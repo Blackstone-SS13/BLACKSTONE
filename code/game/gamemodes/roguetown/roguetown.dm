@@ -51,8 +51,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	var/skeletons = FALSE
 
 	var/headrebdecree = FALSE
-	
-	var/check_for_lord = TRUE
+
+	var/check_for_lord = FALSE
 	var/next_check_lord = 0
 	var/missing_lord_time = FALSE
 	var/roundvoteend = FALSE
