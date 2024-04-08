@@ -1,4 +1,4 @@
-
+// This is the list of flaws INCLUDING flaws that are blocked from being used in the character editor.
 GLOBAL_LIST_INIT(character_flaws, list("Alcoholic"=/datum/charflaw/addiction/alcoholic,
 	"Devout Follower"=/datum/charflaw/addiction/godfearing,
 	"Smoker"=/datum/charflaw/addiction/smoker,
@@ -10,6 +10,18 @@ GLOBAL_LIST_INIT(character_flaws, list("Alcoholic"=/datum/charflaw/addiction/alc
 	"Paranoid"=/datum/charflaw/paranoid,
 	"Random Flaw"=/datum/charflaw/randflaw,
 	"No Flaw (3 TRI)"=/datum/charflaw/noflaw))
+
+// This is the list of flaws WITHOUT the NO FLAW flaw, for use in character creation.
+GLOBAL_LIST_INIT(character_flaws_onlyflaws, list("Alcoholic"=/datum/charflaw/addiction/alcoholic,
+	"Devout Follower"=/datum/charflaw/addiction/godfearing,
+	"Smoker"=/datum/charflaw/addiction/smoker,
+	"Junkie"=/datum/charflaw/addiction/junkie,
+	"Cyclops (R)"=/datum/charflaw/noeyer,
+	"Cyclops (L)"=/datum/charflaw/noeyel,
+	"No Arm (R)"=/datum/charflaw/limbloss/arm_r,
+	"No Arm (L)"=/datum/charflaw/limbloss/arm_l,
+	"Paranoid"=/datum/charflaw/paranoid,
+	"Random Flaw"=/datum/charflaw/randflaw))
 
 /datum/charflaw
 	var/name
