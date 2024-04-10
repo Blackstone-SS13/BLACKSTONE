@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_sexes = list("male")
+	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen",
 	"Humen",
 	"Elf",
@@ -22,7 +22,7 @@
 	min_pq = -4
 
 /datum/outfit/job/roguetown/watchman
-	name = "Gateman"
+	name = "Gatemaster"
 	jobtype = /datum/job/roguetown/watchman
 
 /datum/outfit/job/roguetown/watchman/pre_equip(mob/living/carbon/human/H)
