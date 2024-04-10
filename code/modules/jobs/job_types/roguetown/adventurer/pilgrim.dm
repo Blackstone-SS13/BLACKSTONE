@@ -4,7 +4,7 @@
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = 9999
-	spawn_positions = 0
+	spawn_positions = 20
 	allowed_races = list("Humen",
 	"Dwarf",
 	"Elf",
