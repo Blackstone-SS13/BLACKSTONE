@@ -300,3 +300,10 @@
 
 /datum/intent/sword/thrust/zwei
 	reach = 2
+
+/obj/item/rogueweapon/greatsword/sunlight
+	name = "Sunlight Greatsword"
+	desc = "A fabled relic of the Astratal Church"
+	force = 10
+	force_wielded = 45
+	associated_skill = /datum/skill/magic/holy
