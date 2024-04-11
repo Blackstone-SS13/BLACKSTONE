@@ -54,6 +54,35 @@
 	icon_state = "stonearrow"
 	max_integrity = 5
 
+/obj/item/ammo_casing/caseless/rogue/arrow/poison
+	name = "Poisoned Arrow"
+	projectile_type = /obj/projectile/bullet/reusable/arrow/poison
+	caliber = "arrow"
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "arrow_poison"
+	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
+	max_integrity = 10
+
+/obj/projectile/bullet/reusable/arrow/poison
+	name = "arrow"
+	damage = 35
+	damage_type = BRUTE
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "arrow_proj"
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow
+	range = 15
+	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
+	embedchance = 100
+	woundclass = BCLASS_STAB
+	flag = "bullet"
+	speed = 0.4
+
+/obj/projectile/bullet/reusable/arrow/poison/on_hit(atom/target, blocked = FALSE)
+	. = ..()
+	if(iscarbon(target))
+		var/mob/living/carbon/M = target
+		M.reagents.add_reagent(/datum/reagent/toxin/drow, 5) //a REALLY slow burn for this arrow, and its lasting
+
 /obj/projectile/bullet/reusable/bullet
 	name = "lead ball"
 	damage = 50
