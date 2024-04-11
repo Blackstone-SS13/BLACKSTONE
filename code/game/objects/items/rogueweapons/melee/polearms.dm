@@ -301,9 +301,16 @@
 /datum/intent/sword/thrust/zwei
 	reach = 2
 
-/obj/item/rogueweapon/greatsword/sunlight
-	name = "Sunlight Greatsword"
-	desc = "A fabled relic of the Astratal Church"
+/obj/item/rogueweapon/Moonlight
 	force = 10
 	force_wielded = 45
+	possible_item_intents = list(/datum/intent/sword/chop,/datum/intent/sword/strike) //bash is for nonlethal takedowns, only targets limbs
+	gripped_intents = list(/datum/intent/sword/cut/zwei, /datum/intent/sword/chop, /datum/intent/sword/thrust/zwei, /datum/intent/sword/strike)
+	name = "Moonlight Greatsword"
+	desc = "A relic of the long forgotten church of Ellune"
+	icon_state = "moonlightgs"
+	icon = 'icons/roguetown/weapons/32.dmi'
+	item_state = "moonlightgs"
+	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	associated_skill = /datum/skill/magic/holy
