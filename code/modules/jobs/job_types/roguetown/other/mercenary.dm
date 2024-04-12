@@ -19,7 +19,6 @@
 	outfit = /datum/outfit/job/roguetown/mercenary
 	display_order = JDO_MERCENARY
 	give_bank_account = 3
-	min_pq = -9
 
 /datum/outfit/job/roguetown/mercenary/pre_equip(mob/living/carbon/human/H)
 	..()

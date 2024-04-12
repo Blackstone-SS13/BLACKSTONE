@@ -21,7 +21,6 @@
 
 	outfit = /datum/outfit/job/roguetown/guardsman
 	give_bank_account = 16
-	min_pq = -4
 
 /datum/job/roguetown/guardsman/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()

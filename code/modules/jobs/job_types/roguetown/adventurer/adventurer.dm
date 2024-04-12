@@ -25,7 +25,6 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 	var/ispilgrim = FALSE
 	display_order = JDO_ADVENTURER
 	show_in_credits = FALSE
-	min_pq = -4
 
 /datum/job/roguetown/adventurer/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()

@@ -21,4 +21,3 @@
 	isvillager = FALSE
 	ispilgrim = TRUE
 	display_order = JDO_PILGRIM
-	min_pq = -999

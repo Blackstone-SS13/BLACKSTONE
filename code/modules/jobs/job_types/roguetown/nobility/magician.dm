@@ -18,7 +18,6 @@
 	outfit = /datum/outfit/job/roguetown/magician
 	whitelist_req = TRUE
 	give_bank_account = 47
-	min_pq = -4
 
 /datum/outfit/job/roguetown/magician/pre_equip(mob/living/carbon/human/H)
 	..()

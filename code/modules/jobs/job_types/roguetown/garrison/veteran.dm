@@ -19,7 +19,6 @@
 
 	outfit = /datum/outfit/job/roguetown/veteran
 	give_bank_account = 35
-	min_pq = 5
 
 /datum/outfit/job/roguetown/veteran/pre_equip(mob/living/carbon/human/H)
 	..()

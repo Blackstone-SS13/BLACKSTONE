@@ -19,7 +19,6 @@
 
 	outfit = /datum/outfit/job/roguetown/watchman
 	give_bank_account = 3
-	min_pq = -4
 
 /datum/outfit/job/roguetown/watchman
 	name = "Gateman"
