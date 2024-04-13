@@ -1,4 +1,4 @@
-//elf human specia lrogue 2 daggers throwing belt
+//its a delf special now... owned
 
 /datum/advclass/rare
 	name = "Rarec"

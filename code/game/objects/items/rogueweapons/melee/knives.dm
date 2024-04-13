@@ -203,3 +203,10 @@
 	max_integrity = 50
 	max_blade_int = 50
 	wdefense = 1
+
+/obj/item/rogueweapon/huntingknife/elvish
+	name = "elvish dagger"
+	force = 19
+	icon_state = "elfdagger"
+	item_state = "elfdag"
+
