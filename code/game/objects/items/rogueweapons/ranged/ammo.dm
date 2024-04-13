@@ -10,6 +10,11 @@
 	max_integrity = 10
 	force = 10
 
+/obj/item/ammo_casing/caseless/rogue/bolt/poison
+	name = "poisoned bolt"
+	projectile_type = /obj/projectile/bullet/reusable/bolt/poison
+	icon_state = "arrow_poison"
+
 /obj/projectile/bullet/reusable/bolt
 	name = "bolt"
 	damage = 80
@@ -23,6 +28,18 @@
 	woundclass = BCLASS_STAB
 	flag = "bullet"
 	speed = 0.3
+
+/obj/projectile/bullet/reusable/bolt/poison
+	name = "poisoned bolt"
+	damage = 50
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/bolt/poison
+
+
+/obj/projectile/bullet/reusable/bolt/poison/on_hit(atom/target, blocked = FALSE)
+	. = ..()
+	if(iscarbon(target))
+		var/mob/living/carbon/M = target
+		M.reagents.add_reagent(/datum/reagent/toxin/mutetoxin, 7) //not gonna kill anyone, but they will be quite quiet
 
 /obj/item/ammo_casing/caseless/rogue/arrow
 	name = "arrow"
@@ -57,10 +74,7 @@
 /obj/item/ammo_casing/caseless/rogue/arrow/poison
 	name = "Poisoned Arrow"
 	projectile_type = /obj/projectile/bullet/reusable/arrow/poison
-	caliber = "arrow"
-	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "arrow_poison"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
 	max_integrity = 10
 
 /obj/projectile/bullet/reusable/arrow/poison
@@ -72,10 +86,7 @@
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow
 	range = 15
 	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
-	embedchance = 100
-	woundclass = BCLASS_STAB
-	flag = "bullet"
-	speed = 0.4
+
 
 /obj/projectile/bullet/reusable/arrow/poison/on_hit(atom/target, blocked = FALSE)
 	. = ..()
