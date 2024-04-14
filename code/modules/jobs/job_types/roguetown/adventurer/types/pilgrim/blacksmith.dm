@@ -18,7 +18,7 @@
 	..()
 	beltr = /obj/item/rogueweapon/hammer
 	backl = /obj/item/storage/backpack/rogue/satchel
-	backpack_contents = list(/obj/item/flint, /obj/item/rogueweapon/tongs)
+	backpack_contents = list(/obj/item/flint = 1, /obj/item/rogueweapon/tongs = 1)
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/trou
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
