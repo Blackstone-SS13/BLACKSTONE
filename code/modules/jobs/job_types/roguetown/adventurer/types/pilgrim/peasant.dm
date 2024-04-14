@@ -29,7 +29,6 @@
 	pants = /obj/item/clothing/under/roguetown/trou
 	head = /obj/item/clothing/head/roguetown/armingcap
 	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
-	backr = /obj/item/storage/backpack/rogue/satchel
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	backl = /obj/item/storage/backpack/rogue/satchel
 	neck = /obj/item/storage/belt/rogue/pouch/coins/mid
@@ -39,9 +38,8 @@
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 		pants = null
 	backpack_contents = list(/obj/item/flint = 1, /obj/item/seeds/wheat = 1, /obj/item/seeds/apple = 1, /obj/item/ash = 1)
+	beltl = /obj/item/rogueweapon/sickle
 	if(prob(23))
-		beltl = /obj/item/rogueweapon/sickle
-	else if(prob(23))
 		backr = /obj/item/rogueweapon/thresher
 	else if(prob(23))
 		backr = /obj/item/rogueweapon/hoe
