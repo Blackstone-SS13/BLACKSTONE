@@ -351,8 +351,9 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(use_skintones)
 
 //				dat += APPEARANCE_CATEGORY_COLUMN
+				var/skin_tone_wording = pref_species.skin_tone_wording // Both the skintone names and the word swap here is useless fluff
 
-				dat += "<b>Skin Tone: </b><a href='?_src_=prefs;preference=s_tone;task=input'>Change </a>"
+				dat += "<b>[skin_tone_wording]: </b><a href='?_src_=prefs;preference=s_tone;task=input'>Change </a>"
 //				dat += "<a href='?_src_=prefs;preference=toggle_random;random_type=[RANDOM_SKIN_TONE]'>[(randomise[RANDOM_SKIN_TONE]) ? "Lock" : "Unlock"]</A>"
 				dat += "<br>"
 
@@ -362,7 +363,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 //				if(!use_skintones)
 //					dat += APPEARANCE_CATEGORY_COLUMN
 
-				dat += "<h3>MUtant color</h3>"
+				dat += "<h3>Mutant color</h3>"
 
 				dat += "<span style='border: 1px solid #161616; background-color: #[features["mcolor"]];'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> <a href='?_src_=prefs;preference=mutant_color;task=input'>Change</a><BR>"
 
@@ -734,6 +735,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 //			dat += "<br>"
 //			dat += "<b>Midround Antagonist:</b> <a href='?_src_=prefs;preference=allow_midround_antag'>[(toggles & MIDROUND_ANTAG) ? "Enabled" : "Disabled"]</a><br>"
 			dat += "</td></tr></table>"
+
 		if(2) //OOC Preferences
 			used_title = "ooc"
 			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
@@ -803,6 +805,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 				dat += "</td>"
 			dat += "</tr></table>"
+
 		if(3) // Custom keybindings
 			used_title = "Keybinds"
 			// Create an inverted list of keybindings -> key
@@ -844,10 +847,12 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<br><br>"
 			dat += "<a href ='?_src_=prefs;preference=keybinds;task=keybindings_set'>\[Reset to default\]</a>"
 			dat += "</body>"
+
 	if(!IsGuestKey(user.key))
 		dat += "<a href='?_src_=prefs;preference=save'>Save</a><br>"
 		dat += "<a href='?_src_=prefs;preference=load'>Undo</a><br>"
 	dat += "<center>"
+
 	if(SSticker.current_state <= GAME_STATE_PREGAME)
 		switch(N.ready)
 			if(PLAYER_NOT_READY)
@@ -863,13 +868,13 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	if(user.client.is_new_player())
 		dat = list("<center>REGISTER!</center>")
 
-	winshow(user, "preferences_window", TRUE)
-	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>[used_title]</div>", 700, 530)
+	winshow(user, "preferencess_window", TRUE)
+	var/datum/browser/popup = new(user, "preferences_browser", "<div align='center'>[used_title]</div>")
 	popup.set_window_options("can_close=0")
 	popup.set_content(dat.Join())
 	popup.open(FALSE)
 	update_preview_icon()
-//	onclose(user, "preferences_window", src)
+//	onclose(user, "preferencess_window", src)
 
 #undef APPEARANCE_CATEGORY_COLUMN
 #undef MAX_MUTANT_ROWS
@@ -1035,7 +1040,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 </style>
 
-<div class="tutorialhover"><font color=[job.selection_color]>[used_name]</font>
+<div class="tutorialhover"><font>[used_name]</font>
 <span class="tutorial">[job.tutorial]<br>
 Slots: [job.spawn_positions]</span>
 </div>
@@ -1366,7 +1371,7 @@ Slots: [job.spawn_positions]</span>
 				ShowChoices(user,4)
 			if("reset")
 				ResetJobs()
-				SetChoices(user,4)
+				SetChoices(user)
 			if("triumphthing")
 				ResetLastClass(user)
 			if("nojob")
@@ -1946,6 +1951,8 @@ Slots: [job.spawn_positions]</span>
 					if(selectedflaw)
 						charflaw = GLOB.character_flaws[selectedflaw]
 						charflaw = new charflaw()
+						if(charflaw.desc)
+							to_chat(user, "<span class='info'>[charflaw.desc]</span>")
 
 				if("ooccolor")
 					var/new_ooccolor = input(user, "Choose your OOC colour:", "Game Preference",ooccolor) as color|null
