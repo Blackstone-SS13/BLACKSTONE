@@ -13,7 +13,9 @@
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	belt = /obj/item/storage/belt/rogue/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/gambeson
-	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
+	beltr = /obj/item/storage/belt/rogue/pouch/coins/mid
+	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/flint = 1)
 	cloak = /obj/item/clothing/cloak/stabard/mercenary
 	beltl = /obj/item/rogueweapon/sword/sabre
 	if(prob(50))

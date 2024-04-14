@@ -18,13 +18,13 @@
 	..()
 	beltr = /obj/item/rogueweapon/hammer
 	backl = /obj/item/storage/backpack/rogue/satchel
-	backpack_contents = list(/obj/item/rogueweapon/tongs=1)
+	backpack_contents = list(/obj/item/flint, /obj/item/rogueweapon/tongs)
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/trou
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 		shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt
 		belt = /obj/item/storage/belt/rogue/leather
-		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
+		beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
 		cloak = /obj/item/clothing/cloak/apron/brown
 		gloves = /obj/item/clothing/gloves/roguetown/leather
 		if(H.mind)
@@ -46,7 +46,7 @@
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		belt = /obj/item/storage/belt/rogue/leather
 		cloak = /obj/item/clothing/cloak/apron/brown
-		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
+		beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
 		gloves = /obj/item/clothing/gloves/roguetown/leather
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)

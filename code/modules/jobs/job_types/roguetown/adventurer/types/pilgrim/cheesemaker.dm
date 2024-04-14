@@ -28,9 +28,9 @@
 	cloak = /obj/item/clothing/cloak/apron
 	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
 	backr = /obj/item/storage/backpack/rogue/satchel
-	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	beltr = /obj/item/cooking/pan
-	backpack_contents = list(/obj/item/reagent_containers/powder/flour/salt = 1,/obj/item/reagent_containers/food/snacks/rogue/cheese=1,/obj/item/reagent_containers/food/snacks/rogue/cheddar=1)
+	backpack_contents = list(/obj/item/flint, /obj/item/reagent_containers/powder/flour/salt, /obj/item/reagent_containers/food/snacks/rogue/cheese, /obj/item/reagent_containers/food/snacks/rogue/cheddar)
 	H.change_stat("intelligence", 1)
 	H.change_stat("constitution", 1)

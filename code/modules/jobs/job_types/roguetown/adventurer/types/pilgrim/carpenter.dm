@@ -35,9 +35,10 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/random
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	belt = /obj/item/storage/belt/rogue/leather
-	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
-	beltl = /obj/item/rogueweapon/hammer/claw
-	backl = /obj/item/storage/backpack/rogue/backpack
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	beltr = /obj/item/rogueweapon/hammer/claw
+	backr = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/flint)
 	H.change_stat("intelligence", 1)
 	H.change_stat("constitution", 1)
 	H.change_stat("speed", -1)

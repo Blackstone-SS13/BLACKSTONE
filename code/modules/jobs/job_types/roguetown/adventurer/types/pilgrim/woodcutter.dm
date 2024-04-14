@@ -30,7 +30,8 @@
 	head = /obj/item/clothing/head/roguetown/roguehood
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	backr = /obj/item/storage/backpack/rogue/satchel
-	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+	backpack_contents = list(/obj/item/flint)
+	neck = /obj/item/storage/belt/rogue/pouch/coins/mid
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/workervest
 	beltr = /obj/item/rogueweapon/stoneaxe/woodcut

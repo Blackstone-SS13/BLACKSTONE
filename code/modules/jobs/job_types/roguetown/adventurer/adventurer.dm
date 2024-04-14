@@ -15,7 +15,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 	"Dark Elf",
 	"Aasimar"
 	)
-	tutorial = "Hero of Nothing, Adventurer by trade. Whatever led you to this fate is up to the wind to decide, and youve never fancied yourself for much other than the thrill. Someday your pride is going to catch up to you, and youre going to find out why most men dont end up in the annals of history."
+	tutorial = "Hero of Nothing, Adventurer by trade. Whatever led you to this fate is up to the wind to decide, and you've never fancied yourself for much other than the thrill. Someday your pride is going to catch up to you, and youre going to find out why most men dont end up in the annals of history."
 
 
 	outfit = null
@@ -39,10 +39,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 			H.possibleclass = list()
 		var/list/classes = GLOB.adv_classes.Copy()
 		var/list/special_classes = list()
-		var/classamt = 5
-		if(M.client)
-			if(M.client.patreonlevel() >= 1)
-				classamt = 999
+		var/classamt = 10
 		if(isvillager)
 			GLOB.billagerspawns |= H
 #ifdef TESTSERVER

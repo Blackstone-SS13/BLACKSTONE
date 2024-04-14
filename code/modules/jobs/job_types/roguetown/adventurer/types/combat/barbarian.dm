@@ -23,11 +23,12 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
 	belt = /obj/item/storage/belt/rogue/leather
-	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	shoes = /obj/item/clothing/shoes/roguetown/boots/leather	
+	backr = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/flint = 1)
 	if(prob(13))
 		head = /obj/item/clothing/head/roguetown/helmet/horned
-	if(prob(55))
-		backr = /obj/item/storage/backpack/rogue/satchel
 	if(prob(23))
 		armor = /obj/item/clothing/suit/roguetown/armor/leather
 	if(prob(23))

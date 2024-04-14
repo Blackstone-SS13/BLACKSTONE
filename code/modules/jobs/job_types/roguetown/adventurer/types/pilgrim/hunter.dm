@@ -20,14 +20,14 @@
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+	neck = /obj/item/storage/belt/rogue/pouch/coins/mid
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/brown
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	beltr = /obj/item/quiver/arrows
 	beltl = /obj/item/flashlight/flare/torch/lantern
-	backpack_contents = list(/obj/item/bait = 1, /obj/item/rogueweapon/huntingknife = 1)
+	backpack_contents = list(/obj/item/flint = 1, /obj/item/bait = 1, /obj/item/rogueweapon/huntingknife = 1)
 	gloves = /obj/item/clothing/gloves/roguetown/leather
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)

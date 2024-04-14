@@ -21,7 +21,7 @@
 		pants = /obj/item/clothing/under/roguetown/tights/random
 		shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-		neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+		neck = /obj/item/storage/belt/rogue/pouch/coins/mid
 		head = /obj/item/clothing/head/roguetown/fisherhat
 		armor = /obj/item/clothing/suit/roguetown/armor/workervest
 		backr = /obj/item/storage/backpack/rogue/satchel
@@ -29,7 +29,7 @@
 		backl = /obj/item/fishingrod
 		beltr = /obj/item/cooking/pan
 		beltl = /obj/item/rogueweapon/huntingknife
-		backpack_contents = list(/obj/item/natural/worms = 2,/obj/item/rogueweapon/shovel/small=1)
+		backpack_contents = list(/obj/item/flint, /obj/item/natural/worms = 2,/obj/item/rogueweapon/shovel/small=1)
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)

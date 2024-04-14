@@ -22,9 +22,10 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/random
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	belt = /obj/item/storage/belt/rogue/leather/rope
-	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+	neck = /obj/item/storage/belt/rogue/pouch/coins/mid
 	beltl = /obj/item/rogueweapon/pick
 	backl = /obj/item/storage/backpack/rogue/backpack
+	backpack_contents = list(/obj/item/flint = 1)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)

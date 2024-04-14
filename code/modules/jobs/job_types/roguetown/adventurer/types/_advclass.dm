@@ -39,7 +39,7 @@
 	H.cure_blind("advsetup")
 	H.SetStun(0)
 	sleep(1)
-	testing("[H] spawn troch")
+	testing("[H] spawn torch")
 	var/obj/item/flashlight/flare/torch/T = new()
 	T.spark_act()
 	H.put_in_hands(T)

@@ -48,9 +48,9 @@
 		cloak = /obj/item/clothing/cloak/raincloak/green
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	backl = /obj/item/storage/backpack/rogue/satchel
-	beltr = /obj/item/flashlight/flare/torch/lantern
-	backpack_contents = list(/obj/item/bait = 1, /obj/item/rogueweapon/huntingknife = 1)
-	beltl = /obj/item/quiver/arrows
+	beltr = /obj/item/quiver/arrows
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	backpack_contents = list(/obj/item/flint = 1, /obj/item/bait = 1, /obj/item/rogueweapon/huntingknife = 1)
 	H.change_stat("perception", 3)
 	H.change_stat("endurance", 1)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)

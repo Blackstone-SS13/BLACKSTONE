@@ -46,8 +46,9 @@
 	if(prob(50))
 		cloak = /obj/item/clothing/cloak/raincloak/red
 	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/flint = 1)
 	beltr = /obj/item/rogueweapon/huntingknife/idagger/steel
-	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
 	if(H.dna?.species)
 		if(H.dna.species.id == "human")
 			backr = /obj/item/rogue/instrument/lute

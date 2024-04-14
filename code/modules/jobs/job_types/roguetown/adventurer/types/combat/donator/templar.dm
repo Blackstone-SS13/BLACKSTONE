@@ -19,7 +19,10 @@
 	belt = /obj/item/storage/belt/rogue/leather/hand
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
 	id = /obj/item/clothing/ring/silver
-	cloak = /obj/item/clothing/cloak/tabard/crusader
+	cloak = /obj/item/clothing/cloak/tabard/crusader		
+	backr = /obj/item/rogueweapon/sword/long
+	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/flint = 1)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
@@ -31,13 +34,13 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
-		backl = /obj/item/rogueweapon/sword/long
 		H.change_stat("strength", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 2)
 		H.change_stat("constitution", 2)
 		H.change_stat("endurance", 3)
 		H.change_stat("speed", -2)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/heal/lesser)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/churn)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	if(H.dna?.species)
@@ -48,5 +51,3 @@
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
 	C.holder_mob = H
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
-	H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/heal/lesser)
-	H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/churn)

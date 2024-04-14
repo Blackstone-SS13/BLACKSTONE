@@ -39,9 +39,10 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/leather
 	cloak = /obj/item/clothing/cloak/raincloak/mortus
 	backl = /obj/item/storage/backpack/rogue/satchel
-	beltr = /obj/item/rogueweapon/huntingknife/idagger/steel
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
-	beltl = /obj/item/quiver/bolts
+	beltr = /obj/item/quiver/bolts
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	backpack_contents = list(/obj/item/flint = 1, /obj/item/rogueweapon/huntingknife/idagger/steel = 1)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	H.change_stat("strength", -1)
 	H.change_stat("perception", 2)

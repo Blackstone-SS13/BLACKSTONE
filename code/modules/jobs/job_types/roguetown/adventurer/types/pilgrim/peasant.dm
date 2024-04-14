@@ -32,13 +32,13 @@
 	backr = /obj/item/storage/backpack/rogue/satchel
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	backl = /obj/item/storage/backpack/rogue/satchel
-	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+	neck = /obj/item/storage/belt/rogue/pouch/coins/mid
 	armor = /obj/item/clothing/suit/roguetown/armor/workervest
 	if(H.gender == FEMALE)
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 		pants = null
-	backpack_contents = list(/obj/item/seeds/wheat=1,/obj/item/seeds/apple=1,/obj/item/ash=1)
+	backpack_contents = list(/obj/item/flint = 1, /obj/item/seeds/wheat = 1, /obj/item/seeds/apple = 1, /obj/item/ash = 1)
 	if(prob(23))
 		beltl = /obj/item/rogueweapon/sickle
 	else if(prob(23))

@@ -31,9 +31,11 @@
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
+	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/flint = 1)
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/mace
-	beltl = /obj/item/storage/belt/rogue/pouch
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
