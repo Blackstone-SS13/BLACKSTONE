@@ -22,6 +22,7 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
+	lhand = /obj/item/flint
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
@@ -31,6 +32,6 @@
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	beltr = /obj/item/cooking/pan
-	backpack_contents = list(/obj/item/flint = 1, /obj/item/reagent_containers/powder/flour/salt = 1, /obj/item/reagent_containers/food/snacks/rogue/cheese = 1, /obj/item/reagent_containers/food/snacks/rogue/cheddar = 1)
+	backpack_contents = list(/obj/item/reagent_containers/powder/flour/salt = 1, /obj/item/reagent_containers/food/snacks/rogue/cheese = 1, /obj/item/reagent_containers/food/snacks/rogue/cheddar = 1)
 	H.change_stat("intelligence", 1)
 	H.change_stat("constitution", 1)
