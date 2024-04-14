@@ -39,7 +39,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 			H.possibleclass = list()
 		var/list/classes = GLOB.adv_classes.Copy()
 		var/list/special_classes = list()
-		var/classamt = 10
+		var/classamt = 7
 		if(isvillager)
 			GLOB.billagerspawns |= H
 #ifdef TESTSERVER
