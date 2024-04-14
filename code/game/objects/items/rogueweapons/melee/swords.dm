@@ -442,3 +442,11 @@
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust)
 	gripped_intents = null
 	wdefense = 6
+
+/obj/item/rogueweapon/sword/sabre
+	force = 25
+	name = "elvish saber"
+	icon_state = "esaber"
+	item_state = "esaber"
+	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
