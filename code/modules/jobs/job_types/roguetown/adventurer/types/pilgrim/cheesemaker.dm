@@ -22,7 +22,7 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
-	lhand = /obj/item/flint
+	l_hand = /obj/item/flint
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
