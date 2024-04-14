@@ -40,6 +40,9 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 		var/list/classes = GLOB.adv_classes.Copy()
 		var/list/special_classes = list()
 		var/classamt = 7
+		if(M.client)
+			if(M.client.patreonlevel() >= 1)
+				classamt = 999
 		if(isvillager)
 			GLOB.billagerspawns |= H
 #ifdef TESTSERVER
