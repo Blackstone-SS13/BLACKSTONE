@@ -64,14 +64,15 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 					testing("[A.name] fail9")
 					continue
 
-			if(!isvillager && !ispilgrim) //adventurer
+			if(!isvillager && !ispilgrim) // Avoid adventurers being able to pick pilgrim / villager classes
 				if(A.ispilgrim || A.isvillager)
 					continue
+
 			if(isvillager) //towner
 				if(!A.isvillager)
 					continue
 
-			if(ispilgrim) //pilgrim
+			if(ispilgrim) // Avoid pilgrims being able to pick adventurer classes
 				if(!A.ispilgrim)
 					continue
 
