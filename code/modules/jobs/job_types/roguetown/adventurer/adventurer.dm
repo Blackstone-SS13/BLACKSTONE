@@ -71,9 +71,9 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 				if(!A.isvillager)
 					continue
 
-//			if(ispilgrim) //pilgrim
-//				if(A.ispilgrim)
-//					continue
+			if(ispilgrim) //pilgrim
+				if(!A.ispilgrim)
+					continue
 
 			if(A.plevel_req > M.client.patreonlevel())
 				testing("[A.name] fail6")
@@ -152,7 +152,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 
 /mob/living/carbon/human/proc/advsetup()
 	if(!advsetup)
-		testing("RETARD")
+		testing("advsetup: Character does not have advsetup enabled")
 		return TRUE
 	var/blacklisted = check_blacklist(ckey)
 	if(possibleclass.len && !blacklisted)
@@ -176,7 +176,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 				cure_blind("advsetup")
 				return TRUE
 	else
-		testing("RETARD2")
+		testing("advsetup: Resetting advsetup and making character visible")
 		advsetup = 0
 		invisibility = 0
 		cure_blind("advsetup")
