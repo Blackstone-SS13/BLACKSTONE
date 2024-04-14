@@ -17,7 +17,7 @@
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	belt = /obj/item/storage/belt/rogue/leather/hand
-	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	id = /obj/item/clothing/ring/silver
 	cloak = /obj/item/clothing/cloak/tabard/crusader		
 	backr = /obj/item/rogueweapon/sword/long

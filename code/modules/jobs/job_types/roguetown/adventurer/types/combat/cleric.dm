@@ -45,7 +45,7 @@
 	backpack_contents = list(/obj/item/flint = 1)
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/mace
-	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)

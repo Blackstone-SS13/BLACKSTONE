@@ -17,7 +17,7 @@
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/flint = 1)
-	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	beltr = /obj/item/quiver/bolts
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/hide
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather

@@ -21,7 +21,7 @@
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/flint = 1)
 	beltr = /obj/item/reagent_containers/glass/bottle/rogue/manapot
-	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	r_hand = /obj/item/rogueweapon/woodstaff
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)

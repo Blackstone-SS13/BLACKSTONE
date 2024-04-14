@@ -48,7 +48,7 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/flint = 1)
 	beltr = /obj/item/rogueweapon/huntingknife/idagger/steel
-	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	if(H.dna?.species)
 		if(H.dna.species.id == "human")
 			backr = /obj/item/rogue/instrument/lute

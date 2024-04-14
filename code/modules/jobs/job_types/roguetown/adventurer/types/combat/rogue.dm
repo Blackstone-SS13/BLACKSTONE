@@ -41,7 +41,7 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	beltr = /obj/item/quiver/bolts
-	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backpack_contents = list(/obj/item/flint = 1, /obj/item/rogueweapon/huntingknife/idagger/steel = 1)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	H.change_stat("strength", -1)
