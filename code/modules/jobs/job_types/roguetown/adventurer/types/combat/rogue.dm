@@ -33,7 +33,6 @@
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 	gloves = /obj/item/clothing/gloves/roguetown/leather
-	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	if(prob(30))
 		gloves = /obj/item/clothing/gloves/roguetown/fingerless
 	belt = /obj/item/storage/belt/rogue/leather
@@ -42,7 +41,7 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	beltr = /obj/item/quiver/bolts
-	beltl = /obj/item/flashlight/flare/torch/lantern
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backpack_contents = list(/obj/item/flint = 1, /obj/item/rogueweapon/huntingknife/idagger/steel = 1)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	H.change_stat("strength", -1)

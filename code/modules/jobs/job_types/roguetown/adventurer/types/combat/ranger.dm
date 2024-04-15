@@ -44,12 +44,13 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/hide
 	cloak = /obj/item/clothing/cloak/raincloak/brown
+	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	if(prob(33))
 		cloak = /obj/item/clothing/cloak/raincloak/green
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltr = /obj/item/quiver/arrows
-	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
+	beltl = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(/obj/item/flint = 1, /obj/item/bait = 1, /obj/item/rogueweapon/huntingknife = 1)
 	H.change_stat("perception", 3)
 	H.change_stat("endurance", 1)
