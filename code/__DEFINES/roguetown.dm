@@ -5,6 +5,8 @@
 
 #define ALL_PATRON_NAMES_LIST		list("Astrata", "Noc", "Xylix", "Eora", "Malum", "Dendor", "Abyssor", "Necra", "Pestra", "Malum", "Ravox")
 
+#define ALL_FLAWS_LIST	list("alcoholic", "godfearing", "smoker", "junkie", "noeyer", "noeyel", "arm_r", "arm_l", "paranoid", "randflaw", "noflaw")
+
 #define PLATEHIT "plate"
 #define CHAINHIT "chain"
 #define SOFTHIT "soft"
