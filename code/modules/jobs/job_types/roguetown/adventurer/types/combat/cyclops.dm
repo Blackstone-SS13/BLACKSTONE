@@ -6,15 +6,28 @@
 	allowed_races = list("Humen",
 	"Humen",
 	"Dwarf",
-	"Dwarf",
 	)
+	var/list/allowed_flaws = define("/datum/charflaw/addiction/alcoholic",
+	"/datum/charflaw/addiction/godfearing",
+	"/datum/charflaw/addiction/smoker",
+	"/datum/charflaw/addiction/junkie",
+	"/datum/charflaw/noeyer", 
+	"/datum/charflaw/noeyel",
+	"/datum/charflaw/limbloss/arm_r",
+	"/datum/charflaw/limbloss/arm_l",
+	"/datum/charflaw/paranoid",
+	"/datum/charflaw/randflaw",
+	"/datum/charflaw/noflaw"
+	)
+	
+	advclass/cyclops/allowed_flaws = list(/datum/charflaw/noeyer, 
+	/datum/charflaw/noeyel
+	)
+	if(charflaw in allowed_flaws)
+ 	continue
 
 	outfit = /datum/outfit/job/roguetown/adventurer/cyclops
 	maxchosen = 4
-
-	A.allowed_flaw = (/datum/charflaw/noeyer, /datum/charflaw/noeyel)
-	if((H.charflaw in A.allowed_flaws) && !isnull(A.allowed_flaws))
-  continue
 
 /datum/outfit/job/roguetown/adventurer/cyclops/pre_equip(mob/living/carbon/human/H)
 	..()
