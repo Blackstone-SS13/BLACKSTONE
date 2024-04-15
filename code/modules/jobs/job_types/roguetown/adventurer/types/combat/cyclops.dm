@@ -7,22 +7,11 @@
 	"Humen",
 	"Dwarf",
 	)
-	var/list/allowed_flaws = define("/datum/charflaw/addiction/alcoholic",
-	"/datum/charflaw/addiction/godfearing",
-	"/datum/charflaw/addiction/smoker",
-	"/datum/charflaw/addiction/junkie",
-	"/datum/charflaw/noeyer", 
-	"/datum/charflaw/noeyel",
-	"/datum/charflaw/limbloss/arm_r",
-	"/datum/charflaw/limbloss/arm_l",
-	"/datum/charflaw/paranoid",
-	"/datum/charflaw/randflaw",
-	"/datum/charflaw/noflaw"
-	)
 	
-	advclass/cyclops/allowed_flaws = list(/datum/charflaw/noeyer, 
-	/datum/charflaw/noeyel
+	advclass/cyclops/allowed_flaws = list("noeyer", 
+	"noeyel"
 	)
+
 	if(charflaw in allowed_flaws)
  	continue
 
