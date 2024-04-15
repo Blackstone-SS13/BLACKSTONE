@@ -12,6 +12,10 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/cyclops
 	maxchosen = 4
 
+	A.allowed_flaw = (/datum/charflaw/noeyer, /datum/charflaw/noeyel)
+	if((H.charflaw in A.allowed_flaws) && !isnull(A.allowed_flaws))
+  continue
+
 /datum/outfit/job/roguetown/adventurer/cyclops/pre_equip(mob/living/carbon/human/H)
 	..()
 	pants = /obj/item/clothing/under/roguetown/trou/leather
