@@ -3170,6 +3170,7 @@
 #include "code\modules\spells\roguetown\cleric.dm"
 #include "code\modules\spells\roguetown\jester.dm"
 #include "code\modules\spells\roguetown\monk.dm"
+#include "code\modules\spells\roguetown\necromancer.dm"
 #include "code\modules\spells\roguetown\priest.dm"
 #include "code\modules\spells\roguetown\spider.dm"
 #include "code\modules\spells\roguetown\wizard.dm"

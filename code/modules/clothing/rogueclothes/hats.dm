@@ -79,6 +79,15 @@
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	dynamic_hair_suffix = ""
 
+/obj/item/clothing/head/roguetown/necromhood
+	name = "necromancers hood"
+	color = null
+	icon_state = "necromhood"
+	item_state = "necromhood"
+	body_parts_covered = NECK
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	dynamic_hair_suffix = ""
+
 /obj/item/clothing/head/roguetown/priestmask
 	name = "solar visage"
 	desc = "The sanctified helm of the most devoted. Thiefs beware."
