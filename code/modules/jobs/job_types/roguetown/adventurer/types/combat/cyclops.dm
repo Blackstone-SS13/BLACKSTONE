@@ -19,12 +19,12 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/studded
 	backr = /obj/item/rogueweapon/shield/wood
-  backl = /obj/item/storage/backpack/rogue/backpack
+	backl = /obj/item/storage/backpack/rogue/backpack
 	backpack_contents = list(/obj/item/bomb = 3, /obj/item/flint = 1 /obj/item/reagent_containers/glass/bottle/rogue/wine = 2)
-		beltl = /obj/item/rogueweapon/sword/cutlass
+	beltl = /obj/item/rogueweapon/sword/cutlass
 
 	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-  H.mind.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
@@ -35,5 +35,5 @@
 	H.change_stat("speed", -2)
 	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)
-  H.change_stat("intelligence", -1)
+	H.change_stat("intelligence", -1)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
