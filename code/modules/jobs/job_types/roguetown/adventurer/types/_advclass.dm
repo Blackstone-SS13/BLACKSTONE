@@ -11,6 +11,7 @@
 	"Dwarf",
 	"Dwarf"
 	)
+	var/list/allowed_flaws = ALL_FLAWS_LIST
 	var/list/allowed_patrons = ALL_PATRON_NAMES_LIST
 	var/list/allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	var/pickprob = 100
