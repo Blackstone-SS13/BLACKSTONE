@@ -210,3 +210,6 @@
 	icon_state = "elfdagger"
 	item_state = "elfdag"
 
+/obj/item/rogueweapon/huntingknife/elvish/drow
+	name = "drow dagger"
+	force = 25

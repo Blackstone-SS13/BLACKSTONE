@@ -444,7 +444,7 @@
 	gripped_intents = null
 	wdefense = 6
 
-/obj/item/rogueweapon/sword/sabre
+/obj/item/rogueweapon/sword/sabre/elf
 	force = 25
 	name = "elvish saber"
 	icon_state = "esaber"
