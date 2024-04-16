@@ -11,9 +11,6 @@
 	"noeyel"
 	)
 
-	if(charflaw in allowed_flaws)
- 	continue
-
 	outfit = /datum/outfit/job/roguetown/adventurer/cyclops
 	maxchosen = 4
 
