@@ -63,6 +63,8 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 				if(A.amtchosen >= A.maxchosen)
 					testing("[A.name] fail9")
 					continue
+			if(charflaw in allowed_flaws)
+					continue
 
 			if(!isvillager && !ispilgrim) //adventurer
 				if(A.ispilgrim || A.isvillager)
