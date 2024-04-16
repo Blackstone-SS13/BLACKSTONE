@@ -66,6 +66,21 @@
 	reqs = list(/obj/item/grown/log/tree/small = 1)
 	craftdiff = 0
 
+/datum/crafting_recipe/roguetown/billhook
+	name = "Improvised Billhook"
+	result = /obj/item/rogueweapon/spear/improvisedbillhook
+	reqs = list(/obj/item/rogueweapon/sickle,
+				/obj/item/grown/log/tree/small = 1)
+	tools = list(/obj/item/rogueweapon/hammer)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/goedendag
+	name = "Goedendag"
+	result = /obj/item/rogueweapon/mace/goden
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/rogueweapon/hoe)
+	tools = list(/obj/item/rogueweapon/hammer)
+	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/rproesthetic
 	name = "wood arm (L)"
