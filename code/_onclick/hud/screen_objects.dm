@@ -379,7 +379,7 @@
 	var/border1
 	var/border2
 
-/obj/screen/act_intent/rogintent/update_icon(var/list/intentsl,var/list/intentsr, oactive = FALSE)
+/obj/screen/act_intent/rogintent/update_icon(list/intentsl,list/intentsr, oactive = FALSE)
 	..()
 	cut_overlays(TRUE)
 	if(!intentsl || !intentsr)
@@ -500,7 +500,7 @@
 				return
 		user.rog_intent_change(clicked)
 
-/obj/screen/act_intent/rogintent/proc/get_index_at_loc(var/xl, var/yl)
+/obj/screen/act_intent/rogintent/proc/get_index_at_loc(xl, yl)
 /*	if(xl<=64)
 		if(xl<32)
 			if(yl>16)
@@ -1937,7 +1937,7 @@
 //	var/list/prevcolors = list("background-color=#000000","background-color=#242f28","background-color=#302323","background-color=#999a63","background-color=#7e7e7e")
 
 //obj/screen/char_preview/Click()
-//	winset(usr.client, "preferences_window.character_preview_map", pick(prevcolors))
+//	winset(usr.client, "preferencess_window.character_preview_map", pick(prevcolors))
 
 #define READ_RIGHT 1
 #define READ_LEFT 2

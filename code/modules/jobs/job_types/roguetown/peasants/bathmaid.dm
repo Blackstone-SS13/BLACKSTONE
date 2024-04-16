@@ -3,8 +3,8 @@
 	flag = JESTER
 	department_flag = PEASANTS
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 3
+	total_positions = 0 // Disabled due to ERP removal, originally 2
+	spawn_positions = 0 // Disabled due to ERP removal, originally 3
 
 	allowed_sexes = list("female")
 	allowed_races = list("Humen",
@@ -43,7 +43,7 @@
 
 /obj/item/bath/soap
 	name = "herbal soap"
-	desc = "a soap made from various herbs"
+	desc = "A soap made from various herbs"
 	icon = 'icons/obj/items_and_weapons.dmi'
 	icon_state = "soap"
 	lefthand_file = 'icons/mob/inhands/equipment/custodial_lefthand.dmi'

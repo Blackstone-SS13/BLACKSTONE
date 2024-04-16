@@ -148,11 +148,11 @@
 #define ORPHAN		(1<<3)
 #define PRINCE		(1<<4)
 
-#define JCOLOR_NOBLE "#9c40bf"
-#define JCOLOR_MERCHANT "#c2b449"
-#define JCOLOR_SOLDIER "#b64949"
-#define JCOLOR_SERF "#669968"
-#define JCOLOR_PEASANT "#936d6c"
+#define JCOLOR_NOBLE "#aa83b9"
+#define JCOLOR_CHURCH "#c0ba8d"
+#define JCOLOR_SOLDIER "#b18484"
+#define JCOLOR_SERF "#819e82"
+#define JCOLOR_PEASANT "#b6a68c"
 
 
 // job display orders //
@@ -171,12 +171,14 @@
 #define JDO_TOWNGUARD 8
 #define JDO_GATEMASTER 9
 #define JDO_DUNGEONEER 10
+#define JDO_KNIGHT 10.1
 #define JDO_SQUIRE 11
 #define JDO_VET 11.1
 
 #define JDO_PRIEST 12
 #define JDO_CLERIC 13
 #define JDO_MONK 14
+#define JDO_TEMPLAR 14.1
 #define JDO_CHURCHLING 15
 
 #define JDO_PURITAN 16

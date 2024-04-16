@@ -128,6 +128,18 @@
 	name = "fung-eye"
 	desc = ""
 
+/obj/item/organ/eyes/elf
+	name = "elf eyes"
+	desc = ""
+	see_in_dark = 4
+	lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
+
+/obj/item/organ/eyes/halfelf
+	name = "half-elf eyes"
+	desc = ""
+	see_in_dark = 3
+	lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
+
 ///Robotic
 
 /obj/item/organ/eyes/robotic
