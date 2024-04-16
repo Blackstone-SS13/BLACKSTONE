@@ -82,6 +82,14 @@
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
+/datum/crafting_recipe/roguetown/peasantwarflail
+	name = "Goedendag"
+	result = /obj/item/rogueweapon/flail/peasantwarflail
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/rogueweapon/thresher)
+	tools = list(/obj/item/rogueweapon/hammer)
+	craftdiff = 3
+
 /datum/crafting_recipe/roguetown/rproesthetic
 	name = "wood arm (L)"
 	result = list(/obj/item/bodypart/l_arm/rproesthetic)
