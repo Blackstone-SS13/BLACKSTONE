@@ -34,3 +34,4 @@
 	H.change_stat("strength", 1)
 	H.change_stat("endurance", 1)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+
