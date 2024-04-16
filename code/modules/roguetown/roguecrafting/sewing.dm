@@ -86,4 +86,16 @@
 	craftdiff = 2
 
 
+/datum/crafting_recipe/roguetown/gambeson
+	name = "Gambeson"
+	result = /obj/item/clothing/suit/roguetown/armor/gambeson
+	reqs = list(/obj/item/natural/fibers = 20)
+	tools = list(/obj/item/needle)
+	craftdiff = 2
 
+/datum/crafting_recipe/roguetown/paddedcap
+	name = "Padded Cap"
+	result = /obj/item/clothing/head/roguetown/paddedcap
+	reqs = list(/obj/item/natural/fibers = 5)
+	tools = list(/obj/item/needle)
+	craftdiff = 2
