@@ -16,7 +16,7 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	backl = /obj/item/storage/backpack/rogue/backpack
-	backpack_contents = list(/obj/item/bomb = 1, /obj/item/flint = 1)
+	backpack_contents = list(/obj/item/bomb = 3, /obj/item/flint = 1)
 	if(prob(50))
 		beltl = /obj/item/rogueweapon/pick
 	else
