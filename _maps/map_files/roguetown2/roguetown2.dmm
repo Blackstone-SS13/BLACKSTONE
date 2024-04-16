@@ -1963,7 +1963,7 @@
 "Nf" = (/obj/structure/chair/wood/rogue{icon_state = "chair2"; dir = 8},/turf/open/floor/rogue/ruinedwood{icon_state = "horzw"},/area/rogue/indoors/town/tavern)
 "Ng" = (/turf/open/floor/rogue/ruinedwood{icon_state = "horzw"},/area/rogue/indoors/town/tavern)
 "Nh" = (/obj/structure/mineral_door/wood{locked = 1; lockid = "tavern"; name = "MEETING ROOM"},/turf/open/floor/rogue/wood,/area/rogue/indoors/town/tavern)
-"Ni" = (/obj/structure/mineral_door/wood{name = "Room III"; lockid = "roomiii"; locked = 1},/turf/closed,/area/rogue/indoors/town/tavern)
+"Ni" = (/obj/structure/mineral_door/wood{name = "Room III"; lockid = "roomiii"; locked = 1},/turf/open/floor/rogue/wood,/area/rogue/indoors/town/tavern)
 "Nj" = (/obj/machinery/light/rogue/wallfire{pixel_x = 32},/turf/open/floor/rogue/ruinedwood{icon_state = "vertw"; dir = 1},/area/rogue/indoors/town/tavern)
 "Nk" = (/obj/structure/mineral_door/wood/donjon{lockid = "ssteward"},/turf/open/floor/rogue/wood,/area/rogue/indoors/town/shop)
 "Nl" = (/obj/structure/bed/rogue/inn/wool,/obj/item/bedsheet/rogue/pelt,/turf/open/floor/rogue/wood,/area/rogue/indoors/town/tavern)
