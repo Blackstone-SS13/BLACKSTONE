@@ -8,7 +8,7 @@
 	"Dwarf",
 	)
 	
-	advclass/cyclops/allowed_flaws = list("noeyer", 
+	allowed_flaws = list("noeyer", 
 	"noeyel"
 	)
 
