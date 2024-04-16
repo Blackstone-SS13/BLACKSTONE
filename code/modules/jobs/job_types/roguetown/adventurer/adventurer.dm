@@ -64,7 +64,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 					testing("[A.name] fail9")
 					continue
 			if(!(H.charflaw in A.allowed_flaws))
-			continue
+				continue
 
 			if(!isvillager && !ispilgrim) //adventurer
 				if(A.ispilgrim || A.isvillager)
