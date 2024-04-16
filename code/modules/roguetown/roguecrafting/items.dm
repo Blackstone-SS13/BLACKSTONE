@@ -212,6 +212,6 @@
 /datum/crafting_recipe/roguetown/bottlebomb
 	name = "Bottle Bomb"
 	result = /obj/item/bomb
-	reqs = list(/obj/item/reagent_containers/glass/bottle = 1,
+	reqs = list(/obj/item/reagent_containers/glass = 1,
 			/obj/item/natural/cloth = 1,
 			/obj/item/rogueore/coal = 1)
