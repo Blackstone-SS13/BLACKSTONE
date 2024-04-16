@@ -117,14 +117,6 @@
 	name = "undead eyes"
 	desc = ""
 
-/obj/item/organ/eyes/night_vision/elf
-	name = "elven eyes"
-	desc = ""
-
-/obj/item/organ/eyes/night_vision/halfelf
-	name = "half-elven eyes"
-	desc = ""
-
 /obj/item/organ/eyes/night_vision/werewolf
 	name = "moonlight eyes"
 	desc = ""
