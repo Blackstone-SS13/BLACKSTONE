@@ -82,8 +82,7 @@ GLOBAL_VAR(restart_counter)
 
 	Master.Initialize(10, FALSE, TRUE)
 
-	if(TEST_RUN_PARAMETER in params)
-		HandleTestRun()
+	HandleTestRun()
 
 
 /world/proc/HandleTestRun()

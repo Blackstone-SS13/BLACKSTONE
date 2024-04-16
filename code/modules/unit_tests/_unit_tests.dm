@@ -10,5 +10,6 @@
 #include "species_whitelists.dm"
 #include "subsystem_init.dm"
 #include "timer_sanity.dm"
+#include "create_and_destroy.dm"
 #include "unit_test.dm"
 #endif
