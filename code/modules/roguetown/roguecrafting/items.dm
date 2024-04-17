@@ -83,7 +83,7 @@
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/peasantwarflail
-	name = "Goedendag"
+	name = "Peasant War Flail"
 	result = /obj/item/rogueweapon/flail/peasantwarflail
 	reqs = list(/obj/item/grown/log/tree/small = 1,
 				/obj/item/rogueweapon/thresher)
