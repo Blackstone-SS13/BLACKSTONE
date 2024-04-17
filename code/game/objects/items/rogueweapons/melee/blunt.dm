@@ -14,7 +14,7 @@
 	//dropshrink = 0.75
 	wlength = WLENGTH_NORMAL
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_HIP
+	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
 	associated_skill = /datum/skill/combat/axesmaces
 	smeltresult = /obj/item/ingot/iron
 	gripped_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
@@ -263,7 +263,6 @@
 	//dropshrink = 0.75
 	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK
 	associated_skill = /datum/skill/combat/axesmaces
 	smeltresult = /obj/item/ash
 	parrysound = "parrywood"
