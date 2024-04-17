@@ -528,6 +528,17 @@
 			var/obj/item/I = target
 			I.throw_at(throw_target, 200, 4)
 
+/obj/projectile/magic/skeleton
+	name = "bolt of fetching"
+	icon_state = "necropotence"
+	range = 15
+
+obj/projectile/magic/skeleton/on_hit(target)
+	var/turf/T
+	if(isturf(target))
+		T = target
+	new /mob/living/carbon/human/species/skeleton/npc(T)
+
 /obj/projectile/magic/sapping
 	name = "bolt of sapping"
 	icon_state = "sapping"

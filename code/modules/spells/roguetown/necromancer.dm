@@ -37,3 +37,27 @@
 		return TRUE
 	else
 		return FALSE
+
+
+
+new /mob/living/simple_animal/chick(T)
+
+FINALLY
+
+/obj/effect/proc_holder/spell/invoked/projectile/skeleton
+	name = "Raise Undead"
+	desc = ""
+	clothes_req = FALSE
+	range = 15
+	projectile_type = /obj/projectile/magic/skeleton
+	overlay_state = ""
+	sound = list('sound/magic/magnet.ogg')
+	active = FALSE
+	releasedrain = 40
+	chargedrain = 10
+	chargetime = 60
+	warnie = "spellwarning"
+	no_early_release = TRUE
+	charging_slowdown = 1
+	chargedloop = /datum/looping_sound/invokegen
+	associated_skill = /datum/skill/magic/arcane
