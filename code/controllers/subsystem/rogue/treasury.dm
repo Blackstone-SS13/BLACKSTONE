@@ -29,7 +29,6 @@ SUBSYSTEM_DEF(treasury)
 	var/list/bank_accounts = list()
 	var/list/stockpile_datums = list()
 	var/next_treasury_check = 0
-	var/list/acceptable_treasure_typecache = list()
 	var/list/log_entries = list()
 
 
@@ -62,8 +61,6 @@ SUBSYSTEM_DEF(treasury)
 		var/amt_to_generate = 0
 		for(var/obj/item/I in A)
 			if(!isturf(I.loc))
-				return
-			if(!(I.type in acceptable_treasure_typecache))
 				return
 			if(I.get_real_price() <= 0)
 				return
