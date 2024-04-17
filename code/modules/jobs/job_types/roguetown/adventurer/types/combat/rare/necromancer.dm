@@ -1,7 +1,6 @@
 /datum/advclass/necromancer
 	name = "Necromancer"
 	tutorial = "Ostrasized and hunted by society for their dark magics and perversion of life, Necromancers have been known to summon ghosts, ghouls, and zombies; you can not"
-	faction = "Station"
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Half-Elf",
 	 "Dark Elf",
