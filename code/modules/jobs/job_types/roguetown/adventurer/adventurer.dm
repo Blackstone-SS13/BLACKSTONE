@@ -21,11 +21,12 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 	outfit = null
 	outfit_female = null
 
-	var/isvillager = FALSE
-	var/ispilgrim = FALSE
 	display_order = JDO_ADVENTURER
 	show_in_credits = FALSE
 	min_pq = -4
+	
+	var/isvillager = FALSE
+	var/ispilgrim = FALSE
 
 /datum/job/roguetown/adventurer/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -66,16 +67,14 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 			if(!(H.charflaw in A.allowed_flaws))
 				continue
 
-			if(!isvillager && !ispilgrim) //adventurer
-				if(A.ispilgrim || A.isvillager)
-					continue
-			if(isvillager) //towner
-				if(!A.isvillager)
-					continue
+			if((!isvillager && !ispilgrim) && (A.isvillager || A.ispilgrim)) //adventurer
+				continue
 
-//			if(ispilgrim) //pilgrim
-//				if(A.ispilgrim)
-//					continue
+			if(isvillager && !A.isvillager) //towner
+				continue
+
+			if(ispilgrim && !A.ispilgrim) //pilgrim
+				continue
 
 			if(A.plevel_req > M.client.patreonlevel())
 				testing("[A.name] fail6")
