@@ -307,7 +307,7 @@
 	dynamic_hair_suffix = "+generic"
 
 /obj/item/clothing/head/roguetown/paddedcap
-	name = "Padded Cap"
+	name = "padded cap"
 	icon_state = "armingcap"
 	item_state = "armingcap"
 	sleevetype = null
