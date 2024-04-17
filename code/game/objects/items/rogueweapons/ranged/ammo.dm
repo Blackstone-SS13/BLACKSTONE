@@ -72,7 +72,7 @@
 	max_integrity = 5
 
 /obj/item/ammo_casing/caseless/rogue/arrow/poison
-	name = "Poisoned Arrow"
+	name = "poisoned arrow"
 	projectile_type = /obj/projectile/bullet/reusable/arrow/poison
 	icon_state = "arrow_poison"
 	max_integrity = 10
