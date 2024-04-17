@@ -43,7 +43,4 @@
 	H.change_stat("perception", 5)
 	H.change_stat("endurance", 2)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	if(prob(23))
-		if(!H.has_language(/datum/language/elvish))
-			H.grant_language(/datum/language/elvish)
-			to_chat(H, "<span class='info'>I can speak Elfish with ,e before my speech.</span>")
+	H.ambushable = FALSE
