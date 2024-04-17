@@ -12,7 +12,7 @@
 	)
 
 	outfit = /datum/outfit/job/roguetown/adventurer/cyclops
-	maxchosen = 6
+	maxchosen = 3
 
 /datum/outfit/job/roguetown/adventurer/cyclops/pre_equip(mob/living/carbon/human/H)
 	..()
