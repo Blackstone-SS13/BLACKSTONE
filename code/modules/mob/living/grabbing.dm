@@ -86,7 +86,7 @@
 	return ..()
 
 /obj/item/grabbing/dropped(mob/living/user, show_message = TRUE)
-	SHOULD_CALL_PARENT(0)
+	SHOULD_CALL_PARENT(FALSE)
 	if(grabbed == user.pulling)
 		user.stop_pulling(FALSE)
 	if(!user.pulling)
@@ -457,7 +457,7 @@
 		return
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
-		if(istype(H.wear_neck, /obj/item/clothing/neck/roguetown/psicross/s))
+		if(istype(H.wear_neck, /obj/item/clothing/neck/roguetown/psicross/silver))
 			to_chat(user, "<span class='userdanger'>SILVER! HISSS!!!</span>")
 			return
 	last_drink = world.time
