@@ -139,7 +139,7 @@
 	force = 12
 	force_wielded = 25
 	name = "Improvised Billhook"
-	desc = "Looks hastily made"
+	desc = "Looks hastily made."
 	icon_state = "billhook"
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 100
