@@ -138,7 +138,7 @@
 /obj/item/rogueweapon/spear/improvisedbillhook
 	force = 12
 	force_wielded = 25
-	name = "Improvised Billhook"
+	name = "improvised billhook"
 	desc = "Looks hastily made."
 	icon_state = "billhook"
 	smeltresult = /obj/item/ingot/iron
