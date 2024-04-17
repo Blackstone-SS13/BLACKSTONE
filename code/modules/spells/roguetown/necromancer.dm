@@ -1,6 +1,6 @@
 /obj/effect/proc_holder/spell/invoked/bonechill
 	name = "Bone Chill"
-	overlay_state = "astrata"
+	overlay_state = "raiseskele"
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
@@ -30,7 +30,6 @@
 			return TRUE
 		target.visible_message("<span class='info'>Necrotic energy floods over [target]!</span>", "<span class='userdanger'>I feel colder as the dark energy fades!</span>")
 		if(iscarbon(target))
-			var/mob/living/carbon/C = target
 			target.Paralyze(50)
 		else
 			target.adjustBruteLoss(20)
@@ -38,19 +37,13 @@
 	else
 		return FALSE
 
-
-
-new /mob/living/simple_animal/chick(T)
-
-FINALLY
-
 /obj/effect/proc_holder/spell/invoked/projectile/skeleton
 	name = "Raise Undead"
 	desc = ""
 	clothes_req = FALSE
 	range = 15
 	projectile_type = /obj/projectile/magic/skeleton
-	overlay_state = ""
+	overlay_state = "raiseskele"
 	sound = list('sound/magic/magnet.ogg')
 	active = FALSE
 	releasedrain = 40
