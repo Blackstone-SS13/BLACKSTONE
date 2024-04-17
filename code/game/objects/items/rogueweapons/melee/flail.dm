@@ -89,7 +89,7 @@
 	force_wielded = 35
 	possible_item_intents = list(/datum/intent/flail/strike)
 	gripped_intents = list(/datum/intent/flail/strikerange, /datum/intent/flail/strike/smashrange)
-	name = "Peasant War Flail"
+	name = "peasant war flail"
 	desc = "An agricultural flail turned into a weapon of war."
 	icon_state = "peasantwarflail"
 	icon = 'icons/roguetown/weapons/64.dmi'
