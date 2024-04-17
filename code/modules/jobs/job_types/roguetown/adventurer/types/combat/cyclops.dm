@@ -22,7 +22,7 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/studded
 	backr = /obj/item/rogueweapon/shield/wood
 	backl = /obj/item/storage/backpack/rogue/backpack
-	backpack_contents = list(/obj/item/bomb = 3, /obj/item/flint = 1 /obj/item/reagent_containers/glass/bottle/rogue/wine = 2)
+	backpack_contents = list(/obj/item/bomb = 3, /obj/item/flint = 1, /obj/item/reagent_containers/glass/bottle/rogue/wine = 2,)
 	beltl = /obj/item/rogueweapon/sword/cutlass
 
 	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
