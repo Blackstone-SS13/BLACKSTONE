@@ -38,35 +38,23 @@
 		var/list/skin_slop = H.dna.species.get_skin_list()
 		H.skin_tone = skin_slop["Giza"]
 		H.update_body()
+	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
+	belt = /obj/item/storage/belt/rogue/leather/rope
+	beltl = /obj/item/keyring/merchant
+	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
+	pants = /obj/item/clothing/under/roguetown/tights/sailor
+	neck = /obj/item/clothing/neck/roguetown/horus
+	armor = /obj/item/clothing/suit/roguetown/shirt/robe/merchant
+	head = /obj/item/clothing/head/roguetown/chaperon
+	id = /obj/item/clothing/ring/gold
 	if(H.gender == MALE)
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-		beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		beltl = /obj/item/keyring/merchant
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
-		pants = /obj/item/clothing/under/roguetown/tights/sailor
-		neck = /obj/item/clothing/neck/roguetown/horus
-		armor = /obj/item/clothing/suit/roguetown/shirt/robe/merchant
-		head = /obj/item/clothing/head/roguetown/chaperon
-		id = /obj/item/clothing/ring/gold
-		H.change_stat("intelligence", 2)
-		H.change_stat("perception", 1)
-		H.change_stat("strength", -2)
 		if(H.dna?.species)
 			if(H.dna.species.id == "human")
 				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 	else
 		shoes = /obj/item/clothing/shoes/roguetown/gladiator
-		beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		beltl = /obj/item/roguekey/merchant
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
-		neck = /obj/item/clothing/neck/roguetown/horus
-		armor = /obj/item/clothing/suit/roguetown/shirt/robe/merchant
-		pants = /obj/item/clothing/under/roguetown/tights/sailor
-		head = /obj/item/clothing/head/roguetown/chaperon
-		id = /obj/item/clothing/ring/gold
-		H.change_stat("intelligence", 2)
-		H.change_stat("perception", 1)
-		H.change_stat("strength", -2)
+	H.change_stat("intelligence", 2)
+	H.change_stat("perception", 1)
+	H.change_stat("strength", -2)
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)

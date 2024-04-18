@@ -25,20 +25,16 @@
 		H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
+	belt = /obj/item/storage/belt/rogue/leather/rope
+	beltr = /obj/item/roguekey/blacksmith
+	backr = /obj/item/storage/backpack/rogue/satchel
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/tights/random
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
 		shirt = null
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		beltr = /obj/item/roguekey/blacksmith
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/vest
-		backr = /obj/item/storage/backpack/rogue/satchel
 		wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	else
-		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
+		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random	
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		beltr = /obj/item/roguekey/blacksmith
 		cloak = /obj/item/clothing/cloak/apron/brown
-		backr = /obj/item/storage/backpack/rogue/satchel

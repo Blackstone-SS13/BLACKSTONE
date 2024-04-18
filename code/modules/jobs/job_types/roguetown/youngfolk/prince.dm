@@ -20,13 +20,13 @@
 
 /datum/outfit/job/roguetown/prince/pre_equip(mob/living/carbon/human/H)
 	..()
+	beltl = /obj/item/roguekey/manor
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guard
 		armor = /obj/item/clothing/suit/roguetown/armor/chainmail
 		shoes = /obj/item/clothing/shoes/roguetown/boots
 		belt = /obj/item/storage/belt/rogue/leather
-		beltl = /obj/item/roguekey/manor
 		beltr = /obj/item/storage/belt/rogue/pouch
 		backr = /obj/item/storage/backpack/rogue/satchel
 		if(H.mind)
@@ -47,7 +47,6 @@
 			H.change_stat("constitution", 1)
 			H.change_stat("speed", 1)
 	else
-		beltl = /obj/item/roguekey/manor
 		head = /obj/item/clothing/head/roguetown/hennin
 		neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 		belt = /obj/item/storage/belt/rogue/leather/cloth/lady

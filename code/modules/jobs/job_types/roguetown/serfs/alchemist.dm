@@ -31,21 +31,15 @@
 		if(H.age == AGE_OLD)
 			H.mind.adjust_skillrank(/datum/skill/craft/alchemy, pick(4,6), TRUE)
 //Requires a lot of sprites, so this is just a placeholder
+	pants = /obj/item/clothing/under/roguetown/trou
+	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
+	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt
+	belt = /obj/item/storage/belt/rogue/leather
+	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
+	cloak = /obj/item/clothing/cloak/apron/brown
 	if(H.gender == MALE)
-		pants = /obj/item/clothing/under/roguetown/trou
-		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-		shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt
-		belt = /obj/item/storage/belt/rogue/leather
-		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-		cloak = /obj/item/clothing/cloak/apron/brown
 		H.change_stat("intelligence", 3)
 		H.change_stat("speed", -1)
 	else
-		pants = /obj/item/clothing/under/roguetown/trou
-		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-		shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt
-		belt = /obj/item/storage/belt/rogue/leather
-		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-		cloak = /obj/item/clothing/cloak/apron/brown
 		H.change_stat("intelligence", 2)
 		H.change_stat("speed", -2)

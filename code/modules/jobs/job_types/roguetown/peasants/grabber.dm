@@ -33,37 +33,31 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
+	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+	beltl = /obj/item/roguekey/shop
+	belt = /obj/item/storage/belt/rogue/leather/rope
+	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
+	pants = /obj/item/clothing/under/roguetown/tights/sailor
 	if(H.gender == MALE)
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-		pants = /obj/item/clothing/under/roguetown/tights/sailor
-		neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/rogueweapon/mace/woodclub
-		beltl = /obj/item/roguekey/shop
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 		if(prob(30))
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor/red
 		if(prob(23))
 			armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
 		H.change_stat("strength", 2)
-		H.change_stat("intelligence", -3)
 		H.change_stat("endurance", 3)
 		H.change_stat("constitution", 2)
 	else
 		shoes = /obj/item/clothing/shoes/roguetown/gladiator
-		pants = /obj/item/clothing/under/roguetown/tights/sailor
 		beltr = /obj/item/rogueweapon/sword/cutlass
-		neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-		beltl = /obj/item/roguekey/shop
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 		if(prob(23))
 			armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
 		if(prob(77))
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor/red
 		H.change_stat("strength", 1)
 		H.change_stat("perception", 2)
-		H.change_stat("intelligence", -3)
 		H.change_stat("endurance", 4)
 		H.change_stat("speed", 3)
 		H.change_stat("constitution", 1)
+	H.change_stat("intelligence", -3)

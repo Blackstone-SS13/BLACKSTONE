@@ -27,21 +27,15 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
+	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
+	belt = /obj/item/storage/belt/rogue/leather/rope
+	pants = /obj/item/clothing/under/roguetown/tights
+	backr = /obj/item/storage/backpack/rogue/satchel
+	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 	if(H.gender == MALE)
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		pants = /obj/item/clothing/under/roguetown/tights
-		backr = /obj/item/storage/backpack/rogue/satchel
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 		armor = /obj/item/clothing/suit/roguetown/shirt/robe
 	else
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		pants = /obj/item/clothing/under/roguetown/tights
-		backr = /obj/item/storage/backpack/rogue/satchel
 		head = /obj/item/clothing/head/roguetown/armingcap
-
 	H.change_stat("perception", 1)
 	H.change_stat("speed", 2)
