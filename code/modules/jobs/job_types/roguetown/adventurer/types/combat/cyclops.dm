@@ -7,8 +7,8 @@
 	"Dwarf",
 	)
 
-	allowed_flaws = list("noeyer", 
-	"noeyel"
+	allowed_flaws = list("Cyclops (R)", 
+	"Cyclops (L)"
 	)
 
 	outfit = /datum/outfit/job/roguetown/adventurer/cyclops
