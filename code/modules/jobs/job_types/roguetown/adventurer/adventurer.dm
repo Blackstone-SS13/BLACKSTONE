@@ -21,11 +21,12 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 	outfit = null
 	outfit_female = null
 
-	var/isvillager = FALSE
-	var/ispilgrim = FALSE
 	display_order = JDO_ADVENTURER
 	show_in_credits = FALSE
 	min_pq = -4
+	
+	var/isvillager = FALSE
+	var/ispilgrim = FALSE
 
 /datum/job/roguetown/adventurer/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -64,17 +65,14 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 					testing("[A.name] fail9")
 					continue
 
-			if(!isvillager && !ispilgrim) // Avoid adventurers being able to pick pilgrim / villager classes
-				if(A.ispilgrim || A.isvillager)
-					continue
+			if((!isvillager && !ispilgrim) && (A.isvillager || A.ispilgrim)) // Avoid adventurers being able to pick pilgrim / villager classes
+				continue
 
-			if(isvillager) //towner
-				if(!A.isvillager)
-					continue
+			if(isvillager && !A.isvillager) // Avoid towners being able to pick non-towner classes
+				continue
 
-			if(ispilgrim) // Avoid pilgrims being able to pick adventurer classes
-				if(!A.ispilgrim)
-					continue
+			if(ispilgrim && !A.ispilgrim) // Avoid pilgrims being able to pick non-pilgrim classes
+				continue
 
 			if(A.plevel_req > M.client.patreonlevel())
 				testing("[A.name] fail6")

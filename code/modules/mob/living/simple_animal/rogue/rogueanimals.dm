@@ -68,7 +68,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/rogue/death(gibbed)
 	emote("death")
-	..()
+	..(gibbed)
 
 /mob/living/simple_animal/hostile/retaliate/rogue/handle_automated_movement()
 	set waitfor = FALSE
@@ -255,7 +255,7 @@
 	if(tame && !stop_automated_movement)
 		stop_automated_movement = TRUE
 		Goto(user,move_to_delay)
-		addtimer(CALLBACK(src, .proc/return_action), 3 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(return_action)), 3 SECONDS)
 
 /mob/living/simple_animal/hostile/retaliate/rogue/food_tempted(obj/item/O, mob/user)
 	testing("tempted")
@@ -263,4 +263,4 @@
 		testing("infoodtype")
 		stop_automated_movement = TRUE
 		Goto(user,move_to_delay)
-		addtimer(CALLBACK(src, .proc/return_action), 3 SECONDS)
+		addtimer(CALLBACK(src, PROC_REF(return_action)), 3 SECONDS)

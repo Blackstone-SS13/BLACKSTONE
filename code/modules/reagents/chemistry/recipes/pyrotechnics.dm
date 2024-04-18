@@ -104,7 +104,7 @@
 	strengthdiv = 3
 
 /datum/chemical_reaction/reagent_explosion/tatp/New()
-	SSticker.OnRoundstart(CALLBACK(src,.proc/UpdateInfo)) //method used by secret sauce.
+	SSticker.OnRoundstart(CALLBACK(src,PROC_REF(UpdateInfo))) //method used by secret sauce.
 
 /datum/chemical_reaction/reagent_explosion/tatp/proc/UpdateInfo()
 	required_temp = 450 + rand(-49,49)  //this gets loaded only on round start
@@ -124,7 +124,7 @@
 	strengthdiv = 3
 
 /datum/chemical_reaction/reagent_explosion/tatp_explosion/New()
-	SSticker.OnRoundstart(CALLBACK(src,.proc/UpdateInfo))
+	SSticker.OnRoundstart(CALLBACK(src,PROC_REF(UpdateInfo)))
 
 
 /datum/chemical_reaction/reagent_explosion/tatp_explosion/proc/UpdateInfo()
@@ -338,7 +338,7 @@
 	var/range = created_volume/3
 	if(isatom(holder.my_atom))
 		var/atom/A = holder.my_atom
-		A.flash_lighting_fx(_range = (range + 2), _reset_lighting = FALSE)
+		A.flash_lighting_fx(_range = (range + 2))
 	for(var/mob/living/C in get_hearers_in_view(range, location))
 		if(C.flash_act(affect_silicon = TRUE))
 			if(get_dist(C, location) < 4)
@@ -359,7 +359,7 @@
 	var/range = created_volume/10
 	if(isatom(holder.my_atom))
 		var/atom/A = holder.my_atom
-		A.flash_lighting_fx(_range = (range + 2), _reset_lighting = FALSE)
+		A.flash_lighting_fx(_range = (range + 2))
 	for(var/mob/living/C in get_hearers_in_view(range, location))
 		if(C.flash_act(affect_silicon = TRUE))
 			if(get_dist(C, location) < 4)
