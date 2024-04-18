@@ -12,6 +12,8 @@
 	 "Tiefling",
 	"Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/ranger
+	pickprob = 40
+	maxchosen = 15
 
 /datum/outfit/job/roguetown/adventurer/ranger/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -24,6 +26,7 @@
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
