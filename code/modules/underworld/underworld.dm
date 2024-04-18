@@ -60,20 +60,22 @@
 // shit that eventually will need moved elsewhere
 /obj/item/flashlight/lantern/shrunken
 	name = "shrunken lamp"
+	desc = "A beacon."
 	icon_state = "shrunkenlamp"
 	item_state = "shrunkenlamp"
 	lefthand_file = 'icons/mob/inhands/equipment/mining_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/mining_righthand.dmi'
-	desc = "A beacon."
-	brightness_on = 2			// luminosity when on
+	light_range = 4
+	light_power = 20
+	light_color = LIGHT_COLOR_BLOOD_MAGIC
 
 /obj/item/flashlight/lantern/shrunken/update_brightness(mob/user = null)
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		set_light(3, 20, LIGHT_COLOR_BLOOD_MAGIC)
+		set_light_on(TRUE)
 	else
 		icon_state = initial(icon_state)
-		set_light(0)
+		set_light_on(FALSE)
 
 
 /obj/structure/underworld/carriageman
@@ -155,26 +157,34 @@ GLOBAL_LIST_EMPTY(underworld_coins)
 	desc = "This is more than just a coin."
 	icon = 'icons/roguetown/underworld/enigma_husks.dmi'
 	icon_state = "soultoken_floor"
+	var/should_track = TRUE
 
 /obj/item/underworld/coin/Initialize()
 	. = ..()
-	GLOB.underworld_coins |= src
+	if(should_track)
+		GLOB.underworld_coins |= src
 
 /obj/item/underworld/coin/Destroy()
-	GLOB.underworld_coins -= src
+	if(should_track)
+		GLOB.underworld_coins -= src
 	coin_upkeep()
 	return ..()
 
 /obj/item/underworld/coin/pickup(mob/user)
 	..()
-	GLOB.underworld_coins -= src
+	if(should_track)
+		GLOB.underworld_coins -= src
 	coin_upkeep()
 	icon_state = "soultoken"
 
 /obj/item/underworld/coin/dropped(mob/user)
 	..()
-	GLOB.underworld_coins |= src
+	if(should_track)
+		GLOB.underworld_coins |= src
 	icon_state = "soultoken_floor"
+
+/obj/item/underworld/coin/notracking
+	should_track = FALSE
 
 /proc/coin_upkeep()
 	if(length(GLOB.underworld_coins) < 3)
