@@ -255,7 +255,9 @@ SUBSYSTEM_DEF(mapping)
 			LoadGroup(FailedZs, OtherZ.map_name, OtherZ.map_path, OtherZ.map_file, OtherZ.traits, ZTRAITS_STATION)
 
 	if(SSdbcore.Connect())
-		var/datum/DBQuery/query_round_map_name = SSdbcore.NewQuery("UPDATE [format_table_name("round")] SET map_name = '[config.map_name]' WHERE id = [GLOB.round_id]")
+		var/datum/DBQuery/query_round_map_name = SSdbcore.NewQuery({"
+			UPDATE [format_table_name("round")] SET map_name = :map_name WHERE id = :round_id
+		"}, list("map_name" = config.map_name, "round_id" = GLOB.round_id))
 		query_round_map_name.Execute()
 		qdel(query_round_map_name)
 
@@ -395,11 +397,6 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 
 		map_templates[R.name] = R
 		ruins_templates[R.name] = R
-
-		if(istype(R, /datum/map_template/ruin/lavaland))
-			lava_ruins_templates[R.name] = R
-		else if(istype(R, /datum/map_template/ruin/space))
-			space_ruins_templates[R.name] = R
 
 /datum/controller/subsystem/mapping/proc/preloadShuttleTemplates()
 	var/list/unbuyable = generateMapList("[global.config.directory]/unbuyableshuttles.txt")
