@@ -3,131 +3,145 @@ Reproductive extracts:
 	When fed three monkey cubes, produces between
 	1 and 4 normal slime extracts of the same colour.
 */
+
+
 /obj/item/slimecross/reproductive
 	name = "reproductive extract"
-	desc = ""
+	desc = "It pulses with a strange hunger."
 	icon_state = "reproductive"
 	effect = "reproductive"
-	effect_desc = ""
+	effect_desc = "When fed monkey cubes it produces more extracts. Bio bag compatible as well."
 	var/extract_type = /obj/item/slime_extract/
-	var/cubes_eaten = 0
+	var/cooldown = 3 SECONDS
+	var/feedAmount = 3
 	var/last_produce = 0
-	var/cooldown = 30 // 3 seconds.
+
+/obj/item/slimecross/reproductive/examine()
+	. = ..()
+	. += span_danger("It appears to have eaten [length(contents)] Monkey Cube[p_s()]")
+
+/obj/item/slimecross/reproductive/Initialize(mapload)
+	. = ..()
+	create_storage(storage_type = /datum/storage/extract_inventory)
 
 /obj/item/slimecross/reproductive/attackby(obj/item/O, mob/user)
-	if((last_produce + cooldown) > world.time)
-		to_chat(user, "<span class='warning'>[src] is still digesting!</span>")
+	var/datum/storage/extract_inventory/slime_storage = atom_storage
+	if(!istype(slime_storage))
 		return
-	if(istype(O, /obj/item/storage/bag/bio))
-		var/list/inserted = list()
-		SEND_SIGNAL(O, COMSIG_TRY_STORAGE_TAKE_TYPE, /obj/item/reagent_containers/food/snacks/monkeycube, src, 1, null, null, user, inserted)
-		if(inserted.len)
-			var/obj/item/reagent_containers/food/snacks/monkeycube/M = inserted[1]
-			if(istype(M))
-				eat_cube(M, user)
-		else
-			to_chat(user, "<span class='warning'>There are no monkey cubes in the bio bag!</span>")
-	if(istype(O,/obj/item/reagent_containers/food/snacks/monkeycube))
-		eat_cube(O, user)
-	if(cubes_eaten >= 3)
-		var/cores = rand(1,4)
-		visible_message("<span class='notice'>[src] briefly swells to a massive size, and expels [cores] extract[cores > 1 ? "s":""]!</span>")
-		playsound(src, 'sound/blank.ogg', 40, TRUE)
-		last_produce = world.time
-		for(var/i = 0, i < cores, i++)
-			new extract_type(get_turf(loc))
-		cubes_eaten = 0
 
-/obj/item/slimecross/reproductive/proc/eat_cube(obj/item/reagent_containers/food/snacks/monkeycube, mob/user)
-		qdel(monkeycube)
-		cubes_eaten++
-		to_chat(user, "<span class='notice'>I feed [monkeycube] to [src], and it pulses gently.</span>")
-		playsound(src, 'sound/blank.ogg', 20, TRUE)
+	if((last_produce + cooldown) > world.time)
+		to_chat(user, span_warning("[src] is still digesting!"))
+		return
+
+	if(length(contents) >= feedAmount) //if for some reason the contents are full, but it didnt digest, attempt to digest again
+		to_chat(user, span_warning("[src] appears to be full but is not digesting! Maybe poking it stimulated it to digest."))
+		slime_storage?.processCubes(user)
+		return
+
+	if(istype(O, /obj/item/storage/bag/xeno))
+		var/list/inserted = list()
+		O.atom_storage.remove_type(/obj/item/food/monkeycube, src, feedAmount - length(contents), TRUE, FALSE, user, inserted)
+		if(inserted.len)
+			to_chat(user, span_notice("You feed [length(inserted)] Monkey Cube[p_s()] to [src], and it pulses gently."))
+			playsound(src, 'sound/items/eatfood.ogg', 20, TRUE)
+			slime_storage?.processCubes(user)
+		else
+			to_chat(user, span_warning("There are no monkey cubes in the bio bag!"))
+		return
+
+	else if(istype(O, /obj/item/food/monkeycube))
+		if(atom_storage?.attempt_insert(O, user, override = TRUE, force = STORAGE_FULLY_LOCKED))
+			to_chat(user, span_notice("You feed 1 Monkey Cube to [src], and it pulses gently."))
+			slime_storage?.processCubes(user)
+			playsound(src, 'sound/items/eatfood.ogg', 20, TRUE)
+			return
+		else
+			to_chat(user, span_notice("The [src] rejects the Monkey Cube!")) //in case it fails to insert for whatever reason you get feedback
 
 /obj/item/slimecross/reproductive/grey
 	extract_type = /obj/item/slime_extract/grey
-	colour = "grey"
+	colour = SLIME_TYPE_GREY
 
 /obj/item/slimecross/reproductive/orange
 	extract_type = /obj/item/slime_extract/orange
-	colour = "orange"
+	colour = SLIME_TYPE_ORANGE
 
 /obj/item/slimecross/reproductive/purple
 	extract_type = /obj/item/slime_extract/purple
-	colour = "purple"
+	colour = SLIME_TYPE_PURPLE
 
 /obj/item/slimecross/reproductive/blue
 	extract_type = /obj/item/slime_extract/blue
-	colour = "blue"
+	colour = SLIME_TYPE_BLUE
 
 /obj/item/slimecross/reproductive/metal
 	extract_type = /obj/item/slime_extract/metal
-	colour = "metal"
+	colour = SLIME_TYPE_METAL
 
 /obj/item/slimecross/reproductive/yellow
 	extract_type = /obj/item/slime_extract/yellow
-	colour = "yellow"
+	colour = SLIME_TYPE_YELLOW
 
 /obj/item/slimecross/reproductive/darkpurple
 	extract_type = /obj/item/slime_extract/darkpurple
-	colour = "dark purple"
+	colour = SLIME_TYPE_DARK_PURPLE
 
 /obj/item/slimecross/reproductive/darkblue
 	extract_type = /obj/item/slime_extract/darkblue
-	colour = "dark blue"
+	colour = SLIME_TYPE_DARK_BLUE
 
 /obj/item/slimecross/reproductive/silver
 	extract_type = /obj/item/slime_extract/silver
-	colour = "silver"
+	colour = SLIME_TYPE_SILVER
 
 /obj/item/slimecross/reproductive/bluespace
 	extract_type = /obj/item/slime_extract/bluespace
-	colour = "bluespace"
+	colour = SLIME_TYPE_BLUESPACE
 
 /obj/item/slimecross/reproductive/sepia
 	extract_type = /obj/item/slime_extract/sepia
-	colour = "sepia"
+	colour = SLIME_TYPE_SEPIA
 
 /obj/item/slimecross/reproductive/cerulean
 	extract_type = /obj/item/slime_extract/cerulean
-	colour = "cerulean"
+	colour = SLIME_TYPE_CERULEAN
 
 /obj/item/slimecross/reproductive/pyrite
 	extract_type = /obj/item/slime_extract/pyrite
-	colour = "pyrite"
+	colour = SLIME_TYPE_PYRITE
 
 /obj/item/slimecross/reproductive/red
 	extract_type = /obj/item/slime_extract/red
-	colour = "red"
+	colour = SLIME_TYPE_RED
 
 /obj/item/slimecross/reproductive/green
 	extract_type = /obj/item/slime_extract/green
-	colour = "green"
+	colour = SLIME_TYPE_GREEN
 
 /obj/item/slimecross/reproductive/pink
 	extract_type = /obj/item/slime_extract/pink
-	colour = "pink"
+	colour = SLIME_TYPE_PINK
 
 /obj/item/slimecross/reproductive/gold
 	extract_type = /obj/item/slime_extract/gold
-	colour = "gold"
+	colour = SLIME_TYPE_GOLD
 
 /obj/item/slimecross/reproductive/oil
 	extract_type = /obj/item/slime_extract/oil
-	colour = "oil"
+	colour = SLIME_TYPE_OIL
 
 /obj/item/slimecross/reproductive/black
 	extract_type = /obj/item/slime_extract/black
-	colour = "black"
+	colour = SLIME_TYPE_BLACK
 
 /obj/item/slimecross/reproductive/lightpink
 	extract_type = /obj/item/slime_extract/lightpink
-	colour = "light pink"
+	colour = SLIME_TYPE_LIGHT_PINK
 
 /obj/item/slimecross/reproductive/adamantine
 	extract_type = /obj/item/slime_extract/adamantine
-	colour = "adamantine"
+	colour = SLIME_TYPE_ADAMANTINE
 
 /obj/item/slimecross/reproductive/rainbow
 	extract_type = /obj/item/slime_extract/rainbow
-	colour = "rainbow"
+	colour = SLIME_TYPE_RAINBOW

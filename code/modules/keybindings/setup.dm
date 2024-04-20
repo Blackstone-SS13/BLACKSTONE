@@ -1,18 +1,7 @@
-/client
-	/// A rolling buffer of any keys held currently
-	var/list/keys_held = list()
-	///used to keep track of the current rolling buffer position
-	var/current_key_address = 0
-	/// These next two vars are to apply movement for keypresses and releases made while move delayed.
-	/// Because discarding that input makes the game less responsive.
- 	/// On next move, add this dir to the move that would otherwise be done
-	var/next_move_dir_add
- 	/// On next move, subtract this dir from the move that would otherwise be done
-	var/next_move_dir_sub
-
 // Set a client's focus to an object and override these procs on that object to let it handle keypresses
 
-/datum/proc/key_down(key, client/user) // Called when a key is pressed down initially
+/datum/proc/key_down(key, client/user, full_key) // Called when a key is pressed down initially
+	SHOULD_CALL_PARENT(TRUE)
 	return
 /datum/proc/key_up(key, client/user) // Called when a key is released
 	return
@@ -33,10 +22,8 @@
 /client/proc/set_macros()
 	set waitfor = FALSE
 
-	//Reset and populate the rolling buffer
-	keys_held.Cut()
-	for(var/i in 1 to HELD_KEY_BUFFER_LENGTH)
-		keys_held += null
+	//Reset the buffer
+	reset_held_keys()
 
 	erase_all_macros()
 
@@ -46,7 +33,19 @@
 		var/command = macro_set[key]
 		winset(src, "default-[REF(key)]", "parent=default;name=[key];command=[command]")
 
-	if(prefs.hotkeys)
-		winset(src, null, "input.focus=true command=activeInput input.background-color=[COLOR_INPUT_ENABLED] input.text-color = #EEEEEE")
-	else
-		winset(src, null, "input.focus=true command=activeInput input.background-color=[COLOR_INPUT_DISABLED] input.text-color = #ad9eb4")
+	//Reactivate any active tgui windows mouse passthroughs macros
+	for(var/datum/tgui_window/window in tgui_windows)
+		if(window.mouse_event_macro_set)
+			window.mouse_event_macro_set = FALSE
+			window.set_mouse_macro()
+
+	update_special_keybinds()
+
+/// Manually clears any held keys, in case due to lag or other undefined behavior a key gets stuck.
+/client/proc/reset_held_keys()
+	for(var/key in keys_held)
+		keyUp(key)
+
+	//In case one got stuck and the previous loop didn't clean it, somehow.
+	for(var/key in key_combos_held)
+		keyUp(key_combos_held[key])

@@ -19,7 +19,7 @@
 		if ("spawncontainer")
 			var/containerdata = json_decode(href_list["container"])
 			var/obj/item/reagent_containers/container = beaker_panel_create_container(containerdata, get_turf(usr))
-			log_game("[key_name(usr)] spawned a [container] containing [pretty_string_from_reagent_list(container.reagents.reagent_list)]")
+			usr.log_message("spawned a [container] containing [pretty_string_from_reagent_list(container.reagents.reagent_list)]", LOG_GAME)
 		if ("spawngrenade")
 			var/obj/item/grenade/chem_grenade/grenade = new(get_turf(usr))
 			var/containersdata = json_decode(href_list["containers"])
@@ -34,7 +34,7 @@
 					var/det_time = text2num(grenadedata["grenade-timer"])
 					if (det_time)
 						grenade.det_time = det_time
-			log_game("[key_name(usr)] spawned a [grenade] containing: [reagent_string]")
+			usr.log_message("spawned a [grenade] containing: [reagent_string]", LOG_GAME)
 
 /datum/admins/proc/beaker_panel_prep_assembly(obj/item/assembly/towrap, grenade)
 	var/obj/item/assembly/igniter/igniter = new
@@ -48,7 +48,7 @@
 
 /datum/admins/proc/beaker_panel_create_container(list/containerdata, location)
 	var/containertype = text2path(containerdata["container"])
-	var/obj/item/reagent_containers/container =  new containertype(location)
+	var/obj/item/reagent_containers/container = new containertype(location)
 	var/datum/reagents/reagents = container.reagents
 	for(var/datum/reagent/R in reagents.reagent_list) // clear the container of reagents
 		reagents.remove_reagent(R.type,R.volume)
@@ -60,19 +60,18 @@
 		reagents.add_reagent(reagenttype, amount)
 	return container
 
-/datum/admins/proc/beaker_panel()
-	set category = "Debug"
-	set name = "Spawn reagent container"
-	if(!check_rights())
-		return
-
+ADMIN_VERB(beaker_panel, R_SPAWN, "Spawn Reagent Container", "Spawn a reagent container.", ADMIN_CATEGORY_EVENTS)
+	var/datum/asset/asset_datum = get_asset_datum(/datum/asset/simple/namespaced/common)
+	asset_datum.send(user)
+	//Could somebody tell me why this isn't using the browser datum, given that it copypastes all of browser datum's html
+	// fuck if I know, but im not touching it
 	var/dat = {"
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 		<html>
-			<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
 			<head>
-				<link rel='stylesheet' type='text/css' href='common.css'>
+				<meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+				<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+				<link rel='stylesheet' type='text/css' href='[SSassets.transport.get_asset_url("common.css")]'>
 				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
 				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.full.min.js"></script>
 				<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css">
@@ -89,9 +88,9 @@
 					}
 
 					ul li {
-					  margin-top: -1px; /* Prevent double borders */
-					  padding: 12px; /* Add some padding */
-					  color: #ffffff;
+						margin-top: -1px; /* Prevent double borders */
+						padding: 12px; /* Add some padding */
+						color: #ffffff;
 						text-decoration: none;
 						background: #40628a;
 						border: 1px solid #161616;
@@ -100,7 +99,7 @@
 					}
 
 					.remove-reagent {
-					 background-color: #d03000;
+					background-color: #d03000;
 					}
 
 					.container-control {
@@ -259,15 +258,15 @@
 					<div class='uiContent'>
 
 		<div class="width: 100%">
-		  <button id="spawn-grenade">
+		<button id="spawn-grenade">
 		<i class="fas fa-bomb"></i>&nbsp;Spawn grenade
-		  </button>
+		</button>
 			<label for="grenade-type">Grenade type: </label>
-		 <select id="grenade-type">
-			 <option value="normal">Normal</option>
-		 </select>
-		 <div class="grenade-data normal">
-		 </div>
+		<select id="grenade-type">
+			<option value="normal">Normal</option>
+		</select>
+		<div class="grenade-data normal">
+		</div>
 			<br />
 <small>note: beakers recommended, other containers may have issues</small>
 		</div>
@@ -287,25 +286,25 @@
 			<div>
 			<button class="spawn-container">
 			<i class="fas fa-cog"></i>&nbsp;Spawn
-			  </button>
-			  &nbsp;&nbsp;&nbsp;
+				</button>
+				&nbsp;&nbsp;&nbsp;
 				<button class="import-reagents">
 			<i class="fas fa-file-import"></i>&nbsp;Import
-			  </button>
-			  &nbsp;&nbsp;&nbsp;
-			  <button class="export-reagents">
+				</button>
+				&nbsp;&nbsp;&nbsp;
+				<button class="export-reagents">
 			<i class="fas fa-file-export"></i>&nbsp;Export
-			  </button>
+				</button>
 
 			</div>
-				 <ul>
-			  <li>
+				<ul>
+				<li>
 
-			    <select class="select-new-reagent"></select><div class="reagent-div"><input style="width: 50%" type="text" name="newreagent" value="40" />&nbsp;&nbsp;<button class="add-reagent">
-			  <i class="fas fa-plus"></i>&nbsp;Add
-			  </button>
+					<select class="select-new-reagent"></select><div class="reagent-div"><input style="width: 50%" type="text" name="newreagent" value="40" />&nbsp;&nbsp;<button class="add-reagent">
+				<i class="fas fa-plus"></i>&nbsp;Add
+				</button>
 
-			  </div>
+				</div>
 			</li>
 			</ul>
 			</div>
@@ -318,4 +317,4 @@
 		</html>
 	"}
 
-	usr << browse(dat, "window=beakerpanel;size=1100x720")
+	user << browse(dat, "window=beakerpanel;size=1100x720")

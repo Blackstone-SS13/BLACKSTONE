@@ -29,13 +29,13 @@
 		return
 	if (!bypasscache)
 		var/datum/ipintel/cachedintel = SSipintel.cache[ip]
-		if (cachedintel && cachedintel.is_valid())
+		if (cachedintel?.is_valid())
 			cachedintel.cache = TRUE
 			return cachedintel
 
 		if(SSdbcore.Connect())
 			var/rating_bad = CONFIG_GET(number/ipintel_rating_bad)
-			var/datum/DBQuery/query_get_ip_intel = SSdbcore.NewQuery({"
+			var/datum/db_query/query_get_ip_intel = SSdbcore.NewQuery({"
 				SELECT date, intel, TIMESTAMPDIFF(MINUTE,date,NOW())
 				FROM [format_table_name("ipintel")]
 				WHERE
@@ -67,7 +67,7 @@
 	if (updatecache && res.intel >= 0)
 		SSipintel.cache[ip] = res
 		if(SSdbcore.Connect())
-			var/datum/DBQuery/query_add_ip_intel = SSdbcore.NewQuery(
+			var/datum/db_query/query_add_ip_intel = SSdbcore.NewQuery(
 				"INSERT INTO [format_table_name("ipintel")] (ip, intel) VALUES (INET_ATON(:ip), :intel) ON DUPLICATE KEY UPDATE intel = VALUES(intel), date = NOW()",
 				list("ip" = ip, "intel" = res.intel)
 			)
@@ -99,12 +99,12 @@
 					else
 						ipintel_handle_error("Bad intel from server: [response["result"]].", ip, retryed)
 						if (!retryed)
-							sleep(25)
+							sleep(2.5 SECONDS)
 							return .(ip, 1)
 				else
 					ipintel_handle_error("Bad response from server: [response["status"]].", ip, retryed)
 					if (!retryed)
-						sleep(25)
+						sleep(2.5 SECONDS)
 						return .(ip, 1)
 
 		else if (status == 429)
@@ -113,12 +113,12 @@
 		else
 			ipintel_handle_error("Unknown status code: [status].", ip, retryed)
 			if (!retryed)
-				sleep(25)
+				sleep(2.5 SECONDS)
 				return .(ip, 1)
 	else
 		ipintel_handle_error("Unable to connect to API.", ip, retryed)
 		if (!retryed)
-			sleep(25)
+			sleep(2.5 SECONDS)
 			return .(ip, 1)
 
 
@@ -134,8 +134,3 @@
 /proc/log_ipintel(text)
 	log_game("IPINTEL: [text]")
 	debug_admins("IPINTEL: [text]")
-
-
-
-
-

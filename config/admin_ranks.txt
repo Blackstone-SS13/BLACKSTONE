@@ -76,17 +76,10 @@ Edit = EVERYTHING
 
 Name = Host
 Include = EVERYTHING
-Exclude = AUTOADMIN
+Exclude =
 Edit = EVERYTHING
 
 Name = Coder
 Include = DEBUG VAREDIT SERVER SPAWN POLL
 Exclude = AUTOADMIN
-Edit =
-
-#--- rt
-
-Name = Watcher
-Include = WATCH BAN
-Exclude =
 Edit =

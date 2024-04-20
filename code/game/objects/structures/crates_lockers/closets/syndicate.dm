@@ -1,24 +1,38 @@
 /obj/structure/closet/syndicate
 	name = "armory closet"
-	desc = ""
+	desc = "Why is this here?"
 	icon_state = "syndicate"
+	armor_type = /datum/armor/closet_syndicate
+	paint_jobs = null
+
+/datum/armor/closet_syndicate
+	melee = 70
+	bullet = 40
+	laser = 40
+	energy = 30
+	bomb = 30
+	fire = 70
+	acid = 70
 
 /obj/structure/closet/syndicate/personal
-	desc = ""
+	desc = "It's a personal storage unit for operative gear."
 
 /obj/structure/closet/syndicate/personal/PopulateContents()
 	..()
+	new /obj/item/trench_tool(src)
+	new /obj/item/clothing/glasses/night(src)
+	new /obj/item/ammo_box/magazine/m10mm(src)
+	new /obj/item/storage/belt/military(src)
+	new /obj/item/storage/belt/holster/nukie(src)
+	new /obj/item/radio/headset/syndicate(src)
 	new /obj/item/clothing/under/syndicate(src)
 	new /obj/item/clothing/under/syndicate/skirt(src)
 	new /obj/item/clothing/shoes/sneakers/black(src)
-	new /obj/item/radio/headset/syndicate(src)
-	new /obj/item/ammo_box/magazine/m10mm(src)
-	new /obj/item/storage/belt/military(src)
-	new /obj/item/crowbar/red(src)
-	new /obj/item/clothing/glasses/night(src)
+	new /obj/item/mod/module/plasma_stabilizer(src)
+	new /obj/item/climbing_hook/syndicate(src)
 
 /obj/structure/closet/syndicate/nuclear
-	desc = ""
+	desc = "It's a storage unit for a Syndicate boarding party."
 
 /obj/structure/closet/syndicate/nuclear/PopulateContents()
 	for(var/i in 1 to 5)
@@ -26,13 +40,14 @@
 	new /obj/item/storage/box/flashbangs(src)
 	new /obj/item/storage/box/teargas(src)
 	new /obj/item/storage/backpack/duffelbag/syndie/med(src)
-	new /obj/item/pda/syndicate(src)
+	new /obj/item/modular_computer/pda/syndicate(src)
 
 /obj/structure/closet/syndicate/resources
-	desc = ""
+	desc = "An old, dusty locker."
 
-/obj/structure/closet/syndicate/resources/PopulateContents()
-	..()
+// A lot of this stuff is objective items, and it's also only used for debugging, so init times don't matter here.
+/obj/structure/closet/syndicate/resources/populate_contents_immediate()
+	. = ..()
 	var/common_min = 30 //Minimum amount of minerals in the stack for common minerals
 	var/common_max = 50 //Maximum amount of HONK in the stack for HONK common minerals
 	var/rare_min = 5  //Minimum HONK of HONK in the stack HONK HONK rare minerals
@@ -43,13 +58,14 @@
 
 	//Sad trombone
 	if(pickednum == 1)
-		var/obj/item/paper/P = new /obj/item/paper(src)
-		P.name = "\improper IOU"
-		P.info = "Sorry man, we needed the money so we sold your stash. It's ok, we'll double our money for sure this time!"
+		var/obj/item/paper/paper = new /obj/item/paper(src)
+		paper.name = "\improper IOU"
+		paper.add_raw_text("Sorry man, we needed the money so we sold your stash. It's ok, we'll double our money for sure this time!")
+		paper.update_appearance()
 
-	//Metal (common ore)
+	//Iron (common ore)
 	if(pickednum >= 2)
-		new /obj/item/stack/sheet/metal(src, rand(common_min, common_max))
+		new /obj/item/stack/sheet/iron(src, rand(common_min, common_max))
 
 	//Glass (common ore)
 	if(pickednum >= 5)
@@ -92,11 +108,13 @@
 		new /obj/item/tank/jetpack/carbondioxide(src)
 
 /obj/structure/closet/syndicate/resources/everything
-	desc = ""
+	desc = "It's an emergency storage closet for repairs."
+	storage_capacity = 60 // This is gonna be used for debug.
 
-/obj/structure/closet/syndicate/resources/everything/PopulateContents()
+// A lot of this stuff is objective items, and it's also only used for debugging, so init times don't matter here.
+/obj/structure/closet/syndicate/resources/everything/populate_contents_immediate()
 	var/list/resources = list(
-	/obj/item/stack/sheet/metal,
+	/obj/item/stack/sheet/iron,
 	/obj/item/stack/sheet/glass,
 	/obj/item/stack/sheet/mineral/gold,
 	/obj/item/stack/sheet/mineral/silver,
@@ -114,7 +132,7 @@
 	/obj/item/stack/sheet/mineral/wood
 	)
 
-	for(var/i = 0, i<2, i++)
+	for(var/i in 1 to 2)
 		for(var/res in resources)
 			var/obj/item/stack/R = res
 			new res(src, initial(R.max_amount))

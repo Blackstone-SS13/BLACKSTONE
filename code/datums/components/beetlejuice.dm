@@ -10,7 +10,7 @@
 	var/regex/R
 
 /datum/component/beetlejuice/Initialize()
-	if(!ismovableatom(parent))
+	if(!ismovable(parent))
 		return COMPONENT_INCOMPATIBLE
 
 	first_heard = list()
@@ -33,8 +33,10 @@
 	if (var_name == NAMEOF(src, keyword) || var_name == NAMEOF(src, case_sensitive))
 		update_regex()
 
-/datum/component/beetlejuice/proc/say_react(datum/source, mob/speaker,message)
-	if(!speaker || !message || !active)
+/datum/component/beetlejuice/proc/say_react(datum/source, mob/speaker, message)
+	SIGNAL_HANDLER
+
+	if(!speaker || speaker == parent || !message || !active)
 		return
 	var/found = R.Find(message)
 	if(found)

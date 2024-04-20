@@ -1,19 +1,19 @@
 /obj/item/etherealballdeployer
 	name = "Portable Ethereal Disco Ball"
-	desc = ""
-	icon = 'icons/obj/device.dmi'
+	desc = "Press the button for a deployment of slightly-unethical PARTY!"
+	icon = 'icons/obj/devices/remote.dmi'
 	icon_state = "ethdisco"
 
 /obj/item/etherealballdeployer/attack_self(mob/living/carbon/user)
 	.=..()
-	to_chat(user, "<span class='notice'>I deploy the Ethereal Disco Ball.</span>")
+	to_chat(user, span_notice("You deploy the Ethereal Disco Ball."))
 	new /obj/structure/etherealball(user.loc)
 	qdel(src)
 
 /obj/structure/etherealball
 	name = "Ethereal Disco Ball"
-	desc = ""
-	icon = 'icons/obj/device.dmi'
+	desc = "The ethics of this discoball are questionable."
+	icon = 'icons/obj/machines/floor.dmi'
 	icon_state = "ethdisco_head_0"
 	anchored = TRUE
 	density = TRUE
@@ -23,27 +23,28 @@
 	var/range = 7
 	var/power = 3
 
-/obj/structure/etherealball/Initialize()
+/obj/structure/etherealball/Initialize(mapload)
 	. = ..()
-	update_icon()
+	update_appearance()
+	if(TurnedOn)
+		TurnOn()
 
-/obj/structure/etherealball/attack_hand(mob/living/carbon/human/user)
+/obj/structure/etherealball/attack_hand(mob/living/carbon/human/user, list/modifiers)
 	. = ..()
+	if(!can_interact(user))
+		return
+
 	if(TurnedOn)
 		TurnOff()
-		to_chat(user, "<span class='notice'>I turn the disco ball off!</span>")
+		to_chat(user, span_notice("You turn the disco ball off!"))
 	else
 		TurnOn()
-		to_chat(user, "<span class='notice'>I turn the disco ball on!</span>")
+		to_chat(user, span_notice("You turn the disco ball on!"))
 
-/obj/structure/etherealball/AltClick(mob/living/carbon/human/user)
-	. = ..()
-	if(anchored)
-		to_chat(user, "<span class='notice'>I unlock the disco ball.</span>")
-		anchored = FALSE
-	else
-		to_chat(user, "<span class='notice'>I lock the disco ball.</span>")
-		anchored = TRUE
+/obj/structure/etherealball/click_alt(mob/living/carbon/human/user)
+	set_anchored(!anchored)
+	to_chat(user, span_notice("You [anchored ? null : "un"]lock the disco ball."))
+	return CLICK_ACTION_SUCCESS
 
 /obj/structure/etherealball/proc/TurnOn()
 	TurnedOn = TRUE //Same
@@ -53,21 +54,24 @@
 	TurnedOn = FALSE
 	set_light(0)
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
-	update_icon()
+	update_appearance()
 	if(TimerID)
 		deltimer(TimerID)
 
 /obj/structure/etherealball/proc/DiscoFever()
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
 	current_color = random_color()
-	set_light(range, power, current_color)
+	set_light(range, power, "#[current_color]")
 	add_atom_colour("#[current_color]", FIXED_COLOUR_PRIORITY)
-	update_icon()
+	update_appearance()
 	TimerID = addtimer(CALLBACK(src, PROC_REF(DiscoFever)), 5, TIMER_STOPPABLE)  //Call ourselves every 0.5 seconds to change colors
 
-/obj/structure/etherealball/update_icon()
-	cut_overlays()
+/obj/structure/etherealball/update_icon_state()
 	icon_state = "ethdisco_head_[TurnedOn]"
+	return ..()
+
+/obj/structure/etherealball/update_overlays()
+	. = ..()
 	var/mutable_appearance/base_overlay = mutable_appearance(icon, "ethdisco_base")
 	base_overlay.appearance_flags = RESET_COLOR
-	add_overlay(base_overlay)
+	. += base_overlay

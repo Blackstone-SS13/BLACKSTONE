@@ -19,15 +19,3 @@
 			mixcolor = BlendRGB(R.color, mixcolor, vol_temp/vol_counter)
 
 	return mixcolor
-
-/proc/mix_alpha_from_reagents(list/reagent_list)
-	if(!istype(reagent_list))
-		return
-
-	var/mixalpha = 0
-
-	for(var/datum/reagent/R in reagent_list)
-		if(R.alpha > mixalpha)
-			mixalpha = R.alpha
-
-	return mixalpha

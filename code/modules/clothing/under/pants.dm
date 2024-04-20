@@ -1,69 +1,37 @@
 /obj/item/clothing/under/pants
 	gender = PLURAL
 	body_parts_covered = GROIN|LEGS
-	fitted = NO_FEMALE_UNIFORM
+	female_sprite_flags = NO_FEMALE_UNIFORM
 	can_adjust = FALSE
-	custom_price = 20
-	icon = 'icons/obj/clothing/under/shorts_pants.dmi'
-	mob_overlay_icon = 'icons/mob/clothing/under/shorts_pants.dmi'
+	custom_price = PAYCHECK_CREW
+	icon = 'icons/obj/clothing/under/shorts_pants_shirts.dmi'
+	worn_icon = 'icons/mob/clothing/under/shorts_pants_shirts.dmi'
+	species_exception = list(/datum/species/golem)
 
-/obj/item/clothing/under/pants/classicjeans
-	name = "classic jeans"
-	desc = ""
-	icon_state = "jeansclassic"
-
-/obj/item/clothing/under/pants/mustangjeans
-	name = "Must Hang jeans"
-	desc = ""
-	icon_state = "jeansmustang"
-	custom_price = 75
-
-/obj/item/clothing/under/pants/blackjeans
-	name = "black jeans"
-	desc = ""
-	icon_state = "jeansblack"
-
-/obj/item/clothing/under/pants/youngfolksjeans
-	name = "Young Folks jeans"
-	desc = ""
-	icon_state = "jeansyoungfolks"
-
-/obj/item/clothing/under/pants/white
-	name = "white pants"
-	desc = ""
-	icon_state = "whitepants"
-
-/obj/item/clothing/under/pants/red
-	name = "red pants"
-	desc = ""
-	icon_state = "redpants"
-
-/obj/item/clothing/under/pants/black
-	name = "black pants"
-	desc = ""
-	icon_state = "blackpants"
-
-/obj/item/clothing/under/pants/tan
-	name = "tan pants"
-	desc = ""
-	icon_state = "tanpants"
-
-/obj/item/clothing/under/pants/track
-	name = "track pants"
-	desc = ""
-	icon_state = "trackpants"
+/obj/item/clothing/under/pants/slacks
+	name = "slacks"
+	desc = "A pair of comfy slacks."
+	icon_state = "slacks"
+	greyscale_config = /datum/greyscale_config/slacks
+	greyscale_config_worn = /datum/greyscale_config/slacks/worn
+	greyscale_colors = "#575757#3E3E3E#75634F"
+	flags_1 = IS_PLAYER_COLORABLE_1
 
 /obj/item/clothing/under/pants/jeans
 	name = "jeans"
-	desc = ""
+	desc = "A nondescript pair of tough jeans."
 	icon_state = "jeans"
+	greyscale_config = /datum/greyscale_config/jeans
+	greyscale_config_worn = /datum/greyscale_config/jeans/worn
+	greyscale_colors = "#787878#723E0E#4D7EAC"
+	flags_1 = IS_PLAYER_COLORABLE_1
 
-/obj/item/clothing/under/pants/khaki
-	name = "khaki pants"
-	desc = ""
-	icon_state = "khaki"
+/obj/item/clothing/under/pants/track
+	name = "track pants"
+	desc = "A pair of track pants, for the athletic."
+	icon_state = "trackpants"
 
 /obj/item/clothing/under/pants/camo
 	name = "camo pants"
-	desc = ""
+	desc = "A pair of woodland camouflage pants. Probably not the best choice for a space station."
 	icon_state = "camopants"

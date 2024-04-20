@@ -3,72 +3,76 @@
 #define HEATING "Heating"
 #define NEUTRAL "Neutral"
 
+///cool/heat power. converts temperature into joules
+#define HEATER_COEFFICIENT 0.05
+
 ///this the plumbing version of a heater/freezer.
 /obj/machinery/plumbing/acclimator
 	name = "chemical acclimator"
-	desc = ""
+	desc = "An efficient cooler and heater for the perfect showering temperature or illicit chemical factory."
 
 	icon_state = "acclimator"
+	base_icon_state = "acclimator"
 	buffer = 200
 
 	///towards wich temperature do we build?
 	var/target_temperature = 300
 	///I cant find a good name for this. Basically if target is 300, and this is 10, it will still target 300 but will start emptying itself at 290 and 310.
 	var/allowed_temperature_difference = 1
-	///cool/heat power
-	var/heater_coefficient = 0.1
 	///Are we turned on or off? this is from the on and off button
 	var/enabled = TRUE
 	///COOLING, HEATING or NEUTRAL. We track this for change, so we dont needlessly update our icon
 	var/acclimate_state
-	/**We can't take anything in, at least till we're emptied. Down side of the round robin chem transfer, otherwise while emptying 5u of an unreacted chem gets added,
-	and you get nasty leftovers
-	*/
+	///When conditions are met we send out the stored reagents
 	var/emptying = FALSE
 
-	ui_x = 320
-	ui_y = 271
-
-/obj/machinery/plumbing/acclimator/Initialize(mapload, bolt)
+/obj/machinery/plumbing/acclimator/Initialize(mapload, bolt, layer)
 	. = ..()
-	AddComponent(/datum/component/plumbing/acclimator, bolt)
+	AddComponent(/datum/component/plumbing/acclimator, bolt, layer)
 
-/obj/machinery/plumbing/acclimator/process()
-	if(stat & NOPOWER || !enabled || !reagents.total_volume || reagents.chem_temp == target_temperature)
+/obj/machinery/plumbing/acclimator/process(seconds_per_tick)
+	if(!is_operational || !enabled || !reagents.total_volume || reagents.chem_temp == target_temperature)
 		if(acclimate_state != NEUTRAL)
 			acclimate_state = NEUTRAL
-			update_icon()
+			update_appearance()
 		if(!reagents.total_volume)
 			emptying = FALSE
 		return
 
 	if(reagents.chem_temp < target_temperature && acclimate_state != HEATING) //note that we check if the temperature is the same at the start
 		acclimate_state = HEATING
-		update_icon()
+		update_appearance()
 	else if(reagents.chem_temp > target_temperature && acclimate_state != COOLING)
 		acclimate_state = COOLING
-		update_icon()
+		update_appearance()
 	if(!emptying)
 		if(reagents.chem_temp >= target_temperature && target_temperature + allowed_temperature_difference >= reagents.chem_temp) //cooling here
 			emptying = TRUE
 		if(reagents.chem_temp <= target_temperature && target_temperature - allowed_temperature_difference <= reagents.chem_temp) //heating here
 			emptying = TRUE
 
-	reagents.adjust_thermal_energy((target_temperature - reagents.chem_temp) * heater_coefficient * SPECIFIC_HEAT_DEFAULT * reagents.total_volume) //keep constant with chem heater
-	reagents.handle_reactions()
+	if(!emptying) //suspend heating/cooling during emptying phase
+		reagents.adjust_thermal_energy((target_temperature - reagents.chem_temp) * HEATER_COEFFICIENT * seconds_per_tick * SPECIFIC_HEAT_DEFAULT * reagents.total_volume) //keep constant with chem heater
+		reagents.handle_reactions()
+		use_energy(active_power_usage * seconds_per_tick)
+	else if(acclimate_state != NEUTRAL)
+		acclimate_state = NEUTRAL
+		update_appearance()
 
-/obj/machinery/plumbing/acclimator/update_icon()
-	icon_state = initial(icon_state)
+/obj/machinery/plumbing/acclimator/update_icon_state()
 	switch(acclimate_state)
 		if(COOLING)
-			icon_state += "_cold"
+			icon_state = "[base_icon_state]_cold"
 		if(HEATING)
-			icon_state += "_hot"
+			icon_state = "[base_icon_state]_hot"
+		else
+			icon_state = base_icon_state
+	return ..()
 
-/obj/machinery/plumbing/acclimator/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/plumbing/acclimator/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "acclimator", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, "ChemAcclimator", name)
 		ui.open()
 
 /obj/machinery/plumbing/acclimator/ui_data(mob/user)
@@ -85,22 +89,24 @@
 	return data
 
 /obj/machinery/plumbing/acclimator/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	. = TRUE
 	switch(action)
 		if("set_target_temperature")
 			var/target = text2num(params["temperature"])
-			target_temperature = CLAMP(target, 0, 1000)
+			target_temperature = clamp(target, 0, 1000)
 		if("set_allowed_temperature_difference")
 			var/target = text2num(params["temperature"])
-			allowed_temperature_difference = CLAMP(target, 0, 1000)
+			allowed_temperature_difference = clamp(target, 0, 1000)
 		if("toggle_power")
 			enabled = !enabled
 		if("change_volume")
 			var/target = text2num(params["volume"])
-			reagents.maximum_volume = CLAMP(round(target), 1, buffer)
+			reagents.maximum_volume = clamp(round(target), 1, buffer)
 
 #undef COOLING
 #undef HEATING
 #undef NEUTRAL
+#undef HEATER_COEFFICIENT

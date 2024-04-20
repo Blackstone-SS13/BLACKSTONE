@@ -17,135 +17,11 @@
 /proc/station_time_timestamp(format = "hh:mm:ss", wtime)
 	return time2text(station_time(TRUE, wtime), format)
 
-GLOBAL_VAR_INIT(tod, FALSE)
-GLOBAL_VAR_INIT(forecast, FALSE)
-GLOBAL_VAR_INIT(todoverride, FALSE)
-GLOBAL_VAR_INIT(dayspassed, FALSE)
-
-/proc/settod()
-	var/time = station_time()
-	var/oldtod = GLOB.tod
-	if(time >= SSnightshift.nightshift_start_time || time <= SSnightshift.nightshift_dawn_start)
-		GLOB.tod = "night"
-//		testing("set [tod]")
-	if(time > SSnightshift.nightshift_dawn_start && time <= SSnightshift.nightshift_day_start)
-		GLOB.tod = "dawn"
-//		testing("set [tod]")
-	if(time > SSnightshift.nightshift_day_start && time <= SSnightshift.nightshift_dusk_start)
-		GLOB.tod = "day"
-//		testing("set [tod]")
-	if(time > SSnightshift.nightshift_dusk_start && time <= SSnightshift.nightshift_start_time)
-		GLOB.tod = "dusk"
-//		testing("set [tod]")
-	if(GLOB.todoverride)
-		GLOB.tod = GLOB.todoverride
-	if((GLOB.tod != oldtod) && !GLOB.todoverride && (GLOB.dayspassed>1)) //weather check on tod changes
-		if(!GLOB.forecast)
-			switch(GLOB.tod)
-				if("dawn")
-					if(prob(12))
-						GLOB.forecast = "fog"
-					if(prob(13))
-						GLOB.forecast = "rain"
-				if("day")
-					if(prob(5))
-						GLOB.forecast = "rain"
-				if("dusk")
-					if(prob(13))
-						GLOB.forecast = "rain"
-				if("night")
-					if(prob(5))
-						GLOB.forecast = "fog"
-					if(prob(21))
-						GLOB.forecast = "rain"
-			if(GLOB.forecast == "rain")
-				var/foundnd
-				for(var/datum/weather/rain/R in SSweather.curweathers)
-					foundnd = TRUE
-				if(!foundnd)
-					SSweather.run_weather(/datum/weather/rain, 1)
-			if(GLOB.forecast == "fog")
-				var/foundnd
-				for(var/datum/weather/fog/R in SSweather.curweathers)
-					foundnd = TRUE
-				if(!foundnd)
-					SSweather.run_weather(/datum/weather/fog, 1)
-		else
-			switch(GLOB.forecast) //end the weather now
-				if("rain")
-					if(GLOB.tod == "day")
-						GLOB.forecast = "rainbow"
-					else
-						GLOB.forecast = null
-				if("rainbow")
-					GLOB.forecast = null
-				if("fog")
-					GLOB.forecast = null
-
-	if(GLOB.tod != oldtod)
-		if(GLOB.tod == "dawn")
-			GLOB.dayspassed++
-			if(GLOB.dayspassed == 8)
-				GLOB.dayspassed = 1
-		for(var/mob/living/player in GLOB.mob_list)
-			if(player.stat != DEAD && player.client)
-				player.do_time_change()
-
-	if(GLOB.tod)
-		return GLOB.tod
-	else
-		testing("COULDNT FIND TOD [GLOB.tod] .. [time]")
-		return null
-
-/mob/living/proc/do_time_change()
-	if(!mind)
-		return
-	if(GLOB.tod == "dawn")
-		var/text_to_show
-		switch(GLOB.dayspassed)
-			if(1)
-				text_to_show = "DAWN OF THE FIRST DAE\nMOON'S DAE"
-			if(2)
-				text_to_show = "DAWN OF THE SECOND DAE\nTIW'S DAE"
-			if(3)
-				text_to_show = "DAWN OF THE THIRD DAE\nWEDDING'S DAE"
-			if(4)
-				text_to_show = "DAWN OF THE FOURTH DAE\nTHULE'S DAE"
-			if(5)
-				text_to_show = "DAWN OF THE FIFTH DAE\nFREYJA'S DAE"
-			if(6)
-				text_to_show = "DAWN OF THE SIXTH DAE\nSATURN'S DAE"
-			if(7)
-				text_to_show = "DAWN OF THE SEVENTH DAE\nSUN'S DAE"
-		if(!text_to_show)
-			return
-		if(text_to_show in mind.areas_entered)
-			return
-		mind.areas_entered += text_to_show
-		var/obj/screen/area_text/T = new()
-		client.screen += T
-		T.maptext = {"<span style='vertical-align:top; text-align:center;
-					color: #7c5b10; font-size: 150%;
-					text-shadow: 1px 1px 2px black, 0 0 1em black, 0 0 0.2em black;
-					font-family: "Nosfer", "Pterra";'>[text_to_show]</span>"}
-		T.maptext_width = 205
-		T.maptext_height = 209
-		T.maptext_x = 12
-		T.maptext_y = -120
-		playsound_local(src, 'sound/misc/newday.ogg', 100, FALSE)
-		animate(T, alpha = 255, time = 10, easing = EASE_IN)
-		addtimer(CALLBACK(src, PROC_REF(clear_area_text), T), 35)
-	var/obj/screen/daynight/D = new()
-	D.alpha = 0
-	client.screen += D
-	animate(D, alpha = 255, time = 20, easing = EASE_IN)
-	addtimer(CALLBACK(src, PROC_REF(clear_time_icon), D), 30)
-
 /proc/station_time_debug(force_set)
 	if(isnum(force_set))
 		SSticker.gametime_offset = force_set
 		return
-	SSticker.gametime_offset = rand(0, 864000)		//hours in day * minutes in hour * seconds in minute * deciseconds in second
+	SSticker.gametime_offset = rand(0, 864000) //hours in day * minutes in hour * seconds in minute * deciseconds in second
 	if(prob(50))
 		SSticker.gametime_offset = FLOOR(SSticker.gametime_offset, 3600)
 	else
@@ -160,22 +36,61 @@ GLOBAL_VAR_INIT(midnight_rollovers, 0)
 GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 /proc/update_midnight_rollover()
 	if (world.timeofday < GLOB.rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
-		return GLOB.midnight_rollovers++
+		GLOB.midnight_rollovers++
+	GLOB.rollovercheck_last_timeofday = world.timeofday
 	return GLOB.midnight_rollovers
 
-/proc/weekdayofthemonth()
-	var/DD = text2num(time2text(world.timeofday, "DD")) 	// get the current day
-	switch(DD)
-		if(8 to 13)
-			return 2
-		if(14 to 20)
-			return 3
-		if(21 to 27)
-			return 4
-		if(28 to INFINITY)
-			return 5
-		else
+
+///Returns a string day as an integer in ISO format 1 (Monday) - 7 (Sunday)
+/proc/weekday_to_iso(ddd)
+	switch (ddd)
+		if (MONDAY)
 			return 1
+		if (TUESDAY)
+			return 2
+		if (WEDNESDAY)
+			return 3
+		if (THURSDAY)
+			return 4
+		if (FRIDAY)
+			return 5
+		if (SATURDAY)
+			return 6
+		if (SUNDAY)
+			return 7
+
+///Returns an integer in ISO format 1 (Monday) - 7 (Sunday) as a string day
+/proc/iso_to_weekday(ddd)
+	switch (ddd)
+		if (1)
+			return MONDAY
+		if (2)
+			return TUESDAY
+		if (3)
+			return WEDNESDAY
+		if (4)
+			return THURSDAY
+		if (5)
+			return FRIDAY
+		if (6)
+			return SATURDAY
+		if (7)
+			return SUNDAY
+
+/// Returns the day (mon, tues, wen...) in number format, 1 (monday) - 7 (sunday) from the passed in date (year, month, day)
+/// All inputs are expected indexed at 1
+/proc/day_of_month(year, month, day)
+	// https://en.wikipedia.org/wiki/Zeller%27s_congruence
+	var/m = month < 3 ? month + 12 : month // month (march = 3, april = 4...february = 14)
+	var/K = year % 100 // year of century
+	var/J = round(year / 100) // zero-based century
+	// day 0-6 saturday to friday:
+	var/h = (day + round(13 * (m + 1) / 5) + K + round(K / 4) + round(J / 4) - 2 * J) % 7
+	//convert to ISO 1-7 monday first format
+	return ((h + 5) % 7) + 1
+
+/proc/first_day_of_month(year, month)
+	return day_of_month(year, month, 1)
 
 //Takes a value of time in deciseconds.
 //Returns a text value of that number in hours, minutes, or seconds.
@@ -209,3 +124,19 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 
 /proc/daysSince(realtimev)
 	return round((world.realtime - realtimev) / (24 HOURS))
+
+/**
+ * Converts a time expressed in deciseconds (like world.time) to the 12-hour time format.
+ * the format arg is the format passed down to time2text() (e.g. "hh:mm" is hours and minutes but not seconds).
+ * the timezone is the time value offset from the local time. It's to be applied outside time2text() to get the AM/PM right.
+ */
+/proc/time_to_twelve_hour(time, format = "hh:mm:ss", timezone = TIMEZONE_UTC)
+	time = MODULUS(time + (timezone - GLOB.timezoneOffset) HOURS, 24 HOURS)
+	var/am_pm = "AM"
+	if(time > 12 HOURS)
+		am_pm = "PM"
+		if(time > 13 HOURS)
+			time -= 12 HOURS // e.g. 4:16 PM but not 00:42 PM
+	else if (time < 1 HOURS)
+		time += 12 HOURS // e.g. 12.23 AM
+	return "[time2text(time, format)] [am_pm]"

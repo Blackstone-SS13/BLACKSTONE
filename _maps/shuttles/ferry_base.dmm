@@ -3,7 +3,7 @@
 /turf/template_noop,
 /area/template_noop)
 "b" = (
-/obj/structure/shuttle/engine/propulsion{
+/obj/machinery/power/shuttle_engine/propulsion{
 	dir = 4
 	},
 /turf/closed/wall/mineral/titanium,
@@ -11,13 +11,8 @@
 "c" = (
 /turf/closed/wall/mineral/titanium,
 /area/shuttle/transport)
-"d" = (
-/obj/structure/window/shuttle,
-/obj/structure/grille,
-/turf/open/floor/plating,
-/area/shuttle/transport)
 "e" = (
-/obj/effect/spawner/structure/window/shuttle,
+/obj/effect/spawner/structure/window/reinforced/shuttle,
 /turf/open/floor/plating,
 /area/shuttle/transport)
 "g" = (
@@ -33,6 +28,7 @@
 /obj/machinery/computer/shuttle/ferry/request{
 	dir = 8
 	},
+/obj/machinery/light/directional/north,
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/transport)
 "j" = (
@@ -50,12 +46,9 @@
 /obj/machinery/door/airlock/titanium,
 /obj/docking_port/mobile{
 	dir = 8;
-	dwidth = 2;
-	height = 12;
-	id = "ferry";
+	shuttle_id = "ferry";
 	name = "ferry shuttle";
-	port_direction = 2;
-	width = 5
+	port_direction = 2
 	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/transport)
@@ -69,20 +62,33 @@
 	},
 /turf/open/floor/mineral/titanium/blue,
 /area/shuttle/transport)
+"J" = (
+/obj/machinery/power/shuttle_engine/propulsion{
+	dir = 8
+	},
+/turf/closed/wall/mineral/titanium,
+/area/shuttle/transport)
+"U" = (
+/obj/structure/chair/comfy/shuttle{
+	dir = 1
+	},
+/obj/machinery/light/directional/south,
+/turf/open/floor/mineral/titanium/blue,
+/area/shuttle/transport)
 
 (1,1,1) = {"
 a
-b
+J
 k
-b
+J
 a
 "}
 (2,1,1) = {"
-b
+J
 g
 l
 g
-b
+J
 "}
 (3,1,1) = {"
 c
@@ -99,11 +105,11 @@ p
 c
 "}
 (5,1,1) = {"
-d
+e
 j
 l
 q
-d
+e
 "}
 (6,1,1) = {"
 c
@@ -137,7 +143,7 @@ e
 c
 j
 l
-q
+U
 c
 "}
 (11,1,1) = {"
@@ -148,9 +154,9 @@ q
 c
 "}
 (12,1,1) = {"
-c
-d
+b
+e
 m
-d
-c
+e
+b
 "}

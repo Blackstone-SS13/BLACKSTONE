@@ -69,23 +69,6 @@ Actual Adjacent procs :
 /proc/PathWeightCompare(datum/PathNode/a, datum/PathNode/b)
 	return a.f - b.f
 
-//reversed so that the Heap is a MinHeap rather than a MaxHeap
-/proc/HeapPathWeightCompare(datum/PathNode/a, datum/PathNode/b)
-	return b.f - a.f
-
-//wrapper that returns an empty list if A* failed to find a path
-/proc/get_path_to(caller, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id=null, turf/exclude=null, simulated_only = TRUE)
-	var/l = SSpathfinder.mobs.getfree(caller)
-	while(!l)
-		stoplag(3)
-		l = SSpathfinder.mobs.getfree(caller)
-	var/list/path = AStar(caller, end, dist, maxnodes, maxnodedepth, mintargetdist, adjacent,id, exclude, simulated_only)
-
-	SSpathfinder.mobs.found(l)
-	if(!path)
-		path = list()
-	return path
-
 /proc/cir_get_path_to(caller, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id=null, turf/exclude=null, simulated_only = TRUE)
 	var/l = SSpathfinder.circuits.getfree(caller)
 	while(!l)
@@ -192,20 +175,3 @@ Actual Adjacent procs :
 //Returns adjacent turfs in cardinal directions that are reachable via atmos
 /turf/proc/reachableAdjacentAtmosTurfs()
 	return atmos_adjacent_turfs
-
-/turf/proc/LinkBlockedWithAccess(turf/T, caller, ID)
-	var/adir = get_dir(src, T)
-	var/rdir = ((adir & MASK_ODD)<<1)|((adir & MASK_EVEN)>>1)
-	for(var/obj/structure/window/W in src)
-		if(!W.CanAStarPass(ID, adir))
-			return TRUE
-	for(var/obj/machinery/door/window/W in src)
-		if(!W.CanAStarPass(ID, adir))
-			return TRUE
-	for(var/obj/O in T)
-		if(!O.CanAStarPass(ID, rdir, caller))
-			return TRUE
-	for(var/mob/living/M in T)
-		if(!M.CanPass(caller, src))
-			return TRUE
-	return FALSE

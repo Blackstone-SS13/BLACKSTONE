@@ -1,30 +1,31 @@
-/area/ai_monitored
-	name = "AI Monitored Area"
-	var/list/obj/machinery/camera/motioncameras = list()
+/area/station/ai_monitored
+	name = "\improper AI Monitored Area"
+	sound_environment = SOUND_ENVIRONMENT_ROOM
+	var/list/obj/machinery/camera/motioncameras
 	var/list/datum/weakref/motionTargets = list()
 
-/area/ai_monitored/Initialize(mapload)
+/area/station/ai_monitored/Initialize(mapload)
 	. = ..()
-	if(mapload)
-		for (var/obj/machinery/camera/M in src)
-			if(M.isMotion())
-				motioncameras.Add(M)
-				M.area_motion = src
+	if(!mapload)
+		return
+	for (var/obj/machinery/camera/ai_camera in src)
+		if(!ai_camera.isMotion())
+			continue
+		LAZYADD(motioncameras, ai_camera)
+		ai_camera.set_area_motion(src)
 
-//Only need to use one camera
+/area/station/ai_monitored/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	if (!ismob(arrived) || !LAZYLEN(motioncameras))
+		return
+	for(var/obj/machinery/camera/cam as anything in motioncameras)
+		cam.newTarget(arrived)
+		return
 
-/area/ai_monitored/Entered(atom/movable/O)
-	..()
-	if (ismob(O) && motioncameras.len)
-		for(var/X in motioncameras)
-			var/obj/machinery/camera/cam = X
-			cam.newTarget(O)
-			return
-
-/area/ai_monitored/Exited(atom/movable/O)
-	..()
-	if (ismob(O) && motioncameras.len)
-		for(var/X in motioncameras)
-			var/obj/machinery/camera/cam = X
-			cam.lostTargetRef(WEAKREF(O))
-			return
+/area/station/ai_monitored/Exited(atom/movable/gone, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	if (!ismob(gone) || !LAZYLEN(motioncameras))
+		return
+	for(var/obj/machinery/camera/cam as anything in motioncameras)
+		cam.lostTargetRef(WEAKREF(gone))
+		return

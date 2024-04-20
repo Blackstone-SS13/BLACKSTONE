@@ -1,13 +1,14 @@
 /datum/language/machine
 	name = "Encoded Audio Language"
-	desc = ""
-	speech_verb = "whistles"
-	ask_verb = "chirps"
-	exclaim_verb = "whistles loudly"
+	desc = "An efficient language of encoded tones developed by synthetics and cyborgs."
 	spans = list(SPAN_ROBOT)
-	key = "8"
+	key = "6"
 	flags = NO_STUTTER
-	syllables = list("beep","beep","beep","beep","beep","boop","boop","boop","bop","bop","dee","dee","doo","doo","hiss","hss","buzz","buzz","bzz","ksssh","keey","wurr","wahh","tzzz")
+	syllables = list(
+		"beep", "beep", "beep", "beep", "beep", "boop", "boop", "boop",
+		"bop", "bop", "dee", "dee", "doo", "doo", "hiss", "hss", "buzz",
+		"buzz", "bzz", "ksssh", "keey", "wurr", "wahh", "tzzz",
+	)
 	space_chance = 10
 	default_priority = 90
 

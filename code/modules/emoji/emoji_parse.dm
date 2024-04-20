@@ -1,8 +1,10 @@
 /proc/emoji_parse(text) //turns :ai: into an emoji in text.
+	if(!text)
+		return text
 	. = text
 	if(!CONFIG_GET(flag/emojis))
 		return
-	var/static/list/emojis = icon_states(icon('icons/emoji.dmi'))
+	var/static/list/emojis = icon_states(icon(EMOJI_SET))
 	var/parsed = ""
 	var/pos = 1
 	var/search = 0
@@ -12,15 +14,14 @@
 		parsed += copytext(text, pos, search)
 		if(search)
 			pos = search
-			search = findtext(text, ":", pos+1)
+			search = findtext(text, ":", pos + length(text[pos]))
 			if(search)
-				emoji = lowertext(copytext(text, pos+1, search))
-//				var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/goonchat)
-				var/datum/asset/spritesheet/sheet
+				emoji = LOWER_TEXT(copytext(text, pos + length(text[pos]), search))
+				var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/chat)
 				var/tag = sheet.icon_tag("emoji-[emoji]")
 				if(tag)
 					parsed += tag
-					pos = search + 1
+					pos = search + length(text[pos])
 				else
 					parsed += copytext(text, pos, search)
 					pos = search
@@ -35,7 +36,7 @@
 	. = text
 	if(!CONFIG_GET(flag/emojis))
 		return
-	var/static/list/emojis = icon_states(icon('icons/emoji.dmi'))
+	var/static/list/emojis = icon_states(icon(EMOJI_SET))
 	var/final = "" //only tags are added to this
 	var/pos = 1
 	var/search = 0
@@ -43,12 +44,12 @@
 		search = findtext(text, ":", pos)
 		if(search)
 			pos = search
-			search = findtext(text, ":", pos+1)
+			search = findtext(text, ":", pos + length(text[pos]))
 			if(search)
-				var/word = lowertext(copytext(text, pos+1, search))
+				var/word = LOWER_TEXT(copytext(text, pos + length(text[pos]), search))
 				if(word in emojis)
-					final += lowertext(copytext(text, pos, search+1))
-				pos = search + 1
+					final += LOWER_TEXT(copytext(text, pos, search + length(text[search])))
+				pos = search + length(text[search])
 				continue
 		break
 	return final

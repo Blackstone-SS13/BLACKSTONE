@@ -1,10 +1,7 @@
 /datum/language/draconic
 	name = "Draconic"
-	desc = ""
-	speech_verb = "hisses"
-	ask_verb = "hisses"
-	exclaim_verb = "roars"
-	key = "10"
+	desc = "The common language of lizard-people, composed of sibilant hisses and rattles."
+	key = "o"
 	flags = TONGUELESS_SPEECH
 	space_chance = 40
 	syllables = list(

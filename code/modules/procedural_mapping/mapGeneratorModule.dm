@@ -1,27 +1,26 @@
 
-/datum/mapGeneratorModule
-	var/datum/mapGenerator/mother = null
+/datum/map_generator_module
+	var/datum/map_generator/mother = null
 	var/list/spawnableAtoms = list()
 	var/list/spawnableTurfs = list()
 	var/clusterMax = 5
 	var/clusterMin = 1
 	var/clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
 	var/allowAtomsOnSpace = FALSE
-	var/checkdensity = TRUE
-	var/list/excluded_turfs = list()
-	var/list/allowed_turfs = list()
-	var/list/allowed_areas = list()
-	var/include_subtypes = TRUE
+
+/datum/map_generator_module/Destroy(force)
+	mother = null
+	return ..()
 
 //Syncs the module up with its mother
-/datum/mapGeneratorModule/proc/sync(datum/mapGenerator/mum)
+/datum/map_generator_module/proc/sync(datum/map_generator/mum)
 	mother = null
 	if(mum)
 		mother = mum
 
 
 //Generates its spawnable atoms and turfs
-/datum/mapGeneratorModule/proc/generate()
+/datum/map_generator_module/proc/generate()
 	if(!mother)
 		return
 	var/list/map = mother.map
@@ -30,33 +29,12 @@
 
 
 //Place a spawnable atom or turf on this turf
-/datum/mapGeneratorModule/proc/place(turf/T)
+/datum/map_generator_module/proc/place(turf/T)
 	if(!T)
 		return 0
+
 	var/clustering = 0
 	var/skipLoopIteration = FALSE
-
-	if(T.type in excluded_turfs)
-		return
-
-	if(allowed_turfs.len)
-		if(!(T.type in allowed_turfs))
-			return
-
-	if(allowed_areas.len)
-		var/area/A = get_area(T)
-		if(A)
-			if(include_subtypes)
-				var/found
-				for(var/AT in allowed_areas)
-					if(istype(A, AT))
-						found = TRUE
-						break
-				if(!found)
-					return
-			else
-				if(!(A.type in allowed_areas))
-					return
 
 	//Turfs don't care whether atoms can be placed here
 	for(var/turfPath in spawnableTurfs)
@@ -129,19 +107,17 @@
 
 
 //Checks and Rejects dense turfs
-/datum/mapGeneratorModule/proc/checkPlaceAtom(turf/T)
-	. = 1
+/datum/map_generator_module/proc/checkPlaceAtom(turf/T)
 	if(!T)
-		return 0
-	if(checkdensity)
-		if(T.density)
-			. = 0
-		for(var/atom/A in T)
-			if(A.density)
-				. = 0
-				break
+		return FALSE
+	if(T.density)
+		return FALSE
+	for(var/atom/A in T)
+		if(A.density)
+			return FALSE
 	if(!allowAtomsOnSpace && (isspaceturf(T)))
-		. = 0
+		return FALSE
+	return TRUE
 
 
 ///////////////////////////////////////////////////////////
@@ -154,19 +130,19 @@
 
 //Settings appropriate for a turf that covers the entire map region, eg a fill colour on a bottom layer in a graphics program.
 //Should only have one of these in your mapGenerator unless you want to waste CPU
-/datum/mapGeneratorModule/bottomLayer
+/datum/map_generator_module/bottom_layer
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	spawnableAtoms = list()//Recommended: No atoms.
 	spawnableTurfs = list(/turf = 100)
 
 //Settings appropriate for turfs/atoms that cover SOME of the map region, sometimes referred to as a splatter layer.
-/datum/mapGeneratorModule/splatterLayer
+/datum/map_generator_module/splatter_layer
 	clusterCheckFlags = CLUSTER_CHECK_ALL
 	spawnableAtoms = list(/atom = 30)
 	spawnableTurfs = list(/turf = 30)
 
 //Settings appropriate for turfs/atoms that cover a lot of the map region, eg a dense forest.
-/datum/mapGeneratorModule/denseLayer
+/datum/map_generator_module/dense_layer
 	clusterCheckFlags = CLUSTER_CHECK_NONE
 	spawnableAtoms = list(/atom = 75)
 	spawnableTurfs = list(/turf = 75)

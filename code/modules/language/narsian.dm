@@ -1,10 +1,7 @@
 /datum/language/narsie
 	name = "Nar'Sian"
-	desc = ""
-	speech_verb = "intones"
-	ask_verb = "inquires"
-	exclaim_verb = "invokes"
-	key = "6"
+	desc = "The ancient, blood-soaked, impossibly complex language of Nar'Sian cultists."
+	key = "n"
 	sentence_chance = 8
 	space_chance = 95 //very high due to the potential length of each syllable
 	var/static/list/base_syllables = list(

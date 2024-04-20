@@ -1,3 +1,5 @@
-<!-- Most valid html will work in here, excluding images. -->
-Blackstone Discord Server: <a href="https://discord.gg/bx9c7ha5Qk">discord.gg/Blackstone</a>
-<center>* Unstable Playtest - Expect Restarts *</center>
+<!-- Most valid html will work in here, but you have to use URL links for images. -->
+
+<h1>Welcome to Space Station 13!</h1>
+
+<i>This server is running a /tg/station 13 Git build.</i>

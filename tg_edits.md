@@ -1,0 +1,4356 @@
+# List of TG edits found in the codebase
+
+- _maps/custom/roguetown2.dmm
+- _maps/jajsm.dm
+- _maps/jajsm.json
+- _maps/map_files/backup2/roguetown.dmm
+- _maps\map_files\grimoria\roguetown.dmm
+- _maps\map_files\grimoria\roguetown2.dmm
+- _maps\oldtown.dm
+- _maps\oldtown.json
+- _maps\RandomZLevels\Academy.dmm
+- _maps\RandomZLevels\challenge.dmm
+- _maps\RandomZLevels\spacebattle.dmm
+- _maps\RandomZLevels\wildwest.dmm
+- _maps\roguetest.dm
+- _maps\roguetest.json
+- _maps\roguetown.dm
+- _maps\roguetown.json
+- _maps\roguetown2.dm
+- _maps\roguetown2.json
+- _maps\roguewar.dm
+- _maps\roguewar.json
+- _maps\rogueworld.dm
+- _maps\rogueworld.json
+- _maps\runtimestation.dm
+- _maps\shuttles\arrival_rogue.dmm
+- _maps\shuttles\cargo_rogue.dmm
+- _maps\shuttles\emergency_rogue.dmm
+- appveyor.yml
+- code\__DEFINES\_globals.dm
+- code\__DEFINES\_readme.dm
+- code\__DEFINES\atmospherics.dm
+- code\__DEFINES\cinematics.dm
+- code\__DEFINES\components.dm
+- code\__DEFINES\construction.dm
+- code\__DEFINES\contracts.dm
+- code\__DEFINES\dcs\signals.dm
+- code\__DEFINES\dcs\signals_atom_lighting.dm
+- code\__DEFINES\exports.dm
+- code\__DEFINES\flags.dm
+- code\__DEFINES\forensics.dm
+- code\__DEFINES\materials.dm
+- code\__DEFINES\menu.dm
+- code\__DEFINES\misc.dm
+- code\__DEFINES\mob_timers.dm
+- code\__DEFINES\musicsystem.dm
+- code\__DEFINES\nanites.dm
+- code\__DEFINES\networks.dm
+- code\__DEFINES\roguetown.dm
+- code\__DEFINES\traits.dm
+- code\__DEFINES\turf_flags.dm
+- code\__DEFINES\weaponsounds.dm
+- code\__HELPERS\_logging.dm
+- code\__HELPERS\AStar.dm
+- code\__HELPERS\lordcolor.dm
+- code\__HELPERS\unsorted.dm
+- code\__HELPERS\unused.dm
+- code\_globalvars\lists\admin.dm
+- code\_globalvars\misc.dm
+- code\_globalvars\regexes.dm
+- code\_globalvars\roguetown.dm
+- code\_globalvars\traits.dm
+- code\_onclick\hud\_defines.dm
+- code\_onclick\hud\blobbernauthud.dm
+- code\_onclick\hud\clickdelay.dm
+- code\_onclick\hud\constructs.dm
+- code\_onclick\hud\devil.dm
+- code\_onclick\hud\lavaland_elite.dm
+- code\_onclick\hud\monkey.dm
+- code\_onclick\hud\mouseover.dm
+- code\_onclick\hud\pai.dm
+- code\_onclick\hud\parallax.dm
+- code\_onclick\hud\plane_master.dm
+- code\_onclick\hud\slime.dm
+- code\_onclick\hud\spirit.dm
+- code\_onclick\hud\swarmer.dm
+- code\_onclick\pai.dm
+- code\controllers\subsystem\acid.dm
+- code\controllers\subsystem\adjacent_air.dm
+- code\controllers\subsystem\fire_burning.dm
+- code\controllers\subsystem\idlenpcpool.dm
+- code\controllers\subsystem\librarian.dm
+- code\controllers\subsystem\lobby.dm
+- code\controllers\subsystem\music_update.dm
+- code\controllers\subsystem\persistence.dm
+- code\controllers\subsystem\processing\fields.dm
+- code\controllers\subsystem\processing\fluids.dm
+- code\controllers\subsystem\processing\haunting.dm
+- code\controllers\subsystem\processing\huds.dm
+- code\controllers\subsystem\processing\incone.dm
+- code\controllers\subsystem\processing\mapgen.dm
+- code\controllers\subsystem\processing\mousecharge.dm
+- code\controllers\subsystem\processing\nanites.dm
+- code\controllers\subsystem\processing\networks.dm
+- code\controllers\subsystem\processing\pollutants.dm
+- code\controllers\subsystem\rogue\crediticons.dm
+- code\controllers\subsystem\rogue\damoverlays.dm
+- code\controllers\subsystem\rogue\devotion.dm
+- code\controllers\subsystem\rogue\humannpc.dm
+- code\controllers\subsystem\rogue\pollutants.dm
+- code\controllers\subsystem\rogue\roguemachine.dm
+- code\controllers\subsystem\rogue\roguerot.dm
+- code\controllers\subsystem\rogue\soundloopers.dm
+- code\controllers\subsystem\rogue\todchange.dm
+- code\controllers\subsystem\rogue\treasury.dm
+- code\controllers\subsystem\rogue\water_level.dm
+- code\controllers\subsystem\rogueroundsplayed.dm
+- code\controllers\subsystem\spacedrift.dm
+- code\controllers\subsystem\traumas.dm
+- code\controllers\subsystem\treestuff.dm
+- code\controllers\subsystem\triumphs.dm
+- code\datums\action.dm
+- code\datums\actions\beam_rifle.dm
+- code\datums\actions\ninja.dm
+- code\datums\ai_laws.dm
+- code\datums\armor.dm
+- code\datums\character_flaw\_character_flaw.dm
+- code\datums\character_flaw\addiction.dm
+- code\datums\character_flaw\limbloss.dm
+- code\datums\cinematic.dm
+- code\datums\components\archaeology.dm
+- code\datums\components\art.dm
+- code\datums\components\bane.dm
+- code\datums\components\beauty.dm
+- code\datums\components\crafting\recipes.dm
+- code\datums\components\decal.dm
+- code\datums\components\decals\blood.dm
+- code\datums\components\empprotection.dm
+- code\datums\components\footstep.dm
+- code\datums\components\forced_gravity.dm
+- code\datums\components\forensics.dm
+- code\datums\components\knockback.dm
+- code\datums\components\lifesteal.dm
+- code\datums\components\lockon_aiming.dm
+- code\datums\components\magnetic_catch.dm
+- code\datums\components\material_container.dm
+- code\datums\components\mirage_border.dm
+- code\datums\components\mood.dm
+- code\datums\components\nanites.dm
+- code\datums\components\ntnet_interface.dm
+- code\datums\components\paintable.dm
+- code\datums\components\rad_insulation.dm
+- code\datums\components\radioactive.dm
+- code\datums\components\remote_materials.dm
+- code\datums\components\riding.dm
+- code\datums\components\rotting.dm
+- code\datums\components\shrapnel.dm
+- code\datums\components\spooky.dm
+- code\datums\components\storage\concrete\_concrete.dm
+- code\datums\components\storage\concrete\bag_of_holding.dm
+- code\datums\components\storage\concrete\bluespace.dm
+- code\datums\components\storage\concrete\implant.dm
+- code\datums\components\storage\concrete\pockets.dm
+- code\datums\components\storage\concrete\rped.dm
+- code\datums\components\storage\concrete\stack.dm
+- code\datums\components\storage\concrete\wallet.dm
+- code\datums\components\storage\storage.dm
+- code\datums\diseases\advance\symptoms\nanites.dm
+- code\datums\diseases\advance\symptoms\shivering.dm
+- code\datums\diseases\appendicitis.dm
+- code\datums\embedding_behavior.dm
+- code\datums\explosion.dm
+- code\datums\forced_movement.dm
+- code\datums\gods\patrons.dm
+- code\datums\mind.dm
+- code\datums\mutations\actions.dm
+- code\datums\mutations\space_adaptation.dm
+- code\datums\radiation_wave.dm
+- code\datums\recipe.dm
+- code\datums\shuttles.dm
+- code\datums\skills\combat.dm
+- code\datums\skills\craft.dm
+- code\datums\skills\labor.dm
+- code\datums\skills\magic.dm
+- code\datums\skills\misc.dm
+- code\datums\soullink.dm
+- code\datums\status_effects\debuffs.dm
+- code\datums\status_effects\rogue\alerts.dm
+- code\datums\status_effects\rogue\debuff.dm
+- code\datums\status_effects\rogue\roguebuff.dm
+- code\datums\status_effects\rogue\roguestatus.dm
+- code\datums\status_effects\status_effect.dm
+- code\datums\traits\_quirk.dm
+- code\datums\traits\good.dm
+- code\datums\traits\negative.dm
+- code\datums\traits\neutral.dm
+- code\datums\weather\weather_types\acid_rain.dm
+- code\datums\weather\weather_types\roguetown\fog.dm
+- code\datums\weather\weather_types\roguetown\rain.dm
+- code\datums\wires\particle_accelerator.dm
+- code\datums\wounds.dm
+- code\game\alternate_appearance.dm
+- code\game\area\roguetownareas.dm
+- code\game\area\Space_Station_13_areas.dm
+- code\game\atoms.dm
+- code\game\gamemodes\brother\traitor_bro.dm
+- code\game\gamemodes\changeling\changeling.dm
+- code\game\gamemodes\changeling\traitor_chan.dm
+- code\game\gamemodes\clown_ops\clown_ops.dm
+- code\game\gamemodes\clown_ops\bananium_bomb.dm
+- code\game\gamemodes\clown_ops\clown_weapons.dm
+- code\game\gamemodes\cult\cult.dm
+- code\game\gamemodes\devil\devil_agent\devil_agent.dm
+- code\game\gamemodes\devil\devil_game_mode.dm
+- code\game\gamemodes\devil\game_mode.dm
+- code\game\gamemodes\dynamic\dynamic.dm
+- code\game\gamemodes\devil\objectives.dm
+- code\game\gamemodes\dynamic\dynamic_rulesets.dm
+- code\game\gamemodes\dynamic\dynamic_rulesets_latejoin.dm
+- code\game\gamemodes\dynamic\dynamic_rulesets_midround.dm
+- code\game\gamemodes\dynamic\readme.md
+- code\game\gamemodes\dynamic\dynamic_rulesets_roundstart.dm
+- code\game\gamemodes\extended\extended.dm
+- code\game\gamemodes\game_mode.dm
+- code\game\gamemodes\meteor\meteor.dm
+- code\game\gamemodes\meteor\meteors.dm
+- code\game\gamemodes\monkey\monkey.dm
+- code\game\gamemodes\nuclear\nuclear.dm
+- code\game\gamemodes\revolution\revolution.dm
+- code\game\gamemodes\objectives_rogue.dm
+- code\game\gamemodes\roguetown\chaosmode.dm
+- code\game\gamemodes\roguetown\roguewar.dm
+- code\game\gamemodes\roguetown\roguetown.dm
+- code\game\gamemodes\sandbox\airlock_maker.dm
+- code\game\gamemodes\sandbox\h_sandbox.dm
+- code\game\gamemodes\traitor\double_agents.dm
+- code\game\gamemodes\sandbox\sandbox.dm
+- code\game\gamemodes\traitor\traitor.dm
+- code\game\gamemodes\wizard\wizard.dm
+- code\game\machinery\aug_manipulator.dm
+- code\game\machinery\Beacon.dm
+- code\game\machinery\camera\camera_assembly.dm
+- code\game\machinery\camera\tracking.dm
+- code\game\machinery\cloning.dm
+- code\game\machinery\computer\arcade.dm
+- code\game\machinery\computer\arena.dm
+- code\game\machinery\computer\atmos_control.dm
+- code\game\machinery\computer\card.dm
+- code\game\machinery\computer\cloning.dm
+- code\datums\components\waddling.dm
+- code\datums\datacore.dm
+- code\game\machinery\computer\medical.dm
+- code\game\machinery\computer\Operating.dm
+- code\game\machinery\computer\security.dm
+- code\game\machinery\doors\airlock_types.dm
+- code\game\machinery\doors\alarmlock.dm
+- code\game\machinery\doors\checkForMultipleDoors.dm
+- code\game\machinery\doppler_array.dm
+- code\game\machinery\embedded_controller\embedded_controller_base.dm
+- code\game\machinery\embedded_controller\simple_vent_controller.dm
+- code\game\machinery\exp_cloner.dm
+- code\game\machinery\magnet.dm
+- code\game\machinery\newscaster.dm
+- code\game\machinery\Sleeper.dm
+- code\game\mecha\combat\combat.dm
+- code\game\mecha\combat\durand.dm
+- code\game\mecha\combat\gygax.dm
+- code\game\mecha\combat\honker.dm
+- code\game\mecha\combat\marauder.dm
+- code\game\mecha\combat\phazon.dm
+- code\game\mecha\combat\reticence.dm
+- code\game\mecha\equipment\mecha_equipment.dm
+- code\game\mecha\equipment\tools\medical_tools.dm
+- code\game\mecha\equipment\tools\mining_tools.dm
+- code\game\mecha\equipment\tools\other_tools.dm
+- code\game\mecha\equipment\tools\weapon_bay.dm
+- code\game\mecha\equipment\tools\work_tools.dm
+- code\game\mecha\equipment\weapons\mecha_ammo.dm
+- code\game\mecha\equipment\weapons\weapons.dm
+- code\game\mecha\mech_bay.dm
+- code\game\mecha\mech_fabricator.dm
+- code\game\mecha\mecha.dm
+- code\game\mecha\mecha_actions.dm
+- code\game\mecha\mecha_construction_paths.dm
+- code\game\mecha\mecha_control_console.dm
+- code\game\mecha\mecha_defense.dm
+- code\game\mecha\mecha_parts.dm
+- code\game\mecha\mecha_topic.dm
+- code\game\mecha\mecha_wreckage.dm
+- code\game\mecha\medical\medical.dm
+- code\game\mecha\medical\odysseus.dm
+- code\game\mecha\working\ripley.dm
+- code\game\mecha\working\working.dm
+- code\game\objects\effects\alien_acid.dm
+- code\game\objects\effects\anomalies.dm
+- code\game\objects\effects\contraband.dm
+- code\game\objects\effects\effect_system\effects_foam.dm
+- code\game\objects\effects\effect_system\effects_smoke.dm
+- code\game\objects\effects\particles\weather.dm
+- code\game\objects\effects\proximity.dm
+- code\game\objects\effects\spawners\bundle.dm
+- code\game\objects\effects\spawners\lootdrop.dm
+- code\game\objects\effects\spawners\roguemapgen.dm
+- code\game\objects\effects\spawners\traps.dm
+- code\game\objects\effects\spawners\vaultspawner.dm
+- code\game\objects\effects\spiders.dm
+- code\game\objects\examine.dm
+- code\game\objects\inhands_rogue.dm
+- code\game\objects\items\AI_modules.dm
+- code\game\objects\items\candle.dm
+- code\game\objects\items\chrono_eraser.dm
+- code\game\objects\items\circuitboards\machine_circuitboards.dm
+- code\game\objects\items\devices\camera_bug.dm
+- code\game\objects\items\devices\instruments.dm
+- code\game\objects\items\devices\paicard.dm
+- code\game\objects\items\devices\PDA\cart.dm
+- code\game\objects\items\devices\PDA\PDA.dm
+- code\game\objects\items\devices\PDA\PDA_types.dm
+- code\game\objects\items\devices\PDA\radio.dm
+- code\game\objects\items\devices\PDA\virus_cart.dm
+- code\game\objects\items\devices\scanners.dm
+- code\game\objects\items\documents.dm
+- code\game\objects\items\granters.dm
+- code\game\objects\items\grenades\grenade.dm
+- code\game\objects\items\holy_weapons.dm
+- code\game\objects\items\implants\implant_chem.dm
+- code\game\objects\items\implants\implant_exile.dm
+- code\game\objects\items\implants\implant_track.dm
+- code\game\objects\items\melee\transforming.dm
+- code\game\objects\items\miscellaneous.dm
+- code\game\objects\items\RCD.dm
+- code\game\objects\items\RCL.dm
+- code\game\objects\items\robot\robot_items.dm
+- code\game\objects\items\rogueitems\bags.dm
+- code\game\objects\items\rogueitems\bait.dm
+- code\game\objects\items\rogueitems\bells.dm
+- code\game\objects\items\rogueitems\bombs.dm
+- code\game\objects\items\rogueitems\books.dm
+- code\game\objects\items\rogueitems\coins.dm
+- code\game\objects\items\rogueitems\cup.dm
+- code\game\objects\items\rogueitems\dmusicbox.dm
+- code\game\objects\items\rogueitems\flintsparker.dm
+- code\game\objects\items\rogueitems\gems.dm
+- code\game\objects\items\rogueitems\instruments.dm
+- code\game\objects\items\rogueitems\keyrings.dm
+- code\game\objects\items\rogueitems\keys.dm
+- code\game\objects\items\rogueitems\magic.dm
+- code\game\objects\items\rogueitems\natural.dm
+- code\game\objects\items\rogueitems\natural\animals.dm
+- code\game\objects\items\rogueitems\natural\ash.dm
+- code\game\objects\items\rogueitems\natural\clothfibersthorn.dm
+- code\game\objects\items\rogueitems\natural\dirtclod.dm
+- code\game\objects\items\rogueitems\natural\feather.dm
+- code\game\objects\items\rogueitems\natural\flower.dm
+- code\game\objects\items\rogueitems\natural\poo.dm
+- code\game\objects\items\rogueitems\natural\stones.dm
+- code\game\objects\items\rogueitems\natural\wood.dm
+- code\game\objects\items\rogueitems\needle.dm
+- code\game\objects\items\rogueitems\painting.dm
+- code\game\objects\items\rogueitems\prostheticarm.dm
+- code\game\objects\items\rogueitems\ropechainbola.dm
+- code\game\objects\items\rogueitems\undies.dm
+- code\game\objects\items\rogueweapons\integrity.dm
+- code\game\objects\items\rogueweapons\intents.dm
+- code\game\objects\items\rogueweapons\melee\axes.dm
+- code\game\objects\items\rogueweapons\melee\blunt.dm
+- code\game\objects\items\rogueweapons\melee\flail.dm
+- code\game\objects\items\rogueweapons\melee\knives.dm
+- code\game\objects\items\rogueweapons\melee\polearms.dm
+- code\game\objects\items\rogueweapons\melee\special.dm
+- code\game\objects\items\rogueweapons\melee\swords.dm
+- code\game\objects\items\rogueweapons\ranged\ammo.dm
+- code\game\objects\items\rogueweapons\ranged\bows.dm
+- code\game\objects\items\rogueweapons\ranged\crossbows.dm
+- code\game\objects\items\rogueweapons\ranged\slings.dm
+- code\game\objects\items\rogueweapons\rmb_intents.dm
+- code\game\objects\items\rogueweapons\rogueweapon.dm
+- code\game\objects\items\rogueweapons\shields.dm
+- code\game\objects\items\RPD.dm
+- code\game\objects\items\RSF.dm
+- code\game\objects\items\singularityhammer.dm
+- code\game\objects\items\storage\book.dm
+- code\game\objects\items\storage\boxes.dm
+- code\game\objects\items\storage\firstaid.dm
+- code\game\objects\items\storage\secure.dm
+- code\game\objects\items\stunbaton.dm
+- code\game\objects\items\teleprod.dm
+- code\game\objects\items\twohanded.dm
+- code\game\objects\structures\artstuff.dm
+- code\game\objects\structures\barsigns.dm
+- code\game\objects\structures\bearpelt.dm
+- code\game\objects\structures\beds_chairs\roguechair.dm
+- code\game\objects\structures\crates_lockers\roguetown.dm
+- code\game\objects\structures\fugitive_role_spawners.dm
+- code\game\objects\structures\ghost_role_spawners.dm
+- code\game\objects\structures\hell.dm
+- code\game\objects\structures\janicart.dm
+- code\game\objects\structures\maneater.dm
+- code\game\objects\structures\manned_turret.dm
+- code\game\objects\structures\mop_bucket.dm
+- code\game\objects\structures\musician.dm
+- code\game\objects\structures\roguetent.dm
+- code\game\objects\structures\roguetown\bell.dm
+- code\game\objects\structures\roguetown\gate.dm
+- code\game\objects\structures\roguetown\handcart.dm
+- code\game\objects\structures\roguetown\musicbox.dm
+- code\game\objects\structures\roguetown\newtree.dm
+- code\game\objects\structures\roguetown\portal.dm
+- code\game\objects\structures\roguetown\redstone.dm
+- code\game\objects\structures\roguetown\rogueflora.dm
+- code\game\objects\structures\roguetown\telescope.dm
+- code\game\objects\structures\roguewindow.dm
+- code\game\objects\structures\signs\signs_plaques.dm
+- code\game\objects\structures\statues.dm
+- code\game\objects\structures\target_stake.dm
+- code\game\objects\structures\traveltile.dm
+- code\game\objects\structures\walldeco.dm
+- code\game\objects\structures\well.dm
+- code\game\turfs\closed\transparent.dm
+- code\game\turfs\closed\wall\roguewalls.dm
+- code\game\turfs\open\floor\plasteel_floor.dm
+- code\game\turfs\open\floor\plating\asteroid.dm
+- code\game\turfs\open\floor\plating\dirt.dm
+- code\game\turfs\open\floor\reinf_floor.dm
+- code\game\turfs\open\floor\roguefloor.dm
+- code\game\turfs\open\pollutants.dm
+- code\game\turfs\open\transparent.dm
+- code\game\turfs\turf_defense.dm
+- code\modules\admin\adminmenu.dm
+- code\modules\admin\blacklist.dm
+- code\modules\admin\crowns.dm
+- code\modules\admin\patreon.dm
+- code\modules\admin\player_curses.dm
+- code\modules\admin\playerquality.dm
+- code\modules\admin\secrets.dm
+- code\modules\admin\verbs\bluespacearty.dm
+- code\modules\admin\verbs\BrokenInhands.dm
+- code\modules\admin\verbs\one_click_antag.dm
+- code\modules\admin\verbs\onlyone.dm
+- code\modules\admin\verbs\randomverbs.dm
+- code\modules\admin\verbs\tripAI.dm
+- code\modules\antagonists\abductor\equipment\abduction_gear.dm
+- code\modules\antagonists\blob\blob.dm
+- code\modules\antagonists\blob\blob_mobs.dm
+- code\modules\antagonists\blob\blob_report.dm
+- code\modules\antagonists\blob\blobstrains\zombifying_pods.dm
+- code\modules\antagonists\blood_contract\blood_contract.dm
+- code\modules\antagonists\changeling\powers\hivemind.dm
+- code\modules\antagonists\changeling\powers\humanform.dm
+- code\modules\antagonists\changeling\powers\linglink.dm
+- code\modules\antagonists\creep\creep.dm
+- code\modules\antagonists\cult\ritual.dm
+- code\modules\antagonists\devil\devil.dm
+- code\modules\antagonists\devil\devil_helpers.dm
+- code\modules\antagonists\devil\imp\imp.dm
+- code\modules\antagonists\devil\sintouched\objectives.dm
+- code\modules\antagonists\devil\sintouched\sintouched.dm
+- code\modules\antagonists\devil\true_devil\_true_devil.dm
+- code\modules\antagonists\devil\true_devil\inventory.dm
+- code\modules\antagonists\disease\disease_event.dm
+- code\modules\antagonists\fugitive\fugitive_ship.dm
+- code\modules\antagonists\fugitive\hunter.dm
+- code\modules\antagonists\monkey\monkey.dm
+- code\modules\antagonists\morph\morph.dm
+- code\modules\antagonists\ninja\ninja.dm
+- code\modules\antagonists\nukeop\clownop.dm
+- code\modules\antagonists\nukeop\equipment\nuclearbomb.dm
+- code\modules\antagonists\nukeop\nukeop.dm
+- code\modules\antagonists\official\official.dm
+- code\modules\antagonists\revenant\revenant.dm
+- code\modules\antagonists\revenant\revenant_abilities.dm
+- code\modules\antagonists\revenant\revenant_spawn_event.dm
+- code\modules\antagonists\roguetown\roleobjs\prisoner.dm
+- code\modules\antagonists\roguetown\roleobjs\purishep.dm
+- code\modules\antagonists\roguetown\roleobjs\skeleton.dm
+- code\modules\antagonists\roguetown\villain\aspirant.dm
+- code\modules\antagonists\roguetown\villain\assassin.dm
+- code\modules\antagonists\roguetown\villain\bandit.dm
+- code\modules\antagonists\roguetown\villain\choosename.dm
+- code\modules\antagonists\roguetown\villain\peasantrebel.dm
+- code\modules\antagonists\roguetown\villain\succubus.dm
+- code\modules\antagonists\roguetown\villain\vampire.dm
+- code\modules\antagonists\roguetown\villain\vampirelord.dm
+- code\modules\antagonists\roguetown\villain\werewolf.dm
+- code\modules\antagonists\roguetown\villain\zombie.dm
+- code\modules\antagonists\slaughter\slaughter.dm
+- code\modules\antagonists\slaughter\slaughterevent.dm
+- code\modules\antagonists\slaughter\slaughter_antag.dm
+- code\modules\antagonists\swarmer\swarmer.dm
+- code\modules\antagonists\swarmer\swarmer_event.dm
+- code\modules\antagonists\traitor\equipment\contractor.dm
+- code\modules\antagonists\traitor\equipment\Malf_Modules.dm
+- code\modules\antagonists\traitor\IAA\internal_affairs.dm
+- code\modules\antagonists\traitor\syndicate_contract.dm
+- code\modules\antagonists\wizard\equipment\spellbook.dm
+- code\modules\assembly\bomb.dm
+- code\modules\atmospherics\machinery\airalarm.dm
+- code\modules\atmospherics\machinery\components\unary_devices\tank.dm
+- code\modules\atmospherics\machinery\pipes\manifold.dm
+- code\modules\atmospherics\machinery\pipes\manifold4w.dm
+- code\modules\atmospherics\machinery\pipes\simple.dm
+- code\modules\atmospherics\multiz.dm
+- code\modules\awaymissions\bluespaceartillery.dm
+- code\modules\awaymissions\capture_the_flag.dm
+- code\modules\awaymissions\corpse.dm
+- code\modules\awaymissions\mission_code\Academy.dm
+- code\modules\awaymissions\mission_code\challenge.dm
+- code\modules\awaymissions\mission_code\spacebattle.dm
+- code\modules\awaymissions\mission_code\wildwest.dm
+- code\modules\bsql\LICENSE
+- code\modules\buildmode\effects\line.dm
+- code\modules\cargo\bounty_console.dm
+- code\modules\cargo\console.dm
+- code\modules\cargo\export_scanner.dm
+- code\modules\cargo\packs.dm
+- code\modules\cargo\packsrogue\_rogue.dm
+- code\modules\cargo\packsrogue\armor.dm
+- code\modules\cargo\packsrogue\apparel.dm
+- code\modules\cargo\packsrogue\food.dm
+- code\modules\cargo\packsrogue\luxury.dm
+- code\modules\cargo\packsrogue\rawmat.dm
+- code\modules\cargo\packsrogue\seeds.dm
+- code\modules\cargo\packsrogue\tools.dm
+- code\modules\cargo\packsrogue\weapons.dm
+- code\modules\client\asset_cache.dm
+- code\modules\client\assets_rogue.dm
+- code\modules\client\darkmode.dm
+- code\modules\client\preferences_toggles.dm
+- code\modules\client\roundendmanifest.dm
+- code\modules\client\verbs\etips.dm
+- code\modules\clothing\chameleon.dm
+- code\modules\clothing\gloves\miscellaneous.dm
+- code\modules\clothing\head\misc.dm
+- code\modules\clothing\head\misc_special.dm
+- code\modules\clothing\masks\miscellaneous.dm
+- code\modules\clothing\rogueclothes\armor.dm
+- code\modules\clothing\rogueclothes\cloaks.dm
+- code\modules\clothing\rogueclothes\feet.dm
+- code\modules\clothing\rogueclothes\gloves.dm
+- code\modules\clothing\rogueclothes\hats.dm
+- code\modules\clothing\rogueclothes\mask.dm
+- code\modules\clothing\rogueclothes\mouth.dm
+- code\modules\clothing\rogueclothes\neck.dm
+- code\modules\clothing\rogueclothes\npc\goblin.dm
+- code\modules\clothing\rogueclothes\pants.dm
+- code\modules\clothing\rogueclothes\quiver.dm
+- code\modules\clothing\rogueclothes\rings.dm
+- code\modules\clothing\rogueclothes\shirts.dm
+- code\modules\clothing\rogueclothes\storage.dm
+- code\modules\clothing\rogueclothes\wrists.dm
+- code\modules\clothing\shoes\colour.dm
+- code\modules\clothing\shoes\implant_exile.dm
+- code\modules\clothing\shoes\miscellaneous.dm
+- code\modules\clothing\spacesuits\chronosuit.dm
+- code\modules\clothing\spacesuits\miscellaneous.dm
+- code\modules\clothing\spacesuits\hardsuit.dm
+- code\modules\clothing\suits\chaplainsuits.dm
+- code\modules\clothing\suits\miscellaneous.dm
+- code\modules\clothing\under\accessories.dm
+- code\modules\detectivework\detective_work.dm
+- code\modules\detectivework\footprints_and_rag.dm
+- code\modules\discord\manipulation.dm
+- code\modules\droning\droning.dm
+- code\modules\economy\pay_stand.dm
+- code\modules\events\abductor.dm
+- code\modules\events\alien_infestation.dm
+- code\modules\events\anomaly.dm
+- code\modules\events\anomaly_bluespace.dm
+- code\modules\events\anomaly_flux.dm
+- code\modules\events\anomaly_grav.dm
+- code\modules\events\anomaly_pyro.dm
+- code\modules\events\anomaly_vortex.dm
+- code\modules\events\blob.dm
+- code\modules\events\devil.dm
+- code\modules\events\fugitive_spawning.dm
+- code\modules\events\ghost_role.dm
+- code\modules\events\high_priority_bounty.dm
+- code\modules\events\immovable_rod.dm
+- code\modules\events\major_dust.dm
+- code\modules\events\meateor_wave.dm
+- code\modules\events\meteor_wave.dm
+- code\modules\events\nightmare.dm
+- code\modules\events\operative.dm
+- code\modules\events\pirates.dm
+- code\modules\events\prison_break.dm
+- code\modules\events\rogue\_rogue.dm
+- code\modules\events\rogue\allmig\skellysiege.dm
+- code\modules\events\rogue\goblininvasion.dm
+- code\modules\events\rogue\haunts.dm
+- code\modules\events\rogue\lightsout.dm
+- code\modules\events\rogue\skellyinvade.dm
+- code\modules\events\rogue\skellysiege.dm
+- code\modules\events\rogue\vines.dm
+- code\modules\events\sentience.dm
+- code\modules\events\shuttle_loan.dm
+- code\modules\events\space_dragon.dm
+- code\modules\events\spacevine.dm
+- code\modules\events\spontaneous_appendicitis.dm
+- code\modules\fields\fields.dm
+- code\modules\fields\gravity.dm
+- code\modules\fields\peaceborg_dampener.dm
+- code\modules\fields\timestop.dm
+- code\modules\fields\turf_objects.dm
+- code\modules\flufftext\Hallucination.dm
+- code\modules\food_and_drinks\drinks\drinks.dm
+- code\modules\food_and_drinks\drinks\drinks\bottle.dm
+- code\modules\food_and_drinks\drinks\drinks\drinkingglass.dm
+- code\modules\food_and_drinks\food.dm
+- code\modules\food_and_drinks\food\condiment.dm
+- code\modules\food_and_drinks\food\customizables.dm
+- code\modules\food_and_drinks\food\snacks.dm
+- code\modules\food_and_drinks\food\snacks\dough.dm
+- code\modules\food_and_drinks\food\snacks\meat.dm
+- code\modules\food_and_drinks\food\snacks_bread.dm
+- code\modules\food_and_drinks\food\snacks_burgers.dm
+- code\modules\food_and_drinks\food\snacks_cake.dm
+- code\modules\food_and_drinks\food\snacks_egg.dm
+- code\modules\food_and_drinks\food\snacks_frozen.dm
+- code\modules\food_and_drinks\food\snacks_meat.dm
+- code\modules\food_and_drinks\food\snacks_other.dm
+- code\modules\food_and_drinks\food\snacks_pastry.dm
+- code\modules\food_and_drinks\food\snacks_pie.dm
+- code\modules\food_and_drinks\food\snacks_pizza.dm
+- code\modules\food_and_drinks\food\snacks_salad.dm
+- code\modules\food_and_drinks\food\snacks_sandwichtoast.dm
+- code\modules\food_and_drinks\food\snacks_soup.dm
+- code\modules\food_and_drinks\food\snacks_spaghetti.dm
+- code\modules\food_and_drinks\food\snacks_vend.dm
+- code\modules\food_and_drinks\kitchen_machinery\deep_fryer.dm
+- code\modules\food_and_drinks\kitchen_machinery\food_cart.dm
+- code\modules\food_and_drinks\kitchen_machinery\gibber.dm
+- code\modules\food_and_drinks\kitchen_machinery\grill.dm
+- code\modules\food_and_drinks\kitchen_machinery\icecream_vat.dm
+- code\modules\food_and_drinks\kitchen_machinery\microwave.dm
+- code\modules\food_and_drinks\kitchen_machinery\monkeyrecycler.dm
+- code\modules\food_and_drinks\kitchen_machinery\processor.dm
+- code\modules\food_and_drinks\kitchen_machinery\smartfridge.dm
+- code\modules\food_and_drinks\recipes\drinks_recipes.dm
+- code\modules\food_and_drinks\recipes\tablecraft\recipes_soup.dm
+- code\modules\games\cas.dm
+- code\modules\goonchat\browserassets\css\browserOutput.css
+- code\modules\goonchat\browserassets\html\browserOutput.html
+- code\modules\goonchat\browserassets\js\browserOutput.js
+- code\modules\goonchat\browserassets\js\jquery.min.js
+- code\modules\goonchat\browserassets\js\json2.min.js
+- code\modules\goonchat\browserOutput.dm
+- code\modules\holiday\easter.dm
+- code\modules\holiday\halloween.dm
+- code\modules\holodeck\area_copy.dm
+- code\modules\holodeck\mobs.dm
+- code\modules\hydroponics\gene_modder.dm
+- code\modules\hydroponics\grown\kudzu.dm
+- code\modules\hydroponics\grown\misc.dm
+- code\modules\hydroponics\grown\nettle.dm
+- code\modules\hydroponics\grown\roguesmoke.dm
+- code\modules\hydroponics\grown\roguetown.dm
+- code\modules\hydroponics\grown\special.dm
+- code\modules\hydroponics\roguebin.dm
+- code\modules\hydroponics\roguebarrels.dm
+- code\modules\hydroponics\sample.dm
+- code\modules\jobs\job_types\old\ai.dm
+- code\modules\jobs\job_types\old\assistant.dm
+- code\modules\jobs\job_types\old\atmospheric_technician.dm
+- code\modules\jobs\job_types\old\bartender.dm
+- code\modules\jobs\job_types\old\botanist.dm
+- code\modules\jobs\job_types\old\captain.dm
+- code\modules\jobs\job_types\old\cargo_technician.dm
+- code\modules\jobs\job_types\old\chaplain.dm
+- code\modules\jobs\job_types\old\chemist.dm
+- code\modules\jobs\job_types\old\chief_engineer.dm
+- code\modules\jobs\job_types\old\chief_medical_officer.dm
+- code\modules\jobs\job_types\old\clown.dm
+- code\modules\jobs\job_types\old\cook.dm
+- code\modules\jobs\job_types\old\curator.dm
+- code\modules\jobs\job_types\old\cyborg.dm
+- code\modules\jobs\job_types\old\detective.dm
+- code\modules\jobs\job_types\old\geneticist.dm
+- code\modules\jobs\job_types\old\head_of_personnel.dm
+- code\modules\jobs\job_types\old\head_of_security.dm
+- code\modules\jobs\job_types\old\janitor.dm
+- code\modules\jobs\job_types\old\lawyer.dm
+- code\modules\jobs\job_types\old\medical_doctor.dm
+- code\modules\jobs\job_types\old\mime.dm
+- code\modules\jobs\job_types\old\quartermaster.dm
+- code\modules\jobs\job_types\old\research_director.dm
+- code\modules\jobs\job_types\old\roboticist.dm
+- code\modules\jobs\job_types\old\scientist.dm
+- code\modules\jobs\job_types\old\security_officer.dm
+- code\modules\jobs\job_types\old\shaft_miner.dm
+- code\modules\jobs\job_types\old\station_engineer.dm
+- code\modules\jobs\job_types\old\virologist.dm
+- code\modules\jobs\job_types\old\warden.dm
+- code\modules\jobs\job_types\roguetown\adventurer\adventurer.dm
+- code\modules\jobs\job_types\roguetown\adventurer\pilgrim.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\_advclass.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\amazon.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\barbarian.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\bard.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\cleric.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\dbomb.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\bladesinger.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\dwarfwarrior.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\grenzelhoft.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\longbeard.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\paladin.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\swordmaster.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\vampirehunter.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\vaquero.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\dwarfranger.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\mage.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\ranger.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\assassin.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\berserker.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\freelancer.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelt.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelthand.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\sentinel.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\swashbuckler.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\treasurehunter.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\witchhunter.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\rogue.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\sorceress.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\combat\warrior.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\blacksmith.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\carpenter.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\cheesemaker.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\fisher.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\hunter.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\miner.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\monk.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\peasant.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lcarp.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lchef.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lfish.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lmason.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lminer.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lmonk.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lpeasant.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lsmith.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lwoodcut.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\woodcutter.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\special\crusader.dm
+- code\modules\jobs\job_types\roguetown\adventurer\types\special\whitecheesemaker.dm
+- code\modules\jobs\job_types\roguetown\adventurer\villager.dm
+- code\modules\jobs\job_types\roguetown\church\confessor.dm
+- code\modules\jobs\job_types\roguetown\church\monk.dm
+- code\modules\jobs\job_types\roguetown\church\priest.dm
+- code\modules\jobs\job_types\roguetown\church\puritan.dm
+- code\modules\jobs\job_types\roguetown\church\templar.dm
+- code\modules\jobs\job_types\roguetown\garrison\dungeoneer.dm
+- code\modules\jobs\job_types\roguetown\garrison\gatemaster.dm
+- code\modules\jobs\job_types\roguetown\garrison\manorguard.dm
+- code\modules\jobs\job_types\roguetown\garrison\townguard.dm
+- code\modules\jobs\job_types\roguetown\garrison\veteran.dm
+- code\modules\jobs\job_types\roguetown\garrison\villagechief.dm
+- code\modules\jobs\job_types\roguetown\nobility\hand.dm
+- code\modules\jobs\job_types\roguetown\nobility\knight.dm
+- code\modules\jobs\job_types\roguetown\nobility\lady.dm
+- code\modules\jobs\job_types\roguetown\nobility\lord.dm
+- code\modules\jobs\job_types\roguetown\nobility\magician.dm
+- code\modules\jobs\job_types\roguetown\nobility\sheriff.dm
+- code\modules\jobs\job_types\roguetown\nobility\steward.dm
+- code\modules\jobs\job_types\roguetown\other\deathknight.dm
+- code\modules\jobs\job_types\roguetown\other\mercenary.dm
+- code\modules\jobs\job_types\roguetown\other\skeleton.dm
+- code\modules\jobs\job_types\roguetown\other\tester.dm
+- code\modules\jobs\job_types\roguetown\peasants\bathmaid.dm
+- code\modules\jobs\job_types\roguetown\peasants\beggar.dm
+- code\modules\jobs\job_types\roguetown\peasants\butcher.dm
+- code\modules\jobs\job_types\roguetown\peasants\butler.dm
+- code\modules\jobs\job_types\roguetown\peasants\cook.dm
+- code\modules\jobs\job_types\roguetown\peasants\grabber.dm
+- code\modules\jobs\job_types\roguetown\peasants\gravedigger.dm
+- code\modules\jobs\job_types\roguetown\peasants\jester.dm
+- code\modules\jobs\job_types\roguetown\peasants\nightman.dm
+- code\modules\jobs\job_types\roguetown\peasants\prisoner.dm
+- code\modules\jobs\job_types\roguetown\peasants\soilson.dm
+- code\modules\jobs\job_types\roguetown\roguetown.dm
+- code\modules\jobs\job_types\roguetown\serfs\alchemist.dm
+- code\modules\jobs\job_types\roguetown\serfs\apothecary.dm
+- code\modules\jobs\job_types\roguetown\serfs\archivist.dm
+- code\modules\jobs\job_types\roguetown\serfs\barkeep.dm
+- code\modules\jobs\job_types\roguetown\serfs\blacksmith.dm
+- code\modules\jobs\job_types\roguetown\serfs\mason.dm
+- code\modules\jobs\job_types\roguetown\serfs\merchant.dm
+- code\modules\jobs\job_types\roguetown\serfs\scribe.dm
+- code\modules\jobs\job_types\roguetown\serfs\tailor.dm
+- code\modules\jobs\job_types\roguetown\statueitems.dm
+- code\modules\jobs\job_types\roguetown\youngfolk\bapprentice.dm
+- code\modules\jobs\job_types\roguetown\youngfolk\churchling.dm
+- code\modules\jobs\job_types\roguetown\youngfolk\orphan.dm
+- code\modules\jobs\job_types\roguetown\youngfolk\prince.dm
+- code\modules\jobs\job_types\roguetown\youngfolk\servant.dm
+- code\modules\jobs\job_types\roguetown\youngfolk\squire.dm
+- code\modules\jobs\job_types\roguetown\youngfolk\wapprentice.dm
+- code\modules\keybindings\bindings_carbon.dm
+- code\modules\language\roguetown\beast.dm
+- code\modules\language\roguetown\cat.dm
+- code\modules\language\roguetown\dwarf.dm
+- code\modules\language\roguetown\elf.dm
+- code\modules\language\roguetown\fae.dm
+- code\modules\language\roguetown\hellspeak.dm
+- code\modules\language\roguetown\orc.dm
+- code\modules\language\roguetown\sandspeak.dm
+- code\modules\language\roguetown\undead.dm
+- code\modules\language\swarmer.dm
+- code\modules\library\lib_items.dm
+- code\modules\library\soapstone.dm
+- code\modules\lighting\__lighting_docs.dm
+- code\modules\lighting\lighting_emissive_blocker.dm
+- code\modules\mining\aux_base_camera.dm
+- code\modules\mining\equipment\regenerative_core.dm
+- code\modules\mining\equipment\vendor_items.dm
+- code\modules\mining\lavaland\ruins\gym.dm
+- code\modules\mining\machine_vending.dm
+- code\modules\mining\mint.dm
+- code\modules\mining\minebot.dm
+- code\modules\mining\satchel_ore_boxdm.dm
+- code\modules\mob\dead\new_player\sprite_accessories.dm
+- code\modules\mob\dead\observer\say.dm
+- code\modules\mob\death.dm
+- code\modules\mob\living\ambush.dm
+- code\modules\mob\living\bloodcrawl.dm
+- code\modules\mob\living\brain\say.dm
+- code\modules\mob\living\brain\status_procs.dm
+- code\modules\mob\living\carbon\alien\humanoid\alien_powers.dm
+- code\modules\mob\living\carbon\alien\humanoid\caste\drone.dm
+- code\modules\mob\living\carbon\alien\humanoid\caste\hunter.dm
+- code\modules\mob\living\carbon\alien\humanoid\caste\praetorian.dm
+- code\modules\mob\living\carbon\alien\humanoid\caste\sentinel.dm
+- code\modules\mob\living\carbon\alien\humanoid\death.dm
+- code\modules\mob\living\carbon\alien\humanoid\humanoid.dm
+- code\modules\mob\living\carbon\alien\humanoid\humanoid_defense.dm
+- code\modules\mob\living\carbon\alien\humanoid\inventory.dm
+- code\modules\mob\living\carbon\alien\humanoid\life.dm
+- code\modules\mob\living\carbon\alien\humanoid\queen.dm
+- code\modules\mob\living\carbon\alien\humanoid\update_icons.dm
+- code\modules\mob\living\carbon\alien\larva\update_icons.dm
+- code\modules\mob\living\carbon\alien\say.dm
+- code\modules\mob\living\carbon\alien\status_procs.dm
+- code\modules\mob\living\carbon\alien\update_icons.dm
+- code\modules\mob\living\carbon\human\damage_procs.dm
+- code\modules\mob\living\carbon\human\npc\_npc.dm
+- code\modules\mob\living\carbon\human\npc\bum.dm
+- code\modules\mob\living\carbon\human\npc\goblin.dm
+- code\modules\mob\living\carbon\human\npc\skeleton.dm
+- code\modules\mob\living\carbon\human\say.dm
+- code\modules\mob\living\carbon\human\species.dm
+- code\modules\mob\living\carbon\human\species_types\corporate.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\dwarf\_dwarf.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\dwarf\dwarfm.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\elf\_elf.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\elf\elfd.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\elf\elfs.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\human\_human.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\human\humann.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\other\aasimar.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\other\halfelf.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\other\tiefling.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\other\werewolf.dm
+- code\modules\mob\living\carbon\human\species_types\roguetown\roguetown_species.dm
+- code\modules\mob\living\carbon\human\species_types\synths.dm
+- code\modules\mob\living\carbon\human\update_icons.dm
+- code\modules\mob\living\carbon\human\voicepack.dm
+- code\modules\mob\living\carbon\human\voicepacks\female\dwarf.dm
+- code\modules\mob\living\carbon\human\voicepacks\female\elf.dm
+- code\modules\mob\living\carbon\human\voicepacks\genfemale.dm
+- code\modules\mob\living\carbon\human\voicepacks\genmale.dm
+- code\modules\mob\living\carbon\human\voicepacks\male\dwarf.dm
+- code\modules\mob\living\carbon\human\voicepacks\male\elf.dm
+- code\modules\mob\living\carbon\human\voicepacks\male\evil.dm
+- code\modules\mob\living\carbon\human\voicepacks\male\jester.dm
+- code\modules\mob\living\carbon\human\voicepacks\male\knight.dm
+- code\modules\mob\living\carbon\human\voicepacks\male\warrior.dm
+- code\modules\mob\living\carbon\human\voicepacks\male\wizard.dm
+- code\modules\mob\living\carbon\human\voicepacks\male\zeth.dm
+- code\modules\mob\living\carbon\human\voicepacks\other\goblin.dm
+- code\modules\mob\living\carbon\human\voicepacks\other\skeleton.dm
+- code\modules\mob\living\carbon\human\voicepacks\other\werewolf.dm
+- code\modules\mob\living\carbon\human\voicepacks\other\zombie.dm
+- code\modules\mob\living\carbon\monkey\combat.dm
+- code\modules\mob\living\carbon\monkey\death.dm
+- code\modules\mob\living\carbon\monkey\inventory.dm
+- code\modules\mob\living\carbon\monkey\life.dm
+- code\modules\mob\living\carbon\monkey\monkey.dm
+- code\modules\mob\living\carbon\monkey\monkey_defense.dm
+- code\modules\mob\living\carbon\monkey\punpun.dm
+- code\modules\mob\living\carbon\monkey\update_icons.dm
+- code\modules\mob\living\carbon\rogfatstam.dm
+- code\modules\mob\living\carbon\say.dm
+- code\modules\mob\living\carbon\spirit\combat.dm
+- code\modules\mob\living\carbon\spirit\death.dm
+- code\modules\mob\living\carbon\spirit\inventory.dm
+- code\modules\mob\living\carbon\spirit\life.dm
+- code\modules\mob\living\carbon\spirit\spirit.dm
+- code\modules\mob\living\carbon\spirit\spirit_defense.dm
+- code\modules\mob\living\carbon\spirit\update_icons.dm
+- code\modules\mob\living\carbon\stress.dm
+- code\modules\mob\living\carbon\update_icons.dm
+- code\modules\mob\living\grabbing.dm
+- code\modules\mob\living\roguetownprocs.dm
+- code\modules\mob\living\say.dm
+- code\modules\mob\living\silicon\ai\freelook\read_me.dm
+- code\modules\mob\living\silicon\ai\say.dm
+- code\modules\mob\living\silicon\pai\death.dm
+- code\modules\mob\living\silicon\pai\pai.dm
+- code\modules\mob\living\silicon\pai\pai_defense.dm
+- code\modules\mob\living\silicon\pai\pai_shell.dm
+- code\modules\mob\living\silicon\pai\personality.dm
+- code\modules\mob\living\silicon\pai\say.dm
+- code\modules\mob\living\silicon\pai\software.dm
+- code\modules\mob\living\silicon\robot\robot_modules.dm
+- code\modules\mob\living\silicon\robot\say.dm
+- code\modules\mob\living\silicon\say.dm
+- code\modules\mob\living\simple_animal\bot\cleanbot.dm
+- code\modules\mob\living\simple_animal\bot\medbot.dm
+- code\modules\mob\living\simple_animal\constructs.dm
+- code\modules\mob\living\simple_animal\corpse.dm
+- code\modules\mob\living\simple_animal\examine.dm
+- code\modules\mob\living\simple_animal\friendly\butterfly.dm
+- code\modules\mob\living\simple_animal\friendly\cat.dm
+- code\modules\mob\living\simple_animal\friendly\cockroach.dm
+- code\modules\mob\living\simple_animal\friendly\crab.dm
+- code\modules\mob\living\simple_animal\friendly\dog.dm
+- code\modules\mob\living\simple_animal\friendly\drone\_drone.dm
+- code\modules\mob\living\simple_animal\friendly\drone\drones_as_items.dm
+- code\modules\mob\living\simple_animal\friendly\drone\extra_drone_types.dm
+- code\modules\mob\living\simple_animal\friendly\drone\interaction.dm
+- code\modules\mob\living\simple_animal\friendly\drone\inventory.dm
+- code\modules\mob\living\simple_animal\friendly\drone\say.dm
+- code\modules\mob\living\simple_animal\friendly\drone\verbs.dm
+- code\modules\mob\living\simple_animal\friendly\drone\visuals_icons.dm
+- code\modules\mob\living\simple_animal\friendly\farm_animals.dm
+- code\modules\mob\living\simple_animal\friendly\fox.dm
+- code\modules\mob\living\simple_animal\friendly\lizard.dm
+- code\modules\mob\living\simple_animal\friendly\mouse.dm
+- code\modules\mob\living\simple_animal\friendly\penguin.dm
+- code\modules\mob\living\simple_animal\friendly\sloth.dm
+- code\modules\mob\living\simple_animal\friendly\snake.dm
+- code\modules\mob\living\simple_animal\guardian\guardian.dm
+- code\modules\mob\living\simple_animal\guardian\guardiannaming.dm
+- code\modules\mob\living\simple_animal\guardian\types\assassin.dm
+- code\modules\mob\living\simple_animal\guardian\types\charger.dm
+- code\modules\mob\living\simple_animal\guardian\types\dextrous.dm
+- code\modules\mob\living\simple_animal\guardian\types\explosive.dm
+- code\modules\mob\living\simple_animal\guardian\types\fire.dm
+- code\modules\mob\living\simple_animal\guardian\types\gravitokinetic.dm
+- code\modules\mob\living\simple_animal\guardian\types\lightning.dm
+- code\modules\mob\living\simple_animal\guardian\types\protector.dm
+- code\modules\mob\living\simple_animal\guardian\types\ranged.dm
+- code\modules\mob\living\simple_animal\guardian\types\standard.dm
+- code\modules\mob\living\simple_animal\guardian\types\support.dm
+- code\modules\mob\living\simple_animal\hostile\alien.dm
+- code\modules\mob\living\simple_animal\hostile\bear.dm
+- code\modules\mob\living\simple_animal\hostile\bees.dm
+- code\modules\mob\living\simple_animal\hostile\bosses\boss.dm
+- code\modules\mob\living\simple_animal\hostile\bosses\paperwizard.dm
+- code\modules\mob\living\simple_animal\hostile\carp.dm
+- code\modules\mob\living\simple_animal\hostile\cat_butcher.dm
+- code\modules\mob\living\simple_animal\hostile\eyeballs.dm
+- code\modules\mob\living\simple_animal\hostile\faithless.dm
+- code\modules\mob\living\simple_animal\hostile\giant_spider.dm
+- code\modules\mob\living\simple_animal\hostile\goose.dm
+- code\modules\mob\living\simple_animal\hostile\gorilla\emotes.dm
+- code\modules\mob\living\simple_animal\hostile\gorilla\gorilla.dm
+- code\modules\mob\living\simple_animal\hostile\gorilla\visuals_icons.dm
+- code\modules\mob\living\simple_animal\hostile\headcrab.dm
+- code\modules\mob\living\simple_animal\hostile\hivebot.dm
+- code\modules\mob\living\simple_animal\hostile\jungle\_jungle_mobs.dm
+- code\modules\mob\living\simple_animal\hostile\jungle\leaper.dm
+- code\modules\mob\living\simple_animal\hostile\jungle\mega_arachnid.dm
+- code\modules\mob\living\simple_animal\hostile\jungle\mook.dm
+- code\modules\mob\living\simple_animal\hostile\jungle\seedling.dm
+- code\modules\mob\living\simple_animal\hostile\killertomato.dm
+- code\modules\mob\living\simple_animal\hostile\mecha_pilot.dm
+- code\modules\mob\living\simple_animal\hostile\megafauna\megafauna.dm
+- code\modules\mob\living\simple_animal\hostile\megafauna\swarmer.dm
+- code\modules\mob\living\simple_animal\hostile\mining_mobs\basilisk.dm
+- code\modules\mob\living\simple_animal\hostile\mining_mobs\goldgrub.dm
+- code\modules\mob\living\simple_animal\hostile\mining_mobs\goliath.dm
+- code\modules\mob\living\simple_animal\hostile\mining_mobs\gutlunch.dm
+- code\modules\mob\living\simple_animal\hostile\mining_mobs\hivelord.dm
+- code\modules\mob\living\simple_animal\hostile\mushroom.dm
+- code\modules\mob\living\simple_animal\hostile\nanotrasen.dm
+- code\modules\mob\living\simple_animal\hostile\netherworld.dm
+- code\modules\mob\living\simple_animal\hostile\pirate.dm
+- code\modules\mob\living\simple_animal\hostile\retaliate\bat.dm
+- code\modules\mob\living\simple_animal\hostile\retaliate\clown.dm
+- code\modules\mob\living\simple_animal\hostile\retaliate\frog.dm
+- code\modules\mob\living\simple_animal\hostile\retaliate\ghost.dm
+- code\modules\mob\living\simple_animal\hostile\retaliate\spaceman.dm
+- code\modules\mob\living\simple_animal\hostile\roguetown\crow.dm
+- code\modules\mob\living\simple_animal\hostile\roguetown\haunt.dm
+- code\modules\mob\living\simple_animal\hostile\roguetown\smallrat.dm
+- code\modules\mob\living\simple_animal\hostile\roguetown\werewolf\update_icons.dm
+- code\modules\mob\living\simple_animal\hostile\roguetown\werewolf\werewolf.dm
+- code\modules\mob\living\simple_animal\hostile\russian.dm
+- code\modules\mob\living\simple_animal\hostile\skeleton.dm
+- code\modules\mob\living\simple_animal\hostile\statue.dm
+- code\modules\mob\living\simple_animal\hostile\stickman.dm
+- code\modules\mob\living\simple_animal\hostile\syndicate.dm
+- code\modules\mob\living\simple_animal\hostile\tree.dm
+- code\modules\mob\living\simple_animal\hostile\venus_human_trap.dm
+- code\modules\mob\living\simple_animal\hostile\wizard.dm
+- code\modules\mob\living\simple_animal\hostile\wumborian_fugu.dm
+- code\modules\mob\living\simple_animal\parrot.dm
+- code\modules\mob\living\simple_animal\rogue\creacher\bigrat.dm
+- code\modules\mob\living\simple_animal\rogue\creacher\honeyspider.dm
+- code\modules\mob\living\simple_animal\rogue\creacher\minotaur.dm
+- code\modules\mob\living\simple_animal\rogue\creacher\mole.dm
+- code\modules\mob\living\simple_animal\rogue\creacher\volf.dm
+- code\modules\mob\living\simple_animal\rogue\farm\chicken.dm
+- code\modules\mob\living\simple_animal\rogue\farm\cow.dm
+- code\modules\mob\living\simple_animal\rogue\farm\goat.dm
+- code\modules\mob\living\simple_animal\rogue\game\saiga.dm
+- code\modules\mob\living\simple_animal\rogue\rogueanimals.dm
+- code\modules\mob\living\simple_animal\shade.dm
+- code\modules\mob\living\simple_animal\slime\death.dm
+- code\modules\mob\living\simple_animal\slime\emote.dm
+- code\modules\mob\living\simple_animal\slime\life.dm
+- code\modules\mob\living\simple_animal\slime\powers.dm
+- code\modules\mob\living\simple_animal\slime\say.dm
+- code\modules\mob\living\simple_animal\slime\slime.dm
+- code\modules\mob\living\simple_animal\slime\subtypes.dm
+- code\modules\mob\living\simple_animal\status_procs.dm
+- code\modules\mob\living\simple_animal\topic.dm
+- code\modules\mob\living\stats.dm
+- code\modules\mob\living\update_icons.dm
+- code\modules\mob\mob_movespeed.dm
+- code\modules\mob\roguetransform.dm
+- code\modules\mob\say.dm
+- code\modules\mob\typing_indicator.dm
+- code\modules\mob\update_icons.dm
+- code\modules\mob\vision_cone.dm
+- code\modules\modular_computers\computers\_modular_computer_shared.dm
+- code\modules\modular_computers\computers\item\computer_components.dm
+- code\modules\modular_computers\computers\item\computer_damage.dm
+- code\modules\modular_computers\computers\item\tablet.dm
+- code\modules\modular_computers\computers\item\tablet_presets.dm
+- code\modules\modular_computers\computers\machinery\modular_console.dm
+- code\modules\modular_computers\documentation.md
+- code\modules\modular_computers\file_system\program_events.dm
+- code\modules\modular_computers\file_system\programs\antagonist\contract_uplink.dm
+- code\modules\modular_computers\file_system\programs\configurator.dm
+- code\modules\modular_computers\file_system\programs\ntmonitor.dm
+- code\modules\modular_computers\file_system\programs\ntnrc_client.dm
+- code\modules\modular_computers\file_system\programs\nttransfer.dm
+- code\modules\modular_computers\hardware\_hardware.dm
+- code\modules\modular_computers\hardware\ai_slot.dm
+- code\modules\modular_computers\hardware\card_slot.dm
+- code\modules\modular_computers\hardware\battery_module.dm
+- code\modules\modular_computers\hardware\CPU.dm
+- code\modules\modular_computers\hardware\hard_drive.dm
+- code\modules\modular_computers\hardware\network_card.dm
+- code\modules\modular_computers\hardware\portable_disk.dm
+- code\modules\modular_computers\hardware\printer.dm
+- code\modules\modular_computers\hardware\recharger.dm
+- code\modules\modular_computers\laptop_vendor.dm
+- code\modules\modular_computers\NTNet\NTNRC\conversation.dm
+- code\modules\ninja\__ninjaDefines.dm
+- code\modules\ninja\energy_katana.dm
+- code\modules\ninja\ninja_event.dm
+- code\modules\ninja\outfit.dm
+- code\modules\ninja\suit\gloves.dm
+- code\modules\ninja\suit\head.dm
+- code\modules\ninja\suit\mask.dm
+- code\modules\ninja\suit\n_suit_verbs\energy_net_nets.dm
+- code\modules\ninja\suit\n_suit_verbs\ninja_adrenaline.dm
+- code\modules\ninja\suit\n_suit_verbs\ninja_cost_check.dm
+- code\modules\ninja\suit\n_suit_verbs\ninja_empulse.dm
+- code\modules\ninja\suit\n_suit_verbs\ninja_net.dm
+- code\modules\ninja\suit\n_suit_verbs\ninja_smoke.dm
+- code\modules\ninja\suit\n_suit_verbs\ninja_stars.dm
+- code\modules\ninja\suit\n_suit_verbs\ninja_stealth.dm
+- code\modules\ninja\suit\n_suit_verbs\ninja_sword_recall.dm
+- code\modules\ninja\suit\ninjaDrainAct.dm
+- code\modules\ninja\suit\shoes.dm
+- code\modules\ninja\suit\suit.dm
+- code\modules\ninja\suit\suit_attackby.dm
+- code\modules\ninja\suit\suit_initialisation.dm
+- code\modules\ninja\suit\suit_process.dm
+- code\modules\NTNet\netdata.dm
+- code\modules\NTNet\network.dm
+- code\modules\NTNet\services\_service.dm
+- code\modules\paperwork\papers\scrap.dm
+- code\modules\paperwork\rogue.dm
+- code\modules\power\apc.dm
+- code\modules\power\generator.dm
+- code\modules\power\lanternpost.dm
+- code\modules\power\lighting.dm
+- code\modules\power\roguelighting.dm
+- code\modules\power\singularity\boh_tear.dmplasmamen.dm
+- code\modules\power\singularity\collector.dm
+- code\modules\power\singularity\generator.dm
+- code\modules\power\singularity\investigate.dm
+- code\modules\power\singularity\particle_accelerator\particle_accelerator.dm
+- code\modules\power\singularity\particle_accelerator\particle.dm
+- code\modules\power\singularity\particle_accelerator\particle_control.dm
+- code\modules\power\singularity\particle_accelerator\particle_emitter.dm
+- code\modules\power\tesla\generator.dm
+- code\modules\power\turbine.dm
+- code\modules\procedural_mapping\mapGeneratorObj.dm
+- code\modules\procedural_mapping\mapGeneratorReadme.dm
+- code\modules\projectiles\ammunition\caseless\_caseless.dm
+- code\modules\projectiles\ammunition\caseless\foam.dm
+- code\modules\projectiles\ammunition\caseless\rocket.dm
+- code\modules\projectiles\ammunition\caseless\misc.dm
+- code\modules\projectiles\boxes_magazines\internal\misc.dm
+- code\modules\projectiles\boxes_magazines\internal\pew.dm
+- code\modules\projectiles\guns\ballistic\laser_gatling.dm
+- code\modules\projectiles\guns\misc\beam_rifle.dm
+- code\modules\projectiles\guns\misc\blastcannon.dm
+- code\modules\projectiles\guns\misc\grenade_launcher.dm
+- code\modules\projectiles\guns\misc\chem_gun.dm
+- code\modules\projectiles\guns\misc\medbeam.dm
+- code\modules\projectiles\guns\misc\syringe_gun.dm
+- code\modules\projectiles\projectile\energy\misc.dm
+- code\modules\projectiles\projectile\magic\spellcard.dm
+- code\modules\projectiles\projectile\reusable\foam_dart.dm
+- code\modules\projectiles\projectile\reusable\_reusable.dm
+- code\modules\projectiles\projectile\special\hallucination.dm
+- code\modules\projectiles\projectile\special\hallucination.dmlizardpeople.dm
+- code\modules\reagents\chemistry\holder.dm
+- code\modules\reagents\chemistry\readme.md
+- code\modules\reagents\chemistry\reagents\alcohol_reagents.dm
+- code\modules\reagents\chemistry\reagents\drink_reagents.dm
+- code\modules\reagents\chemistry\reagents\roguetown.dm
+- code\modules\reagents\reagent_containers\borghydro.dm
+- code\modules\reagents\reagent_containers\bottle.dm
+- code\modules\reagents\reagent_containers\glass.dm
+- code\modules\reagents\reagent_containers\powderspice.dm
+- code\modules\reagents\roguespill.dm
+- code\modules\recycling\conveyor2.dm
+- code\modules\research\designs\autolathe_designs.dm
+- code\modules\research\designs\nanite_designs.dm
+- code\modules\research\nanites\nanite_chamber.dm
+- code\modules\research\nanites\nanite_chamber_computer.dm
+- code\modules\research\nanites\nanite_cloud_controller.dm
+- code\modules\research\nanites\nanite_hijacker.dm
+- code\modules\research\nanites\nanite_misc_items.dm
+- code\modules\research\nanites\nanite_program_hub.dm
+- code\modules\research\nanites\nanite_programmer.dm
+- code\modules\research\nanites\nanite_programs.dm
+- code\modules\research\nanites\nanite_programs\buffing.dm
+- code\modules\research\nanites\nanite_programs\healing.dm
+- code\modules\research\nanites\nanite_programs\rogue.dm
+- code\modules\research\nanites\nanite_programs\sensor.dm
+- code\modules\research\nanites\nanite_programs\suppression.dm
+- code\modules\research\nanites\nanite_programs\utility.dm
+- code\modules\research\nanites\nanite_programs\weapon.dm
+- code\modules\research\nanites\nanite_remote.dm
+- code\modules\research\nanites\program_disks.dm
+- code\modules\research\nanites\public_chamber.dm
+- code\modules\research\nanites\rules.dm
+- code\modules\research\xenobiology\crossbreeding\inventory.dm
+- code\modules\ruins\lavaland_ruin_code.dm
+- code\modules\ruins\lavalandruin_code\biodome_clown_planet.dm
+- code\modules\ruins\lavalandruin_code\elephantgraveyard.dm
+- code\modules\ruins\lavalandruin_code\pizzaparty.dm
+- code\modules\ruins\lavalandruin_code\puzzle.dm
+- code\modules\ruins\lavalandruin_code\sloth.dm
+- code\modules\ruins\lavalandruin_code\surface.dm
+- code\modules\ruins\lavalandruin_code\syndicate_base.dm
+- code\modules\ruins\objects_and_mobs\ash_walker_den.dm
+- code\modules\ruins\objects_and_mobs\necropolis_gate.dm
+- code\modules\ruins\objects_and_mobs\sin_ruins.dm
+- code\modules\ruins\spaceruin_code\asteroid4.dm
+- code\modules\ruins\spaceruin_code\bigderelict1.dm
+- code\modules\ruins\spaceruin_code\caravanambush.dm
+- code\modules\ruins\spaceruin_code\clericsden.dm
+- code\modules\ruins\spaceruin_code\cloning_lab.dm
+- code\modules\ruins\spaceruin_code\crashedclownship.dm
+- code\modules\ruins\spaceruin_code\crashedship.dm
+- code\modules\ruins\spaceruin_code\deepstorage.dm
+- code\modules\ruins\spaceruin_code\DJstation.dm
+- code\modules\ruins\spaceruin_code\hilbertshotel.dm
+- code\modules\ruins\spaceruin_code\listeningstation.dm
+- code\modules\ruins\spaceruin_code\oldstation.dm
+- code\modules\ruins\spaceruin_code\originalcontent.dm
+- code\modules\ruins\spaceruin_code\spacehotel.dm
+- code\modules\ruins\spaceruin_code\TheDerelict.dm
+- code\modules\ruins\spaceruin_code\whiteshipruin_box.dm
+- code\modules\security_levels\security_levels.dm
+- code\modules\spells\roguetown\_roguetown.dm
+- code\modules\spells\roguetown\cleric.dm
+- code\modules\spells\roguetown\jester.dm
+- code\modules\spells\roguetown\monk.dm
+- code\modules\spells\roguetown\priest.dm
+- code\modules\spells\roguetown\spider.dm
+- code\modules\spells\roguetown\wizard.dm
+- code\modules\spells\spell_types\aimed.dm
+- code\modules\spells\spell_types\area_teleport.dm
+- code\modules\spells\spell_types\barnyard.dm
+- code\modules\spells\spell_types\bloodcrawl.dm
+- code\modules\spells\spell_types\charge.dm
+- code\modules\spells\spell_types\conjure.dm
+- code\modules\spells\spell_types\construct_spells.dm
+- code\modules\spells\spell_types\devil.dm
+- code\modules\spells\spell_types\curse.dm
+- code\modules\spells\spell_types\devil_boons.dm
+- code\modules\spells\spell_types\emplosion.dm
+- code\modules\spells\spell_types\ethereal_jaunt.dm
+- code\modules\spells\spell_types\explosion.dm
+- code\modules\spells\spell_types\forcewall.dm
+- code\modules\spells\spell_types\genetic.dm
+- code\modules\spells\spell_types\godhand.dm
+- code\modules\spells\spell_types\infinite_guns.dm
+- code\modules\spells\spell_types\inflict_handler.dm
+- code\modules\spells\spell_types\knock.dm
+- code\modules\spells\spell_types\lichdom.dm
+- code\modules\spells\spell_types\lightning.dm
+- code\modules\spells\spell_types\mime.dm
+- code\modules\spells\spell_types\mind_transfer.dm
+- code\modules\spells\spell_types\personality_commune.dm
+- code\modules\spells\spell_types\projectile.dm
+- code\modules\spells\spell_types\rightandwrong.dm
+- code\modules\spells\spell_types\rod_form.dm
+- code\modules\spells\spell_types\santa.dm
+- code\modules\spells\spell_types\shadow_walk.dm
+- code\modules\spells\spell_types\shapeshift.dm
+- code\modules\spells\spell_types\soultap.dm
+- code\modules\spells\spell_types\summonitem.dm
+- code\modules\spells\spell_types\spacetime_distortion.dm
+- code\modules\spells\spell_types\telepathy.dm
+- code\modules\spells\spell_types\the_traps.dm
+- code\modules\spells\spell_types\touch_attacks.dm
+- code\modules\spells\spell_types\turf_teleport.dm
+- code\modules\spells\spell_types\trigger.dm
+- code\modules\spells\spell_types\voice_of_god.dm
+- code\modules\spells\spell_types\wizard.dm
+- code\modules\station_goals\shield.dm
+- code\modules\surgery\advanced\bioware\bioware.dm
+- code\modules\surgery\advanced\revival.dm
+- code\modules\surgery\bodyparts\bodyparts.dm
+- code\modules\surgery\organs\appendix.dm
+- code\modules\surgery\organs\augments_arms.dm
+- code\modules\surgery\organs\augments_chest.dm
+- code\modules\surgery\organs\augments_eyes.dm
+- code\modules\surgery\organs\augments_internal.dm
+- code\modules\surgery\organs\ears.dm
+- code\modules\surgery\organs\eyes.dm
+- code\modules\surgery\organs\heart.dm
+- code\modules\surgery\organs\liver.dm
+- code\modules\surgery\organs\lungs.dm
+- code\modules\surgery\organs\organ_internal.dm
+- code\modules\surgery\organs\tails.dm
+- code\modules\surgery\organs\stomach.dm
+- code\modules\surgery\organs\tongue.dm
+- code\modules\surgery\organs\vocal_cords.dm
+- code\modules\surgery\remove_embedded_object.dm
+- code\modules\tgui\subsystem.dm
+- code\modules\underworld\demon.dm
+- code\modules\underworld\underworld.dm
+- code\rt.dm
+- code\testing.dm
+- code\unit_tests.dm
+- config\antag_rep.txt
+- config\arenas\README.md
+- config\crownwearers.txt
+- config\external_rsc_urls.txt
+- config\in_character_filter.txt
+- config\jobs.txt
+- config\mapsrw.txt
+- config\roguetown\bans\blacklist.txt
+- config\roguetown\bans\nameban.txt
+- config\roguetown\bans\old\nameban.txt
+- config\roguetown\bans\old\OLDBLACKLIST.txt
+- config\roguetown\bans\old\psychokiller.txt
+- config\roguetown\bans\psychokiller.txt
+- config\roguetown\bypassage.txt
+- config\roguetown\donatorclasses.json
+- config\roguetown\patreon\p1.txt
+- config\roguetown\patreon\p2.txt
+- config\roguetown\patreon\p3.txt
+- config\roguetown\patreon\p4.txt
+- config\roguetown\patreon\p5.txt
+- config\roguetown\wl_mat.txt
+- config\roguetown\wl_test.txt
+- goon\icons\obj\fitness.dmi
+- goon\icons\obj\goon_terminals.dmi
+- goon\icons\obj\kitchen.dmi
+- goon\icons\obj\hydroponics.dmi
+- goon\LICENSE.md
+- goon\icons\obj\power.dmi
+- goon\README.md
+- goon\sound\effects\spring.ogg
+- goon\sound\machinery\FireAlarm.ogg
+- html\88x31.png
+- html\archivedchangelog.html
+- html\ban.png
+- html\book.png
+- html\browser\book.css
+- html\browser\scannernew.css
+- html\browser\techwebs.css
+- html\bug-minus.png
+- html\burn-exclamation.png
+- html\changelog.css
+- html\changelog.html
+- html\changelogs\.all_changelog.yml
+- html\changelogs\AutoChangeLog-pr-47735.yml
+- html\changelogs\AutoChangeLog-pr-47748.yml
+- html\changelogs\AutoChangeLog-pr-47790.yml
+- html\changelogs\AutoChangeLog-pr-47823.yml
+- html\changelogs\AutoChangeLog-pr-47820.yml
+- html\chevron-expand.png
+- html\chevron.png
+- html\chrome-wrench.png
+- html\coding.png
+- html\cross-circle.png
+- html\dna_discovered.gif
+- html\dna_extra.gif
+- html\dna_undiscovered.gif
+- html\font-awesome\webfonts\fa-regular-400.eot
+- html\font-awesome\webfonts\fa-regular-400.woff
+- html\font-awesome\webfonts\fa-solid-900.eot
+- html\font-awesome\webfonts\fa-solid-900.woff
+- html\hard-hat-exclamation.png
+- html\high_button.png
+- html\image-minus.png
+- html\image-plus.png
+- html\IRV\jquery-ui.custom-core-widgit-mouse-sortable-min.js
+- html\mapbase1024.png
+- html\medium_button.png
+- html\minor_button.png
+- html\music-minus.png
+- html\music-plus.png
+- html\padlock.png
+- html\none_button.png
+- html\paigrid.png
+- html\panels.css
+- html\scales.png
+- html\search.js
+- html\spell-check.png
+- html\templates\footer.html
+- html\templates\header.html
+- html\wrench-screwdriver.png
+- html\tick-circle.png
+- icons\480x480.dmi
+- icons\ass\assalien.png
+- icons\ass\assdrone.png
+- icons\ass\assfemale.png
+- icons\ass\assmale.png
+- icons\badass.dmi
+- icons\blackblock.dmi
+- icons\blank_title.png
+- icons\default_title.dmi
+- icons\dispensebutton_bg.png
+- icons\effects\119x268.dmi
+- icons\effects\128x128.dmi
+- icons\effects\166x195.dmi
+- icons\effects\237x321.dmi
+- icons\effects\274x385.dmi
+- icons\effects\32x64.dmi
+- icons\effects\400x400.dmi
+- icons\effects\512x512.dmi
+- icons\effects\bloodbig.dmi
+- icons\effects\chemsmoke.dmi
+- icons\effects\clockwork_effects.dmi
+- icons\effects\compromise_target.dmi
+- icons\effects\cult_effects.dmi
+- icons\effects\cult_target.dmi
+- icons\effects\genetics.dmi
+- icons\effects\lighting.dmi
+- icons\effects\liquid.dmi
+- icons\effects\mousemice\human.dmi
+- icons\effects\mousemice\human_attack.dmi
+- icons\effects\mousemice\human_give.dmi
+- icons\effects\mousemice\human_jump.dmi
+- icons\effects\mousemice\human_kick.dmi
+- icons\effects\mousemice\human_looking.dmi
+- icons\effects\mousemice\swang\0.dmi
+- icons\effects\mousemice\swang\10.dmi
+- icons\effects\mousemice\swang\100.dmi
+- icons\effects\mousemice\swang\15.dmi
+- icons\effects\mousemice\swang\20.dmi
+- icons\effects\mousemice\swang\25.dmi
+- icons\effects\mousemice\swang\30.dmi
+- icons\effects\mousemice\swang\35.dmi
+- icons\effects\mousemice\swang\40.dmi
+- icons\effects\mousemice\swang\45.dmi
+- icons\effects\mousemice\swang\5.dmi
+- icons\effects\mousemice\swang\50.dmi
+- icons\effects\mousemice\swang\55.dmi
+- icons\effects\mousemice\swang\60.dmi
+- icons\effects\mousemice\swang\65.dmi
+- icons\effects\mousemice\swang\70.dmi
+- icons\effects\mousemice\swang\75.dmi
+- icons\effects\mousemice\swang\80.dmi
+- icons\effects\mousemice\swang\85.dmi
+- icons\effects\mousemice\swang\90.dmi
+- icons\effects\mousemice\swang\95.dmi
+- icons\effects\mousemice\swang\acharged.dmi
+- icons\effects\mousemice\swang\acharging.dmi
+- icons\effects\overload_machine_target.dmi
+- icons\effects\override_machine_target.dmi
+- icons\effects\progessbar.dmi
+- icons\effects\ss13_dark_alpha6.dmi
+- icons\effects\spacevines.dmi
+- icons\effects\ss13_dark_alpha7.dmi
+- icons\effects\ss13_dark_alpha7_DEBUG.dmi
+- icons\effects\ss13_dark_alpha7_old.dmi
+- icons\effects\static.dmi
+- icons\effects\supplypod_down_target.dmi
+- icons\effects\supplypod_target.dmi
+- icons\effects\throw_target.dmi
+- icons\effects\trail.dmi
+- icons\effects\vanguard_target.dmi
+- icons\effects\visor_reticule.dmi
+- icons\effects\volt_target.dmi
+- icons\effects\wrap_target.dmi
+- icons\emoji.dmi
+- icons\eyeanim.dmi
+- icons\Font_Minimal.dmi
+- icons\foolishdefault_title.dmi
+- icons\fullblack.dmi
+- icons\gameover.dmi
+- icons\grain.dmi
+- icons\grainsmall.dmi
+- icons\mecha\durand_shield.dmi
+- icons\mecha\mech_bay.dmi
+- icons\mecha\mech_construct.dmi
+- icons\mecha\mech_construction.dmi
+- icons\mecha\mech_fab.dmi
+- icons\mecha\mecha.dmi
+- icons\mecha\mecha_ammo.dmi
+- icons\mecha\mecha_equipment.dmi
+- icons\mecha\mecha_mouse-disable.dmi
+- icons\mecha\mecha_mouse.dmi
+- icons\member_content.dmi
+- icons\minimap.dmi
+- icons\misc\achievements.dmi
+- icons\misc\imap.dmi
+- icons\misc\inpipe.dmi
+- icons\misc\largeui.dmi
+- icons\misc\mark.dmi
+- icons\misc\radar.dmi
+- icons\misc\static.dmi
+- icons\mob\actions.dmi
+- icons\mob\32x64.dmi
+- icons\mob\actions\actions_clockcult.dmi
+- icons\mob\actions\actions_flightsuit.dmi
+- icons\mob\actions\actions_vr.dmi
+- icons\mob\actions\roguespells.dmi
+- icons\mob\advsetup.dmi
+- icons\mob\ai.dmi
+- icons\mob\aibots.dmi
+- icons\mob\alien.dmi
+- icons\mob\alienleap.dmi
+- icons\mob\alienqueen.dmi
+- icons\mob\animal.dmi
+- icons\mob\animal_parts.dmi
+- icons\mob\bees.dmi
+- icons\mob\blob.dmi
+- icons\mob\broadMobs.dmi
+- icons\mob\cameramob.dmi
+- icons\mob\carp.dmi
+- icons\mob\clockwork_mobs.dmi
+- icons\mob\clothing\head.dmi
+- icons\mob\clothing\suit.dmi
+- icons\mob\clothing\under\shorts_pants.dmi
+- icons\mob\clothing\under\trackpants.dmi
+- icons\mob\clothing\wings.dmi
+- icons\mob\clown_mobs.dmi
+- icons\mob\corgi_back.dmi
+- icons\mob\corgi_head.dmi
+- icons\mob\drone.dmi
+- icons\mob\dam_mob.dmi
+- icons\mob\easter.dmi
+- icons\mob\evilpope.dmi
+- icons\mob\facialhair_extensions.dmi
+- icons\mob\ghostspin.dmi
+- icons\mob\gondolas.dmi
+- icons\mob\gorilla.dmi
+- icons\mob\guardian.dmi
+- icons\mob\hair_extensions.dmi
+- icons\mob\hivebot.dmi
+- icons\mob\hud.dmi
+- icons\mob\human.dmi
+- icons\mob\human_face.dmi
+- icons\mob\human_parts.dmi
+- icons\mob\human_parts_greyscale.dmi
+- icons\mob\inhands\balloons_lefthand.dmi
+- icons\mob\inhands\balloons_righthand.dmi
+- icons\mob\inhands\clothing_lefthand.dmi
+- icons\mob\inhands\clothing_righthand.dmi
+- icons\mob\inhands\misc\bedsheet_lefthand.dmi
+- icons\mob\inhands\misc\bedsheet_righthand.dmi
+- icons\mob\inhands\misc\books_lefthand.dmi
+- icons\mob\inhands\misc\books_righthand.dmi
+- icons\mob\inhands\misc\chairs_lefthand.dmi
+- icons\mob\inhands\misc\chairs_righthand.dmi
+- icons\mob\inhands\misc\devices_lefthand.dmi
+- icons\mob\inhands\misc\devices_righthand.dmi
+- icons\mob\inhands\misc\food_lefthand.dmi
+- icons\mob\inhands\misc\food_righthand.dmi
+- icons\mob\inhands\misc\lavaland_lefthand.dmi
+- icons\mob\inhands\misc\lavaland_righthand.dmi
+- icons\mob\inhands\misc\megaphone_lefthand.dmi
+- icons\mob\inhands\misc\megaphone_righthand.dmi
+- icons\mob\inhands\misc\sheets_lefthand.dmi
+- icons\mob\inhands\misc\sheets_righthand.dmi
+- icons\mob\inhands\misc\tiles_lefthand.dmi
+- icons\mob\inhands\misc\tiles_righthand.dmi
+- icons\mob\inhands\misc\touchspell_lefthand.dmi
+- icons\mob\inhands\misc\touchspell_righthand.dmi
+- icons\mob\inhands\weapons\rogue_righthand.dmi
+- icons\mob\inhands\weapons\rogue_lefthand.dmi
+- icons\mob\inhands\weapons\roguebig_lefthand.dmi
+- icons\mob\inhands\weapons\roguebig_righthand.dmi
+- icons\mob\jungle\arachnid.dmi
+- icons\mob\jungle\leaper.dmi
+- icons\mob\jungle\mook.dmi
+- icons\mob\jungle\seedling.dmi
+- icons\mob\lavaland\64x64megafauna.dmi
+- icons\mob\lavaland\96x96megafauna.dmi
+- icons\mob\lavaland\hierophant.dmi
+- icons\mob\lavaland\hierophant_new.dmi
+- icons\mob\lavaland\lavaland_elites.dmi
+- icons\mob\lavaland\lavaland_monsters.dmi
+- icons\mob\lavaland\watcher.dmi
+- icons\mob\limb_mask.dmi
+- icons\mob\mob.dmi
+- icons\mob\monkey.dmi
+- icons\mob\monkey_held.dmi
+- icons\mob\moth_wings.dmi
+- icons\mob\moth_markings.dmi
+- icons\mob\mouse_held.dmi
+- icons\mob\mutant_bodyparts.dmi
+- icons\mob\nest.dmi
+- icons\mob\onfire.dmi
+- icons\mob\pai.dmi
+- icons\mob\pai_item_head.dmi
+- icons\mob\pai_item_lh.dmi
+- icons\mob\pai_item_rh.dmi
+- icons\mob\penguins.dmi
+- icons\mob\radial.dmi
+- icons\mob\robot_items.dmi
+- icons\mob\robots.dmi
+- icons\mob\rogueheat.dmi
+- icons\mob\roguehud.dmi
+- icons\mob\roguehud64.dmi
+- icons\mob\roguehudback2.dmi
+- icons\mob\roguehudbackghost.dmi
+- icons\mob\roguehudgrabs.dmi
+- icons\mob\rogueintentbase.dmi
+- icons\mob\screen_ai.dmi
+- icons\mob\screen_alert.dmi
+- icons\mob\screen_alien.dmi
+- icons\mob\screen_clockwork.dmi
+- icons\mob\screen_construct.dmi
+- icons\mob\screen_cyborg.dmi
+- icons\mob\screen_elite.dmi
+- icons\mob\screen_full.dmi
+- icons\mob\screen_fullwide.dmi
+- icons\mob\screen_gen.dmi
+- icons\mob\screen_gen_old.dmi
+- icons\mob\screen_ghost.dmi
+- icons\mob\screen_midnight.dmi
+- icons\mob\screen_operative.dmi
+- icons\mob\screen_pai.dmi
+- icons\mob\screen_plasmafire.dmi
+- icons\mob\screen_retro.dmi
+- icons\mob\screen_slime.dmi
+- icons\mob\screen_slimecore.dmi
+- icons\mob\simple_human.dmi
+- icons\mob\slimes.dmi
+- icons\mob\spacedragon.dmi
+- icons\mob\talk.dmi
+- icons\mob\swarmer.dmi
+- icons\mob\vision_cone.dmi
+- icons\mob\z.dmi
+- icons\mob\zone_sel.dmi
+- icons\mouseover.dmi
+- icons\obj\2x2.dmi
+- icons\obj\3x3.dmi
+- icons\obj\abductor.dmi
+- icons\obj\airlock_machines.dmi
+- icons\obj\ammo.dmi
+- icons\obj\artstuff.dmi
+- icons\obj\assemblies.dmi
+- icons\obj\assemblies\electronic_components.dmi
+- icons\obj\assemblies\electronic_misc.dmi
+- icons\obj\assemblies\electronic_setups.dmi
+- icons\obj\assemblies\electronic_tools.dmi
+- icons\obj\assemblies\new_assemblies.dmi
+- icons\obj\atmos.dmi
+- icons\obj\atmospherics\components\binary_devices.dmi
+- icons\obj\atmospherics\components\miners.dmi
+- icons\obj\atmospherics\components\thermomachine.dmi
+- icons\obj\atmospherics\components\trinary_devices.dmi
+- icons\obj\atmospherics\components\unary_devices.dmi
+- icons\obj\atmospherics\pipes\disposal.dmi
+- icons\obj\atmospherics\pipes\he-junction.dmi
+- icons\obj\atmospherics\pipes\he-manifold.dmi
+- icons\obj\atmospherics\pipes\he-simple.dmi
+- icons\obj\atmospherics\pipes\manifold.dmi
+- icons\obj\atmospherics\pipes\meter.dmi
+- icons\obj\atmospherics\pipes\pipe_item.dmi
+- icons\obj\atmospherics\pipes\pressure_tank.dmi
+- icons\obj\atmospherics\pipes\simple.dmi
+- icons\obj\atmospherics\pipes\transit_tube.dmi
+- icons\obj\balloons.dmi
+- icons\obj\barsigns.dmi
+- icons\obj\basketball.dmi
+- icons\obj\bike.dmi
+- icons\obj\bloodpack.dmi
+- icons\obj\bodybag.dmi
+- icons\obj\brokentiling.dmi
+- icons\obj\bureaucracy.dmi
+- icons\obj\bus.dmi
+- icons\obj\car.dmi
+- icons\obj\cardboard_cutout.dmi
+- icons\obj\changeling_items.dmi
+- icons\obj\chempuff.dmi
+- icons\obj\chemical.dmi
+- icons\obj\christmas.dmi
+- icons\obj\chromosomes.dmi
+- icons\obj\clockwork_objects.dmi
+- icons\obj\closet.dmi
+- icons\obj\clothing\clockwork_garb.dmi
+- icons\obj\clothing\flightsuit.dmi
+- icons\obj\clothing\hats.dmi
+- icons\obj\clothing\suits.dmi
+- icons\obj\clothing\under\shorts_pants.dmi
+- icons\obj\clothing\under\swimsuit.dmi
+- icons\obj\computer.dmi
+- icons\obj\contraband.dmi
+- icons\obj\contractor_tablet.dmi
+- icons\obj\crates.dmi
+- icons\obj\crayons.dmi
+- icons\obj\cryo_mobs.dmi
+- icons\obj\cryogenics.dmi
+- icons\obj\cult.dmi
+- icons\obj\cult_large.dmi
+- icons\obj\decals.dmi
+- icons\obj\device.dmi
+- icons\obj\defib.dmi
+- icons\obj\dice.dmi
+- icons\obj\doors\1x2blast_hor.dmi
+- icons\obj\doors\1x2blast_vert.dmi
+- icons\obj\doors\1x4blast_hor.dmi
+- icons\obj\doors\1x4blast_vert.dmi
+- icons\obj\doors\airlocks\glass_large\overlays.dmi
+- icons\obj\doors\airlocks\glass_large\glass_large.dmi
+- icons\obj\doors\airlocks\station2\glass.dmi
+- icons\obj\doors\airlocks\station2\overlays.dmi
+- icons\obj\doors\door2x1glassfull.dmi
+- icons\obj\doors\door_assembly.dmi
+- icons\obj\doors\doorf.dmi
+- icons\obj\doors\doorhazard.dmi
+- icons\obj\drinks.dmi
+- icons\obj\fireplace.dmi
+- icons\obj\flamethrower.dmi
+- icons\obj\flora\_flora.dmi
+- icons\obj\flora\ausflora.dmi
+- icons\obj\flora\deadtrees.dmi
+- icons\obj\flora\jungleflora.dmi
+- icons\obj\flora\jungletrees.dmi
+- icons\obj\flora\jungletreesmall.dmi
+- icons\obj\flora\largejungleflora.dmi
+- icons\obj\flora\pinetrees.dmi
+- icons\obj\flora\plants.dmi
+- icons\obj\flora\rocks.dmi
+- icons\obj\flora\rogueflora.dmi
+- icons\obj\flora\snowflora.dmi
+- icons\obj\fluff.dmi
+- icons\obj\food\pizzaspaghetti.dmi
+- icons\obj\food\snowcones.dmi
+- icons\obj\fulton_balloon.dmi
+- icons\obj\grenade.dmi
+- icons\obj\guns\bayonets.dmi
+- icons\obj\guns\energy.dmi
+- icons\obj\guns\magic.dmi
+- icons\obj\guns\minigun.dmi
+- icons\obj\guns\flashlights.dmi
+- icons\obj\guns\projectile.dmi
+- icons\obj\guns\toy.dmi
+- icons\obj\hand_of_god_structures.dmi
+- icons\obj\halloween_items.dmi
+- icons\obj\holiday_misc.dmi
+- icons\obj\hourglass.dmi
+- icons\obj\hydroponics\equipment.dmi
+- icons\obj\hydroponics\growing.dmi
+- icons\obj\hydroponics\growing_flowers.dmi
+- icons\obj\hydroponics\growing_fruits.dmi
+- icons\obj\hydroponics\growing_mushrooms.dmi
+- icons\obj\hydroponics\growing_vegetables.dmi
+- icons\obj\hydroponics\harvest.dmi
+- icons\obj\hydroponics\seeds.dmi
+- icons\obj\implants.dmi
+- icons\obj\improvised.dmi
+- icons\obj\items_and_weapons.dmi
+- icons\obj\iv_drip.dmi
+- icons\obj\janitor.dmi
+- icons\obj\kitchen.dmi
+- icons\obj\lavaland\artefacts.dmi
+- icons\obj\lavaland\ash_flora.dmi
+- icons\obj\lavaland\cannon.dmi
+- icons\obj\lavaland\dead_ratvar.dmi
+- icons\obj\lavaland\donkvendor.dmi
+- icons\obj\lavaland\dragonboat.dmi
+- icons\obj\lavaland\elite_trophies.dmi
+- icons\obj\lavaland\legionnaire_bonfire.dmi
+- icons\obj\lavaland\orbital_cannon.dmi
+- icons\obj\lavaland\pod_computer.dmi
+- icons\obj\lavaland\spawners.dmi
+- icons\obj\lavaland\survival_pod.dmi
+- icons\obj\lavaland\terrain.dmi
+- icons\obj\lavaland\tumor.dmi
+- icons\obj\library.dmi
+- icons\obj\lollipop.dmi
+- icons\obj\machines\droneDispenser.dmi
+- icons\obj\machines\fiber.dmi
+- icons\obj\machines\heavy_lathe.dmi
+- icons\obj\machines\heavy_fiber.dmi
+- icons\obj\machines\implantchair.dmi
+- icons\obj\machines\lasers.dmi
+- icons\obj\machines\nanite_chamber.dmi
+- icons\obj\machines\selfdestruct.dmi
+- icons\obj\magic.dmi
+- icons\obj\magic_terror.dmi
+- icons\obj\modular_console.dmi
+- icons\obj\modular_tablet.dmi
+- icons\obj\module.dmi
+- icons\obj\money_machine.dmi
+- icons\obj\money_machine_64.dmi
+- icons\obj\monitors.dmi
+- icons\obj\musician.dmi
+- icons\obj\mysterybox.dmi
+- icons\obj\narsie.dmi
+- icons\obj\narsie_spawn_anim.dmi
+- icons\obj\nuke_tools.dmi
+- icons\obj\objects.dmi
+- icons\obj\playing_cards.dmi
+- icons\obj\plumbing\fluid_ducts.dmi
+- icons\obj\plumbing\plumbers.dmi
+- icons\obj\plushes.dmi
+- icons\obj\pneumaticCannon.dmi
+- icons\obj\power.dmi
+- icons\obj\power_cond\cable.dmi
+- icons\obj\power_cond\layer_cable.dmi
+- icons\obj\power_cond\pipe_cleaner.dmi
+- icons\obj\power_cond\power_cond_heavy.dmi
+- icons\obj\power_cond\power_local.dmi
+- icons\obj\projectiles.dmi
+- icons\obj\projectiles_impact.dmi
+- icons\obj\projectiles_muzzle.dmi
+- icons\obj\projectiles_tracer.dmi
+- icons\obj\puzzle.dmi
+- icons\obj\radio.dmi
+- icons\obj\railing.dmi
+- icons\obj\reagentfillings.dmi
+- icons\obj\recycling.dmi
+- icons\obj\robotics.dmi
+- icons\obj\rollerbed.dmi
+- icons\obj\rune.dmi
+- icons\obj\shards.dmi
+- icons\obj\shields.dmi
+- icons\obj\singularity.dmi
+- icons\obj\slimecrossing.dmi
+- icons\obj\smooth_structures\catwalk_clockwork.dmi
+- icons\obj\smooth_structures\catwalk_clockwork_large.dmi
+- icons\obj\smooth_structures\lattice_clockwork.dmi
+- icons\obj\smooth_structures\lattice_clockwork_large.dmi
+- icons\obj\smooth_structures\swarmer_catwalk.dmi
+- icons\obj\sofa.dmi
+- icons\obj\stationobjs.dmi
+- icons\obj\statue.dmi
+- icons\obj\statuelarge.dmi
+- icons\obj\status_display.dmi
+- icons\obj\stock_parts.dmi
+- icons\obj\storage.dmi
+- icons\obj\supermatter.dmi
+- icons\obj\surgery.dmi
+- icons\obj\syringe.dmi
+- icons\obj\tank.dmi
+- icons\obj\terminals.dmi
+- icons\obj\telescience.dmi
+- icons\obj\tesla_engine\energy_ball.dmi
+- icons\obj\tesla_engine\tesla_coil.dmi
+- icons\obj\tesla_engine\tesla_generator.dmi
+- icons\obj\tgui_components.dmi
+- icons\obj\tomb.dmi
+- icons\obj\toy.dmi
+- icons\obj\transforming_energy.dmi
+- icons\obj\turrets.dmi
+- icons\obj\vending.dmi
+- icons\obj\votebox.dmi
+- icons\obj\wallframe.dmi
+- icons\obj\wizard.dmi
+- icons\old_title.dmi
+- icons\PSD files\asteroiddustoverlay.psd
+- icons\PSD files\door.psd
+- icons\PSD files\large-stamps.psd
+- icons\PSD files\locker_template.psd
+- icons\PSD files\window_spawners.psd
+- icons\reagentname_bg.png
+- icons\roguetown\clothing\armor.dmi
+- icons\roguetown\clothing\belts.dmi
+- icons\roguetown\clothing\cloaks.dmi
+- icons\roguetown\clothing\feet.dmi
+- icons\roguetown\clothing\gloves.dmi
+- icons\roguetown\clothing\head.dmi
+- icons\roguetown\clothing\masks.dmi
+- icons\roguetown\clothing\mouth.dmi
+- icons\roguetown\clothing\neck.dmi
+- icons\roguetown\clothing\onmob\64x64\head.dmi
+- icons\roguetown\clothing\onmob\armor.dmi
+- icons\roguetown\clothing\onmob\back_l.dmi
+- icons\roguetown\clothing\onmob\back_r.dmi
+- icons\roguetown\clothing\onmob\belt_l.dmi
+- icons\roguetown\clothing\onmob\belt_r.dmi
+- icons\roguetown\clothing\onmob\belts.dmi
+- icons\roguetown\clothing\onmob\cloaks.dmi
+- icons\roguetown\clothing\onmob\detailed\tabards.dmi
+- icons\roguetown\clothing\onmob\feet.dmi
+- icons\roguetown\clothing\onmob\gloves.dmi
+- icons\roguetown\clothing\onmob\head.dmi
+- icons\roguetown\clothing\onmob\head_items.dmi
+- icons\roguetown\clothing\onmob\helpers\dismemberment.dmi
+- icons\roguetown\clothing\onmob\helpers\sleeves_armor.dmi
+- icons\roguetown\clothing\onmob\helpers\sleeves_cloaks.dmi
+- icons\roguetown\clothing\onmob\helpers\sleeves_pants.dmi
+- icons\roguetown\clothing\onmob\helpers\sleeves_shirts.dmi
+- icons\roguetown\clothing\onmob\masks.dmi
+- icons\roguetown\clothing\onmob\mouth_items.dmi
+- icons\roguetown\clothing\onmob\neck.dmi
+- icons\roguetown\clothing\onmob\pants.dmi
+- icons\roguetown\clothing\onmob\rings.dmi
+- icons\roguetown\clothing\onmob\shirts.dmi
+- icons\roguetown\clothing\onmob\wrists.dmi
+- icons\roguetown\clothing\pants.dmi
+- icons\roguetown\clothing\rings.dmi
+- icons\roguetown\clothing\shirts.dmi
+- icons\roguetown\clothing\special\blkknight.dmi
+- icons\roguetown\clothing\special\crusader.dmi
+- icons\roguetown\clothing\special\onmob\blkknight.dmi
+- icons\roguetown\clothing\special\onmob\crusader.dmi
+- icons\roguetown\clothing\storage.dmi
+- icons\roguetown\clothing\wrists.dmi
+- icons\roguetown\helpers\inhand.dmi
+- icons\roguetown\helpers\inhand_64.dmi
+- icons\roguetown\hud\read.dmi
+- icons\roguetown\items\books.dmi
+- icons\roguetown\items\chairs.dmi
+- icons\roguetown\items\cooking.dmi
+- icons\roguetown\items\food.dmi
+- icons\roguetown\items\gems.dmi
+- icons\roguetown\items\keys.dmi
+- icons\roguetown\items\lighting.dmi
+- icons\roguetown\items\misc.dmi
+- icons\roguetown\items\music.dmi
+- icons\roguetown\items\natural.dmi
+- icons\roguetown\items\ore.dmi
+- icons\roguetown\items\produce.dmi
+- icons\roguetown\items\valuable.dmi
+- icons\roguetown\misc\256.dmi
+- icons\roguetown\misc\64x64.dmi
+- icons\roguetown\misc\96x96.dmi
+- icons\roguetown\misc\ay.dmi
+- icons\roguetown\misc\bookshelf.dmi
+- icons\roguetown\misc\crops.dmi
+- icons\roguetown\misc\decoration.dmi
+- icons\roguetown\misc\doors.dmi
+- icons\roguetown\misc\fireplace64.dmi
+- icons\roguetown\misc\fish.dmi
+- icons\roguetown\misc\foliage.dmi
+- icons\roguetown\misc\foliagetall.dmi
+- icons\roguetown\misc\forge.dmi
+- icons\roguetown\misc\gate.dmi
+- icons\roguetown\misc\hell.dmi
+- icons\roguetown\misc\lighting.dmi
+- icons\roguetown\misc\machines.dmi
+- icons\roguetown\misc\particles.dmi
+- icons\roguetown\misc\portal.dmi
+- icons\roguetown\misc\signs.dmi
+- icons\roguetown\misc\structure.dmi
+- icons\roguetown\misc\tables.dmi
+- icons\roguetown\misc\tallandwide.dmi
+- icons\roguetown\misc\tallstructure.dmi
+- icons\roguetown\misc\tallwide.dmi
+- icons\roguetown\misc\tree.dmi
+- icons\roguetown\mob\accessories.dmi
+- icons\roguetown\mob\bodies\attachments.dmi
+- icons\roguetown\mob\bodies\cuffed.dmi
+- icons\roguetown\mob\bodies\dam\dam_female.dmi
+- icons\roguetown\mob\bodies\dam\dam_male.dmi
+- icons\roguetown\mob\bodies\f\fd.dmi
+- icons\roguetown\mob\bodies\f\fm.dmi
+- icons\roguetown\mob\bodies\f\fs.dmi
+- icons\roguetown\mob\bodies\f\ft.dmi
+- icons\roguetown\mob\bodies\m\md.dmi
+- icons\roguetown\mob\bodies\m\mem.dmi
+- icons\roguetown\mob\bodies\m\met.dmi
+- icons\roguetown\mob\bodies\m\mm.dmi
+- icons\roguetown\mob\bodies\m\mo.dmi
+- icons\roguetown\mob\bodies\m\ms.dmi
+- icons\roguetown\mob\bodies\m\mt.dmi
+- icons\roguetown\mob\coldbreath.dmi
+- icons\roguetown\mob\detail.dmi
+- icons\roguetown\mob\drunk.dmi
+- icons\roguetown\mob\facial.dmi
+- icons\roguetown\mob\facialhair_extensions.dmi
+- icons\roguetown\mob\hair.dmi
+- icons\roguetown\mob\hair_extensions.dmi
+- icons\roguetown\mob\lemure.dmi
+- icons\roguetown\mob\misc.dmi
+- icons\roguetown\mob\monster\bigrat.dmi
+- icons\roguetown\mob\monster\cow.dmi
+- icons\roguetown\mob\monster\crow.dmi
+- icons\roguetown\mob\monster\goblins.dmi
+- icons\roguetown\mob\monster\gote.dmi
+- icons\roguetown\mob\monster\hellkeeper.dmi
+- icons\roguetown\mob\monster\hog.dmi
+- icons\roguetown\mob\monster\maneater.dmi
+- icons\roguetown\mob\monster\minotaur.dmi
+- icons\roguetown\mob\monster\mole.dmi
+- icons\roguetown\mob\monster\rat.dmi
+- icons\roguetown\mob\monster\saiga.dmi
+- icons\roguetown\mob\monster\spider.dmi
+- icons\roguetown\mob\monster\Trolls.dmi
+- icons\roguetown\mob\monster\vol.dmi
+- icons\roguetown\mob\monster\werewolf.dmi
+- icons\roguetown\mob\monster\wraith.dmi
+- icons\roguetown\mob\rotten.dmi
+- icons\roguetown\mob\skeleton_female.dmi
+- icons\roguetown\mob\skeleton_male.dmi
+- icons\roguetown\mob\smell.dmi
+- icons\roguetown\oldstuff\clothes.dmi
+- icons\roguetown\topadd\anaedum\MAIDEN.dmi
+- icons\roguetown\topadd\apek\asterix_and_obelix.dmi
+- icons\roguetown\topadd\apek\BILLING.txt
+- icons\roguetown\topadd\apek\glowjade.dmi
+- icons\roguetown\topadd\apek\noble.dmi
+- icons\roguetown\topadd\armol\slime.dmi
+- icons\roguetown\topadd\cre\enigma_acolytes.dmi
+- icons\roguetown\topadd\cre\enigma_astrata.dmi
+- icons\roguetown\topadd\cre\enigma_church1.dmi
+- icons\roguetown\topadd\cre\enigma_church2.dmi
+- icons\roguetown\topadd\cre\enigma_church3.dmi
+- icons\roguetown\topadd\cre\enigma_matstacks1.dmi
+- icons\roguetown\topadd\cre\enigma_misc1.dmi
+- icons\roguetown\topadd\cre\enigma_misc2.dmi
+- icons\roguetown\topadd\cre\enigma_misc3.dmi
+- icons\roguetown\topadd\cre\enigma_misc4.dmi
+- icons\roguetown\topadd\cre\enigma_necklaces.dmi
+- icons\roguetown\topadd\cre\enigma_organs.dmi
+- icons\roguetown\topadd\Cult.dmi
+- icons\roguetown\topadd\death\vamp-lord.dmi
+- icons\roguetown\topadd\hog.dmi
+- icons\roguetown\topadd\Ifromspace#0001\komar.dmi
+- icons\roguetown\topadd\Ifromspace#0001\raki.dmi
+- icons\roguetown\topadd\jel.dmi
+- icons\roguetown\topadd\johnie\amulets backpacks.dmi
+- icons\roguetown\topadd\johnie\decor.dmi
+- icons\roguetown\topadd\johnie\fancy armor.dmi
+- icons\roguetown\topadd\johnie\grate.dmi
+- icons\roguetown\topadd\johnie\noldor.dmi
+- icons\roguetown\topadd\metalrust.dmi
+- icons\roguetown\topadd\Polyushko#0323\giftsforthatsever.dmi
+- icons\roguetown\topadd\Polyushko#0323\weapons.dmi
+- icons\roguetown\topadd\Polyushko#0323\weapons.dmi.tmp
+- icons\roguetown\topadd\rat_decayed.dmi
+- icons\roguetown\topadd\ratso.dmi
+- icons\roguetown\topadd\sprits\ag.png
+- icons\roguetown\topadd\sprits\armor_stand.png
+- icons\roguetown\topadd\sprits\bark.png
+- icons\roguetown\topadd\sprits\cw (1).png
+- icons\roguetown\topadd\sprits\cw (10).png
+- icons\roguetown\topadd\sprits\cw (11).png
+- icons\roguetown\topadd\sprits\cw (12).png
+- icons\roguetown\topadd\sprits\cw (13).png
+- icons\roguetown\topadd\sprits\cw (2).png
+- icons\roguetown\topadd\sprits\cw (3).png
+- icons\roguetown\topadd\sprits\cw (4).png
+- icons\roguetown\topadd\sprits\cw (5).png
+- icons\roguetown\topadd\sprits\cw (6).png
+- icons\roguetown\topadd\sprits\cw (7).png
+- icons\roguetown\topadd\sprits\cw (8).png
+- icons\roguetown\topadd\sprits\cw (9).png
+- icons\roguetown\topadd\sprits\farmland.png
+- icons\roguetown\topadd\sprits\farmland_moist.png
+- icons\roguetown\topadd\sprits\feather.png
+- icons\roguetown\topadd\sprits\leather.png
+- icons\roguetown\topadd\sprits\lectern_base.png
+- icons\roguetown\topadd\sprits\lectern_sides.png
+- icons\roguetown\topadd\sprits\mossy_cobblestone.png
+- icons\roguetown\topadd\sprits\mossy_stone_bricks.png
+- icons\roguetown\topadd\sprits\petrified_oak.png
+- icons\roguetown\topadd\sprits\pumpkin_seeds.png
+- icons\roguetown\topadd\sprits\rail.png
+- icons\roguetown\topadd\sprits\rail_corner.png
+- icons\roguetown\topadd\sprits\t.png
+- icons\roguetown\topadd\sprits\tree.png
+- icons\roguetown\topadd\sprits\wheat_stage0.png
+- icons\roguetown\topadd\sprits\wheat_stage1.png
+- icons\roguetown\topadd\sprits\wheat_stage2.png
+- icons\roguetown\topadd\sprits\wheat_stage3.png
+- icons\roguetown\topadd\sprits\wheat_stage4.png
+- icons\roguetown\topadd\sprits\wheat_stage5.png
+- icons\roguetown\topadd\sprits\wheat_stage6.png
+- icons\roguetown\topadd\sprits\wheat_stage7.png
+- icons\roguetown\topadd\statue1.dmi
+- icons\roguetown\topadd\takyon\Bat.dmi
+- icons\roguetown\topadd\takyon\Cat.dmi
+- icons\roguetown\topadd\takyon\Crow.dmi
+- icons\roguetown\topadd\takyon\herbs.dmi
+- icons\roguetown\topadd\takyon\Honeyspider.dmi
+- icons\roguetown\topadd\takyon\merchant_update.dmi
+- icons\roguetown\topadd\takyon\mimic.ogg
+- icons\roguetown\topadd\takyon\Mimics.dmi
+- icons\roguetown\topadd\takyon\Portal_Gate.dmi
+- icons\roguetown\topadd\takyon\Purple_Robe.dmi
+- icons\roguetown\topadd\takyon\Racial_Armour.dmi
+- icons\roguetown\topadd\takyon\Rope_and_Chain.dmi
+- icons\roguetown\topadd\takyon\shaidal(1).dmi
+- icons\roguetown\topadd\takyon\Teeth.dmi
+- icons\roguetown\topadd\tril\bongofgreed.png
+- icons\roguetown\topadd\tril\bronzethrowingknife.png
+- icons\roguetown\topadd\tril\churchwindowsF.dmi
+- icons\roguetown\topadd\tril\daggers.png
+- icons\roguetown\topadd\tril\doors.dmi
+- icons\roguetown\topadd\tril\fancytableF.dmi
+- icons\roguetown\topadd\tril\floors.dmi
+- icons\roguetown\topadd\tril\forbiddengroundFE.dmi
+- icons\roguetown\topadd\tril\roguewall.dmi
+- icons\roguetown\topadd\tril\shortsword.png
+- icons\roguetown\topadd\tril\silverkey.png
+- icons\roguetown\topadd\tril\smoothchurchFE.dmi
+- icons\roguetown\topadd\tril\sneedbong.png
+- icons\roguetown\topadd\tril\tree.dmi
+- icons\roguetown\topadd\tril\tree2.dmi
+- icons\roguetown\topadd\tril\unknown.png
+- icons\roguetown\topadd\tril\WakizashiTweakFINAL.dmi
+- icons\roguetown\topadd\tril\woodwallF(1).dmi
+- icons\roguetown\topadd\tril\wrought_gateTweakFINAL.dmi
+- icons\roguetown\topadd\vent.dmi
+- icons\roguetown\topadd\yeg.dmi
+- icons\roguetown\topadd\yegr.dmi
+- icons\roguetown\underworld\carriageman.dmi
+- icons\roguetown\underworld\enigma_carriage.dmi
+- icons\roguetown\underworld\enigma_carriageman.dmi
+- icons\roguetown\underworld\enigma_dragger.dmi
+- icons\roguetown\underworld\enigma_husks.dmi
+- icons\roguetown\underworld\underworld.dmi
+- icons\roguetown\weapons\32.dmi
+- icons\roguetown\weapons\64.dmi
+- icons\roguetown\weapons\ammo.dmi
+- icons\roguetown\weapons\shield_heraldry.dmi
+- icons\roguetown\weapons\special\sorthief.dmi
+- icons\roguetown\weapons\tools.dmi
+- icons\roguetown\weapons\wood_heraldry.dmi
+- icons\rogueworld_title.dmi
+- icons\ss13_32.png
+- icons\ss13_64.png
+- icons\Testing\air_meter.dmi
+- icons\Testing\atmos_testing.dmi
+- icons\tg_32.png
+- icons\time.dmi
+- icons\turf\areas.dmi
+- icons\turf\cobble.dmi
+- icons\turf\floors\bear.dmi
+- icons\turf\floors\darkdirt.dmi
+- icons\turf\floors\dirt.dmi
+- icons\turf\floors\inn.dmi
+- icons\turf\floors\smoothtile.dmi
+- icons\turf\floors\wood.dmi
+- icons\turf\floors\wood_turned.dmi
+- icons\turf\grass.dmi
+- icons\turf\greenstone.dmi
+- icons\turf\mob_overlay.dmi
+- icons\turf\newwater.dmi
+- icons\turf\pipewall.dmi
+- icons\turf\roguefloor.dmi
+- icons\turf\roguewall.dmi
+- icons\turf\walls\craftstone.dmi
+- icons\turf\walls\cwall.dmi
+- icons\turf\walls\hardrock.dmi
+- icons\turf\walls\mossy_stone.dmi
+- icons\turf\walls\roguepipe.dmi
+- icons\turf\walls\roguewood.dmi
+- icons\turf\walls\stone_wall.dmi
+- icons\turf\walls\stonebrick.dmi
+- icons\UI_Icons\Achievements\default.png
+- icons\UI_Icons\Pills\pill1.png
+- icons\UI_Icons\Pills\pill10.png
+- icons\UI_Icons\Pills\pill11.png
+- icons\UI_Icons\Pills\pill12.png
+- icons\UI_Icons\Pills\pill13.png
+- icons\UI_Icons\Pills\pill14.png
+- icons\UI_Icons\Pills\pill15.png
+- icons\UI_Icons\Pills\pill16.png
+- icons\UI_Icons\Pills\pill17.png
+- icons\UI_Icons\Pills\pill18.png
+- icons\UI_Icons\Pills\pill19.png
+- icons\UI_Icons\Pills\pill2.png
+- icons\UI_Icons\Pills\pill20.png
+- icons\UI_Icons\Pills\pill21.png
+- icons\UI_Icons\Pills\pill22.png
+- icons\UI_Icons\Pills\pill3.png
+- icons\UI_Icons\Pills\pill4.png
+- icons\UI_Icons\Pills\pill5.png
+- icons\UI_Icons\Pills\pill6.png
+- icons\UI_Icons\Pills\pill7.png
+- icons\UI_Icons\Pills\pill8.png
+- icons\UI_Icons\Pills\pill9.png
+- icons\UI_Icons\Roulette\0.png
+- icons\UI_Icons\Roulette\1-18.png
+- icons\UI_Icons\Roulette\19-36.png
+- icons\UI_Icons\Roulette\black.png
+- icons\UI_Icons\Roulette\even.png
+- icons\UI_Icons\Roulette\nano.png
+- icons\UI_Icons\Roulette\odd.png
+- icons\UI_Icons\Roulette\red.png
+- icons\vending_icons\vendingslot_bg.png
+- icons\VendingMachineBG.png
+- interface\fonts\blackmoor.ttf
+- interface\fonts\book1.ttf
+- interface\fonts\book2.ttf
+- interface\fonts\book3.ttf
+- interface\fonts\book4.ttf
+- interface\fonts\chiseld.ttf
+- interface\fonts\handwrite.ttf
+- interface\fonts\languages\cat.ttf
+- interface\fonts\languages\dwarf.ttf
+- interface\fonts\languages\elf.ttf
+- interface\fonts\languages\fae.ttf
+- interface\fonts\languages\hell.ttf
+- interface\fonts\languages\orc.ttf
+- interface\fonts\languages\sand.ttf
+- interface\fonts\languages\undead.ttf
+- interface\fonts\pterra.ttf
+- libmariadb.dll
+- librust_g.so
+- roguetown.dme
+- sound\adminhelp.ogg
+- sound\ambience\amb winter2.ogg
+- sound\ambience\amb winter3.ogg
+- sound\ambience\arcadia.ogg
+- sound\ambience\basement.ogg
+- sound\ambience\boat (1).ogg
+- sound\ambience\boat (2).ogg
+- sound\ambience\bogday (1).ogg
+- sound\ambience\bogday (2).ogg
+- sound\ambience\bogday (3).ogg
+- sound\ambience\bognight.ogg
+- sound\ambience\cave.ogg
+- sound\ambience\cavelava (1).ogg
+- sound\ambience\cavelava (2).ogg
+- sound\ambience\cavelava (3).ogg
+- sound\ambience\cavewater (1).ogg
+- sound\ambience\cavewater (2).ogg
+- sound\ambience\cavewater (3).ogg
+- sound\ambience\creepywind.ogg
+- sound\ambience\desertday.ogg
+- sound\ambience\desertnight.ogg
+- sound\ambience\dungeon (1).ogg
+- sound\ambience\dungeon (3).ogg
+- sound\ambience\dungeon (2).ogg
+- sound\ambience\forestday.ogg
+- sound\ambience\forestnight.ogg
+- sound\ambience\indoorgen.ogg
+- sound\ambience\hell1.ogg
+- sound\ambience\jungleday.ogg
+- sound\ambience\junglenight.ogg
+- sound\ambience\lake (1).ogg
+- sound\ambience\lake (2).ogg
+- sound\ambience\lake (3).ogg
+- sound\ambience\MOUNTAIN (2).ogg
+- sound\ambience\MOUNTAIN (1).ogg
+- sound\ambience\noises\birds (1).ogg
+- sound\ambience\noises\birds (2).ogg
+- sound\ambience\noises\birds (3).ogg
+- sound\ambience\noises\birds (5).ogg
+- sound\ambience\noises\birds (4).ogg
+- sound\ambience\noises\birds (6).ogg
+- sound\ambience\noises\birds (7).ogg
+- sound\ambience\noises\cave (1).ogg
+- sound\ambience\noises\cave (2).ogg
+- sound\ambience\noises\cave (3).ogg
+- sound\ambience\noises\dungeon (1).ogg
+- sound\ambience\noises\dungeon (2).ogg
+- sound\ambience\noises\dungeon (3).ogg
+- sound\ambience\noises\dungeon (4).ogg
+- sound\ambience\noises\dungeon (5).ogg
+- sound\ambience\noises\frog (2).ogg
+- sound\ambience\noises\frog (1).ogg
+- sound\ambience\noises\genspooky (1).ogg
+- sound\ambience\noises\genspooky (3).ogg
+- sound\ambience\noises\genspooky (2).ogg
+- sound\ambience\noises\genspooky (4).ogg
+- sound\ambience\noises\genspooky (5).ogg
+- sound\ambience\noises\mystical (2).ogg
+- sound\ambience\noises\mystical (3).ogg
+- sound\ambience\noises\mystical (1).ogg
+- sound\ambience\noises\mystical (5).ogg
+- sound\ambience\noises\mystical (4).ogg
+- sound\ambience\noises\mystical (6).ogg
+- sound\ambience\noises\owl.ogg
+- sound\ambience\noises\RAT1.ogg
+- sound\ambience\noises\RAT2.ogg
+- sound\ambience\noises\thunin (1).ogg
+- sound\ambience\noises\thunin (2).ogg
+- sound\ambience\noises\thunin (3).ogg
+- sound\ambience\noises\thunin (4).ogg
+- sound\ambience\noises\thunout (1).ogg
+- sound\ambience\noises\thunout (2).ogg
+- sound\ambience\noises\thunout (3).ogg
+- sound\ambience\noises\thunout (4).ogg
+- sound\ambience\noises\werewolf_howl1_01.ogg
+- sound\ambience\noises\werewolf_howl2_01.ogg
+- sound\ambience\noises\werewolf_howl3_01.ogg
+- sound\ambience\noises\werewolf_howl4_01.ogg
+- sound\ambience\noises\werewolf_howl_04.ogg
+- sound\ambience\noises\wolf (1).ogg
+- sound\ambience\noises\wolf (2).ogg
+- sound\ambience\noises\wolf (3).ogg
+- sound\ambience\rainin.ogg
+- sound\ambience\rainout.ogg
+- sound\ambience\rainsewer.ogg
+- sound\ambience\riverday (1).ogg
+- sound\ambience\riverday (2).ogg
+- sound\ambience\riverday (3).ogg
+- sound\ambience\rivernight (1).ogg
+- sound\ambience\rivernight (2).ogg
+- sound\ambience\rivernight (3).ogg
+- sound\ambience\sewer.ogg
+- sound\ambience\tomb.ogg
+- sound\ambience\townday.ogg
+- sound\ambience\townnight (1).ogg
+- sound\ambience\townnight (3).ogg
+- sound\ambience\townnight (2).ogg
+- sound\blank.ogg
+- sound\combat\caught.ogg
+- sound\combat\cleave.ogg
+- sound\combat\crit.ogg
+- sound\combat\crit2.ogg
+- sound\combat\dismemberment\dismem (1).ogg
+- sound\combat\dismemberment\dismem (2).ogg
+- sound\combat\dismemberment\dismem (3).ogg
+- sound\combat\dismemberment\dismem (5).ogg
+- sound\combat\dismemberment\dismem (6).ogg
+- sound\combat\dodge.ogg
+- sound\combat\feint.ogg
+- sound\combat\fracture\fracturedry (1).ogg
+- sound\combat\fracture\fracturedry (2).ogg
+- sound\combat\fracture\fracturedry (3).ogg
+- sound\combat\fracture\fracturewet (1).ogg
+- sound\combat\fracture\fracturewet (2).ogg
+- sound\combat\fracture\fracturewet (3).ogg
+- sound\combat\fracture\headcrush (1).ogg
+- sound\combat\fracture\headcrush (2).ogg
+- sound\combat\fracture\headcrush (3).ogg
+- sound\combat\fracture\headcrush (4).ogg
+- sound\combat\gib (1).ogg
+- sound\combat\gib (2).ogg
+- sound\combat\hits\armor\chain_blunt (1).ogg
+- sound\combat\hits\armor\chain_blunt (2).ogg
+- sound\combat\hits\armor\chain_blunt (3).ogg
+- sound\combat\hits\armor\chain_slashed (1).ogg
+- sound\combat\hits\armor\chain_slashed (2).ogg
+- sound\combat\hits\armor\chain_slashed (3).ogg
+- sound\combat\hits\armor\chain_slashed (4).ogg
+- sound\combat\hits\armor\light_blunt (1).ogg
+- sound\combat\hits\armor\light_blunt (2).ogg
+- sound\combat\hits\armor\light_blunt (3).ogg
+- sound\combat\hits\armor\light_stabbed (1).ogg
+- sound\combat\hits\armor\light_stabbed (2).ogg
+- sound\combat\hits\armor\light_stabbed (3).ogg
+- sound\combat\hits\armor\plate_blunt (1).ogg
+- sound\combat\hits\armor\plate_blunt (2).ogg
+- sound\combat\hits\armor\plate_blunt (3).ogg
+- sound\combat\hits\armor\plate_slashed (1).ogg
+- sound\combat\hits\armor\plate_slashed (2).ogg
+- sound\combat\hits\armor\plate_slashed (3).ogg
+- sound\combat\hits\armor\plate_slashed (4).ogg
+- sound\combat\hits\armor\plate_stabbed (1).ogg
+- sound\combat\hits\armor\plate_stabbed (2).ogg
+- sound\combat\hits\armor\plate_stabbed (3).ogg
+- sound\combat\hits\belt.ogg
+- sound\combat\hits\bladed\genchop (1).ogg
+- sound\combat\hits\bladed\genchop (2).ogg
+- sound\combat\hits\bladed\genchop (3).ogg
+- sound\combat\hits\bladed\genslash (1).ogg
+- sound\combat\hits\bladed\genslash (2).ogg
+- sound\combat\hits\bladed\genslash (3).ogg
+- sound\combat\hits\bladed\genstab (1).ogg
+- sound\combat\hits\bladed\genstab (2).ogg
+- sound\combat\hits\bladed\genstab (3).ogg
+- sound\combat\hits\bladed\genthrust (1).ogg
+- sound\combat\hits\bladed\genthrust (2).ogg
+- sound\combat\hits\bladed\largeslash (1).ogg
+- sound\combat\hits\bladed\largeslash (2).ogg
+- sound\combat\hits\bladed\largeslash (3).ogg
+- sound\combat\hits\bladed\smallslash (1).ogg
+- sound\combat\hits\bladed\smallslash (2).ogg
+- sound\combat\hits\bladed\smallslash (3).ogg
+- sound\combat\hits\blunt\bluntsmall (1).ogg
+- sound\combat\hits\blunt\bluntsmall (2).ogg
+- sound\combat\hits\blunt\flailhit.ogg
+- sound\combat\hits\blunt\genblunt (1).ogg
+- sound\combat\hits\blunt\genblunt (2).ogg
+- sound\combat\hits\blunt\genblunt (3).ogg
+- sound\combat\hits\blunt\metalblunt (1).ogg
+- sound\combat\hits\blunt\metalblunt (2).ogg
+- sound\combat\hits\blunt\metalblunt (3).ogg
+- sound\combat\hits\blunt\shovel_hit.ogg
+- sound\combat\hits\blunt\shovel_hit2.ogg
+- sound\combat\hits\blunt\shovel_hit3.ogg
+- sound\combat\hits\blunt\woodblunt (1).ogg
+- sound\combat\hits\blunt\woodblunt (2).ogg
+- sound\combat\hits\burn (1).ogg
+- sound\combat\hits\burn (2).ogg
+- sound\combat\hits\hi_arrow.ogg
+- sound\combat\hits\hi_arrow2.ogg
+- sound\combat\hits\hi_arrow3.ogg
+- sound\combat\hits\hi_bolt (1).ogg
+- sound\combat\hits\hi_bolt (2).ogg
+- sound\combat\hits\hi_bolt (3).ogg
+- sound\combat\hits\kick\kick.ogg
+- sound\combat\hits\kick\stomp.ogg
+- sound\combat\hits\nodmg (1).ogg
+- sound\combat\hits\nodmg (2).ogg
+- sound\combat\hits\onglass\glassbreak (1).ogg
+- sound\combat\hits\onglass\glassbreak (2).ogg
+- sound\combat\hits\onglass\glassbreak (3).ogg
+- sound\combat\hits\onglass\glasshit.ogg
+- sound\combat\hits\onmetal\attackpipewall (1).ogg
+- sound\combat\hits\onmetal\attackpipewall (2).ogg
+- sound\combat\hits\onmetal\grille (1).ogg
+- sound\combat\hits\onmetal\grille (2).ogg
+- sound\combat\hits\onmetal\grille (3).ogg
+- sound\combat\hits\onmetal\metalimpact (1).ogg
+- sound\combat\hits\onmetal\metalimpact (2).ogg
+- sound\combat\hits\onmetal\sheet (1).ogg
+- sound\combat\hits\onmetal\sheet (2).ogg
+- sound\combat\hits\onrock\onrock (1).ogg
+- sound\combat\hits\onrock\onrock (2).ogg
+- sound\combat\hits\onrock\onrock (3).ogg
+- sound\combat\hits\onrock\onrock (4).ogg
+- sound\combat\hits\onstone\stonedeath.ogg
+- sound\combat\hits\onstone\wallhit.ogg
+- sound\combat\hits\onstone\wallhit2.ogg
+- sound\combat\hits\onstone\wallhit3.ogg
+- sound\combat\hits\onvine\vinehit.ogg
+- sound\combat\hits\onwood\destroyfurniture.ogg
+- sound\combat\hits\onwood\destroywalldoor.ogg
+- sound\combat\hits\onwood\education1.ogg
+- sound\combat\hits\onwood\education2.ogg
+- sound\combat\hits\onwood\education3.ogg
+- sound\combat\hits\onwood\fence_hit1.ogg
+- sound\combat\hits\onwood\fence_hit2.ogg
+- sound\combat\hits\onwood\fence_hit3.ogg
+- sound\combat\hits\onwood\woodimpact (1).ogg
+- sound\combat\hits\onwood\woodimpact (2).ogg
+- sound\combat\hits\pick\genpick (1).ogg
+- sound\combat\hits\pick\genpick (2).ogg
+- sound\combat\hits\punch\p1 (1).ogg
+- sound\combat\hits\punch\p1 (2).ogg
+- sound\combat\hits\punch\p1 (3).ogg
+- sound\combat\hits\punch\punch (1).ogg
+- sound\combat\hits\punch\punch (2).ogg
+- sound\combat\hits\punch\punch (3).ogg
+- sound\combat\hits\punch\punch_hard (1).ogg
+- sound\combat\hits\punch\punch_hard (2).ogg
+- sound\combat\hits\punch\punch_hard (3).ogg
+- sound\combat\hits\smashlimb (1).ogg
+- sound\combat\hits\smashlimb (2).ogg
+- sound\combat\hits\smashlimb (3).ogg
+- sound\combat\hits\whip.ogg
+- sound\combat\hits\whipgrab.ogg
+- sound\combat\newstuck.ogg
+- sound\combat\parry\bladed\bladedlarge (1).ogg
+- sound\combat\parry\bladed\bladedlarge (2).ogg
+- sound\combat\parry\bladed\bladedlarge (3).ogg
+- sound\combat\parry\bladed\bladedmedium (1).ogg
+- sound\combat\parry\bladed\bladedmedium (2).ogg
+- sound\combat\parry\bladed\bladedmedium (3).ogg
+- sound\combat\parry\bladed\bladedsmall (1).ogg
+- sound\combat\parry\bladed\bladedsmall (2).ogg
+- sound\combat\parry\bladed\bladedsmall (3).ogg
+- sound\combat\parry\bladed\bladedthin (1).ogg
+- sound\combat\parry\bladed\bladedthin (2).ogg
+- sound\combat\parry\bladed\bladedthin (3).ogg
+- sound\combat\parry\parrygen.ogg
+- sound\combat\parry\pugilism\unarmparry (1).ogg
+- sound\combat\parry\pugilism\unarmparry (2).ogg
+- sound\combat\parry\pugilism\unarmparry (3).ogg
+- sound\combat\parry\shield\metalshield (1).ogg
+- sound\combat\parry\shield\metalshield (2).ogg
+- sound\combat\parry\shield\metalshield (3).ogg
+- sound\combat\parry\shield\towershield (1).ogg
+- sound\combat\parry\shield\towershield (2).ogg
+- sound\combat\parry\shield\towershield (3).ogg
+- sound\combat\parry\wood\parrywood (1).ogg
+- sound\combat\parry\wood\parrywood (2).ogg
+- sound\combat\parry\wood\parrywood (3).ogg
+- sound\combat\Ranged\bow-draw-01.ogg
+- sound\combat\Ranged\bow-draw-04.ogg
+- sound\combat\Ranged\crossbow-small-shot-01.ogg
+- sound\combat\Ranged\crossbow-small-shot-02.ogg
+- sound\combat\Ranged\crossbow-small-shot-04.ogg
+- sound\combat\Ranged\crossbow_big_shot.ogg
+- sound\combat\Ranged\crossbow_medium_reload-01.ogg
+- sound\combat\Ranged\crossbow_medium_reload-02.ogg
+- sound\combat\Ranged\crossbow_medium_reload-03.ogg
+- sound\combat\Ranged\firebow-shot-01.ogg
+- sound\combat\Ranged\firebow-shot-02.ogg
+- sound\combat\Ranged\firebow-shot-03.ogg
+- sound\combat\Ranged\flatbow-shot-01.ogg
+- sound\combat\Ranged\flatbow-shot-02.ogg
+- sound\combat\Ranged\flatbow-shot-03.ogg
+- sound\combat\riposte.ogg
+- sound\combat\shieldraise.ogg
+- sound\combat\shove.ogg
+- sound\combat\tf2crit.ogg
+- sound\combat\vite.ogg
+- sound\combat\weaponr1.ogg
+- sound\combat\weaponr2.ogg
+- sound\combat\wooshes\bladed\wooshhuge (1).ogg
+- sound\combat\wooshes\bladed\wooshhuge (2).ogg
+- sound\combat\wooshes\bladed\wooshhuge (3).ogg
+- sound\combat\wooshes\bladed\wooshlarge (1).ogg
+- sound\combat\wooshes\bladed\wooshlarge (2).ogg
+- sound\combat\wooshes\bladed\wooshlarge (3).ogg
+- sound\combat\wooshes\bladed\wooshmed (1).ogg
+- sound\combat\wooshes\bladed\wooshmed (2).ogg
+- sound\combat\wooshes\bladed\wooshmed (3).ogg
+- sound\combat\wooshes\bladed\wooshsmall (1).ogg
+- sound\combat\wooshes\bladed\wooshsmall (2).ogg
+- sound\combat\wooshes\bladed\wooshsmall (3).ogg
+- sound\combat\wooshes\blunt\shovel_swing.ogg
+- sound\combat\wooshes\blunt\shovel_swing2.ogg
+- sound\combat\wooshes\blunt\wooshhuge (1).ogg
+- sound\combat\wooshes\blunt\wooshhuge (2).ogg
+- sound\combat\wooshes\blunt\wooshhuge (3).ogg
+- sound\combat\wooshes\blunt\wooshlarge (1).ogg
+- sound\combat\wooshes\blunt\wooshlarge (2).ogg
+- sound\combat\wooshes\blunt\wooshlarge (3).ogg
+- sound\combat\wooshes\blunt\wooshmed (1).ogg
+- sound\combat\wooshes\blunt\wooshmed (2).ogg
+- sound\combat\wooshes\blunt\wooshmed (3).ogg
+- sound\combat\wooshes\flail_swing.ogg
+- sound\combat\wooshes\punch\punchwoosh (1).ogg
+- sound\combat\wooshes\punch\punchwoosh (2).ogg
+- sound\combat\wooshes\punch\punchwoosh (3).ogg
+- sound\foley\bandage.ogg
+- sound\foley\bodyfall (1).ogg
+- sound\foley\bodyfall (2).ogg
+- sound\foley\bodyfall (3).ogg
+- sound\foley\bodyfall (4).ogg
+- sound\foley\breaksound.ogg
+- sound\foley\bubb (1).ogg
+- sound\foley\bubb (2).ogg
+- sound\foley\bubb (3).ogg
+- sound\foley\bubb (4).ogg
+- sound\foley\bubb (5).ogg
+- sound\foley\Building-01.ogg
+- sound\foley\butcher.ogg
+- sound\foley\cartadd.ogg
+- sound\foley\cartdump.ogg
+- sound\foley\chairfall.ogg
+- sound\foley\climb.ogg
+- sound\foley\cloth_rip.ogg
+- sound\foley\cloth_wipe (1).ogg
+- sound\foley\cloth_wipe (2).ogg
+- sound\foley\cloth_wipe (3).ogg
+- sound\foley\coinphy (1).ogg
+- sound\foley\coinphy (2).ogg
+- sound\foley\coins1.ogg
+- sound\foley\Door_Iron_Small_Close_Wav.ogg
+- sound\foley\Door_Iron_Small_Open_Wav.ogg
+- sound\foley\doors\creak.ogg
+- sound\foley\doors\ironclose.ogg
+- sound\foley\doors\ironopen.ogg
+- sound\foley\doors\knocking.ogg
+- sound\foley\doors\lock.ogg
+- sound\foley\doors\lockmetal.ogg
+- sound\foley\doors\lockrattle.ogg
+- sound\foley\doors\lockrattlemetal.ogg
+- sound\foley\doors\shittyclose.ogg
+- sound\foley\doors\shittyopen.ogg
+- sound\foley\doors\shut.ogg
+- sound\foley\doors\unlock.ogg
+- sound\foley\doors\windowdown.ogg
+- sound\foley\doors\windowup.ogg
+- sound\foley\doors\woodlock.ogg
+- sound\foley\drawwater.ogg
+- sound\foley\dropsound\armor_drop.ogg
+- sound\foley\dropsound\book_drop.ogg
+- sound\foley\dropsound\chain_drop.ogg
+- sound\foley\dropsound\cloth_drop.ogg
+- sound\foley\dropsound\device_drop.ogg
+- sound\foley\dropsound\food_drop.ogg
+- sound\foley\dropsound\gen_drop.ogg
+- sound\foley\dropsound\glass_drop.ogg
+- sound\foley\dropsound\metalshield_drop.ogg
+- sound\foley\dropsound\paper_drop.ogg
+- sound\foley\dropsound\shovel_drop.ogg
+- sound\foley\dropsound\wooden_drop.ogg
+- sound\foley\equip\cloak (1).ogg
+- sound\foley\equip\cloak (2).ogg
+- sound\foley\equip\cloak (3).ogg
+- sound\foley\equip\equip_armor.ogg
+- sound\foley\equip\equip_armor.wav
+- sound\foley\equip\equip_armor_chain.ogg
+- sound\foley\equip\equip_armor_chain.wav
+- sound\foley\equip\equip_armor_plate.ogg
+- sound\foley\equip\equip_armor_plate.wav
+- sound\foley\equip\rummaging-01.ogg
+- sound\foley\equip\rummaging-02.ogg
+- sound\foley\equip\rummaging-03.ogg
+- sound\foley\equip\swordlarge1.ogg
+- sound\foley\equip\swordlarge2.ogg
+- sound\foley\equip\swordsmall1.ogg
+- sound\foley\equip\swordsmall2.ogg
+- sound\foley\flesh_rem.ogg
+- sound\foley\flesh_rem2.ogg
+- sound\foley\footsteps\armor\chain (1).ogg
+- sound\foley\footsteps\armor\chain (2).ogg
+- sound\foley\footsteps\armor\chain (3).ogg
+- sound\foley\footsteps\armor\coatplates (1).ogg
+- sound\foley\footsteps\armor\coatplates (2).ogg
+- sound\foley\footsteps\armor\coatplates (3).ogg
+- sound\foley\footsteps\armor\fullplate (1).ogg
+- sound\foley\footsteps\armor\fullplate (2).ogg
+- sound\foley\footsteps\armor\fullplate (3).ogg
+- sound\foley\footsteps\armor\plate (1).ogg
+- sound\foley\footsteps\armor\plate (2).ogg
+- sound\foley\footsteps\armor\plate (3).ogg
+- sound\foley\footsteps\bigwalk (1).ogg
+- sound\foley\footsteps\bigwalk (2).ogg
+- sound\foley\footsteps\bigwalk (3).ogg
+- sound\foley\footsteps\bigwalk (4).ogg
+- sound\foley\footsteps\FT_FUNG1.ogg
+- sound\foley\footsteps\FT_FUNG2.ogg
+- sound\foley\footsteps\FT_FUNG3.ogg
+- sound\foley\footsteps\FT_FUNG4.ogg
+- sound\foley\footsteps\FTCAR_A1.ogg
+- sound\foley\footsteps\FTCAR_A2.ogg
+- sound\foley\footsteps\FTCAR_A3.ogg
+- sound\foley\footsteps\FTCAR_A4.ogg
+- sound\foley\footsteps\FTDIR_A1.ogg
+- sound\foley\footsteps\FTDIR_A2.ogg
+- sound\foley\footsteps\FTDIR_A3.ogg
+- sound\foley\footsteps\FTDIR_A4.ogg
+- sound\foley\footsteps\FTGRA_A1.ogg
+- sound\foley\footsteps\FTGRA_A2.ogg
+- sound\foley\footsteps\FTGRA_A3.ogg
+- sound\foley\footsteps\FTGRA_A4.ogg
+- sound\foley\footsteps\FTMET_A1.ogg
+- sound\foley\footsteps\FTMET_A2.ogg
+- sound\foley\footsteps\FTMET_A3.ogg
+- sound\foley\footsteps\FTMET_A4.ogg
+- sound\foley\footsteps\FTMUD (1).ogg
+- sound\foley\footsteps\FTMUD (2).ogg
+- sound\foley\footsteps\FTMUD (3).ogg
+- sound\foley\footsteps\FTMUD (4).ogg
+- sound\foley\footsteps\FTMUD (5).ogg
+- sound\foley\footsteps\FTROC_A1.ogg
+- sound\foley\footsteps\FTROC_A2.ogg
+- sound\foley\footsteps\FTROC_A3.ogg
+- sound\foley\footsteps\FTROC_A4.ogg
+- sound\foley\footsteps\FTSHAL (1).ogg
+- sound\foley\footsteps\FTSHAL (2).ogg
+- sound\foley\footsteps\FTSHAL (3).ogg
+- sound\foley\footsteps\FTSHAL (4).ogg
+- sound\foley\footsteps\FTSHAL (5).ogg
+- sound\foley\footsteps\ftsnow1.ogg
+- sound\foley\footsteps\ftsnow2.ogg
+- sound\foley\footsteps\ftsnow3.ogg
+- sound\foley\footsteps\ftsnow4.ogg
+- sound\foley\footsteps\FTTIL_A1.ogg
+- sound\foley\footsteps\FTTIL_A2.ogg
+- sound\foley\footsteps\FTTIL_A3.ogg
+- sound\foley\footsteps\FTTIL_A4.ogg
+- sound\foley\footsteps\FTWAT_1.ogg
+- sound\foley\footsteps\FTWAT_2.ogg
+- sound\foley\footsteps\FTWAT_3.ogg
+- sound\foley\footsteps\FTWAT_4.ogg
+- sound\foley\footsteps\FTWOO_A1.ogg
+- sound\foley\footsteps\FTWOO_A2.ogg
+- sound\foley\footsteps\FTWOO_A3.ogg
+- sound\foley\footsteps\FTWOO_A4.ogg
+- sound\foley\footsteps\hardbarefoot (1).ogg
+- sound\foley\footsteps\hardbarefoot (2).ogg
+- sound\foley\footsteps\hardbarefoot (3).ogg
+- sound\foley\footsteps\hoof\horserun (1).ogg
+- sound\foley\footsteps\hoof\horserun (2).ogg
+- sound\foley\footsteps\hoof\horserun (3).ogg
+- sound\foley\footsteps\hoof\horsewalk (1).ogg
+- sound\foley\footsteps\hoof\horsewalk (2).ogg
+- sound\foley\footsteps\hoof\horsewalk (3).ogg
+- sound\foley\footsteps\softbarefoot (1).ogg
+- sound\foley\footsteps\softbarefoot (2).ogg
+- sound\foley\footsteps\softbarefoot (3).ogg
+- sound\foley\glass_step.ogg
+- sound\foley\grab.ogg
+- sound\foley\grindblade.ogg
+- sound\foley\gross.ogg
+- sound\foley\hit_rock.ogg
+- sound\foley\jumpland\carpetland.ogg
+- sound\foley\jumpland\carpetland.wav
+- sound\foley\jumpland\dirtland.ogg
+- sound\foley\jumpland\dirtland.wav
+- sound\foley\jumpland\grassland.ogg
+- sound\foley\jumpland\grassland.WAV
+- sound\foley\jumpland\metalland.ogg
+- sound\foley\jumpland\metalland.WAV
+- sound\foley\jumpland\stoneland.ogg
+- sound\foley\jumpland\stoneland.wav
+- sound\foley\jumpland\tileland.ogg
+- sound\foley\jumpland\tileland.wav
+- sound\foley\jumpland\waterland.ogg
+- sound\foley\jumpland\waterland.wav
+- sound\foley\jumpland\woodland.ogg
+- sound\foley\jumpland\woodland.wav
+- sound\foley\ladder.ogg
+- sound\foley\latch.ogg
+- sound\foley\lever.ogg
+- sound\foley\machinebreak.ogg
+- sound\foley\nockarrow.ogg
+- sound\foley\pierce.ogg
+- sound\foley\plantcross1.ogg
+- sound\foley\plantcross2.ogg
+- sound\foley\plantcross3.ogg
+- sound\foley\plantcross4.ogg
+- sound\foley\saddledismount.ogg
+- sound\foley\saddlemount.ogg
+- sound\foley\scribble.ogg
+- sound\foley\sewflesh.ogg
+- sound\foley\slap (1).ogg
+- sound\foley\slap (2).ogg
+- sound\foley\smackspecial.ogg
+- sound\foley\smash_rock.ogg
+- sound\foley\struggle.ogg
+- sound\foley\toggledown.ogg
+- sound\foley\toggleup.ogg
+- sound\foley\torchfixtureput.ogg
+- sound\foley\torchfixturetake.ogg
+- sound\foley\trap.ogg
+- sound\foley\trap_arm.ogg
+- sound\foley\water_land1.ogg
+- sound\foley\water_land2.ogg
+- sound\foley\water_land3.ogg
+- sound\foley\waterenter.ogg
+- sound\foley\watermove (1).ogg
+- sound\foley\watermove (2).ogg
+- sound\foley\waterwash (1).ogg
+- sound\foley\waterwash (2).ogg
+- sound\foley\whiz (1).ogg
+- sound\foley\whiz (2).ogg
+- sound\foley\whiz (3).ogg
+- sound\foley\whiz (4).ogg
+- sound\foley\winch.ogg
+- sound\foley\woodclimb.ogg
+- sound\foley\zfall.ogg
+- sound\haunting\haunting1.ogg
+- sound\haunting\haunting10.ogg
+- sound\haunting\haunting11.ogg
+- sound\haunting\haunting12.ogg
+- sound\haunting\haunting13.ogg
+- sound\haunting\haunting14.ogg
+- sound\haunting\haunting15.ogg
+- sound\haunting\haunting16.ogg
+- sound\haunting\haunting17.ogg
+- sound\haunting\haunting18.ogg
+- sound\haunting\haunting2.ogg
+- sound\haunting\haunting3.ogg
+- sound\haunting\haunting4.ogg
+- sound\haunting\haunting5.ogg
+- sound\haunting\haunting6.ogg
+- sound\haunting\haunting7.ogg
+- sound\haunting\haunting8.ogg
+- sound\haunting\haunting9.ogg
+- sound\health\burning.ogg
+- sound\items\beartrap.ogg
+- sound\items\book_close.ogg
+- sound\items\book_open.ogg
+- sound\items\book_page.ogg
+- sound\items\bsmith1.ogg
+- sound\items\bsmith2.ogg
+- sound\items\bsmith3.ogg
+- sound\items\bsmith4.ogg
+- sound\items\bsmithfail.ogg
+- sound\items\bucket_transfer (1).ogg
+- sound\items\bucket_transfer (2).ogg
+- sound\items\bucket_transfer (3).ogg
+- sound\items\carvgood.ogg
+- sound\items\carvhello.ogg
+- sound\items\carvhelp.ogg
+- sound\items\carvsorry.ogg
+- sound\items\carvty.ogg
+- sound\items\dig_shovel.ogg
+- sound\items\drink_bottle (1).ogg
+- sound\items\drink_bottle (2).ogg
+- sound\items\drink_cup (1).ogg
+- sound\items\drink_cup (2).ogg
+- sound\items\drink_cup (3).ogg
+- sound\items\drink_cup (4).ogg
+- sound\items\drink_cup (5).ogg
+- sound\items\drink_gen (1).ogg
+- sound\items\drink_gen (2).ogg
+- sound\items\drink_gen (3).ogg
+- sound\items\empty_shovel.ogg
+- sound\items\fillbottle.ogg
+- sound\items\fillcup.ogg
+- sound\items\firelight.ogg
+- sound\items\firesnuff.ogg
+- sound\items\Fish_out.ogg
+- sound\items\fishing_plouf.ogg
+- sound\items\flint.ogg
+- sound\items\gem.ogg
+- sound\items\gems (1).ogg
+- sound\items\gems (2).ogg
+- sound\items\match.ogg
+- sound\items\light_cig.ogg
+- sound\items\match_fail.ogg
+- sound\items\matchboxdrop.ogg
+- sound\items\quench_barrel1.ogg
+- sound\items\quench_barrel2.ogg
+- sound\items\scroll_close.ogg
+- sound\items\scroll_open.ogg
+- sound\items\seed.ogg
+- sound\items\seedextract.ogg
+- sound\items\sharpen_long1.ogg
+- sound\items\sharpen_long2.ogg
+- sound\items\sharpen_short1.ogg
+- sound\items\sharpen_short2.ogg
+- sound\items\smithdist1.ogg
+- sound\items\smithdist2.ogg
+- sound\items\smithdist3.ogg
+- sound\items\sniff.ogg
+- sound\items\stonestone.ogg
+- sound\items\stunmace_gen (1).ogg
+- sound\items\stunmace_gen (2).ogg
+- sound\items\stunmace_hit (1).ogg
+- sound\items\stunmace_hit (2).ogg
+- sound\items\stunmace_toggle (1).ogg
+- sound\items\stunmace_toggle (2).ogg
+- sound\items\stunmace_toggle (3).ogg
+- sound\items\stunstick_swing1.ogg
+- sound\items\stunstick_swing2.ogg
+- sound\items\torchloop.ogg
+- sound\items\uncork.ogg
+- sound\items\visor.ogg
+- sound\items\wood_sharpen.ogg
+- sound\items\write.ogg
+- sound\magic\ahh1.ogg
+- sound\magic\ahh2.ogg
+- sound\magic\antimagic.ogg
+- sound\magic\bless.ogg
+- sound\magic\charging.ogg
+- sound\magic\charged.ogg
+- sound\magic\chargingold.ogg
+- sound\magic\churn.ogg
+- sound\magic\comedy.ogg
+- sound\magic\dwarf_chant01.ogg
+- sound\magic\hallelujah.ogg
+- sound\magic\heal.ogg
+- sound\magic\holycharging.ogg
+- sound\magic\holyshield.ogg
+- sound\magic\inspire_02.ogg
+- sound\magic\lightning.ogg
+- sound\magic\magic_nulled.ogg
+- sound\magic\magnet.ogg
+- sound\magic\revive.ogg
+- sound\magic\timestop.ogg
+- sound\magic\tragedy.ogg
+- sound\magic\vlightning.ogg
+- sound\magic\webspin.ogg
+- sound\magic\whiteflame.ogg
+- sound\misc\alert.ogg
+- sound\misc\area.ogg
+- sound\misc\astratascream.ogg
+- sound\misc\batsound.ogg
+- sound\misc\beep.ogg
+- sound\misc\bell.ogg
+- sound\misc\bleed (1).ogg
+- sound\misc\bleed (2).ogg
+- sound\misc\bleed (3).ogg
+- sound\misc\boatbell.ogg
+- sound\misc\boatleave.ogg
+- sound\misc\boiling.ogg
+- sound\misc\Bug.ogg
+- sound\misc\carriage1.ogg
+- sound\misc\carriage2.ogg
+- sound\misc\carriage3.ogg
+- sound\misc\carriage4.ogg
+- sound\misc\cas1.ogg
+- sound\misc\cas3.ogg
+- sound\misc\cas2.ogg
+- sound\misc\chestclose.ogg
+- sound\misc\chestopen.ogg
+- sound\misc\click.ogg
+- sound\misc\clockloop.ogg
+- sound\misc\coindispense.ogg
+- sound\misc\coininsert.ogg
+- sound\misc\comboff.ogg
+- sound\misc\combon.ogg
+- sound\misc\cupboard_close.ogg
+- sound\misc\cupboard_open.ogg
+- sound\misc\deadbell.ogg
+- sound\misc\deth.ogg
+- sound\misc\disposalflush.ogg
+- sound\misc\drink_blood.ogg
+- sound\misc\dun.ogg
+- sound\misc\eat.ogg
+- sound\misc\elec (1).ogg
+- sound\misc\elec (2).ogg
+- sound\misc\elec (3).ogg
+- sound\misc\enflame.ogg
+- sound\misc\evilevent.ogg
+- sound\misc\excomm.ogg
+- sound\misc\explode\bomb.ogg
+- sound\misc\explode\bottlebomb (1).ogg
+- sound\misc\explode\bottlebomb (2).ogg
+- sound\misc\explode\explosion.ogg
+- sound\misc\explode\explosionclose (1).ogg
+- sound\misc\explode\explosionclose (2).ogg
+- sound\misc\explode\explosionclose (3).ogg
+- sound\misc\explode\explosionfar (1).ogg
+- sound\misc\explode\explosionfar (2).ogg
+- sound\misc\explode\explosionfar (3).ogg
+- sound\misc\explode\explosiongreat.ogg
+- sound\misc\explode\incendiary (1).ogg
+- sound\misc\explode\incendiary (2).ogg
+- sound\misc\explode\meteor.ogg
+- sound\misc\fail.ogg
+- sound\misc\fill.ogg
+- sound\misc\fire_place.ogg
+- sound\misc\fliesloop.ogg
+- sound\misc\frying.ogg
+- sound\misc\gate.ogg
+- sound\misc\glassknock.ogg
+- sound\misc\guillotine.ogg
+- sound\misc\hel.ogg
+- sound\misc\hello.ogg
+- sound\misc\heroin_rush.ogg
+- sound\misc\hiss.ogg
+- sound\misc\HL (1).ogg
+- sound\misc\HL (2).ogg
+- sound\misc\HL (3).ogg
+- sound\misc\HL (4).ogg
+- sound\misc\HL (5).ogg
+- sound\misc\HL (6).ogg
+- sound\misc\jack_killing_2.ogg
+- sound\misc\jmov (1).ogg
+- sound\misc\jmov (2).ogg
+- sound\misc\jumphumans (1).ogg
+- sound\misc\jumphumans (2).ogg
+- sound\misc\jumphumans (3).ogg
+- sound\misc\jumpscare (1).ogg
+- sound\misc\jumpscare (2).ogg
+- sound\misc\jumpscare (3).ogg
+- sound\misc\jumpscare (4).ogg
+- sound\misc\keyboard_enter.ogg
+- sound\misc\keyboard_select (1).ogg
+- sound\misc\keyboard_select (2).ogg
+- sound\misc\keyboard_select (3).ogg
+- sound\misc\keyboard_select (4).ogg
+- sound\misc\keyboard_type (1).ogg
+- sound\misc\keyboard_type (2).ogg
+- sound\misc\keyboard_type (3).ogg
+- sound\misc\keyboard_type (4).ogg
+- sound\misc\keyboard_type (5).ogg
+- sound\misc\kybraxor.ogg
+- sound\misc\kybraxorop.ogg
+- sound\misc\lava_death.ogg
+- sound\misc\login\jajsm.ogg
+- sound\misc\login\jajsm.wav
+- sound\misc\loops\StLight2.ogg
+- sound\misc\loops\StLight1.ogg
+- sound\misc\machinelong.ogg
+- sound\misc\loops\StLight3.ogg
+- sound\misc\machineno.ogg
+- sound\misc\machinequestion.ogg
+- sound\misc\machinetalk.ogg
+- sound\misc\machinevomit.ogg
+- sound\misc\machineyes.ogg
+- sound\misc\mail.ogg
+- sound\misc\mat\end.ogg
+- sound\misc\mat\endin.ogg
+- sound\misc\mat\fap.ogg
+- sound\misc\mat\endout.ogg
+- sound\misc\mat\girlmouth (1).ogg
+- sound\misc\mat\girlmouth (2).ogg
+- sound\misc\mat\guymouth (1).ogg
+- sound\misc\mat\guymouth (2).ogg
+- sound\misc\mat\guymouth (3).ogg
+- sound\misc\mat\guymouth (4).ogg
+- sound\misc\mat\insert (1).ogg
+- sound\misc\mat\guymouth (5).ogg
+- sound\misc\mat\insert (2).ogg
+- sound\misc\mat\mouthend (1).ogg
+- sound\misc\mat\mouthend (2).ogg
+- sound\misc\mat\segso.ogg
+- sound\misc\monster.ogg
+- sound\misc\newday.ogg
+- sound\misc\notice (2).ogg
+- sound\misc\notice.ogg
+- sound\misc\nutriment.ogg
+- sound\misc\obey.ogg
+- sound\misc\portal_enter.ogg
+- sound\misc\portal_loop.ogg
+- sound\misc\portal_op.ogg
+- sound\misc\portalactivate.ogg
+- sound\misc\portalenter.ogg
+- sound\misc\portalopen.ogg
+- sound\misc\pressurepad_down.ogg
+- sound\misc\pressurepad_up.ogg
+- sound\misc\rebel.ogg
+- sound\misc\roundstart.ogg
+- sound\misc\scom.ogg
+- sound\misc\slide_wood (1).ogg
+- sound\misc\slide_wood (2).ogg
+- sound\misc\smelter_sound.ogg
+- sound\misc\smelter_fin.ogg
+- sound\misc\sting1.ogg
+- sound\misc\sting2.ogg
+- sound\misc\sudden noise.ogg
+- sound\misc\stolen.ogg
+- sound\misc\talk.ogg
+- sound\misc\surrender.ogg
+- sound\misc\thiefobj.ogg
+- sound\misc\treefall.ogg
+- sound\misc\triumph.ogg
+- sound\misc\updatebook.ogg
+- sound\misc\vampirespell.ogg
+- sound\misc\vcraft.ogg
+- sound\misc\waterloop.ogg
+- sound\misc\wood_saw.ogg
+- sound\misc\woodhit.ogg
+- sound\misc\zizo.ogg
+- sound\music\area\bath.ogg
+- sound\music\area\bog.ogg
+- sound\music\area\catacombs.ogg
+- sound\music\area\caves.ogg
+- sound\music\area\church.ogg
+- sound\music\area\decap.ogg
+- sound\music\area\dwarf.ogg
+- sound\music\area\field.ogg
+- sound\music\area\forest.ogg
+- sound\music\area\magiciantower.ogg
+- sound\music\area\manorgarri.ogg
+- sound\music\area\sargoth.ogg
+- sound\music\area\septimus.ogg
+- sound\music\area\sewers.ogg
+- sound\music\area\shop.ogg
+- sound\music\area\siege.ogg
+- sound\music\area\sleeping.ogg
+- sound\music\area\spidercave.ogg
+- sound\music\area\towngen.ogg
+- sound\music\area\townstreets.ogg
+- sound\music\area\underworlddrone.ogg
+- sound\music\circus.ogg
+- sound\music\combat.ogg
+- sound\music\combat_weird.ogg
+- sound\music\combatbandit.ogg
+- sound\music\combatmaniac.ogg
+- sound\music\combatvamp.ogg
+- sound\music\credits.ogg
+- sound\music\death.ogg
+- sound\music\horror.ogg
+- sound\music\instruments\accord (1).ogg
+- sound\music\instruments\accord (2).ogg
+- sound\music\instruments\accord (3).ogg
+- sound\music\instruments\accord (4).ogg
+- sound\music\instruments\accord (5).ogg
+- sound\music\instruments\accord (6).ogg
+- sound\music\instruments\drum (1).ogg
+- sound\music\instruments\drum (2).ogg
+- sound\music\instruments\drum (3).ogg
+- sound\music\instruments\flute (1).ogg
+- sound\music\instruments\flute (2).ogg
+- sound\music\instruments\flute (3).ogg
+- sound\music\instruments\flute (4).ogg
+- sound\music\instruments\flute (5).ogg
+- sound\music\instruments\flute (6).ogg
+- sound\music\instruments\guitar (1).ogg
+- sound\music\instruments\guitar (2).ogg
+- sound\music\instruments\guitar (3).ogg
+- sound\music\instruments\guitar (4).ogg
+- sound\music\instruments\guitar (5).ogg
+- sound\music\instruments\guitar (6).ogg
+- sound\music\instruments\harb (1).ogg
+- sound\music\instruments\harb (2).ogg
+- sound\music\instruments\harb (3).ogg
+- sound\music\instruments\lute (1).ogg
+- sound\music\instruments\lute (2).ogg
+- sound\music\instruments\lute (3).ogg
+- sound\music\instruments\lute (4).ogg
+- sound\music\instruments\lute (5).ogg
+- sound\music\instruments\lute (6).ogg
+- sound\music\instruments\lute (7).ogg
+- sound\music\jukeboxes\tav3.ogg
+- sound\music\lorddeath.ogg
+- sound\music\maniac.ogg
+- sound\music\spice.ogg
+- sound\music\title.ogg
+- sound\music\traitor.ogg
+- sound\music\tree.ogg
+- sound\music\unused\tav1.ogg
+- sound\music\unused\tav2.ogg
+- sound\music\vampintro.ogg
+- sound\music\wartitle.ogg
+- sound\music\wolfintro.ogg
+- sound\pray.ogg
+- sound\ravein\small\hello_my_friend.ogg
+- sound\roundend\dwarfs.ogg
+- sound\roundend\gather.ogg
+- sound\roundend\knave.ogg
+- sound\roundend\rest.ogg
+- sound\roundend\twohours.ogg
+- sound\vo\attn.ogg
+- sound\vo\clap (1).ogg
+- sound\vo\clap (2).ogg
+- sound\vo\clap (3).ogg
+- sound\vo\clap (4).ogg
+- sound\vo\claponce.ogg
+- sound\vo\cult\vs_chant_conj_hf.ogg
+- sound\vo\cult\vs_chant_conj_hm.ogg
+- sound\vo\cult\vs_chant_conj_lf.ogg
+- sound\vo\cult\vs_chant_conj_lm.ogg
+- sound\vo\cult\vs_chant_ench_hf.ogg
+- sound\vo\cult\vs_chant_ench_hm.ogg
+- sound\vo\cult\vs_chant_ench_lf.ogg
+- sound\vo\cult\vs_chant_ench_lm.ogg
+- sound\vo\cult\vs_chant_evoc_hf.ogg
+- sound\vo\cult\vs_chant_evoc_hm.ogg
+- sound\vo\cult\vs_chant_evoc_lf.ogg
+- sound\vo\cult\vs_chant_evoc_lm.ogg
+- sound\vo\cult\vs_chant_illu_hf.ogg
+- sound\vo\cult\vs_chant_illu_hm.ogg
+- sound\vo\cult\vs_chant_illu_lf.ogg
+- sound\vo\cult\vs_chant_illu_lm.ogg
+- sound\vo\cult\vs_chant_necr_hf.ogg
+- sound\vo\cult\vs_chant_necr_hm.ogg
+- sound\vo\cult\vs_chant_necr_lf.ogg
+- sound\vo\cult\vs_chant_necr_lm.ogg
+- sound\vo\deathgurgle (1).ogg
+- sound\vo\deathgurgle (2).ogg
+- sound\vo\deathgurgle (3).ogg
+- sound\vo\fart (1).ogg
+- sound\vo\fart (2).ogg
+- sound\vo\fart (3).ogg
+- sound\vo\female\dwarf\chuckle (1).ogg
+- sound\vo\female\dwarf\chuckle (2).ogg
+- sound\vo\female\dwarf\chuckle (3).ogg
+- sound\vo\female\dwarf\laugh (1).ogg
+- sound\vo\female\dwarf\laugh (2).ogg
+- sound\vo\female\dwarf\laugh (3).ogg
+- sound\vo\female\elf\breathgasp (1).ogg
+- sound\vo\female\elf\breathgasp (2).ogg
+- sound\vo\female\elf\fatigue.ogg
+- sound\vo\female\elf\firescream.ogg
+- sound\vo\female\elf\gasp (1).ogg
+- sound\vo\female\elf\gasp (2).ogg
+- sound\vo\female\elf\gasp (3).ogg
+- sound\vo\female\elf\groan.ogg
+- sound\vo\female\elf\haltyell.ogg
+- sound\vo\female\elf\hmm (1).ogg
+- sound\vo\female\elf\hmm (2).ogg
+- sound\vo\female\elf\pain (1).ogg
+- sound\vo\female\elf\pain (2).ogg
+- sound\vo\female\elf\pain (3).ogg
+- sound\vo\female\elf\pain (4).ogg
+- sound\vo\female\elf\paincrit.ogg
+- sound\vo\female\elf\painscream (1).ogg
+- sound\vo\female\elf\painscream (2).ogg
+- sound\vo\female\elf\scream (1).ogg
+- sound\vo\female\elf\scream (2).ogg
+- sound\vo\female\elf\scream (3).ogg
+- sound\vo\female\elf\scream (4).ogg
+- sound\vo\female\gen\agony (1).ogg
+- sound\vo\female\gen\agony (2).ogg
+- sound\vo\female\gen\agony (3).ogg
+- sound\vo\female\gen\breathgasp.ogg
+- sound\vo\female\gen\burp.ogg
+- sound\vo\female\gen\choke (1).ogg
+- sound\vo\female\gen\choke (2).ogg
+- sound\vo\female\gen\choke (3).ogg
+- sound\vo\female\gen\chuckle (1).ogg
+- sound\vo\female\gen\chuckle (2).ogg
+- sound\vo\female\gen\chuckle (3).ogg
+- sound\vo\female\gen\clearthroat.ogg
+- sound\vo\female\gen\cough (1).ogg
+- sound\vo\female\gen\cough (2).ogg
+- sound\vo\female\gen\cry (1).ogg
+- sound\vo\female\gen\cry (2).ogg
+- sound\vo\female\gen\cry (3).ogg
+- sound\vo\female\gen\cry (4).ogg
+- sound\vo\female\gen\cry (5).ogg
+- sound\vo\female\gen\cry (6).ogg
+- sound\vo\female\gen\cry (7).ogg
+- sound\vo\female\gen\deathgurgle (1).ogg
+- sound\vo\female\gen\deathgurgle (2).ogg
+- sound\vo\female\gen\deathgurgle (3).ogg
+- sound\vo\female\gen\drown (1).ogg
+- sound\vo\female\gen\drown (2).ogg
+- sound\vo\female\gen\drown (3).ogg
+- sound\vo\female\gen\embed (1).ogg
+- sound\vo\female\gen\embed (2).ogg
+- sound\vo\female\gen\embed (3).ogg
+- sound\vo\female\gen\embed (4).ogg
+- sound\vo\female\gen\fatigue (1).ogg
+- sound\vo\female\gen\fatigue (2).ogg
+- sound\vo\female\gen\fatigue (3).ogg
+- sound\vo\female\gen\firescream (1).ogg
+- sound\vo\female\gen\firescream (2).ogg
+- sound\vo\female\gen\gag (1).ogg
+- sound\vo\female\gen\gag (2).ogg
+- sound\vo\female\gen\gag (3).ogg
+- sound\vo\female\gen\gasp (1).ogg
+- sound\vo\female\gen\gasp (2).ogg
+- sound\vo\female\gen\gasp (3).ogg
+- sound\vo\female\gen\giggle (1).ogg
+- sound\vo\female\gen\giggle (2).ogg
+- sound\vo\female\gen\groan (1).ogg
+- sound\vo\female\gen\groan (2).ogg
+- sound\vo\female\gen\groan (3).ogg
+- sound\vo\female\gen\groan (4).ogg
+- sound\vo\female\gen\groan (5).ogg
+- sound\vo\female\gen\grumble.ogg
+- sound\vo\female\gen\haltyell (1).ogg
+- sound\vo\female\gen\haltyell (2).ogg
+- sound\vo\female\gen\hmm.ogg
+- sound\vo\female\gen\huh (1).ogg
+- sound\vo\female\gen\huh (2).ogg
+- sound\vo\female\gen\huh (3).ogg
+- sound\vo\female\gen\hum (1).ogg
+- sound\vo\female\gen\hum (2).ogg
+- sound\vo\female\gen\hum (3).ogg
+- sound\vo\female\gen\jump.ogg
+- sound\vo\female\gen\laugh (1).ogg
+- sound\vo\female\gen\laugh (2).ogg
+- sound\vo\female\gen\laugh (3).ogg
+- sound\vo\female\gen\pain (1).ogg
+- sound\vo\female\gen\pain (2).ogg
+- sound\vo\female\gen\pain (3).ogg
+- sound\vo\female\gen\paincrit (1).ogg
+- sound\vo\female\gen\paincrit (2).ogg
+- sound\vo\female\gen\paincrit (3).ogg
+- sound\vo\female\gen\painmoan (1).ogg
+- sound\vo\female\gen\painmoan (2).ogg
+- sound\vo\female\gen\painmoan (3).ogg
+- sound\vo\female\gen\painmoan (4).ogg
+- sound\vo\female\gen\painmoan (5).ogg
+- sound\vo\female\gen\painmoan (6).ogg
+- sound\vo\female\gen\painmoan (7).ogg
+- sound\vo\female\gen\painmoan (8).ogg
+- sound\vo\female\gen\painscream (1).ogg
+- sound\vo\female\gen\painscream (2).ogg
+- sound\vo\female\gen\painscream (3).ogg
+- sound\vo\female\gen\painscream (4).ogg
+- sound\vo\female\gen\painscream (5).ogg
+- sound\vo\female\gen\painscream (6).ogg
+- sound\vo\female\gen\painscream (7).ogg
+- sound\vo\female\gen\painscream (8).ogg
+- sound\vo\female\gen\rage (1).ogg
+- sound\vo\female\gen\rage (2).ogg
+- sound\vo\female\gen\rage (3).ogg
+- sound\vo\female\gen\scream (1).ogg
+- sound\vo\female\gen\scream (2).ogg
+- sound\vo\female\gen\scream (3).ogg
+- sound\vo\female\gen\scream (4).ogg
+- sound\vo\female\gen\scream (5).ogg
+- sound\vo\female\gen\scream (6).ogg
+- sound\vo\female\gen\scream (7).ogg
+- sound\vo\female\gen\shh (2).ogg
+- sound\vo\female\gen\shh.ogg
+- sound\vo\female\gen\sigh (1).ogg
+- sound\vo\female\gen\sigh (2).ogg
+- sound\vo\female\gen\sigh (3).ogg
+- sound\vo\female\gen\snore (1).ogg
+- sound\vo\female\gen\snore (2).ogg
+- sound\vo\female\gen\snore (3).ogg
+- sound\vo\female\gen\spit.ogg
+- sound\vo\female\gen\whimper (1).ogg
+- sound\vo\female\gen\whimper (2).ogg
+- sound\vo\female\gen\whimper (3).ogg
+- sound\vo\female\gen\whistle (1).ogg
+- sound\vo\female\gen\whistle (2).ogg
+- sound\vo\female\gen\whistle (3).ogg
+- sound\vo\female\gen\whistle (4).ogg
+- sound\vo\female\gen\whistle (5).ogg
+- sound\vo\female\gen\yawn (1).ogg
+- sound\vo\female\gen\yawn (2).ogg
+- sound\vo\female\gen\yawn (3).ogg
+- sound\vo\female\old\laugh (1).ogg
+- sound\vo\female\old\laugh (2).ogg
+- sound\vo\female\old\laugh (3).ogg
+- sound\vo\female\old\laugh (4).ogg
+- sound\vo\female\old\laugh (5).ogg
+- sound\vo\female\old\laugh (6).ogg
+- sound\vo\female\old\noble\laugh (1).ogg
+- sound\vo\female\old\noble\laugh (2).ogg
+- sound\vo\female\old\noble\laugh (3).ogg
+- sound\vo\hungry1.ogg
+- sound\vo\hungry2.ogg
+- sound\vo\hungry3.ogg
+- sound\vo\hungry4.ogg
+- sound\vo\kiss (1).ogg
+- sound\vo\kiss (2).ogg
+- sound\vo\male\dwarf\chuckle.ogg
+- sound\vo\male\dwarf\cough (1).ogg
+- sound\vo\male\dwarf\cough (2).ogg
+- sound\vo\male\dwarf\cough (3).ogg
+- sound\vo\male\dwarf\firescream (1).ogg
+- sound\vo\male\dwarf\firescream (2).ogg
+- sound\vo\male\dwarf\firescream (3).ogg
+- sound\vo\male\dwarf\haltyell (1).ogg
+- sound\vo\male\dwarf\haltyell (2).ogg
+- sound\vo\male\dwarf\hmm.ogg
+- sound\vo\male\dwarf\hum (1).ogg
+- sound\vo\male\dwarf\hum (2).ogg
+- sound\vo\male\dwarf\hum (3).ogg
+- sound\vo\male\dwarf\laugh (1).ogg
+- sound\vo\male\dwarf\laugh (2).ogg
+- sound\vo\male\dwarf\laugh (3).ogg
+- sound\vo\male\dwarf\laugh (4).ogg
+- sound\vo\male\dwarf\laugh (5).ogg
+- sound\vo\male\dwarf\pain (1).ogg
+- sound\vo\male\dwarf\pain (2).ogg
+- sound\vo\male\dwarf\pain (3).ogg
+- sound\vo\male\dwarf\paincrit (1).ogg
+- sound\vo\male\dwarf\paincrit (2).ogg
+- sound\vo\male\dwarf\paincrit (3).ogg
+- sound\vo\male\dwarf\painscream (1).ogg
+- sound\vo\male\dwarf\painscream (2).ogg
+- sound\vo\male\dwarf\painscream (3).ogg
+- sound\vo\male\dwarf\rage (1).ogg
+- sound\vo\male\dwarf\rage (2).ogg
+- sound\vo\male\dwarf\rage (3).ogg
+- sound\vo\male\dwarf\scream (1).ogg
+- sound\vo\male\dwarf\scream (2).ogg
+- sound\vo\male\dwarf\scream (3).ogg
+- sound\vo\male\elf\agony.ogg
+- sound\vo\male\elf\chuckle (1).ogg
+- sound\vo\male\elf\chuckle (2).ogg
+- sound\vo\male\elf\chuckle (3).ogg
+- sound\vo\male\elf\chuckle (4).ogg
+- sound\vo\male\elf\chuckle (5).ogg
+- sound\vo\male\elf\chuckle (6).ogg
+- sound\vo\male\elf\chuckle (7).ogg
+- sound\vo\male\elf\chuckle (8).ogg
+- sound\vo\male\elf\cry (1).ogg
+- sound\vo\male\elf\cry (2).ogg
+- sound\vo\male\elf\cry (3).ogg
+- sound\vo\male\elf\embed (1).ogg
+- sound\vo\male\elf\embed (2).ogg
+- sound\vo\male\elf\firescream (1).ogg
+- sound\vo\male\elf\firescream (2).ogg
+- sound\vo\male\elf\firescream (3).ogg
+- sound\vo\male\elf\gasp (1).ogg
+- sound\vo\male\elf\gasp (2).ogg
+- sound\vo\male\elf\gasp (3).ogg
+- sound\vo\male\elf\grumble.ogg
+- sound\vo\male\elf\haltyell.ogg
+- sound\vo\male\elf\huh.ogg
+- sound\vo\male\elf\laugh (1).ogg
+- sound\vo\male\elf\laugh (2).ogg
+- sound\vo\male\elf\laugh (3).ogg
+- sound\vo\male\elf\pain (1).ogg
+- sound\vo\male\elf\pain (2).ogg
+- sound\vo\male\elf\pain (3).ogg
+- sound\vo\male\elf\paincrit (1).ogg
+- sound\vo\male\elf\paincrit (2).ogg
+- sound\vo\male\elf\paincrit (3).ogg
+- sound\vo\male\elf\painmoan (1).ogg
+- sound\vo\male\elf\painmoan (2).ogg
+- sound\vo\male\elf\painmoan (3).ogg
+- sound\vo\male\elf\painscream (1).ogg
+- sound\vo\male\elf\painscream (2).ogg
+- sound\vo\male\elf\rage (1).ogg
+- sound\vo\male\elf\rage (2).ogg
+- sound\vo\male\elf\scream (1).ogg
+- sound\vo\male\elf\scream (2).ogg
+- sound\vo\male\evil\blkknightlaugh.ogg
+- sound\vo\male\evil\critpain (1).ogg
+- sound\vo\male\evil\critpain (2).ogg
+- sound\vo\male\evil\critpain (3).ogg
+- sound\vo\male\evil\firescream (1).ogg
+- sound\vo\male\evil\firescream (2).ogg
+- sound\vo\male\evil\firescream (3).ogg
+- sound\vo\male\evil\firescream (4).ogg
+- sound\vo\male\evil\firescream (5).ogg
+- sound\vo\male\evil\firescream (6).ogg
+- sound\vo\male\evil\grumble.ogg
+- sound\vo\male\evil\laugh (1).ogg
+- sound\vo\male\evil\laugh (2).ogg
+- sound\vo\male\evil\laugh (3).ogg
+- sound\vo\male\evil\laugh (4).ogg
+- sound\vo\male\evil\laugh (5).ogg
+- sound\vo\male\evil\laugh (6).ogg
+- sound\vo\male\evil\laugh (7).ogg
+- sound\vo\male\evil\laugh (8).ogg
+- sound\vo\male\evil\pain (1).ogg
+- sound\vo\male\evil\pain (2).ogg
+- sound\vo\male\evil\pain (3).ogg
+- sound\vo\male\evil\pain (4).ogg
+- sound\vo\male\evil\pain (5).ogg
+- sound\vo\male\evil\pain (6).ogg
+- sound\vo\male\evil\pain (7).ogg
+- sound\vo\male\evil\pain (8).ogg
+- sound\vo\male\evil\painmoan (1).ogg
+- sound\vo\male\evil\painmoan (2).ogg
+- sound\vo\male\evil\painmoan (3).ogg
+- sound\vo\male\evil\painmoan (4).ogg
+- sound\vo\male\evil\painmoan (5).ogg
+- sound\vo\male\evil\painscream (1).ogg
+- sound\vo\male\evil\painscream (2).ogg
+- sound\vo\male\evil\rage (1).ogg
+- sound\vo\male\evil\rage (2).ogg
+- sound\vo\male\gen\agony (1).ogg
+- sound\vo\male\gen\agony (10).ogg
+- sound\vo\male\gen\agony (11).ogg
+- sound\vo\male\gen\agony (12).ogg
+- sound\vo\male\gen\agony (13).ogg
+- sound\vo\male\gen\agony (2).ogg
+- sound\vo\male\gen\agony (3).ogg
+- sound\vo\male\gen\agony (4).ogg
+- sound\vo\male\gen\agony (5).ogg
+- sound\vo\male\gen\agony (6).ogg
+- sound\vo\male\gen\agony (7).ogg
+- sound\vo\male\gen\agony (8).ogg
+- sound\vo\male\gen\agony (9).ogg
+- sound\vo\male\gen\breathgasp (1).ogg
+- sound\vo\male\gen\breathgasp (2).ogg
+- sound\vo\male\gen\breathgasp (3).ogg
+- sound\vo\male\gen\burp.ogg
+- sound\vo\male\gen\choke.ogg
+- sound\vo\male\gen\chuckle.ogg
+- sound\vo\male\gen\clearthroat (1).ogg
+- sound\vo\male\gen\clearthroat (2).ogg
+- sound\vo\male\gen\clearthroat (3).ogg
+- sound\vo\male\gen\cough (1).ogg
+- sound\vo\male\gen\cough (2).ogg
+- sound\vo\male\gen\cry (1).ogg
+- sound\vo\male\gen\cry (2).ogg
+- sound\vo\male\gen\cry (3).ogg
+- sound\vo\male\gen\cry (4).ogg
+- sound\vo\male\gen\deathgurgle (1).ogg
+- sound\vo\male\gen\deathgurgle (2).ogg
+- sound\vo\male\gen\deathgurgle (3).ogg
+- sound\vo\male\gen\drown (1).ogg
+- sound\vo\male\gen\drown (2).ogg
+- sound\vo\male\gen\drown (3).ogg
+- sound\vo\male\gen\embed (1).ogg
+- sound\vo\male\gen\embed (2).ogg
+- sound\vo\male\gen\embed (3).ogg
+- sound\vo\male\gen\fatigue.ogg
+- sound\vo\male\gen\firescream (1).ogg
+- sound\vo\male\gen\firescream (2).ogg
+- sound\vo\male\gen\firescream (3).ogg
+- sound\vo\male\gen\firescream (4).ogg
+- sound\vo\male\gen\gag (1).ogg
+- sound\vo\male\gen\gag (2).ogg
+- sound\vo\male\gen\gag (3).ogg
+- sound\vo\male\gen\gasp.ogg
+- sound\vo\male\gen\groan (1).ogg
+- sound\vo\male\gen\groan (2).ogg
+- sound\vo\male\gen\groan (3).ogg
+- sound\vo\male\gen\groan (4).ogg
+- sound\vo\male\gen\groan (5).ogg
+- sound\vo\male\gen\groan (6).ogg
+- sound\vo\male\gen\groin (1).ogg
+- sound\vo\male\gen\groin (2).ogg
+- sound\vo\male\gen\grumble.ogg
+- sound\vo\male\gen\haltyell (1).ogg
+- sound\vo\male\gen\haltyell (2).ogg
+- sound\vo\male\gen\HEY.ogg
+- sound\vo\male\gen\hmm.ogg
+- sound\vo\male\gen\huh (1).ogg
+- sound\vo\male\gen\huh (2).ogg
+- sound\vo\male\gen\huh (3).ogg
+- sound\vo\male\gen\hum (1).ogg
+- sound\vo\male\gen\hum (2).ogg
+- sound\vo\male\gen\hum (3).ogg
+- sound\vo\male\gen\jump.ogg
+- sound\vo\male\gen\laugh (1).ogg
+- sound\vo\male\gen\laugh (2).ogg
+- sound\vo\male\gen\laugh (3).ogg
+- sound\vo\male\gen\laugh (4).ogg
+- sound\vo\male\gen\laugh (5).ogg
+- sound\vo\male\gen\laugh (6).ogg
+- sound\vo\male\gen\leap.ogg
+- sound\vo\male\gen\pain (1).ogg
+- sound\vo\male\gen\pain (2).ogg
+- sound\vo\male\gen\pain (3).ogg
+- sound\vo\male\gen\paincrit (1).ogg
+- sound\vo\male\gen\paincrit (2).ogg
+- sound\vo\male\gen\painmoan (1).ogg
+- sound\vo\male\gen\painmoan (2).ogg
+- sound\vo\male\gen\painmoan (3).ogg
+- sound\vo\male\gen\painmoan (4).ogg
+- sound\vo\male\gen\painmoan (5).ogg
+- sound\vo\male\gen\painscream (1).ogg
+- sound\vo\male\gen\painscream (2).ogg
+- sound\vo\male\gen\painscream (3).ogg
+- sound\vo\male\gen\rage (1).ogg
+- sound\vo\male\gen\rage (2).ogg
+- sound\vo\male\gen\scream (1).ogg
+- sound\vo\male\gen\scream (2).ogg
+- sound\vo\male\gen\scream (3).ogg
+- sound\vo\male\gen\shh.ogg
+- sound\vo\male\gen\sigh.ogg
+- sound\vo\male\gen\snore (1).ogg
+- sound\vo\male\gen\snore (2).ogg
+- sound\vo\male\gen\snore (3).ogg
+- sound\vo\male\gen\snore (4).ogg
+- sound\vo\male\gen\spit.ogg
+- sound\vo\male\gen\whimper (1).ogg
+- sound\vo\male\gen\whimper (2).ogg
+- sound\vo\male\gen\whimper (3).ogg
+- sound\vo\male\gen\whistle (1).ogg
+- sound\vo\male\gen\whistle (2).ogg
+- sound\vo\male\gen\whistle (3).ogg
+- sound\vo\male\gen\yawn (1).ogg
+- sound\vo\male\gen\yawn (2).ogg
+- sound\vo\male\jester\laugh (1).ogg
+- sound\vo\male\jester\laugh (2).ogg
+- sound\vo\male\jester\laugh (3).ogg
+- sound\vo\male\knight\agony (1).ogg
+- sound\vo\male\knight\agony (2).ogg
+- sound\vo\male\knight\agony (3).ogg
+- sound\vo\male\knight\firescream (1).ogg
+- sound\vo\male\knight\firescream (2).ogg
+- sound\vo\male\knight\firescream (3).ogg
+- sound\vo\male\knight\laugh (1).ogg
+- sound\vo\male\knight\laugh (2).ogg
+- sound\vo\male\knight\laugh (3).ogg
+- sound\vo\male\knight\laugh (4).ogg
+- sound\vo\male\knight\pain (1).ogg
+- sound\vo\male\knight\pain (10).ogg
+- sound\vo\male\knight\pain (11).ogg
+- sound\vo\male\knight\pain (12).ogg
+- sound\vo\male\knight\pain (2).ogg
+- sound\vo\male\knight\pain (3).ogg
+- sound\vo\male\knight\pain (4).ogg
+- sound\vo\male\knight\pain (5).ogg
+- sound\vo\male\knight\pain (6).ogg
+- sound\vo\male\knight\pain (7).ogg
+- sound\vo\male\knight\pain (8).ogg
+- sound\vo\male\knight\pain (9).ogg
+- sound\vo\male\knight\paincrit (1).ogg
+- sound\vo\male\knight\paincrit (2).ogg
+- sound\vo\male\knight\paincrit (3).ogg
+- sound\vo\male\knight\painmoan (1).ogg
+- sound\vo\male\knight\painmoan (2).ogg
+- sound\vo\male\knight\painmoan (3).ogg
+- sound\vo\male\knight\painmoan (4).ogg
+- sound\vo\male\knight\painscream (1).ogg
+- sound\vo\male\knight\painscream (2).ogg
+- sound\vo\male\knight\painscream (3).ogg
+- sound\vo\male\knight\rage (1).ogg
+- sound\vo\male\knight\rage (2).ogg
+- sound\vo\male\knight\rage (3).ogg
+- sound\vo\male\knight\rage (4).ogg
+- sound\vo\male\knight\rage (5).ogg
+- sound\vo\male\knight\rage (6).ogg
+- sound\vo\male\old\cough (1).ogg
+- sound\vo\male\old\cough (2).ogg
+- sound\vo\male\old\cough (3).ogg
+- sound\vo\male\old\cough (4).ogg
+- sound\vo\male\old\laugh (1).ogg
+- sound\vo\male\old\laugh (2).ogg
+- sound\vo\male\old\laugh (3).ogg
+- sound\vo\male\old\pain (1).ogg
+- sound\vo\male\old\pain (2).ogg
+- sound\vo\male\old\pain (3).ogg
+- sound\vo\male\old\scream.ogg
+- sound\vo\male\warrior\firescream (1).ogg
+- sound\vo\male\warrior\firescream (2).ogg
+- sound\vo\male\warrior\firescream (3).ogg
+- sound\vo\male\warrior\laugh (1).ogg
+- sound\vo\male\warrior\laugh (2).ogg
+- sound\vo\male\warrior\laugh (3).ogg
+- sound\vo\male\warrior\pain (1).ogg
+- sound\vo\male\warrior\pain (10).ogg
+- sound\vo\male\warrior\pain (2).ogg
+- sound\vo\male\warrior\pain (3).ogg
+- sound\vo\male\warrior\pain (4).ogg
+- sound\vo\male\warrior\pain (5).ogg
+- sound\vo\male\warrior\pain (6).ogg
+- sound\vo\male\warrior\pain (7).ogg
+- sound\vo\male\warrior\pain (8).ogg
+- sound\vo\male\warrior\pain (9).ogg
+- sound\vo\male\warrior\paincrit (1).ogg
+- sound\vo\male\warrior\paincrit (2).ogg
+- sound\vo\male\warrior\paincrit (3).ogg
+- sound\vo\male\warrior\painscream (1).ogg
+- sound\vo\male\warrior\painscream (2).ogg
+- sound\vo\male\warrior\painscream (3).ogg
+- sound\vo\male\warrior\rage (1).ogg
+- sound\vo\male\warrior\rage (2).ogg
+- sound\vo\male\warrior\rage (3).ogg
+- sound\vo\male\wilhelm_scream.ogg
+- sound\vo\male\wizard\laugh.ogg
+- sound\vo\male\young\chuckle (1).ogg
+- sound\vo\male\young\chuckle (2).ogg
+- sound\vo\male\young\embed (1).ogg
+- sound\vo\male\young\embed (2).ogg
+- sound\vo\male\young\fatigue.ogg
+- sound\vo\male\young\firescream (1).ogg
+- sound\vo\male\young\firescream (2).ogg
+- sound\vo\male\young\firescream (3).ogg
+- sound\vo\male\young\laugh (1).ogg
+- sound\vo\male\young\laugh (2).ogg
+- sound\vo\male\young\laugh (3).ogg
+- sound\vo\male\young\laugh (4).ogg
+- sound\vo\male\young\laugh (5).ogg
+- sound\vo\male\young\laugh (6).ogg
+- sound\vo\male\young\laugh (7).ogg
+- sound\vo\male\young\pain (1).ogg
+- sound\vo\male\young\pain (2).ogg
+- sound\vo\male\young\pain (3).ogg
+- sound\vo\male\young\pain (4).ogg
+- sound\vo\male\young\paincrit (1).ogg
+- sound\vo\male\young\paincrit (2).ogg
+- sound\vo\male\young\paincrit (3).ogg
+- sound\vo\male\young\painscream (1).ogg
+- sound\vo\male\young\painscream (2).ogg
+- sound\vo\male\young\painscream (3).ogg
+- sound\vo\male\young\rage.ogg
+- sound\vo\male\zeth\chuckle.ogg
+- sound\vo\male\zeth\grumble (1).ogg
+- sound\vo\male\zeth\grumble (2).ogg
+- sound\vo\male\zeth\laugh.ogg
+- sound\vo\male\zeth\pain (1).ogg
+- sound\vo\male\zeth\pain (2).ogg
+- sound\vo\male\zeth\pain (3).ogg
+- sound\vo\male\zeth\pain (4).ogg
+- sound\vo\male\zeth\pain (5).ogg
+- sound\vo\male\zeth\pain (6).ogg
+- sound\vo\male\zeth\paincrit (1).ogg
+- sound\vo\male\zeth\paincrit (2).ogg
+- sound\vo\male\zeth\painscream (1).ogg
+- sound\vo\male\zeth\painscream (2).ogg
+- sound\vo\male\zeth\sigh (1).ogg
+- sound\vo\male\zeth\sigh (2).ogg
+- sound\vo\male\zeth\sigh (3).ogg
+- sound\vo\mobs\bird\birdfly.ogg
+- sound\vo\mobs\bird\CROW_01.ogg
+- sound\vo\mobs\bird\CROW_02.ogg
+- sound\vo\mobs\bird\CROW_03.ogg
+- sound\vo\mobs\chikn\death.ogg
+- sound\vo\mobs\chikn\idle (1).ogg
+- sound\vo\mobs\chikn\idle (2).ogg
+- sound\vo\mobs\chikn\idle (3).ogg
+- sound\vo\mobs\chikn\idle (4).ogg
+- sound\vo\mobs\chikn\idle (5).ogg
+- sound\vo\mobs\chikn\idle (6).ogg
+- sound\vo\mobs\chikn\pain (1).ogg
+- sound\vo\mobs\chikn\pain (2).ogg
+- sound\vo\mobs\chikn\pain (3).ogg
+- sound\vo\mobs\cow\aggro (1).ogg
+- sound\vo\mobs\cow\aggro (2).ogg
+- sound\vo\mobs\cow\aggro (3).ogg
+- sound\vo\mobs\cow\death (1).ogg
+- sound\vo\mobs\cow\death (2).ogg
+- sound\vo\mobs\cow\idle (1).ogg
+- sound\vo\mobs\cow\idle (2).ogg
+- sound\vo\mobs\cow\idle (3).ogg
+- sound\vo\mobs\cow\idle (4).ogg
+- sound\vo\mobs\cow\idle (5).ogg
+- sound\vo\mobs\cow\pain (1).ogg
+- sound\vo\mobs\cow\pain (2).ogg
+- sound\vo\mobs\ghost\aggro (1).ogg
+- sound\vo\mobs\ghost\aggro (2).ogg
+- sound\vo\mobs\ghost\aggro (3).ogg
+- sound\vo\mobs\ghost\aggro (4).ogg
+- sound\vo\mobs\ghost\aggro (5).ogg
+- sound\vo\mobs\ghost\aggro (6).ogg
+- sound\vo\mobs\ghost\death.ogg
+- sound\vo\mobs\ghost\laugh (1).ogg
+- sound\vo\mobs\ghost\laugh (2).ogg
+- sound\vo\mobs\ghost\laugh (3).ogg
+- sound\vo\mobs\ghost\laugh (4).ogg
+- sound\vo\mobs\ghost\laugh (5).ogg
+- sound\vo\mobs\ghost\laugh (6).ogg
+- sound\vo\mobs\ghost\moan (1).ogg
+- sound\vo\mobs\ghost\moan (2).ogg
+- sound\vo\mobs\ghost\moan (3).ogg
+- sound\vo\mobs\ghost\skullpile_hit.ogg
+- sound\vo\mobs\ghost\skullpile_loop.ogg
+- sound\vo\mobs\ghost\whisper (1).ogg
+- sound\vo\mobs\ghost\whisper (2).ogg
+- sound\vo\mobs\ghost\whisper (3).ogg
+- sound\vo\mobs\goat\aggro (1).ogg
+- sound\vo\mobs\goat\aggro (2).ogg
+- sound\vo\mobs\goat\death (1).ogg
+- sound\vo\mobs\goat\death (2).ogg
+- sound\vo\mobs\goat\idle (1).ogg
+- sound\vo\mobs\goat\idle (2).ogg
+- sound\vo\mobs\goat\idle (3).ogg
+- sound\vo\mobs\goat\pain (1).ogg
+- sound\vo\mobs\goat\pain (2).ogg
+- sound\vo\mobs\gob\aggro (1).ogg
+- sound\vo\mobs\gob\aggro (2).ogg
+- sound\vo\mobs\gob\aggro (3).ogg
+- sound\vo\mobs\gob\aggro (4).ogg
+- sound\vo\mobs\gob\death (1).ogg
+- sound\vo\mobs\gob\death (2).ogg
+- sound\vo\mobs\gob\idle (1).ogg
+- sound\vo\mobs\gob\idle (2).ogg
+- sound\vo\mobs\gob\idle (3).ogg
+- sound\vo\mobs\gob\idle (4).ogg
+- sound\vo\mobs\gob\idle (5).ogg
+- sound\vo\mobs\gob\laugh (1).ogg
+- sound\vo\mobs\gob\laugh (2).ogg
+- sound\vo\mobs\gob\pain (1).ogg
+- sound\vo\mobs\gob\pain (2).ogg
+- sound\vo\mobs\gob\pain (3).ogg
+- sound\vo\mobs\gob\pain (4).ogg
+- sound\vo\mobs\gob\pain (5).ogg
+- sound\vo\mobs\gob\painscream (1).ogg
+- sound\vo\mobs\gob\painscream (2).ogg
+- sound\vo\mobs\gob\painscream (3).ogg
+- sound\vo\mobs\gob\painscream (4).ogg
+- sound\vo\mobs\gob\painscream (5).ogg
+- sound\vo\mobs\mimic\c2780_v_attack.wav.ogg
+- sound\vo\mobs\mimic\c2780_v_attack1.wav.ogg
+- sound\vo\mobs\mimic\c2780_v_attack2.wav.ogg
+- sound\vo\mobs\mimic\c2780_v_dead.wav.ogg
+- sound\vo\mobs\plant\attack (1).ogg
+- sound\vo\mobs\plant\attack (2).ogg
+- sound\vo\mobs\plant\attack (3).ogg
+- sound\vo\mobs\plant\attack (4).ogg
+- sound\vo\mobs\plant\pain (1).ogg
+- sound\vo\mobs\plant\pain (2).ogg
+- sound\vo\mobs\plant\pain (3).ogg
+- sound\vo\mobs\plant\pain (4).ogg
+- sound\vo\mobs\rat\aggro (1).ogg
+- sound\vo\mobs\rat\aggro (2).ogg
+- sound\vo\mobs\rat\aggro (3).ogg
+- sound\vo\mobs\rat\death (1).ogg
+- sound\vo\mobs\rat\death (2).ogg
+- sound\vo\mobs\rat\pain (1).ogg
+- sound\vo\mobs\rat\pain (2).ogg
+- sound\vo\mobs\rat\pain (3).ogg
+- sound\vo\mobs\rat\rat_death.ogg
+- sound\vo\mobs\rat\rat_life.ogg
+- sound\vo\mobs\rat\rat_life2.ogg
+- sound\vo\mobs\rat\rat_life3.ogg
+- sound\vo\mobs\saiga\attack (1).ogg
+- sound\vo\mobs\saiga\attack (2).ogg
+- sound\vo\mobs\saiga\death (1).ogg
+- sound\vo\mobs\saiga\death (2).ogg
+- sound\vo\mobs\saiga\fst_horse_idle_graze_01.ogg
+- sound\vo\mobs\saiga\fst_horse_idle_graze_02.ogg
+- sound\vo\mobs\saiga\fst_horse_idle_graze_03.ogg
+- sound\vo\mobs\saiga\idle (1).ogg
+- sound\vo\mobs\saiga\idle (2).ogg
+- sound\vo\mobs\saiga\idle (3).ogg
+- sound\vo\mobs\saiga\idle (4).ogg
+- sound\vo\mobs\saiga\idle (5).ogg
+- sound\vo\mobs\saiga\idle (6).ogg
+- sound\vo\mobs\saiga\idle (7).ogg
+- sound\vo\mobs\saiga\npc_horse_dismount_01.ogg
+- sound\vo\mobs\saiga\npc_horse_mount_01.ogg
+- sound\vo\mobs\saiga\npc_horse_rearup_01.ogg
+- sound\vo\mobs\saiga\npc_horse_rearup_02.ogg
+- sound\vo\mobs\saiga\npc_horse_rearup_03.ogg
+- sound\vo\mobs\saiga\pain (1).ogg
+- sound\vo\mobs\saiga\pain (2).ogg
+- sound\vo\mobs\saiga\pain (3).ogg
+- sound\vo\mobs\skel\skeleton_laugh.ogg
+- sound\vo\mobs\skel\skeleton_pain (1).ogg
+- sound\vo\mobs\skel\skeleton_pain (2).ogg
+- sound\vo\mobs\skel\skeleton_pain (3).ogg
+- sound\vo\mobs\skel\skeleton_pain (4).ogg
+- sound\vo\mobs\skel\skeleton_pain (5).ogg
+- sound\vo\mobs\skel\skeleton_rage (1).ogg
+- sound\vo\mobs\skel\skeleton_rage (2).ogg
+- sound\vo\mobs\skel\skeleton_rage (3).ogg
+- sound\vo\mobs\skel\skeleton_scream (1).ogg
+- sound\vo\mobs\skel\skeleton_scream (2).ogg
+- sound\vo\mobs\skel\skeleton_scream (3).ogg
+- sound\vo\mobs\skel\skeleton_scream (4).ogg
+- sound\vo\mobs\skel\skeleton_scream (5).ogg
+- sound\vo\mobs\spider\aggro (1).ogg
+- sound\vo\mobs\spider\aggro (2).ogg
+- sound\vo\mobs\spider\aggro (3).ogg
+- sound\vo\mobs\spider\attack (1).ogg
+- sound\vo\mobs\spider\attack (2).ogg
+- sound\vo\mobs\spider\attack (3).ogg
+- sound\vo\mobs\spider\attack (4).ogg
+- sound\vo\mobs\spider\death.ogg
+- sound\vo\mobs\spider\idle (1).ogg
+- sound\vo\mobs\spider\idle (2).ogg
+- sound\vo\mobs\spider\idle (3).ogg
+- sound\vo\mobs\spider\idle (4).ogg
+- sound\vo\mobs\spider\pain.ogg
+- sound\vo\mobs\spider\speak (1).ogg
+- sound\vo\mobs\spider\speak (2).ogg
+- sound\vo\mobs\spider\speak (3).ogg
+- sound\vo\mobs\spider\speak (4).ogg
+- sound\vo\mobs\vw\aggro (1).ogg
+- sound\vo\mobs\vw\aggro (2).ogg
+- sound\vo\mobs\vw\attack (1).ogg
+- sound\vo\mobs\vw\attack (2).ogg
+- sound\vo\mobs\vw\attack (3).ogg
+- sound\vo\mobs\vw\attack (4).ogg
+- sound\vo\mobs\vw\bark (1).ogg
+- sound\vo\mobs\vw\bark (2).ogg
+- sound\vo\mobs\vw\bark (3).ogg
+- sound\vo\mobs\vw\bark (4).ogg
+- sound\vo\mobs\vw\bark (5).ogg
+- sound\vo\mobs\vw\bark (6).ogg
+- sound\vo\mobs\vw\bark (7).ogg
+- sound\vo\mobs\vw\death (1).ogg
+- sound\vo\mobs\vw\death (2).ogg
+- sound\vo\mobs\vw\death (3).ogg
+- sound\vo\mobs\vw\death (4).ogg
+- sound\vo\mobs\vw\death (5).ogg
+- sound\vo\mobs\vw\idle (1).ogg
+- sound\vo\mobs\vw\idle (2).ogg
+- sound\vo\mobs\vw\idle (3).ogg
+- sound\vo\mobs\vw\idle (4).ogg
+- sound\vo\mobs\vw\pain (1).ogg
+- sound\vo\mobs\vw\pain (2).ogg
+- sound\vo\mobs\vw\pain (3).ogg
+- sound\vo\mobs\wwolf\death.ogg
+- sound\vo\mobs\wwolf\howl (1).ogg
+- sound\vo\mobs\wwolf\howl (2).ogg
+- sound\vo\mobs\wwolf\howldist (1).ogg
+- sound\vo\mobs\wwolf\howldist (2).ogg
+- sound\vo\mobs\wwolf\idle (1).ogg
+- sound\vo\mobs\wwolf\idle (2).ogg
+- sound\vo\mobs\wwolf\jump (1).ogg
+- sound\vo\mobs\wwolf\jump (2).ogg
+- sound\vo\mobs\wwolf\jump (3).ogg
+- sound\vo\mobs\wwolf\pain (1).ogg
+- sound\vo\mobs\wwolf\pain (2).ogg
+- sound\vo\mobs\wwolf\pain (3).ogg
+- sound\vo\mobs\wwolf\painscream.ogg
+- sound\vo\mobs\wwolf\roar.ogg
+- sound\vo\mobs\wwolf\sniff.ogg
+- sound\vo\mobs\wwolf\wolftalk1.ogg
+- sound\vo\mobs\wwolf\wolftalk2.ogg
+- sound\vo\mobs\zombie\death (1).ogg
+- sound\vo\mobs\zombie\death (2).ogg
+- sound\vo\mobs\zombie\death (3).ogg
+- sound\vo\mobs\zombie\f\death (1).ogg
+- sound\vo\mobs\zombie\f\death (2).ogg
+- sound\vo\mobs\zombie\f\death (3).ogg
+- sound\vo\mobs\zombie\f\firescream (1).ogg
+- sound\vo\mobs\zombie\f\firescream (2).ogg
+- sound\vo\mobs\zombie\f\firescream (3).ogg
+- sound\vo\mobs\zombie\f\idle (1).ogg
+- sound\vo\mobs\zombie\f\idle (2).ogg
+- sound\vo\mobs\zombie\f\idle (3).ogg
+- sound\vo\mobs\zombie\f\pain (1).ogg
+- sound\vo\mobs\zombie\f\pain (2).ogg
+- sound\vo\mobs\zombie\f\pain (3).ogg
+- sound\vo\mobs\zombie\firescream (1).ogg
+- sound\vo\mobs\zombie\firescream (2).ogg
+- sound\vo\mobs\zombie\firescream (3).ogg
+- sound\vo\mobs\zombie\idle (1).ogg
+- sound\vo\mobs\zombie\idle (2).ogg
+- sound\vo\mobs\zombie\idle (3).ogg
+- sound\vo\mobs\zombie\pain (1).ogg
+- sound\vo\mobs\zombie\pain (2).ogg
+- sound\vo\mobs\zombie\pain (3).ogg
+- sound\vo\psst.ogg
+- sound\vo\smokedrag.ogg
+- sound\vo\throat.ogg
+- sound\vo\throat2.ogg
+- sound\vo\throat3.ogg
+- sound\vo\vart (1).ogg
+- sound\vo\vart (2).ogg
+- sound\vo\vart (3).ogg
+- sound\vo\vart (4).ogg
+- sound\vo\vomit.ogg
+- sound\vo\vomit_2.ogg
+- SQL\database_changelog.txt
+- SQL\tgstation_schema1.sql
+- SQL\tgstation_schema_prefixed1.sql
+- strings\accent_universal.json
+- strings\bibble.txt
+- strings\books\cooking.json
+- strings\books\holyguide.json
+- strings\books\knowledge.json
+- strings\books\law.json
+- strings\books\manners.json
+- strings\books\robber.json
+- strings\books\tales1.json
+- strings\books\tales10.json
+- strings\books\tales11.json
+- strings\books\tales12.json
+- strings\books\tales13.json
+- strings\books\tales14.json
+- strings\books\tales2.json
+- strings\books\tales3.json
+- strings\books\tales4.json
+- strings\books\tales5.json
+- strings\books\tales6.json
+- strings\books\tales7.json
+- strings\books\tales8.json
+- strings\books\tales9.json
+- strings\books\talesformat.json
+- strings\books\xylix.json
+- strings\clockwork_cult_changelog.txt
+- strings\dwarf_replacement.json
+- strings\names\roguetown\dwarffemale.txt
+- strings\names\roguetown\dwarflast.txt
+- strings\names\roguetown\dwarfmale.txt
+- strings\names\roguetown\elffemale.txt
+- strings\names\roguetown\elflast.txt
+- strings\names\roguetown\elfmale.txt
+- strings\names\roguetown\humfemale.txt
+- strings\names\roguetown\humlast.txt
+- strings\names\roguetown\hummale.txt
+- strings\names\roguetown\ooctitle.txt
+- strings\proper_replacement.json
+- strings\roundid.txt
+- strings\rt\bumaggrolines.txt
+- strings\rt\bumlines.txt
+- strings\rt\crier.txt
+- strings\rt\names\dwarf\dwarhf.txt
+- strings\rt\names\dwarf\dwarhlast.txt
+- strings\rt\names\dwarf\dwarhm.txt
+- strings\rt\names\dwarf\dwarmf.txt
+- strings\rt\names\dwarf\dwarmlast.txt
+- strings\rt\names\dwarf\dwarmm.txt
+- strings\rt\names\elf\elfdf.txt
+- strings\rt\names\elf\elfdlast.txt
+- strings\rt\names\elf\elfdm.txt
+- strings\rt\names\elf\elfsnf.txt
+- strings\rt\names\elf\elfsnlast.txt
+- strings\rt\names\elf\elfsnm.txt
+- strings\rt\names\elf\elfwf.txt
+- strings\rt\names\elf\elfwlast.txt
+- strings\rt\names\elf\elfwm.txt
+- strings\rt\names\human\humnorf.txt
+- strings\rt\names\human\humnorlast.txt
+- strings\rt\names\human\humnorm.txt
+- strings\rt\names\human\humsouf.txt
+- strings\rt\names\human\humsoulast.txt
+- strings\rt\names\human\humsoum.txt
+- strings\rt\names\other\aasf.txt
+- strings\rt\names\other\aasm.txt
+- strings\rt\names\other\tieff.txt
+- strings\rt\names\other\tieflast.txt
+- strings\rt\names\other\tiefm.txt
+- strings\rt\rp_prompt.txt
+- strings\russian_replacement.json
+- strings\spanish_replacement.json
+- strings\spellcheck.json
+- tgui-next\.editorconfig
+- tgui-next\.eslintignore
+- tgui-next\.eslintrc.yml
+- tgui-next\.gitattributes
+- tgui-next\.gitignore
+- tgui-next\bin\tgui
+- tgui-next\bin\tgui-build.bat
+- tgui-next\bin\tgui-dev-server.bat
+- tgui-next\docs\converting-old-tgui-interfaces.md
+- tgui-next\docs\tutorial-and-examples.md
+- tgui-next\package.json
+- tgui-next\packages\common\collections.js
+- tgui-next\packages\common\fp.js
+- tgui-next\packages\common\logging.js
+- tgui-next\packages\common\math.js
+- tgui-next\packages\common\package.json
+- tgui-next\packages\common\react.js
+- tgui-next\packages\common\redux.js
+- tgui-next\packages\common\string.babel-plugin.cjs
+- tgui-next\packages\common\string.js
+- tgui-next\packages\common\vector.js
+- tgui-next\packages\tgui-dev-server\index.js
+- tgui-next\packages\tgui-dev-server\link\client.js
+- tgui-next\packages\tgui-dev-server\link\retrace.js
+- tgui-next\packages\tgui-dev-server\link\server.js
+- tgui-next\packages\tgui-dev-server\package.json
+- tgui-next\packages\tgui-dev-server\reloader.js
+- tgui-next\packages\tgui-dev-server\util.js
+- tgui-next\packages\tgui-dev-server\webpack.js
+- tgui-next\packages\tgui\assets\bg-nanotrasen.svg
+- tgui-next\packages\tgui\assets\bg-syndicate.svg
+- tgui-next\packages\tgui\backend.js
+- tgui-next\packages\tgui\byond.js
+- tgui-next\packages\tgui\components\AnimatedNumber.js
+- tgui-next\packages\tgui\components\BlockQuote.js
+- tgui-next\packages\tgui\components\Box.js
+- tgui-next\packages\tgui\components\Button.js
+- tgui-next\packages\tgui\components\Chart.js
+- tgui-next\packages\tgui\components\ColorBox.js
+- tgui-next\packages\tgui\components\Dimmer.js
+- tgui-next\packages\tgui\components\Flex.js
+- tgui-next\packages\tgui\components\Grid.js
+- tgui-next\packages\tgui\components\Icon.js
+- tgui-next\packages\tgui\components\index.js
+- tgui-next\packages\tgui\components\Input.js
+- tgui-next\packages\tgui\components\LabeledList.js
+- tgui-next\packages\tgui\components\NoticeBox.js
+- tgui-next\packages\tgui\components\NumberInput.js
+- tgui-next\packages\tgui\components\ProgressBar.js
+- tgui-next\packages\tgui\components\Section.js
+- tgui-next\packages\tgui\components\Table.js
+- tgui-next\packages\tgui\components\Tabs.js
+- tgui-next\packages\tgui\components\TitleBar.js
+- tgui-next\packages\tgui\components\Toast.js
+- tgui-next\packages\tgui\components\Tooltip.js
+- tgui-next\packages\tgui\constants.js
+- tgui-next\packages\tgui\drag.js
+- tgui-next\packages\tgui\hotkeys.js
+- tgui-next\packages\tgui\index.js
+- tgui-next\packages\tgui\interfaces\Achievements.js
+- tgui-next\packages\tgui\interfaces\AiAirlock.js
+- tgui-next\packages\tgui\interfaces\AirAlarm.js
+- tgui-next\packages\tgui\interfaces\AirlockElectronics.js
+- tgui-next\packages\tgui\interfaces\Apc.js
+- tgui-next\packages\tgui\interfaces\AtmosAlertConsole.js
+- tgui-next\packages\tgui\interfaces\AtmosControlConsole.js
+- tgui-next\packages\tgui\interfaces\AtmosFilter.js
+- tgui-next\packages\tgui\interfaces\AtmosMixer.js
+- tgui-next\packages\tgui\interfaces\AtmosPump.js
+- tgui-next\packages\tgui\interfaces\BluespaceArtillery.js
+- tgui-next\packages\tgui\interfaces\BorgPanel.js
+- tgui-next\packages\tgui\interfaces\BrigTimer.js
+- tgui-next\packages\tgui\interfaces\Canister.js
+- tgui-next\packages\tgui\interfaces\Cargo.js
+- tgui-next\packages\tgui\interfaces\CellularEmporium.js
+- tgui-next\packages\tgui\interfaces\CentcomPodLauncher.js
+- tgui-next\packages\tgui\interfaces\ChemAcclimator.js
+- tgui-next\packages\tgui\interfaces\ChemDebugSynthesizer.js
+- tgui-next\packages\tgui\interfaces\ChemDispenser.js
+- tgui-next\packages\tgui\interfaces\ChemFilter.js
+- tgui-next\packages\tgui\interfaces\ChemHeater.js
+- tgui-next\packages\tgui\interfaces\ChemMaster.js
+- tgui-next\packages\tgui\interfaces\ChemPress.js
+- tgui-next\packages\tgui\interfaces\ChemSplitter.js
+- tgui-next\packages\tgui\interfaces\ChemSynthesizer.js
+- tgui-next\packages\tgui\interfaces\CodexGigas.js
+- tgui-next\packages\tgui\interfaces\common\BeakerContents.js
+- tgui-next\packages\tgui\interfaces\common\InterfaceLockNoticeBox.js
+- tgui-next\packages\tgui\interfaces\ComputerFabricator.js
+- tgui-next\packages\tgui\interfaces\Crayon.js
+- tgui-next\packages\tgui\interfaces\CrewConsole.js
+- tgui-next\packages\tgui\interfaces\Cryo.js
+- tgui-next\packages\tgui\interfaces\DisposalUnit.js
+- tgui-next\packages\tgui\interfaces\Gps.js
+- tgui-next\packages\tgui\interfaces\KitchenSink.js
+- tgui-next\packages\tgui\interfaces\LanguageMenu.js
+- tgui-next\packages\tgui\interfaces\MedicalKiosk.js
+- tgui-next\packages\tgui\interfaces\Mint.js
+- tgui-next\packages\tgui\interfaces\NtosMain.js
+- tgui-next\packages\tgui\interfaces\NtosSupermatterMonitor.js
+- tgui-next\packages\tgui\interfaces\NtosWrapper.js
+- tgui-next\packages\tgui\interfaces\OperatingComputer.js
+- tgui-next\packages\tgui\interfaces\OreRedemptionMachine.js
+- tgui-next\packages\tgui\interfaces\PersonalCrafting.js
+- tgui-next\packages\tgui\interfaces\PortableGenerator.js
+- tgui-next\packages\tgui\interfaces\PowerMonitor.js
+- tgui-next\packages\tgui\interfaces\Radio.js
+- tgui-next\packages\tgui\interfaces\RapidPipeDispenser.js
+- tgui-next\packages\tgui\interfaces\ShuttleManipulator.js
+- tgui-next\packages\tgui\interfaces\SmartVend.js
+- tgui-next\packages\tgui\interfaces\SMES.js
+- tgui-next\packages\tgui\interfaces\SolarControl.js
+- tgui-next\packages\tgui\interfaces\StationAlertConsole.js
+- tgui-next\packages\tgui\interfaces\SuitStorageUnit.js
+- tgui-next\packages\tgui\interfaces\TankDispenser.js
+- tgui-next\packages\tgui\interfaces\ThermoMachine.js
+- tgui-next\packages\tgui\interfaces\TurbineComputer.js
+- tgui-next\packages\tgui\interfaces\VaultController.js
+- tgui-next\packages\tgui\interfaces\Wires.js
+- tgui-next\packages\tgui\layout.js
+- tgui-next\packages\tgui\logging.js
+- tgui-next\packages\tgui\package.json
+- tgui-next\packages\tgui\polyfills.js
+- tgui-next\packages\tgui\public\shim-css-om.js
+- tgui-next\packages\tgui\public\shim-dom4.js
+- tgui-next\packages\tgui\public\shim-html5shiv.js
+- tgui-next\packages\tgui\public\shim-ie8.js
+- tgui-next\packages\tgui\public\tgui-fallback.html
+- tgui-next\packages\tgui\public\tgui-main.html
+- tgui-next\packages\tgui\public\tgui.bundle.css
+- tgui-next\packages\tgui\public\tgui.bundle.js
+- tgui-next\packages\tgui\refocus.js
+- tgui-next\packages\tgui\routes.js
+- tgui-next\packages\tgui\store.js
+- tgui-next\packages\tgui\styles\atomic\candystripe.scss
+- tgui-next\packages\tgui\styles\atomic\color.scss
+- tgui-next\packages\tgui\styles\atomic\text.scss
+- tgui-next\packages\tgui\styles\base.scss
+- tgui-next\packages\tgui\styles\colors.scss
+- tgui-next\packages\tgui\styles\components\Button.scss
+- tgui-next\packages\tgui\styles\components\ColorBox.scss
+- tgui-next\packages\tgui\styles\components\FatalError.scss
+- tgui-next\packages\tgui\styles\components\Flex.scss
+- tgui-next\packages\tgui\styles\components\Input.scss
+- tgui-next\packages\tgui\styles\components\LabeledList.scss
+- tgui-next\packages\tgui\styles\components\Layout.scss
+- tgui-next\packages\tgui\styles\components\NoticeBox.scss
+- tgui-next\packages\tgui\styles\components\NtosHeader.scss
+- tgui-next\packages\tgui\styles\components\NtosWrapper.scss
+- tgui-next\packages\tgui\styles\components\NumberInput.scss
+- tgui-next\packages\tgui\styles\components\ProgressBar.scss
+- tgui-next\packages\tgui\styles\components\Section.scss
+- tgui-next\packages\tgui\styles\components\Table.scss
+- tgui-next\packages\tgui\styles\components\Tabs.scss
+- tgui-next\packages\tgui\styles\components\TitleBar.scss
+- tgui-next\packages\tgui\styles\components\Tooltip.scss
+- tgui-next\packages\tgui\styles\functions.scss
+- tgui-next\packages\tgui\styles\main.scss
+- tgui-next\packages\tgui\styles\reset.scss
+- tgui-next\packages\tgui\styles\themes\ntos.scss
+- tgui-next\packages\tgui\styles\themes\syndicate.scss
+- tgui-next\packages\tgui\webpack.config.js
+- tgui-next\README.md
+- tgui-next\yarn.lock
+- tgui\.babelrc
+- tgui\assets\tgui.css
+- tgui\assets\tgui.js
+- tgui\build.sh
+- tgui\build_assets.bat
+- tgui\gulp\css.js
+- tgui\gulp\flags.js
+- tgui\gulp\js.js
+- tgui\gulp\plugins.js
+- tgui\gulp\reload.js
+- tgui\gulp\size.js
+- tgui\gulpfile.babel.js
+- tgui\install_dependencies.bat
+- tgui\LICENSE.md
+- tgui\package-lock.json
+- tgui\reload.bat
+- tgui\src\.babelrc
+- tgui\src\components\bar.ract
+- tgui\src\components\bar.styl
+- tgui\src\components\button.ract
+- tgui\src\components\button.styl
+- tgui\src\components\display.ract
+- tgui\src\components\display.styl
+- tgui\src\components\input.ract
+- tgui\src\components\input.styl
+- tgui\src\components\linegraph.ract
+- tgui\src\components\linegraph.styl
+- tgui\src\components\notice.ract
+- tgui\src\components\notice.styl
+- tgui\src\components\resize.ract
+- tgui\src\components\resize.styl
+- tgui\src\components\section.ract
+- tgui\src\components\section.styl
+- tgui\src\components\subdisplay.ract
+- tgui\src\components\subdisplay.styl
+- tgui\src\components\tabs.ract
+- tgui\src\components\tabs\tab.ract
+- tgui\src\components\titlebar.ract
+- tgui\src\components\titlebar.styl
+- tgui\src\components\warnings.ract
+- tgui\src\images\nanotrasen.svg
+- tgui\src\images\syndicate.svg
+- tgui\src\interfaces\acclimator.ract
+- tgui\src\interfaces\ai_airlock.ract
+- tgui\src\interfaces\airalarm.ract
+- tgui\src\interfaces\airalarm\back.ract
+- tgui\src\interfaces\airalarm\modes.ract
+- tgui\src\interfaces\airalarm\scrubbers.ract
+- tgui\src\interfaces\airalarm\status.ract
+- tgui\src\interfaces\airalarm\thresholds.ract
+- tgui\src\interfaces\airalarm\vents.ract
+- tgui\src\interfaces\airlock_electronics.ract
+- tgui\src\interfaces\airlock_electronics.styl
+- tgui\src\interfaces\apc.ract
+- tgui\src\interfaces\atmos_alert.ract
+- tgui\src\interfaces\atmos_control.ract
+- tgui\src\interfaces\atmos_filter.ract
+- tgui\src\interfaces\atmos_mixer.ract
+- tgui\src\interfaces\atmos_pump.ract
+- tgui\src\interfaces\borgopanel.ract
+- tgui\src\interfaces\brig_timer.ract
+- tgui\src\interfaces\bsa.ract
+- tgui\src\interfaces\canister.ract
+- tgui\src\interfaces\cargo.ract
+- tgui\src\interfaces\cargo_express.ract
+- tgui\src\interfaces\cellular_emporium.ract
+- tgui\src\interfaces\centcom_podlauncher.ract
+- tgui\src\interfaces\chem_dispenser.ract
+- tgui\src\interfaces\chem_heater.ract
+- tgui\src\interfaces\chem_master.ract
+- tgui\src\interfaces\chem_press.ract
+- tgui\src\interfaces\chem_splitter.ract
+- tgui\src\interfaces\chem_synthesizer.ract
+- tgui\src\interfaces\chemical_filter.ract
+- tgui\src\interfaces\codex_gigas.ract
+- tgui\src\interfaces\computer_fabricator.ract
+- tgui\src\interfaces\crayon.ract
+- tgui\src\interfaces\crew.ract
+- tgui\src\interfaces\cryo.ract
+- tgui\src\interfaces\disposal_unit.ract
+- tgui\src\interfaces\dna_vault.ract
+- tgui\src\interfaces\eightball.ract
+- tgui\src\interfaces\emergency_shuttle_console.ract
+- tgui\src\interfaces\engraved_message.ract
+- tgui\src\interfaces\error.ract
+- tgui\src\interfaces\exonet_node.ract
+- tgui\src\interfaces\gps.ract
+- tgui\src\interfaces\gulag_console.ract
+- tgui\src\interfaces\gulag_item_reclaimer.ract
+- tgui\src\interfaces\holodeck.ract
+- tgui\src\interfaces\implantchair.ract
+- tgui\src\interfaces\intellicard.ract
+- tgui\src\interfaces\keycard_auth.ract
+- tgui\src\interfaces\labor_claim_console.ract
+- tgui\src\interfaces\language_menu.ract
+- tgui\src\interfaces\launchpad_console.ract
+- tgui\src\interfaces\launchpad_remote.ract
+- tgui\src\interfaces\mech_bay_power_console.ract
+- tgui\src\interfaces\medical_kiosk.ract
+- tgui\src\interfaces\mulebot.ract
+- tgui\src\interfaces\nanite_chamber_control.ract
+- tgui\src\interfaces\nanite_cloud_control.ract
+- tgui\src\interfaces\nanite_comm_remote.ract
+- tgui\src\interfaces\nanite_program_hub.ract
+- tgui\src\interfaces\nanite_programmer.ract
+- tgui\src\interfaces\nanite_remote.ract
+- tgui\src\interfaces\notificationpanel.ract
+- tgui\src\interfaces\ntnet_relay.ract
+- tgui\src\interfaces\ntos_ai_restorer.ract
+- tgui\src\interfaces\ntos_card.ract
+- tgui\src\interfaces\ntos_configuration.ract
+- tgui\src\interfaces\ntos_file_manager.ract
+- tgui\src\interfaces\ntos_main.ract
+- tgui\src\interfaces\ntos_net_chat.ract
+- tgui\src\interfaces\ntos_net_dos.ract
+- tgui\src\interfaces\ntos_net_downloader.ract
+- tgui\src\interfaces\ntos_net_monitor.ract
+- tgui\src\interfaces\ntos_net_transfer.ract
+- tgui\src\interfaces\ntos_power_monitor.ract
+- tgui\src\interfaces\ntos_revelation.ract
+- tgui\src\interfaces\ntos_station_alert.ract
+- tgui\src\interfaces\ntos_supermatter_monitor.ract
+- tgui\src\interfaces\ntosheader.ract
+- tgui\src\interfaces\nuclear_bomb.ract
+- tgui\src\interfaces\operating_computer.ract
+- tgui\src\interfaces\ore_redemption_machine.ract
+- tgui\src\interfaces\pandemic.ract
+- tgui\src\interfaces\personal_crafting.ract
+- tgui\src\interfaces\portable_generator.ract
+- tgui\src\interfaces\portable_pump.ract
+- tgui\src\interfaces\portable_scrubber.ract
+- tgui\src\interfaces\power_monitor.ract
+- tgui\src\interfaces\radio.ract
+- tgui\src\interfaces\rdconsole.ract
+- tgui\src\interfaces\rdconsole\circuit.ract
+- tgui\src\interfaces\rdconsole\designview.ract
+- tgui\src\interfaces\rdconsole\destruct.ract
+- tgui\src\interfaces\rdconsole\diskopsdesign.ract
+- tgui\src\interfaces\rdconsole\diskopstech.ract
+- tgui\src\interfaces\rdconsole\nodeview.ract
+- tgui\src\interfaces\rdconsole\protolathe.ract
+- tgui\src\interfaces\rdconsole\rdheader.ract
+- tgui\src\interfaces\rdconsole\settings.ract
+- tgui\src\interfaces\rdconsole\techweb.ract
+- tgui\src\interfaces\reaction_chamber.ract
+- tgui\src\interfaces\roulette.ract
+- tgui\src\interfaces\roulette.styl
+- tgui\src\interfaces\rpd.ract
+- tgui\src\interfaces\sat_control.ract
+- tgui\src\interfaces\scanner_gate.ract
+- tgui\src\interfaces\scrubbing_types.ract
+- tgui\src\interfaces\shuttle_manipulator.ract
+- tgui\src\interfaces\shuttle_manipulator\modification.ract
+- tgui\src\interfaces\shuttle_manipulator\status.ract
+- tgui\src\interfaces\shuttle_manipulator\templates.ract
+- tgui\src\interfaces\sleeper.ract
+- tgui\src\interfaces\slime_swap_body.ract
+- tgui\src\interfaces\smartvend.ract
+- tgui\src\interfaces\smes.ract
+- tgui\src\interfaces\smoke_machine.ract
+- tgui\src\interfaces\solar_control.ract
+- tgui\src\interfaces\space_heater.ract
+- tgui\src\interfaces\spawners_menu.ract
+- tgui\src\interfaces\station_alert.ract
+- tgui\src\interfaces\suit_storage_unit.ract
+- tgui\src\interfaces\synd_contract.ract
+- tgui\src\interfaces\synthesizer.ract
+- tgui\src\interfaces\tank_dispenser.ract
+- tgui\src\interfaces\tanks.ract
+- tgui\src\interfaces\thermomachine.ract
+- tgui\src\interfaces\turbine_computer.ract
+- tgui\src\interfaces\uplink.ract
+- tgui\src\interfaces\vault_controller.ract
+- tgui\src\interfaces\wires.ract
+- tgui\src\styles\clockwork.styl
+- tgui\src\styles\nanotrasen.styl
+- tgui\src\styles\syndicate.styl
+- tgui\src\tgui.js
+- tgui\src\tgui.ract
+- tgui\src\tgui.styl
+- tgui\src\util\byond.js
+- tgui\src\util\colors.styl
+- tgui\src\util\constants.js
+- tgui\src\util\dragresize.js
+- tgui\src\util\filter.js
+- tgui\src\util\math.js
+- tgui\src\util\misc.styl
+- tgui\src\util\text.js
+- tgui\src\util\text.styl
+- tgui\src\util\tooltip.styl
+- tools\appveyor\build.ps1
+- tools\appveyor\download_byond.sh
+- tools\ci\check_required_commits.sh
+- tools\ci\validate_dme.py
+- tools\ColonCatcher\ColonCatcher.py
+- tools\dmitool\.gitignore
+- tools\dmitool\build.gradle
+- tools\dmitool\check_icon_state_limit.py
+- tools\dmitool\dmimerge.sh
+- tools\dmitool\dmitool.jar
+- tools\dmitool\dmitool.py
+- tools\dmitool\git_merge_installer.bat
+- tools\dmitool\git_merge_installer.sh
+- tools\dmitool\merging.txt
+- tools\dmitool\README.txt
+- tools\dmitool\src\main\java\dmitool\DMI.java
+- tools\dmitool\src\main\java\dmitool\DMIDiff.java
+- tools\dmitool\src\main\java\dmitool\DMIException.java
+- tools\dmitool\src\main\java\dmitool\IconState.java
+- tools\dmitool\src\main\java\dmitool\IconStateDiff.java
+- tools\dmitool\src\main\java\dmitool\Image.java
+- tools\dmitool\src\main\java\dmitool\Main.java
+- tools\dmitool\src\main\java\dmitool\NonPalettedImage.java
+- tools\dmitool\src\main\java\dmitool\PalettedImage.java
+- tools\dmitool\src\main\java\dmitool\PNGChunk.java
+- tools\dmitool\src\main\java\dmitool\RGBA.java
+- tools\docker\apt-node-prefs
+- tools\docker\juke-build.sh
+- tools\docker\nodesource.gpg
+- tools\docker\nodesource.list
+- tools\docker\runner-entrypoint.sh
+- tools\GenerateChangelog\makeChangelog.bat
+- tools\GenerateChangelog\makeChangelog.sh
+- tools\GenerateChangelog\ss13_genchangelog.py
+- tools\HitboxExpander\.gitignore
+- tools\HitboxExpander\hitbox_expander.py
+- tools\HitboxExpander\README
+- tools\HitboxExpander\third_party\Imaging-1.1.7.zip
+- tools\HitboxExpander\third_party\zlib.zip
+- tools\hooks\__install.bat
+- tools\hooks\_Install.bat
+- tools\linux_build.py
+- tools\MapAtmosFixer\MapAtmosFixer.exe
+- tools\MapAtmosFixer\MapAtmosFixer.pdb
+- tools\MapAtmosFixer\MapAtmosFixer.sln
+- tools\MapAtmosFixer\MapAtmosFixer.suo
+- tools\MapAtmosFixer\MapAtmosFixer\Mapatmosfixer.cs
+- tools\MapAtmosFixer\MapAtmosFixer\MapAtmosFixer.csproj
+- tools\MapAtmosFixer\MapAtmosFixer\Program.cs
+- tools\MapAtmosFixer\MapAtmosFixer\Properties\AssemblyInfo.cs
+- tools\MapAtmosFixer\Readme.txt
+- tools\mapmerge2\dmi.py
+- tools\mapmerge2\dmm2tgm.bat
+- tools\mapmerge2\map_scripts\apc_pixel_offsets.txt
+- tools\mapmerge2\map_scripts\clothingunderrepath.txt
+- tools\mapmerge2\map_scripts\cornersfix.txt
+- tools\mapmerge2\map_scripts\turfs2decals.txt
+- tools\mapmerge2\mapmerge.bat
+- tools\mapmerge2\merge_driver_dmi.py
+- tools\mapmerge2\Prepare Maps.bat
+- tools\mapmerge2\requirements.txt
+- tools\mapmerge2\requirements-install.bat
+- tools\mapmerge2\tgm2dmm.bat
+- tools\mapmerge2\update_paths.py
+- tools\MapTileImageTool\MapTileImageTool.py
+- tools\midi2piano\easygui\__init__.py
+- tools\midi2piano\midi\__init__.py
+- tools\midi2piano\midi\midi.py
+- tools\midi2piano\pyperclip\clipboards.py
+- tools\midi2piano\pyperclip\__init__.py
+- tools\midi2piano\pyperclip\exceptions.py
+- tools\midi2piano\pyperclip\windows.py
+- tools\readme.txt
+- tools\Redirector\config.txt
+- tools\Redirector\Configurations.dm
+- tools\Redirector\Redirect_Tgstation.dme
+- tools\Redirector\Redirector.dm
+- tools\Redirector\skin.dmf
+- tools\Redirector\textprocs.dm
+- tools\Runtime Condenser\.gitignore
+- tools\Runtime Condenser\Input.txt
+- tools\Runtime Condenser\Output.txt
+- tools\Runtime Condenser\RuntimeCondenser.exe
+- tools\Runtime Condenser\task.bat
+- tools\runtimes\.gitignore
+- tools\runtimes\post_runtime.py
+- tools\runtimes\runtime.py
+- tools\SS13SmoothingCutter\2-smooth.dmi
+- tools\SS13SmoothingCutter\2.dmi
+- tools\SS13SmoothingCutter\builderstone01.dmi
+- tools\SS13SmoothingCutter\dgdg.dmi
+- tools\SS13SmoothingCutter\ExampleInput_1-2.dmi
+- tools\SS13SmoothingCutter\ExampleInput_1-2.dmi.tmp
+- tools\SS13SmoothingCutter\spookywalls.dmi
+- tools\SS13SmoothingCutter\stmn.dmi
+- tools\SS13SmoothingCutter\vert.dmi
+- tools\SS13SmoothingCutter\wallsspanish01.dmi
+- tools\tgs4_scripts\PostCompile.sh
+- tools\tgs4_scripts\PreSynchronize.bat
+- tools\tgs4_scripts\PreSynchronize.ps1
+- tools\tgs4_scripts\PreSynchronize.sh
+- tools\tgs_scripts\PreSynchronize.sh
+- tools\TGUICompiler.php
+- tools\travis\build_bsql.sh
+- tools\travis\build_tgui.sh
+- tools\travis\check_changelogs.sh
+- tools\travis\check_filedirs.sh
+- tools\travis\check_grep.sh
+- tools\travis\dm.sh
+- tools\travis\install_build_tools.sh
+- tools\travis\install_byond.sh
+- tools\travis\install_libmariadb.sh
+- tools\travis\install_rust_g.sh
+- tools\travis\install_spaceman_dmm.sh
+- tools\travis\run_server.sh
+- tools\travis\template_dm_generator.py
+- tools\travis\travis_config.txt
+- tools\UnquotedListAssociations\2016-11-27-unquoted_list_associations_log.txt
+- tools\UnquotedListAssociations\UnquotedListAssociations.py
+- tools\UnstandardnessTestForDM\readme.txt
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM.sln
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM.suo
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\bin\Debug\UnstandardnessTestForDM.exe
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\bin\Debug\UnstandardnessTestForDM.pdb
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\bin\Debug\UnstandardnessTestForDM.vshost.exe
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\Form1.cs
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\Form1.Designer.cs
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\Form1.resx
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\obj\x86\Debug\GenerateResource.read.1.tlog
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\obj\x86\Debug\GenerateResource.write.1.tlog
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\obj\x86\Debug\UnstandardnessTestForDM.csproj.FileListAbsolute.txt
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\obj\x86\Debug\UnstandardnessTestForDM.exe
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\obj\x86\Debug\UnstandardnessTestForDM.Form1.resources
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\obj\x86\Debug\UnstandardnessTestForDM.pdb
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\obj\x86\Debug\UnstandardnessTestForDM.Properties.Resources.resources
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\Program.cs
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\Properties\AssemblyInfo.cs
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\Properties\Resources.Designer.cs
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\Properties\Resources.resx
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\Properties\Settings.Designer.cs
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\Properties\Settings.settings
+- tools\UnstandardnessTestForDM\UnstandardnessTestForDM\UnstandardnessTestForDM.csproj
+- tools\UpdatePaths\Scripts\2599-the-subtyping.txt
+- tools\UpdatePaths\Scripts\2725-standardization-end-of-evangelion.txt
+- tools\vox_list_generator\.gitignore
+- tools\vox_list_generator\generate_dm_list.bat
+- tools\vox_list_generator\generate_dm_list.py
+
+## List of non-modular folders found in TG code
+
+- _maps\map_files\oldtown
+- _maps\map_files\roguetest
+- _maps\map_files\roguetown
+- _maps\map_files\roguetown2
+- _maps\map_files\roguewar
+- _maps\map_files\rogueworld
+- code\module\roguetown
+
+### Misc notes for later
+
+1. Open all maps later in StrongDMM and convert them to StrongDMM map file type instead of using default DMM

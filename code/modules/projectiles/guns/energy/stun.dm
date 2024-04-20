@@ -1,48 +1,72 @@
 /obj/item/gun/energy/taser
 	name = "taser gun"
-	desc = ""
+	desc = "A low-capacity, energy-based stun gun used by security teams to subdue targets at range."
 	icon_state = "taser"
-	item_state = null	//so the human update icon uses the icon_state instead.
+	inhand_icon_state = null //so the human update icon uses the icon_state instead.
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode)
 	ammo_x_offset = 3
 
-/obj/item/gun/energy/tesla_revolver
-	name = "tesla gun"
-	desc = ""
-	icon_state = "tesla"
-	item_state = "tesla"
-	ammo_type = list(/obj/item/ammo_casing/energy/tesla_revolver)
-	can_flashlight = FALSE
-	pin = null
-	shaded_charge = 1
-
 /obj/item/gun/energy/e_gun/advtaser
 	name = "hybrid taser"
-	desc = ""
+	desc = "A dual-mode taser designed to fire both short-range high-power electrodes and long-range disabler beams."
 	icon_state = "advtaser"
 	ammo_type = list(/obj/item/ammo_casing/energy/electrode, /obj/item/ammo_casing/energy/disabler)
 	ammo_x_offset = 2
 
 /obj/item/gun/energy/e_gun/advtaser/cyborg
 	name = "cyborg taser"
-	desc = ""
-	can_flashlight = FALSE
+	desc = "An integrated hybrid taser that draws directly from a cyborg's power cell. The weapon contains a limiter to prevent the cyborg's power cell from overheating."
 	can_charge = FALSE
 	use_cyborg_cell = TRUE
+
+/obj/item/gun/energy/e_gun/advtaser/cyborg/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_ALL)
+
+/obj/item/gun/energy/e_gun/advtaser/cyborg/add_seclight_point()
+	return
 
 /obj/item/gun/energy/disabler
 	name = "disabler"
-	desc = ""
+	desc = "A self-defense weapon that exhausts organic targets, weakening them until they collapse."
 	icon_state = "disabler"
-	item_state = null
+	inhand_icon_state = null
 	ammo_type = list(/obj/item/ammo_casing/energy/disabler)
 	ammo_x_offset = 2
-	can_flashlight = TRUE
-	flight_x_offset = 15
-	flight_y_offset = 10
+
+/obj/item/gun/energy/disabler/add_seclight_point()
+	AddComponent(/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 15, \
+		overlay_y = 10)
+
+/obj/item/gun/energy/disabler/smg
+	name = "disabler smg"
+	desc = "An automatic disabler variant, as opposed to the conventional model, boasts a higher ammunition capacity at the cost of slightly reduced beam effectiveness."
+	icon_state = "disabler_smg"
+	ammo_type = list(/obj/item/ammo_casing/energy/disabler/smg)
+	shaded_charge = 1
+
+/obj/item/gun/energy/disabler/smg/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/automatic_fire, 0.15 SECONDS, allow_akimbo = FALSE)
+
+/obj/item/gun/energy/disabler/add_seclight_point()
+	AddComponent(\
+		/datum/component/seclite_attachable, \
+		light_overlay_icon = 'icons/obj/weapons/guns/flashlights.dmi', \
+		light_overlay = "flight", \
+		overlay_x = 15, \
+		overlay_y = 13, \
+	)
 
 /obj/item/gun/energy/disabler/cyborg
 	name = "cyborg disabler"
-	desc = ""
+	desc = "An integrated disabler that draws from a cyborg's power cell. This weapon contains a limiter to prevent the cyborg's power cell from overheating."
 	can_charge = FALSE
 	use_cyborg_cell = TRUE
+
+/obj/item/gun/energy/disabler/cyborg/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/empprotection, EMP_PROTECT_ALL)

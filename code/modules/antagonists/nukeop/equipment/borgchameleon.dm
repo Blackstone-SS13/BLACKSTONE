@@ -1,22 +1,23 @@
+#define ACTIVATION_COST (0.3 * STANDARD_CELL_CHARGE)
+#define ACTIVATION_UP_KEEP (0.025 * STANDARD_CELL_RATE)
+
 /obj/item/borg_chameleon
 	name = "cyborg chameleon projector"
-	icon = 'icons/obj/device.dmi'
+	icon = 'icons/obj/devices/syndie_gadget.dmi'
 	icon_state = "shield0"
-	flags_1 = CONDUCT_1
+	obj_flags = CONDUCTS_ELECTRICITY
 	item_flags = NOBLUDGEON
-	item_state = "electronic"
-	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'
+	inhand_icon_state = "electronic"
+	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
 	w_class = WEIGHT_CLASS_SMALL
 	var/friendlyName
 	var/savedName
 	var/active = FALSE
-	var/activationCost = 300
-	var/activationUpkeep = 50
 	var/disguise = "engineer"
 	var/mob/listeningTo
 	var/static/list/signalCache = list( // list here all signals that should break the camouflage
-			COMSIG_PARENT_ATTACKBY,
+			COMSIG_ATOM_ATTACKBY,
 			COMSIG_ATOM_ATTACK_HAND,
 			COMSIG_MOVABLE_IMPACT_ZONE,
 			COMSIG_ATOM_BULLET_ACT,
@@ -27,7 +28,7 @@
 	var/mob/living/silicon/robot/user // needed for process()
 	var/animation_playing = FALSE
 
-/obj/item/borg_chameleon/Initialize()
+/obj/item/borg_chameleon/Initialize(mapload)
 	. = ..()
 	friendlyName = pick(GLOB.ai_names)
 
@@ -44,55 +45,40 @@
 	disrupt(user)
 
 /obj/item/borg_chameleon/attack_self(mob/living/silicon/robot/user)
-	if (user && user.cell && user.cell.charge >  activationCost)
+	if (user && user.cell && user.cell.charge >  ACTIVATION_COST)
 		if (isturf(user.loc))
 			toggle(user)
 		else
-			to_chat(user, "<span class='warning'>I can't use [src] while inside something!</span>")
+			to_chat(user, span_warning("You can't use [src] while inside something!"))
 	else
-		to_chat(user, "<span class='warning'>I need at least [activationCost] charge in my cell to use [src]!</span>")
+		to_chat(user, span_warning("You need at least [display_energy(ACTIVATION_COST)] of charge in your cell to use [src]!"))
 
 /obj/item/borg_chameleon/proc/toggle(mob/living/silicon/robot/user)
 	if(active)
-		playsound(src, 'sound/blank.ogg', 100, TRUE, -6)
-		to_chat(user, "<span class='notice'>I deactivate \the [src].</span>")
+		playsound(src, 'sound/effects/pop.ogg', 100, TRUE, -6)
+		to_chat(user, span_notice("You deactivate \the [src]."))
 		deactivate(user)
 	else
 		if(animation_playing)
-			to_chat(user, "<span class='notice'>\the [src] is recharging.</span>")
+			to_chat(user, span_notice("\the [src] is recharging."))
 			return
 		animation_playing = TRUE
-		to_chat(user, "<span class='notice'>I activate \the [src].</span>")
-		playsound(src, 'sound/blank.ogg', 100, TRUE, -6)
-		var/start = user.filters.len
-		var/X,Y,rsq,i,f
-		for(i=1, i<=7, ++i)
-			do
-				X = 60*rand() - 30
-				Y = 60*rand() - 30
-				rsq = X*X + Y*Y
-			while(rsq<100 || rsq>900)
-			user.filters += filter(type="wave", x=X, y=Y, size=rand()*2.5+0.5, offset=rand())
-		for(i=1, i<=7, ++i)
-			f = user.filters[start+i]
-			animate(f, offset=f:offset, time=0, loop=3, flags=ANIMATION_PARALLEL)
-			animate(offset=f:offset-1, time=rand()*20+10)
-		if (do_after(user, 50, target=user) && user.cell.use(activationCost))
-			playsound(src, 'sound/blank.ogg', 100, TRUE, -6)
-			to_chat(user, "<span class='notice'>I are now disguised as the Nanotrasen engineering borg \"[friendlyName]\".</span>")
+		to_chat(user, span_notice("You activate \the [src]."))
+		playsound(src, 'sound/effects/seedling_chargeup.ogg', 100, TRUE, -6)
+		apply_wibbly_filters(user)
+		if (do_after(user, 5 SECONDS, target = user, hidden = TRUE) && user.cell.use(ACTIVATION_COST))
+			playsound(src, 'sound/effects/bamf.ogg', 100, TRUE, -6)
+			to_chat(user, span_notice("You are now disguised as the Nanotrasen engineering borg \"[friendlyName]\"."))
 			activate(user)
 		else
-			to_chat(user, "<span class='warning'>The chameleon field fizzles.</span>")
+			to_chat(user, span_warning("The chameleon field fizzles."))
 			do_sparks(3, FALSE, user)
-			for(i=1, i<=min(7, user.filters.len), ++i) // removing filters that are animating does nothing, we gotta stop the animations first
-				f = user.filters[start+i]
-				animate(f)
-		user.filters = null
+		remove_wibbly_filters(user)
 		animation_playing = FALSE
 
-/obj/item/borg_chameleon/process()
+/obj/item/borg_chameleon/process(seconds_per_tick)
 	if (user)
-		if (!user.cell || !user.cell.use(activationUpkeep))
+		if (!user.cell || !user.cell.use(ACTIVATION_UP_KEEP * seconds_per_tick))
 			disrupt(user)
 	else
 		return PROCESS_KILL
@@ -102,7 +88,8 @@
 	src.user = user
 	savedName = user.name
 	user.name = friendlyName
-	user.module.cyborg_base_icon = disguise
+	user.model.cyborg_base_icon = disguise
+	user.model.name = capitalize(disguise)
 	user.bubble_icon = "robot"
 	active = TRUE
 	user.update_icons()
@@ -111,7 +98,7 @@
 		return
 	if(listeningTo)
 		UnregisterSignal(listeningTo, signalCache)
-	RegisterSignal(user, signalCache, PROC_REF(disrupt))
+	RegisterSignals(user, signalCache, PROC_REF(disrupt))
 	listeningTo = user
 
 /obj/item/borg_chameleon/proc/deactivate(mob/living/silicon/robot/user)
@@ -121,13 +108,18 @@
 		listeningTo = null
 	do_sparks(5, FALSE, user)
 	user.name = savedName
-	user.module.cyborg_base_icon = initial(user.module.cyborg_base_icon)
+	user.model.cyborg_base_icon = initial(user.model.cyborg_base_icon)
+	user.model.name = initial(user.model.name)
 	user.bubble_icon = "syndibot"
 	active = FALSE
 	user.update_icons()
 	src.user = user
 
 /obj/item/borg_chameleon/proc/disrupt(mob/living/silicon/robot/user)
+	SIGNAL_HANDLER
 	if(active)
-		to_chat(user, "<span class='danger'>My chameleon field deactivates.</span>")
+		to_chat(user, span_danger("Your chameleon field deactivates."))
 		deactivate(user)
+
+#undef ACTIVATION_COST
+#undef ACTIVATION_UP_KEEP

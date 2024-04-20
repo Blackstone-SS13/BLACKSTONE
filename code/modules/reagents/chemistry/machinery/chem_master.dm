@@ -1,410 +1,546 @@
 /obj/machinery/chem_master
 	name = "ChemMaster 3000"
-	desc = ""
+	desc = "Used to separate chemicals and distribute them in a variety of forms."
+	icon = 'icons/obj/medical/chemical.dmi'
+	icon_state = "chemmaster"
+	base_icon_state = "chemmaster"
 	density = TRUE
-	layer = BELOW_OBJ_LAYER
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "mixer0"
-	use_power = IDLE_POWER_USE
-	idle_power_usage = 20
+	idle_power_usage = BASE_MACHINE_IDLE_CONSUMPTION * 0.2
+	active_power_usage = BASE_MACHINE_ACTIVE_CONSUMPTION * 0.2
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	circuit = /obj/item/circuitboard/machine/chem_master
-	ui_x = 465
-	ui_y = 550
 
-	var/obj/item/reagent_containers/beaker = null
-	var/obj/item/storage/pill_bottle/bottle = null
-	var/mode = 1
-	var/condi = FALSE
-	var/chosenPillStyle = 1
-	var/screen = "home"
-	var/analyzeVars[0]
-	var/useramount = 30 // Last used amount
-	var/list/pillStyles = null
+	/// Inserted reagent container
+	var/obj/item/reagent_containers/beaker
+	/// Whether separated reagents should be moved back to container or destroyed.
+	var/is_transfering = TRUE
+	/// List of printable container types
+	var/list/printable_containers
+	/// Container used by default to reset to
+	var/obj/item/reagent_containers/default_container
+	/// Selected printable container type
+	var/obj/item/reagent_containers/selected_container
+	/// Whether the machine is busy with printing containers
+	var/is_printing = FALSE
+	/// Number of containers printed so far
+	var/printing_progress
+	/// Number of containers to be printed
+	var/printing_total
+	/// The amount of containers that can be printed in 1 cycle
+	var/printing_amount = 1
 
-/obj/machinery/chem_master/Initialize()
+/obj/machinery/chem_master/Initialize(mapload)
 	create_reagents(100)
 
-	//Calculate the span tags and ids fo all the available pill icons
-	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
-	pillStyles = list()
-	for (var/x in 1 to PILL_STYLE_COUNT)
-		var/list/SL = list()
-		SL["id"] = x
-		SL["className"] = assets.icon_class_name("pill[x]")
-		pillStyles += list(SL)
+	printable_containers = load_printable_containers()
+	default_container = printable_containers[printable_containers[1]][1]
+	selected_container = default_container
+
+	register_context()
 
 	. = ..()
 
+	var/obj/item/circuitboard/machine/chem_master/board = circuit
+	board.build_path = type
+	board.name = name
+
 /obj/machinery/chem_master/Destroy()
 	QDEL_NULL(beaker)
-	QDEL_NULL(bottle)
 	return ..()
+
+/obj/machinery/chem_master/add_context(atom/source, list/context, obj/item/held_item, mob/user)
+	. = NONE
+	if(isnull(held_item) || (held_item.item_flags & ABSTRACT) || (held_item.flags_1 & HOLOGRAM_1))
+		if(isnull(held_item))
+			context[SCREENTIP_CONTEXT_RMB] = "Remove beaker"
+			. = CONTEXTUAL_SCREENTIP_SET
+		return .
+
+	if(is_reagent_container(held_item) && held_item.is_open_container())
+		if(!QDELETED(beaker))
+			context[SCREENTIP_CONTEXT_LMB] = "Replace beaker"
+		else
+			context[SCREENTIP_CONTEXT_LMB] = "Insert beaker"
+		return CONTEXTUAL_SCREENTIP_SET
+
+	if(held_item.tool_behaviour == TOOL_SCREWDRIVER)
+		context[SCREENTIP_CONTEXT_LMB] = "[panel_open ? "Close" : "Open"] panel"
+		return CONTEXTUAL_SCREENTIP_SET
+	else if(held_item.tool_behaviour == TOOL_WRENCH)
+		context[SCREENTIP_CONTEXT_LMB] = "[anchored ? "Un" : ""] anchor"
+		return CONTEXTUAL_SCREENTIP_SET
+	else if(panel_open && held_item.tool_behaviour == TOOL_CROWBAR)
+		context[SCREENTIP_CONTEXT_LMB] = "Deconstruct"
+		return CONTEXTUAL_SCREENTIP_SET
+
+/obj/machinery/chem_master/examine(mob/user)
+	. = ..()
+	if(in_range(user, src) || isobserver(user))
+		. += span_notice("The status display reads:<br>Reagent buffer capacity: <b>[reagents.maximum_volume]</b> units.<br>Number of containers printed per cycle <b>[printing_amount]</b>.")
+		if(!QDELETED(beaker))
+			. += span_notice("[beaker] of <b>[beaker.reagents.maximum_volume]u</b> capacity inserted")
+			. += span_notice("Right click with empty hand to remove beaker")
+		else
+			. += span_warning("Missing input beaker")
+
+		. += span_notice("It can be [EXAMINE_HINT("wrenched")] [anchored ? "loose" : "in place"]")
+		. += span_notice("Its maintainence panel can be [EXAMINE_HINT("screwed")] [panel_open ? "close" : "open"]")
+		if(panel_open)
+			. += span_notice("The machine can be [EXAMINE_HINT("pried")] apart.")
+
+/obj/machinery/chem_master/update_appearance(updates)
+	. = ..()
+	if(panel_open || (machine_stat & (NOPOWER|BROKEN)))
+		set_light(0)
+	else
+		set_light(1, 1, "#fffb00")
+
+/obj/machinery/chem_master/update_overlays()
+	. = ..()
+	if(!isnull(beaker))
+		. += mutable_appearance(icon, base_icon_state + "_overlay_container")
+	if(machine_stat & BROKEN)
+		. += mutable_appearance(icon, base_icon_state + "_overlay_broken")
+	if(panel_open)
+		. += mutable_appearance(icon, base_icon_state + "_overlay_panel")
+
+	if(is_printing)
+		. += mutable_appearance(icon, base_icon_state + "_overlay_extruder_active")
+	else
+		. += mutable_appearance(icon, base_icon_state + "_overlay_extruder")
+
+	// Screen overlay
+	if(!panel_open && !(machine_stat & (NOPOWER | BROKEN)))
+		var/screen_overlay = base_icon_state + "_overlay_screen"
+		if(is_printing)
+			screen_overlay += "_active"
+		else if(reagents.total_volume > 0)
+			screen_overlay += "_main"
+		. += mutable_appearance(icon, screen_overlay)
+		. += emissive_appearance(icon, base_icon_state + "_overlay_lightmask", src, alpha = src.alpha)
+
+	// Buffer reagents overlay
+	if(reagents.total_volume)
+		var/threshold = null
+		var/static/list/fill_icon_thresholds = list(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+		for(var/i in 1 to fill_icon_thresholds.len)
+			if(ROUND_UP(100 * (reagents.total_volume / reagents.maximum_volume)) >= fill_icon_thresholds[i])
+				threshold = i
+		if(threshold)
+			var/fill_name = "chemmaster[fill_icon_thresholds[threshold]]"
+			var/mutable_appearance/filling = mutable_appearance('icons/obj/medical/reagent_fillings.dmi', fill_name)
+			filling.color = mix_color_from_reagents(reagents.reagent_list)
+			. += filling
+
+/obj/machinery/chem_master/Exited(atom/movable/gone, direction)
+	. = ..()
+	if(gone == beaker)
+		beaker = null
+		update_appearance(UPDATE_OVERLAYS)
+
+/obj/machinery/chem_master/on_set_is_operational(old_value)
+	if(!is_operational)
+		is_printing = FALSE
+	update_appearance(UPDATE_OVERLAYS)
 
 /obj/machinery/chem_master/RefreshParts()
+	. = ..()
 	reagents.maximum_volume = 0
-	for(var/obj/item/reagent_containers/glass/beaker/B in component_parts)
-		reagents.maximum_volume += B.reagents.maximum_volume
+	for(var/obj/item/reagent_containers/cup/beaker/beaker in component_parts)
+		reagents.maximum_volume += beaker.reagents.maximum_volume
 
-/obj/machinery/chem_master/ex_act(severity, target)
-	if(severity < 3)
-		..()
+	printing_amount = 0
+	for(var/datum/stock_part/servo/servo in component_parts)
+		printing_amount += servo.tier * 12.5
+	printing_amount = min(50, ROUND_UP(printing_amount))
 
-/obj/machinery/chem_master/contents_explosion(severity, target)
-	..()
-	if(beaker)
-		beaker.ex_act(severity, target)
-	if(bottle)
-		bottle.ex_act(severity, target)
+///Return a map of category->list of containers this machine can print
+/obj/machinery/chem_master/proc/load_printable_containers()
+	PROTECTED_PROC(TRUE)
+	SHOULD_BE_PURE(TRUE)
 
-/obj/machinery/chem_master/handle_atom_del(atom/A)
-	..()
-	if(A == beaker)
-		beaker = null
-		reagents.clear_reagents()
-		update_icon()
-	else if(A == bottle)
-		bottle = null
+	var/static/list/containers
+	if(!length(containers))
+		containers = list(
+			CAT_TUBES = GLOB.reagent_containers[CAT_TUBES],
+			CAT_PILLS = GLOB.reagent_containers[CAT_PILLS],
+			CAT_PATCHES = GLOB.reagent_containers[CAT_PATCHES],
+		)
+	return containers
 
-/obj/machinery/chem_master/update_icon()
-	cut_overlays()
-	if (stat & BROKEN)
-		add_overlay("waitlight")
-	if(beaker)
-		icon_state = "mixer1"
-	else
-		icon_state = "mixer0"
+/obj/machinery/chem_master/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.combat_mode || (tool.item_flags & ABSTRACT) || (tool.flags_1 & HOLOGRAM_1) || !can_interact(user) || !user.can_perform_action(src, ALLOW_SILICON_REACH | FORBID_TELEKINESIS_REACH))
+		return NONE
 
-/obj/machinery/chem_master/blob_act(obj/structure/blob/B)
-	if (prob(50))
-		qdel(src)
+	if(is_reagent_container(tool) && tool.is_open_container())
+		replace_beaker(user, tool)
+		if(!panel_open)
+			ui_interact(user)
+			return ITEM_INTERACT_SUCCESS
+		else
+			return ITEM_INTERACT_BLOCKING
 
-/obj/machinery/chem_master/attackby(obj/item/I, mob/user, params)
-	if(default_deconstruction_screwdriver(user, "mixer0_nopower", "mixer0", I))
-		return
+	return NONE
 
-	else if(default_deconstruction_crowbar(I))
-		return
+/obj/machinery/chem_master/wrench_act(mob/living/user, obj/item/tool)
+	if(user.combat_mode)
+		return NONE
 
-	if(default_unfasten_wrench(user, I))
-		return
-	if(istype(I, /obj/item/reagent_containers) && !(I.item_flags & ABSTRACT) && I.is_open_container())
-		. = TRUE // no afterattack
-		if(panel_open)
-			to_chat(user, "<span class='warning'>I can't use the [src.name] while its panel is opened!</span>")
-			return
-		var/obj/item/reagent_containers/B = I
-		. = TRUE // no afterattack
-		if(!user.transferItemToLoc(B, src))
-			return
-		replace_beaker(user, B)
-		to_chat(user, "<span class='notice'>I add [B] to [src].</span>")
-		updateUsrDialog()
-		update_icon()
-	else if(!condi && istype(I, /obj/item/storage/pill_bottle))
-		if(bottle)
-			to_chat(user, "<span class='warning'>A pill bottle is already loaded into [src]!</span>")
-			return
-		if(!user.transferItemToLoc(I, src))
-			return
-		bottle = I
-		to_chat(user, "<span class='notice'>I add [I] into the dispenser slot.</span>")
-		updateUsrDialog()
-	else
-		return ..()
+	. = ITEM_INTERACT_BLOCKING
+	if(is_printing)
+		balloon_alert(user, "still printing!")
+		return .
 
-/obj/machinery/chem_master/AltClick(mob/living/user)
-	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, FALSE, NO_TK))
-		return
-	replace_beaker(user)
-	return
+	if(default_unfasten_wrench(user, tool) == SUCCESSFUL_UNFASTEN)
+		return ITEM_INTERACT_SUCCESS
 
+/obj/machinery/chem_master/screwdriver_act(mob/living/user, obj/item/tool)
+	if(user.combat_mode)
+		return NONE
+
+	. = ITEM_INTERACT_BLOCKING
+	if(is_printing)
+		balloon_alert(user, "still printing!")
+		return .
+
+	if(default_deconstruction_screwdriver(user, icon_state, icon_state, tool))
+		update_appearance(UPDATE_OVERLAYS)
+		return ITEM_INTERACT_SUCCESS
+
+/obj/machinery/chem_master/crowbar_act(mob/living/user, obj/item/tool)
+	if(user.combat_mode)
+		return NONE
+
+	. = ITEM_INTERACT_BLOCKING
+	if(is_printing)
+		balloon_alert(user, "still printing!")
+		return .
+
+	if(default_deconstruction_crowbar(tool))
+		return ITEM_INTERACT_SUCCESS
+
+/**
+ * Insert, remove, replace the existig beaker
+ * Arguments
+ *
+ * * mob/living/user - the player trying to replace the beaker
+ * * obj/item/reagent_containers/new_beaker - the beaker we are trying to insert, swap with existing or remove if null
+ */
 /obj/machinery/chem_master/proc/replace_beaker(mob/living/user, obj/item/reagent_containers/new_beaker)
-	if(beaker)
-		beaker.forceMove(drop_location())
-		if(user && Adjacent(user) && !issiliconoradminghost(user))
-			user.put_in_hands(beaker)
-	if(new_beaker)
+	PRIVATE_PROC(TRUE)
+
+	if(!QDELETED(beaker))
+		try_put_in_hand(beaker, user)
+	if(!QDELETED(new_beaker) && user.transferItemToLoc(new_beaker, src))
 		beaker = new_beaker
-	else
-		beaker = null
-	update_icon()
-	return TRUE
+	update_appearance(UPDATE_OVERLAYS)
 
-/obj/machinery/chem_master/on_deconstruction()
-	replace_beaker()
-	if(bottle)
-		bottle.forceMove(drop_location())
-		adjust_item_drop_location(bottle)
-		bottle = null
-	return ..()
+/obj/machinery/chem_master/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return .
+	if(!can_interact(user) || !user.can_perform_action(src, ALLOW_SILICON_REACH | FORBID_TELEKINESIS_REACH))
+		return .
+	replace_beaker(user)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/machinery/chem_master/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
-										datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/chem_master/attack_robot_secondary(mob/user, list/modifiers)
+	return attack_hand_secondary(user, modifiers)
+
+/obj/machinery/chem_master/attack_ai_secondary(mob/user, list/modifiers)
+	return attack_hand_secondary(user, modifiers)
+
+/obj/machinery/chem_master/ui_assets(mob/user)
+	return list(
+		get_asset_datum(/datum/asset/spritesheet/chemmaster)
+	)
+
+/obj/machinery/chem_master/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-//		var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
-//		assets.send(user)
-
-		ui = new(user, src, ui_key, "chem_master", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, "ChemMaster", name)
 		ui.open()
 
-//Insert our custom spritesheet css link into the html
-/obj/machinery/chem_master/ui_base_html(html)
-	var/datum/asset/spritesheet/simple/assets = get_asset_datum(/datum/asset/spritesheet/simple/pills)
-	. = replacetext(html, "<!--customheadhtml-->", assets.css_tag())
-
-/obj/machinery/chem_master/ui_data(mob/user)
+/obj/machinery/chem_master/ui_static_data(mob/user)
 	var/list/data = list()
-	data["isBeakerLoaded"] = beaker ? 1 : 0
-	data["beakerCurrentVolume"] = beaker ? beaker.reagents.total_volume : null
-	data["beakerMaxVolume"] = beaker ? beaker.volume : null
-	data["mode"] = mode
-	data["condi"] = condi
-	data["screen"] = screen
-	data["analyzeVars"] = analyzeVars
-	data["chosenPillStyle"] = chosenPillStyle
-	data["isPillBottleLoaded"] = bottle ? 1 : 0
-	if(bottle)
-		var/datum/component/storage/STRB = bottle.GetComponent(/datum/component/storage)
-		data["pillBottleCurrentAmount"] = bottle.contents.len
-		data["pillBottleMaxAmount"] = STRB.max_items
 
-	var/beakerContents[0]
-	if(beaker)
-		for(var/datum/reagent/R in beaker.reagents.reagent_list)
-			beakerContents.Add(list(list("name" = R.name, "id" = ckey(R.name), "volume" = R.volume))) // list in a list because Byond merges the first list...
-	data["beakerContents"] = beakerContents
+	data["categories"] = list()
+	for(var/category in printable_containers)
+		//make the category
+		var/list/category_list = list(
+			"name" = category,
+			"containers" = list(),
+		)
 
-	var/bufferContents[0]
-	if(reagents.total_volume)
-		for(var/datum/reagent/N in reagents.reagent_list)
-			bufferContents.Add(list(list("name" = N.name, "id" = ckey(N.name), "volume" = N.volume))) // ^
-	data["bufferContents"] = bufferContents
+		//add containers to this category
+		for(var/obj/item/reagent_containers/container as anything in printable_containers[category])
+			category_list["containers"] += list(list(
+				"icon" = sanitize_css_class_name("[container]"),
+				"ref" = REF(container),
+				"name" = initial(container.name),
+				"volume" = initial(container.volume),
+			))
 
-	//Calculated at init time as it never changes
-	data["pillStyles"] = pillStyles
+		//add the category
+		data["categories"] += list(category_list)
+
 	return data
 
-/obj/machinery/chem_master/ui_act(action, params)
-	if(..())
+/obj/machinery/chem_master/ui_data(mob/user)
+	. = list()
+
+	//printing statictics
+	.["isPrinting"] = is_printing
+	.["printingProgress"] = printing_progress
+	.["printingTotal"] = printing_total
+	.["maxPrintable"] = printing_amount
+
+	//contents of source beaker
+	var/list/beaker_data = null
+	if(!QDELETED(beaker))
+		beaker_data = list()
+		beaker_data["maxVolume"] = beaker.volume
+		beaker_data["currentVolume"] = round(beaker.reagents.total_volume, CHEMICAL_VOLUME_ROUNDING)
+		var/list/beakerContents = list()
+		if(length(beaker.reagents.reagent_list))
+			for(var/datum/reagent/reagent as anything in beaker.reagents.reagent_list)
+				beakerContents += list(list(
+					"ref" = "[reagent.type]",
+					"name" = reagent.name,
+					"volume" = round(reagent.volume, CHEMICAL_VOLUME_ROUNDING),
+					"pH" = reagent.ph,
+					"color" = reagent.color,
+					"description" = reagent.description,
+					"purity" = reagent.purity,
+					"metaRate" = reagent.metabolization_rate,
+					"overdose" = reagent.overdose_threshold,
+					"addictionTypes" = reagents.parse_addictions(reagent),
+				))
+		beaker_data["contents"] = beakerContents
+	.["beaker"] = beaker_data
+
+	//contents of buffer
+	beaker_data = list()
+	beaker_data["maxVolume"] = reagents.maximum_volume
+	beaker_data["currentVolume"] = round(reagents.total_volume, CHEMICAL_VOLUME_ROUNDING)
+	var/list/beakerContents = list()
+	if(length(reagents.reagent_list))
+		for(var/datum/reagent/reagent as anything in reagents.reagent_list)
+			beakerContents += list(list(
+				"ref" = "[reagent.type]",
+				"name" = reagent.name,
+				"volume" = round(reagent.volume, CHEMICAL_VOLUME_ROUNDING),
+				"pH" = reagent.ph,
+				"color" = reagent.color,
+				"description" = reagent.description,
+				"purity" = reagent.purity,
+				"metaRate" = reagent.metabolization_rate,
+				"overdose" = reagent.overdose_threshold,
+				"addictionTypes" = reagents.parse_addictions(reagent),
+			))
+	beaker_data["contents"] = beakerContents
+	.["buffer"] = beaker_data
+
+	//is transfering or destroying reagents. applied only for buffer
+	.["isTransfering"] = is_transfering
+
+	//container along with the suggested type
+	var/obj/item/reagent_containers/suggested_container = default_container
+	if(reagents.total_volume > 0)
+		var/datum/reagent/master_reagent = reagents.get_master_reagent()
+		var/container_found = FALSE
+		suggested_container = master_reagent.default_container
+		for(var/category in printable_containers)
+			for(var/obj/item/reagent_containers/container as anything in printable_containers[category])
+				if(container == suggested_container)
+					suggested_container = REF(container)
+					container_found = TRUE
+					break
+		if(!container_found)
+			suggested_container = REF(default_container)
+	.["suggestedContainerRef"] = suggested_container
+
+	//selected container
+	.["selectedContainerRef"] = REF(selected_container)
+	.["selectedContainerVolume"] = initial(selected_container.volume)
+
+/**
+ * Transfers a single reagent between buffer & beaker
+ * Arguments
+ *
+ * * mob/user - the player who is attempting the transfer
+ * * datum/reagents/source - the holder we are transferring from
+ * * datum/reagents/target - the holder we are transferring to
+ * * datum/reagent/path - the reagent typepath we are transfering
+ * * amount - volume to transfer -1 means custom amount
+ * * do_transfer - transfer the reagents else destroy them
+ */
+/obj/machinery/chem_master/proc/transfer_reagent(mob/user, datum/reagents/source, datum/reagents/target, datum/reagent/path, amount, do_transfer)
+	PRIVATE_PROC(TRUE)
+
+	//sanity checks for transfer amount
+	if(isnull(amount))
+		return FALSE
+	amount = text2num(amount)
+	if(isnull(amount))
+		return FALSE
+	if(amount == -1)
+		var/target_amount = tgui_input_number(user, "Enter amount to transfer", "Transfer amount")
+		if(!target_amount)
+			return FALSE
+		amount = text2num(target_amount)
+		if(isnull(amount))
+			return FALSE
+	if(amount <= 0)
+		return FALSE
+
+	//sanity checks for reagent path
+	var/datum/reagent/reagent = text2path(path)
+	if (!reagent)
+		return FALSE
+
+	//use energy
+	if(!use_energy(active_power_usage, force = FALSE))
+		return FALSE
+
+	//do the operation
+	. = FALSE
+	if(do_transfer)
+		if(target.is_reacting)
+			return FALSE
+		if(source.trans_to(target, amount, target_id = reagent))
+			. = TRUE
+	else if(source.remove_reagent(reagent, amount))
+		. = TRUE
+	if(. && !QDELETED(src)) //transferring volatile reagents can cause a explosion & destory us
+		update_appearance(UPDATE_OVERLAYS)
+	return .
+
+/obj/machinery/chem_master/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
+	if(.)
 		return
 
-	if(action == "eject")
-		replace_beaker(usr)
-		return TRUE
-
-	if(action == "ejectPillBottle")
-		if(!bottle)
-			return FALSE
-		bottle.forceMove(drop_location())
-		adjust_item_drop_location(bottle)
-		bottle = null
-		return TRUE
-
-	if(action == "transfer")
-		if(!beaker)
-			return FALSE
-		var/reagent = GLOB.name2reagent[params["id"]]
-		var/amount = text2num(params["amount"])
-		var/to_container = params["to"]
-		// Custom amount
-		if (amount == -1)
-			amount = text2num(input(
-				"Enter the amount you want to transfer:",
-				name, ""))
-		if (amount == null || amount <= 0)
-			return FALSE
-		if (to_container == "buffer")
-			beaker.reagents.trans_id_to(src, reagent, amount)
+	switch(action)
+		if("eject")
+			replace_beaker(ui.user)
 			return TRUE
-		if (to_container == "beaker" && mode)
-			reagents.trans_id_to(beaker, reagent, amount)
+
+		if("transfer")
+			if(is_printing)
+				say("buffer locked while printing!")
+				return
+
+			var/reagent_ref = params["reagentRef"]
+			var/amount = params["amount"]
+			var/target = params["target"]
+
+			if(target == "buffer")
+				return transfer_reagent(ui.user, beaker.reagents, reagents, reagent_ref, amount, TRUE)
+			else if(target == "beaker")
+				return transfer_reagent(ui.user, reagents, beaker.reagents, reagent_ref, amount, is_transfering)
+			return FALSE
+
+		if("toggleTransferMode")
+			is_transfering = !is_transfering
 			return TRUE
-		if (to_container == "beaker" && !mode)
-			reagents.remove_reagent(reagent, amount)
+
+		if("stopPrinting")
+			is_printing = FALSE
+			update_appearance(UPDATE_OVERLAYS)
 			return TRUE
-		return FALSE
 
-	if(action == "toggleMode")
-		mode = !mode
-		return TRUE
+		if("selectContainer")
+			var/obj/item/reagent_containers/target = locate(params["ref"])
+			if(!ispath(target))
+				return FALSE
 
-	if(action == "pillStyle")
-		var/id = text2num(params["id"])
-		chosenPillStyle = id
-		return TRUE
+			selected_container = target
+			return TRUE
 
-	if(action == "create")
-		if(reagents.total_volume == 0)
-			return FALSE
-		var/item_type = params["type"]
-		// Get amount of items
-		var/amount = text2num(params["amount"])
-		if(amount == null)
-			amount = text2num(input(usr,
-				"Max 10. Buffer content will be split evenly.",
-				"How many to make?", 1))
-		amount = CLAMP(round(amount), 0, 10)
-		if (amount <= 0)
-			return FALSE
-		// Get units per item
-		var/vol_each = text2num(params["volume"])
-		var/vol_each_text = params["volume"]
-		var/vol_each_max = reagents.total_volume / amount
-		if (item_type == "pill")
-			vol_each_max = min(50, vol_each_max)
-		else if (item_type == "patch")
-			vol_each_max = min(40, vol_each_max)
-		else if (item_type == "bottle")
-			vol_each_max = min(30, vol_each_max)
-		else if (item_type == "condimentPack")
-			vol_each_max = min(10, vol_each_max)
-		else if (item_type == "condimentBottle")
-			vol_each_max = min(50, vol_each_max)
-		else
-			return FALSE
-		if(vol_each_text == "auto")
-			vol_each = vol_each_max
-		if(vol_each == null)
-			vol_each = text2num(input(usr,
-				"Maximum [vol_each_max] units per item.",
-				"How many units to fill?",
-				vol_each_max))
-		vol_each = CLAMP(round(vol_each), 0, vol_each_max)
-		if(vol_each <= 0)
-			return FALSE
-		// Get item name
-		var/name = params["name"]
-		var/name_has_units = item_type == "pill" || item_type == "patch"
-		if(!name)
-			var/name_default = reagents.get_master_reagent_name()
-			if (name_has_units)
-				name_default += " ([vol_each]u)"
-			name = stripped_input(usr,
-				"Name:",
-				"Give it a name!",
-				name_default,
+		if("create")
+			if(!reagents.total_volume || is_printing)
+				return FALSE
+
+			//validate print count
+			var/item_count = params["itemCount"]
+			if(isnull(item_count))
+				return FALSE
+			item_count = text2num(item_count)
+			if(isnull(item_count) || item_count <= 0)
+				return FALSE
+			item_count = min(item_count, printing_amount)
+			var/volume_in_each = round(reagents.total_volume / item_count, CHEMICAL_VOLUME_ROUNDING)
+
+			// Generate item name
+			var/item_name_default = initial(selected_container.name)
+			var/datum/reagent/master_reagent = reagents.get_master_reagent()
+			if(selected_container == default_container) // Tubes and bottles gain reagent name
+				item_name_default = "[master_reagent.name] [item_name_default]"
+			if(!(initial(selected_container.reagent_flags) & OPENCONTAINER)) // Closed containers get both reagent name and units in the name
+				item_name_default = "[master_reagent.name] [item_name_default] ([volume_in_each]u)"
+			var/item_name = tgui_input_text(usr,
+				"Container name",
+				"Name",
+				item_name_default,
 				MAX_NAME_LEN)
-		if(!name || !reagents.total_volume || !src || QDELETED(src) || !usr.canUseTopic(src, !issilicon(usr)))
-			return FALSE
-		// Start filling
-		if(item_type == "pill")
-			var/obj/item/reagent_containers/pill/P
-			var/target_loc = drop_location()
-			var/drop_threshold = INFINITY
-			if(bottle)
-				var/datum/component/storage/STRB = bottle.GetComponent(
-					/datum/component/storage)
-				if(STRB)
-					drop_threshold = STRB.max_items - bottle.contents.len
-			for(var/i = 0; i < amount; i++)
-				if(i < drop_threshold)
-					P = new/obj/item/reagent_containers/pill(target_loc)
-				else
-					P = new/obj/item/reagent_containers/pill(drop_location())
-				P.name = trim("[name] pill")
-				if(chosenPillStyle == RANDOM_PILL_STYLE)
-					P.icon_state ="pill[rand(1,21)]"
-				else
-					P.icon_state = "pill[chosenPillStyle]"
-				if(P.icon_state == "pill4")
-					P.desc = ""
-				adjust_item_drop_location(P)
-				reagents.trans_to(P, vol_each, transfered_by = usr)
-			return TRUE
-		if(item_type == "patch")
-			var/obj/item/reagent_containers/pill/patch/P
-			for(var/i = 0; i < amount; i++)
-				P = new/obj/item/reagent_containers/pill/patch(drop_location())
-				P.name = trim("[name] patch")
-				adjust_item_drop_location(P)
-				reagents.trans_to(P, vol_each, transfered_by = usr)
-			return TRUE
-		if(item_type == "bottle")
-			var/obj/item/reagent_containers/glass/bottle/P
-			for(var/i = 0; i < amount; i++)
-				P = new/obj/item/reagent_containers/glass/bottle(drop_location())
-				P.name = trim("[name] bottle")
-				adjust_item_drop_location(P)
-				reagents.trans_to(P, vol_each, transfered_by = usr)
-			return TRUE
-		if(item_type == "condimentPack")
-			var/obj/item/reagent_containers/food/condiment/pack/P
-			for(var/i = 0; i < amount; i++)
-				P = new/obj/item/reagent_containers/food/condiment/pack(drop_location())
-				P.originalname = name
-				P.name = trim("[name] pack")
-				P.desc = ""
-				reagents.trans_to(P, vol_each, transfered_by = usr)
-			return TRUE
-		if(item_type == "condimentBottle")
-			var/obj/item/reagent_containers/food/condiment/P
-			for(var/i = 0; i < amount; i++)
-				P = new/obj/item/reagent_containers/food/condiment(drop_location())
-				P.originalname = name
-				P.name = trim("[name] bottle")
-				reagents.trans_to(P, vol_each, transfered_by = usr)
-			return TRUE
-		return FALSE
+			if(!item_name)
+				return FALSE
 
-	if(action == "analyze")
-		var/datum/reagent/R = GLOB.name2reagent[params["id"]]
-		if(R)
-			var/state = "Unknown"
-			if(initial(R.reagent_state) == 1)
-				state = "Solid"
-			else if(initial(R.reagent_state) == 2)
-				state = "Liquid"
-			else if(initial(R.reagent_state) == 3)
-				state = "Gas"
-			var/const/P = 3 //The number of seconds between life ticks
-			var/T = initial(R.metabolization_rate) * (60 / P)
-			analyzeVars = list("name" = initial(R.name), "state" = state, "color" = initial(R.color), "description" = initial(R.description), "metaRate" = T, "overD" = initial(R.overdose_threshold), "addicD" = initial(R.addiction_threshold))
-			screen = "analyze"
+			//start printing
+			is_printing = TRUE
+			printing_progress = 0
+			printing_total = item_count
+			update_appearance(UPDATE_OVERLAYS)
+			create_containers(ui.user, item_count, item_name, volume_in_each)
 			return TRUE
 
-	if(action == "goScreen")
-		screen = params["screen"]
-		return TRUE
+/**
+ * Create N selected containers with reagents from buffer split between them
+ * Arguments
+ *
+ * * mob/user - the player printing these containers
+ * * item_count - number of containers to print
+ * * item_name - the name for each container printed
+ * * volume_in_each - volume in each container created
+ */
+/obj/machinery/chem_master/proc/create_containers(mob/user, item_count, item_name, volume_in_each)
+	PRIVATE_PROC(TRUE)
 
-	return FALSE
+	//lost power or manually stopped
+	if(!is_printing)
+		return
 
+	//use power
+	if(!use_energy(active_power_usage, force = FALSE))
+		is_printing = FALSE
+		update_appearance(UPDATE_OVERLAYS)
+		return
 
-/obj/machinery/chem_master/proc/isgoodnumber(num)
-	if(isnum(num))
-		if(num > 200)
-			num = 200
-		else if(num < 0)
-			num = 0
-		else
-			num = round(num)
-		return num
+	//print the stuff
+	var/obj/item/reagent_containers/item = new selected_container(drop_location())
+	adjust_item_drop_location(item)
+	item.name = item_name
+	item.reagents.clear_reagents()
+	reagents.trans_to(item, volume_in_each, transferred_by = user)
+	printing_progress++
+	update_appearance(UPDATE_OVERLAYS)
+
+	//print more items
+	item_count --
+	if(item_count > 0)
+		addtimer(CALLBACK(src, PROC_REF(create_containers), user, item_count, item_name, volume_in_each), 0.75 SECONDS)
 	else
-		return 0
-
-
-/obj/machinery/chem_master/adjust_item_drop_location(atom/movable/AM) // Special version for chemmasters and condimasters
-	if (AM == beaker)
-		AM.pixel_x = -8
-		AM.pixel_y = 8
-		return null
-	else if (AM == bottle)
-		if (length(bottle.contents))
-			AM.pixel_x = -13
-		else
-			AM.pixel_x = -7
-		AM.pixel_y = -8
-		return null
-	else
-		var/md5 = md5(AM.name)
-		for (var/i in 1 to 32)
-			. += hex2num(md5[i])
-		. = . % 9
-		AM.pixel_x = ((.%3)*6)
-		AM.pixel_y = -8 + (round( . / 3)*8)
+		is_printing = FALSE
+		update_appearance(UPDATE_OVERLAYS)
 
 /obj/machinery/chem_master/condimaster
 	name = "CondiMaster 3000"
-	desc = ""
-	condi = TRUE
+	desc = "Used to create condiments and other cooking supplies."
+	icon_state = "condimaster"
+
+/obj/machinery/chem_master/condimaster/load_printable_containers()
+	var/static/list/containers
+	if(!length(containers))
+		containers = list(CAT_CONDIMENTS = GLOB.reagent_containers[CAT_CONDIMENTS])
+	return containers

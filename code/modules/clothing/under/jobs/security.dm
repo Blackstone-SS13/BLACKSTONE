@@ -1,8 +1,8 @@
 /*
  * Contains:
- *		Security
- *		Detective
- *		Navy uniforms
+ * Security
+ * Detective
+ * Navy uniforms
  */
 
 /*
@@ -11,79 +11,90 @@
 
 /obj/item/clothing/under/rank/security
 	icon = 'icons/obj/clothing/under/security.dmi'
-	mob_overlay_icon = 'icons/mob/clothing/under/security.dmi'
-
-/obj/item/clothing/under/rank/security/officer
-	name = "security jumpsuit"
-	desc = ""
-	icon_state = "rsecurity"
-	item_state = "r_suit"
-	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 30)
+	worn_icon = 'icons/mob/clothing/under/security.dmi'
+	armor_type = /datum/armor/clothing_under/rank_security
 	strip_delay = 50
-	alt_covers_chest = TRUE
 	sensor_mode = SENSOR_COORDS
 	random_sensor = FALSE
 
+/datum/armor/clothing_under/rank_security
+	melee = 10
+	fire = 30
+	acid = 30
+	wound = 10
+
+/obj/item/clothing/under/rank/security/officer
+	name = "security uniform"
+	desc = "A tactical security jumpsuit for officers complete with Nanotrasen belt buckle."
+	icon_state = "rsecurity"
+	inhand_icon_state = "r_suit"
+
 /obj/item/clothing/under/rank/security/officer/grey
 	name = "grey security jumpsuit"
-	desc = ""
+	desc = "A tactical relic of years past before Nanotrasen decided it was cheaper to dye the suits red instead of washing out the blood."
 	icon_state = "security"
-	item_state = "gy_suit"
+	inhand_icon_state = "gy_suit"
 
 /obj/item/clothing/under/rank/security/officer/skirt
-	name = "security jumpskirt"
-	desc = ""
+	name = "security skirt"
+	desc = "A \"tactical\" security uniform with the legs replaced by a skirt."
 	icon_state = "secskirt"
-	item_state = "r_suit"
+	inhand_icon_state = "r_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE //you know now that i think of it if you adjust the skirt and the sprite disappears isn't that just like flashing everyone
-	fitted = FEMALE_UNIFORM_TOP
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/rank/security/officer/blueshirt
 	name = "blue shirt and tie"
-	desc = ""
+	desc = "I'm a little busy right now, Calhoun."
 	icon_state = "blueshift"
-	item_state = "blueshift"
+	inhand_icon_state = null
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/security/officer/formal
 	name = "security officer's formal uniform"
-	desc = ""
+	desc = "The latest in fashionable security outfits."
 	icon_state = "officerblueclothes"
-	item_state = "officerblueclothes"
+	inhand_icon_state = null
 	alt_covers_chest = TRUE
+
+/obj/item/clothing/under/rank/security/constable
+	name = "constable outfit"
+	desc = "A british looking outfit."
+	icon_state = "constable"
+	inhand_icon_state = null
+	can_adjust = FALSE
+	custom_price = PAYCHECK_COMMAND
+
 
 /obj/item/clothing/under/rank/security/warden
 	name = "security suit"
-	desc = ""
+	desc = "A formal security suit for officers complete with Nanotrasen belt buckle."
 	icon_state = "rwarden"
-	item_state = "r_suit"
-	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 30)
-	strip_delay = 50
-	alt_covers_chest = TRUE
-	sensor_mode = 3
-	random_sensor = FALSE
+	inhand_icon_state = "r_suit"
 
 /obj/item/clothing/under/rank/security/warden/grey
 	name = "grey security suit"
-	desc = ""
+	desc = "A formal relic of years past before Nanotrasen decided it was cheaper to dye the suits red instead of washing out the blood."
 	icon_state = "warden"
-	item_state = "gy_suit"
+	inhand_icon_state = "gy_suit"
 
 /obj/item/clothing/under/rank/security/warden/skirt
 	name = "warden's suitskirt"
-	desc = ""
+	desc = "A formal security suitskirt for officers complete with Nanotrasen belt buckle."
 	icon_state = "rwarden_skirt"
-	item_state = "r_suit"
+	inhand_icon_state = "r_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/rank/security/warden/formal
-	desc = ""
+	desc = "The insignia on this uniform tells you that this uniform belongs to the Warden."
 	name = "warden's formal uniform"
 	icon_state = "wardenblueclothes"
-	item_state = "wardenblueclothes"
+	inhand_icon_state = null
 	alt_covers_chest = TRUE
 
 /*
@@ -91,104 +102,111 @@
  */
 /obj/item/clothing/under/rank/security/detective
 	name = "hard-worn suit"
-	desc = ""
+	desc = "Someone who wears this means business."
 	icon_state = "detective"
-	item_state = "det"
-	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 30, "acid" = 30)
-	strip_delay = 50
+	inhand_icon_state = "det"
 	alt_covers_chest = TRUE
-	sensor_mode = 3
-	random_sensor = FALSE
 
 /obj/item/clothing/under/rank/security/detective/skirt
 	name = "detective's suitskirt"
-	desc = ""
+	desc = "Someone who wears this means business."
 	icon_state = "detective_skirt"
-	item_state = "det"
+	inhand_icon_state = "det"
 	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
-/obj/item/clothing/under/rank/security/detective/grey
+/obj/item/clothing/under/rank/security/detective/noir
 	name = "noir suit"
-	desc = ""
-	icon_state = "greydet"
-	item_state = "greydet"
+	desc = "A hard-boiled private investigator's dark suit, complete with tie clip."
+	icon_state = "noirdet"
+	inhand_icon_state = null
 	alt_covers_chest = TRUE
 
-/obj/item/clothing/under/rank/security/detective/grey/skirt
+/obj/item/clothing/under/rank/security/detective/noir/skirt
 	name = "noir suitskirt"
-	desc = ""
-	icon_state = "greydet_skirt"
-	item_state = "greydet"
+	desc = "A hard-boiled private investigator's grey suitskirt, complete with tie clip."
+	icon_state = "noirdet_skirt"
+	inhand_icon_state = null
 	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /*
  * Head of Security
  */
 /obj/item/clothing/under/rank/security/head_of_security
-	name = "head of security's jumpsuit"
-	desc = ""
+	name = "head of security's uniform"
+	desc = "A security jumpsuit decorated for those few with the dedication to achieve the position of Head of Security."
 	icon_state = "rhos"
-	item_state = "r_suit"
-	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 50)
+	inhand_icon_state = "r_suit"
+	armor_type = /datum/armor/clothing_under/security_head_of_security
 	strip_delay = 60
-	alt_covers_chest = TRUE
-	sensor_mode = 3
-	random_sensor = FALSE
+
+/datum/armor/clothing_under/security_head_of_security
+	melee = 10
+	fire = 50
+	acid = 50
+	wound = 10
 
 /obj/item/clothing/under/rank/security/head_of_security/skirt
-	name = "head of security's jumpskirt"
-	desc = ""
+	name = "head of security's skirt"
+	desc = "A security jumpskirt decorated for those few with the dedication to achieve the position of Head of Security."
 	icon_state = "rhos_skirt"
-	item_state = "r_suit"
+	inhand_icon_state = "r_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/rank/security/head_of_security/grey
 	name = "head of security's grey jumpsuit"
-	desc = ""
+	desc = "There are old men, and there are bold men, but there are very few old, bold men."
 	icon_state = "hos"
-	item_state = "gy_suit"
+	inhand_icon_state = "gy_suit"
 
 /obj/item/clothing/under/rank/security/head_of_security/alt
 	name = "head of security's turtleneck"
-	desc = ""
+	desc = "A stylish alternative to the normal head of security jumpsuit, complete with tactical pants."
 	icon_state = "hosalt"
-	item_state = "bl_suit"
+	inhand_icon_state = "bl_suit"
+	alt_covers_chest = TRUE
 
 /obj/item/clothing/under/rank/security/head_of_security/alt/skirt
 	name = "head of security's turtleneck skirt"
-	desc = ""
+	desc = "A stylish alternative to the normal head of security jumpsuit, complete with a tactical skirt."
 	icon_state = "hosalt_skirt"
-	item_state = "bl_suit"
+	inhand_icon_state = "bl_suit"
 	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	alt_covers_chest = TRUE
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/rank/security/head_of_security/parade
 	name = "head of security's parade uniform"
-	desc = ""
+	desc = "A male head of security's luxury-wear, for special occasions."
 	icon_state = "hos_parade_male"
-	item_state = "r_suit"
+	inhand_icon_state = "r_suit"
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/security/head_of_security/parade/female
 	name = "head of security's parade uniform"
-	desc = ""
+	desc = "A female head of security's luxury-wear, for special occasions."
 	icon_state = "hos_parade_fem"
-	item_state = "r_suit"
-	fitted = FEMALE_UNIFORM_TOP
+	inhand_icon_state = "r_suit"
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/security/head_of_security/formal
-	desc = ""
+	desc = "The insignia on this uniform tells you that this uniform belongs to the Head of Security."
 	name = "head of security's formal uniform"
 	icon_state = "hosblueclothes"
-	item_state = "hosblueclothes"
+	inhand_icon_state = null
 	alt_covers_chest = TRUE
 
 /*
@@ -197,27 +215,72 @@
 
 /obj/item/clothing/under/rank/security/officer/spacepol
 	name = "police uniform"
-	desc = ""
+	desc = "Space not controlled by megacorporations, planets, or pirates is under the jurisdiction of Spacepol."
 	icon_state = "spacepol"
-	item_state = "spacepol"
+	inhand_icon_state = null
 	can_adjust = FALSE
+	armor_type = /datum/armor/clothing_under/sec_uniform_spacepol
+
+/datum/armor/clothing_under/sec_uniform_spacepol
+	fire = 10
+	acid = 10
+	melee = 10
+	wound = 10
 
 /obj/item/clothing/under/rank/prisoner
 	name = "prison jumpsuit"
-	desc = ""
-	icon = 'icons/obj/clothing/under/security.dmi'
-	icon_state = "prisoner"
-	item_state = "o_suit"
-	mob_overlay_icon = 'icons/mob/clothing/under/security.dmi'
+	desc = "Standardised Nanotrasen prisoner-wear. Its suit sensors are stuck in the \"Fully On\" position."
+	icon_state = "jumpsuit"
+	icon_preview = 'icons/obj/fluff/previews.dmi'
+	icon_state_preview = "prisonsuit"
+	inhand_icon_state = "jumpsuit"
+	greyscale_colors = "#ff8300"
+	greyscale_config = /datum/greyscale_config/jumpsuit/prison
+	greyscale_config_worn = /datum/greyscale_config/jumpsuit/prison/worn
+	greyscale_config_inhand_left = /datum/greyscale_config/jumpsuit/prison/inhand_left
+	greyscale_config_inhand_right = /datum/greyscale_config/jumpsuit/prison/inhand_right
 	has_sensor = LOCKED_SENSORS
 	sensor_mode = SENSOR_COORDS
 	random_sensor = FALSE
 
+/obj/item/clothing/under/rank/prisoner/nosensor
+	desc = "Standardised Nanotrasen prisoner-wear. Its suit sensors are stuck in the \"OFF\" position."
+	has_sensor = NO_SENSORS
+	sensor_mode = SENSOR_OFF
+
 /obj/item/clothing/under/rank/prisoner/skirt
 	name = "prison jumpskirt"
-	desc = ""
-	icon_state = "prisoner_skirt"
-	item_state = "o_suit"
+	desc = "Standardised Nanotrasen prisoner-wear. Its suit sensors are stuck in the \"Fully On\" position."
+	icon_state = "jumpskirt"
+	icon_preview = 'icons/obj/fluff/previews.dmi'
+	icon_state_preview = "prisonskirt"
+	greyscale_colors = "#ff8300"
+	greyscale_config = /datum/greyscale_config/jumpsuit/prison
+	greyscale_config_worn = /datum/greyscale_config/jumpsuit/prison/worn
+	greyscale_config_inhand_left = /datum/greyscale_config/jumpsuit/prison/inhand_left
+	greyscale_config_inhand_right = /datum/greyscale_config/jumpsuit/prison/inhand_right
 	body_parts_covered = CHEST|GROIN|ARMS
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
+
+/obj/item/clothing/under/rank/security/officer/beatcop
+	name = "space police uniform"
+	desc = "A police uniform often found in the lines at donut shops."
+	icon_state = "spacepolice_families"
+	inhand_icon_state = null
 	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP
+
+/obj/item/clothing/under/rank/security/detective/disco
+	name = "superstar cop uniform"
+	desc = "Flare cut trousers and a dirty shirt that might have been classy before someone took a piss in the armpits. It's the dress of a superstar."
+	icon_state = "jamrock_suit"
+	inhand_icon_state = null
+	can_adjust = FALSE
+
+/obj/item/clothing/under/rank/security/detective/kim
+	name = "aerostatic suit"
+	desc = "A crisp and well-pressed suit; professional, comfortable and curiously authoritative."
+	icon_state = "aerostatic_suit"
+	inhand_icon_state = null
+	can_adjust = FALSE

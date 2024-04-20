@@ -1,13 +1,13 @@
 //Ash storms happen frequently on lavaland. They heavily obscure vision, and cause high fire damage to anyone caught outside.
 /datum/weather/ash_storm
 	name = "ash storm"
-	desc = ""
+	desc = "An intense atmospheric storm lifts ash off of the planet's surface and billows it down across the area, dealing intense fire damage to the unprotected."
 
 	telegraph_message = "<span class='boldwarning'>An eerie moan rises on the wind. Sheets of burning ash blacken the horizon. Seek shelter.</span>"
 	telegraph_duration = 300
 	telegraph_overlay = "light_ash"
 
-	weather_message = "<span class='danger'><i>Smoldering clouds of scorching ash billow down around you! Get inside!</i></span>"
+	weather_message = "<span class='userdanger'><i>Smoldering clouds of scorching ash billow down around you! Get inside!</i></span>"
 	weather_duration_lower = 600
 	weather_duration_upper = 1200
 	weather_overlay = "ash_storm"
@@ -16,91 +16,70 @@
 	end_duration = 300
 	end_overlay = "light_ash"
 
-	area_type = /area/lavaland/surface/outdoors
-	target_trait = ZTRAIT_MINING
+	area_type = /area
+	protect_indoors = TRUE
+	target_trait = ZTRAIT_ASHSTORM
 
-	immunity_type = "ash"
+	immunity_type = TRAIT_ASHSTORM_IMMUNE
 
 	probability = 90
 
 	barometer_predictable = TRUE
-
-	var/datum/looping_sound/active_outside_ashstorm/sound_ao = new(list(), FALSE, TRUE)
-	var/datum/looping_sound/active_inside_ashstorm/sound_ai = new(list(), FALSE, TRUE)
-	var/datum/looping_sound/weak_outside_ashstorm/sound_wo = new(list(), FALSE, TRUE)
-	var/datum/looping_sound/weak_inside_ashstorm/sound_wi = new(list(), FALSE, TRUE)
+	var/list/weak_sounds = list()
+	var/list/strong_sounds = list()
 
 /datum/weather/ash_storm/telegraph()
-	. = ..()
-	var/list/inside_areas = list()
-	var/list/outside_areas = list()
 	var/list/eligible_areas = list()
 	for (var/z in impacted_z_levels)
 		eligible_areas += SSmapping.areas_in_z["[z]"]
 	for(var/i in 1 to eligible_areas.len)
 		var/area/place = eligible_areas[i]
 		if(place.outdoors)
-			outside_areas += place
+			weak_sounds[place] = /datum/looping_sound/weak_outside_ashstorm
+			strong_sounds[place] = /datum/looping_sound/active_outside_ashstorm
 		else
-			inside_areas += place
+			weak_sounds[place] = /datum/looping_sound/weak_inside_ashstorm
+			strong_sounds[place] = /datum/looping_sound/active_inside_ashstorm
 		CHECK_TICK
 
-	sound_ao.output_atoms = outside_areas
-	sound_ai.output_atoms = inside_areas
-	sound_wo.output_atoms = outside_areas
-	sound_wi.output_atoms = inside_areas
-
-	sound_wo.start()
-	sound_wi.start()
-
-/datum/weather/ash_storm/start()
-	. = ..()
-	sound_wo.stop()
-	sound_wi.stop()
-
-	sound_ao.start()
-	sound_ai.start()
-
-/datum/weather/ash_storm/wind_down()
-	. = ..()
-	sound_ao.stop()
-	sound_ai.stop()
-
-	sound_wo.start()
-	sound_wi.start()
-
-/datum/weather/ash_storm/end()
-	. = ..()
-	sound_wo.stop()
-	sound_wi.stop()
-
-/datum/weather/ash_storm/proc/is_ash_immune(atom/L)
-	while (L && !isturf(L))
-		if(ismecha(L)) //Mechs are immune
-			return TRUE
-		if(ishuman(L)) //Are you immune?
-			var/mob/living/carbon/human/H = L
-			var/thermal_protection = H.get_thermal_protection()
-			if(thermal_protection >= FIRE_IMMUNITY_MAX_TEMP_PROTECT)
-				return TRUE
-		if(isliving(L))// if we're a non immune mob inside an immune mob we have to reconsider if that mob is immune to protect ourselves
-			var/mob/living/the_mob = L
-			if("ash" in the_mob.weather_immunities)
-				return TRUE
-		L = L.loc //Check parent items immunities (recurses up to the turf)
-	return FALSE //RIP you
-
-/datum/weather/ash_storm/weather_act(mob/living/L)
-	if(is_ash_immune(L))
-		return
-	L.adjustFireLoss(4)
+	//We modify this list instead of setting it to weak/stron sounds in order to preserve things that hold a reference to it
+	//It's essentially a playlist for a bunch of components that chose what sound to loop based on the area a player is in
+	GLOB.ash_storm_sounds += weak_sounds
 	return ..()
 
+/datum/weather/ash_storm/start()
+	GLOB.ash_storm_sounds -= weak_sounds
+	GLOB.ash_storm_sounds += strong_sounds
+	return ..()
+
+/datum/weather/ash_storm/wind_down()
+	GLOB.ash_storm_sounds -= strong_sounds
+	GLOB.ash_storm_sounds += weak_sounds
+	return ..()
+
+/datum/weather/ash_storm/can_weather_act(mob/living/mob_to_check)
+	. = ..()
+	if(!. || !ishuman(mob_to_check))
+		return
+	var/mob/living/carbon/human/human_to_check = mob_to_check
+	if(human_to_check.get_thermal_protection() >= FIRE_IMMUNITY_MAX_TEMP_PROTECT)
+		return FALSE
+
+/datum/weather/ash_storm/weather_act(mob/living/victim)
+	victim.adjustFireLoss(4, required_bodytype = BODYTYPE_ORGANIC)
+
+/datum/weather/ash_storm/end()
+	GLOB.ash_storm_sounds -= weak_sounds
+	for(var/turf/open/misc/asteroid/basalt/basalt as anything in GLOB.dug_up_basalt)
+		if(!(basalt.loc in impacted_areas) || !(basalt.z in impacted_z_levels))
+			continue
+		basalt.refill_dug()
+	return ..()
 
 //Emberfalls are the result of an ash storm passing by close to the playable area of lavaland. They have a 10% chance to trigger in place of an ash storm.
 /datum/weather/ash_storm/emberfall
 	name = "emberfall"
-	desc = ""
+	desc = "A passing ash storm blankets the area in harmless embers."
 
 	weather_message = "<span class='notice'>Gentle embers waft down around you like grotesque snow. The storm seems to have passed you by...</span>"
 	weather_overlay = "light_ash"

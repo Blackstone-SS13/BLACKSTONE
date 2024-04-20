@@ -1,20 +1,30 @@
-/mob/living/proc/Life(seconds, times_fired)
-	set waitfor = FALSE
-	set invisibility = 0
+/// This divisor controls how fast body temperature changes to match the environment
+#define BODYTEMP_DIVISOR 16
 
-	if((movement_type & FLYING) && !(movement_type & FLOATING))	//TODO: Better floating
-		float(on = TRUE)
+/**
+ * Handles the biological and general over-time processes of the mob.
+ *
+ *
+ * Arguments:
+ * - seconds_per_tick: The amount of time that has elapsed since this last fired.
+ * - times_fired: The number of times SSmobs has fired
+ */
+/mob/living/proc/Life(seconds_per_tick = SSMOBS_DT, times_fired)
+	set waitfor = FALSE
+
+	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds_per_tick, times_fired)
+
+	if(signal_result & COMPONENT_LIVING_CANCEL_LIFE_PROCESSING) // mmm less work
+		return
 
 	if (client)
 		var/turf/T = get_turf(src)
 		if(!T)
-			for(var/obj/effect/landmark/error/E in GLOB.landmarks_list)
-				forceMove(E.loc)
-				break
-			var/msg = "[ADMIN_LOOKUPFLW(src)] was found to have no .loc with an attached client, if the cause is unknown it would be wise to ask how this was accomplished."
-			message_admins(msg)
-			send2irc_adminless_only("Mob", msg, R_ADMIN)
-			log_game("[key_name(src)] was found to have no .loc with an attached client.")
+			move_to_error_room()
+			var/msg = " was found to have no .loc with an attached client, if the cause is unknown it would be wise to ask how this was accomplished."
+			message_admins(ADMIN_LOOKUPFLW(src) + msg)
+			send2tgs_adminless_only("Mob", key_name_and_tag(src) + msg, R_ADMIN)
+			src.log_message("was found to have no .loc with an attached client.", LOG_GAME)
 
 		// This is a temporary error tracker to make sure we've caught everything
 		else if (registered_z != T.z)
@@ -27,165 +37,116 @@
 		log_game("Z-TRACKING: [src] of type [src.type] has a Z-registration despite not having a client.")
 		update_z(null)
 
-	if (notransform)
-		return
-	if(!loc)
+	if(isnull(loc) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 
-	if(!IS_IN_STASIS(src))
+	if(!HAS_TRAIT(src, TRAIT_STASIS))
 
-		//Mutations and radiation
-		handle_mutations_and_radiation()
-		//Breathing, if applicable
-		handle_breathing(times_fired)
-		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-			handle_wounds()
-			handle_blood()
-			handle_embedded_objects()
-			heal_wounds(1)
+		if(stat != DEAD)
+			//Mutations and radiation
+			handle_mutations(seconds_per_tick, times_fired)
+			//Breathing, if applicable
+			handle_breathing(seconds_per_tick, times_fired)
 
-		handle_diseases()// DEAD check is in the proc itself; we want it to spread even if the mob is dead, but to handle its disease-y properties only if you're not.
+		handle_diseases(seconds_per_tick, times_fired)// DEAD check is in the proc itself; we want it to spread even if the mob is dead, but to handle its disease-y properties only if you're not.
 
 		if (QDELETED(src)) // diseases can qdel the mob via transformations
 			return
 
-		//Random events (vomiting etc)
-		handle_random_events()
+		if(stat != DEAD)
+			//Random events (vomiting etc)
+			handle_random_events(seconds_per_tick, times_fired)
+
 		//Handle temperature/pressure differences between body and environment
 		var/datum/gas_mixture/environment = loc.return_air()
 		if(environment)
-			handle_environment(environment)
+			handle_environment(environment, seconds_per_tick, times_fired)
 
-		handle_gravity()
+		handle_gravity(seconds_per_tick, times_fired)
 
-		handle_traits() // eye, ear, brain damages
-		handle_status_effects() //all special effects, stun, knockdown, jitteryness, hallucination, sleeping, etc
-
-	update_sneak_invis()
-	handle_fire()
-
-	if(machine)
-		machine.check_eye(src)
-
-	handle_typing_indicator()
-
-	if(istype(loc, /turf/open/water))
-		handle_inwater()
+	handle_wounds(seconds_per_tick, times_fired)
 
 	if(stat != DEAD)
 		return 1
 
-/mob/living
-	var/last_deadlife
-
-/mob/living/proc/DeadLife()
-	set invisibility = 0
-	if (notransform)
-		return
-	if(!loc)
-		return
-	if(!IS_IN_STASIS(src))
-		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-			handle_blood()
-			handle_embedded_objects()
-	update_sneak_invis()
-	handle_fire()
-	handle_typing_indicator()
-	if(istype(loc, /turf/open/water))
-		handle_inwater()
-
-/mob/living/proc/handle_breathing(times_fired)
+/mob/living/proc/handle_breathing(seconds_per_tick, times_fired)
+	SEND_SIGNAL(src, COMSIG_LIVING_HANDLE_BREATHING, seconds_per_tick, times_fired)
 	return
 
-/mob/living/proc/handle_mutations_and_radiation()
-	radiation = 0 //so radiation don't accumulate in simple animals
+/mob/living/proc/handle_mutations(seconds_per_tick, times_fired)
 	return
 
-/mob/living/proc/handle_diseases()
+/mob/living/proc/handle_diseases(seconds_per_tick, times_fired)
 	return
 
-/mob/living/proc/handle_random_events()
-	//random painstun
-	if(!stat && !HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-		if(world.time > mob_timers["painstun"] + 600)
-			if(getBruteLoss() + getFireLoss() >= (STAEND * 10))
-				var/probby = 53 - (STAEND * 2)
-				if(!(mobility_flags & MOBILITY_STAND))
-					probby = probby - 20
-				if(prob(probby))
-					mob_timers["painstun"] = world.time
-					Immobilize(10)
-					emote("painscream")
-					visible_message("<span class='warning'>[src] freezes in pain!</span>",
-								"<span class='warning'>I'm frozen in pain!</span>")
-					sleep(10)
-					Stun(110)
-					Knockdown(110)
-
-/mob/living/proc/handle_environment(datum/gas_mixture/environment)
+/mob/living/proc/handle_wounds(seconds_per_tick, times_fired)
 	return
 
-/mob/living/proc/handle_fire()
-	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly
-		fire_stacks = min(0, fire_stacks + 1)//So we dry ourselves back to default, nonflammable.
-	if(!on_fire)
-//		testing("handlefyre0 [src]")
-		return TRUE //the mob is no longer on fire, no need to do the rest.
-//	testing("handlefyre1 [src]")
-	if(fire_stacks > 0)
-		adjust_fire_stacks(-0.05) //the fire is slowly consumed
-	else
-		ExtinguishMob()
-		return TRUE //mob was put out, on_fire = FALSE via ExtinguishMob(), no need to update everything down the chain.
-//	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
-//	if(!G.gases[/datum/gas/oxygen] || G.gases[/datum/gas/oxygen][MOLES] < 1)
-//		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
-//		return TRUE
-	update_fire()
-	var/turf/location = get_turf(src)
-	location.hotspot_expose(700, 50, 1)
+/mob/living/proc/handle_random_events(seconds_per_tick, times_fired)
+	return
 
-//this updates all special effects: knockdown, druggy, stuttering, etc..
-/mob/living/proc/handle_status_effects()
-	if(confused)
-		confused = max(confused - 1, 0)
-	if(slowdown)
-		slowdown = max(slowdown - 1, 0)
-	if(slowdown <= 0)
-		remove_movespeed_modifier(MOVESPEED_ID_LIVING_SLOWDOWN_STATUS)
+// Base mob environment handler for body temperature
+/mob/living/proc/handle_environment(datum/gas_mixture/environment, seconds_per_tick, times_fired)
+	var/loc_temp = get_temperature(environment)
+	var/temp_delta = loc_temp - bodytemperature
 
-/mob/living/proc/handle_traits()
-	//Eyes
-	if(eye_blind)	//blindness, heals slowly over time
-		if(HAS_TRAIT_FROM(src, TRAIT_BLIND, EYES_COVERED)) //covering your eyes heals blurry eyes faster
-			adjust_blindness(-3)
-		else if(!stat && !(HAS_TRAIT(src, TRAIT_BLIND)))
-			adjust_blindness(-1)
-	else if(eye_blurry)			//blurry eyes heal slowly
-		adjust_blurriness(-1)
+	if(ismovable(loc))
+		var/atom/movable/occupied_space = loc
+		temp_delta *= (1 - occupied_space.contents_thermal_insulation)
+
+	if(temp_delta < 0) // it is cold here
+		if(!on_fire) // do not reduce body temp when on fire
+			adjust_bodytemperature(max(max(temp_delta / BODYTEMP_DIVISOR, BODYTEMP_COOLING_MAX) * seconds_per_tick, temp_delta))
+	else // this is a hot place
+		adjust_bodytemperature(min(min(temp_delta / BODYTEMP_DIVISOR, BODYTEMP_HEATING_MAX) * seconds_per_tick, temp_delta))
+
+/**
+ * Get the fullness of the mob
+ *
+ * This returns a value form 0 upwards to represent how full the mob is.
+ * The value is a total amount of consumable reagents in the body combined
+ * with the total amount of nutrition they have.
+ * This does not have an upper limit.
+ */
+/mob/living/proc/get_fullness()
+	var/fullness = nutrition
+	// we add the nutrition value of what we're currently digesting
+	for(var/bile in reagents.reagent_list)
+		var/datum/reagent/consumable/bits = bile
+		if(bits)
+			fullness += bits.get_nutriment_factor(src) * bits.volume / bits.metabolization_rate
+	return fullness
+
+/**
+ * Check if the mob contains this reagent.
+ *
+ * This will validate the the reagent holder for the mob and any sub holders contain the requested reagent.
+ * Vars:
+ * * reagent (typepath) takes a PATH to a reagent.
+ * * amount (int) checks for having a specific amount of that chemical.
+ * * needs_metabolizing (bool) takes into consideration if the chemical is matabolizing when it's checked.
+ */
+/mob/living/proc/has_reagent(reagent, amount = -1, needs_metabolizing = FALSE)
+	return reagents.has_reagent(reagent, amount, needs_metabolizing)
 
 /mob/living/proc/update_damage_hud()
 	return
 
-/mob/living/proc/handle_gravity()
-	var/gravity = mob_has_gravity()
-	update_gravity(gravity)
-
-	if(gravity > STANDARD_GRAVITY)
-		gravity_animate()
-		handle_high_gravity(gravity)
+/mob/living/proc/handle_gravity(seconds_per_tick, times_fired)
+	if(gravity_state > STANDARD_GRAVITY)
+		handle_high_gravity(gravity_state, seconds_per_tick, times_fired)
 
 /mob/living/proc/gravity_animate()
 	if(!get_filter("gravity"))
 		add_filter("gravity",1,list("type"="motion_blur", "x"=0, "y"=0))
-	INVOKE_ASYNC(src, PROC_REF(gravity_pulse_animation))
+	animate(get_filter("gravity"), y = 1, time = 10, loop = -1)
+	animate(y = 0, time = 10)
 
-/mob/living/proc/gravity_pulse_animation()
-	animate(get_filter("gravity"), y = 1, time = 10)
-	sleep(10)
-	animate(get_filter("gravity"), y = 0, time = 10)
+/mob/living/proc/handle_high_gravity(gravity, seconds_per_tick, times_fired)
+	if(gravity < GRAVITY_DAMAGE_THRESHOLD) //Aka gravity values of 3 or more
+		return
 
-/mob/living/proc/handle_high_gravity(gravity)
-	if(gravity >= GRAVITY_DAMAGE_TRESHOLD) //Aka gravity values of 3 or more
-		var/grav_stregth = gravity - GRAVITY_DAMAGE_TRESHOLD
-		adjustBruteLoss(min(grav_stregth,3))
+	var/grav_strength = gravity - GRAVITY_DAMAGE_THRESHOLD
+	adjustBruteLoss(min(GRAVITY_DAMAGE_SCALING * grav_strength, GRAVITY_DAMAGE_MAXIMUM) * seconds_per_tick)
+
+#undef BODYTEMP_DIVISOR

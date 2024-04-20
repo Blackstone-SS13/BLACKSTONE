@@ -2,255 +2,153 @@
 	category = CATEGORY_HUMAN
 	weight = WEIGHT_MOB
 
-
-/datum/keybinding/living/swap_left
-	hotkey_keys = list("Q")
-	classic_keys = list("Q") // PAGEUP
-	name = "swap_left"
-	full_name = "Swap to left hand"
-	description = ""
-
-/datum/keybinding/living/swap_left/down(client/user)
-	var/mob/M = user.mob
-	if(!isliving(M))
-		return
-	if(M.atkswinging)
-		M.stop_attack()
-	if(M.active_hand_index == 1)
-		var/obj/item/I = M.get_active_held_item()
-		if(I)
-			I.Click()
-	else
-		M.swap_hand(1)
-	return TRUE
-
-/datum/keybinding/living/swap_right
-	hotkey_keys = list("E")
-	classic_keys = list("E") // PAGEUP
-	name = "swap_right"
-	full_name = "Swap to right hand"
-	description = ""
-
-/datum/keybinding/living/swap_right/down(client/user)
-	var/mob/M = user.mob
-	if(!isliving(M))
-		return
-	if(M.atkswinging)
-		M.stop_attack()
-	if(M.active_hand_index == 2)
-		var/obj/item/I = M.get_active_held_item()
-		if(I)
-			I.Click()
-	else
-		M.swap_hand(2)
-	return TRUE
-
-/datum/keybinding/living/swap_hands
-	hotkey_keys = list()
-	classic_keys = list()
-	name = "swap_hands"
-	full_name = "Swap hands"
-	description = ""
-
-/datum/keybinding/living/swap_hands/down(client/user)
-	var/mob/M = user.mob
-	if(!isliving(M))
-		return
-	if(M.atkswinging)
-		M.stop_attack()
-	M.swap_hand()
-	return TRUE
-
-/datum/keybinding/living/activate_inhand
-	hotkey_keys = list()
-	classic_keys = list()
-	name = "activate_inhand"
-	full_name = "Activate in-hand"
-	description = "Uses whatever item you have inhand"
-
-/datum/keybinding/living/activate_inhand/down(client/user)
-	var/mob/M = user.mob
-	if(!isliving(M))
-		return
-	M.mode()
-	return TRUE
-
-
-
-/datum/keybinding/living/drop_item
-	hotkey_keys = list("Z")
-	name = "drop_item"
-	full_name = "Drop Item"
-	description = ""
-
-/datum/keybinding/living/drop_item/down(client/user)
-	var/mob/M = user.mob
-	if(!isliving(M))
-		return
-	if(M.atkswinging)
-		M.stop_attack()
-	var/obj/item/I = M.get_active_held_item()
-	if(I)
-		user.mob.dropItemToGround(I, silent = FALSE)
-	return TRUE
-
-/datum/keybinding/living/sprint
-	hotkey_keys = list()
-	name = "sprint"
-	full_name = "Sprint"
-	description = "Sprinting can be dangerous to your health if you aren't careful."
-
-/datum/keybinding/living/sprint/down(client/user)
-	var/mob/M = user.mob
-	if(!isliving(M))
-		return
-	if(M.m_intent == MOVE_INTENT_RUN)
-		M.toggle_rogmove_intent(MOVE_INTENT_WALK)
-	else
-		M.toggle_rogmove_intent(MOVE_INTENT_RUN)
-	return TRUE
-
-/datum/keybinding/living/sneak
-	hotkey_keys = list()
-	name = "sneak"
-	full_name = "Sneak"
-	description = "Press this hotkey to sneak around, which has many uses."
-
-/datum/keybinding/living/sneak/down(client/user)
-	var/mob/M = user.mob
-	if(!isliving(M))
-		return
-	if(M.m_intent == MOVE_INTENT_SNEAK)
-		M.toggle_rogmove_intent(MOVE_INTENT_WALK)
-	else
-		M.toggle_rogmove_intent(MOVE_INTENT_SNEAK)
-	return TRUE
-
-
-/datum/keybinding/living/submit
-	hotkey_keys = list("ShiftX")
-	name = "yield"
-	full_name = "Yield"
-	description = "Yield to your enemy, which may save your life or end it quicker."
-
-/datum/keybinding/living/submit/down(client/user)
-	if(!isliving(user))
-		return
-	var/mob/living/L = user.mob
-	if(L.doing)
-		L.doing = 0
-	L.submit()
-	return TRUE
-
+/datum/keybinding/living/can_use(client/user)
+	return isliving(user.mob)
 
 /datum/keybinding/living/resist
-	hotkey_keys = list("X")
-	name = "cancelresist"
-	full_name = "Cancel/Resist"
-	description = "Stop an action such as a charged attack or spam this to resist against a grab."
+	hotkey_keys = list("B")
+	name = "resist"
+	full_name = "Resist"
+	description = "Break free of your current state. Handcuffed? on fire? Resist!"
+	keybind_signal = COMSIG_KB_LIVING_RESIST_DOWN
 
 /datum/keybinding/living/resist/down(client/user)
+	. = ..()
+	if(.)
+		return
 	var/mob/living/L = user.mob
-	if(!istype(L))
-		return FALSE
-	if(L.doing)
-		L.doing = 0
 	L.resist()
 	return TRUE
 
-/datum/keybinding/living/defendtoggle
-	hotkey_keys = list("C")
-	name = "defendtoggle"
-	full_name = "Combat Mode"
-	description = "Initiates combat mode. Enables certain RMB intents. Allows to dodge and parry."
+/datum/keybinding/living/look_up
+	hotkey_keys = list("L")
+	name = "look up"
+	full_name = "Look Up"
+	description = "Look up at the next z-level.  Only works if directly below open space."
+	keybind_signal = COMSIG_KB_LIVING_LOOKUP_DOWN
 
-/datum/keybinding/living/defendtoggle/down(client/user)
-	var/mob/living/L = user.mob
-	if(!isliving(L))
+/datum/keybinding/living/look_up/down(client/user)
+	. = ..()
+	if(.)
 		return
-	L.toggle_cmode()
-
-/datum/keybinding/living/dodgeparry
-	hotkey_keys = list("ShiftC")
-	name = "dodgeparry"
-	full_name = "Dodge/Parry"
-	description = "Change between dodging and parrying."
-
-/datum/keybinding/living/dodgeparry/down(client/user)
 	var/mob/living/L = user.mob
-	if(!istype(L))
-		return FALSE
-	if(L.d_intent == INTENT_DODGE)
-		L.def_intent_change(INTENT_PARRY)
-	else
-		L.def_intent_change(INTENT_DODGE)
+	L.look_up()
+	return TRUE
 
-/datum/keybinding/living/restd
-	hotkey_keys = list("V")
-	name = "standrest"
-	full_name = "Toggle Stand/Rest"
-	description = "Toggle between standing and laying on the floor."
-	var/lastrest = 0
-
-/datum/keybinding/living/restd/down(client/user)
+/datum/keybinding/living/look_up/up(client/user)
 	var/mob/living/L = user.mob
-	if(!istype(L))
-		return FALSE
-	if(!lastrest || world.time > lastrest + 15)
-		L.toggle_rest()
-		lastrest = world.time
-		return TRUE
-	else
-		return FALSE
+	L.end_look_up()
+	return TRUE
 
-/datum/keybinding/living/standu
-	hotkey_keys = list()
-	name = "stand"
-	full_name = "Stand Up"
-	description = "Stand up from a prone position."
-	var/lastrest = 0
+/datum/keybinding/living/look_down
+	hotkey_keys = list(";")
+	name = "look down"
+	full_name = "Look Down"
+	description = "Look down at the previous z-level.  Only works if directly above open space."
+	keybind_signal = COMSIG_KB_LIVING_LOOKDOWN_DOWN
 
-/datum/keybinding/living/standu/down(client/user)
+/datum/keybinding/living/look_down/down(client/user)
+	. = ..()
+	if(.)
+		return
 	var/mob/living/L = user.mob
-	if(!istype(L))
-		return FALSE
-	if(!lastrest || world.time > lastrest + 15)
-		L.stand_up()
-		lastrest = world.time
-		return TRUE
-	else
-		return FALSE
+	L.look_down()
+	return TRUE
+
+/datum/keybinding/living/look_down/up(client/user)
+	var/mob/living/L = user.mob
+	L.end_look_down()
+	return TRUE
 
 /datum/keybinding/living/rest
-	hotkey_keys = list()
+	hotkey_keys = list("U")
 	name = "rest"
-	full_name = "Lay Down"
-	description = "Lay down on the floor."
-	var/lastrest = 0
+	full_name = "Rest"
+	description = "Lay down, or get up."
+	keybind_signal = COMSIG_KB_LIVING_REST_DOWN
 
 /datum/keybinding/living/rest/down(client/user)
-	var/mob/living/L = user.mob
-	if(!istype(L))
-		return FALSE
-	if(!lastrest || world.time > lastrest + 15)
-		L.lay_down()
-		lastrest = world.time
-		return TRUE
-	else
-		return FALSE
+	. = ..()
+	if(.)
+		return
+	var/mob/living/living_mob = user.mob
+	living_mob.toggle_resting()
+	return TRUE
 
-/datum/keybinding/living/lookup
-	hotkey_keys = list("ShiftF")
-	name = "lookup"
-	full_name = "Look up"
-	description = "Look at what's above you, if you are under an open space."
-	var/lastrest = 0
+/datum/keybinding/living/toggle_combat_mode
+	hotkey_keys = list("F")
+	name = "toggle_combat_mode"
+	full_name = "Toggle Combat Mode"
+	description = "Toggles combat mode. Like Help/Harm but cooler."
+	keybind_signal = COMSIG_KB_LIVING_TOGGLE_COMBAT_DOWN
 
-/datum/keybinding/living/lookup/down(client/user)
-	var/mob/living/L = user.mob
-	if(!lastrest || world.time > lastrest + 15)
-		L.look_up()
-		lastrest = world.time
-		return TRUE
-	else
-		return FALSE
+
+/datum/keybinding/living/toggle_combat_mode/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/user_mob = user.mob
+	user_mob.set_combat_mode(!user_mob.combat_mode, FALSE)
+
+/datum/keybinding/living/enable_combat_mode
+	hotkey_keys = list("4")
+	name = "enable_combat_mode"
+	full_name = "Enable Combat Mode"
+	description = "Enable combat mode."
+	keybind_signal = COMSIG_KB_LIVING_ENABLE_COMBAT_DOWN
+
+/datum/keybinding/living/enable_combat_mode/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/user_mob = user.mob
+	user_mob.set_combat_mode(TRUE, silent = FALSE)
+
+/datum/keybinding/living/disable_combat_mode
+	hotkey_keys = list("1")
+	name = "disable_combat_mode"
+	full_name = "Disable Combat Mode"
+	description = "Disable combat mode."
+	keybind_signal = COMSIG_KB_LIVING_DISABLE_COMBAT_DOWN
+
+/datum/keybinding/living/disable_combat_mode/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/user_mob = user.mob
+	user_mob.set_combat_mode(FALSE, silent = FALSE)
+
+/datum/keybinding/living/toggle_move_intent
+	hotkey_keys = list("C")
+	name = "toggle_move_intent"
+	full_name = "Hold to toggle move intent"
+	description = "Held down to cycle to the other move intent, release to cycle back"
+	keybind_signal = COMSIG_KB_LIVING_TOGGLEMOVEINTENT_DOWN
+
+/datum/keybinding/living/toggle_move_intent/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/M = user.mob
+	M.toggle_move_intent()
+	return TRUE
+
+/datum/keybinding/living/toggle_move_intent/up(client/user)
+	var/mob/living/M = user.mob
+	M.toggle_move_intent()
+	return TRUE
+
+/datum/keybinding/living/toggle_move_intent_alternative
+	hotkey_keys = list("Unbound")
+	name = "toggle_move_intent_alt"
+	full_name = "press to cycle move intent"
+	description = "Pressing this cycle to the opposite move intent, does not cycle back"
+	keybind_signal = COMSIG_KB_LIVING_TOGGLEMOVEINTENTALT_DOWN
+
+/datum/keybinding/living/toggle_move_intent_alternative/down(client/user)
+	. = ..()
+	if(.)
+		return
+	var/mob/living/M = user.mob
+	M.toggle_move_intent()
+	return TRUE

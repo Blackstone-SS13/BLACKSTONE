@@ -1,100 +1,82 @@
 /datum/computer_file/program/ntnet_dos
 	filename = "ntn_dos"
-	filedesc = ""
-	program_icon_state = "hostile"
-	extended_desc = ""
+	filedesc = "DoS Traffic Generator"
+	downloader_category = PROGRAM_CATEGORY_DEVICE
+	program_open_overlay = "hostile"
+	extended_desc = "This advanced script can perform denial of service attacks against NTNet quantum relays. The system administrator will probably notice this. Multiple devices can run this program together against same relay for increased effect"
 	size = 20
-	requires_ntnet = 1
-	available_on_ntnet = 0
-	available_on_syndinet = 1
-	tgui_id = "ntos_net_dos"
-	ui_style = "syndicate"
-	ui_x = 400
-	ui_y = 250
+	program_flags = PROGRAM_ON_SYNDINET_STORE | PROGRAM_REQUIRES_NTNET
+	tgui_id = "NtosNetDos"
+	program_icon = "satellite-dish"
 
 	var/obj/machinery/ntnet_relay/target = null
 	var/dos_speed = 0
 	var/error = ""
 	var/executed = 0
 
-/datum/computer_file/program/ntnet_dos/process_tick()
+/datum/computer_file/program/ntnet_dos/process_tick(seconds_per_tick)
 	dos_speed = 0
 	switch(ntnet_status)
-		if(1)
+		if(NTNET_LOW_SIGNAL)
 			dos_speed = NTNETSPEED_LOWSIGNAL * 10
-		if(2)
+		if(NTNET_GOOD_SIGNAL)
 			dos_speed = NTNETSPEED_HIGHSIGNAL * 10
-		if(3)
+		if(NTNET_ETHERNET_SIGNAL)
 			dos_speed = NTNETSPEED_ETHERNET * 10
 	if(target && executed)
 		target.dos_overload += dos_speed
-		if(!target.is_operational())
+		if(!target.is_operational)
 			target.dos_sources.Remove(src)
 			target = null
 			error = "Connection to destination relay lost."
 
-/datum/computer_file/program/ntnet_dos/kill_program(forced = FALSE)
+/datum/computer_file/program/ntnet_dos/kill_program(mob/user)
 	if(target)
 		target.dos_sources.Remove(src)
 	target = null
-	executed = 0
+	executed = FALSE
+	return ..()
 
-	..()
-
-/datum/computer_file/program/ntnet_dos/ui_act(action, params)
-	if(..())
-		return 1
+/datum/computer_file/program/ntnet_dos/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
 	switch(action)
 		if("PRG_target_relay")
-			for(var/obj/machinery/ntnet_relay/R in SSnetworks.station_network.relays)
-				if("[R.uid]" == params["targid"])
-					target = R
-			return 1
+			for(var/obj/machinery/ntnet_relay/relays as anything in SSmachines.get_machines_by_type(/obj/machinery/ntnet_relay))
+				if(relays.uid == params["targid"])
+					target = relays
+					break
+			return TRUE
 		if("PRG_reset")
 			if(target)
 				target.dos_sources.Remove(src)
 				target = null
-			executed = 0
+			executed = FALSE
 			error = ""
-			return 1
+			return TRUE
 		if("PRG_execute")
 			if(target)
-				executed = 1
+				executed = TRUE
 				target.dos_sources.Add(src)
-				if(SSnetworks.station_network.intrusion_detection_enabled)
-					var/obj/item/computer_hardware/network_card/network_card = computer.all_components[MC_NET]
-					SSnetworks.station_network.add_log("IDS WARNING - Excess traffic flood targeting relay [target.uid] detected from device: [network_card.get_network_tag()]")
-					SSnetworks.station_network.intrusion_detection_alarm = 1
-			return 1
+				if(SSmodular_computers.intrusion_detection_enabled)
+					SSmodular_computers.add_log("IDS WARNING - Excess traffic flood targeting relay [target.uid] detected from device: [computer.name]")
+					SSmodular_computers.intrusion_detection_alarm = TRUE
+			return TRUE
 
 /datum/computer_file/program/ntnet_dos/ui_data(mob/user)
-	if(!SSnetworks.station_network)
-		return
-
 	var/list/data = list()
 
-	data = get_header_data()
-
-	if(error)
-		data["error"] = error
-	else if(target && executed)
-		data["target"] = 1
+	data["error"] = error
+	if(target && executed)
+		data["target"] = TRUE
 		data["speed"] = dos_speed
 
-		// This is mostly visual, generate some strings of 1s and 0s
-		// Probability of 1 is equal of completion percentage of DoS attack on this relay.
-		// Combined with UI updates this adds quite nice effect to the UI
-		var/percentage = target.dos_overload * 100 / target.dos_capacity
-		data["dos_strings"] = list()
-		for(var/j, j<10, j++)
-			var/string = ""
-			for(var/i, i<20, i++)
-				string = "[string][prob(percentage)]"
-			data["dos_strings"] += list(list("nums" = string))
+		data["overload"] = target.dos_overload
+		data["capacity"] = target.dos_capacity
 	else
+		data["target"] = FALSE
 		data["relays"] = list()
-		for(var/obj/machinery/ntnet_relay/R in SSnetworks.station_network.relays)
-			data["relays"] += list(list("id" = R.uid))
+		for(var/obj/machinery/ntnet_relay/relays as anything in SSmachines.get_machines_by_type(/obj/machinery/ntnet_relay))
+			data["relays"] += list(list("id" = relays.uid))
 		data["focus"] = target ? target.uid : null
 
 	return data

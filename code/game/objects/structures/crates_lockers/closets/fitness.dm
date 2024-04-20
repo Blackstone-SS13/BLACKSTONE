@@ -1,6 +1,6 @@
 /obj/structure/closet/athletic_mixed
 	name = "athletic wardrobe"
-	desc = ""
+	desc = "It's a storage unit for athletic wear."
 	icon_door = "mixed"
 
 /obj/structure/closet/athletic_mixed/PopulateContents()
@@ -15,8 +15,9 @@
 
 
 /obj/structure/closet/boxinggloves
-	name = "boxing gloves"
-	desc = ""
+	name = "boxing gloves closet"
+	desc = "It's a storage unit for gloves for use in the boxing ring."
+	icon_door = "mixed"
 
 /obj/structure/closet/boxinggloves/PopulateContents()
 	..()
@@ -28,7 +29,7 @@
 
 /obj/structure/closet/masks
 	name = "mask closet"
-	desc = ""
+	desc = "IT'S A STORAGE UNIT FOR FIGHTER MASKS OLE!"
 
 /obj/structure/closet/masks/PopulateContents()
 	..()
@@ -39,8 +40,9 @@
 
 /obj/structure/closet/lasertag/red
 	name = "red laser tag equipment"
-	desc = ""
+	desc = "It's a storage unit for laser tag equipment."
 	icon_door = "red"
+	icon_state = "rack"
 
 /obj/structure/closet/lasertag/red/PopulateContents()
 	..()
@@ -53,8 +55,9 @@
 
 /obj/structure/closet/lasertag/blue
 	name = "blue laser tag equipment"
-	desc = ""
+	desc = "It's a storage unit for laser tag equipment."
 	icon_door = "blue"
+	icon_state = "rack"
 
 /obj/structure/closet/lasertag/blue/PopulateContents()
 	..()

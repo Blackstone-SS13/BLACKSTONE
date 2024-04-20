@@ -18,13 +18,24 @@
 	var/list/fired = list()
 	var/countdown_length = 10
 	var/countdown_step = 0
+	var/pairing_code = ""
+
+/datum/duel/New(new_gun_A, new_gun_B)
+	pairing_code = assign_random_name()
+
+	gun_A = new_gun_A
+	gun_B = new_gun_B
+	gun_A.duel = src
+	gun_B.duel = src
+
+	. = ..()
 
 /datum/duel/proc/try_begin()
 	//Check if both guns are held and if so begin.
 	var/mob/living/A = get_duelist(gun_A)
 	var/mob/living/B = get_duelist(gun_B)
 	if(!A || !B)
-		message_duelists("<span class='warning'>To begin the duel, both participants need to be holding paired dueling pistols.</span>")
+		message_duelists(span_warning("To begin the duel, both participants need to be holding paired dueling pistols."))
 		return
 	begin()
 
@@ -34,7 +45,7 @@
 	fired.Cut()
 	countdown_step = countdown_length
 
-	message_duelists("<span class='notice'>Set your gun setting and move [required_distance] steps away from your opponent.</span>")
+	message_duelists(span_notice("Set your gun setting and move [required_distance] steps away from your opponent."))
 
 	START_PROCESSING(SSobj,src)
 
@@ -56,7 +67,7 @@
 	return G == gun_A ? gun_B : gun_A
 
 /datum/duel/proc/end()
-	message_duelists("<span class='notice'>Duel finished. Re-engaging safety.</span>")
+	message_duelists(span_notice("Duel finished. Re-engaging safety."))
 	STOP_PROCESSING(SSobj,src)
 	state = DUEL_IDLE
 
@@ -83,26 +94,26 @@
 
 
 /datum/duel/proc/back_to_prep()
-	message_duelists("<span class='notice'>Positions invalid. Please move to valid positions [required_distance] steps aways from each other to continue.</span>")
+	message_duelists(span_notice("Positions invalid. Please move to valid positions exactly [required_distance] steps away from each other to continue."))
 	state = DUEL_PREPARATION
 	confirmations.Cut()
 	countdown_step = countdown_length
 
 /datum/duel/proc/confirm_positioning()
-	message_duelists("<span class='notice'>Position confirmed. Confirm readiness by pulling the trigger once.</span>")
+	message_duelists(span_notice("Position confirmed. Confirm readiness by pulling the trigger once."))
 	state = DUEL_READY
 
 /datum/duel/proc/confirm_ready()
-	message_duelists("<span class='notice'>Readiness confirmed. Starting countdown. Commence firing at zero mark.</span>")
+	message_duelists(span_notice("Readiness confirmed. Starting countdown. Commence firing at zero mark."))
 	state = DUEL_COUNTDOWN
 
 /datum/duel/proc/countdown_step()
 	countdown_step--
 	if(countdown_step == 0)
 		state = DUEL_FIRING
-		message_duelists("<span class='danger'>Fire!</span>")
+		message_duelists(span_userdanger("Fire!"))
 	else
-		message_duelists("<span class='danger'>[countdown_step]!</span>")
+		message_duelists(span_userdanger("[countdown_step]!"))
 
 /datum/duel/proc/check_fired()
 	if(fired.len == 2)
@@ -123,29 +134,54 @@
 		return FALSE
 	if(get_dist(A,B) != required_distance)
 		return FALSE
-	for(var/turf/T in getline(get_turf(A),get_turf(B)))
-		if(is_blocked_turf(T,TRUE))
+	for(var/turf/T in get_line(get_turf(A),get_turf(B)))
+		if(T.is_blocked_turf(TRUE))
 			return FALSE
 	return TRUE
 
+///For each linked gun that still exists, clear its reference to us, then delete.
+/datum/duel/proc/clear_duel()
+	gun_A?.duel = null
+	gun_B?.duel = null
+	qdel(src)
+
 /obj/item/gun/energy/dueling
 	name = "dueling pistol"
-	desc = ""
+	desc = "High-tech dueling pistol. Launches chaff and projectile according to preset settings."
 	icon_state = "dueling_pistol"
-	item_state = "gun"
+	inhand_icon_state = "gun"
 	ammo_x_offset = 2
 	w_class = WEIGHT_CLASS_SMALL
 	ammo_type = list(/obj/item/ammo_casing/energy/duel)
 	automatic_charge_overlays = FALSE
+	gun_flags = TURRET_INCOMPATIBLE
 	var/unlocked = FALSE
 	var/setting = DUEL_SETTING_A
 	var/datum/duel/duel
 	var/mutable_appearance/setting_overlay
 
-/obj/item/gun/energy/dueling/Initialize()
+/obj/item/gun/energy/dueling/Initialize(mapload)
 	. = ..()
 	setting_overlay = mutable_appearance(icon,setting_iconstate())
 	add_overlay(setting_overlay)
+
+/obj/item/gun/energy/dueling/attackby(obj/item/W, mob/user, params)
+	if(istype(W, /obj/item/gun/energy/dueling))
+		var/obj/item/gun/energy/dueling/other_gun = W
+
+		if(!check_valid_duel(user, FALSE) && !other_gun.check_valid_duel(user, FALSE))
+			var/datum/duel/D = new(src, other_gun)
+			to_chat(user,span_notice("Pairing established. Pairing code: [D.pairing_code]"))
+			return
+
+	return ..()
+
+/obj/item/gun/energy/dueling/examine_more(mob/user)
+	. = ..()
+	if(check_valid_duel(user, FALSE))
+		. += "The pairing code is: [duel.pairing_code]"
+	else
+		. += "[src] is currently unpaired."
 
 /obj/item/gun/energy/dueling/proc/setting_iconstate()
 	switch(setting)
@@ -159,6 +195,9 @@
 
 /obj/item/gun/energy/dueling/attack_self(mob/living/user)
 	. = ..()
+	if(!check_valid_duel(user, TRUE))
+		return
+
 	if(duel.state == DUEL_IDLE)
 		duel.try_begin()
 	else
@@ -172,33 +211,33 @@
 			setting = DUEL_SETTING_C
 		if(DUEL_SETTING_C)
 			setting = DUEL_SETTING_A
-	to_chat(user,"<span class='notice'>I switch [src] setting to [setting] mode.</span>")
-	update_icon()
+	to_chat(user,span_notice("You switch [src] setting to [setting] mode."))
+	update_appearance()
 
-/obj/item/gun/energy/dueling/update_icon(force_update)
+/obj/item/gun/energy/dueling/update_overlays()
 	. = ..()
 	if(setting_overlay)
-		cut_overlay(setting_overlay)
 		setting_overlay.icon_state = setting_iconstate()
-		add_overlay(setting_overlay)
+		. += setting_overlay
 
 /obj/item/gun/energy/dueling/Destroy()
 	. = ..()
-	if(duel.gun_A == src)
-		duel.gun_A = null
-	if(duel.gun_B == src)
-		duel.gun_B = null
-	duel = null
+	duel?.clear_duel()
 
-/obj/item/gun/energy/dueling/can_trigger_gun(mob/living/user)
+/obj/item/gun/energy/dueling/can_trigger_gun(mob/living/user, akimbo_usage)
+	if(akimbo_usage)
+		return FALSE //not honorable.
 	. = ..()
+	if(!check_valid_duel(user, TRUE))
+		return FALSE
+
 	switch(duel.state)
 		if(DUEL_FIRING)
 			return . && !duel.fired[src]
 		if(DUEL_READY)
 			return .
 		else
-			to_chat(user,"<span class='warning'>[src] is locked. Wait for FIRE signal before shooting.</span>")
+			to_chat(user,span_warning("[src] is locked. Wait for FIRE signal before shooting."))
 			return FALSE
 
 /obj/item/gun/energy/dueling/proc/is_duelist(mob/living/L)
@@ -209,12 +248,14 @@
 	return TRUE
 
 /obj/item/gun/energy/dueling/process_fire(atom/target, mob/living/user, message, params, zone_override, bonus_spread)
+	if(!check_valid_duel(user, TRUE))
+		return
 	if(duel.state == DUEL_READY)
 		duel.confirmations[src] = TRUE
-		to_chat(user,"<span class='notice'>I confirm your readiness.</span>")
+		to_chat(user,span_notice("You confirm your readiness."))
 		return
 	else if(!is_duelist(target)) //I kinda want to leave this out just to see someone shoot a bystander or missing.
-		to_chat(user,"<span class='warning'>[src] safety system prevents shooting anyone but your designated opponent.</span>")
+		to_chat(user,span_warning("[src] safety system prevents shooting anyone but your designated opponent."))
 		return
 	else
 		duel.fired[src] = TRUE
@@ -223,6 +264,14 @@
 /obj/item/gun/energy/dueling/before_firing(target,user)
 	var/obj/item/ammo_casing/energy/duel/D = chambered
 	D.setting = setting
+
+///Return a boolean of whether or not the pistol has a valid duel datum, if false optionally warn the user
+/obj/item/gun/energy/dueling/proc/check_valid_duel(mob/living/user, do_warn)
+	if(!duel)
+		if(do_warn)
+			to_chat(user,span_warning("[src] is currently unpaired."))
+		return FALSE
+	return TRUE
 
 /obj/effect/temp_visual/dueling_chaff
 	icon = 'icons/effects/effects.dmi'
@@ -243,21 +292,21 @@
 //Casing
 
 /obj/item/ammo_casing/energy/duel
-	e_cost = 0
+	e_cost = 0 // Can't use the macro
 	projectile_type = /obj/projectile/energy/duel
 	var/setting
 
 /obj/item/ammo_casing/energy/duel/ready_proj(atom/target, mob/living/user, quiet, zone_override)
 	. = ..()
-	var/obj/projectile/energy/duel/D = BB
+	var/obj/projectile/energy/duel/D = loaded_projectile
 	D.setting = setting
-	D.update_icon()
+	D.update_appearance()
 
 /obj/item/ammo_casing/energy/duel/fire_casing(atom/target, mob/living/user, params, distro, quiet, zone_override, spread, atom/fired_from)
 	. = ..()
 	var/obj/effect/temp_visual/dueling_chaff/C = new(get_turf(user))
 	C.setting = setting
-	C.update_icon()
+	C.update_appearance()
 
 //Projectile
 
@@ -278,7 +327,7 @@
 		if(DUEL_SETTING_C)
 			color = "blue"
 
-/obj/projectile/energy/duel/on_hit(atom/target, blocked)
+/obj/projectile/energy/duel/on_hit(atom/target, blocked = 0, pierce_hit)
 	. = ..()
 	var/turf/T = get_turf(target)
 	var/obj/effect/temp_visual/dueling_chaff/C = locate() in T
@@ -305,9 +354,9 @@
 //Storage case.
 /obj/item/storage/lockbox/dueling
 	name = "dueling pistol case"
-	desc = ""
+	desc = "Let's solve this like gentlespacemen."
 	icon_state = "medalbox+l"
-	item_state = "syringe_kit"
+	inhand_icon_state = "syringe_kit"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	w_class = WEIGHT_CLASS_NORMAL
@@ -315,32 +364,35 @@
 	icon_locked = "medalbox+l"
 	icon_closed = "medalbox"
 	icon_broken = "medalbox+b"
+	base_icon_state = "medalbox"
 
-/obj/item/storage/lockbox/dueling/ComponentInitialize()
+/obj/item/storage/lockbox/dueling/Initialize(mapload)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_w_class = WEIGHT_CLASS_SMALL
-	STR.max_items = 2
-	STR.set_holdable(list(/obj/item/gun/energy/dueling))
+	atom_storage.max_specific_storage = WEIGHT_CLASS_SMALL
+	atom_storage.max_slots = 2
+	atom_storage.set_holdable(/obj/item/gun/energy/dueling)
 
-/obj/item/storage/lockbox/dueling/update_icon()
-	cut_overlays()
-	var/locked = SEND_SIGNAL(src, COMSIG_IS_STORAGE_LOCKED)
-	if(locked)
-		icon_state = "medalbox+l"
-	else
-		icon_state = "medalbox"
-		if(open)
-			icon_state += "open"
-		if(broken)
-			icon_state += "+b"
+/obj/item/storage/lockbox/dueling/update_icon_state()
+	if(atom_storage?.locked)
+		icon_state = icon_locked
+		return ..()
+	if(broken)
+		icon_state = icon_broken
+		return ..()
+	icon_state = open ? "[base_icon_state]open" : icon_closed
+	return ..()
 
 /obj/item/storage/lockbox/dueling/PopulateContents()
 	. = ..()
 	var/obj/item/gun/energy/dueling/gun_A = new(src)
 	var/obj/item/gun/energy/dueling/gun_B = new(src)
-	var/datum/duel/D = new
-	gun_A.duel = D
-	gun_B.duel = D
-	D.gun_A = gun_A
-	D.gun_B = gun_B
+	new /datum/duel(gun_A, gun_B)
+
+#undef DUEL_IDLE
+#undef DUEL_PREPARATION
+#undef DUEL_READY
+#undef DUEL_COUNTDOWN
+#undef DUEL_FIRING
+#undef DUEL_SETTING_A
+#undef DUEL_SETTING_B
+#undef DUEL_SETTING_C

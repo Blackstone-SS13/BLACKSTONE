@@ -1,24 +1,15 @@
-/*
-//////////////////////////////////////
-
-Confusion
-
-	Little bit hidden.
-	Lowers resistance.
-	Decreases stage speed.
-	Not very transmissibile.
-	Intense Level.
-
-Bonus
-	Makes the affected mob be confused for short periods of time.
-
-//////////////////////////////////////
-*/
-
+/**Confusion
+ * Slightly increases stealth
+ * Slightly lowers resistance
+ * Decreases stage speed
+ * No effect to transmissibility
+ * Intense level
+ * Bonus: Makes the affected mob be confused for short periods of time.
+ */
 /datum/symptom/confusion
-
 	name = "Confusion"
-	desc = ""
+	desc = "The virus interferes with the proper function of the neural system, leading to bouts of confusion and erratic movement."
+	illness = "Shattered Reality"
 	stealth = 1
 	resistance = -1
 	stage_speed = -3
@@ -28,35 +19,44 @@ Bonus
 	base_message_chance = 25
 	symptom_delay_min = 10
 	symptom_delay_max = 30
+	threshold_descs = list(
+		"Resistance 6" = "Causes brain damage over time.",
+		"Transmission 6" = "Increases confusion duration and strength.",
+		"Stealth 4" = "The symptom remains hidden until active.",
+	)
 	var/brain_damage = FALSE
-	threshold_desc = "<b>Resistance 6:</b> Causes brain damage over time.<br>\
-					  <b>Transmission 6:</b> Increases confusion duration and strength.<br>\
-					  <b>Stealth 4:</b> The symptom remains hidden until active."
+	var/causes_illiteracy = FALSE
 
-/datum/symptom/confusion/Start(datum/disease/advance/A)
-	if(!..())
+/datum/symptom/confusion/Start(datum/disease/advance/advanced_disease)
+	. = ..()
+	if(!.)
 		return
-	if(A.properties["resistance"] >= 6)
+	if(advanced_disease.totalStageSpeed() >= 6)
+		causes_illiteracy = TRUE
+	if(advanced_disease.totalResistance() >= 6)
 		brain_damage = TRUE
-	if(A.properties["transmittable"] >= 6)
+	if(advanced_disease.totalTransmittable() >= 6)
 		power = 1.5
-	if(A.properties["stealth"] >= 4)
+	if(advanced_disease.totalStealth() >= 4)
 		suppress_warning = TRUE
 
-/datum/symptom/confusion/Activate(datum/disease/advance/A)
-	if(!..())
+/datum/symptom/confusion/End(datum/disease/advance/advanced_disease)
+	advanced_disease.affected_mob.remove_status_effect(/datum/status_effect/confusion)
+	return ..()
+
+/datum/symptom/confusion/Activate(datum/disease/advance/advanced_disease)
+	. = ..()
+	if(!.)
 		return
-	var/mob/living/carbon/M = A.affected_mob
-	switch(A.stage)
+	var/mob/living/carbon/infected_mob = advanced_disease.affected_mob
+	switch(advanced_disease.stage)
 		if(1, 2, 3, 4)
 			if(prob(base_message_chance) && !suppress_warning)
-				to_chat(M, "<span class='warning'>[pick("Your head hurts.", "Your mind blanks for a moment.")]</span>")
+				to_chat(infected_mob, span_warning("[pick("Your head hurts.", "Your mind blanks for a moment.")]"))
 		else
-			to_chat(M, "<span class='danger'>I can't think straight!</span>")
-			if(M.confused < 100)
-				M.confused += (16 * power)
+			to_chat(infected_mob, span_userdanger("You can't think straight!"))
+			infected_mob.adjust_confusion_up_to(16 SECONDS * power, 30 SECONDS)
 			if(brain_damage)
-				M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3 * power, 80)
-				M.updatehealth()
-
+				infected_mob.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3 * power, 80)
+				infected_mob.updatehealth()
 	return

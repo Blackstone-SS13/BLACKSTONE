@@ -1,5 +1,6 @@
 /datum/wires/rnd
 	holder_type = /obj/machinery/rnd
+	proper_name = "R&D Machinery"
 	randomize = TRUE
 
 /datum/wires/rnd/New(atom/holder)
@@ -11,6 +12,8 @@
 	..()
 
 /datum/wires/rnd/interactable(mob/user)
+	if(!..())
+		return FALSE
 	var/obj/machinery/rnd/R = holder
 	if(R.panel_open)
 		return TRUE
@@ -30,7 +33,7 @@
 			R.hacked = !R.hacked
 		if(WIRE_DISABLE)
 			R.disabled = !R.disabled
-/datum/wires/rnd/on_cut(wire, mend)
+/datum/wires/rnd/on_cut(wire, mend, source)
 	var/obj/machinery/rnd/R = holder
 	switch(wire)
 		if(WIRE_HACK)

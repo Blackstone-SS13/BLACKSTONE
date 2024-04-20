@@ -1,61 +1,57 @@
 /datum/computer_file/program/revelation
 	filename = "revelation"
-	filedesc = ""
-	program_icon_state = "hostile"
-	extended_desc = ""
+	filedesc = "Revelation"
+	downloader_category = PROGRAM_CATEGORY_DEVICE
+	program_open_overlay = "hostile"
+	extended_desc = "This virus can destroy hard drive of system it is executed on. It may be obfuscated to look like another non-malicious program. Once armed, it will destroy the system upon next execution."
 	size = 13
-	requires_ntnet = 0
-	available_on_ntnet = 0
-	available_on_syndinet = 1
-	tgui_id = "ntos_revelation"
-	ui_style = "syndicate"
-	ui_x = 400
-	ui_y = 250
-
+	program_flags = PROGRAM_ON_SYNDINET_STORE
+	tgui_id = "NtosRevelation"
+	program_icon = "magnet"
 	var/armed = 0
 
-/datum/computer_file/program/revelation/run_program(mob/living/user)
+/datum/computer_file/program/revelation/on_start(mob/living/user)
 	. = ..(user)
 	if(armed)
 		activate()
 
 /datum/computer_file/program/revelation/proc/activate()
 	if(computer)
-		computer.visible_message("<span class='notice'>\The [computer]'s screen brightly flashes and loud electrical buzzing is heard.</span>")
-		computer.enabled = 0
-		computer.update_icon()
-		var/obj/item/computer_hardware/hard_drive/hard_drive = computer.all_components[MC_HDD]
-		var/obj/item/computer_hardware/battery/battery_module = computer.all_components[MC_CELL]
-		var/obj/item/computer_hardware/recharger/recharger = computer.all_components[MC_CHARGE]
-		qdel(hard_drive)
+		if(istype(computer, /obj/item/modular_computer/pda/silicon)) //If this is a borg's integrated tablet
+			var/obj/item/modular_computer/pda/silicon/modularInterface = computer
+			to_chat(modularInterface.silicon_owner,span_userdanger("SYSTEM PURGE DETECTED/"))
+			addtimer(CALLBACK(modularInterface.silicon_owner, TYPE_PROC_REF(/mob/living/silicon/robot/, death)), 2 SECONDS, TIMER_UNIQUE)
+			return
+
+		computer.visible_message(span_notice("\The [computer]'s screen brightly flashes and loud electrical buzzing is heard."))
+		computer.enabled = FALSE
+		computer.update_appearance()
+
+		QDEL_LIST(computer.stored_files)
+
 		computer.take_damage(25, BRUTE, 0, 0)
-		if(battery_module && prob(25))
-			qdel(battery_module)
-			computer.visible_message("<span class='notice'>\The [computer]'s battery explodes in rain of sparks.</span>")
+
+		if(computer.internal_cell && prob(25))
+			QDEL_NULL(computer.internal_cell)
+			computer.visible_message(span_notice("\The [computer]'s battery explodes in rain of sparks."))
 			var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread
 			spark_system.start()
 
-		if(recharger && prob(50))
-			qdel(recharger)
-			computer.visible_message("<span class='notice'>\The [computer]'s recharger explodes in rain of sparks.</span>")
-			var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread
-			spark_system.start()
-
-
-/datum/computer_file/program/revelation/ui_act(action, params)
-	if(..())
-		return 1
+/datum/computer_file/program/revelation/ui_act(action, params, datum/tgui/ui, datum/ui_state/state)
+	. = ..()
 	switch(action)
 		if("PRG_arm")
 			armed = !armed
+			return TRUE
 		if("PRG_activate")
 			activate()
+			return TRUE
 		if("PRG_obfuscate")
-			var/mob/living/user = usr
-			var/newname = sanitize(input(user, "Enter new program name: "))
+			var/newname = params["new_name"]
 			if(!newname)
 				return
 			filedesc = newname
+			return TRUE
 
 
 /datum/computer_file/program/revelation/clone()
@@ -64,7 +60,7 @@
 	return temp
 
 /datum/computer_file/program/revelation/ui_data(mob/user)
-	var/list/data = get_header_data()
+	var/list/data = list()
 
 	data["armed"] = armed
 

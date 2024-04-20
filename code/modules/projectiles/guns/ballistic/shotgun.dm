@@ -1,23 +1,22 @@
 /obj/item/gun/ballistic/shotgun
 	name = "shotgun"
-	desc = ""
+	desc = "A traditional shotgun with wood furniture and a four-shell capacity underneath."
 	icon_state = "shotgun"
+	worn_icon_state = null
 	lefthand_file = 'icons/mob/inhands/weapons/64x_guns_left.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/64x_guns_right.dmi'
-	item_state = "shotgun"
+	inhand_icon_state = "shotgun"
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
-	fire_sound = 'sound/blank.ogg'
-	vary_fire_sound = FALSE
+	fire_sound = 'sound/weapons/gun/shotgun/shot.ogg'
 	fire_sound_volume = 90
-	rack_sound = "sound/weapons/gun/shotgun/rack.ogg"
-	load_sound = "sound/weapons/gun/shotgun/insert_shell.ogg"
+	rack_sound = 'sound/weapons/gun/shotgun/rack.ogg'
+	load_sound = 'sound/weapons/gun/shotgun/insert_shell.ogg'
 	w_class = WEIGHT_CLASS_BULKY
 	force = 10
-	flags_1 =  CONDUCT_1
+	obj_flags = CONDUCTS_ELECTRICITY
 	slot_flags = ITEM_SLOT_BACK
-	mag_type = /obj/item/ammo_box/magazine/internal/shot
-	weapon_weight = WEAPON_MEDIUM
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot
 	semi_auto = FALSE
 	internal_magazine = TRUE
 	casing_ejector = FALSE
@@ -30,67 +29,91 @@
 
 /obj/item/gun/ballistic/shotgun/blow_up(mob/user)
 	. = 0
-	if(chambered && chambered.BB)
+	if(chambered?.loaded_projectile)
 		process_fire(user, user, FALSE)
 		. = 1
 
 /obj/item/gun/ballistic/shotgun/lethal
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/lethal
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/lethal
 
 // RIOT SHOTGUN //
 
 /obj/item/gun/ballistic/shotgun/riot //for spawn in the armory
 	name = "riot shotgun"
-	desc = ""
+	desc = "A sturdy shotgun with a longer magazine and a fixed tactical stock designed for non-lethal riot control."
 	icon_state = "riotshotgun"
-	item_state = "shotgun"
-	fire_delay = 7
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/riot
-	sawn_desc = ""
-	can_be_sawn_off  = TRUE
+	inhand_icon_state = "shotgun"
+	fire_delay = 8
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/riot
+	sawn_desc = "Come with me if you want to live."
+	can_be_sawn_off = TRUE
 
 // Automatic Shotguns//
 
-/obj/item/gun/ballistic/shotgun/automatic/shoot_live_shot(mob/living/user as mob|obj)
+/obj/item/gun/ballistic/shotgun/automatic/shoot_live_shot(mob/living/user)
 	..()
-	src.rack()
+	rack()
 
 /obj/item/gun/ballistic/shotgun/automatic/combat
 	name = "combat shotgun"
-	desc = ""
+	desc = "A semi automatic shotgun with tactical furniture and a six-shell capacity underneath."
 	icon_state = "cshotgun"
-	item_state = "shotgun_combat"
+	inhand_icon_state = "shotgun_combat"
 	fire_delay = 5
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/com
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/com
 	w_class = WEIGHT_CLASS_HUGE
 
 /obj/item/gun/ballistic/shotgun/automatic/combat/compact
-	name = "compact combat shotgun"
-	desc = ""
+	name = "compact shotgun"
+	desc = "A compact version of the semi automatic combat shotgun. For close encounters."
 	icon_state = "cshotgunc"
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/com/compact
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/com/compact
 	w_class = WEIGHT_CLASS_BULKY
 
 //Dual Feed Shotgun
 
 /obj/item/gun/ballistic/shotgun/automatic/dual_tube
 	name = "cycler shotgun"
-	desc = ""
+	desc = "An advanced shotgun with two separate magazine tubes, allowing you to quickly toggle between ammo types."
 	icon_state = "cycler"
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/tube
+	inhand_icon_state = "bulldog"
+	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
+	inhand_x_dimension = 32
+	inhand_y_dimension = 32
+	worn_icon_state = "cshotgun"
 	w_class = WEIGHT_CLASS_HUGE
-	var/toggled = FALSE
-	var/obj/item/ammo_box/magazine/internal/shot/alternate_magazine
 	semi_auto = TRUE
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/tube
+	interaction_flags_click = NEED_DEXTERITY|NEED_HANDS
+	/// If defined, the secondary tube is this type, if you want different shell loads
+	var/alt_mag_type
+	/// If TRUE, we're drawing from the alternate_magazine
+	var/toggled = FALSE
+	/// The B tube
+	var/obj/item/ammo_box/magazine/internal/shot/alternate_magazine
+
+/obj/item/gun/ballistic/shotgun/automatic/dual_tube/bounty
+	name = "bounty cycler shotgun"
+	desc = "An advanced shotgun with two separate magazine tubes. This one shows signs of bounty hunting customization, meaning it likely has a dual rubber shot/fire slug load."
+	alt_mag_type = /obj/item/ammo_box/magazine/internal/shot/tube/fire
+
+/obj/item/gun/ballistic/shotgun/automatic/dual_tube/deadly
+	spawn_magazine_type = /obj/item/ammo_box/magazine/internal/shot/tube/buckshot
+	alt_mag_type = /obj/item/ammo_box/magazine/internal/shot/tube/slug
 
 /obj/item/gun/ballistic/shotgun/automatic/dual_tube/examine(mob/user)
 	. = ..()
-	. += "<span class='notice'>Alt-click to pump it.</span>"
+	. += span_notice("Alt-click to pump it.")
 
-/obj/item/gun/ballistic/shotgun/automatic/dual_tube/Initialize()
+/obj/item/gun/ballistic/shotgun/automatic/dual_tube/Initialize(mapload)
 	. = ..()
-	if (!alternate_magazine)
-		alternate_magazine = new mag_type(src)
+	alt_mag_type = alt_mag_type || spawn_magazine_type
+	alternate_magazine = new alt_mag_type(src)
+
+/obj/item/gun/ballistic/shotgun/automatic/dual_tube/Destroy()
+	QDEL_NULL(alternate_magazine)
+	return ..()
 
 /obj/item/gun/ballistic/shotgun/automatic/dual_tube/attack_self(mob/living/user)
 	if(!chambered && magazine.contents.len)
@@ -105,43 +128,133 @@
 	alternate_magazine = current_mag
 	toggled = !toggled
 	if(toggled)
-		to_chat(user, "<span class='notice'>I switch to tube B.</span>")
+		balloon_alert(user, "switched to tube B")
 	else
-		to_chat(user, "<span class='notice'>I switch to tube A.</span>")
+		balloon_alert(user, "switched to tube A")
 
-/obj/item/gun/ballistic/shotgun/automatic/dual_tube/AltClick(mob/living/user)
-	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
-		return
+/obj/item/gun/ballistic/shotgun/automatic/dual_tube/click_alt(mob/living/user)
 	rack()
+	return CLICK_ACTION_SUCCESS
 
 // Bulldog shotgun //
 
 /obj/item/gun/ballistic/shotgun/bulldog
 	name = "\improper Bulldog Shotgun"
-	desc = ""
+	desc = "A 2-round burst fire, mag-fed shotgun for combat in narrow corridors, nicknamed 'Bulldog' by boarding parties. Compatible only with specialized 8-round drum magazines. Can have a secondary magazine attached to quickly swap between ammo types, or just to keep shooting."
 	icon_state = "bulldog"
-	item_state = "bulldog"
+	inhand_icon_state = "bulldog"
+	worn_icon_state = "cshotgun"
 	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
 	inhand_x_dimension = 32
 	inhand_y_dimension = 32
-	w_class = WEIGHT_CLASS_NORMAL
+	projectile_damage_multiplier = 1.2
 	weapon_weight = WEAPON_MEDIUM
-	mag_type = /obj/item/ammo_box/magazine/m12g
+	accepted_magazine_type = /obj/item/ammo_box/magazine/m12g
 	can_suppress = FALSE
-	burst_size = 1
-	fire_delay = 0
+	burst_size = 2
+	fire_delay = 1
 	pin = /obj/item/firing_pin/implant/pindicate
-	fire_sound = 'sound/blank.ogg'
-	actions_types = list()
+	fire_sound = 'sound/weapons/gun/shotgun/shot_alt.ogg'
+	actions_types = list(/datum/action/item_action/toggle_firemode)
 	mag_display = TRUE
 	empty_indicator = TRUE
 	empty_alarm = TRUE
 	special_mags = TRUE
+	mag_display_ammo = TRUE
 	semi_auto = TRUE
 	internal_magazine = FALSE
 	tac_reloads = TRUE
+	burst_fire_selection = TRUE
+	///the type of secondary magazine for the bulldog
+	var/secondary_magazine_type
+	///the secondary magazine
+	var/obj/item/ammo_box/magazine/secondary_magazine
 
+/obj/item/gun/ballistic/shotgun/bulldog/Initialize(mapload)
+	. = ..()
+	secondary_magazine_type = secondary_magazine_type || spawn_magazine_type
+	secondary_magazine = new secondary_magazine_type(src)
+	update_appearance()
+
+/obj/item/gun/ballistic/shotgun/bulldog/Destroy()
+	QDEL_NULL(secondary_magazine)
+	return ..()
+
+/obj/item/gun/ballistic/shotgun/bulldog/examine(mob/user)
+	. = ..()
+	if(secondary_magazine)
+		var/secondary_ammo_count = secondary_magazine.ammo_count()
+		. += "There is a secondary magazine."
+		. += "It has [secondary_ammo_count] round\s remaining."
+		. += "Shoot with right-click to swap to the secondary magazine after firing."
+		. += "If the magazine is empty, [src] will automatically swap to the secondary magazine."
+	. += "You can load a secondary magazine by right-clicking [src] with the magazine you want to load."
+	. += "You can remove a secondary magazine by alt-right-clicking [src]."
+	. += "Right-click to swap the magazine to the secondary position, and vice versa."
+
+/obj/item/gun/ballistic/shotgun/bulldog/update_overlays()
+	. = ..()
+	if(secondary_magazine)
+		. += "[icon_state]_secondary_mag_[initial(secondary_magazine.icon_state)]"
+		if(!secondary_magazine.ammo_count())
+			. += "[icon_state]_secondary_mag_empty"
+	else
+		. += "[icon_state]_no_secondary_mag"
+
+/obj/item/gun/ballistic/shotgun/bulldog/handle_chamber()
+	if(!secondary_magazine)
+		return ..()
+	var/secondary_shells_left = LAZYLEN(secondary_magazine.stored_ammo)
+	if(magazine)
+		var/shells_left = LAZYLEN(magazine.stored_ammo)
+		if(shells_left <= 0 && secondary_shells_left >= 1)
+			toggle_magazine()
+	else
+		toggle_magazine()
+	return ..()
+
+/obj/item/gun/ballistic/shotgun/bulldog/attack_self_secondary(mob/user, modifiers)
+	toggle_magazine()
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/gun/ballistic/shotgun/bulldog/afterattack_secondary(mob/living/victim, mob/living/user, proximity_flag, click_parameters)
+	if(secondary_magazine)
+		toggle_magazine()
+	return SECONDARY_ATTACK_CALL_NORMAL
+
+/obj/item/gun/ballistic/shotgun/bulldog/attackby_secondary(obj/item/weapon, mob/user, params)
+	if(!istype(weapon, secondary_magazine_type))
+		balloon_alert(user, "[weapon.name] doesn't fit!")
+		return SECONDARY_ATTACK_CALL_NORMAL
+	if(!user.transferItemToLoc(weapon, src))
+		to_chat(user, span_warning("You cannot seem to get [src] out of your hands!"))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	var/obj/item/ammo_box/magazine/old_mag = secondary_magazine
+	secondary_magazine = weapon
+	if(old_mag)
+		user.put_in_hands(old_mag)
+	balloon_alert(user, "secondary [magazine_wording] loaded")
+	playsound(src, load_empty_sound, load_sound_volume, load_sound_vary)
+	update_appearance()
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/gun/ballistic/shotgun/bulldog/alt_click_secondary(mob/user)
+	if(secondary_magazine)
+		var/obj/item/ammo_box/magazine/old_mag = secondary_magazine
+		secondary_magazine = null
+		user.put_in_hands(old_mag)
+		update_appearance()
+		playsound(src, load_empty_sound, load_sound_volume, load_sound_vary)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/item/gun/ballistic/shotgun/bulldog/proc/toggle_magazine()
+	var/primary_magazine = magazine
+	var/alternative_magazine = secondary_magazine
+	magazine = alternative_magazine
+	secondary_magazine = primary_magazine
+	playsound(src, load_empty_sound, load_sound_volume, load_sound_vary)
+	update_appearance()
 
 /obj/item/gun/ballistic/shotgun/bulldog/unrestricted
 	pin = /obj/item/firing_pin
@@ -151,16 +264,16 @@
 
 /obj/item/gun/ballistic/shotgun/doublebarrel
 	name = "double-barreled shotgun"
-	desc = ""
+	desc = "A true classic."
 	icon_state = "dshotgun"
-	item_state = "shotgun_db"
+	inhand_icon_state = "shotgun_db"
 	w_class = WEIGHT_CLASS_BULKY
 	weapon_weight = WEAPON_MEDIUM
 	force = 10
-	flags_1 = CONDUCT_1
+	obj_flags = CONDUCTS_ELECTRICITY
 	slot_flags = ITEM_SLOT_BACK
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/dual
-	sawn_desc = ""
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/dual
+	sawn_desc = "Omar's coming!"
 	obj_flags = UNIQUE_RENAME
 	rack_sound_volume = 0
 	unique_reskin = list("Default" = "dshotgun",
@@ -172,109 +285,60 @@
 						)
 	semi_auto = TRUE
 	bolt_type = BOLT_TYPE_NO_BOLT
-	can_be_sawn_off  = TRUE
+	can_be_sawn_off = TRUE
 	pb_knockback = 3 // it's a super shotgun!
 
-/obj/item/gun/ballistic/shotgun/doublebarrel/AltClick(mob/user)
-	. = ..()
-	if(unique_reskin && !current_skin && user.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
-		reskin_obj(user)
 
 /obj/item/gun/ballistic/shotgun/doublebarrel/sawoff(mob/user)
 	. = ..()
 	if(.)
 		weapon_weight = WEAPON_MEDIUM
 
-// IMPROVISED SHOTGUN //
+/obj/item/gun/ballistic/shotgun/doublebarrel/slugs
+	name = "hunting shotgun"
+	desc = "A hunting shotgun used by the wealthy to hunt \"game\"."
+	sawn_desc = "A sawn-off hunting shotgun. In its new state, it's remarkably less effective at hunting... anything."
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/dual/slugs
 
-/obj/item/gun/ballistic/shotgun/doublebarrel/improvised
-	name = "improvised shotgun"
-	desc = ""
-	icon_state = "ishotgun"
-	item_state = "ishotgun"
-	w_class = WEIGHT_CLASS_BULKY
-	force = 10
-	slot_flags = null
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/improvised
-	sawn_desc = ""
-	unique_reskin = null
-	var/slung = FALSE
+/obj/item/gun/ballistic/shotgun/doublebarrel/breacherslug
+	name = "breaching shotgun"
+	desc = "A normal double-barrel shotgun that has been rechambered to fit breaching shells. Useful in breaching airlocks and windows, not much else."
+	sawn_desc = "A sawn-off breaching shotgun, making for a more compact configuration while still having the same capability as before."
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/dual/breacherslug
 
-/obj/item/gun/ballistic/shotgun/doublebarrel/improvised/attackby(obj/item/A, mob/user, params)
-	..()
-	if(istype(A, /obj/item/stack/cable_coil) && !sawn_off)
-		var/obj/item/stack/cable_coil/C = A
-		if(C.use(10))
-			slot_flags = ITEM_SLOT_BACK
-			to_chat(user, "<span class='notice'>I tie the lengths of cable to the shotgun, making a sling.</span>")
-			slung = TRUE
-			update_icon()
-		else
-			to_chat(user, "<span class='warning'>I need at least ten lengths of cable if you want to make a sling!</span>")
-
-/obj/item/gun/ballistic/shotgun/doublebarrel/improvised/update_icon()
-	..()
-	if(slung)
-		add_overlay("ishotgunsling")
-		item_state = "ishotgunsling"
-
-/obj/item/gun/ballistic/shotgun/doublebarrel/improvised/sawoff(mob/user)
-	. = ..()
-	if(. && slung) //sawing off the gun removes the sling
-		new /obj/item/stack/cable_coil(get_turf(src), 10)
-		slung = 0
-		update_icon()
-
-/obj/item/gun/ballistic/shotgun/doublebarrel/improvised/sawn
-	name = "sawn-off improvised shotgun"
-	desc = ""
-	icon_state = "ishotgun_sawn"
-	item_state = "ishotgun_sawn"
-	w_class = WEIGHT_CLASS_NORMAL
-	sawn_off = TRUE
-	slot_flags = ITEM_SLOT_BELT
-
-/obj/item/gun/ballistic/shotgun/doublebarrel/hook
+/obj/item/gun/ballistic/shotgun/hook
 	name = "hook modified sawn-off shotgun"
-	desc = ""
+	desc = "Range isn't an issue when you can bring your victim to you."
 	icon_state = "hookshotgun"
-	item_state = "shotgun"
-	load_sound = "sound/weapons/shotguninsert.ogg"
-	mag_type = /obj/item/ammo_box/magazine/internal/shot/bounty
-	w_class = WEIGHT_CLASS_BULKY
+	inhand_icon_state = "hookshotgun"
+	lefthand_file = 'icons/mob/inhands/weapons/guns_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/guns_righthand.dmi'
+	inhand_x_dimension = 32
+	inhand_y_dimension = 32
+	accepted_magazine_type = /obj/item/ammo_box/magazine/internal/shot/bounty
 	weapon_weight = WEAPON_MEDIUM
-	can_be_sawn_off = FALSE
-	force = 16 //it has a hook on it
-	attack_verb = list("slashed", "hooked", "stabbed")
-	hitsound = 'sound/blank.ogg'
+	semi_auto = TRUE
+	obj_flags = CONDUCTS_ELECTRICITY
+	force = 18 //it has a hook on it
+	sharpness = SHARP_POINTY //it does in fact, have a hook on it
+	attack_verb_continuous = list("slashes", "hooks", "stabs")
+	attack_verb_simple = list("slash", "hook", "stab")
+	hitsound = 'sound/weapons/bladeslice.ogg'
 	//our hook gun!
 	var/obj/item/gun/magic/hook/bounty/hook
-	var/toggled = FALSE
 
-/obj/item/gun/ballistic/shotgun/doublebarrel/hook/Initialize()
+/obj/item/gun/ballistic/shotgun/hook/Initialize(mapload)
 	. = ..()
 	hook = new /obj/item/gun/magic/hook/bounty(src)
 
-/obj/item/gun/ballistic/shotgun/doublebarrel/hook/AltClick(mob/user)
-	if(!istype(user) || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
-		return
-	if(toggled)
-		to_chat(user,"<span class='notice'>I switch to the shotgun.</span>")
-		fire_sound = initial(fire_sound)
-	else
-		to_chat(user,"<span class='notice'>I switch to the hook.</span>")
-		fire_sound = 'sound/blank.ogg'
-	toggled = !toggled
+/obj/item/gun/ballistic/shotgun/hook/Destroy()
+	QDEL_NULL(hook)
+	return ..()
 
-/obj/item/gun/ballistic/shotgun/doublebarrel/hook/examine(mob/user)
+/obj/item/gun/ballistic/shotgun/hook/examine(mob/user)
 	. = ..()
-	if(toggled)
-		. += "<span class='notice'>Alt-click to switch to the shotgun.</span>"
-	else
-		. += "<span class='notice'>Alt-click to switch to the hook.</span>"
+	. += span_notice("Right-click to shoot the hook.")
 
-/obj/item/gun/ballistic/shotgun/doublebarrel/hook/afterattack(atom/target, mob/living/user, flag, params)
-	if(toggled)
-		hook.afterattack(target, user, flag, params)
-	else
-		return ..()
+/obj/item/gun/ballistic/shotgun/hook/afterattack_secondary(atom/target, mob/user, proximity_flag, click_parameters)
+	hook.afterattack(target, user, proximity_flag, click_parameters)
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN

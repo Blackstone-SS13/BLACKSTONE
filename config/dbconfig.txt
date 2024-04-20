@@ -7,13 +7,13 @@
 
 ## Server the MySQL database can be found at.
 ## Examples: localhost, 200.135.5.43, www.mysqldb.com, etc.
-ADDRESS 127.0.0.1
+ADDRESS localhost
 
 ## MySQL server port (default is 3306).
 PORT 3306
 
 ## Database for all SQL functions, not just feedback.
-FEEDBACK_DATABASE rtwn
+FEEDBACK_DATABASE feedback
 
 ## Prefix to be added to the name of every table, older databases will require this be set to erro_
 ## Note, this does not change the table names in the database, you will have to do that yourself.
@@ -24,22 +24,25 @@ FEEDBACK_DATABASE rtwn
 FEEDBACK_TABLEPREFIX SS13_
 
 ## Username/Login used to access the database.
-FEEDBACK_LOGIN rtzone
+FEEDBACK_LOGIN username
 
 ## Password used to access the database.
-FEEDBACK_PASSWORD Wowamu5E
+FEEDBACK_PASSWORD password
 
 ## Time in seconds for asynchronous queries to timeout
 ## Set to 0 for infinite
 ASYNC_QUERY_TIMEOUT 10
 
-## Time in seconds for blocking queries to execute before slow query timeout 
+## Time in seconds for blocking queries to execute before slow query timeout
 ## Set to 0 for infinite
 ## Must be less than or equal to ASYNC_QUERY_TIMEOUT
 BLOCKING_QUERY_TIMEOUT 5
 
-## The maximum number of additional threads BSQL is allowed to run at once
-BSQL_THREAD_LIMIT 50
+## The minimum number of sql connections to keep around in the pool. Setting this higher on servers geographically away from the database can improve performance.
+POOLING_MIN_SQL_CONNECTIONS 1
 
-## Uncomment to enable verbose BSQL communication logs
-#BSQL_DEBUG
+## The maximum number of sql connections to the database.
+POOLING_MAX_SQL_CONNECTIONS 25
+
+## The maximum number of concurrent asynchronous queries that can be pending a result before we start queuing further database queries.
+MAX_CONCURRENT_QUERIES 25

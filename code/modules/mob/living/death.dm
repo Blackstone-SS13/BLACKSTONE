@@ -1,39 +1,80 @@
-/mob/living/gib(no_brain, no_organs, no_bodyparts)
-	var/prev_lying = lying
-	if(stat != DEAD)
-		death(TRUE)
-	if(client)
-		SSdroning.kill_droning(client)
-	playsound(src.loc, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+/**
+ * Blow up the mob into giblets
+ *
+ * drop_bitflags: (see code/__DEFINES/blood.dm)
+ * * DROP_BRAIN - Gibbed mob will drop a brain
+ * * DROP_ORGANS - Gibbed mob will drop organs
+ * * DROP_BODYPARTS - Gibbed mob will drop bodyparts (arms, legs, etc.)
+ * * DROP_ITEMS - Gibbed mob will drop carried items (otherwise they get deleted)
+ * * DROP_ALL_REMAINS - Gibbed mob will drop everything
+**/
+/mob/living/proc/gib(drop_bitflags=NONE)
+	var/prev_lying = lying_angle
+	spawn_gibs(drop_bitflags)
 
 	if(!prev_lying)
 		gib_animation()
 
-	spill_organs(no_brain, no_organs, no_bodyparts)
+	if(stat != DEAD)
+		death(TRUE)
 
-	if(!no_bodyparts)
-		spread_bodyparts(no_brain, no_organs)
+	ghostize()
+	spill_organs(drop_bitflags)
 
-	for(var/obj/item/I in simple_embedded_objects)
-		simple_embedded_objects -= I
-		I.forceMove(get_turf(src))
+	if(drop_bitflags & DROP_BODYPARTS)
+		spread_bodyparts(drop_bitflags)
 
-	spawn_gibs(no_bodyparts)
+	SEND_SIGNAL(src, COMSIG_LIVING_GIBBED, drop_bitflags)
 	qdel(src)
 
 /mob/living/proc/gib_animation()
 	return
 
-/mob/living/proc/spawn_gibs()
+/**
+ * Spawn bloody gib mess on the floor
+ *
+ * drop_bitflags: (see code/__DEFINES/blood.dm)
+ * * DROP_BODYPARTS - Gibs will spawn with bodypart limbs present
+**/
+/mob/living/proc/spawn_gibs(drop_bitflags=NONE)
+	if(flags_1 & HOLOGRAM_1)
+		return
 	new /obj/effect/gibspawner/generic(drop_location(), src, get_static_viruses())
 
-/mob/living/proc/spill_organs()
+/**
+ * Drops a mob's organs on the floor
+ *
+ * drop_bitflags: (see code/__DEFINES/blood.dm)
+ * * DROP_BRAIN - Mob will drop a brain
+ * * DROP_ORGANS - Mob will drop organs
+ * * DROP_BODYPARTS - Mob will drop bodyparts (arms, legs, etc.)
+ * * DROP_ALL_REMAINS - Mob will drop everything
+**/
+/mob/living/proc/spill_organs(drop_bitflags=NONE)
 	return
 
-/mob/living/proc/spread_bodyparts()
+/**
+ * Launches all bodyparts away from the mob
+ *
+ * drop_bitflags: (see code/__DEFINES/blood.dm)
+ * * DROP_BRAIN - Detaches the head from the mob and launches it away from the body
+**/
+/mob/living/proc/spread_bodyparts(drop_bitflags=NONE)
 	return
 
-/mob/living/dust(just_ash, drop_items, force)
+/**
+ * This is the proc for turning a mob into ash.
+ * Dusting robots does not eject the MMI, so it's a bit more powerful than gib()
+ *
+ * Arguments:
+ * * just_ash - If TRUE, ash will spawn where the mob was, as opposed to remains
+ * * drop_items - Should the mob drop their items before dusting?
+ * * force - Should this mob be FORCABLY dusted?
+*/
+/mob/living/proc/dust(just_ash, drop_items, force)
+	if(body_position == STANDING_UP)
+		// keep us upright so the animation fits.
+		ADD_TRAIT(src, TRAIT_FORCED_STANDING, TRAIT_GENERIC)
 	death(TRUE)
 
 	if(drop_items)
@@ -44,82 +85,58 @@
 
 	dust_animation()
 	spawn_dust(just_ash)
+	ghostize()
 	QDEL_IN(src,5) // since this is sometimes called in the middle of movement, allow half a second for movement to finish, ghosting to happen and animation to play. Looks much nicer and doesn't cause multiple runtimes.
 
 /mob/living/proc/dust_animation()
 	return
 
 /mob/living/proc/spawn_dust(just_ash = FALSE)
-	for(var/i in 1 to 3)
-		new /obj/item/ash(loc)
+	new /obj/effect/decal/cleanable/ash(loc)
 
+/*
+ * Called when the mob dies. Can also be called manually to kill a mob.
+ *
+ * Arguments:
+ * * gibbed - Was the mob gibbed?
+*/
+/mob/living/proc/death(gibbed)
+	if(stat == DEAD)
+		return FALSE
 
-/mob/living/death(gibbed)
-	var/was_dead_before = stat == DEAD
-	stat = DEAD
-	unset_machine()
+	if(!gibbed && (death_sound || death_message))
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/mob, emote), "deathgasp")
+
+	set_stat(DEAD)
 	timeofdeath = world.time
-	tod = station_time_timestamp()
-//	var/turf/T = get_turf(src)
-	for(var/obj/item/I in contents)
-		I.on_mob_death(src, gibbed)
-//	if(mind && mind.name && mind.active && !istype(T.loc, /area/ctf))
-//		deadchat_broadcast(" has died at <b>[get_area_name(T)]</b>.", "<b>[mind.name]</b>", follow_target = src, turf_target = T, message_type=DEADCHAT_DEATHRATTLE)
-//	if(mind)
-//		mind.store_memory("Time of death: [tod]", 0)
-	GLOB.alive_mob_list -= src
-	if(!gibbed && !was_dead_before)
-		GLOB.dead_mob_list += src
-
-//	stop_all_loops()
-	SSdroning.kill_rain(src.client)
-	SSdroning.kill_loop(src.client)
-	SSdroning.kill_droning(src.client)
-	src.playsound_local(src, 'sound/misc/deth.ogg', 100)
-
-	set_drugginess(0)
+	station_timestamp_timeofdeath = station_time_timestamp()
+	var/turf/death_turf = get_turf(src)
+	var/area/death_area = get_area(src)
+	// Display a death message if the mob is a player mob (has an active mind)
+	var/player_mob_check = mind && mind.name && mind.active
+	// and, display a death message if the area allows it (or if they're in nullspace)
+	var/valid_area_check = !death_area || !(death_area.area_flags & NO_DEATH_MESSAGE)
+	if(player_mob_check && valid_area_check)
+		deadchat_broadcast(" has died at <b>[get_area_name(death_turf)]</b>.", "<b>[mind.name]</b>", follow_target = src, turf_target = death_turf, message_type=DEADCHAT_DEATHRATTLE)
+		if(SSlag_switch.measures[DISABLE_DEAD_KEYLOOP] && !client?.holder)
+			to_chat(src, span_deadsay(span_big("Observer freelook is disabled.\nPlease use Orbit, Teleport, and Jump to look around.")))
+			ghostize(TRUE)
 	set_disgust(0)
 	SetSleeping(0, 0)
 	reset_perspective(null)
 	reload_fullscreen()
-	update_action_buttons_icon()
+	update_mob_action_buttons()
 	update_damage_hud()
 	update_health_hud()
-	update_mobility()
 	med_hud_set_health()
 	med_hud_set_status()
-	if(!gibbed && !QDELETED(src))
-		addtimer(CALLBACK(src, PROC_REF(med_hud_set_status)), (DEFIB_TIME_LIMIT * 10) + 1)
 	stop_pulling()
 
-	. = ..()
+	SEND_SIGNAL(src, COMSIG_LIVING_DEATH, gibbed)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_MOB_DEATH, src, gibbed)
 
-	if(client)
+	if (client)
 		client.move_delay = initial(client.move_delay)
-		var/obj/screen/gameover/hog/H = new()
-		H.layer = SPLASHSCREEN_LAYER+0.1
-		client.screen += H
-//		flick("gameover",H)
-//		addtimer(CALLBACK(H, TYPE_PROC_REF(/obj/screen/gameover, Fade)), 29)
-		H.Fade()
-		mob_timers["lastdied"] = world.time
-		addtimer(CALLBACK(H, TYPE_PROC_REF(/obj/screen/gameover, Fade), TRUE), 100)
-//		addtimer(CALLBACK(client, PROC_REF(ghostize), 1, src), 150)
-		add_client_colour(/datum/client_colour/monochrome)
-		client.verbs += /client/proc/descend
-
-	for(var/s in ownedSoullinks)
-		var/datum/soullink/S = s
-		S.ownerDies(gibbed)
-	for(var/s in sharedSoullinks)
-		var/datum/soullink/S = s
-		S.sharerDies(gibbed)
-
-//	for(var/datum/death_tracker/D in target.death_trackers)
-
-	if(!gibbed && rot_type)
-		LoadComponent(rot_type)
-
-	set_typing_indicator(FALSE)
+		client.player_details.time_of_death = timeofdeath
 
 	return TRUE

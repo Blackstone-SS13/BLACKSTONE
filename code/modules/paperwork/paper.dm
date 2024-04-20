@@ -1,534 +1,814 @@
-/*
+/**
  * Paper
  * also scraps of paper
  *
  * lipstick wiping is in code/game/objects/items/weapons/cosmetics.dm!
  */
 
-#ifdef TESTSERVER
-
-/client/verb/textperp()
-	set category = "PAPER"
-	set name = "textper+"
-	set desc = ""
-
-	var/obj/item/I
-	I = mob.get_active_held_item()
-	if(I)
-		if(istype(I,/obj/item/paper))
-			var/obj/item/paper/P = I
-			P.textper++
-			P.read(mob)
-		if(istype(I,/obj/item/book))
-			var/obj/item/book/P = I
-			P.textper++
-			P.read(mob)
-
-/client/verb/textperm()
-	set category = "PAPER"
-	set name = "textper-"
-	set desc = ""
-
-	var/obj/item/I
-	I = mob.get_active_held_item()
-	if(I)
-		if(istype(I,/obj/item/paper))
-			var/obj/item/paper/P = I
-			P.textper--
-			P.read(mob)
-		if(istype(I,/obj/item/book))
-			var/obj/item/book/P = I
-			P.textper--
-			P.read(mob)
-
-#endif
-
+/**
+ * Paper is now using markdown (like in github pull notes) for ALL rendering
+ * so we do loose a bit of functionality but we gain in easy of use of
+ * paper and getting rid of that crashing bug
+ */
 /obj/item/paper
-	name = "parchment"
+	name = "paper"
 	gender = NEUTER
-	icon = 'icons/roguetown/items/misc.dmi'
+	icon = 'icons/obj/service/bureaucracy.dmi'
 	icon_state = "paper"
+	inhand_icon_state = "paper"
+	worn_icon_state = "paper"
+	custom_fire_overlay = "paper_onfire_overlay"
 	throwforce = 0
 	w_class = WEIGHT_CLASS_TINY
 	throw_range = 1
 	throw_speed = 1
 	pressure_resistance = 0
-	slot_flags = ITEM_SLOT_HEAD
-	body_parts_covered = HEAD
 	resistance_flags = FLAMMABLE
-	max_integrity = 30
-	dog_fashion = /datum/dog_fashion/head
-	drop_sound = 'sound/foley/dropsound/paper_drop.ogg'
-	pickup_sound =  'sound/blank.ogg'
+	max_integrity = 50
+	drop_sound = 'sound/items/handling/paper_drop.ogg'
+	pickup_sound = 'sound/items/handling/paper_pickup.ogg'
 	grind_results = list(/datum/reagent/cellulose = 3)
+	color = COLOR_WHITE
+	item_flags = SKIP_FANTASY_ON_SPAWN
+	interaction_flags_click = NEED_DEXTERITY|NEED_HANDS
 
+	/// Lazylist of raw, unsanitised, unparsed text inputs that have been made to the paper.
+	var/list/datum/paper_input/raw_text_inputs
+	/// Lazylist of all raw stamp data to be sent to tgui.
+	var/list/datum/paper_stamp/raw_stamp_data
+	/// Lazylist of all fields that have had some input added to them.
+	var/list/datum/paper_field/raw_field_input_data
 
-	var/extra_headers //For additional styling or other js features.
+	/// Whether the icon should show little scribbly written words when the paper has some text on it.
+	var/show_written_words = TRUE
 
-	var/info		//What's actually written on the paper.
-	var/info_links	//A different version of the paper which includes html links at fields and EOF
-	var/stamps		//The (text for the) stamps on the paper.
-	var/fields = 0	//Amount of user created fields
-	var/list/stamped
-	var/rigged = 0
-	var/spam_flag = 0
-	var/contact_poison // Reagent ID to transfer on contact
+	/// Helper cache that contains a list of all icon_states that are currently stamped on the paper.
+	var/list/stamp_cache
+
+	/// Reagent to transfer to the user when they pick the paper up without proper protection.
+	var/contact_poison
+	/// Volume of contact_poison to transfer to the user when they pick the paper up without proper protection.
 	var/contact_poison_volume = 0
-	dropshrink = 0.5
-	var/textper = 100
-	var/maxlen = 2000
 
-	var/cached_mailer
-	var/cached_mailedto
+	/// Default raw text to fill this paper with on init.
+	var/default_raw_text
 
-/obj/item/paper/get_real_price()
-	if(info)
-		return 0
-	else
-		return sellprice
+	/// The number of input fields
+	var/input_field_count = 0
 
-/obj/item/paper/spark_act()
-	fire_act()
+	/// Paper can be shown via cameras. When that is done, a deep copy of the paper is made and stored as a var on the camera.
+	/// The paper is located in nullspace, and holds a weak ref to the camera that once contained it so the paper can do some
+	/// state checking on if it should be shown to a viewer.
+	var/datum/weakref/camera_holder
 
-/obj/item/paper/getonmobprop(tag)
+	///If TRUE, staff can read paper everywhere, but usually from requests panel.
+	var/request_state = FALSE
+
+/obj/item/paper/Initialize(mapload)
 	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.3,"sx" = 0,"sy" = -1,"nx" = 13,"ny" = -1,"wx" = 4,"wy" = 0,"ex" = 7,"ey" = -1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 2,"sflip" = 0,"wflip" = 0,"eflip" = 8)
-			if("onbelt")
-				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+	pixel_x = base_pixel_x + rand(-9, 9)
+	pixel_y = base_pixel_y + rand(-8, 8)
+
+	if(default_raw_text)
+		add_raw_text(default_raw_text)
+
+	update_appearance()
+
+/obj/item/paper/Destroy()
+	. = ..()
+	camera_holder = null
+	clear_paper()
+
+/// Determines whether this paper has been written or stamped to.
+/obj/item/paper/proc/is_empty()
+	return !(LAZYLEN(raw_text_inputs) || LAZYLEN(raw_stamp_data))
+
+/// Returns a deep copy list of raw_text_inputs, or null if the list is empty or doesn't exist.
+/obj/item/paper/proc/copy_raw_text()
+	if(!LAZYLEN(raw_text_inputs))
+		return null
+
+	var/list/datum/paper_input/copy_text = list()
+
+	for(var/datum/paper_input/existing_input as anything in raw_text_inputs)
+		copy_text += existing_input.make_copy()
+
+	return copy_text
+
+/// Returns a deep copy list of raw_field_input_data, or null if the list is empty or doesn't exist.
+/obj/item/paper/proc/copy_field_text()
+	if(!LAZYLEN(raw_field_input_data))
+		return null
+
+	var/list/datum/paper_field/copy_text = list()
+
+	for(var/datum/paper_field/existing_input as anything in raw_field_input_data)
+		copy_text += existing_input.make_copy()
+
+	return copy_text
+
+/// Returns a deep copy list of raw_stamp_data, or null if the list is empty or doesn't exist. Does not copy overlays or stamp_cache, only the tgui rendered stamps.
+/obj/item/paper/proc/copy_raw_stamps()
+	if(!LAZYLEN(raw_stamp_data))
+		return null
+
+	var/list/datum/paper_field/copy_stamps = list()
+
+	for(var/datum/paper_stamp/existing_input as anything in raw_stamp_data)
+		copy_stamps += existing_input.make_copy()
+
+	return copy_stamps
+
+/**
+ * This proc copies this sheet of paper to a new
+ * sheet. Used by carbon papers and the photocopier machine.
+ *
+ * Arguments
+ * * paper_type - Type path of the new paper to create. Can copy anything to anything.
+ * * location - Where to spawn in the new copied paper.
+ * * colored - If true, the copied paper will be coloured and will inherit all colours.
+ * * greyscale_override - If set to a colour string and coloured is false, it will override the default of COLOR_WEBSAFE_DARK_GRAY when copying.
+ */
+/obj/item/paper/proc/copy(paper_type = /obj/item/paper, atom/location = loc, colored = TRUE, greyscale_override = null)
+	var/obj/item/paper/new_paper
+	if(ispath(paper_type, /obj/item/paper))
+		new_paper = new paper_type(location)
+	else if(istype(paper_type, /obj/item/paper))
+		new_paper = paper_type
+	else
+		CRASH("invalid paper_type [paper_type], paper type path or instance expected")
+
+	new_paper.raw_text_inputs = copy_raw_text()
+	new_paper.raw_field_input_data = copy_field_text()
+
+	if(colored)
+		new_paper.color = color
+	else
+		var/new_color = greyscale_override || COLOR_WEBSAFE_DARK_GRAY
+		for(var/datum/paper_input/text as anything in new_paper.raw_text_inputs)
+			text.colour = new_color
+
+		for(var/datum/paper_field/text as anything in new_paper.raw_field_input_data)
+			text.field_data.colour = new_color
+
+	new_paper.input_field_count = input_field_count
+	new_paper.raw_stamp_data = copy_raw_stamps()
+	new_paper.stamp_cache = stamp_cache?.Copy()
+	new_paper.update_icon_state()
+	copy_overlays(new_paper, TRUE)
+	return new_paper
+
+/**
+ * This simple helper adds the supplied raw text to the paper, appending to the end of any existing contents.
+ *
+ * This a God proc that does not care about paper max length and expects sanity checking beforehand if you want to respect it.
+ *
+ * The caller is expected to handle updating icons and appearance after adding text, to allow for more efficient batch adding loops.
+ * * Arguments:
+ * * text - The text to append to the paper.
+ * * font - The font to use.
+ * * color - The font color to use.
+ * * bold - Whether this text should be rendered completely bold.
+ * * advanced_html - Boolean that is true when the writer has R_FUN permission, which sanitizes less HTML (such as images) from the new paper_input
+ */
+/obj/item/paper/proc/add_raw_text(text, font, color, bold, advanced_html)
+	var/new_input_datum = new /datum/paper_input(
+		text,
+		font,
+		color,
+		bold,
+		advanced_html,
+	)
+
+	input_field_count += get_input_field_count(text)
+
+	LAZYADD(raw_text_inputs, new_input_datum)
+
+/**
+ * This simple helper adds the supplied input field data to the paper.
+ *
+ * It will not overwrite any existing input field data by default and will early return FALSE if this scenario happens unless overwrite is
+ * set properly.
+ *
+ * Other than that, this is a God proc that does not care about max length or out-of-range IDs and expects sanity checking beforehand if
+ * you want to respect it.
+ *
+ * * Arguments:
+ * * field_id - The ID number of the field to which this data applies.
+ * * text - The text to append to the paper.
+ * * font - The font to use.
+ * * color - The font color to use.
+ * * bold - Whether this text should be rendered completely bold.
+ * * overwrite - If TRUE, will overwrite existing field ID's data if it exists.
+ */
+/obj/item/paper/proc/add_field_input(field_id, text, font, color, bold, signature_name, overwrite = FALSE)
+	var/datum/paper_field/field_data_datum = null
+
+	var/is_signature = ((text == "%sign") || (text == "%s"))
+
+	var/field_text = is_signature ? signature_name : text
+	var/field_font = is_signature ? SIGNATURE_FONT : font
+
+	for(var/datum/paper_field/field_input in raw_field_input_data)
+		if(field_input.field_index == field_id)
+			if(!overwrite)
+				return FALSE
+			field_data_datum = field_input
+			break
+
+	if(!field_data_datum)
+		var/new_field_input_datum = new /datum/paper_field(
+			field_id,
+			field_text,
+			field_font,
+			color,
+			bold,
+			is_signature,
+		)
+		LAZYADD(raw_field_input_data, new_field_input_datum)
+		return TRUE
+
+	var/new_input_datum = new /datum/paper_input(
+		field_text,
+		field_font,
+		color,
+		bold,
+	)
+
+	field_data_datum.field_data = new_input_datum;
+	field_data_datum.is_signature = is_signature;
+
+	return TRUE
+
+/**
+ * This simple helper adds the supplied stamp to the paper, appending to the end of any existing stamps.
+ *
+ * This a God proc that does not care about stamp max count and expects sanity checking beforehand if you want to respect it.
+ *
+ * It does however respect the overlay limit and will not apply any overlays past the cap.
+ *
+ * The caller is expected to handle updating icons and appearance after adding text, to allow for more efficient batch adding loops.
+ * * Arguments:
+ * * stamp_class - Div class for the stamp.
+ * * stamp_x - X coordinate to render the stamp in tgui.
+ * * stamp_y - Y coordinate to render the stamp in tgui.
+ * * rotation - Degrees of rotation for the stamp to be rendered with in tgui.
+ * * stamp_icon_state - Icon state for the stamp as part of overlay rendering.
+ */
+/obj/item/paper/proc/add_stamp(stamp_class, stamp_x, stamp_y, rotation, stamp_icon_state)
+	var/new_stamp_datum = new /datum/paper_stamp(stamp_class, stamp_x, stamp_y, rotation)
+	LAZYADD(raw_stamp_data, new_stamp_datum);
+
+	if(LAZYLEN(stamp_cache) > MAX_PAPER_STAMPS_OVERLAYS)
+		return
+
+	var/mutable_appearance/stamp_overlay = mutable_appearance('icons/obj/service/bureaucracy.dmi', "paper_[stamp_icon_state]")
+	stamp_overlay.pixel_x = rand(-2, 2)
+	stamp_overlay.pixel_y = rand(-3, 2)
+	add_overlay(stamp_overlay)
+	LAZYADD(stamp_cache, stamp_icon_state)
+
+/// Removes all input and all stamps from the paper, clearing it completely.
+/obj/item/paper/proc/clear_paper()
+	LAZYNULL(raw_text_inputs)
+	LAZYNULL(raw_stamp_data)
+	LAZYNULL(raw_field_input_data)
+	LAZYNULL(stamp_cache)
+
+	cut_overlays()
+	update_appearance()
 
 /obj/item/paper/pickup(user)
 	if(contact_poison && ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/clothing/gloves/G = H.gloves
-		if(!istype(G) || G.transfer_prints)
+		if(!istype(G) || !(G.body_parts_covered & HANDS) || HAS_TRAIT(G, TRAIT_FINGERPRINT_PASSTHROUGH) || HAS_TRAIT(H, TRAIT_FINGERPRINT_PASSTHROUGH))
 			H.reagents.add_reagent(contact_poison,contact_poison_volume)
 			contact_poison = null
-	..()
-
-/obj/item/paper/update_icon()
 	. = ..()
-	update_icon_state()
-
-/obj/item/paper/Initialize()
-	. = ..()
-	pixel_y = rand(-8, 8)
-	pixel_x = rand(-9, 9)
-	update_icon_state()
-	updateinfolinks()
 
 /obj/item/paper/update_icon_state()
-	if(mailer)
-		icon_state = "paper_prep"
-		name = "letter"
-		throw_range = 7
-		return
-	name = initial(name)
-	throw_range = initial(throw_range)
-	if(info)
-		icon_state = "paperwrite"
-		return
-	icon_state = "paper"
+	if(LAZYLEN(raw_text_inputs) && show_written_words)
+		icon_state = "[initial(icon_state)]_words"
+	return ..()
 
-/obj/item/paper/examine(mob/user)
-	. = ..()
-	if(!mailer)
-		. += "<a href='?src=[REF(src)];read=1'>Read</a>"
-	else
-		. += "It's from [mailer], addressed to [mailedto].</a>"
-
-/obj/item/paper/proc/read(mob/user)
-//	var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/paper)
-//	assets.send(user)
-	user << browse_rsc('html/book.png')
-	if(!user.client || !user.hud_used)
-		return
-	if(!user.hud_used.reads)
-		return
-	if(!user.can_read(src))
-		return
-	if(mailer)
-		return
-	if(in_range(user, src) || isobserver(user))
-//		var/obj/screen/read/R = user.hud_used.reads
-		user.hud_used.reads.icon_state = "scrap"
-		user.hud_used.reads.show()
-		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-					<html><head><style type=\"text/css\">
-					body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
-		dat += "[info]<br>"
-		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
-		dat += "</body></html>"
-		user << browse(dat, "window=reading;size=460x300;can_close=0;can_minimize=0;can_maximize=0;can_resize=0;titlebar=0")
-		onclose(user, "reading", src)
-	else
-		return "<span class='warning'>I'm too far away to read it.</span>"
-
-/*
-	if(in_range(user, src) || isobserver(user))
-		if(user.is_literate())
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[info]<HR></BODY></HTML>", "window=paper[md5(name)]")
-			onclose(user, "paper[md5(name)]")
-		else
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE>[extra_headers]</HEAD><BODY>[stars(info)]<HR></BODY></HTML>", "window=paper[md5(name)]")
-			onclose(user, "paper[md5(name)]")
-	else
-		return "<span class='warning'>You're too far away to read it.</span>"
-*/
 /obj/item/paper/verb/rename()
 	set name = "Rename paper"
-	set hidden = 1
+	set category = "Object"
 	set src in usr
 
-	if(usr.incapacitated() || !usr.is_literate())
+	if(!usr.can_read(src) || usr.is_blind() || usr.incapacitated(IGNORE_RESTRAINTS|IGNORE_GRAB) || (isobserver(usr) && !isAdminGhostAI(usr)))
 		return
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		if(HAS_TRAIT(H, TRAIT_CLUMSY) && prob(25))
-			to_chat(H, "<span class='warning'>I cut myself on the paper! Ahhhh! Ahhhhh!</span>")
+			to_chat(H, span_warning("You cut yourself on the paper! Ahhhh! Ahhhhh!"))
 			H.damageoverlaytemp = 9001
 			H.update_damage_hud()
 			return
-	var/n_name = stripped_input(usr, "What would you like to label the paper?", "Paper Labelling", null, MAX_NAME_LEN)
-	if((loc == usr && usr.stat == CONSCIOUS))
-		name = "paper[(n_name ? text("- '[n_name]'") : null)]"
+	var/n_name = tgui_input_text(usr, "Enter a paper label", "Paper Labelling", max_length = MAX_NAME_LEN)
+	if(isnull(n_name) || n_name == "")
+		return
+	if(((loc == usr || istype(loc, /obj/item/clipboard)) && usr.stat == CONSCIOUS))
+		name = "paper[(n_name ? "- '[n_name]'" : null)]"
 	add_fingerprint(usr)
+	update_static_data()
 
+/obj/item/paper/suicide_act(mob/living/user)
+	user.visible_message(span_suicide("[user] scratches a grid on [user.p_their()] wrist with the paper! It looks like [user.p_theyre()] trying to commit sudoku..."))
+	return BRUTELOSS
 
-/obj/item/paper/suicide_act(mob/user)
-	user.visible_message("<span class='suicide'>[user] scratches a grid on [user.p_their()] wrist with the paper! It looks like [user.p_theyre()] trying to commit sudoku...</span>")
-	return (BRUTELOSS)
-
-/obj/item/paper/proc/reset_spamflag()
-	spam_flag = FALSE
-
-/obj/item/paper/attack_self(mob/user)
-	if(mailer)
-		user.visible_message("<span class='notice'>[user] opens the letter from [mailer].</span>")
-		cached_mailer = mailer
-		cached_mailedto = mailedto
-		mailer = null
-		mailedto = null
-		update_icon()
-		return
-	read(user)
-	if(rigged && (SSevents.holidays && SSevents.holidays[APRIL_FOOLS]))
-		if(!spam_flag)
-			spam_flag = TRUE
-			playsound(loc, 'sound/blank.ogg', 50, TRUE)
-			addtimer(CALLBACK(src, PROC_REF(reset_spamflag)), 20)
-
-
-/obj/item/paper/attack_ai(mob/living/silicon/ai/user)
-	var/dist
-	if(istype(user) && user.current) //is AI
-		dist = get_dist(src, user.current)
-	else //cyborg or AI not seeing through a camera
-		dist = get_dist(src, user)
-	if(dist < 2)
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info]<HR>[stamps]</BODY></HTML>", "window=[name]")
-		onclose(usr, "[name]")
-	else
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)]<HR>[stamps]</BODY></HTML>", "window=[name]")
-		onclose(usr, "[name]")
-
-
-/obj/item/paper/proc/addtofield(id, text, links = 0)
-	var/locid = 0
-	var/laststart = 1
-	var/textindex = 1
-	while(locid < 15)	//hey whoever decided a while(1) was a good idea here, i hate you
-		var/istart = 0
-		if(links)
-			istart = findtext(info_links, "<span class=\"paper_field\">", laststart)
-		else
-			istart = findtext(info, "<span class=\"paper_field\">", laststart)
-
-		if(istart == 0)
-			return	//No field found with matching id
-
-		laststart = istart+1
-		locid++
-		if(locid == id)
-			var/iend = 1
-			if(links)
-				iend = findtext(info_links, "</span>", istart)
-			else
-				iend = findtext(info, "</span>", istart)
-
-			//textindex = istart+26
-			textindex = iend
-			break
-
-	if(links)
-		var/before = copytext(info_links, 1, textindex)
-		var/after = copytext(info_links, textindex)
-		info_links = before + text + after
-	else
-		var/before = copytext(info, 1, textindex)
-		var/after = copytext(info, textindex)
-		info = before + text + after
-		updateinfolinks()
-
-
-/obj/item/paper/proc/updateinfolinks()
-	info_links = info
-	for(var/i in 1 to min(fields, 15))
-		addtofield(i, "<font face=\"[PEN_FONT]\"><A href='?src=[REF(src)];write=[i]'>write</A></font>", 1)
-	info_links = info_links + "<font face=\"[PEN_FONT]\"><A href='?src=[REF(src)];write=end'>write</A></font>"
-
-
-/obj/item/paper/proc/clearpaper()
-	info = null
-	stamps = null
-	LAZYCLEARLIST(stamped)
-	cut_overlays()
-	updateinfolinks()
-	update_icon_state()
-
-
-/obj/item/paper/proc/parsepencode(t, obj/item/P, mob/user, iscrayon = 0)
-	if(length(t) < 1)		//No input means nothing needs to be parsed
+/obj/item/paper/examine(mob/user)
+	. = ..()
+	. += span_notice("Alt-click [src] to fold it into a paper plane.")
+	if(!in_range(user, src) && !isobserver(user))
+		. += span_warning("You're too far away to read it!")
 		return
 
-	t = parsemarkdown(t, user, iscrayon)
-
-	if(!iscrayon)
-		if(istype(P, /obj/item/pen))
-			var/obj/item/pen/J = P
-			t = "<font face=\"[J.font]\" color=[J.colour]>[t]</font>"
-		else if(istype(P, /obj/item/natural/thorn))
-			t = "<font face=\"[FOUNTAIN_PEN_FONT]\" color=#862f20>[t]</font>"
-		else if(istype(P, /obj/item/natural/feather))
-			t = "<font face=\"[FOUNTAIN_PEN_FONT]\" color=#14103f>[t]</font>"
-
-	else
-		var/obj/item/toy/crayon/C = P
-		t = "<font face=\"[CRAYON_FONT]\" color=[C.paint_color]><b>[t]</b></font>"
-
-	// Count the fields
-	var/laststart = 1
-	while(fields < 15)
-		var/i = findtext(t, "<span class=\"paper_field\">", laststart)
-		if(i == 0)
-			break
-		laststart = i+1
-		fields++
-
-	return t
-
-/obj/item/paper/proc/reload_fields() // Useful if you made the paper programicly and want to include fields. Also runs updateinfolinks() for you.
-	fields = 0
-	var/laststart = 1
-	while(fields < 15)
-		var/i = findtext(info, "<span class=\"paper_field\">", laststart)
-		if(i == 0)
-			break
-		laststart = i+1
-		fields++
-	updateinfolinks()
-
-
-/obj/item/paper/proc/openhelp(mob/user)
-	user << browse({"<HTML><HEAD><TITLE>Paper Help</TITLE></HEAD>
-	<BODY>
-		You can use backslash (\\) to escape special characters.<br>
-		<br>
-		# text : Defines a header.<br>
-		|text| : Centers the text.<br>
-		**text** : Makes the text <b>bold</b>.<br>
-		*text* : Makes the text <i>italic</i>.<br>
-		^text^ : Increases the <font size = \"4\">size</font> of the text.<br>
-		%s : Inserts a signature of your name in a foolproof way.<br>
-		%f : Inserts an invisible field which lets you start type from there. Useful for forms.<br>
-		((text)) : Decreases the <font size = \"1\">size</font> of the text.<br>
-		* item : An unordered list item.<br>
-		&nbsp;&nbsp;* item: An unordered list child item.<br>
-		--- : Adds a horizontal rule.
-	</BODY></HTML>"}, "window=paper_help")
-
-
-/obj/item/paper/Topic(href, href_list)
-	..()
-
-	if(!usr)
+	if(user.is_blind())
+		to_chat(user, span_warning("You are blind and can't read anything!"))
 		return
 
-	if(href_list["close"])
-		var/mob/user = usr
-		if(user?.client && user.hud_used)
-			if(user.hud_used.reads)
-				user.hud_used.reads.destroy_read()
-			user << browse(null, "window=reading")
-
-	var/literate = usr.is_literate()
-	if(!usr.canUseTopic(src, BE_CLOSE, literate))
+	if(user.can_read(src))
+		ui_interact(user)
 		return
+	. += span_warning("You cannot read it!")
 
-	if(href_list["read"])
-		read(usr)
-
-	if(href_list["help"])
-		openhelp(usr)
-		return
-	if(href_list["write"])
-		var/id = href_list["write"]
-		var/t =  stripped_multiline_input("Enter what you want to write:", "Write", no_trim=TRUE)
-		if(!t || !usr.canUseTopic(src, BE_CLOSE, literate))
-			return
-		var/obj/item/i = usr.get_active_held_item()	//Check to see if he still got that darn pen, also check if he's using a crayon or pen.
-		var/iscrayon = 0
-		if(!istype(i, /obj/item/pen))
-			if(istype(i, /obj/item/toy/crayon))
-				iscrayon = 1
-			else
-				if(!istype(i, /obj/item/natural/thorn))
-					if(!istype(i, /obj/item/natural/feather))
-						return
-
-		if(!in_range(src, usr) && loc != usr && !istype(loc, /obj/item/clipboard) && loc.loc != usr && usr.get_active_held_item() != i)	//Some check to see if he's allowed to write
-			return
-
-		log_paper("[key_name(usr)] writing to paper [t]")
-		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
-
-		if(t != null)	//No input from the user means nothing needs to be added
-			if(id!="end")
-				addtofield(text2num(id), t) // He wants to edit a field, let him.
-			else
-				info += t // Oh, he wants to edit to the end of the file, let him.
-				testing("[length(info)]")
-				testing("[findtext(info, "\n")]")
-				updateinfolinks()
-			playsound(src, 'sound/items/write.ogg', 100, FALSE)
-			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links]<HR>[stamps]</BODY><div align='right'style='position:fixed;bottom:0;font-style:bold;'><A href='?src=[REF(src)];help=1'>\[?\]</A></div></HTML>", "window=[name]") // Update the window
-			update_icon_state()
-
-/obj/item/paper/attackby(obj/item/P, mob/living/carbon/human/user, params)
+/obj/item/paper/ui_status(mob/user, datum/ui_state/state)
+	// Are we on fire?  Hard to read if so
 	if(resistance_flags & ON_FIRE)
-		return ..()
-
-	if(mailer)
-		return ..()
-
-	if(is_blind(user))
-		return ..()
-
-	if(istype(P, /obj/item/pen) || istype(P, /obj/item/natural/thorn)|| istype(P, /obj/item/natural/feather))
-		if(length(info) > maxlen)
-			to_chat(user, "<span class='warning'>[src] is full of verba.</span>")
-			return
-		if(user.can_read(src))
-			var/t = stripped_multiline_input("Write Something", "Paper", no_trim=TRUE)
-			if(t)
-				if((length(info) + length(t)) > maxlen)
-					to_chat(user, "<span class='warning'>Too long. Try again.</span>")
-					return
-				info += t
-			update_icon_state()
-			return
-		else
-			to_chat(user, "<span class='warning'>I can't write.</span>")
-			return
-
-
-	if(!P.can_be_package_wrapped())
-		return ..()
-
-	to_chat(user, "<span class='info'>I start to wrap [P] in [src]...</span>")
-	if(do_after(user, 30, 0, target = src))
-		if(user.is_holding(P))
-			if(!user.dropItemToGround(P))
-				return
-		else if(!isturf(P.loc))
-			return
-		var/obj/item/smallDelivery/D = new /obj/item/smallDelivery(get_turf(P.loc))
-		if(user.Adjacent(D))
-			D.add_fingerprint(user)
-			P.add_fingerprint(user)
-			user.put_in_hands(D)
-		P.forceMove(D)
-		var/size = round(P.w_class)
-		D.name = "[weightclass2text(size)] package"
-		D.w_class = size
-		size = min(size, 5)
-		D.icon_state = "deliverypackage[size]"
-
-/*	else if(istype(P, /obj/item/stamp))
-
-		if(!in_range(src, user))
-			return
-
-		var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/simple/paper)
-		if (isnull(stamps))
-			stamps = sheet.css_tag()
-		stamps += sheet.icon_tag(P.icon_state)
-		var/mutable_appearance/stampoverlay = mutable_appearance('icons/obj/bureaucracy.dmi', "paper_[P.icon_state]")
-		stampoverlay.pixel_x = rand(-2, 2)
-		stampoverlay.pixel_y = rand(-3, 2)
-
-		LAZYADD(stamped, P.icon_state)
-		add_overlay(stampoverlay)
-
-		to_chat(user, "<span class='notice'>I stamp the paper with your rubber stamp.</span>")
-
-	if(P.get_temperature())
-		if(HAS_TRAIT(user, TRAIT_CLUMSY) && prob(10))
-			user.visible_message("<span class='warning'>[user] accidentally ignites [user.p_them()]self!</span>", \
-								"<span class='danger'>I miss the paper and accidentally light myself on fire!</span>")
-			user.dropItemToGround(P)
-			user.adjust_fire_stacks(1)
-			user.IgniteMob()
-			return
-
-		if(!(in_range(user, src))) //to prevent issues as a result of telepathically lighting a paper
-			return
-
-		user.dropItemToGround(src)
-		user.visible_message("<span class='danger'>[user] lights [src] ablaze with [P]!</span>", "<span class='danger'>I light [src] on fire!</span>")
-		fire_act()*/
-
-	add_fingerprint(user)
+		return UI_CLOSE
+	if(camera_holder && can_show_to_mob_through_camera(user) || request_state)
+		return UI_UPDATE
+	if(!in_range(user, src) && !isobserver(user))
+		return UI_CLOSE
+	if(user.incapacitated(IGNORE_RESTRAINTS|IGNORE_GRAB) || (isobserver(user) && !isAdminGhostAI(user)))
+		return UI_UPDATE
+	// Even harder to read if your blind...braile? humm
+	// .. or if you cannot read
+	if(user.is_blind())
+		to_chat(user, span_warning("You are blind and can't read anything!"))
+		return UI_CLOSE
+	if(!user.can_read(src))
+		return UI_CLOSE
+	if(in_contents_of(/obj/machinery/door/airlock) || in_contents_of(/obj/item/clipboard))
+		return UI_INTERACTIVE
 	return ..()
 
-/obj/item/paper/fire_act(added, maxstacks)
-	..()
-	if(!(resistance_flags & FIRE_PROOF))
-		add_overlay("paper_onfire_overlay")
-		info = "[stars(info)]"
+/obj/item/paper/can_interact(mob/user)
+	if(in_contents_of(/obj/machinery/door/airlock))
+		return TRUE
+	return ..()
+
+/obj/item/paper/click_alt(mob/living/user)
+	if(HAS_TRAIT(user, TRAIT_PAPER_MASTER))
+		make_plane(user, /obj/item/paperplane/syndicate)
+		return CLICK_ACTION_SUCCESS
+	make_plane(user, /obj/item/paperplane)
+	return CLICK_ACTION_SUCCESS
 
 
-/obj/item/paper/extinguish()
-	..()
-	cut_overlay("paper_onfire_overlay")
 
-/*
- * Construction paper
+/**
+ * Paper plane folding
+ * Makes a paperplane depending on args and returns it.
+ *
+ * Arguments:
+ * * mob/living/user - who's folding
+ * * plane_type - what it will be folded into (path)
  */
+/obj/item/paper/proc/make_plane(mob/living/user, plane_type = /obj/item/paperplane)
+	balloon_alert(user, "folded into a plane")
+	user.temporarilyRemoveItemFromInventory(src)
+	var/obj/item/paperplane/new_plane = new plane_type(loc, src)
+	if(user.Adjacent(new_plane))
+		user.put_in_hands(new_plane)
+	return new_plane
+
+/obj/item/proc/burn_paper_product_attackby_check(obj/item/attacking_item, mob/living/user, bypass_clumsy = FALSE)
+	//can't be put on fire!
+	if((resistance_flags & FIRE_PROOF) || !(resistance_flags & FLAMMABLE))
+		return FALSE
+	//already on fire!
+	if(resistance_flags & ON_FIRE)
+		return FALSE
+	var/ignition_message = attacking_item.ignition_effect(src, user)
+	if(!ignition_message)
+		return FALSE
+	if(!bypass_clumsy && HAS_TRAIT(user, TRAIT_CLUMSY) && prob(10) && Adjacent(user))
+		user.visible_message(span_warning("[user] accidentally ignites [user.p_them()]self!"), \
+							span_userdanger("You miss [src] and accidentally light yourself on fire!"))
+		if(user.is_holding(attacking_item)) //checking if they're holding it in case TK is involved
+			user.dropItemToGround(attacking_item)
+		user.adjust_fire_stacks(attacking_item)
+		user.ignite_mob()
+		return TRUE
+
+	if(user.is_holding(src)) //no TK shit here.
+		user.dropItemToGround(src)
+	user.visible_message(ignition_message)
+	add_fingerprint(user)
+	fire_act(attacking_item.get_temperature())
+	return TRUE
+
+/obj/item/paper/attackby(obj/item/attacking_item, mob/living/user, params)
+	if(burn_paper_product_attackby_check(attacking_item, user))
+		SStgui.close_uis(src)
+		return
+
+	// Enable picking paper up by clicking on it with the clipboard or folder
+	if(istype(attacking_item, /obj/item/clipboard) || istype(attacking_item, /obj/item/folder) || istype(attacking_item, /obj/item/paper_bin))
+		attacking_item.attackby(src, user)
+		return
+
+	// Handle writing items.
+	var/writing_stats = attacking_item.get_writing_implement_details()
+
+	if(!writing_stats)
+		ui_interact(user)
+		return ..()
+
+	if(writing_stats["interaction_mode"] == MODE_WRITING)
+		if(!user.can_write(attacking_item))
+			return
+		if(get_total_length() >= MAX_PAPER_LENGTH)
+			to_chat(user, span_warning("This sheet of paper is full!"))
+			return
+
+		ui_interact(user)
+		return
+
+	// Handle stamping items.
+	if(writing_stats["interaction_mode"] == MODE_STAMPING)
+		if(!user.can_read(src) || user.is_blind())
+			//The paper's stampable window area is assumed approx 400x500
+			add_stamp(writing_stats["stamp_class"], rand(0, 400), rand(0, 500), rand(0, 360), writing_stats["stamp_icon_state"])
+			user.visible_message(span_notice("[user] blindly stamps [src] with \the [attacking_item]!"))
+			to_chat(user, span_notice("You stamp [src] with \the [attacking_item] the best you can!"))
+			playsound(src, 'sound/items/handling/standard_stamp.ogg', 50, vary = TRUE)
+		else
+			to_chat(user, span_notice("You ready your stamp over the paper! "))
+			ui_interact(user)
+		return
+
+	ui_interact(user)
+	return ..()
+
+/**
+ * Attempts to ui_interact the paper to the given user, with some sanity checking
+ * to make sure the camera still exists via the weakref and that this paper is still
+ * attached to it.
+ */
+/obj/item/paper/proc/show_through_camera(mob/living/user)
+	if(!can_show_to_mob_through_camera(user))
+		return
+
+	return ui_interact(user)
+
+/obj/item/paper/proc/can_show_to_mob_through_camera(mob/living/user)
+	var/obj/machinery/camera/held_to_camera = camera_holder.resolve()
+
+	if(!held_to_camera)
+		return FALSE
+
+	if(isAI(user))
+		var/mob/living/silicon/ai/ai_user = user
+		if(ai_user.control_disabled || (ai_user.stat == DEAD))
+			return FALSE
+
+		return TRUE
+
+	if(user.client?.eye != held_to_camera)
+		return FALSE
+
+	return TRUE
+
+/obj/item/paper/ui_assets(mob/user)
+	return list(
+		get_asset_datum(/datum/asset/spritesheet/simple/paper),
+	)
+
+/obj/item/paper/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "PaperSheet", name)
+		ui.open()
+
+/obj/item/paper/ui_static_data(mob/user)
+	var/list/static_data = list()
+
+	static_data["user_name"] = user.real_name
+
+	static_data["raw_text_input"] = list()
+	for(var/datum/paper_input/text_input as anything in raw_text_inputs)
+		static_data["raw_text_input"] += list(text_input.to_list())
+
+	static_data["raw_field_input"] = list()
+	for(var/datum/paper_field/field_input as anything in raw_field_input_data)
+		static_data["raw_field_input"] += list(field_input.to_list())
+
+	static_data["raw_stamp_input"] = list()
+	for(var/datum/paper_stamp/stamp_input as anything in raw_stamp_data)
+		static_data["raw_stamp_input"] += list(stamp_input.to_list())
+
+	static_data["max_length"] = MAX_PAPER_LENGTH
+	static_data["max_input_field_length"] = MAX_PAPER_INPUT_FIELD_LENGTH
+	static_data["paper_color"] = color ? color : COLOR_WHITE
+	static_data["paper_name"] = name
+
+	static_data["default_pen_font"] = PEN_FONT
+	static_data["default_pen_color"] = COLOR_BLACK
+	static_data["signature_font"] = FOUNTAIN_PEN_FONT
+
+	return static_data;
+
+/obj/item/paper/ui_data(mob/user)
+	var/list/data = list()
+
+	var/obj/item/holding = user.get_active_held_item()
+	// Use a clipboard's pen, if applicable
+	if(istype(loc, /obj/item/clipboard))
+		var/obj/item/clipboard/clipboard = loc
+		// This is just so you can still use a stamp if you're holding one. Otherwise, it'll
+		// use the clipboard's pen, if applicable.
+		if(!istype(holding, /obj/item/stamp) && clipboard.pen)
+			holding = clipboard.pen
+
+	data["held_item_details"] = holding?.get_writing_implement_details()
+
+	// If the paper is on an unwritable noticeboard, clear the held item details so it's read-only.
+	if(istype(loc, /obj/structure/noticeboard))
+		var/obj/structure/noticeboard/noticeboard = loc
+		if(!noticeboard.allowed(user))
+			data["held_item_details"] = null;
+
+	return data
+
+/obj/item/paper/ui_act(action, params, datum/tgui/ui)
+	. = ..()
+	if(.)
+		return
+
+	var/mob/user = ui.user
+
+	switch(action)
+		if("add_stamp")
+			var/obj/item/holding = user.get_active_held_item()
+			var/stamp_info = holding?.get_writing_implement_details()
+			if(!stamp_info || (stamp_info["interaction_mode"] != MODE_STAMPING))
+				to_chat(src, span_warning("You can't stamp with the [holding]!"))
+				return TRUE
+
+			var/stamp_class = stamp_info["stamp_class"];
+
+			// If the paper is on an unwritable noticeboard, this usually shouldn't be possible.
+			if(istype(loc, /obj/structure/noticeboard))
+				var/obj/structure/noticeboard/noticeboard = loc
+				if(!noticeboard.allowed(user))
+					log_paper("[key_name(user)] tried to add stamp to [name] when it was on an unwritable noticeboard: \"[stamp_class]\"")
+					return TRUE
+
+			var/stamp_x = text2num(params["x"])
+			var/stamp_y = text2num(params["y"])
+			var/stamp_rotation = text2num(params["rotation"])
+			var/stamp_icon_state = stamp_info["stamp_icon_state"]
+
+			if (LAZYLEN(raw_stamp_data) >= MAX_PAPER_STAMPS)
+				to_chat(usr, pick("You try to stamp but you miss!", "There is no where else you can stamp!"))
+				return TRUE
+
+			add_stamp(stamp_class, stamp_x, stamp_y, stamp_rotation, stamp_icon_state)
+			user.visible_message(span_notice("[user] stamps [src] with \the [holding.name]!"), span_notice("You stamp [src] with \the [holding.name]!"))
+			playsound(src, 'sound/items/handling/standard_stamp.ogg', 50, vary = TRUE)
+
+			update_appearance()
+			update_static_data_for_all_viewers()
+			return TRUE
+		if("add_text")
+			var/paper_input = params["text"]
+			var/this_input_length = length_char(paper_input)
+
+			if(this_input_length == 0)
+				to_chat(user, pick("Writing block strikes again!", "You forgot to write anthing!"))
+				return TRUE
+
+			// If the paper is on an unwritable noticeboard, this usually shouldn't be possible.
+			if(istype(loc, /obj/structure/noticeboard))
+				var/obj/structure/noticeboard/noticeboard = loc
+				if(!noticeboard.allowed(user))
+					log_paper("[key_name(user)] tried to write to [name] when it was on an unwritable noticeboard: \"[paper_input]\"")
+					return TRUE
+
+			var/obj/item/holding = user.get_active_held_item()
+			// Use a clipboard's pen, if applicable
+			if(istype(loc, /obj/item/clipboard))
+				var/obj/item/clipboard/clipboard = loc
+				// This is just so you can still use a stamp if you're holding one. Otherwise, it'll
+				// use the clipboard's pen, if applicable.
+				if(!istype(holding, /obj/item/stamp) && clipboard.pen)
+					holding = clipboard.pen
+
+			// As of the time of writing, can_write outputs a message to the user so we don't have to.
+			if(!user.can_write(holding))
+				return TRUE
+
+			var/current_length = get_total_length()
+			var/new_length = current_length + this_input_length
+
+			// tgui should prevent this outcome.
+			if(new_length > MAX_PAPER_LENGTH)
+				log_paper("[key_name(user)] tried to write to [name] when it would exceed the length limit by [new_length - MAX_PAPER_LENGTH] characters: \"[paper_input]\"")
+				return TRUE
+
+			// Safe to assume there are writing implement details as user.can_write(...) fails with an invalid writing implement.
+			var/writing_implement_data = holding.get_writing_implement_details()
+
+			add_raw_text(paper_input, writing_implement_data["font"], writing_implement_data["color"], writing_implement_data["use_bold"], check_rights_for(user?.client, R_FUN))
+
+			log_paper("[key_name(user)] wrote to [name]: \"[paper_input]\"")
+			to_chat(user, "You have added to your paper masterpiece!");
+
+			update_static_data_for_all_viewers()
+			update_appearance()
+			return TRUE
+		if("fill_input_field")
+			// If the paper is on an unwritable noticeboard, this usually shouldn't be possible.
+			if(istype(loc, /obj/structure/noticeboard))
+				var/obj/structure/noticeboard/noticeboard = loc
+				if(!noticeboard.allowed(user))
+					log_paper("[key_name(user)] tried to write to the input fields of [name] when it was on an unwritable noticeboard!")
+					return TRUE
+
+			var/obj/item/holding = user.get_active_held_item()
+			// Use a clipboard's pen, if applicable
+			if(istype(loc, /obj/item/clipboard))
+				var/obj/item/clipboard/clipboard = loc
+				// This is just so you can still use a stamp if you're holding one. Otherwise, it'll
+				// use the clipboard's pen, if applicable.
+				if(!istype(holding, /obj/item/stamp) && clipboard.pen)
+					holding = clipboard.pen
+
+			// As of the time of writing, can_write outputs a message to the user so we don't have to.
+			if(!user.can_write(holding))
+				return TRUE
+
+			// Safe to assume there are writing implement details as user.can_write(...) fails with an invalid writing implement.
+			var/writing_implement_data = holding.get_writing_implement_details()
+			var/list/field_data = params["field_data"]
+
+			for(var/field_key in field_data)
+				var/field_text = field_data[field_key]
+				var/text_length = length_char(field_text)
+				if(text_length > MAX_PAPER_INPUT_FIELD_LENGTH)
+					log_paper("[key_name(user)] tried to write to field [field_key] with text over the max limit ([text_length] out of [MAX_PAPER_INPUT_FIELD_LENGTH]) with the following text: [field_text]")
+					return TRUE
+				if(text2num(field_key) >= input_field_count)
+					log_paper("[key_name(user)] tried to write to invalid field [field_key] (when the paper only has [input_field_count] fields) with the following text: [field_text]")
+					return TRUE
+
+				if(!add_field_input(field_key, field_text, writing_implement_data["font"], writing_implement_data["color"], writing_implement_data["use_bold"], user.real_name))
+					log_paper("[key_name(user)] tried to write to field [field_key] when it already has data, with the following text: [field_text]")
+
+			update_static_data_for_all_viewers()
+			return TRUE
+
+/obj/item/paper/proc/get_input_field_count(raw_text)
+	var/static/regex/field_regex = new(@"\[_+\]","g")
+
+	var/counter = 0
+	while(field_regex.Find(raw_text))
+		counter++
+
+	return counter
+
+/obj/item/paper/ui_host(mob/user)
+	if(istype(loc, /obj/structure/noticeboard))
+		return loc
+	return ..()
+
+/obj/item/paper/proc/get_total_length()
+	var/total_length = 0
+	for(var/datum/paper_input/entry as anything in raw_text_inputs)
+		total_length += length_char(entry.raw_text)
+
+	return total_length
+
+/// Get a single string representing the text on a page
+/obj/item/paper/proc/get_raw_text()
+	var/paper_contents = ""
+	for(var/datum/paper_input/line as anything in raw_text_inputs)
+		paper_contents += line.raw_text + "/"
+	return paper_contents
+
+/// A single instance of a saved raw input onto paper.
+/datum/paper_input
+	/// Raw, unsanitised, unparsed text for an input.
+	var/raw_text = ""
+	/// Font to draw the input with.
+	var/font = ""
+	/// Colour to draw the input with.
+	var/colour = ""
+	/// Whether to render the font bold or not.
+	var/bold = FALSE
+	/// Whether the creator of this input field has the R_FUN permission, thus allowing less sanitization
+	var/advanced_html = FALSE
+
+/datum/paper_input/New(_raw_text, _font, _colour, _bold, _advanced_html)
+	raw_text = _raw_text
+	font = _font
+	colour = _colour
+	bold = _bold
+	advanced_html = _advanced_html
+
+/datum/paper_input/proc/make_copy()
+	return new /datum/paper_input(raw_text, font, colour, bold, advanced_html)
+
+/datum/paper_input/proc/to_list()
+	return list(
+		raw_text = raw_text,
+		font = font,
+		color = colour,
+		bold = bold,
+		advanced_html = advanced_html,
+	)
+
+/// Returns the raw contents of the input as html, with **ZERO SANITIZATION**
+/datum/paper_input/proc/to_raw_html()
+	var/final = raw_text
+	if(font)
+		final = "<font face='[font]'>[final]</font>"
+	if(colour)
+		final = "<font color='[colour]'>[final]</font>"
+	if(bold)
+		final = "<b>[final]</b>"
+	return final
+
+/// A single instance of a saved stamp on paper.
+/datum/paper_stamp
+	/// Asset class of the for rendering in tgui
+	var/class = ""
+	/// X position of stamp.
+	var/stamp_x = 0
+	/// Y position of stamp.
+	var/stamp_y = 0
+	/// Rotation of stamp in degrees. 0 to 359.
+	var/rotation = 0
+
+/datum/paper_stamp/New(_class, _stamp_x, _stamp_y, _rotation)
+	class = _class
+	stamp_x = _stamp_x
+	stamp_y = _stamp_y
+	rotation = _rotation
+
+/datum/paper_stamp/proc/make_copy()
+	return new /datum/paper_stamp(class, stamp_x, stamp_y, rotation)
+
+/datum/paper_stamp/proc/to_list()
+	return list(
+		class = class,
+		x = stamp_x,
+		y = stamp_y,
+		rotation = rotation,
+	)
+
+/// A reference to some data that replaces a modifiable input field at some given index in paper raw input parsing.
+/datum/paper_field
+	/// When tgui parses the raw input, if it encounters a field_index matching the nth user input field, it will disable it and replace it with the field_data.
+	var/field_index = -1
+	/// The data that tgui should substitute in-place of the input field when parsing.
+	var/datum/paper_input/field_data = null
+	/// If TRUE, requests tgui to render this field input in a more signature-y style.
+	var/is_signature = FALSE
+
+/datum/paper_field/New(_field_index, raw_text, font, colour, bold, _is_signature)
+	field_index = _field_index
+	field_data = new /datum/paper_input(raw_text, font, colour, bold)
+	is_signature = _is_signature
+
+/datum/paper_field/proc/make_copy()
+	return new /datum/paper_field(field_index, field_data.raw_text, field_data.font, field_data.colour, field_data.bold, is_signature)
+
+/datum/paper_field/proc/to_list()
+	return list(
+		field_index = field_index,
+		field_data = field_data.to_list(),
+		is_signature = is_signature,
+	)
 
 /obj/item/paper/construction
 
-/obj/item/paper/construction/Initialize()
+/obj/item/paper/construction/Initialize(mapload)
 	. = ..()
-	color = pick("FF0000", "#33cc33", "#ffb366", "#551A8B", "#ff80d5", "#4d94ff")
+	color = pick(COLOR_RED, COLOR_LIME, COLOR_LIGHT_ORANGE, COLOR_DARK_PURPLE, COLOR_FADED_PINK, COLOR_BLUE_LIGHT)
 
-/*
- * Natural paper
- */
-
-/obj/item/paper/natural/Initialize()
-	. = ..()
-	color = "#FFF5ED"
+/obj/item/paper/natural
+	color = COLOR_OFF_WHITE
 
 /obj/item/paper/crumpled
 	name = "paper scrap"
 	icon_state = "scrap"
 	slot_flags = null
-
-/obj/item/paper/crumpled/update_icon_state()
-	return
+	show_written_words = FALSE
 
 /obj/item/paper/crumpled/bloody
 	icon_state = "scrap_bloodied"

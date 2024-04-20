@@ -167,52 +167,50 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 
 	GLOB.current_test = test
 	var/duration = REALTIMEOFDAY
-//	var/skip_test = (test_path in SSmapping.config.skipped_tests)
+	var/skip_test = (test_path in SSmapping.config.skipped_tests)
 	var/test_output_desc = "[test_path]"
 	var/message = ""
 
 	log_world("::group::[test_path]")
 
-//	if(skip_test)
-//		log_world("[TEST_OUTPUT_YELLOW("SKIPPED")] Skipped run on map [SSmapping.config.map_name].")
+	if(skip_test)
+		log_world("[TEST_OUTPUT_YELLOW("SKIPPED")] Skipped run on map [SSmapping.config.map_name].")
 
-//	else
+	else
 
-	test.Run()
+		test.Run()
 
-	duration = REALTIMEOFDAY - duration
-	GLOB.current_test = null
-	GLOB.failed_any_test |= !test.succeeded
+		duration = REALTIMEOFDAY - duration
+		GLOB.current_test = null
+		GLOB.failed_any_test |= !test.succeeded
 
-	var/list/log_entry = list()
-	var/list/fail_reasons = test.fail_reasons
+		var/list/log_entry = list()
+		var/list/fail_reasons = test.fail_reasons
 
-	for(var/reasonID in 1 to LAZYLEN(fail_reasons))
-		var/text = fail_reasons[reasonID][1]
-		var/file = fail_reasons[reasonID][2]
-		var/line = fail_reasons[reasonID][3]
+		for(var/reasonID in 1 to LAZYLEN(fail_reasons))
+			var/text = fail_reasons[reasonID][1]
+			var/file = fail_reasons[reasonID][2]
+			var/line = fail_reasons[reasonID][3]
 
-		test.log_for_test(text, "error", file, line)
+			test.log_for_test(text, "error", file, line)
 
-		// Normal log message
-		log_entry += "\tFAILURE #[reasonID]: [text] at [file]:[line]"
+			// Normal log message
+			log_entry += "\tFAILURE #[reasonID]: [text] at [file]:[line]"
 
-	if(length(log_entry))
-		message = log_entry.Join("\n")
-		log_test(message)
+		if(length(log_entry))
+			message = log_entry.Join("\n")
+			log_test(message)
 
-	test_output_desc += " [duration / 10]s"
-	if (test.succeeded)
-		log_world("[TEST_OUTPUT_GREEN("PASS")] [test_output_desc]")
+		test_output_desc += " [duration / 10]s"
+		if (test.succeeded)
+			log_world("[TEST_OUTPUT_GREEN("PASS")] [test_output_desc]")
 
 	log_world("::endgroup::")
 
-	//if (!test.succeeded && !skip_test)
-	if (!test.succeeded)
+	if (!test.succeeded && !skip_test)
 		log_world("::error::[TEST_OUTPUT_RED("FAIL")] [test_output_desc]")
 
-	//var/final_status = skip_test ? UNIT_TEST_SKIPPED : (test.succeeded ? UNIT_TEST_PASSED : UNIT_TEST_FAILED)
-	var/final_status = test.succeeded ? UNIT_TEST_PASSED : UNIT_TEST_FAILED
+	var/final_status = skip_test ? UNIT_TEST_SKIPPED : (test.succeeded ? UNIT_TEST_PASSED : UNIT_TEST_FAILED)
 	test_results[test_path] = list("status" = final_status, "message" = message, "name" = test_path)
 
 	qdel(test)
@@ -230,14 +228,25 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 		/obj/item/slimecross/recurring,
 		//This should be obvious
 		/obj/machinery/doomsday_device,
+		//Yet more templates
+		/obj/machinery/restaurant_portal,
 		//Template type
 		/obj/effect/mob_spawn,
+		//Template type
+		/obj/structure/holosign/robot_seat,
 		//Singleton
 		/mob/dview,
 		//Template type
 		/obj/item/bodypart,
+		//This is meant to fail extremely loud every single time it occurs in any environment in any context, and it falsely alarms when this unit test iterates it. Let's not spawn it in.
+		/obj/merge_conflict_marker,
 		//briefcase launchpads erroring
 		/obj/machinery/launchpad/briefcase,
+		//Both are abstract types meant to scream bloody murder if spawned in raw
+		/obj/item/organ/external,
+		/obj/item/organ/external/wings,
+		//Not meant to spawn without the machine wand
+		/obj/effect/bug_moving,
 	)
 
 	// Everything that follows is a typesof() check.
@@ -247,40 +256,75 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	//This turf existing is an error in and of itself
 	returnable_list += typesof(/turf/baseturf_skipover)
 	returnable_list += typesof(/turf/baseturf_bottom)
+	//This demands a borg, so we'll let if off easy
+	returnable_list += typesof(/obj/item/modular_computer/pda/silicon)
 	//This one demands a computer, ditto
 	returnable_list += typesof(/obj/item/modular_computer/processor)
 	//Very finiky, blacklisting to make things easier
 	returnable_list += typesof(/obj/item/poster/wanted)
+	//This expects a seed, we can't pass it
+	returnable_list += typesof(/obj/item/food/grown)
+	//Needs clients / mobs to observe it to exist. Also includes hallucinations.
+	returnable_list += typesof(/obj/effect/client_image_holder)
 	//Same to above. Needs a client / mob / hallucination to observe it to exist.
 	returnable_list += typesof(/obj/projectile/hallucination)
+	returnable_list += typesof(/obj/item/hallucinated)
+	//We don't have a pod
+	returnable_list += typesof(/obj/effect/pod_landingzone_effect)
+	returnable_list += typesof(/obj/effect/pod_landingzone)
 	//We have a baseturf limit of 10, adding more than 10 baseturf helpers will kill CI, so here's a future edge case to fix.
 	returnable_list += typesof(/obj/effect/baseturf_helper)
 	//No tauma to pass in
 	returnable_list += typesof(/mob/camera/imaginary_friend)
 	//No pod to gondola
 	returnable_list += typesof(/mob/living/simple_animal/pet/gondola/gondolapod)
+	//No heart to give
+	returnable_list += typesof(/obj/structure/ethereal_crystal)
+	//No linked console
+	returnable_list += typesof(/mob/camera/ai_eye/remote/base_construction)
+	//See above
+	returnable_list += typesof(/mob/camera/ai_eye/remote/shuttle_docker)
 	//Hangs a ref post invoke async, which we don't support. Could put a qdeleted check but it feels hacky
 	returnable_list += typesof(/obj/effect/anomaly/grav/high)
 	//See above
 	returnable_list += typesof(/obj/effect/timestop)
+	//Invoke async in init, skippppp
+	returnable_list += typesof(/mob/living/silicon/robot/model)
 	//This lad also sleeps
 	returnable_list += typesof(/obj/item/hilbertshotel)
 	//this boi spawns turf changing stuff, and it stacks and causes pain. Let's just not
 	returnable_list += typesof(/obj/effect/sliding_puzzle)
 	//these can explode and cause the turf to be destroyed at unexpected moments
 	returnable_list += typesof(/obj/effect/mine)
+	returnable_list += typesof(/obj/effect/spawner/random/contraband/landmine)
+	returnable_list += typesof(/obj/item/minespawner)
 	//Stacks baseturfs, can't be tested here
 	returnable_list += typesof(/obj/effect/temp_visual/lava_warning)
+	//Stacks baseturfs, can't be tested here
+	returnable_list += typesof(/obj/effect/landmark/ctf)
 	//Our system doesn't support it without warning spam from unregister calls on things that never registered
 	returnable_list += typesof(/obj/docking_port)
 	//Asks for a shuttle that may not exist, let's leave it alone
 	returnable_list += typesof(/obj/item/pinpointer/shuttle)
+	//This spawns beams as a part of init, which can sleep past an async proc. This hangs a ref, and fucks us. It's only a problem here because the beam sleeps with CHECK_TICK
+	returnable_list += typesof(/obj/structure/alien/resin/flower_bud)
+	//Needs a linked mecha
+	returnable_list += typesof(/obj/effect/skyfall_landingzone)
 	//Expects a mob to holderize, we have nothing to give
 	returnable_list += typesof(/obj/item/clothing/head/mob_holder)
 	//Needs cards passed into the initilazation args
 	returnable_list += typesof(/obj/item/toy/cards/cardhand)
 	//Needs a holodeck area linked to it which is not guarenteed to exist and technically is supposed to have a 1:1 relationship with computer anyway.
 	returnable_list += typesof(/obj/machinery/computer/holodeck)
+	//runtimes if not paired with a landmark
+	returnable_list += typesof(/obj/structure/transport/linear)
+	// Runtimes if the associated machinery does not exist, but not the base type
+	returnable_list += subtypesof(/obj/machinery/airlock_controller)
+	// Always ought to have an associated escape menu. Any references it could possibly hold would need one regardless.
+	returnable_list += subtypesof(/atom/movable/screen/escape_menu)
+	// Can't spawn openspace above nothing, it'll get pissy at me
+	returnable_list += typesof(/turf/open/space/openspace)
+	returnable_list += typesof(/turf/open/openspace)
 
 	return returnable_list
 
@@ -296,7 +340,7 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	if(length(focused_tests))
 		tests_to_run = focused_tests
 
-	tests_to_run = sortTim(tests_to_run, /proc/cmp_unit_test_priority)
+	tests_to_run = sortTim(tests_to_run, GLOBAL_PROC_REF(cmp_unit_test_priority))
 
 	var/list/test_results = list()
 
@@ -311,7 +355,7 @@ GLOBAL_VAR_INIT(focused_tests, focused_tests())
 	fdel(file_name)
 	file(file_name) << json_encode(test_results)
 
-	SSticker.force_ending = 1
+	SSticker.force_ending = ADMIN_FORCE_END_ROUND
 	//We have to call this manually because del_text can preceed us, and SSticker doesn't fire in the post game
 	SSticker.declare_completion()
 

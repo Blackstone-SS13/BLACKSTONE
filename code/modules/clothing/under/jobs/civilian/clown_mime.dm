@@ -1,98 +1,94 @@
 
 /obj/item/clothing/under/rank/civilian/mime
 	name = "mime's outfit"
-	desc = ""
+	desc = "It's not very colourful."
 	icon_state = "mime"
-	item_state = "mime"
+	inhand_icon_state = null
 
 /obj/item/clothing/under/rank/civilian/mime/skirt
 	name = "mime's skirt"
-	desc = ""
+	desc = "It's not very colourful."
 	icon_state = "mime_skirt"
-	item_state = "mime"
+	inhand_icon_state = null
 	body_parts_covered = CHEST|GROIN|ARMS
-	can_adjust = FALSE
-	fitted = FEMALE_UNIFORM_TOP
+	dying_key = DYE_REGISTRY_JUMPSKIRT
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	supports_variations_flags = CLOTHING_DIGITIGRADE_VARIATION_NO_NEW_ICON
 
 /obj/item/clothing/under/rank/civilian/mime/sexy
 	name = "sexy mime outfit"
-	desc = ""
+	desc = "Pretty inappropriate for a circus."
 	icon_state = "sexymime"
-	item_state = "sexymime"
+	inhand_icon_state = null
 	body_parts_covered = CHEST|GROIN|LEGS
-	fitted = FEMALE_UNIFORM_TOP
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
 	can_adjust = FALSE
 
 /obj/item/clothing/under/rank/civilian/clown
 	name = "clown suit"
-	desc = ""
+	desc = "<i>'HONK!'</i>"
 	icon_state = "clown"
-	item_state = "clown"
+	inhand_icon_state = "clown"
+	female_sprite_flags = FEMALE_UNIFORM_TOP_ONLY
+	can_adjust = FALSE
+
+/obj/item/clothing/under/rank/civilian/clown/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/squeak, list('sound/items/bikehorn.ogg'=1), 50, falloff_exponent = 20) //die off quick please
+	AddElement(/datum/element/swabable, CELL_LINE_TABLE_CLOWN, CELL_VIRUS_TABLE_GENERIC, rand(2,3), 0)
 
 /obj/item/clothing/under/rank/civilian/clown/blue
 	name = "blue clown suit"
-	desc = ""
+	desc = "<i>'BLUE HONK!'</i>"
 	icon_state = "blueclown"
-	item_state = "blueclown"
-	fitted = FEMALE_UNIFORM_TOP
-	can_adjust = FALSE
+	inhand_icon_state = "blueclown"
 
 /obj/item/clothing/under/rank/civilian/clown/green
 	name = "green clown suit"
-	desc = ""
+	desc = "<i>'GREEN HONK!'</i>"
 	icon_state = "greenclown"
-	item_state = "greenclown"
-	fitted = FEMALE_UNIFORM_TOP
-	can_adjust = FALSE
+	inhand_icon_state = "greenclown"
 
 /obj/item/clothing/under/rank/civilian/clown/yellow
 	name = "yellow clown suit"
-	desc = ""
+	desc = "<i>'YELLOW HONK!'</i>"
 	icon_state = "yellowclown"
-	item_state = "yellowclown"
-	fitted = FEMALE_UNIFORM_TOP
-	can_adjust = FALSE
+	inhand_icon_state = "yellowclown"
 
 /obj/item/clothing/under/rank/civilian/clown/purple
 	name = "purple clown suit"
-	desc = ""
+	desc = "<i>'PURPLE HONK!'</i>"
 	icon_state = "purpleclown"
-	item_state = "purpleclown"
-	fitted = FEMALE_UNIFORM_TOP
-	can_adjust = FALSE
+	inhand_icon_state = "purpleclown"
 
 /obj/item/clothing/under/rank/civilian/clown/orange
 	name = "orange clown suit"
-	desc = ""
+	desc = "<i>'ORANGE HONK!'</i>"
 	icon_state = "orangeclown"
-	item_state = "orangeclown"
-	fitted = FEMALE_UNIFORM_TOP
-	can_adjust = FALSE
+	inhand_icon_state = "orangeclown"
 
 /obj/item/clothing/under/rank/civilian/clown/rainbow
 	name = "rainbow clown suit"
-	desc = ""
+	desc = "<i>'R A I N B O W HONK!'</i>"
 	icon_state = "rainbowclown"
-	item_state = "rainbowclown"
-	fitted = FEMALE_UNIFORM_TOP
-	can_adjust = FALSE
+	inhand_icon_state = "rainbowclown"
 
 /obj/item/clothing/under/rank/civilian/clown/jester
 	name = "jester suit"
-	desc = ""
-	icon_state = "jester"
-	can_adjust = FALSE
+	desc = "A jolly dress, well suited to entertain your master, nuncle."
+	icon_state = "jester_map"
+	greyscale_colors = "#00ff00#ff0000"
+	greyscale_config = /datum/greyscale_config/jester_suit
+	greyscale_config_worn = /datum/greyscale_config/jester_suit/worn
+	flags_1 = IS_PLAYER_COLORABLE_1
 
-/obj/item/clothing/under/rank/civilian/clown/jester/alt
+/obj/item/clothing/under/rank/civilian/clown/jesteralt
+	name = "jester suit"
+	desc = "A jolly dress, well suited to entertain your master, nuncle."
 	icon_state = "jester2"
 
 /obj/item/clothing/under/rank/civilian/clown/sexy
 	name = "sexy-clown suit"
-	desc = ""
+	desc = "It makes you look HONKable!"
 	icon_state = "sexyclown"
-	item_state = "sexyclown"
-	can_adjust = FALSE
-
-/obj/item/clothing/under/rank/civilian/clown/Initialize()
-	. = ..()
-	AddComponent(/datum/component/squeak, list('sound/blank.ogg'=1), 50)
+	inhand_icon_state = null

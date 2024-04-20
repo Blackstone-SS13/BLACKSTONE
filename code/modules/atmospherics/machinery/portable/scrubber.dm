@@ -1,43 +1,73 @@
 /obj/machinery/portable_atmospherics/scrubber
 	name = "portable air scrubber"
-	icon_state = "pscrubber:0"
+	icon_state = "scrubber"
 	density = TRUE
-	ui_x = 420
-	ui_y = 435
-
-	var/on = FALSE
-	var/volume_rate = 1000
-	var/overpressure_m = 80
+	max_integrity = 250
 	volume = 1000
 
-	var/list/scrubbing = list(/datum/gas/plasma, /datum/gas/carbon_dioxide, /datum/gas/nitrous_oxide, /datum/gas/bz, /datum/gas/nitryl, /datum/gas/tritium, /datum/gas/hypernoblium, /datum/gas/water_vapor)
+	///Is the machine on?
+	var/on = FALSE
+	///the rate the machine will scrub air
+	var/volume_rate = 1000
+	///Multiplier with ONE_ATMOSPHERE, if the enviroment pressure is higher than that, the scrubber won't work
+	var/overpressure_m = 80
+	///Should the machine use overlay in update_overlays() when open/close?
+	var/use_overlays = TRUE
+	///List of gases that can be scrubbed
+	var/list/scrubbing = list(
+		/datum/gas/plasma,
+		/datum/gas/carbon_dioxide,
+		/datum/gas/nitrous_oxide,
+		/datum/gas/bz,
+		/datum/gas/nitrium,
+		/datum/gas/tritium,
+		/datum/gas/hypernoblium,
+		/datum/gas/water_vapor,
+		/datum/gas/freon,
+		/datum/gas/hydrogen,
+		/datum/gas/healium,
+		/datum/gas/proto_nitrate,
+		/datum/gas/zauker,
+		/datum/gas/halon,
+	)
 
-/obj/machinery/portable_atmospherics/scrubber/Destroy()
-	var/turf/T = get_turf(src)
-	T.assume_air(air_contents)
-	air_update_turf()
+/obj/machinery/portable_atmospherics/scrubber/on_deconstruction(disassembled)
+	var/turf/local_turf = get_turf(src)
+	local_turf.assume_air(air_contents)
 	return ..()
 
-/obj/machinery/portable_atmospherics/scrubber/update_icon()
-	icon_state = "pscrubber:[on]"
+/obj/machinery/portable_atmospherics/scrubber/update_icon_state()
+	icon_state = "[initial(icon_state)]_[on]"
+	return ..()
 
-	cut_overlays()
+/obj/machinery/portable_atmospherics/scrubber/update_overlays()
+	. = ..()
+	if(!use_overlays)
+		return
 	if(holding)
-		add_overlay("scrubber-open")
+		. += "scrubber-open"
 	if(connected_port)
-		add_overlay("scrubber-connector")
+		. += "scrubber-connector"
 
 /obj/machinery/portable_atmospherics/scrubber/process_atmos()
-	..()
+	if(take_atmos_damage())
+		excited = TRUE
+		return ..()
+
 	if(!on)
-		return
+		return ..()
 
-	if(holding)
-		scrub(holding.air_contents)
-	else
-		var/turf/T = get_turf(src)
-		scrub(T.return_air())
+	excited = TRUE
 
+	var/atom/target = holding || get_turf(src)
+	scrub(target.return_air())
+	return ..()
+
+/**
+ * Called in process_atmos(), handles the scrubbing of the given gas_mixture
+ * Arguments:
+ * * mixture: the gas mixture to be scrubbed
+ */
 /obj/machinery/portable_atmospherics/scrubber/proc/scrub(datum/gas_mixture/mixture)
 	if(air_contents.return_pressure() >= overpressure_m * ONE_ATMOSPHERE)
 		return
@@ -59,22 +89,23 @@
 	air_contents.merge(filtered) // Store filtered out gasses.
 	mixture.merge(filtering) // Returned the cleaned gas.
 	if(!holding)
-		air_update_turf()
+		air_update_turf(FALSE, FALSE)
 
 /obj/machinery/portable_atmospherics/scrubber/emp_act(severity)
 	. = ..()
 	if(. & EMP_PROTECT_SELF)
 		return
-	if(is_operational())
+	if(is_operational)
 		if(prob(50 / severity))
 			on = !on
-		update_icon()
+			if(on)
+				SSair.start_processing_machine(src)
+		update_appearance()
 
-/obj/machinery/portable_atmospherics/scrubber/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, \
-														datum/tgui/master_ui = null, datum/ui_state/state = GLOB.physical_state)
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+/obj/machinery/portable_atmospherics/scrubber/ui_interact(mob/user, datum/tgui/ui)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "portable_scrubber", name, ui_x, ui_y, master_ui, state)
+		ui = new(user, src, "PortableScrubber", name)
 		ui.open()
 
 /obj/machinery/portable_atmospherics/scrubber/ui_data()
@@ -83,34 +114,43 @@
 	data["connected"] = connected_port ? 1 : 0
 	data["pressure"] = round(air_contents.return_pressure() ? air_contents.return_pressure() : 0)
 
-	data["id_tag"] = -1 //must be defined in order to reuse code between portable and vent scrubbers
-	data["filter_types"] = list()
+	data["hasHypernobCrystal"] = !!nob_crystal_inserted
+	data["reactionSuppressionEnabled"] = !!suppress_reactions
+
+	data["filterTypes"] = list()
 	for(var/path in GLOB.meta_gas_info)
 		var/list/gas = GLOB.meta_gas_info[path]
-		data["filter_types"] += list(list("gas_id" = gas[META_GAS_ID], "gas_name" = gas[META_GAS_NAME], "enabled" = (path in scrubbing)))
+		data["filterTypes"] += list(list("gasId" = gas[META_GAS_ID], "gasName" = gas[META_GAS_NAME], "enabled" = (path in scrubbing)))
 
 	if(holding)
 		data["holding"] = list()
 		data["holding"]["name"] = holding.name
-		data["holding"]["pressure"] = round(holding.air_contents.return_pressure())
+		var/datum/gas_mixture/holding_mix = holding.return_air()
+		data["holding"]["pressure"] = round(holding_mix.return_pressure())
+	else
+		data["holding"] = null
 	return data
 
 /obj/machinery/portable_atmospherics/scrubber/replace_tank(mob/living/user, close_valve)
 	. = ..()
-	if(.)
-		if(close_valve)
-			if(on)
-				on = FALSE
-				update_icon()
-		else if(on && holding)
-			investigate_log("[key_name(user)] started a transfer into [holding].<br>", INVESTIGATE_ATMOS)
+	if(!.)
+		return
+	if(close_valve)
+		if(on)
+			on = FALSE
+			update_appearance()
+	else if(on && holding)
+		user.investigate_log("started a transfer into [holding].", INVESTIGATE_ATMOS)
 
 /obj/machinery/portable_atmospherics/scrubber/ui_act(action, params)
-	if(..())
+	. = ..()
+	if(.)
 		return
 	switch(action)
 		if("power")
 			on = !on
+			if(on)
+				SSair.start_processing_machine(src)
 			. = TRUE
 		if("eject")
 			if(holding)
@@ -119,20 +159,33 @@
 		if("toggle_filter")
 			scrubbing ^= gas_id2path(params["val"])
 			. = TRUE
-	update_icon()
+		if("reaction_suppression")
+			if(!nob_crystal_inserted)
+				message_admins("[ADMIN_LOOKUPFLW(usr)] tried to toggle reaction suppression on a scrubber without a noblium crystal inside, possible href exploit attempt.")
+				return
+			suppress_reactions = !suppress_reactions
+			SSair.start_processing_machine(src)
+			message_admins("[ADMIN_LOOKUPFLW(usr)] turned [suppress_reactions ? "on" : "off"] the [src] reaction suppression.")
+			usr.investigate_log("turned [suppress_reactions ? "on" : "off"] the [src] reaction suppression.")
+			. = TRUE
+	update_appearance()
+
+/obj/machinery/portable_atmospherics/scrubber/unregister_holding()
+	on = FALSE
+	return ..()
 
 /obj/machinery/portable_atmospherics/scrubber/huge
 	name = "huge air scrubber"
-	icon_state = "scrubber:0"
+	icon_state = "hugescrubber"
 	anchored = TRUE
-	active_power_usage = 500
-	idle_power_usage = 10
+	active_power_usage = BASE_MACHINE_ACTIVE_CONSUMPTION * 0.5
 
 	overpressure_m = 200
 	volume_rate = 1500
 	volume = 50000
 
 	var/movable = FALSE
+	use_overlays = FALSE
 
 /obj/machinery/portable_atmospherics/scrubber/huge/movable
 	movable = TRUE
@@ -140,26 +193,31 @@
 /obj/machinery/portable_atmospherics/scrubber/huge/movable/cargo
 	anchored = FALSE
 
-/obj/machinery/portable_atmospherics/scrubber/huge/update_icon()
-	icon_state = "scrubber:[on]"
+/obj/machinery/portable_atmospherics/scrubber/huge/update_icon_state()
+	icon_state = "[initial(icon_state)]_[on]"
+	return ..()
 
 /obj/machinery/portable_atmospherics/scrubber/huge/process_atmos()
-	if((!anchored && !movable) || !is_operational())
+	if((!anchored && !movable) || !is_operational)
 		on = FALSE
-		update_icon()
-	use_power = on ? ACTIVE_POWER_USE : IDLE_POWER_USE
+		update_appearance()
+	update_use_power(on ? ACTIVE_POWER_USE : IDLE_POWER_USE)
 	if(!on)
-		return
+		return ..()
 
-	..()
+	excited = TRUE
+
 	if(!holding)
 		var/turf/T = get_turf(src)
-		for(var/turf/AT in T.GetAtmosAdjacentTurfs(alldir = TRUE))
+		for(var/turf/AT in T.get_atmos_adjacent_turfs(alldir = TRUE))
 			scrub(AT.return_air())
 
-/obj/machinery/portable_atmospherics/scrubber/huge/attackby(obj/item/W, mob/user)
-	if(default_unfasten_wrench(user, W))
+	return ..()
+
+/obj/machinery/portable_atmospherics/scrubber/huge/wrench_act(mob/living/user, obj/item/tool)
+	. = ..()
+	if(default_unfasten_wrench(user, tool))
 		if(!movable)
 			on = FALSE
-	else
-		return ..()
+		return ITEM_INTERACT_SUCCESS
+	return FALSE

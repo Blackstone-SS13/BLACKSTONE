@@ -3,7 +3,9 @@ const TITLE_BOT_HEADER = "title: ";
 
 // Only check jobs that start with these.
 // Helps make sure we don't restart something like screenshot tests or linters, which are not known to be flaky.
-const CONSIDERED_JOBS = ["Unit Tests"];
+const CONSIDERED_JOBS = [
+	"Integration Tests",
+];
 
 async function getFailedJobsForRun(github, context, workflowRunId, runAttempt) {
 	const {
@@ -31,9 +33,7 @@ export async function rerunFlakyTests({ github, context }) {
 	);
 
 	if (failingJobs.length > 1) {
-		console.log(
-			"Multiple jobs failing. PROBABLY not flaky, not rerunning."
-		);
+		console.log("Multiple jobs failing. PROBABLY not flaky, not rerunning.");
 		return;
 	}
 
@@ -137,8 +137,26 @@ export function extractDetails(log) {
 	// Common patterns where we can always get a detailed title
 	const runtimeMatch = failure.headline.match(/Runtime in .+?: (?<error>.+)/);
 	if (runtimeMatch) {
+		const runtime = runtimeMatch.groups.error.trim();
+
+		const invalidTimerMatch = runtime.match(/^Invalid timer:.+object:(?<object>[^[]+).*delegate:(?<proc>.+?), source:/);
+		if (invalidTimerMatch) {
+			return {
+				title: `Flaky test ${failGroup}: Invalid timer: ${invalidTimerMatch.groups.proc.trim()} on ${invalidTimerMatch.groups.object.trim()}`,
+				failures,
+			};
+		}
+
 		return {
-			title: `Flaky test ${failGroup}: ${runtimeMatch.groups.error.trim()}`,
+			title: `Flaky test ${failGroup}: ${runtime}`,
+			failures,
+		};
+	}
+
+	const hardDelMatch = failure.headline.match(/^(?<object>\/[\w/]+) hard deleted .* times out of a total del count of/);
+	if (hardDelMatch) {
+		return {
+			title: `Flaky hard delete: ${hardDelMatch.groups.object}`,
 			failures,
 		};
 	}
@@ -184,9 +202,7 @@ async function getExistingIssueId(graphql, context, title) {
 		}
 	);
 
-	const exactTitle = openFlakyTestIssues.find(
-		(issue) => issue.title === title
-	);
+	const exactTitle = openFlakyTestIssues.find((issue) => issue.title === title);
 	if (exactTitle !== undefined) {
 		return exactTitle.number;
 	}
@@ -213,9 +229,7 @@ function createBody({ title, failures }, runUrl) {
 	${failures
 		.map(
 			(failure) =>
-				`${failure.group}: ${
-					failure.headline
-				}\n\t${failure.details.join("\n")}`
+				`${failure.group}: ${failure.headline}\n\t${failure.details.join("\n")}`
 		)
 		.join("\n")}
 	\`\`\`
