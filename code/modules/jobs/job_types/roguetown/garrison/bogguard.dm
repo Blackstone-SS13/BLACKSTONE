@@ -21,8 +21,8 @@
 	display_order = JDO_BOGGUARD
 	whitelist_req = TRUE
 
-	outfit = /datum/outfit/job/roguetown/manorguard
-	give_bank_account = 22
+	outfit = /datum/outfit/job/roguetown/bogguard
+	give_bank_account = 16
 	min_pq = -4
 
 
@@ -40,10 +40,10 @@
 			S.name = "guard's tabard ([index])"
 
 
-/datum/outfit/job/roguetown/guardsman/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/bogguard/pre_equip(mob/living/carbon/human/H)
 	..()
 	pants = /obj/item/clothing/under/roguetown/trou/leather
-	cloak = /obj/item/clothing/cloak/stabard/guard
+	cloak = /obj/item/clothing/cloak/stabard/guard/alt
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/merc
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail
 	neck = /obj/item/clothing/neck/roguetown/gorget

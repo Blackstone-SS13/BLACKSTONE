@@ -329,6 +329,11 @@
 /obj/item/clothing/cloak/stabard/dungeon
 	color = CLOTHING_BLACK
 
+/obj/item/clothing/cloak/stabard/stabard/guard/alt
+	desc = "A surcoat with the colors of the Lord's Bog Guard."
+	color = CLOTHING_GREEN
+	detail_color = CLOTHING_RED
+
 /obj/item/clothing/cloak/stabard/dungeon/attack_right(mob/user)
 	return
 
@@ -344,6 +349,7 @@
 	if(ismob(loc))
 		var/mob/L = loc
 		L.update_inv_cloak()
+
 
 //////////////////////////
 /// SURCOATS
