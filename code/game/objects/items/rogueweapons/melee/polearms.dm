@@ -39,7 +39,7 @@
 	icon = 'icons/roguetown/weapons/64.dmi'
 	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK
+	slot_flags = null
 	blade_dulling = DULLING_BASHCHOP
 	walking_stick = TRUE
 	pixel_y = -16
@@ -108,7 +108,7 @@
 	gripsprite = TRUE
 	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK
+	slot_flags = null
 	minstr = 8
 	max_blade_int = 100
 	smeltresult = /obj/item/ingot/iron
@@ -178,7 +178,7 @@
 	gripsprite = TRUE
 	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK
+	slot_flags = null
 	minstr = 9
 	max_blade_int = 200
 	smeltresult = /obj/item/ingot/steel
@@ -224,7 +224,7 @@
 	gripsprite = TRUE
 	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK
+	slot_flags = null
 	minstr = 11
 	smeltresult = /obj/item/ingot/steel
 	associated_skill = /datum/skill/combat/polearms
@@ -269,7 +269,7 @@
 	gripsprite = TRUE
 	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK
+	slot_flags = null
 	minstr = 9
 	smeltresult = /obj/item/ingot/steel
 	associated_skill = /datum/skill/combat/swords
