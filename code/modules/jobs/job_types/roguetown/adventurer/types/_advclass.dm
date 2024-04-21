@@ -25,7 +25,7 @@
 	var/vampcompat = TRUE
 
 /datum/advclass/Initialize()
-	allowed_flaws = GLOB.character_flaws
+allowed_flaws = GLOB.character_flaws
 
 /datum/advclass/proc/equipme(mob/living/carbon/human/H)
 	if(!H)
