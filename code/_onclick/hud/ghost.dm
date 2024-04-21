@@ -50,7 +50,6 @@
 					verbs -= /client/proc/descend
 
 				return
-
 //		var/take_triumph = FALSE
 		var/datum/game_mode/chaosmode/C = SSticker.mode
 		if(istype(C))
