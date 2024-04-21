@@ -145,7 +145,7 @@
 
 /datum/wound
 	var/name = "wound"
-	var/bleed_rate = 0.2
+	var/bleed_rate = 1
 	var/can_sew = TRUE
 	var/time = 3
 	var/whp = 60
@@ -168,7 +168,7 @@
 
 /datum/wound/cut
 	name = "cut"
-	bleed_rate = 0.4
+	bleed_rate = 2
 	can_sew = TRUE
 	whp = 50
 	woundpain = 0
@@ -176,11 +176,11 @@
 
 /datum/wound/cut/small
 	name = "small cut"
-	bleed_rate = 0.2
+	bleed_rate = 1
 
 /datum/wound/cut/large
 	name = "gruesome cut"
-	bleed_rate = 1
+	bleed_rate = 5
 
 /datum/wound/bruise
 	name = "hematoma"
@@ -201,7 +201,7 @@
 
 /datum/wound/artery
 	name = "severed blood tunnel"
-	bleed_rate = 30
+	bleed_rate = 50
 	can_sew = TRUE
 	whp = 100
 	woundpain = 100
@@ -211,11 +211,11 @@
 /datum/wound/artery/throat
 	name = "sliced throat"
 	mob_overlay = "s1_throat"
-	bleed_rate = 50
+	bleed_rate = 100
 
 /datum/wound/stab
 	name = "puncture wound"
-	bleed_rate = 0.4
+	bleed_rate = 2
 	can_sew = TRUE
 	whp = 50
 	woundpain = 0
@@ -223,11 +223,11 @@
 
 /datum/wound/stab/small
 	name = "small puncture wound"
-	bleed_rate = 0.2
+	bleed_rate = 1
 
 /datum/wound/stab/large
 	name = "gaping wound"
-	bleed_rate = 1
+	bleed_rate = 5
 
 /datum/wound/dismemberment
 	name = "bleeding stump"
@@ -279,7 +279,7 @@
 
 /datum/wound/bite/bleeding
 	name = "bleeding bite mark"
-	bleed_rate = 0.2
+	bleed_rate = 1
 	can_sew = 1
 	whp = 30
 	woundpain = 5
