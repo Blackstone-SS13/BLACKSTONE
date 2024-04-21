@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 /datum/job/roguetown/adventurer
 	title = "Adventurer"
 	flag = ADVENTURER
-	department_flag = PEASANTS
+	department_flag = ALLMIG
 	faction = "Station"
 	total_positions = 75
 	spawn_positions = 75
