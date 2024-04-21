@@ -54,7 +54,6 @@
 #define JOB_UNAVAILABLE_LASTCLASS 9
 #define JOB_UNAVAILABLE_PATRON 10
 
-
 #define DEFAULT_RELIGION "Christianity"
 #define DEFAULT_DEITY "Space Jesus"
 
