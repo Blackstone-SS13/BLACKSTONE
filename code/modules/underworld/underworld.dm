@@ -10,6 +10,14 @@
 				if(D.buried && D.funeral)
 					D.returntolobby()
 					return
+
+				// Check if the player's job is adventurer and reduce current_positions
+				var/datum/job/adventurer_job = SSjob.GetJob("Adventurer")
+				if(adventurer_job && D?.mind?.assigned_role == "Adventurer")
+					adventurer_job.current_positions = max(0, adventurer_job.current_positions - 1)
+					// Store the current time for the player
+					GLOB.adventurer_cooldowns[D?.client?.ckey] = world.time
+
 			for(var/obj/effect/landmark/underworld/A in GLOB.landmarks_list)
 				var/mob/living/carbon/spirit/O = new /mob/living/carbon/spirit(A.loc)
 				O.livingname = mob.name
@@ -150,7 +158,7 @@
 	else
 		to_chat(user, "<B><font size=3 color=red>It's LOCKED.</font></B>")
 
-GLOBAL_LIST_EMPTY(underworld_coins)
+GLOBAL_VAR_INIT(underworld_coins, 0)
 
 /obj/item/underworld/coin
 	name = "The Toll"
@@ -162,32 +170,32 @@ GLOBAL_LIST_EMPTY(underworld_coins)
 /obj/item/underworld/coin/Initialize()
 	. = ..()
 	if(should_track)
-		GLOB.underworld_coins |= src
+		GLOB.underworld_coins += 1
 
 /obj/item/underworld/coin/Destroy()
 	if(should_track)
-		GLOB.underworld_coins -= src
+		GLOB.underworld_coins -= 1
 	coin_upkeep()
 	return ..()
 
 /obj/item/underworld/coin/pickup(mob/user)
 	..()
 	if(should_track)
-		GLOB.underworld_coins -= src
+		GLOB.underworld_coins -= 1
 	coin_upkeep()
 	icon_state = "soultoken"
 
 /obj/item/underworld/coin/dropped(mob/user)
 	..()
 	if(should_track)
-		GLOB.underworld_coins |= src
+		GLOB.underworld_coins += 1
 	icon_state = "soultoken_floor"
 
 /obj/item/underworld/coin/notracking
 	should_track = FALSE
 
 /proc/coin_upkeep()
-	if(length(GLOB.underworld_coins) < 3)
+	if(GLOB.underworld_coins < 3)
 		for(var/obj/effect/landmark/underworldcoin/B in GLOB.landmarks_list)
 			new /obj/item/underworld/coin(B.loc)
 	
