@@ -321,9 +321,6 @@
 		if(C.vampire_werewolf() == "werewolf")
 			end_reason = "The Werevolves formed an unholy clan, marauding Rockhill until the end of its daes."
 
-		if(C.headrebdecree)
-			end_reason = "The peasant rebels took control of the throne, hail the new community!"
-
 
 	if(end_reason)
 		to_chat(world, "<span class='big bold'>[end_reason].</span>")

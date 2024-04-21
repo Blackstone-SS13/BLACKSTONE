@@ -34,12 +34,6 @@
 
 /datum/antagonist/aspirant/ruler/greet() // No alert for the ruler to always keep them guessing.
 
-/datum/antagonist/prebel/can_be_owned(datum/mind/new_owner)
-	. = ..()
-	if(.)
-		if(!new_owner.assigned_role in GLOB.noble_positions || !new_owner.assigned_role in GLOB.garrison_positions)
-			return FALSE
-
 /datum/antagonist/aspirant/on_gain()
 	. = ..()
 	create_objectives()

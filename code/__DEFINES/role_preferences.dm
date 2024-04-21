@@ -12,7 +12,6 @@
 #define ROLE_NBEAST				"Vampire Lord"
 #define ROLE_BANDIT				"Bandit"
 #define ROLE_DELF				"Dark Elf"
-#define ROLE_PREBEL				"Peasant Rebel"
 #define ROLE_ASPIRANT			"Aspirant"
 
 #define ROLE_SYNDICATE			"Syndicate"
@@ -72,7 +71,6 @@ GLOBAL_LIST_INIT(special_roles, list(
 
 GLOBAL_LIST_INIT(special_roles_rogue, list(
 //	ROLE_VILLAIN = /datum/antagonist/villain,
-	ROLE_PREBEL = /datum/antagonist/prebel,
 	ROLE_BANDIT = /datum/antagonist/bandit,
 	ROLE_ASPIRANT = /datum/antagonist/aspirant,
 //	ROLE_WEREWOLF = /datum/antagonist/werewolf,

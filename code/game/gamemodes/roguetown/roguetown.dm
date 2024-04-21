@@ -1,5 +1,5 @@
 // This mode will become the main basis for the typical roguetown round. Based off of chaos mode.
-var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "Aspirants", "Bandits", "CANCEL") // This is mainly used for forcemgamemodes
+var/global/list/roguegamemodes = list("Vampire Lord", "Extended", "Aspirants", "Bandits", "CANCEL") // This is mainly used for forcemgamemodes
 
 /datum/game_mode/chaosmode
 	name = "roguemode"
@@ -28,7 +28,6 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 // MAJOR ANTAGS
 	var/list/datum/mind/pre_vampires = list()
 	var/list/datum/mind/vampires = list()
-	var/list/datum/mind/pre_rebels = list()
 	var/mob/living/carbon/human/vlord = null
 // MINOR ANTAGS
 	var/list/datum/mind/pre_werewolves = list()
@@ -148,9 +147,6 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		message_admins("Manual gamemodes selected.")
 		for(var/G in forcedmodes)
 			switch(G)
-				if("Rebellion")
-					pick_rebels()
-					log_game("Major Antagonist: Rebellion")
 				if("Vampire Lord")
 					pick_vampires()
 					log_game("Major Antagonist: Vampire Lord")
@@ -165,11 +161,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		return TRUE
 	switch(majorpicked)
 		if(1)
-			pick_rebels()
-			log_game("Major Antagonist: Rebellion")
-		if(2)
 			log_game("Major Antagonist: Extended") //gotta put something here.
-		if(3)
+		if(2)
 			pick_vampires()
 			log_game("Major Antagonist: Vampire Lord")
 	minor_modes = shuffle(minor_modes)
@@ -259,43 +252,6 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 						testing("[key_name(couper)] has been selected as an Aspirant")
 						log_game("[key_name(couper)] has been selected as a Aspirant")
 					else continue
-
-
-/datum/game_mode/chaosmode/proc/pick_rebels()
-	restricted_jobs = list() //handled after picking
-	var/num_rebels = 0
-	if(num_players() >= 10)
-		num_rebels = CLAMP(round(num_players() / 3), 1, 3)
-	if(num_rebels)
-		antag_candidates = get_players_for_role(ROLE_PREBEL)
-		if(antag_candidates.len)
-			for(var/i = 0, i < num_rebels, ++i)
-				var/datum/mind/rebelguy = pick_n_take(antag_candidates)
-				if(!rebelguy)
-					continue
-				var/blockme = FALSE
-				if(!(rebelguy in allantags))
-					blockme = TRUE
-				if(rebelguy.assigned_role in GLOB.garrison_positions)
-					blockme = TRUE
-				if(rebelguy.assigned_role in GLOB.noble_positions)
-					blockme = TRUE
-				if(rebelguy.assigned_role in GLOB.youngfolk_positions)
-					blockme = TRUE
-				if(rebelguy.assigned_role in GLOB.church_positions)
-					blockme = TRUE
-				if(rebelguy.assigned_role in GLOB.serf_positions)
-					blockme = TRUE
-				if(blockme)
-					continue
-				allantags -= rebelguy
-				pre_rebels += rebelguy
-				rebelguy.special_role = "Peasant Rebel"
-				testing("[key_name(rebelguy)] has been selected as a Peasant Rebel")
-				log_game("[key_name(rebelguy)] has been selected as a Peasant Rebel")
-	for(var/antag in pre_rebels)
-		GLOB.pre_setup_antags |= antag
-	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_maniac()
 	restricted_jobs = list("King",
@@ -463,12 +419,6 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	var/mob/living/king = SSticker.rulermob
 	var/datum/antagonist/ruler = new /datum/antagonist/aspirant/ruler() // Do the king last.
 	king.mind.add_antag_datum(ruler)
-
-///////////////// REBELS
-	for(var/datum/mind/rebelguy in pre_rebels)
-		var/datum/antagonist/new_antag = new /datum/antagonist/prebel/head()
-		rebelguy.add_antag_datum(new_antag)
-		GLOB.pre_setup_antags -= rebelguy
 
 	..()
 	//We're not actually ready until all traitors are assigned.

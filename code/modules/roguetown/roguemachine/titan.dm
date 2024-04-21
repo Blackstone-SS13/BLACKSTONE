@@ -152,45 +152,6 @@ GLOBAL_LIST_EMPTY(lord_decrees)
 		SStreasury.tax_value = newtax / 100
 		priority_announce("The new tax in Rockhill shall be [newtax] percent.", "The Generous Lord Decrees", 'sound/misc/alert.ogg', "Captain")
 
-
-/obj/structure/roguemachine/titan/proc/make_announcement(mob/living/user, raw_message)
-	if(!SScommunications.can_announce(user))
-		return
-	var/datum/antagonist/prebel/P = user.mind?.has_antag_datum(/datum/antagonist/prebel)
-	if(P)
-		var/datum/game_mode/chaosmode/C = SSticker.mode
-		if(istype(C))
-			if(P.rev_team)
-				if(P.rev_team.members.len < 3)
-					to_chat(user, "<span class='warning'>I need more folk on my side to declare victory.</span>")
-				else
-					for(var/datum/objective/prebel/obj in user.mind.get_all_objectives())
-						obj.completed = TRUE
-					if(!C.headrebdecree)
-						user.mind.adjust_triumphs(1)
-					C.headrebdecree = TRUE
-
-	SScommunications.make_announcement(user, FALSE, raw_message)
-
-/obj/structure/roguemachine/titan/proc/make_decree(mob/living/user, raw_message)
-	if(!SScommunications.can_announce(user))
-		return
-	var/datum/antagonist/prebel/P = user.mind?.has_antag_datum(/datum/antagonist/prebel)
-	if(P)
-		var/datum/game_mode/chaosmode/C = SSticker.mode
-		if(istype(C))
-			if(P.rev_team)
-				if(P.rev_team.members.len < 3)
-					to_chat(user, "<span class='warning'>I need more folk on my side to declare victory.</span>")
-				else
-					for(var/datum/objective/prebel/obj in user.mind.get_all_objectives())
-						obj.completed = TRUE
-					if(!C.headrebdecree)
-						user.mind.adjust_triumphs(1)
-					C.headrebdecree = TRUE
-	GLOB.lord_decrees += raw_message
-	SScommunications.make_announcement(user, TRUE, raw_message)
-
 /obj/structure/roguemachine/titan/proc/make_outlaw(mob/living/user, raw_message)
 	if(!SScommunications.can_announce(user))
 		return

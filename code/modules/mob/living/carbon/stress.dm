@@ -530,11 +530,6 @@
 	stressadd = -2
 	desc = list("<span class='green'>A meal fit for a god!</span>","<span class='green'>Delicious!</span>")
 
-/datum/stressevent/prebel
-	timer = 5 MINUTES
-	stressadd = -5
-	desc = "<span class='green'>Down with the tyranny!</span>"
-
 /datum/stressevent/music
 	timer = 1 MINUTES
 	stressadd = -1
