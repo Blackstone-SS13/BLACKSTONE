@@ -158,6 +158,13 @@ GLOBAL_LIST_EMPTY(lord_decrees)
 
 	SScommunications.make_announcement(user, FALSE, raw_message)
 
+/obj/structure/roguemachine/titan/proc/make_decree(mob/living/user, raw_message)
+	if(!SScommunications.can_announce(user))
+		return
+		
+	GLOB.lord_decrees += raw_message
+	SScommunications.make_announcement(user, TRUE, raw_message)
+
 /obj/structure/roguemachine/titan/proc/make_outlaw(mob/living/user, raw_message)
 	if(!SScommunications.can_announce(user))
 		return
