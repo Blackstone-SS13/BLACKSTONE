@@ -10,7 +10,7 @@
 	antag_hud_name = "rev"
 	var/datum/team/prebels/rev_team
 	show_in_roundend = FALSE
-	confess_lines = list("VIVA!", "DEATH TO THE NOBLES!")
+	confess_lines = list("VIVA!", "DEATH TO THE NOBLES!", "NO GODS, NO MASTERS!")
 	increase_votepwr = FALSE
 
 /datum/antagonist/prebel/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
@@ -40,6 +40,10 @@
 		if(new_owner.assigned_role in GLOB.noble_positions)
 			return FALSE
 		if(new_owner.assigned_role in GLOB.garrison_positions)
+			return FALSE
+		if(new_owner.assigned_role in GLOB.church_positions)
+			return FALSE
+		if(new_owner.assigned_role in GLOB.allmig_positions)
 			return FALSE
 		if(new_owner.unconvertable)
 			return FALSE
