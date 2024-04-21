@@ -48,8 +48,8 @@
 						O.ckey = G.ckey
 						SSdroning.area_entered(get_area(O), O.client)
 					verbs -= /client/proc/descend
-
 				return
+
 //		var/take_triumph = FALSE
 		var/datum/game_mode/chaosmode/C = SSticker.mode
 		if(istype(C))
