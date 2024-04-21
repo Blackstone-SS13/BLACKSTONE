@@ -152,6 +152,7 @@
 	gripsprite = TRUE
 	wlength = WLENGTH_GREAT
 	minstr = 6
+	slot_flags = ITEM_SLOT_BACK
 	max_blade_int = 50
 	smeltresult = null
 	associated_skill = /datum/skill/combat/polearms
