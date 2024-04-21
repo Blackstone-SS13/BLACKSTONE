@@ -152,6 +152,12 @@ GLOBAL_LIST_EMPTY(lord_decrees)
 		SStreasury.tax_value = newtax / 100
 		priority_announce("The new tax in Rockhill shall be [newtax] percent.", "The Generous Lord Decrees", 'sound/misc/alert.ogg', "Captain")
 
+/obj/structure/roguemachine/titan/proc/make_announcement(mob/living/user, raw_message)
+	if(!SScommunications.can_announce(user))
+		return
+
+	SScommunications.make_announcement(user, FALSE, raw_message)
+
 /obj/structure/roguemachine/titan/proc/make_outlaw(mob/living/user, raw_message)
 	if(!SScommunications.can_announce(user))
 		return
