@@ -3,8 +3,8 @@
 	flag = SHOPHAND
 	department_flag = YOUNGFOLK
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 
   allowed_races = list("Humen",
 	"Humen",
@@ -35,7 +35,7 @@
 		backr = /obj/item/storage/backpack/rogue/satchel
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-      H.change_stat("strength", -1)
+    		H.change_stat("strength", -1)
 
 	if(H.gender == FEMALE)
 		pants = /obj/item/clothing/under/roguetown/tights
@@ -45,6 +45,6 @@
 		beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltl = /obj/item/keyring/merchant
 		backr = /obj/item/storage/backpack/rogue/satchel
-	if(H.mind)
-    H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-    H.change_stat("strength", -1)
+		if(H.mind)
+  	 		 H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+   			 H.change_stat("strength", -1)
