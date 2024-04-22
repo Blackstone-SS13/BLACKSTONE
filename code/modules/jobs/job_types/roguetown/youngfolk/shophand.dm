@@ -5,8 +5,8 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-
-  allowed_races = list("Humen",
+	
+	allowed_races = list("Humen",
 	"Humen",
 	"Elf",
 	"Dwarf",
@@ -35,7 +35,7 @@
 		backr = /obj/item/storage/backpack/rogue/satchel
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-    		H.change_stat("strength", -1)
+			H.change_stat("strength", -1)
 
 	if(H.gender == FEMALE)
 		pants = /obj/item/clothing/under/roguetown/tights
