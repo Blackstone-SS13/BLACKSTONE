@@ -1,4 +1,4 @@
-// traitors, bandits, pro thieves, werewolves, vampires, demons, cultists
+// traitors, bandits, marauder, pro thieves, werewolves, vampires, demons, cultists
 /*
 
 /datum/game_mode/chaosmode
@@ -27,16 +27,20 @@
 	var/list/datum/mind/vampires = list()
 	var/list/datum/mind/werewolves = list()
 	var/list/datum/mind/bandits = list()
+	var/list/datum/mind/marauder = list()
 
 	var/list/datum/mind/pre_villains = list()
 	var/list/datum/mind/pre_werewolves = list()
 	var/list/datum/mind/pre_vampires = list()
 	var/list/datum/mind/pre_bandits = list()
+	var/list/datum/mind/pre_marauder = list()
 	var/list/datum/mind/pre_delfs = list()
 	var/list/datum/mind/pre_rebels = list()
 
 	var/banditcontrib = 0
 	var/banditgoal = 1
+	var/maraudercontrib = 0
+	var/maraudergoal = 1
 	var/delfcontrib = 0
 	var/delfgoal = 1
 
@@ -161,6 +165,43 @@
 					pick_maniac()
 
 	return TRUE
+
+/datum/game_mode/chaosmode/proc/pick_marauder()
+	//MARAUDERS
+	maraudergoal = rand(200,400)
+	restricted_jobs = list("King",
+	"Queen",
+	"Merchant",
+	"Priest",
+	"Knight")
+	var/num_marauder = 0
+	if(num_players() >= 10)
+		num_marauder = CLAMP(round(num_players() / 2), 40, 50)
+		maraudergoal += (num_marauder * rand(200,400))
+#ifdef TESTSERVER
+	num_marauder = 999
+#endif
+	if(num_marauder)
+		antag_candidates = get_players_for_role(ROLE_MARAUDER, pre_do=TRUE) //pre_do checks for their preferences since they don't have a job yet
+		for(var/i = 0, i < num_marauder, ++i)
+			var/datum/mind/marauder = pick_n_take(antag_candidates)
+			var/found = FALSE
+			for(var/M in allantags)
+				if(M == marauder)
+					found = TRUE
+					allantags -= M
+					break
+			if(!found)
+				continue
+			pre_marauder += marauder
+			marauder.assigned_role = "Marauder"
+			marauder.special_role = "Marauder"
+			testing("[key_name(marauder)] has been selected as a marauder")
+			log_game("[key_name(marauder)] has been selected as a marauder")
+	for(var/antag in pre_marauder)
+		GLOB.pre_setup_antags |= antag
+	restricted_jobs = list()
+
 
 /datum/game_mode/chaosmode/proc/pick_bandits()
 	//BANDITS
@@ -352,6 +393,13 @@
 		bandito.add_antag_datum(new_antag)
 		GLOB.pre_setup_antags -= bandito
 		bandits += bandito
+
+///////////////// MARAUDER
+	for(var/datum/mind/marauder in pre_marauder)
+		var/datum/antagonist/new_antag = new /datum/antagonist/marauder()
+		marauder.add_antag_datum(new_antag)
+		GLOB.pre_setup_antags -= marauder
+		marauder += marauder
 
 ///////////////// REBELS
 	for(var/datum/mind/rebelguy in pre_rebels)
