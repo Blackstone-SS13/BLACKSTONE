@@ -184,6 +184,7 @@
 #define JDO_SHEPHERD 17
 
 #define JDO_MERCHANT 18
+#define JDO_SHOPHAND 18.1
 #define JDO_GRABBER 19
 
 #define JDO_ARMORER 20
