@@ -19,10 +19,11 @@
 		return
 	var/datum/mind/blacksmith_mind = user.mind
 	var/repair_percent = 0.05 // 5% Repairing per hammer smack
+	var/exp_gained = 0
 
 	if(isitem(attacked_object))
 		var/obj/item/attacked_item = attacked_object
-		if(!attacked_item.anvilrepair || !attacked_item.max_integrity || !isturf(attacked_item.loc))
+		if(!attacked_item.anvilrepair || attacked_item.max_integrity || !isturf(attacked_item.loc))
 			return
 		if(!attacked_item.obj_integrity)
 			user.visible_message("<span class='warning'>[attacked_item] is broken!</span>")
@@ -34,9 +35,10 @@
 
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
 		repair_percent *= attacked_item.max_integrity
-		attacked_item.obj_integrity = min(obj_integrity+repair_percent, attacked_item.max_integrity)
+		exp_gained = min(attacked_item.obj_integrity + repair_percent, attacked_item.max_integrity) - attacked_item.obj_integrity
+		attacked_item.obj_integrity = min(attacked_item.obj_integrity + repair_percent, attacked_item.max_integrity)
 		user.visible_message("<span class='info'>[user] repairs [attacked_item]!</span>")
-		blacksmith_mind.adjust_experience(attacked_item.anvilrepair, repair_percent) //We gain as much exp as we fix
+		blacksmith_mind.adjust_experience(attacked_item.anvilrepair, exp_gained/2) //We gain as much exp as we fix divided by 2
 		return
 
 	if(isstructure(attacked_object))
@@ -47,8 +49,9 @@
 			to_chat(user, "<span class='warning'>I don't know how to repair this..</span>")
 			return
 		repair_percent *= blacksmith_mind.get_skill_level(attacked_structure.hammer_repair) * attacked_structure.max_integrity
+		exp_gained = min(attacked_structure.obj_integrity + repair_percent, attacked_structure.max_integrity) - attacked_structure.obj_integrity
 		attacked_structure.obj_integrity = min(attacked_structure.obj_integrity + repair_percent, attacked_structure.max_integrity)
-		blacksmith_mind.adjust_experience(attacked_structure.hammer_repair, repair_percent) //We gain as much exp as we fix
+		blacksmith_mind.adjust_experience(attacked_structure.hammer_repair, exp_gained) //We gain as much exp as we fix
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
 		user.visible_message("<span class='info'>[user] repairs [attacked_structure]!</span>")
 		return
