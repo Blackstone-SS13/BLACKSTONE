@@ -46,5 +46,5 @@
 		beltl = /obj/item/keyring/merchant
 		backr = /obj/item/storage/backpack/rogue/satchel
 		if(H.mind)
-  	 		 H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-   			 H.change_stat("strength", -1)
+  	 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+   			H.change_stat("strength", -1)
