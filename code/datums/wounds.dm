@@ -196,7 +196,7 @@
 
 /datum/wound/bruise/large
 	name = "massive hematoma"
-	bleed_rate = 1
+	bleed_rate = 0.99
 	woundpain = 25
 
 /datum/wound/artery
@@ -257,7 +257,7 @@
 /datum/wound/fracture
 	name = "fracture"
 	bleed_rate = 0
-	can_sew = TRUE
+	can_sew = 0
 	whp = 40
 	woundpain = 100
 	mob_overlay = "frac"
