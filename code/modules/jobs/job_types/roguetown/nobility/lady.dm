@@ -40,6 +40,10 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(2,2,3,4), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/medicine, pick(1,2,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(0,0,0,1), TRUE)
+
 			if(H.age == AGE_OLD)
 				H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			H.change_stat("intelligence", 3)

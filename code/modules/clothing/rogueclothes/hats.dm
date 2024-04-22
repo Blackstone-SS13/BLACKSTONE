@@ -40,13 +40,14 @@
 	icon_state = "shalal"
 	item_state = "shalal"
 	icon = 'icons/roguetown/clothing/head.dmi'
-	body_parts_covered = NECK
+	body_parts_covered = HEAD|NECK
 	slot_flags = ITEM_SLOT_HEAD
 	dynamic_hair_suffix = ""
 	edelay_type = 1
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
-	max_integrity = 100
+	max_integrity = 200
+	armor = list("melee" = 27, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0) // Same as leather. 
 
 /obj/item/clothing/head/roguetown/roguehood/astrata
 	name = "sun hood"

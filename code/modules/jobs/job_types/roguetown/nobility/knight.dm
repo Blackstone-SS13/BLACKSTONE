@@ -48,6 +48,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, rand(3,4), TRUE)
 		backl = /obj/item/rogueweapon/sword/long
 		H.change_stat("strength", 4)
 		H.change_stat("perception", 2)

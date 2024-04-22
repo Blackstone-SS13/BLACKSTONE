@@ -14,23 +14,33 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/rogue
 
 /datum/outfit/job/roguetown/adventurer/rogue/pre_equip(mob/living/carbon/human/H)
-	..()
+	..() // Low weapon skills but high stealth and knives. Good utility class.
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(1,2,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/athletics, pick(0,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(1,1,1,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2,2,2,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, pick(2,2,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/knives, pick(2,3,3,3,3,4), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(0,1,1), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/swimming, pick(2,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(2,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/craft/crafting, pick(1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(0,1,1), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/labor/fishing, pick(0,1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/sewing, pick(0,1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/labor/butchering, pick(0,1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/craft/traps, pick(1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/craft/engineering, pick(0,1,1), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/medicine, pick(0,1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(3,4,4,4,5,5), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/stealing, pick(3,4,4,4,5,5), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/craft/cooking, pick(1,1,1,2), TRUE)
+
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-	H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/stealing, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/traps, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 	gloves = /obj/item/clothing/gloves/roguetown/leather
@@ -44,6 +54,9 @@
 	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	beltl = /obj/item/quiver/bolts
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	H.change_stat("strength", -1)
-	H.change_stat("perception", 2)
-	H.change_stat("speed", 2)
+	H.change_stat("intelligence", pick(0,0,1))
+	H.change_stat("perception", pick(0,1,1,1,2))
+	H.change_stat("strength", pick(-1,-1,0,0,0,1))
+	H.change_stat("constitution", pick(0,0,0,0,0,1))
+	H.change_stat("endurance", pick(0,0,0,0,0,1))
+	H.change_stat("speed", pick(1,2,2,2,2,3))

@@ -4,7 +4,7 @@
 	title = "Templar"
 	department_flag = CHURCHMEN
 	faction = "Station"
-	tutorial = "Templars are warriors who have forsaken wealth and title in lieu of service to the church, due to either zealotry or a past shame. They guard the church and its priest, while keeping a watchful eye against heresy and nite-creechers. Within troubled dreams, they wonder if the blood they shed makes them holy or stained."
+	tutorial = "Templars are warriors who have forsaken wealth and title in lieu of service to the church, due to either zealotry or a past shame. They serve the Church and their God, often taking on the most gruesome of tasks given to them by the priest. Within troubled dreams, they wonder if the blood they shed makes them holy or stained."
 	allowed_sexes = list("male")
 	allowed_races = list("Humen",
 	"Tiefling",
@@ -35,24 +35,35 @@
 	gloves = /obj/item/clothing/gloves/roguetown/chain
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	backpack_contents = list(/obj/item/roguekey/church = 1, /obj/item/clothing/neck/roguetown/chaincoif = 1)
-	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
-		H.change_stat("strength", 2)
-		H.change_stat("perception", 2)
-		H.change_stat("intelligence", 2)
-		H.change_stat("constitution", 2)
-		H.change_stat("endurance", 3)
-		H.change_stat("speed", -2)
+	if(H.mind) // Templar are more experienced in war and soldiering compared to Paladins. So they are stealthier, stronger and have better weapons training. 
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(1,2,2,2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(1,1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(1,2,2,2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(1,2,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2,2,2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, pick(2,3,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/athletics, pick(2,3,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,4,4,4), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, pick(1,2,2,2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,1,1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/crafting, pick(0,1,1,1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/swimming, pick(1,1,1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(1,1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(2,2,2,2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(2,2,2,2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/cooking, pick(0,0,1), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/traps, pick(0,1,1), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/magic/holy, pick(1,1,1,2), TRUE) 
+
+		H.change_stat("intelligence", pick(1,1,2))
+		H.change_stat("perception", pick(1,1,2)) // Templars are a generally tougher but slower version of the Paladin. By their lore they would be retired knights or soldiers which might explain poor speed.
+		H.change_stat("strength", pick(1,2,2))
+		H.change_stat("constitution", pick(1,1,2))
+		H.change_stat("endurance", pick(2,2,2,3))
+		H.change_stat("speed", pick(-2,-2,-1))
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC) // The church's sanctioned killer.
 	if(H.dna?.species)
 		if(H.dna.species.id == "human")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()

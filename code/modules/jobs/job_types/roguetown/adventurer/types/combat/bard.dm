@@ -1,10 +1,7 @@
 
 /datum/advclass/bard
 	name = "Bard"
-	tutorial = "Bards make up one of the largest populations of \
-	registered adventurers in Enigma, mostly because they are \
-	the last ones in a party to die. Their wish is to experience \
-	the greatest adventures of the age and write amazing songs about them."
+	tutorial = "A travelling musician on the road, you've seen more places then most and have learned to survive in both wilderness and civilized towns. You do what you have to get by, and it's better then most."
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen",
 	"Humen",
@@ -19,27 +16,32 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/bard
 
 /datum/outfit/job/roguetown/adventurer/bard/pre_equip(mob/living/carbon/human/H)
-	..()
-	H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
+	..() // The entertaining jack of all trades, uniquely handy with crossbows and swords. They're incredibly well travelled, can sneak, steal and survive on their own. 
+	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(1,2,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(0,1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(1,2,2,2,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2,2,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/swimming, pick(1,2,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(1,2,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/athletics, pick(2,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(1,2,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/knives, pick(1,1,2,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(1,2,2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/sewing, pick(1,1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,2,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/stealing, pick(2,2,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/medicine, pick(0,1,1), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/craft/cooking, pick(1,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(1,1,2), TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/music, rand(3,5), TRUE)
+
 	head = /obj/item/clothing/head/roguetown/bardhat
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt
-	if(prob(30))
-		gloves = /obj/item/clothing/gloves/roguetown/fingerless
+	gloves = /obj/item/clothing/gloves/roguetown/fingerless
 	belt = /obj/item/storage/belt/rogue/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/vest
 	cloak = /obj/item/clothing/cloak/raincloak/blue
@@ -57,7 +59,13 @@
 			backr = /obj/item/rogue/instrument/harp
 		if(H.dna.species.id == "tiefling")
 			backr = /obj/item/rogue/instrument/guitar
+		else
+			backr = /obj/item/rogue/instrument/lute
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	H.change_stat("perception", 1)
-	H.change_stat("speed", 2)
-	H.change_stat("strength", -1)
+	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)
+	H.change_stat("intelligence", pick(1,2,2))
+	H.change_stat("perception", pick(0,0,1))
+	H.change_stat("strength", pick(-1,0,0,0,1))
+	H.change_stat("constitution", pick(-1,0,0,0,1))
+	H.change_stat("endurance", pick(-1,0,0,0,1))
+	H.change_stat("speed", pick(1,2,2))
