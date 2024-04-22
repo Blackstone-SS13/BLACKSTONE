@@ -2171,6 +2171,7 @@
 #include "code\modules\jobs\job_types\roguetown\youngfolk\orphan.dm"
 #include "code\modules\jobs\job_types\roguetown\youngfolk\prince.dm"
 #include "code\modules\jobs\job_types\roguetown\youngfolk\servant.dm"
+#include "code\modules\jobs\job_types\roguetown\youngfolk\shophand.dm"
 #include "code\modules\jobs\job_types\roguetown\youngfolk\squire.dm"
 #include "code\modules\jobs\job_types\roguetown\youngfolk\wapprentice.dm"
 #include "code\modules\keybindings\bindings_atom.dm"
