@@ -3,7 +3,7 @@
 	set category = "OOC"
 	set name = "Notify Restart"
 	set desc = ""
-	set hidden = 1
+	set hidden = FALSE
 	// Safety checks
 	if(!CONFIG_GET(flag/sql_enabled))
 		to_chat(src, "<span class='warning'>This feature requires the SQL backend to be running.</span>")

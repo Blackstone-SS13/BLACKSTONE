@@ -3,7 +3,7 @@
 	set category = "OOC"
 	set name = "Link Discord Account"
 	set desc = ""
-	set hidden = 0
+	set hidden = FALSE
 	// Safety checks
 	if(!CONFIG_GET(flag/sql_enabled))
 		to_chat(src, "<span class='warning'>This feature requires the SQL backend to be running.</span>")
