@@ -156,9 +156,9 @@
 
 	if(give_bank_account)
 		if(give_bank_account > 1)
-			SStreasury.create_bank_account(H.real_name, give_bank_account)
+			SStreasury.create_bank_account(H.ckey + H.real_name, give_bank_account)
 		else
-			SStreasury.create_bank_account(H.real_name)
+			SStreasury.create_bank_account(H.ckey + H.real_name)
 
 	if(show_in_credits)
 		SScrediticons.processing += H

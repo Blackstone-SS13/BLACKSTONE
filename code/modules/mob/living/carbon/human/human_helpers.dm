@@ -8,7 +8,7 @@
 		SStreasury.bank_accounts -= real_name
 	real_name = new_name
 	if(act)
-		SStreasury.create_bank_account(real_name, act)
+		SStreasury.create_bank_account(ckey + real_name, act)
 
 /mob/living/carbon/human/restrained(ignore_grab)
 	. = ((wear_armor && wear_armor.breakouttime) || ..())
