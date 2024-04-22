@@ -124,7 +124,6 @@
 				D.withdraw_price = newtax
 	if(href_list["givemoney"])
 		var/X = locate(href_list["givemoney"])
-		to_chat(world, "[X]")
 		if(!X)
 			return
 		for(var/mob/living/A in SStreasury.bank_accounts)
