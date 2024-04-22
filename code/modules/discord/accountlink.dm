@@ -1,11 +1,9 @@
 // Verb to link discord accounts to BYOND accounts
 /client/verb/linkdiscord()
-	set category = "Special Verbs"
+	set category = "OOC"
 	set name = "Link Discord Account"
 	set desc = ""
-	set hidden = 0
-	if(!usr.client.holder)
-		return
+	set hidden = FALSE
 	// Safety checks
 	if(!CONFIG_GET(flag/sql_enabled))
 		to_chat(src, "<span class='warning'>This feature requires the SQL backend to be running.</span>")
