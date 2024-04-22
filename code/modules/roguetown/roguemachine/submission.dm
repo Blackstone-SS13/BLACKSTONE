@@ -19,8 +19,8 @@
 			say("Single item entries only. Please unstack.")
 			return
 		if(istype(P, /obj/item/roguecoin))
-			if(H.real_name in SStreasury.bank_accounts)
-				SStreasury.generate_money_account(P.get_real_price(), H.real_name)
+			if(H in SStreasury.bank_accounts)
+				SStreasury.generate_money_account(P.get_real_price(), H)
 				qdel(P)
 				playsound(src, 'sound/misc/coininsert.ogg', 100, FALSE, -1)
 				return
@@ -51,7 +51,7 @@
 					playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 					flick("submit_anim",src)
 					if(amt)
-						if(!SStreasury.give_money_account(amt, H.real_name, "+[amt] from [R.name] bounty"))
+						if(!SStreasury.give_money_account(amt, H, "+[amt] from [R.name] bounty"))
 							say("No account found. Submit your fingers to a shylock for inspection.")
 					return
 	return ..()
