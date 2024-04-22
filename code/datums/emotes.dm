@@ -109,14 +109,14 @@
 	if(gender == MALE)
 		if(STASTR > 10)
 			for(var/i in 1 to STASTR)
-				cont -= 200
+				cont -= 100
 		if(STASTR < 10)
 			for(var/i in 1 to STASTR)
 				cont += 100
 	else
 		if(STASTR > 10)
 			for(var/i in 1 to STASTR)
-				cont -= 200
+				cont -= 100
 		if(STASTR < 5)
 			for(var/i in 1 to STASTR)
 				cont += 100
