@@ -38,6 +38,7 @@
 	var/do_sound = FALSE
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
 	armor_class = ARMOR_CLASS_MEDIUM
 
 /obj/item/clothing/suit/roguetown/armor/chainmail/Initialize()
@@ -52,6 +53,8 @@
 	name = "chainmaille"
 	desc = "A chain vest made of heavy iron rings. Better than nothing."
 	body_parts_covered = CHEST|GROIN|VITALS
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/iron
 	armor_class = ARMOR_CLASS_MEDIUM
 
 /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
@@ -63,8 +66,8 @@
 	item_state = "hauberk"
 	armor = list("melee" = 100, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
-	do_sound = TRUE
 	smeltresult = /obj/item/ingot/steel
+	do_sound = TRUE
 	armor_class = ARMOR_CLASS_MEDIUM
 
 /obj/item/clothing/suit/roguetown/armor/chainmail/chainkini
@@ -142,6 +145,7 @@
 	allowed_sex = list(MALE, FEMALE)
 	icon_state = "lamellar"
 	max_integrity = 200
+	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
 	equip_delay_self = 40
 	armor_class = ARMOR_CLASS_MEDIUM

@@ -51,7 +51,7 @@
 			else
 				C.l_grab = src
 
-/datum/proc/grabdropped(var/obj/item/grabbing/G)
+/datum/proc/grabdropped(obj/item/grabbing/G)
 	if(G)
 		for(var/datum/D in G.dependents)
 			if(D == src)
@@ -86,7 +86,7 @@
 	return ..()
 
 /obj/item/grabbing/dropped(mob/living/user, show_message = TRUE)
-	SHOULD_CALL_PARENT(0)
+	SHOULD_CALL_PARENT(FALSE)
 	if(grabbed == user.pulling)
 		user.stop_pulling(FALSE)
 	if(!user.pulling)
@@ -369,7 +369,7 @@
 	var/list/modifiers = params2list(params)
 	if(iscarbon(usr))
 		var/mob/living/carbon/C = usr
-		if(C != grabbee)
+		if(C != grabbee || C.incapacitated() || C.stat == DEAD)
 			qdel(src)
 			return 1
 		if(modifiers["right"])
@@ -409,12 +409,11 @@
 				var/mob/living/carbon/human/H = C
 				if(prob(25) && H)
 					H.werewolf_infect()
-					//addtimer(CALLBACK(C, .mob/living/carbon/human/proc/werewolf_infect), 3 MINUTES)
+					//addtimer(CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon/human, werewolf_infect)), 3 MINUTES)
 			if(user.mind.has_antag_datum(/datum/antagonist/zombie))
 				var/mob/living/carbon/human/H = C
-				if(prob(25)) //Delay is handled in zombie infect anyways
-					H.zombie_infect()
-					//addtimer(CALLBACK(C, .mob/living/carbon/human/proc/zombie_infect), 3 MINUTES)
+				H.zombie_infect_attempt()
+					//addtimer(CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect)), 3 MINUTES)
 				if(C.stat)
 					if(istype(limb_grabbed, /obj/item/bodypart/head))
 						var/obj/item/bodypart/head/HE = limb_grabbed
@@ -457,7 +456,7 @@
 		return
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
-		if(istype(H.wear_neck, /obj/item/clothing/neck/roguetown/psicross/s))
+		if(istype(H.wear_neck, /obj/item/clothing/neck/roguetown/psicross/silver))
 			to_chat(user, "<span class='userdanger'>SILVER! HISSS!!!</span>")
 			return
 	last_drink = world.time
@@ -473,7 +472,7 @@
 		if(VDrinker)
 			if(zomwerewolf)
 				to_chat(user, "<span class='danger'>I'm going to puke...</span>")
-				addtimer(CALLBACK(user, .mob/living/carbon/proc/vomit, 0, TRUE), rand(8 SECONDS, 15 SECONDS))
+				addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living/carbon, vomit), 0, TRUE), rand(8 SECONDS, 15 SECONDS))
 			else
 				if(VVictim)
 					to_chat(user, "<span class='warning'>It's vitae, just like mine.</span>")
@@ -485,7 +484,7 @@
 						VDrinker.handle_vitae(500)
 		else
 			to_chat(user, "<span class='warning'>I'm going to puke...</span>")
-			addtimer(CALLBACK(user, .mob/living/carbon/proc/vomit, 0, TRUE), rand(8 SECONDS, 15 SECONDS))
+			addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living/carbon, vomit), 0, TRUE), rand(8 SECONDS, 15 SECONDS))
 	else
 		if(user.mind)
 			if(user.mind.has_antag_datum(/datum/antagonist/vampirelord))

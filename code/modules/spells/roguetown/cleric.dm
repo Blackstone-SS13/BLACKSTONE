@@ -64,6 +64,7 @@
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	sound = 'sound/magic/heal.ogg'
+	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
@@ -113,17 +114,16 @@
 	chargedloop = null
 	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/heal.ogg'
+	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
-	charge_max = 5 SECONDS
+	charge_max = 10 SECONDS
 	miracle = TRUE
 	devotion_cost = -45
 
 /obj/effect/proc_holder/spell/invoked/heal/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
-		if(target == user)
-			return FALSE
 		if(get_dist(user, target) > 7)
 			return FALSE
 		if(target.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
@@ -179,7 +179,7 @@
 			return FALSE
 		L.adjust_fire_stacks(5)
 		L.IgniteMob()
-		addtimer(CALLBACK(L, /mob/living/proc/ExtinguishMob), 4 SECONDS)
+		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, ExtinguishMob)), 4 SECONDS)
 		return TRUE
 
 	// Spell interaction with ignitable objects (burn wooden things, light torches up)
@@ -212,6 +212,8 @@
 	charge_max = 1 MINUTES
 	miracle = TRUE
 	devotion_cost = -100
+	/// Amount of PQ gained for reviving people
+	var/revive_pq = 0.25
 
 /obj/effect/proc_holder/spell/invoked/revive/cast(list/targets, mob/living/user)
 	..()
@@ -237,6 +239,9 @@
 					target.emote("breathgasp")
 					target.Jitter(100)
 					to_chat(target, "<span class='notice'>I awake from the void.</span>")
+					if(revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
+						adjust_playerquality(revive_pq, user.ckey)
+						ADD_TRAIT(target, TRAIT_IWASREVIVED, "[type]")
 					return TRUE
 			target.visible_message("<span class='warning'>Nothing happens.</span>")
 			return FALSE
@@ -273,20 +278,20 @@
 	miracle = TRUE
 	devotion_cost = -15
 
-/obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets,mob/user = usr)
-	for(var/obj/structure/closet/dirthole/H in view(1))
-		if(H.stage != 4)
-			continue
-		if(!H.contents)
-			continue
-		for(var/mob/living/carbon/human/A in H.contents)
-			A.funeral = TRUE
-			if(A.mind && A.mind.has_antag_datum(/datum/antagonist/zombie))
-				A.mind.remove_antag_datum(/datum/antagonist/zombie)
-			user.visible_message("My funeral rites have been performed!", "[user] consecrates the grave!")
-		for(var/obj/structure/closet/crate/coffin/C)
-			for(var/mob/living/carbon/human/B in C.contents)
-				B.funeral = TRUE
+/obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets, mob/user = usr)
+	. = ..()
+	var/success = FALSE
+	for(var/obj/structure/closet/crate/coffin/coffin in view(1))
+		success = pacify_coffin(coffin, user)
+		if(success)
+			user.visible_message("My funeral rites have been performed on [coffin]!", "[user] consecrates [coffin]!")
+			return
+	for(var/obj/structure/closet/dirthole/hole in view(1))
+		success = pacify_coffin(hole, user)
+		if(success)
+			user.visible_message("My funeral rites have been performed on [hole]!", "[user] consecrates [hole]!")
+			return
+	to_chat(user, "<span class='red'>I failed to perform the rites.</span>")
 
 /obj/effect/proc_holder/spell/targeted/churn
 	name = "Churn Undead"
@@ -359,12 +364,12 @@
 	var/mob/living/carbon/spirit/capturedsoul = null
 	var/list/souloptions = list()
 	var/list/itemstorestore = list()
-	for(var/mob/living/carbon/spirit/S in world)
+	for(var/mob/living/carbon/spirit/S in GLOB.mob_list)
 		souloptions += S.livingname
 	var/pickedsoul = input(user, "Which soul should I commune with?", "Available Souls") as null|anything in souloptions
 	if(!pickedsoul)
 		return
-	for(var/mob/living/carbon/spirit/P in world)
+	for(var/mob/living/carbon/spirit/P in GLOB.mob_list)
 		if(P.livingname == pickedsoul)
 			to_chat(P, "You feel yourself being pulled out of the underworld.")
 			sleep(20)
@@ -385,7 +390,7 @@
 		spawn(1200)
 			to_chat(user, "The soul returns to the underworld.")
 			to_chat(capturedsoul, "You feel yourself being pulled back to the underworld.")
-			for(var/obj/effect/landmark/underworld/A in world)
+			for(var/obj/effect/landmark/underworld/A in GLOB.landmarks_list)
 				capturedsoul.loc = A.loc
 				capturedsoul.invisibility = initial(capturedsoul.invisibility)
 				for(var/I in itemstorestore)

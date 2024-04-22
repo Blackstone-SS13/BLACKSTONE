@@ -22,7 +22,7 @@
 		if(FOOTSTEP_MOB_HUMAN)
 			if(!ishuman(parent))
 				return COMPONENT_INCOMPATIBLE
-			RegisterSignal(parent, list(COMSIG_MOVABLE_MOVED), .proc/play_humanstep)
+			RegisterSignal(parent, list(COMSIG_MOVABLE_MOVED), PROC_REF(play_humanstep))
 			return
 		if(FOOTSTEP_MOB_CLAW)
 			footstep_sounds = GLOB.clawfootstep
@@ -34,7 +34,7 @@
 			footstep_sounds = GLOB.footstep
 		if(FOOTSTEP_MOB_SLIME)
 			footstep_sounds = 'sound/blank.ogg'
-	RegisterSignal(parent, list(COMSIG_MOVABLE_MOVED), .proc/play_simplestep) //Note that this doesn't get called for humans.
+	RegisterSignal(parent, list(COMSIG_MOVABLE_MOVED), PROC_REF(play_simplestep)) //Note that this doesn't get called for humans.
 
 ///Prepares a footstep. Determines if it should get played. Returns the turf it should get played on. Note that it is always a /turf/open
 /datum/component/footstep/proc/prepare_step()
@@ -85,6 +85,10 @@
 			turf_footstep = T.footstep
 	if(!turf_footstep)
 		return
+	//SANITY CHECK, WILL NOT PLAY A SOUND IF THE LIST IS INVALID
+	if(!footstep_sounds[turf_footstep] || (LAZYLEN(footstep_sounds) < 3))
+		testing("SOME RETARD GAVE AN INVALID FOOTSTEP [footstep_type] VALUE ([turf_footstep]) TO [T.type]!!! FIX THIS SHIT!!!")
+		return
 	playsound(T, pick(footstep_sounds[turf_footstep][1]), footstep_sounds[turf_footstep][2], FALSE, footstep_sounds[turf_footstep][3] + e_range)
 
 /datum/component/footstep/proc/play_humanstep()
@@ -98,6 +102,10 @@
 	var/list/used_footsteps
 
 	if(H.shoes || feetCover) //are we wearing shoes
+		//SANITY CHECK, WILL NOT PLAY A SOUND IF THE LIST IS INVALID
+		if(!GLOB.footstep[T.footstep] || (LAZYLEN(GLOB.footstep[T.footstep]) < 3))
+			testing("SOME RETARD GAVE AN INVALID FOOTSTEP VALUE ([T.footstep]) TO [T.type]!!! FIX THIS SHIT!!!")
+			return
 		used_footsteps = GLOB.footstep[T.footstep][1]
 		used_footsteps = used_footsteps.Copy()
 		used_sound = pick_n_take(used_footsteps)
@@ -112,26 +120,19 @@
 			FALSE,
 			GLOB.footstep[T.footstep][3] + e_range)
 	else
-		if(H.dna.species.special_step_sounds)
-			used_footsteps = H.dna.species.special_step_sounds
-			used_footsteps = used_footsteps.Copy()
-			used_sound = pick_n_take(used_footsteps)
-			if(used_sound == last_sound)
-				used_sound = pick(used_footsteps)
-			if(!used_sound)
-				used_sound = last_sound
-			last_sound = used_sound
-			playsound(T, used_sound, 50, FALSE)
-		else
-			used_footsteps = GLOB.barefootstep[T.barefootstep][1]
-			used_footsteps = used_footsteps.Copy()
-			used_sound = pick_n_take(used_footsteps)
-			if(used_sound == last_sound)
-				used_sound = pick(used_footsteps)
-			if(!used_sound)
-				used_sound = last_sound
-			last_sound = used_sound
-			playsound(T, used_sound,
-				GLOB.barefootstep[T.barefootstep][2],
-				TRUE,
-				GLOB.barefootstep[T.barefootstep][3] + e_range)
+		//SANITY CHECK, WILL NOT PLAY A SOUND IF THE LIST IS INVALID
+		if(!GLOB.barefootstep[T.barefootstep] || (LAZYLEN(GLOB.barefootstep[T.barefootstep]) < 3))
+			testing("SOME RETARD GAVE AN INVALID BAREFOOTSTEP VALUE ([T.barefootstep]) TO [T.type]!!! FIX THIS SHIT!!!")
+			return
+		used_footsteps = GLOB.barefootstep[T.barefootstep][1]
+		used_footsteps = used_footsteps.Copy()
+		used_sound = pick_n_take(used_footsteps)
+		if(used_sound == last_sound)
+			used_sound = pick(used_footsteps)
+		if(!used_sound)
+			used_sound = last_sound
+		last_sound = used_sound
+		playsound(T, used_sound,
+			GLOB.barefootstep[T.barefootstep][2],
+			TRUE,
+			GLOB.barefootstep[T.barefootstep][3] + e_range)

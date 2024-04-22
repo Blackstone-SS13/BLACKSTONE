@@ -203,7 +203,7 @@
 /datum/config_entry/string/wikiurl
 	config_entry_value = ""
 
-/datum/config_entry/string/forumurl
+/datum/config_entry/string/discordurl
 	config_entry_value = ""
 
 /datum/config_entry/string/rulesurl
@@ -433,6 +433,10 @@
 
 /datum/config_entry/string/chat_announce_new_game
 	config_entry_value = null
+
+
+/datum/config_entry/string/channel_announce_new_game_message
+	default = null
 
 /datum/config_entry/flag/debug_admin_hrefs
 
