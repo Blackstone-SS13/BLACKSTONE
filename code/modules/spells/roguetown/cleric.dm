@@ -308,7 +308,7 @@
 					target.emote("breathgasp")
 					target.Jitter(100)
 					to_chat(target, "<span class='notice'>I awake from the void.</span>")
-					if(mind && revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
+					if(target.mind && revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
 						adjust_playerquality(revive_pq, user.ckey)
 						ADD_TRAIT(target, TRAIT_IWASREVIVED, "[type]")
 					return TRUE
