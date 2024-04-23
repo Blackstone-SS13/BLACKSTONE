@@ -55,7 +55,7 @@
 	chargedloop = /datum/looping_sound/invokegen
 	associated_skill = /datum/skill/magic/arcane
 
-/obj/effect/proc_holder/spell/invoked/projectile/plauge
+/obj/effect/proc_holder/spell/invoked/projectile/plague
 	name = "Ray of Sickness"
 	desc = ""
 	clothes_req = FALSE
