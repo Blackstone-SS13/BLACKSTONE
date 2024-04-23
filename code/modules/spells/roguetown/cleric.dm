@@ -50,8 +50,10 @@
 	var/datum/patrongods/A = H.PATRON
 	var/spelllist = list(A.t0, A.t1)
 	level = CLERIC_T1
-	for(var/C in spelllist)
-		H.mind.AddSpell(new C)
+	for(var/spell in spelllist)
+		if(H.mind.has_spell(spell))
+			continue
+		H.mind.AddSpell(new spell)
 
 // General
 /obj/effect/proc_holder/spell/invoked/heal/lesser
