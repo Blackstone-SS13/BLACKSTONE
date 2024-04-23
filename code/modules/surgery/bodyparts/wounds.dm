@@ -15,7 +15,7 @@
 	return TRUE
 
 /obj/item/bodypart/proc/add_wound(datum/wound/W, skipcheck = TRUE)
-	if(!W || !owner)
+	if(!W || !owner || (owner.status_flags & GODMODE))
 		return
 /*	for(var/datum/wound/D in wounds)
 		if(istype(D,W) || D.smaller_wound == W)
@@ -264,13 +264,15 @@
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
 		if(!owner.stat)
+			var/from_behind = FALSE
 			if(owner.dir == turn(get_dir(owner,user), 180))
+				from_behind = TRUE
 				used += 50
 			if(can_bloody_wound())
 				if(prob(used) || (brute_dam >= max_damage))
-					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out!</span>"
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 					owner.flash_fullscreen("whiteflash3")
-					owner.Unconscious(300)
+					owner.Unconscious(10 SECONDS + (from_behind * 10 SECONDS))
 					if(owner.client)
 						winset(owner.client, "outputwindow.output", "max-lines=1")
 						winset(owner.client, "outputwindow.output", "max-lines=100")
@@ -352,16 +354,18 @@
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
 		if(!owner.stat)
+			var/from_behind = FALSE
 			if(owner.dir == turn(get_dir(owner,user), 180))
+				from_behind = TRUE
 				used += 30
 			if(prob(used) || (dam >= 30 ))
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out!</span>"
+				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 				owner.flash_fullscreen("whiteflash3")
-				owner.Unconscious(600)
+				owner.Unconscious(10 SECONDS + (from_behind * 10 SECONDS))
 			return FALSE
 
 /obj/item/bodypart/attacked_by(bclass, dam, mob/living/user, zone_precise)
-	if(!owner)
+	if(!owner || (owner.status_flags & GODMODE))
 		return
 	if(!bclass)
 		return
@@ -369,7 +373,7 @@
 		return
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		if(H.checkcritarmor(src, bclass))
+		if(H.checkcritarmor(zone_precise, bclass))
 			return FALSE
 	//try limbsmash here, return
 	//try dismember here, return

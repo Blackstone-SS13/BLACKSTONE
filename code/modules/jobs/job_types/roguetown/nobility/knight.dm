@@ -3,7 +3,7 @@
 	flag = KNIGHT
 	department_flag = NOBLEMEN
 	faction = "Station"
-	total_positions = 0
+	total_positions = 2
 	spawn_positions = 2
 	allowed_races = list("Humen",
 	"Humen")
@@ -44,12 +44,12 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		backl = /obj/item/rogueweapon/sword/long
-		H.change_stat("strength", 2)
+		H.change_stat("strength", 4)
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 2)
 		H.change_stat("constitution", 2)
