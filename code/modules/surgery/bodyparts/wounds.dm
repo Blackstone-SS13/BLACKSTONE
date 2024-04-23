@@ -373,7 +373,7 @@
 		return
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		if(H.checkcritarmor(src, bclass))
+		if(H.checkcritarmor(zone_precise, bclass))
 			return FALSE
 	//try limbsmash here, return
 	//try dismember here, return
