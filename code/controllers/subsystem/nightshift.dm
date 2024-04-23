@@ -15,7 +15,7 @@ SUBSYSTEM_DEF(nightshift)
 	var/nightshift_dusk_start = 666000	//6:30 PM
 
 	//1hr = 36000
-	//30m = 1800
+	//30m = 18000
 
 	var/nightshift_first_check = 2 SECONDS
 
