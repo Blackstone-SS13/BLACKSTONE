@@ -211,6 +211,10 @@
 
 	if(!check_rights())
 		return
+	
+	if(!M.ckey)
+		to_chat(src, "<span class='warning'>There is no ckey attached to this mob.</span>")
+		return
 
 	check_pq_menu(M.ckey)
 
@@ -239,6 +243,10 @@
 	if(!check_rights())
 		return
 	
+	if(!M.ckey)
+		to_chat(src, "<span class='warning'>There is no ckey attached to this mob.</span>")
+		return
+
 	var/ckey = lowertext(M.ckey)
 	var/admin = lowertext(usr.key)
 
