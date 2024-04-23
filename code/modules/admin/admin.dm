@@ -240,7 +240,8 @@
 	set desc = "Start a vote"
 	set category = "Server"
 
-	if(!check_rights())
+	if(!check_rights(R_POLL))
+		to_chat(usr, "<span class='warning'>You do not have the rights to start a vote.</span>")
 		return
 
 	var/type = input("What kind of vote?") as null|anything in list("End Round", "Custom")
