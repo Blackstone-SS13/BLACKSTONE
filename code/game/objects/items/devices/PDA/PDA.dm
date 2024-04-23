@@ -1028,7 +1028,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 
 		plist[avoid_assoc_duplicate_keys(P.owner, namecounts)] = P
 
-	var/c = input(user, "Please select a PDA") as null|anything in sortList(plist)
+	var/c = input(user, "Please select a PDA") as null|anything in sort_list(plist)
 
 	if (!c)
 		return
@@ -1075,7 +1075,7 @@ GLOBAL_LIST_EMPTY(PDAs)
 	else
 		sortmode = /proc/cmp_pdajob_asc
 
-	for(var/obj/item/pda/P in sortList(GLOB.PDAs, sortmode))
+	for(var/obj/item/pda/P in sort_list(GLOB.PDAs, sortmode))
 		if(!P.owner || P.toff || P.hidden)
 			continue
 		. += P

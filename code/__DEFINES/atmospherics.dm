@@ -72,7 +72,7 @@
 #define WALL_HEAT_TRANSFER_COEFFICIENT		0.0
 #define OPEN_HEAT_TRANSFER_COEFFICIENT		0.4
 /// a hack for now
-#define WINDOW_HEAT_TRANSFER_COEFFICIENT	0.1	
+#define WINDOW_HEAT_TRANSFER_COEFFICIENT	0.1
 /// a hack to help make vacuums "cold", sacrificing realism for gameplay
 #define HEAT_CAPACITY_VACUUM				7000
 
@@ -104,7 +104,7 @@
 
 // Pressure limits.
 /// This determins at what pressure the ultra-high pressure red icon is displayed. (This one is set as a constant)
-#define HAZARD_HIGH_PRESSURE				550	
+#define HAZARD_HIGH_PRESSURE				550
 /// This determins when the orange pressure icon is displayed (it is 0.7 * HAZARD_HIGH_PRESSURE)
 #define WARNING_HIGH_PRESSURE				325
 /// This is when the gray low pressure icon is displayed. (it is 2.5 * HAZARD_LOW_PRESSURE)
@@ -377,21 +377,6 @@ GLOBAL_LIST_INIT(atmos_adjacent_savings, list(0,0))
 #else
 #define CALCULATE_ADJACENT_TURFS(T) SSadjacent_air.queue[T] = 1
 #endif
-
-GLOBAL_LIST_INIT(pipe_paint_colors, sortList(list(
-		"amethyst" = rgb(130,43,255), //supplymain
-		"blue" = rgb(0,0,255),
-		"brown" = rgb(178,100,56),
-		"cyan" = rgb(0,255,249),
-		"dark" = rgb(69,69,69),
-		"green" = rgb(30,255,0),
-		"grey" = rgb(255,255,255),
-		"orange" = rgb(255,129,25),
-		"purple" = rgb(128,0,182),
-		"red" = rgb(255,0,0),
-		"violet" = rgb(64,0,128),
-		"yellow" = rgb(255,198,0)
-)))
 
 #define MIASMA_CORPSE_MOLES 0.02
 #define MIASMA_GIBS_MOLES 0.005

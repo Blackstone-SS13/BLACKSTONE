@@ -308,7 +308,7 @@
 		damage = CLAMP(round(new_damage, 1), 0, 500)
 	if(setting == NES_DAMAGE_TYPE)
 		var/list/damage_types = list(BRUTE,BURN,TOX,OXY,CLONE)
-		var/new_damage_type = input("Choose the damage type", name) as null|anything in sortList(damage_types)
+		var/new_damage_type = input("Choose the damage type", name) as null|anything in sort_list(damage_types)
 		if(!new_damage_type)
 			return
 		damage_type = new_damage_type
@@ -462,7 +462,7 @@
 		for(var/name in allowed_species)
 			species_types += name
 		species_types += "Other"
-		var/new_species_type = input("Choose the species", name) as null|anything in sortList(species_types)
+		var/new_species_type = input("Choose the species", name) as null|anything in sort_list(species_types)
 		if(!new_species_type)
 			return
 		species_type = new_species_type

@@ -66,7 +66,7 @@
 	)
 
 /datum/species/human/northern/get_hairc_list()
-	return sortList(list(
+	return sort_list(list(
 	"blond - pale" = "9d8d6e",
 	"blond - dirty" = "88754f",
 	"blond - drywheat" = "d5ba7b",

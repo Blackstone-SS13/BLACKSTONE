@@ -165,7 +165,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 		charflaw = pick(GLOB.character_flaws)
 		charflaw = GLOB.character_flaws[charflaw]
 		charflaw = new charflaw()
-	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
+	key_bindings = deep_copy_list(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
 	C.update_movement_keys()
 	real_name = pref_species.random_name(gender,1)
 	if(!loaded_preferences_successfully)
@@ -934,7 +934,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 		//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
 		var/datum/job/lastJob
-		for(var/datum/job/job in sortList(SSjob.occupations, GLOBAL_PROC_REF(cmp_job_display_asc)))
+		for(var/datum/job/job in sort_list(SSjob.occupations, GLOBAL_PROC_REF(cmp_job_display_asc)))
 			if(!job.total_positions && !job.spawn_positions)
 				continue
 
@@ -1531,7 +1531,7 @@ Slots: [job.spawn_positions]</span>
 					if(!length(key_bindings[old_key]))
 						key_bindings -= old_key
 				key_bindings[full_key] += list(kb_name)
-				key_bindings[full_key] = sortList(key_bindings[full_key])
+				key_bindings[full_key] = sort_list(key_bindings[full_key])
 
 				user << browse(null, "window=capturekeypress")
 				user.client.update_movement_keys()
@@ -1544,7 +1544,7 @@ Slots: [job.spawn_positions]</span>
 					ShowChoices(user,3)
 					return
 				hotkeys = (choice == "Do It")
-				key_bindings = (hotkeys) ? deepCopyList(GLOB.hotkey_keybinding_list_by_key) : deepCopyList(GLOB.classic_keybinding_list_by_key)
+				key_bindings = (hotkeys) ? deep_copy_list(GLOB.hotkey_keybinding_list_by_key) : deep_copy_list(GLOB.classic_keybinding_list_by_key)
 				user.client.update_movement_keys()
 				SetKeybinds(user)
 			else
@@ -2008,7 +2008,7 @@ Slots: [job.spawn_positions]</span>
 							friendlyname += " (disabled)"
 						maplist[friendlyname] = VM.map_name
 					maplist[default] = null
-					var/pickedmap = input(user, "Choose your preferred map. This will be used to help weight random map selection.", "Character Preference")  as null|anything in sortList(maplist)
+					var/pickedmap = input(user, "Choose your preferred map. This will be used to help weight random map selection.", "Character Preference")  as null|anything in sort_list(maplist)
 					if (pickedmap)
 						preferred_map = maplist[pickedmap]
 
@@ -2018,15 +2018,11 @@ Slots: [job.spawn_positions]</span>
 						clientfps = desiredfps
 						parent.fps = desiredfps
 				if("ui")
-					var/pickedui = input(user, "Choose your UI style.", "Character Preference", UI_style)  as null|anything in sortList(GLOB.available_ui_styles)
+					var/pickedui = input(user, "Choose your UI style.", "Character Preference", UI_style)  as null|anything in sort_list(GLOB.available_ui_styles)
 					if(pickedui)
 						UI_style = "Rogue"
 						if (parent && parent.mob && parent.mob.hud_used)
 							parent.mob.hud_used.update_ui_style(ui_style2icon(UI_style))
-				if("pda_style")
-					var/pickedPDAStyle = input(user, "Choose your PDA style.", "Character Preference", pda_style)  as null|anything in GLOB.pda_styles
-					if(pickedPDAStyle)
-						pda_style = pickedPDAStyle
 				if("pda_color")
 					var/pickedPDAColor = input(user, "Choose your PDA Interface color.", "Character Preference", pda_color) as color|null
 					if(pickedPDAColor)
@@ -2132,7 +2128,7 @@ Slots: [job.spawn_positions]</span>
 						if(!length(key_bindings[old_key]))
 							key_bindings -= old_key
 					key_bindings[full_key] += list(kb_name)
-					key_bindings[full_key] = sortList(key_bindings[full_key])
+					key_bindings[full_key] = sort_list(key_bindings[full_key])
 
 					user << browse(null, "window=capturekeypress")
 					user.client.update_movement_keys()
@@ -2144,7 +2140,7 @@ Slots: [job.spawn_positions]</span>
 						ShowChoices(user,3)
 						return
 					hotkeys = (choice == "Do It")
-					key_bindings = (hotkeys) ? deepCopyList(GLOB.hotkey_keybinding_list_by_key) : deepCopyList(GLOB.classic_keybinding_list_by_key)
+					key_bindings = (hotkeys) ? deep_copy_list(GLOB.hotkey_keybinding_list_by_key) : deep_copy_list(GLOB.classic_keybinding_list_by_key)
 					user.client.update_movement_keys()*/
 				if("chat_on_map")
 					chat_on_map = !chat_on_map

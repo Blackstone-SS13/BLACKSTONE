@@ -43,13 +43,13 @@
 	return TRUE	//Pure humans are always allowed in all roles.
 
 /datum/species/human/get_skin_list()
-	return sortList(list(
+	return sort_list(list(
 	"skin1" = "ffe0d1",
 	"skin2" = "fcccb3"
 	))
 
 /datum/species/human/get_hairc_list()
-	return sortList(list(
+	return sort_list(list(
 	"black - nightsky" = "0a0707",
 	"brown - treebark" = "362e25",
 	"blonde - moonlight" = "dfc999",

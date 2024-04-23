@@ -27,7 +27,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	display_order = JDO_ADVENTURER
 	show_in_credits = FALSE
 	min_pq = -4
-	
+
 	var/isvillager = FALSE
 	var/ispilgrim = FALSE
 
@@ -168,7 +168,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 		return TRUE
 	var/blacklisted = check_blacklist(ckey)
 	if(possibleclass.len && !blacklisted)
-		var/datum/advclass/C = input(src, "What is my class?", "Adventure") as null|anything in sortNames(possibleclass)
+		var/datum/advclass/C = input(src, "What is my class?", "Adventure") as null|anything in sort_names(possibleclass)
 		if(C && advsetup)
 			if(C.maxchosen > -1)
 				for(var/datum/advclass/A in GLOB.adv_classes)

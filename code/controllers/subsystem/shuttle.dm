@@ -815,7 +815,7 @@ SUBSYSTEM_DEF(shuttle)
 
 		templates[S.port_id]["templates"] += list(L)
 
-	data["templates_tabs"] = sortList(data["templates_tabs"])
+	data["templates_tabs"] = sort_list(data["templates_tabs"])
 
 	data["existing_shuttle"] = null
 
@@ -922,3 +922,4 @@ SUBSYSTEM_DEF(shuttle)
 //		log_game("Round end vote passed. Shuttle has been auto-called.")
 //		message_admins("Round end vote passed. Shuttle has been auto-called.")
 	emergencyNoRecall = TRUE
+

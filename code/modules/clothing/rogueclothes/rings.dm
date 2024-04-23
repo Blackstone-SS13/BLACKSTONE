@@ -79,6 +79,4 @@
 
 /obj/item/clothing/ring/active/nomag/demagicify()
 	. = ..()
-	var/datum/component/magcom = GetComponent(/datum/component/anti_magic)
-	if(magcom)
-		magcom.RemoveComponent()
+	qdel(GetComponent(/datum/component/anti_magic))

@@ -102,7 +102,7 @@
 	)
 
 /datum/species/aasimar/get_hairc_list()
-	return sortList(list(
+	return sort_list(list(
 	"white - silver" = "d3d9e3",
 	"white - alabaster" = "fffffc",
 	"white - skies" = "a1b4d4",

@@ -154,13 +154,15 @@
 	if(!precision)
 		return list(center)
 	var/list/posturfs = list()
-	for(var/turf/T in range(precision,center))
+	for(var/turf/T as anything in RANGE_TURFS(precision,center))
 		if(T.is_transition_turf())
 			continue // Avoid picking these.
 		var/area/A = T.loc
-		if(!A.noteleport)
+		if(!(A.area_flags & NOTELEPORT))
 			posturfs.Add(T)
 	return posturfs
 
 /proc/get_teleport_turf(turf/center, precision = 0)
-	return safepick(get_teleport_turfs(center, precision))
+	var/list/turfs = get_teleport_turfs(center, precision)
+	if (length(turfs))
+		return pick(turfs)

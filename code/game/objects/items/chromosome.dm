@@ -48,7 +48,7 @@
 			if(!initial(CM.cweight))
 				break
 			chromosomes[A] = initial(CM.cweight)
-	return pickweight(chromosomes)
+	return pick_weight(chromosomes)
 
 
 /obj/item/chromosome/stabilizer

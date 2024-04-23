@@ -103,7 +103,7 @@
 	)
 
 /datum/species/tieberian/get_hairc_list()
-	return sortList(list(
+	return sort_list(list(
 	"black - oil" = "181a1d",
 	"black - cave" = "201616",
 	"black - rogue" = "2b201b",

@@ -60,7 +60,7 @@ Credit dupes that require a lot of manual work shouldn't be removed, unless they
 
 	var/newbudget = 0
 	// We go backwards, so it'll be innermost objects sold first
-	for(var/i in reverseRange(contents))
+	for(var/i in reverse_range(contents))
 		var/atom/movable/thing = i
 		var/sold = FALSE
 		if(QDELETED(thing))

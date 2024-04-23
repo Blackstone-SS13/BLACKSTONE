@@ -51,11 +51,11 @@
 		if(!check_rights(NONE))
 			return
 		var/list/names = list()
-		var/list/componentsubtypes = sortList(subtypesof(/datum/component), GLOBAL_PROC_REF(cmp_typepaths_asc))
+		var/list/componentsubtypes = sort_list(subtypesof(/datum/component), GLOBAL_PROC_REF(cmp_typepaths_asc))
 		names += "---Components---"
 		names += componentsubtypes
 		names += "---Elements---"
-		names += sortList(subtypesof(/datum/element), GLOBAL_PROC_REF(cmp_typepaths_asc))
+		names += sort_list(subtypesof(/datum/element), GLOBAL_PROC_REF(cmp_typepaths_asc))
 		var/result = input(usr, "Choose a component/element to add","better know what ur fuckin doin pal") as null|anything in names
 		if(!usr || !result || result == "---Components---" || result == "---Elements---")
 			return
@@ -69,10 +69,10 @@
 		lst.Insert(1, result)
 		if(result in componentsubtypes)
 			datumname = "component"
-			target.AddComponent(arglist(lst))
+			target._AddComponent(arglist(lst))
 		else
 			datumname = "element"
-			target.AddElement(arglist(lst))
+			target._AddElement(arglist(lst))
 		log_admin("[key_name(usr)] has added [result] [datumname] to [key_name(src)].")
 		message_admins("<span class='notice'>[key_name_admin(usr)] has added [result] [datumname] to [key_name_admin(src)].</span>")
 	if(href_list[VV_HK_CALLPROC])

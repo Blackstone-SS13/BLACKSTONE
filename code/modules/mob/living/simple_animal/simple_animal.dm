@@ -584,7 +584,7 @@ mob/living/simple_animal/handle_fire()
 //			return //we never mate when not alone, so just abort early
 
 	if(alone && partner && children < 3)
-		var/childspawn = pickweight(childtype)
+		var/childspawn = pick_weight(childtype)
 		var/turf/target = get_turf(loc)
 		if(target)
 			return new childspawn(target)

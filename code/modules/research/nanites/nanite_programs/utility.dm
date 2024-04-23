@@ -95,7 +95,7 @@
 /datum/nanite_program/triggered/self_scan/set_extra_setting(user, setting)
 	if(setting == NES_SCAN_TYPE)
 		var/list/scan_types = list("Medical","Chemical","Nanite")
-		var/new_scan_type = input("Choose the scan type", name) as null|anything in sortList(scan_types)
+		var/new_scan_type = input("Choose the scan type", name) as null|anything in sort_list(scan_types)
 		if(!new_scan_type)
 			return
 		scan_type = new_scan_type

@@ -160,7 +160,7 @@
 		icon_state = display_icon_state
 	. = ..()
 	if (prob(mineralChance))
-		var/path = pickweight(mineralSpawnChanceList)
+		var/path = pick_weight(mineralSpawnChanceList)
 		var/turf/T = ChangeTurf(path,null,CHANGETURF_IGNORE_AIR)
 
 		if(T && ismineralturf(T))

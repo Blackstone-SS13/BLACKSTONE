@@ -151,7 +151,7 @@
 		message_admins("Convert_roundtype failed due to no valid modes to convert to. Please report this error to the Coders.")
 		return null
 
-	replacementmode = pickweight(usable_modes)
+	replacementmode = pick_weight(usable_modes)
 
 	if(SSshuttle.emergency)
 		switch(SSshuttle.emergency.mode) //Rounds on the verge of ending don't get new antags, they just run out
@@ -283,7 +283,7 @@
 		reports += config.mode_reports[report_type]
 		Count++
 	for(var/i in Count to rand(3,5)) //Between three and five wrong entries on the list.
-		var/false_report_type = pickweightAllowZero(report_weights)
+		var/false_report_type = pick_weight(report_weights)
 		report_weights[false_report_type] = 0 //Make it so the same false report won't be selected twice
 		reports += config.mode_reports[false_report_type]
 

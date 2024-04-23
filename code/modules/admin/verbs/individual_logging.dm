@@ -52,7 +52,7 @@
 		if(nlog_type & ntype)
 			var/list/reversed = log_source[log_type]
 			if(islist(reversed))
-				reversed = reverseRange(reversed.Copy())
+				reversed = reverse_range(reversed.Copy())
 				for(var/entry in reversed)
 					dat += "<font size=2px><b>[entry]</b><br>[reversed[entry]]</font><br>"
 			dat += "<hr>"

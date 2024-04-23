@@ -56,7 +56,7 @@
 		/obj/item/riddleofsteel=2,
 		/obj/item/clothing/neck/roguetown/talkstone=2)
 	if(prob(70))
-		var/I = pickweight(loot)
+		var/I = pick_weight(loot)
 		new I(src)
 
 /obj/structure/closet/crate/roguecloset

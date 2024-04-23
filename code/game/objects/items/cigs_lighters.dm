@@ -217,7 +217,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		qdel(src)
 		return
 	// allowing reagents to react after being lit
-	DISABLE_BITFIELD(reagents.flags, NO_REACT)
+	reagents.flags &= ~NO_REACT
 	reagents.handle_reactions()
 	icon_state = icon_on
 	item_state = icon_on
@@ -244,7 +244,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon_state = icon_off
 	item_state = icon_off
 	STOP_PROCESSING(SSobj, src)
-	ENABLE_BITFIELD(reagents.flags, NO_REACT)
+	reagents.flags |= NO_REACT
 	lit = FALSE
 	if(ismob(loc))
 		var/mob/living/M = loc
@@ -877,7 +877,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if(!screw)
 			screw = TRUE
 			to_chat(user, "<span class='notice'>I open the cap on [src].</span>")
-			ENABLE_BITFIELD(reagents.flags, OPENCONTAINER)
+			reagents.flags |= OPENCONTAINER
 			if(obj_flags & EMAGGED)
 				add_overlay("vapeopen_high")
 			else if(super)
@@ -887,7 +887,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		else
 			screw = FALSE
 			to_chat(user, "<span class='notice'>I close the cap on [src].</span>")
-			DISABLE_BITFIELD(reagents.flags, OPENCONTAINER)
+			reagents.flags &= ~OPENCONTAINER
 			cut_overlays()
 
 	if(O.tool_behaviour == TOOL_MULTITOOL)
@@ -935,7 +935,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(slot == SLOT_WEAR_MASK)
 		if(!screw)
 			to_chat(user, "<span class='notice'>I start puffing on the vape.</span>")
-			DISABLE_BITFIELD(reagents.flags, NO_REACT)
+			reagents.flags &= ~NO_REACT
 			START_PROCESSING(SSobj, src)
 		else //it will not start if the vape is opened.
 			to_chat(user, "<span class='warning'>I need to close the cap first!</span>")
@@ -943,7 +943,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/clothing/mask/vape/dropped(mob/user)
 	. = ..()
 	if(user.get_item_by_slot(SLOT_WEAR_MASK) == src)
-		ENABLE_BITFIELD(reagents.flags, NO_REACT)
+		reagents.flags |= NO_REACT
 		STOP_PROCESSING(SSobj, src)
 
 /obj/item/clothing/mask/vape/proc/hand_reagents()//had to rename to avoid duplicate error

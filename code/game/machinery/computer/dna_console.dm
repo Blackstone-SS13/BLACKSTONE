@@ -886,7 +886,7 @@
 					if(CM.can_apply(HM))
 						chromosomes += CM
 				if(chromosomes.len)
-					var/obj/item/chromosome/CM = input("Select a chromosome to apply", "Apply Chromosome") as null|anything in sortNames(chromosomes)
+					var/obj/item/chromosome/CM = input("Select a chromosome to apply", "Apply Chromosome") as null|anything in sort_names(chromosomes)
 					if(CM)
 						to_chat(usr, "<span class='notice'>I apply [CM] to [HM.name].</span>")
 						stored_chromosomes -= CM

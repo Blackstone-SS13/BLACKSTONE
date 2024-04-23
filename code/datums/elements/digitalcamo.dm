@@ -1,5 +1,4 @@
 /datum/element/digitalcamo
-	element_flags = ELEMENT_DETACH
 	var/list/attached_mobs = list()
 
 /datum/element/digitalcamo/New()

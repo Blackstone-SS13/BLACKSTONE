@@ -85,10 +85,10 @@
 				Lines += "<span class='info'>[usedkey]</span>"*/
 			Lines += "<span class='info'>[usedkey]</span>"
 //	if(holder && check_rights(R_ADMIN,0)) //thius is the part where admins see the lines but nobody else
-	for(var/line in sortList(Lines))
+	for(var/line in sort_list(Lines))
 		msg += "[line]\n"
 //#else
-//	for(var/line in sortList(Lines))
+//	for(var/line in sort_list(Lines))
 //		msg += "[line]\n"
 	msg += "<b>Players at the table:</b> [length(Lines)]"
 	if(holder)

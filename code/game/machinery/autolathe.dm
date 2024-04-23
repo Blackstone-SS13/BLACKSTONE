@@ -48,21 +48,21 @@
 							)
 
 /obj/machinery/autolathe/Initialize()
-	AddComponent(/datum/component/material_container,
-	list(/datum/material/iron,
-	/datum/material/glass,
-	/datum/material/gold,
-	/datum/material/silver,
-	/datum/material/diamond,
-	/datum/material/uranium,
-	/datum/material/plasma,
-	/datum/material/bluespace,
-	/datum/material/bananium,
-	/datum/material/titanium,
-	/datum/material/runite,
-	/datum/material/plastic,
-	/datum/material/adamantine,
-	/datum/material/mythril
+	AddComponent(/datum/component/material_container, \
+	list(/datum/material/iron, \
+	/datum/material/glass, \
+	/datum/material/gold, \
+	/datum/material/silver, \
+	/datum/material/diamond, \
+	/datum/material/uranium, \
+	/datum/material/plasma, \
+	/datum/material/bluespace, \
+	/datum/material/bananium, \
+	/datum/material/titanium, \
+	/datum/material/runite, \
+	/datum/material/plastic, \
+	/datum/material/adamantine, \
+	/datum/material/mythril \
 	), 0, TRUE, null, null, CALLBACK(src, PROC_REF(AfterMaterialInsert)))
 	. = ..()
 
@@ -198,7 +198,7 @@
 						if(materials.materials[i] > 0)
 							list_to_show += i
 
-					used_material = input("Choose [used_material]", "Custom Material") as null|anything in sortList(list_to_show, GLOBAL_PROC_REF(cmp_typepaths_asc))
+					used_material = input("Choose [used_material]", "Custom Material") as null|anything in sort_list(list_to_show, GLOBAL_PROC_REF(cmp_typepaths_asc))
 					if(!used_material)
 						return //Didn't pick any material, so you can't build shit either.
 					custom_materials[used_material] += amount_needed

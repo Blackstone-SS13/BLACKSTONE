@@ -491,7 +491,7 @@
 	if(dir_to_target && !(dir_to_target & dir))//wrong direction
 		return
 	if(internal_damage & MECHA_INT_CONTROL_LOST)
-		target = safepick(view(3,target))
+		target = pick(view(3,target))
 		if(!target)
 			return
 
@@ -511,7 +511,7 @@
 			selected.start_cooldown()
 	else
 		if(internal_damage & MECHA_INT_CONTROL_LOST)
-			target = safepick(oview(1,src))
+			target = pick(oview(1,src))
 		if(!melee_can_hit || !istype(target, /atom))
 			return
 		target.mech_melee_attack(src)
@@ -676,19 +676,19 @@
 ///////////////////////////////////
 
 /obj/mecha/proc/check_for_internal_damage(list/possible_int_damage,ignore_threshold=null)
-	if(!islist(possible_int_damage) || isemptylist(possible_int_damage))
+	if(!islist(possible_int_damage) || !length(possible_int_damage))
 		return
 	if(prob(20))
 		if(ignore_threshold || obj_integrity*100/max_integrity < internal_damage_threshold)
 			for(var/T in possible_int_damage)
 				if(internal_damage & T)
 					possible_int_damage -= T
-			var/int_dam_flag = safepick(possible_int_damage)
+			var/int_dam_flag = pick(possible_int_damage)
 			if(int_dam_flag)
 				setInternalDamage(int_dam_flag)
 	if(prob(5))
 		if(ignore_threshold || obj_integrity*100/max_integrity < internal_damage_threshold)
-			var/obj/item/mecha_parts/mecha_equipment/ME = safepick(equipment)
+			var/obj/item/mecha_parts/mecha_equipment/ME = pick(equipment)
 			if(ME)
 				qdel(ME)
 	return

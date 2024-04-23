@@ -98,7 +98,7 @@
 		if(!selections.len)
 			to_chat(src, "<span class='boldwarning'>No characters found.</span>")
 			return
-		selection = input("Which Character?") as null|anything in sortList(selections)
+		selection = input("Which Character?") as null|anything in sort_list(selections)
 		if(!selection)
 			return
 		theykey = selections[selection]
@@ -109,7 +109,7 @@
 //				if(C.ckey in GLOB.anonymize)
 //					usedkey = get_fake_key(C.ckey)
 			selections[usedkey] = C.ckey
-		selection = input("Which Player?") as null|anything in sortList(selections)
+		selection = input("Which Player?") as null|anything in sort_list(selections)
 		if(!selection)
 			return
 		theykey = selections[selection]
@@ -156,7 +156,7 @@
 		if(!selections.len)
 			to_chat(src, "<span class='boldwarning'>No characters found.</span>")
 			return
-		selection = input("Which Character?") as null|anything in sortList(selections)
+		selection = input("Which Character?") as null|anything in sort_list(selections)
 		if(!selection)
 			return
 		theykey = selections[selection]
@@ -167,7 +167,7 @@
 //				if(C.ckey in GLOB.anonymize)
 //					usedkey = get_fake_key(C.ckey)
 			selections[usedkey] = C.ckey
-		selection = input("Which Player?") as null|anything in sortList(selections)
+		selection = input("Which Player?") as null|anything in sort_list(selections)
 		if(!selection)
 			return
 		theykey = selections[selection]

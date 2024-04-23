@@ -1,6 +1,6 @@
 /datum/disease
 	//Flags
-	var/visibility_flags = 0
+	var/visibility_flags = NONE
 	var/disease_flags = CURABLE|CAN_CARRY|CAN_RESIST
 	var/spread_flags = DISEASE_SPREAD_AIRBORNE | DISEASE_SPREAD_CONTACT_FLUIDS | DISEASE_SPREAD_CONTACT_SKIN
 

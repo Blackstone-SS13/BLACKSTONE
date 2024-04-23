@@ -281,7 +281,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 	var/list/borgs = active_free_borgs()
 	if(borgs.len)
 		if(user)
-			. = input(user,"Unshackled cyborg signals detected:", "Cyborg Selection", borgs[1]) in sortList(borgs)
+			. = input(user,"Unshackled cyborg signals detected:", "Cyborg Selection", borgs[1]) in sort_list(borgs)
 		else
 			. = pick(borgs)
 	return .
@@ -290,7 +290,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 	var/list/ais = active_ais()
 	if(ais.len)
 		if(user)
-			. = input(user,"AI signals detected:", "AI Selection", ais[1]) in sortList(ais)
+			. = input(user,"AI signals detected:", "AI Selection", ais[1]) in sort_list(ais)
 		else
 			. = pick(ais)
 	return .
@@ -328,7 +328,7 @@ Turf and target are separate in case you want to teleport some distance from a t
 //Orders mobs by type then by name
 /proc/sortmobs()
 	var/list/moblist = list()
-	var/list/sortmob = sortNames(GLOB.mob_list)
+	var/list/sortmob = sort_names(GLOB.mob_list)
 	for(var/mob/living/silicon/ai/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/camera/M in sortmob)
@@ -1171,8 +1171,11 @@ B --><-- A
 	sleep(duration)
 	A.cut_overlay(O)
 
+///Returns a random turf on the station
 /proc/get_random_station_turf()
-	return safepick(get_area_turfs(pick(GLOB.the_station_areas)))
+	var/list/turfs = get_area_turfs(pick(GLOB.the_station_areas))
+	if (length(turfs))
+		return pick(turfs)
 
 /proc/get_safe_random_station_turf() //excludes dense turfs (like walls) and areas that have valid_territory set to FALSE
 	for (var/i in 1 to 5)
@@ -1229,7 +1232,7 @@ proc/pick_closest_path(value, list/matches = get_fancy_list_of_atom_types())
 	if(matches.len==1)
 		chosen = matches[1]
 	else
-		chosen = input("Select a type", "Pick Type", matches[1]) as null|anything in sortList(matches)
+		chosen = input("Select a type", "Pick Type", matches[1]) as null|anything in sort_list(matches)
 		if(!chosen)
 			return
 	chosen = matches[chosen]
@@ -1625,13 +1628,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 				continue
 			. |= i
 
-/proc/special_list_filter(list/L, datum/callback/condition)
-	if(!islist(L) || !length(L) || !istype(condition))
-		return list()
-	. = list()
-	for(var/i in L)
-		if(condition.Invoke(i))
-			. |= i
 /proc/generate_items_inside(list/items_list,where_to)
 	for(var/each_item in items_list)
 		for(var/i in 1 to items_list[each_item])

@@ -136,7 +136,7 @@
 	for(var/X in bodyparts)
 		var/obj/item/bodypart/BP = X
 		//We want an accurate reading of .len
-		listclearnulls(BP.embedded_objects)
+		list_clear_nulls(BP.embedded_objects)
 		bleedrate += BP.get_bleedrate()
 //			temp_bleed += 0.5*BP.embedded_objects.len
 		for(var/obj/item/I in BP.embedded_objects)

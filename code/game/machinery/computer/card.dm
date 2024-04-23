@@ -188,7 +188,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 	var/list/dat = list()
 	if (mode == 1) // accessing crew manifest
 		dat += "<tt><b>Crew Manifest:</b><br>Please use security record computer to modify entries.<br><br>"
-		for(var/datum/data/record/t in sortRecord(GLOB.data_core.general))
+		for(var/datum/data/record/t in sort_record(GLOB.data_core.general))
 			dat += {"[t.fields["name"]] - [t.fields["rank"]]<br>"}
 		dat += "<a href='?src=[REF(src)];choice=print'>Print</a><br><br><a href='?src=[REF(src)];choice=mode;mode_target=0'>Access ID modification console.</a><br></tt>"
 
@@ -559,7 +559,7 @@ GLOBAL_VAR_INIT(time_last_changed_position, 0)
 				sleep(50)
 				var/obj/item/paper/P = new /obj/item/paper( loc )
 				var/t1 = "<B>Crew Manifest:</B><BR>"
-				for(var/datum/data/record/t in sortRecord(GLOB.data_core.general))
+				for(var/datum/data/record/t in sort_record(GLOB.data_core.general))
 					t1 += t.fields["name"] + " - " + t.fields["rank"] + "<br>"
 				P.info = t1
 				P.name = "paper- 'Crew Manifest'"

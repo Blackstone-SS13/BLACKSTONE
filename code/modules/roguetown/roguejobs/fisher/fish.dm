@@ -20,7 +20,7 @@
 
 /obj/item/reagent_containers/food/snacks/fish/Initialize()
 	. = ..()
-	var/rarity = pickweight(list("gold" = 1, "ultra" =40, "rare"=50, "com"=900))
+	var/rarity = pick_weight(list("gold" = 1, "ultra" =40, "rare"=50, "com"=900))
 	icon_state = "[initial(icon_state)][rarity]"
 	switch(rarity)
 		if("gold")

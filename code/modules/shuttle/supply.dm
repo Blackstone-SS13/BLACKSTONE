@@ -206,7 +206,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 			if(QDELETED(AM))
 				continue
 			var/list/contents = AM.GetAllContents()
-			for(var/i in reverseRange(contents))
+			for(var/i in reverse_range(contents))
 				var/atom/movable/thing = i
 				if(QDELETED(thing))
 					continue
@@ -231,7 +231,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 						qdel(C)
 						continue
 				var/list/contents = AM.GetAllContents()
-				for(var/i in reverseRange(contents))
+				for(var/i in reverse_range(contents))
 					var/atom/movable/thing = i
 					if(QDELETED(thing))
 						continue

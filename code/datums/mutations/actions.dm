@@ -60,7 +60,7 @@
 		if(!length(possible))
 			to_chat(user,"<span class='warning'>Despite my best efforts, there are no scents to be found on [sniffed]...</span>")
 			return
-		tracking_target = input(user, "Choose a scent to remember.", "Scent Tracking") as null|anything in sortNames(possible)
+		tracking_target = input(user, "Choose a scent to remember.", "Scent Tracking") as null|anything in sort_names(possible)
 		if(!tracking_target)
 			if(!old_target)
 				to_chat(user,"<span class='warning'>I decide against remembering any scents. Instead, you notice my own nose in my peripheral vision. This goes on to remind you of that one time you started breathing manually and couldn't stop. What an awful day that was.</span>")

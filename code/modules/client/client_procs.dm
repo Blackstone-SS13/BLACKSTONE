@@ -124,7 +124,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		var/list/selections = GLOB.character_ckey_list.Copy()
 		if(!selections.len)
 			return
-		var/selection = input(src,"Which Character?") as null|anything in sortList(selections)
+		var/selection = input(src,"Which Character?") as null|anything in sort_list(selections)
 		if(!selection)
 			return
 		if(commendedsomeone)
@@ -653,7 +653,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	var/datum/DBQuery/query_get_client_age = SSdbcore.NewQuery(
 		"SELECT firstseen, DATEDIFF(Now(),firstseen), accountjoindate, DATEDIFF(Now(),accountjoindate) FROM [format_table_name("player")] WHERE ckey = :ckey",
 		list("ckey" = ckey)
-	)	
+	)
 	if(!query_get_client_age.Execute())
 		qdel(query_get_client_age)
 		return

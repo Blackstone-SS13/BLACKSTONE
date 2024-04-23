@@ -10,6 +10,13 @@
 /proc/cmp_text_dsc(a,b)
 	return sorttext(a,b)
 
+/proc/cmp_embed_text_asc(a,b)
+	if(isdatum(a))
+		a = REF(a)
+	if(isdatum(b))
+		b = REF(b)
+	return sorttext("[b]", "[a]")
+
 /proc/cmp_name_asc(atom/a, atom/b)
 	return sorttext(b.name, a.name)
 
@@ -35,7 +42,7 @@ GLOBAL_VAR_INIT(cmp_field, "name")
 
 /proc/cmp_datum_text_dsc(datum/a, datum/b, variable)
 	return sorttext(a.vars[variable], b.vars[variable])
-	
+
 /proc/cmp_ckey_asc(client/a, client/b)
 	return sorttext(b.ckey, a.ckey)
 

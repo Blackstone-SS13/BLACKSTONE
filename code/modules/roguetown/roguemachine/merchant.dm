@@ -296,7 +296,7 @@
 			var/datum/supply_pack/PA = SSshuttle.supply_packs[pack]
 			if(PA.group == current_cat)
 				pax += PA
-		for(var/datum/supply_pack/PA in sortList(pax))
+		for(var/datum/supply_pack/PA in sort_list(pax))
 			var/costy = PA.cost
 			if(!(upgrade_flags & UPGRADE_NOTAX))
 				costy=round(costy+(SStreasury.tax_value * costy))

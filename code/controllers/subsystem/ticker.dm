@@ -134,7 +134,7 @@ SUBSYSTEM_DEF(ticker)
 				continue
 		music -= S
 
-	if(isemptylist(music))
+	if(!length(music))
 		music = world.file2list(ROUND_START_MUSIC_LIST, "\n")
 		login_music = pick(music)
 	else
@@ -256,7 +256,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/checkreqroles()
 	var/list/readied_jobs = list()
 	var/list/required_jobs = list()
-	
+
 	//var/list/required_jobs = list("Queen","King","Merchant") //JTGSZ - 4/11/2024 - This was the prev set of required jobs to go with the hardcoded checks commented out below
 
 	for(var/V in required_jobs)
@@ -276,7 +276,7 @@ SUBSYSTEM_DEF(ticker)
 				rulertype = "King"
 			else
 				rulertype = "Queen"
-		/*	
+		/*
 			// These else conditions stop the round from starting unless there is a merchant, king, and queen.
 		else
 			var/list/stuffy = list("Set a Ruler to 'high' in your class preferences to start the game!", "PLAY Ruler NOW!", "A Ruler is required to start.", "Pray for a Ruler.", "One day, there will be a Ruler.", "Just try playing Ruler.", "If you don't play Ruler, the game will never start.", "We need at least one Ruler to start the game.", "We're waiting for you to pick Ruler to start.", "Still no Ruler is readied..", "I'm going to lose my mind if we don't get a Ruler readied up.","No. The game will not start because there is no Ruler.","What's the point of ROGUETOWN without a Ruler?")
@@ -285,7 +285,7 @@ SUBSYSTEM_DEF(ticker)
 	else
 		var/list/stuffy = list("Set Merchant to 'high' in your class preferences to start the game!", "PLAY Merchant NOW!", "A Merchant is required to start.", "Pray for a Merchant.", "One day, there will be a Merchant.", "Just try playing Merchant.", "If you don't play Merchant, the game will never start.", "We need at least one Merchant to start the game.", "We're waiting for you to pick Merchant to start.", "Still no Merchant is readied..", "I'm going to lose my mind if we don't get a Merchant readied up.","No. The game will not start because there is no Merchant.","What's the point of ROGUETOWN without a Merchant?")
 		to_chat(world, "<span class='purple'>[pick(stuffy)]</span>")
-		return FALSE			
+		return FALSE
 	*/
 
 	/*
@@ -345,7 +345,7 @@ SUBSYSTEM_DEF(ticker)
 			if(!runnable_modes.len)
 				message_admins("<B>Unable to choose playable game mode.</B> Reverting to pre-game lobby.")
 				return 0
-			mode = pickweight(runnable_modes)
+			mode = pick_weight(runnable_modes)
 			if(!mode)	//too few roundtypes all run too recently
 				mode = pick(runnable_modes)
 
@@ -411,7 +411,7 @@ SUBSYSTEM_DEF(ticker)
 //		var/list/modes = new
 //		for (var/datum/game_mode/M in runnable_modes)
 //			modes += M.name
-//		modes = sortList(modes)
+//		modes = sort_list(modes)
 //		message_admins("<b>The gamemode is: secret!\nPossibilities:</B> [english_list(modes)]")
 //	else
 //		mode.announce()
@@ -438,7 +438,7 @@ SUBSYSTEM_DEF(ticker)
 	for(var/I in round_start_events)
 		var/datum/callback/cb = I
 		cb.InvokeAsync()
-	
+
 	log_game("GAME SETUP: round start events success")
 	LAZYCLEARLIST(round_start_events)
 
@@ -630,7 +630,7 @@ SUBSYSTEM_DEF(ticker)
 		return
 	var/hpc = CONFIG_GET(number/hard_popcap)
 	if(!hpc)
-		listclearnulls(queued_players)
+		list_clear_nulls(queued_players)
 		for (var/mob/dead/new_player/NP in queued_players)
 			to_chat(NP, "<span class='danger'>The alive players limit has been released!<br><a href='?src=[REF(NP)];late_join=override'>[html_encode(">>Join Game<<")]</a></span>")
 			SEND_SOUND(NP, sound('sound/blank.ogg'))
@@ -644,7 +644,7 @@ SUBSYSTEM_DEF(ticker)
 
 	switch(queue_delay)
 		if(5) //every 5 ticks check if there is a slot available
-			listclearnulls(queued_players)
+			list_clear_nulls(queued_players)
 			if(living_player_count() < hpc)
 				if(next_in_line && next_in_line.client)
 					to_chat(next_in_line, "<span class='danger'>A slot has opened! You have approximately 20 seconds to join. <a href='?src=[REF(next_in_line)];late_join=override'>\>\>Join Game\<\<</a></span>")

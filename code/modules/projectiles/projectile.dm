@@ -250,9 +250,9 @@
 		if(A.loc != original)
 			if(ismob(A))
 				var/mob/M = A
-				if(!CHECK_BITFIELD(movement_type, UNSTOPPABLE))
+				if(movement_type & UNSTOPPABLE)
 					temporary_unstoppable_movement = TRUE
-					ENABLE_BITFIELD(movement_type, UNSTOPPABLE)
+					movement_type |= UNSTOPPABLE
 				M.playsound_local(T, "whiz", 100, FALSE, pressure_affected = FALSE)
 				return process_hit(T, qdel_self=2, hit_something=TRUE)
 		return process_hit(T, select_target(T, A))
@@ -264,7 +264,7 @@
 
 /obj/projectile/proc/process_hit(turf/T, atom/target, qdel_self, hit_something = FALSE)		//probably needs to be reworked entirely when pixel movement is done.
 	if(QDELETED(src) || !T || !target)		//We're done, nothing's left.
-		if((qdel_self == FORCE_QDEL) || ((qdel_self == QDEL_SELF) && !temporary_unstoppable_movement && !CHECK_BITFIELD(movement_type, UNSTOPPABLE)))
+		if((qdel_self == FORCE_QDEL) || ((qdel_self == QDEL_SELF) && !temporary_unstoppable_movement && movement_type & UNSTOPPABLE))
 			qdel(src)
 		return hit_something
 	permutated |= target		//Make sure we're never hitting it again. If we ever run into weirdness with piercing projectiles needing to hit something multiple times.. well.. that's a to-do.
@@ -273,21 +273,21 @@
 	SEND_SIGNAL(target, COMSIG_PROJECTILE_PREHIT, args)
 	var/result = target.bullet_act(src, def_zone)
 	if(result == BULLET_ACT_FORCE_PIERCE)
-		if(!CHECK_BITFIELD(movement_type, UNSTOPPABLE))
+		if(movement_type & UNSTOPPABLE)
 			temporary_unstoppable_movement = TRUE
-			ENABLE_BITFIELD(movement_type, UNSTOPPABLE)
+			movement_type |= UNSTOPPABLE
 		return process_hit(T, select_target(T), qdel_self, TRUE)		//Hit whatever else we can since we're piercing through but we're still on the same tile.
 	else if(result == BULLET_ACT_TURF)									//We hit the turf but instead we're going to also hit something else on it.
 		return process_hit(T, select_target(T), qdel_self, TRUE)
 	else if(result == BULLET_ACT_MISS)
-		if(!CHECK_BITFIELD(movement_type, UNSTOPPABLE))
+		if(movement_type & UNSTOPPABLE)
 			temporary_unstoppable_movement = TRUE
-			ENABLE_BITFIELD(movement_type, UNSTOPPABLE)
+			movement_type |= UNSTOPPABLE
 		return process_hit(T, select_target(T), qdel_self, TRUE)
 	else		//Whether it hit or blocked, we're done!
 		qdel_self = QDEL_SELF
 		hit_something = TRUE
-	if((qdel_self == FORCE_QDEL) || ((qdel_self == QDEL_SELF) && !temporary_unstoppable_movement && !CHECK_BITFIELD(movement_type, UNSTOPPABLE)))
+	if((qdel_self == FORCE_QDEL) || ((qdel_self == QDEL_SELF) && !temporary_unstoppable_movement && movement_type & UNSTOPPABLE))
 		qdel(src)
 	return hit_something
 
@@ -306,7 +306,7 @@
 		if(!can_hit_target(M, permutated, M == original, TRUE))
 			continue
 		mobs += M
-	var/mob/M = safepick(mobs)
+	var/mob/M = pick(mobs)
 	if(M)
 		return M.lowest_buckled_mob()
 	var/list/obj/possible_objs = typecache_filter_list(T, GLOB.typecache_machine_or_structure)
@@ -315,7 +315,7 @@
 		if(!can_hit_target(O, permutated, O == original, TRUE))
 			continue
 		objs += O
-	var/obj/O = safepick(objs)
+	var/obj/O = pick(objs)
 	if(O)
 		return O
 	//Nothing else is here that we can hit, hit the turf if we haven't.
@@ -568,7 +568,7 @@
 	else
 		var/mob/living/L = target
 		if(!direct_target)
-			if(!CHECK_BITFIELD(L.mobility_flags, MOBILITY_USE | MOBILITY_STAND | MOBILITY_MOVE) || !(L.stat == CONSCIOUS))		//If they're able to 1. stand or 2. use items or 3. move, AND they are not softcrit,  they are not stunned enough to dodge projectiles passing over.
+			if(!(L.mobility_flags & MOBILITY_USE) || !(L.mobility_flags & MOBILITY_STAND) || !(L.mobility_flags & MOBILITY_MOVE) || !(L.stat == CONSCIOUS))		//If they're able to 1. stand or 2. use items or 3. move, AND they are not softcrit,  they are not stunned enough to dodge projectiles passing over.
 				return FALSE
 	return TRUE
 
@@ -648,7 +648,7 @@
 	if(.)
 		if(temporary_unstoppable_movement)
 			temporary_unstoppable_movement = FALSE
-			DISABLE_BITFIELD(movement_type, UNSTOPPABLE)
+			movement_type &= ~UNSTOPPABLE
 		if(fired && can_hit_target(original, permutated, (newloc == original)))
 			Bump(original)
 

@@ -77,7 +77,7 @@
 //						var/turf/T = get_turf(pick(possible_targets))
 						var/turf/T = get_turf(src)
 						if(T)
-							var/mob/M = pickweight(attracted_types)
+							var/mob/M = pick_weight(attracted_types)
 							new M(T)
 							qdel(src)
 					else

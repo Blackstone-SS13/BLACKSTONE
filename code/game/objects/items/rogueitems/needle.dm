@@ -78,7 +78,7 @@
 	if(!sewable || !sewable.len)
 		to_chat(doctor, "<span class='warning'>There aren't any wounds large enough to sew.</span>")
 		return
-	var/datum/wound/target_wound = input(doctor, "Which wound?", "Roguetown", name) as null|anything in sortList(sewable)
+	var/datum/wound/target_wound = input(doctor, "Which wound?", "Roguetown", name) as null|anything in sort_list(sewable)
 	if(!target_wound || !target_wound.can_sew || !do_after(doctor, 20))
 		return
 

@@ -120,7 +120,7 @@
 		if(C.orders.len > 4)
 			to_chat(user, "<span class='warning'>Too much order.</span>")
 			return
-		var/picked_cat = input(user, "Categories", "Shipping Ledger") as null|anything in sortList(SSshuttle.supply_cats)
+		var/picked_cat = input(user, "Categories", "Shipping Ledger") as null|anything in sort_list(SSshuttle.supply_cats)
 		if(!picked_cat)
 			testing("yeye")
 			return
@@ -129,7 +129,7 @@
 			var/datum/supply_pack/PA = SSshuttle.supply_packs[pack]
 			if(PA.group == picked_cat)
 				pax += PA
-		var/picked_pack = input(user, "Shipments", "Shipping Ledger") as null|anything in sortList(pax)
+		var/picked_pack = input(user, "Shipments", "Shipping Ledger") as null|anything in sort_list(pax)
 		if(!picked_pack)
 			return
 		var/namer = user.name
@@ -150,7 +150,7 @@
 		if(P.info)
 			to_chat(user, "<span class='warning'>Something is written here already.</span>")
 			return
-		var/picked_cat = input(user, "Categories", "Shipping Ledger") as null|anything in sortList(SSshuttle.supply_cats)
+		var/picked_cat = input(user, "Categories", "Shipping Ledger") as null|anything in sort_list(SSshuttle.supply_cats)
 		if(!picked_cat)
 			return
 		var/list/pax = list()
@@ -158,7 +158,7 @@
 			var/datum/supply_pack/PA = SSshuttle.supply_packs[pack]
 			if(PA.group == picked_cat)
 				pax += PA
-		var/picked_pack = input(user, "Shipments", "Shipping Ledger") as null|anything in sortList(pax)
+		var/picked_pack = input(user, "Shipments", "Shipping Ledger") as null|anything in sort_list(pax)
 		if(!picked_pack)
 			return
 		var/obj/item/paper/scroll/cargo/C = new(user.loc)
@@ -232,7 +232,7 @@
 	bookfile = "law.json"
 
 /obj/item/book/rogue/cooking
-	name = "Tastes Fit For The Lord" 
+	name = "Tastes Fit For The Lord"
 	desc = ""
 	icon_state ="book_0"
 	base_icon_state = "book"

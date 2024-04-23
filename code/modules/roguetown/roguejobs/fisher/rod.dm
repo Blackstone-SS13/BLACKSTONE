@@ -103,7 +103,7 @@
 		update_icon()
 		return
 
-	var/caught_thing = pickweight(baited.fishloot)
+	var/caught_thing = pick_weight(baited.fishloot)
 	new caught_thing(current_fisherman.loc)
 	amt2raise = current_fisherman.STAINT
 	playsound(loc, 'sound/items/Fish_out.ogg', 100, TRUE)

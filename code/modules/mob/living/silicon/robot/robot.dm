@@ -205,7 +205,7 @@
 	if(!CONFIG_GET(flag/disable_secborg))
 		modulelist["Security"] = /obj/item/robot_module/security
 
-	var/input_module = input("Please, select a module!", "Robot", null, null) as null|anything in sortList(modulelist)
+	var/input_module = input("Please, select a module!", "Robot", null, null) as null|anything in sort_list(modulelist)
 	if(!input_module || module.type != /obj/item/robot_module)
 		return
 

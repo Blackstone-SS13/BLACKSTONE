@@ -48,3 +48,5 @@
 
 #define LOGSRC_CLIENT "Client"
 #define LOGSRC_MOB "Mob"
+
+#define LOG_CATEGORY_SIGNAL "signal"

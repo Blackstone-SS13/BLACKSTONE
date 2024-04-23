@@ -156,7 +156,7 @@
 				radio.attack_self(src)
 
 			if("image") // Set pAI card display face
-				var/newImage = input("Select my new display image.", "Display Image", "Happy") in sortList(list("Happy", "Cat", "Extremely Happy", "Face", "Laugh", "Off", "Sad", "Angry", "What", "Sunglasses"))
+				var/newImage = input("Select my new display image.", "Display Image", "Happy") in sort_list(list("Happy", "Cat", "Extremely Happy", "Face", "Laugh", "Off", "Sad", "Angry", "What", "Sunglasses"))
 				var/pID = 1
 
 				switch(newImage)
@@ -457,7 +457,7 @@
 /mob/living/silicon/pai/proc/softwareManifest()
 	. += "<h2>Crew Manifest</h2><br><br>"
 	if(GLOB.data_core.general)
-		for(var/datum/data/record/t in sortRecord(GLOB.data_core.general))
+		for(var/datum/data/record/t in sort_record(GLOB.data_core.general))
 			. += "[t.fields["name"]] - [t.fields["rank"]]<BR>"
 	. += "</body></html>"
 	return .
@@ -468,7 +468,7 @@
 		if(0)
 			. += "<h3>Medical Records</h3><HR>"
 			if(GLOB.data_core.general)
-				for(var/datum/data/record/R in sortRecord(GLOB.data_core.general))
+				for(var/datum/data/record/R in sort_record(GLOB.data_core.general))
 					. += "<A href='?src=[REF(src)];med_rec=[R.fields["id"]];software=medicalrecord;sub=1'>[R.fields["id"]]: [R.fields["name"]]<BR>"
 		if(1)
 			. += "<CENTER><B>Medical Record</B></CENTER><BR>"
@@ -490,7 +490,7 @@
 		if(0)
 			. += "<h3>Security Records</h3><HR>"
 			if(GLOB.data_core.general)
-				for(var/datum/data/record/R in sortRecord(GLOB.data_core.general))
+				for(var/datum/data/record/R in sort_record(GLOB.data_core.general))
 					. += "<A href='?src=[REF(src)];sec_rec=[R.fields["id"]];software=securityrecord;sub=1'>[R.fields["id"]]: [R.fields["name"]]<BR>"
 		if(1)
 			. += "<h3>Security Record</h3>"

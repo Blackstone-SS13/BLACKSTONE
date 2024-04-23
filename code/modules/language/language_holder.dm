@@ -48,7 +48,7 @@
 	var/list/possible = list()
 	for(var/dt in languages)
 		possible += dt
-	. = safepick(possible)
+	. = pick(possible)
 
 /datum/language_holder/proc/remove_language(datum/language/dt, shadow = FALSE)
 	if(shadow)

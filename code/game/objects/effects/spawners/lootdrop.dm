@@ -13,9 +13,9 @@
 		var/turf/T = get_turf(src)
 		var/loot_spawned = 0
 		while((lootcount-loot_spawned) && loot.len)
-			var/lootspawn = pickweight(loot)
+			var/lootspawn = pick_weight(loot)
 			while(islist(lootspawn))
-				lootspawn = pickweight(lootspawn)
+				lootspawn = pick_weight(lootspawn)
 			if(!lootdoubles)
 				loot.Remove(lootspawn)
 

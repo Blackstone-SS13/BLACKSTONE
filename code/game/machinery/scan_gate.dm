@@ -167,7 +167,7 @@
 		return
 	switch(action)
 		if("set_mode")
-			var/new_mode = input("Choose the scan mode","Scan Mode") as null|anything in sortList(list(SCANGATE_NONE,
+			var/new_mode = input("Choose the scan mode","Scan Mode") as null|anything in sort_list(list(SCANGATE_NONE,
 																								SCANGATE_MINDSHIELD,
 																								SCANGATE_NANITES,
 																								SCANGATE_DISEASE,
@@ -182,7 +182,7 @@
 			reverse = !reverse
 			. = TRUE
 		if("set_disease_threshold")
-			var/new_threshold = input("Set disease threshold","Scan Mode") as null|anything in sortList(list(DISEASE_SEVERITY_POSITIVE,
+			var/new_threshold = input("Set disease threshold","Scan Mode") as null|anything in sort_list(list(DISEASE_SEVERITY_POSITIVE,
 																								DISEASE_SEVERITY_NONTHREAT,
 																								DISEASE_SEVERITY_MINOR,
 																								DISEASE_SEVERITY_MEDIUM,
@@ -199,7 +199,7 @@
 			. = TRUE
 		//Some species are not scannable, like abductors (too unknown), androids (too artificial) or skeletons (too magic)
 		if("set_target_species")
-			var/new_species = input("Set target species","Scan Mode") as null|anything in sortList(list("Human",
+			var/new_species = input("Set target species","Scan Mode") as null|anything in sort_list(list("Human",
 																								"Lizardperson",
 																								"Flyperson",
 																								"Felinid",
@@ -234,7 +234,7 @@
 						detect_species = /datum/species/zombie
 			. = TRUE
 		if("set_target_nutrition")
-			var/new_nutrition = input("Set target nutrition level","Scan Mode") as null|anything in sortList(list("Starving",
+			var/new_nutrition = input("Set target nutrition level","Scan Mode") as null|anything in sort_list(list("Starving",
 																											"Obese"))
 			if(new_nutrition)
 				switch(new_nutrition)

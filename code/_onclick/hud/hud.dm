@@ -5,7 +5,7 @@
 */
 
 // The default UI style is the first one in the list
-GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
+GLOBAL_LIST_INIT(available_ui_styles, sort_list(list(
 	"Rogue" = 'icons/mob/roguehud.dmi')))
 
 /proc/ui_style2icon(ui_style)
@@ -322,3 +322,4 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 
 /datum/hud/proc/update_locked_slots()
 	return
+

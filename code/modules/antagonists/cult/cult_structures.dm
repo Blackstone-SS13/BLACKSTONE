@@ -202,14 +202,14 @@
 
 		last_corrupt = world.time + corrupt_delay
 
-		var/turf/T = safepick(validturfs)
+		var/turf/T = pick(validturfs)
 		if(T)
 			if(istype(T, /turf/open/floor/plating))
 				T.PlaceOnTop(/turf/open/floor/engine/cult, flags = CHANGETURF_INHERIT_AIR)
 			else
 				T.ChangeTurf(/turf/open/floor/engine/cult, flags = CHANGETURF_INHERIT_AIR)
 		else
-			var/turf/open/floor/engine/cult/F = safepick(cultturfs)
+			var/turf/open/floor/engine/cult/F = pick(cultturfs)
 			if(F)
 				new /obj/effect/temp_visual/cult/turf/floor(F)
 			else

@@ -4,7 +4,7 @@
 	speech_span = SPAN_ROBOT
 	var/obj_flags = CAN_BE_HIT
 	/// ONLY FOR MAPPING: Sets flags from a string list, handled in Initialize. Usage: set_obj_flags = "EMAGGED;!CAN_BE_HIT" to set EMAGGED and clear CAN_BE_HIT.
-	var/set_obj_flags 
+	var/set_obj_flags
 
 	var/damtype = BRUTE
 	var/force = 0
@@ -14,7 +14,7 @@
 	var/obj_integrity
 	var/max_integrity = 500
 	///0 if we have no special broken behavior, otherwise is a percentage of at what point the obj breaks. 0.5 being 50%
-	var/integrity_failure = 0 
+	var/integrity_failure = 0
 	///Damage under this value will be completely ignored
 	var/damage_deflection = 0
 	var/obj_broken = FALSE
@@ -23,14 +23,14 @@
 	var/resistance_flags = NONE // INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ON_FIRE | UNACIDABLE | ACID_PROOF
 
 	///how much acid is on that obj
-	var/acid_level = 0 
+	var/acid_level = 0
 
 	///have something WAY too amazing to live to the next round? Set a new path here. Overuse of this var will make me upset.
-	var/persistence_replacement 
+	var/persistence_replacement
 	///Has the item been reskinned?
-	var/current_skin            
+	var/current_skin
 	///List of options to reskin.
-	var/list/unique_reskin      
+	var/list/unique_reskin
 
 	// Access levels, used in modules\jobs\access.dm
 	var/list/req_access
@@ -39,10 +39,10 @@
 	var/req_one_access_txt = "0"
 
 	///set when a player uses a pen on a renamable object
-	var/renamedByPlayer = FALSE 
+	var/renamedByPlayer = FALSE
 
 	/// Amont of multiplicative slowdown applied if pulled. >1 makes you slower, <1 makes you faster.
-	var/drag_slowdown 
+	var/drag_slowdown
 
 	var/blade_dulling = DULLING_BASHCHOP
 
@@ -333,7 +333,7 @@
 		var/output = icon2html(src, M, unique_reskin[V])
 		to_chat(M, "[V]: <span class='reallybig'>[output]</span>")
 
-	var/choice = input(M,"Warning, you can only reskin [src] once!","Reskin Object") as null|anything in sortList(unique_reskin)
+	var/choice = input(M,"Warning, you can only reskin [src] once!","Reskin Object") as null|anything in sort_list(unique_reskin)
 	if(!QDELETED(src) && choice && !current_skin && !M.incapacitated() && in_range(M,src))
 		if(!unique_reskin[choice])
 			return

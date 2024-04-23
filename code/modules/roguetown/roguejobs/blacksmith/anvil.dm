@@ -115,7 +115,7 @@
 		if(!istype(hingot, R.req_bar))
 			appro_recipe -= R
 	if(appro_recipe.len)
-		var/datum/chosen_recipe = input(user, "Choose A Creation", "Anvil") as null|anything in sortNames(appro_recipe.Copy())
+		var/datum/chosen_recipe = input(user, "Choose A Creation", "Anvil") as null|anything in sort_names(appro_recipe.Copy())
 		if(!hingot.currecipe && chosen_recipe)
 			hingot.currecipe = new chosen_recipe.type(hingot)
 			return TRUE

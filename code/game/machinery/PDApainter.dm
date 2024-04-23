@@ -114,7 +114,7 @@
 			to_chat(user, "<span class='info'>I manage to eject the loaded PDA.</span>")
 		else
 			var/obj/item/pda/P
-			P = input(user, "Select your color!", "PDA Painting") as null|anything in sortNames(colorlist)
+			P = input(user, "Select your color!", "PDA Painting") as null|anything in sort_names(colorlist)
 			if(!P)
 				return
 			if(!in_range(src, user))

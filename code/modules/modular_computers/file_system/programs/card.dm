@@ -338,7 +338,7 @@
 	if(!mod_mode)
 		data["manifest"] = list()
 		var/list/crew = list()
-		for(var/datum/data/record/t in sortRecord(GLOB.data_core.general))
+		for(var/datum/data/record/t in sort_record(GLOB.data_core.general))
 			crew.Add(list(list(
 				"name" = t.fields["name"],
 				"rank" = t.fields["rank"])))

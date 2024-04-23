@@ -1,5 +1,22 @@
-GLOBAL_LIST_INIT(bitfields, list(
-	"appearance_flags" = list(
+GLOBAL_LIST_INIT(bitfields, generate_bitfields())
+
+/// Specifies a bitfield for smarter debugging
+/datum/bitfield
+	/// The variable name that contains the bitfield
+	var/variable
+
+	/// An associative list of the readable flag and its true value
+	var/list/flags
+
+/// Turns /datum/bitfield subtypes into a list for use in debugging
+/proc/generate_bitfields()
+	var/list/bitfields = list()
+	for (var/_bitfield in subtypesof(/datum/bitfield))
+		var/datum/bitfield/bitfield = new _bitfield
+		bitfields[bitfield.variable] = bitfield.flags
+	return bitfields
+
+DEFINE_BITFIELD(appearance_flags, list(
 		"LONG_GLIDE" = LONG_GLIDE,
 		"RESET_COLOR" = RESET_COLOR,
 		"RESET_ALPHA" = RESET_ALPHA,
@@ -10,8 +27,9 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"PLANE_MASTER" = PLANE_MASTER,
 		"TILE_BOUND" = TILE_BOUND,
 		"PIXEL_SCALE" = PIXEL_SCALE
-		),
-	"sight" = list(
+))
+
+DEFINE_BITFIELD(sight, list(
 		"SEE_INFRA" = SEE_INFRA,
 		"SEE_SELF" = SEE_SELF,
 		"SEE_MOBS" = SEE_MOBS,
@@ -21,8 +39,9 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"SEE_THRU" = SEE_THRU,
 		"SEE_BLACKNESS" = SEE_BLACKNESS,
 		"BLIND" = BLIND
-		),
-	"obj_flags" = list(
+))
+
+DEFINE_BITFIELD(obj_flags, list(
 		"EMAGGED" = EMAGGED,
 		"IN_USE" = IN_USE,
 		"CAN_BE_HIT" = CAN_BE_HIT,
@@ -32,12 +51,14 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"UNIQUE_RENAME" = UNIQUE_RENAME,
 		"USES_TGUI" = USES_TGUI,
 		"FROZEN" = FROZEN,
-		),
-	"datum_flags" = list(
+))
+
+DEFINE_BITFIELD(datum_flags, list(
 		"DF_USE_TAG" = DF_USE_TAG,
 		"DF_VAR_EDITED" = DF_VAR_EDITED,
-		),
-	"item_flags" = list(
+))
+
+DEFINE_BITFIELD(item_flags, list(
 		"BEING_REMOVED" = BEING_REMOVED,
 		"IN_INVENTORY" = IN_INVENTORY,
 		"FORCE_STRING_OVERRIDE" = FORCE_STRING_OVERRIDE,
@@ -48,8 +69,9 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"NOBLUDGEON" = NOBLUDGEON,
 		"ABSTRACT" = ABSTRACT,
 		"IN_STORAGE" = IN_STORAGE,
-		),
-	"admin_flags" = list(
+))
+
+DEFINE_BITFIELD(admin_flags, list(
 		"BUILDMODE" = R_BUILD,
 		"ADMIN" = R_ADMIN,
 		"BAN" = R_BAN,
@@ -66,8 +88,9 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"AUTOLOGIN" = R_AUTOADMIN,
 		"WATCH" = R_WATCH,
 		"DBRANKS" = R_DBRANKS
-		),
-	"interaction_flags_atom" = list(
+))
+
+DEFINE_BITFIELD(interaction_flags_atom, list(
 		"INTERACT_ATOM_REQUIRES_ANCHORED" = INTERACT_ATOM_REQUIRES_ANCHORED,
 		"INTERACT_ATOM_ATTACK_HAND" = INTERACT_ATOM_ATTACK_HAND,
 		"INTERACT_ATOM_UI_INTERACT" = INTERACT_ATOM_UI_INTERACT,
@@ -77,8 +100,9 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"INTERACT_ATOM_CHECK_GRAB" = INTERACT_ATOM_CHECK_GRAB,
 		"INTERACT_ATOM_NO_FINGERPRINT_ATTACK_HAND" = INTERACT_ATOM_NO_FINGERPRINT_ATTACK_HAND,
 		"INTERACT_ATOM_NO_FINGERPRINT_INTERACT" = INTERACT_ATOM_NO_FINGERPRINT_INTERACT
-		),
-	"interaction_flags_machine" = list(
+))
+
+DEFINE_BITFIELD(interaction_flags_machine, list(
 		"INTERACT_MACHINE_OPEN" = INTERACT_MACHINE_OPEN,
 		"INTERACT_MACHINE_OFFLINE" = INTERACT_MACHINE_OFFLINE,
 		"INTERACT_MACHINE_WIRES_IF_OPEN" = INTERACT_MACHINE_WIRES_IF_OPEN,
@@ -86,11 +110,13 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"INTERACT_MACHINE_OPEN_SILICON" = INTERACT_MACHINE_OPEN_SILICON,
 		"INTERACT_MACHINE_REQUIRES_SILICON" = INTERACT_MACHINE_REQUIRES_SILICON,
 		"INTERACT_MACHINE_SET_MACHINE" = INTERACT_MACHINE_SET_MACHINE
-		),
-	"interaction_flags_item" = list(
+))
+
+DEFINE_BITFIELD(interaction_flags_item, list(
 		"INTERACT_ITEM_ATTACK_HAND_PICKUP" = INTERACT_ITEM_ATTACK_HAND_PICKUP,
-		),
-	"pass_flags" = list(
+))
+
+DEFINE_BITFIELD(pass_flags, list(
 		"PASSTABLE" = PASSTABLE,
 		"PASSGLASS" = PASSGLASS,
 		"PASSGRILLE" = PASSGRILLE,
@@ -98,15 +124,17 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"PASSMOB" = PASSMOB,
 		"PASSCLOSEDTURF" = PASSCLOSEDTURF,
 		"LETPASSTHROW" = LETPASSTHROW
-		),
-	"movement_type" = list(
+))
+
+DEFINE_BITFIELD(movement_type, list(
 		"GROUND" = GROUND,
 		"FLYING" = FLYING,
 		"VENTCRAWLING" = VENTCRAWLING,
 		"FLOATING" = FLOATING,
 		"UNSTOPPABLE" = UNSTOPPABLE
-		),
-	"resistance_flags" = list(
+))
+
+DEFINE_BITFIELD(resistance_flags, list(
 		"LAVA_PROOF" = LAVA_PROOF,
 		"FIRE_PROOF" = FIRE_PROOF,
 		"FLAMMABLE" = FLAMMABLE,
@@ -115,8 +143,9 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"ACID_PROOF" = ACID_PROOF,
 		"INDESTRUCTIBLE" = INDESTRUCTIBLE,
 		"FREEZE_PROOF" = FREEZE_PROOF
-		),
-	"flags_1" = list(
+))
+
+DEFINE_BITFIELD(flags_1, list(
 		"NOJAUNT_1" = NOJAUNT_1,
 		"UNUSED_RESERVATION_TURF_1" = UNUSED_RESERVATION_TURF_1,
 		"CAN_BE_DIRTY_1" = CAN_BE_DIRTY_1,
@@ -134,8 +163,9 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"TESLA_IGNORE_1" = TESLA_IGNORE_1,
 		"INITIALIZED_1" = INITIALIZED_1,
 		"ADMIN_SPAWNED_1" = ADMIN_SPAWNED_1,
-		),
-	"clothing_flags" = list(
+))
+
+DEFINE_BITFIELD(clothing_flags, list(
 		"LAVAPROTECT" = LAVAPROTECT,
 		"STOPSPRESSUREDAMAGE" = STOPSPRESSUREDAMAGE,
 		"BLOCK_GAS_SMOKE_EFFECT" = BLOCK_GAS_SMOKE_EFFECT,
@@ -148,25 +178,29 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"BLOCKS_SHOVE_KNOCKDOWN" = BLOCKS_SHOVE_KNOCKDOWN,
 		"SNUG_FIT" = SNUG_FIT,
 		"ANTI_TINFOIL_MANEUVER" = ANTI_TINFOIL_MANEUVER,
-		),
-	"tesla_flags" = list(
+))
+
+DEFINE_BITFIELD(tesla_flags, list(
 		"TESLA_MOB_DAMAGE" = TESLA_MOB_DAMAGE,
 		"TESLA_OBJ_DAMAGE" = TESLA_OBJ_DAMAGE,
 		"TESLA_MOB_STUN" = TESLA_MOB_STUN,
 		"TESLA_ALLOW_DUPLICATES" = TESLA_ALLOW_DUPLICATES,
 		"TESLA_MACHINE_EXPLOSIVE" = TESLA_MACHINE_EXPLOSIVE,
-		),
-	"smooth" = list(
+))
+
+DEFINE_BITFIELD(smooth, list(
 		"SMOOTH_TRUE" = SMOOTH_TRUE,
 		"SMOOTH_MORE" = SMOOTH_MORE,
 		"SMOOTH_DIAGONAL" = SMOOTH_DIAGONAL,
 		"SMOOTH_BORDER" = SMOOTH_BORDER,
 		"SMOOTH_QUEUED" = SMOOTH_QUEUED,
-		),
-	"car_traits" = list(
+))
+
+DEFINE_BITFIELD(car_traits, list(
 		"CAN_KIDNAP" = CAN_KIDNAP,
-		),
-	"mobility_flags" = list(
+))
+
+DEFINE_BITFIELD(mobility_flags, list(
 		"MOVE" = MOBILITY_MOVE,
 		"STAND" = MOBILITY_STAND,
 		"PICKUP" = MOBILITY_PICKUP,
@@ -174,17 +208,20 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"UI" = MOBILITY_UI,
 		"STORAGE" = MOBILITY_STORAGE,
 		"PULL" = MOBILITY_PULL,
-		),
-	"rad_flags" = list(
+))
+
+DEFINE_BITFIELD(rad_flags, list(
 		"RAD_PROTECT_CONTENTS" = RAD_PROTECT_CONTENTS,
 		"RAD_NO_CONTAMINATE" = RAD_NO_CONTAMINATE,
-		),
-	"disease_flags" = list (
+))
+
+DEFINE_BITFIELD(disease_flags, list(
 		"CURABLE" = CURABLE,
 		"CAN_CARRY"	= CAN_CARRY,
-		"CAN_RESIST" = CAN_RESIST
-		),
-	"mob_biotypes" = list (
+		"CAN_RESIST" = CAN_RESIST,
+))
+
+DEFINE_BITFIELD(mob_biotypes, list(
 		"MOB_ORGANIC" = MOB_ORGANIC,
 		"MOB_MINERAL" = MOB_MINERAL,
 		"MOB_ROBOTIC" = MOB_ROBOTIC,
@@ -194,12 +231,12 @@ GLOBAL_LIST_INIT(bitfields, list(
 		"MOB_BEAST" = MOB_BEAST,
 		"MOB_EPIC" = MOB_EPIC,
 		"MOB_REPTILE" = MOB_REPTILE,
-		"MOB_SPIRIT" = MOB_SPIRIT
-		),
-	"fovangle" = list (
+		"MOB_SPIRIT" = MOB_SPIRIT,
+))
+
+DEFINE_BITFIELD(fovangle, list(
 		"FOV_DEFAULT" = FOV_DEFAULT,
 		"FOV_RIGHT" = FOV_RIGHT,
 		"FOV_LEFT" = FOV_LEFT,
-		"FOV_BEHIND" = FOV_BEHIND
-		)
-	))
+		"FOV_BEHIND" = FOV_BEHIND,
+))

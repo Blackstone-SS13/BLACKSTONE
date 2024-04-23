@@ -340,7 +340,10 @@
 /obj/item/twohanded/required/kirbyplants/Initialize()
 	. = ..()
 	AddComponent(/datum/component/tactical)
-	addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, AddComponent), /datum/component/beauty, 500), 0)
+	addtimer(CALLBACK(src, PROC_REF(make_pretty)), 50 SECONDS)
+
+/obj/item/twohanded/required/kirbyplants/proc/make_pretty()
+	AddComponent(/datum/component/beauty, 500)
 
 /obj/item/twohanded/required/kirbyplants/random
 	icon = 'icons/obj/flora/_flora.dmi'

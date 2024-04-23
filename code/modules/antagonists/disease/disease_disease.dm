@@ -47,6 +47,7 @@
 /datum/disease/advance/sentient_disease/GetDiseaseID()
 	return "[type]|[overmind ? overmind.tag : null]"
 
+/*
 /datum/disease/advance/sentient_disease/GenerateCure()
 	if(cures.len)
 		return
@@ -58,3 +59,4 @@
 	var/datum/reagent/D1 = GLOB.chemical_reagents_list[cures[1]]
 	var/datum/reagent/D2 = GLOB.chemical_reagents_list[cures[2]]
 	cure_text = "[D1.name] and [D2.name]"
+*/

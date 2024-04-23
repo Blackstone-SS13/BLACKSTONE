@@ -322,7 +322,7 @@
 				var/list/mobs = new
 				for(var/mob/living/carbon/M in mechsyringe.loc)
 					mobs += M
-				var/mob/living/carbon/M = safepick(mobs)
+				var/mob/living/carbon/M = pick(mobs)
 				if(M)
 					var/R
 					mechsyringe.visible_message("<span class=\"attack\"> [M] was hit by the syringe!</span>")

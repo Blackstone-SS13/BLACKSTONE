@@ -6,6 +6,6 @@
 	if(!SSticker)
 		return
 
-	var/datum/cinematic/choice = input(src,"Cinematic","Choose",null) as anything in sortList(subtypesof(/datum/cinematic), GLOBAL_PROC_REF(cmp_typepaths_asc))
+	var/datum/cinematic/choice = input(src,"Cinematic","Choose",null) as anything in sort_list(subtypesof(/datum/cinematic), GLOBAL_PROC_REF(cmp_typepaths_asc))
 	if(choice)
 		Cinematic(initial(choice.id),world,null)

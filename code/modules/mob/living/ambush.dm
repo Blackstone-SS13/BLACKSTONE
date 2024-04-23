@@ -61,7 +61,7 @@
 		mob_timers["ambushlast"] = world.time
 		for(var/mob/living/V in victimsa)
 			V.mob_timers["ambushlast"] = world.time
-		var/spawnedtype = pickweight(AR.ambush_mobs)
+		var/spawnedtype = pick_weight(AR.ambush_mobs)
 		var/mustype = 1
 		for(var/i in 1 to CLAMP(victims*1,2,3))
 			var/spawnloc = pick(possible_targets)
