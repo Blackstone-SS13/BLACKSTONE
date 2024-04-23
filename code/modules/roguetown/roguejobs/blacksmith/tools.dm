@@ -23,7 +23,6 @@
 	if(locate(/obj/machinery/anvil) in attacked_object.loc)
 		repair_percent *= 2 // Double the repair amount if we're using an anvil
 	var/exp_gained = 0
-
 	if(isitem(attacked_object))
 		var/obj/item/attacked_item = attacked_object
 		if(!attacked_item.anvilrepair || (attacked_item.obj_integrity >= attacked_item.max_integrity) || !isturf(attacked_item.loc))
