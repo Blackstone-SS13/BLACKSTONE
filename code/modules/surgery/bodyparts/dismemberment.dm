@@ -84,6 +84,8 @@
 	var/mob/living/carbon/C = owner
 	if(!dismemberable)
 		return FALSE
+	if(body_zone == BODY_ZONE_HEAD && (zone_precise != BODY_ZONE_PRECISE_NECK))
+		return FALSE
 	if(skeletonized)
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
