@@ -367,3 +367,38 @@
 	icon_state ="book8_0"
 	base_icon_state = "book8"
 	bookfile = "tales14.json"
+
+/obj/item/book/rogue/playerbook
+	var/player_book_text = "moisture in the air or water leaks have rendered the carefully written caligraphy of this book unreadable"
+	var/player_book_title = "unknown title"
+	var/player_book_author = "unknown author"
+	var/player_book_icon = "basic_book"
+	var/player_book_author_ckey = "unknown"
+	var/is_in_round_player_generated = FALSE
+	var/list/player_book_titles
+	var/list/player_book_content
+	name = "unknown title"
+	desc = "by an unknown author"
+	icon_state = "basic_book_0"
+	base_icon_state = "basic_book"
+	override_find_book = TRUE
+
+/obj/item/book/rogue/playerbook/Initialize()
+	. = ..()
+	if(is_in_round_player_generated)
+		return
+
+	player_book_titles = SSlibrarian.pull_player_book_titles()
+	player_book_title = pick(player_book_titles)
+	player_book_content = SSlibrarian.file2playerbook(player_book_title)
+	player_book_author = player_book_content["author"]
+	player_book_author_ckey = player_book_content["author_ckey"]
+	player_book_icon = player_book_content["icon"]
+	player_book_text = player_book_content["text"]
+
+	name = "[player_book_title]"
+	desc = "By [player_book_author]"
+	icon_state = "[player_book_icon]_0"
+	base_icon_state = "[player_book_icon]"
+
+	pages = list("[player_book_text]")

@@ -27,6 +27,7 @@
 	var/curpage = 1
 	var/textper = 100
 	var/our_font = "Rosemary Roman"
+	var/override_find_book = FALSE
 
 /obj/item/book/attack_self(mob/user)
 	if(!user.can_read(src))
@@ -80,7 +81,8 @@
 		return
 	if(in_range(user, src) || isobserver(user))
 		if(!pages.len)
-			pages = SSlibrarian.get_book(bookfile)
+			if(!override_find_book)
+				pages = SSlibrarian.get_book(bookfile)
 		if(!pages.len)
 			to_chat(user, "<span class='warning'>This book is completely blank.</span>")
 		if(curpage > pages.len)
