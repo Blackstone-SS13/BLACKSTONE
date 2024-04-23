@@ -10,6 +10,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/hearallasghost,
 	/client/proc/admin_ghost,
 	/client/proc/ghost_up,
+	/datum/admins/proc/start_vote,
 	/datum/admins/proc/show_player_panel,
 	/datum/admins/proc/admin_heal,
 	/datum/admins/proc/admin_sleep,

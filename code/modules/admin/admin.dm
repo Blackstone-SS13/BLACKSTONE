@@ -235,6 +235,22 @@
 	message_admins("<span class='danger'>Admin [key_name_admin(usr)] toggled [key_name_admin(M)]'s sleeping state!</span>")
 	log_admin("[key_name(usr)] toggled [key_name(M)]'s sleeping state.")
 
+/datum/admins/proc/start_vote()
+	set name = "Start Vote"
+	set desc = "Start a vote"
+	set category = "Server"
+
+	if(!check_rights())
+		return
+
+	var/type = input("What kind of vote?") as null|anything in list("End Round", "Custom")
+	switch(type)
+		if("End Round")
+			type = "endround"
+		if("Custom")
+			type = "custom"
+	SSvote.initiate_vote(type, usr.key)
+
 /datum/admins/proc/adjustpq(mob/living/M in GLOB.mob_list)
 	set name = "Adjust PQ"
 	set desc = "Adjust a player's PQ"
