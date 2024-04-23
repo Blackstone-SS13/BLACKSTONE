@@ -122,7 +122,7 @@
 				switch(select)
 					if("To Bank")
 						var/mob/living/carbon/human/H = usr
-						SStreasury.generate_money_account(secret_budget, H.real_name)
+						SStreasury.generate_money_account(secret_budget, H)
 						secret_budget = 0
 					if("Direct")
 						if(secret_budget > 0)

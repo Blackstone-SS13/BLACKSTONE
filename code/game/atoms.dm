@@ -90,6 +90,14 @@
 
 	var/list/alternate_appearances
 
+	///Boolean variable for toggleable lights. Has no effect without the proper light_system, light_range and light_power values.
+	var/light_on = TRUE
+	///Light systems, both shouldn't be active at the same time.
+	var/light_system = STATIC_LIGHT
+	///Bitflags to determine lighting-related atom properties.
+	var/light_flags = NONE
+	
+
 /**
   * Called when an atom is created in byond (built in engine proc)
   *
@@ -158,7 +166,7 @@
 	if(color)
 		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 
-	if (light_power && light_range)
+	if (light_system == STATIC_LIGHT && light_power && light_range)
 		update_light()
 
 	if (opacity && isturf(loc))
@@ -595,7 +603,7 @@
   */
 /atom/proc/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	if(density && !has_gravity(AM)) //thrown stuff bounces off dense stuff in no grav, unless the thrown stuff ends up inside what it hit(embedding, bola, etc...).
-		addtimer(CALLBACK(src, .proc/hitby_react, AM), 2)
+		addtimer(CALLBACK(src, PROC_REF(hitby_react), AM), 2)
 
 /**
   * We have have actually hit the passed in atom
@@ -752,7 +760,7 @@
 	var/list/things = src_object.contents()
 	var/datum/progressbar/progress = new(user, things.len, src)
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	while (do_after(user, 10, TRUE, src, FALSE, CALLBACK(STR, /datum/component/storage.proc/handle_mass_item_insertion, things, src_object, user, progress)))
+	while (do_after(user, 10, TRUE, src, FALSE, CALLBACK(STR, TYPE_PROC_REF(/datum/component/storage, handle_mass_item_insertion), things, src_object, user, progress)))
 		stoplag(1)
 	qdel(progress)
 	to_chat(user, "<span class='notice'>I dump as much of [src_object.parent]'s contents [STR.insert_preposition]to [src] as I can.</span>")
@@ -939,7 +947,7 @@
 						if(!valid_id)
 							to_chat(usr, "<span class='warning'>A reagent with that ID doesn't exist!</span>")
 				if("Choose from a list")
-					chosen_id = input(usr, "Choose a reagent to add.", "Choose a reagent.") as null|anything in sortList(subtypesof(/datum/reagent), /proc/cmp_typepaths_asc)
+					chosen_id = input(usr, "Choose a reagent to add.", "Choose a reagent.") as null|anything in sortList(subtypesof(/datum/reagent), GLOBAL_PROC_REF(cmp_typepaths_asc))
 				if("I'm feeling lucky")
 					chosen_id = pick(subtypesof(/datum/reagent))
 			if(chosen_id)

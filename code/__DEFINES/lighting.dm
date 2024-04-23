@@ -1,3 +1,13 @@
+///Object doesn't use any of the light systems. Should be changed to add a light source to the object.
+#define NO_LIGHT_SUPPORT 0
+///Light made with the lighting datums, applying a matrix.
+#define STATIC_LIGHT 1
+///Light made by masking the lighting darkness plane.
+#define MOVABLE_LIGHT 2
+
+///Is a movable light source attached to another movable (its loc), meaning that the lighting component should go one level deeper.
+#define LIGHT_ATTACHED (1<<0)
+
 //Bay lighting engine shit, not in /code/modules/lighting because BYOND is being shit about it
 #define LIGHTING_INTERVAL       5 // frequency, in 1/10ths of a second, of the lighting process
 
@@ -117,5 +127,3 @@ GLOBAL_LIST_INIT(em_mask_matrix, EM_MASK_MATRIX)
 
 /// Returns the blue part of a #RRGGBB hex sequence as number
 #define GETBLUEPART(hexa) hex2num(copytext(hexa, 6, 8))
-
-#define TYPE_PROC_REF(TYPE, X) (##TYPE.proc/##X) //BYOND version compatability nonsence that probably dosent work.

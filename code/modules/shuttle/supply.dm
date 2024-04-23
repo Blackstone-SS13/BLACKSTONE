@@ -86,7 +86,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 		testing("docked away")
 		sell()
 		buy()
-		addtimer(CALLBACK(SSshuttle, /datum/controller/subsystem/shuttle/.proc/moveShuttle, "supply", "supply_home", TRUE), 100)
+		addtimer(CALLBACK(SSshuttle, TYPE_PROC_REF(/datum/controller/subsystem/shuttle, moveShuttle), "supply", "supply_home", TRUE), 100)
 
 /obj/docking_port/mobile/supply/proc/buy()
 	var/list/obj/cat_boxes = list()
@@ -190,7 +190,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 	for(var/area/shuttle/supply/buy/shuttle_area in shuttle_areas)
 		for(var/turf/open/floor/T in shuttle_area)
 			general_turfs += T
-			new /obj/item/book/rogue/ledger(pick(general_turfs))
+			new /obj/item/book/rogue/secret/ledger(pick(general_turfs))
 
 /obj/docking_port/mobile/supply/proc/sell()
 	var/msg = ""

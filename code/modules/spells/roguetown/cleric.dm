@@ -50,8 +50,10 @@
 	var/datum/patrongods/A = H.PATRON
 	var/spelllist = list(A.t0, A.t1)
 	level = CLERIC_T1
-	for(var/C in spelllist)
-		H.mind.AddSpell(new C) 
+	for(var/spell in spelllist)
+		if(H.mind.has_spell(spell))
+			continue
+		H.mind.AddSpell(new spell)
 
 // General
 /obj/effect/proc_holder/spell/invoked/heal/lesser
@@ -64,6 +66,7 @@
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	sound = 'sound/magic/heal.ogg'
+	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
@@ -113,6 +116,7 @@
 	chargedloop = null
 	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/heal.ogg'
+	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
@@ -177,7 +181,7 @@
 			return FALSE
 		L.adjust_fire_stacks(5)
 		L.IgniteMob()
-		addtimer(CALLBACK(L, /mob/living/proc/ExtinguishMob), 4 SECONDS)
+		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, ExtinguishMob)), 4 SECONDS)
 		return TRUE
 
 	// Spell interaction with ignitable objects (burn wooden things, light torches up)
@@ -210,6 +214,8 @@
 	charge_max = 1 MINUTES
 	miracle = TRUE
 	devotion_cost = -100
+	/// Amount of PQ gained for reviving people
+	var/revive_pq = 0.25
 
 /obj/effect/proc_holder/spell/invoked/revive/cast(list/targets, mob/living/user)
 	..()
@@ -235,6 +241,9 @@
 					target.emote("breathgasp")
 					target.Jitter(100)
 					to_chat(target, "<span class='notice'>I awake from the void.</span>")
+					if(revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
+						adjust_playerquality(revive_pq, user.ckey)
+						ADD_TRAIT(target, TRAIT_IWASREVIVED, "[type]")
 					return TRUE
 			target.visible_message("<span class='warning'>Nothing happens.</span>")
 			return FALSE
@@ -271,20 +280,20 @@
 	miracle = TRUE
 	devotion_cost = -15
 
-/obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets,mob/user = usr)
-	for(var/obj/structure/closet/dirthole/H in view(1))
-		if(H.stage != 4)
-			continue
-		if(!H.contents)
-			continue
-		for(var/mob/living/carbon/human/A in H.contents)
-			A.funeral = TRUE
-			if(A.mind && A.mind.has_antag_datum(/datum/antagonist/zombie))
-				A.mind.remove_antag_datum(/datum/antagonist/zombie)
-			user.visible_message("My funeral rites have been performed!", "[user] consecrates the grave!")
-		for(var/obj/structure/closet/crate/coffin/C)
-			for(var/mob/living/carbon/human/B in C.contents)
-				B.funeral = TRUE
+/obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets, mob/user = usr)
+	. = ..()
+	var/success = FALSE
+	for(var/obj/structure/closet/crate/coffin/coffin in view(1))
+		success = pacify_coffin(coffin, user)
+		if(success)
+			user.visible_message("My funeral rites have been performed on [coffin]!", "[user] consecrates [coffin]!")
+			return
+	for(var/obj/structure/closet/dirthole/hole in view(1))
+		success = pacify_coffin(hole, user)
+		if(success)
+			user.visible_message("My funeral rites have been performed on [hole]!", "[user] consecrates [hole]!")
+			return
+	to_chat(user, "<span class='red'>I failed to perform the rites.</span>")
 
 /obj/effect/proc_holder/spell/targeted/churn
 	name = "Churn Undead"
@@ -394,7 +403,7 @@
 						var/obj/item/flashlight/lantern/shrunken/L = new
 						capturedsoul.put_in_hands(L)
 			user.remove_language(/datum/language_holder/abyssal)
-		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")	
+		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")
 		capturedsoul.Paralyze(1200)
 	else return
 
@@ -441,3 +450,26 @@
 	visible_message("<FONT COLOR='green'>[usr] soothes the beastblood with Dendor's whisper.</FONT><BR>")
 	for(var/mob/living/simple_animal/hostile/retaliate/B in oview(2))
 		B.aggressive = 0
+
+/obj/effect/proc_holder/spell/targeted/conjurglowshroom
+	name = "Fungal Illumination"
+	range = 1
+	overlay_state = "blesscrop"
+	releasedrain = 30
+	charge_max = 300
+	max_targets = 0
+	cast_without_targets = TRUE
+	sound = 'sound/items/dig_shovel.ogg'
+	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
+	invocation = null
+	invocation = "Treefather light the way."
+	invocation_type = "whisper" //can be none, whisper, emote and shout
+
+/obj/effect/proc_holder/spell/targeted/conjurglowshroom/cast(list/targets,mob/user = usr)
+	var/turf/T = user.loc
+	for(var/X in GLOB.cardinals)
+		var/turf/TT = get_step(T, X)
+		if(!isclosedturf(TT))
+			new /obj/structure/glowshroom(TT)
+	return TRUE

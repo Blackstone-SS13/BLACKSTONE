@@ -15,7 +15,7 @@
 	bypass_lastclass = FALSE
 	whitelist_req = FALSE
 	min_pq = 2
-	give_bank_account = 10000
+	give_bank_account = 1000
 	required = TRUE
 
 /datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
@@ -23,7 +23,7 @@
 	if(L)
 		SSticker.select_ruler()
 		to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is King of Rockhill.</span></span></b>")
-		addtimer(CALLBACK(L, /mob/.proc/lord_color_choice), 50)
+		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
 
 
 /datum/outfit/job/roguetown/lord/pre_equip(mob/living/carbon/human/H)
@@ -40,6 +40,8 @@
 		id = /obj/item/clothing/ring/active/nomag
 		l_hand = /obj/item/rogueweapon/lordscepter
 		if(H.mind)
+			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
+			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)

@@ -25,6 +25,7 @@
 #define TRAIT_LIMPDICK 				"limp_dick"
 #define TRAIT_SEXPASS				"sexpass"
 #define TRAIT_STEELHEARTED 			"steelhearted" //no bad mood from dismembering or seeing this
+#define TRAIT_IWASREVIVED "iwasrevived" //prevents PQ gain from reviving the same person twice
 
 GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_WEBWALK = "I can move freely between webs.",
@@ -204,6 +205,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_XENO_IMMUNE		"xeno_immune"//prevents xeno huggies implanting skeletons
 #define TRAIT_NOPAIN			"no_pain"
 #define TRAIT_DRUQK				"druqk"
+#define TRAIT_BURIED_COIN_GIVEN "buried_coin_given" // prevents a human corpse from being used for a corpse multiple times
 
 //non-mob traits
 #define TRAIT_PARALYSIS			"paralysis" //Used for limb-based paralysis, where replacing the limb will fix it
@@ -303,3 +305,4 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define SLEEPING_CARP_TRAIT "sleeping_carp"
 #define MADE_UNCLONEABLE "made-uncloneable"
 #define TIMESTOP_TRAIT "timestop"
+#define ADVENTURER_HUGBOX_TRAIT "adventurer_hugbox"

@@ -53,8 +53,12 @@
 		return
 	if(prob(25))
 		category = null
-	var/c = category? " AND category='[sanitizeSQL(category)]'" :""
-	var/datum/DBQuery/query_get_random_books = SSdbcore.NewQuery("SELECT * FROM [format_table_name("library")] WHERE isnull(deleted)[c] GROUP BY title ORDER BY rand() LIMIT [amount];") // isdeleted copyright (c) not me
+	var/datum/DBQuery/query_get_random_books = SSdbcore.NewQuery({"
+		SELECT author, title, content
+		FROM [format_table_name("library")]
+		WHERE isnull(deleted) AND (:category IS NULL OR category = :category)
+		ORDER BY rand() LIMIT :limit
+	"}, list("category" = category, "limit" = amount))
 	if(query_get_random_books.Execute())
 		while(query_get_random_books.NextRow())
 			var/obj/item/book/B = new(location)
@@ -70,9 +74,12 @@
 	var/list/possible_books = subtypesof(/obj/item/book/rogue/)
 	for(var/b in 1 to amount)
 		var/obj/item/book/rogue/addition = pick(possible_books)
-		if(istype(addition, /obj/item/book/rogue/secret))
+		var/obj/item/book/rogue/newbook = new addition(location)
+		if(istype(newbook, /obj/item/book/rogue/secret))
+			qdel(newbook)
 			continue
-		new addition(location)
+		if(prob(50))
+			newbook.bookfile = "ruined.json"
 
 
 /obj/structure/bookcase/random/fiction

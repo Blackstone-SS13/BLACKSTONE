@@ -40,12 +40,17 @@ GLOBAL_VAR(restart_counter)
 	//SetupLogs depends on the RoundID, so lets check
 	//DB schema and set RoundID if we can
 //	SSdbcore.CheckSchemaVersion()
-//	SSdbcore.SetRoundID()
+	SSdbcore.SetRoundID()
 	var/timestamp = replacetext(time_stamp(), ":", ".")
 
-	GLOB.rogue_round_id = "[pick(GLOB.roundid)][rand(0,9)][rand(0,9)][rand(0,9)]-[timestamp]"
+	if(!GLOB.round_id) // we do not have a db connected, back to pointless random numbers
+		GLOB.rogue_round_id = "[pick(GLOB.roundid)][rand(0,9)][rand(0,9)][rand(0,9)]-[timestamp]"
+	else // We got a db connected, GLOB.round_id ticks up based on where its at on the db.
+		GLOB.rogue_round_id = "[pick(GLOB.roundid)][GLOB.round_id]-[timestamp]"
 	SetupLogs()
-	send2chat("<@&1229725256290144258> New round starting!", "new-round-ping")
+	load_poll_data()
+	if(CONFIG_GET(string/channel_announce_new_game_message))
+		send2chat(new /datum/tgs_message_content(CONFIG_GET(string/channel_announce_new_game_message)), CONFIG_GET(string/chat_announce_new_game))
 
 #ifndef USE_CUSTOM_ERROR_HANDLER
 	world.log = file("[GLOB.log_directory]/dd.log")
@@ -93,11 +98,11 @@ GLOBAL_VAR(restart_counter)
 	CONFIG_SET(number/round_end_countdown, 0)
 	var/datum/callback/cb
 #ifdef UNIT_TESTS
-	cb = CALLBACK(GLOBAL_PROC, /proc/RunUnitTests)
+	cb = CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(RunUnitTests))
 #else
 	cb = VARSET_CALLBACK(SSticker, force_ending, TRUE)
 #endif
-	SSticker.OnRoundstart(CALLBACK(GLOBAL_PROC, /proc/addtimer, cb, 10 SECONDS))
+	SSticker.OnRoundstart(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(addtimer), cb, 10 SECONDS))
 
 /world/proc/SetupExternalRSC()
 #if (PRELOAD_RSC == 0)
@@ -156,10 +161,6 @@ GLOBAL_VAR(restart_counter)
 	GLOB.world_paper_log = "[GLOB.log_directory]/paper.log"
 	GLOB.tgui_log = "[GLOB.log_directory]/tgui.log"
 
-#ifdef UNIT_TESTS
-	GLOB.test_log = file("[GLOB.log_directory]/tests.log")
-	start_log(GLOB.test_log)
-#endif
 	start_log(GLOB.world_game_log)
 	start_log(GLOB.world_attack_log)
 	start_log(GLOB.world_pda_log)
@@ -186,32 +187,8 @@ GLOBAL_VAR(restart_counter)
 	log_runtime(GLOB.revdata.get_log_message())
 
 /world/Topic(T, addr, master, key)
-	var/list/input = params2list(T)
+	TGS_TOPIC //redirect to server tools if necessary
 
-	if(!("botpassword" in input))
-		return
-	else
-		if(input["botpassword"] != "MACHINETONGUE")
-			return
-//		if("discord" in input)
-//			register_discord(input["discord"]) //looks for the ckey and registers it
-		if("status" in input)
-			var/list/s = list()
-
-			if(SSticker.current_state <= GAME_STATE_PREGAME)
-				s["inlobby"] = 1
-			else
-				s["inlobby"] = 2
-
-			var/player_count = 0
-			for(var/client/C in GLOB.clients)
-				player_count++
-			s["players"] = player_count
-
-			return list2params(s)
-
-//	TGS_TOPIC	//redirect to server tools if necessary
-/*
 	var/static/list/topic_handlers = TopicHandlers()
 
 	var/list/input = params2list(T)
@@ -228,7 +205,7 @@ GLOBAL_VAR(restart_counter)
 		return
 
 	handler = new handler()
-	return handler.TryRun(input)*/
+	return handler.TryRun(input)
 
 
 /world/proc/AnnouncePR(announcement, list/payload)
@@ -295,7 +272,7 @@ GLOBAL_VAR(restart_counter)
 		return
 
 	if(TgsAvailable())
-		send2chat("Round ending!", "new-round-ping")
+		send2chat(new /datum/tgs_message_content("Round ending!"), CONFIG_GET(string/chat_announce_new_game))
 		testing("tgsavailable passed")
 		var/do_hard_reboot
 		// check the hard reboot counter

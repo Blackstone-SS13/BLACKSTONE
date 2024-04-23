@@ -248,7 +248,7 @@
 	transfer_antag_huds(hud_to_transfer)				//inherit the antag HUD
 	transfer_actions(new_character)
 	transfer_martial_arts(new_character)
-	RegisterSignal(new_character, COMSIG_MOB_DEATH, .proc/set_death_time)
+	RegisterSignal(new_character, COMSIG_MOB_DEATH, PROC_REF(set_death_time))
 	if(active || force_key_move)
 		testing("dotransfer to [new_character]")
 		new_character.key = key		//now transfer the key to link the client to our new body
@@ -860,6 +860,15 @@
 	spell_list += S
 	S.action.Grant(current)
 
+/datum/mind/proc/has_spell(spell_type)
+	if(istype(spell_type, /obj/effect/proc_holder))
+		var/obj/instanced_spell = spell_type
+		spell_type = instanced_spell.type
+	for(var/obj/effect/proc_holder/spell as anything in spell_list)
+		if(istype(spell, spell_type))
+			return TRUE
+	return FALSE
+
 /datum/mind/proc/owns_soul()
 	return soulOwner == src
 
@@ -905,7 +914,7 @@
 				continue
 		S.charge_counter = delay
 		S.updateButtonIcon()
-		INVOKE_ASYNC(S, /obj/effect/proc_holder/spell.proc/start_recharge)
+		INVOKE_ASYNC(S, TYPE_PROC_REF(/obj/effect/proc_holder/spell, start_recharge))
 
 /datum/mind/proc/get_ghost(even_if_they_cant_reenter, ghosts_with_clients)
 	for(var/mob/dead/observer/G in (ghosts_with_clients ? GLOB.player_list : GLOB.dead_mob_list))

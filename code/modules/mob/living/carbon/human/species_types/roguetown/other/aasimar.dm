@@ -14,7 +14,7 @@
 	Rockhills populace holds them with a mixture of uneasy fear or, and respect. \
 	It is also widely believed that an Aasimars death is a bad omen..."
 
-	skin_tone_wording = "Crafted With"
+	skin_tone_wording = "Craft"
 
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,STUBBLE,OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP)
@@ -52,7 +52,7 @@
 
 /datum/species/aasimar/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, .proc/handle_speech)
+	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 
 /datum/species/aasimar/after_creation(mob/living/carbon/C)

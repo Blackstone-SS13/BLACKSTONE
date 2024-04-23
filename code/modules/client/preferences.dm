@@ -934,7 +934,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 		//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
 		var/datum/job/lastJob
-		for(var/datum/job/job in sortList(SSjob.occupations, /proc/cmp_job_display_asc))
+		for(var/datum/job/job in sortList(SSjob.occupations, GLOBAL_PROC_REF(cmp_job_display_asc)))
 			if(!job.total_positions && !job.spawn_positions)
 				continue
 
@@ -1160,7 +1160,7 @@ Slots: [job.spawn_positions]</span>
 			var/used_name = "[job.title]"
 			if(gender == FEMALE && job.f_title)
 				used_name = "[job.f_title]"
-			to_chat(user, "<font color='red'>Warning: You have too low PQ to normally roll for [used_name], you may only roll for it if there are no eligible players.</font>")
+			to_chat(user, "<font color='red'>You have too low PQ for [used_name] (Min PQ: [job.min_pq]), you may only set it to low.</font>")
 			jpval = JP_LOW
 
 	SetJobPreferenceLevel(job, jpval)

@@ -3,8 +3,8 @@
 	flag = ADVENTURER
 	department_flag = PEASANTS
 	faction = "Station"
-	total_positions = 0
-	spawn_positions = 15
+	total_positions = 30
+	spawn_positions = 30
 	allowed_races = list("Humen",
 	"Elf",
 	"Half-Elf",
@@ -20,6 +20,7 @@
 	display_order = JDO_VILLAGER
 	isvillager = TRUE
 	give_bank_account = TRUE
+
 /*
 /datum/job/roguetown/adventurer/villager/New()
 	. = ..()

@@ -140,6 +140,12 @@
 	results = list(/datum/reagent/water/gross = 2)
 	required_reagents = list(/datum/reagent/water/gross = 1, /datum/reagent/water = 1)
 
+/datum/chemical_reaction/disinfectwater
+	name = "Boiled Water"
+	id = "boilwater"
+	results = list(/datum/reagent/water = 1)
+	required_reagents = list(/datum/reagent/water/gross = 1)
+	required_temp = 374
 
 /datum/reagent/water/on_mob_life(mob/living/carbon/M)
 	if(ishuman(M))
@@ -996,7 +1002,7 @@
 		to_chat(M, "<span class='warning'>I feel unstable...</span>")
 		M.Jitter(2)
 		current_cycle = 1
-		addtimer(CALLBACK(M, /mob/living/proc/bluespace_shuffle), 30)
+		addtimer(CALLBACK(M, TYPE_PROC_REF(/mob/living, bluespace_shuffle)), 30)
 	..()
 
 /mob/living/proc/bluespace_shuffle()
@@ -1651,7 +1657,7 @@
 	var/can_colour_mobs = TRUE
 
 /datum/reagent/colorful_reagent/New()
-	SSticker.OnRoundstart(CALLBACK(src,.proc/UpdateColor))
+	SSticker.OnRoundstart(CALLBACK(src,PROC_REF(UpdateColor)))
 
 /datum/reagent/colorful_reagent/proc/UpdateColor()
 	color = pick(random_color_list)
@@ -1685,7 +1691,7 @@
 	taste_description = "sourness"
 
 /datum/reagent/hair_dye/New()
-	SSticker.OnRoundstart(CALLBACK(src,.proc/UpdateColor))
+	SSticker.OnRoundstart(CALLBACK(src,PROC_REF(UpdateColor)))
 
 /datum/reagent/hair_dye/proc/UpdateColor()
 	color = pick(potential_colors)

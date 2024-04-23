@@ -5,17 +5,31 @@
 
 	switch(alert("Descend to the Underworld?",,"Yes","No"))
 		if("Yes")
+			if(istype(mob, /mob/living/carbon/spirit))
+				//HONEYPOT CODE, REMOVE LATER
+				message_admins("RETARDED MOTHERFUCKER [key] IS TRYING TO CRASH THE SERVER BY SPAWNING 3 GORILLION SPIRITS!")
+				return
+
 			if(istype(mob, /mob/living/carbon/human))
 				var/mob/living/carbon/human/D = mob
 				if(D.buried && D.funeral)
 					D.returntolobby()
 					return
-			for(var/obj/effect/landmark/underworld/A in GLOB.landmarks_list)
+
+				// Check if the player's job is adventurer and reduce current_positions
+				var/datum/job/adventurer_job = SSjob.GetJob("Adventurer")
+				if(adventurer_job && D?.mind?.assigned_role == "Adventurer")
+					adventurer_job.current_positions = max(0, adventurer_job.current_positions - 1)
+					// Store the current time for the player
+					GLOB.adventurer_cooldowns[D?.client?.ckey] = world.time
+
+			for(var/obj/effect/landmark/underworld/A in shuffle(GLOB.landmarks_list))
 				var/mob/living/carbon/spirit/O = new /mob/living/carbon/spirit(A.loc)
 				O.livingname = mob.name
 				O.ckey = ckey
 				O.PATRON = prefs.selected_patron
 				SSdroning.area_entered(get_area(O), O.client)
+				break
 			verbs -= /client/proc/descend
 		if("No")
 			usr << "You have second thoughts."	
@@ -60,20 +74,22 @@
 // shit that eventually will need moved elsewhere
 /obj/item/flashlight/lantern/shrunken
 	name = "shrunken lamp"
+	desc = "A beacon."
 	icon_state = "shrunkenlamp"
 	item_state = "shrunkenlamp"
 	lefthand_file = 'icons/mob/inhands/equipment/mining_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/mining_righthand.dmi'
-	desc = "A beacon."
-	brightness_on = 2			// luminosity when on
+	light_range = 4
+	light_power = 20
+	light_color = LIGHT_COLOR_BLOOD_MAGIC
 
 /obj/item/flashlight/lantern/shrunken/update_brightness(mob/user = null)
 	if(on)
 		icon_state = "[initial(icon_state)]-on"
-		set_light(3, 20, LIGHT_COLOR_BLOOD_MAGIC)
+		set_light_on(TRUE)
 	else
 		icon_state = initial(icon_state)
-		set_light(0)
+		set_light_on(FALSE)
 
 
 /obj/structure/underworld/carriageman
@@ -148,32 +164,44 @@
 	else
 		to_chat(user, "<B><font size=3 color=red>It's LOCKED.</font></B>")
 
-GLOBAL_LIST_EMPTY(underworld_coins)
+GLOBAL_VAR_INIT(underworld_coins, 0)
 
 /obj/item/underworld/coin
 	name = "The Toll"
 	desc = "This is more than just a coin."
 	icon = 'icons/roguetown/underworld/enigma_husks.dmi'
 	icon_state = "soultoken_floor"
+	var/should_track = TRUE
 
 /obj/item/underworld/coin/Initialize()
 	. = ..()
-	GLOB.underworld_coins |= src
+	if(should_track)
+		GLOB.underworld_coins += 1
 
 /obj/item/underworld/coin/Destroy()
-	GLOB.underworld_coins -= src
+	if(should_track)
+		GLOB.underworld_coins -= 1
+	coin_upkeep()
 	return ..()
 
 /obj/item/underworld/coin/pickup(mob/user)
 	..()
+	if(should_track)
+		GLOB.underworld_coins -= 1
+	coin_upkeep()
 	icon_state = "soultoken"
 
 /obj/item/underworld/coin/dropped(mob/user)
 	..()
+	if(should_track)
+		GLOB.underworld_coins += 1
 	icon_state = "soultoken_floor"
 
+/obj/item/underworld/coin/notracking
+	should_track = FALSE
+
 /proc/coin_upkeep()
-	if(length(GLOB.underworld_coins) < 3)
+	if(GLOB.underworld_coins < 3)
 		for(var/obj/effect/landmark/underworldcoin/B in GLOB.landmarks_list)
 			new /obj/item/underworld/coin(B.loc)
 	

@@ -3,17 +3,15 @@
 	flag = KNIGHT
 	department_flag = NOBLEMEN
 	faction = "Station"
-	total_positions = 0
+	total_positions = 2
 	spawn_positions = 2
-
 	allowed_races = list("Humen",
 	"Humen")
 	allowed_sexes = list(MALE)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
-	tutorial = "An elite knight with expert training. You are a Knight with unwavering loyalty to the King and are to protect him at all costs from any threat. Guard the Lord's fancy things. Protect the nobles."
+	tutorial = "A Knight with expert training; Born into petty nobility and raised as a squire from a young age, now you Guard the king as his knight, answer to his commands, and protect his honor. You're wholy dedicated to him, and his safety. Do not fail him."
 	display_order = JDO_KNIGHT
 	whitelist_req = TRUE
-
 	outfit = /datum/outfit/job/roguetown/knight
 	give_bank_account = 22
 	min_pq = 2
@@ -22,11 +20,10 @@
 	..()
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
-		var/prev_name = H.name
 		var/prev_real_name = H.real_name
-		H.name = "Sir [prev_name]"
+		var/prev_name = H.name
 		H.real_name = "Sir [prev_real_name]"
-
+		H.name = "Sir [prev_name]"
 
 /datum/outfit/job/roguetown/knight/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -47,12 +44,12 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		backl = /obj/item/rogueweapon/sword/long
-		H.change_stat("strength", 2)
+		H.change_stat("strength", 4)
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 2)
 		H.change_stat("constitution", 2)
