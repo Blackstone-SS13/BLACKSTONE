@@ -2107,6 +2107,7 @@
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelt.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelthand.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\necromancer.dm"
+#include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\sentinel.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\treasurehunter.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\witchhunter.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\blacksmith.dm"
