@@ -1,6 +1,6 @@
 
 /obj/item/bodypart/proc/can_dismember(obj/item/I)
-	if(dismemberable)
+	if(dismemberable || /obj/item/bodypart/head)
 		return TRUE
 
 /obj/item/bodypart/proc/can_disable(obj/item/I)
@@ -14,12 +14,13 @@
 'sound/combat/dismemberment/dismem (6).ogg')
 
 //Dismember a limb
-/obj/item/bodypart/proc/dismember(dam_type = BRUTE)
+/obj/item/bodypart/proc/dismember(dam_type = BRUTE, zone_precise)
 	if(!owner)
 		return FALSE
 	var/mob/living/carbon/C = owner
 	if(!dismemberable)
-		return FALSE
+		if(zone_precise != BODY_ZONE_PRECISE_NECK)
+			return FALSE
 	if(C.status_flags & GODMODE)
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
