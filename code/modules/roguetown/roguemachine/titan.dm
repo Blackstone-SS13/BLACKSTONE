@@ -1,5 +1,15 @@
 GLOBAL_LIST_EMPTY(outlawed_players)
 GLOBAL_LIST_EMPTY(lord_decrees)
+GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
+
+/proc/initialize_laws_of_the_land()
+	var/list/laws = strings("laws_of_the_land.json", "lawsets")
+	var/list/lawsets_weighted = list()
+	for(var/lawset_name as anything in laws)
+		var/list/lawset = laws[lawset_name]
+		lawsets_weighted[lawset_name] = lawset["weight"]
+	var/chosen_lawset = pickweight(lawsets_weighted)
+	return laws[chosen_lawset]["laws"]
 
 /obj/structure/roguemachine/titan
 	name = "throat"
@@ -91,6 +101,50 @@ GLOBAL_LIST_EMPTY(lord_decrees)
 				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
 				mode = 2
 				return
+			if(findtext(message2recognize, "make law"))
+				if(!SScommunications.can_announce(H))
+					say("I must gather my strength!")
+					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+					return
+				if(notlord || nocrown)
+					say("You are not my master!")
+					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+					return
+				say("Speak and they will obey.")
+				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
+				mode = 4
+				return
+			if(findtext(message2recognize, "remove law"))
+				if(!SScommunications.can_announce(H))
+					say("I must gather my strength!")
+					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+					return
+				if(notlord || nocrown)
+					say("You are not my master!")
+					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+					return
+				var/message_clean = replacetext(message2recognize, "remove law", "")
+				var/law_index = text2num(message_clean) || 0
+				if(!law_index || !GLOB.laws_of_the_land[law_index])
+					say("That law doesn't exist!")
+					return
+				say("That law shall be gone!")
+				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
+				remove_law(law_index)
+				return
+			if(findtext(message2recognize, "purge laws"))
+				if(!SScommunications.can_announce(H))
+					say("I must gather my strength!")
+					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+					return
+				if(notlord || nocrown)
+					say("You are not my master!")
+					playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+					return
+				say("All laws shall be purged!")
+				playsound(src, 'sound/misc/machineyes.ogg', 100, FALSE, -1)
+				purge_laws()
+				return
 			if(findtext(message2recognize, "declare outlaw"))
 				if(notlord || nocrown)
 					say("You are not my master!")
@@ -137,6 +191,9 @@ GLOBAL_LIST_EMPTY(lord_decrees)
 			mode = 0
 		if(3)
 			make_outlaw(H, raw_message)
+			mode = 0
+		if(4)
+			make_law(H, raw_message)
 			mode = 0
 
 /obj/structure/roguemachine/titan/proc/give_tax_popup(mob/living/carbon/human/user)
@@ -215,3 +272,20 @@ GLOBAL_LIST_EMPTY(lord_decrees)
 		return FALSE
 	GLOB.outlawed_players += raw_message
 	priority_announce("[raw_message] has been declared an outlaw and must be captured or slain.", "The King Decrees", 'sound/misc/alert.ogg', "Captain")
+
+/obj/structure/roguemachine/titan/proc/make_law(mob/living/user, raw_message)
+	if(!SScommunications.can_announce(user))
+		return
+	GLOB.laws_of_the_land += raw_message
+	priority_announce("[length(GLOB.laws_of_the_land)]. [raw_message]", "A LAW IS DECLARED", 'sound/misc/lawdeclaration.ogg', "Captain")
+
+/obj/structure/roguemachine/titan/proc/remove_law(law_index)
+	if(!GLOB.laws_of_the_land[law_index])
+		return
+	var/law_text = GLOB.laws_of_the_land[law_index]
+	GLOB.laws_of_the_land -= law_text
+	priority_announce("[law_index]. [law_text]", "A LAW IS ABOLISHED", 'sound/misc/lawdeclaration.ogg', "Captain")
+
+/obj/structure/roguemachine/titan/proc/purge_laws()
+	GLOB.laws_of_the_land = list()
+	priority_announce("All laws of the land have been purged!", "LAWS PURGED", 'sound/misc/lawspurged.ogg', "Captain")
