@@ -2268,7 +2268,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/easy_dismember = HAS_TRAIT(H, TRAIT_EASYDISMEMBER) || affecting.rotted
 	if(prob(probability) || (easy_dismember && prob(probability))) //try twice
 		if(affecting.brute_dam > 0)
-			if(affecting.dismember(I.damtype))
+			if(affecting.dismember(I.damtype, selzone))
 				bloody = 1
 				I.add_mob_blood(H)
 				user.update_inv_hands()
