@@ -1,10 +1,11 @@
 /datum/advclass/necromancer
 	name = "Necromancer"
-	tutorial = "Ostrasized and hunted by society for their dark magics and perversion of life, Necromancers have been known to summon ghosts, ghouls, and zombies; you can not"
+	tutorial = "Ostracized and hunted by society for their dark magics and perversion of life, Necromancers have been known to summon ghosts, ghouls, and zombies; you can not"
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Half-Elf",
 	 "Dark Elf",
-	 "Tiefling")
+	 "Tiefling",
+	 "Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/necromancer
 
 /datum/outfit/job/roguetown/adventurer/necromancer/pre_equip(mob/living/carbon/human/H)

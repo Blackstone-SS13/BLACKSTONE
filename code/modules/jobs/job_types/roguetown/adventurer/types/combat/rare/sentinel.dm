@@ -1,21 +1,19 @@
 //elf ranger
 
-/datum/advclass/sentinal
-	name = "Sentinal"
-	tutorial = "Elvish Sentinals are a specialized group of Rangers known for their mastery of bow and blade alike; their arrows are said to contain poisons from the native trees"
+/datum/advclass/sentinel
+	name = "Sentinel"
+	tutorial = "Elvish Sentinels are a specialized group of Rangers known for their mastery of bow and blade alike; their arrows are said to contain poisons from the native trees"
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Elf",
-	 "Half-Elf",
-	 "Elf")
+	 "Half-Elf")
 	outfit = /datum/outfit/job/roguetown/adventurer/sentinal
 
 /datum/outfit/job/roguetown/adventurer/sentinal/pre_equip(mob/living/carbon/human/H)
 	..()
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/bows, 6, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/bows, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/tanning, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
