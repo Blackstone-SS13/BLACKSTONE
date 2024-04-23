@@ -18,15 +18,17 @@
 	if(!isliving(user) || !user.mind)
 		return
 	var/datum/mind/blacksmith_mind = user.mind
-	var/repair_percent = 0.05 // 5% Repairing per hammer smack
+	var/repair_percent = 0.025 // 2.5% Repairing per hammer smack
+	/// Repairing is MUCH better with an anvil!
+	if(locate(/obj/machinery/anvil) in attacked_object.loc)
+		repair_percent *= 2 // Double the repair amount if we're using an anvil
 	var/exp_gained = 0
-
 	if(isitem(attacked_object))
 		var/obj/item/attacked_item = attacked_object
-		if(!attacked_item.anvilrepair || attacked_item.max_integrity || !isturf(attacked_item.loc))
+		if(!attacked_item.anvilrepair || (attacked_item.obj_integrity >= attacked_item.max_integrity) || !isturf(attacked_item.loc))
 			return
-		if(!attacked_item.obj_integrity)
-			user.visible_message("<span class='warning'>[attacked_item] is broken!</span>")
+		if(attacked_item.obj_integrity <= 0)
+			user.visible_message("<span class='warning'>[attacked_item] is broken! I cannot fix it...</span>")
 			return
 
 		if(blacksmith_mind.get_skill_level(attacked_item.anvilrepair) > 0)

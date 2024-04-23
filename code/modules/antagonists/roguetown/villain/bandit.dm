@@ -119,6 +119,7 @@
 	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 	beltl = /obj/item/quiver/bolts
 	mask = /obj/item/clothing/mask/rogue/facemask/steel
+	head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 1)
