@@ -27,7 +27,7 @@
 	. = ..()
 	. += "<b>THE LAWS OF THE LAND:</b>"
 	if(!length(GLOB.laws_of_the_land))
-		. += "<span class='danger'>The land has no laws!</span>"
+		. += "<span class='danger'>The land has no laws! <b>We are doomed!</b></span>"
 		return
 	if(!user.is_literate())
 		. += "<span class='warning'>Uhhh... I can't read them...</span>"
