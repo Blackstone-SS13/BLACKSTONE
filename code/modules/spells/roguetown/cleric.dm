@@ -457,7 +457,7 @@
 	charge_max = 300
 	max_targets = 0
 	cast_without_targets = TRUE
-	sound = 'sound/item/dig_shovel.ogg'
+	sound = 'sound/items/dig_shovel.ogg'
 	associated_skill = /datum/skill/magic/holy
 	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	invocation = null
