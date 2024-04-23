@@ -254,9 +254,7 @@
 		else
 			to_chat(user, "<span class='warning'>You point at [O], but it fails to catch fire.</span>")
 			return FALSE
-
-	else
-		return FALSE
+	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/revive
 	name = "Anastasis"
@@ -327,8 +325,7 @@
 	if(!found)
 		to_chat(user, "<span class='warning'>I need a holy cross.</span>")
 		return FALSE
-	else
-		return TRUE
+	return TRUE
 
 
 // Necrite
@@ -472,8 +469,6 @@
 			user.remove_language(/datum/language_holder/abyssal)
 		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")
 		capturedsoul.Paralyze(1200)
-	else return
-
 
 // Druid
 
