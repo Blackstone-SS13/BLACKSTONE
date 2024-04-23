@@ -323,7 +323,7 @@
 "VA" = (/obj/effect/landmark/start/bogguardsman,/turf/open/floor/rogue/dirt/road,/area/rogue/outdoors/woods)
 "VW" = (/obj/structure/fluff/railing/stonehedge,/turf/open/floor/rogue/grass,/area/rogue/outdoors/woods)
 "Wy" = (/turf/closed/mineral/random/rogue,/area/rogue/outdoors/caves)
-"WD" = (/obj/structure/table/wood{icon_state = "tablewood1"},/obj/item/storage/box/matches,/turf/open/floor/rogue/woodturned,/area/rogue/outdoors/woods)
+"WD" = (/obj/structure/table/wood{icon_state = "tablewood1"},/turf/open/floor/rogue/woodturned,/area/rogue/outdoors/woods)
 "WW" = (/turf/open/floor/rogue/cobblerock,/area/rogue/indoors)
 "WY" = (/obj/structure/roguemachine/scomm,/turf/open/floor/rogue/grass,/area/rogue/outdoors/woods)
 "WZ" = (/obj/machinery/light/rogue/torchholder{icon_state = "torchwall1"; dir = 8},/turf/open/floor/rogue/blocks{icon_state = "paving"},/area/rogue/indoors)
