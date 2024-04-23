@@ -375,30 +375,181 @@
 	var/player_book_icon = "basic_book"
 	var/player_book_author_ckey = "unknown"
 	var/is_in_round_player_generated = FALSE
+	var/mob/living/in_round_player_mob = null
 	var/list/player_book_titles
 	var/list/player_book_content
+	var/list/book_icons = list(
+	"Sickly green with embossed bronze" = "book8",
+	"White with embossed obsidian" = "book7",
+	"Black with embossed quartz" = "book6",
+	"Blue with embossed ruby" = "book5",
+	"Green with embossed amethyst" = "book4",
+	"Purple with embossed emerald" = "book3",
+	"Red with embossed sapphire" = "book2",
+	"Brown with embossed gold" = "book1",
+	"Brown without embossed material" = "basic_book")
 	name = "unknown title"
 	desc = "by an unknown author"
 	icon_state = "basic_book_0"
 	base_icon_state = "basic_book"
 	override_find_book = TRUE
-
+	
 /obj/item/book/rogue/playerbook/Initialize()
 	. = ..()
 	if(is_in_round_player_generated)
-		return
+		player_book_author_ckey = in_round_player_mob.ckey
+		player_book_title = sanitize_hear_message(input(in_round_player_mob, "What title do you want to give the book?", "Title", "Unknown"))
+		player_book_author = "[sanitize_hear_message(input(in_round_player_mob, "Do you want to preface your author name with an author title?", "Author Title", ""))] [in_round_player_mob.real_name]"
+		player_book_icon = input(in_round_player_mob, "Choose a book style", "Book Style") as anything in book_icons
+		message_admins("[player_book_author_ckey]([in_round_player_mob.real_name]) has generated the player book: [player_book_title]")
 
-	player_book_titles = SSlibrarian.pull_player_book_titles()
-	player_book_title = pick(player_book_titles)
-	player_book_content = SSlibrarian.file2playerbook(player_book_title)
-	player_book_author = player_book_content["author"]
-	player_book_author_ckey = player_book_content["author_ckey"]
-	player_book_icon = player_book_content["icon"]
-	player_book_text = player_book_content["text"]
+	else
+		player_book_titles = SSlibrarian.pull_player_book_titles()
+		player_book_title = pick(player_book_titles)
+		player_book_content = SSlibrarian.file2playerbook(player_book_title)
+		player_book_author = player_book_content["author"]
+		player_book_author_ckey = player_book_content["author_ckey"]
+		player_book_icon = player_book_content["icon"]
+		player_book_text = player_book_content["text"]
 
 	name = "[player_book_title]"
 	desc = "By [player_book_author]"
 	icon_state = "[player_book_icon]_0"
 	base_icon_state = "[player_book_icon]"
 
-	pages = list("[player_book_text]")
+	pages = list("<b3><h3>Title:[player_book_title]<br>Author:[player_book_author]</b><h3>[player_book_text]")
+
+/obj/item/manuscript
+	name = "2 page manuscript"
+	desc = "A 2 page written piece, with aspirations of becoming a book."
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "manuscript"
+	dir = 2
+	resistance_flags = FLAMMABLE
+	var/number_of_pages = 2
+	var/compiled_pages = null
+	var/list/page_texts = list()
+
+/obj/item/manuscript/attackby(obj/item/I, mob/living/user)
+	// why is a book crafting kit using the craft system, but crafting a book isn't? Well the crafting system for *some reason* is made in such a way as to make reworking it to allow you to put reqs vars in the crafted item near *impossible.*
+	if(istype(I, /obj/item/book_crafting_kit))
+		var/obj/item/book/rogue/playerbook/PB = new /obj/item/book/rogue/playerbook(get_turf(I.loc))
+		qdel(I)
+		if(user.Adjacent(PB))
+			PB.add_fingerprint(user)
+			user.put_in_hands(PB)
+		PB.is_in_round_player_generated = TRUE
+		PB.in_round_player_mob = user
+		var/sanitize_list = list("\n"="", "\t"="", "<"="", ">"="")
+		sanitize_simple(compiled_pages, sanitize_list)
+		PB.player_book_text = compiled_pages
+
+	if(!istype(I, /obj/item/paper))
+		return
+	var/obj/item/paper/P = I
+	if(!(P.info))
+		to_chat(user, "the paper needs to contain text to be added to a manuscript!")
+		return
+	if(number_of_pages == 8)
+		to_chat(user, "The manuscript pile cannot surpass 8 pages!")
+		return
+
+	++number_of_pages
+	name = "[number_of_pages] page manuscript"
+	desc = "A [number_of_pages] page written piece, with aspirations of becoming a book."
+	page_texts += P.info
+	compiled_pages += "<p>[P.info]</p>"
+	qdel(P)
+
+	update_icon()
+	return ..()
+
+/obj/item/manuscript/examine(mob/user)
+	. = ..()
+	. += "<a href='?src=[REF(src)];read=1'>Read</a>"
+
+/obj/item/manuscript/Topic(href, href_list)
+	..()
+
+	if(!usr)
+		return
+
+	if(href_list["close"])
+		var/mob/user = usr
+		if(user?.client && user.hud_used)
+			if(user.hud_used.reads)
+				user.hud_used.reads.destroy_read()
+			user << browse(null, "window=reading")
+
+	var/literate = usr.is_literate()
+	if(!usr.canUseTopic(src, BE_CLOSE, literate))
+		return
+
+	if(href_list["read"])
+		read(usr)
+
+/obj/item/manuscript/attack_self(mob/user)
+	read(user)
+
+/obj/item/manuscript/proc/read(mob/user)
+	user << browse_rsc('html/book.png')
+	if(!user.client || !user.hud_used)
+		return
+	if(!user.hud_used.reads)
+		return
+	if(!user.can_read(src))
+		return
+	if(in_range(user, src) || isobserver(user))
+		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
+					<html><head><style type=\"text/css\">
+					body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
+		dat += compiled_pages
+		dat += "<br>"
+		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
+		dat += "</body></html>"
+		user << browse(dat, "window=reading;size=1000x700;can_close=1;can_minimize=0;can_maximize=0;can_resize=0;titlebar=0")
+		onclose(user, "reading", src)
+	else
+		return "<span class='warning'>I'm too far away to read it.</span>"
+
+/obj/item/manuscript/update_icon()
+	. = ..()
+	switch(number_of_pages)
+		if(2)
+			dir = SOUTH
+		if(3)
+			dir = NORTH
+		if(4)
+			dir = EAST
+		if(5)
+			dir = WEST
+		if(6)
+			dir = SOUTHEAST
+		if(7)
+			dir = SOUTHWEST
+		if(8)
+			dir = NORTHWEST
+
+/obj/item/manuscript/fire_act(added, maxstacks)
+	..()
+	if(!(resistance_flags & FIRE_PROOF))
+		add_overlay("paper_onfire_overlay")
+
+/obj/item/manuscript/attack_hand(mob/user)
+	if(istype(user, /mob/living))
+		var/mob/living/L = user
+		var/obj/item/paper/P = new /obj/item/paper(get_turf(src.loc))
+		L.put_in_active_hand(P)
+		P.icon_state = "paperwrite"
+		P.info = page_texts[length(page_texts)]
+		page_texts -= page_texts[length(page_texts)]
+		--number_of_pages
+		for(var/I in page_texts)
+			compiled_pages += "<p>[page_texts[I]]</p>"
+
+
+/obj/item/book_crafting_kit
+	name = "book crafting kit"
+	desc = "Apply on a written manuscript to create a book"
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "book_crafting_kit"

@@ -208,3 +208,11 @@
 
 /obj/item/rogueweapon/shovel/small/crafted
 	sellprice = 5
+
+/datum/crafting_recipe/roguetown/book_crafting_kit
+	name = "book crafting kit"
+	result = /obj/item/book_crafting_kit
+	reqs = list(
+			/obj/item/natural/hide = 2,
+			/obj/item/natural/fibers = 2,
+			/obj/item/needle = 1)
