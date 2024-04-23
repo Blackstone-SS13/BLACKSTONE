@@ -19,8 +19,9 @@
 		return FALSE
 	var/mob/living/carbon/C = owner
 	if(!dismemberable)
-		if(zone_precise != BODY_ZONE_PRECISE_NECK)
-			return FALSE
+		return FALSE
+	if(body_zone == BODY_ZONE_HEAD && (zone_precise != BODY_ZONE_PRECISE_NECK))
+		return FALSE
 	if(C.status_flags & GODMODE)
 		return FALSE
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
@@ -83,8 +84,6 @@
 		return FALSE
 	var/mob/living/carbon/C = owner
 	if(!dismemberable)
-		return FALSE
-	if(body_zone == BODY_ZONE_HEAD && (zone_precise != BODY_ZONE_PRECISE_NECK))
 		return FALSE
 	if(skeletonized)
 		return FALSE
