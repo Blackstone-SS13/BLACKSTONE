@@ -126,6 +126,7 @@ GLOBAL_LIST_INIT(youngfolk_positions, list(
 	"Magician's Apprentice",
 	"Churchling",
 	"Servant",
+	"Shophand",
 	"Orphan"
 	))
 
