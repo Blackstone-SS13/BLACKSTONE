@@ -240,7 +240,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	"Priest",
 	"Knight")
 	var/num_marauder = 0
-	if(num_players() >= 0)
+	if(num_players() >= 100)
 		num_marauder = CLAMP(round(num_players() / 2), 30, 40)
 		maraudergoal += (num_marauder * rand(200,400))
 #ifdef TESTSERVER
