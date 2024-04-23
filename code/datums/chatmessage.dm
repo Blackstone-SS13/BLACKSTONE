@@ -117,7 +117,7 @@
 	text = replacetext(text, span_check, "")
 
 	// Clip message
-	var/maxlen = owned_by.prefs.read_preference(/datum/preference/numeric/max_chat_length)
+	var/maxlen = owned_by.prefs.max_chat_length
 	if (length_char(text) > maxlen)
 		text = copytext_char(text, 1, maxlen + 1) + "..." // BYOND index moment
 
@@ -149,13 +149,13 @@
 	else if (extra_classes.Find("emote"))
 		var/image/r_icon = image('icons/ui_icons/chat/chat_icons.dmi', icon_state = "emote")
 		LAZYADD(prefixes, "\icon[r_icon]")
-		chat_color_name_to_use = target.get_visible_name(add_id_name = FALSE) // use face name for nonverbal messages
+		chat_color_name_to_use = target.name //XANTODO update get_visible_name() from TG
 
-	if(isnull(chat_color_name_to_use))
-		if(HAS_TRAIT(target, TRAIT_SIGN_LANG))
-			chat_color_name_to_use = target.get_visible_name(add_id_name = FALSE) // use face name for signers too
-		else
-			chat_color_name_to_use = target.GetVoice() // for everything else, use the target's voice name
+	//if(isnull(chat_color_name_to_use))
+		//if(HAS_TRAIT(target, TRAIT_SIGN_LANG)) XANTODO Sign Language maybe?
+		//	chat_color_name_to_use = target.get_visible_name(add_id_name = FALSE) // use face name for signers too
+		//else
+		//	chat_color_name_to_use = target.GetVoice() // for everything else, use the target's voice name
 
 	// Calculate target color if not already present
 	if (!target.chat_color || target.chat_color_name != chat_color_name_to_use)
@@ -247,11 +247,11 @@
 
 	// Build message image
 	message = image(loc = message_loc, layer = CHAT_LAYER + CHAT_LAYER_Z_STEP * current_z_idx++)
-	SET_PLANE_EXPLICIT(message, RUNECHAT_PLANE, message_loc)
+	message.plane = 30 //SET_PLANE_EXPLICIT(message, RUNECHAT_PLANE, message_loc)
 	message.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
 	message.alpha = 0
 	message.pixel_y = starting_height
-	message.pixel_x = -target.base_pixel_x
+	message.pixel_x = -target.pixel_x //base_pixel_x
 	message.maptext_width = CHAT_MESSAGE_WIDTH
 	message.maptext_height = mheight * 1.25 // We add extra because some characters are superscript, like actions
 	message.maptext_x = (CHAT_MESSAGE_WIDTH - owner.bound_width) * -0.5
@@ -288,7 +288,7 @@
 
 /datum/chatmessage/proc/loc_z_changed(datum/source, turf/old_turf, turf/new_turf, same_z_layer)
 	SIGNAL_HANDLER
-	SET_PLANE(message, RUNECHAT_PLANE, new_turf)
+	//SET_PLANE(message, RUNECHAT_PLANE, new_turf) XANTODO Update with planes
 
 /**
  * Creates a message overlay at a defined location for a given speaker
@@ -300,10 +300,10 @@
  * * spans - Additional classes to be added to the message
  */
 /mob/proc/create_chat_message(atom/movable/speaker, datum/language/message_language, raw_message, list/spans, runechat_flags = NONE)
-	if(SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(speaker, TRAIT_BYPASS_MEASURES))
-		return
-	if(HAS_TRAIT(speaker, TRAIT_RUNECHAT_HIDDEN))
-		return
+	// XANTODO SSLag system ----- if(SSlag_switch.measures[DISABLE_RUNECHAT] && !HAS_TRAIT(speaker, TRAIT_BYPASS_MEASURES))
+		//return
+	// XANTODO These traits: ----- if(HAS_TRAIT(speaker, TRAIT_RUNECHAT_HIDDEN))
+		//return
 	// Ensure the list we are using, if present, is a copy so we don't modify the list provided to us
 	spans = spans ? spans.Copy() : list()
 
