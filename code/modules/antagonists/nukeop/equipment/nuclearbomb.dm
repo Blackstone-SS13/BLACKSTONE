@@ -239,7 +239,7 @@
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "nuclear_bomb", name, ui_x, ui_y, master_ui, state)
-		ui.set_style(ui_style)
+		//ui.set_style(ui_style)
 		ui.open()
 
 /obj/machinery/nuclearbomb/ui_data(mob/user)

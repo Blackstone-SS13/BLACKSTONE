@@ -131,6 +131,14 @@
 	///custom movement keys for this client
 	var/list/movement_keys = list()
 
+	// List of all asset filenames sent to this client by the asset cache, along with their assoicated md5s
+	var/list/sent_assets = list()
+	/// List of all completed blocking send jobs awaiting acknowledgement by send_asset
+	var/list/completed_asset_jobs = list()
+	/// Last asset send job id.
+	var/last_asset_job = 0
+	var/last_completed_asset_job = 0
+
 	/// Messages currently seen by this client
 	var/list/seen_messages
 
@@ -143,6 +151,9 @@
 	var/rain_sound = FALSE
 	var/last_droning_sound
 	var/sound/droning_sound
+
+	/// If this client has been fully initialized or not
+	var/fully_created = FALSE
 
 /client/proc/update_weather(force)
 	if(!mob)

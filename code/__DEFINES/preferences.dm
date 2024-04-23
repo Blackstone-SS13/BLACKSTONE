@@ -136,3 +136,9 @@
 							ALIGNMENT_LE,\
 							ALIGNMENT_NE,\
 							ALIGNMENT_CE)
+
+// Values for /datum/preference/savefile_identifier
+/// This preference is character specific.
+#define PREFERENCE_CHARACTER "character"
+/// This preference is account specific.
+#define PREFERENCE_PLAYER "player"

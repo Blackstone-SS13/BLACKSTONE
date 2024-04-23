@@ -489,6 +489,13 @@
 //	roundend_report.add_stylesheet("font-awesome", 'html/font-awesome/css/all.min.css')
 	roundend_report.open(FALSE)
 
+/client/proc/show_previous_roundend_report()
+	set name = "Your Last Round"
+	set category = "OOC"
+	set desc = ""
+
+	SSticker.show_roundend_report(src, TRUE)
+
 /datum/controller/subsystem/ticker/proc/personal_report(client/C, popcount)
 	var/list/parts = list()
 	var/mob/M = C.mob

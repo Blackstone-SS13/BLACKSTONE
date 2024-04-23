@@ -21,7 +21,41 @@
 	var/motd
 	var/policy
 
+	/// A regex that matches words blocked IC
 	var/static/regex/ic_filter_regex
+
+	/// A regex that matches words blocked OOC
+	var/static/regex/ooc_filter_regex
+
+	/// A regex that matches words blocked IC, but not in PDAs
+	var/static/regex/ic_outside_pda_filter_regex
+
+	/// A regex that matches words soft blocked IC
+	var/static/regex/soft_ic_filter_regex
+
+	/// A regex that matches words soft blocked OOC
+	var/static/regex/soft_ooc_filter_regex
+
+	/// A regex that matches words soft blocked IC, but not in PDAs
+	var/static/regex/soft_ic_outside_pda_filter_regex
+
+	/// An assoc list of blocked IC words to their reasons
+	var/static/list/ic_filter_reasons
+
+	/// An assoc list of words that are blocked IC, but not in PDAs, to their reasons
+	var/static/list/ic_outside_pda_filter_reasons
+
+	/// An assoc list of words that are blocked both IC and OOC to their reasons
+	var/static/list/shared_filter_reasons
+
+	/// An assoc list of soft blocked IC words to their reasons
+	var/static/list/soft_ic_filter_reasons
+
+	/// An assoc list of words that are soft blocked IC, but not in PDAs, to their reasons
+	var/static/list/soft_ic_outside_pda_filter_reasons
+
+	/// An assoc list of words that are soft blocked both IC and OOC to their reasons
+	var/static/list/soft_shared_filter_reasons
 
 /datum/controller/configuration/proc/admin_reload()
 	if(IsAdminAdvancedProcCall())
@@ -52,6 +86,9 @@
 	LoadMOTD()
 	LoadPolicy()
 	LoadChatFilter()
+
+	if (Master)
+		Master.OnConfigLoad()
 
 /datum/controller/configuration/proc/full_wipe()
 	if(IsAdminAdvancedProcCall())
@@ -417,7 +454,56 @@ Example config:
 
 	ic_filter_regex = in_character_filter.len ? regex("\\b([jointext(in_character_filter, "|")])\\b", "i") : null
 
-	syncChatRegexes()
+	update_chat_filter_regexes()
+
+/// Will update the internal regexes of the chat filter based on the filter reasons
+/datum/controller/configuration/proc/update_chat_filter_regexes()
+	ic_filter_regex = compile_filter_regex(ic_filter_reasons + ic_outside_pda_filter_reasons + shared_filter_reasons)
+	ic_outside_pda_filter_regex = compile_filter_regex(ic_filter_reasons + shared_filter_reasons)
+	ooc_filter_regex = compile_filter_regex(shared_filter_reasons)
+	soft_ic_filter_regex = compile_filter_regex(soft_ic_filter_reasons + soft_ic_outside_pda_filter_reasons + soft_shared_filter_reasons)
+	soft_ic_outside_pda_filter_regex = compile_filter_regex(soft_ic_filter_reasons + soft_shared_filter_reasons)
+	soft_ooc_filter_regex = compile_filter_regex(soft_shared_filter_reasons)
+
+/datum/controller/configuration/proc/try_extract_from_word_filter(list/word_filter, key)
+	var/list/banned_words = word_filter[key]
+
+	if (isnull(banned_words))
+		return list()
+	else if (!islist(banned_words))
+		var/message = "The word filter configuration's '[key]' key was invalid, contact someone with configuration access to make sure it's setup properly."
+		log_config(message)
+		DelayedMessageAdmins(message)
+		return list()
+
+	var/list/formatted_banned_words = list()
+
+	for (var/banned_word in banned_words)
+		formatted_banned_words[LOWER_TEXT(banned_word)] = banned_words[banned_word]
+	return formatted_banned_words
+
+/datum/controller/configuration/proc/compile_filter_regex(list/banned_words)
+	if (isnull(banned_words) || banned_words.len == 0)
+		return null
+
+	var/static/regex/should_join_on_word_bounds = regex(@"^\w+$")
+
+	// Stuff like emoticons needs another split, since there's no way to get ":)" on a word bound.
+	// Furthermore, normal words need to be on word bounds, so "(adminhelp)" gets filtered.
+	var/list/to_join_on_whitespace_splits = list()
+	var/list/to_join_on_word_bounds = list()
+
+	for (var/banned_word in banned_words)
+		if (findtext(banned_word, should_join_on_word_bounds))
+			to_join_on_word_bounds += REGEX_QUOTE(banned_word)
+		else
+			to_join_on_whitespace_splits += REGEX_QUOTE(banned_word)
+
+	// We don't want a whitespace_split part if there's no stuff that requires it
+	var/whitespace_split = to_join_on_whitespace_splits.len > 0 ? @"(?:(?:^|\s+)(" + jointext(to_join_on_whitespace_splits, "|") + @")(?:$|\s+))" : ""
+	var/word_bounds = @"(\b(" + jointext(to_join_on_word_bounds, "|") + @")\b)"
+	var/regex_filter = whitespace_split != "" ? "([whitespace_split]|[word_bounds])" : word_bounds
+	return regex(regex_filter, "i")
 
 //Message admins when you can.
 /datum/controller/configuration/proc/DelayedMessageAdmins(text)

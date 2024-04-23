@@ -142,13 +142,13 @@
 /datum/computer_file/program/ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = FALSE, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
 	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
 	if(!ui && tgui_id)
-		var/datum/asset/assets = get_asset_datum(/datum/asset/simple/headers)
+		//var/datum/asset/assets = get_asset_datum(/datum/asset/simple/headers)
 		assets.send(user)
 
 		ui = new(user, src, ui_key, tgui_id, filedesc, ui_x, ui_y, state = state)
 
-		if(ui_style)
-			ui.set_style(ui_style)
+		//if(ui_style)
+			//ui.set_style(ui_style)
 		ui.set_autoupdate(state = 1)
 		ui.open()
 

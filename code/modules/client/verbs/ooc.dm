@@ -1,108 +1,467 @@
 GLOBAL_VAR_INIT(OOC_COLOR, null)//If this is null, use the CSS for OOC. Otherwise, use a custom colour.
 GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
-
-//client/verb/ooc(msg as text)
-
+//XANTODO make sure OOC works I guess
+///talking in OOC uses this
 /client/verb/ooc(msg as text)
 	set name = "OOC" //Gave this shit a shorter name so you only have to time out "ooc" rather than "ooc message" to use it --NeoFite
 	set category = "OOC"
-	set hidden = 1
-	if(GLOB.say_disabled)	//This is here to try to identify lag problems
-		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+
+	if(GLOB.say_disabled) //This is here to try to identify lag problems
+		to_chat(usr, span_danger("Speech is currently admin-disabled."))
 		return
 
-	if(!mob)
+	var/client_initalized = VALIDATE_CLIENT_INITIALIZATION(src)
+	if(isnull(mob) || !client_initalized)
+		if(!client_initalized)
+			unvalidated_client_error() // we only want to throw this warning message when it's directly related to client failure.
+
+		to_chat(usr, span_warning("Failed to send your OOC message. You attempted to send the following message:\n[span_big(msg)]"))
 		return
 
-	if(CONFIG_GET(flag/usewhitelist))
-		if(whitelisted() != 1)
-			to_chat(src, "<span class='danger'>I can't use that.</span>")
-			return
-
-	if(blacklisted())
-		to_chat(src, "<span class='danger'>I can't use that.</span>")
-		return
-
-	if(get_playerquality(ckey) <= -5)
-		to_chat(src, "<span class='danger'>I can't use that.</span>")
-		return
-
-	if(!holder)
+	if(isnull(holder))
 		if(!GLOB.ooc_allowed)
-			to_chat(src, "<span class='danger'>OOC is globally muted.</span>")
+			to_chat(src, span_danger("OOC is globally muted."))
 			return
 		if(!GLOB.dooc_allowed && (mob.stat == DEAD))
-			to_chat(usr, "<span class='danger'>OOC for dead mobs has been turned off.</span>")
+			to_chat(usr, span_danger("OOC for dead mobs has been turned off."))
 			return
 		if(prefs.muted & MUTE_OOC)
-			to_chat(src, "<span class='danger'>I cannot use OOC (muted).</span>")
+			to_chat(src, span_danger("You cannot use OOC (muted)."))
 			return
 	if(is_banned_from(ckey, "OOC"))
-		to_chat(src, "<span class='danger'>I have been banned from OOC.</span>")
+		to_chat(src, span_danger("You have been banned from OOC."))
 		return
 	if(QDELETED(src))
 		return
 
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	msg = trim(copytext_char(sanitize(msg), 1, MAX_MESSAGE_LEN))
 	var/raw_msg = msg
+/*
+	var/list/filter_result = is_ooc_filtered(msg)
+	if (!CAN_BYPASS_FILTER(usr) && filter_result)
+		REPORT_CHAT_FILTER_TO_USER(usr, filter_result)
+		log_filter("OOC", msg, filter_result)
+		return
 
+	// Protect filter bypassers from themselves.
+	// Demote hard filter results to soft filter results if necessary due to the danger of accidentally speaking in OOC.
+	var/list/soft_filter_result = filter_result || is_soft_ooc_filtered(msg)
+
+	if (soft_filter_result)
+		if(alert(usr,"Your message contains \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\". \"[soft_filter_result[CHAT_FILTER_INDEX_REASON]]\", Are you sure you want to say it?", "Soft Blocked Word", list("Yes", "No")) != "Yes")
+			return
+		message_admins("[ADMIN_LOOKUPFLW(usr)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\" they may be using a disallowed term. Message: \"[msg]\"")
+		log_admin_private("[key_name(usr)] has passed the soft filter for \"[soft_filter_result[CHAT_FILTER_INDEX_WORD]]\" they may be using a disallowed term. Message: \"[msg]\"")
+*/
 	if(!msg)
 		return
 
 	msg = emoji_parse(msg)
 
+	if(SSticker.HasRoundStarted() && (msg[1] in list(".",";",":","#") || findtext_char(msg, "say", 1, 5)))
+		if(alert(usr,"Your message \"[raw_msg]\" looks like it was meant for in game communication, say it in OOC?", "Meant for OOC?", list("Yes", "No")) != "Yes")
+			return
 
 	if(!holder)
 		if(handle_spam_prevention(msg,MUTE_OOC))
 			return
 		if(findtext(msg, "byond://"))
-			to_chat(src, "<B>FOOL</B>")
+			to_chat(src, span_boldannounce("<B>Advertising other servers is not allowed.</B>"))
 			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
 			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
 			return
+/*
+	if(!(get_chat_toggles(src) & CHAT_OOC))
+		to_chat(src, span_danger("You have OOC muted."))
+		return
+*/
+	mob.log_talk(raw_msg)
+/*
+	var/keyname = key
+	if(prefs.unlock_content)
+		if(prefs.toggles & MEMBER_PUBLIC)
+			keyname = "<font color='[prefs.read_preference(/datum/preference/color/ooc_color) || GLOB.normal_ooc_colour]'>[icon2html('icons/ui_icons/chat/member_content.dmi', world, "blag")][keyname]</font>"
+	if(prefs.hearted)
+		var/datum/asset/spritesheet/sheet = get_asset_datum(/datum/asset/spritesheet/chat)
+		keyname = "[sheet.icon_tag("emoji-heart")][keyname]"
+	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
+	for(var/client/receiver as anything in GLOB.clients)
+		if(!receiver.prefs) // Client being created or deleted. Despite all, this can be null.
+			continue
+		if(!(get_chat_toggles(receiver) & CHAT_OOC))
+			continue
+		if(holder?.fakekey in receiver.prefs.ignoring)
+			continue
+		var/avoid_highlight = receiver == src
+		if(holder)
+			if(!holder.fakekey || receiver.holder)
+				if(check_rights_for(src, R_ADMIN))
+					var/ooc_color = prefs.read_preference(/datum/preference/color/ooc_color)
+					to_chat(receiver, span_adminooc("[CONFIG_GET(flag/allow_admin_ooccolor) && ooc_color ? "<font color=[ooc_color]>" :"" ][span_prefix("OOC:")] <EM>[keyname][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message linkify'>[msg]</span>"), avoid_highlighting = avoid_highlight)
+				else
+					to_chat(receiver, span_adminobserverooc(span_prefix("OOC:</span> <EM>[keyname][holder.fakekey ? "/([holder.fakekey])" : ""]:</EM> <span class='message linkify'>[msg]")), avoid_highlighting = avoid_highlight)
+			else
+				if(GLOB.OOC_COLOR)
+					to_chat(receiver, "<span class='oocplain'><font color='[GLOB.OOC_COLOR]'><b>[span_prefix("OOC:")] <EM>[holder.fakekey ? holder.fakekey : key]:</EM> <span class='message linkify'>[msg]</span></b></font></span>", avoid_highlighting = avoid_highlight)
+				else
+					to_chat(receiver, span_ooc(span_prefix("OOC:</span> <EM>[holder.fakekey ? holder.fakekey : key]:</EM> <span class='message linkify'>[msg]")), avoid_highlighting = avoid_highlight)
 
-	if(!(prefs.chat_toggles & CHAT_OOC))
-		to_chat(src, "<span class='danger'>I have OOC muted.</span>")
+		else if(!(key in receiver.prefs.ignoring))
+			if(GLOB.OOC_COLOR)
+				to_chat(receiver, "<span class='oocplain'><font color='[GLOB.OOC_COLOR]'><b>[span_prefix("OOC:")] <EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></b></font></span>", avoid_highlighting = avoid_highlight)
+			else
+				to_chat(receiver, span_ooc(span_prefix("OOC:</span> <EM>[keyname]:</EM> <span class='message linkify'>[msg]")), avoid_highlighting = avoid_highlight)
+*/
+
+/proc/toggle_ooc(toggle = null)
+	if(toggle != null) //if we're specifically en/disabling ooc
+		if(toggle != GLOB.ooc_allowed)
+			GLOB.ooc_allowed = toggle
+		else
+			return
+	else //otherwise just toggle it
+		GLOB.ooc_allowed = !GLOB.ooc_allowed
+	to_chat(world, "<span class='oocplain'><B>The OOC channel has been globally [GLOB.ooc_allowed ? "enabled" : "disabled"].</B></span>")
+
+/proc/toggle_dooc(toggle = null)
+	if(toggle != null)
+		if(toggle != GLOB.dooc_allowed)
+			GLOB.dooc_allowed = toggle
+		else
+			return
+	else
+		GLOB.dooc_allowed = !GLOB.dooc_allowed
+
+
+/client/proc/set_ooc()
+	set name = "Set Player OOC Color"
+	set desc = "Modifies player OOC Color"
+	set category = "Server"
+	if(IsAdminAdvancedProcCall())
 		return
 
-	mob.log_talk(raw_msg, LOG_OOC)
+ADMIN_VERB(set_ooc_color, R_FUN, "Set Player OOC Color", "Modifies the global OOC color.", ADMIN_CATEGORY_SERVER)
+	var/newColor = input(user, "Please select the new player OOC color.", "OOC color") as color|null
+	if(isnull(newColor))
+		return
+	var/new_color = sanitize_color(newColor)
+	message_admins("[key_name_admin(user)] has set the players' ooc color to [new_color].")
+	log_admin("[key_name_admin(user)] has set the player ooc color to [new_color].")
+	GLOB.OOC_COLOR = new_color
 
-	var/keyname = ckey
-	if(ckey in GLOB.anonymize)
-		keyname = get_fake_key(ckey)
-//	if(prefs.unlock_content)
-//		if(prefs.toggles & MEMBER_PUBLIC)
-//			keyname = "<font color='[prefs.ooccolor ? prefs.ooccolor : GLOB.normal_ooc_colour]'>[icon2html('icons/member_content.dmi', world, "blag")][keyname]</font>"
-	//The linkify span classes and linkify=TRUE below make ooc text get clickable chat href links if you pass in something resembling a url
+/client/proc/reset_ooc()
+	set name = "Reset Player OOC Color"
+	set desc = "Returns player OOC Color to default"
+	set category = "Server"
+	if(IsAdminAdvancedProcCall())
+		return
+
+ADMIN_VERB(reset_ooc_color, R_FUN, "Reset Player OOC Color", "Returns player OOC color to default.", ADMIN_CATEGORY_SERVER)
+	if(alert(user, "Are you sure you want to reset the OOC color of all players?", "Reset Player OOC Color", list("Yes", "No")) != "Yes")
+		return
+	message_admins("[key_name_admin(user)] has reset the players' ooc color.")
+	log_admin("[key_name_admin(user)] has reset player ooc color.")
+	GLOB.OOC_COLOR = null
+
+//Checks admin notice
+/client/verb/admin_notice()
+	set name = "Adminnotice"
+	set category = "Admin"
+	set desc ="Check the admin notice if it has been set"
+
+	if(GLOB.admin_notice)
+		to_chat(src, "[span_boldnotice("Admin Notice:")]\n \t [GLOB.admin_notice]")
+	else
+		to_chat(src, span_notice("There are no admin notices at the moment."))
+
+/client/verb/motd()
+	set name = "MOTD"
+	set category = "OOC"
+	set desc ="Check the Message of the Day"
+
+	var/motd = global.config.motd
+	if(motd)
+		to_chat(src, "<span class='infoplain'><div class=\"motd\">[motd]</div></span>", handle_whitespace=FALSE)
+	else
+		to_chat(src, span_notice("The Message of the Day has not been set."))
+
+/client/proc/self_notes()
+	set name = "View Admin Remarks"
+	set category = "OOC"
+	set desc = "View the notes that admins have written about you"
+
+	if(!CONFIG_GET(flag/see_own_notes))
+		to_chat(usr, span_notice("Sorry, that function is not enabled on this server."))
+		return
+
+	browse_messages(null, usr.ckey, null, TRUE)
+/*
+/client/proc/self_playtime()
+	set name = "View tracked playtime"
+	set category = "OOC"
+	set desc = "View the amount of playtime for roles the server has tracked."
+
+	if(!CONFIG_GET(flag/use_exp_tracking))
+		to_chat(usr, span_notice("Sorry, tracking is currently disabled."))
+		return
+
+	new /datum/job_report_menu(src, usr)
+*/
+// Ignore verb
+/client/verb/select_ignore()
+	set name = "Ignore"
+	set category = "OOC"
+	set desc ="Ignore a player's messages on the OOC channel"
+
+	// Make a list to choose players from
+	var/list/players = list()
+
+	// Use keys and fakekeys for the same purpose
+	var/displayed_key = ""
+
+	// Try to add every player who's online to the list
 	for(var/client/C in GLOB.clients)
-		var/color2use = prefs.voice_color
-		if(!color2use)
-			color2use = "#FFFFFF"
+		// Don't add ourself
+		if(C == src)
+			continue
+
+		// Don't add players we've already ignored if they're not using a fakekey
+		if((C.key in prefs.ignoring) && !C.holder?.fakekey)
+			continue
+
+		// Don't add players using a fakekey we've already ignored
+		if(C.holder?.fakekey in prefs.ignoring)
+			continue
+
+		// Use the player's fakekey if they're using one
+		if(C.holder?.fakekey)
+			displayed_key = C.holder.fakekey
+
+		// Use the player's key if they're not using a fakekey
 		else
-			color2use = "#[color2use]"
-		var/chat_color = "#c5c5c5"
-		if(C.prefs.chat_toggles & CHAT_OOC)
-			if(holder)
-				to_chat(C, "<font color='[color2use]'><EM>[keyname]:</EM></font> <font color='#4972bc'><span class='message linkify'>[msg]</span></font>")
-			else
-				to_chat(C, "<font color='[color2use]'><EM>[keyname]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>")
+			displayed_key = C.key
 
-//				if(!holder.fakekey || C.holder)
-//					if(check_rights_for(src, R_ADMIN))
-//						to_chat(C, "<span class='adminooc'><EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></span></font>")
-//					else
-//						to_chat(C, "<span class='adminobserverooc'><EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></span>")
-//				else
-//					if(GLOB.OOC_COLOR)
-//						to_chat(C, "<font color='[GLOB.OOC_COLOR]'><b><EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></b></font>")
-//					else
-//						to_chat(C, "<span class='ooc'><EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></span>")
+		// Check if both we and the player are ghosts and they're not using a fakekey
+		if(isobserver(mob) && isobserver(C.mob) && !C.holder?.fakekey)
+			// Show us if the player is a ghost or not after their displayed key
+			// Add the player's displayed key to the list
+			players["[displayed_key](ghost)"] = displayed_key
 
-//			else if(!(key in C.prefs.ignoring))
-//				if(GLOB.OOC_COLOR)
-//					to_chat(C, "<font color='[GLOB.OOC_COLOR]'><b><EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></b></font>")
-//				else
-//					to_chat(C, "<span class='ooc'><EM>[keyname]:</EM> <span class='message linkify'>[msg]</span></span>")
+		// Add the player's displayed key to the list if we or the player aren't a ghost or they're using a fakekey
+		else
+			players[displayed_key] = displayed_key
+
+	// Check if the list is empty
+	if(!length(players))
+		// Express that there are no players we can ignore in chat
+		to_chat(src, "<span class='infoplain'>There are no other players you can ignore!</span>")
+
+		// Stop running
+		return
+
+	// Sort the list
+	players = sort_list(players)
+
+	// Request the player to ignore
+	var/selection = input(src, "Select a player", "Ignore", players)
+
+	// Stop running if we didn't receieve a valid selection
+	if(isnull(selection) || !(selection in players))
+		return
+
+	// Store the selected player
+	selection = players[selection]
+
+	// Check if the selected player is on our ignore list
+	if(selection in prefs.ignoring)
+		// Express that the selected player is already on our ignore list in chat
+		to_chat(src, "<span class='infoplain'>You are already ignoring [selection]!</span>")
+
+		// Stop running
+		return
+
+	// Add the selected player to our ignore list
+	prefs.ignoring.Add(selection)
+
+	// Save our preferences
+	prefs.save_preferences()
+
+	// Express that we've ignored the selected player in chat
+	to_chat(src, "<span class='infoplain'>You are now ignoring [selection] on the OOC channel.</span>")
+
+// Unignore verb
+/client/verb/select_unignore()
+	set name = "Unignore"
+	set category = "OOC"
+	set desc = "Stop ignoring a player's messages on the OOC channel"
+
+	// Check if we've ignored any players
+	if(!length(prefs.ignoring))
+		// Express that we haven't ignored any players in chat
+		to_chat(src, "<span class='infoplain'>You haven't ignored any players!</span>")
+
+		// Stop running
+		return
+
+	// Request the player to unignore
+	var/selection = input(src, "Select a player", "Unignore", prefs.ignoring)
+
+	// Stop running if we didn't receive a selection
+	if(isnull(selection))
+		return
+
+	// Check if the selected player is not on our ignore list
+	if(!(selection in prefs.ignoring))
+		// Express that the selected player is not on our ignore list in chat
+		to_chat(src, "<span class='infoplain'>You are not ignoring [selection]!</span>")
+
+		// Stop running
+		return
+
+	// Remove the selected player from our ignore list
+	prefs.ignoring.Remove(selection)
+
+	// Save our preferences
+	prefs.save_preferences()
+
+	// Express that we've unignored the selected player in chat
+	to_chat(src, "<span class='infoplain'>You are no longer ignoring [selection] on the OOC channel.</span>")
+
+/*
+/client/proc/show_previous_roundend_report()
+	set name = "Your Last Round"
+	set category = "OOC"
+	set desc = "View the last round end report you've seen"
+
+	SSticker.show_roundend_report(src, report_type = PERSONAL_LAST_ROUND)
+
+/client/proc/show_servers_last_roundend_report()
+	set name = "Server's Last Round"
+	set category = "OOC"
+	set desc = "View the last round end report from this server"
+
+	SSticker.show_roundend_report(src, report_type = SERVER_LAST_ROUND)
+
+/client/verb/fit_viewport()
+	set name = "Fit Viewport"
+	set category = "OOC"
+	set desc = "Fit the width of the map window to match the viewport"
+
+	// Fetch aspect ratio
+	var/view_size = getviewsize(view)
+	var/aspect_ratio = view_size[1] / view_size[2]
+
+	// Calculate desired pixel width using window size and aspect ratio
+	var/list/sizes = params2list(winget(src, "mainwindow.split;mapwindow", "size"))
+
+	// Client closed the window? Some other error? This is unexpected behaviour, let's
+	// CRASH with some info.
+	if(!sizes["mapwindow.size"])
+		CRASH("sizes does not contain mapwindow.size key. This means a winget failed to return what we wanted. --- sizes var: [sizes] --- sizes length: [length(sizes)]")
+
+	var/list/map_size = splittext(sizes["mapwindow.size"], "x")
+
+	// Gets the type of zoom we're currently using from our view datum
+	// If it's 0 we do our pixel calculations based off the size of the mapwindow
+	// If it's not, we already know how big we want our window to be, since zoom is the exact pixel ratio of the map
+	var/zoom_value = src.view_size?.zoom || 0
+
+	var/desired_width = 0
+	if(zoom_value)
+		desired_width = round(view_size[1] * zoom_value * world.icon_size)
+	else
+
+		// Looks like we expect mapwindow.size to be "ixj" where i and j are numbers.
+		// If we don't get our expected 2 outputs, let's give some useful error info.
+		if(length(map_size) != 2)
+			CRASH("map_size of incorrect length --- map_size var: [map_size] --- map_size length: [length(map_size)]")
+		var/height = text2num(map_size[2])
+		desired_width = round(height * aspect_ratio)
+
+	if (text2num(map_size[1]) == desired_width)
+		// Nothing to do
+		return
+
+	var/split_size = splittext(sizes["mainwindow.split.size"], "x")
+	var/split_width = text2num(split_size[1])
+
+	// Avoid auto-resizing the statpanel and chat into nothing.
+	desired_width = min(desired_width, split_width - 300)
+
+	// Calculate and apply a best estimate
+	// +4 pixels are for the width of the splitter's handle
+	var/pct = 100 * (desired_width + 4) / split_width
+	winset(src, "mainwindow.split", "splitter=[pct]")
+
+	// Apply an ever-lowering offset until we finish or fail
+	var/delta
+	for(var/safety in 1 to 10)
+		var/after_size = winget(src, "mapwindow", "size")
+		map_size = splittext(after_size, "x")
+		var/got_width = text2num(map_size[1])
+
+		if (got_width == desired_width)
+			// success
+			return
+		else if (isnull(delta))
+			// calculate a probable delta value based on the difference
+			delta = 100 * (desired_width - got_width) / split_width
+		else if ((delta > 0 && got_width > desired_width) || (delta < 0 && got_width < desired_width))
+			// if we overshot, halve the delta and reverse direction
+			delta = -delta/2
+
+		pct += delta
+		winset(src, "mainwindow.split", "splitter=[pct]")
+*/
+/*
+/// Attempt to automatically fit the viewport, assuming the user wants it
+/client/proc/attempt_auto_fit_viewport()
+	if (!prefs.read_preference(/datum/preference/toggle/auto_fit_viewport))
+		return
+	if(fully_created)
+		INVOKE_ASYNC(src, VERB_REF(fit_viewport))
+	else //Delayed to avoid wingets from Login calls.
+		addtimer(CALLBACK(src, VERB_REF(fit_viewport), 1 SECONDS))
+*/
+
+/client/verb/policy()
+	set name = "Show Policy"
+	set desc = "Show special server rules related to your current character."
+	set category = "OOC"
+
+	//Collect keywords
+	var/list/keywords = mob.get_policy_keywords()
+	var/header = get_policy(POLICY_VERB_HEADER)
+	var/list/policytext = list(header,"<hr>")
+	var/anything = FALSE
+	for(var/keyword in keywords)
+		var/p = get_policy(keyword)
+		if(p)
+			policytext += p
+			policytext += "<hr>"
+			anything = TRUE
+	if(!anything)
+		policytext += "No related rules found."
+
+	usr << browse(policytext.Join(""),"window=policy")
+
+/client/verb/fix_stat_panel()
+	set name = "Fix Stat Panel"
+	set hidden = TRUE
+
+	init_verbs()
+/*
+/client/proc/export_preferences()
+	set name = "Export Preferences"
+	set desc = "Export your current preferences to a file."
+	set category = "OOC"
+
+	ASSERT(prefs, "User attempted to export preferences while preferences were null!") // what the fuck
+
+	prefs.savefile.export_json_to_client(usr, ckey)
+*/
+
+//// Roguetown  ---- TG UPDATE Consider updating say verb to TG including OOC
 
 
 /client/proc/lobbyooc(msg as text)
@@ -190,411 +549,3 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 					to_chat(C, "<font color='[color2use]'><EM>[keyname]:</EM></font> <font color='#4972bc'><span class='message linkify'>[msg]</span></font>")
 				else
 					to_chat(C, "<font color='[color2use]'><EM>[keyname]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>")
-
-
-/proc/toggle_ooc(toggle = null)
-	if(toggle != null) //if we're specifically en/disabling ooc
-		if(toggle != GLOB.ooc_allowed)
-			GLOB.ooc_allowed = toggle
-		else
-			return
-	else //otherwise just toggle it
-		GLOB.ooc_allowed = !GLOB.ooc_allowed
-	message_admins("<B>The OOC channel has been globally [GLOB.ooc_allowed ? "enabled" : "disabled"].</B>")
-
-/proc/toggle_dooc(toggle = null)
-	if(toggle != null)
-		if(toggle != GLOB.dooc_allowed)
-			GLOB.dooc_allowed = toggle
-		else
-			return
-	else
-		GLOB.dooc_allowed = !GLOB.dooc_allowed
-
-/client/proc/set_ooc(newColor as color)
-	set name = "Set Player OOC Color"
-	set desc = ""
-	set category = "Fun"
-	set hidden = 1
-	if(!holder)
-		return
-	GLOB.OOC_COLOR = sanitize_ooccolor(newColor)
-	if(!check_rights(0))
-		return
-
-/client/proc/reset_ooc()
-	set name = "Reset Player OOC Color"
-	set desc = ""
-	set category = "Fun"
-	set hidden = 1
-	if(!holder)
-		return
-	GLOB.OOC_COLOR = null
-	if(!check_rights(0))
-		return
-/client/verb/colorooc()
-	set name = "Set Your OOC Color"
-	set category = "Preferences"
-	set hidden = 1
-	if(!holder)
-		return
-	if(!check_rights(0))
-		return
-	if(!holder || !check_rights_for(src, R_ADMIN))
-		if(!is_content_unlocked())
-			return
-
-	var/new_ooccolor = input(src, "Please select your OOC color.", "OOC color", prefs.ooccolor) as color|null
-	if(new_ooccolor)
-		prefs.ooccolor = sanitize_ooccolor(new_ooccolor)
-		prefs.save_preferences()
-	SSblackbox.record_feedback("tally", "admin_verb", 1, "Set OOC Color") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-	return
-
-/client/verb/resetcolorooc()
-	set name = "Reset Your OOC Color"
-	set desc = ""
-	set category = "Preferences"
-	set hidden = 1
-	if(!holder)
-		return
-	if(!check_rights(0))
-		return
-	if(!holder || !check_rights_for(src, R_ADMIN))
-		if(!is_content_unlocked())
-			return
-
-		prefs.ooccolor = initial(prefs.ooccolor)
-		prefs.save_preferences()
-
-//Checks admin notice
-/client/verb/admin_notice()
-	set name = "Adminnotice"
-	set category = "Admin"
-	set desc ="Check the admin notice if it has been set"
-	set hidden = 1
-	if(!holder)
-		return
-	if(!check_rights(0))
-		return
-	if(GLOB.admin_notice)
-		to_chat(src, "<span class='boldnotice'>Admin Notice:</span>\n \t [GLOB.admin_notice]")
-	else
-		to_chat(src, "<span class='notice'>There are no admin notices at the moment.</span>")
-#ifdef TESTSERVER
-/client/verb/smiteselfverily()
-	set name = "KillSelf"
-	set category = "DEBUGTEST"
-/*
-	set hidden = 1
-	if(!check_rights(0))
-		return*/
-	var/confirm = alert(src, "Should I really kill myself?", "Feed the crows", "Yes", "No")
-	if(confirm == "Yes")
-		log_admin("[key_name(usr)] used killself.")
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] used killself.</span>")
-		mob.death()
-#endif
-
-/*
-/client/verb/jcoindate()
-	set name = "{CHECKJOINDATE}"
-	set category = "Options"
-	testing("[CheckJoinDate(ckey)]")
-*/
-/mob/dead/new_player/verb/togglobb()
-	set name = "SilenceLobbyMusic"
-	set category = "Options"
-	stop_sound_channel(CHANNEL_LOBBYMUSIC)
-
-/proc/CheckJoinDate(ckey)
-	var/list/http = world.Export("http://byond.com/members/[ckey]?format=text")
-	if(!http)
-		log_world("Failed to connect to byond member page to age check [ckey]")
-		return "2022"
-	var/F = file2text(http["CONTENT"])
-	if(F)
-		var/regex/R = regex("joined = \"(\\d{4})")
-		if(R.Find(F))
-			. = R.group[1]
-		else
-			return "2022" //can't find join date, either a scuffed name or a guest but let it through anyway
-
-/proc/CheckIPCountry(ipaddress)
-	set background = 1
-	if(!ipaddress)
-		return
-	var/list/vl = world.Export("http://ip-api.com/json/[ipaddress]")
-	if (!("CONTENT" in vl) || vl["STATUS"] != "200 OK")
-//		sleep(3000)
-//		return CheckIPCountry(ipaddress)
-		return
-	var/jd = html_encode(file2text(vl["CONTENT"]))
-	var/parsed = ""
-	var/pos = 1
-	var/search = findtext(jd, "country", pos)
-	parsed += copytext(jd, pos, search)
-	if(search)
-		pos = search
-		search = findtext(jd, ",", pos+1)
-		if(search)
-			return lowertext(copytext(jd, pos+9, search))
-
-//	var/regex/R = regex("\"country\":\"(.*)\"")
-//	if(jd)
-//		if(R.Find(jd))
-//			. = R.group[1]
-//		else
-//			testing("reges cant find")
-//			return "0"
-
-/client/verb/fix_chat()
-	set name = "{FIX CHAT}"
-	set category = "Options"
-	set hidden = 1
-	if(!check_rights(0))
-		return
-	if (!chatOutput || !istype(chatOutput))
-		var/action = alert(src, "Invalid Chat Output data found!\nRecreate data?", "Wot?", "Recreate Chat Output data", "Cancel")
-		if (action != "Recreate Chat Output data")
-			return
-		chatOutput = new /datum/chatOutput(src)
-		chatOutput.start()
-		action = alert(src, "Goon chat reloading, wait a bit and tell me if it's fixed", "", "Fixed", "Nope")
-		if (action == "Fixed")
-			log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by re-creating the chatOutput datum")
-		else
-			chatOutput.load()
-			action = alert(src, "How about now? (give it a moment (it may also try to load twice))", "", "Yes", "No")
-			if (action == "Yes")
-				log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by re-creating the chatOutput datum and forcing a load()")
-			else
-				action = alert(src, "Welp, I'm all out of ideas. Try closing byond and reconnecting.\nWe could also disable fancy chat and re-enable oldchat", "", "Thanks anyways", "Switch to old chat")
-				if (action == "Switch to old chat")
-					winset(src, "output", "is-visible=true;is-disabled=false")
-					winset(src, "browseroutput", "is-visible=false")
-				log_game("GOONCHAT: [key_name(src)] Failed to fix their goonchat window after recreating the chatOutput and forcing a load()")
-
-	else if (chatOutput.loaded)
-		var/action = alert(src, "ChatOutput seems to be loaded\nDo you want me to force a reload, wiping the chat log or just refresh the chat window because it broke/went away?", "Hmmm", "Force Reload", "Refresh", "Cancel")
-		switch (action)
-			if ("Force Reload")
-				chatOutput.loaded = FALSE
-				chatOutput.start() //this is likely to fail since it asks , but we should try it anyways so we know.
-				action = alert(src, "Goon chat reloading, wait a bit and tell me if it's fixed", "", "Fixed", "Nope")
-				if (action == "Fixed")
-					log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by forcing a start()")
-				else
-					chatOutput.load()
-					action = alert(src, "How about now? (give it a moment (it may also try to load twice))", "", "Yes", "No")
-					if (action == "Yes")
-						log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by forcing a load()")
-					else
-						action = alert(src, "Welp, I'm all out of ideas. Try closing byond and reconnecting.\nWe could also disable fancy chat and re-enable oldchat", "", "Thanks anyways", "Switch to old chat")
-						if (action == "Switch to old chat")
-							winset(src, "output", "is-visible=true;is-disabled=false")
-							winset(src, "browseroutput", "is-visible=false")
-						log_game("GOONCHAT: [key_name(src)] Failed to fix their goonchat window forcing a start() and forcing a load()")
-
-			if ("Refresh")
-				chatOutput.showChat()
-				action = alert(src, "Goon chat refreshing, wait a bit and tell me if it's fixed", "", "Fixed", "Nope, force a reload")
-				if (action == "Fixed")
-					log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by forcing a show()")
-				else
-					chatOutput.loaded = FALSE
-					chatOutput.load()
-					action = alert(src, "How about now? (give it a moment)", "", "Yes", "No")
-					if (action == "Yes")
-						log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by forcing a load()")
-					else
-						action = alert(src, "Welp, I'm all out of ideas. Try closing byond and reconnecting.\nWe could also disable fancy chat and re-enable oldchat", "", "Thanks anyways", "Switch to old chat")
-						if (action == "Switch to old chat")
-							winset(src, "output", "is-visible=true;is-disabled=false")
-							winset(src, "browseroutput", "is-visible=false")
-						log_game("GOONCHAT: [key_name(src)] Failed to fix their goonchat window forcing a show() and forcing a load()")
-		return
-
-	else
-		chatOutput.start()
-		var/action = alert(src, "Manually loading Chat, wait a bit and tell me if it's fixed", "", "Fixed", "Nope")
-		if (action == "Fixed")
-			log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by manually calling start()")
-		else
-			chatOutput.load()
-			alert(src, "How about now? (give it a moment (it may also try to load twice))", "", "Yes", "No")
-			if (action == "Yes")
-				log_game("GOONCHAT: [key_name(src)] Had to fix their goonchat by manually calling start() and forcing a load()")
-			else
-				action = alert(src, "Welp, I'm all out of ideas. Try closing byond and reconnecting.\nWe could also disable fancy chat and re-enable oldchat", "", "Thanks anyways", "Switch to old chat")
-				if (action == "Switch to old chat")
-					winset(src, "output", list2params(list("on-show" = "", "is-disabled" = "false", "is-visible" = "true")))
-					winset(src, "browseroutput", "is-disabled=true;is-visible=false")
-				log_game("GOONCHAT: [key_name(src)] Failed to fix their goonchat window after manually calling start() and forcing a load()")
-
-
-
-/client/verb/motd()
-	set name = "MOTD"
-	set category = "OOC"
-	set desc ="Check the Message of the Day"
-	set hidden = 1
-	if(!holder)
-		return
-	if(!check_rights(0))
-		return
-	var/motd = global.config.motd
-	if(motd)
-		to_chat(src, "<div class=\"motd\">[motd]</div>", handle_whitespace=FALSE)
-	else
-		to_chat(src, "<span class='notice'>The Message of the Day has not been set.</span>")
-
-/client/proc/self_notes()
-	set name = "View Admin Remarks"
-	set category = "OOC"
-	set desc = ""
-	set hidden = 1
-	if(!holder)
-		return
-	if(!check_rights(0))
-		return
-	if(!CONFIG_GET(flag/see_own_notes))
-		to_chat(usr, "<span class='notice'>Sorry, that function is not enabled on this server.</span>")
-		return
-
-	browse_messages(null, usr.ckey, null, TRUE)
-
-/client/proc/self_playtime()
-	set name = "View tracked playtime"
-	set category = "OOC"
-	set desc = ""
-
-	if(!CONFIG_GET(flag/use_exp_tracking))
-		to_chat(usr, "<span class='notice'>Sorry, tracking is currently disabled.</span>")
-		return
-
-	var/list/body = list()
-	body += "<html><head><title>Playtime for [key]</title></head><BODY><BR>Playtime:"
-	body += get_exp_report()
-	body += "</BODY></HTML>"
-	usr << browse(body.Join(), "window=playerplaytime[ckey];size=550x615")
-
-/client/proc/ignore_key(client, displayed_key)
-	var/client/C = client
-	if(C.key in prefs.ignoring)
-		prefs.ignoring -= C.key
-	else
-		prefs.ignoring |= C.key
-	to_chat(src, "You are [(C.key in prefs.ignoring) ? "now" : "no longer"] ignoring [displayed_key] on the OOC channel.")
-	prefs.save_preferences()
-
-/client/verb/select_ignore()
-	set name = "Ignore"
-	set category = "Options"
-	set desc ="Ignore a player's messages on the OOC channel"
-	set hidden = 1
-	if(!holder)
-		return
-
-	var/see_ghost_names = isobserver(mob)
-	var/list/choices = list()
-	var/displayed_choicename = ""
-	for(var/client/C in GLOB.clients)
-		if(C.holder?.fakekey)
-			displayed_choicename = C.holder.fakekey
-		else
-			displayed_choicename = C.key
-		if(isobserver(C.mob) && see_ghost_names)
-			choices["[C.mob]([displayed_choicename])"] = C
-		else
-			choices[displayed_choicename] = C
-	choices = sort_list(choices)
-	var/selection = input("Please, select a player!", "Ignore", null, null) as null|anything in choices
-	if(!selection || !(selection in choices))
-		return
-	displayed_choicename = selection // ckey string
-	selection = choices[selection] // client
-	if(selection == src)
-		to_chat(src, "You can't ignore myself.")
-		return
-	ignore_key(selection, displayed_choicename)
-
-/client/proc/show_previous_roundend_report()
-	set name = "Your Last Round"
-	set category = "OOC"
-	set desc = ""
-
-	SSticker.show_roundend_report(src, TRUE)
-
-/client/verb/fit_viewport()
-	set name = "Fit Viewport"
-	set category = "Options"
-	set desc = ""
-	set hidden = 1
-	if(!holder)
-		return
-	// Fetch aspect ratio
-	var/view_size = getviewsize(view)
-	var/aspect_ratio = view_size[1] / view_size[2]
-
-	// Calculate desired pixel width using window size and aspect ratio
-	var/sizes = params2list(winget(src, "mainwindow.split;mapwindow", "size"))
-	var/map_size = splittext(sizes["mapwindow.size"], "x")
-	var/height = text2num(map_size[2])
-	var/desired_width = round(height * aspect_ratio)
-	if (text2num(map_size[1]) == desired_width)
-		// Nothing to do
-		return
-
-	var/split_size = splittext(sizes["mainwindow.split.size"], "x")
-	var/split_width = text2num(split_size[1])
-
-	// Calculate and apply a best estimate
-	// +4 pixels are for the width of the splitter's handle
-	var/pct = 100 * (desired_width + 4) / split_width
-	winset(src, "mainwindow.split", "splitter=[pct]")
-
-	// Apply an ever-lowering offset until we finish or fail
-	var/delta
-	for(var/safety in 1 to 10)
-		var/after_size = winget(src, "mapwindow", "size")
-		map_size = splittext(after_size, "x")
-		var/got_width = text2num(map_size[1])
-
-		if (got_width == desired_width)
-			// success
-			return
-		else if (isnull(delta))
-			// calculate a probable delta value based on the difference
-			delta = 100 * (desired_width - got_width) / split_width
-		else if ((delta > 0 && got_width > desired_width) || (delta < 0 && got_width < desired_width))
-			// if we overshot, halve the delta and reverse direction
-			delta = -delta/2
-
-		pct += delta
-		winset(src, "mainwindow.split", "splitter=[pct]")
-
-
-/client/verb/policy()
-	set name = "Show Policy"
-	set desc = ""
-	set category = "OOC"
-	set hidden = 1
-	if(!holder)
-		return
-
-	//Collect keywords
-	var/list/keywords = mob.get_policy_keywords()
-	var/header = get_policy(POLICY_VERB_HEADER)
-	var/list/policytext = list(header,"<hr>")
-	var/anything = FALSE
-	for(var/keyword in keywords)
-		var/p = get_policy(keyword)
-		if(p)
-			policytext += p
-			policytext += "<hr>"
-			anything = TRUE
-	if(!anything)
-		policytext += "No related rules found."
-
-	usr << browse(policytext.Join(""),"window=policy")

@@ -188,50 +188,21 @@ GLOBAL_LIST_EMPTY(bloody_footprints_cache)
 #define POLLTYPE_MULTI		"MULTICHOICE"
 #define POLLTYPE_IRV		"IRV"
 
-
-
-//subtypesof(), typesof() without the parent path
-#define subtypesof(typepath) ( typesof(typepath) - typepath )
-
 //Gets the turf this atom inhabits
 #define get_turf(A) (get_step(A, 0))
 
 //Same as above except gets the area instead
 #define get_area(A) (isarea(A) ? A : get_step(A, 0)?.loc)
 
-//Ghost orbit types:
-#define GHOST_ORBIT_CIRCLE		"circle"
-#define GHOST_ORBIT_TRIANGLE	"triangle"
-#define GHOST_ORBIT_HEXAGON		"hexagon"
-#define GHOST_ORBIT_SQUARE		"square"
-#define GHOST_ORBIT_PENTAGON	"pentagon"
-
-//Ghost showing preferences:
-#define GHOST_ACCS_NONE		1
-#define GHOST_ACCS_DIR		50
-#define GHOST_ACCS_FULL		100
-
 #define GHOST_ACCS_NONE_NAME		"default sprites"
 #define GHOST_ACCS_DIR_NAME			"only directional sprites"
 #define GHOST_ACCS_FULL_NAME		"full accessories"
 
-#define GHOST_ACCS_DEFAULT_OPTION	GHOST_ACCS_FULL
-
 GLOBAL_LIST_INIT(ghost_accs_options, list(GHOST_ACCS_NONE, GHOST_ACCS_DIR, GHOST_ACCS_FULL)) //So save files can be sanitized properly.
-
-#define GHOST_OTHERS_SIMPLE 			1
-#define GHOST_OTHERS_DEFAULT_SPRITE		50
-#define GHOST_OTHERS_THEIR_SETTING 		100
 
 #define GHOST_OTHERS_SIMPLE_NAME 			"white ghost"
 #define GHOST_OTHERS_DEFAULT_SPRITE_NAME 	"default sprites"
 #define GHOST_OTHERS_THEIR_SETTING_NAME 	"their setting"
-
-#define GHOST_OTHERS_DEFAULT_OPTION			GHOST_OTHERS_THEIR_SETTING
-
-#define GHOST_MAX_VIEW_RANGE_DEFAULT 10
-#define GHOST_MAX_VIEW_RANGE_MEMBER 14
-
 
 GLOBAL_LIST_INIT(ghost_others_options, list(GHOST_OTHERS_SIMPLE, GHOST_OTHERS_DEFAULT_SPRITE, GHOST_OTHERS_THEIR_SETTING)) //Same as ghost_accs_options.
 
@@ -287,10 +258,6 @@ GLOBAL_LIST_INIT(ghost_others_options, list(GHOST_OTHERS_SIMPLE, GHOST_OTHERS_DE
 // Diagonal movement
 #define FIRST_DIAG_STEP 1
 #define SECOND_DIAG_STEP 2
-
-#define DEADCHAT_ARRIVALRATTLE "arrivalrattle"
-#define DEADCHAT_DEATHRATTLE "deathrattle"
-#define DEADCHAT_REGULAR "regular-deadchat"
 
 // Bluespace shelter deploy checks
 #define SHELTER_DEPLOY_ALLOWED "allowed"
@@ -424,10 +391,6 @@ GLOBAL_LIST_INIT(ghost_others_options, list(GHOST_OTHERS_SIMPLE, GHOST_OTHERS_DE
 
 #define STANDARD_GRAVITY 1 //Anything above this is high gravity, anything below no grav
 #define GRAVITY_DAMAGE_TRESHOLD 3 //Starting with this value gravity will start to damage mobs
-
-#define CAMERA_NO_GHOSTS 0
-#define CAMERA_SEE_GHOSTS_BASIC 1
-#define CAMERA_SEE_GHOSTS_ORBIT 2
 
 #define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (istype(I, /client) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
 

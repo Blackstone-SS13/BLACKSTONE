@@ -22,22 +22,23 @@
 #define BANTYPE_ANY_JOB		9
 
 //Admin Permissions
-#define R_BUILD			(1<<0)
-#define R_ADMIN			(1<<1)
-#define R_BAN			(1<<2)
-#define R_FUN			(1<<3)
-#define R_SERVER		(1<<4)
-#define R_DEBUG			(1<<5)
-#define R_POSSESS		(1<<6)
-#define R_PERMISSIONS	(1<<7)
-#define R_STEALTH		(1<<8)
-#define R_POLL			(1<<9)
-#define R_VAREDIT		(1<<10)
-#define R_SOUND			(1<<11)
-#define R_SPAWN			(1<<12)
-#define R_AUTOADMIN		(1<<13)
-#define R_WATCH			(1<<14)
-#define R_DBRANKS		(1<<15)
+#define R_NONE NONE
+#define R_BUILD (1<<0)
+#define R_ADMIN (1<<1)
+#define R_BAN (1<<2)
+#define R_FUN (1<<3)
+#define R_SERVER (1<<4)
+#define R_DEBUG (1<<5)
+#define R_POSSESS (1<<6)
+#define R_PERMISSIONS (1<<7)
+#define R_STEALTH (1<<8)
+#define R_POLL (1<<9)
+#define R_VAREDIT (1<<10)
+#define R_SOUND (1<<11)
+#define R_SPAWN (1<<12)
+#define R_AUTOADMIN (1<<13)
+#define R_WATCH (1<<14)
+#define R_DBRANKS (1<<15)
 
 #define R_DEFAULT R_AUTOADMIN
 
