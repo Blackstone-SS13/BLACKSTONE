@@ -1,6 +1,6 @@
 
 /obj/item/bodypart/proc/can_dismember(obj/item/I)
-	if(dismemberable || /obj/item/bodypart/head)
+	if(dismemberable)
 		return TRUE
 
 /obj/item/bodypart/proc/can_disable(obj/item/I)
