@@ -146,6 +146,14 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Castle Guard"
 	icon_state = "arrow"
 
+/obj/effect/landmark/start/bogmaster
+	name = "Bog Master"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/bogguardsman
+	name = "Bog Guard"
+	icon_state = "arrow"
+
 /obj/effect/landmark/start/veteran
 	name = "Veteran"
 	icon_state = "arrow"
@@ -202,6 +210,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Merchant"
 	icon_state = "arrow"
 
+/obj/effect/landmark/start/shophand
+	name = "Shophand"
+	icon_state = "arrow"
+
 /obj/effect/landmark/start/grabber
 	name = "Grabber"
 	icon_state = "arrow"
@@ -211,7 +223,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Innkeep"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/apothecary
+/obj/effect/landmark/start/archivist
 	name = "Archivist"
 	icon_state = "arrow"
 
@@ -711,6 +723,16 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 	GLOB.ruin_landmarks -= src
 	ruin_template = null
 	. = ..()
+
+/// Marks the bottom left of the testing zone.
+/// In landmarks.dm and not unit_test.dm so it is always active in the mapping tools.
+/obj/effect/landmark/unit_test_bottom_left
+	name = "unit test zone bottom left"
+
+/// Marks the top right of the testing zone.
+/// In landmarks.dm and not unit_test.dm so it is always active in the mapping tools.
+/obj/effect/landmark/unit_test_top_right
+	name = "unit test zone top right"
 
 //Underworld landmark
 

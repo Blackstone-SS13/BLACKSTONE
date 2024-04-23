@@ -64,6 +64,7 @@
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	sound = 'sound/magic/heal.ogg'
+	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
@@ -113,6 +114,7 @@
 	chargedloop = null
 	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/heal.ogg'
+	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
@@ -210,6 +212,8 @@
 	charge_max = 1 MINUTES
 	miracle = TRUE
 	devotion_cost = -100
+	/// Amount of PQ gained for reviving people
+	var/revive_pq = 0.25
 
 /obj/effect/proc_holder/spell/invoked/revive/cast(list/targets, mob/living/user)
 	..()
@@ -235,6 +239,9 @@
 					target.emote("breathgasp")
 					target.Jitter(100)
 					to_chat(target, "<span class='notice'>I awake from the void.</span>")
+					if(revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
+						adjust_playerquality(revive_pq, user.ckey)
+						ADD_TRAIT(target, TRAIT_IWASREVIVED, "[type]")
 					return TRUE
 			target.visible_message("<span class='warning'>Nothing happens.</span>")
 			return FALSE
@@ -271,20 +278,20 @@
 	miracle = TRUE
 	devotion_cost = -15
 
-/obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets,mob/user = usr)
-	for(var/obj/structure/closet/dirthole/H in view(1))
-		if(H.stage != 4)
-			continue
-		if(!H.contents)
-			continue
-		for(var/mob/living/carbon/human/A in H.contents)
-			A.funeral = TRUE
-			if(A.mind && A.mind.has_antag_datum(/datum/antagonist/zombie))
-				A.mind.remove_antag_datum(/datum/antagonist/zombie)
-			user.visible_message("My funeral rites have been performed!", "[user] consecrates the grave!")
-		for(var/obj/structure/closet/crate/coffin/C)
-			for(var/mob/living/carbon/human/B in C.contents)
-				B.funeral = TRUE
+/obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets, mob/user = usr)
+	. = ..()
+	var/success = FALSE
+	for(var/obj/structure/closet/crate/coffin/coffin in view(1))
+		success = pacify_coffin(coffin, user)
+		if(success)
+			user.visible_message("My funeral rites have been performed on [coffin]!", "[user] consecrates [coffin]!")
+			return
+	for(var/obj/structure/closet/dirthole/hole in view(1))
+		success = pacify_coffin(hole, user)
+		if(success)
+			user.visible_message("My funeral rites have been performed on [hole]!", "[user] consecrates [hole]!")
+			return
+	to_chat(user, "<span class='red'>I failed to perform the rites.</span>")
 
 /obj/effect/proc_holder/spell/targeted/churn
 	name = "Churn Undead"
