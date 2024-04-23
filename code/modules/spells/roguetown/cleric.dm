@@ -51,7 +51,7 @@
 	var/spelllist = list(A.t0, A.t1)
 	level = CLERIC_T1
 	for(var/C in spelllist)
-		H.mind.AddSpell(new C) 
+		H.mind.AddSpell(new C)
 
 // General
 /obj/effect/proc_holder/spell/invoked/heal/lesser
@@ -401,7 +401,7 @@
 						var/obj/item/flashlight/lantern/shrunken/L = new
 						capturedsoul.put_in_hands(L)
 			user.remove_language(/datum/language_holder/abyssal)
-		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")	
+		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")
 		capturedsoul.Paralyze(1200)
 	else return
 
@@ -448,3 +448,26 @@
 	visible_message("<FONT COLOR='green'>[usr] soothes the beastblood with Dendor's whisper.</FONT><BR>")
 	for(var/mob/living/simple_animal/hostile/retaliate/B in oview(2))
 		B.aggressive = 0
+
+/obj/effect/proc_holder/spell/targeted/conjurglowshroom
+	name = "Fungal Illumination"
+	range = 1
+	overlay_state = "blesscrop"
+	releasedrain = 30
+	charge_max = 300
+	max_targets = 0
+	cast_without_targets = TRUE
+	sound = 'sound/items/dig_shovel.ogg'
+	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
+	invocation = null
+	invocation = "Treefather light the way."
+	invocation_type = "whisper" //can be none, whisper, emote and shout
+
+/obj/effect/proc_holder/spell/targeted/conjurglowshroom/cast(list/targets,mob/user = usr)
+	var/turf/T = user.loc
+	for(var/X in GLOB.cardinals)
+		var/turf/TT = get_step(T, X)
+		if(!isclosedturf(TT))
+			new /obj/structure/glowshroom(TT)
+	return TRUE
