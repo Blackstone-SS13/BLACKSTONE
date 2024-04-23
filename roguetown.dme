@@ -1545,6 +1545,7 @@
 #include "code\modules\antagonists\roguetown\roleobjs\skeleton.dm"
 #include "code\modules\antagonists\roguetown\villain\aspirant.dm"
 #include "code\modules\antagonists\roguetown\villain\assassin.dm"
+#include "code\modules\antagonists\roguetown\villain\marauder.dm"
 #include "code\modules\antagonists\roguetown\villain\bandit.dm"
 #include "code\modules\antagonists\roguetown\villain\choosename.dm"
 #include "code\modules\antagonists\roguetown\villain\peasantrebel.dm"
