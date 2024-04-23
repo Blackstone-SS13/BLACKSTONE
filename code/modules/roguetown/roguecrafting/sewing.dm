@@ -117,7 +117,7 @@
 	result = /obj/item/clothing/head/roguetown/paddedcap
 	reqs = list(/obj/item/natural/fibers = 5)
 	tools = list(/obj/item/needle)
-  craftdiff = 2
+	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/sewing/bardhat
 	name = "bard hat"
