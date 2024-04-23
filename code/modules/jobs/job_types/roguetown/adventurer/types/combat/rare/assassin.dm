@@ -5,9 +5,10 @@
 	tutorial = "You are a Drow Assassin, one of the elites trained within one of Lolth's many city states to slaughter traitors and her foes"
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Dark Elf")
-	outfit = /datum/outfit/job/roguetown/adventurer/assasain
+	outfit = /datum/outfit/job/roguetown/adventurer/assassin
+	maxchosen = 3
 
-/datum/outfit/job/roguetown/adventurer/assasain/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/adventurer/assassin/pre_equip(mob/living/carbon/human/H)
 	..()
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	H.mind.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)

@@ -7,6 +7,8 @@
 	allowed_races = list("Elf",
 	 "Half-Elf")
 	outfit = /datum/outfit/job/roguetown/adventurer/sentinal
+	maxchosen = 3
+
 
 /datum/outfit/job/roguetown/adventurer/sentinal/pre_equip(mob/living/carbon/human/H)
 	..()

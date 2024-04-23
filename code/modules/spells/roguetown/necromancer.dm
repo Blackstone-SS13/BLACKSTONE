@@ -3,7 +3,7 @@
 	overlay_state = "raiseskele"
 	releasedrain = 30
 	chargedrain = 0
-	chargetime = 0
+	chargetime = 2
 	range = 15
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
@@ -49,6 +49,24 @@
 	releasedrain = 40
 	chargedrain = 10
 	chargetime = 60
+	warnie = "spellwarning"
+	no_early_release = TRUE
+	charging_slowdown = 1
+	chargedloop = /datum/looping_sound/invokegen
+	associated_skill = /datum/skill/magic/arcane
+
+/obj/effect/proc_holder/spell/invoked/projectile/plauge
+	name = "Ray of Sickness"
+	desc = ""
+	clothes_req = FALSE
+	range = 15
+	projectile_type = /obj/projectile/magic/plauge
+	overlay_state = "raiseskele"
+	sound = list('sound/misc/portal_enter.ogg')
+	active = FALSE
+	releasedrain = 30
+	chargedrain = 0
+	chargetime = 10
 	warnie = "spellwarning"
 	no_early_release = TRUE
 	charging_slowdown = 1
