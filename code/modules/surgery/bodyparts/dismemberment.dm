@@ -368,7 +368,7 @@
 	C.update_hair()
 	C.update_damage_overlays()
 	C.update_mobility()
-
+	return TRUE
 
 /obj/item/bodypart/head/attach_limb(mob/living/carbon/C, special)
 	//Transfer some head appearance vars over
@@ -408,8 +408,7 @@
 			AP.Grant(C)
 			break
 
-	..()
-
+	return ..()
 
 //Regenerates all limbs. Returns amount of limbs regenerated
 /mob/living/proc/regenerate_limbs(noheal, excluded_limbs)

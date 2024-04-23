@@ -120,7 +120,7 @@
 	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
-	charge_max = 10 SECONDS
+	charge_max = 20 SECONDS
 	miracle = TRUE
 	devotion_cost = -45
 
@@ -155,7 +155,7 @@
 
 // Limb attachment
 /obj/effect/proc_holder/spell/invoked/heal/attach_limb
-	name = "Attach Limb"
+	name = "Limb Miracle"
 	overlay_state = "lesserheal"
 	releasedrain = 30
 	chargedrain = 0
@@ -167,15 +167,30 @@
 	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
-	charge_max = 30 SECONDS //attaching a limb is pretty intense
+	charge_max = 60 SECONDS //attaching a limb is pretty intense
 	miracle = TRUE
 	devotion_cost = -45
 
-/obj/effect/proc_holder/spell/invoked/heal/attach_limb/proc/get_limb(mob/living/target)
-	var/obj/item/bodypart/limb = locate(/obj/item/bodypart) in target.held_items
+/obj/effect/proc_holder/spell/invoked/heal/attach_limb/proc/get_limb(mob/living/target, mob/living/user)
+	var/list/missing_limbs = target.get_missing_limbs()
+	if(!length(missing_limbs))
+		return
+	var/obj/item/bodypart/limb
+	//try to get from user's hands first
+	for(var/obj/item/bodypart/potential_limb in user?.held_items)
+		if(potential_limb.owner || !(potential_limb.body_zone in missing_limbs))
+			continue
+		limb = potential_limb
+	//then target's hands
+	if(!limb)
+		for(var/obj/item/bodypart/dismembered in target.held_items)
+			if(dismembered.owner || !(dismembered.body_zone in missing_limbs))
+				continue
+			limb = dismembered
+	//then finally, 1 tile range around target
 	if(!limb)
 		for(var/obj/item/bodypart/dismembered in range(1, target))
-			if(dismembered.owner)
+			if(dismembered.owner || !(dismembered.body_zone in missing_limbs))
 				continue
 			limb = dismembered
 	return limb
@@ -191,7 +206,7 @@
 			target.Paralyze(30)
 			target.fire_act(1,5)
 			return TRUE
-		var/obj/item/bodypart/limb = get_limb(target)
+		var/obj/item/bodypart/limb = get_limb(target, user)
 		if(!limb?.attach_limb(target))
 			return FALSE
 		target.visible_message("<span class='info'>\The [limb] attaches itself to [target]!</span>", \
@@ -257,7 +272,7 @@
 	sound = 'sound/magic/revive.ogg'
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
-	charge_max = 1 MINUTES
+	charge_max = 2 MINUTES
 	miracle = TRUE
 	devotion_cost = -100
 	/// Amount of PQ gained for reviving people
@@ -283,6 +298,12 @@
 			if(target.stat == DEAD)
 				if(target.revive(full_heal = FALSE))
 					testing("revived2")
+					var/mob/living/carbon/spirit/underworld_spirit = target.get_spirit()
+					//GET OVER HERE!
+					if(underworld_spirit)
+						var/mob/dead/observer/ghost = underworld_spirit.ghostize()
+						qdel(underworld_spirit)
+						ghost.mind?.current = target
 					target.grab_ghost(force = TRUE) // even suicides
 					target.emote("breathgasp")
 					target.Jitter(100)
