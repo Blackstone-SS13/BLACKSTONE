@@ -17,6 +17,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
 	max_blade_int = 100
+	max_integrity = 175
 	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
 	associated_skill = /datum/skill/combat/knives
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
@@ -150,6 +151,8 @@
 
 /obj/item/rogueweapon/huntingknife/idagger
 	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut)
+	force = 15
+	max_integrity = 100
 	name = "dagger"
 	desc = ""
 	icon_state = "idagger"
@@ -158,6 +161,7 @@
 /obj/item/rogueweapon/huntingknife/idagger/steel
 	name = "dagger"
 	icon_state = "sdagger"
+	max_integrity = 150
 	smeltresult = null
 
 /obj/item/rogueweapon/huntingknife/idagger/steel/special
