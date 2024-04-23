@@ -5,7 +5,7 @@
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust, /datum/intent/dagger/chop)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	name = "hunting knife"
-	desc = ""
+	desc = "A hunting knife designed for rudimentary appplication such as basic butchering or skinning, along with other everyday needs as a tool. Has small defense capacity to it, and does deliver a decent damage if aimed well."
 	icon_state = "huntingknife"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	item_state = "bone_dagger"
@@ -88,7 +88,7 @@
 /obj/item/rogueweapon/huntingknife/cleaver
 	force = 15
 	name = "cleaver"
-	desc = ""
+	desc = "A short, sharp weapon with a large cutting area. Has slightly higher damage than a hunter knife. Perfect for butchering beasts or your neighbor."
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
 	icon_state = "cleav"
 	icon = 'icons/roguetown/weapons/32.dmi'
@@ -103,7 +103,7 @@
 /obj/item/rogueweapon/huntingknife/cleaver/combat
 	force = 16
 	name = "knife"
-	desc = ""
+	desc = "A knife designed for combat situations. Has a slightly higher damage than cleaver."
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
 	icon_state = "combatknife"
 	icon = 'icons/roguetown/weapons/32.dmi'
@@ -199,7 +199,7 @@
 /obj/item/rogueweapon/huntingknife/stoneknife
 	possible_item_intents = list(/datum/intent/dagger/cut,/datum/intent/dagger/chop)
 	name = "stone knife"
-	desc = ""
+	desc = "Crude tool consisting of sharpened rock and a woodpiece. Does the job as a tool, but has miniscule defense an doesnt do much damage."
 	icon_state = "stone_knife"
 	smeltresult = null
 	max_integrity = 50

@@ -54,7 +54,7 @@
 
 /obj/item/rogueweapon/shield/wood
 	name = "wooden shield"
-	desc = ""
+	desc = "A round wooden shield, decent middle ground. Can exceptionally parry attacks and handle a lot of beating. Essential for any battle."
 	icon_state = "woodsh"
 	dropshrink = 0.8
 	wdefense = 15
@@ -87,7 +87,7 @@
 
 /obj/item/rogueweapon/shield/tower
 	name = "tower shield"
-	desc = ""
+	desc = "A large rectangular shield, covers significant portion of the wearers body. Has excellent parry ability, but wont protect wearer much more than a regular round shield but sports slightly higher durability."
 	icon_state = "shield_tower"
 	force = 15
 	throwforce = 10
@@ -111,7 +111,7 @@
 
 /obj/item/rogueweapon/shield/tower/metal
 	name = "kite shield"
-	desc = ""
+	desc = "A kite shaped shield with high quality build. Made dominantly from metal materials, and offering highest protection along with superior integrity. The best you can get from an armourer in terms of shields."
 	icon_state = "ironsh"
 	force = 20
 	throwforce = 10

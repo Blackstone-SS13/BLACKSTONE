@@ -2,7 +2,7 @@
 	force = 12
 	possible_item_intents = list(/datum/intent/flail/strike, /datum/intent/flail/strike/smash)
 	name = "flail"
-	desc = ""
+	desc = "A gruesome treshing weapon that sends shivers down the spine of everyone who is unfortunate enough to face this abstraction. Has no defense capacity, and delivers formidable force."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	sharpness = IS_BLUNT
