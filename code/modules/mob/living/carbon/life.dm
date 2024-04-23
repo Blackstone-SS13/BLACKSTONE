@@ -68,6 +68,8 @@
 						if(affecting.get_bleedrate() <= 0.1)
 							if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, null, BODYPART_ORGANIC))
 								src.update_damage_overlays()
+							if(affecting.heal_wounds(5))
+								src.update_damage_overlays()
 					adjustToxLoss(-buckled.sleepy)
 					if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 						Sleeping(300)
@@ -105,6 +107,8 @@
 							var/obj/item/bodypart/affecting = X
 							if(affecting.get_bleedrate() <= 0.1)
 								if(affecting.heal_damage(0.15, 0.15, null, BODYPART_ORGANIC))
+									src.update_damage_overlays()
+								if(affecting.heal_wounds(1))
 									src.update_damage_overlays()
 						adjustToxLoss(-0.1)
 
