@@ -869,7 +869,7 @@
 
 	. = ..()
 
-	update_sneak_invis(TRUE)
+	update_sneak_invis()
 
 	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1 && (pulledby != moving_from_pull))//separated from our puller and not in the middle of a diagonal move.
 		pulledby.stop_pulling()
@@ -1804,7 +1804,6 @@
 		visible_message("<span class='info'>[src] looks around.</span>")
 	var/looktime = 50 - (STAPER * 2)
 	if(do_after(src, looktime, target = src))
-		var/huhsneak
 		for(var/mob/living/M in view(7,src))
 			if(M == src)
 				continue
@@ -1817,7 +1816,7 @@
 			if(prob(probby))
 				found_ping(get_turf(M), client, "hidden")
 				if(M.m_intent == MOVE_INTENT_SNEAK)
-					huhsneak = TRUE
+					emote("huh")
 					to_chat(M, "<span class='danger'>[src] sees me! I'm found!</span>")
 					M.mob_timers[MT_FOUNDSNEAK] = world.time
 			else
@@ -1827,9 +1826,7 @@
 					else
 						to_chat(M, "<span class='warning'>[src] didn't find me.</span>")
 				else
-					found_ping(get_turf(M), client, "hidden")
-		if(huhsneak)
-			emote("huh")
+					found_ping(get_turf(M), client, "hidden")	
 
 		for(var/obj/O in view(7,src))
 			if(istype(O, /obj/item/restraints/legcuffs/beartrap))

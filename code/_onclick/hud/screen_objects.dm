@@ -733,6 +733,7 @@
 	else
 		user.toggle_rogmove_intent(MOVE_INTENT_SNEAK)
 	update_icon_state()
+	user.update_sneak_invis()
 
 /obj/screen/rogmove/update_icon_state()
 	if(hud?.mymob?.m_intent == MOVE_INTENT_SNEAK)
