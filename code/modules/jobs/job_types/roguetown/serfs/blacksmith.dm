@@ -18,6 +18,7 @@
 	outfit = /datum/outfit/job/roguetown/armorsmith
 	display_order = JDO_ARMORER
 	give_bank_account = 11
+	min_pq = 1
 
 /datum/outfit/job/roguetown/armorsmith/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -71,10 +72,12 @@
 	"Dwarf",
 	)
 
-	tutorial = "You studied for many decades under your master with a few other apprentices to become a Weaponsmith, a trade that is as ancient as the secrets of steel itself! Youve repaired the blades of cooks, the cracked hoes of peasants and greased the spears of many soldiers into war."
+	tutorial = "You studied for many decades under your master with a few other apprentices to become a Weaponsmith, a trade that is as ancient as the secrets of steel itself! You've repaired the blades of cooks, the cracked hoes of peasants and greased the spears of many soldiers into war."
 
 	outfit = /datum/outfit/job/roguetown/weaponsmith
 	display_order = JDO_WSMITH
+	give_bank_account = 11
+	min_pq = 1
 
 /datum/outfit/job/roguetown/weaponsmith/pre_equip(mob/living/carbon/human/H)
 	..()

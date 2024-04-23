@@ -173,13 +173,12 @@ SUBSYSTEM_DEF(ticker)
 			for(var/client/C in GLOB.clients)
 				window_flash(C, ignorepref = TRUE) //let them know lobby has opened up.
 //			to_chat(world, "<span class='boldnotice'>Welcome to [station_name()]!</span>")
-//			send2chat("New round starting on [SSmapping.config.map_name]!", CONFIG_GET(string/chat_announce_new_game))
+			send2chat(new /datum/tgs_message_content("New round starting on [SSmapping.config.map_name]!"), CONFIG_GET(string/chat_announce_new_game))
 			current_state = GAME_STATE_PREGAME
 			//Everyone who wants to be an observer is now spawned
 			create_observers()
 			fire()
 		if(GAME_STATE_PREGAME)
-			bot_update_lobby()
 			//lobby stats for statpanels
 			if(isnull(timeLeft))
 				timeLeft = max(0,start_at - world.time)
@@ -241,8 +240,6 @@ SUBSYSTEM_DEF(ticker)
 				toggle_dooc(TRUE)
 				declare_completion(force_ending)
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
-			else
-				bot_update()
 			if(firstvote)
 				if(world.time > round_start_time + time_until_vote)
 					SSvote.initiate_vote("restart", "The Gods")
@@ -255,16 +252,6 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker
 	var/last_bot_update = 0
-
-/datum/controller/subsystem/ticker/proc/bot_update_lobby()
-	if(world.time >= last_bot_update + 15 SECONDS)
-		last_bot_update = world.time
-		do_bot_thing_update("IN LOBBY")
-
-/datum/controller/subsystem/ticker/proc/bot_update()
-	if(world.time >= last_bot_update + 15 SECONDS)
-		last_bot_update = world.time
-		do_bot_thing_update("PLAYING")
 
 /datum/controller/subsystem/ticker/proc/checkreqroles()
 	var/list/readied_jobs = list()
@@ -616,7 +603,7 @@ SUBSYSTEM_DEF(ticker)
 				S.Fade(TRUE)
 			livings += living
 	if(livings.len)
-		addtimer(CALLBACK(src, .proc/release_characters, livings), 30, TIMER_CLIENT_TIME)
+		addtimer(CALLBACK(src, PROC_REF(release_characters), livings), 30, TIMER_CLIENT_TIME)
 
 /datum/controller/subsystem/ticker/proc/release_characters(list/livings)
 	for(var/I in livings)
@@ -684,7 +671,7 @@ SUBSYSTEM_DEF(ticker)
 	//map rotate chance defaults to 75% of the length of the round (in minutes)
 	if (!prob((world.time/600)*CONFIG_GET(number/maprotatechancedelta)))
 		return
-	INVOKE_ASYNC(SSmapping, /datum/controller/subsystem/mapping/.proc/maprotate)
+	INVOKE_ASYNC(SSmapping, TYPE_PROC_REF(/datum/controller/subsystem/mapping, maprotate))
 
 /datum/controller/subsystem/ticker/proc/HasRoundStarted()
 	return current_state >= GAME_STATE_PLAYING
@@ -797,7 +784,7 @@ SUBSYSTEM_DEF(ticker)
 		var/mob/dead/new_player/player = i
 		if(player.ready == PLAYER_READY_TO_OBSERVE && player.mind)
 			//Break chain since this has a sleep input in it
-			addtimer(CALLBACK(player, /mob/dead/new_player.proc/make_me_an_observer), 1)
+			addtimer(CALLBACK(player, TYPE_PROC_REF(/mob/dead/new_player, make_me_an_observer)), 1)
 
 /datum/controller/subsystem/ticker/proc/load_mode()
 	var/mode = trim(file2text("data/mode.txt"))
@@ -858,10 +845,7 @@ SUBSYSTEM_DEF(ticker)
 		to_chat(world, "<span class='info'>Round logs can be located <a href=\"[gamelogloc]\">at this website!</a></span>")
 
 	log_game("<span class='boldannounce'>Rebooting World. [reason]</span>")
-#ifndef TESTSERVER
-	if(end_party)
-		do_bot_thing_end(1)
-#endif
+
 	if(end_party)
 		to_chat(world, "<span class='boldannounce'>It's over!</span>")
 		world.Del()

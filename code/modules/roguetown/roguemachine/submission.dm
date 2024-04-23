@@ -19,8 +19,8 @@
 			say("Single item entries only. Please unstack.")
 			return
 		if(istype(P, /obj/item/roguecoin))
-			if(H.real_name in SStreasury.bank_accounts)
-				SStreasury.generate_money_account(P.get_real_price(), H.real_name)
+			if(H in SStreasury.bank_accounts)
+				SStreasury.generate_money_account(P.get_real_price(), H)
 				qdel(P)
 				playsound(src, 'sound/misc/coininsert.ogg', 100, FALSE, -1)
 				return
@@ -51,7 +51,7 @@
 					playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 					flick("submit_anim",src)
 					if(amt)
-						if(!SStreasury.give_money_account(amt, H.real_name, "+[amt] from [R.name] bounty"))
+						if(!SStreasury.give_money_account(amt, H, "+[amt] from [R.name] bounty"))
 							say("No account found. Submit your fingers to a shylock for inspection.")
 					return
 	return ..()
@@ -101,27 +101,39 @@ var/global/feeding_hole_reset_timer
 	pixel_y = 32
 
 /obj/structure/feedinghole/attackby(obj/item/P, mob/user, params)
-	if(istype(P, /obj/item/reagent_containers/food/snacks/grown/wheat))
-		qdel(P)
-/*		if(!feeding_hole_reset_timer || world.time > feeding_hole_reset_timer)
-			feeding_hole_wheat_count = 0
-			feeding_hole_reset_timer = world.time + (1 MINUTES)
+/*	if(feeding_hole_wheat_count < 5)
+		user << "You hear squeaks coming from the hole, but it seems inactive."
 
-		feeding_hole_wheat_count++
-*/
-		playsound(src, 'sound/misc/beep.ogg', 100, FALSE, -1)
-		user.visible_message("<span class='notice'>[user] feeds [P] into the [src].</span>",
-			"<span class='notice'>You feed the [P] into the [src].</span>")
-	else if(istype(P, /obj/item/reagent_containers/food/snacks/rogue/meat/steak))
-		// Handle the steak item and spawn bigrat
-		qdel(P)
-		playsound(src, 'sound/vo/mobs/rat/rat_death.ogg', 100, FALSE, -1)
-		new /mob/living/simple_animal/hostile/retaliate/rogue/bigrat(loc)
-		user.visible_message("<span class='notice'>[user] feeds [P] into the [src], and something emerges!</span>",
-			"<span class='danger'>You feed the [P] into the [src], and something emerges!</span>")
-	else
-
-		..()
+		return*/
+	if(ishuman(user))
+//		return
+		if(istype(P, /obj/item/natural/bundle))
+			say("Single item entries only. Please unstack.")
+			return
+		else
+			for(var/datum/roguestock/R in SStreasury.stockpile_datums)
+				if(istype(P,R.item_type))
+					if(!R.check_item(P))
+						continue
+					if(!R.transport_item)
+						R.held_items += 1 //stacked logs need to check for multiple
+						qdel(P)
+						stock_announce("[R.name] has been stockpiled.")
+					else
+						var/area/A = GLOB.areas_by_type[R.transport_item]
+						if(!A)
+							say("Couldn't find where to send the submission.")
+							return
+						P.submitted_to_stockpile = TRUE
+						var/list/turfs = list()
+						for(var/turf/T in A)
+							turfs += T
+						var/turf/T = pick(turfs)
+						P.forceMove(T)
+						playsound(T, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+					playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
+					return
+	return ..()
 
 /obj/structure/feedinghole/attack_hand(mob/living/user)
 	. = ..()

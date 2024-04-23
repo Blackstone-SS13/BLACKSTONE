@@ -53,6 +53,7 @@
 #define JOB_UNAVAILABLE_WTEAM 8
 #define JOB_UNAVAILABLE_LASTCLASS 9
 #define JOB_UNAVAILABLE_PATRON 10
+#define JOB_UNAVAILABLE_ADVENTURER_COOLDOWN 11
 
 #define DEFAULT_RELIGION "Christianity"
 #define DEFAULT_DEITY "Space Jesus"
@@ -147,6 +148,7 @@
 #define SERVANT		(1<<2)
 #define ORPHAN		(1<<3)
 #define PRINCE		(1<<4)
+#define SHOPHAND	(1<<5)
 
 #define JCOLOR_NOBLE "#aa83b9"
 #define JCOLOR_CHURCH "#c0ba8d"
@@ -169,7 +171,9 @@
 #define JDO_SHERIFF 7
 #define JDO_CASTLEGUARD 7.1
 #define JDO_TOWNGUARD 8
+#define JDO_BOGGUARD 8.1
 #define JDO_GATEMASTER 9
+#define JDO_BOGMASTER 9.1
 #define JDO_DUNGEONEER 10
 #define JDO_KNIGHT 10.1
 #define JDO_SQUIRE 11
@@ -178,12 +182,14 @@
 #define JDO_PRIEST 12
 #define JDO_CLERIC 13
 #define JDO_MONK 14
+#define JDO_TEMPLAR 14.1
 #define JDO_CHURCHLING 15
 
 #define JDO_PURITAN 16
 #define JDO_SHEPHERD 17
 
 #define JDO_MERCHANT 18
+#define JDO_SHOPHAND 18.1
 #define JDO_GRABBER 19
 
 #define JDO_ARMORER 20

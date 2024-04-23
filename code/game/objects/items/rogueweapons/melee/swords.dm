@@ -1,6 +1,6 @@
 
 /obj/item/rogueweapon/sword
-	slot_flags = ITEM_SLOT_HIP
+	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
 	force = 18
 	force_wielded = 25
 	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust)
@@ -23,6 +23,7 @@
 	throwforce = 10
 	thrown_bclass = BCLASS_CUT
 	//dropshrink = 0.75
+	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/steel
 	minstr = 7
 	sellprice = 30
@@ -34,6 +35,7 @@
 		icon_state = "sword[rand(1,3)]"
 
 /obj/item/rogueweapon/sword/decorated
+	name = "engraved sword"
 	icon_state = "decsword1"
 	sellprice = 140
 
@@ -100,7 +102,6 @@
 	associated_skill = /datum/skill/combat/swords
 	throwforce = 15
 	thrown_bclass = BCLASS_CUT
-	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.75
 	smeltresult = /obj/item/ingot/steel
 
@@ -142,7 +143,6 @@
 	associated_skill = /datum/skill/combat/swords
 	throwforce = 15
 	thrown_bclass = BCLASS_CUT
-	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.75
 	smeltresult = /obj/item/ingot/steel
 
@@ -181,7 +181,6 @@
 	associated_skill = /datum/skill/combat/swords
 	throwforce = 15
 	thrown_bclass = BCLASS_CUT
-	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.75
 	smeltresult = /obj/item/ingot/steel
 	sellprice = 363
@@ -221,7 +220,6 @@
 	associated_skill = /datum/skill/combat/swords
 	throwforce = 15
 	thrown_bclass = BCLASS_CUT
-	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.75
 	smeltresult = /obj/item/ingot/steel
 	sellprice = 363
@@ -261,7 +259,6 @@
 	associated_skill = /datum/skill/combat/swords
 	throwforce = 15
 	thrown_bclass = BCLASS_CUT
-	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.75
 	smeltresult = /obj/item/ingot/steel
 
@@ -301,7 +298,6 @@
 	associated_skill = /datum/skill/combat/swords
 	throwforce = 15
 	thrown_bclass = BCLASS_CUT
-	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	dropshrink = 0.75
 	minstr = 6
 	sellprice = 42
@@ -348,7 +344,6 @@
 	name = "execution sword"
 	desc = ""
 	minstr = 10
-	slot_flags = ITEM_SLOT_BACK
 
 /obj/item/rogueweapon/sword/long/exe/getonmobprop(tag)
 	. = ..()
@@ -385,7 +380,6 @@
 	name = "sabre"
 	desc = "A swift saber."
 	icon_state = "saber"
-	smeltresult = /obj/item/ingot/steel
 	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust)
 	gripped_intents = null
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
@@ -405,7 +399,6 @@
 	name = "rapier"
 	desc = "A precise raper."
 	icon_state = "rapier"
-	smeltresult = /obj/item/ingot/steel
 	possible_item_intents = list(/datum/intent/sword/thrust/rapier, /datum/intent/sword/cut/rapier)
 	gripped_intents = null
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')

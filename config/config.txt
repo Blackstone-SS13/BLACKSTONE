@@ -47,7 +47,7 @@ ADMIN_LEGACY_SYSTEM
 #LOAD_LEGACY_RANKS_ONLY
 
 ## Comment this out to stop locally connected clients from being given the almost full access !localhost! admin rank
-#ENABLE_LOCALHOST_RANK
+ENABLE_LOCALHOST_RANK
 
 ## Uncomment this entry to have certain jobs require your account to be at least a certain number of days old to select. You can configure the exact age requirement for different jobs by editing
 ## the minimal_player_age variable in the files in folder /code/game/jobs/job/.. for the job you want to edit. Set minimal_player_age to 0 to disable age requirement for that job.
@@ -231,17 +231,17 @@ USEBLACKLIST
 ## Don't set this to the same server, BYOND will automatically restart players to the server when it has restarted.
 # SERVER ss13.example.com:2506
 
-## forum address
-# FORUMURL http://tgstation13.org/phpBB/index.php
+## Discod address
+DISCORDURL https://discord.gg/bx9c7ha5Qk
 
 ## Wiki address
-# WIKIURL http://www.tgstation13.org/wiki
+WIKIURL https://wiki.moviesfreepremium.xyz/blackstone
 
 ## Rules address
-# RULESURL http://www.tgstation13.org/wiki/Rules
+RULESURL https://wiki.moviesfreepremium.xyz/blackstone/rules
 
 ## Github address
-# GITHUBURL https://www.github.com/tgstation/tgstation
+GITHUBURL https://github.com/Blackstone-SS13/BLACKSTONE
 
 ## Round specific stats address
 ## Link to round specific parsed logs; IE statbus. It is appended with the RoundID automatically by ticker/Reboot()
@@ -454,11 +454,12 @@ MINUTE_CLICK_LIMIT 400
 ## Various messages to be sent to game chats
 ## Uncommenting these will enable them, by default they will be broadcast to Game chat channels on TGS3 or non-admin channels on TGS4
 ## If using TGS4, the string option can be set as a chat channel tag to limit the message to channels of that tag type (case-sensitive)
-## i.e. CHAT_ANNOUNCE_NEW_GAME chat_channel_tag
+##i.e. CHAT_ANNOUNCE_NEW_GAME chat_channel_tag
 
 ## Send a message with the station name starting a new game. Also required for the notify function
 #CHAT_ANNOUNCE_NEW_GAME
 
+#CHANNEL_ANNOUNCE_NEW_GAME_MESSAGE A new round is beggining!!
 
 ## Allow admin hrefs that don't use the new token system, will eventually be removed
 DEBUG_ADMIN_HREFS

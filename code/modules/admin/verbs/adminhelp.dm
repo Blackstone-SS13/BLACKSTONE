@@ -90,21 +90,19 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 //Tickets statpanel
 /datum/admin_help_tickets/proc/stat_entry()
 	SHOULD_CALL_PARENT(TRUE)
-	var/list/L = list()
 	var/num_disconnected = 0
-	L[++L.len] = list("Active Tickets:", "[astatclick.update("[active_tickets.len]")]", null, REF(astatclick))
+	stat("Active Tickets:", astatclick.update("[active_tickets.len]"))
 	astatclick.update("[active_tickets.len]")
 	for(var/I in active_tickets)
 		var/datum/admin_help/AH = I
 		if(AH.initiator)
-			L[++L.len] = list("#[AH.id]. [AH.initiator_key_name]:", "[AH.statclick.update()]", REF(AH))
+			stat("#[AH.id]. [AH.initiator_key_name]:", AH.statclick.update())
 		else
 			++num_disconnected
 	if(num_disconnected)
-		L[++L.len] = list("Disconnected:", "[astatclick.update("[num_disconnected]")]", null, REF(astatclick))
-	L[++L.len] = list("Closed Tickets:", "[cstatclick.update("[closed_tickets.len]")]", null, REF(cstatclick))
-	L[++L.len] = list("Resolved Tickets:", "[rstatclick.update("[resolved_tickets.len]")]", null, REF(rstatclick))
-	return L
+		stat("Disconnected:", astatclick.update("[num_disconnected]"))
+	stat("Closed Tickets:", cstatclick.update("[closed_tickets.len]"))
+	stat("Resolved Tickets:", rstatclick.update("[resolved_tickets.len]"))
 
 //Reassociate still open ticket if one exists
 /datum/admin_help_tickets/proc/ClientLogin(client/C)
@@ -227,7 +225,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 //Removes the ahelp verb and returns it after 2 minutes
 /datum/admin_help/proc/TimeoutVerb()
 	initiator.verbs -= /client/verb/adminhelp
-	initiator.adminhelptimerid = addtimer(CALLBACK(initiator, /client/proc/giveadminhelpverb), 1200, TIMER_STOPPABLE) //2 minute cooldown of admin helps
+	initiator.adminhelptimerid = addtimer(CALLBACK(initiator, TYPE_PROC_REF(/client, giveadminhelpverb)), 1200, TIMER_STOPPABLE) //2 minute cooldown of admin helps
 
 //private
 /datum/admin_help/proc/FullMonty(ref_src)
@@ -343,7 +341,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 	state = AHELP_RESOLVED
 	GLOB.ahelp_tickets.ListInsert(src)
 
-	addtimer(CALLBACK(initiator, /client/proc/giveadminhelpverb), 50)
+	addtimer(CALLBACK(initiator, TYPE_PROC_REF(/client, giveadminhelpverb)), 50)
 
 	AddInteraction("<font color='green'>Resolved by [key_name].</font>")
 	to_chat(initiator, "<span class='adminhelp'>Your ticket has been resolved by [usr?.client?.holder?.fakekey? usr.client.holder.fakekey : "an administrator"]. The Adminhelp verb will be returned to you shortly.</span>")
