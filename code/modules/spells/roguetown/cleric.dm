@@ -38,8 +38,10 @@
 
 	var/datum/patrongods/A = H.PATRON
 	var/spelllist = list(A.t0, A.t1, A.t2, A.t3)
-	for(var/C in spelllist)
-		H.mind.AddSpell(new C)
+	for(var/spell_type in spelllist)
+		if(H.mind.has_spell(spell_type))
+			continue
+		H.mind.AddSpell(new spell_type)
 	level = CLERIC_T3
 	update_devotion(300, 900)
 
@@ -99,8 +101,7 @@
 		target.adjustOxyLoss(-5)
 		target.blood_volume += 25
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 // Light
 /obj/effect/proc_holder/spell/invoked/heal
@@ -150,8 +151,53 @@
 		target.adjustOxyLoss(-50)
 		target.blood_volume += 100
 		return TRUE
-	else
-		return FALSE
+	return FALSE
+
+// Limb attachment
+/obj/effect/proc_holder/spell/invoked/heal/attach_limb
+	name = "Attach Limb"
+	overlay_state = "lesserheal"
+	releasedrain = 30
+	chargedrain = 0
+	chargetime = 0
+	range = 7
+	warnie = "sydwarning"
+	movement_interrupt = FALSE
+	sound = 'sound/gore/flesh_eat_03.ogg'
+	invocation_type = "none"
+	associated_skill = /datum/skill/magic/holy
+	antimagic_allowed = TRUE
+	charge_max = 30 SECONDS //attaching a limb is pretty intense
+	miracle = TRUE
+	devotion_cost = -45
+
+/obj/effect/proc_holder/spell/invoked/heal/attach_limb/proc/get_limb(mob/living/target)
+	var/obj/item/bodypart/limb = locate(/obj/item/bodypart) in target.held_items
+	if(!limb)
+		for(var/obj/item/bodypart/dismembered in range(1, target))
+			if(dismembered.owner)
+				continue
+			limb = dismembered
+	return limb
+
+/obj/effect/proc_holder/spell/invoked/heal/attach_limb/cast(list/targets, mob/living/user)
+	if(ishuman(targets[1]))
+		var/mob/living/carbon/human/target = targets[1]
+		if(get_dist(user, target) > 2)
+			return FALSE
+		if(target.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
+			target.visible_message("<span class='danger'>[target] is burned by holy light!</span>", "<span class='userdanger'>I'm burned by holy light!</span>")
+			target.adjustFireLoss(50)
+			target.Paralyze(30)
+			target.fire_act(1,5)
+			return TRUE
+		var/obj/item/bodypart/limb = get_limb(target)
+		if(!limb?.attach_limb(target))
+			return FALSE
+		target.visible_message("<span class='info'>\The [limb] attaches itself to [target]!</span>", \
+							"<span class='notice'>\The [limb] attaches itself to me!</span>")
+		return TRUE
+	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/sacred_flame_rogue
 	name = "Sacred Flame"
