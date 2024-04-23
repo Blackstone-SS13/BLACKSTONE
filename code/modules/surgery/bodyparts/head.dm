@@ -13,7 +13,6 @@
 	px_y = -8
 	stam_damage_coeff = 1
 	max_stamina_damage = 100
-	dismemberable = FALSE
 
 	var/mob/living/brain/brainmob = null //The current occupant.
 	var/obj/item/organ/brain/brain = null //The brain organ
