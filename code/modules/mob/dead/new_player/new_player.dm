@@ -557,7 +557,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	dat += "<table><tr><td valign='top'>"
 	var/column_counter = 0
 
-	var/list/omegalist = list(GLOB.noble_positions) + list(GLOB.garrison_positions) + list(GLOB.church_positions) + list(GLOB.serf_positions) + list(GLOB.peasant_positions) + list(GLOB.youngfolk_positions)
+	var/list/omegalist = list(GLOB.noble_positions) + list(GLOB.garrison_positions) + list(GLOB.church_positions) + list(GLOB.serf_positions) + list(GLOB.peasant_positions) + list(GLOB.youngfolk_positions) + list(GLOB.mercenary_positions)
 
 	if(istype(SSticker.mode, /datum/game_mode/chaosmode))
 		var/datum/game_mode/chaosmode/C = SSticker.mode
@@ -594,6 +594,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 					cat_name = "Peasants"
 				if (YOUNGFOLK)
 					cat_name = "Youngfolk"
+				if (MERCENARIES)
+					cat_name = "Mercenaries"
 
 			dat += "<fieldset style='width: 185px; border: 2px solid [cat_color]; display: inline'>"
 			dat += "<legend align='center' style='font-weight: bold; color: [cat_color]'>[cat_name]</legend>"

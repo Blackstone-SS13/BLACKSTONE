@@ -1,31 +1,24 @@
-/datum/advclass/grenzelhoft
-	name = "Grenzelhoft mercenary"
+/datum/job/roguetown/mercenary/grenzelhoft
+	title = "Grenzelhof"
+	flag = GRENZELHOFT
 	tutorial = "A mercenary from the Grenzelhoft emperiate mercenary guild, only cares about coin."
-	allowed_sexes = list("male")
-	allowed_races = list("Humen",
-	"Tiefling",
-	"Aasimar")
-	outfit = /datum/outfit/job/roguetown/adventurer/grenzelhoft
+	allowed_sexes = list("male", "female")
+	allowed_races = list("Humen", "Aasimar", "Half-Elf", "Dwarf")
+	outfit = /datum/outfit/job/roguetown/mercenary/grenzelhoft
+	display_order = JDO_GRENZELHOFT
 
-/datum/outfit/job/roguetown/adventurer/grenzelhoft/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/mercenary/grenzelhoft/pre_equip(mob/living/carbon/human/H)
 	..()
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	belt = /obj/item/storage/belt/rogue/leather
-	armor = /obj/item/clothing/suit/roguetown/armor/gambeson
+	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 	cloak = /obj/item/clothing/cloak/stabard/mercenary
-	beltl = /obj/item/rogueweapon/sword/sabre
-	if(prob(50))
-		beltl = /obj/item/rogueweapon/sword
+	beltl = /obj/item/rogueweapon/sword
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/merc
 	pants = /obj/item/clothing/under/roguetown/trou/leather
-	neck = /obj/item/clothing/neck/roguetown/gorget
 	if(H.gender == FEMALE)
-		pants = /obj/item/clothing/under/roguetown/tights/black
-		beltl = /obj/item/rogueweapon/sword/sabre
-		if(prob(50))
-			beltl = /obj/item/rogueweapon/sword/rapier
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
 		if(!(H.hairstyle in acceptable))
 			H.hairstyle = pick(acceptable)
@@ -49,6 +42,9 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-		H.change_stat("intelligence", -2)
-		H.change_stat("endurance", -1)
+		H.change_stat("strength", 3)
+		H.change_stat("endurance", 2)
+		H.change_stat("constitution", 2)
+		H.change_stat("perception", -2)
+		H.change_stat("speed", -1)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)

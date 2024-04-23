@@ -107,7 +107,8 @@
 	//only migrants and peasants
 	if(!(recruit.job in GLOB.peasant_positions) && \
 		!(recruit.job in GLOB.serf_positions) && \
-		!(recruit.job in GLOB.allmig_positions))
+		!(recruit.job in GLOB.allmig_positions) && \
+		!(recruit.job in GLOB.mercenary_positions))
 		return FALSE
 	//need to see their damn face
 	if(!recruit.get_face_name(null))

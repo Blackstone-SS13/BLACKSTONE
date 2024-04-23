@@ -1,26 +1,8 @@
-/datum/job/roguetown/mercenary
-	title = "Mercenary"
-	//flag = GRAVEDIGGER
-	department_flag = MERCENARIES
-	selection_color = JCOLOR_MERCENARIES
-	faction = "Station"
-	total_positions = 5
-	spawn_positions = 5
-	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen", "Humen", "Half-Elf", "Tiefling", "Dwarf", "Dark Elf", "Aasimar")
-	tutorial = "How much blood is on your hands? Do you even see it when they line your palms with golden treasures? You're a paid killer, the only redeemable fact is that your loyalty is something purchasable, but even a whore has dignity compared to the likes of you. Another day, another mammon, you'd say."
-	outfit = /datum/outfit/job/roguetown/mercenary
-	display_order = JDO_MERCENARY
-	give_bank_account = 3
-	min_pq = -9
-
-//Smells like useless boilerplate
-/datum/outfit/job/roguetown/mercenary/pre_equip(mob/living/carbon/human/H)
-	..()
-
 /datum/job/roguetown/mercenary/desert_rider
 	title = "Desert Rider"
 	flag = DESERT_RIDER
+	allowed_sexes = list("male", "female")
+	allowed_races = list("Humen", "Half-Elf", "Tiefling", "Dark Elf")
 	tutorial = "Blood, like the desert sand, stains your hands, a crimson testament to the gold you covet. A desert rider, renowned mercenary of the far east, your scimitar whispers tales of centuries-old tradition. Your loyalty, a fleeting mirage in the shifting sands, will yield to the allure of fortune."
 	outfit = /datum/outfit/job/roguetown/mercenary/desert_rider
 	display_order = JDO_DESERT_RIDER
@@ -52,11 +34,14 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.change_stat("intelligence", -2)
-		H.change_stat("endurance", -1)
+		H.change_stat("strength", 2)
+		H.change_stat("endurance", 3)
+		H.change_stat("constitution", 2)
+		H.change_stat("perception", 1)
+		H.change_stat("speed", 2)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)

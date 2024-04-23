@@ -151,8 +151,9 @@
 #define SHOPHAND	(1<<5)
 
 #define MERCENARIES		(1<<6)
+
 #define DESERT_RIDER	(1<<0)
-#define GRENZELHOF		(1<<1)
+#define GRENZELHOFT		(1<<1)
 
 #define JCOLOR_NOBLE "#aa83b9"
 #define JCOLOR_CHURCH "#c0ba8d"
@@ -227,7 +228,7 @@
 #define JDO_PILGRIM 32.2
 
 #define JDO_MERCENARY 33
-#define JDO_GRENZELHOF 33.1
+#define JDO_GRENZELHOFT 33.1
 #define JDO_DESERT_RIDER 33.2
 
 #define JDO_VAGRANT 34
