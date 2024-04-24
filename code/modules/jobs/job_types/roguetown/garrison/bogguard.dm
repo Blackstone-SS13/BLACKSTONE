@@ -97,7 +97,7 @@
 	bogger.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	bogger.change_stat("perception", 1)
 	bogger.change_stat("endurance", 1)
 	bogger.change_stat("speed", 1)
