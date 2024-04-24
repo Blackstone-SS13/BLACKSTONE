@@ -15,7 +15,7 @@
 	"Dark Elf",
 	"Aasimar"
 	)
-	tutorial = "How much blood is on your hands? Do you even see it when they line your palms with golden treasures? Youre a paid killer, the only redeemable fact is that your loyalty is something purchasable, but even a whore has dignity compared to the likes of you. Another day, another mammon, youd say."
+	tutorial = "How much blood is on your hands? Do you even see it when they line your palms with golden treasures? You're a paid killer, the only redeemable fact is that your loyalty is something purchasable, but even a whore has dignity compared to the likes of you. Another day, another mammon, you'd say."
 	outfit = /datum/outfit/job/roguetown/mercenary
 	display_order = JDO_MERCENARY
 	give_bank_account = 3
@@ -34,10 +34,6 @@
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	neck = /obj/item/clothing/neck/roguetown/shalal
 	if(H.gender == FEMALE)
-		pants = /obj/item/clothing/under/roguetown/tights/black
-		beltl = /obj/item/rogueweapon/sword/sabre
-		if(prob(50))
-			beltl = /obj/item/rogueweapon/sword/rapier
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
 		if(!(H.hairstyle in acceptable))
 			H.hairstyle = pick(acceptable)

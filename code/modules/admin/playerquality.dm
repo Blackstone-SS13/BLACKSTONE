@@ -81,7 +81,6 @@
 			msg += " - GM: [admin]"
 		if(reason)
 			msg += " - RSN: [reason]"
-		do_bot_thing_pq(msg)
 
 /client/proc/check_pq()
 	set category = "GameMaster"
@@ -189,7 +188,7 @@
 	var/raisin = stripped_input("State a short reason for this change", "Game Master", "", null)
 	if(!amt2change && !raisin)
 		return
-	adjust_playerquality(amt2change, theykey, ckey(src.ckey), raisin)
+	adjust_playerquality(amt2change, theykey, src.ckey, raisin)
 
 /proc/add_commend(key, giver)
 	if(!giver || !key)

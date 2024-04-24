@@ -10,7 +10,7 @@
 	f_title = "Priestess"
 	allowed_races = list("Humen","Humen","Elf", "Dwarf","Half-Elf",	"Aasimar")
 	allowed_patrons = list("Astrata")
-	tutorial = "The Divine is all that matters in a world of the immoral. The Weeping god left his children to rule over us mortals and you will preach their wisdom to any who still heed their will. The faithless are growing in number, it is up to you to shepard them to a God-Fearing future."
+	tutorial = "The Divine is all that matters in a world of the immoral. The Weeping God left his children to rule over us mortals and you will preach their wisdom to any who still heed their will. The faithless are growing in number, it is up to you to shepard them to a Gods-fearing future."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/priest
 
@@ -34,6 +34,8 @@
 	id = /obj/item/clothing/ring/active/nomag
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/priest
 	if(H.mind)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/templar)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/monk)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/holy, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
@@ -138,4 +140,51 @@
 			return FALSE
 		priority_announce("[inputty]", title = "The Priest Speaks", sound = 'sound/misc/bell.ogg')
 
+/obj/effect/proc_holder/spell/self/convertrole/templar
+	name = "Recruit Templar"
+	new_role = "Templar"
+	recruitment_faction = "Templars"
+	recruitment_message = "Serve the ten, %RECRUIT!"
+	accept_message = "FOR PSYDON!"
+	refuse_message = "I refuse."
+	charge_max = 200 //templars get cool spells, so higher cooldown
 
+/obj/effect/proc_holder/spell/self/convertrole/templar/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
+	. = ..()
+	if(!.)
+		return
+	if(!recruit.cleric)
+		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
+		holder.holder_mob = recruit
+		//Max devotion limit - Templars are stronger but cannot pray to gain more abilities
+		holder.max_devotion = 200
+		holder.update_devotion(50, 50)
+	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
+	var/static/list/templar_spells = list(
+		/obj/effect/proc_holder/spell/invoked/heal/lesser, 
+		/obj/effect/proc_holder/spell/targeted/churn, 
+		/obj/effect/proc_holder/spell/targeted/burialrite,
+	)
+	for(var/spell in templar_spells)
+		if(recruit.mind.has_spell(spell))
+			continue
+		recruit.mind.AddSpell(new spell)
+
+/obj/effect/proc_holder/spell/self/convertrole/monk
+	name = "Recruit Acolyte"
+	new_role = "Acolyte"
+	recruitment_faction = "Church"
+	recruitment_message = "Serve the ten, %RECRUIT!"
+	accept_message = "FOR PSYDON!"
+	refuse_message = "I refuse."
+
+/obj/effect/proc_holder/spell/self/convertrole/monk/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
+	. = ..()
+	if(!.)
+		return
+	if(!recruit.cleric)
+		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
+		holder.holder_mob = recruit
+		holder.update_devotion(50, 50)
+		holder.grant_spells(recruit)
+	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)

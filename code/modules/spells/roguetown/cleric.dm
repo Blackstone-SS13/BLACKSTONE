@@ -38,8 +38,10 @@
 
 	var/datum/patrongods/A = H.PATRON
 	var/spelllist = list(A.t0, A.t1, A.t2, A.t3)
-	for(var/C in spelllist)
-		H.mind.AddSpell(new C)
+	for(var/spell_type in spelllist)
+		if(H.mind.has_spell(spell_type))
+			continue
+		H.mind.AddSpell(new spell_type)
 	level = CLERIC_T3
 	update_devotion(300, 900)
 
@@ -50,8 +52,10 @@
 	var/datum/patrongods/A = H.PATRON
 	var/spelllist = list(A.t0, A.t1)
 	level = CLERIC_T1
-	for(var/C in spelllist)
-		H.mind.AddSpell(new C) 
+	for(var/spell in spelllist)
+		if(H.mind.has_spell(spell))
+			continue
+		H.mind.AddSpell(new spell)
 
 // General
 /obj/effect/proc_holder/spell/invoked/heal/lesser
@@ -64,6 +68,7 @@
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	sound = 'sound/magic/heal.ogg'
+	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
@@ -96,8 +101,7 @@
 		target.adjustOxyLoss(-5)
 		target.blood_volume += 25
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 // Light
 /obj/effect/proc_holder/spell/invoked/heal
@@ -113,17 +117,16 @@
 	chargedloop = null
 	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/heal.ogg'
+	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
-	charge_max = 5 SECONDS
+	charge_max = 20 SECONDS
 	miracle = TRUE
 	devotion_cost = -45
 
 /obj/effect/proc_holder/spell/invoked/heal/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
-		if(target == user)
-			return FALSE
 		if(get_dist(user, target) > 7)
 			return FALSE
 		if(target.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
@@ -148,8 +151,68 @@
 		target.adjustOxyLoss(-50)
 		target.blood_volume += 100
 		return TRUE
-	else
-		return FALSE
+	return FALSE
+
+// Limb attachment
+/obj/effect/proc_holder/spell/invoked/heal/attach_limb
+	name = "Limb Miracle"
+	overlay_state = "lesserheal"
+	releasedrain = 30
+	chargedrain = 0
+	chargetime = 0
+	range = 7
+	warnie = "sydwarning"
+	movement_interrupt = FALSE
+	sound = 'sound/gore/flesh_eat_03.ogg'
+	invocation_type = "none"
+	associated_skill = /datum/skill/magic/holy
+	antimagic_allowed = TRUE
+	charge_max = 60 SECONDS //attaching a limb is pretty intense
+	miracle = TRUE
+	devotion_cost = -45
+
+/obj/effect/proc_holder/spell/invoked/heal/attach_limb/proc/get_limb(mob/living/target, mob/living/user)
+	var/list/missing_limbs = target.get_missing_limbs()
+	if(!length(missing_limbs))
+		return
+	var/obj/item/bodypart/limb
+	//try to get from user's hands first
+	for(var/obj/item/bodypart/potential_limb in user?.held_items)
+		if(potential_limb.owner || !(potential_limb.body_zone in missing_limbs))
+			continue
+		limb = potential_limb
+	//then target's hands
+	if(!limb)
+		for(var/obj/item/bodypart/dismembered in target.held_items)
+			if(dismembered.owner || !(dismembered.body_zone in missing_limbs))
+				continue
+			limb = dismembered
+	//then finally, 1 tile range around target
+	if(!limb)
+		for(var/obj/item/bodypart/dismembered in range(1, target))
+			if(dismembered.owner || !(dismembered.body_zone in missing_limbs))
+				continue
+			limb = dismembered
+	return limb
+
+/obj/effect/proc_holder/spell/invoked/heal/attach_limb/cast(list/targets, mob/living/user)
+	if(ishuman(targets[1]))
+		var/mob/living/carbon/human/target = targets[1]
+		if(get_dist(user, target) > 2)
+			return FALSE
+		if(target.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
+			target.visible_message("<span class='danger'>[target] is burned by holy light!</span>", "<span class='userdanger'>I'm burned by holy light!</span>")
+			target.adjustFireLoss(50)
+			target.Paralyze(30)
+			target.fire_act(1,5)
+			return TRUE
+		var/obj/item/bodypart/limb = get_limb(target, user)
+		if(!limb?.attach_limb(target))
+			return FALSE
+		target.visible_message("<span class='info'>\The [limb] attaches itself to [target]!</span>", \
+							"<span class='notice'>\The [limb] attaches itself to me!</span>")
+		return TRUE
+	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/sacred_flame_rogue
 	name = "Sacred Flame"
@@ -179,7 +242,7 @@
 			return FALSE
 		L.adjust_fire_stacks(5)
 		L.IgniteMob()
-		addtimer(CALLBACK(L, /mob/living/proc/ExtinguishMob), 4 SECONDS)
+		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, ExtinguishMob)), 4 SECONDS)
 		return TRUE
 
 	// Spell interaction with ignitable objects (burn wooden things, light torches up)
@@ -191,9 +254,7 @@
 		else
 			to_chat(user, "<span class='warning'>You point at [O], but it fails to catch fire.</span>")
 			return FALSE
-
-	else
-		return FALSE
+	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/revive
 	name = "Anastasis"
@@ -209,9 +270,11 @@
 	sound = 'sound/magic/revive.ogg'
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
-	charge_max = 1 MINUTES
+	charge_max = 2 MINUTES
 	miracle = TRUE
 	devotion_cost = -100
+	/// Amount of PQ gained for reviving people
+	var/revive_pq = 0.25
 
 /obj/effect/proc_holder/spell/invoked/revive/cast(list/targets, mob/living/user)
 	..()
@@ -233,10 +296,19 @@
 			if(target.stat == DEAD)
 				if(target.revive(full_heal = FALSE))
 					testing("revived2")
+					var/mob/living/carbon/spirit/underworld_spirit = target.get_spirit()
+					//GET OVER HERE!
+					if(underworld_spirit)
+						var/mob/dead/observer/ghost = underworld_spirit.ghostize()
+						qdel(underworld_spirit)
+						ghost.mind?.current = target
 					target.grab_ghost(force = TRUE) // even suicides
 					target.emote("breathgasp")
 					target.Jitter(100)
 					to_chat(target, "<span class='notice'>I awake from the void.</span>")
+					if(target.mind && revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
+						adjust_playerquality(revive_pq, user.ckey)
+						ADD_TRAIT(target, TRAIT_IWASREVIVED, "[type]")
 					return TRUE
 			target.visible_message("<span class='warning'>Nothing happens.</span>")
 			return FALSE
@@ -253,8 +325,7 @@
 	if(!found)
 		to_chat(user, "<span class='warning'>I need a holy cross.</span>")
 		return FALSE
-	else
-		return TRUE
+	return TRUE
 
 
 // Necrite
@@ -273,20 +344,20 @@
 	miracle = TRUE
 	devotion_cost = -15
 
-/obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets,mob/user = usr)
-	for(var/obj/structure/closet/dirthole/H in view(1))
-		if(H.stage != 4)
-			continue
-		if(!H.contents)
-			continue
-		for(var/mob/living/carbon/human/A in H.contents)
-			A.funeral = TRUE
-			if(A.mind && A.mind.has_antag_datum(/datum/antagonist/zombie))
-				A.mind.remove_antag_datum(/datum/antagonist/zombie)
-			user.visible_message("My funeral rites have been performed!", "[user] consecrates the grave!")
-		for(var/obj/structure/closet/crate/coffin/C)
-			for(var/mob/living/carbon/human/B in C.contents)
-				B.funeral = TRUE
+/obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets, mob/user = usr)
+	. = ..()
+	var/success = FALSE
+	for(var/obj/structure/closet/crate/coffin/coffin in view(1))
+		success = pacify_coffin(coffin, user)
+		if(success)
+			user.visible_message("My funeral rites have been performed on [coffin]!", "[user] consecrates [coffin]!")
+			return
+	for(var/obj/structure/closet/dirthole/hole in view(1))
+		success = pacify_coffin(hole, user)
+		if(success)
+			user.visible_message("My funeral rites have been performed on [hole]!", "[user] consecrates [hole]!")
+			return
+	to_chat(user, "<span class='red'>I failed to perform the rites.</span>")
 
 /obj/effect/proc_holder/spell/targeted/churn
 	name = "Churn Undead"
@@ -359,12 +430,12 @@
 	var/mob/living/carbon/spirit/capturedsoul = null
 	var/list/souloptions = list()
 	var/list/itemstorestore = list()
-	for(var/mob/living/carbon/spirit/S in world)
+	for(var/mob/living/carbon/spirit/S in GLOB.mob_list)
 		souloptions += S.livingname
 	var/pickedsoul = input(user, "Which soul should I commune with?", "Available Souls") as null|anything in souloptions
 	if(!pickedsoul)
 		return
-	for(var/mob/living/carbon/spirit/P in world)
+	for(var/mob/living/carbon/spirit/P in GLOB.mob_list)
 		if(P.livingname == pickedsoul)
 			to_chat(P, "You feel yourself being pulled out of the underworld.")
 			sleep(20)
@@ -385,7 +456,7 @@
 		spawn(1200)
 			to_chat(user, "The soul returns to the underworld.")
 			to_chat(capturedsoul, "You feel yourself being pulled back to the underworld.")
-			for(var/obj/effect/landmark/underworld/A in world)
+			for(var/obj/effect/landmark/underworld/A in GLOB.landmarks_list)
 				capturedsoul.loc = A.loc
 				capturedsoul.invisibility = initial(capturedsoul.invisibility)
 				for(var/I in itemstorestore)
@@ -396,10 +467,8 @@
 						var/obj/item/flashlight/lantern/shrunken/L = new
 						capturedsoul.put_in_hands(L)
 			user.remove_language(/datum/language_holder/abyssal)
-		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")	
+		to_chat(user, "<font color='blue'>I feel a cold chill run down my spine, a presence has arrived.</font>")
 		capturedsoul.Paralyze(1200)
-	else return
-
 
 // Druid
 
@@ -443,3 +512,26 @@
 	visible_message("<FONT COLOR='green'>[usr] soothes the beastblood with Dendor's whisper.</FONT><BR>")
 	for(var/mob/living/simple_animal/hostile/retaliate/B in oview(2))
 		B.aggressive = 0
+
+/obj/effect/proc_holder/spell/targeted/conjurglowshroom
+	name = "Fungal Illumination"
+	range = 1
+	overlay_state = "blesscrop"
+	releasedrain = 30
+	charge_max = 300
+	max_targets = 0
+	cast_without_targets = TRUE
+	sound = 'sound/items/dig_shovel.ogg'
+	associated_skill = /datum/skill/magic/holy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
+	invocation = null
+	invocation = "Treefather light the way."
+	invocation_type = "whisper" //can be none, whisper, emote and shout
+
+/obj/effect/proc_holder/spell/targeted/conjurglowshroom/cast(list/targets,mob/user = usr)
+	var/turf/T = user.loc
+	for(var/X in GLOB.cardinals)
+		var/turf/TT = get_step(T, X)
+		if(!isclosedturf(TT))
+			new /obj/structure/glowshroom(TT)
+	return TRUE

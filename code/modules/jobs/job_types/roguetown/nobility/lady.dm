@@ -3,7 +3,7 @@
 	flag = MERCHANT
 	department_flag = SERFS
 	faction = "Station"
-	total_positions = 0
+	total_positions = 1
 	spawn_positions = 1
 
 	allowed_sexes = list(FEMALE)
@@ -33,6 +33,8 @@
 		armor = /obj/item/clothing/suit/roguetown/armor/armordress/alt
 		l_hand = /obj/item/rogueweapon/lordscepter
 		if(H.mind)
+			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
+			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
@@ -62,4 +64,4 @@
 		SSticker.select_ruler()
 		if(L)
 			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is Queen of Rockhill.</span></span></b>")
-			addtimer(CALLBACK(L, /mob/.proc/lord_color_choice), 50)
+			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)

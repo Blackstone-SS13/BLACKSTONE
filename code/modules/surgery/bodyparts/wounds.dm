@@ -15,7 +15,7 @@
 	return TRUE
 
 /obj/item/bodypart/proc/add_wound(datum/wound/W, skipcheck = TRUE)
-	if(!W || !owner)
+	if(!W || !owner || (owner.status_flags & GODMODE))
 		return
 /*	for(var/datum/wound/D in wounds)
 		if(istype(D,W) || D.smaller_wound == W)
@@ -164,6 +164,46 @@
 			else
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30
+		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
+			if (prob(round(max(dam / 4, 1), 1)))
+				if(!can_bloody_wound())
+					return FALSE
+				var/organ_spilled = FALSE
+				var/turf/T = get_turf(owner)
+				owner.add_splatter_floor(T)
+				playsound(owner, 'sound/combat/crit2.ogg', 100, FALSE, 5)
+				owner.emote("paincrit", TRUE)
+				. = list()
+				var/static/list/spillable_slots = list(
+					ORGAN_SLOT_STOMACH = 100,
+					ORGAN_SLOT_LIVER = 50,
+				)
+				var/list/spilled_organs = list()
+				for(var/obj/item/organ/organ as anything in owner.internal_organs)
+					var/org_zone = check_zone(organ.zone)
+					if(org_zone != BODY_ZONE_CHEST)
+						continue
+					if(!(organ.slot in spillable_slots))
+						continue
+					var/spill_prob = spillable_slots[organ.slot]
+					if(prob(spill_prob))
+						spilled_organs += organ
+				for(var/obj/item/organ/spilled as anything in spilled_organs)
+					spilled.Remove(owner)
+					spilled.forceMove(T)
+					spilled.add_mob_blood(owner)
+					organ_spilled = TRUE
+				if(cavity_item)
+					cavity_item.forceMove(T)
+					. += cavity_item
+					cavity_item = null
+					organ_spilled = TRUE
+				if(organ_spilled)
+					shake_camera(owner, 2, 2)
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] spills [owner.p_their()] organs!</span>"
+				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
+					return TRUE
+				return FALSE
 		if(prob(round(max(dam / 3, 1), 1)))
 			var/foundy
 			for(var/datum/wound/artery/A in wounds)
@@ -194,36 +234,6 @@
 						owner.death()
 						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 						return TRUE
-		if(prob(round(max(dam / 4, 1), 1)))
-			if(skeletonized)
-				return FALSE
-			for(var/datum/wound/fracture/W in wounds)
-				var/organ_spilled = FALSE
-				var/turf/T = get_turf(owner)
-				owner.add_splatter_floor(T)
-				playsound(owner, 'sound/combat/crit2.ogg', 100, FALSE, 5)
-				owner.emote("paincrit", TRUE)
-				for(var/X in owner.internal_organs)
-					var/obj/item/organ/O = X
-					var/org_zone = check_zone(O.zone)
-					if(org_zone != BODY_ZONE_CHEST)
-						continue
-					O.Remove(owner)
-					O.forceMove(T)
-					O.add_mob_blood(owner)
-					organ_spilled = TRUE
-					. += X
-				if(cavity_item)
-					cavity_item.forceMove(T)
-					. += cavity_item
-					cavity_item = null
-					organ_spilled = TRUE
-
-				if(organ_spilled)
-					shake_camera(owner, 2, 2)
-					owner.death()
-					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] spills [owner.p_their()] organs!</span>"
-				return TRUE
 
 /obj/item/bodypart/head/try_crit(bclass,dam,mob/living/user,zone_precise)
 	if(user && dam)
@@ -252,16 +262,20 @@
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
-/*		if(!owner.stat)
+		if(!owner.stat)
+			var/from_behind = FALSE
+			if(owner.dir == turn(get_dir(owner,user), 180))
+				from_behind = TRUE
+				used += 50
 			if(can_bloody_wound())
 				if(prob(used) || (brute_dam >= max_damage))
-					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out!</span>"
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 					owner.flash_fullscreen("whiteflash3")
-					owner.Unconscious(300)
+					owner.Unconscious(10 SECONDS + (from_behind * 10 SECONDS))
 					if(owner.client)
 						winset(owner.client, "outputwindow.output", "max-lines=1")
 						winset(owner.client, "outputwindow.output", "max-lines=100")
-				return FALSE */
+				return FALSE 
 		for(var/datum/wound/fracture/W in wounds)
 			return FALSE
 		if(prob(used) && (brute_dam / max_damage >= 0.9))
@@ -339,17 +353,18 @@
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
 		if(!owner.stat)
+			var/from_behind = FALSE
+			if(owner.dir == turn(get_dir(owner,user), 180))
+				from_behind = TRUE
+				used += 30
 			if(prob(used) || (dam >= 30 ))
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out!</span>"
+				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 				owner.flash_fullscreen("whiteflash3")
-				owner.Unconscious(600)
-				if(owner.client)
-					winset(owner.client, "outputwindow.output", "max-lines=1")
-					winset(owner.client, "outputwindow.output", "max-lines=100")
+				owner.Unconscious(10 SECONDS + (from_behind * 10 SECONDS))
 			return FALSE
 
 /obj/item/bodypart/attacked_by(bclass, dam, mob/living/user, zone_precise)
-	if(!owner)
+	if(!owner || (owner.status_flags & GODMODE))
 		return
 	if(!bclass)
 		return
@@ -357,7 +372,7 @@
 		return
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		if(H.checkcritarmor(src, bclass))
+		if(H.checkcritarmor(zone_precise, bclass))
 			return FALSE
 	//try limbsmash here, return
 	//try dismember here, return

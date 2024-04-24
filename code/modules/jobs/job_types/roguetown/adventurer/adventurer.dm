@@ -1,12 +1,15 @@
 GLOBAL_LIST_EMPTY(billagerspawns)
 
+GLOBAL_VAR_INIT(adventurer_hugbox_duration, 20 SECONDS)
+GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
+
 /datum/job/roguetown/adventurer
 	title = "Adventurer"
 	flag = ADVENTURER
 	department_flag = PEASANTS
 	faction = "Station"
-	total_positions = -1
-	spawn_positions = -1
+	total_positions = 75
+	spawn_positions = 75
 	allowed_races = list("Humen",
 	"Elf",
 	"Half-Elf",
@@ -15,17 +18,18 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 	"Dark Elf",
 	"Aasimar"
 	)
-	tutorial = "Hero of Nothing, Adventurer by trade. Whatever led you to this fate is up to the wind to decide, and youve never fancied yourself for much other than the thrill. Someday your pride is going to catch up to you, and youre going to find out why most men dont end up in the annals of history."
+	tutorial = "Hero of nothing, adventurer by trade. Whatever led you to this fate is up to the wind to decide, and you've never fancied yourself for much other than the thrill. Someday your pride is going to catch up to you, and you're going to find out why most men don't end up in the annals of history."
 
 
 	outfit = null
 	outfit_female = null
 
-	var/isvillager = FALSE
-	var/ispilgrim = FALSE
 	display_order = JDO_ADVENTURER
 	show_in_credits = FALSE
 	min_pq = -4
+	
+	var/isvillager = FALSE
+	var/ispilgrim = FALSE
 
 /datum/job/roguetown/adventurer/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -37,12 +41,22 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 		H.Stun(100)
 		if(!H.possibleclass)
 			H.possibleclass = list()
+		if(GLOB.adventurer_hugbox_duration)
+			///FOR SOME RETARDED FUCKING REASON THIS REFUSED TO WORK WITHOUT A FUCKING TIMER IT JUST FUCKED SHIT UP
+			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, adv_hugboxing_start)), 1)
 		var/list/classes = GLOB.adv_classes.Copy()
 		var/list/special_classes = list()
 		var/classamt = 5
 		if(M.client)
+			// For every 5 positive PQ points, grant an extra choice for Adventurer classes
+			var/pq = get_playerquality(M.client.ckey, FALSE)
+			if(pq > 0)
+				classamt += floor(pq / 5)
 			if(M.client.patreonlevel() >= 1)
 				classamt = 999
+		// Increase available classes for pilgrims
+		if(ispilgrim)
+			classamt = 15
 		if(isvillager)
 			GLOB.billagerspawns |= H
 #ifdef TESTSERVER
@@ -64,16 +78,14 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 					testing("[A.name] fail9")
 					continue
 
-			if(!isvillager && !ispilgrim) //adventurer
-				if(A.ispilgrim || A.isvillager)
-					continue
-			if(isvillager) //towner
-				if(!A.isvillager)
-					continue
+			if((!isvillager && !ispilgrim) && (A.isvillager || A.ispilgrim)) //adventurer
+				continue
 
-//			if(ispilgrim) //pilgrim
-//				if(A.ispilgrim)
-//					continue
+			if(isvillager && !A.isvillager) //towner
+				continue
+
+			if(ispilgrim && !A.ispilgrim) //pilgrim
+				continue
 
 			if(A.plevel_req > M.client.patreonlevel())
 				testing("[A.name] fail6")
@@ -181,3 +193,27 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 		invisibility = 0
 		cure_blind("advsetup")
 		return TRUE
+
+/mob/living/carbon/human/proc/adv_hugboxing_start()
+	to_chat(src, "<span class='warning'>I will be in danger once I start moving.</span>")
+	status_flags |= GODMODE
+	ADD_TRAIT(src, TRAIT_PACIFISM, ADVENTURER_HUGBOX_TRAIT)
+	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(adv_hugboxing_moved))
+	//Lies, it goes away even if you don't move after enough time
+	if(GLOB.adventurer_hugbox_duration_still)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, adv_hugboxing_end)), GLOB.adventurer_hugbox_duration_still)
+
+/mob/living/carbon/human/proc/adv_hugboxing_moved()
+	UnregisterSignal(src, COMSIG_MOVABLE_MOVED)
+	to_chat(src, "<span class='danger'>I have [DisplayTimeText(GLOB.adventurer_hugbox_duration)] to begone!</span>")
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, adv_hugboxing_end)), GLOB.adventurer_hugbox_duration)
+
+/mob/living/carbon/human/proc/adv_hugboxing_end()
+	if(QDELETED(src))
+		return
+	//hugbox already ended
+	if(!(status_flags & GODMODE))
+		return
+	status_flags &= ~GODMODE
+	REMOVE_TRAIT(src, TRAIT_PACIFISM, ADVENTURER_HUGBOX_TRAIT)
+	to_chat(src, "<span class='danger'>My joy is gone! Danger surrounds me.</span>")

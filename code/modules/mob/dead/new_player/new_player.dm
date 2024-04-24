@@ -263,85 +263,15 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		handle_player_polling()
 		return
 
-	if(href_list["pollid"])
-		var/pollid = href_list["pollid"]
-		if(istext(pollid))
-			pollid = text2num(pollid)
-		if(isnum(pollid) && ISINTEGER(pollid))
-			src.poll_player(pollid)
-		return
+	if(href_list["viewpoll"])
+		var/datum/poll_question/poll = locate(href_list["viewpoll"]) in GLOB.polls
+		poll_player(poll)
 
-	if(href_list["votepollid"] && href_list["votetype"])
-		var/pollid = text2num(href_list["votepollid"])
-		var/votetype = href_list["votetype"]
-		//lets take data from the user to decide what kind of poll this is, without validating it
-		//what could go wrong
-		switch(votetype)
-			if(POLLTYPE_OPTION)
-				var/optionid = text2num(href_list["voteoptionid"])
-				if(vote_on_poll(pollid, optionid))
-					to_chat(usr, "<span class='notice'>Vote successful.</span>")
-				else
-					to_chat(usr, "<span class='danger'>Vote failed, please try again or contact an administrator.</span>")
-			if(POLLTYPE_TEXT)
-				var/replytext = href_list["replytext"]
-				if(log_text_poll_reply(pollid, replytext))
-					to_chat(usr, "<span class='notice'>Feedback logging successful.</span>")
-				else
-					to_chat(usr, "<span class='danger'>Feedback logging failed, please try again or contact an administrator.</span>")
-			if(POLLTYPE_RATING)
-				var/id_min = text2num(href_list["minid"])
-				var/id_max = text2num(href_list["maxid"])
+	if(href_list["votepollref"])
+		var/datum/poll_question/poll = locate(href_list["votepollref"]) in GLOB.polls
+		vote_on_poll_handler(poll, href_list)
 
-				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					                            //(protip, this stops no exploits)
-					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
-					return
 
-				for(var/optionid = id_min; optionid <= id_max; optionid++)
-					if(!isnull(href_list["o[optionid]"]))	//Test if this optionid was replied to
-						var/rating
-						if(href_list["o[optionid]"] == "abstain")
-							rating = null
-						else
-							rating = text2num(href_list["o[optionid]"])
-							if(!isnum(rating) || !ISINTEGER(rating))
-								return
-
-						if(!vote_on_numval_poll(pollid, optionid, rating))
-							to_chat(usr, "<span class='danger'>Vote failed, please try again or contact an administrator.</span>")
-							return
-				to_chat(usr, "<span class='notice'>Vote successful.</span>")
-			if(POLLTYPE_MULTI)
-				var/id_min = text2num(href_list["minoptionid"])
-				var/id_max = text2num(href_list["maxoptionid"])
-
-				if( (id_max - id_min) > 100 )	//Basic exploit prevention
-					to_chat(usr, "The option ID difference is too big. Please contact administration or the database admin.")
-					return
-
-				for(var/optionid = id_min; optionid <= id_max; optionid++)
-					if(!isnull(href_list["option_[optionid]"]))	//Test if this optionid was selected
-						var/i = vote_on_multi_poll(pollid, optionid)
-						switch(i)
-							if(0)
-								continue
-							if(1)
-								to_chat(usr, "<span class='danger'>Vote failed, please try again or contact an administrator.</span>")
-								return
-							if(2)
-								to_chat(usr, "<span class='danger'>Maximum replies reached.</span>")
-								break
-				to_chat(usr, "<span class='notice'>Vote successful.</span>")
-			if(POLLTYPE_IRV)
-				if (!href_list["IRVdata"])
-					to_chat(src, "<span class='danger'>No ordering data found. Please try again or contact an administrator.</span>")
-					return
-				var/list/votelist = splittext(href_list["IRVdata"], ",")
-				if (!vote_on_irv_poll(pollid, votelist))
-					to_chat(src, "<span class='danger'>Vote failed, please try again or contact an administrator.</span>")
-					return
-				to_chat(src, "<span class='notice'>Vote successful.</span>")
 
 /mob/dead/new_player/verb/do_rp_prompt()
 	set name = "Lore Primer"
@@ -349,7 +279,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	var/list/dat = list()
 	dat += GLOB.roleplay_readme
 	if(dat)
-		var/datum/browser/popup = new(src, "Primer", "RT", 460, 550)
+		var/datum/browser/popup = new(src, "Primer", "BLACKSTONE", 460, 550)
 		popup.set_content(dat.Join())
 		popup.open()
 
@@ -411,6 +341,12 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 			return "[jobtitle] requires more faith."
 		if(JOB_UNAVAILABLE_LASTCLASS)
 			return "You have played [jobtitle] recently."
+		if(JOB_UNAVAILABLE_ADVENTURER_COOLDOWN)
+			if(usr?.ckey && (usr?.ckey in GLOB.adventurer_cooldowns))
+				var/cooldown_time = GLOB.adventurer_cooldowns[usr.ckey]
+				var/cooldown_duration = 15 MINUTES
+				var/remaining_time = round((cooldown_time + cooldown_duration - world.time) / 10)
+				return "You must wait [remaining_time] seconds before playing as an Adventurer again."
 	return "Error: Unknown job availability."
 
 //used for latejoining
@@ -433,6 +369,15 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		else
 			if(rank == "Death Knight")
 				return JOB_UNAVAILABLE_GENERIC
+
+	// Check if the player is on cooldown for the Adventurer role
+	if(rank == "Adventurer")
+		if(client?.ckey in GLOB.adventurer_cooldowns)
+			var/cooldown_time = GLOB.adventurer_cooldowns[ckey]
+			var/cooldown_duration = 15 MINUTES
+			if(world.time < cooldown_time + cooldown_duration)
+				return JOB_UNAVAILABLE_ADVENTURER_COOLDOWN
+
 	var/datum/job/job = SSjob.GetJob(rank)
 	if(!job)
 		return JOB_UNAVAILABLE_GENERIC
@@ -489,7 +434,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)
 	var/error = IsJobUnavailable(rank)
 	if(error != JOB_AVAILABLE)
-		alert(src, get_job_unavailable_error_message(error, rank))
+		to_chat(src, "<span class='warning'>[get_job_unavailable_error_message(error, rank)]</span>")
 		return FALSE
 
 	if(SSticker.late_join_disabled)
@@ -629,7 +574,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		var/list/available_jobs = list()
 		for(var/job in category)
 			var/datum/job/job_datum = SSjob.name_occupations[job]
-			if(job_datum && IsJobUnavailable(job_datum.title, TRUE) == JOB_AVAILABLE)
+			// Make sure adventurer jobs always appear on list, even if unavailable
+			if(job_datum && (IsJobUnavailable(job_datum.title, TRUE) == JOB_AVAILABLE || job_datum.title == "Adventurer"))
 				available_jobs += job
 
 		if (length(available_jobs))

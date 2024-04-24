@@ -155,7 +155,8 @@
 	var/sewn_overlay = ""
 	var/bigger_wound
 	var/smaller_wound
-	var/progress
+	///How close our wound is to being treated with 100 being our target
+	var/progress = 0
 	var/passive_heal = FALSE
 
 
@@ -195,7 +196,7 @@
 
 /datum/wound/bruise/large
 	name = "massive hematoma"
-	bleed_rate = 1
+	bleed_rate = 0.99
 	woundpain = 25
 
 /datum/wound/artery
@@ -256,7 +257,7 @@
 /datum/wound/fracture
 	name = "fracture"
 	bleed_rate = 0
-	can_sew = TRUE
+	can_sew = FALSE
 	whp = 40
 	woundpain = 100
 	mob_overlay = "frac"

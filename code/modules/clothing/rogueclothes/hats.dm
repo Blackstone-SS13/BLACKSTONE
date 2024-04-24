@@ -166,6 +166,11 @@
 	name = "hat"
 	icon_state = "bardhat"
 
+/obj/item/clothing/head/roguetown/fancyhat
+	name = "fancy hat"
+	icon_state = "fancy_hat"
+	item_state = "fancyhat"
+
 /obj/item/clothing/head/roguetown/hatfur
 	name = "fur hat"
 	icon_state = "hatfur"
@@ -234,6 +239,8 @@
 	//dropshrink = 0.75
 	dynamic_hair_suffix = null
 
+/obj/item/clothing/head/roguetown/headband/red
+	color = CLOTHING_RED
 
 /obj/item/clothing/head/roguetown/crown/serpcrown
 	name = "crown of rockhill"
@@ -289,12 +296,6 @@
 /obj/item/clothing/head/roguetown/headdress/alt
 	icon_state = "headdressalt"
 
-/obj/item/clothing/head/roguetown/headband
-	name = "headband"
-	icon_state = "cloth"
-	color = CLOTHING_RED
-	sellprice = 5
-
 /obj/item/clothing/head/roguetown/nun
 	name = "nun's habit"
 	icon_state = "nun"
@@ -305,6 +306,20 @@
 	icon_state = "hennin"
 	sellprice = 19
 	dynamic_hair_suffix = "+generic"
+
+/obj/item/clothing/head/roguetown/paddedcap
+	name = "padded cap"
+	icon_state = "armingcap"
+	item_state = "armingcap"
+	sleevetype = null
+	sleeved = null
+	body_parts_covered = HEAD|HAIR|EARS
+	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_NECK|ITEM_SLOT_HEAD
+	armor = list("melee" = 15, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT)
+	blocksound = SOFTHIT
+	max_integrity = 75
+	color = "#463C2B"
 
 /obj/item/clothing/head/roguetown/helmet
 	icon = 'icons/roguetown/clothing/head.dmi'
@@ -321,6 +336,7 @@
 	dynamic_hair_suffix = "+generic"
 	bloody_icon_state = "helmetblood"
 	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
 	blocksound = PLATEHIT
 	max_integrity = 200
 
@@ -331,6 +347,7 @@
 	icon_state = "skullcap"
 	body_parts_covered = HEAD|HAIR
 	max_integrity = 200
+	smeltresult = /obj/item/ingot/iron
 
 /obj/item/clothing/head/roguetown/helmet/horned
 	name = "horned cap"
@@ -403,7 +420,6 @@
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
-	anvilrepair = /datum/skill/craft/armorsmithing
 	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/steel
 
@@ -490,6 +506,19 @@
 	sewrepair = TRUE
 	blocksound = SOFTHIT
 
+/obj/item/clothing/head/roguetown/helmet/leather/volfhelm
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_HIP
+	name = "volf helmet"
+	desc = "Bandit initiation rites involve the slaying of a volf."
+	body_parts_covered = HEAD|HAIR|EARS
+	icon_state = "volfhead"
+	item_state = "volfhead"
+	armor = list("melee" = 27, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_BLUNT)
+	anvilrepair = null
+	sewrepair = TRUE
+	blocksound = SOFTHIT
+
 /obj/item/clothing/head/roguetown/wizhat
 	name = "wizard hat"
 	desc = "Used to distinguish dangerous wizards from senile old men."
@@ -502,6 +531,28 @@
 
 /obj/item/clothing/head/roguetown/wizhat/gen
 	icon_state = "wizardhatgen"
+
+/obj/item/clothing/head/roguetown/wizhat/gen/wise
+	name = "wise hat"
+	desc = "Only the wisest of nimrods wear this."
+
+/obj/item/clothing/head/roguetown/wizhat/gen/wise/equipped(mob/user, slot)
+	. = ..()
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/wise = user
+	if(slot == SLOT_HEAD)
+		wise.change_stat("intelligence", 2)
+		to_chat(wise, "<span class='green'>I gain wisdom.</span>")
+	
+/obj/item/clothing/head/roguetown/wizhat/gen/wise/dropped(mob/user)
+	. = ..()
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/wise = user
+	if(wise.get_item_by_slot(SLOT_HEAD) == src)
+		wise.change_stat("intelligence", -2)
+		to_chat(wise, "<span class='red'>I lose wisdom.</span>")
 
 /obj/item/clothing/head/roguetown/nyle
 	name = "jewel of nyle"

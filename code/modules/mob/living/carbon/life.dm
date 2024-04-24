@@ -68,6 +68,8 @@
 						if(affecting.get_bleedrate() <= 0.1)
 							if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, null, BODYPART_ORGANIC))
 								src.update_damage_overlays()
+							if(affecting.heal_wounds(5))
+								src.update_damage_overlays()
 					adjustToxLoss(-buckled.sleepy)
 					if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 						Sleeping(300)
@@ -105,6 +107,8 @@
 							var/obj/item/bodypart/affecting = X
 							if(affecting.get_bleedrate() <= 0.1)
 								if(affecting.heal_damage(0.15, 0.15, null, BODYPART_ORGANIC))
+									src.update_damage_overlays()
+								if(affecting.heal_wounds(1))
 									src.update_damage_overlays()
 						adjustToxLoss(-0.1)
 
@@ -160,8 +164,8 @@
 						Immobilize(10)
 						emote("painscream")
 						stuttering += 5
-						addtimer(CALLBACK(src, .proc/Stun, 110), 10)
-						addtimer(CALLBACK(src, .proc/Knockdown, 110), 10)
+						addtimer(CALLBACK(src, PROC_REF(Stun), 110), 10)
+						addtimer(CALLBACK(src, PROC_REF(Knockdown), 110), 10)
 						mob_timers["painstun"] = world.time + 160
 					else
 						emote("painmoan")

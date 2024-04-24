@@ -140,7 +140,7 @@ GLOBAL_VAR(last_connection)
 			return
 		GLOB.stickybanadminexemptions[ckey] = world.time
 		stoplag() // sleep a byond tick
-		GLOB.stickbanadminexemptiontimerid = addtimer(CALLBACK(GLOBAL_PROC, /proc/restore_stickybans), 5 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_OVERRIDE)
+		GLOB.stickbanadminexemptiontimerid = addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(restore_stickybans)), 5 SECONDS, TIMER_STOPPABLE|TIMER_UNIQUE|TIMER_OVERRIDE)
 		return
 	var/list/ban = ..()	//default pager ban stuff
 
@@ -226,11 +226,19 @@ GLOBAL_VAR(last_connection)
 		if (ban["fromdb"])
 			if(SSdbcore.Connect())
 				INVOKE_ASYNC(SSdbcore, /datum/controller/subsystem/dbcore/proc.QuerySelect, list(
-					SSdbcore.NewQuery("INSERT INTO [format_table_name("stickyban_matched_ckey")] (matched_ckey, stickyban) VALUES ('[sanitizeSQL(ckey)]', '[sanitizeSQL(bannedckey)]') ON DUPLICATE KEY UPDATE last_matched = now()"),
-					SSdbcore.NewQuery("INSERT INTO [format_table_name("stickyban_matched_ip")] (matched_ip, stickyban) VALUES ( INET_ATON('[sanitizeSQL(address)]'), '[sanitizeSQL(bannedckey)]') ON DUPLICATE KEY UPDATE last_matched = now()"),
-					SSdbcore.NewQuery("INSERT INTO [format_table_name("stickyban_matched_cid")] (matched_cid, stickyban) VALUES ('[sanitizeSQL(computer_id)]', '[sanitizeSQL(bannedckey)]') ON DUPLICATE KEY UPDATE last_matched = now()")
+					SSdbcore.NewQuery(
+						"INSERT INTO [format_table_name("stickyban_matched_ckey")] (matched_ckey, stickyban) VALUES (:ckey, :bannedckey) ON DUPLICATE KEY UPDATE last_matched = now()",
+						list("ckey" = ckey, "bannedckey" = bannedckey)
+					),
+					SSdbcore.NewQuery(
+						"INSERT INTO [format_table_name("stickyban_matched_ip")] (matched_ip, stickyban) VALUES (INET_ATON(:address), :bannedckey) ON DUPLICATE KEY UPDATE last_matched = now()",
+						list("address" = address, "bannedckey" = bannedckey)
+					),
+					SSdbcore.NewQuery(
+						"INSERT INTO [format_table_name("stickyban_matched_cid")] (matched_cid, stickyban) VALUES (:computer_id, :bannedckey) ON DUPLICATE KEY UPDATE last_matched = now()",
+						list("computer_id" = computer_id, "bannedckey" = bannedckey)
+					)
 				), FALSE, TRUE)
-
 
 		//byond will not trigger isbanned() for "global" host bans,
 		//ie, ones where the "apply to this game only" checkbox is not checked (defaults to not checked)
@@ -276,16 +284,6 @@ GLOBAL_VAR(last_connection)
 #ifdef TESTSERVER
 	return FALSE
 #endif
-	if(!check_whitelist(ckey))
-//		if(text2num(CheckJoinDate(ckey)) > 2021)
-		if(holder)
-			return FALSE
-		else
-			if(!check_bypassage(ckey))
-				var/plevel = patreonlevel()
-				if(plevel < 1 || !plevel)
-					if(!discord_name())
-						return TRUE
 
 #undef STICKYBAN_MAX_MATCHES
 #undef STICKYBAN_MAX_EXISTING_USER_MATCHES

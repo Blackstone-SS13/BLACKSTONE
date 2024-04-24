@@ -34,7 +34,7 @@
 			chance2hit += 10
 
 	if(user.STAPER > 10)
-		chance2hit += ((20-user.STAPER)*3)
+		chance2hit += ((user.STAPER-10)*3)
 
 	if(user.STAPER < 10)
 		chance2hit -= ((10-user.STAPER)*3)
@@ -81,7 +81,7 @@
 		return TRUE
 
 
-/mob/living/proc/checkdefense(var/datum/intent/intenty, mob/living/user)
+/mob/living/proc/checkdefense(datum/intent/intenty, mob/living/user)
 	testing("begin defense")
 	if(!cmode)
 		return FALSE
@@ -358,7 +358,7 @@
 			else
 				return FALSE
 
-/mob/proc/do_parry(var/obj/item/W, parrydrain as num, mob/living/user)
+/mob/proc/do_parry(obj/item/W, parrydrain as num, mob/living/user)
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		if(H.rogfat_add(parrydrain))
@@ -394,7 +394,7 @@
 		return TRUE
 
 
-/mob/proc/do_dodge(mob/user, var/turf/turfy)
+/mob/proc/do_dodge(mob/user, turf/turfy)
 	if(!dodgecd)
 		var/mob/living/L = src
 		var/mob/living/U = user
