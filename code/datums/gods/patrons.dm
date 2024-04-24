@@ -87,4 +87,4 @@ GLOBAL_LIST_EMPTY(patronlist)
 	name = "Eora"
 	domain = "Goddess of Degeneracy, Debauchery and Addiction"
 	summary = "The Fallen Daughter, once used to be a goddess of love and family but has now fallen from grace."
-	worshippers = "Drunkards, Junkies, Gamblers"
+	worshippers = "Drunkards, Junkies, Gamblers and Bards"
