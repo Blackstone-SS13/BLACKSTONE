@@ -1145,7 +1145,7 @@
 /mob/living/carbon/proc/update_disabled_bodyparts()
 	for(var/B in bodyparts)
 		var/obj/item/bodypart/BP = B
-		BP.update_disabled()
+		BP.update_disabled(TRUE)
 
 /mob/living/carbon/vv_get_dropdown()
 	. = ..()
