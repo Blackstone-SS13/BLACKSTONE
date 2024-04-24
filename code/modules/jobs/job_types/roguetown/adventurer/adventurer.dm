@@ -78,7 +78,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 					testing("[A.name] fail9")
 					continue
 			if(!(H.charflaw.name in A.allowed_flaws))
-					continue
+				continue
 
 			if((!isvillager && !ispilgrim) && (A.isvillager || A.ispilgrim)) //adventurer
 				continue
