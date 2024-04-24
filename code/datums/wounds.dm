@@ -158,6 +158,8 @@
 	///How close our wound is to being treated with 100 being our target
 	var/progress = 0
 	var/passive_heal = FALSE
+	/// If TRUE, this disables limbs
+	var/disabling = FALSE
 
 
 /datum/wound/proc/sewn()
@@ -261,6 +263,7 @@
 	whp = 40
 	woundpain = 100
 	mob_overlay = "frac"
+	disabling = TRUE
 
 /datum/wound/necksnap
 	name = "broken neck"

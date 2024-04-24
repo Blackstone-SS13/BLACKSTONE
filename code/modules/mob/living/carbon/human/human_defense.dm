@@ -997,6 +997,11 @@
 		isdisabled = "cracked "
 	if(FB.is_disabled() == BODYPART_DISABLED_PARALYSIS || FB.is_disabled() == BODYPART_DISABLED_FALL)
 		isdisabled = "limp "
+	if(FB.is_disabled() == BODYPART_DISABLED_ROT)
+		if(FB.skeletonized)
+			isdisabled = "skeletonized "
+		else
+			isdisabled = "rotting "
 	to_chat(src, "\t <span class='[no_damage ? "notice" : "warning"]'>My [isdisabled][FB.name] [status].</span>")
 
 	for(var/obj/item/I in FB.embedded_objects)
