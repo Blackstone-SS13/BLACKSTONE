@@ -63,13 +63,10 @@
 				if(hydration > 0 || yess)
 					if(!bleed_rate)
 						blood_volume = min(blood_volume + 10, BLOOD_VOLUME_MAXIMUM)
-					for(var/X in bodyparts)
-						var/obj/item/bodypart/affecting = X
-						if(affecting.get_bleedrate() <= 0.1)
-							if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, null, BODYPART_ORGANIC))
-								src.update_damage_overlays()
-							if(affecting.heal_wounds(5))
-								src.update_damage_overlays()
+					for(var/obj/item/bodypart/affecting as anything in bodyparts)
+						//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
+						if((affecting.get_bleedrate() <= 1) && affecting.heal_damage(buckled.sleepy, buckled.sleepy, null, BODYPART_ORGANIC))
+							src.update_damage_overlays()
 					adjustToxLoss(-buckled.sleepy)
 					if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 						Sleeping(300)
