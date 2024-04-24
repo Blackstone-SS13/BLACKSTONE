@@ -54,6 +54,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOSLEEP, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_LIMPDICK, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_VAMPMANSION, TRAIT_GENERIC)
 	owner.current.cmode_music = 'sound/music/combatvamp.ogg'
 	var/obj/item/organ/eyes/eyes = owner.current.getorganslot(ORGAN_SLOT_EYES)
@@ -144,8 +145,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	..()
 	H.mind.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 6, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
 	pants = /obj/item/clothing/under/roguetown/tights/black
@@ -156,6 +157,10 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	cloak = /obj/item/clothing/cloak/cape/puritan
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	backl = /obj/item/storage/backpack/rogue/satchel/black
+	neck = /obj/item/clothing/neck/roguetown/gorget
+	H.change_stat("strength", 6)
+	H.change_stat("intelligence", 6)
+	H.change_stat("constitution", 6)
 	H.ambushable = FALSE
 
 ////////Outfits////////
