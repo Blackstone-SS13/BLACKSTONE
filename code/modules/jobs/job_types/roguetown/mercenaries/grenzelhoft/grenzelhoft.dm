@@ -1,5 +1,5 @@
 /datum/job/roguetown/mercenary/grenzelhoft
-	title = "Grenzelhof"
+	title = "Grenzelhoft Mercenary"
 	flag = GRENZELHOFT
 	tutorial = "A mercenary from the Grenzelhoft emperiate mercenary guild, only cares about coin."
 	allowed_sexes = list("male", "female")
@@ -14,10 +14,20 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
-	cloak = /obj/item/clothing/cloak/stabard/mercenary
-	beltl = /obj/item/rogueweapon/sword
-	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/merc
+	cloak = /obj/item/clothing/cloak/stabard/grenzelhoft
+	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/trou/leather
+	neck = /obj/item/clothing/neck/roguetown/gorget
+	head = /obj/item/clothing/head/roguetown/chaperon
+
+	//quick and gay way to do random loadouts
+	var equipment = rand(1, 2)
+	if (equipment == 1) {
+		backl = /obj/item/rogueweapon/spear/billhook
+	} else if (equipment == 2) {
+		backl = /obj/item/rogueweapon/halberd
+	}
+
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
 		if(!(H.hairstyle in acceptable))
@@ -29,22 +39,22 @@
 		H.skin_tone = skin_slop["Grenzelhoft"]
 		H.update_body()
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		H.change_stat("strength", 3)
 		H.change_stat("endurance", 2)
-		H.change_stat("constitution", 2)
-		H.change_stat("perception", -2)
-		H.change_stat("speed", -1)
+		H.change_stat("constitution", 3)
+		H.change_stat("perception", 1)
+		H.change_stat("speed", 1)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)

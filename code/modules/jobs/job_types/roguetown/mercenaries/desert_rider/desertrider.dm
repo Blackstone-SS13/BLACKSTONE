@@ -1,5 +1,5 @@
 /datum/job/roguetown/mercenary/desert_rider
-	title = "Desert Rider"
+	title = "Desert Rider Mercenary"
 	flag = DESERT_RIDER
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen", "Half-Elf", "Tiefling", "Dark Elf")
@@ -17,8 +17,9 @@
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 	beltl = /obj/item/rogueweapon/sword/long/rider
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
-	pants = /obj/item/clothing/under/roguetown/tights/black
+	pants = /obj/item/clothing/under/roguetown/chainlegs/iron
 	neck = /obj/item/clothing/neck/roguetown/shalal
+	
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
 		if(!(H.hairstyle in acceptable))
@@ -37,11 +38,11 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("endurance", 3)
 		H.change_stat("constitution", 2)
-		H.change_stat("perception", 1)
-		H.change_stat("speed", 2)
+		H.change_stat("perception", 2)
+		H.change_stat("speed", 3)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
