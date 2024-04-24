@@ -145,22 +145,25 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	..()
 	H.mind.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 6, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
-	pants = /obj/item/clothing/under/roguetown/tights/black
+	pants = /obj/item/clothing/under/roguetown/platelegs/vampire
 	shirt = /obj/item/clothing/suit/roguetown/shirt/vampire
 	belt = /obj/item/storage/belt/rogue/leather/plaquegold
 	head  = /obj/item/clothing/head/roguetown/vampire
 	beltl = /obj/item/roguekey/vampire
+	beltr = /obj/item/clothing/head/roguetown/helmet/heavy/guard
 	cloak = /obj/item/clothing/cloak/cape/puritan
-	shoes = /obj/item/clothing/shoes/roguetown/boots
+	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/vampire
 	backl = /obj/item/storage/backpack/rogue/satchel/black
 	neck = /obj/item/clothing/neck/roguetown/gorget
-	H.change_stat("strength", 6)
-	H.change_stat("intelligence", 6)
-	H.change_stat("constitution", 6)
+	armor = /obj/item/clothing/suit/roguetown/armor/plate/vampire
+	gloves = /obj/item/clothing/gloves/roguetown/chain/vampire
+	H.change_stat("strength", 4)
+	H.change_stat("intelligence", 2)
+	H.change_stat("constitution", 2)
 	H.ambushable = FALSE
 
 ////////Outfits////////
