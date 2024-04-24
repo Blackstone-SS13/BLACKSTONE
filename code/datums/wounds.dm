@@ -196,7 +196,7 @@
 
 /datum/wound/bruise/large
 	name = "massive hematoma"
-	bleed_rate = 0.99
+	bleed_rate = 0.9
 	woundpain = 25
 
 /datum/wound/artery
