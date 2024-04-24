@@ -293,25 +293,24 @@
 			target.visible_message("<span class='danger'>[target] is unmade by holy light!</span>", "<span class='userdanger'>I'm unmade by holy light!</span>")
 			target.gib()
 		else
-			if(target.stat == DEAD)
-				if(target.revive(full_heal = FALSE))
-					testing("revived2")
-					var/mob/living/carbon/spirit/underworld_spirit = target.get_spirit()
-					//GET OVER HERE!
-					if(underworld_spirit)
-						var/mob/dead/observer/ghost = underworld_spirit.ghostize()
-						qdel(underworld_spirit)
-						ghost.mind?.current = target
-					target.grab_ghost(force = TRUE) // even suicides
-					target.emote("breathgasp")
-					target.Jitter(100)
-					to_chat(target, "<span class='notice'>I awake from the void.</span>")
-					if(target.mind && revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
-						adjust_playerquality(revive_pq, user.ckey)
-						ADD_TRAIT(target, TRAIT_IWASREVIVED, "[type]")
-					return TRUE
-			target.visible_message("<span class='warning'>Nothing happens.</span>")
-			return FALSE
+			if((target.stat >= DEAD) || !target.revive(full_heal = FALSE))
+				target.visible_message("<span class='warning'>Nothing happens.</span>")
+				return FALSE
+			testing("revived2")
+			var/mob/living/carbon/spirit/underworld_spirit = target.get_spirit()
+			//GET OVER HERE!
+			if(underworld_spirit)
+				var/mob/dead/observer/ghost = underworld_spirit.ghostize()
+				qdel(underworld_spirit)
+				ghost.mind?.current = target
+			target.grab_ghost(force = TRUE) // even suicides
+			target.emote("breathgasp")
+			target.Jitter(100)
+			to_chat(target, "<span class='notice'>I awake from the void.</span>")
+			if(target.mind && revive_pq && !HAS_TRAIT(target, TRAIT_IWASREVIVED) && user?.ckey)
+				adjust_playerquality(revive_pq, user.ckey)
+				ADD_TRAIT(target, TRAIT_IWASREVIVED, "[type]")
+			return TRUE
 		return TRUE
 	else
 		return FALSE
