@@ -72,6 +72,10 @@ GLOBAL_LIST_EMPTY(patronlist)
 	domain = "Goddess of Decay, Disease and Medicine"
 	summary = "The Loving Daughter of Psydon, gifted man medicine."
 	worshippers = "The Sick, Phyicians, Apothecaries"
+	t0 = /obj/effect/proc_holder/spell/invoked/heal/lesser
+	t1 = /obj/effect/proc_holder/spell/invoked/heal/attach_limb
+	t2 = /obj/effect/proc_holder/spell/invoked/heal
+	t3 = /obj/effect/proc_holder/spell/invoked/revive
 
 /datum/patrongods/malum
 	name = "Malum"
@@ -84,6 +88,3 @@ GLOBAL_LIST_EMPTY(patronlist)
 	domain = "Goddess of the Family, Love and Lust"
 	summary = "The Lovely One, her divine gift was that of family and love."
 	worshippers = "Lovers, Harlots, Doting Grandparents"
-
-
-
