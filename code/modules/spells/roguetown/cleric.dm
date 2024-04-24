@@ -579,10 +579,12 @@
         charge_max = 30 SECONDS
         devotion_cost = -50
     
-    /obj/effect/proc_holder/spell/invoked/invisibility/cast(list/targets, mob/user = usr)
+/obj/effect/proc_holder/spell/invoked/invisibility/cast(list/targets, mob/user = usr)
         if(isliving(targets[1]))
             var/mob/living/L = targets[1]
             if(L.anti_magic_check(TRUE, TRUE))
                 return FALSE
             L.invisible(50)
             return TRUE
+
+//TesT Commit to ensure reworking
