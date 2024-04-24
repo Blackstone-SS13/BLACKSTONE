@@ -81,10 +81,10 @@ GLOBAL_LIST_EMPTY(patronlist)
 	name = "Malum"
 	domain = "God of Fire, Destruction and Rebirth"
 	summary = "The Opinionless God, his children hold no malice in their actions."
-	worshippers = "Smiths, Miners, Artists."
+	worshippers = "Smiths, Miners, Artists"
 
 /datum/patrongods/eora
 	name = "Eora"
-	domain = "Goddess of the Family, Love and Lust"
-	summary = "The Lovely One, her divine gift was that of family and love."
-	worshippers = "Lovers, Harlots, Doting Grandparents"
+	domain = "Goddess of Degeneracy, Debauchery and Addiction"
+	summary = "The Fallen Daughter, once used to be a goddess of love and family but has now fallen from grace."
+	worshippers = "Drunkards, Junkies, Gamblers"
