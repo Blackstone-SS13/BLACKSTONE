@@ -138,8 +138,8 @@ GLOBAL_LIST_INIT(allmig_positions, list(
 	))
 
 GLOBAL_LIST_INIT(mercenary_positions, list(
-	"Grenzelhof",
-	"Desert Rider"
+	"Grenzelhoft Mercenary",
+	"Desert Rider Mercenary"
 	))
 
 GLOBAL_LIST_INIT(roguewar_positions, list(
