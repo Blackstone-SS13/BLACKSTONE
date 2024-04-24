@@ -52,12 +52,10 @@
 
 /obj/structure/bookcase/random/archive/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/book/rogue/playerbook))
-		message_admins("starting to save a player book")
 		var/obj/item/book/rogue/playerbook/PB = I
 		if(PB.is_in_round_player_generated)
 			to_chat(user, "<span class='notice'>[SSlibrarian.playerbook2file(PB.player_book_text, PB.player_book_title, PB.player_book_author, PB.player_book_author_ckey, PB.player_book_icon)]</span>")
 			PB.is_in_round_player_generated = FALSE
-			message_admins("a player book has been saved to database")
 
 	. = ..()
 

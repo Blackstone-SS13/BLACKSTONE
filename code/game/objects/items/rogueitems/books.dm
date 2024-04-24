@@ -374,7 +374,7 @@
 	var/player_book_author = "unknown author"
 	var/player_book_icon = "basic_book"
 	var/player_book_author_ckey = "unknown"
-	var/is_in_round_player_generated = FALSE
+	var/is_in_round_player_generated
 	var/list/player_book_titles
 	var/list/player_book_content
 	var/list/book_icons = list(
@@ -393,20 +393,19 @@
 	base_icon_state = "basic_book"
 	override_find_book = TRUE
 	
-/obj/item/book/rogue/playerbook/Initialize(loc, is_in_round_player_generated, var/mob/living/in_round_player_mob, player_book_text)
+/obj/item/book/rogue/playerbook/Initialize(loc, in_round_player_generated, var/mob/living/in_round_player_mob, player_book_text)
 	. = ..()
+	is_in_round_player_generated = in_round_player_generated
 	if(is_in_round_player_generated)
 		player_book_author_ckey = in_round_player_mob.ckey
-		player_book_title = sanitize_hear_message(input(in_round_player_mob, "What title do you want to give the book?", "Title", "Unknown"))
-		player_book_author = "[sanitize_hear_message(input(in_round_player_mob, "Do you want to preface your author name with an author title?", "Author Title", ""))] [in_round_player_mob.real_name]"
+		player_book_title = dd_limittext(capitalize(sanitize_hear_message(input(in_round_player_mob, "What title do you want to give the book? (max 42 characters)", "Title", "Unknown"))), MAX_NAME_LEN)
+		player_book_author = "[dd_limittext(sanitize_hear_message(input(in_round_player_mob, "Do you want to preface your author name with an author title? (max 42 characters)", "Author Title", "")), MAX_NAME_LEN)] [in_round_player_mob.real_name]"
 		player_book_icon = book_icons[input(in_round_player_mob, "Choose a book style", "Book Style") as anything in book_icons]
-		var/sanitize_list = list("\n"="", "\t"="", "<"="", ">"="")
-		sanitize_simple(player_book_text, sanitize_list)
 		message_admins("[player_book_author_ckey]([in_round_player_mob.real_name]) has generated the player book: [player_book_title]")
 	else
 		player_book_titles = SSlibrarian.pull_player_book_titles()
-		player_book_title = pick(player_book_titles)
-		player_book_content = SSlibrarian.file2playerbook(player_book_title)
+		player_book_content = SSlibrarian.file2playerbook(pick(player_book_titles))
+		player_book_title = player_book_content["book_title"]
 		player_book_author = player_book_content["author"]
 		player_book_author_ckey = player_book_content["author_ckey"]
 		player_book_icon = player_book_content["icon"]
@@ -417,7 +416,7 @@
 	icon_state = "[player_book_icon]_0"
 	base_icon_state = "[player_book_icon]"
 
-	pages = list("<b3><h3>Title:[player_book_title]<br>Author:[player_book_author]</b><h3>[player_book_text]")
+	pages = list("<b3><h3>Title: [player_book_title]<br>Author: [player_book_author]</b><h3>[player_book_text]")
 
 /obj/item/manuscript
 	name = "2 page manuscript"
