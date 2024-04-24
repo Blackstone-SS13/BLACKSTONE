@@ -196,6 +196,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /obj/item/clothing/head/roguetown/vampire
 	name = "crown of darkness"
 	icon_state = "vcrown"
+	item_state = "vcrown"
 	body_parts_covered = null
 	slot_flags = ITEM_SLOT_HEAD
 	dynamic_hair_suffix = null
