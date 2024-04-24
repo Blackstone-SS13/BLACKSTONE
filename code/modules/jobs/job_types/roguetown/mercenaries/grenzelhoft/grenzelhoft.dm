@@ -1,7 +1,7 @@
 /datum/job/roguetown/mercenary/grenzelhoft
 	title = "Grenzelhoft Mercenary"
 	flag = GRENZELHOFT
-	tutorial = "A mercenary from the Grenzelhoft emperiate mercenary guild, only cares about coin."
+	tutorial = "Experts, Professionals, Expensive. Those are the first words that come to mind when the emperiate Grenzelhoft mercenary guild is mentioned. While you may work for coin like any common sellsword, mantaining the prestige of the guild will be of utmost priority."
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen", "Aasimar", "Half-Elf", "Dwarf")
 	outfit = /datum/outfit/job/roguetown/mercenary/grenzelhoft
