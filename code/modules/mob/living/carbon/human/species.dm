@@ -1854,7 +1854,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		else
 			affecting.attacked_by(user.used_intent.blade_class, damage, user, selzone)
 		log_combat(user, target, "punched")
-		knockback(attacker_style, target, user, nodmg)
 
 		if(!nodmg)
 			if(user.limb_destroyer)
