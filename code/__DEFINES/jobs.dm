@@ -148,6 +148,7 @@
 #define SERVANT		(1<<2)
 #define ORPHAN		(1<<3)
 #define PRINCE		(1<<4)
+#define SHOPHAND	(1<<5)
 
 #define JCOLOR_NOBLE "#aa83b9"
 #define JCOLOR_CHURCH "#c0ba8d"
@@ -188,6 +189,7 @@
 #define JDO_SHEPHERD 17
 
 #define JDO_MERCHANT 18
+#define JDO_SHOPHAND 18.1
 #define JDO_GRABBER 19
 
 #define JDO_ARMORER 20

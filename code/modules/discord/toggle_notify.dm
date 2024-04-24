@@ -1,11 +1,9 @@
 // Verb to toggle restart notifications
 /client/verb/notify_restart()
-	set category = "Special Verbs"
+	set category = "OOC"
 	set name = "Notify Restart"
 	set desc = ""
-	set hidden = 1
-	if(!usr.client.holder)
-		return
+	set hidden = FALSE
 	// Safety checks
 	if(!CONFIG_GET(flag/sql_enabled))
 		to_chat(src, "<span class='warning'>This feature requires the SQL backend to be running.</span>")

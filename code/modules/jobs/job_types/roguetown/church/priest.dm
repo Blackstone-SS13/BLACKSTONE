@@ -180,11 +180,12 @@
 	. = ..()
 	if(!.)
 		return
-	var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
-	holder.holder_mob = recruit
-	//Max devotion limit - Templars are stronger but cannot pray to gain more abilities
-	holder.max_devotion = 200
-	holder.update_devotion(50, 50)
+	if(!recruit.cleric)
+		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
+		holder.holder_mob = recruit
+		//Max devotion limit - Templars are stronger but cannot pray to gain more abilities
+		holder.max_devotion = 200
+		holder.update_devotion(50, 50)
 	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 	var/static/list/templar_spells = list(
 		/obj/effect/proc_holder/spell/invoked/heal/lesser, 
@@ -192,7 +193,9 @@
 		/obj/effect/proc_holder/spell/targeted/burialrite,
 	)
 	for(var/spell in templar_spells)
-		recruit.mind?.AddSpell(new spell)
+		if(recruit.mind.has_spell(spell))
+			continue
+		recruit.mind.AddSpell(new spell)
 
 /obj/effect/proc_holder/spell/self/convertrole/monk
 	name = "Recruit Acolyte"
@@ -202,19 +205,13 @@
 	accept_message = "FOR PSYDON!"
 	refuse_message = "I refuse."
 
-/obj/effect/proc_holder/spell/self/convertrole/monk/can_convert(mob/living/carbon/human/recruit)
-	. = ..()
-	if(!.)
-		return
-	if(!recruit.PATRON || !(recruit.PATRON in ALL_PATRON_NAMES_LIST))
-		return FALSE
-
 /obj/effect/proc_holder/spell/self/convertrole/monk/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
 	. = ..()
 	if(!.)
 		return
-	var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
-	holder.holder_mob = recruit
-	holder.update_devotion(50, 50)
-	holder.grant_spells(recruit)
+	if(!recruit.cleric)
+		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
+		holder.holder_mob = recruit
+		holder.update_devotion(50, 50)
+		holder.grant_spells(recruit)
 	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)

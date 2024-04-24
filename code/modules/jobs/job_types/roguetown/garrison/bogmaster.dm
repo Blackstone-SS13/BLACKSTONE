@@ -14,7 +14,7 @@
 		"Tiefling",
 		"Dark Elf"
 	)
-	tutorial = "You are the most experienced idiot to volunteer to the Bog Guard... What a mistake that was. Your job is to keep the bogmen in line and to ensure the routes to the keep are safe. May the ten have mercy on you..."
+	tutorial = "You are the most experienced idiot to volunteer to the Bog Guard... What a mistake that was. You report to the Sheriff, and your job is to keep the bogmen in line and to ensure the routes to the keep are safe. May the ten have mercy on you..."
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	display_order = JDO_BOGMASTER
 	whitelist_req = TRUE
@@ -54,7 +54,7 @@
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
@@ -64,6 +64,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 3)
