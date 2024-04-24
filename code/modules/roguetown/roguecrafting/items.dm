@@ -231,3 +231,9 @@
 
 /obj/item/rogueweapon/shovel/small/crafted
 	sellprice = 5
+
+/datum/crafting_recipe/roguetown/bow
+	name = "bow"
+	result = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	reqs = list(/obj/item/grown/log/tree = 1,
+			/obj/item/rope = 1)
