@@ -109,3 +109,36 @@
 	M.Stun(40)
 	M.petrify()
 	return ..()
+
+
+/obj/item/melee/touch_attack/necrotic
+	name = "necrotic touch"
+	desc = ""
+	catchphrase = "Dreadmaiden take you!"
+	on_use_sound = 'sound/combat/riposte.ogg'
+	icon_state = "necrotic"
+	item_state = "necrotic"
+	lefthand_file = 'icons/mob/inhands/misc/touchspell_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/misc/touchspell_righthand.dmi'
+	damtype = "brute"
+	force = 25
+
+/obj/item/melee/touch_attack/inflictwounds/afterattack(atom/target, mob/living/carbon/user, proximity)
+	if(!proximity || target == user || !isliving(target) || !iscarbon(user))
+		return
+	if(!(user.mobility_flags & MOBILITY_USE))
+		to_chat(user, "<span class='warning'>I can't reach out!</span>")
+		return
+	if(!user.can_speak_vocal())
+		to_chat(user, "<span class='warning'>I can't get the words out!</span>")
+		return
+	var/mob/living/M = target
+	if(M.anti_magic_check())
+		to_chat(user, "<span class='warning'>The spell can't seem to affect [M]!</span>")
+		to_chat(M, "<span class='warning'>You feel a cold, otherworldly grasp on your skin that quickly fades!</span>")
+		..()
+		return
+	M.Jitter(40)
+	M.adjust_bodytemperature(-15 * TEMPERATURE_DAMAGE_COEFFICIENT, BODYTEMP_NORMAL)
+	M.adjustToxLoss(15)
+	return ..()

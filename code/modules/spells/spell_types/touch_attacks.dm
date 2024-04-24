@@ -81,3 +81,19 @@
 
 	action_icon_state = "statue"
 	sound = 'sound/blank.ogg'
+
+/obj/effect/proc_holder/spell/targeted/touch/necrotic
+	name = "Necrotic Grasp"
+	desc = ""
+	hand_path = /obj/item/melee/touch_attack/necrotic
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
+	releasedrain = 50
+	charge_max = 600
+	max_targets = 0
+	overlay_state = "necra"
+	sound = 'sound/blank.ogg'
+	associated_skill = /datum/skill/magic/holy
+	invocation = "Dreadlady, give me your hand."
+	invocation_type = "whisper" //can be none, whisper, emote and shout
+	miracle = TRUE
+	devotion_cost = -60
