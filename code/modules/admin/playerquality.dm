@@ -118,19 +118,22 @@
 		if(!selection)
 			return
 		theykey = selection
-	if(!fexists("data/player_saves/[copytext(theykey,1,2)]/[theykey]/preferences.sav"))
+	check_pq_menu(theykey)
+
+/proc/check_pq_menu(ckey)
+	if(!fexists("data/player_saves/[copytext(ckey,1,2)]/[ckey]/preferences.sav"))
 		to_chat(src, "<span class='boldwarning'>User does not exist.</span>")
 		return
-	var/popup_window_data = "<center>[selection]</center>"
-	popup_window_data += "<center>PQ: [get_playerquality(theykey, TRUE, TRUE)] ([get_playerquality(theykey, FALSE, TRUE)])</center>"
+	var/popup_window_data = "<center>[ckey]</center>"
+	popup_window_data += "<center>PQ: [get_playerquality(ckey, TRUE, TRUE)] ([get_playerquality(ckey, FALSE, TRUE)])</center>"
 
 //	dat += "<table width=100%><tr><td width=33%><div style='text-align:left'><a href='?_src_=prefs;preference=playerquality;task=menu'><b>PQ:</b></a> [get_playerquality(user.ckey, text = TRUE)]</div></td><td width=34%><center><a href='?_src_=prefs;preference=triumphs;task=menu'><b>TRIUMPHS:</b></a> [user.get_triumphs() ? "\Roman [user.get_triumphs()]" : "None"]</center></td><td width=33%></td></tr></table>"
-	popup_window_data += "<center><a href='?_src_=holder;[HrefToken()];cursemenu=[theykey]'>CURSES</a></center>"
+	popup_window_data += "<center><a href='?_src_=holder;[HrefToken()];cursemenu=[ckey]'>CURSES</a></center>"
 	popup_window_data += "<table width=100%><tr><td width=33%><div style='text-align:left'>"
-	popup_window_data += "Commends: <a href='?_src_=holder;[HrefToken()];readcommends=[theykey]'>[get_commends(theykey)]</a></div></td>"
-	popup_window_data += "<td width=34%><center>ESL Points: [get_eslpoints(theykey)]</center></td>"
-	popup_window_data += "<td width=33%><div style='text-align:right'>Rounds Survived: [get_roundsplayed(theykey)]</div></td></tr></table>"
-	var/list/listy = world.file2list("data/player_saves/[copytext(theykey,1,2)]/[theykey]/playerquality.txt")
+	popup_window_data += "Commends: <a href='?_src_=holder;[HrefToken()];readcommends=[ckey]'>[get_commends(ckey)]</a></div></td>"
+	popup_window_data += "<td width=34%><center>ESL Points: [get_eslpoints(ckey)]</center></td>"
+	popup_window_data += "<td width=33%><div style='text-align:right'>Rounds Survived: [get_roundsplayed(ckey)]</div></td></tr></table>"
+	var/list/listy = world.file2list("data/player_saves/[copytext(ckey,1,2)]/[ckey]/playerquality.txt")
 	if(!listy.len)
 		popup_window_data += "<span class='info'>No data on record. Create some.</span>"
 	else
@@ -138,7 +141,7 @@
 			var/ya = listy[i]
 			if(ya)
 				popup_window_data += "<span class='info'>[listy[i]]</span><br>"
-	var/datum/browser/noclose/popup = new(mob, "playerquality", "", 390, 320)
+	var/datum/browser/noclose/popup = new(usr, "playerquality", "", 390, 320)
 	popup.set_content(popup_window_data)
 	popup.open()
 
@@ -188,7 +191,7 @@
 	var/raisin = stripped_input("State a short reason for this change", "Game Master", "", null)
 	if(!amt2change && !raisin)
 		return
-	adjust_playerquality(amt2change, theykey, ckey(src.ckey), raisin)
+	adjust_playerquality(amt2change, theykey, src.ckey, raisin)
 
 /proc/add_commend(key, giver)
 	if(!giver || !key)

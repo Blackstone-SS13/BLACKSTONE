@@ -5,14 +5,14 @@
 	allowed_sexes = list("male","female")
 	allowed_races = list("Humen", "Elf", "Dwarf", "Aasimar", "Dark Elf",
 	"Aasimar")
-	allowed_patrons = list("Astrata", "Dendor", "Necra")
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
 	ispilgrim = FALSE
 	vampcompat = FALSE
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
 
 /datum/outfit/job/roguetown/adventurer/cleric/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/allowed_patrons = list("Astrata", "Dendor", "Necra")
+	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
 
 	var/datum/patrongods/ourpatron
 	if(istype(H.PATRON, /datum/patrongods))
@@ -36,6 +36,8 @@
 			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
 		if("Necra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/necra
+		if("Pestra")
+			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 
 	armor = /obj/item/clothing/suit/roguetown/armor/plate
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather

@@ -16,6 +16,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
 	associated_skill = /datum/skill/combat/axesmaces
+	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/iron
 	gripped_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
 	parrysound = list('sound/combat/parry/parrygen.ogg')
@@ -118,6 +119,19 @@
 	damfactor = 1.1
 	swingdelay = 8
 	icon_state = "insmash"
+	
+/datum/intent/mace/rangedthrust
+	name = "thrust"
+	blade_class = BCLASS_STAB
+	attack_verb = list("stabs")
+	animname = "stab"
+	icon_state = "instab"
+	reach = 2
+	chargetime = 1
+	recovery = 30
+	warnie = "mobwarning"
+	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
+	penfactor = 25
 
 /obj/item/rogueweapon/mace/woodclub
 	force = 15
@@ -241,8 +255,8 @@
 	force = 15
 	force_wielded = 30
 	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/dagger/thrust)
-	name = "warclub"
+	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/mace/rangedthrust)
+	name = "Goedendag"
 	desc = "Good morning."
 	icon_state = "goedendag"
 	icon = 'icons/roguetown/weapons/64.dmi'
@@ -260,6 +274,7 @@
 	pixel_x = -16
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
+	dropshrink = 0.6
 	bigboy = TRUE
 	gripsprite = TRUE
 
@@ -268,9 +283,9 @@
 	if(tag)
 		switch(tag)
 			if("gen")
-				return list("shrink" = 0.6,"sx" = -21,"sy" = -11,"nx" = -3,"ny" = -11,"wx" = -20,"wy" = -10,"ex" = -10,"ey" = -11,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -11,"sturn" = 16,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+				return list("shrink" = 0.6,"sx" = -7,"sy" = 2,"nx" = 7,"ny" = 3,"wx" = -2,"wy" = 1,"ex" = 1,"ey" = 1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -38,"sturn" = 37,"wturn" = 30,"eturn" = -30,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 			if("wielded")
-				return list("shrink" = 0.6,"sx" = -10,"sy" = -15,"nx" = -14,"ny" = -15,"wx" = -12,"wy" = -14,"ex" = -9,"ey" = -14,"westabove" = 1,"eastbehind" = 0,"nturn" = 3,"sturn" = 0,"wturn" = -7,"eturn" = -9,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 0)
+				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 

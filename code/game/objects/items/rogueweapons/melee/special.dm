@@ -57,7 +57,7 @@
 				if(H.anti_magic_check())
 					to_chat(H, "<span class='warning'>I'm protected from the scepter.</span>")
 					return
-				if(!(H.real_name in SStreasury.bank_accounts))
+				if(!(H in SStreasury.bank_accounts))
 					to_chat(H, "<span class='warning'>I'm protected from the scepter.</span>")
 					return
 				H.electrocute_act(5, src)

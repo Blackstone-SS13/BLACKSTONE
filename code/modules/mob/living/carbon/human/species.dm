@@ -72,7 +72,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/fixed_mut_color = "" //to use MUTCOLOR with a fixed color that's independent of dna.feature["mcolor"]
 	var/inert_mutation 	= DWARFISM //special mutation that can be found in the genepool. Dont leave empty or changing species will be a headache
 	var/deathsound //used to set the mobs deathsound on species change
-	var/list/special_step_sounds //Sounds to override barefeet walkng
 	var/grab_sound //Special sound for grabbing
 	var/datum/outfit/outfit_important_for_life /// A path to an outfit that is important for species life e.g. plasmaman outfit
 
@@ -2269,7 +2268,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/easy_dismember = HAS_TRAIT(H, TRAIT_EASYDISMEMBER) || affecting.rotted
 	if(prob(probability) || (easy_dismember && prob(probability))) //try twice
 		if(affecting.brute_dam > 0)
-			if(affecting.dismember(I.damtype))
+			if(affecting.dismember(I.damtype, selzone))
 				bloody = 1
 				I.add_mob_blood(H)
 				user.update_inv_hands()
