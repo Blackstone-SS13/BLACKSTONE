@@ -5,7 +5,7 @@
 	allowed_sexes = list("male","female")
 	allowed_races = list("Humen", "Elf", "Dwarf", "Aasimar", "Dark Elf",
 	"Aasimar")
-	allowed_patrons = list("Astrata", "Dendor", "Necra")
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
 	ispilgrim = FALSE
 	vampcompat = FALSE
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
