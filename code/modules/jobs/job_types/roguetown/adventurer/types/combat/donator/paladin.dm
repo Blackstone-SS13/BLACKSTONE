@@ -8,7 +8,7 @@
 	"Tiefling",
 	"Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
-	var/list/allowed_patrons = list("Astrata", "Dendor", "Necra")
+	allowed_patrons = list("Astrata", "Dendor", "Necra")
 
 /datum/outfit/job/roguetown/adventurer/paladin/pre_equip(mob/living/carbon/human/H)
 	..()
