@@ -400,7 +400,7 @@
 			switch(dam)
 				if(1 to 10)
 					add_wound(/datum/wound/cut/small, skipcheck = FALSE)
-				if(11 to 15)
+				if(11 to 20)
 					add_wound(/datum/wound/cut, skipcheck = FALSE)
 				if(21 to INFINITY)
 					add_wound(/datum/wound/cut/large, skipcheck = FALSE)
