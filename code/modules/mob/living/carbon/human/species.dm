@@ -2255,7 +2255,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 //			H.throw_at(target_shove_turf, 1, 1, H, spin = FALSE)
 
 	I.funny_attack_effects(H, user, nodmg)
-	knockback(I, H, user, nodmg)
 
 	H.send_item_attack_message(I, user, parse_zone(selzone))
 
