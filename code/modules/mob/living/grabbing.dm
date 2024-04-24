@@ -412,7 +412,8 @@
 					//addtimer(CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon/human, werewolf_infect)), 3 MINUTES)
 			if(user.mind.has_antag_datum(/datum/antagonist/zombie))
 				var/mob/living/carbon/human/H = C
-				H.zombie_infect_attempt()
+				spawn(0) //slop
+					H.zombie_infect_attempt()
 					//addtimer(CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect)), 3 MINUTES)
 				if(C.stat)
 					if(istype(limb_grabbed, /obj/item/bodypart/head))
