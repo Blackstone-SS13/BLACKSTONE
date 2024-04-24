@@ -154,7 +154,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	belt = /obj/item/storage/belt/rogue/leather/plaquegold
 	head  = /obj/item/clothing/head/roguetown/vampire
 	beltl = /obj/item/roguekey/vampire
-	beltr = /obj/item/clothing/head/roguetown/helmet/heavy/guard
+	beltr = /obj/item/clothing/head/roguetown/helmet/heavy/guard/vampire
 	cloak = /obj/item/clothing/cloak/cape/puritan
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor/vampire
 	backl = /obj/item/storage/backpack/rogue/satchel/black
@@ -240,9 +240,10 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	blocksound = PLATEHIT
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
-/obj/item/clothing/head/roguetown/helmet/heavy/guard
+/obj/item/clothing/head/roguetown/helmet/heavy/guard/vampire
 	name = "ancient ceremonial helm"
 	icon_state = "vhelmet"
+	item_state = "helmet"
 
 /obj/item/clothing/gloves/roguetown/chain/vampire
 	name = "ancient ceremonial gloves"
