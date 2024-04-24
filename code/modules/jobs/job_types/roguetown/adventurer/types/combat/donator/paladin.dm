@@ -12,7 +12,8 @@
 
 /datum/outfit/job/roguetown/adventurer/paladin/pre_equip(mob/living/carbon/human/H)
 	..()
-
+	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
+	
 	var/datum/patrongods/ourpatron
 	if(istype(H.PATRON, /datum/patrongods))
 		ourpatron = H.PATRON
