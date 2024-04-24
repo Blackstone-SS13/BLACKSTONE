@@ -375,7 +375,6 @@
 	var/player_book_icon = "basic_book"
 	var/player_book_author_ckey = "unknown"
 	var/is_in_round_player_generated = FALSE
-	var/mob/living/in_round_player_mob = null
 	var/list/player_book_titles
 	var/list/player_book_content
 	var/list/book_icons = list(
@@ -394,15 +393,16 @@
 	base_icon_state = "basic_book"
 	override_find_book = TRUE
 	
-/obj/item/book/rogue/playerbook/Initialize()
+/obj/item/book/rogue/playerbook/Initialize(loc, is_in_round_player_generated, var/mob/living/in_round_player_mob, player_book_text)
 	. = ..()
 	if(is_in_round_player_generated)
 		player_book_author_ckey = in_round_player_mob.ckey
 		player_book_title = sanitize_hear_message(input(in_round_player_mob, "What title do you want to give the book?", "Title", "Unknown"))
 		player_book_author = "[sanitize_hear_message(input(in_round_player_mob, "Do you want to preface your author name with an author title?", "Author Title", ""))] [in_round_player_mob.real_name]"
-		player_book_icon = input(in_round_player_mob, "Choose a book style", "Book Style") as anything in book_icons
+		player_book_icon = book_icons[input(in_round_player_mob, "Choose a book style", "Book Style") as anything in book_icons]
+		var/sanitize_list = list("\n"="", "\t"="", "<"="", ">"="")
+		sanitize_simple(player_book_text, sanitize_list)
 		message_admins("[player_book_author_ckey]([in_round_player_mob.real_name]) has generated the player book: [player_book_title]")
-
 	else
 		player_book_titles = SSlibrarian.pull_player_book_titles()
 		player_book_title = pick(player_book_titles)
@@ -429,20 +429,17 @@
 	var/number_of_pages = 2
 	var/compiled_pages = null
 	var/list/page_texts = list()
+	var/qdel_source = FALSE
 
 /obj/item/manuscript/attackby(obj/item/I, mob/living/user)
 	// why is a book crafting kit using the craft system, but crafting a book isn't? Well the crafting system for *some reason* is made in such a way as to make reworking it to allow you to put reqs vars in the crafted item near *impossible.*
 	if(istype(I, /obj/item/book_crafting_kit))
-		var/obj/item/book/rogue/playerbook/PB = new /obj/item/book/rogue/playerbook(get_turf(I.loc))
+		var/obj/item/book/rogue/playerbook/PB = new /obj/item/book/rogue/playerbook(get_turf(I.loc), TRUE, user, compiled_pages)
 		qdel(I)
 		if(user.Adjacent(PB))
 			PB.add_fingerprint(user)
 			user.put_in_hands(PB)
-		PB.is_in_round_player_generated = TRUE
-		PB.in_round_player_mob = user
-		var/sanitize_list = list("\n"="", "\t"="", "<"="", ">"="")
-		sanitize_simple(compiled_pages, sanitize_list)
-		PB.player_book_text = compiled_pages
+		return qdel(src)
 
 	if(!istype(I, /obj/item/paper))
 		return
@@ -503,7 +500,8 @@
 		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
 					<html><head><style type=\"text/css\">
 					body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
-		dat += compiled_pages
+		for(var/I in page_texts)
+			dat += "<p>[I]</p>"
 		dat += "<br>"
 		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
 		dat += "</body></html>"
@@ -536,17 +534,32 @@
 		add_overlay("paper_onfire_overlay")
 
 /obj/item/manuscript/attack_hand(mob/user)
-	if(istype(user, /mob/living))
+	if(istype(user, /mob/living) && src.loc == user)
 		var/mob/living/L = user
 		var/obj/item/paper/P = new /obj/item/paper(get_turf(src.loc))
 		L.put_in_active_hand(P)
+		L.put_in_inactive_hand(src)
 		P.icon_state = "paperwrite"
 		P.info = page_texts[length(page_texts)]
 		page_texts -= page_texts[length(page_texts)]
 		--number_of_pages
-		for(var/I in page_texts)
-			compiled_pages += "<p>[page_texts[I]]</p>"
+		if(number_of_pages == 1)
+			var/obj/item/paper/P_two = new /obj/item/paper(get_turf(src.loc))
+			P_two.icon_state = "paperwrite"
+			P_two.info = page_texts[length(page_texts)]
+			qdel_source = TRUE
+			. = ..()
+			src.loc = get_turf(src.loc)
+			L.put_in_hands(P_two)
+			qdel(src)
+			return
+		else
+			update_icon()
+			name = "[number_of_pages] page manuscript"
+			desc = "A [number_of_pages] page written piece, with aspirations of becoming a book."
+			return
 
+	. = ..()
 
 /obj/item/book_crafting_kit
 	name = "book crafting kit"

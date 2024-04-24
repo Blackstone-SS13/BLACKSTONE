@@ -436,14 +436,16 @@
 		var/obj/item/paper/p = P
 		if(info && p.info)
 			var/obj/item/manuscript/M = new /obj/item/manuscript(get_turf(P.loc))
-			if(user.Adjacent(M))
-				M.add_fingerprint(user)
-				user.put_in_hands(M)
 			M.page_texts = list(src.info, p.info)
 			M.compiled_pages = "<p>[src.info]</p><p>[p.info]</p>"
 			qdel(p)
-			qdel(src)
-			return
+			if(user.Adjacent(M))
+				M.add_fingerprint(user)
+				user.update_inv_hands()
+				user.put_in_active_hand(src)
+				user.put_in_inactive_hand(M)
+			. = ..()
+			return qdel(src)
 
 	if(!P.can_be_package_wrapped())
 		return ..()

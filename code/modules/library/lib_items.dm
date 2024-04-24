@@ -81,6 +81,9 @@
 		if(2)
 			var/datum/component/storage/STR = I.GetComponent(/datum/component/storage)
 			if(is_type_in_list(I, allowed_books))
+				if(!(contents.len <= 15))
+					to_chat(user, "<span class='notice'>There are too many books on this shelf!</span>")
+					return
 				if(!user.transferItemToLoc(I, src))
 					return
 				update_icon()
@@ -121,7 +124,7 @@
 	if(!istype(user))
 		return
 	if(contents.len)
-		var/obj/item/book/choice = input(user, "Which book would you like to remove from the shelf?") as null|obj in sortNames(contents.Copy())
+		var/obj/item/book/choice = input(user, "Which book would you like to remove from the shelf?") as null|obj in contents.Copy()
 		if(choice)
 			if(!(user.mobility_flags & MOBILITY_USE) || user.stat || user.restrained() || !in_range(loc, user))
 				return
@@ -141,7 +144,7 @@
 
 
 /obj/structure/bookcase/update_icon()
-	if(contents.len >= 1)
+	if((contents.len >= 1) && (contents.len <= 15))
 		icon_state = "[based][contents.len]"
 	else
 		icon_state = "bookcase"

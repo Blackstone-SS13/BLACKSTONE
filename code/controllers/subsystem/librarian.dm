@@ -45,10 +45,10 @@ SUBSYSTEM_DEF(librarian)
 	WRITE_FILE(file_name, json_encode(contents))
 
 	testing("playerbook2file2")
-	if(fexists(file("data/player_generated_books/_book_titles.json")))
-		var/list/_book_titles_contents = json_decode(file2text("data/player_generated_books/_book_titles.json"))
-		_book_titles_contents = list(_book_titles_contents, "[sanitize_hear_message(book_title)]\n")
-		WRITE_FILE("data/player_generated_books/_book_titles.json", json_encode(_book_titles_contents))
+	var/list/_book_titles_contents = json_decode(file2text("data/player_generated_books/_book_titles.json"))
+	_book_titles_contents = list(_book_titles_contents, "[sanitize_hear_message(book_title)]\n")
+	WRITE_FILE("data/player_generated_books/_book_titles.json", json_encode(_book_titles_contents))
+	return "You have a feeling the newly written book will remain in the archive for a very long time..."
 
 /datum/controller/subsystem/librarian/proc/file2playerbook(filename)
 	if(!filename)
