@@ -312,8 +312,7 @@
 				ADD_TRAIT(target, TRAIT_IWASREVIVED, "[type]")
 			return TRUE
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/revive/cast_check(skipcharge = 0,mob/user = usr)
 	if(!..())
