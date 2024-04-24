@@ -119,6 +119,19 @@
 	damfactor = 1.1
 	swingdelay = 8
 	icon_state = "insmash"
+	
+/datum/intent/mace/rangedthrust
+	name = "thrust"
+	blade_class = BCLASS_STAB
+	attack_verb = list("stabs")
+	animname = "stab"
+	icon_state = "instab"
+	reach = 2
+	chargetime = 1
+	recovery = 30
+	warnie = "mobwarning"
+	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
+	penfactor = 25
 
 /obj/item/rogueweapon/mace/woodclub
 	force = 15
@@ -242,8 +255,8 @@
 	force = 15
 	force_wielded = 30
 	possible_item_intents = list(/datum/intent/mace/strike)
-	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/dagger/thrust)
-	name = "warclub"
+	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/mace/rangedthrust)
+	name = "Goedendag"
 	desc = "Good morning."
 	icon_state = "goedendag"
 	icon = 'icons/roguetown/weapons/64.dmi'
@@ -261,6 +274,7 @@
 	pixel_x = -16
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
+	dropshrink = 0.6
 	bigboy = TRUE
 	gripsprite = TRUE
 

@@ -14,11 +14,13 @@
 'sound/combat/dismemberment/dismem (6).ogg')
 
 //Dismember a limb
-/obj/item/bodypart/proc/dismember(dam_type = BRUTE)
+/obj/item/bodypart/proc/dismember(dam_type = BRUTE, mob/living/user, zone_precise = src.body_zone)
 	if(!owner)
 		return FALSE
 	var/mob/living/carbon/C = owner
 	if(!dismemberable)
+		return FALSE
+	if(user && (body_zone == BODY_ZONE_HEAD) && (zone_precise != BODY_ZONE_PRECISE_NECK))
 		return FALSE
 	if(C.status_flags & GODMODE)
 		return FALSE
@@ -77,7 +79,7 @@
 	return 1
 
 
-/obj/item/bodypart/chest/dismember()
+/obj/item/bodypart/chest/dismember(dam_type = BRUTE, mob/living/user, zone_precise = src.body_zone)
 	if(!owner)
 		return FALSE
 	var/mob/living/carbon/C = owner
@@ -368,7 +370,7 @@
 	C.update_hair()
 	C.update_damage_overlays()
 	C.update_mobility()
-
+	return TRUE
 
 /obj/item/bodypart/head/attach_limb(mob/living/carbon/C, special)
 	//Transfer some head appearance vars over
@@ -408,8 +410,7 @@
 			AP.Grant(C)
 			break
 
-	..()
-
+	return ..()
 
 //Regenerates all limbs. Returns amount of limbs regenerated
 /mob/living/proc/regenerate_limbs(noheal, excluded_limbs)

@@ -239,7 +239,7 @@
 	if(statforce)
 		var/probability = I.get_dismemberment_chance(affecting)
 		if(prob(probability))
-			if(affecting.dismember(I.damtype))
+			if(affecting.dismember(I.damtype, user, user.zone_selected))
 				I.add_mob_blood(src)
 				playsound(get_turf(src), I.get_dismember_sound(), 80, TRUE)
 		return TRUE //successful attack
@@ -338,7 +338,7 @@
 	if(affecting)
 		dam_zone = affecting.body_zone
 		if(affecting.get_damage() >= affecting.max_damage)
-			affecting.dismember()
+			affecting.dismember(BRUTE, attacker, attacker.zone_selected)
 			return null
 		return affecting.body_zone
 	return dam_zone

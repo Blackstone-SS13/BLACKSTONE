@@ -192,6 +192,95 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Player Panel") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
+/datum/admins/proc/admin_heal(mob/living/M in GLOB.mob_list)
+	set name = "Heal Mob"
+	set desc = "Heal a mob to full health"
+	set category = "GameMaster"
+
+	if(!check_rights())
+		return
+
+	M.fully_heal(admin_revive = TRUE)
+	message_admins("<span class='danger'>Admin [key_name_admin(usr)] healed / revived [key_name_admin(M)]!</span>")
+	log_admin("[key_name(usr)] healed / Revived [key_name(M)].")
+
+/datum/admins/proc/checkpq(mob/living/M in GLOB.mob_list)
+	set name = "Check PQ"
+	set desc = "Check a mob's PQ"
+	set category = null
+
+	if(!check_rights())
+		return
+	
+	if(!M.ckey)
+		to_chat(src, "<span class='warning'>There is no ckey attached to this mob.</span>")
+		return
+
+	check_pq_menu(M.ckey)
+
+/datum/admins/proc/admin_sleep(mob/living/M in GLOB.mob_list)
+	set name = "Toggle Sleeping"
+	set desc = "Toggle a mob's sleeping state"
+	set category = "GameMaster"
+
+	if(!check_rights())
+		return
+	
+	var/S = M.IsSleeping()
+	if(S)
+		M.remove_status_effect(S)
+		M.set_resting(FALSE, TRUE)
+	else
+		M.SetSleeping(999999)
+	message_admins("<span class='danger'>Admin [key_name_admin(usr)] toggled [key_name_admin(M)]'s sleeping state!</span>")
+	log_admin("[key_name(usr)] toggled [key_name(M)]'s sleeping state.")
+
+/datum/admins/proc/start_vote()
+	set name = "Start Vote"
+	set desc = "Start a vote"
+	set category = "Server"
+
+	if(!check_rights(R_POLL))
+		to_chat(usr, "<span class='warning'>You do not have the rights to start a vote.</span>")
+		return
+
+	var/type = input("What kind of vote?") as null|anything in list("End Round", "Custom")
+	switch(type)
+		if("End Round")
+			type = "endround"
+		if("Custom")
+			type = "custom"
+	SSvote.initiate_vote(type, usr.key)
+
+/datum/admins/proc/adjustpq(mob/living/M in GLOB.mob_list)
+	set name = "Adjust PQ"
+	set desc = "Adjust a player's PQ"
+	set category = null
+
+	if(!check_rights())
+		return
+	
+	if(!M.ckey)
+		to_chat(src, "<span class='warning'>There is no ckey attached to this mob.</span>")
+		return
+
+	var/ckey = lowertext(M.ckey)
+	var/admin = lowertext(usr.key)
+
+	if(ckey == admin)
+		to_chat(src, "<span class='boldwarning'>That's you!</span>")
+		return
+	if(!fexists("data/player_saves/[copytext(ckey,1,2)]/[ckey]/preferences.sav"))
+		to_chat(src, "<span class='boldwarning'>User does not exist.</span>")
+		return
+	var/amt2change = input("How much to modify the PQ by? (20 to -20, or 0 to just add a note)") as null|num
+	if(!check_rights(R_ADMIN,0))
+		amt2change = CLAMP(amt2change, -20, 20)
+	var/raisin = stripped_input("State a short reason for this change", "Game Master", "", null)
+	if(!amt2change && !raisin)
+		return
+	adjust_playerquality(amt2change, ckey, admin, raisin)
+
 /datum/admins/proc/access_news_network() //MARKER
 	set category = "Fun"
 	set name = "Access Newscaster Network"

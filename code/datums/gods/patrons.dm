@@ -18,7 +18,7 @@ GLOBAL_LIST_EMPTY(patronlist)
 	domain = "Goddess of the Sun, Day, and Order"
 	summary = "The Firstborn of Psydon, twin of Noc, gifted man the Sun as her divine gift."
 	worshippers = "The Noble Hearted, Zealots, Farmers"
-	t0 = /obj/effect/proc_holder/spell/invoked/heal/lesser
+	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/invoked/sacred_flame_rogue
 	t2 = /obj/effect/proc_holder/spell/invoked/heal
 	t3 = /obj/effect/proc_holder/spell/invoked/revive
@@ -34,7 +34,7 @@ GLOBAL_LIST_EMPTY(patronlist)
 	domain = "God of the Earth and Nature"
 	summary = "The Primordial Son, patron of beasts and the wood. Gone mad with time."
 	worshippers = "Druids, Beasts, Madmen"
-	t0 = /obj/effect/proc_holder/spell/invoked/heal/lesser
+	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/targeted/blesscrop
 	t2 = /obj/effect/proc_holder/spell/targeted/beasttame
 	t3 = null
@@ -56,7 +56,7 @@ GLOBAL_LIST_EMPTY(patronlist)
 	domain = "Goddess of Death and the Afterlife"
 	summary = "The Veiled Lady, a feared but respected God who leads the dead."
 	worshippers = " Necromancers, The Dead, Gravekeepers"
-	t0 = /obj/effect/proc_holder/spell/invoked/heal/lesser
+	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/targeted/burialrite
 	t2 = /obj/effect/proc_holder/spell/targeted/churn
 	t3 = /obj/effect/proc_holder/spell/targeted/soulspeak
@@ -72,18 +72,19 @@ GLOBAL_LIST_EMPTY(patronlist)
 	domain = "Goddess of Decay, Disease and Medicine"
 	summary = "The Loving Daughter of Psydon, gifted man medicine."
 	worshippers = "The Sick, Phyicians, Apothecaries"
+	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
+	t1 = /obj/effect/proc_holder/spell/invoked/attach_limb
+	t2 = /obj/effect/proc_holder/spell/invoked/heal
+	t3 = /obj/effect/proc_holder/spell/invoked/cure_rot
 
 /datum/patrongods/malum
 	name = "Malum"
 	domain = "God of Fire, Destruction and Rebirth"
 	summary = "The Opinionless God, his children hold no malice in their actions."
-	worshippers = "Smiths, Miners, Artists."
+	worshippers = "Smiths, Miners, Artists"
 
 /datum/patrongods/eora
 	name = "Eora"
-	domain = "Goddess of the Family, Love and Lust"
-	summary = "The Lovely One, her divine gift was that of family and love."
-	worshippers = "Lovers, Harlots, Doting Grandparents"
-
-
-
+	domain = "Goddess of Degeneracy, Debauchery and Addiction"
+	summary = "The Fallen Daughter, once used to be a goddess of love and family but has now fallen from grace."
+	worshippers = "Drunkards, Junkies, Gamblers and Bards"

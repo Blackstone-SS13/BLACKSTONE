@@ -9,10 +9,11 @@
 	max_integrity = 0
 	pixel_y = 32
 	flags_1 = HEAR_1
-	var/listening = TRUE
-	var/speaking = TRUE
 	anchored = TRUE
 	var/next_decree = 0
+	var/listening = TRUE
+	var/speaking = TRUE
+	var/dictating = FALSE
 
 /obj/structure/roguemachine/scomm/r
 	pixel_y = 0
@@ -21,6 +22,18 @@
 /obj/structure/roguemachine/scomm/l
 	pixel_y = 0
 	pixel_x = -32
+
+/obj/structure/roguemachine/scomm/examine(mob/user)
+	. = ..()
+	. += "<b>THE LAWS OF THE LAND:</b>"
+	if(!length(GLOB.laws_of_the_land))
+		. += "<span class='danger'>The land has no laws! <b>We are doomed!</b></span>"
+		return
+	if(!user.is_literate())
+		. += "<span class='warning'>Uhhh... I can't read them...</span>"
+		return
+	for(var/i in 1 to length(GLOB.laws_of_the_land))
+		. += "<span class='small'>[i]. [GLOB.laws_of_the_land[i]]</span>"
 
 /obj/structure/roguemachine/scomm/process()
 	if(world.time > next_decree)
@@ -112,10 +125,31 @@
 	if(H.voicecolor_override)
 		usedcolor = H.voicecolor_override
 	if(raw_message)
+		if(lowertext(raw_message) == "say laws")
+			dictate_laws()
+			return
 		for(var/obj/structure/roguemachine/scomm/S in SSroguemachine.scomm_machines)
 			S.repeat_message(raw_message, src, usedcolor, message_language)
 		for(var/obj/item/scomstone/S in SSroguemachine.scomm_machines)
 			S.repeat_message(raw_message, src, usedcolor, message_language)
+
+/obj/structure/roguemachine/scomm/proc/dictate_laws()
+	if(dictating)
+		return
+	dictating = TRUE
+	repeat_message("THE LAWS OF THE LAND ARE...", tcolor = COLOR_RED)
+	INVOKE_ASYNC(src, PROC_REF(dictation))
+
+/obj/structure/roguemachine/scomm/proc/dictation()
+	if(!length(GLOB.laws_of_the_land))
+		sleep(2)
+		repeat_message("THE LAND HAS NO LAWS!", tcolor = COLOR_RED)
+		dictating = FALSE
+		return
+	for(var/i in 1 to length(GLOB.laws_of_the_land))
+		sleep(2)
+		repeat_message("[i]. [GLOB.laws_of_the_land[i]]", tcolor = COLOR_RED)
+	dictating = FALSE
 
 /proc/scom_announce(message)
 	for(var/obj/structure/roguemachine/scomm/S in SSroguemachine.scomm_machines)

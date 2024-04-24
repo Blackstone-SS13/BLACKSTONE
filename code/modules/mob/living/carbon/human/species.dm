@@ -2255,7 +2255,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 //			H.throw_at(target_shove_turf, 1, 1, H, spin = FALSE)
 
 	I.funny_attack_effects(H, user, nodmg)
-	knockback(I, H, user, nodmg)
 
 	H.send_item_attack_message(I, user, parse_zone(selzone))
 
@@ -2268,7 +2267,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/easy_dismember = HAS_TRAIT(H, TRAIT_EASYDISMEMBER) || affecting.rotted
 	if(prob(probability) || (easy_dismember && prob(probability))) //try twice
 		if(affecting.brute_dam > 0)
-			if(affecting.dismember(I.damtype))
+			if(affecting.dismember(I.damtype, selzone))
 				bloody = 1
 				I.add_mob_blood(H)
 				user.update_inv_hands()

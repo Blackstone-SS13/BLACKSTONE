@@ -200,7 +200,6 @@
 					organ_spilled = TRUE
 				if(organ_spilled)
 					shake_camera(owner, 2, 2)
-					owner.death()
 					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] spills [owner.p_their()] organs!</span>"
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					return TRUE
@@ -373,7 +372,7 @@
 		return
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
-		if(H.checkcritarmor(src, bclass))
+		if(H.checkcritarmor(zone_precise, bclass))
 			return FALSE
 	//try limbsmash here, return
 	//try dismember here, return

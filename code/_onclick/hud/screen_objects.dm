@@ -1464,28 +1464,38 @@
 			var/toxpercent = H.getToxLoss()
 			var/oxpercent = H.getOxyLoss()
 			var/bloodpercent = (H.blood_volume / BLOOD_VOLUME_NORMAL) * 100
+			var/rotted = FALSE
+			var/skeletonized = FALSE
 			for(var/X in H.bodyparts)	//hardcoded to streamline things a bit
 				var/obj/item/bodypart/BP = X
-				if(BP.name == "head")
+				if(BP.body_zone == BODY_ZONE_HEAD)
 					headpercent	+= (BP.brute_dam / BP.max_damage) * 100
 					if(burnspercent < BP.burn_dam)
 						burnspercent = (BP.burn_dam / BP.max_damage) * 100
-				if(BP.name == "chest")
+				if(BP.body_zone == BODY_ZONE_CHEST)
 					if(burnspercent < BP.burn_dam)
 						burnspercent = (BP.burn_dam / BP.max_damage) * 100
+				if(BP.rotted)
+					rotted = TRUE
+				if(BP.skeletonized)
+					skeletonized = TRUE
 
 			if(headpercent)
 				to_chat(H, "<span class='purple'>Mortal Wounds</span>")
 			if(burnspercent)
 				to_chat(H, "<span class='orange'>Mortal Burns</span>")
-			if(bloodpercent < 100)
+			if(bloodpercent < 90)
 				to_chat(H, "<span class='red'>Bloodloss</span>")
 			if(toxpercent)
 				to_chat(H, "<span class='green'>Poisoned</span>")
+			if(rotted)
+				to_chat(H, "<span class='green'>Rotted</span>")
+			if(skeletonized)
+				to_chat(H, "<span class='grey'>Skeletonized</span>")
 			if(oxpercent)
 				to_chat(H, "<span class='grey'>Suffocation</span>")
 			if(H.nutrition < 0)
-				to_chat(H, "<span class='red'>Starving to Death</span>")
+				to_chat(H, "<span class='red'>Starving</span>")
 		if(modifiers["right"])
 			if(H.mind)
 				if(H.mind.known_people.len)
