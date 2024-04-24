@@ -123,7 +123,7 @@
 	damtype = "brute"
 	force = 25
 
-/obj/item/melee/touch_attack/inflictwounds/afterattack(atom/target, mob/living/carbon/user, proximity)
+/obj/item/melee/touch_attack/necrotic/afterattack(atom/target, mob/living/carbon/user, proximity)
 	if(!proximity || target == user || !isliving(target) || !iscarbon(user))
 		return
 	if(!(user.mobility_flags & MOBILITY_USE))
