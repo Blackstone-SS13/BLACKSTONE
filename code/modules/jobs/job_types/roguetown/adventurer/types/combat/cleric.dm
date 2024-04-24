@@ -36,6 +36,8 @@
 			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
 		if("Necra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/necra
+		if("Pestra")
+			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 
 	armor = /obj/item/clothing/suit/roguetown/armor/plate
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
