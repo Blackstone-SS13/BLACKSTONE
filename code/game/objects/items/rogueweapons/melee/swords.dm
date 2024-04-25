@@ -421,7 +421,7 @@
 /obj/item/rogueweapon/sword/rapier/lord
 	force = 20
 	name = "sword of the Mad Duke"
-	desc = "Passed down through the ages, this decorative sword was recovered from the ashes of blackstone when it was last destroyed... clutched in the bony fingers of the Mad Duke. Very high integrity and formidable force"
+	desc = "Passed down through the ages, this decorative sword was recovered from the ashes of blackstone when it was last destroyed... clutched in the bony fingers of the Mad Duke. An extremely resistant and forceful weapon."
 	icon_state = "lordrap"
 	sellprice = 300
 	max_integrity = 300
