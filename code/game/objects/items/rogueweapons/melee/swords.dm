@@ -381,6 +381,29 @@
 	max_integrity = 100
 	sellprice = 10
 
+/obj/item/rogueweapon/sword/iron/short
+	name = "short sword"
+	desc = "An archaic iron sword."
+	icon_state = "iswordshort"
+	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
+	gripped_intents = NULL
+	minstr = 5
+	wdefense = 3
+
+/obj/item/rogueweapon/sword/iron/short/chipped
+	force = 17
+	desc = "An ancient-looking iron sword."
+	icon_state = "iswordshort_chipped"
+	max_integrity = 75
+
+/datum/intent/sword/cut/short
+	clickcd = 10
+	damfactor = 0.9
+
+/datum/intent/sword/cut/short
+	clickcd = 10
+	damfactor = 1.1
+
 /obj/item/rogueweapon/sword/sabre
 	name = "sabre"
 	desc = "A swift saber."
