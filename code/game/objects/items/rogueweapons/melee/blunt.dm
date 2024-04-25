@@ -124,7 +124,7 @@
 	force = 15
 	force_wielded = 18
 	name = "club"
-	desc = "An extremely crude woodclub that looks like it has fell off a tree. Has absolutely no defense properties to it, and delivers an applicable amount of damage. Wield for slightly higher damage output"
+	desc = "An extremely crude wooden club that looks like it has fallen off a tree. Would offer little defensive properties, yet deliver an applicable amount of damage."
 	icon_state = "club1"
 	//dropshrink = 0.75
 	wbalance = 0
