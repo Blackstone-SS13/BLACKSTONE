@@ -10,9 +10,15 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/hearallasghost,
 	/client/proc/admin_ghost,
 	/client/proc/ghost_up,
+	/datum/admins/proc/start_vote,
+	/datum/admins/proc/show_player_panel,
+	/datum/admins/proc/admin_heal,
+	/datum/admins/proc/admin_sleep,
 	/client/proc/ghost_down,
 	/client/proc/jumptoarea,
 	/client/proc/jumptokey,
+	/datum/admins/proc/checkpq,
+	/datum/admins/proc/adjustpq,
 	/client/proc/jumptomob,
 	/client/proc/returntolobby,
 	/datum/verbs/menu/Admin/verb/playerpanel,
@@ -794,3 +800,13 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	else
 		SSticker.end_party=FALSE
 		to_chat(src, "<span class='interface'>Ending DISABLED.</span>")
+
+/client/proc/delete_player_book()
+	set category = "Admin"
+	set name = "Delete Player Made Book"
+	if(!holder)	
+		return
+	if(SSlibrarian.del_player_book(input(src, "What is the book file you want to delete? (spaces and other characters are their url encode versions for the file name, so for example spaces are +)")))
+		to_chat(src, "<span class='notice'>Book has been successfully deleted</span>")
+	else
+		to_chat(src, "<span class='notice'> Either the book file doesn't exist or you have failed to type it in properly (remember characters have been url encoded for the file name)</span>")

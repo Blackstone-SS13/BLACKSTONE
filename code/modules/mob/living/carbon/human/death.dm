@@ -128,17 +128,17 @@
 		INVOKE_ASYNC(is_devil(src), TYPE_PROC_REF(/datum/antagonist/devil, beginResurrectionCheck), src)
 
 /mob/living/carbon/human/proc/zombie_check()
-	if(mind && ckey)
-		if(mind.has_antag_datum(/datum/antagonist/vampirelord))
-			return
-		if(mind.has_antag_datum(/datum/antagonist/werewolf))
-			return
-		if(mind.has_antag_datum(/datum/antagonist/zombie))
-			return
-		if(mind.has_antag_datum(/datum/antagonist/skeleton))
-			return
-		mind.add_antag_datum(/datum/antagonist/zombie)
-		qdel(cleric)
+	if(!mind)
+		return
+	if(mind.has_antag_datum(/datum/antagonist/vampirelord))
+		return
+	if(mind.has_antag_datum(/datum/antagonist/werewolf))
+		return
+	if(mind.has_antag_datum(/datum/antagonist/zombie))
+		return
+	if(mind.has_antag_datum(/datum/antagonist/skeleton))
+		return
+	mind.add_antag_datum(/datum/antagonist/zombie)
 
 /mob/living/carbon/human/gib(no_brain, no_organs, no_bodyparts, safe_gib = FALSE)
 	for(var/mob/living/carbon/human/CA in viewers(7, src))
