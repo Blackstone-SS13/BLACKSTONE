@@ -41,7 +41,7 @@
 	force = 30
 	force_wielded = 40
 	name = "mace"
-	desc = "Well crafted mace with steel head. very sturdy and delivers formidably higher damage & defense capacity than a regular mace."
+	desc = "A well-crafted mace with a steel head. Very sturdy and delivers formidably higher damage and defensive capacities than a regular mace."
 	icon_state = "smace"
 	wbalance = -1
 	smeltresult = /obj/item/ingot/steel
