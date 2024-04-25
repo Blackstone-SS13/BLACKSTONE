@@ -150,7 +150,7 @@
 	return
 
 /turf/closed/wall/mineral/rogue/wooddark
-	name = "wall"
+	name = "Wooden wall"
 	desc = "Made from durable, somewhat darker wood." // i am not sure if the wood is really dark
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "corner"
@@ -166,26 +166,26 @@
 	climbdiff = 3
 
 /turf/closed/wall/mineral/rogue/wooddark/horizontal
-	name = "wall"
+	name = "Wooden wall"
 	icon_state = "horizwooddark"
 
 /turf/closed/wall/mineral/rogue/wooddark/vertical
-	name = "wall"
+	name = "Wooden wall"
 	icon_state = "vertwooddark"
 
 /turf/closed/wall/mineral/rogue/wooddark/end
-	name = "wall"
+	name = "Wooden wall"
 	icon_state = "endwooddark"
 
 /turf/closed/wall/mineral/rogue/wooddark/slitted
-	name = "wall"
+	name = "Wooden wall"
 	icon_state = "slittedwooddark"
 
 /turf/closed/wall/mineral/rogue/wooddark/window
-	name = "wall"
+	name = "Wooden window"
 	icon_state = "subwindow"
 	opacity = FALSE
-
+    max_integrity = 550
 /turf/closed/wall/mineral/rogue/wooddark/window/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover) && ((mover.pass_flags & PASSTABLE) || (mover.pass_flags & PASSGRILLE)) )
 		return 1
@@ -218,7 +218,8 @@
 	icon_state = "roofTurf_IC"
 
 /turf/closed/wall/mineral/rogue/decowood
-	name = "wall"
+	name = "Decorated Wooden Wall"
+	desc = "This one is fancy."
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "decowood"
 	smooth = SMOOTH_FALSE
@@ -237,10 +238,12 @@
 	dir = pick(GLOB.cardinals)
 
 /turf/closed/wall/mineral/rogue/decowood/vert
+	name = "Decorated wooden wall"
 	icon_state = "decowood-vert"
 
 /turf/closed/wall/mineral/rogue/decostone
-	name = "stone wall"
+	name = "Decorated stone wall"
+	desc = "The mason did some good work here."
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "decostone-b"
 	smooth = SMOOTH_MORE
@@ -256,10 +259,11 @@
 	climbdiff = 1
 
 /turf/closed/wall/mineral/rogue/decostone/long
+	name = "Decorated stone wall"
 	icon_state = "decostone-l"
 
 /obj/structure/thronething
-	name = "stone wall"
+	name = "Decorated Stone Wall" // what is thronething??
 	icon = 'icons/turf/roguewall.dmi'
 	max_integrity = 0
 	opacity = 0
