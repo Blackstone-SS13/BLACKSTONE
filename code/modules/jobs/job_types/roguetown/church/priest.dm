@@ -188,7 +188,7 @@
 		holder.update_devotion(50, 50)
 	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 	var/static/list/templar_spells = list(
-		/obj/effect/proc_holder/spell/invoked/heal/lesser, 
+		/obj/effect/proc_holder/spell/invoked/lesser_heal, 
 		/obj/effect/proc_holder/spell/targeted/churn, 
 		/obj/effect/proc_holder/spell/targeted/burialrite,
 	)
