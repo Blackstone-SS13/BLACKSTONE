@@ -44,6 +44,7 @@
 			H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
 			if(prob(50))
 				H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
