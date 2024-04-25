@@ -23,6 +23,8 @@
 
 	/// Marking on this heart for the maniac antagonist
 	var/inscryption
+	/// Associated maniac key
+	var/inscryption_key
 
 /obj/item/organ/heart/examine(mob/user)
 	. = ..()
@@ -32,7 +34,7 @@
 			. += "<span class='danger'><b>There is NOTHING on this heart. \
 				Should be? Following the TRUTH - not here. I need to keep LOOKING. Keep FOLLOWING my heart.</b>></span>"
 		else
-			. += "<b>There's something CUT on this HEART. \"[inscryption]. Add it to the other keys to exit INRL.\"</b>"
+			. += "<b><span class='warning'>There's something CUT on this HEART.</span>\n\"[inscryption]. Add it to the other keys to exit INRL.\"</b>"
 			if(!(inscryption in dreamer.hearts_seen))
 				dreamer.hearts_seen += inscryption
 				SEND_SOUND(dreamer, 'sound/villain/newheart.ogg')

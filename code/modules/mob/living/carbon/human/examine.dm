@@ -17,6 +17,9 @@
 	var/t_is = p_are()
 	var/obscure_name
 	var/race_name = dna.species.name
+	var/datum/antagonist/maniac/maniac = user.mind?.has_antag_datum(/datum/antagonist/maniac)
+	if(maniac)
+		race_name = "disgusting pig"
 
 	var/m1 = "[t_He] [t_is]"
 	var/m2 = "[t_his]"
@@ -381,6 +384,11 @@
 				. += "<span class='warning'>[t_He] look[p_s()] weaker.</span>"
 		else
 			. += "[t_He] look[p_s()] about as strong as I."
+	
+	if(maniac)
+		var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
+		if(heart?.inscryption && (heart.inscryption_key in maniac.key_nums))
+			. += "<span class='danger'>[t_He] know[p_s()] [heart.inscryption_key], I AM SURE OF IT!</span>"
 
 	if(Adjacent(user))
 		. += "<a href='?src=[REF(src)];inspect_limb=1'>Inspect [parse_zone(check_zone(user.zone_selected))]</a>"

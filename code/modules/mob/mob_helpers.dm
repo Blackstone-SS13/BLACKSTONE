@@ -569,16 +569,16 @@
 		playsound_local(src, 'sound/misc/comboff.ogg', 100)
 		SSdroning.play_area_sound(get_area(src), client)
 		cmode = FALSE
-		if(HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE) && client)
-			animate(client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
-			animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
+		if(client && HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE))
+			animate(client, pixel_y)
 	else
 		cmode = TRUE
 		playsound_local(src, 'sound/misc/combon.ogg', 100)
 		if(L.cmode_music)
 			SSdroning.play_combat_music(L.cmode_music, client)
-		if(HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE) && client)
-			animate(client)
+		if(client && HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE))
+			animate(client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
+			animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
 	if(hud_used)
 		if(hud_used.cmode_button)
 			hud_used.cmode_button.update_icon()

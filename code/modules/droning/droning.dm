@@ -102,7 +102,9 @@ SUBSYSTEM_DEF(droning)
 	if(shouldskip)
 		var/sound/droning = sound(pick(area_player.droning_sound_current), area_player.droning_repeat, area_player.droning_wait, area_player.droning_channel, listener?.prefs.musicvol)
 
-		if(HAS_TRAIT(listener.mob, TRAIT_DRUQK))
+		if(HAS_TRAIT(listener.mob, TRAIT_SCHIZO_AMBIENCE))
+			droning.file = 'sound/music/dreamer_is_still_asleep.ogg'
+		else if(HAS_TRAIT(listener.mob, TRAIT_DRUQK))
 			droning.file = 'sound/music/spice.ogg'
 
 		listener.droning_sound = droning
@@ -123,7 +125,9 @@ SUBSYSTEM_DEF(droning)
 		listener.last_droning_sound = null
 		var/sound/droning = sound(pick(area_player.droning_sound_current), area_player.droning_repeat, area_player.droning_wait, area_player.droning_channel, listener?.prefs.musicvol)
 
-		if(HAS_TRAIT(listener.mob, TRAIT_DRUQK))
+		if(HAS_TRAIT(listener.mob, TRAIT_SCHIZO_AMBIENCE))
+			droning.file = 'sound/music/dreamer_is_still_asleep.ogg'
+		else if(HAS_TRAIT(listener.mob, TRAIT_DRUQK))
 			droning.file = 'sound/music/spice.ogg'
 
 		listener.droning_sound = droning

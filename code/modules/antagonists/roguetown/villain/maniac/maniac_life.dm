@@ -9,6 +9,8 @@
 	handle_hallucinations(owner.current)
 	handle_floors(owner.current)
 	handle_walls(owner.current)
+	if(waking_up)
+		handle_dreamer_waking_up(owner.current)
 
 /datum/antagonist/maniac/proc/handle_visions(mob/living/dreamer)
 	//Jumpscare funny
@@ -32,7 +34,7 @@
 	else if(prob(4))
 		var/list/objects = list()
 		for(var/obj/object in view(dreamer))
-			if(object.invisibility < dreamer.see_invisible)
+			if(object.invisibility > dreamer.see_invisible)
 				continue
 			var/weight = 1
 			if(isitem(object))
@@ -60,12 +62,13 @@
 			if(prob(1))
 				speech = "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
 			else
-				speech = pick_list_replacements('strings/maniac/visions.json', "dreamer_object")
+				speech = pick_list_replacements("maniac.json", "dreamer_object")
 				speech = replacetext(speech, "%OWNER", "[dreamer.real_name]")
-			var/message = dreamer.compose_message(speaker, null, speech)
+			var/language = dreamer.get_random_understood_language()
+			var/message = dreamer.compose_message(speaker, language, speech)
 			dreamer.playsound_local(dreamer, pick(speech_sounds), vol = 60, vary = FALSE)
 			if(dreamer.client.prefs?.chat_on_map)
-				dreamer.create_chat_message(speaker, null, speech)
+				dreamer.create_chat_message(speaker, language, speech)
 			to_chat(dreamer, message)
 
 /datum/antagonist/maniac/proc/handle_mob_hallucination(mob/living/dreamer)
@@ -131,7 +134,7 @@
 		return
 	//Floors go crazy go stupid
 	for(var/turf/open/floor in view(dreamer))
-		if(!prob(4))
+		if(!prob(7))
 			continue
 		INVOKE_ASYNC(src, PROC_REF(handle_floor), floor, dreamer)
 
@@ -152,7 +155,7 @@
 		return
 	//Shit on THA walls
 	for(var/turf/closed/wall in view(dreamer))
-		if(!prob(2))
+		if(!prob(4))
 			continue
 		INVOKE_ASYNC(src, PROC_REF(handle_wall), wall, dreamer)
 
@@ -168,3 +171,22 @@
 	sleep(disappearsecond)
 	dreamer.client?.images -= shit
 
+/datum/antagonist/dreamer/proc/handle_dreamer_waking_up(mob/living/dreamer)
+	if(!dreamer.client)
+		return
+	//Floors go crazier go stupider
+	for(var/turf/open/floor in view(dreamer))
+		if(!prob(15))
+			continue
+		INVOKE_ASYNC(src, PROC_REF(handle_waking_up_floor), floor, dreamer)
+
+/datum/antagonist/dreamer/proc/handle_waking_up_floor(turf/open/floor, mob/living/dreamer)
+	var/mutable_appearance/fake_floor = image('icons/turf/floors.dmi', floor,  pick("rcircuitanim", "gcircuitanim"), floor.layer + 0.1)
+	dreamer.client.images += fake_floor
+	var/offset = pick(-1, 1)
+	var/disappearfirst = 3 SECONDS
+	animate(fake_floor, pixel_y = offset, time = disappearfirst, flags = ANIMATION_RELATIVE)
+	sleep(disappearfirst)
+	var/disappearsecond = 3 SECONDS
+	animate(fake_floor, pixel_y = -offset, time = disappearsecond, flags = ANIMATION_RELATIVE)
+	sleep(disappearsecond)

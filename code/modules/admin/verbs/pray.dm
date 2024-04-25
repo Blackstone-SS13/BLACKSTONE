@@ -67,7 +67,7 @@
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Prayer") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	//log_admin("HELP: [key_name(src)]: [msg]")
 	var/datum/antagonist/maniac/maniac = mind?.has_antag_datum(/datum/antagonist/maniac)
-	if(maniac && text2num(msg_tmp) == maniac.sum_keys)
+	if(maniac && (text2num(msg_tmp) == maniac.sum_keys))
 		maniac.wake_up()
 
 /proc/CentCom_announce(text , mob/Sender)

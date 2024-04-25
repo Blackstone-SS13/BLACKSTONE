@@ -13,23 +13,22 @@
 		RTRAIT_CRITICAL_RESISTANCE,
 		RTRAIT_DECEIVING_MEEKNESS,
 		RTRAIT_NOSTINK,
-		RTRAIT_HATEWOMEN,
+		RTRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
 		TRAIT_NOMOOD,
 		TRAIT_NOFATSTAM,
 		TRAIT_HARDDISMEMBER,
-		TRAIT_NOLIMBDISABLE,
 		TRAIT_NOSLEEP,
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_STABLEHEART,
 		TRAIT_STABLELIVER,
+		TRAIT_ANTIMAGIC,
+		TRAIT_SCHIZO_AMBIENCE,
 	)
-	/// Stats we apply to the dreamer
-	var/static/list/applied_stats = list(
-		"strength" = 6,
-		"constitution" = 6,
-		"speed" = 3,
-	)
+	/// Cached old stats in case we get removed
+	var/STASTR
+	var/STACON 
+	var/STAEND
 	/// Weapons we can give to the dreamer
 	var/static/list/possible_weapons = list(
 		/obj/item/rogueweapon/huntingknife/cleaver,
@@ -72,17 +71,24 @@
 	. = ..()
 	owner.special_role = ROLE_MANIAC
 	owner.special_items["Maniac"] = pick(possible_weapons)
-	owner.special_items["Surgical Backpack"] = /obj/item/storage/backpack/rogue/backpack/surgery
+	owner.special_items["Surgical Kit"] = /obj/item/storage/backpack/rogue/backpack/surgery
 	if(owner.current)
 		if(ishuman(owner.current))
 			var/mob/living/carbon/human/dreamer = owner.current
 			dreamer.cmode_music = 'sound/music/combatmaniac2.ogg'
 			owner.adjust_skillrank(/datum/skill/combat/knives, 6, TRUE)
-			for(var/stat in applied_stats)
-				dreamer.change_stat(stat, applied_stats[stat])
+			owner.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
+			owner.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
+			STASTR = dreamer.STASTR
+			STACON = dreamer.STACON
+			STAEND = dreamer.STAEND
+			dreamer.STASTR = 20
+			dreamer.STACON = 20
+			dreamer.STAEND = 20
 		for(var/trait in applied_traits)
 			ADD_TRAIT(owner.current, trait, "[type]")
 		hallucinations = owner.current.overlay_fullscreen("maniac", /obj/screen/fullscreen/maniac)
+	LAZYINITLIST(owner.learned_recipes)
 	owner.learned_recipes |= recipe_progression[1]
 	forge_villain_objectives()
 	if(length(objectives))
@@ -98,8 +104,9 @@
 			to_chat(owner.current,"<span class='danger'>I am no longer a MANIAC!</span>")
 		if(ishuman(owner.current))
 			var/mob/living/carbon/human/dreamer = owner.current
-			for(var/stat in applied_stats)
-				dreamer.change_stat(stat, -applied_stats[stat])
+			dreamer.STASTR = STASTR
+			dreamer.STACON = STACON
+			dreamer.STAEND = STAEND
 		for(var/trait in applied_traits)
 			REMOVE_TRAIT(owner.current, trait, "[type]")
 		owner.current.clear_fullscreen("maniac")
@@ -220,7 +227,7 @@
 		cant_wake_up()
 	*/
 	sleep(1 MINUTES)
-	to_chat(world, "<span class='deadsay'><span class='big bold'>The Maniac has TRIUMPHED!</span></span>")
+	to_chat(world, "<span class='deadsay'><span class='reallybig'>The Maniac has TRIUMPHED!</span></span>")
 	SSticker.declare_completion()
 	SSticker.Reboot("The Maniac has TRIUMPHED.", "The Maniac has TRIUMPHED.", delay = 60 SECONDS)
 

@@ -599,7 +599,7 @@
 		all_objectives |= A.objectives
 
 	if(all_objectives.len)
-		output += "<B>Objectives:</B>"
+		output += "\n<B>Objectives:</B>"
 		var/obj_count = 1
 		for(var/datum/objective/objective in all_objectives)
 			output += "<br><B>Objective #[obj_count++]</B>: [objective.explanation_text]"

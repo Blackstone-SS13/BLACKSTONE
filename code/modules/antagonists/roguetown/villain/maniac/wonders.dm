@@ -11,6 +11,7 @@
 	craftsound = 'sound/foley/Building-01.ogg'
 	skillcraft = null
 	always_availible = FALSE
+	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/structure/wonder/first
 	name = "first wonder"
@@ -25,7 +26,7 @@
 	result = /obj/structure/wonder
 	reqs = list(
 		/obj/item/bodypart = 2,
-		/obj/item/organ/lungs = 1,
+		/obj/item/organ/lungs = 2,
 	)
 
 /datum/crafting_recipe/roguetown/structure/wonder/third
@@ -33,7 +34,7 @@
 	result = /obj/structure/wonder
 	reqs = list(
 		/obj/item/bodypart/head = 3,
-		/obj/item/bodypart = 1,
+		/obj/item/bodypart = 2,
 		/obj/item/organ/stomach = 2,
 	)
 
@@ -43,7 +44,7 @@
 	reqs = list(
 		/obj/item/organ/tongue = 4,
 		/obj/item/organ/eyes = 3,
-		/obj/item/organ/stomach = 3,
+		/obj/item/organ/liver = 4,
 	)
 
 //Wonder structure
@@ -69,16 +70,17 @@
 	/// Dreamer key text
 	var/key_text = ""
 
+/obj/structure/wonder/Destroy()
+	. = ..()
+	STOP_PROCESSING(SSobj, src)
+
 /obj/structure/wonder/OnCrafted(dirin, mob/user)
 	. = ..()
 	playsound(src, 'sound/villain/wonder.ogg', 100, vary = FALSE)
 	dream_master = user?.mind?.has_antag_datum(/datum/antagonist/maniac)
 	if(dream_master)
-		var/recipe_index = dream_master.recipe_progression.Find(src.type)
-		if(recipe_index)
-			user.mind.forget_crafting_recipe(src.type)
-			if(LAZYACCESS(dream_master.recipe_progression, recipe_index + 1))
-				user.mind.teach_crafting_recipe(dream_master.recipe_progression[recipe_index + 1])
+		if(LAZYACCESS(dream_master.recipe_progression, dream_master.current_wonder))
+			user.mind.forget_crafting_recipe(dream_master.recipe_progression[dream_master.current_wonder])
 		wonder_id = dream_master.current_wonder
 		if(wonder_id >= 4)
 			to_chat(user, "<span class='userdanger'>I must SUM the keys. I am WAKING up!</span>")
@@ -88,24 +90,20 @@
 		name = "[key_text ? "[key_text] " : ""]Wonder"
 		icon_state = "creation[clamp(wonder_id, 1, 4)]"
 		dream_master.current_wonder++
+		if(LAZYACCESS(dream_master.recipe_progression, dream_master.current_wonder))
+			user.mind.teach_crafting_recipe(dream_master.recipe_progression[dream_master.current_wonder])
 		dream_master.wonders_made |= src
-
+	START_PROCESSING(SSobj, src)
+	
 /obj/structure/wonder/examine(mob/user)
 	. = ..()
 	if(gazed_at && (user.mind?.has_antag_datum(/datum/antagonist/maniac) == dream_master))
 		. += "<span class='danger'>They have GAZED at my wonder!</span>"
-	START_PROCESSING(SSobj, src)
-	process()
-
-/obj/structure/wonder/Initialize()
-	. = ..()
-	START_PROCESSING(SSobj, src)
+	if(dream_master)
+		process()
 
 /obj/structure/wonder/process()
 	. = ..()
-	if(gazed_at)
-		STOP_PROCESSING(SSobj, src)
-		return
 	var/list/viewers = view(7, src)
 	for(var/mob/living/carbon/human/victim in viewers)
 		if(dream_master && (victim.mind?.has_antag_datum(/datum/antagonist/maniac) == dream_master))
@@ -116,14 +114,16 @@
 				if(prob(10))
 					to_chat(other_victim, "<span class='userdanger'>It is WONDERFUL!</span>")
 		else
-			if(victim.stat == DEAD)
+			if(!victim.mind || (victim.stat == DEAD))
 				continue
 			var/obj/item/organ/heart/heart = victim.getorganslot(ORGAN_SLOT_HEART)
 			if(dream_master && heart && !heart.inscryption)
 				heart.inscryption = "<b>INRL</b> - [key_text] - [key_num]"
+				heart.inscryption_key = key_text
 				victim.add_stress(/datum/stressevent/saw_wonder)
 				victim.emote("scream")
 				SEND_SOUND(victim, 'sound/villain/seen_wonder.ogg')
 				victim.Paralyze(5 SECONDS)
+				victim.add_client_colour(/datum/client_colour/maniac_marked)
 				gazed_at = TRUE
 				break
