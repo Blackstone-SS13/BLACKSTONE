@@ -88,7 +88,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/roguebig_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/roguebig_righthand.dmi'
 	name = "bastard sword"
-	desc = "A serious weapon to behol. Large, razor sharp, and undeniably lethal. Offers very high damage output and even more when wielded. This weapon is gods right hand."
+	desc = "A serious weapon to behold. Large, razor sharp, and undeniably lethal. Offers very high damage output and even more when wielded. This weapon is gods right hand."
 	parrysound = "bladedmedium"
 	swingsound = BLADEWOOSH_LARGE
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
