@@ -11,7 +11,7 @@
 
 /obj/item/clothing/gloves/roguetown/leather
 	name = "leather gloves"
-	desc = ""
+	desc = "Gloves made out of sturdy leather. Warm, and offer very small protection against melee attacks."
 	icon_state = "leather_gloves"
 	armor = list("melee" = 12, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
@@ -28,7 +28,7 @@
 
 /obj/item/clothing/gloves/roguetown/fingerless
 	name = "fingerless gloves"
-	desc = ""
+	desc = "Fingerless gloves made out of leather offering no melee protection."
 	icon_state = "fingerless_gloves"
 	resistance_flags = null
 	blocksound = SOFTHIT
@@ -41,7 +41,7 @@
 
 /obj/item/clothing/gloves/roguetown/angle
 	name = "heavy leather gloves"
-	desc = ""
+	desc = "A heavier, more reinforced format of leather gloves. These look like they can take some beating. Fair melee protection and decent durability."
 	icon_state = "angle"
 	armor = list("melee" = 30, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
@@ -56,7 +56,7 @@
 
 /obj/item/clothing/gloves/roguetown/chain
 	name = "chain gauntlets"
-	desc = ""
+	desc = "Gaunlets made out of steel chains. Great melee protection and higher integrity."
 	icon_state = "cgloves"
 	armor = list("melee" = 100, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
@@ -77,14 +77,13 @@
 //rogtodo sprites for this
 /obj/item/clothing/gloves/roguetown/plate
 	name = "plate gauntlets"
-	desc = ""
+	desc = "Gaunlets made out of of steel ingots. Offer best protection against melee attacks and have high integrity."
 	icon_state = "gauntlets"
 	armor = list("melee" = 100, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CHOP, BCLASS_CUT, BCLASS_BLUNT)
 	resistance_flags = null
 	blocksound = PLATEHIT
 	body_parts_covered = ARMS|HANDS
-
 	max_integrity = 400
 	blade_dulling = DULLING_BASH
 	break_sound = 'sound/foley/breaksound.ogg'

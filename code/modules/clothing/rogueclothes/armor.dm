@@ -28,7 +28,7 @@
 /obj/item/clothing/suit/roguetown/armor/chainmail
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 	name = "haubergeon"
-	desc = "A steel maille shirt."
+	desc = "A maille shirt typically made out of steel. Successor to the iron chain vest. A firm medium protection format."
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
 	icon_state = "haubergeon"
 	armor = list("melee" = 100, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
@@ -51,7 +51,7 @@
 /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 	icon_state = "ichainmail"
 	name = "chainmaille"
-	desc = "A chain vest made of heavy iron rings. Better than nothing."
+	desc = "A chain vest made of heavy iron rings. Good protection format against melee weaponry of all kind."
 	body_parts_covered = CHEST|GROIN|VITALS
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
@@ -109,7 +109,7 @@
 /obj/item/clothing/suit/roguetown/armor/plate/half
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "steel cuirass"
-	desc = "A basic cuirass of steel. Lightweight and durable."
+	desc = "A cuirass of steel. Lightweight and highly durable."
 	body_parts_covered = CHEST|VITALS
 	icon_state = "cuirass"
 	item_state = "cuirass"
@@ -140,7 +140,7 @@
 /obj/item/clothing/suit/roguetown/armor/plate/scale
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "scalemail"
-	desc = ""
+	desc = "A scale shirt typically made out of various materials, this one is made from steel. Offers a decent durability. "
 	body_parts_covered = CHEST|VITALS|GROIN|LEGS
 	allowed_sex = list(MALE, FEMALE)
 	icon_state = "lamellar"
@@ -185,7 +185,7 @@
 /obj/item/clothing/suit/roguetown/armor/brigandine
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "brigandine"
-	desc = "A coat with plates concealed inside an exterior fabric."
+	desc = "A coat with plates concealed inside an exterior fabric. Protects the user from melee impacts and also ranged attacks to an extent."
 	icon_state = "brigandine"
 	blocksound = SOFTHIT
 	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
@@ -234,7 +234,7 @@
 /obj/item/clothing/suit/roguetown/armor/armordress
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "padded dress"
-	desc = ""
+	desc = "A padded dress that usually goes under the armor. Offers some protection against melee."
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	icon_state = "armordress"
 	armor = list("melee" = 50, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
@@ -256,7 +256,7 @@
 /obj/item/clothing/suit/roguetown/armor/gambeson
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 	name = "gambeson"
-	desc = ""
+	desc = "A gambeson is a padded defensive jacket that is worn as armour separately, combined with mail or plate armour. On its own, protects wearer slightly."
 	icon_state = "gambeson"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	armor = list("melee" = 40, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
@@ -278,7 +278,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather
 	name = "leather armor"
-	desc = ""
+	desc = "A light armor typically made out of boiled leather. Offers small to none protection from melee attacks and has low integrity, but better than nothing."
 	icon_state = "leather"
 //	color = "#514339"
 	body_parts_covered = CHEST|GROIN|VITALS
@@ -296,13 +296,14 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/hide
 	name = "hide armor"
-	desc = ""
+	desc = "Similiar to leather armor. Offers slightly higher integrity."
 	icon_state = "hidearmor"
 	max_integrity = 230
 	armor_class = ARMOR_CLASS_LIGHT
 
 /obj/item/clothing/suit/roguetown/armor/leather/studded
 	name = "studded leather armor"
+	desc = "A leather, flexible armor typically reinforced with close-set rivets. Offers a decent integrity. Best choice when it comes to leather armors."
 	icon_state = "studleather"
 	item_state = "studleather"
 	blocksound = SOFTHIT
@@ -315,7 +316,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest
 	name = "leather vest"
-	desc = ""
+	desc = "A leather vest with no sleeves, wont really protect much."
 	icon_state = "vest"
 	item_state = "vest"
 	color = "#514339"
@@ -377,7 +378,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/workervest
 	name = "striped tunic"
-	desc = ""
+	desc = "A common tunic worn by just about anyone. Nothing special, but essential."
 	icon_state = "workervest"
 	armor = null
 	blocksound = SOFTHIT

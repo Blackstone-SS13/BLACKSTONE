@@ -2,7 +2,7 @@
 	name = "shoes"
 	icon = 'icons/roguetown/clothing/feet.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/feet.dmi'
-	desc = ""
+	desc = "Typical shoes worn by almost anyone."
 	gender = PLURAL
 	slot_flags = ITEM_SLOT_SHOES
 	body_parts_covered = FEET
@@ -16,7 +16,7 @@
 	name = "dark boots"
 	//dropshrink = 0.75
 	color = "#d5c2aa"
-	desc = ""
+	desc = "Boots made out of darker materials. Offers light protection against melee attacks."
 	gender = PLURAL
 	icon_state = "blackboots"
 	item_state = "blackboots"
@@ -26,7 +26,7 @@
 	name = "noble boots"
 	//dropshrink = 0.75
 	color = "#d5c2aa"
-	desc = "Fine dark leather boots."
+	desc = "Fine dark leather boots. Offers light protection against melee attacks."
 	gender = PLURAL
 	icon_state = "nobleboots"
 	item_state = "nobleboots"
@@ -35,7 +35,7 @@
 /obj/item/clothing/shoes/roguetown/shortboots
 	name = "shortboots"
 	color = "#d5c2aa"
-	desc = ""
+	desc = "A shorter format of boots worn by about anyone."
 	gender = PLURAL
 	icon_state = "shortboots"
 	item_state = "shortboots"
@@ -43,7 +43,7 @@
 /obj/item/clothing/shoes/roguetown/ridingboots
 	name = "riding boots"
 	color = "#d5c2aa"
-	desc = ""
+	desc = "Boots designed for riding a mount."
 	gender = PLURAL
 	icon_state = "ridingboots"
 	item_state = "ridingboots"
@@ -54,7 +54,7 @@
 
 /obj/item/clothing/shoes/roguetown/simpleshoes
 	name = "shoes"
-	desc = ""
+	desc = "Simple shoes worn by about anyone."
 	gender = PLURAL
 	icon_state = "simpleshoe"
 	item_state = "simpleshoe"
@@ -72,7 +72,7 @@
 
 /obj/item/clothing/shoes/roguetown/simpleshoes/lord
 	name = "shoes"
-	desc = ""
+	desc = "Shoes typically worn by the lord himself."
 	gender = PLURAL
 	icon_state = "simpleshoe"
 	item_state = "simpleshoe"
@@ -81,14 +81,14 @@
 
 /obj/item/clothing/shoes/roguetown/gladiator
 	name = "leather sandals"
-	desc = ""
+	desc = "Open design sandals made from sturdy leather. Can be typically seen worn by gladiators."
 	gender = PLURAL
 	icon_state = "gladiator"
 	item_state = "gladiator"
 
 /obj/item/clothing/shoes/roguetown/sandals
 	name = "sandals"
-	desc = ""
+	desc = "A standard sandals."
 	gender = PLURAL
 	icon_state = "sandals"
 	item_state = "sandals"
@@ -102,7 +102,7 @@
 
 /obj/item/clothing/shoes/roguetown/boots/armor
 	name = "plated boots"
-	desc = ""
+	desc = "Armored boots made from iron offering heavy protection against both melee and ranged attacks."
 	body_parts_covered = FEET
 	icon_state = "armorboots"
 	item_state = "armorboots"
@@ -116,7 +116,7 @@
 /obj/item/clothing/shoes/roguetown/boots/leather
 	name = "leather boots"
 	//dropshrink = 0.75
-	desc = ""
+	desc = "Boots made out of sturdy leather. Providing light protection against melee attacks."
 	gender = PLURAL
 	icon_state = "leatherboots"
 	item_state = "leatherboots"
@@ -124,5 +124,6 @@
 
 /obj/item/clothing/shoes/roguetown/jester
 	name = "funny shoes"
+	desc = "Shoes typically worn by a jester"
 	icon_state = "jestershoes"
 	resistance_flags = null

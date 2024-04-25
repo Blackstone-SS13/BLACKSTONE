@@ -3,7 +3,7 @@
 	icon = 'icons/roguetown/clothing/cloaks.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	slot_flags = ITEM_SLOT_CLOAK
-	desc = ""
+	desc = "A simple cloak covering the body."
 	edelay_type = 1
 	equip_delay_self = 10
 	bloody_icon_state = "bodyblood"
@@ -15,7 +15,7 @@
 
 /obj/item/clothing/cloak/tabard
 	name = "tabard"
-	desc = ""
+	desc = "A common short coat commonly worn by just about anyone."
 	color = null
 	icon_state = "tabard"
 	item_state = "tabard"
@@ -270,7 +270,7 @@
 
 /obj/item/clothing/cloak/stabard/guard
 	name = "guard tabard"
-	desc = "A tabard with the lord's heraldic colors."
+	desc = "A tabard with the lord's heraldic colors. This one is worn typically by guards."
 	color = CLOTHING_RED
 	detail_tag = "_spl"
 	detail_color = CLOTHING_PURPLE
@@ -548,7 +548,7 @@
 
 /obj/item/clothing/cloak/apron/cook
 	name = "cook apron"
-	desc = ""
+	desc = "An apron covering the frontal part of the body. Apart of protection from spills, wont prevent you from getting cut in half."
 	color = null
 	icon_state = "aproncook"
 	item_state = "aproncook"
@@ -570,7 +570,7 @@
 
 /obj/item/clothing/cloak/raincloak
 	name = "cloak"
-	desc = ""
+	desc = "A typical raincloak used to protect wearer against elements."
 	color = null
 	icon_state = "rain_cloak"
 	item_state = "rain_cloak"
@@ -626,7 +626,7 @@
 
 /obj/item/clothing/head/hooded/rainhood
 	name = "hood"
-	desc = ""
+	desc = "A hood that's attached to the raincoat."
 	icon_state = "rain_hood"
 	item_state = "rain_hood"
 	slot_flags = ITEM_SLOT_HEAD
@@ -741,7 +741,7 @@
 
 /obj/item/clothing/cloak/stole
 	name = "stole"
-	desc = ""
+	desc = "A gold weaved fabric. "
 	icon_state = "stole_gold"
 	sleeved = null
 	sleevetype = null
@@ -755,7 +755,7 @@
 
 /obj/item/clothing/cloak/black_cloak
 	name = "fur coat"
-	desc = ""
+	desc = "A coat made out of fur that covers chest, arms, groin and a chest. Has no protection capacities."
 	icon_state = "black_cloak"
 	body_parts_covered = CHEST|GROIN|VITALS|ARMS
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
@@ -768,7 +768,7 @@
 
 /obj/item/clothing/cloak/heartfelt
 	name = "red cloak"
-	desc = ""
+	desc = "A typical cloak, this one is in red colours."
 	icon_state = "heartfelt_cloak"
 	body_parts_covered = CHEST|GROIN|VITALS|ARMS
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
@@ -781,7 +781,7 @@
 
 /obj/item/clothing/cloak/half
 	name = "halfcloak"
-	desc = ""
+	desc = "A cloak that covers only half of the body. "
 	color = null
 	icon_state = "halfcloak"
 	alternate_worn_layer = CLOAK_BEHIND_LAYER
