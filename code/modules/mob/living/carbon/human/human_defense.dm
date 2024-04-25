@@ -994,7 +994,7 @@
 	if(FB.is_disabled() == BODYPART_DISABLED_CRIT)
 		isdisabled = "shattered "
 	if(FB.is_disabled() == BODYPART_DISABLED_DAMAGE)
-		isdisabled = "cracked "
+		isdisabled = "numb "
 	if(FB.is_disabled() == BODYPART_DISABLED_PARALYSIS || FB.is_disabled() == BODYPART_DISABLED_FALL)
 		isdisabled = "limp "
 	if(FB.is_disabled() == BODYPART_DISABLED_ROT)

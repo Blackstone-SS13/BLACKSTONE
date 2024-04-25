@@ -20,6 +20,10 @@
 	var/next_battle_screech = 0
 	var/battle_screech_cooldown = 50
 
+/mob/living/carbon/spirit/Initialize()
+	status_traits |= TRAIT_STUNIMMUNE
+	. = ..()
+
 /mob/living/carbon/spirit/proc/IsStandingStill()
 	return resisting || pickpocketing || disposing_body
 
