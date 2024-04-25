@@ -6,7 +6,7 @@
 							"Tiefling")
 	outfit = /datum/outfit/job/roguetown/adventurer/crusader
 	special_req = TRUE
-	maxchosen = 0
+	maxchosen = 1
 	isvillager = FALSE
 	tutorial = "The crusaders... Knights who have pledged \
 	their wealth and lands to the church, taking up the banner \
