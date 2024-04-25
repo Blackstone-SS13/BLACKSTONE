@@ -1,0 +1,170 @@
+
+
+//Processing procs related to dreamer, so he hallucinates and shit
+/datum/antagonist/maniac/process()
+	if(!owner.current)
+		STOP_PROCESSING(SSobj, src)
+		return
+	handle_visions(owner.current)
+	handle_hallucinations(owner.current)
+	handle_floors(owner.current)
+	handle_walls(owner.current)
+
+/datum/antagonist/maniac/proc/handle_visions(mob/living/dreamer)
+	//Jumpscare funny
+	if(prob(2))
+		hallucinations.jumpscare(dreamer)
+	//Random laughter
+	else if(prob(1))
+		var/static/list/funnies = list(
+			'sound/villain/comic1.ogg',
+			'sound/villain/comic2.ogg',
+			'sound/villain/comic3.ogg',
+			'sound/villain/comic4.ogg',
+		)
+		dreamer.playsound_local(dreamer, pick(funnies), vol = 100, vary = FALSE)
+
+/datum/antagonist/maniac/proc/handle_hallucinations(mob/living/dreamer)
+	//Chasing mob
+	if(prob(1))
+		INVOKE_ASYNC(src, PROC_REF(handle_mob_hallucination), dreamer)
+	//Talking objects
+	else if(prob(4))
+		var/list/objects = list()
+		for(var/obj/object in view(dreamer))
+			if(object.invisibility < dreamer.see_invisible)
+				continue
+			var/weight = 1
+			if(isitem(object))
+				weight = 3
+			else if(isstructure(object))
+				weight = 2
+			objects[object] = weight
+		objects -= dreamer.contents
+		if(!length(objects))
+			var/static/list/speech_sounds = list(
+				'sound/villain/female_talk1.ogg',
+				'sound/villain/female_talk2.ogg',
+				'sound/villain/female_talk3.ogg',
+				'sound/villain/female_talk4.ogg',
+				'sound/villain/female_talk5.ogg',
+				'sound/villain/male_talk1.ogg',
+				'sound/villain/male_talk2.ogg',
+				'sound/villain/male_talk3.ogg',
+				'sound/villain/male_talk4.ogg',
+				'sound/villain/male_talk5.ogg',
+				'sound/villain/male_talk6.ogg',
+			)
+			var/obj/speaker = pickweight(objects)
+			var/speech
+			if(prob(1))
+				speech = "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
+			else
+				speech = pick_list_replacements('strings/maniac/visions.json', "dreamer_object")
+				speech = replacetext(speech, "%OWNER", "[dreamer.real_name]")
+			var/message = dreamer.compose_message(speaker, null, speech)
+			dreamer.playsound_local(dreamer, pick(speech_sounds), vol = 60, vary = FALSE)
+			if(dreamer.client.prefs?.chat_on_map)
+				dreamer.create_chat_message(speaker, null, speech)
+			to_chat(dreamer, message)
+
+/datum/antagonist/maniac/proc/handle_mob_hallucination(mob/living/dreamer)
+	if(!dreamer.client)
+		return
+	var/mob_message = pick("It's mom!", "I have to HURRY UP!", "They are CLOSE!","They are NEAR!")
+	var/turf/spawning_turf
+	var/list/turf/spawning_turfs = list()
+	for(var/turf/turf in view(dreamer))
+		spawning_turfs += turf
+	if(length(spawning_turfs))
+		spawning_turf = pick(spawning_turfs)
+	if(!spawning_turf)
+		return
+	var/mob_state = pick("mom", "shadow", "deepone")
+	if(mob_message == "It's mom!")
+		mob_state = "mom"
+	var/image/mob_image = image('icons/roguetown/maniac/dreamer_mobs.dmi', spawning_turf, mob_state, FLOAT_LAYER, get_dir(spawning_turf, dreamer))
+	mob_image.plane = GAME_PLANE_UPPER
+	dreamer.client.images += mob_image
+	to_chat(dreamer, "<span class='userdanger'><span class='big'>[mob_message]</span></span>")
+	sleep(5)
+	if(!dreamer?.client)
+		return
+	var/static/list/spookies = pick(
+		'sound/villain/hall_attack1.ogg',
+		'sound/villain/hall_attack2.ogg',
+		'sound/villain/hall_attack3.ogg',
+		'sound/villain/hall_attack4.ogg',
+	)
+	dreamer.playsound_local(dreamer, pick(spookies), 100)
+	var/chase_tiles = 7
+	var/chase_wait = rand(4,6)
+	var/caught_dreamer = FALSE
+	var/turf/current_turf = spawning_turf
+	while(chase_tiles > 0)
+		if(!dreamer?.client)
+			return
+		var/face_direction = get_dir(current_turf, dreamer)
+		current_turf = get_step(current_turf, face_direction)
+		if(!current_turf)
+			break
+		mob_image.dir = face_direction
+		mob_image.loc = current_turf
+		if(current_turf == get_turf(dreamer))
+			caught_dreamer = TRUE
+			break
+		chase_tiles--
+		sleep(chase_wait)
+	if(!dreamer?.client)
+		return
+	if(caught_dreamer)
+		dreamer.Paralyze(rand(2, 4) SECONDS)
+		var/pain_message = pick("NO!", "THEY GOT ME!", "AGH!")
+		to_chat(dreamer, "<span class='userdanger'>[pain_message]</span>")
+	sleep(chase_wait)
+	if(!dreamer?.client)
+		return
+	dreamer.client.images -= mob_image
+
+/datum/antagonist/maniac/proc/handle_floors(mob/living/dreamer)
+	if(!dreamer.client)
+		return
+	//Floors go crazy go stupid
+	for(var/turf/open/floor in view(dreamer))
+		if(!prob(4))
+			continue
+		INVOKE_ASYNC(src, PROC_REF(handle_floor), floor, dreamer)
+
+/datum/antagonist/maniac/proc/handle_floor(turf/open/floor, mob/living/dreamer)
+	var/mutable_appearance/fake_floor = image(floor.icon, floor, floor.icon_state, floor.layer + 0.01)
+	dreamer.client.images += fake_floor
+	var/offset = pick(-3,-2, -1, 1, 2, 3)
+	var/disappearfirst = rand(1 SECONDS, 3 SECONDS) * abs(offset)
+	animate(fake_floor, pixel_y = offset, time = disappearfirst, flags = ANIMATION_RELATIVE)
+	sleep(disappearfirst)
+	var/disappearsecond = rand(1 SECONDS, 3 SECONDS) * abs(offset)
+	animate(fake_floor, pixel_y = -offset, time = disappearsecond, flags = ANIMATION_RELATIVE)
+	sleep(disappearsecond)
+	dreamer.client?.images -= fake_floor
+
+/datum/antagonist/maniac/proc/handle_walls(mob/living/dreamer)
+	if(!dreamer.client)
+		return
+	//Shit on THA walls
+	for(var/turf/closed/wall in view(dreamer))
+		if(!prob(2))
+			continue
+		INVOKE_ASYNC(src, PROC_REF(handle_wall), wall, dreamer)
+
+/datum/antagonist/maniac/proc/handle_wall(turf/closed/wall, mob/living/dreamer)
+	var/image/shit = image('icons/roguetown/maniac/shit.dmi', wall, "splat[rand(1,8)]")
+	dreamer.client?.images += shit
+	var/offset = pick(-1, 1, 2)
+	var/disappearfirst = rand(2 SECONDS, 4 SECONDS)
+	animate(shit, pixel_y = offset, time = disappearfirst, flags = ANIMATION_RELATIVE)
+	sleep(disappearfirst)
+	var/disappearsecond = rand(2 SECONDS, 4 SECONDS)
+	animate(shit, pixel_y = -offset, time = disappearsecond, flags = ANIMATION_RELATIVE)
+	sleep(disappearsecond)
+	dreamer.client?.images -= shit
+

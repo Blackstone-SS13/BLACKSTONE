@@ -1,16 +1,16 @@
 
-/datum/antagonist/villain
+/datum/antagonist/maniac
 	name = "Assassin"
 	roundend_category = "villains"
 	antagpanel_category = "Villain"
-	job_rank = ROLE_VILLAIN
+	job_rank = ROLE_MANIAC
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "villain"
-	var/special_role = ROLE_VILLAIN
+	var/special_role = ROLE_MANIAC
 
 /mind/
 
-/datum/antagonist/villain/on_gain()
+/datum/antagonist/maniac/on_gain()
 	SSticker.mode.villains += owner
 	owner.special_role = special_role
 	var/yea = pick(/obj/item/rogueweapon/huntingknife/idagger,/obj/item/rogueweapon/huntingknife/idagger/steel,/obj/item/rogueweapon/huntingknife/idagger/silver)
@@ -26,20 +26,20 @@
 	finalize_villain()
 	return ..()
 
-/datum/antagonist/villain/on_removal()
+/datum/antagonist/maniac/on_removal()
 	SSticker.mode.villains -= owner
 	if(!silent && owner.current)
 		to_chat(owner.current,"<span class='danger'>I am no longer a [special_role]!</span>")
 	owner.special_role = null
 	return ..()
 
-/datum/antagonist/villain/proc/add_objective(datum/objective/O)
+/datum/antagonist/maniac/proc/add_objective(datum/objective/O)
 	objectives += O
 
-/datum/antagonist/villain/proc/remove_objective(datum/objective/O)
+/datum/antagonist/maniac/proc/remove_objective(datum/objective/O)
 	objectives -= O
 
-/datum/antagonist/villain/proc/forge_villain_objectives()
+/datum/antagonist/maniac/proc/forge_villain_objectives()
 	forge_single_human_objective()
 
 	if(!(locate(/datum/objective/escape) in objectives))

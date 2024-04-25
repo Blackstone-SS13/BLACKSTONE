@@ -102,8 +102,8 @@
 /mob/living/carbon/attackby(obj/item/I, mob/user, params)
 	for(var/datum/surgery/S in surgeries)
 		if(!(mobility_flags & MOBILITY_STAND) || !S.lying_required)
-			if((S.self_operable || user != src) && (user.used_intent.type == INTENT_HELP || user.used_intent.type == INTENT_DISARM))
-				if(S.next_step(user,user.used_intent))
+			if(S.self_operable || user != src)
+				if(S.next_step(user, user.used_intent))
 					return 1
 	return ..()
 

@@ -12,8 +12,10 @@
 #define RTRAIT_NOBLE					"Noble Blooded"
 #define RTRAIT_EMPATH					"Empath"
 #define RTRAIT_BREADY					"Battleready"
-#define RTRAIT_MEDIUMARMOR					"Maille Training"
-#define RTRAIT_HEAVYARMOR					"Plate Training"
+#define RTRAIT_MEDIUMARMOR				"Maille Training"
+#define RTRAIT_HEAVYARMOR				"Plate Training"
+#define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
+#define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
 
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
 #define TRAIT_NOFATSTAM				"nofatstam" //for ai
@@ -28,6 +30,7 @@
 #define TRAIT_STEELHEARTED 			"steelhearted" //no bad mood from dismembering or seeing this
 #define TRAIT_IWASREVIVED "iwasrevived" //prevents PQ gain from reviving the same person twice
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
+#define TRAIT_SCHIZO_AMBIENCE "schizo" //replaces all ambience with creepy shit
 
 GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_WEBWALK = "I can move freely between webs.",
@@ -156,6 +159,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOHUNGER			"no_hunger"
 #define TRAIT_NOMETABOLISM		"no_metabolism"
 #define TRAIT_TOXIMMUNE			"toxin_immune"
+#define TRAIT_HARDDISMEMBER		"hard_dismember"
 #define TRAIT_EASYDISMEMBER		"easy_dismember"
 #define TRAIT_LIMBATTACHMENT 	"limb_attach"
 #define TRAIT_NOLIMBDISABLE		"no_limb_disable"
@@ -210,6 +214,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOPAIN			"no_pain"
 #define TRAIT_DRUQK				"druqk"
 #define TRAIT_BURIED_COIN_GIVEN "buried_coin_given" // prevents a human corpse from being used for a corpse multiple times
+#define TRAIT_BLOODLOSS_IMMUNE "bloodloss_immune" // can bleed, but will never die from blood loss
 
 //non-mob traits
 #define TRAIT_PARALYSIS			"paralysis" //Used for limb-based paralysis, where replacing the limb will fix it

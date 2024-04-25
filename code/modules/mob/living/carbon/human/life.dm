@@ -86,7 +86,7 @@
 			if(health <= 0)
 				adjustOxyLoss(0.5)
 			else
-				if(!(NOBLOOD in dna.species.species_traits))
+				if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE) && !(NOBLOOD in dna.species.species_traits))
 					if(blood_volume <= BLOOD_VOLUME_SURVIVE)
 						adjustOxyLoss(0.5)
 						if(blood_volume <= 20)

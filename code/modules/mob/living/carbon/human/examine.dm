@@ -364,18 +364,23 @@
 	if (length(msg))
 		. += "<span class='warning'>[msg.Join("")]</span>"
 
-	if(isliving(user))
+	if((user != src) && isliving(user))
 		var/mob/living/L = user
-		if((STASTR - L.STASTR) > 1)
-			if((STASTR - L.STASTR) > 6)
+		var/final_str = STASTR
+		if(HAS_TRAIT(src, RTRAIT_DECEIVING_MEEKNESS))
+			final_str = 10
+		if((final_str - L.STASTR) > 1)
+			if((final_str - L.STASTR) > 6)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much stronger than I.</B></span>"
 			else
 				. += "<span class='warning'>[t_He] look[p_s()] stronger than I.</span>"
-		if((L.STASTR - STASTR) > 1)
-			if((L.STASTR - STASTR) > 6)
+		else if((L.STASTR - final_str) > 1)
+			if((L.STASTR - final_str) > 6)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker.</B></span>"
 			else
 				. += "<span class='warning'>[t_He] look[p_s()] weaker.</span>"
+		else
+			. += "[t_He] look[p_s()] about as strong as I."
 
 	if(Adjacent(user))
 		. += "<a href='?src=[REF(src)];inspect_limb=1'>Inspect [parse_zone(check_zone(user.zone_selected))]</a>"
