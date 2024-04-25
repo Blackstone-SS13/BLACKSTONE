@@ -113,7 +113,7 @@
 			head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 		if(2)
-			backr = /obj/item/rogueweapon/halberd
+			backr = /obj/item/rogueweapon/halberd/bardiche
 			neck = /obj/item/clothing/neck/roguetown/bervor
 			head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
