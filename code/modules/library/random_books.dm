@@ -41,6 +41,24 @@
 	create_random_books_rogue(book_count, src)
 	update_icon()
 
+/obj/structure/bookcase/random/archive
+	book_count = 5
+
+/obj/structure/bookcase/random/archive/Initialize(mapload)
+	. = ..()
+	if(book_count && isnum(book_count))
+		book_count += pick(0,1,2,3,4,5,6,7,8,9,10)
+		. = INITIALIZE_HINT_LATELOAD
+
+/obj/structure/bookcase/random/archive/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/book/rogue/playerbook))
+		var/obj/item/book/rogue/playerbook/PB = I
+		if(PB.is_in_round_player_generated)
+			to_chat(user, "<span class='notice'>[SSlibrarian.playerbook2file(PB.player_book_text, PB.player_book_title, PB.player_book_author, PB.player_book_author_ckey, PB.player_book_icon)]</span>")
+			PB.is_in_round_player_generated = FALSE
+
+	. = ..()
+
 /proc/create_random_books(amount = 2, location, fail_loud = FALSE, category = null)
 	. = list()
 	if(!isnum(amount) || amount<1)
@@ -73,13 +91,21 @@
 /proc/create_random_books_rogue(amount = 2, location)
 	var/list/possible_books = subtypesof(/obj/item/book/rogue/)
 	for(var/b in 1 to amount)
-		var/obj/item/book/rogue/addition = pick(possible_books)
-		var/obj/item/book/rogue/newbook = new addition(location)
-		if(istype(newbook, /obj/item/book/rogue/secret))
-			qdel(newbook)
-			continue
 		if(prob(50))
-			newbook.bookfile = "ruined.json"
+			var/obj/item/book/rogue/playerbook/newbook = new /obj/item/book/rogue/playerbook(src)
+			if(prob(50))
+				newbook.pages = SSlibrarian.file2playerbook("ruined")["text"]
+		else
+			var/obj/item/book/rogue/addition = pick(possible_books)
+			var/obj/item/book/rogue/newbook = new addition(location)
+			if(istype(newbook, /obj/item/book/rogue/secret))
+				qdel(newbook)
+				continue
+			if(istype(newbook, /obj/item/book/rogue/bibble))
+				qdel(newbook)
+				continue
+			if(prob(50))
+				newbook.bookfile = "ruined.json"
 
 
 /obj/structure/bookcase/random/fiction

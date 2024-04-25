@@ -376,7 +376,8 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	return null
 
 /mob/living/proc/treat_message(message)
-
+	if(HAS_TRAIT(src, TRAIT_ZOMBIE_SPEECH))
+		message = "[repeat_string(rand(1, 3), "U")][repeat_string(rand(1, 6), "H")]..."
 	if(HAS_TRAIT(src, TRAIT_UNINTELLIGIBLE_SPEECH))
 		message = unintelligize(message)
 

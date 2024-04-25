@@ -81,7 +81,7 @@
 			handle_liver()
 			update_rogfat()
 			update_rogstam()
-			if(charflaw)
+			if(charflaw && !charflaw.ephemeral)
 				charflaw.flaw_on_life(src)
 			if(health <= 0)
 				adjustOxyLoss(0.5)

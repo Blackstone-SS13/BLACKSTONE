@@ -13,7 +13,7 @@
 	min_pq = 2
 	total_positions = 2
 	spawn_positions = 2
-	spells = list(/obj/effect/proc_holder/spell/invoked/heal/lesser, /obj/effect/proc_holder/spell/targeted/churn, /obj/effect/proc_holder/spell/targeted/burialrite)
+	spells = list(/obj/effect/proc_holder/spell/invoked/lesser_heal, /obj/effect/proc_holder/spell/targeted/churn, /obj/effect/proc_holder/spell/targeted/burialrite)
 	display_order = JDO_TEMPLAR
 	give_bank_account = TRUE
 
