@@ -146,7 +146,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	H.mind.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
 	pants = /obj/item/clothing/under/roguetown/platelegs/vampire
@@ -161,9 +161,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	neck = /obj/item/clothing/neck/roguetown/gorget
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/vampire
 	gloves = /obj/item/clothing/gloves/roguetown/chain/vampire
-	H.change_stat("strength", 4)
 	H.change_stat("intelligence", 2)
-	H.change_stat("constitution", 2)
 	H.ambushable = FALSE
 
 ////////Outfits////////
