@@ -10,7 +10,6 @@
 	allowed_patrons = list("Noc")
 	allowed_ages = list(AGE_OLD, AGE_MIDDLEAGED)
 
-
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = 19
 

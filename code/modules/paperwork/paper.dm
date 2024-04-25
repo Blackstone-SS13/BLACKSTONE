@@ -153,15 +153,14 @@
 		return
 	if(in_range(user, src) || isobserver(user))
 //		var/obj/screen/read/R = user.hud_used.reads
-		user.hud_used.reads.icon_state = "scrap"
-		user.hud_used.reads.show()
 		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-					<html><head><style type=\"text/css\">
-					body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
-		dat += "[info]<br>"
+			<html><head><style type=\"text/css\">
+			body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
+		dat += info
+		dat += "<br>"
 		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
 		dat += "</body></html>"
-		user << browse(dat, "window=reading;size=460x300;can_close=0;can_minimize=0;can_maximize=0;can_resize=0;titlebar=0")
+		user << browse(dat, "window=reading;size=500x400;can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=0;border=0")
 		onclose(user, "reading", src)
 	else
 		return "<span class='warning'>I'm too far away to read it.</span>"
@@ -433,6 +432,20 @@
 			to_chat(user, "<span class='warning'>I can't write.</span>")
 			return
 
+	if(istype(P, /obj/item/paper))
+		var/obj/item/paper/p = P
+		if(info && p.info)
+			var/obj/item/manuscript/M = new /obj/item/manuscript(get_turf(P.loc))
+			M.page_texts = list(src.info, p.info)
+			M.compiled_pages = "<p>[src.info]</p><p>[p.info]</p>"
+			qdel(p)
+			if(user.Adjacent(M))
+				M.add_fingerprint(user)
+				user.update_inv_hands()
+				user.put_in_active_hand(src)
+				user.put_in_inactive_hand(M)
+			. = ..()
+			return qdel(src)
 
 	if(!P.can_be_package_wrapped())
 		return ..()
