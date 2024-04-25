@@ -27,12 +27,12 @@
 	if(H.gender == FEMALE)
 		armor = /obj/item/clothing/suit/roguetown/shirt/rags
 	else
-		pants = /obj/item/clothing/under/roguetown/tights/vagrant
+		pants = /obj/item/clothing/under/roguetown/tights/beggar
 		if(prob(50))
-			pants = /obj/item/clothing/under/roguetown/tights/vagrant/l
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant
+			pants = /obj/item/clothing/under/roguetown/tights/beggar/l
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/beggar
 		if(prob(50))
-			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant/l
+			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/beggar/l
 	if(prob(33))
 		cloak = /obj/item/clothing/cloak/half/brown
 		gloves = /obj/item/clothing/gloves/roguetown/fingerless

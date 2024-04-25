@@ -1,4 +1,4 @@
-/datum/job/roguetown/vagrant
+/datum/job/roguetown/beggar
 	title = "Beggar"
 	flag = APPRENTICE
 	department_flag = PEASANTS
@@ -13,13 +13,13 @@
 	"Dark Elf"
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
-	outfit = /datum/outfit/job/roguetown/vagrant
+	outfit = /datum/outfit/job/roguetown/beggar
 	bypass_lastclass = TRUE
 	bypass_jobban = FALSE
 	min_pq = -30
 
 	tutorial = "The stench of your piss-laden clothes dont bug you anymore, the glances of disgust and loathing others give you is just a friendly greeting; the only reason you've not been killed already is because Volfs are known to be repelled by decaying flesh. You're going to be a solemn reminder what happens when something unwanted is born into this world."
-	display_order = JDO_VAGRANT
+	display_order = JDO_BEGGAR
 	show_in_credits = FALSE
 	can_random = FALSE
 	/// Chance to become a wise beggar, if we still have space for more wise beggars
@@ -29,19 +29,19 @@
 	/// Maximum amount of wise beggars that can be spawned
 	var/wise_max = 3
 	/// Outfit to use when wise beggar triggers
-	var/wise_outfit = /datum/outfit/job/roguetown/vagrant/wise
+	var/wise_outfit = /datum/outfit/job/roguetown/beggar/wise
 
-/datum/job/roguetown/vagrant/New()
+/datum/job/roguetown/beggar/New()
 	. = ..()
 	peopleknowme = list()
 
-/datum/job/roguetown/vagrant/get_outfit(mob/living/carbon/human/wearer, visualsOnly = FALSE, announce = TRUE, latejoin = FALSE, preference_source = null)
+/datum/job/roguetown/beggar/get_outfit(mob/living/carbon/human/wearer, visualsOnly = FALSE, announce = TRUE, latejoin = FALSE, preference_source = null)
 	if((wise_amount < wise_max) && prob(wise_chance))
 		wise_amount++
 		return wise_outfit
 	return ..()
 
-/datum/outfit/job/roguetown/vagrant/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/beggar/pre_equip(mob/living/carbon/human/H)
 	..()
 	// wise beggar!!!
 	// guaranteed full beggar gear + random stats
@@ -52,8 +52,8 @@
 		cloak = /obj/item/clothing/cloak/raincloak/brown
 		gloves = /obj/item/clothing/gloves/roguetown/fingerless
 		armor = /obj/item/clothing/suit/roguetown/shirt/rags
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant
-		pants = /obj/item/clothing/under/roguetown/tights/vagrant
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/beggar
+		pants = /obj/item/clothing/under/roguetown/tights/beggar
 		shoes = /obj/item/clothing/shoes/roguetown/shalal // wise boots
 		r_hand = /obj/item/rogueweapon/woodstaff/wise // dog beating staff
 		l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/special // dog butchering knife
@@ -98,12 +98,12 @@
 		armor = /obj/item/clothing/suit/roguetown/shirt/rags
 	else
 		armor = null
-		pants = /obj/item/clothing/under/roguetown/tights/vagrant
+		pants = /obj/item/clothing/under/roguetown/tights/beggar
 		if(prob(50))
-			pants = /obj/item/clothing/under/roguetown/tights/vagrant/l
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant
+			pants = /obj/item/clothing/under/roguetown/tights/beggar/l
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/beggar
 		if(prob(50))
-			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant/l
+			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/beggar/l
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(1,5), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/stealing, rand(1,5), TRUE)
@@ -122,11 +122,11 @@
 	H.change_stat("constitution", -3)
 	H.change_stat("endurance", -3)
 
-/datum/outfit/job/roguetown/vagrant
+/datum/outfit/job/roguetown/beggar
 	name = "Beggar"
 	/// Whether or not we get wise gear and stats
 	var/is_wise = FALSE
 
-/datum/outfit/job/roguetown/vagrant/wise
+/datum/outfit/job/roguetown/beggar/wise
 	name = "Wise Beggar"
 	is_wise = TRUE

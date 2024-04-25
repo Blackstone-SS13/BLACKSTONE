@@ -133,6 +133,7 @@
 #define HUNTER		(1<<0)
 #define FARMER		(1<<1)
 #define BEASTMASTER	(1<<2)
+#define DYN_VAGRANTS (1<<3) //Hey this ones empty, and im usin it
 #define FISHER		(1<<4)
 #define LUMBERJACK	(1<<5)
 #define GRAVEDIGGER	(1<<6)
@@ -232,9 +233,10 @@
 
 #define JDO_ADVENTURER 32.1
 #define JDO_PILGRIM 32.2
+#define JDO_VAGRANT 32.3
 
 #define JDO_GRENZELHOFT 33.1
 #define JDO_DESERT_RIDER 33.2
 
-#define JDO_VAGRANT 34
+#define JDO_BEGGAR 34
 #define JDO_ORPHAN 35

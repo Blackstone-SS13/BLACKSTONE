@@ -121,7 +121,8 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Bath Wench",
 	"Docker",
 	"Prisoner",
-	"Beggar"
+	"Beggar",
+	"Vagrant"
 	))
 
 GLOBAL_LIST_INIT(youngfolk_positions, list(

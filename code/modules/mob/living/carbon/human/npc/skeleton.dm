@@ -83,13 +83,13 @@
 	if(prob(10))
 		armor = /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 	if(prob(30))
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/beggar
 		if(prob(50))
-			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant/l
+			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/beggar/l
 	if(prob(30))
-		pants = /obj/item/clothing/under/roguetown/tights/vagrant
+		pants = /obj/item/clothing/under/roguetown/tights/beggar
 		if(prob(50))
-			pants = /obj/item/clothing/under/roguetown/tights/vagrant/l
+			pants = /obj/item/clothing/under/roguetown/tights/beggar/l
 	if(prob(10))
 		head = /obj/item/clothing/head/roguetown/helmet/leather
 	if(prob(10))
