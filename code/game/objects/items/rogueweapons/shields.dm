@@ -111,7 +111,7 @@
 
 /obj/item/rogueweapon/shield/tower/metal
 	name = "kite shield"
-	desc = "A kite shaped shield with high quality build. Made dominantly from metal materials, and offering highest protection along with superior integrity. The best you can get from an armourer in terms of shields."
+	desc = "A kite shaped shield with an high quality build. Made predominantly from metallic materials, and offering higher protection along with superior integrity."
 	icon_state = "ironsh"
 	force = 20
 	throwforce = 10
