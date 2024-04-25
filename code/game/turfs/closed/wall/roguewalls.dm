@@ -17,6 +17,7 @@
 
 /turf/closed/wall/mineral/rogue/stone
 	name = "stone wall"
+	desc = "A wall of smooth, unyielding stone."
 	icon = 'icons/turf/walls/stone_wall.dmi'
 	icon_state = "stone"
 	smooth = SMOOTH_MORE
@@ -57,6 +58,7 @@
 
 /turf/closed/wall/mineral/rogue/craftstone
 	name = "stone wall"
+	desc = "A wall of unyielding, smooth stone."
 	icon = 'icons/turf/walls/craftstone.dmi'
 	icon_state = "box"
 	smooth = SMOOTH_MORE
@@ -75,6 +77,7 @@
 
 /turf/closed/wall/mineral/rogue/stonebrick
 	name = "brick wall"
+	desc = "Several bricks form this wall."
 	icon = 'icons/turf/walls/stonebrick.dmi'
 	icon_state = "stonebrick"
 	smooth = SMOOTH_MORE
@@ -93,6 +96,7 @@
 
 /turf/closed/wall/mineral/rogue/wood
 	name = "wall"
+	desc = "A rough-hewn wall of wood."
 	icon = 'icons/turf/walls/roguewood.dmi'
 	icon_state = "wood"
 	smooth = SMOOTH_MORE
@@ -108,6 +112,8 @@
 	climbdiff = 3
 
 /turf/closed/wall/mineral/rogue/wood/window
+	name = "Wooden window"
+	desc = "A window with rough hewn wood frame."
 	opacity = FALSE
 	max_integrity = 550
 
@@ -123,6 +129,7 @@
 
 /turf/closed/wall/mineral/rogue/tent
 	name = "tent"
+	desc = "Made from durable fabric and wooden branches."
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "tent"
 	smooth = SMOOTH_FALSE
@@ -144,6 +151,7 @@
 
 /turf/closed/wall/mineral/rogue/wooddark
 	name = "wall"
+	desc = "Made from durable, somewhat darker wood." // i am not sure if the wood is really dark
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "corner"
 	smooth = SMOOTH_FALSE
@@ -274,7 +282,7 @@
 
 /turf/closed/wall/shroud //vines
 	name = "thick treetop"
-	desc = ""
+	desc = "All the birds flew away before i could see one!"
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "shroud1"
 	var/smooth_icon = 'icons/turf/smoothrocks.dmi'
@@ -327,6 +335,7 @@
 
 /turf/closed/wall/mineral/rogue/pipe
 	name = "metal wall"
+	desc = "Solid steel made into an impenetrable obstacle!"
 	icon = 'icons/turf/pipewall.dmi'
 	icon_state = "iron_box"
 	smooth = SMOOTH_MORE
