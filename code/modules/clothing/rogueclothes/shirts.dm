@@ -229,6 +229,10 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
+/obj/item/clothing/suit/roguetown/shirt/robe/necromancer/equipped(mob/living/carbon/human/user, slot)
+	..()
+	if (slot == SLOT_ARMOR)
+		user.faction |= "undead"
 
 /obj/item/clothing/suit/roguetown/shirt/robe/dendor
 	slot_flags = ITEM_SLOT_ARMOR

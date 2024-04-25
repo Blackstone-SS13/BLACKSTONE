@@ -27,3 +27,4 @@
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/bonechill)
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/skeleton)
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/plague)
+	H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/eyebite)

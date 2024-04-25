@@ -16,7 +16,7 @@
 	charge_max = 5 SECONDS
 	miracle = FALSE
 
-/obj/effect/proc_holder/spell/invoked/heal/cast(list/targets, mob/living/user)
+/obj/effect/proc_holder/spell/invoked/bonechill/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
 		if(target == user)
@@ -28,11 +28,42 @@
 			target.adjustFireLoss(-50)
 			target.adjustBruteLoss(-50)
 			return TRUE
-		target.visible_message("<span class='info'>Necrotic energy floods over [target]!</span>", "<span class='userdanger'>I feel colder as the dark energy fades!</span>")
+		target.visible_message("<span class='info'>Necrotic energy floods over [target]!</span>", "<span class='userdanger'>I feel colder as the dark energy floods into me!</span>")
 		if(iscarbon(target))
 			target.Paralyze(50)
 		else
 			target.adjustBruteLoss(20)
+		return TRUE
+	else
+		return FALSE
+
+/obj/effect/proc_holder/spell/invoked/eyebite
+	name = "Eyebite"
+	overlay_state = "raiseskele"
+	releasedrain = 30
+	chargedrain = 10
+	chargetime = 15
+	range = 15
+	warnie = "sydwarning"
+	movement_interrupt = FALSE
+//	chargedloop = /datum/looping_sound/invokeholy
+	chargedloop = null
+	req_items = list(/obj/item/clothing/suit/roguetown/shirt/robe/necromancer)
+	sound = 'sound/items/beartrap.ogg'
+	associated_skill = /datum/skill/magic/arcane
+	antimagic_allowed = TRUE
+	charge_max = 5 SECONDS
+	miracle = FALSE
+
+/obj/effect/proc_holder/spell/invoked/eyebite/cast(list/targets, mob/living/user)
+	if(isliving(targets[1]))
+		var/mob/living/carbon/target = targets[1]
+		if(target == user)
+			return FALSE
+		target.visible_message("<span class='info'>A loud crunching sound has come from [target]!</span>", "<span class='userdanger'>I feel arcane teeth biting into my eyes!</span>")
+		target.adjustBruteLoss(40)
+		target.blind_eyes(20)
+		target.blur_eyes(90)
 		return TRUE
 	else
 		return FALSE
