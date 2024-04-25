@@ -69,6 +69,7 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/sword
 	backr = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/natural/cloth = 2,)
 	if(is_crossbowman)
 		backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 		beltr = /obj/item/quiver/bolts //replaces sword
@@ -98,7 +99,7 @@
 	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
 	bogger.change_stat("perception", 1)
-	bogger.change_stat("endurance", 1)
+	bogger.change_stat("endurance", 3)
 	bogger.change_stat("speed", 1)
 
 /datum/outfit/job/roguetown/bogguardsman/crossbowman
