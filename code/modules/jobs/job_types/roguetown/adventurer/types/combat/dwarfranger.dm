@@ -6,6 +6,7 @@
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Dwarf","Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dranger
+	maxchosen = 5
 
 /datum/outfit/job/roguetown/adventurer/dranger/pre_equip(mob/living/carbon/human/H)
 	..()
