@@ -79,8 +79,8 @@
 	var/list/subtargets = list()		//these are subtargets that can be attacked with weapons (crits)
 	var/list/grabtargets = list()		//these are subtargets that can be grabbed
 
-	var/rotted = 0
-	var/skeletonized = 0
+	var/rotted = FALSE
+	var/skeletonized = FALSE
 
 	var/fingers = TRUE
 
@@ -311,7 +311,7 @@
 	if(owner && updating_health)
 		owner.updatehealth()
 	consider_processing()
-	update_disabled(TRUE)
+	update_disabled()
 	cremation_progress = min(0, cremation_progress - ((brute_dam + burn_dam)*(100/max_damage)))
 	return update_bodypart_damage_state()
 
@@ -325,29 +325,21 @@
 //Checks disabled status thresholds
 /obj/item/bodypart/proc/update_disabled(heal = FALSE)
 	update_HP()
-	if(heal)
-		if(world.time > (last_disable + 10))
-			set_disabled(is_disabled(TRUE))
-	else if(!disabled)
-		set_disabled(is_disabled())
+	set_disabled(is_disabled())
 
-/obj/item/bodypart/proc/is_disabled(heal = FALSE)
-	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
-		return BODYPART_DISABLED_PARALYSIS
-	if(can_disable() && !HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
-		. = disabled //inertia, to avoid limbs healing 0.1 damage and being re-enabled
-		if((brute_dam >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (brute_dam >= (max_damage * 0.6))))
-			return BODYPART_DISABLED_DAMAGE
-		if(burn_dam >= max_damage)
-			return BODYPART_DISABLED_PARALYSIS
-		if(heal)
-//			if(disabled == BODYPART_DISABLED_DAMAGE && (get_damage(TRUE) <= (max_damage * 0.5)))
-//				return BODYPART_NOT_DISABLED
-			for(var/datum/wound/fracture/F in wounds)
-				return BODYPART_DISABLED_CRIT
-			return BODYPART_NOT_DISABLED
-	else
+/obj/item/bodypart/proc/is_disabled()
+	if(!can_disable() || HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
 		return BODYPART_NOT_DISABLED
+	var/total_dam = brute_dam + burn_dam
+	if((total_dam >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (total_dam >= (max_damage * 0.6))))
+		return BODYPART_DISABLED_DAMAGE
+	//yes this does mean vampires can use rotten limbs
+	if((rotted || skeletonized) && !(owner.mob_biotypes & MOB_UNDEAD))
+		return BODYPART_DISABLED_ROT
+	for(var/datum/wound/ouchie as anything in wounds)
+		if(ouchie.disabling)
+			return BODYPART_DISABLED_CRIT
+	return BODYPART_NOT_DISABLED
 
 /obj/item/bodypart/proc/set_disabled(new_disabled)
 	if(disabled == new_disabled)

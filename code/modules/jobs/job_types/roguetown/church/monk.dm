@@ -50,7 +50,7 @@
 			armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra
 		if("Pestra") //PLEASE add plague doctor gear later, this SUCKS dude
 			head = /obj/item/clothing/head/roguetown/necrahood
-			neck = /obj/item/clothing/neck/roguetown/psicross
+			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 			shoes = /obj/item/clothing/shoes/roguetown/boots
 			pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
 			armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra

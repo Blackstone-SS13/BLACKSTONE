@@ -144,6 +144,10 @@
 	desc = ""
 	icon_state = "necra"
 
+/obj/item/clothing/neck/roguetown/psicross/pestra 
+	name = "amulet of Pestra"
+	desc = ""
+
 /obj/item/clothing/neck/roguetown/psicross/silver
 	name = "silver psycross"
 	icon_state = "psicrossiron"

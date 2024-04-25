@@ -14,6 +14,7 @@ GLOBAL_LIST_INIT(character_flaws, list("Alcoholic"=/datum/charflaw/addiction/alc
 /datum/charflaw
 	var/name
 	var/desc
+	var/ephemeral = FALSE // This flaw is currently disabled and will not process
 
 /datum/charflaw/proc/on_mob_creation(mob/user)
 	return
