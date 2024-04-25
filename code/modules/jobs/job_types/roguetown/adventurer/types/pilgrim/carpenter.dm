@@ -17,29 +17,16 @@
 /datum/outfit/job/roguetown/adventurer/carpenter/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(0,0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(1,2,2,2), TRUE) // They use hammers, sawes and axes all day.
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(0,1,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, pick(2,2,3), TRUE) 
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2,2,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, pick(2,2,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(1,1,2), TRUE) 
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, pick(1,2,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(1,2,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, pick(2,3,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, pick(4,5,5), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/masonry, pick(2,2,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/engineering, pick(2,2,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(2,2,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/labor/butchering, pick(0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/traps, pick(0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/labor/farming, pick(0,0,1), TRUE)
-
-		H.change_stat("strength", pick(0,1,1))
-		H.change_stat("endurance", pick(1,2,2))
-
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, rand(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, rand(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, rand(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/crafting, rand(2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, rand(4,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/masonry, rand(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/engineering, rand(2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 	head = /obj/item/clothing/head/roguetown/hatfur
 	if(prob(50))
 		head = /obj/item/clothing/head/roguetown/hatblu
@@ -52,4 +39,6 @@
 	beltl = /obj/item/rogueweapon/hammer/claw
 	backl = /obj/item/storage/backpack/rogue/backpack
 	backpack_contents = list(/obj/item/flint = 1, /obj/item/rogueweapon/huntingknife = 1)
-		
+	H.change_stat("intelligence", 1)
+	H.change_stat("constitution", 1)
+	H.change_stat("speed", -1)

@@ -11,7 +11,7 @@
 	"Humen"
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
-	tutorial = "Having proven yourself loyal and capable, you are entrusted to defend the Royal Family and their Court, trained regularly in combat and siege warfare you stand a small chance of surviving the King's reign."
+	tutorial = "You've trained enough, either you were born into this position or promoted from a Town Guard; You are loyal to the King, especially that your pockets are lined with money, and you eat, drink and no longer have woes of working another day to feed yourself."
 	display_order = JDO_CASTLEGUARD
 	whitelist_req = TRUE
 
@@ -49,29 +49,23 @@
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/rope/chain = 1)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(2,3,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,3,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, pick(2,3,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(2,3,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, pick(3,4,4,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, pick(2,3,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, pick(2,3,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,4,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, pick(2,2,2,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,1,2), TRUE) 
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, pick(1,1,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(1,1,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(1,1,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, pick(0,0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(1,1,2), TRUE)
-
-		H.change_stat("intelligence", pick(-1,0,0))
-		H.change_stat("perception", pick(1,1,2))
-		H.change_stat("strength", pick(1,2,2,2))
-		H.change_stat("constitution", pick(1,2,2,2))
-		H.change_stat("endurance", pick(1,2,2,2))
-		H.change_stat("speed", pick(1,2,2,2))
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+		H.change_stat("strength", 2)
+		H.change_stat("perception", 2)
+		H.change_stat("endurance", 2)
+		H.change_stat("speed", 2)
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
 		if(!(H.hairstyle in acceptable))
@@ -79,5 +73,3 @@
 			H.update_hair()
 	H.verbs |= /mob/proc/haltyell
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR	, TRAIT_GENERIC)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)

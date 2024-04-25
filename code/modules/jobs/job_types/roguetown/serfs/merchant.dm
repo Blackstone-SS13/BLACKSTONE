@@ -13,7 +13,7 @@
 	"Tiefling",
 	"Aasimar"
 	)
-	tutorial = "A powerful merchant and defacto leader of the local Trade Guild, find yourself doing business in one of the most dangerous cities in the realm. Through the aid of business partners, some more skilled in magic then commerce -- you have built up an establishment that has become the envy of even The King himself."
+	tutorial = "You were born into wealth, learning from before you could talk about the basics of mathematics. Counting coins is a simple pleasure for any person, but you've made it an artform. These people are addicted to your wares and you are the literal beating heart of this economy: Dont let these filthy-covered troglodytes ever forget that."
 
 	display_order = JDO_MERCHANT
 
@@ -25,23 +25,16 @@
 /datum/outfit/job/roguetown/merchant/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(1,2,2,2,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(0,0,1,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, pick(0,0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, pick(0,1,1,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, pick(2,2,3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(3,4,4,5,6), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,1,1,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, pick(2,2,3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/labor/mathematics, pick(3,4,4,5), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, pick(0,1,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, pick(0,1,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(1,1,2), TRUE)
-	
-	//20% chance to be raceswapped to Giza because slop lore
-	if(ishumannorthern(H) && prob(20))
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/labor/mathematics, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
+	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
+	//50% chance to be raceswapped to Giza because slop lore
+	if(ishumannorthern(H) && prob(50))
 		var/list/skin_slop = H.dna.species.get_skin_list()
 		H.skin_tone = skin_slop["Giza"]
 		H.update_body()
@@ -56,12 +49,9 @@
 		armor = /obj/item/clothing/suit/roguetown/shirt/robe/merchant
 		head = /obj/item/clothing/head/roguetown/chaperon
 		id = /obj/item/clothing/ring/gold
-		H.change_stat("intelligence", pick(1,1,2))
-		H.change_stat("perception", pick(0,1,1,2))
-		H.change_stat("strength", pick(-1,0,0,1,1))
-		H.change_stat("constitution", pick(-1,0,0,1,1))
-		H.change_stat("endurance", pick(-1,0,0,1,1))
-		H.change_stat("speed", pick(-1,0,0,1,1))
+		H.change_stat("intelligence", 2)
+		H.change_stat("perception", 1)
+		H.change_stat("strength", -2)
 		if(H.dna?.species)
 			if(H.dna.species.id == "human")
 				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
@@ -76,12 +66,7 @@
 		pants = /obj/item/clothing/under/roguetown/tights/sailor
 		head = /obj/item/clothing/head/roguetown/chaperon
 		id = /obj/item/clothing/ring/gold
-		H.change_stat("intelligence", rand(1,2))
-		H.change_stat("perception", rand(-1,2))
-		H.change_stat("strength", rand(-2,0))
-		H.change_stat("constitution", rand(-1,1))
-		H.change_stat("endurance", rand(-1,1))
-		H.change_stat("speed", rand(-1,1))
+		H.change_stat("intelligence", 2)
+		H.change_stat("perception", 1)
+		H.change_stat("strength", -2)
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
