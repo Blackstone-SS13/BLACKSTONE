@@ -4,7 +4,7 @@
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
 	name = "mace"
-	desc = "Classic blunt weapon with a lot of momentum. Has a decent force to it, and deals a fair amount of damage."
+	desc = "A classic blunt weapon with a lot of momentum. Has a decent force to it, and deals a fair amount of damage."
 	icon_state = "mace"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	item_state = "mace_greyscale"
