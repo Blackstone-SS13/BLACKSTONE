@@ -10,7 +10,7 @@
 	handle_floors(owner.current)
 	handle_walls(owner.current)
 	if(waking_up)
-		handle_dreamer_waking_up(owner.current)
+		handle_waking_up(owner.current)
 
 /datum/antagonist/maniac/proc/handle_visions(mob/living/dreamer)
 	//Jumpscare funny
@@ -171,7 +171,7 @@
 	sleep(disappearsecond)
 	dreamer.client?.images -= shit
 
-/datum/antagonist/dreamer/proc/handle_dreamer_waking_up(mob/living/dreamer)
+/datum/antagonist/maniac/proc/handle_waking_up(mob/living/dreamer)
 	if(!dreamer.client)
 		return
 	//Floors go crazier go stupider
@@ -180,7 +180,7 @@
 			continue
 		INVOKE_ASYNC(src, PROC_REF(handle_waking_up_floor), floor, dreamer)
 
-/datum/antagonist/dreamer/proc/handle_waking_up_floor(turf/open/floor, mob/living/dreamer)
+/datum/antagonist/maniac/proc/handle_waking_up_floor(turf/open/floor, mob/living/dreamer)
 	var/mutable_appearance/fake_floor = image('icons/turf/floors.dmi', floor,  pick("rcircuitanim", "gcircuitanim"), floor.layer + 0.1)
 	dreamer.client.images += fake_floor
 	var/offset = pick(-1, 1)
@@ -190,3 +190,4 @@
 	var/disappearsecond = 3 SECONDS
 	animate(fake_floor, pixel_y = -offset, time = disappearsecond, flags = ANIMATION_RELATIVE)
 	sleep(disappearsecond)
+	dreamer.client?.images -= fake_floor
