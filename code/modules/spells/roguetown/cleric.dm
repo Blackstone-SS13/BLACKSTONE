@@ -62,7 +62,7 @@
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
-	range = 1
+	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	sound = 'sound/magic/heal.ogg'
@@ -106,7 +106,7 @@
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
-	range = 1
+	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 //	chargedloop = /datum/looping_sound/invokeholy
@@ -367,6 +367,7 @@
 			for(var/obj/item/bodypart/rotty in stinky.bodyparts)
 				rotty.rotted = FALSE
 				rotty.skeletonized = FALSE
+				rotty.update_limb()
 				rotty.update_disabled()
 		target.update_body()
 		target.visible_message("<span class='notice'>The rot leaves [target]'s body!</span>", "<span class='green'>I feel the rot leave my body!</span>")
@@ -390,7 +391,7 @@
 	range = 5
 	overlay_state = "consecrateburial"
 	releasedrain = 30
-	charge_max = 300
+	charge_max = 30 SECONDS
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
@@ -420,7 +421,7 @@
 	range = 8
 	overlay_state = "necra"
 	releasedrain = 30
-	charge_max = 300
+	charge_max = 30 SECONDS
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
@@ -472,7 +473,7 @@
 	range = 5
 	overlay_state = "speakwithdead"
 	releasedrain = 30
-	charge_max = 300
+	charge_max = 30 SECONDS
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
@@ -533,7 +534,7 @@
 	range = 5
 	overlay_state = "blesscrop"
 	releasedrain = 30
-	charge_max = 300
+	charge_max = 30 SECONDS
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
@@ -554,7 +555,7 @@
 	range = 5
 	overlay_state = "tamebeast"
 	releasedrain = 30
-	charge_max = 300
+	charge_max = 30 SECONDS
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
@@ -569,22 +570,21 @@
 	for(var/mob/living/simple_animal/hostile/retaliate/B in oview(2))
 		B.aggressive = 0
 
-/obj/effect/proc_holder/spell/targeted/conjurglowshroom
+/obj/effect/proc_holder/spell/targeted/conjure_glowshroom
 	name = "Fungal Illumination"
 	range = 1
 	overlay_state = "blesscrop"
 	releasedrain = 30
-	charge_max = 300
+	charge_max = 30 SECONDS
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/items/dig_shovel.ogg'
 	associated_skill = /datum/skill/magic/holy
 	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
-	invocation = null
 	invocation = "Treefather light the way."
 	invocation_type = "whisper" //can be none, whisper, emote and shout
 
-/obj/effect/proc_holder/spell/targeted/conjurglowshroom/cast(list/targets,mob/user = usr)
+/obj/effect/proc_holder/spell/targeted/conjure_glowshroom/cast(list/targets,mob/user = usr)
 	var/turf/T = user.loc
 	for(var/X in GLOB.cardinals)
 		var/turf/TT = get_step(T, X)

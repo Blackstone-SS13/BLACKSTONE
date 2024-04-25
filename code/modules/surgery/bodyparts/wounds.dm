@@ -51,7 +51,7 @@
 			if(owner == user)
 				used = 0
 		if(prob(used))
-			if(is_disabled() == BODYPART_DISABLED_FALL)
+			if(disabled == BODYPART_DISABLED_FALL)
 				if(brute_dam < max_damage)
 					return
 				var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
@@ -72,6 +72,7 @@
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
 				set_disabled(BODYPART_DISABLED_FALL)
+				addtimer(CALLBACK(src, PROC_REF(update_disabled)), 60 SECONDS)
 		return FALSE
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH)
 		for(var/datum/wound/fracture/W in wounds)
