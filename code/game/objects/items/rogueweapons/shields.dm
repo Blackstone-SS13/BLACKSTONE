@@ -87,7 +87,7 @@
 
 /obj/item/rogueweapon/shield/tower
 	name = "tower shield"
-	desc = "A large rectangular shield, covers significant portion of the wearers body. Has excellent parry ability, but wont protect wearer much more than a regular round shield but sports slightly higher durability."
+	desc = "A large rectangular shield, which covers a significant portion of the wearers body. Has an excellent parrying ability, it won't protect wearer much more than a regular round shield but sports slightly higher durability."
 	icon_state = "shield_tower"
 	force = 15
 	throwforce = 10
