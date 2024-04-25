@@ -180,8 +180,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	do_sound = FALSE
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
-	r_sleeve_status = SLEEVE_NOMOD
-	l_sleeve_status = SLEEVE_NOMOD
 
 /obj/item/clothing/suit/roguetown/shirt/vampire
 	slot_flags = ITEM_SLOT_SHIRT
@@ -190,8 +188,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	body_parts_covered = CHEST|GROIN|LEGS|VITALS
 	icon_state = "vrobe"
 	item_state = "vrobe"
-	r_sleeve_status = SLEEVE_NORMAL
-	l_sleeve_status = SLEEVE_NORMAL
 
 /obj/item/clothing/head/roguetown/vampire
 	name = "crown of darkness"
@@ -209,19 +205,18 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts.dmi'
 	name = "ancient chain shirt"
 	desc = ""
-	body_parts_covered = CHEST|GROIN|VITALS
+	body_parts_covered = CHEST|GROIN|VITALS|ARMS
 	armor_class = 2
 
 /obj/item/clothing/suit/roguetown/armor/plate/vampire
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "ancient ceremonial plate"
 	desc = ""
-	body_parts_covered = CHEST|GROIN|VITALS
+	body_parts_covered = CHEST|GROIN|ARMS|VITALS
 	icon_state = "vplate"
 	item_state = "vplate"
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
-	nodismemsleeves = TRUE
 	max_integrity = 500
 	allowed_sex = list(MALE, FEMALE)
 	do_sound = TRUE
@@ -244,7 +239,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /obj/item/clothing/head/roguetown/helmet/heavy/guard/vampire
 	name = "ancient ceremonial helm"
 	icon_state = "vhelmet"
-	item_state = "helmet"
+	item_state = "vhelmet"
+	max_integrity = 300
 
 /obj/item/clothing/gloves/roguetown/chain/vampire
 	name = "ancient ceremonial gloves"
@@ -632,7 +628,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 					return
 				if(do_after(user, 100))
 					lord.handle_vitae(-1500)
-					var/list/armorpieces = list(/obj/item/clothing/under/roguetown/platelegs/vampire, /obj/item/clothing/suit/roguetown/armor/chainmail/iron/vampire, /obj/item/clothing/suit/roguetown/armor/chainmail/iron/vampire, /obj/item/clothing/shoes/roguetown/boots/armor/vampire, /obj/item/clothing/head/roguetown/helmet/heavy/guard)
+					var/list/armorpieces = list(/obj/item/clothing/under/roguetown/platelegs/vampire, /obj/item/clothing/suit/roguetown/armor/plate/vampire, /obj/item/clothing/gloves/roguetown/chain/vampire, /obj/item/clothing/shoes/roguetown/boots/armor/vampire, /obj/item/clothing/head/roguetown/helmet/heavy/guard/vampire, /obj/item/clothing/neck/roguetown/bervor)
 					for(var/obj/item/A in armorpieces)
 						new A(src.loc)
 				user.playsound_local(get_turf(src), 'sound/misc/vcraft.ogg', 100, FALSE, pressure_affected = FALSE)
@@ -1308,4 +1304,3 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 			to_chat(L, "<font color='purple'>You feel like a curtain is coming over your mind.</font>")
 			sleep(50)
 			L.Sleeping(300)
-
