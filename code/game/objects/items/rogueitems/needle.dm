@@ -84,7 +84,7 @@
 
 	var/moveup = 10
 	for(var/i = 1 to 100)
-		if(do_after(doctor, 20, target = doctor))
+		if(do_after(doctor, 20, target = patient))
 			if(target_wound.progress == 100)
 				target_wound.sewn()
 				doctor.mind.adjust_experience(/datum/skill/misc/medicine, doctor.STAINT * 5)
