@@ -112,7 +112,7 @@
 	climbdiff = 3
 
 /turf/closed/wall/mineral/rogue/wood/window
-	name = "Wooden window"
+	name = "wooden window"
 	desc = "A window with rough hewn wood frame."
 	opacity = FALSE
 	max_integrity = 550
@@ -150,7 +150,7 @@
 	return
 
 /turf/closed/wall/mineral/rogue/wooddark
-	name = "Wooden wall"
+	name = "wooden wall"
 	desc = "Made from durable, somewhat darker wood." // i am not sure if the wood is really dark
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "corner"
