@@ -112,6 +112,13 @@
 	. = ..()
 	icon_state = "roofg"
 
+/turf/open/floor/rogue/rooftop/green/corner1
+	icon_state = "roofgc1-arw"
+
+/turf/open/floor/rogue/rooftop/green/corner1/Initialize()
+	. = ..()
+	icon_state = "roofgc1"
+
 /turf/open/floor/rogue/grass
 	name = "grass"
 	desc = ""
