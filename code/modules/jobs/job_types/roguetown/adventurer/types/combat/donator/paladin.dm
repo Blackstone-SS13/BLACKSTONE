@@ -7,6 +7,7 @@
 	allowed_races = list("Humen",
 	"Tiefling",
 	"Aasimar")
+	maxchosen = 3
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
 	allowed_patrons = list("Astrata", "Dendor", "Necra")
 
