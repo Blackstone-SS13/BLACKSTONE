@@ -108,26 +108,26 @@
 	switch(loadoutm)
 		if(1) 
 			beltr = /obj/item/rogueweapon/sword/iron
-            mask = /obj/item/clothing/mask/rogue/facemask/steel
-            neck = /obj/item/clothing/neck/roguetown/coif
-            head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
+			mask = /obj/item/clothing/mask/rogue/facemask/steel
+			neck = /obj/item/clothing/neck/roguetown/coif
+			head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 		if(2)
 			backr = /obj/item/rogueweapon/halberd
-            neck = /obj/item/clothing/neck/roguetown/bervor
-            head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
+			neck = /obj/item/clothing/neck/roguetown/bervor
+			head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 		if(3)
 			beltr = /obj/item/rogueweapon/flail
-            backr = /obj/item/rogueweapon/shield/wood
+			backr = /obj/item/rogueweapon/shield/wood
 			H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
-        if(4)
-            backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
-            beltl = /obj/item/quiver/bolts
-            mask = /obj/item/clothing/mask/rogue/facemask/steel
-            head = /obj/item/clothing/head/roguetown/roguehood
-            H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-            H.change_stat("perception", 2)
+		if(4)
+			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+			beltl = /obj/item/quiver/bolts
+			mask = /obj/item/clothing/mask/rogue/facemask/steel
+			head = /obj/item/clothing/head/roguetown/roguehood
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
+			H.change_stat("perception", 2)
 	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 1)
