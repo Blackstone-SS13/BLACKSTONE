@@ -369,7 +369,7 @@
 
 /obj/item/rogueweapon/sword/iron
 	name = "sword"
-	desc = "A simple iron sword. Nothing extreme, does the job andd offers decent force."
+	desc = "A simple iron sword. Nothing extreme, does the job, and offers decent force behind its swings."
 	icon_state = "isword"
 	minstr = 6
 	smeltresult = /obj/item/ingot/iron
@@ -378,7 +378,7 @@
 
 /obj/item/rogueweapon/sword/sabre
 	name = "sabre"
-	desc = "A small swift saber with surprising defense capacity."
+	desc = "A small swift saber with surprising defensive capacities."
 	icon_state = "saber"
 	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust)
 	gripped_intents = null
@@ -421,7 +421,7 @@
 /obj/item/rogueweapon/sword/rapier/lord
 	force = 20
 	name = "sword of the Mad Duke"
-	desc = "Passed down through the ages, this decorative sword was recovered from the ashes of blackstone when it was last destroyed... clutched in the bony fingers of the Mad Duke. Very high integrity and formidable force"
+	desc = "Passed down through the ages, this decorative sword was recovered from the ashes of blackstone when it was last destroyed... clutched in the bony fingers of the Mad Duke. An extremely resistant and forceful weapon."
 	icon_state = "lordrap"
 	sellprice = 300
 	max_integrity = 300

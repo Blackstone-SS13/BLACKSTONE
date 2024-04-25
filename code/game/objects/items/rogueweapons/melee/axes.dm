@@ -2,8 +2,8 @@
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
 	force = 12
 	possible_item_intents = list(/datum/intent/axe/chop/stone)
-	name = "Stone axe"
-	desc = "Crude wannabe-axe made out of wood pole and a rock secured with some fibers. It's no glory, but will do the job when cutting trees and trunks. Not a smart choice as a weapon."
+	name = "stone axe"
+	desc = "A crude axe made out of a wooden pole and a rock secured with some fibers. It's not glorious, but will do the job when cutting trees and trunks."
 	icon_state = "stoneaxe"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	item_state = "axe"
