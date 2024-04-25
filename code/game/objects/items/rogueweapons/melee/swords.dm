@@ -400,7 +400,7 @@
 	clickcd = 10
 	damfactor = 0.9
 
-/datum/intent/sword/cut/short
+/datum/intent/sword/thrust/short
 	clickcd = 10
 	damfactor = 1.1
 
