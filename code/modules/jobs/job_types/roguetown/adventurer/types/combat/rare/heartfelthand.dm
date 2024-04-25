@@ -31,7 +31,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
-		H.change_stat("strength", -3)
+		H.change_stat("strength", 1)
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 3)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
