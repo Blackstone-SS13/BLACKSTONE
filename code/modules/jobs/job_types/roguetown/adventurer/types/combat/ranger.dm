@@ -12,6 +12,7 @@
 	 "Tiefling",
 	"Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/ranger
+    maxchosen = 10
 
 /datum/outfit/job/roguetown/adventurer/ranger/pre_equip(mob/living/carbon/human/H)
 	..()
