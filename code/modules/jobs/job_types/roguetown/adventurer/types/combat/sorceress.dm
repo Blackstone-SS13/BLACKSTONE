@@ -12,6 +12,7 @@
 	"Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/sorceress
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
+	maxchosen = 10
 
 /datum/outfit/job/roguetown/adventurer/sorceress/pre_equip(mob/living/carbon/human/H)
 	..()
