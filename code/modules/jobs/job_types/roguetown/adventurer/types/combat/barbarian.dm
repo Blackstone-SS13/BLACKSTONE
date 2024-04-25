@@ -7,6 +7,7 @@
 	allowed_races = list("Humen",
 	"Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
+	maxchosen = 5
 
 
 /datum/outfit/job/roguetown/adventurer/barbarian/pre_equip(mob/living/carbon/human/H)
