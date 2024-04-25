@@ -378,7 +378,7 @@
 
 /obj/item/rogueweapon/sword/sabre
 	name = "sabre"
-	desc = "A small swift saber with surprising defense capacity."
+	desc = "A small swift saber with surprising defensive capacities."
 	icon_state = "saber"
 	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust)
 	gripped_intents = null
