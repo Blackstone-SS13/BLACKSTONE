@@ -79,26 +79,30 @@
 		to_chat(doctor, "<span class='warning'>There aren't any wounds large enough to sew.</span>")
 		return
 	var/datum/wound/target_wound = input(doctor, "Which wound?", "Roguetown", name) as null|anything in sortList(sewable)
-	if(!target_wound || !target_wound.can_sew || !do_after(doctor, 20))
+	if(!target_wound || !target_wound.can_sew)
 		return
 
-	playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
 	var/moveup = 10
-	if(doctor.mind)
-		moveup = (((doctor.mind.get_skill_level(/datum/skill/misc/medicine)) * 5) + moveup)
-	target_wound.progress = min(target_wound.progress + moveup, 100)
-	if(target_wound.progress == 100)
-		target_wound.sewn()
-		doctor.mind.adjust_experience(/datum/skill/misc/medicine, doctor.STAINT * 5)
-		use(1)
+	for(var/i = 1 to 100)
+		if(do_after(doctor, 20, target = doctor))
+			if(target_wound.progress == 100)
+				target_wound.sewn()
+				doctor.mind.adjust_experience(/datum/skill/misc/medicine, doctor.STAINT * 5)
+				use(1)
+				patient.update_damage_overlays()
+				if(patient == doctor)
+					doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [doctor.p_them()]self.</span>", "<span class='notice'>I stitch \a [target_wound.name] on my [affecting].</span>")
+				else
+					doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient]'s [affecting].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient]'s [affecting].</span>")
+					log_combat(doctor, patient, "sew", "needle")
+				return
+			if(doctor.mind)
+				playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
+				moveup = (((doctor.mind.get_skill_level(/datum/skill/misc/medicine)) * 5) + moveup)
+				target_wound.progress = min(target_wound.progress + moveup, 100)
+				continue
+		return
 
-	patient.update_damage_overlays()
-
-	if(patient == doctor)
-		doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [doctor.p_them()]self.</span>", "<span class='notice'>I stitch \a [target_wound.name] on my [affecting].</span>")
-	else
-		doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient]'s [affecting].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient]'s [affecting].</span>")
-	log_combat(doctor, patient, "sew", "needle")
 
 /obj/item/needle/thorn
 	name = "needle"
