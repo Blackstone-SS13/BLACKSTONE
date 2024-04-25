@@ -369,7 +369,7 @@
 
 /obj/item/rogueweapon/sword/iron
 	name = "sword"
-	desc = "A simple iron sword. Nothing extreme, does the job andd offers decent force."
+	desc = "A simple iron sword. Nothing extreme, does the job, and offers decent force behind its swings."
 	icon_state = "isword"
 	minstr = 6
 	smeltresult = /obj/item/ingot/iron
