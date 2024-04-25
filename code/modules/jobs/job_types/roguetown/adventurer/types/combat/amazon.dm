@@ -5,7 +5,7 @@
 	allowed_races = list("Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/amazon
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
-	pickprob = 13
+	pickprob = 18
 	maxchosen = 2
 
 /datum/outfit/job/roguetown/adventurer/amazon/pre_equip(mob/living/carbon/human/H)
@@ -42,7 +42,7 @@
 	else
 		r_hand = /obj/item/rogueweapon/spear
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-	H.change_stat("strength", 2)
+	H.change_stat("strength", 4)
 	H.change_stat("intelligence", -3)
 	H.change_stat("constitution", 2)
 	H.change_stat("perception", 2)
