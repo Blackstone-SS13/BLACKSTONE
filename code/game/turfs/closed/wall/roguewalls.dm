@@ -185,7 +185,6 @@
 	name = "Wooden window"
 	icon_state = "subwindow"
 	opacity = FALSE
-    max_integrity = 550
 /turf/closed/wall/mineral/rogue/wooddark/window/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover) && ((mover.pass_flags & PASSTABLE) || (mover.pass_flags & PASSGRILLE)) )
 		return 1
