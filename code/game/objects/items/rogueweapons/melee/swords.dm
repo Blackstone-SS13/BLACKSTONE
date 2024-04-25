@@ -386,7 +386,7 @@
 	desc = "An archaic iron sword."
 	icon_state = "iswordshort"
 	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
-	gripped_intents = NULL
+	gripped_intents = null
 	minstr = 5
 	wdefense = 3
 
