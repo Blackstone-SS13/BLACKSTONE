@@ -6,6 +6,7 @@
 	allowed_races = list("Tiefling")
 	outfit = /datum/outfit/job/roguetown/adventurer/vaquero
 	horse = /mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame/saddled
+	maxchosen = 2
 
 /datum/advclass/vaquero/equipme(mob/living/carbon/human/H)
 	if(H.gender == FEMALE)
