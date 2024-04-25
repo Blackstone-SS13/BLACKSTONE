@@ -14,6 +14,7 @@
 	isvillager = FALSE
 	ispilgrim = FALSE
 	vampcompat = FALSE
+	maxchosen = 5
 
 
 /datum/outfit/job/roguetown/adventurer/monk/pre_equip(mob/living/carbon/human/H)
