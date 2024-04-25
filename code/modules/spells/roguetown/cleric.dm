@@ -367,6 +367,7 @@
 			for(var/obj/item/bodypart/rotty in stinky.bodyparts)
 				rotty.rotted = FALSE
 				rotty.skeletonized = FALSE
+				rotty.update_limb()
 				rotty.update_disabled()
 		target.update_body()
 		target.visible_message("<span class='notice'>The rot leaves [target]'s body!</span>", "<span class='green'>I feel the rot leave my body!</span>")
