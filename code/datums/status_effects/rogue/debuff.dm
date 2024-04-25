@@ -11,7 +11,7 @@
 
 /obj/screen/alert/status_effect/debuff/hungryt1
 	name = "Hungry"
-	desc = "Hunger weaks this living body."
+	desc = "Hunger weakens this living body."
 	icon_state = "hunger1"
 
 /datum/status_effect/debuff/hungryt2

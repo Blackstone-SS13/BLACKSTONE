@@ -112,7 +112,7 @@
 	climbdiff = 3
 
 /turf/closed/wall/mineral/rogue/wood/window
-	name = "Wooden window"
+	name = "wooden window"
 	desc = "A window with rough hewn wood frame."
 	opacity = FALSE
 	max_integrity = 550
@@ -150,7 +150,7 @@
 	return
 
 /turf/closed/wall/mineral/rogue/wooddark
-	name = "Wooden wall"
+	name = "wooden wall"
 	desc = "Made from durable, somewhat darker wood." // i am not sure if the wood is really dark
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "corner"
@@ -166,23 +166,23 @@
 	climbdiff = 3
 
 /turf/closed/wall/mineral/rogue/wooddark/horizontal
-	name = "Wooden wall"
+	name = "wooden wall"
 	icon_state = "horizwooddark"
 
 /turf/closed/wall/mineral/rogue/wooddark/vertical
-	name = "Wooden wall"
+	name = "wooden wall"
 	icon_state = "vertwooddark"
 
 /turf/closed/wall/mineral/rogue/wooddark/end
-	name = "Wooden wall"
+	name = "wooden wall"
 	icon_state = "endwooddark"
 
 /turf/closed/wall/mineral/rogue/wooddark/slitted
-	name = "Wooden wall"
+	name = "wooden wall"
 	icon_state = "slittedwooddark"
 
 /turf/closed/wall/mineral/rogue/wooddark/window
-	name = "Wooden window"
+	name = "wooden window"
 	icon_state = "subwindow"
 	opacity = FALSE
 	max_integrity = 550
@@ -219,7 +219,7 @@
 	icon_state = "roofTurf_IC"
 
 /turf/closed/wall/mineral/rogue/decowood
-	name = "Decorated Wooden Wall"
+	name = "decorated wooden wall"
 	desc = "This one is fancy."
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "decowood"
@@ -239,11 +239,11 @@
 	dir = pick(GLOB.cardinals)
 
 /turf/closed/wall/mineral/rogue/decowood/vert
-	name = "Decorated wooden wall"
+	name = "decorated wooden wall"
 	icon_state = "decowood-vert"
 
 /turf/closed/wall/mineral/rogue/decostone
-	name = "Decorated stone wall"
+	name = "decorated stone wall"
 	desc = "The mason did some good work here."
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "decostone-b"
@@ -260,11 +260,11 @@
 	climbdiff = 1
 
 /turf/closed/wall/mineral/rogue/decostone/long
-	name = "Decorated stone wall"
+	name = "decorated stone wall"
 	icon_state = "decostone-l"
 
 /obj/structure/thronething
-	name = "Decorated Stone Wall" // what is thronething??
+	name = "decorated Stone Wall" // what is thronething??
 	icon = 'icons/turf/roguewall.dmi'
 	max_integrity = 0
 	opacity = 0
