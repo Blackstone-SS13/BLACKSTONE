@@ -9,6 +9,7 @@
 	ispilgrim = FALSE
 	vampcompat = FALSE
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
+    maxchosen = 3
 
 /datum/outfit/job/roguetown/adventurer/cleric/pre_equip(mob/living/carbon/human/H)
 	..()
