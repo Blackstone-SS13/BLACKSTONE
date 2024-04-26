@@ -109,9 +109,12 @@
 		deity = " to [human_user.PATRON.name]"
 
 	var/datum/antagonist/maniac/maniac = mind?.has_antag_datum(/datum/antagonist/maniac)
-	if(maniac && (text2num(msg) == maniac.sum_keys))
-		deity = " to THE GODHEAD"
-		INVOKE_ASYNC(maniac, TYPE_PROC_REF(/datum/antagonist/maniac, wakeup))
+	if(maniac)
+		if(text2num(msg) == maniac.sum_keys)
+			deity = " to THE GODHEAD"
+			INVOKE_ASYNC(maniac, TYPE_PROC_REF(/datum/antagonist/maniac, wakeup))
+		else
+			deity = " to Zizo"
 
 	msg = "<span class='info'>[real_name] prays[deity]: [msg]</span>"
 	

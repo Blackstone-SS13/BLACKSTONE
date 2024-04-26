@@ -37,7 +37,7 @@
 /datum/antagonist/maniac/proc/handle_object_hallucination(mob/living/dreamer)
 	var/list/objects = list()
 	for(var/obj/object in view(dreamer))
-		if((object.invisibility > dreamer.see_invisible) || !object.loc)
+		if((object.invisibility > dreamer.see_invisible) || !object.loc || !object.name)
 			continue
 		var/weight = 1
 		if(isitem(object))
