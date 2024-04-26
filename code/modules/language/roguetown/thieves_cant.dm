@@ -28,5 +28,5 @@ LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD
 		var/lowered_word = lowertext(word)
 		var/translated_word = translate_word(lowered_word)
 		translated_words += translated_word
-	speech_args[SPEECH_MESSAGE] = jointext)translated_words, "")
+	speech_args[SPEECH_MESSAGE] = jointext(translated_words, "")
 	return ..()
