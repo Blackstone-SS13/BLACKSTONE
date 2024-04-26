@@ -388,7 +388,7 @@
 /obj/item/rogueweapon/sword/iron/short/chipped
 	force = 17
 	desc = "An ancient-looking iron sword."
-	icon_state = "iswordshort_chipped"
+	icon_state = "iswordshort_d"
 	max_integrity = 75
 
 /datum/intent/sword/cut/short
