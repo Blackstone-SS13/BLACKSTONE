@@ -4,7 +4,7 @@
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 2
-	range = 7
+	range = 15
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 //	chargedloop = /datum/looping_sound/invokeholy
@@ -13,12 +13,16 @@
 	sound = 'sound/magic/whiteflame.ogg'
 	associated_skill = /datum/skill/magic/arcane
 	antimagic_allowed = TRUE
-	charge_max = 15 SECONDS
+	charge_max = 5 SECONDS
 	miracle = FALSE
 
 /obj/effect/proc_holder/spell/invoked/bonechill/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
+		if(target == user)
+			return FALSE
+		if(get_dist(user, target) > 7)
+			return FALSE
 		if(target.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
 			target.visible_message("<span class='danger'>[target] reforms under the vile energy!</span>", "<span class='notice'>I'm remade by dark magic!</span>")
 			target.adjustFireLoss(-50)
@@ -48,12 +52,14 @@
 	sound = 'sound/items/beartrap.ogg'
 	associated_skill = /datum/skill/magic/arcane
 	antimagic_allowed = TRUE
-	charge_max = 15 SECONDS
+	charge_max = 5 SECONDS
 	miracle = FALSE
 
 /obj/effect/proc_holder/spell/invoked/eyebite/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/carbon/target = targets[1]
+		if(target == user)
+			return FALSE
 		target.visible_message("<span class='info'>A loud crunching sound has come from [target]!</span>", "<span class='userdanger'>I feel arcane teeth biting into my eyes!</span>")
 		target.adjustBruteLoss(40)
 		target.blind_eyes(20)
@@ -66,10 +72,11 @@
 	name = "Raise Undead"
 	desc = ""
 	clothes_req = FALSE
-	range = 7
+	range = 15
 	projectile_type = /obj/projectile/magic/skeleton
 	overlay_state = "raiseskele"
 	sound = list('sound/magic/magnet.ogg')
+	active = FALSE
 	releasedrain = 40
 	chargedrain = 10
 	chargetime = 60
@@ -78,14 +85,13 @@
 	charging_slowdown = 1
 	chargedloop = /datum/looping_sound/invokegen
 	associated_skill = /datum/skill/magic/arcane
-	charge_max = 60 SECONDS
 
 /obj/effect/proc_holder/spell/invoked/projectile/plague
 	name = "Ray of Sickness"
 	desc = ""
 	clothes_req = FALSE
 	range = 15
-	projectile_type = /obj/projectile/magic/plague
+	projectile_type = /obj/projectile/magic/plauge
 	overlay_state = "raiseskele"
 	sound = list('sound/misc/portal_enter.ogg')
 	active = FALSE
@@ -97,4 +103,3 @@
 	charging_slowdown = 1
 	chargedloop = /datum/looping_sound/invokegen
 	associated_skill = /datum/skill/magic/arcane
-	charge_max = 15 SECONDS
