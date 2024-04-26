@@ -24,6 +24,7 @@
 		TRAIT_STABLELIVER,
 		TRAIT_ANTIMAGIC,
 		TRAIT_SCHIZO_AMBIENCE,
+		TRAIT_BLOODLOSS_IMMUNE,
 	)
 	/// Traits that only get applied in the final sequence
 	var/static/list/final_traits = list(
