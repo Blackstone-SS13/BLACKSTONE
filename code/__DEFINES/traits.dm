@@ -13,10 +13,10 @@
 #define RTRAIT_HEAVYARMOR				"Plate Training"
 #define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
 #define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
-#define RTRAIT_MANIAC_AWOKEN					"Awoken"
+#define RTRAIT_MANIAC_AWOKEN			"Awoken"
+#define RTRAIT_NOFATSTAM					"Indefatigable" //for ai
 
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
-#define TRAIT_NOFATSTAM				"nofatstam" //for ai
 #define TRAIT_NOSLEEP				"Fatal Insomnia"
 #define TRAIT_BASHDOORS				"bashdoors"
 #define TRAIT_NOMOOD 			"no_mood"
@@ -46,6 +46,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
 	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
 	RTRAIT_MANIAC_AWOKEN = "I am <b>WAKING UP</b> and the sheeple know this. They will resist.",
+	RTRAIT_NOFATSTAM = "I have boundless energy, I will never tire."
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "I can't sleep.",
