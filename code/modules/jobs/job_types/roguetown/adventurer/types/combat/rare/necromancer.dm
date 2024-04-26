@@ -7,6 +7,7 @@
 	 "Tiefling",
 	 "Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/necromancer
+	pickprob = 30
 
 /datum/outfit/job/roguetown/adventurer/necromancer/pre_equip(mob/living/carbon/human/H)
 	..()
