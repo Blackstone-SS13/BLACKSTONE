@@ -112,7 +112,7 @@
 	if(maniac)
 		if(text2num(msg) == maniac.sum_keys)
 			deity = " to THE GODHEAD"
-			INVOKE_ASYNC(maniac, TYPE_PROC_REF(/datum/antagonist/maniac, wakeup))
+			INVOKE_ASYNC(maniac, TYPE_PROC_REF(/datum/antagonist/maniac, wake_up))
 		else
 			deity = " to Zizo"
 
