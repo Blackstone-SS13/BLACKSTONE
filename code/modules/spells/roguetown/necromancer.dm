@@ -7,7 +7,6 @@
 	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
-//	chargedloop = /datum/looping_sound/invokeholy
 	chargedloop = null
 	req_items = list(/obj/item/clothing/suit/roguetown/shirt/robe/necromancer)
 	sound = 'sound/magic/whiteflame.ogg'
@@ -42,7 +41,6 @@
 	range = 15
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
-//	chargedloop = /datum/looping_sound/invokeholy
 	chargedloop = null
 	req_items = list(/obj/item/clothing/suit/roguetown/shirt/robe/necromancer)
 	sound = 'sound/items/beartrap.ogg'
@@ -55,19 +53,18 @@
 	if(isliving(targets[1]))
 		var/mob/living/carbon/target = targets[1]
 		target.visible_message("<span class='info'>A loud crunching sound has come from [target]!</span>", "<span class='userdanger'>I feel arcane teeth biting into my eyes!</span>")
-		target.adjustBruteLoss(40)
+		target.adjustBruteLoss(30)
 		target.blind_eyes(20)
 		target.blur_eyes(90)
 		return TRUE
 	else
 		return FALSE
 
-/obj/effect/proc_holder/spell/invoked/projectile/skeleton
+/obj/effect/proc_holder/spell/invoked/raise_undead
 	name = "Raise Undead"
 	desc = ""
 	clothes_req = FALSE
 	range = 7
-	projectile_type = /obj/projectile/magic/skeleton
 	overlay_state = "raiseskele"
 	sound = list('sound/magic/magnet.ogg')
 	releasedrain = 40
@@ -80,12 +77,21 @@
 	associated_skill = /datum/skill/magic/arcane
 	charge_max = 60 SECONDS
 
-/obj/effect/proc_holder/spell/invoked/projectile/plague
+/obj/effect/proc_holder/spell/invoked/raise_undead/cast(list/targets, mob/living/user)
+	var/turf/T = get_turf(targets[1])
+	if(!isclosedturf(T))
+		new /mob/living/carbon/human/species/skeleton/npc/no_equipment(T)
+		return TRUE
+	else
+		to_chat(user, "<span class='warning'>The targeted location is blocked. My summon fails to come forth.</span>")
+		return FALSE
+
+/obj/effect/proc_holder/spell/invoked/projectile/sickness
 	name = "Ray of Sickness"
 	desc = ""
 	clothes_req = FALSE
 	range = 15
-	projectile_type = /obj/projectile/magic/plague
+	projectile_type = /obj/projectile/magic/sickness
 	overlay_state = "raiseskele"
 	sound = list('sound/misc/portal_enter.ogg')
 	active = FALSE
