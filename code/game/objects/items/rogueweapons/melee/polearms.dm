@@ -34,7 +34,7 @@
 	possible_item_intents = list(SPEAR_BASH)
 	gripped_intents = list(SPEAR_BASH,/datum/intent/mace/smash/wood)
 	name = "wooden staff"
-	desc = ""
+	desc = "Not so heavy, perfect for beggars, pilgrims and mages."
 	icon_state = "woodstaff"
 	icon = 'icons/roguetown/weapons/64.dmi'
 	wlength = WLENGTH_LONG
@@ -68,7 +68,7 @@
 
 /obj/item/rogueweapon/woodstaff/aries
 	name = "staff of the shepherd"
-	desc = ""
+	desc = "This staff makes you look important to any peasante."
 	force = 25
 	force_wielded = 28
 	icon_state = "aries"
@@ -97,7 +97,7 @@
 	possible_item_intents = list(SPEAR_THRUST, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, SPEAR_BASH)
 	name = "spear"
-	desc = ""
+	desc = "This iron spear is great to impale goblins."
 	icon_state = "spear"
 	icon = 'icons/roguetown/weapons/64.dmi'
 	pixel_y = -16
@@ -132,7 +132,7 @@
 
 /obj/item/rogueweapon/spear/billhook
 	name = "billhook"
-	desc = ""
+	desc = "A neat hook."
 	icon_state = "billhook"
 	smeltresult = /obj/item/ingot/steel
 	max_blade_int = 200
@@ -152,7 +152,8 @@
 /obj/item/rogueweapon/spear/stone
 	force = 15
 	force_wielded = 18
-	name = "simple spear"
+	name = "stone spear"
+	desc = "This handmade spear is simple, but does the job."
 	icon_state = "stonespear"
 	pixel_y = -16
 	pixel_x = -16
@@ -176,8 +177,8 @@
 	force_wielded = 30
 	possible_item_intents = list(SPEAR_THRUST, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, /datum/intent/axe/chop, SPEAR_BASH)
-	name = "halbert"
-	desc = ""
+	name = "halberd"
+	desc = "An iron halberd, mostly used by town guards."
 	icon_state = "halberd"
 	icon = 'icons/roguetown/weapons/64.dmi'
 	pixel_y = -16
@@ -213,7 +214,7 @@
 
 /obj/item/rogueweapon/halberd/bardiche
 	name = "bardiche"
-	desc = ""
+	desc = "A beautiful variant of the halberd."
 	icon_state = "bardiche"
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/iron
@@ -259,7 +260,7 @@
 
 /obj/item/rogueweapon/eaglebeak/lucerne
 	name = "lucerne"
-	desc = ""
+	desc = "A polehammer with a sharp pointy end."
 	icon_state = "polehammer"
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 200
@@ -270,7 +271,7 @@
 	possible_item_intents = list(/datum/intent/sword/chop,/datum/intent/sword/strike) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(/datum/intent/sword/cut/zwei, /datum/intent/sword/chop, /datum/intent/sword/thrust/zwei, /datum/intent/sword/strike)
 	name = "greatsword"
-	desc = ""
+	desc = "Might be able to chop anything in half!"
 	icon_state = "gsw"
 	icon = 'icons/roguetown/weapons/64.dmi'
 	pixel_y = -16
@@ -303,7 +304,7 @@
 
 /obj/item/rogueweapon/greatsword/zwei
 	name = "zweihander"
-	desc = ""
+	desc = "This is much longer than a common greatsword, and well balanced too!"
 	icon_state = "zwei"
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 200
