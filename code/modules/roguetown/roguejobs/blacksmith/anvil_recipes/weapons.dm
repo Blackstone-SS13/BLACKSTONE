@@ -18,12 +18,6 @@
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/rogueweapon/huntingknife/idagger
 
-/datum/anvil_recipe/weapons/isword
-	name = "iron short sword"
-	appro_skill = /datum/skill/craft/weaponsmithing
-	req_bar = /obj/item/ingot/iron
-	created_item = /obj/item/rogueweapon/sword/iron/short
-
 /datum/anvil_recipe/weapons/sdagger
 	name = "steel dagger"
 	req_bar = /obj/item/ingot/steel
