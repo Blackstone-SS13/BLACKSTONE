@@ -124,7 +124,7 @@
 	name = "surgical saw"
 	desc = ""
 	icon = 'icons/roguetown/items/surgery.dmi'
-	icon_state = "bonesaw"
+	icon_state = "saw"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	hitsound = 'sound/blank.ogg'
@@ -146,6 +146,9 @@
 	. = ..()
 	AddComponent(/datum/component/butchering, 40 * toolspeed, 100, 5, 'sound/blank.ogg') //saws are very accurate and fast at butchering
 
+/obj/item/circular_saw/bonesaw
+	icon_state = "bonesaw"
+
 /obj/item/circular_saw/augment
 	desc = ""
 	w_class = WEIGHT_CLASS_SMALL
@@ -157,7 +160,7 @@
 	name = "surgical drapes"
 	desc = ""
 	icon = 'icons/roguetown/items/surgery.dmi'
-	icon_state = "surgical_drapes"
+	icon_state = "drapes"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	item_state = "drapes"

@@ -1,5 +1,5 @@
 // This mode will become the main basis for the typical roguetown round. Based off of chaos mode.
-var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "Aspirants", "Bandits", "CANCEL") // This is mainly used for forcemgamemodes
+var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "Aspirants", "Bandits", "Maniac", "CANCEL") // This is mainly used for forcemgamemodes
 
 /datum/game_mode/chaosmode
 	name = "roguemode"
@@ -142,7 +142,9 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	if(SSticker.manualmodes)
 		forcedmodes |= SSticker.manualmodes
 	var/list/major_modes = list(1, 2, 3)
-	var/list/minor_modes = list(1,2,3,4)
+	var/list/minor_modes = list(1,2,3)
+	if(prob(25))
+		minor_modes += 4 //maniac
 	var/majorpicked = pick(major_modes)
 	if(forcedmodes.len)
 		message_admins("Manual gamemodes selected.")
@@ -191,8 +193,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 				log_game("Minor Antagonist: Maniac")
 		if(prob(30))
 			continue
-		else
-			return TRUE
+		return TRUE
+
 /datum/game_mode/chaosmode/proc/pick_bandits()
 	//BANDITS
 	banditgoal = rand(200,400)

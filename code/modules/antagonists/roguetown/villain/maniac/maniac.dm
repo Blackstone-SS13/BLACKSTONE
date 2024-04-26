@@ -28,6 +28,7 @@
 	/// Traits that only get applied in the final sequence
 	var/static/list/final_traits = list(
 		RTRAIT_MANIAC_AWOKEN,
+		TRAIT_SCREENSHAKE,
 	)
 	/// Cached old stats in case we get removed
 	var/STASTR

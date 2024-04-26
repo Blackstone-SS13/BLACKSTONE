@@ -37,12 +37,14 @@
 /datum/antagonist/maniac/proc/handle_object_hallucination(mob/living/dreamer)
 	var/list/objects = list()
 	for(var/obj/object in view(dreamer))
-		if(object.invisibility > dreamer.see_invisible)
+		if((object.invisibility > dreamer.see_invisible) || !object.loc)
 			continue
 		var/weight = 1
 		if(isitem(object))
 			weight = 3
 		else if(isstructure(object))
+			weight = 2
+		else if(ismachinery(object))
 			weight = 2
 		objects[object] = weight
 	objects -= dreamer.contents
@@ -72,7 +74,7 @@
 	var/message = dreamer.compose_message(speaker, language, speech)
 	dreamer.playsound_local(dreamer, pick(speech_sounds), vol = 60, vary = FALSE)
 	if(dreamer.client.prefs?.chat_on_map)
-		dreamer.create_chat_message(speaker, language, speech)
+		dreamer.create_chat_message(speaker, language, speech, spans = list(dreamer.speech_span))
 	to_chat(dreamer, message)
 
 /datum/antagonist/maniac/proc/handle_mob_hallucination(mob/living/dreamer)
@@ -182,7 +184,7 @@
 		dreamer.emote("laugh")
 	//Floors go crazier go stupider
 	for(var/turf/open/floor in view(dreamer))
-		if(!prob(15))
+		if(!prob(20))
 			continue
 		INVOKE_ASYNC(src, PROC_REF(handle_waking_up_floor), floor, dreamer)
 

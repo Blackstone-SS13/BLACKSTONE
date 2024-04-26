@@ -222,7 +222,6 @@
 	new /obj/item/scalpel(src)
 	new /obj/item/hemostat(src)
 	new /obj/item/retractor(src)
-	new /obj/item/circular_saw(src)
-	new /obj/item/surgicaldrill(src)
+	new /obj/item/circular_saw/bonesaw(src)
 	new /obj/item/cautery(src)
 	new /obj/item/surgical_drapes(src)
