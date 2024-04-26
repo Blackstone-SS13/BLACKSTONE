@@ -21,12 +21,12 @@ LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD
 
 /datum/language/thieves_cant/handle_speech(datum/source, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]
-	var/list/words = splittext(message, "")
+	var/list/words = splittext(message, " ")
 	var/list/translated_words = list()
 	
 	for (var/word in words)
 		var/lowered_word = lowertext(word)
 		var/translated_word = translate_word(lowered_word)
 		translated_words += translated_word
-	speech_args[SPEECH_MESSAGE] = jointext(translated_words, " ")
+	speech_args[SPEECH_MESSAGE] = jointext(translated_words, "")
 	return ..()
