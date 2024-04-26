@@ -599,7 +599,7 @@ obj/effect/temp_visual/fireball
 	name = "space dragon"
 	maxHealth = 250
 	health = 250
-	faction = list("neutral")
+	faction = list("dragon")
 	desc = ""
 	icon = 'icons/mob/spacedragon.dmi'
 	icon_state = "spacedragon"
