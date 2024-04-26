@@ -166,7 +166,7 @@
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30
 		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
-			if (prob(round(max(dam / 4, 1), 1)))
+			if (prob(round(max(dam / 3, 1), 1)))
 				if(!can_bloody_wound())
 					return FALSE
 				var/organ_spilled = FALSE
@@ -205,7 +205,7 @@
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					return TRUE
 				return FALSE
-		if(prob(round(max(dam / 3, 1), 1)))
+		if(prob(round(max(dam / 4, 1), 1)))
 			var/foundy
 			for(var/datum/wound/artery/A in wounds)
 				foundy= TRUE
@@ -390,27 +390,27 @@
 	switch(bclass) //do stuff but only when we are a blade that adds wounds
 		if(BCLASS_SMASH || BCLASS_BLUNT)
 			switch(dam)
-				if(1 to 5)
+				if(1 to 10)
 					add_wound(/datum/wound/bruise/small, skipcheck = FALSE)
-				if(6 to 15)
+				if(11 to 20)
 					add_wound(/datum/wound/bruise, skipcheck = FALSE)
-				if(16 to INFINITY)
+				if(21 to INFINITY)
 					add_wound(/datum/wound/bruise/large, skipcheck = FALSE)
 		if(BCLASS_CUT || BCLASS_CHOP)
 			switch(dam)
-				if(1 to 5)
+				if(1 to 10)
 					add_wound(/datum/wound/cut/small, skipcheck = FALSE)
-				if(6 to 15)
+				if(11 to 20)
 					add_wound(/datum/wound/cut, skipcheck = FALSE)
-				if(16 to INFINITY)
+				if(21 to INFINITY)
 					add_wound(/datum/wound/cut/large, skipcheck = FALSE)
 		if(BCLASS_STAB || BCLASS_PICK)
 			switch(dam)
-				if(1 to 5)
+				if(1 to 10)
 					add_wound(/datum/wound/stab/small, skipcheck = FALSE)
-				if(6 to 15)
+				if(11 to 20)
 					add_wound(/datum/wound/stab, skipcheck = FALSE)
-				if(16 to INFINITY)
+				if(21 to INFINITY)
 					add_wound(/datum/wound/stab/large, skipcheck = FALSE)
 		if(BCLASS_BITE)
 			if(dam > 8)
