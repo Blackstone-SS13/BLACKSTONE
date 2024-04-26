@@ -7,7 +7,8 @@
 	key = "t"
 	flags = LANGUAGE_HIDE_ICON_IF_UNDERSTOOD | 
 LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD
-	default_priority = 
+	default_priority = 100
+	icon_state = "galcom"
 	spans = list(SPAN_THIEF)
 	syllables = list()
 
