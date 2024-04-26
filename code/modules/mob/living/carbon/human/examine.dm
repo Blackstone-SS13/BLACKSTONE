@@ -18,7 +18,7 @@
 	var/obscure_name
 	var/race_name = dna.species.name
 	var/datum/antagonist/maniac/maniac = user.mind?.has_antag_datum(/datum/antagonist/maniac)
-	if(maniac)
+	if(maniac && (user != src))
 		race_name = "disgusting pig"
 
 	var/m1 = "[t_He] [t_is]"
@@ -105,7 +105,7 @@
 		if(HAS_TRAIT(src, RTRAIT_MANIAC_AWOKEN))
 			. += "<span class='userdanger'>MANIAC!</span>"
 
-	if(leprosy)
+	if(leprosy == 1)
 		. += "<span class='deadsay'>A LEPER...</span>"
 
 	if(user != src)

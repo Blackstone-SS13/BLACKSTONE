@@ -1,4 +1,4 @@
-"a" = (/obj/structure/table/reinforced,/obj/item/t_scanner,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
+"a" = (/obj/structure/table/reinforced,/obj/item/t_scanner,/obj/item/gun/ballistic/revolver/last_resort,/turf/open/floor/plasteel/maniac/damaged,/area/rogue/underworld)
 "b" = (/turf/open/floor/plating/dirt/dark,/area/rogue/underworld)
 "c" = (/obj/effect/landmark/underworldsafe,/turf/open/floor/plating/dirt/dark,/area/rogue/underworld)
 "d" = (/obj/structure/underworld/barrier,/turf/open/floor/plating/dirt/dark,/area/rogue/underworld)

@@ -179,7 +179,7 @@
 		trey_liam.equipOutfit(/datum/outfit/treyliam)
 		trey_liam.regenerate_icons()
 		for(var/obj/structure/chair/chair in spawnturf)
-			chair.buckle_mob(trey_liam, force = TRUE)
+			chair.buckle_mob(trey_liam)
 			break
 		return trey_liam
 	return

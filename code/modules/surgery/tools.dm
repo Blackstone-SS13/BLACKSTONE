@@ -1,7 +1,7 @@
 /obj/item/retractor
 	name = "retractor"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "retractor"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
@@ -21,7 +21,7 @@
 /obj/item/hemostat
 	name = "hemostat"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "hemostat"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
@@ -42,7 +42,7 @@
 /obj/item/cautery
 	name = "cautery"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "cautery"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
@@ -63,7 +63,7 @@
 /obj/item/surgicaldrill
 	name = "surgical drill"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "drill"
 	lefthand_file = 'icons/mob/inhands/equipment/tools_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/tools_righthand.dmi'
@@ -88,7 +88,7 @@
 /obj/item/scalpel
 	name = "scalpel"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "scalpel"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
@@ -121,10 +121,10 @@
 
 
 /obj/item/circular_saw
-	name = "circular saw"
+	name = "surgical saw"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
-	icon_state = "saw"
+	icon = 'icons/roguetown/items/surgery.dmi'
+	icon_state = "bonesaw"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
 	hitsound = 'sound/blank.ogg'
@@ -156,7 +156,7 @@
 /obj/item/surgical_drapes
 	name = "surgical drapes"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "surgical_drapes"
 	lefthand_file = 'icons/mob/inhands/equipment/medical_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/equipment/medical_righthand.dmi'
@@ -243,7 +243,7 @@
 /obj/item/scalpel/advanced
 	name = "laser scalpel"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "scalpel_a"
 	hitsound = 'sound/blank.ogg'
 	force = 16
@@ -277,7 +277,7 @@
 /obj/item/retractor/advanced
 	name = "mechanical pinches"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "retractor_a"
 	toolspeed = 0.7
 
@@ -299,7 +299,7 @@
 /obj/item/surgicaldrill/advanced
 	name = "searing tool"
 	desc = ""
-	icon = 'icons/obj/surgery.dmi'
+	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "surgicaldrill_a"
 	hitsound = 'sound/blank.ogg'
 	toolspeed = 0.7

@@ -32,44 +32,48 @@
 		INVOKE_ASYNC(src, PROC_REF(handle_mob_hallucination), dreamer)
 	//Talking objects
 	else if(prob(4))
-		var/list/objects = list()
-		for(var/obj/object in view(dreamer))
-			if(object.invisibility > dreamer.see_invisible)
-				continue
-			var/weight = 1
-			if(isitem(object))
-				weight = 3
-			else if(isstructure(object))
-				weight = 2
-			objects[object] = weight
-		objects -= dreamer.contents
-		if(!length(objects))
-			var/static/list/speech_sounds = list(
-				'sound/villain/female_talk1.ogg',
-				'sound/villain/female_talk2.ogg',
-				'sound/villain/female_talk3.ogg',
-				'sound/villain/female_talk4.ogg',
-				'sound/villain/female_talk5.ogg',
-				'sound/villain/male_talk1.ogg',
-				'sound/villain/male_talk2.ogg',
-				'sound/villain/male_talk3.ogg',
-				'sound/villain/male_talk4.ogg',
-				'sound/villain/male_talk5.ogg',
-				'sound/villain/male_talk6.ogg',
-			)
-			var/obj/speaker = pickweight(objects)
-			var/speech
-			if(prob(1))
-				speech = "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
-			else
-				speech = pick_list_replacements("maniac.json", "dreamer_object")
-				speech = replacetext(speech, "%OWNER", "[dreamer.real_name]")
-			var/language = dreamer.get_random_understood_language()
-			var/message = dreamer.compose_message(speaker, language, speech)
-			dreamer.playsound_local(dreamer, pick(speech_sounds), vol = 60, vary = FALSE)
-			if(dreamer.client.prefs?.chat_on_map)
-				dreamer.create_chat_message(speaker, language, speech)
-			to_chat(dreamer, message)
+		INVOKE_ASYNC(src, PROC_REF(handle_object_hallucination), dreamer)
+
+/datum/antagonist/maniac/proc/handle_object_hallucination(mob/living/dreamer)
+	var/list/objects = list()
+	for(var/obj/object in view(dreamer))
+		if(object.invisibility > dreamer.see_invisible)
+			continue
+		var/weight = 1
+		if(isitem(object))
+			weight = 3
+		else if(isstructure(object))
+			weight = 2
+		objects[object] = weight
+	objects -= dreamer.contents
+	if(!length(objects))
+		return
+	var/static/list/speech_sounds = list(
+		'sound/villain/female_talk1.ogg',
+		'sound/villain/female_talk2.ogg',
+		'sound/villain/female_talk3.ogg',
+		'sound/villain/female_talk4.ogg',
+		'sound/villain/female_talk5.ogg',
+		'sound/villain/male_talk1.ogg',
+		'sound/villain/male_talk2.ogg',
+		'sound/villain/male_talk3.ogg',
+		'sound/villain/male_talk4.ogg',
+		'sound/villain/male_talk5.ogg',
+		'sound/villain/male_talk6.ogg',
+	)
+	var/obj/speaker = pickweight(objects)
+	var/speech
+	if(prob(1))
+		speech = "[rand(0,9)][rand(0,9)][rand(0,9)][rand(0,9)]"
+	else
+		speech = pick_list_replacements("maniac.json", "dreamer_object")
+		speech = replacetext(speech, "%OWNER", "[dreamer.real_name]")
+	var/language = dreamer.get_random_understood_language()
+	var/message = dreamer.compose_message(speaker, language, speech)
+	dreamer.playsound_local(dreamer, pick(speech_sounds), vol = 60, vary = FALSE)
+	if(dreamer.client.prefs?.chat_on_map)
+		dreamer.create_chat_message(speaker, language, speech)
+	to_chat(dreamer, message)
 
 /datum/antagonist/maniac/proc/handle_mob_hallucination(mob/living/dreamer)
 	if(!dreamer.client)
@@ -121,7 +125,7 @@
 	if(!dreamer?.client)
 		return
 	if(caught_dreamer)
-		dreamer.Paralyze(rand(2, 4) SECONDS)
+		dreamer.Stun(rand(2, 4) SECONDS)
 		var/pain_message = pick("NO!", "THEY GOT ME!", "AGH!")
 		to_chat(dreamer, "<span class='userdanger'>[pain_message]</span>")
 	sleep(chase_wait)
@@ -174,9 +178,11 @@
 /datum/antagonist/maniac/proc/handle_waking_up(mob/living/dreamer)
 	if(!dreamer.client)
 		return
+	if(prob(2.5))
+		dreamer.emote("laugh")
 	//Floors go crazier go stupider
 	for(var/turf/open/floor in view(dreamer))
-		if(!prob(25))
+		if(!prob(15))
 			continue
 		INVOKE_ASYNC(src, PROC_REF(handle_waking_up_floor), floor, dreamer)
 
