@@ -529,29 +529,29 @@
 			I.throw_at(throw_target, 200, 4)
 
 /obj/projectile/magic/skeleton
-	name = "bolt of skeleton"
+	name = "bolt of fetching"
 	icon_state = "necropotence"
-	range = 7
+	range = 15
 
-/obj/projectile/magic/skeleton/on_hit(target)
+obj/projectile/magic/skeleton/on_hit(target)
 	var/turf/T
-	if(!isclosedturf(target))
+	if(isturf(target))
 		T = target
 	new /mob/living/carbon/human/species/skeleton/npc(T)
 
-/obj/projectile/magic/plague
+/obj/projectile/magic/plauge
 	name = "Bolt of Sickness"
 	icon_state = "xray"
 	damage = 10
 	damage_type = BURN
 	flag = "magic"
-	range = 15
+	range = 25
 
-/obj/projectile/magic/plague/on_hit(atom/target, blocked = FALSE)
+/obj/projectile/magic/plauge/on_hit(atom/target, blocked = FALSE)
 	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/M = target
-		M.reagents.add_reagent(/datum/reagent/toxin/histamine, 5) //someones gonna have a shitty day
+		M.reagents.add_reagent(/datum/reagent/toxin/histamine, 15) //someones gonna have a shitty day
 
 /obj/projectile/magic/sapping
 	name = "bolt of sapping"
