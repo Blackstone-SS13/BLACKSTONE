@@ -21,7 +21,7 @@
 
 /turf/open/floor/rogue/ruinedwood
     name = "damaged wooden floor"
-desc = "These boards have seen to many steps."
+	desc = "These boards have seen to many steps."
 	icon_state = "wooden_floor"
 	footstep = FOOTSTEP_WOOD
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
