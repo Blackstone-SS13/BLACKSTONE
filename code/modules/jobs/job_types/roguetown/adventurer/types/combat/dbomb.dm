@@ -1,5 +1,5 @@
 /datum/advclass/dbomb
-	name = "Dwarf"
+	name = "Vagrant"
 	tutorial = "Dwarves like to blow things up."
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Dwarf","Dwarf")
@@ -13,14 +13,16 @@
 	pants = /obj/item/clothing/under/roguetown/trou
 	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
 	belt = /obj/item/storage/belt/rogue/leather
+	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
+	beltl = /obj/item/rogueweapon/huntingknife
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	backl = /obj/item/storage/backpack/rogue/backpack
 	backpack_contents = list(/obj/item/bomb = 1, /obj/item/flint = 1)
 	if(prob(50))
-		beltl = /obj/item/rogueweapon/pick
+		beltr = /obj/item/rogueweapon/pick
 	else
-		beltl = /obj/item/rogueweapon/hammer
+		beltr = /obj/item/rogueweapon/hammer
 	if(prob(50))
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
@@ -31,6 +33,7 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	H.change_stat("strength", 1)
 	H.change_stat("endurance", 1)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)

@@ -14,10 +14,10 @@
 
 /turf/open/water
 	gender = PLURAL
-	name = ""
-	desc = ""
-	icon = null
-	icon_state = ""
+	name = "water"
+	desc = "Good enough to drink, wet enough to douse fires."
+	icon = 'icons/turf/roguefloor.dmi'
+	icon_state = "together"
 	baseturfs = /turf/open/water
 	initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 	slowdown = 5
@@ -85,7 +85,7 @@
 					drained += 40
 				if(!user.rogfat_add(drained))
 					user.Immobilize(30)
-					addtimer(CALLBACK(user, /mob/living/.proc/Knockdown, 30), 10)
+					addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, Knockdown), 30), 10)
 
 /turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
 	..()
@@ -222,7 +222,7 @@
 
 /turf/open/water/bath
 	name = "water"
-	desc = ""
+	desc = "Faintly yellow colored.. Suspicious."
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "bathtileW"
 	water_level = 2
@@ -236,7 +236,7 @@
 
 /turf/open/water/sewer
 	name = "sewage"
-	desc = ""
+	desc = "This dark water smells like dead rats and sulphur!"
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "pavingW"
 	water_level = 1
@@ -252,7 +252,7 @@
 
 /turf/open/water/swamp
 	name = "murk"
-	desc = ""
+	desc = "Weeds and algae cover the surface of the water."
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "dirtW2"
 	water_level = 2
@@ -289,6 +289,7 @@
 
 /turf/open/water/swamp/deep
 	name = "murk"
+	desc = "Deep water with several weeds and algae on the surface."
 	icon_state = "dirtW"
 	water_level = 3
 	water_color = "#705a43"
@@ -317,7 +318,7 @@
 
 /turf/open/water/cleanshallow
 	name = "water"
-	desc = ""
+	desc = "Clear and shallow water, what a blessing!"
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "rockw2"
 	water_level = 2
@@ -332,8 +333,9 @@
 
 
 /turf/open/water/river
-	name = "water"
-	icon_state = "rockwd"
+	name = "river"
+	desc = "Crystal clear water! Flowing swiflty along the river."
+	icon_state = "rivermove"
 	icon = 'icons/turf/roguefloor.dmi'
 	water_level = 3
 	slowdown = 5
@@ -360,7 +362,7 @@
 	. = ..()
 	if(isliving(AM))
 		if(!river_processing)
-			river_processing = addtimer(CALLBACK(src, .proc/process_river), 5, TIMER_STOPPABLE)
+			river_processing = addtimer(CALLBACK(src, PROC_REF(process_river)), 5, TIMER_STOPPABLE)
 
 /turf/open/water/river/proc/process_river()
 	river_processing = null

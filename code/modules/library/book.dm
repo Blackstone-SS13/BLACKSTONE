@@ -27,6 +27,7 @@
 	var/curpage = 1
 	var/textper = 100
 	var/our_font = "Rosemary Roman"
+	var/override_find_book = FALSE
 
 /obj/item/book/attack_self(mob/user)
 	if(!user.can_read(src))
@@ -80,14 +81,13 @@
 		return
 	if(in_range(user, src) || isobserver(user))
 		if(!pages.len)
-			pages = SSlibrarian.get_book(bookfile)
+			if(!override_find_book)
+				pages = SSlibrarian.get_book(bookfile)
 		if(!pages.len)
 			to_chat(user, "<span class='warning'>This book is completely blank.</span>")
 		if(curpage > pages.len)
 			curpage = 1
 //		var/curdat = pages[curpage]
-		user.hud_used.reads.icon_state = "book"
-		user.hud_used.reads.show()
 		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
 					<html><head><style type=\"text/css\">
 					body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
@@ -96,7 +96,7 @@
 			dat += "<br>"
 		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
 		dat += "</body></html>"
-		user << browse(dat, "window=reading;size=460x300;can_close=0;can_minimize=0;can_maximize=0;can_resize=1;titlebar=0")
+		user << browse(dat, "window=reading;size=1000x700;can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=0;border=0")
 		onclose(user, "reading", src)
 	else
 		return "<span class='warning'>You're too far away to read it.</span>"

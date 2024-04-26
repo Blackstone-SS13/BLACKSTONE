@@ -15,12 +15,13 @@
 	Due to their heritage, Half-Elves tend to gain racial traits depending on how strong their fathers, or mothers, genes were. \
 	Half-Elves also typically try to find identity in one of two regions they have similarities towards."
 
-	skin_tone_wording = "Identifies As"
+	skin_tone_wording = "Identity"
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,STUBBLE,OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP,TRAIT_LESSER_NIGHT_VISION)
+	inherent_traits = list(TRAIT_NOMOBSWAP)
 	default_features = list("mcolor" = "FFF", "ears" = "ElfH", "wings" = "None")
 	mutant_bodyparts = list("ears")
+	mutanteyes = /obj/item/organ/eyes/halfelf
 	use_skintones = 1
 	possible_ages = list(AGE_YOUNG, AGE_ADULT, AGE_MIDDLEAGED)
 	skinned_type = /obj/item/stack/sheet/animalhide/human

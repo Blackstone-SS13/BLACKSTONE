@@ -31,13 +31,14 @@
 	if(isliving(mover) && mover.z == z)
 //		var/throwdir = get_dir(src, mover)
 		var/mob/living/L = mover
-		if(L.electrocute_act(30, src))
-			L.consider_ambush()
-			if(L.throwing)
-				L.throwing.finalize(FALSE)
-//			if(mover.loc != loc && L.stat == CONSCIOUS)
-//				L.throw_at(get_step(L, throwdir), 1, 1, L, spin = FALSE)
-			return FALSE
+		if(L.PATRON != "Dendor") //Dendor kneestinger immunity
+			if(L.electrocute_act(30, src)) 
+				L.consider_ambush()
+				if(L.throwing)
+					L.throwing.finalize(FALSE)
+	//			if(mover.loc != loc && L.stat == CONSCIOUS)
+	//				L.throw_at(get_step(L, throwdir), 1, 1, L, spin = FALSE)
+				return FALSE
 	. = ..()
 
 /obj/structure/glowshroom/Crossed(AM as mob|obj)
@@ -129,7 +130,7 @@
 	else //if on the floor, glowshroom on-floor sprite
 		icon_state = base_icon_state
 */
-//	addtimer(CALLBACK(src, .proc/Spread), delay)
+//	addtimer(CALLBACK(src, PROC_REF(Spread)), delay)
 
 /obj/structure/glowshroom/proc/Spread()
 	var/turf/ownturf = get_turf(src)
@@ -176,7 +177,7 @@
 			shrooms_planted++ //if we failed due to generation, don't try to plant one later
 	if(shrooms_planted < myseed.yield) //if we didn't get all possible shrooms planted, try again later
 		myseed.yield -= shrooms_planted
-		addtimer(CALLBACK(src, .proc/Spread), delay)
+		addtimer(CALLBACK(src, PROC_REF(Spread)), delay)
 
 /obj/structure/glowshroom/proc/CalcDir(turf/location = loc)
 	var/direction = 16

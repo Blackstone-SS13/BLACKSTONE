@@ -764,6 +764,17 @@
 		M.reagents.remove_reagent(R.type,remove_amt)
 	return ..()
 
+/datum/reagent/toxin/drow
+	name = "Drow Toxin"
+	description = "How are you even reading this?"
+	reagent_state = LIQUID
+	color = "#410233"
+	metabolization_rate = 0.2 * REAGENTS_METABOLISM
+
+/datum/reagent/toxin/on_mob_life(mob/living/carbon/M)
+		M.adjustCloneLoss(rand(1,2))
+
+
 //ACID
 
 

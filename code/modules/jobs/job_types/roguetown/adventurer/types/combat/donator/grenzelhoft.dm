@@ -1,6 +1,6 @@
 /datum/advclass/grenzelhoft
 	name = "Grenzelhoft mercenary"
-	tutorial = "A mercenary from the grenzelhoft emperiate mercenary guild, only cares about coin."
+	tutorial = "A mercenary from the Grenzelhoft emperiate mercenary guild, only cares about coin."
 	allowed_sexes = list("male")
 	allowed_races = list("Humen",
 	"Tiefling",
@@ -49,5 +49,6 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 		H.change_stat("intelligence", -2)
 		H.change_stat("endurance", -1)

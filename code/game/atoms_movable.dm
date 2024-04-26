@@ -43,6 +43,16 @@
 	var/jumping = FALSE
 	var/zfalling = FALSE
 
+	///Lazylist to keep track on the sources of illumination.
+	var/list/affected_dynamic_lights
+	///Highest-intensity light affecting us, which determines our visibility.
+	var/affecting_dynamic_lumi = 0
+
+/atom/movable/Initialize(mapload)
+	. = ..()
+	if(light_system == MOVABLE_LIGHT)
+		AddComponent(/datum/component/overlay_lighting)
+
 /atom/movable/proc/can_zFall(turf/source, levels = 1, turf/target, direction)
 	if(!direction)
 		direction = DOWN
@@ -65,7 +75,7 @@
 		if(isobj(A) || ismob(A))
 			if(A.layer > highest.layer)
 				highest = A
-//	INVOKE_ASYNC(src, .proc/SpinAnimation, 5, 2)
+//	INVOKE_ASYNC(src, PROC_REF(SpinAnimation), 5, 2)
 	throw_impact(highest)
 	return TRUE
 
@@ -899,15 +909,13 @@
 
 /atom/movable/proc/can_speak_in_language(datum/language/dt)
 	var/datum/language_holder/H = get_language_holder()
-
-	if(!H.has_language(dt))
+	if(!H.has_language(dt) || HAS_TRAIT(src, TRAIT_LANGUAGE_BARRIER))
 		return FALSE
 	else if(H.omnitongue)
 		return TRUE
 	else if(could_speak_in_language(dt) && (!H.only_speaks_language || H.only_speaks_language == dt))
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 /atom/movable/proc/get_default_language()
 	// if no language is specified, and we want to say() something, which

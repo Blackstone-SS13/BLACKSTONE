@@ -24,6 +24,7 @@
 	H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	belt = /obj/item/storage/belt/rogue/leather
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
 	pants = /obj/item/clothing/under/roguetown/trou
@@ -34,6 +35,8 @@
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/workervest
 	beltr = /obj/item/rogueweapon/stoneaxe/woodcut
+	beltl = /obj/item/rogueweapon/huntingknife
+	backpack_contents = list(/obj/item/flint = 1)
 	H.change_stat("strength", 1)
 	H.change_stat("intelligence", -2)
 	H.change_stat("speed", -1)

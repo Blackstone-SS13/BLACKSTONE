@@ -112,9 +112,16 @@
 	. = ..()
 	icon_state = "roofg"
 
+/turf/open/floor/rogue/rooftop/green/corner1
+	icon_state = "roofgc1-arw"
+
+/turf/open/floor/rogue/rooftop/green/corner1/Initialize()
+	. = ..()
+	icon_state = "roofgc1"
+
 /turf/open/floor/rogue/grass
 	name = "grass"
-	desc = ""
+	desc = "Grass, sodden with mud and bogwater." 
 	icon_state = "grass"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_GRASS
@@ -132,7 +139,7 @@
 
 /turf/open/floor/rogue/dirt/ambush
 	name = "dirt"
-	desc = ""
+	desc = "The dirt is pocked with the scars of countless wars."
 	icon_state = "dirt"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_GRASS
@@ -150,7 +157,7 @@
 
 /turf/open/floor/rogue/dirt
 	name = "dirt"
-	desc = ""
+	desc = "The dirt is pocked with the scars of countless wars."
 	icon_state = "dirt"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_GRASS
@@ -285,7 +292,7 @@
 
 /turf/open/floor/rogue/dirt/road
 	name = "dirt"
-	desc = ""
+	desc = "The dirt is pocked with the scars of countless steps."
 	icon_state = "road"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_SAND
@@ -383,7 +390,7 @@
 
 /turf/open/floor/rogue/underworld/road
 	name = "ash"
-	desc = ""
+	desc = "Smells like burnt wood."
 	icon_state = "ash"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_SAND
@@ -401,7 +408,7 @@
 
 /turf/open/floor/rogue/volcanic
 	name = "dirt"
-	desc = ""
+	desc = "The dirt is pocked with the scars of countless steps."
 	icon_state = "lavafloor"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_SAND

@@ -65,7 +65,7 @@
 //		else
 //			if(get_triumphs() > 0)
 //				tris2take += -1
-		if(real_name in SStreasury.bank_accounts)
+		if(H in SStreasury.bank_accounts)
 			for(var/obj/structure/roguemachine/camera/C in view(7, src))
 				var/area_name = A.name
 				var/texty = "<CENTER><B>Death of a Living Being</B><br>---<br></CENTER>"
@@ -125,20 +125,20 @@
 		SSblackbox.ReportDeath(src)
 		log_message("has died (BRUTE: [src.getBruteLoss()], BURN: [src.getFireLoss()], TOX: [src.getToxLoss()], OXY: [src.getOxyLoss()], CLONE: [src.getCloneLoss()])", LOG_ATTACK)
 	if(is_devil(src))
-		INVOKE_ASYNC(is_devil(src), /datum/antagonist/devil.proc/beginResurrectionCheck, src)
+		INVOKE_ASYNC(is_devil(src), TYPE_PROC_REF(/datum/antagonist/devil, beginResurrectionCheck), src)
 
 /mob/living/carbon/human/proc/zombie_check()
-	if(mind && ckey)
-		if(mind.has_antag_datum(/datum/antagonist/vampirelord))
-			return
-		if(mind.has_antag_datum(/datum/antagonist/werewolf))
-			return
-		if(mind.has_antag_datum(/datum/antagonist/zombie))
-			return
-		if(mind.has_antag_datum(/datum/antagonist/skeleton))
-			return
-		mind.add_antag_datum(/datum/antagonist/zombie)
-		qdel(cleric)
+	if(!mind)
+		return
+	if(mind.has_antag_datum(/datum/antagonist/vampirelord))
+		return
+	if(mind.has_antag_datum(/datum/antagonist/werewolf))
+		return
+	if(mind.has_antag_datum(/datum/antagonist/zombie))
+		return
+	if(mind.has_antag_datum(/datum/antagonist/skeleton))
+		return
+	mind.add_antag_datum(/datum/antagonist/zombie)
 
 /mob/living/carbon/human/gib(no_brain, no_organs, no_bodyparts, safe_gib = FALSE)
 	for(var/mob/living/carbon/human/CA in viewers(7, src))

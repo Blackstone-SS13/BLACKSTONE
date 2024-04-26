@@ -128,7 +128,7 @@
 						"<span class='danger'>[user] tightens [user.p_their()] grip on my [used_limb]!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)
 		to_chat(user, "<span class='danger'>I tighten my grip on [src]'s [used_limb]!</span>")
 
-/mob/living/carbon/proc/precise_attack_check(zone, var/obj/item/bodypart/affecting) //for striking eyes, throat, etc
+/mob/living/carbon/proc/precise_attack_check(zone, obj/item/bodypart/affecting) //for striking eyes, throat, etc
 	if(zone && affecting)
 		if(zone in affecting.subtargets)
 			return parse_zone(zone)
@@ -239,7 +239,7 @@
 	if(statforce)
 		var/probability = I.get_dismemberment_chance(affecting)
 		if(prob(probability))
-			if(affecting.dismember(I.damtype))
+			if(affecting.dismember(I.damtype, user, user.zone_selected))
 				I.add_mob_blood(src)
 				playsound(get_turf(src), I.get_dismember_sound(), 80, TRUE)
 		return TRUE //successful attack
@@ -338,7 +338,7 @@
 	if(affecting)
 		dam_zone = affecting.body_zone
 		if(affecting.get_damage() >= affecting.max_damage)
-			affecting.dismember()
+			affecting.dismember(BRUTE, attacker, attacker.zone_selected)
 			return null
 		return affecting.body_zone
 	return dam_zone
@@ -390,7 +390,7 @@
 		do_jitter_animation(jitteriness)
 		stuttering += 2
 		emote("painscream")
-	addtimer(CALLBACK(src, .proc/secondary_shock, should_stun), 20)
+	addtimer(CALLBACK(src, PROC_REF(secondary_shock), should_stun), 20)
 	return shock_damage
 
 ///Called slightly after electrocute act to reduce jittering and apply a secondary stun.

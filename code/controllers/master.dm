@@ -79,7 +79,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 			qdel(Master)
 		else
 			var/list/subsytem_types = subtypesof(/datum/controller/subsystem)
-			sortTim(subsytem_types, /proc/cmp_subsystem_init)
+			sortTim(subsytem_types, GLOBAL_PROC_REF(cmp_subsystem_init))
 			for(var/I in subsytem_types)
 				_subsystems += new I
 		Master = src
@@ -94,7 +94,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 /datum/controller/master/Shutdown()
 	processing = FALSE
-	sortTim(subsystems, /proc/cmp_subsystem_init)
+	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_init))
 	reverseRange(subsystems)
 	for(var/datum/controller/subsystem/ss in subsystems)
 		log_world("Shutting down [ss.name] subsystem...")
@@ -162,52 +162,6 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 		to_chat(world, "<span class='boldannounce'>The Master Controller is having some issues, we will need to re-initialize EVERYTHING</span>")
 		Initialize(20, TRUE)
 
-
-/proc/do_bot_thing_new(statusr)
-#ifdef TESTSERVER
-	return
-#endif
-	var/playercount = 0
-	for(var/client/C in GLOB.clients)
-		playercount++
-	spawn(-1)
-		world.Export("http://85.214.207.37:1622/server_status/newround?id=[GLOB.rogue_round_id]&players=[playercount]&status=[statusr]&pass=INgToREvitersawnTAmBoTREtInKEScOM")
-
-/proc/do_bot_thing_update(statusr)
-#ifdef TESTSERVER
-	return
-#endif
-	var/playercount = 0
-	for(var/client/C in GLOB.clients)
-		playercount++
-	spawn(-1)
-		world.Export("http://85.214.207.37:1622/server_status/updateround?id=[GLOB.rogue_round_id]&players=[playercount]&status=[statusr]&pass=INgToREvitersawnTAmBoTREtInKEScOM")
-
-
-/proc/do_bot_thing_end(forreal)
-#ifdef TESTSERVER
-	return
-#endif
-	if(forreal)
-		spawn(-1)
-			world.Export("http://85.214.207.37:1622/server_status/shutdown?&pass=INgToREvitersawnTAmBoTREtInKEScOM")
-	else
-		var/statusr = "POST ROUND"
-		var/playercount = 0
-		for(var/client/C in GLOB.clients)
-			playercount++
-		if(playercount)
-			playercount = round(playercount*1.1)
-			playercount = max(playercount, 1)
-		spawn(-1)
-			world.Export("http://85.214.207.37:1622/server_status/updateround?id=[GLOB.rogue_round_id]&players=[playercount]&status=[statusr]&pass=INgToREvitersawnTAmBoTREtInKEScOM")
-
-/proc/do_bot_thing_pq(msg)
-	if(!msg)
-		return
-	spawn(-1)
-		world.Export("http://85.214.207.37:1622/announce?ch=1098690934654369892&t=[msg]")
-
 // Please don't stuff random bullshit here,
 // 	Make a subsystem, give it the SS_NO_FIRE flag, and do your work in it's Initialize()
 /datum/controller/master/Initialize(delay, init_sss, tgs_prime)
@@ -225,15 +179,13 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	to_chat(world, "<span class='boldannounce'>Initializing subsystems...</span>")
 #endif
 	// Sort subsystems by init_order, so they initialize in the correct order.
-	sortTim(subsystems, /proc/cmp_subsystem_init)
+	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_init))
 
 	var/start_timeofday = REALTIMEOFDAY
 	// Initialize subsystems.
 //#ifndef TESTSERVER
 //	var/thing_done = FALSE
 //#endif
-
-	do_bot_thing_new("IN LOBBY")
 
 	current_ticklimit = CONFIG_GET(number/tick_limit_mc_init)
 	for (var/datum/controller/subsystem/SS in subsystems)
@@ -255,7 +207,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 		SetRunLevel(1)
 
 	// Sort subsystems by display setting for easy access.
-	sortTim(subsystems, /proc/cmp_subsystem_display)
+	sortTim(subsystems, GLOBAL_PROC_REF(cmp_subsystem_display))
 	// Set world options.
 	world.change_fps(CONFIG_GET(number/fps))
 	var/initialized_tod = REALTIMEOFDAY
@@ -337,9 +289,9 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	queue_tail = null
 	//these sort by lower priorities first to reduce the number of loops needed to add subsequent SS's to the queue
 	//(higher subsystems will be sooner in the queue, adding them later in the loop means we don't have to loop thru them next queue add)
-	sortTim(tickersubsystems, /proc/cmp_subsystem_priority)
+	sortTim(tickersubsystems, GLOBAL_PROC_REF(cmp_subsystem_priority))
 	for(var/I in runlevel_sorted_subsystems)
-		sortTim(I, /proc/cmp_subsystem_priority) //I is a list, sort it bro
+		sortTim(I, GLOBAL_PROC_REF(cmp_subsystem_priority)) //I is a list, sort it bro
 		I += tickersubsystems
 
 	var/cached_runlevel = current_runlevel

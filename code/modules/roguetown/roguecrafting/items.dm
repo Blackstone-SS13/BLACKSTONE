@@ -66,6 +66,29 @@
 	reqs = list(/obj/item/grown/log/tree/small = 1)
 	craftdiff = 0
 
+/datum/crafting_recipe/roguetown/billhook
+	name = "Improvised Billhook"
+	result = /obj/item/rogueweapon/spear/improvisedbillhook
+	reqs = list(/obj/item/rogueweapon/sickle,
+				/obj/item/grown/log/tree/small = 1)
+	tools = list(/obj/item/rogueweapon/hammer)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/goedendag
+	name = "Goedendag"
+	result = /obj/item/rogueweapon/mace/goden
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/rogueweapon/hoe)
+	tools = list(/obj/item/rogueweapon/hammer)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/peasantwarflail
+	name = "Peasant War Flail"
+	result = /obj/item/rogueweapon/flail/peasantwarflail
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/rogueweapon/thresher)
+	tools = list(/obj/item/rogueweapon/hammer)
+	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/rproesthetic
 	name = "wood arm (L)"
@@ -208,3 +231,11 @@
 
 /obj/item/rogueweapon/shovel/small/crafted
 	sellprice = 5
+
+/datum/crafting_recipe/roguetown/book_crafting_kit
+	name = "book crafting kit"
+	result = /obj/item/book_crafting_kit
+	reqs = list(
+			/obj/item/natural/hide = 2,
+			/obj/item/natural/fibers = 2,
+			/obj/item/needle = 1)
