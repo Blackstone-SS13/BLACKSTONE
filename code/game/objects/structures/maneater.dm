@@ -95,7 +95,7 @@
 /obj/structure/flora/roguegrass/maneater/real/update_icon()
 	if(obj_broken)
 		name = "MANEATER"
-		desc = "This cunning creature is thankfully defeated."
+		desc = "This cunning creature is thankfully defeated." // i think this might break, dunno
 		icon_state = "maneater-dead"
 		return
 	if(aggroed)
