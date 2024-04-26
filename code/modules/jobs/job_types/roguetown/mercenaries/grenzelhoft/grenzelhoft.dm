@@ -6,6 +6,12 @@
 	allowed_races = list("Humen", "Aasimar", "Half-Elf")
 	outfit = /datum/outfit/job/roguetown/mercenary/grenzelhoft
 	display_order = JDO_GRENZELHOFT
+	department_flag = MERCENARIES
+	selection_color = JCOLOR_MERCENARIES
+	faction = "Station"
+	total_positions = 5
+	spawn_positions = 5
+	min_pq = -9
 
 /datum/outfit/job/roguetown/mercenary/grenzelhoft/pre_equip(mob/living/carbon/human/H)
 	..()
