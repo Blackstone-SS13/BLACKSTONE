@@ -142,7 +142,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	if(SSticker.manualmodes)
 		forcedmodes |= SSticker.manualmodes
 	var/list/major_modes = list(1, 2, 3)
-	var/list/minor_modes = list(1,2,3)
+	var/list/minor_modes = list(1,2,3,4)
 	var/majorpicked = pick(major_modes)
 	if(forcedmodes.len)
 		message_admins("Manual gamemodes selected.")
@@ -160,6 +160,9 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 				if("Aspirants")
 					pick_aspirants()
 					log_game("Minor Antagonist: Aspirant")
+				if("Maniac")
+					pick_maniac()
+					log_game("Minor Antagonist: Maniac)")
 				if("Extended")
 					log_game("Major Antagonist: Extended")
 		return TRUE
@@ -183,6 +186,9 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 				log_game("Minor Antagonist: Aspirant")
 			if(3)
 				log_game("Minor Antagonist: Extended") // placeholder.
+			if(4)
+				pick_maniac()
+				log_game("Minor Antagonist: Maniac")
 		if(prob(30))
 			continue
 		else
@@ -216,7 +222,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 				continue
 			pre_bandits += bandito
 			bandito.assigned_role = "Bandit"
-			bandito.special_role = "Bandit"
+			bandito.special_role = ROLE_BANDIT
 			testing("[key_name(bandito)] has been selected as a bandit")
 			log_game("[key_name(bandito)] has been selected as a bandit")
 	for(var/antag in pre_bandits)
@@ -236,7 +242,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 					if(couper.assigned_role in possible_jobs_aspirants)
 						antag_candidates -= couper
 						pre_aspirants += couper
-						couper.special_role = "Aspirant"
+						couper.special_role = ROLE_ASPIRANT
 						rolesneeded -= R
 						testing("[key_name(couper)] has been selected as an Aspirant")
 						log_game("[key_name(couper)] has been selected as a Aspirant")
@@ -298,23 +304,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_maniac()
-	restricted_jobs = list("King",
-	"Queen",
-	"Prisoner",
-	"Dungeoneer",
-	"Witch Hunter",
-	"Confessor",
-	"Town Guard",
-	"Castle Guard",
-	"Veteran",
-	"Acolyte",
-	"Cleric",
-	"Sheriff",
-	"Templar",
-	"Bog Guard",
-	"Bog Master",
-	"Knight")
-	antag_candidates = get_players_for_role(ROLE_NBEAST)
+	restricted_jobs = list("King", "Queen")
+	antag_candidates = get_players_for_role(ROLE_MANIAC)
 	var/datum/mind/villain = pick_n_take(antag_candidates)
 	if(villain)
 		var/blockme = FALSE
@@ -329,7 +320,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 			return
 		allantags -= villain
 		pre_villains += villain
-		villain.special_role = "maniac"
+		villain.special_role = ROLE_MANIAC
 		villain.restricted_roles = restricted_jobs.Copy()
 		testing("[key_name(villain)] has been selected as the [villain.special_role]")
 		log_game("[key_name(villain)] has been selected as the [villain.special_role]")
@@ -399,7 +390,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 			return
 		allantags -= werewolf
 		pre_werewolves += werewolf
-		werewolf.special_role = "werewolf"
+		werewolf.special_role = ROLE_WEREWOLF
 		werewolf.restricted_roles = restricted_jobs.Copy()
 		testing("[key_name(werewolf)] has been selected as a WEREWOLF")
 		log_game("[key_name(werewolf)] has been selected as a [werewolf.special_role]")
@@ -447,7 +438,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		bandits += bandito
 ///////////////// ASPIRANTS
 	for(var/datum/mind/rogue in pre_aspirants) // Do the aspirant first, so the suppporter works right.
-		if(rogue.special_role == "Aspirant")
+		if(rogue.special_role == ROLE_ASPIRANT)
 			var/datum/antagonist/new_asp = new /datum/antagonist/aspirant()
 			rogue.add_antag_datum(new_asp)
 			aspirants += rogue
