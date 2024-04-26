@@ -96,6 +96,8 @@
 	. = ..()
 	if(gazed_at && (user.mind?.has_antag_datum(/datum/antagonist/maniac) == dream_master))
 		. += "<span class='danger'>They have GAZED at my wonder!</span>"
+	if(isobserver(user))
+		return
 	if(dream_master)
 		process()
 
