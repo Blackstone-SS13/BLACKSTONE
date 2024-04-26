@@ -1,6 +1,6 @@
-//elf human specia lrogue 2 daggers throwing belt
+//its a delf special now... owned
 
-/datum/advclass/rare
+/datum/advclass/dona
 	name = "Rarec"
 	tutorial = "rarec"
 	allowed_sexes = list("male", "female")
@@ -10,6 +10,6 @@
 	"Half-Elf",
 	"Dark Elf",
 	"Tiefling")
-	outfit = /datum/outfit/job/roguetown/adventurer/rare
-	maxchosen = 1
-	pickprob = 11
+	outfit = /datum/outfit/job/roguetown/adventurer/dona
+	maxchosen = -1
+	pickprob = 100

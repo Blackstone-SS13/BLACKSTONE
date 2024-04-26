@@ -106,3 +106,6 @@
 		r_hand = /obj/item/rogueweapon/sword
 	else
 		r_hand = /obj/item/rogueweapon/stoneaxe/woodcut
+
+/mob/living/carbon/human/species/skeleton/npc/no_equipment
+    skel_outfit = null
