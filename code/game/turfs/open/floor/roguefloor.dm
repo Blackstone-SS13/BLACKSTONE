@@ -20,8 +20,6 @@
 	. = ..()
 
 /turf/open/floor/rogue/ruinedwood
-    name = "damaged wooden floor"
-desc = "These boards have seen to many steps."
 	icon_state = "wooden_floor"
 	footstep = FOOTSTEP_WOOD
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -46,8 +44,6 @@ desc = "These boards have seen to many steps."
 	icon_state = "weird2"
 
 /turf/open/floor/rogue/twig
-    name = "twig flooring"
-desc = "Several branches lined up to form a neat floor."
 	icon_state = "twig"
 	footstep = FOOTSTEP_GRASS
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
@@ -65,8 +61,6 @@ desc = "Several branches lined up to form a neat floor."
 	dir = dirin
 
 /turf/open/floor/rogue/wood
-    name = "wooden floor"
-desc = "Smooth, wooden floor made of several boards."
 	smooth_icon = 'icons/turf/floors/wood.dmi'
 	icon_state = "wooden_floor2"
 	footstep = FOOTSTEP_WOOD
@@ -100,7 +94,6 @@ desc = "Smooth, wooden floor made of several boards."
 
 /turf/open/floor/rogue/rooftop
 	name = "roof"
-	desc = "This is a rooftop. Thieves love these."
 	icon_state = "roof-arw"
 	footstep = FOOTSTEP_WOOD
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -164,7 +157,7 @@ desc = "Smooth, wooden floor made of several boards."
 
 /turf/open/floor/rogue/dirt
 	name = "dirt"
-	desc = "The dirt is pocked with the scars of countless battles."
+	desc = "The dirt is pocked with the scars of countless wars."
 	icon_state = "dirt"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_GRASS
@@ -494,8 +487,6 @@ desc = "Smooth, wooden floor made of several boards."
 //Church floors
 
 /turf/open/floor/rogue/churchmarble
-    name = "marble floor"
-desc = "Fancy (and rare!) marble floor."
 	icon_state = "church_marble"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -513,7 +504,6 @@ desc = "Fancy (and rare!) marble floor."
 	dir = pick(GLOB.cardinals)
 
 /turf/open/floor/rogue/church
-    name = ""
 	icon_state = "church"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -531,9 +521,7 @@ desc = "Fancy (and rare!) marble floor."
 	dir = pick(GLOB.cardinals)
 
 /turf/open/floor/rogue/churchbrick
-    name = "brick floor"
-	desc = "Several bricks lined up for a neat floor."
-icon_state = "church_brick"
+	icon_state = "church_brick"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -550,9 +538,7 @@ icon_state = "church_brick"
 	dir = pick(GLOB.cardinals)
 
 /turf/open/floor/rogue/churchrough
-    name = "rough floor"
-	desc = "Rough-hewn floor."
-icon_state = "church_rough"
+	icon_state = "church_rough"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -587,9 +573,7 @@ icon_state = "church_rough"
 	dir = pick(GLOB.cardinals)
 
 /turf/open/floor/rogue/cobble
-    name = "cobblestone floor"
-	desc = "Leftover stones from the mine made up this road."
-icon_state = "cobblestone1"
+	icon_state = "cobblestone1"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -607,9 +591,7 @@ icon_state = "cobblestone1"
 	icon_state = "cobblestone[rand(1,3)]"
 
 /turf/open/floor/rogue/cobble/mossy
-    name = "mossy cobblestone floor"
-	desc = "This cobblestone floor is covered in moss."
-icon_state = "mossystone1"
+	icon_state = "mossystone1"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -627,9 +609,7 @@ icon_state = "mossystone1"
 	icon_state = "mossystone[rand(1,3)]"
 
 /turf/open/floor/rogue/cobblerock
-    name = "cobblestone floor"
-	desc = "Rough-hewn cobblestone floor."
-icon_state = "cobblerock"
+	icon_state = "cobblerock"
 	footstep = FOOTSTEP_STONE
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
@@ -650,9 +630,7 @@ icon_state = "cobblerock"
 	mouse_opacity = 0
 
 /turf/open/floor/rogue/tile
-    name = "checkered floor"
-	desc = "Now all we need are giant chess pieces."
-icon_state = "chess"
+	icon_state = "chess"
 	landsound = 'sound/foley/jumpland/tileland.wav'
 	footstep = FOOTSTEP_FLOOR
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
@@ -718,9 +696,7 @@ icon_state = "chess"
 	icon_state = "barograteopen"
 
 /turf/open/floor/rogue/carpet
-    name = "regal carpet floor"
-	desc = "Soft and warm carpet flooring."
-icon_state = "carpet"
+	icon_state = "carpet"
 	landsound = 'sound/foley/jumpland/carpetland.wav'
 	footstep = FOOTSTEP_CARPET
 	barefootstep = FOOTSTEP_SOFT_BAREFOOT
