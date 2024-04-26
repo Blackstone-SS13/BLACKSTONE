@@ -25,6 +25,10 @@
 		TRAIT_ANTIMAGIC,
 		TRAIT_SCHIZO_AMBIENCE,
 	)
+	/// Traits that only get applied in the final sequence
+	var/static/list/final_traits = list(
+		RTRAIT_MANIAC_AWOKEN,
+	)
 	/// Cached old stats in case we get removed
 	var/STASTR
 	var/STACON 
@@ -54,6 +58,8 @@
 	var/current_wonder = 1
 	/// Set to TRUE when we are on the last wonder (waking up)
 	var/waking_up = FALSE
+	/// Set to true when we WIN and are on the ending sequence
+	var/triumphed = FALSE
 	/// Wonders we have made
 	var/list/wonders_made = list()
 	/// Hallucinations screen object
@@ -61,6 +67,7 @@
 
 /datum/antagonist/maniac/New()
 	set_keys()
+	load_strings_file("maniac.json")
 	return ..()
 
 /datum/antagonist/maniac/Destroy()
@@ -109,6 +116,8 @@
 			dreamer.STAEND = STAEND
 		for(var/trait in applied_traits)
 			REMOVE_TRAIT(owner.current, trait, "[type]")
+		for(var/trait in final_traits)
+			REMOVE_TRAIT(owner.current, trait, "[type]")
 		owner.current.clear_fullscreen("maniac")
 	QDEL_LIST(wonders_made)
 	wonders_made = null
@@ -148,32 +157,37 @@
 	SEND_SOUND(dreamer, im_sick)
 	dreamer.overlay_fullscreen("dream", /obj/screen/fullscreen/dreaming)
 	dreamer.overlay_fullscreen("wakeup", /obj/screen/fullscreen/dreaming/waking_up)
+	for(var/trait in final_traits)
+		ADD_TRAIT(dreamer, trait, "[type]")
 	waking_up = TRUE
 
-/* I don't have the patience to code this right now
-/datum/antagonist/dreamer/proc/spawn_trey_liam()
+/datum/antagonist/maniac/proc/spawn_trey_liam()
 	var/turf/spawnturf
-	var/obj/effect/landmark/treyliam/trey = locate(/obj/effect/landmark/treyliam) in world
+	var/obj/effect/landmark/treyliam/trey = locate(/obj/effect/landmark/treyliam) in GLOB.landmarks_list
 	if(trey)
 		spawnturf = get_turf(trey)
 	if(spawnturf)
-		var/mob/living/carbon/human/trey_liam = new /mob/living/carbon/human(spawnturf)
+		var/mob/living/carbon/human/trey_liam = new /mob/living/carbon/human/species/human/northern(spawnturf)
 		trey_liam.fully_replace_character_name(trey_liam.name, "Trey Liam")
 		trey_liam.gender = MALE
 		trey_liam.skin_tone = "ffe0d1"
 		trey_liam.hair_color = "999999"
-		trey_liam.hair_style = "Plain Long"
-		trey_liam.facial_haircolor = "999999"
+		trey_liam.hairstyle = "Plain Long"
+		trey_liam.facial_hair_color = "999999"
 		trey_liam.facial_hairstyle = "Knowledge"
 		trey_liam.age = AGE_OLD
 		trey_liam.equipOutfit(/datum/outfit/treyliam)
 		trey_liam.regenerate_icons()
-		for(var/obj/machinery/vr_sleeper/chungus in get_turf(trey_liam))
-			chungus.buckle_mob(trey_liam, TRUE, FALSE)
+		for(var/obj/structure/chair/chair in spawnturf)
+			chair.buckle_mob(trey_liam, force = TRUE)
+			break
 		return trey_liam
-*/ 
+	return
+
 /datum/antagonist/maniac/proc/wake_up()
 	STOP_PROCESSING(SSobj, src)
+	triumphed = TRUE
+	waking_up = FALSE
 	var/mob/living/carbon/dreamer = owner.current
 	// var/client/dreamer_client = dreamer.client // Trust me, we need it later
 	dreamer.clear_fullscreen("dream")
@@ -185,12 +199,11 @@
 			continue
 		SEND_SOUND(connected_player, sound(null))
 		SEND_SOUND(connected_player, 'sound/villain/dreamer_win.ogg')
-	/* Can't be fucked with this right now
 	var/mob/living/carbon/human/trey_liam = spawn_trey_liam()
 	if(trey_liam)
 		owner.transfer_to(trey_liam)
 		//Explodie all our wonders
-		for(var/obj/structure/wonder/wondie as anything in wonders_done)
+		for(var/obj/structure/wonder/wondie as anything in wonders_made)
 			if(istype(wondie))
 				explosion(wondie, 8, 16, 32, 64)
 		var/obj/item/organ/brain/brain = dreamer.getorganslot(ORGAN_SLOT_BRAIN)
@@ -201,44 +214,37 @@
 				qdel(head)
 		if(brain)
 			qdel(brain)
-		H.SetSleeping(250)
-		dreamer_client.chatOutput?.loaded = FALSE
-		dreamer_client.chatOutput?.start()
-		dreamer_client.chatOutput?.load()
-		H.add_stress(/datum/stressevent/maniac_woke_up)
-		sleep(15)
-		to_chat(H, "<span class='big bold'><span class='deadsay'>... WHERE AM I? ...</span></span>")
-		sleep(30)
-		to_chat(H, "<span class='deadsay'>... Rockhill? No ... It doesn't exist ...</span>")
-		sleep(30)
-		to_chat(H, "<span class='deadsay'>... My name is Trey. Trey Liam, Scientific Overseer ...</span>")
-		sleep(30)
-		to_chat(H, "<span class='deadsay'>... I'm on NT Aeon, a self sustaining ship, used to preserve what remains of humanity ...</span>")
-		sleep(30)
-		to_chat(H, "<span class='deadsay'>... Launched into the stars, INRL preserves their memories ... Their personalities ...</span>")
-		sleep(30)
-		to_chat(H, "<span class='deadsay'>... Keeps them alive in cyberspace, oblivious to the catastrophe ...</span>")
-		sleep(30)
-		to_chat(H, "<span class='deadsay'>... There is no hope left. Only the cyberspace deck lets me live in the forgery ...</span>")
-		sleep(30)
-		to_chat(H, "<span class='deadsay'>... What have i done!? ...</span>")
-		sleep(40)
+		trey_liam.SetSleeping(25 SECONDS)
+		trey_liam.add_stress(/datum/stressevent/maniac_woke_up)
+		sleep(1.5 SECONDS)
+		to_chat(trey_liam, "<span class='deadsay'><span class='reallybig'>... WHERE AM I? ...</span></span>")
+		sleep(1.5 SECONDS)
+		var/static/list/slop_lore = list(
+			"<span class='deadsay'>... Rockhill? No ... It doesn't exist ...</span>",
+			"<span class='deadsay'>... My name is Trey. Trey Liam, Scientific Overseer ...</span>",
+			"<span class='deadsay'>... I'm on NT Aeon, a self sustaining ship, used to preserve what remains of humanity ...</span>",
+			"<span class='deadsay'>... Launched into the stars, INRL preserves their memories ... Their personalities ...</span>",
+			"<span class='deadsay'>... Keeps them alive in cyberspace, oblivious to the catastrophe ...</span>",
+			"<span class='deadsay'>... There is no hope left. Only the cyberspace deck lets me live in the forgery ...</span>",
+			"<span class='deadsay'>... What have I done!? ...</span>",
+		)
+		for(var/slop in slop_lore)
+			to_chat(trey_liam, slop)
+			sleep(3 SECONDS)
 	else
-		cant_wake_up()
-	*/
-	sleep(1 MINUTES)
+		INVOKE_ASYNC(src, PROC_REF(cant_wake_up), dreamer)
+	sleep(15 SECONDS)
 	to_chat(world, "<span class='deadsay'><span class='reallybig'>The Maniac has TRIUMPHED!</span></span>")
 	SSticker.declare_completion()
-	SSticker.Reboot("The Maniac has TRIUMPHED.", "The Maniac has TRIUMPHED.", delay = 60 SECONDS)
 
-/datum/antagonist/dreamer/proc/cant_wake_up()
-	if(!iscarbon(owner?.current))
+/datum/antagonist/maniac/proc/cant_wake_up(mob/living/dreamer)
+	if(!iscarbon(dreamer))
 		return
-	to_chat(owner.current, "<span class='deadsay'><span class='big bold'>I CAN'T WAKE UP.</span></span>")
-	sleep(20)
-	to_chat(owner.current, "<span class='deadsay'><span class='big bold'>ICANTWAKEUP</span></span>")
-	sleep(10)
-	var/mob/living/carbon/dreamer = owner.current
+	to_chat(dreamer, "<span class='deadsay'><span class='reallybig'>I CAN'T WAKE UP.</span></span>")
+	sleep(2 SECONDS)
+	for(var/i in 1 to 10)
+		to_chat(dreamer, "<span class='deadsay'><span class='reallybig'>ICANTWAKEUP</span></span>")
+		sleep(0.5 SECONDS)
 	var/obj/item/organ/brain/brain = dreamer.getorganslot(ORGAN_SLOT_BRAIN)
 	var/obj/item/bodypart/head/head = dreamer.get_bodypart(BODY_ZONE_HEAD)
 	if(head)
@@ -259,9 +265,9 @@
 		for(var/datum/objective/objective in objectives)
 			objective.update_explanation_text()
 			if(objective.check_completion())
-				to_chat(world, "<B>Dream #[count]</B>: [objective.explanation_text] <span class='greentext'>TRIUMPH!</span>")
+				to_chat(world, "<B>[objective.flavor] #[count]</B>: [objective.explanation_text] <span class='greentext'>TRIUMPH!</span>")
 			else
-				to_chat(world, "<B>Dream #[count]</B>: [objective.explanation_text] <span class='redtext'>Failure.</span>")
+				to_chat(world, "<B>[objective.flavor] #[count]</B>: [objective.explanation_text] <span class='redtext'>Failure.</span>")
 				traitorwin = FALSE
 			count += objective.triumph_count
 

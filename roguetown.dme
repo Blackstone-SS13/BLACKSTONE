@@ -8,7 +8,6 @@
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "_maps\_basemap.dm"
-#include "_maps\roguetown2.dm"
 #include "code\__byond_version_compat.dm"
 #include "code\_compile_options.dm"
 #include "code\rt.dm"
@@ -1553,8 +1552,11 @@
 #include "code\modules\antagonists\roguetown\villain\werewolf.dm"
 #include "code\modules\antagonists\roguetown\villain\zombie.dm"
 #include "code\modules\antagonists\roguetown\villain\maniac\maniac.dm"
+#include "code\modules\antagonists\roguetown\villain\maniac\maniac_items.dm"
 #include "code\modules\antagonists\roguetown\villain\maniac\maniac_life.dm"
-#include "code\modules\antagonists\roguetown\villain\maniac\wonders.dm"
+#include "code\modules\antagonists\roguetown\villain\maniac\maniac_structures.dm"
+#include "code\modules\antagonists\roguetown\villain\maniac\maniac_turfs.dm"
+#include "code\modules\antagonists\roguetown\villain\maniac\maniac_wonders.dm"
 #include "code\modules\antagonists\santa\santa.dm"
 #include "code\modules\antagonists\separatist\separatist.dm"
 #include "code\modules\antagonists\slaughter\slaughter.dm"

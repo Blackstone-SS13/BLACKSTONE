@@ -103,8 +103,18 @@
 		return
 	log_prayer("[src.key]/([src.name]): [msg]")
 
-	msg = "<span class='info'>[real_name] prays: [msg]</span>"
+	var/deity = "to Psydon"
+	if(ishuman(src))
+		var/mob/living/carbon/human/human_user = src
+		deity = "to [human_user.PATRON.name]"
 
+	var/datum/antagonist/maniac/maniac = mind?.has_antag_datum(/datum/antagonist/maniac)
+	if(maniac && (text2num(msg) == maniac.sum_keys))
+		deity = "to THE GODHEAD"
+		maniac.wake_up()
+
+	msg = "<span class='info'>[real_name] prays[deity]: [msg]</span>"
+	
 	for(var/client/C in GLOB.admins)
 		if(C.prefs.chat_toggles & CHAT_PRAYER)
 			to_chat(C, msg)

@@ -64,3 +64,4 @@
 /datum/objective/maniac
 	name = "WAKE UP"
 	explanation_text = "FOLLOWING my HEART shall be the WHOLE of the law."
+	flavor = "Dream"

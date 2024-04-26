@@ -2,7 +2,7 @@
 
 //Processing procs related to dreamer, so he hallucinates and shit
 /datum/antagonist/maniac/process()
-	if(!owner.current)
+	if(!owner.current || triumphed)
 		STOP_PROCESSING(SSobj, src)
 		return
 	handle_visions(owner.current)
@@ -176,14 +176,14 @@
 		return
 	//Floors go crazier go stupider
 	for(var/turf/open/floor in view(dreamer))
-		if(!prob(15))
+		if(!prob(25))
 			continue
 		INVOKE_ASYNC(src, PROC_REF(handle_waking_up_floor), floor, dreamer)
 
 /datum/antagonist/maniac/proc/handle_waking_up_floor(turf/open/floor, mob/living/dreamer)
-	var/mutable_appearance/fake_floor = image('icons/turf/floors.dmi', floor,  pick("rcircuitanim", "gcircuitanim"), floor.layer + 0.1)
+	var/mutable_appearance/fake_floor = image('icons/roguetown/maniac/dreamer_floors.dmi', floor,  pick("rcircuitanim", "gcircuitanim"), floor.layer + 0.1)
 	dreamer.client.images += fake_floor
-	var/offset = pick(-1, 1)
+	var/offset = pick(-1, 1, 2)
 	var/disappearfirst = 3 SECONDS
 	animate(fake_floor, pixel_y = offset, time = disappearfirst, flags = ANIMATION_RELATIVE)
 	sleep(disappearfirst)

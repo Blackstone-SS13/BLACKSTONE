@@ -13,6 +13,7 @@
 #define RTRAIT_HEAVYARMOR				"Plate Training"
 #define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
 #define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
+#define RTRAIT_MANIAC_AWOKEN					"Awoken"
 
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
 #define TRAIT_NOFATSTAM				"nofatstam" //for ai
@@ -28,6 +29,7 @@
 #define TRAIT_IWASREVIVED "iwasrevived" //prevents PQ gain from reviving the same person twice
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
 #define TRAIT_SCHIZO_AMBIENCE "schizo_ambience" //replaces all ambience with creepy shit
+#define TRAIT_SCREENSHAKE "screenshake" //screen will always be shaking, you cannot stop it
 
 GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_WEBWALK = "I can move freely between webs.",
@@ -43,6 +45,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
 	RTRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
 	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
+	RTRAIT_MANIAC_AWOKEN = "I am <b>WAKING UP</b> and the sheeple know this. They will resist.",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "I can't sleep.",

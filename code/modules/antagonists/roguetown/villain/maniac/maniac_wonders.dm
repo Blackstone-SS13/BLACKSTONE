@@ -54,9 +54,6 @@
 	icon = 'icons/roguetown/maniac/creations.dmi'
 	icon_state = "creation1"
 	resistance_flags = INDESTRUCTIBLE
-	max_integrity = INFINITY
-	obj_integrity = INFINITY
-	integrity_failure = INFINITY
 	density = TRUE
 	anchored = TRUE
 	/// The maniac that made this structure
