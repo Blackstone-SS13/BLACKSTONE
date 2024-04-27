@@ -167,7 +167,7 @@
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30
 		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
-			if (prob(round(max(dam / 4, 1), 1)))
+			if (prob(round(max(dam / 3, 1), 1)))
 				if(!can_bloody_wound())
 					return FALSE
 				var/organ_spilled = FALSE
@@ -206,7 +206,7 @@
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					return TRUE
 				return FALSE
-		if(prob(round(max(dam / 3, 1), 1)))
+		if(prob(round(max(dam / 4, 1), 1)))
 			var/foundy
 			for(var/datum/wound/artery/A in wounds)
 				foundy= TRUE

@@ -228,7 +228,7 @@
 			return FALSE
 		L.adjust_fire_stacks(5)
 		L.IgniteMob()
-		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, ExtinguishMob)), 4 SECONDS)
+		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob/living, ExtinguishMob)), 5 SECONDS)
 		return TRUE
 
 	// Spell interaction with ignitable objects (burn wooden things, light torches up)
@@ -588,6 +588,6 @@
 	var/turf/T = user.loc
 	for(var/X in GLOB.cardinals)
 		var/turf/TT = get_step(T, X)
-		if(!isclosedturf(TT))
+		if(!isclosedturf(TT) && !locate(/obj/structure/glowshroom) in TT)
 			new /obj/structure/glowshroom(TT)
 	return TRUE

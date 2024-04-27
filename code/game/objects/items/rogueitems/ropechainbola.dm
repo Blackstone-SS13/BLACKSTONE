@@ -1,7 +1,7 @@
 
 /obj/item/rope
 	name = "rope"
-	desc = ""
+	desc = "A woven hemp rope."
 	gender = PLURAL
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "rope"
@@ -126,7 +126,7 @@
 
 /obj/item/rope/chain
 	name = "chain"
-	desc = ""
+	desc = "A heavy steel chain."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "chain"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS

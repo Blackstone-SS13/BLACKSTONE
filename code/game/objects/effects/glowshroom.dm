@@ -31,13 +31,14 @@
 	if(isliving(mover) && mover.z == z)
 //		var/throwdir = get_dir(src, mover)
 		var/mob/living/L = mover
-		if(L.electrocute_act(30, src))
-			L.consider_ambush()
-			if(L.throwing)
-				L.throwing.finalize(FALSE)
-//			if(mover.loc != loc && L.stat == CONSCIOUS)
-//				L.throw_at(get_step(L, throwdir), 1, 1, L, spin = FALSE)
-			return FALSE
+		if(L.PATRON != "Dendor") //Dendor kneestinger immunity
+			if(L.electrocute_act(30, src)) 
+				L.consider_ambush()
+				if(L.throwing)
+					L.throwing.finalize(FALSE)
+	//			if(mover.loc != loc && L.stat == CONSCIOUS)
+	//				L.throw_at(get_step(L, throwdir), 1, 1, L, spin = FALSE)
+				return FALSE
 	. = ..()
 
 /obj/structure/glowshroom/Crossed(AM as mob|obj)

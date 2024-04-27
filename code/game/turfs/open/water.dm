@@ -15,7 +15,7 @@
 /turf/open/water
 	gender = PLURAL
 	name = "water"
-	desc = ""
+	desc = "Good enough to drink, wet enough to douse fires."
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "together"
 	baseturfs = /turf/open/water
@@ -222,7 +222,7 @@
 
 /turf/open/water/bath
 	name = "water"
-	desc = ""
+	desc = "Faintly yellow colored.. Suspicious."
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "bathtileW"
 	water_level = 2
@@ -236,7 +236,7 @@
 
 /turf/open/water/sewer
 	name = "sewage"
-	desc = ""
+	desc = "This dark water smells like dead rats and sulphur!"
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "pavingW"
 	water_level = 1
@@ -252,7 +252,7 @@
 
 /turf/open/water/swamp
 	name = "murk"
-	desc = ""
+	desc = "Weeds and algae cover the surface of the water."
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "dirtW2"
 	water_level = 2
@@ -289,6 +289,7 @@
 
 /turf/open/water/swamp/deep
 	name = "murk"
+	desc = "Deep water with several weeds and algae on the surface."
 	icon_state = "dirtW"
 	water_level = 3
 	water_color = "#705a43"
@@ -317,7 +318,7 @@
 
 /turf/open/water/cleanshallow
 	name = "water"
-	desc = ""
+	desc = "Clear and shallow water, what a blessing!"
 	icon = 'icons/turf/roguefloor.dmi'
 	icon_state = "rockw2"
 	water_level = 2
@@ -333,6 +334,7 @@
 
 /turf/open/water/river
 	name = "river"
+	desc = "Crystal clear water! Flowing swiflty along the river."
 	icon_state = "rivermove"
 	icon = 'icons/turf/roguefloor.dmi'
 	water_level = 3
