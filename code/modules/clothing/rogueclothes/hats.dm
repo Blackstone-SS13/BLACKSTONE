@@ -228,6 +228,13 @@
 	flags_inv = HIDEEARS
 	color = "#C0392B"
 
+/obj/item/clothing/head/roguetown/chaperon/councillor
+	name = "chaperon hat"
+	icon_state = "chap_alt"
+	item_state = "chap_alt"
+	flags_inv = HIDEEARS
+	color = "#7dcea0"
+
 /obj/item/clothing/head/roguetown/chef
 	name = "chef's hat"
 	icon_state = "chef"

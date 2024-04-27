@@ -169,8 +169,10 @@
 #define JDO_MAGICIAN 5
 #define JDO_WAPP 6
 #define JDO_BAILIFF 7
-#define JDO_SHERIFF 7.1
-#define JDO_CASTLEGUARD 7.2
+#define JDO_COUNCILLOR 7.1
+
+#define JDO_SHERIFF 7.2
+#define JDO_CASTLEGUARD 7.3
 #define JDO_TOWNGUARD 8
 #define JDO_BOGGUARD 8.1
 #define JDO_GATEMASTER 9

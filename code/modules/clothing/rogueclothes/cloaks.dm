@@ -363,6 +363,9 @@
 /obj/item/clothing/cloak/stabard/surcoat/bailiff
 	color = "#641E16"
 
+/obj/item/clothing/cloak/stabard/surcoat/councillor
+	color = "#2d2d2d"
+
 /obj/item/clothing/cloak/stabard/surcoat/attack_right(mob/user)
 	if(picked)
 		return
