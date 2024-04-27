@@ -14,7 +14,7 @@
 	var/list/word_replacements = list(
 			"kill" = "hug",
 			"guard" = "mapper"
-
+			"can't" = "shan't"
 
 	)
  /datum/language/thieves_cant/proc/translate_word(word)
@@ -26,9 +26,14 @@
 	var/list/translated_words = list()
 	
 	for (var/word in words)
-		var/lowered_word = lowertext(word)
-		var/translated_word = translate_word(lowered_word)
-		translated_words += translated_word
+		var/original_word = word
+		var/lowered_word= lowertext(word)
+
+		var/translated_word = translate_word(lower_word) 
+
+		if (original_word[1] == uppertext(original_word[1]))
+			translate_word = uppertext(translated_word[1]) + substr(translated_word, 2)
+			translated_words += translated_word
+
 	speech_args[SPEECH_MESSAGE] = jointext(translated_words, " ")
 	return ..()
-
