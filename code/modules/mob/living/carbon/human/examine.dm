@@ -50,7 +50,7 @@
 			if(gender == FEMALE && J.f_title)
 				used_title = J.f_title
 			if(used_title == "Adventurer")
-				used_title = advjob
+		//		used_title = advjob muhahahaha, no more shift-click examining rogues.
 				. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the wandering [race_name] [used_title].")
 			else
 				if(islatejoin)
