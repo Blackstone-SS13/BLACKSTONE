@@ -28,12 +28,14 @@
 	for (var/word in words)
 		var/original_word = word
 		var/lowered_word= lowertext(word)
-
+		var/all_uppercase = (original_word == uppertext(original_owrd)
 		var/translated_word = translate_word(lower_word) 
-
-		if (original_word[1] == uppertext(original_word[1]))
+	
+		if (all_uppercase)
+			translated_word = uppertext(translated_word)
+		else if (original_word[1] == uppertext(original_word[1]))
 			translate_word = uppertext(translated_word[1]) + substr(translated_word, 2)
-			translated_words += translated_word
 
+		translated_words += translated_word
 	speech_args[SPEECH_MESSAGE] = jointext(translated_words, " ")
 	return ..()
