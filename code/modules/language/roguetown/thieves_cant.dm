@@ -5,8 +5,7 @@
 	ask_verb = "asks"
 	exclaim_verb = "yells"
 	key = "t"
-	flags = LANGUAGE_HIDE_ICON_IF_UNDERSTOOD | 
-LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD
+	flags = LANGUAGE_HIDE_ICON_IF_UNDERSTOOD | LANGUAGE_HIDE_ICON_IF_NOT_UNDERSTOOD
 	default_priority = 100
 	icon_state = "galcom"
 	spans = list(SPAN_THIEF)
