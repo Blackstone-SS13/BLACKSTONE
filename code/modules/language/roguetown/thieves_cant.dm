@@ -13,7 +13,7 @@
 
 	var/list/word_replacements = list(
 			"kill" = "hug",
-			"guard" = "mapper"
+			"guard" = "mapper",
 			"can't" = "shan't"
 
 	)
