@@ -28,7 +28,7 @@
 	for (var/word in words)
 		var/original_word = word
 		var/lowered_word= lowertext(word)
-		var/all_uppercase = (original_word == uppertext(original_owrd)
+		var/all_uppercase = (original_word == uppertext(original_word)
 		var/translated_word = translate_word(lower_word) 
 	
 		if (all_uppercase)
