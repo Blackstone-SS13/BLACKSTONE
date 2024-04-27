@@ -27,7 +27,7 @@
 
 		for(var/word in words)
 			var/lowered_word = lowertext(word)
-			translated_words += translate_word(lowered_word_
+			translated_words += translate_word(lowered_word)
 		speech_args[SPEECH_MESSAGE] = jointext(translated_words, " ")
 		return ..()
 
