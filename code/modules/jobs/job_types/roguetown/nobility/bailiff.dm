@@ -32,7 +32,7 @@
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/bailiff
 	gloves = /obj/item/clothing/gloves/roguetown/angle
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
-	backpack_contents = list(/obj/item/keyring/sheriff = 1)
+	backpack_contents = list(/obj/item/keyring/bailiff = 1)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)

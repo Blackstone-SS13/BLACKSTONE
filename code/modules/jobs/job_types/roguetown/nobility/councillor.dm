@@ -33,7 +33,7 @@
 	beltl = /obj/item/keyring/guardcastle
 	beltr = /obj/item/rogueweapon/huntingknife/idagger/steel
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/councillor
-	backpack_contents = list(/obj/item/keyring/sheriff = 1)
+	backpack_contents = list(/obj/item/keyring/councillor = 1)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
