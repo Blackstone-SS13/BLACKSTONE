@@ -12,7 +12,7 @@
 	syllables = list()
 
 	var/list/word_replacements = list(
-			"kill" = "hug"
+			"kill" = "hug",
 			"guard" = "mapper"
 
 
