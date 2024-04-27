@@ -17,24 +17,10 @@
 
 
 	)
-	proc/translate_word(word)
-		return word_replacements[word] ? word_replacements[word] :word
-
-	proc/handle_speech(datum/source, list/speech_args)
-		var/message = speech_args[SPEECH_MESSAGE]
-		var/list/words = splittext(message, " ")
-		var/list/translated_words = []
-
-		for(var/word in words)
-			var/lowered_word = lowertext(word)
-			translated_words += translate_word(lowered_word)
-		speech_args[SPEECH_MESSAGE] = jointext(translated_words, " ")
-		return ..()
-
-/* /datum/language/thieves_cant/translate_word(var/word)
+ /datum/language/thieves_cant/proc/translate_word(word)
 	return word_replacements[word] ? word_replacements[word] : word
 
-/datum/language/thieves_cant/handle_speech(datum/source, list/speech_args)
+/datum/language/thieves_cant/proc/handle_speech(datum/source, list/speech_args)
 	var/message = speech_args[SPEECH_MESSAGE]
 	var/list/words = splittext(message, " ")
 	var/list/translated_words = list()
@@ -45,4 +31,4 @@
 		translated_words += translated_word
 	speech_args[SPEECH_MESSAGE] = jointext(translated_words, " ")
 	return ..()
-*\
+
