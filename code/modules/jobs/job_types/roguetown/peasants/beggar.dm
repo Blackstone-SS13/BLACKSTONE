@@ -57,7 +57,7 @@
 		r_hand = /obj/item/rogueweapon/woodstaff/wise // dog beating staff
 		l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/special // dog butchering knife
 		if(H.mind)
-			H.mind.add_language(/datum/language/thieves_cant)
+			H.mind.grant_language(/datum/language/thieves_cant)
 			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(2,5), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/stealing, rand(2,5), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(2,5), TRUE)
