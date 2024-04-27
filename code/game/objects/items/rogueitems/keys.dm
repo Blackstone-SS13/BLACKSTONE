@@ -65,6 +65,11 @@
 	lockid = "vault"
 
 /obj/item/roguekey/sheriff
+	name = "sheriff's key"
+	icon_state = "cheesekey"
+	lockid = "sheriff"
+
+/obj/item/roguekey/bailiff
 	name = "bailiff's key"
 	icon_state = "cheesekey"
 	lockid = "sheriff"

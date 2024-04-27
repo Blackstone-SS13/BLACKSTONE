@@ -313,7 +313,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	"Templar",
 	"Bog Guard",
 	"Bog Master",
-	"Knight")
+	"Knight",
+	"Bailiff")
 	antag_candidates = get_players_for_role(ROLE_NBEAST)
 	var/datum/mind/villain = pick_n_take(antag_candidates)
 	if(villain)
