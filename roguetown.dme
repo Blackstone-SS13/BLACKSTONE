@@ -2207,6 +2207,7 @@
 #include "code\modules\language\roguetown\hellspeak.dm"
 #include "code\modules\language\roguetown\orc.dm"
 #include "code\modules\language\roguetown\sandspeak.dm"
+#include "code\modules\language\roguetown\thieves_cant.dm"
 #include "code\modules\language\roguetown\undead.dm"
 #include "code\modules\library\book.dm"
 #include "code\modules\library\lib_codex_gigas.dm"
