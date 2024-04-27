@@ -104,6 +104,9 @@
 		if(prob(50))
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant/l
 	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, rand(0,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, rand(0,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, rand(0,3), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(1,5), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/stealing, rand(1,5), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(1,5), TRUE)
@@ -116,10 +119,11 @@
 		l_hand = /obj/item/rogueweapon/mace/woodclub
 	else
 		l_hand = null
-	H.change_stat("strength", -1)
-	H.change_stat("intelligence", -4)
-	H.change_stat("constitution", -3)
-	H.change_stat("endurance", -3)
+	H.change_stat("strength", -rand(0, 1))
+	H.change_stat("intelligence", -rand(0, 4))
+	H.change_stat("constitution", -rand(0, 3))
+	H.change_stat("endurance", -rand(0, 3))
+	H.change_stat("speed", rand(0, 3))
 
 /datum/outfit/job/roguetown/vagrant
 	name = "Beggar"
