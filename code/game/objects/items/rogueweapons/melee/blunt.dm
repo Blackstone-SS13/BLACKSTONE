@@ -4,7 +4,7 @@
 	possible_item_intents = list(/datum/intent/mace/strike)
 	gripped_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
 	name = "mace"
-	desc = ""
+	desc = "Helps anyone fall asleep."
 	icon_state = "mace"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	item_state = "mace_greyscale"
@@ -30,7 +30,7 @@
 	force = 25
 	force_wielded = 30
 	name = "bell ringer"
-	desc = ""
+	desc = "This heavy hammer is used to ring the church's bell."
 	icon_state = "churchmace"
 	wbalance = -1
 	smeltresult = /obj/item/ingot/steel
@@ -40,8 +40,8 @@
 /obj/item/rogueweapon/mace/steel
 	force = 30
 	force_wielded = 40
-	name = "mace"
-	desc = ""
+	name = "steel mace"
+	desc = "This steel mace is objectively superior to an iron one."
 	icon_state = "smace"
 	wbalance = -1
 	smeltresult = /obj/item/ingot/steel
@@ -136,8 +136,8 @@
 /obj/item/rogueweapon/mace/woodclub
 	force = 15
 	force_wielded = 18
-	name = "club"
-	desc = ""
+	name = "wooden club"
+	desc = "Unga! Unga to the head!"
 	icon_state = "club1"
 	//dropshrink = 0.75
 	wbalance = 0
@@ -161,11 +161,11 @@
 
 
 /obj/item/rogueweapon/mace/cudgel
-	force = 25
-	force_wielded = 25
 	name = "cudgel"
-	icon_state = "cudgel"
 	desc = "A stubby little club for brigands."
+	force = 25
+	icon_state = "cudgel"
+	force_wielded = 25
 	gripped_intents = null
 	smeltresult = /obj/item/ash
 	wlength = WLENGTH_SHORT
@@ -184,10 +184,10 @@
 				return list("shrink" = 0.4,"sx" = -3,"sy" = -4,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 70,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 1,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/rogueweapon/mace/wsword
+	name = "wooden sword"
+	desc = "This wooden sword is great for training."
 	force = 5
 	force_wielded = 8
-	name = "wooden sword"
-	desc = ""
 	icon_state = "wsword"
 	//dropshrink = 0.75
 	possible_item_intents = list(/datum/intent/mace/strike/wood)
