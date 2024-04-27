@@ -124,6 +124,8 @@
 	H.change_stat("constitution", -rand(0, 3))
 	H.change_stat("endurance", -rand(0, 3))
 	H.change_stat("speed", rand(0, 3))
+	if(prob(20))
+		ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/vagrant
 	name = "Beggar"
