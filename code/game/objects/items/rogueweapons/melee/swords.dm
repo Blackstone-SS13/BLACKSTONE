@@ -36,6 +36,7 @@
 
 /obj/item/rogueweapon/sword/decorated
 	name = "engraved sword"
+	desc = "A valuable sword for celebrations and rites."
 	icon_state = "decsword1"
 	sellprice = 140
 
@@ -88,7 +89,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/roguebig_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/roguebig_righthand.dmi'
 	name = "bastard sword"
-	desc = ""
+	desc = "A longsword that can chop with ease."
 	parrysound = "bladedmedium"
 	swingsound = BLADEWOOSH_LARGE
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
@@ -245,7 +246,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/roguebig_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/roguebig_righthand.dmi'
 	name = "kilij scimitar"
-	desc = ""
+	desc = "A scimitar with elegant curves and deadly sharpness."
 	parrysound = "bladedmedium"
 	swingsound = BLADEWOOSH_LARGE
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
@@ -284,7 +285,7 @@
 	lefthand_file = 'icons/mob/inhands/weapons/roguebig_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/roguebig_righthand.dmi'
 	name = "shalal saber"
-	desc = ""
+	desc = "Lightweight, slender and curved."
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	swingsound = BLADEWOOSH_SMALL
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
@@ -369,16 +370,39 @@
 
 /obj/item/rogueweapon/sword/iron
 	name = "sword"
-	desc = "A simple iron sword."
+	desc = "The most classical war weapon."
 	icon_state = "isword"
 	minstr = 6
 	smeltresult = /obj/item/ingot/iron
 	max_integrity = 100
 	sellprice = 10
 
+/obj/item/rogueweapon/sword/iron/short
+	name = "short sword"
+	desc = "An archaic iron sword."
+	icon_state = "iswordshort"
+	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
+	gripped_intents = null
+	minstr = 5
+	wdefense = 3
+
+/obj/item/rogueweapon/sword/iron/short/chipped
+	force = 17
+	desc = "An ancient-looking iron sword."
+	icon_state = "iswordshort_d"
+	max_integrity = 75
+
+/datum/intent/sword/cut/short
+	clickcd = 10
+	damfactor = 0.9
+
+/datum/intent/sword/thrust/short
+	clickcd = 10
+	damfactor = 1.1
+
 /obj/item/rogueweapon/sword/sabre
 	name = "sabre"
-	desc = "A swift saber."
+	desc = "A swift saber. Parries realiantly and strikes swiftly"
 	icon_state = "saber"
 	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust)
 	gripped_intents = null
@@ -397,7 +421,7 @@
 
 /obj/item/rogueweapon/sword/rapier
 	name = "rapier"
-	desc = "A precise raper."
+	desc = "A precise rapier, a good stabbing weapon."
 	icon_state = "rapier"
 	possible_item_intents = list(/datum/intent/sword/thrust/rapier, /datum/intent/sword/cut/rapier)
 	gripped_intents = null
@@ -439,6 +463,7 @@
 /obj/item/rogueweapon/sword/sabre/elf
 	force = 25
 	name = "elvish saber"
+	desc = "This finely crafted saber is of elven smithcraft."
 	icon_state = "esaber"
 	item_state = "esaber"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'

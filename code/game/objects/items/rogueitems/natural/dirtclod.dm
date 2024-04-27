@@ -1,6 +1,6 @@
 /obj/item/natural/dirtclod
 	name = "clod"
-	desc = ""
+	desc = "A handful of dirt clod."
 	icon_state = "clod1"
 	dropshrink = 0
 	throwforce = 0
@@ -46,7 +46,7 @@
 
 /obj/structure/fluff/clodpile
 	name = "dirt pile"
-	desc = ""
+	desc = "A pile of dirt."
 	icon_state = "clodpile"
 	var/dirtamt = 5
 	icon = 'icons/roguetown/items/natural.dmi'

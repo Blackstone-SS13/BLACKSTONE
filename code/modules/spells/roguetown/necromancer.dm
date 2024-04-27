@@ -38,7 +38,7 @@
 	releasedrain = 30
 	chargedrain = 10
 	chargetime = 15
-	range = 15
+	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = null
@@ -54,8 +54,8 @@
 		var/mob/living/carbon/target = targets[1]
 		target.visible_message("<span class='info'>A loud crunching sound has come from [target]!</span>", "<span class='userdanger'>I feel arcane teeth biting into my eyes!</span>")
 		target.adjustBruteLoss(30)
-		target.blind_eyes(20)
-		target.blur_eyes(90)
+		target.blind_eyes(1)
+		target.blur_eyes(10)
 		return TRUE
 	else
 		return FALSE

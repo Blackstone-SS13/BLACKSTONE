@@ -1,6 +1,7 @@
 
 /obj/structure/flora/roguegrass/maneater
 	name = "grass"
+	desc = "Green and vivid.. Did i see.. a tendril?"
 	icon = 'icons/roguetown/mob/monster/maneater.dmi'
 	icon_state = "maneater-hidden"
 	max_integrity = 5
@@ -94,6 +95,7 @@
 /obj/structure/flora/roguegrass/maneater/real/update_icon()
 	if(obj_broken)
 		name = "MANEATER"
+		desc = "This cunning creature is thankfully defeated." // i think this might break, dunno
 		icon_state = "maneater-dead"
 		return
 	if(aggroed)

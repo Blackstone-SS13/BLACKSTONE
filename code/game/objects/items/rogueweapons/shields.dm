@@ -54,7 +54,7 @@
 
 /obj/item/rogueweapon/shield/wood
 	name = "wooden shield"
-	desc = ""
+	desc = "A sturdy wooden shield. Will block anything you can imagine."
 	icon_state = "woodsh"
 	dropshrink = 0.8
 	wdefense = 15
@@ -87,7 +87,7 @@
 
 /obj/item/rogueweapon/shield/tower
 	name = "tower shield"
-	desc = ""
+	desc = "A huge iron shield!"
 	icon_state = "shield_tower"
 	force = 15
 	throwforce = 10
@@ -111,7 +111,7 @@
 
 /obj/item/rogueweapon/shield/tower/metal
 	name = "kite shield"
-	desc = ""
+	desc = "A kite-shaped iron shield. Reliable and sturdy."
 	icon_state = "ironsh"
 	force = 20
 	throwforce = 10
