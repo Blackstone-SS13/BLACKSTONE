@@ -85,12 +85,6 @@
 				charflaw.flaw_on_life(src)
 			if(health <= 0)
 				adjustOxyLoss(0.5)
-			else
-				if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE) && !(NOBLOOD in dna.species.species_traits))
-					if(blood_volume <= BLOOD_VOLUME_SURVIVE)
-						adjustOxyLoss(0.5)
-						if(blood_volume <= 20)
-							adjustOxyLoss(5)
 			if(!client && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 				if(mob_timers["slo"])
 					if(world.time > mob_timers["slo"] + 90 SECONDS)
@@ -382,7 +376,7 @@
 	//Puke if toxloss is too high
 	if(!stat)
 		if(prob(33))
-			if(getToxLoss() >= 75 && blood_volume)
+			if(getToxLoss() >= 75)
 				mob_timers["puke"] = world.time
 				vomit(1, blood = TRUE)
 

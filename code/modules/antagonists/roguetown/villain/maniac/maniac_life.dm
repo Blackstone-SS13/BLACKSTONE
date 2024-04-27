@@ -6,11 +6,12 @@
 		STOP_PROCESSING(SSobj, src)
 		return
 	handle_visions(owner.current)
-	handle_hallucinations(owner.current)
-	handle_floors(owner.current)
-	handle_walls(owner.current)
 	if(waking_up)
 		handle_waking_up(owner.current)
+	else
+		handle_hallucinations(owner.current)
+	handle_floors(owner.current)
+	handle_walls(owner.current)
 
 /datum/antagonist/maniac/proc/handle_visions(mob/living/dreamer)
 	//Jumpscare funny
