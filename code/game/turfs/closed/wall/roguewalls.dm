@@ -264,7 +264,7 @@
 	icon_state = "decostone-l"
 
 /obj/structure/thronething
-	name = "decorated Stone Wall" // what is thronething??
+	name = "decorated stone wall" // what is thronething??
 	icon = 'icons/turf/roguewall.dmi'
 	max_integrity = 0
 	opacity = 0
