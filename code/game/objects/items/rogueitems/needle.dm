@@ -86,7 +86,6 @@
 	for(var/i = 1 to 100)
 		if(do_after(doctor, 20, target = patient))
 			if(target_wound.progress == 100)
-				target_wound.sewn()
 				doctor.mind.adjust_experience(/datum/skill/misc/medicine, doctor.STAINT * 5)
 				use(1)
 				patient.update_damage_overlays()
@@ -95,6 +94,7 @@
 				else
 					doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient]'s [affecting].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient]'s [affecting].</span>")
 					log_combat(doctor, patient, "sew", "needle")
+				target_wound.sewn()
 				return
 			if(doctor.mind)
 				playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
