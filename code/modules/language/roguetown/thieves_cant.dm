@@ -12,7 +12,8 @@
 	syllables = list()
 
 	var/list/word_replacements = list(
-			
+			"kill" = "hug"
+			"guard" = "mapper"
 
 
 	)
