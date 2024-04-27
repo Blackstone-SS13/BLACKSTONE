@@ -50,3 +50,4 @@
 				armor = /obj/item/clothing/suit/roguetown/shirt/robe/wizard
 				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MINDSHIELD, TRAIT_GENERIC)
