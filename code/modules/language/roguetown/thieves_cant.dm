@@ -17,7 +17,21 @@
 
 
 	)
-/datum/language/thieves_cant/translate_word(var/word)
+	proc/translate_word(word)
+		return word_replacements[word] ? word_replacements[word] :word
+
+	proc/handle_speech(datum/source, list/speech_args)
+		var/message = speech_args[SPEECH_MESSAGE]
+		var/list/words = splittext(message, " ")
+		var/list/translated_words = []
+
+		for(var/word in words)
+			var/lowered_word = lowertext(word)
+			translated_words += translate_word(lowered_word_
+		speech_args[SPEECH_MESSAGE] = jointext(translated_words, " ")
+		return ..()
+
+/* /datum/language/thieves_cant/translate_word(var/word)
 	return word_replacements[word] ? word_replacements[word] : word
 
 /datum/language/thieves_cant/handle_speech(datum/source, list/speech_args)
@@ -31,3 +45,4 @@
 		translated_words += translated_word
 	speech_args[SPEECH_MESSAGE] = jointext(translated_words, " ")
 	return ..()
+*\
