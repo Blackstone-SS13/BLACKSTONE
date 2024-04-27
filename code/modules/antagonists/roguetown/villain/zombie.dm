@@ -33,7 +33,6 @@
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLCOCKBLOCK,
 		TRAIT_ZOMBIE_SPEECH,
-		TRAIT_LANGUAGE_BARRIER,
 	)
 
 /datum/antagonist/zombie/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
