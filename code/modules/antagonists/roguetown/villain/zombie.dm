@@ -82,6 +82,8 @@
 		zombie.STASPD = STASPD
 		zombie.STAINT = STAINT
 		zombie.remove_client_colour(/datum/client_colour/monochrome)
+		for(var/trait in traits_applied)
+			REMOVE_TRAIT(zombie, trait, "[type]")
 	return ..()
 
 /datum/antagonist/zombie/proc/transform_zombie()
