@@ -14,8 +14,8 @@
 	tutorial = "You judge the common folk and their wrongdoings if necessary. You help plan with the Councillors or the King on any new issues, laws, judgings, and construction that are required to adapt to the world. You serve on the same level as Sheriff, however unlike him you are from Petty Nobility. You have two assistant Councillors that may serve as jurors to assist you in your job. You are required to collect taxes for the King, judge people, make sure the town and manor are not in decay, and to help plan or construct new buildings. You are allowed some command over Guards, however it is not the focus of your job unless special circumstances are to change this."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/bailiff
-	give_bank_account = 26
-	min_pq = 2
+	give_bank_account = 40
+	min_pq = 5
 
 /datum/outfit/job/roguetown/bailiff/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -47,16 +47,11 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
 		H.change_stat("strength", 5)
 		H.change_stat("perception", 2)
-		H.change_stat("intelligence", 1)
+		H.change_stat("intelligence", 3)
 		H.change_stat("constitution", 1)
 		H.change_stat("endurance", 1)
 		H.change_stat("speed", 1)
 		H.change_stat("fortune", 1)
-	if(H.gender == FEMALE)
-		var/acceptable = list("Tomboy", "Bob", "Curly Short")
-		if(!(H.hairstyle in acceptable))
-			H.hairstyle = pick(acceptable)
-			H.update_hair()
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	H.verbs |= /mob/proc/haltyell
