@@ -53,7 +53,7 @@
 				if(used_title == "Lord of Heartfelt" || used_title == "Hand of Heartfelt")
 					used_title = advjob
 				else
-				. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the wandering [race_name] [used_title].") // Fuck you, guess.
+					. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the wandering [race_name] [used_title].") // Fuck you, guess.
 			else
 				if(islatejoin)
 					. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the returning [race_name] [used_title].")
