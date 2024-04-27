@@ -1,6 +1,6 @@
 /datum/job/roguetown/bailiff
 	title = "Bailiff"
-	flag = SHERIFF
+	flag = BAILIFF
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 1
