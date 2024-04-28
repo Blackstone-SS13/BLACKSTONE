@@ -7,7 +7,7 @@
 	spawn_positions = 1
 
 	allowed_races = list("Humen",
-	"Humen",
+	"Half-Elf",
 	"Aasimar")
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_BAILIFF
