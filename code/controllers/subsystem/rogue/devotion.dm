@@ -92,8 +92,12 @@
 			if(C.devotion >= C.max_devotion)
 				to_chat(src, "<font color='red'>I have reached the limit of my devotion...</font>")
 				break
-			C.update_devotion(2, 2)
-			prayersesh += 2
+			if(C.progression >= C.max_devotion)
+				C.update_devotion(2, 0)
+				prayersesh += 2
+			else
+				C.update_devotion(2, 2)
+				prayersesh += 2
 		else
 			visible_message("[src] concludes their prayer.", "I conclude my prayer.")
 			to_chat(src, "<font color='purple'>I gained [prayersesh] devotion!</font>")
