@@ -180,11 +180,10 @@
 
 /obj/item/grabbing/proc/twistlimb(mob/living/user) //implies limb_grabbed and sublimb are things
 	var/mob/living/carbon/C = grabbed
-	var/armor_block = C.run_armor_check(limb_grabbed, "melee")
 	var/damage = user.get_punch_dmg()
 	playsound(C.loc, "genblunt", 100, FALSE, -1)
 	C.next_attack_msg.Cut()
-	C.apply_damage(damage, BRUTE, limb_grabbed, armor_block)
+	C.apply_damage(damage, BRUTE, limb_grabbed)
 	limb_grabbed.attacked_by(BCLASS_TWIST, damage, user, sublimb_grabbed)
 	C.visible_message("<span class='danger'>[user] twists [C]'s [sublimb_grabbed]![C.next_attack_msg.Join()]</span>", \
 					"<span class='userdanger'>[user] twists my [sublimb_grabbed]![C.next_attack_msg.Join()]</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
