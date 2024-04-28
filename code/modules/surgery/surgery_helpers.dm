@@ -165,7 +165,7 @@
 		if(BODY_ZONE_PRECISE_EARS)
 			if(covered_locations & EARS)
 				return 1
-		if(BODY_ZONE_PRECISE_HAIR)
+		if(BODY_ZONE_PRECISE_SKULL)
 			if(covered_locations & HAIR)
 				return 1
 		if(BODY_ZONE_PRECISE_NOSE)

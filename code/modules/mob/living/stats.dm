@@ -17,7 +17,7 @@
 	var/BUFLUC = 0
 	var/statbuf = FALSE
 	var/list/statindex = list()
-	var/PATRON = null
+	var/datum/patrongods/PATRON = null
 
 /datum/species
 	var/list/specstats = list("strength" = 0, "perception" = 0, "intelligence" = 0, "constitution" = 0, "endurance" = 0, "speed" = 0, "fortune" = 0)

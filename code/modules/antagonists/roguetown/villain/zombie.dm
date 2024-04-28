@@ -19,7 +19,7 @@
 	/// Traits applied to the owner mob
 	var/static/list/traits_applied = list(
 		TRAIT_NOMOOD,
-		TRAIT_NOFATSTAM,
+		RTRAIT_NOFATSTAM,
 		TRAIT_NOLIMBDISABLE,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,

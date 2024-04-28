@@ -366,7 +366,7 @@
 			return "body"
 		if(BODY_ZONE_PRECISE_MOUTH)
 			return "body"
-		if(BODY_ZONE_PRECISE_HAIR)
+		if(BODY_ZONE_PRECISE_SKULL)
 			return "body"
 		if(BODY_ZONE_PRECISE_EARS)
 			return "body"
