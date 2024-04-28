@@ -1858,7 +1858,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!nodmg)
 			if(user.limb_destroyer)
 				var/easy_dismember = HAS_TRAIT(target, TRAIT_EASYDISMEMBER) || affecting.rotted
-				if(prob(damage/2) || (easy_dismember && prob(damage/2))) //try twice
+				var/probability = damage / (2 - easy_dismember)
+				if(HAS_TRAIT(target, TRAIT_HARDDISMEMBER) && !easy_dismember)
+					probability = min(probability, 5)
+				if(prob(probability))
 					if(affecting.brute_dam > 0)
 						if(affecting.dismember())
 							playsound(get_turf(target), "desceration", 80, TRUE)
@@ -2262,15 +2265,16 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	//dismemberment
 	var/bloody = 0
-	var/probability = I.get_dismemberment_chance(affecting)
 	var/easy_dismember = HAS_TRAIT(H, TRAIT_EASYDISMEMBER) || affecting.rotted
-	if(prob(probability) || (easy_dismember && prob(probability))) //try twice
-		if(affecting.brute_dam > 0)
-			if(affecting.dismember(I.damtype, user, selzone))
-				bloody = 1
-				I.add_mob_blood(H)
-				user.update_inv_hands()
-				playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
+	var/probability = I.get_dismemberment_chance(affecting)
+	if(HAS_TRAIT(H, TRAIT_HARDDISMEMBER) && !easy_dismember)
+		probability = min(probability, 5)
+	if(affecting.brute_dam && prob(probability))
+		if(affecting.dismember(I.damtype, user, selzone))
+			bloody = 1
+			I.add_mob_blood(H)
+			user.update_inv_hands()
+			playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
 
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == BODYPART_ORGANIC)

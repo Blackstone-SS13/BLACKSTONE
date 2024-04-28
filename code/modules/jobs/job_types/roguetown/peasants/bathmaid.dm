@@ -31,7 +31,6 @@
 	armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy
 	neck = /obj/item/storage/belt/rogue/pouch
 	backpack_contents = list(/obj/item/roguekey/nightmaiden = 1)
-	ADD_TRAIT(H, RTRAIT_GOODLOVER, TRAIT_GENERIC)
 
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)

@@ -17,6 +17,9 @@
 	var/t_is = p_are()
 	var/obscure_name
 	var/race_name = dna.species.name
+	var/datum/antagonist/maniac/maniac = user.mind?.has_antag_datum(/datum/antagonist/maniac)
+	if(maniac && (user != src))
+		race_name = "disgusting pig"
 
 	var/m1 = "[t_He] [t_is]"
 	var/m2 = "[t_his]"
@@ -70,7 +73,7 @@
 					if(src.skin_tone == skin_tones[tone])
 						skin_tone_seen = lowertext(tone)
 						break
-			var/slop_lore_string = ""
+			var/slop_lore_string = "."
 			if(ishumannorthern(user))
 				var/mob/living/carbon/human/racist = user
 				var/list/user_skin_tones = racist.dna.species.get_skin_list()
@@ -81,8 +84,8 @@
 						break
 				if((user_skin_tone_seen == "lalvestine" && skin_tone_seen == "shalvistine") || \
 					(user_skin_tone_seen == "shalvistine" && skin_tone_seen == "lalvestine"))
-					slop_lore_string = "<span class='danger'> TRAITOR!</span>"
-			. += "<span class='info'>[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen].[slop_lore_string]</span>"
+					slop_lore_string = ", <span class='danger'>A TRAITOR!</span>"
+			. += "<span class='info'>[capitalize(m2)] [skin_tone_wording] is [skin_tone_seen][slop_lore_string]</span>"
 
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
@@ -99,9 +102,11 @@
 				. += "<span class='userdanger'>BANDIT!</span>"
 			if(mind.special_role == "Vampire Lord")
 				. += "<span class='userdanger'>A MONSTER!</span>"
+		if(HAS_TRAIT(src, RTRAIT_MANIAC_AWOKEN))
+			. += "<span class='userdanger'>MANIAC!</span>"
 
 	if(leprosy == 1)
-		. += "<span class='userdanger'>A LEPER...</span>"
+		. += "<span class='deadsay'>A LEPER...</span>"
 
 	if(user != src)
 		var/datum/mind/Umind = user.mind
@@ -364,18 +369,28 @@
 	if (length(msg))
 		. += "<span class='warning'>[msg.Join("")]</span>"
 
-	if(isliving(user))
+	if((user != src) && isliving(user))
 		var/mob/living/L = user
-		if((STASTR - L.STASTR) > 1)
-			if((STASTR - L.STASTR) > 6)
+		var/final_str = STASTR
+		if(HAS_TRAIT(src, RTRAIT_DECEIVING_MEEKNESS))
+			final_str = 10
+		if((final_str - L.STASTR) > 1)
+			if((final_str - L.STASTR) > 6)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much stronger than I.</B></span>"
 			else
 				. += "<span class='warning'>[t_He] look[p_s()] stronger than I.</span>"
-		if((L.STASTR - STASTR) > 1)
-			if((L.STASTR - STASTR) > 6)
+		else if((L.STASTR - final_str) > 1)
+			if((L.STASTR - final_str) > 6)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker.</B></span>"
 			else
 				. += "<span class='warning'>[t_He] look[p_s()] weaker.</span>"
+		else
+			. += "[t_He] look[p_s()] about as strong as I."
+	
+	if(maniac)
+		var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
+		if(heart?.inscryption && (heart.inscryption_key in maniac.key_nums))
+			. += "<span class='danger'>[t_He] know[p_s()] [heart.inscryption_key], I AM SURE OF IT!</span>"
 
 	if(Adjacent(user))
 		. += "<a href='?src=[REF(src)];inspect_limb=1'>Inspect [parse_zone(check_zone(user.zone_selected))]</a>"

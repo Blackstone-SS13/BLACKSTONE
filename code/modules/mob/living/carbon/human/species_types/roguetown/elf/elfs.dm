@@ -21,7 +21,7 @@
 
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP,TRAIT_NIGHT_VISION)
+	inherent_traits = list(TRAIT_NOMOBSWAP)
 	default_features = list("mcolor" = "FFF", "ears" = "Elf", "wings" = "None")
 	use_skintones = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
@@ -132,5 +132,5 @@
 /datum/species/elf/snow/random_surname()
 	return " [pick(world.file2list("strings/rt/names/elf/elfwlast.txt"))]"
 
-//datum/species/elf/snow/get_accent_list()
+//datum/species/elf/snow/get_accent(mob/living/carbon/human/H)
 //	return strings("russian_replacement.json", "russian")

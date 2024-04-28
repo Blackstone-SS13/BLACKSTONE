@@ -40,7 +40,7 @@
 	//subtargets for crits
 	subtargets = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_NECK)
 	//grabtargets for grabs
-	grabtargets = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_HAIR, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
+	grabtargets = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
 	resistance_flags = FLAMMABLE
 
 	var/brainkill = FALSE
@@ -54,7 +54,7 @@
 			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
 		if(BODY_ZONE_PRECISE_NOSE)
 			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
-		if(BODY_ZONE_PRECISE_HAIR)
+		if(BODY_ZONE_PRECISE_SKULL)
 			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/smash)
 		if(BODY_ZONE_PRECISE_L_EYE)
 			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/smash)
