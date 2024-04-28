@@ -2,13 +2,11 @@
 	name = "Bone Chill"
 	overlay_state = "raiseskele"
 	releasedrain = 30
-	chargedrain = 0
 	chargetime = 2
 	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = null
-	req_items = list(/obj/item/clothing/suit/roguetown/shirt/robe/necromancer)
 	sound = 'sound/magic/whiteflame.ogg'
 	associated_skill = /datum/skill/magic/arcane
 	antimagic_allowed = TRUE
@@ -36,7 +34,6 @@
 	name = "Eyebite"
 	overlay_state = "raiseskele"
 	releasedrain = 30
-	chargedrain = 10
 	chargetime = 15
 	range = 7
 	warnie = "sydwarning"
@@ -68,7 +65,6 @@
 	overlay_state = "raiseskele"
 	sound = list('sound/magic/magnet.ogg')
 	releasedrain = 40
-	chargedrain = 10
 	chargetime = 60
 	warnie = "spellwarning"
 	no_early_release = TRUE
@@ -96,7 +92,6 @@
 	sound = list('sound/misc/portal_enter.ogg')
 	active = FALSE
 	releasedrain = 30
-	chargedrain = 0
 	chargetime = 10
 	warnie = "spellwarning"
 	no_early_release = TRUE
