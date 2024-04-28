@@ -166,6 +166,7 @@
 	bleed_rate = 0.01
 	woundpain = max(woundpain-10, 0)
 	can_sew = FALSE
+	name = name + "<span class='green'>(sewn)</span>"
 	return
 
 /datum/wound/cut
