@@ -7,7 +7,7 @@
 	gripped_intents = null
 	dropshrink = 0.75
 	possible_item_intents = list(INTENT_GENERIC)
-	force = 20
+	force = 18
 	throwforce = 20
 	slot_flags = ITEM_SLOT_MOUTH
 	obj_flags = null
@@ -38,7 +38,7 @@
 	dropshrink = 0
 	throwforce = 25
 	throw_range = 2
-	force = 15
+	force = 18
 	obj_flags = CAN_BE_HIT
 	force_wielded = 15
 	gripped_intents = list(INTENT_GENERIC)
