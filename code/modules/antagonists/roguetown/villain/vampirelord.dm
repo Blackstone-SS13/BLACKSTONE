@@ -63,7 +63,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		QDEL_NULL(eyes)
 	eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(owner.current)
-	owner.current.AddSpell(new /obj/effect/proc_holder/spell/targeted/transfix)
+	// owner.current.AddSpell(new /obj/effect/proc_holder/spell/targeted/transfix)
 	owner.current.verbs |= /mob/living/carbon/human/proc/vamp_regenerate
 	owner.current.verbs |= /mob/living/carbon/human/proc/vampire_telepathy
 	vamp_look()
@@ -430,8 +430,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 				S.unlocked = TRUE
 			owner.current.verbs |= /mob/living/carbon/human/proc/blood_strength
 			owner.current.verbs |= /mob/living/carbon/human/proc/blood_celerity
-			owner.current.RemoveSpell(/obj/effect/proc_holder/spell/targeted/transfix)
-			owner.current.AddSpell(new /obj/effect/proc_holder/spell/targeted/transfix/master)
+			// owner.current.RemoveSpell(/obj/effect/proc_holder/spell/targeted/transfix)
+			// owner.current.AddSpell(new /obj/effect/proc_holder/spell/targeted/transfix/master)
 			for(var/S in MOBSTATS)
 				owner.current.change_stat(S, 2)
 			for(var/obj/structure/vampire/bloodpool/B in GLOB.vampire_objects)
