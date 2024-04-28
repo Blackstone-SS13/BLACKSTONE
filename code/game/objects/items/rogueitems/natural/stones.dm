@@ -7,8 +7,8 @@
 	gripped_intents = null
 	dropshrink = 0.75
 	possible_item_intents = list(INTENT_GENERIC)
-	force = 10
-	throwforce = 15
+	force = 20
+	throwforce = 20
 	slot_flags = ITEM_SLOT_MOUTH
 	obj_flags = null
 	w_class = WEIGHT_CLASS_TINY
@@ -69,9 +69,10 @@
 	if(!disassembled)
 		if(mineralType && mineralAmt)
 			new mineralType(src.loc, mineralAmt)
-		var/obj/item/S = new /obj/item/natural/stone(src.loc)
-		S.pixel_x = rand(25,-25)
-		S.pixel_y = rand(25,-25)
+		for(var/i in 1 to rand(1,4))
+			var/obj/item/S = new /obj/item/natural/stone(src.loc)
+			S.pixel_x = rand(25,-25)
+			S.pixel_y = rand(25,-25)
 	qdel(src)
 
 /obj/item/natural/rock/take_damage(damage_amount, damage_type = BRUTE, damage_flag = 0, sound_effect = 1, attack_dir)
