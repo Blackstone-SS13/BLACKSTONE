@@ -108,7 +108,11 @@ GLOBAL_LIST_INIT(stone_personalities, list(
 	"Heaven",
 	"Cowards",
 	"Conquerors",
-	"Conquest"
+	"Conquest",
+	"Horripilation",
+	"Terror",
+	"Earthquakes",
+	"Thunder"
 ))
 
 GLOBAL_LIST_INIT(stone_personality_descs, list(
