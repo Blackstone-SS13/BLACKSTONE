@@ -374,6 +374,9 @@
 			if(unzombification_pq && !HAS_TRAIT(target, TRAIT_IWASUNZOMBIFIED) && user?.ckey)
 				adjust_playerquality(unzombification_pq, user.ckey)
 				ADD_TRAIT(target, TRAIT_IWASUNZOMBIFIED, "[type]")
+		var/datum/component/rot/rot = target.GetComponent(/datum/component/rot)
+		if(rot)
+			rot.amount = 0
 		if(iscarbon(target))
 			var/mob/living/carbon/stinky = target
 			for(var/obj/item/bodypart/rotty in stinky.bodyparts)
