@@ -20,7 +20,7 @@
 	..()
 	//insane stats, not like they benefit you until you get limbs
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 4 ,TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 6, TRUE)
@@ -30,11 +30,12 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 	H.change_stat("strength", 5)
-	H.change_stat("endurance", 3)
+	H.change_stat("endurance", 6)
 	H.change_stat("constitution", 6)
 	H.change_stat("perception", 4)
-	H.change_stat("speed", 5)
+	H.change_stat("speed", 4)
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/random
 	belt = /obj/item/storage/belt/rogue/leather
@@ -42,6 +43,8 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltl = /obj/item/rogueweapon/huntingknife
 
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	var/static/list/safe_bodyzones = list(
 		BODY_ZONE_HEAD,
