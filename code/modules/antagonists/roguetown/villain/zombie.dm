@@ -146,6 +146,7 @@
 	zombie.STAINT = 1
 	START_PROCESSING(SSobj, src)
 	last_fed = world.time
+	to_chat(zombie, "<span class='userdanger'>I am now a deadite! I must bite the living or I shall ROT AWAY!</span>")
 
 /datum/antagonist/zombie/greet()
 	to_chat(owner.current, "<span class='userdanger'>Death is not the end...</span>")
