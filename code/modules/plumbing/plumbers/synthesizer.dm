@@ -79,7 +79,7 @@
 		if(R)
 			var/chemname = R.name
 			if(is_hallucinating && prob(5))
-				chemname = "[pick_list_replacements("hallucination.json", "chemicals")]"
+				chemname = "[pick_list_replacements(HAL_LINES_FILE, "chemicals")]"
 			chemicals.Add(list(list("title" = chemname, "id" = ckey(R.name))))
 	data["chemicals"] = chemicals
 	data["amount"] = amount

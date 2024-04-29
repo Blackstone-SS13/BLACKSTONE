@@ -102,8 +102,8 @@
 /mob/living/carbon/attackby(obj/item/I, mob/user, params)
 	for(var/datum/surgery/S in surgeries)
 		if(!(mobility_flags & MOBILITY_STAND) || !S.lying_required)
-			if((S.self_operable || user != src) && (user.used_intent.type == INTENT_HELP || user.used_intent.type == INTENT_DISARM))
-				if(S.next_step(user,user.used_intent))
+			if(S.self_operable || user != src)
+				if(S.next_step(user, user.used_intent))
 					return 1
 	return ..()
 
@@ -823,7 +823,7 @@
 	else
 		clear_fullscreen("CMODE")
 
-	if(health <= crit_threshold || (blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE))
+	if(health <= crit_threshold || ((blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE)))
 		var/severity = 0
 		switch(health)
 			if(-20 to -10)
@@ -988,7 +988,7 @@
 			death()
 			cure_blind(UNCONSCIOUS_BLIND)
 			return
-		if((blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE) || IsUnconscious() || IsSleeping() || getOxyLoss() > 75 || (HAS_TRAIT(src, TRAIT_DEATHCOMA)) || (health <= HEALTH_THRESHOLD_FULLCRIT && !HAS_TRAIT(src, TRAIT_NOHARDCRIT)))
+		if(((blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE)) || IsUnconscious() || IsSleeping() || getOxyLoss() > 75 || (HAS_TRAIT(src, TRAIT_DEATHCOMA)) || (health <= HEALTH_THRESHOLD_FULLCRIT && !HAS_TRAIT(src, TRAIT_NOHARDCRIT)))
 			stat = UNCONSCIOUS
 			become_blind(UNCONSCIOUS_BLIND)
 			if(CONFIG_GET(flag/near_death_experience) && health <= HEALTH_THRESHOLD_NEARDEATH && !HAS_TRAIT(src, TRAIT_NODEATH))
