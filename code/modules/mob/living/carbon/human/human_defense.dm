@@ -993,7 +993,7 @@
 	var/isdisabled = ""
 	switch(FB.is_disabled())
 		if(BODYPART_DISABLED_FRACTURE)
-			isdisabled = "shattered "
+			isdisabled = "broken "
 		if(BODYPART_DISABLED_DAMAGE)
 			isdisabled = "numb "
 		if(BODYPART_DISABLED_PARALYSIS)

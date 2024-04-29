@@ -304,6 +304,11 @@
 						msg += "[BP] is numb to touch.\n"
 					if(BODYPART_DISABLED_PARALYSIS)
 						msg += "[BP] is limp.\n"
+					if(BODYPART_DISABLED_ROT)
+						if(BP.skeletonized)
+							msg += "[BP] is skeletonized.\n"
+						else
+							msg += "[BP] is rotting.\n"
 				if(BP.bandage)
 					var/usedclass = "'notice'"
 					if(BP.bandage.return_blood_DNA())
