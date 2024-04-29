@@ -33,7 +33,7 @@
 				possiblegods |= patron
 		ourpatron = pick(possiblegods)
 		H.PATRON = ourpatron
-		to_chat(H, "<span class='warning'> My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
+		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
 	
 	switch(ourpatron.name)
 		if("Astrata")
