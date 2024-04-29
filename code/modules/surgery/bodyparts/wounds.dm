@@ -464,15 +464,18 @@
 			BR = max(BR - G.bleed_suppressing,0.01)
 	return BR
 
-/obj/item/bodypart/proc/heal_wounds(amt) //wounds that are large always have large hp, but they can be sewn to bleed less/be healed
+/obj/item/bodypart/proc/heal_wounds(amt, sleep_heal = FALSE) //wounds that are large always have large hp, but they can be sewn to bleed less/be healed
 	if(!wounds.len)
 		return TRUE
-	for(var/datum/wound/W in wounds)
-		W.whp = W.whp - amt
-		if(W.whp <= 0)
-			wounds -= W
-			qdel(W)
+	for(var/datum/wound/wound in wounds)
+		if(sleep_heal && !wound.sleep_heal)
+			continue
+		wound.whp = wound.whp - amt
+		if(wound.whp <= 0)
+			wounds -= wound
+			qdel(wound)
 	return TRUE
+
 /obj/item/bodypart/proc/has_wound(path)
 	if(!path)
 		return
