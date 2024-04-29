@@ -60,7 +60,7 @@
 					"disturbing",
 					"horrifying",
 				)
-				chat_message += "<span class='crit'>The bone shatters in a [pick(adjectives)] way!</span>"
+				chat_message += " <span class='crit'>The bone shatters in a [pick(adjectives)] way!</span>"
 				if(prob(3))
 					playsound(owner, pick('sound/combat/tf2crit.ogg'), 100, FALSE)
 				else
