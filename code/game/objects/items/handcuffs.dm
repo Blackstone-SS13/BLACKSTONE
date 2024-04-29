@@ -279,6 +279,7 @@
 			C.emote("agony")
 			C.Stun(80)
 			BP.add_wound(/datum/wound/fracture)
+			BP.update_disabled()
 			C.apply_damage(trap_damage, BRUTE, def_zone)
 			C.consider_ambush()
 			return FALSE
@@ -303,6 +304,7 @@
 						"<span class='userdanger'>I trigger \the [src]!</span>")
 				C.emote("agony")
 				BP.add_wound(/datum/wound/fracture)
+				BP.update_disabled()
 				C.apply_damage(trap_damage, BRUTE, def_zone)
 				C.consider_ambush()
 				return FALSE

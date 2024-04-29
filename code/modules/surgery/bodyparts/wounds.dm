@@ -162,7 +162,7 @@
 				playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
 			else
 				playsound(owner, "wetbreak", 100, FALSE)
-			set_disabled(BODYPART_DISABLED_FRACTURE)
+			update_disabled()
 			owner.Slowdown(20)
 			shake_camera(owner, 2, 2)
 			return FALSE
