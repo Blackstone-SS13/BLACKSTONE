@@ -125,7 +125,7 @@
 					return TRUE
 				return FALSE
 			playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-			owner.emote("paincrit", TRUE)
+			owner.emote("paincrit")
 			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 			add_wound(/datum/wound/artery)
 			temporary_crit_paralysis()
