@@ -160,6 +160,8 @@
 	var/passive_heal = FALSE
 	/// If TRUE, this disables limbs
 	var/disabling = FALSE
+	/// If TRUE, this wound can be healed through sleep
+	var/sleep_heal = TRUE
 
 
 /datum/wound/proc/sewn()
@@ -210,6 +212,7 @@
 	woundpain = 100
 	mob_overlay = "s1"
 	time = 10
+	sleep_heal = FALSE
 
 /datum/wound/artery/throat
 	name = "sliced throat"
@@ -240,6 +243,7 @@
 	woundpain = 100
 	time = 10
 	mob_overlay = "dis_head"
+	sleep_heal = FALSE
 
 /datum/wound/dismemberment/r_arm
 	mob_overlay = "dis_ra"
@@ -265,6 +269,7 @@
 	woundpain = 100
 	mob_overlay = "frac"
 	disabling = TRUE
+	sleep_heal = FALSE
 
 /datum/wound/necksnap
 	name = "broken neck"
@@ -272,6 +277,7 @@
 	can_sew = 0
 	whp = 60
 	woundpain = 100
+	sleep_heal = FALSE
 
 /datum/wound/bite
 	name = "bite mark"
