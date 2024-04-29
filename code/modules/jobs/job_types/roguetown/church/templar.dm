@@ -9,6 +9,7 @@
 	allowed_races = list("Humen",
 	"Tiefling",
 	"Aasimar")
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
 	total_positions = 2
@@ -18,7 +19,30 @@
 
 /datum/outfit/job/roguetown/templar/pre_equip(mob/living/carbon/human/H)
 	..()
-	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
+	
+	var/datum/patrongods/ourpatron
+	if(istype(H.PATRON, /datum/patrongods))
+		ourpatron = H.PATRON
+
+	if(!ourpatron || !(ourpatron.name in allowed_patrons))
+		var/list/datum/patrongods/possiblegods = list()
+		for(var/datum/patrongods/P in GLOB.patronlist)
+			if(P.name in allowed_patrons)
+				possiblegods |= P
+		ourpatron = pick(possiblegods)
+		H.PATRON = ourpatron
+		to_chat(H, "<span class='warning'> My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
+	
+	switch(ourpatron.name)
+		if("Astrata")
+			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+		if("Dendor")
+			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
+		if("Necra")
+			neck = /obj/item/clothing/neck/roguetown/psicross/necra
+		if("Pestra")
+			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/tights/black
