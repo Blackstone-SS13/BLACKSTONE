@@ -57,6 +57,8 @@
 					"marvelous",
 					"wonderful",
 					"sickening",
+					"disturbing",
+					"horrifying",
 				)
 				chat_message += "<span class='crit'><b>The bone shatters in a [pick(adjectives)] way!</b></span>"
 				if(prob(3))
