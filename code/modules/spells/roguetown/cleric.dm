@@ -507,7 +507,7 @@
 	for(var/mob/living/carbon/spirit/P in GLOB.carbon_list)
 		if(P.livingname == pickedsoul)
 			to_chat(P, "You feel yourself being pulled out of the underworld.")
-			sleep(20)
+			sleep(2 SECONDS)
 			P.loc = user.loc
 			capturedsoul = P
 			P.invisibility = INVISIBILITY_OBSERVER
