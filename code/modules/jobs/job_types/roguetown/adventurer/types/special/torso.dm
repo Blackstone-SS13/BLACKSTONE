@@ -1,7 +1,7 @@
 //challenge class, spawns with no limbs
 /datum/advclass/torso
 	name = "Torso"
-	tutorial = "Some horrible accident took away all of your limbs!\nSurvival will be a true TRIUMPH."
+	tutorial = "Some horrible accident in the forest away all of your limbs!\nSurvival will be a true TRIUMPH."
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen",
 	"Elf",
