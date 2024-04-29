@@ -65,7 +65,9 @@
 		if(prob(used))
 			if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 				if(brute_dam < max_damage)
-					return
+					return FALSE
+				for(var/datum/wound/fracture/W in wounds)
+					return FALSE
 				var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
 				add_wound(/datum/wound/fracture)
