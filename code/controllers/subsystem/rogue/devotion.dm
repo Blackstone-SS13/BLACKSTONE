@@ -35,31 +35,28 @@
 	//Max devotion limit
 	if(devotion > max_devotion)
 		devotion = max_devotion
-		to_chat(holder_mob, "<font color='red'>I have reached the limit of my devotion...</font>")
+		to_chat(holder_mob, "<span class='warning'>I have reached the limit of my devotion...</span>")
 	if(!prog_amt) // no point in the rest if it's just an expenditure
 		return
 	progression = min(progression + prog_amt, max_progression)
+	var/obj/effect/spell_unlocked
 	switch(level)
 		if(CLERIC_T0)
 			if(progression >= CLERIC_REQ_1)
 				level = CLERIC_T1
-				if(!usr.mind.has_spell(P.t1))
-					usr.mind.AddSpell(new P.t1)
-				return
+				spell_unlocked = P.t1
 		if(CLERIC_T1)
 			if(progression >= CLERIC_REQ_2)
 				level = CLERIC_T2
-				if(!usr.mind.has_spell(P.t2))
-					usr.mind.AddSpell(new P.t2)
-				return
+				spell_unlocked = P.t2
 		if(CLERIC_T2)
 			if(progression >= CLERIC_REQ_3)
 				level = CLERIC_T3
-				if(!usr.mind.has_spell(P.t3))
-					usr.mind.AddSpell(new P.t3)
-				return
-		else // already maxed out
-			return
+				spell_unlocked = P.t3
+	if(spell_unlocked && !usr.mind.has_spell(spell_unlocked))
+		spell_unlocked = new spell_unlocked
+		to_chat(holder_mob, "<span class='boldnotice'>I have unlocked a new spell: [spell_unlocked]</font>")
+		usr.mind.AddSpell(spell_unlocked)
 
 // Devotion Debugs
 
