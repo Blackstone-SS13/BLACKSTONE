@@ -148,7 +148,7 @@
 	zombie.STAINT = 1
 	last_bite = world.time
 	has_turned = TRUE
-	to_chat("<span class='userdanger'>I am now a zombie! I crave for the flesh of the living...</span>")
+	to_chat(zombie, "<span class='userdanger'>I am now a zombie! I crave for the flesh of the living...</span>")
 
 /datum/antagonist/zombie/greet()
 	to_chat(owner.current, "<span class='userdanger'>Death is not the end...</span>")
