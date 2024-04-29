@@ -280,7 +280,6 @@
 
 
 /obj/item/paper/proc/parsepencode(t, obj/item/P, mob/user, iscrayon = 0)
-	message_admins("beginning parsepencode")
 	if(length(t) < 1)		//No input means nothing needs to be parsed
 		return
 
