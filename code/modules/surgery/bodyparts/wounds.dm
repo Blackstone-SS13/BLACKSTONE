@@ -93,6 +93,8 @@
 			return FALSE
 		if(brute_dam)
 			dam += round(max((brute_dam / max_damage)*20, 1), 1)
+		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
+			dam += 20
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				dam += 30
@@ -155,6 +157,8 @@
 				return FALSE
 		if(brute_dam)
 			dam += round(max((brute_dam / max_damage)*20, 1), 1)
+		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
+			dam += 20
 		if(prob(round(max(dam / 3, 1), 1)))
 			var/list/phrases = list("The ribs shatter in a splendid way!", "The ribs are smashed!", "The chest is mauled!", "The chest caves in!")
 			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
@@ -279,6 +283,8 @@
 		if(dam < 5)
 			return FALSE
 		var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
+		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
+			used += 20
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
