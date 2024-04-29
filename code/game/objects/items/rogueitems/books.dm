@@ -435,6 +435,7 @@
 	if(istype(I, /obj/item/book_crafting_kit))
 		var/obj/item/book/rogue/playerbook/PB = new /obj/item/book/rogue/playerbook(get_turf(I.loc), TRUE, user, compiled_pages)
 		qdel(I)
+		var/obj/item/needle/N = new /obj/item/needle(get_turf(loc))
 		if(user.Adjacent(PB))
 			PB.add_fingerprint(user)
 			user.put_in_hands(PB)

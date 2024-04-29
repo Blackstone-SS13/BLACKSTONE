@@ -237,5 +237,6 @@
 	result = /obj/item/book_crafting_kit
 	reqs = list(
 			/obj/item/natural/hide = 2,
-			/obj/item/natural/fibers = 2,
-			/obj/item/needle = 1)
+			/obj/item/natural/cloth = 1)
+	tools = list(/obj/item/needle = 1)
+	req_table = TRUE
