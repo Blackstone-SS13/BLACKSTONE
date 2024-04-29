@@ -34,6 +34,8 @@
 		TRAIT_SPELLCOCKBLOCK,
 		TRAIT_ZOMBIE_SPEECH,
 	)
+	/// Whether or not we have been turned
+	var/has_turned = FALSE
 	/// Last time we bit someone - Zombies will try to bite after 10 seconds of not biting
 	var/last_bite
 
@@ -145,6 +147,7 @@
 
 	zombie.STAINT = 1
 	last_bite = world.time
+	has_turned = TRUE
 	to_chat("<span class='userdanger'>I am now a zombie! I crave for the flesh of the living...</span>")
 
 /datum/antagonist/zombie/greet()
@@ -152,7 +155,7 @@
 	return ..()
 
 /datum/antagonist/zombie/on_life(mob/user)
-	if(!user || user.stat >= DEAD)
+	if(!user || user.stat >= DEAD || !has_turned)
 		return
 	var/mob/living/carbon/human/zombie = user
 	zombie.blood_volume = BLOOD_VOLUME_MAXIMUM
