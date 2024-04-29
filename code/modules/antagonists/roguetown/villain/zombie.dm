@@ -19,7 +19,7 @@
 	/// Traits applied to the owner mob
 	var/static/list/traits_applied = list(
 		TRAIT_NOMOOD,
-		TRAIT_NOFATSTAM,
+		RTRAIT_NOFATSTAM,
 		TRAIT_NOLIMBDISABLE,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
@@ -33,7 +33,6 @@
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLCOCKBLOCK,
 		TRAIT_ZOMBIE_SPEECH,
-		TRAIT_LANGUAGE_BARRIER,
 	)
 
 /datum/antagonist/zombie/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
@@ -82,6 +81,8 @@
 		zombie.STASPD = STASPD
 		zombie.STAINT = STAINT
 		zombie.remove_client_colour(/datum/client_colour/monochrome)
+		for(var/trait in traits_applied)
+			REMOVE_TRAIT(zombie, trait, "[type]")
 	return ..()
 
 /datum/antagonist/zombie/proc/transform_zombie()

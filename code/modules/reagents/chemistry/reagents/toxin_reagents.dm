@@ -764,9 +764,14 @@
 		M.reagents.remove_reagent(R.type,remove_amt)
 	return ..()
 
+/datum/reagent/toxin/drow
+	name = "Drow Toxin"
+	description = "How are you even reading this?"
+	reagent_state = LIQUID
+	color = "#410233"
+	metabolization_rate = 0.2 * REAGENTS_METABOLISM
+
 //ACID
-
-
 /datum/reagent/toxin/acid
 	name = "Sulphuric acid"
 	description = "A strong mineral acid with the molecular formula H2SO4."

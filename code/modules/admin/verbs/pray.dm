@@ -24,6 +24,9 @@
 	var/font_color = "purple"
 	var/prayer_type = "PRAYER"
 	var/deity
+	if(ishuman(src))
+		var/mob/living/carbon/human/human_user = src
+		deity = human_user.PATRON.name
 	if(usr.job == "Chaplain")
 		cross.icon_state = "kingyellow"
 		font_color = "blue"
@@ -44,7 +47,6 @@
 
 	var/msg_tmp = msg
 	msg = "<span class='adminnotice'>[icon2html(cross, GLOB.admins)]<b><font color=[font_color]>[prayer_type][deity ? " (to [deity])" : ""]: </font>[ADMIN_FULLMONTY(src)] [ADMIN_SC(src)]:</b> <span class='linkify'>[msg]</span></span>"
-
 	for(var/client/C in GLOB.admins)
 		if(C.prefs.chat_toggles & CHAT_PRAYER)
 			to_chat(C, msg)
@@ -64,6 +66,9 @@
 
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Prayer") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	//log_admin("HELP: [key_name(src)]: [msg]")
+	var/datum/antagonist/maniac/maniac = mind?.has_antag_datum(/datum/antagonist/maniac)
+	if(maniac && (text2num(msg_tmp) == maniac.sum_keys))
+		maniac.wake_up()
 
 /proc/CentCom_announce(text , mob/Sender)
 	var/msg = copytext(sanitize(text), 1, MAX_MESSAGE_LEN)
@@ -98,8 +103,25 @@
 		return
 	log_prayer("[src.key]/([src.name]): [msg]")
 
-	msg = "<span class='info'>[real_name] prays: [msg]</span>"
+	var/deity = " to Psydon"
+	if(ishuman(src))
+		var/mob/living/carbon/human/human_user = src
+		deity = " to [human_user.PATRON.name]"
 
+	var/datum/antagonist/maniac/maniac = mind?.has_antag_datum(/datum/antagonist/maniac)
+	if(maniac)
+		if(text2num(msg) == maniac.sum_keys)
+			deity = " to THE GODHEAD"
+			INVOKE_ASYNC(maniac, TYPE_PROC_REF(/datum/antagonist/maniac, wake_up))
+		else
+			deity = " to Zizo"
+	
+	var/display_name = "[real_name]"
+	if(!real_name)
+		display_name = "[src.name]"
+
+	msg = "<span class='info'>[display_name] prays[deity] [ADMIN_FLW(src)][ADMIN_SM(src)]: [msg]</span>"
+	
 	for(var/client/C in GLOB.admins)
 		if(C.prefs.chat_toggles & CHAT_PRAYER)
 			to_chat(C, msg)

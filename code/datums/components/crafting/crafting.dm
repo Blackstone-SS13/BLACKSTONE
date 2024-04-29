@@ -555,6 +555,11 @@
 		learned_recipes = list()
 	learned_recipes |= R
 
+/datum/mind/proc/forget_crafting_recipe(R)
+	if(!learned_recipes)
+		return
+	learned_recipes -= R
+
 // new crafting button interaction
 
 /datum/component/personal_crafting/proc/roguecraft(location, control, params, mob/user)
