@@ -394,6 +394,8 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["selected_patron"]	>> patron_name
 	if(patron_name)
 		selected_patron = GLOB.patronlist[patron_name]
+		if(!selected_patron) //failsafe
+			selected_patron = GLOB.patronlist[GLOB.patronlist[1]]
 		// var/newtype = GLOB.patronlist[patron_name]
 		// if(newtype)
 			// selected_patron = new newtype
