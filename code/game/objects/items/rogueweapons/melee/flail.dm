@@ -2,7 +2,7 @@
 	force = 12
 	possible_item_intents = list(/datum/intent/flail/strike, /datum/intent/flail/strike/smash)
 	name = "flail"
-	desc = ""
+	desc = "This is a swift, iron flail. Strikes hard and far."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	sharpness = IS_BLUNT

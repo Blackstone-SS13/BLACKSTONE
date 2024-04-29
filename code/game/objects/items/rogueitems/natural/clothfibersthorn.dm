@@ -2,7 +2,7 @@
 	name = "fibers"
 	icon_state = "fibers"
 	possible_item_intents = list(/datum/intent/use)
-	desc = ""
+	desc = "Plant fibers. The peasants make their living making these into clothing."
 	force = 0
 	throwforce = 0
 	obj_flags = null
@@ -51,7 +51,7 @@
 	name = "cloth"
 	icon_state = "cloth"
 	possible_item_intents = list(/datum/intent/use)
-	desc = ""
+	desc = "This piece of fabric is ready to be worked, or used."
 	force = 0
 	throwforce = 0
 	obj_flags = null
@@ -184,7 +184,7 @@
 /obj/item/natural/thorn
 	name = "thorn"
 	icon_state = "thorn"
-	desc = ""
+	desc = "This bog-grown thorn is sharp and resistant like a needle."
 	force = 10
 	throwforce = 0
 	possible_item_intents = list(/datum/intent/stab)
@@ -214,7 +214,7 @@
 	name = "fiber bundle"
 	icon_state = "fibersroll1"
 	possible_item_intents = list(/datum/intent/use)
-	desc = ""
+	desc = "Fibers, bundled together."
 	force = 0
 	throwforce = 0
 	obj_flags = null
@@ -232,7 +232,7 @@
 	name = "bundle of cloth"
 	icon_state = "clothroll1"
 	possible_item_intents = list(/datum/intent/use)
-	desc = ""
+	desc = "A cloth roll of several pieces of fabric."
 	force = 0
 	throwforce = 0
 	obj_flags = null
@@ -339,7 +339,7 @@
 	name = "bundle of sticks"
 	icon_state = "stickbundle1"
 	possible_item_intents = list(/datum/intent/use)
-	desc = ""
+	desc = "Stick alone.. Weak. Stick together.. Strong."
 	force = 0
 	throwforce = 0
 	obj_flags = null

@@ -909,15 +909,13 @@
 
 /atom/movable/proc/can_speak_in_language(datum/language/dt)
 	var/datum/language_holder/H = get_language_holder()
-
-	if(!H.has_language(dt))
+	if(!H.has_language(dt) || HAS_TRAIT(src, TRAIT_LANGUAGE_BARRIER))
 		return FALSE
 	else if(H.omnitongue)
 		return TRUE
 	else if(could_speak_in_language(dt) && (!H.only_speaks_language || H.only_speaks_language == dt))
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 /atom/movable/proc/get_default_language()
 	// if no language is specified, and we want to say() something, which

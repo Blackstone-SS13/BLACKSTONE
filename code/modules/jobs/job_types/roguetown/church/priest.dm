@@ -39,6 +39,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/holy, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 		if(H.age == AGE_OLD)
 			H.mind.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 		H.change_stat("strength", -1)
@@ -161,7 +162,7 @@
 		holder.update_devotion(50, 50)
 	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 	var/static/list/templar_spells = list(
-		/obj/effect/proc_holder/spell/invoked/heal/lesser, 
+		/obj/effect/proc_holder/spell/invoked/lesser_heal, 
 		/obj/effect/proc_holder/spell/targeted/churn, 
 		/obj/effect/proc_holder/spell/targeted/burialrite,
 	)

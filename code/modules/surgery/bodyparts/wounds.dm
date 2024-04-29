@@ -51,7 +51,7 @@
 			if(owner == user)
 				used = 0
 		if(prob(used))
-			if(is_disabled() == BODYPART_DISABLED_FALL)
+			if(disabled == BODYPART_DISABLED_FALL)
 				if(brute_dam < max_damage)
 					return
 				var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
@@ -72,6 +72,7 @@
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
 				set_disabled(BODYPART_DISABLED_FALL)
+				addtimer(CALLBACK(src, PROC_REF(update_disabled)), 60 SECONDS)
 		return FALSE
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH)
 		for(var/datum/wound/fracture/W in wounds)
@@ -120,6 +121,7 @@
 				return TRUE
 
 /obj/item/bodypart/chest/try_crit(bclass,dam,mob/living/user,zone_precise)
+	var/resistance = HAS_TRAIT(owner, RTRAIT_CRITICAL_RESISTANCE)
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
@@ -165,7 +167,7 @@
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30
 		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
-			if (prob(round(max(dam / 4, 1), 1)))
+			if (prob(round(max(dam / 3, 1), 1)))
 				if(!can_bloody_wound())
 					return FALSE
 				var/organ_spilled = FALSE
@@ -204,7 +206,7 @@
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					return TRUE
 				return FALSE
-		if(prob(round(max(dam / 3, 1), 1)))
+		if(prob(round(max(dam / 4, 1), 1)))
 			var/foundy
 			for(var/datum/wound/artery/A in wounds)
 				foundy= TRUE
@@ -223,7 +225,8 @@
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					if(zone_precise == BODY_ZONE_CHEST)
 						owner.vomit(blood = TRUE)
-						owner.death()
+						if(!resistance)
+							owner.death()
 					return TRUE
 			else
 				if(owner.mind && owner.mind.has_antag_datum(/datum/antagonist/zombie))
@@ -231,11 +234,13 @@
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					if(zone_precise == BODY_ZONE_CHEST)
 						owner.vomit(blood = TRUE)
-						owner.death()
 						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
+						if(!resistance)
+							owner.death()
 						return TRUE
 
 /obj/item/bodypart/head/try_crit(bclass,dam,mob/living/user,zone_precise)
+	var/resistance = HAS_TRAIT(owner, RTRAIT_CRITICAL_RESISTANCE)
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
@@ -253,7 +258,8 @@
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The neck is broken!</span>"
 				add_wound(/datum/wound/necksnap)
 				shake_camera(owner, 2, 2)
-				owner.death()
+				if(!resistance)
+					owner.death()
 		return FALSE
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_PICK || bclass == BCLASS_SMASH)
 		if(dam < 5)
@@ -271,7 +277,7 @@
 				if(prob(used) || (brute_dam >= max_damage))
 					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 					owner.flash_fullscreen("whiteflash3")
-					owner.Unconscious(10 SECONDS + (from_behind * 10 SECONDS))
+					owner.Unconscious(5 SECONDS + (from_behind * 10 SECONDS))
 					if(owner.client)
 						winset(owner.client, "outputwindow.output", "max-lines=1")
 						winset(owner.client, "outputwindow.output", "max-lines=100")
@@ -288,8 +294,9 @@
 				playsound(owner, "headcrush", 100, FALSE)
 			set_disabled(BODYPART_DISABLED_CRIT)
 			shake_camera(owner, 2, 2)
-			owner.death()
-			brainkill = TRUE
+			if(!resistance)
+				owner.death()
+				brainkill = TRUE
 			return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		if(!can_bloody_wound())
@@ -330,7 +337,8 @@
 			if(prob(round(max(dam / 3, 1), 1)))
 				for(var/datum/wound/artery/A in wounds)
 					if(bclass == BCLASS_STAB)
-						owner.death()
+						if(!resistance)
+							owner.death()
 						return TRUE
 					return FALSE
 				playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
@@ -340,8 +348,9 @@
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
 				if(bclass == BCLASS_STAB)
-					owner.death()
-					brainkill = TRUE
+					if(!resistance)
+						owner.death()
+						brainkill = TRUE
 					return TRUE
 	if(bclass == BCLASS_PUNCH)
 		if(!can_bloody_wound())
@@ -360,7 +369,7 @@
 			if(prob(used) || (dam >= 30 ))
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 				owner.flash_fullscreen("whiteflash3")
-				owner.Unconscious(10 SECONDS + (from_behind * 10 SECONDS))
+				owner.Unconscious(5 SECONDS + (from_behind * 10 SECONDS))
 			return FALSE
 
 /obj/item/bodypart/attacked_by(bclass, dam, mob/living/user, zone_precise)
@@ -389,27 +398,27 @@
 	switch(bclass) //do stuff but only when we are a blade that adds wounds
 		if(BCLASS_SMASH || BCLASS_BLUNT)
 			switch(dam)
-				if(1 to 5)
+				if(1 to 10)
 					add_wound(/datum/wound/bruise/small, skipcheck = FALSE)
-				if(6 to 15)
+				if(11 to 20)
 					add_wound(/datum/wound/bruise, skipcheck = FALSE)
-				if(16 to INFINITY)
+				if(21 to INFINITY)
 					add_wound(/datum/wound/bruise/large, skipcheck = FALSE)
 		if(BCLASS_CUT || BCLASS_CHOP)
 			switch(dam)
-				if(1 to 5)
+				if(1 to 10)
 					add_wound(/datum/wound/cut/small, skipcheck = FALSE)
-				if(6 to 15)
+				if(11 to 20)
 					add_wound(/datum/wound/cut, skipcheck = FALSE)
-				if(16 to INFINITY)
+				if(21 to INFINITY)
 					add_wound(/datum/wound/cut/large, skipcheck = FALSE)
 		if(BCLASS_STAB || BCLASS_PICK)
 			switch(dam)
-				if(1 to 5)
+				if(1 to 10)
 					add_wound(/datum/wound/stab/small, skipcheck = FALSE)
-				if(6 to 15)
+				if(11 to 20)
 					add_wound(/datum/wound/stab, skipcheck = FALSE)
-				if(16 to INFINITY)
+				if(21 to INFINITY)
 					add_wound(/datum/wound/stab/large, skipcheck = FALSE)
 		if(BCLASS_BITE)
 			if(dam > 8)

@@ -158,12 +158,15 @@
 	///How close our wound is to being treated with 100 being our target
 	var/progress = 0
 	var/passive_heal = FALSE
+	/// If TRUE, this disables limbs
+	var/disabling = FALSE
 
 
 /datum/wound/proc/sewn()
 	bleed_rate = 0.01
 	woundpain = max(woundpain-10, 0)
 	can_sew = FALSE
+	name = name + "<span class='green'>(sewn)</span>"
 	return
 
 /datum/wound/cut
@@ -261,6 +264,7 @@
 	whp = 40
 	woundpain = 100
 	mob_overlay = "frac"
+	disabling = TRUE
 
 /datum/wound/necksnap
 	name = "broken neck"

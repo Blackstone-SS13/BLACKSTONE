@@ -2,7 +2,7 @@
 	icon = 'icons/roguetown/items/natural.dmi'
 	seed = null
 	name = "log"
-	desc = ""
+	desc = "A big tree log. It's very heavy, and huge."
 	icon_state = "log"
 	blade_dulling = DULLING_CUT
 	max_integrity = 30
@@ -17,6 +17,7 @@
 
 /obj/item/grown/log/tree/small
 	name = "small log"
+	desc = "Smaller log that came from a larger log. Suitable for building."
 	icon_state = "logsmall"
 	max_integrity = 30
 	static_debris = list(/obj/item/grown/log/tree/stick = 3)
@@ -30,7 +31,7 @@
 	seed = null
 	name = "stick"
 	icon_state = "stick1"
-	desc = ""
+	desc = "A dry stick from a tree branch."
 	blade_dulling = 0
 	max_integrity = 20
 	static_debris = null
@@ -95,7 +96,7 @@
 /obj/item/grown/log/tree/stake
 	name = "stake"
 	icon_state = "stake"
-	desc = ""
+	desc = "A wooden stake, and it's pointy end!"
 	force = 10
 	throwforce = 5
 	possible_item_intents = list(/datum/intent/stab, /datum/intent/pick)
@@ -113,7 +114,7 @@
 	seed = null
 	name = "lumber"
 	icon_state = "lumber"
-	desc = ""
+	desc = "This is some lumber." // i haven't seen this ingame yet
 	blade_dulling = 0
 	max_integrity = 50
 	firefuel = 5 MINUTES

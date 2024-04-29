@@ -209,8 +209,7 @@
 							//addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, werewolf_infect)), 3 MINUTES)
 				if(user.mind.has_antag_datum(/datum/antagonist/zombie))
 					if(!src.mind.has_antag_datum(/datum/antagonist/zombie))
-						H.zombie_infect_attempt()
-							//addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect)), 3 MINUTES)
+						INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
 
 	var/obj/item/grabbing/bite/B = new()
 	user.equip_to_slot_or_del(B, SLOT_MOUTH)
@@ -418,11 +417,10 @@
 					changeNext_move(mmb_intent.clickcd)
 				return
 			if(INTENT_SPELL)
-				if(ranged_ability)
-					if(ranged_ability.InterceptClickOn(src, params, A))
-						changeNext_move(mmb_intent.clickcd)
-						if(mmb_intent.releasedrain)
-							rogfat_add(mmb_intent.releasedrain)
+				if(ranged_ability?.InterceptClickOn(src, params, A))
+					changeNext_move(mmb_intent.clickcd)
+					if(mmb_intent.releasedrain)
+						rogfat_add(mmb_intent.releasedrain)
 				return
 
 //Return TRUE to cancel other attack hand effects that respect it.

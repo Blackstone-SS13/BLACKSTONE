@@ -13,7 +13,7 @@
 	min_pq = 2
 	total_positions = 2
 	spawn_positions = 2
-	spells = list(/obj/effect/proc_holder/spell/invoked/heal/lesser, /obj/effect/proc_holder/spell/targeted/churn, /obj/effect/proc_holder/spell/targeted/burialrite)
+	spells = list(/obj/effect/proc_holder/spell/invoked/lesser_heal, /obj/effect/proc_holder/spell/targeted/churn, /obj/effect/proc_holder/spell/targeted/burialrite)
 	display_order = JDO_TEMPLAR
 	give_bank_account = TRUE
 
@@ -46,6 +46,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 2)
