@@ -2,7 +2,7 @@
 	name = "Bone Chill"
 	overlay_state = "raiseskele"
 	releasedrain = 30
-	chargetime = 2
+	chargetime = 5
 	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE

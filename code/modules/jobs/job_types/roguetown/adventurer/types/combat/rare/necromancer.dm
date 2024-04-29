@@ -20,7 +20,7 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltr = /obj/item/reagent_containers/glass/bottle/rogue/manapot
 	beltl = /obj/item/rogueweapon/huntingknife
-	l_hand = /obj/item/rogueweapon/woodstaff
+	r_hand = /obj/item/rogueweapon/woodstaff
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/magic/arcane, 5, TRUE)	
 	H.change_stat("strength", -1)
