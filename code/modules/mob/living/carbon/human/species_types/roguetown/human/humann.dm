@@ -114,9 +114,6 @@
 	return " [pick(world.file2list("strings/rt/names/human/humnorlast.txt"))]"
 
 /datum/species/human/northern/get_accent(mob/living/carbon/human/H)
-	switch(H.skin_tone){
-		if("fff0e9"){ //Grenzelhoft
+	switch(H.skin_tone)
+		if("fff0e9") //Grenzelhoft
 			return strings("german_replacement.json", "german")
-		}
-		// And so on...
-	}

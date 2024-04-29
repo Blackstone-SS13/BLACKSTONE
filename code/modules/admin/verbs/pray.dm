@@ -115,8 +115,12 @@
 			INVOKE_ASYNC(maniac, TYPE_PROC_REF(/datum/antagonist/maniac, wake_up))
 		else
 			deity = " to Zizo"
+	
+	var/display_name = "[real_name]"
+	if(!real_name)
+		display_name = "[src.name]"
 
-	msg = "<span class='info'>[real_name] prays[deity]: [msg]</span>"
+	msg = "<span class='info'>[display_name] prays[deity] [ADMIN_FLW(src)][ADMIN_SM(src)]: [msg]</span>"
 	
 	for(var/client/C in GLOB.admins)
 		if(C.prefs.chat_toggles & CHAT_PRAYER)

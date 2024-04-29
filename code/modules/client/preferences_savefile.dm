@@ -299,37 +299,16 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["key_bindings"], key_bindings)
 	return TRUE
 
-/datum/preferences/proc/load_character(slot)
-	if(!path)
-		return FALSE
-	if(!fexists(path))
-		return FALSE
-	var/savefile/S = new /savefile(path)
-	if(!S)
-		return FALSE
-	S.cd = "/"
-	if(!slot)
-		slot = default_slot
-	slot = sanitize_integer(slot, 1, max_save_slots, initial(default_slot))
-	if(slot != default_slot)
-		default_slot = slot
-		WRITE_FILE(S["default_slot"] , slot)
 
-	S.cd = "/character[slot]"
-	var/needs_update = savefile_needs_update(S)
-	if(needs_update == -2)		//fatal, can't load any data
-		return FALSE
-
-	//Species
+/datum/preferences/proc/_load_species(S)
 	var/species_name
-	S["species"]			>> species_name
+	S["species"] >> species_name
 	if(species_name)
 		var/newtype = GLOB.species_list[species_name]
 		if(newtype)
 			pref_species = new newtype
 
-
-
+/datum/preferences/proc/_load_flaw(S)
 	var/charflaw_type
 	S["charflaw"]			>> charflaw_type
 	if(charflaw_type)
@@ -339,13 +318,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		charflaw = GLOB.character_flaws[charflaw]
 		charflaw = new charflaw()
 
-	if(!S["features["mcolor"]"] || S["features["mcolor"]"] == "#000")
-		WRITE_FILE(S["features["mcolor"]"]	, "#FFF")
-
-	if(!S["feature_ethcolor"] || S["feature_ethcolor"] == "#000")
-		WRITE_FILE(S["feature_ethcolor"]	, "9c3030")
-
-	//Character
+/datum/preferences/proc/_load_appearence(S)
 	S["real_name"]			>> real_name
 	S["gender"]				>> gender
 	S["domhand"]			>> domhand
@@ -382,14 +355,48 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	S["feature_human_tail"]				>> features["tail_human"]
 	S["feature_human_ears"]				>> features["ears"]
 
+/datum/preferences/proc/load_character(slot)
+	if(!path)
+		return FALSE
+	if(!fexists(path))
+		return FALSE
+	var/savefile/S = new /savefile(path)
+	if(!S)
+		return FALSE
+	S.cd = "/"
+	if(!slot)
+		slot = default_slot
+	slot = sanitize_integer(slot, 1, max_save_slots, initial(default_slot))
+	if(slot != default_slot)
+		default_slot = slot
+		WRITE_FILE(S["default_slot"] , slot)
+
+	S.cd = "/character[slot]"
+	var/needs_update = savefile_needs_update(S)
+	if(needs_update == -2)		//fatal, can't load any data
+		return FALSE
+
+	//Species
+	_load_species(S)
+
+	_load_flaw(S)
+
+	if(!S["features["mcolor"]"] || S["features["mcolor"]"] == "#000")
+		WRITE_FILE(S["features["mcolor"]"]	, "#FFF")
+
+	if(!S["feature_ethcolor"] || S["feature_ethcolor"] == "#000")
+		WRITE_FILE(S["feature_ethcolor"]	, "9c3030")
+
+	//Character
+	_load_appearence(S)
+
 	var/patron_name
 	S["selected_patron"]	>> patron_name
 	if(patron_name)
-		var/newtype = GLOB.patronlist[patron_name]
-		if(newtype)
-			selected_patron = new newtype
-
-//	S["selected_patron"]				>> selected_patron
+		selected_patron = GLOB.patronlist[patron_name]
+		// var/newtype = GLOB.patronlist[patron_name]
+		// if(newtype)
+			// selected_patron = new newtype
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
