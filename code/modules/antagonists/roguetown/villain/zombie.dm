@@ -161,11 +161,14 @@
 	//fuck friendly zombies - tries to bite humans in range
 	if(world.time - last_bite < 10 SECONDS)
 		return
-	if(!zombie.get_item_by_slot(ITEM_SLOT_MOUTH))
+	var/obj/item/grabbing/bite/bite = zombie.get_item_by_slot(ITEM_SLOT_MOUTH)
+	if(!bite)
 		for(var/mob/living/carbon/human in view(1, zombie))
 			if(human.mob_biotypes & MOB_UNDEAD)
 				continue
 			human.onbite(zombie)
+	else if(istype(bite))
+		bite.bitelimb(zombie)
 
 //Infected wake param is just a transition from living to zombie, via zombie_infect()
 //Previously you just died without warning in 3 minutes, now you just become an antag
