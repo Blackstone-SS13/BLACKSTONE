@@ -100,7 +100,7 @@
 /mob/living/proc/try_crit(bclass,dam,mob/living/user,zone_precise)
 	if(!dam)
 		return
-	if(zone_precise == "head")
+	if(zone_precise == BODY_ZONE_HEAD)
 		if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_PICK)
 			var/used = round((health / maxHealth)*20 + (dam / 3), 1)
 			if(user)
@@ -165,11 +165,12 @@
 
 
 /datum/wound/proc/sewn()
-	bleed_rate = 0.01
+	bleed_rate = max(bleed_rate * 0.01, 0.01)
 	woundpain = max(woundpain-10, 0)
 	whp = round(whp/2)
 	can_sew = FALSE
-	name = name + "<span class='green'>(sewn)</span>"
+	sleep_heal = TRUE
+	name = name + " <span class='green'>(sewn)</span>"
 	return
 
 /datum/wound/cut
