@@ -29,7 +29,7 @@
 
 /obj/item/rogueweapon/shield/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the projectile", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	SEND_SIGNAL(src, COMSIG_ITEM_HIT_REACT, args)
-	if(attack_type == THROWN_PROJECTILE_ATTACK || attack_type == PROJECTILE_ATTACK || prob(coverage))
+	if(attack_type == (THROWN_PROJECTILE_ATTACK && prob(coverage)) || (attack_type == PROJECTILE_ATTACK && prob(coverage)))
 		if(owner.client?.chargedprog == 100 && owner.used_intent?.tranged)
 			owner.visible_message("<span class='danger'>[owner] blocks [hitby] with [src]!</span>")
 			return 1
