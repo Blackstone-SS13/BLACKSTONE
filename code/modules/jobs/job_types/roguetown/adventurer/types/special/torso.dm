@@ -43,3 +43,12 @@
 	beltl = /obj/item/rogueweapon/huntingknife
 
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	var/static/list/safe_bodyzones = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_CHEST,
+	)
+	for(var/obj/item/bodypart/limb in H.bodyparts)
+		if(limb.body_zone in safe_bodyzones)
+			continue
+		limb.drop_limb()
+		qdel(limb)

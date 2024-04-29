@@ -2130,7 +2130,7 @@
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\pilgrim\rare\Lsmith.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\special\crusader.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\special\nakedandafraid.dm"
-#include "code\modules\jobs\job_types\roguetown\adventurer\types\special\torsolo.dm"
+#include "code\modules\jobs\job_types\roguetown\adventurer\types\special\torso.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\special\whitecheesemaker.dm"
 #include "code\modules\jobs\job_types\roguetown\church\confessor.dm"
 #include "code\modules\jobs\job_types\roguetown\church\monk.dm"
