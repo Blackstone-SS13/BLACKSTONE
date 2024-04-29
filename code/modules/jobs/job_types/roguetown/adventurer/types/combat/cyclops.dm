@@ -39,4 +39,3 @@
 	H.change_stat("endurance", 2)
 	H.change_stat("intelligence", -3)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-  
