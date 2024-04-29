@@ -37,34 +37,6 @@
 	/// Zombies need to bite the living, or their limbs fall off
 	var/last_fed
 
-/datum/antagonist/zombie/process()
-	if(world.time - last_fed < 2 MINUTES)
-		return
-	var/mob/living/carbon/human/zombie = owner.current
-	last_fed = world.time
-	var/static/list/falling_zones = list(
-		BODY_ZONE_L_ARM,
-		BODY_ZONE_R_ARM,
-		BODY_ZONE_L_LEG,
-		BODY_ZONE_R_LEG,
-	)
-	to_chat(zombie, "<span class='danger'><span class='reallybig'>SO HUNGRY!</span></span>")
-	var/a_limb_fell = FALSE
-	for(var/falling_off in shuffle(falling_zones))
-		var/obj/item/bodypart/affecting = zombie.get_bodypart(falling_off)
-		if(!affecting || !affecting.can_dismember())
-			continue
-		affecting.drop_limb()
-		a_limb_fell = TRUE
-		break
-	// None of the limbs fell correctly, time to die buddy!
-	if(!a_limb_fell)
-		var/obj/item/bodypart/head = zombie.get_bodypart(BODY_ZONE_HEAD)
-		if(head)
-			head.drop_limb()
-		STOP_PROCESSING(SSobj, src)
-		owner.remove_antag_datum(/datum/antagonist/zombie)
-
 /datum/antagonist/zombie/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampirelord))
 		var/datum/antagonist/vampirelord/V = examined_datum
@@ -86,7 +58,6 @@
 	return ..()
 
 /datum/antagonist/zombie/on_removal()
-	STOP_PROCESSING(SSobj, src)
 	var/mob/living/carbon/human/zombie = owner?.current
 	if(zombie)
 		if(!was_i_undead)
@@ -190,6 +161,31 @@
 	if(world.time > next_idle_sound)
 		zombie.emote("idle")
 		next_idle_sound = world.time + rand(5 SECONDS, 10 SECONDS)
+	if(!zombie.client)
+		last_fed = world.time
+	if(world.time - last_fed < 2 MINUTES)
+		return
+	last_fed = world.time
+	var/static/list/falling_zones = list(
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_L_LEG,
+		BODY_ZONE_R_LEG,
+	)
+	to_chat(zombie, "<span class='danger'><span class='reallybig'>SO HUNGRY!</span></span>")
+	var/a_limb_fell = FALSE
+	for(var/falling_off in shuffle(falling_zones))
+		var/obj/item/bodypart/affecting = zombie.get_bodypart(falling_off)
+		if(!affecting || !affecting.can_dismember())
+			continue
+		affecting.drop_limb()
+		a_limb_fell = TRUE
+		break
+	// None of the limbs fell correctly, time to die buddy!
+	if(!a_limb_fell)
+		var/obj/item/bodypart/head = zombie.get_bodypart(BODY_ZONE_HEAD)
+		if(head)
+			head.drop_limb()
 
 //Infected wake param is just a transition from living to zombie, via zombie_infect()
 //Previously you just died without warning in 3 minutes, now you just become an antag
