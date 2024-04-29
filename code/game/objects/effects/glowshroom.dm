@@ -31,7 +31,7 @@
 	if(isliving(mover) && mover.z == z)
 //		var/throwdir = get_dir(src, mover)
 		var/mob/living/L = mover
-		if(L.PATRON != "Dendor") //Dendor kneestinger immunity
+		if(L.PATRON.name != "Dendor") //Dendor kneestinger immunity
 			if(L.electrocute_act(30, src)) 
 				L.consider_ambush()
 				if(L.throwing)
