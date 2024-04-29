@@ -4,8 +4,6 @@
 	tutorial = "What makes me a good Cyclops? If I were a bad Cyclops, I wouldn't be sittin' here, describin' it to you now would I? 'm a drunk, bloody cyclops."
   	allowed_sexes = list("male")
 	allowed_races = list("Humen",
-	"Humen",
-	"Dwarf",
 	"Dwarf"
 	)
 
