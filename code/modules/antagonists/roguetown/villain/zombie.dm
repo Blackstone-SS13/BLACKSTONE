@@ -34,6 +34,36 @@
 		TRAIT_SPELLCOCKBLOCK,
 		TRAIT_ZOMBIE_SPEECH,
 	)
+	/// Zombies need to bite the living, or their limbs fall off
+	var/last_fed
+
+/datum/antagonist/zombie/process()
+	if(world.time - last_fed < 2 MINUTES)
+		return
+	var/mob/living/carbon/human/zombie = owner.current
+	last_fed = world.time
+	var/static/list/falling_zones = list(
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_L_LEG,
+		BODY_ZONE_R_LEG,
+	)
+	to_chat(zombie, "<span class='danger'><span class='reallybig'>SO HUNGRY!</span></span>")
+	var/a_limb_fell = FALSE
+	for(var/falling_off in shuffle(falling_zones))
+		var/obj/item/bodypart/affecting = zombie.get_bodypart(falling_off)
+		if(!affecting || !affecting.can_dismember())
+			continue
+		affecting.drop_limb()
+		a_limb_fell = TRUE
+		break
+	// None of the limbs fell correctly, time to die buddy!
+	if(!a_limb_fell)
+		var/obj/item/bodypart/head = zombie.get_bodypart(BODY_ZONE_HEAD)
+		if(head)
+			head.drop_limb()
+		STOP_PROCESSING(SSobj, src)
+		owner.remove_antag_datum(/datum/antagonist/zombie)
 
 /datum/antagonist/zombie/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampirelord))
@@ -56,6 +86,7 @@
 	return ..()
 
 /datum/antagonist/zombie/on_removal()
+	STOP_PROCESSING(SSobj, src)
 	var/mob/living/carbon/human/zombie = owner?.current
 	if(zombie)
 		if(!was_i_undead)
@@ -110,7 +141,7 @@
 	zombie.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	zombie.update_a_intents()
 	zombie.setToxLoss(0, 0)
-	zombie.aggressive = 1
+	zombie.aggressive = TRUE
 	zombie.mode = AI_IDLE
 
 	var/obj/item/organ/eyes/eyes = new /obj/item/organ/eyes/night_vision/zombie
@@ -142,6 +173,8 @@
 		zombie.STASPD = rand(2,4)
 
 	zombie.STAINT = 1
+	START_PROCESSING(SSobj, src)
+	last_fed = world.time
 
 /datum/antagonist/zombie/greet()
 	to_chat(owner.current, "<span class='userdanger'>Death is not the end...</span>")

@@ -410,9 +410,11 @@
 				if(prob(25) && H)
 					H.werewolf_infect()
 					//addtimer(CALLBACK(C, TYPE_PROC_REF(/mob/living/carbon/human, werewolf_infect)), 3 MINUTES)
-			if(user.mind.has_antag_datum(/datum/antagonist/zombie))
+			var/datum/antagonist/zombie/zombie = user.mind.has_antag_datum(/datum/antagonist/zombie)
+			if(zombie)
 				var/mob/living/carbon/human/H = C
 				INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
+				zombie.last_fed = world.time
 				if(C.stat)
 					if(istype(limb_grabbed, /obj/item/bodypart/head))
 						var/obj/item/bodypart/head/HE = limb_grabbed

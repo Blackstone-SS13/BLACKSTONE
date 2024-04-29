@@ -54,7 +54,7 @@
 /obj/effect/proc_holder/spell/invoked/InterceptClickOn(mob/living/caller, params, atom/target)
 	if(..())
 		return FALSE
-	if(!cast_check(0, ranged_ability_user))
+	if(!cast_check(0, ranged_ability_user) || !can_cast(ranged_ability_user))
 		return FALSE
 	if(perform(list(target), TRUE, user = ranged_ability_user))
 		return TRUE
