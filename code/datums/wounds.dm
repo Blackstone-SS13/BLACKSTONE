@@ -291,7 +291,7 @@
 /datum/wound/bite/bleeding
 	name = "bleeding bite mark"
 	bleed_rate = 0.2
-	can_sew = 1
+	can_sew = TRUE
 	whp = 30
 	woundpain = 5
 	passive_heal = FALSE
