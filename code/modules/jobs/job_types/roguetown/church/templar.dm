@@ -81,9 +81,9 @@
 		if(H.dna.species.id == "human")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
-	//Max devotion limit - Templars are stronger but cannot pray to gain more abilities
+	//Max devotion limit - Templars are stronger but cannot pray to gain more abilities beyond t1
 	C.max_devotion = 250
-	C.max_progression = 200
+	C.max_progression = CLERIC_REQ_1
 	C.update_devotion(50, 0)
 	C.holder_mob = H
 	C.grant_spells_templar(H)

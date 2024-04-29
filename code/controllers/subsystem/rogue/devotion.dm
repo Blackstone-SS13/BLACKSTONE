@@ -16,7 +16,7 @@
 	var/devotion = 0
 	var/max_devotion = 1000
 	var/progression = 0
-	var/max_progression = 1000
+	var/max_progression = CLERIC_REQ_3
 	var/level = CLERIC_T0
 
 /datum/devotion/cleric_holder/New(mob/living/carbon/human/holder, god)
