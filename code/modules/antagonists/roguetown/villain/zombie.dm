@@ -18,8 +18,8 @@
 	var/list/base_intents
 	/// Traits applied to the owner mob
 	var/static/list/traits_applied = list(
-		TRAIT_NOMOOD,
 		RTRAIT_NOFATSTAM,
+		TRAIT_NOMOOD,
 		TRAIT_NOLIMBDISABLE,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
