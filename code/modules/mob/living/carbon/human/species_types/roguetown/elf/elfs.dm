@@ -1,4 +1,4 @@
-/mob/living/carbon/human/species/elf/snow
+/mob/living/carbon/human/species/elf/wood
 	race = /datum/species/elf/wood
 
 /datum/species/elf/wood
