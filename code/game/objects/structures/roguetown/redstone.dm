@@ -50,7 +50,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 
 /obj/structure/floordoor
 	name = "floorhatch"
-	desc = ""
+	desc = "A handy floor hatch for people who need privacy upstairs."
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "floorhatch1"
 	density = FALSE

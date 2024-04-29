@@ -326,7 +326,7 @@ GLOBAL_LIST_INIT(shove_disarming_types, typecacheof(list(
 #define BODY_ZONE_PRECISE_EARS		"ears"
 #define BODY_ZONE_PRECISE_NOSE		"nose"
 #define BODY_ZONE_PRECISE_NECK		"neck"
-#define BODY_ZONE_PRECISE_HAIR		"hair"
+#define BODY_ZONE_PRECISE_SKULL		"skull"
 #define BODY_ZONE_PRECISE_MOUTH		"mouth"
 #define BODY_ZONE_PRECISE_GROIN		"groin"
 #define BODY_ZONE_PRECISE_L_HAND	"l_hand"

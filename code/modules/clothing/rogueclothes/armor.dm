@@ -140,7 +140,7 @@
 /obj/item/clothing/suit/roguetown/armor/plate/scale
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "scalemail"
-	desc = ""
+	desc = "Metal scales interwoven intricately to form flexible protection!"
 	body_parts_covered = CHEST|VITALS|GROIN|LEGS
 	allowed_sex = list(MALE, FEMALE)
 	icon_state = "lamellar"
@@ -234,7 +234,7 @@
 /obj/item/clothing/suit/roguetown/armor/armordress
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "padded dress"
-	desc = ""
+	desc = "This dress has been padded with leather for extra protection."
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	icon_state = "armordress"
 	armor = list("melee" = 50, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
@@ -256,7 +256,7 @@
 /obj/item/clothing/suit/roguetown/armor/gambeson
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 	name = "gambeson"
-	desc = ""
+	desc = "A large shirt meant to be used below armor."
 	icon_state = "gambeson"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	armor = list("melee" = 40, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
@@ -281,7 +281,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather
 	name = "leather armor"
-	desc = ""
+	desc = "Flexible cowhide armor. Lightweight, better than nothing."
 	icon_state = "leather"
 //	color = "#514339"
 	body_parts_covered = CHEST|GROIN|VITALS
@@ -299,13 +299,14 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/hide
 	name = "hide armor"
-	desc = ""
+	desc = "A light armor of wildbeast hide. Far more durable than leather."
 	icon_state = "hidearmor"
 	max_integrity = 230
 	armor_class = ARMOR_CLASS_LIGHT
 
 /obj/item/clothing/suit/roguetown/armor/leather/studded
 	name = "studded leather armor"
+	desc = "Studded leather is the most durable of all hides and leathers and about as light."
 	icon_state = "studleather"
 	item_state = "studleather"
 	blocksound = SOFTHIT
@@ -318,7 +319,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest
 	name = "leather vest"
-	desc = ""
+	desc = "A leather vest. Not very protective, but fashion."
 	icon_state = "vest"
 	item_state = "vest"
 	color = "#514339"
@@ -337,6 +338,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
 	name = "sea jacket"
+	desc = "A sailor's garb."
 	icon_state = "sailorvest"
 	color = null
 	slot_flags = ITEM_SLOT_ARMOR
@@ -362,6 +364,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor/nightman
 	name = "silk jacket"
+	desc = "A soft and comfortable jacket."
 	icon_state = "nightman"
 	sleeved = 'icons/roguetown/clothing/onmob/armor.dmi'
 	allowed_sex = list(MALE)
@@ -370,6 +373,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/hand
 	name = "Hand's vest"
+	desc = "A soft vest of finest fabric."
 	icon_state = "handcoat"
 	color = null
 	allowed_sex = list(MALE, FEMALE)
@@ -380,7 +384,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/workervest
 	name = "striped tunic"
-	desc = ""
+	desc = "This cheap tunic is often used by sturdy laborous men and women."
 	icon_state = "workervest"
 	armor = null
 	blocksound = SOFTHIT

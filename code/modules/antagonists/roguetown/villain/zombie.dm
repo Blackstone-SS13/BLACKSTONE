@@ -19,7 +19,7 @@
 	/// Traits applied to the owner mob
 	var/static/list/traits_applied = list(
 		TRAIT_NOMOOD,
-		TRAIT_NOFATSTAM,
+		RTRAIT_NOFATSTAM,
 		TRAIT_NOLIMBDISABLE,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
@@ -33,8 +33,11 @@
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLCOCKBLOCK,
 		TRAIT_ZOMBIE_SPEECH,
-		TRAIT_LANGUAGE_BARRIER,
 	)
+	/// Whether or not we have been turned
+	var/has_turned = FALSE
+	/// Last time we bit someone - Zombies will try to bite after 10 seconds of not biting
+	var/last_bite
 
 /datum/antagonist/zombie/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampirelord))
@@ -82,6 +85,8 @@
 		zombie.STASPD = STASPD
 		zombie.STAINT = STAINT
 		zombie.remove_client_colour(/datum/client_colour/monochrome)
+		for(var/trait in traits_applied)
+			REMOVE_TRAIT(zombie, trait, "[type]")
 	return ..()
 
 /datum/antagonist/zombie/proc/transform_zombie()
@@ -141,21 +146,33 @@
 		zombie.STASPD = rand(2,4)
 
 	zombie.STAINT = 1
+	last_bite = world.time
+	has_turned = TRUE
+	to_chat(zombie, "<span class='userdanger'>I am now a zombie! I crave for the flesh of the living...</span>")
 
 /datum/antagonist/zombie/greet()
 	to_chat(owner.current, "<span class='userdanger'>Death is not the end...</span>")
 	return ..()
 
 /datum/antagonist/zombie/on_life(mob/user)
-	if(!user)
-		return
-	if(user.stat == DEAD)
+	if(!user || user.stat >= DEAD || !has_turned)
 		return
 	var/mob/living/carbon/human/zombie = user
 	zombie.blood_volume = BLOOD_VOLUME_MAXIMUM
 	if(world.time > next_idle_sound)
 		zombie.emote("idle")
 		next_idle_sound = world.time + rand(5 SECONDS, 10 SECONDS)
+	//fuck friendly zombies - tries to bite humans in range
+	if(world.time - last_bite < 10 SECONDS)
+		return
+	var/obj/item/grabbing/bite/bite = zombie.get_item_by_slot(SLOT_MOUTH)
+	if(!bite)
+		for(var/mob/living/carbon/human in view(1, zombie))
+			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction))
+				continue
+			human.onbite(zombie)
+	else if(istype(bite))
+		bite.bitelimb(zombie)
 
 //Infected wake param is just a transition from living to zombie, via zombie_infect()
 //Previously you just died without warning in 3 minutes, now you just become an antag

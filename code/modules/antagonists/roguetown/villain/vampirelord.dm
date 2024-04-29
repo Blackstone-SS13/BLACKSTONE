@@ -46,7 +46,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	. = ..()
 	owner.special_role = name
 	ADD_TRAIT(owner.current, RTRAIT_STRONGBITE, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_NOFATSTAM, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, RTRAIT_NOFATSTAM, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOBREATH, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOPAIN, TRAIT_GENERIC)
@@ -104,7 +104,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		if(prob(50))
 			H.set_species(/datum/species/human/northern)
 		else
-			H.set_species(/datum/species/elf/snow) //setspecies randomizes body
+			H.set_species(/datum/species/elf/wood) //setspecies randomizes body
 		H.after_creation()
 	H.equipOutfit(/datum/outfit/job/roguetown/vamplord)
 

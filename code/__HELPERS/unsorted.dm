@@ -693,12 +693,11 @@ Turf and target are separate in case you want to teleport some distance from a t
 		return "right hand"
 	else if (zone == BODY_ZONE_L_INHAND)
 		return "left hand"
-	else if (zone == BODY_ZONE_PRECISE_HAIR)
-		return "hair"
+	else if (zone == BODY_ZONE_PRECISE_SKULL)
+		return "skull"
 	else if (zone == BODY_ZONE_PRECISE_MOUTH)
 		return "mouth"
-	else
-		return zone
+	return zone
 
 /mob/living/carbon/proc/parse_zone(zone, mob/living/target)
 	if(zone == BODY_ZONE_PRECISE_R_HAND)
@@ -733,12 +732,11 @@ Turf and target are separate in case you want to teleport some distance from a t
 		return parse_inhand(zone)
 	else if (zone == BODY_ZONE_L_INHAND)
 		return parse_inhand(zone)
-	else if (zone == BODY_ZONE_PRECISE_HAIR)
-		return "hair"
+	else if (zone == BODY_ZONE_PRECISE_SKULL)
+		return "skull"
 	else if (zone == BODY_ZONE_PRECISE_MOUTH)
 		return "mouth"
-	else
-		return zone
+	return zone
 
 /*
 

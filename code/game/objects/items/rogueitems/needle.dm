@@ -2,7 +2,7 @@
 /obj/item/needle
 	name = "needle"
 	icon_state = "needle"
-	desc = ""
+	desc = "This sharp needle can sew wounds, cloth and can be used for self defence if you're crazy."
 	icon = 'icons/roguetown/items/misc.dmi'
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/food_righthand.dmi'
@@ -86,7 +86,6 @@
 	for(var/i = 1 to 100)
 		if(do_after(doctor, 20, target = patient))
 			if(target_wound.progress == 100)
-				target_wound.sewn()
 				doctor.mind.adjust_experience(/datum/skill/misc/medicine, doctor.STAINT * 5)
 				use(1)
 				patient.update_damage_overlays()
@@ -95,6 +94,7 @@
 				else
 					doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient]'s [affecting].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient]'s [affecting].</span>")
 					log_combat(doctor, patient, "sew", "needle")
+				target_wound.sewn()
 				return
 			if(doctor.mind)
 				playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
@@ -107,5 +107,5 @@
 /obj/item/needle/thorn
 	name = "needle"
 	icon_state = "thornneedle"
-	desc = ""
+	desc = "This rough needle can be used to sew cloth and woubds."
 	stringamt = 3

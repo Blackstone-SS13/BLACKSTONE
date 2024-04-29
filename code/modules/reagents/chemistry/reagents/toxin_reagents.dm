@@ -771,13 +771,7 @@
 	color = "#410233"
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 
-/datum/reagent/toxin/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(rand(1,2))
-
-
 //ACID
-
-
 /datum/reagent/toxin/acid
 	name = "Sulphuric acid"
 	description = "A strong mineral acid with the molecular formula H2SO4."

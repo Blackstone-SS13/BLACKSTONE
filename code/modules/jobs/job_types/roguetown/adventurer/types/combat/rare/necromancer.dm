@@ -1,6 +1,6 @@
 /datum/advclass/necromancer
 	name = "Necromancer"
-	tutorial = "Ostracized and hunted by society for their dark magics and perversion of life, Necromancers have been known to summon ghosts, ghouls, and zombies; you can not"
+	tutorial = "Ostracized and hunted by society for their dark magics and perversion of life, Necromancers have been known to summon ghosts, ghouls, and zombies; you cannot."
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Half-Elf",
 	 "Dark Elf",
@@ -12,11 +12,14 @@
 /datum/outfit/job/roguetown/adventurer/necromancer/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/necromhood
+	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
+	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/necromancer
 	belt = /obj/item/storage/belt/rogue/leather/rope
-	backr = /obj/item/storage/backpack/rogue/satchel
-	beltl = /obj/item/reagent_containers/glass/bottle/rogue/manapot
+	backl = /obj/item/storage/backpack/rogue/satchel
+	beltr = /obj/item/reagent_containers/glass/bottle/rogue/manapot
+	beltl = /obj/item/rogueweapon/huntingknife
 	r_hand = /obj/item/rogueweapon/woodstaff
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/magic/arcane, 5, TRUE)	

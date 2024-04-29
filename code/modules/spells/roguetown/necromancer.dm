@@ -2,13 +2,11 @@
 	name = "Bone Chill"
 	overlay_state = "raiseskele"
 	releasedrain = 30
-	chargedrain = 0
-	chargetime = 2
+	chargetime = 5
 	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = null
-	req_items = list(/obj/item/clothing/suit/roguetown/shirt/robe/necromancer)
 	sound = 'sound/magic/whiteflame.ogg'
 	associated_skill = /datum/skill/magic/arcane
 	antimagic_allowed = TRUE
@@ -19,9 +17,12 @@
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
 		if(target.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
-			target.visible_message("<span class='danger'>[target] reforms under the vile energy!</span>", "<span class='notice'>I'm remade by dark magic!</span>")
 			target.adjustFireLoss(-50)
 			target.adjustBruteLoss(-50)
+			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(user.zone_selected))
+			if(affecting?.heal_wounds(30))
+				target.update_damage_overlays()
+			target.visible_message("<span class='danger'>[target] reforms under the vile energy!</span>", "<span class='notice'>I'm remade by dark magic!</span>")
 			return TRUE
 		target.visible_message("<span class='info'>Necrotic energy floods over [target]!</span>", "<span class='userdanger'>I feel colder as the dark energy floods into me!</span>")
 		if(iscarbon(target))
@@ -36,9 +37,8 @@
 	name = "Eyebite"
 	overlay_state = "raiseskele"
 	releasedrain = 30
-	chargedrain = 10
 	chargetime = 15
-	range = 15
+	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = null
@@ -54,8 +54,8 @@
 		var/mob/living/carbon/target = targets[1]
 		target.visible_message("<span class='info'>A loud crunching sound has come from [target]!</span>", "<span class='userdanger'>I feel arcane teeth biting into my eyes!</span>")
 		target.adjustBruteLoss(30)
-		target.blind_eyes(20)
-		target.blur_eyes(90)
+		target.blind_eyes(1)
+		target.blur_eyes(10)
 		return TRUE
 	else
 		return FALSE
@@ -68,7 +68,6 @@
 	overlay_state = "raiseskele"
 	sound = list('sound/magic/magnet.ogg')
 	releasedrain = 40
-	chargedrain = 10
 	chargetime = 60
 	warnie = "spellwarning"
 	no_early_release = TRUE
@@ -96,7 +95,6 @@
 	sound = list('sound/misc/portal_enter.ogg')
 	active = FALSE
 	releasedrain = 30
-	chargedrain = 0
 	chargetime = 10
 	warnie = "spellwarning"
 	no_early_release = TRUE
