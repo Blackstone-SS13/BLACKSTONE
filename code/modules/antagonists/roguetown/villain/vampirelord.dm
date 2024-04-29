@@ -104,7 +104,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		if(prob(50))
 			H.set_species(/datum/species/human/northern)
 		else
-			H.set_species(/datum/species/elf/snow) //setspecies randomizes body
+			H.set_species(/datum/species/elf/wood) //setspecies randomizes body
 		H.after_creation()
 	H.equipOutfit(/datum/outfit/job/roguetown/vamplord)
 
