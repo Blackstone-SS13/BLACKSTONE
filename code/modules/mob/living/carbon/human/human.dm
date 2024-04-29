@@ -297,10 +297,13 @@
 		msg += "<B>[parse_zone(check_zone(user.zone_selected))]:</B>\n"
 		if(BP)
 			if(get_location_accessible(src, check_zone(user.zone_selected)))
-				if(BP.disabled == BODYPART_DISABLED_CRIT)
-					msg += "I notice a broken bone.\n"
-				if(BP.disabled == BODYPART_DISABLED_FALL)
-					msg += "The leg is numb to touch.\n"
+				switch(BP.disabled)
+					if(BODYPART_DISABLED_FRACTURE)
+						msg += "[BP] is broken.\n"
+					if(BODYPART_DISABLED_DAMAGE)
+						msg += "[BP] is numb to touch.\n"
+					if(BODYPART_DISABLED_PARALYSIS)
+						msg += "[BP] is limp.\n"
 				if(BP.bandage)
 					var/usedclass = "'notice'"
 					if(BP.bandage.return_blood_DNA())

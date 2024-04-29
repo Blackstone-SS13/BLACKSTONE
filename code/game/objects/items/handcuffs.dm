@@ -388,7 +388,7 @@
 							BP.embedded_objects |= src
 							forceMove(C)
 						C.emote("agony")
-						//BP.set_disabled(BODYPART_DISABLED_CRIT)
+						//BP.set_disabled(BODYPART_DISABLED_FRACTURE)
 						//BP.add_wound(/datum/wound/fracture)
 			else if(snap && isanimal(L))
 				var/mob/living/simple_animal/SA = L

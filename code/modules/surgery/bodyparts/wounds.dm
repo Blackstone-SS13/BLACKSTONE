@@ -37,6 +37,18 @@
 		bandage_expire()
 	owner.update_damage_overlays()
 
+/obj/item/bodypart/proc/temporary_crit_paralysis()
+	if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
+		return FALSE
+	ADD_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
+	addtimer(CALLBACK(src, PROC_REF(remove_crit_paralysis)), 60 SECONDS)
+	update_disabled()
+	return TRUE
+
+/obj/item/bodypart/proc/remove_crit_paralysis()
+	REMOVE_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
+	update_disabled()
+
 /obj/item/bodypart/proc/try_crit(bclass,dam,mob/living/user,zone_precise)
 	if(!dam)
 		return
@@ -51,7 +63,7 @@
 			if(owner == user)
 				used = 0
 		if(prob(used))
-			if(disabled == BODYPART_DISABLED_FALL)
+			if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 				if(brute_dam < max_damage)
 					return
 				var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
@@ -64,15 +76,15 @@
 				owner.emote("paincrit", TRUE)
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
-				set_disabled(BODYPART_DISABLED_CRIT)
+				update_disabled()
 			else
 				var/list/phrases = list("The [src] jolts painfully!", "The [src] is disabled!")
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
 				owner.emote("paincrit", TRUE)
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
-				set_disabled(BODYPART_DISABLED_FALL)
-				addtimer(CALLBACK(src, PROC_REF(update_disabled)), 60 SECONDS)
+				temporary_crit_paralysis()
+				playsound(owner, "drybreak", 100, FALSE)
 		return FALSE
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH)
 		for(var/datum/wound/fracture/W in wounds)
@@ -93,7 +105,7 @@
 			owner.emote("paincrit", TRUE)
 			owner.Slowdown(20)
 			shake_camera(owner, 2, 2)
-			set_disabled(BODYPART_DISABLED_CRIT)
+			update_disabled()
 			return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		if(!can_bloody_wound())
@@ -114,7 +126,7 @@
 			owner.emote("paincrit", TRUE)
 			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 			add_wound(/datum/wound/artery)
-			set_disabled(BODYPART_DISABLED_CRIT)
+			temporary_crit_paralysis()
 			owner.Slowdown(20)
 			shake_camera(owner, 2, 2)
 			if(bclass == BCLASS_STAB)
@@ -150,7 +162,7 @@
 				playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
 			else
 				playsound(owner, "wetbreak", 100, FALSE)
-			set_disabled(BODYPART_DISABLED_CRIT)
+			set_disabled(BODYPART_DISABLED_FRACTURE)
 			owner.Slowdown(20)
 			shake_camera(owner, 2, 2)
 			return FALSE
@@ -292,7 +304,7 @@
 				playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
 			else
 				playsound(owner, "headcrush", 100, FALSE)
-			set_disabled(BODYPART_DISABLED_CRIT)
+			update_disabled()
 			shake_camera(owner, 2, 2)
 			if(!resistance)
 				owner.death()
