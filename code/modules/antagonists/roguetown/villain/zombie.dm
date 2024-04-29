@@ -165,7 +165,7 @@
 	//fuck friendly zombies - tries to bite humans in range
 	if(world.time - last_bite < 10 SECONDS)
 		return
-	var/obj/item/grabbing/bite/bite = zombie.get_item_by_slot(ITEM_SLOT_MOUTH)
+	var/obj/item/grabbing/bite/bite = zombie.get_item_by_slot(SLOT_MOUTH)
 	if(!bite)
 		for(var/mob/living/carbon/human in view(1, zombie))
 			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction))
