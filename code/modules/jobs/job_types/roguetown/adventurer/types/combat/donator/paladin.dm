@@ -76,5 +76,5 @@
 	C.max_devotion = 250
 	C.update_devotion(50, 50)
 	C.holder_mob = H
-	C.grant_spells(H)
+	C.grant_spells_templar(H)
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)

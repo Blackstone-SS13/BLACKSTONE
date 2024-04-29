@@ -55,6 +55,18 @@
 			continue
 		H.mind.AddSpell(new spell)
 
+/datum/devotion/cleric_holder/proc/grant_spells_templar(mob/living/carbon/human/H)
+	if(!H || !H.mind)
+		return
+
+	var/datum/patrongods/A = H.PATRON
+	var/spelllist = list(A.t0)
+	level = CLERIC_T0
+	for(var/spell in spelllist)
+		if(H.mind.has_spell(spell))
+			continue
+		H.mind.AddSpell(new spell)
+
 // General
 /obj/effect/proc_holder/spell/invoked/lesser_heal
 	name = "Lesser Miracle"
