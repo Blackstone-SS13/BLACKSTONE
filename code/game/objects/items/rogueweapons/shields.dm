@@ -29,7 +29,7 @@
 
 /obj/item/rogueweapon/shield/hit_reaction(mob/living/carbon/human/owner, atom/movable/hitby, attack_text = "the projectile", final_block_chance = 0, damage = 0, attack_type = MELEE_ATTACK)
 	SEND_SIGNAL(src, COMSIG_ITEM_HIT_REACT, args)
-	if(attack_type == THROWN_PROJECTILE_ATTACK || attack_type == PROJECTILE_ATTACK)
+	if(attack_type == THROWN_PROJECTILE_ATTACK || attack_type == PROJECTILE_ATTACK || prob(coverage))
 		if(owner.client?.chargedprog == 100 && owner.used_intent?.tranged)
 			owner.visible_message("<span class='danger'>[owner] blocks [hitby] with [src]!</span>")
 			return 1
@@ -57,8 +57,8 @@
 	desc = "A sturdy wooden shield. Will block anything you can imagine."
 	icon_state = "woodsh"
 	dropshrink = 0.8
-	wdefense = 15
-	coverage = 100
+	wdefense = 12
+	coverage = 70
 
 /obj/item/rogueweapon/shield/wood/attack_hand(mob/user)
 	if(!overlays.len)
@@ -96,9 +96,9 @@
 	wlength = WLENGTH_NORMAL
 	resistance_flags = FLAMMABLE
 	wdefense = 15
-	coverage = 100
+	coverage = 90
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
-	max_integrity = 200
+	max_integrity = 250
 
 /obj/item/rogueweapon/shield/tower/getonmobprop(tag)
 	. = ..()
@@ -121,7 +121,7 @@
 	resistance_flags = null
 	flags_1 = CONDUCT_1
 	wdefense = 18
-	coverage = 100
+	coverage = 75
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = 300
