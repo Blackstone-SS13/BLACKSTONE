@@ -34,6 +34,9 @@
 /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	color = CLOTHING_BLACK
 
+/obj/item/clothing/suit/roguetown/shirt/undershirt/purple
+	color = CLOTHING_PURPLE
+
 /obj/item/clothing/suit/roguetown/shirt/undershirt/lord
 	desc = ""
 	color = "#616898"
