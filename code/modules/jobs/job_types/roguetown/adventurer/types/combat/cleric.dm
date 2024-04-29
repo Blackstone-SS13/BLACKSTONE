@@ -19,15 +19,14 @@
 		ourpatron = H.PATRON
 
 	if(!ourpatron || !(ourpatron.name in allowed_patrons))
-
 		var/list/datum/patrongods/possiblegods = list()
-		for(var/datum/patrongods/P in GLOB.patronlist)
-			if(P.name in allowed_patrons)
-				possiblegods |= P
-
+		for(var/god in GLOB.patronlist)
+			var/datum/patrongods/patron = GLOB.patronlist[god]
+			if(patron.name in allowed_patrons)
+				possiblegods |= patron
 		ourpatron = pick(possiblegods)
 		H.PATRON = ourpatron
-		to_chat(H, "<span class='warning'> My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
+		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
 
 	switch(ourpatron.name)
 		if("Astrata")
