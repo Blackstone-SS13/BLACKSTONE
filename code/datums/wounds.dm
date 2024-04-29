@@ -271,7 +271,6 @@
 	woundpain = 100
 	mob_overlay = "frac"
 	disabling = TRUE
-	sleep_heal = FALSE
 
 /datum/wound/necksnap
 	name = "broken neck"
