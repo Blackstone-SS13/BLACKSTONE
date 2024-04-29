@@ -6,13 +6,13 @@
 	allowed_races = list("Humen",
 	"Dwarf"
 	)
+	outfit = /datum/outfit/job/roguetown/adventurer/cyclops
+	maxchosen = 2
+
 
 	allowed_flaws = list("Cyclops (R)", 
 	"Cyclops (L)"
 	)
-
-	outfit = /datum/outfit/job/roguetown/adventurer/cyclops
-	maxchosen = 2
 
 /datum/outfit/job/roguetown/adventurer/cyclops/pre_equip(mob/living/carbon/human/H)
 	..()
