@@ -26,8 +26,7 @@
 /datum/devotion/cleric_holder/proc/check_devotion(req)
 	if(abs(req) <= devotion)
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 /datum/devotion/cleric_holder/proc/update_devotion(dev_amt, prog_amt)
 	var/datum/patrongods/P = patron
@@ -43,19 +42,22 @@
 		if(CLERIC_T0)
 			if(progression >= CLERIC_REQ_1)
 				level = CLERIC_T1
-				usr.mind.AddSpell(new P.t1)
+				if(!usr.mind.has_spell(P.t1))
+					usr.mind.AddSpell(new P.t1)
 				return
 		if(CLERIC_T1)
 			if(progression >= CLERIC_REQ_2)
 				level = CLERIC_T2
-				usr.mind.AddSpell(new P.t2)
+				if(!usr.mind.has_spell(P.t2))
+					usr.mind.AddSpell(new P.t2)
 				return
 		if(CLERIC_T2)
 			if(progression >= CLERIC_REQ_3)
 				level = CLERIC_T3
-				usr.mind.AddSpell(new P.t3)
+				if(!usr.mind.has_spell(P.t3))
+					usr.mind.AddSpell(new P.t3)
 				return
-		if(CLERIC_T3) // already maxed out
+		else // already maxed out
 			return
 
 // Devotion Debugs
