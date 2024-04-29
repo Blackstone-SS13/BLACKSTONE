@@ -524,6 +524,9 @@
 	if(stat || IsSleeping() || (world.time < mob_timers[MT_FOUNDSNEAK] + 30 SECONDS))
 		alpha = 255
 		return
+	if(world.time < mob_timers[MT_INVISIBILITY])
+		alpha = 0
+		return
 	var/turf/T = get_turf(src)
 	if(!T)
 		alpha = 255
