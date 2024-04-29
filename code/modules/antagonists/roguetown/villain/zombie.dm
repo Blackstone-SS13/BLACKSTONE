@@ -174,7 +174,7 @@
 	)
 	to_chat(zombie, "<span class='danger'><span class='reallybig'>SO HUNGRY!</span></span>")
 	var/a_limb_fell = FALSE
-	for(var/falling_off in shuffle(falling_zones))
+	for(var/falling_off in falling_zones)
 		var/obj/item/bodypart/affecting = zombie.get_bodypart(falling_off)
 		if(!affecting || !affecting.can_dismember())
 			continue
