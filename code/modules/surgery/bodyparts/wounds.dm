@@ -37,11 +37,11 @@
 		bandage_expire()
 	owner.update_damage_overlays()
 
-/obj/item/bodypart/proc/temporary_crit_paralysis()
+/obj/item/bodypart/proc/temporary_crit_paralysis(duration = 60 SECONDS)
 	if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 		return FALSE
 	ADD_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
-	addtimer(CALLBACK(src, PROC_REF(remove_crit_paralysis)), 60 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(remove_crit_paralysis)), duration)
 	update_disabled()
 	return TRUE
 
