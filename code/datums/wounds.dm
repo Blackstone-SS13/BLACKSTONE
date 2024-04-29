@@ -167,6 +167,7 @@
 /datum/wound/proc/sewn()
 	bleed_rate = 0.01
 	woundpain = max(woundpain-10, 0)
+	whp = round(whp/2)
 	can_sew = FALSE
 	name = name + "<span class='green'>(sewn)</span>"
 	return
