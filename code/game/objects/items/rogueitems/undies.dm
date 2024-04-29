@@ -1,5 +1,6 @@
 /obj/item/undies
 	name = "smallclothes"
+	desc = "An absolute necessity."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "undies"
 	resistance_flags = FLAMMABLE
@@ -15,6 +16,7 @@
 
 /obj/item/undies/f
 	name = "women's smallclothes"
+	desc = "An absolute necessity."
 	icon_state = "girlundies"
 	gendered = FEMALE
 

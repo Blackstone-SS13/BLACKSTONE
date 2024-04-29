@@ -115,6 +115,9 @@
 	colour = list(1,1,1, 1,1,1, 1,1,1)
 	priority = 1
 
+/datum/client_colour/maniac_marked
+	colour = list(1,0,0, 0,1,0, 0,0,1.5)
+	priority = 0
 
 /datum/client_colour/monochrome/trance
 	priority = 1

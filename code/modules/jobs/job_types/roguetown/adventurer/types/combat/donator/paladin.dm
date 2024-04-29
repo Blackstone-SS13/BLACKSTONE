@@ -58,6 +58,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("perception", 1)
 		H.change_stat("intelligence", 2)
@@ -71,8 +72,8 @@
 		if(H.dna.species.id == "tiefling")
 			cloak = /obj/item/clothing/cloak/tabard/crusader/tief
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
-	//Max devotion limit - Paladins are stronger but cannot pray to gain more abilities
-	C.max_devotion = 200
+	//Max devotion limit - Paladins are stronger but cannot pray to gain all abilities
+	C.max_devotion = 250
 	C.update_devotion(50, 50)
 	C.holder_mob = H
 	C.grant_spells(H)

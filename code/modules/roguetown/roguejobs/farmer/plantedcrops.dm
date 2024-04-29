@@ -188,6 +188,7 @@
 		if(growth < 100)
 			to_chat(user, "<span class='warning'>This crop is not ready to harvest.</span>")
 			return
+		user.visible_message("<span class='notice'>[user] harvests [src] with [attacking_item].</span>")
 		for(var/i in 1 to myseed.yield)
 			if(plant_hp <= 0)
 				return
@@ -199,7 +200,6 @@
 			new myseed.product(src.loc)
 			myseed.yield -= 1
 			playsound(src,"plantcross", 100, FALSE)
-			user.visible_message("<span class='notice'>[user] harvests [src] with [attacking_item].</span>")
 			exp_gained = round(current_farmer.STAINT / initial(myseed.yield)) //So we don't gain a fuck ton of EXP if our plant happens to have multiple crops
 			farmer_mind.adjust_experience(/datum/skill/labor/farming, exp_gained)
 			pq_gained += crop_pq
