@@ -504,7 +504,7 @@
 	var/pickedsoul = input(user, "Which soul should I commune with?", "Available Souls") as null|anything in souloptions
 	if(!pickedsoul)
 		return
-	for(var/mob/living/carbon/spirit/P in GLOB.mob_list)
+	for(var/mob/living/carbon/spirit/P in GLOB.carbon_list)
 		if(P.livingname == pickedsoul)
 			to_chat(P, "You feel yourself being pulled out of the underworld.")
 			sleep(20)
@@ -522,7 +522,7 @@
 			break
 		to_chat(P, "[itemstorestore]")
 	if(capturedsoul)
-		spawn(1200)
+		spawn(2 MINUTES)
 			to_chat(user, "The soul returns to the underworld.")
 			to_chat(capturedsoul, "You feel yourself being pulled back to the underworld.")
 			for(var/obj/effect/landmark/underworld/A in GLOB.landmarks_list)
