@@ -16,6 +16,7 @@
 	var/devotion = 0
 	var/max_devotion = 1000
 	var/progression = 0
+	var/max_progression = 1000
 	var/level = CLERIC_T0
 
 /datum/devotion/cleric_holder/New(mob/living/carbon/human/holder, god)
@@ -37,7 +38,7 @@
 		to_chat(holder_mob, "<font color='red'>I have reached the limit of my devotion...</font>")
 	if(!prog_amt) // no point in the rest if it's just an expenditure
 		return
-	progression += prog_amt
+	progression = min(progression + prog_amt, max_progression)
 	switch(level)
 		if(CLERIC_T0)
 			if(progression >= CLERIC_REQ_1)

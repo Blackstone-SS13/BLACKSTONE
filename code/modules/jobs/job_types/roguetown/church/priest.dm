@@ -159,7 +159,7 @@
 		holder.holder_mob = recruit
 		//Max devotion limit - Templars are stronger but cannot pray to gain more abilities
 		holder.max_devotion = 250
-		holder.update_devotion(50, 50)
+		holder.update_devotion(50, 0)
 		holder.grant_spells_templar(recruit)
 	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 
