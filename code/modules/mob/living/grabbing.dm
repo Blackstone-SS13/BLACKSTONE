@@ -414,7 +414,8 @@
 			if(zombie)
 				var/mob/living/carbon/human/H = C
 				INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
-				zombie.last_fed = world.time
+				if(H.stat < DEAD)
+					zombie.last_fed = world.time
 				if(C.stat)
 					if(istype(limb_grabbed, /obj/item/bodypart/head))
 						var/obj/item/bodypart/head/HE = limb_grabbed
