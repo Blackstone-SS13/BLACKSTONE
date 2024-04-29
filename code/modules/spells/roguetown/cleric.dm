@@ -60,7 +60,7 @@
 		return
 
 	var/datum/patrongods/A = H.PATRON
-	var/spelllist = list(A.t0)
+	var/spelllist = list(/obj/effect/proc_holder/spell/targeted/churn, A.t0)
 	level = CLERIC_T0
 	for(var/spell in spelllist)
 		if(H.mind.has_spell(spell))
