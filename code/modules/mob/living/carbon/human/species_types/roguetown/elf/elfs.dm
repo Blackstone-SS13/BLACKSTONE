@@ -1,7 +1,7 @@
-/mob/living/carbon/human/species/elf/snow
-	race = /datum/species/elf/snow
+/mob/living/carbon/human/species/elf/wood
+	race = /datum/species/elf/wood
 
-/datum/species/elf/snow
+/datum/species/elf/wood
 	name = "Elf"
 	id = "elf"
 	desc = "<b>Elf</b><br>\
@@ -53,10 +53,10 @@
 	enflamed_icon = "widefire"
 	possible_faiths = list(FAITH_PSYDON, FAITH_ELF)
 
-/datum/species/elf/snow/check_roundstart_eligible()
+/datum/species/elf/wood/check_roundstart_eligible()
 	return TRUE
 
-/datum/species/elf/snow/get_span_language(datum/language/message_language)
+/datum/species/elf/wood/get_span_language(datum/language/message_language)
 	if(!message_language)
 		return
 //	if(message_language.type == /datum/language/elvish)
@@ -65,7 +65,7 @@
 //		return list(SPAN_SELF)
 	return message_language.spans
 
-/datum/species/elf/snow/get_skin_list()
+/datum/species/elf/wood/get_skin_list()
 	return list(
 	"Dandelion Creek" = "ffe0d1",
 	"Roseveil" = "fcccb3",
@@ -76,7 +76,7 @@
 	"Timberborn" = "5d4c41"
 	)
 
-/datum/species/elf/snow/get_hairc_list()
+/datum/species/elf/wood/get_hairc_list()
 	return sortList(list(
 	"black - oil" = "181a1d",
 	"black - cave" = "201616",
@@ -108,7 +108,7 @@
 
 	))
 
-/datum/species/elf/snow/random_name(gender,unique,lastname)
+/datum/species/elf/wood/random_name(gender,unique,lastname)
 
 	var/randname
 	if(unique)
@@ -129,8 +129,8 @@
 			randname = pick( world.file2list("strings/rt/names/elf/elfwf.txt") )
 	return randname
 
-/datum/species/elf/snow/random_surname()
+/datum/species/elf/wood/random_surname()
 	return " [pick(world.file2list("strings/rt/names/elf/elfwlast.txt"))]"
 
-//datum/species/elf/snow/get_accent(mob/living/carbon/human/H)
+//datum/species/elf/wood/get_accent(mob/living/carbon/human/H)
 //	return strings("russian_replacement.json", "russian")
