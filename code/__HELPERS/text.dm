@@ -553,6 +553,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 	return t
 
 /proc/parsemarkdown(t, mob/user=null, limited=FALSE)
+	message_admins("beginning parsemarkdown")
 	if(length(t) <= 0)
 		return
 
@@ -560,11 +561,13 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 
 	t = replacetext(t, regex("\[^\\S\\r\\n \]", "g"), "  ")
 
+	message_admins("beginning parsemarkdwon basic step1")
 	t = parsemarkdown_basic_step1(t)
 
 	t = replacetext(t, regex("%s(?:ign)?(?=\\s|$)", "igm"), user ? "<font face=\"[SIGNFONT]\"><i>[user.real_name]</i></font>" : "<span class=\"paper_field\"></span>")
 	t = replacetext(t, regex("%f(?:ield)?(?=\\s|$)", "igm"), "<span class=\"paper_field\"></span>")
 
+	message_admins("beginning parsemarkdown basic step2")
 	t = parsemarkdown_basic_step2(t)
 
 	// Manage whitespace
@@ -573,6 +576,7 @@ GLOBAL_LIST_INIT(binary, list("0","1"))
 
 	t = replacetext(t, "  ", "&nbsp;&nbsp;")
 
+	message_admins("finishing parsemarkdown: [t]")
 	// Done
 
 	return t
