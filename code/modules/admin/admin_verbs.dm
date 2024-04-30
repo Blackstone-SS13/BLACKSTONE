@@ -427,7 +427,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 			to_chat(mob, "<span class='adminnotice'><b>Invisimin on. You are now as invisible as a ghost.</b></span>")
 
 /client/proc/toggle_autovote()
-	set name = "Toggle AutoVotes"
+	set name = "Toggle Magnum Mode"
 	set category = "Server"
 	if(check_rights(R_POLL))
 		SSticker.autovote = !SSticker.autovote
