@@ -42,7 +42,7 @@
 		TRAIT_ZOMBIE_SPEECH,
 		TRAIT_ZOMBIE_IMMUNE,
 	)
-	/// Traits applied to the owner when we are cured
+	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
 		TRAIT_ROTMAN,
 		TRAIT_EASYDISMEMBER,
