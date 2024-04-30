@@ -510,6 +510,42 @@
 	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/steel
 
+/obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
+	name = "astrata helmet"
+	icon_state = "astratahelm"
+	item_state = "astratahelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_RIGHT|FOV_LEFT
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/nochelm
+	name = "noc helmet"
+	icon_state = "nochelm"
+	item_state = "nochelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_RIGHT|FOV_LEFT
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
+	name = "necra helmet"
+	icon_state = "necrahelm"
+	item_state = "necrahelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_RIGHT|FOV_LEFT
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
+	name = "dendor helmet"
+	icon_state = "dendorhelm"
+	item_state = "dendorhelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_RIGHT|FOV_LEFT
+	smeltresult = /obj/item/ingot/steel
+
 /obj/item/clothing/head/roguetown/helmet/heavy/pigface
 	name = "pigface helmet"
 	icon_state = "hounskull"

@@ -19,12 +19,23 @@
 
 /datum/outfit/job/roguetown/templar/pre_equip(mob/living/carbon/human/H)
 	..()
+	var/datum/patrongods/A = H.PATRON
+	switch(A.name)
+		if("Astrata")
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
+		if("Noc")
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
+		if("Necra")
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
+		if("Dendor")
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
+		else
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	shoes = /obj/item/clothing/shoes/roguetown/boots
-	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/rogueweapon/shield/tower/metal
 	belt = /obj/item/storage/belt/rogue/leather/black
