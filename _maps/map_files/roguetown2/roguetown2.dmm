@@ -2302,6 +2302,10 @@
 "iP" = (
 /turf/closed/wall/mineral/rogue/wooddark,
 /area/rogue/indoors/town/manor)
+"iQ" = (
+/obj/effect/landmark/start/lifter,
+/turf/open/floor/rogue/wood,
+/area/rogue/indoors/town/shop)
 "iR" = (
 /obj/effect/landmark/start/woodsman{
 	icon_state = "arrow";
@@ -75301,7 +75305,7 @@ sw
 sk
 sw
 sw
-sw
+iQ
 sw
 oy
 sk
