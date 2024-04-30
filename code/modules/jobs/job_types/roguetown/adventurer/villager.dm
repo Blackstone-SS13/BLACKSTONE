@@ -18,7 +18,6 @@
 	outfit_female = null
 	bypass_jobban = FALSE
 	display_order = JDO_VILLAGER
-	isvillager = TRUE
 	give_bank_account = TRUE
 	min_pq = -15
 	wanderer_examine = FALSE

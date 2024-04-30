@@ -126,30 +126,6 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 						H.possibleclass += A
 						continue
 
-/client
-	var/whitelisted = 2
-	var/blacklisted = 2
-
-/client/proc/whitelisted()
-	if(whitelisted != 2)
-		return whitelisted
-	else
-		if(check_whitelist(ckey))
-			whitelisted = 1
-		else
-			whitelisted = 0
-		return whitelisted
-
-/client/proc/blacklisted()
-	if(blacklisted != 2)
-		return blacklisted
-	else
-		if(check_blacklist(ckey))
-			blacklisted = 1
-		else
-			blacklisted = 0
-		return blacklisted
-
 /proc/find_class_json(name, keyy)
 	if(!name || !keyy)
 		return
