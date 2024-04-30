@@ -350,7 +350,7 @@
 		var/mob/living/target = targets[1]
 		if(target == user)
 			return FALSE
-		var/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
+		var/datum/antagonist/zombie/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
 		var/has_rot = was_zombie
 		if(!has_rot && iscarbon(target))
 			var/mob/living/carbon/stinky = target
@@ -377,15 +377,20 @@
 		var/datum/component/rot/rot = target.GetComponent(/datum/component/rot)
 		if(rot)
 			rot.amount = 0
+		var/is_rotman = HAS_TRAIT(target, TRAIT_ROTMAN)
 		if(iscarbon(target))
 			var/mob/living/carbon/stinky = target
 			for(var/obj/item/bodypart/rotty in stinky.bodyparts)
-				rotty.rotted = FALSE
+				if(!is_rotman)
+					rotty.rotted = FALSE
 				rotty.skeletonized = FALSE
 				rotty.update_limb()
 				rotty.update_disabled()
 		target.update_body()
-		target.visible_message("<span class='notice'>The rot leaves [target]'s body!</span>", "<span class='green'>I feel the rot leave my body!</span>")
+		if(!is_rotman)
+			target.visible_message("<span class='notice'>The rot leaves [target]'s body!</span>", "<span class='green'>I feel the rot leave my body!</span>")
+		else
+			target.visible_message("<span class='warning'>The rot fails to leave [target]'s body!</span>", "<span class='warning'>I feel no different...</span>")
 		return TRUE
 	return FALSE
 

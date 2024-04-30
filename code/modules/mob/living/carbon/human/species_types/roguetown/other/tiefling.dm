@@ -96,10 +96,10 @@
 
 /datum/species/tieberian/get_skin_list()
 	return list(
-	"Castillian" = "cc5757",
-	"Mysterious" = "ff0000",
-	"Succubus" = "D2042D",
-	"Incubus" = "a23737"
+		"Castillian" = SKIN_COLOR_CASTILLIAN,
+		"Mysterious" = SKIN_COLOR_MYSTERIOUS,
+		"Succubus" = SKIN_COLOR_SUCCUBUS,
+		"Incubus" = SKIN_COLOR_INCUBUS,
 	)
 
 /datum/species/tieberian/get_hairc_list()
