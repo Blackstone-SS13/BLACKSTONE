@@ -614,11 +614,10 @@
 /obj/effect/proc_holder/spell/invoked/blindness/cast(list/targets, mob/user = usr)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
-		target.visible_message("<span class='warning'>[target] has summoned darkness!</span>","<span class='notice'>My eyes were covered in darkness!</span>")		
+		target.visible_message("<span class='warning'>An acolyte has summoned darkness!</span>","<span class='notice'>My eyes were covered in darkness!</span>")		
 		if(target.anti_magic_check(TRUE, TRUE))
 			return FALSE
 		target.blind_eyes(2)
-		user.visible_message("<font color='gray'>[user] points at [target]!</font>")
 	return TRUE
 
 /obj/effect/proc_holder/spell/invoked/invisibility
@@ -641,6 +640,8 @@
 /obj/effect/proc_holder/spell/invoked/invisibility/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
+		if(target.anti_magic_check(TRUE, TRUE))
+			return FALSE
 		target.visible_message("<span class='warning'>[target] starts to fade into thin air!</span>", "<span class='notice'>You start to become invisible!</span>")
 		animate(target, alpha = 0, time = 1 SECONDS, easing = EASE_IN)
 		target.mob_timers[MT_INVISIBILITY] = world.time + 15 SECONDS
