@@ -132,7 +132,7 @@
 /obj/item/clothing/neck/roguetown/psicross/noc
 	name = "amulet of Noc"
 	desc = ""
-	icon_state = "noc_psicross"
+	icon_state = "noc"
 
 /obj/item/clothing/neck/roguetown/psicross/dendor
 	name = "amulet of Dendor"
