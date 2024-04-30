@@ -63,8 +63,6 @@
 
 	init_subtypes(/datum/crafting_recipe, GLOB.crafting_recipes)
 
-	init_subtypes(/datum/advclass, GLOB.adv_classes)
-
 	init_subtypes(/datum/anvil_recipe, GLOB.anvil_recipes)
 
 	init_subtypes(/datum/triumph_buy, GLOB.triumph_buy_datums)

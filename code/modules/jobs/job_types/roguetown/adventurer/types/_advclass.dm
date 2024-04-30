@@ -16,14 +16,14 @@
 	var/pickprob = 100
 	var/maxchosen = -1
 	var/amtchosen = 0
-	var/plevel_req = 0
-	var/special_req = FALSE //check the json for our ckey
-	var/whitelist_req = FALSE
-	var/ispilgrim = FALSE
-	var/isvillager = FALSE
+	var/min_pq = -100
+
 	var/horse = FALSE
 	var/vampcompat = TRUE
 	var/list/traits_applied
+
+	//What categories we are going to sort it in, keep in mind this is a set of bitflags
+	var/category_flags = RT_TYPE_DISABLED_CLASS
 
 /datum/advclass/proc/equipme(mob/living/carbon/human/H)
 	if(!H)
@@ -52,7 +52,8 @@
 
 	for(var/trait in traits_applied)
 		ADD_TRAIT(H, trait, ADVENTURER_TRAIT)
-	if(isvillager)
+
+	if(category_flags & (RT_TYPE_VILLAGER_CLASS))
 		for(var/mob/M in GLOB.billagerspawns)
 			to_chat(M, "<span class='info'>[H.real_name] is the [name].</span>")
 		GLOB.billagerspawns -= H
@@ -60,3 +61,28 @@
 /datum/advclass/proc/post_equip(mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,TYPE_PROC_REF(/mob/living/carbon/human, add_credit)), 20)
 	return
+
+/*
+	Whoa! we are checking requirements here!
+	On the datum! Wow!
+*/
+/datum/advclass/proc/check_requirements(mob/living/carbon/human/H)
+	if(!(H.gender in allowed_sexes))
+		return FALSE
+
+	if(!(H.dna.species.name in allowed_races))
+		return FALSE
+
+	if(!(H.age in allowed_ages))
+		return FALSE
+
+	if(maxchosen > -1)
+		if(amtchosen >= maxchosen)
+			return FALSE
+
+	if(!(get_playerquality(H.client.ckey) >= min_pq))
+		return FALSE
+
+	if(prob(pickprob))
+		return TRUE
+

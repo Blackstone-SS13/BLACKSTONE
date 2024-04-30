@@ -9,6 +9,7 @@
 	maxchosen = 1
 	pickprob = 100
 	traits_applied = list(RTRAIT_NOBLE, RTRAIT_NOSEGRAB, RTRAIT_HEAVYARMOR)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/heartfeltlord/pre_equip(mob/living/carbon/human/H)
 	..()

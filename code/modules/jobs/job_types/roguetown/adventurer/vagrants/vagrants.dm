@@ -47,40 +47,10 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 			///FOR SOME RETARDED FUCKING REASON THIS REFUSED TO WORK WITHOUT A FUCKING TIMER IT JUST FUCKED SHIT UP
 			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, adv_hugboxing_start)), 1)
 
-
-
 		if(M.client)
-			GLOB.adv_classes
-			var/list/special_classes = list()
-			var/classamt = 5
+			return FALSE
+			// Heres where we begin the hell
 
-			for(var/I in shuffle(classes))
-				var/datum/advclass/A = I
-				if(!(H.gender in A.allowed_sexes))
-					testing("[A.name] fail11")
-					continue
-
-				if(!(H.dna.species.name in A.allowed_races))
-					testing("[A.name] fail22")
-					continue
-
-				if(!(H.age in A.allowed_ages))
-					testing("[A.name] fail33")
-					continue
-
-				if(A.maxchosen > -1)
-					if(A.amtchosen >= A.maxchosen)
-						testing("[A.name] fail9")
-						continue
-
-				if(H.possibleclass.len >= classamt)
-					testing("[A.name] fail3")
-					continue
-
-				var/the_prob = A.pickprob
-				if(prob(the_prob))
-					testing("[A.name] SUC1")
-					H.possibleclass += A
 
 /*
 /mob/living/carbon/human/proc/advsetup()

@@ -12,8 +12,8 @@
 	"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/cheesemaker
-	isvillager = TRUE
-	ispilgrim = TRUE
+
+	category_flags = RT_TYPE_FREE_CLASS | RT_TYPE_VILLAGER_CLASS
 
 /datum/outfit/job/roguetown/adventurer/cheesemaker/pre_equip(mob/living/carbon/human/H)
 	..()

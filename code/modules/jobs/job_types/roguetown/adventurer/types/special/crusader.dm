@@ -6,13 +6,15 @@
 							"Tiefling")
 	outfit = /datum/outfit/job/roguetown/adventurer/crusader
 	traits_applied = list(RTRAIT_HEAVYARMOR)
-	special_req = TRUE
-	maxchosen = 0
-	isvillager = FALSE
+
+	maxchosen = 1
+
 	tutorial = "The crusaders... Knights who have pledged \
 	their wealth and lands to the church, taking up the banner \
 	of one of the rival Orders dedicated to retaking the holy land. \
 	The 451st crusade is sure to be the last."
+
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/crusader
 	name = "Crusader"

@@ -6,10 +6,11 @@
 	allowed_races = list("Humen"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/fishermaster
-	isvillager = FALSE
-	ispilgrim = TRUE
+
 	maxchosen = 1
 	pickprob = 5
+
+	category_flags = RT_TYPE_FREE_CLASS
 
 /datum/outfit/job/roguetown/adventurer/fishermaster/pre_equip(mob/living/carbon/human/H)
 	..()

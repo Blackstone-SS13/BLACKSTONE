@@ -7,6 +7,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/dwarfwarrior
 	maxchosen = 2
 	traits_applied = list(RTRAIT_HEAVYARMOR)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/dwarfwarrior/pre_equip(mob/living/carbon/human/H)
 	..()

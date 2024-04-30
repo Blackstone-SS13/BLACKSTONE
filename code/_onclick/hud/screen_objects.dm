@@ -803,7 +803,7 @@
 		qdel(src)
 		return
 	else
-		if(H.advsetup())
+		if(H.advsetup()) TODO ITS TIME FOR THE NEW CLASS MENU SETUP HA HA
 			qdel(src)
 
 

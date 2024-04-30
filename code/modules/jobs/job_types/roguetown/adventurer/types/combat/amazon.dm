@@ -8,6 +8,7 @@
 	pickprob = 13
 	maxchosen = 2
 	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/amazon/pre_equip(mob/living/carbon/human/H)
 	..()

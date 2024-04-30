@@ -77,3 +77,13 @@ GLOBAL_LIST_INIT(wolf_suffixes, list("Fang", "Claw", "Stalker", "Prowler", "Roar
 
 
 GLOBAL_LIST_EMPTY(sunlights)
+
+/*
+	ha ha ha bitflags!
+	For the shitty subjob (class) categories
+*/
+#define RT_TYPE_DISABLED_CLASS 1 // Disabled, aka don't make it fuckin APPEAR
+#define RT_TYPE_FREE_CLASS 2 // Free class - Formerly pilgrims, no specific orientation
+#define RT_TYPE_COMBAT_CLASS 4 // Combat class - oriented towards combat
+#define RT_TYPE_VILLAGER_CLASS 8 // Villager class - Villagers can use it
+#define RT_TYPE_ANTAG_CLASS 16 // Antag class - results in an antag

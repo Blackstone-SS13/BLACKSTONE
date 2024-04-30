@@ -5,11 +5,11 @@
 	allowed_sexes = list("male","female")
 	allowed_races = list("Humen", "Elf", "Dwarf", "Aasimar", "Dark Elf",
 	"Aasimar")
-	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
-	ispilgrim = FALSE
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
 	vampcompat = FALSE
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
 	traits_applied = list(RTRAIT_HEAVYARMOR)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/cleric/pre_equip(mob/living/carbon/human/H)
 	..()
