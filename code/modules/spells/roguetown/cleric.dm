@@ -622,28 +622,29 @@
 	return TRUE
 
 /obj/effect/proc_holder/spell/invoked/invisibility
-    name = "Invisibility"
-    range = 1
-    overlay_state = "invisibility"
-    releasedrain = 30
-    chargedrain = 0
-    chargetime = 0
-    charge_max = 30 SECONDS
-    associated_skill = /datum/skill/magic/holy
-    invocation_type = "none"
-    antimagic_allowed = TRUE
-    miracle = TRUE
-    devotion_cost = -45
+	name = "Invisibility"
+	range = 1
+	overlay_state = "invisibility"
+	releasedrain = 30
+	chargedrain = 0
+	chargetime = 0
+	charge_max = 30 SECONDS
+	sound = 'sound/misc/area.ogg'
+	associated_skill = /datum/skill/magic/holy
+	invocation_type = "none"
+	antimagic_allowed = TRUE
+	miracle = TRUE
+	devotion_cost = -45
 
 /obj/effect/proc_holder/spell/invoked/invisibility/cast(list/targets, mob/living/user)
-    if(isliving(targets[1]))
-        var/mob/living/target = targets[1]
-        target.visible_message("<span class='warning'>[target] starts to fade into thin air!</span>", "<span class='notice'>You start to become invisible!</span>")
-        animate(target, alpha = 0, time = 1 SECONDS, easing = EASE_IN)
-        target.mob_timers[MT_INVISIBILITY] = world.time + 15 SECONDS
-        addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, update_sneak_invis), TRUE), 15 SECONDS)
-        addtimer(CALLBACK(target, TYPE_PROC_REF(/atom/movable, visible_message), "<span class='warning'>[target] fades back into view.</span>", "<span class='notice'>You become visible again.</span>"), 15 SECONDS)
-    return FALSE
+	if(isliving(targets[1]))
+		var/mob/living/target = targets[1]
+		target.visible_message("<span class='warning'>[target] starts to fade into thin air!</span>", "<span class='notice'>You start to become invisible!</span>")
+		animate(target, alpha = 0, time = 1 SECONDS, easing = EASE_IN)
+		target.mob_timers[MT_INVISIBILITY] = world.time + 15 SECONDS
+		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, update_sneak_invis), TRUE), 15 SECONDS)
+		addtimer(CALLBACK(target, TYPE_PROC_REF(/atom/movable, visible_message), "<span class='warning'>[target] fades back into view.</span>", "<span class='notice'>You become visible again.</span>"), 15 SECONDS)
+	return FALSE
 
 
 
