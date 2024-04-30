@@ -92,7 +92,7 @@
 
 
 /obj/item/rogueweapon/spear
-	force = 15
+	force = 18
 	force_wielded = 30
 	possible_item_intents = list(SPEAR_THRUST, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, SPEAR_BASH)
@@ -109,15 +109,15 @@
 	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	minstr = 8
-	max_blade_int = 100
+	minstr = 4
+	max_blade_int = 150
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/skill/combat/polearms
 	dropshrink = 0.6
 	blade_dulling = DULLING_BASHCHOP
 	walking_stick = TRUE
-	wdefense = 4
+	wdefense = 6
 	thrown_bclass = BCLASS_STAB
 	throwforce = 25
 
@@ -136,8 +136,10 @@
 	icon_state = "billhook"
 	smeltresult = /obj/item/ingot/steel
 	max_blade_int = 200
-	minstr = 8
+	minstr = 6
 	wdefense = 6
+	force = 15
+	force_wielded = 33
 
 /obj/item/rogueweapon/spear/improvisedbillhook
 	force = 12
@@ -173,12 +175,12 @@
 	max_integrity = 50
 
 /obj/item/rogueweapon/halberd
-	force = 15
-	force_wielded = 30
+	force = 10
+	force_wielded = 36
 	possible_item_intents = list(SPEAR_THRUST, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, /datum/intent/axe/chop, SPEAR_BASH)
+	gripped_intents = list(SPEAR_CUT, /datum/intent/axe/chop, SPEAR_BASH) // Removed spear_thrust intent until a new one is made for Halberd. Right now it's better at thrusting then a spear -- even though it's a pole axe.
 	name = "halberd"
-	desc = "An iron halberd, mostly used by town guards."
+	desc = "An iron halberd -- designed to defeat armor and crush opponents from afar."
 	icon_state = "halberd"
 	icon = 'icons/roguetown/weapons/64.dmi'
 	pixel_y = -16
@@ -198,7 +200,7 @@
 	dropshrink = 0.6
 	blade_dulling = DULLING_BASHCHOP
 	walking_stick = TRUE
-	wdefense = 6
+	wdefense = 4
 
 /obj/item/rogueweapon/halberd/getonmobprop(tag)
 	. = ..()

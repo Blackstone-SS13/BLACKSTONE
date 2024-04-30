@@ -15,7 +15,7 @@
 	"Half-Elf"
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
-	tutorial = "You've enough training to point your spear in the right direction, and you've enough mammons in your pocket to want to keep this job: But you know youre just as disposable as the last poor bastards to call themselves a Guard."
+	tutorial = "Responsible for the safety of the town and the enforcement of the King's law, you are the vanguard of the city faced with punishing those who defy his Royal Majesty. Though you've many lords to obey, as both the Church and the Sheriff have great sway over your life."
 	display_order = JDO_TOWNGUARD
 	whitelist_req = TRUE
 
@@ -84,21 +84,27 @@
 			H.update_hair()
 	H.verbs |= /mob/proc/haltyell
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/guardsman/proc/assign_skills(mob/living/carbon/human/guard)
-	guard.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,3,4), TRUE) // Town guards have stronger street skills then castle guards.
+	guard.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE) 
+	guard.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(3,4), TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/whipsflails, pick(3,4), TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE) 
+	guard.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	guard.change_stat("strength", 1)
-	guard.change_stat("perception", 1)
+	guard.change_stat("perception", 2) 
+	guard.change_stat("constitution", 1)
 	guard.change_stat("endurance", 1)
 	guard.change_stat("speed", 1)
 
@@ -107,19 +113,19 @@
 	is_bowman = TRUE
 
 /datum/outfit/job/roguetown/guardsman/bowman/assign_skills(mob/living/carbon/human/guard)
-	guard.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/bows, 5, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-	guard.change_stat("perception", 2)
-	guard.change_stat("endurance", 1)
+	guard.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+	guard.change_stat("perception", 3)
+	guard.change_stat("constitution", 1)
 	guard.change_stat("speed", 2)
 
 /mob/proc/haltyell()

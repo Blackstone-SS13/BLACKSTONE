@@ -38,35 +38,91 @@
 		if("Pestra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 
-	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
-	pants = /obj/item/clothing/under/roguetown/chainlegs
-	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-	belt = /obj/item/storage/belt/rogue/leather/hand
-	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-	beltr = /obj/item/rogueweapon/huntingknife
-	id = /obj/item/clothing/ring/silver
-	cloak = /obj/item/clothing/cloak/tabard/crusader
-	backr = /obj/item/rogueweapon/sword
-	backl = /obj/item/storage/backpack/rogue/satchel
-	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-		H.change_stat("strength", 2)
-		H.change_stat("perception", 1)
-		H.change_stat("intelligence", 2)
-		H.change_stat("constitution", 2)
-		H.change_stat("endurance", 2)
-		H.change_stat("speed", -2)
+
+
+	H.adjust_blindness(-3)
+	var/classes = list("Paladin","Battle Master",)
+	var/classchoice = input("Choose your archetypes", "Available archetypes") as anything in classes
+
+	switch(classchoice)
+	
+		if("Paladin")
+			to_chat(src, "<span class='warning'>You are a ranger.</span>")
+			H.set_blindness(0) // No introduction text due to there being no real difference in Paladin archetypes for now.
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,3,3,4), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(2,3), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
+			H.change_stat("perception", 1)
+			H.change_stat("strength", 2)
+			H.change_stat("constitution", 2) // Classic paladin is faster then the battle master.
+			H.change_stat("endurance", 1)
+			armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
+			pants = /obj/item/clothing/under/roguetown/chainlegs
+			shoes = /obj/item/clothing/shoes/roguetown/boots/leather
+			belt = /obj/item/storage/belt/rogue/leather/hand
+			beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
+			beltr = /obj/item/rogueweapon/huntingknife
+			id = /obj/item/clothing/ring/silver
+			cloak = /obj/item/clothing/cloak/tabard/crusader
+			if(prob(30))
+				head = /obj/item/clothing/head/roguetown/helmet/sallet/visored
+			if(prob(70))
+				backr = /obj/item/rogueweapon/sword
+			else
+				backr = /obj/item/rogueweapon/sword/long
+			backl = /obj/item/storage/backpack/rogue/satchel
+		if("Battle Master")
+			H.set_blindness(0)
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(2,3), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
+			H.change_stat("perception", 1)
+			H.change_stat("strength", 2)
+			H.change_stat("constitution", 2) 
+			H.change_stat("endurance", 1)
+			H.change_stat("speed", -1)
+			armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
+			pants = /obj/item/clothing/under/roguetown/chainlegs
+			shoes = /obj/item/clothing/shoes/roguetown/boots/leather
+			belt = /obj/item/storage/belt/rogue/leather/hand
+			beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
+			beltr = /obj/item/rogueweapon/huntingknife
+			id = /obj/item/clothing/ring/silver
+			cloak = /obj/item/clothing/cloak/tabard/crusader
+			backr = /obj/item/rogueweapon/flail
+			if(prob(40))
+				r_hand = /obj/item/rogueweapon/shield/wood
+			else if(prob(20))
+				r_hand = /obj/item/rogueweapon/shield/tower/metal
+			backl = /obj/item/storage/backpack/rogue/satchel
+		
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	if(H.dna?.species)
 		if(H.dna.species.id == "human")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
