@@ -416,7 +416,7 @@
 			return TRUE
 	testing("WOUNDADD DAM [dam]")
 	switch(bclass) //do stuff but only when we are a blade that adds wounds
-		if(BCLASS_SMASH || BCLASS_BLUNT)
+		if(BCLASS_SMASH, BCLASS_BLUNT)
 			switch(dam)
 				if(1 to 10)
 					add_wound(/datum/wound/bruise/small, skipcheck = FALSE)
@@ -424,7 +424,7 @@
 					add_wound(/datum/wound/bruise, skipcheck = FALSE)
 				if(21 to INFINITY)
 					add_wound(/datum/wound/bruise/large, skipcheck = FALSE)
-		if(BCLASS_CUT || BCLASS_CHOP)
+		if(BCLASS_CUT, BCLASS_CHOP)
 			switch(dam)
 				if(1 to 10)
 					add_wound(/datum/wound/cut/small, skipcheck = FALSE)
@@ -432,7 +432,7 @@
 					add_wound(/datum/wound/cut, skipcheck = FALSE)
 				if(21 to INFINITY)
 					add_wound(/datum/wound/cut/large, skipcheck = FALSE)
-		if(BCLASS_STAB || BCLASS_PICK)
+		if(BCLASS_STAB, BCLASS_PICK)
 			switch(dam)
 				if(1 to 10)
 					add_wound(/datum/wound/stab/small, skipcheck = FALSE)
