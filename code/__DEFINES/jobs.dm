@@ -100,6 +100,8 @@
 #define KNIGHT		(1<<2)
 #define WIZARD		(1<<3)
 #define SHERIFF		(1<<4)
+#define BAILIFF		(1<<5)
+#define COUNCILLOR	(1<<6)
 
 #define GARRISON		(1<<1)
 
@@ -150,11 +152,17 @@
 #define PRINCE		(1<<4)
 #define SHOPHAND	(1<<5)
 
+#define MERCENARIES		(1<<6)
+
+#define DESERT_RIDER	(1<<0)
+#define GRENZELHOFT		(1<<1)
+
 #define JCOLOR_NOBLE "#aa83b9"
 #define JCOLOR_CHURCH "#c0ba8d"
 #define JCOLOR_SOLDIER "#b18484"
 #define JCOLOR_SERF "#819e82"
 #define JCOLOR_PEASANT "#b6a68c"
+#define JCOLOR_MERCENARIES "#c86e3a"
 
 
 // job display orders //
@@ -167,9 +175,11 @@
 
 #define JDO_MAGICIAN 5
 #define JDO_WAPP 6
+#define JDO_BAILIFF 7
+#define JDO_COUNCILLOR 7.1
 
-#define JDO_SHERIFF 7
-#define JDO_CASTLEGUARD 7.1
+#define JDO_SHERIFF 7.2
+#define JDO_CASTLEGUARD 7.3
 #define JDO_TOWNGUARD 8
 #define JDO_BOGGUARD 8.1
 #define JDO_GATEMASTER 9
@@ -221,7 +231,8 @@
 #define JDO_ADVENTURER 32.1
 #define JDO_PILGRIM 32.2
 
-#define JDO_MERCENARY 33
+#define JDO_GRENZELHOFT 33.1
+#define JDO_DESERT_RIDER 33.2
 
 #define JDO_VAGRANT 34
 #define JDO_ORPHAN 35

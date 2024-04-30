@@ -70,10 +70,9 @@
 
 #define BODYPART_NOT_DISABLED 0
 #define BODYPART_DISABLED_DAMAGE 1
-#define BODYPART_DISABLED_PARALYSIS 2
-#define BODYPART_DISABLED_CRIT 3 //plays a sound
-#define BODYPART_DISABLED_FALL 4 //temporary 60 seconds paralyzed
-#define BODYPART_DISABLED_ROT 5 //limb is rotten oh nooo
+#define BODYPART_DISABLED_PARALYSIS 2 //either a fall or twisting the limb
+#define BODYPART_DISABLED_FRACTURE 3 //bone fracture
+#define BODYPART_DISABLED_ROT 4 //limb is rotten oh nooo
 
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
 #define DEFAULT_BODYPART_ICON_ROBOTIC 'icons/mob/augmentation/augments.dmi'

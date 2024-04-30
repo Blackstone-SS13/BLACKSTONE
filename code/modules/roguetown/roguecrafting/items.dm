@@ -227,8 +227,6 @@
 	result = /obj/item/rogueweapon/shovel/small
 	reqs = list(/obj/item/grown/log/tree/small = 1,
 			/obj/item/grown/log/tree/stick = 1)
-
-
 /obj/item/rogueweapon/shovel/small/crafted
 	sellprice = 5
 
@@ -237,5 +235,6 @@
 	result = /obj/item/book_crafting_kit
 	reqs = list(
 			/obj/item/natural/hide = 2,
-			/obj/item/natural/fibers = 2,
-			/obj/item/needle = 1)
+			/obj/item/natural/cloth = 1)
+	tools = list(/obj/item/needle = 1)
+	req_table = TRUE

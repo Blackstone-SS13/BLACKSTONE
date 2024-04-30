@@ -102,10 +102,16 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	jobspawn_override = list("Orphan")
 	delete_after_roundstart = FALSE
 
-/obj/effect/landmark/start/mercenarylate
-	name = "Mercenarylate"
+/obj/effect/landmark/start/desertriderlate
+	name = "DesertRiderlate"
 	icon_state = "arrow"
-	jobspawn_override = list("Mercenary")
+	jobspawn_override = list("Desert Rider Mercenary")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/grenzelhoftlate
+	name = "Grenzelhoftlate"
+	icon_state = "arrow"
+	jobspawn_override = list("Grenzelhoft Mercenary")
 	delete_after_roundstart = FALSE
 
 /obj/effect/landmark/start/villagerlate
@@ -152,6 +158,14 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/bogguardsman
 	name = "Bog Guard"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/bailiff
+	name = "Bailiff"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/councillor
+	name = "Councillor"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/veteran
@@ -267,10 +281,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Gravedigger"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/mercenary
-	name = "Mercenary"
-	icon_state = "arrow"
-
 /obj/effect/landmark/start/vagrant
 	name = "Beggar"
 	icon_state = "arrow"
@@ -314,7 +324,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/barkeeper
 	name = "Barkeeper"
 	icon_state = "arrow"
-
 
 /obj/effect/landmark/start/adventurer
 	name = "Adventurer"

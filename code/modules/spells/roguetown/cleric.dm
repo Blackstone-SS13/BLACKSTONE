@@ -100,7 +100,7 @@
 			if(affecting)
 				if(affecting.heal_damage(20, 20, 0, null, FALSE))
 					C.update_damage_overlays()
-				if(affecting.heal_wounds(50))
+				if(affecting.heal_wounds(10))
 					C.update_damage_overlays()
 		else
 			target.adjustBruteLoss(-5)
@@ -148,7 +148,7 @@
 			if(affecting)
 				if(affecting.heal_damage(50, 50, 0, null, FALSE))
 					C.update_damage_overlays()
-				if(affecting.heal_wounds(50))
+				if(affecting.heal_wounds(20))
 					C.update_damage_overlays()
 		else
 			target.adjustBruteLoss(-50)
@@ -374,6 +374,9 @@
 			if(unzombification_pq && !HAS_TRAIT(target, TRAIT_IWASUNZOMBIFIED) && user?.ckey)
 				adjust_playerquality(unzombification_pq, user.ckey)
 				ADD_TRAIT(target, TRAIT_IWASUNZOMBIFIED, "[type]")
+		var/datum/component/rot/rot = target.GetComponent(/datum/component/rot)
+		if(rot)
+			rot.amount = 0
 		if(iscarbon(target))
 			var/mob/living/carbon/stinky = target
 			for(var/obj/item/bodypart/rotty in stinky.bodyparts)

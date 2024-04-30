@@ -11,7 +11,7 @@
 	"Aasimar")
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_SHERIFF
-	tutorial = "Law and Order, your divine reason for existence. These animals are undeserving of your protection, for it is their sons and daughters roving the countryside with blade in hand; how many men have you lost this week just to the horrors in the woods alone? Are you the one to stand between this town and chaos, or will you fail it like they expect you to?"
+	tutorial = "You either inherited this role or were elected to it, you belong to no nobility and serve the king as loyal as you may, for he has paid you well. Enforce the law and ensure order prevails, you and the bailiff serve on the same authority; However, unlike the Bailiff you enforce the laws and maintain order in the town. You also oversee the general quality and conscription of Guards for the Town and Manor. The Bailiff can commandeer guards for his own protection, however he does not lead them as you do."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/sheriff
 	give_bank_account = 26
@@ -107,7 +107,8 @@
 	//only migrants and peasants
 	if(!(recruit.job in GLOB.peasant_positions) && \
 		!(recruit.job in GLOB.serf_positions) && \
-		!(recruit.job in GLOB.allmig_positions))
+		!(recruit.job in GLOB.allmig_positions) && \
+		!(recruit.job in GLOB.mercenary_positions))
 		return FALSE
 	//need to see their damn face
 	if(!recruit.get_face_name(null))
