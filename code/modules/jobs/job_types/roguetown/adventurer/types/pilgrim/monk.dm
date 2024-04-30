@@ -29,8 +29,9 @@
 	r_hand = /obj/item/rogueweapon/woodstaff
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.change_stat("strength", 3)
 		H.change_stat("intelligence", 1)
