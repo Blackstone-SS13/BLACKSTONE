@@ -626,9 +626,9 @@
 /obj/effect/proc_holder/spell/invoked/blindness/cast(list/targets, mob/user = usr)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
-		target.visible_message("<span class='warning'>An acolyte has summoned darkness!</span>","<span class='notice'>My eyes were covered in darkness!</span>")		
 		if(target.anti_magic_check(TRUE, TRUE))
 			return FALSE
+		target.visible_message("<span class='warning'>[user] points at [L]'s eyes!</span>","<span class='notice'>My eyes are covered in darkness!</span>")		
 		target.blind_eyes(2)
 	return TRUE
 
@@ -660,6 +660,3 @@
 		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, update_sneak_invis), TRUE), 15 SECONDS)
 		addtimer(CALLBACK(target, TYPE_PROC_REF(/atom/movable, visible_message), "<span class='warning'>[target] fades back into view.</span>", "<span class='notice'>You become visible again.</span>"), 15 SECONDS)
 	return FALSE
-
-
-
