@@ -8,7 +8,7 @@
 	"Tiefling",
 	"Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
-	allowed_patrons = list("Astrata", "Dendor", "Necra","Noc")
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
 
 /datum/outfit/job/roguetown/adventurer/paladin/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -75,9 +75,10 @@
 		if(H.dna.species.id == "tiefling")
 			cloak = /obj/item/clothing/cloak/tabard/crusader/tief
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
-	//Max devotion limit - Paladins are stronger but cannot pray to gain more abilities
-	C.max_devotion = 200
-	C.update_devotion(50, 50)
+	//Max devotion limit - Paladins are stronger but cannot pray to gain all abilities beyond t1
+	C.max_devotion = 250
+	C.max_progression = CLERIC_REQ_1
+	C.update_devotion(50, 0)
 	C.holder_mob = H
-	C.grant_spells(H)
+	C.grant_spells_templar(H)
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)

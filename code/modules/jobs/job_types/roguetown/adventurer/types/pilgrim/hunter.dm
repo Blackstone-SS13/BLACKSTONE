@@ -24,7 +24,7 @@
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/brown
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
-	belt = /obj/item/storage/belt/rogue/leather/rope
+	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/quiver/arrows
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	backpack_contents = list(/obj/item/flint = 1, /obj/item/bait = 1, /obj/item/rogueweapon/huntingknife = 1)

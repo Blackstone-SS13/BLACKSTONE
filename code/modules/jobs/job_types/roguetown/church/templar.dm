@@ -9,29 +9,48 @@
 	allowed_races = list("Humen",
 	"Tiefling",
 	"Aasimar")
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
 	total_positions = 2
 	spawn_positions = 2
-	spells = list(/obj/effect/proc_holder/spell/invoked/lesser_heal, /obj/effect/proc_holder/spell/targeted/churn, /obj/effect/proc_holder/spell/targeted/burialrite)
 	display_order = JDO_TEMPLAR
 	give_bank_account = TRUE
 
 /datum/outfit/job/roguetown/templar/pre_equip(mob/living/carbon/human/H)
-	..()
-	var/datum/patrongods/A = H.PATRON
-	switch(A.name)
-		if("Astrata")
-			head = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
-		if("Noc")
-			head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
-		if("Necra")
-			head = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
-		if("Dendor")
-			head = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
-		else
-			head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
+	..()	
+	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
+	
+	var/datum/patrongods/ourpatron
+	if(istype(H.PATRON, /datum/patrongods))
+		ourpatron = H.PATRON
+
+	if(!ourpatron || !(ourpatron.name in allowed_patrons))
+		var/list/datum/patrongods/possiblegods = list()
+		for(var/datum/patrongods/P in GLOB.patronlist)
+			if(P.name in allowed_patrons)
+				possiblegods |= P
+		ourpatron = pick(possiblegods)
+		H.PATRON = ourpatron
+		to_chat(H, "<span class='warning'> My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
+	
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+	switch(ourpatron.name)
+		if("Astrata")
+			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
+		if("Dendor")
+			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
+		if("Necra")
+			neck = /obj/item/clothing/neck/roguetown/psicross/necra
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
+		if("Pestra")
+			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
+		if("Noc")
+			neck = /obj/item/clothing/neck/roguetown/psicross/noc
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/tights/black
@@ -69,8 +88,10 @@
 		if(H.dna.species.id == "human")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
-	//Max devotion limit - Templars are stronger but cannot pray to gain more abilities
-	C.max_devotion = 200
-	C.update_devotion(50, 50)
+	//Max devotion limit - Templars are stronger but cannot pray to gain more abilities beyond t1
+	C.max_devotion = 250
+	C.max_progression = CLERIC_REQ_1
+	C.update_devotion(50, 0)
 	C.holder_mob = H
+	C.grant_spells_templar(H)
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
