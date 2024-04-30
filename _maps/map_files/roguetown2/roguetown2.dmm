@@ -3792,6 +3792,10 @@
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/town)
+"pb" = (
+/obj/effect/landmark/start/grabber,
+/turf/open/floor/rogue/wood,
+/area/rogue/indoors/town/shop)
 "pc" = (
 /obj/structure/stairs{
 	icon_state = "stairs";
@@ -75301,7 +75305,7 @@ sw
 sk
 sw
 sw
-sw
+pb
 sw
 oy
 sk
