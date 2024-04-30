@@ -1,11 +1,9 @@
 
 /obj/item/bodypart/proc/can_dismember(obj/item/I)
-	if(dismemberable)
-		return TRUE
+	return dismemberable
 
 /obj/item/bodypart/proc/can_disable(obj/item/I)
-	if(disableable)
-		return TRUE
+	return disableable
 
 /obj/item/bodypart/var/list/dismemsound = list('sound/combat/dismemberment/dismem (1).ogg',
 'sound/combat/dismemberment/dismem (2).ogg',

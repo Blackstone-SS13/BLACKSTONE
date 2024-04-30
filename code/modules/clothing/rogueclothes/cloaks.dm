@@ -334,6 +334,13 @@
 	color = CLOTHING_GREEN
 	detail_color = CLOTHING_DARK_GREEN
 
+/obj/item/clothing/cloak/stabard/grenzelhoft
+	name = "grenzelhoft mercenary tabard"
+	desc = "A tabard bearing the colors of the Grenzelhoft emperiate mercenary guild."
+	color = CLOTHING_YELLOW
+	detail_color = CLOTHING_RED
+	detail_tag = "_box"
+
 /obj/item/clothing/cloak/stabard/dungeon
 	color = CLOTHING_BLACK
 
@@ -624,6 +631,9 @@
 
 /obj/item/clothing/cloak/raincloak/blue
 	color = CLOTHING_BLUE
+
+/obj/item/clothing/cloak/raincloak/purple
+	color = CLOTHING_PURPLE
 
 /obj/item/clothing/head/hooded/rainhood
 	name = "hood"

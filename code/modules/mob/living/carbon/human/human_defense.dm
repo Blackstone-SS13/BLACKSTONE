@@ -991,17 +991,18 @@
 	if(status == "is OK." || status == "no damage")
 		no_damage = TRUE
 	var/isdisabled = ""
-	if(FB.is_disabled() == BODYPART_DISABLED_CRIT)
-		isdisabled = "shattered "
-	if(FB.is_disabled() == BODYPART_DISABLED_DAMAGE)
-		isdisabled = "numb "
-	if(FB.is_disabled() == BODYPART_DISABLED_PARALYSIS || FB.is_disabled() == BODYPART_DISABLED_FALL)
-		isdisabled = "limp "
-	if(FB.is_disabled() == BODYPART_DISABLED_ROT)
-		if(FB.skeletonized)
-			isdisabled = "skeletonized "
-		else
-			isdisabled = "rotting "
+	switch(FB.is_disabled())
+		if(BODYPART_DISABLED_FRACTURE)
+			isdisabled = "broken "
+		if(BODYPART_DISABLED_DAMAGE)
+			isdisabled = "numb "
+		if(BODYPART_DISABLED_PARALYSIS)
+			isdisabled = "limp "
+		if(BODYPART_DISABLED_ROT)
+			if(FB.skeletonized)
+				isdisabled = "skeletonized "
+			else
+				isdisabled = "rotting "
 	to_chat(src, "\t <span class='[no_damage ? "notice" : "warning"]'>My [isdisabled][FB.name] [status].</span>")
 
 	for(var/obj/item/I in FB.embedded_objects)

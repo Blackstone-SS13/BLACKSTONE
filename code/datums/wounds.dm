@@ -100,7 +100,7 @@
 /mob/living/proc/try_crit(bclass,dam,mob/living/user,zone_precise)
 	if(!dam)
 		return
-	if(zone_precise == "head")
+	if(zone_precise == BODY_ZONE_HEAD)
 		if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_PICK)
 			var/used = round((health / maxHealth)*20 + (dam / 3), 1)
 			if(user)
@@ -160,12 +160,17 @@
 	var/passive_heal = FALSE
 	/// If TRUE, this disables limbs
 	var/disabling = FALSE
+	/// If TRUE, this wound can be healed through sleep
+	var/sleep_heal = TRUE
 
 
 /datum/wound/proc/sewn()
-	bleed_rate = 0.01
+	bleed_rate = max(bleed_rate * 0.01, 0.01)
 	woundpain = max(woundpain-10, 0)
+	whp = round(whp/2)
 	can_sew = FALSE
+	sleep_heal = TRUE
+	name = name + " <span class='green'>(sewn)</span>"
 	return
 
 /datum/wound/cut
@@ -209,6 +214,7 @@
 	woundpain = 100
 	mob_overlay = "s1"
 	time = 10
+	sleep_heal = FALSE
 
 /datum/wound/artery/throat
 	name = "sliced throat"
@@ -239,6 +245,7 @@
 	woundpain = 100
 	time = 10
 	mob_overlay = "dis_head"
+	sleep_heal = FALSE
 
 /datum/wound/dismemberment/r_arm
 	mob_overlay = "dis_ra"
@@ -271,6 +278,7 @@
 	can_sew = 0
 	whp = 60
 	woundpain = 100
+	sleep_heal = FALSE
 
 /datum/wound/bite
 	name = "bite mark"
@@ -283,7 +291,7 @@
 /datum/wound/bite/bleeding
 	name = "bleeding bite mark"
 	bleed_rate = 0.2
-	can_sew = 1
+	can_sew = TRUE
 	whp = 30
 	woundpain = 5
 	passive_heal = FALSE

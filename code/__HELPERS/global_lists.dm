@@ -71,9 +71,9 @@
 		GLOB.mouseicons_human += file("icons/effects/mousemice/swang/[i * 5].dmi")
 
 	// Patron Gods
-	for(var/gods in subtypesof(/datum/patrongods))
-		var/datum/patrongods/A = new gods()
-		GLOB.patronlist[A] = gods
+	for(var/god in subtypesof(/datum/patrongods))
+		var/datum/patrongods/A = new god()
+		GLOB.patronlist[A.name] = A
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.
