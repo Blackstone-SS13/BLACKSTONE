@@ -139,9 +139,10 @@
 #define MINER		(1<<7)
 #define BUTLER		(1<<8)
 #define JESTER		(1<<8)
-#define ADVENTURER	(1<<9)
-#define COOK		(1<<10)
-#define GRABBER		(1<<11)
+#define LIFTER		(1<<9)
+#define ADVENTURER	(1<<10)
+#define COOK		(1<<11)
+#define GRABBER		(1<<12)
 
 #define YOUNGFOLK		(1<<5)
 
@@ -199,7 +200,8 @@
 #define JDO_SHEPHERD 17
 
 #define JDO_MERCHANT 18
-#define JDO_SHOPHAND 18.1
+#define JDO_LIFTER 18.1
+#define JDO_SHOPHAND 18.2
 #define JDO_GRABBER 19
 
 #define JDO_ARMORER 20
