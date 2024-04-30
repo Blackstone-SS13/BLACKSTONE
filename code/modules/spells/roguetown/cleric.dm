@@ -613,25 +613,27 @@
 
 /obj/effect/proc_holder/spell/invoked/blindness/cast(list/targets, mob/user = usr)
 	if(isliving(targets[1]))
-		var/mob/living/L = targets[1]
-		if(L.anti_magic_check(TRUE, TRUE))
+		var/mob/living/target = targets[1]
+		target.visible_message("<span class='warning'>[target] has summoned darkness!</span>","<span class='notice'>My eyes were covered in darkness!</span>")		
+		if(target.anti_magic_check(TRUE, TRUE))
 			return FALSE
-		L.blind_eyes(2)
-		L.visible_message("<span class='info'>An acolyte has summoned darkness!</span>", "<span class='userdanger'>My eyes are surrounded by darkness!</span>")
-		user.visible_message("<font color='gray'>[user] points at [L]!</font>")
+		target.blind_eyes(2)
+		user.visible_message("<font color='gray'>[user] points at [target]!</font>")
 	return TRUE
 
 /obj/effect/proc_holder/spell/invoked/invisibility
 	name = "Invisibility"
-	range = 1
 	overlay_state = "invisibility"
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
 	charge_max = 30 SECONDS
+	range = 3
+	warnie = "sydwarning"
+	movement_interrupt = FALSE
 	sound = 'sound/misc/area.ogg'
-	associated_skill = /datum/skill/magic/holy
 	invocation_type = "none"
+	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	miracle = TRUE
 	devotion_cost = -45

@@ -67,11 +67,12 @@
 	name = "moon hood"
 	desc = ""
 	color = null
-	icon_state = "nochood_ticon"
-	item_state = "nochood_t"
+	icon_state = "nochood"
+	item_state = "nochood"
 	icon = 'icons/roguetown/clothing/head.dmi'
 	body_parts_covered = NECK
 	slot_flags = ITEM_SLOT_HEAD
+	flags_inv = HIDEFACE|HIDEFACIALHAIR
 	dynamic_hair_suffix = ""
 	edelay_type = 1
 	adjustable = CAN_CADJUST
