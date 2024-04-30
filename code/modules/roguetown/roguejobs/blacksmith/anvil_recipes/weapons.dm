@@ -85,6 +85,7 @@
 /datum/anvil_recipe/weapons/ccleaver
 	name = "knife (+steel)"
 	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/rogueweapon/huntingknife/cleaver/combat
 
 /datum/anvil_recipe/weapons/smace
