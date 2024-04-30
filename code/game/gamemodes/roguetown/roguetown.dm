@@ -1,5 +1,5 @@
 // This mode will become the main basis for the typical roguetown round. Based off of chaos mode.
-var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "Aspirants", "Bandits", "CANCEL") // This is mainly used for forcemgamemodes
+var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "Aspirants", "Bandits", "Maniac", "CANCEL") // This is mainly used for forcemgamemodes
 
 /datum/game_mode/chaosmode
 	name = "roguemode"
@@ -143,6 +143,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		forcedmodes |= SSticker.manualmodes
 	var/list/major_modes = list(1, 2, 3)
 	var/list/minor_modes = list(1,2,3)
+	if(prob(25))
+		minor_modes += 4 //maniac
 	var/majorpicked = pick(major_modes)
 	if(forcedmodes.len)
 		message_admins("Manual gamemodes selected.")
@@ -160,6 +162,9 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 				if("Aspirants")
 					pick_aspirants()
 					log_game("Minor Antagonist: Aspirant")
+				if("Maniac")
+					pick_maniac()
+					log_game("Minor Antagonist: Maniac)")
 				if("Extended")
 					log_game("Major Antagonist: Extended")
 		return TRUE
@@ -183,10 +188,13 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 				log_game("Minor Antagonist: Aspirant")
 			if(3)
 				log_game("Minor Antagonist: Extended") // placeholder.
+			if(4)
+				pick_maniac()
+				log_game("Minor Antagonist: Maniac")
 		if(prob(30))
 			continue
-		else
-			return TRUE
+		return TRUE
+
 /datum/game_mode/chaosmode/proc/pick_bandits()
 	//BANDITS
 	banditgoal = rand(200,400)
@@ -216,7 +224,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 				continue
 			pre_bandits += bandito
 			bandito.assigned_role = "Bandit"
-			bandito.special_role = "Bandit"
+			bandito.special_role = ROLE_BANDIT
 			testing("[key_name(bandito)] has been selected as a bandit")
 			log_game("[key_name(bandito)] has been selected as a bandit")
 	for(var/antag in pre_bandits)
@@ -236,7 +244,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 					if(couper.assigned_role in possible_jobs_aspirants)
 						antag_candidates -= couper
 						pre_aspirants += couper
-						couper.special_role = "Aspirant"
+						couper.special_role = ROLE_ASPIRANT
 						rolesneeded -= R
 						testing("[key_name(couper)] has been selected as an Aspirant")
 						log_game("[key_name(couper)] has been selected as a Aspirant")
@@ -298,23 +306,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_maniac()
-	restricted_jobs = list("King",
-	"Queen",
-	"Prisoner",
-	"Dungeoneer",
-	"Witch Hunter",
-	"Confessor",
-	"Town Guard",
-	"Castle Guard",
-	"Veteran",
-	"Acolyte",
-	"Cleric",
-	"Sheriff",
-	"Templar",
-	"Bog Guard",
-	"Bog Master",
-	"Knight")
-	antag_candidates = get_players_for_role(ROLE_NBEAST)
+	restricted_jobs = list("King", "Queen")
+	antag_candidates = get_players_for_role(ROLE_MANIAC)
 	var/datum/mind/villain = pick_n_take(antag_candidates)
 	if(villain)
 		var/blockme = FALSE
@@ -329,7 +322,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 			return
 		allantags -= villain
 		pre_villains += villain
-		villain.special_role = "maniac"
+		villain.special_role = ROLE_MANIAC
 		villain.restricted_roles = restricted_jobs.Copy()
 		testing("[key_name(villain)] has been selected as the [villain.special_role]")
 		log_game("[key_name(villain)] has been selected as the [villain.special_role]")
@@ -399,7 +392,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 			return
 		allantags -= werewolf
 		pre_werewolves += werewolf
-		werewolf.special_role = "werewolf"
+		werewolf.special_role = ROLE_WEREWOLF
 		werewolf.restricted_roles = restricted_jobs.Copy()
 		testing("[key_name(werewolf)] has been selected as a WEREWOLF")
 		log_game("[key_name(werewolf)] has been selected as a [werewolf.special_role]")
@@ -412,7 +405,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	set waitfor = FALSE
 ///////////////// VILLAINS
 	for(var/datum/mind/traitor in pre_villains)
-		var/datum/antagonist/new_antag = new /datum/antagonist/villain()
+		var/datum/antagonist/new_antag = new /datum/antagonist/maniac()
 		addtimer(CALLBACK(traitor, TYPE_PROC_REF(/datum/mind, add_antag_datum), new_antag), rand(10,100))
 		GLOB.pre_setup_antags -= traitor
 		villains += traitor
@@ -447,7 +440,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		bandits += bandito
 ///////////////// ASPIRANTS
 	for(var/datum/mind/rogue in pre_aspirants) // Do the aspirant first, so the suppporter works right.
-		if(rogue.special_role == "Aspirant")
+		if(rogue.special_role == ROLE_ASPIRANT)
 			var/datum/antagonist/new_asp = new /datum/antagonist/aspirant()
 			rogue.add_antag_datum(new_asp)
 			aspirants += rogue
@@ -486,15 +479,15 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	var/num_villains = round((num_players() * 0.30)+1, 1)
 	if((villains.len + pre_villains.len) >= num_villains) //Upper cap for number of latejoin antagonists
 		return
-	if(ROLE_VILLAIN in character.client.prefs.be_special)
-		if(!is_banned_from(character.ckey, list(ROLE_VILLAIN)) && !QDELETED(character))
+	if(ROLE_MANIAC in character.client.prefs.be_special)
+		if(!is_banned_from(character.ckey, list(ROLE_MANIAC)) && !QDELETED(character))
 			if(age_check(character.client))
 				if(!(character.job in restricted_jobs))
 					if(prob(66))
 						add_latejoin_villain(character.mind)
 
 /datum/game_mode/chaosmode/proc/add_latejoin_villain(datum/mind/character)
-	var/datum/antagonist/villain/new_antag = new /datum/antagonist/villain()
+	var/datum/antagonist/maniac/new_antag = new /datum/antagonist/maniac()
 	character.add_antag_datum(new_antag)
 
 /datum/game_mode/chaosmode/proc/vampire_werewolf()

@@ -1175,7 +1175,7 @@
 								return BODY_ZONE_PRECISE_L_EYE
 						if(icon_y in 53 to 55)
 							if(icon_x in 29 to 37)
-								return BODY_ZONE_PRECISE_HAIR
+								return BODY_ZONE_PRECISE_SKULL
 						return BODY_ZONE_HEAD
 	else
 		switch(icon_y)
@@ -1293,11 +1293,11 @@
 								return BODY_ZONE_PRECISE_L_EYE
 						if(icon_y in 50 to 51)
 							if(icon_x in 30 to 36)
-								return BODY_ZONE_PRECISE_HAIR
+								return BODY_ZONE_PRECISE_SKULL
 						return BODY_ZONE_HEAD
 			if(52)
 				if(icon_x in 30 to 36)
-					return BODY_ZONE_PRECISE_HAIR
+					return BODY_ZONE_PRECISE_SKULL
 
 /obj/screen/zone_sel/proc/set_selected_zone(choice, mob/user)
 	if(user != hud?.mymob)

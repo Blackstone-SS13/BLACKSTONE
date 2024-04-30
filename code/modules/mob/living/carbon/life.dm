@@ -47,9 +47,9 @@
 			updatehealth()
 		update_stress()
 		handle_nausea()
-		if(blood_volume > BLOOD_VOLUME_SURVIVE)
+		if((blood_volume > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 			if(!heart_attacking)
-				adjustOxyLoss(-1.6)
+				adjustOxyLoss(-1.5)
 			else
 				if(getOxyLoss() < 20)
 					heart_attacking = FALSE

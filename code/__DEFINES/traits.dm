@@ -4,20 +4,20 @@
 #define RTRAIT_NOSTINK 					"Dead Nose"
 #define RTRAIT_ZJUMP 					"High Jumping"
 #define RTRAIT_NOSEGRAB 				"Intimidating"
-#define RTRAIT_SEEPRICES				"Golden Blood"
+#define RTRAIT_SEEPRICES				"Giza Blood"
 #define RTRAIT_STRONGBITE				"Strong Bite"
-#define RTRAIT_TORTURER					"Torturer"
-#define RTRAIT_HATEWOMEN				"Ladykiller"
-#define RTRAIT_GOODLOVER				"Fabled Lover"
 #define RTRAIT_NOBLE					"Noble Blooded"
 #define RTRAIT_EMPATH					"Empath"
 #define RTRAIT_BREADY					"Battleready"
-#define RTRAIT_MEDIUMARMOR					"Maille Training"
-#define RTRAIT_HEAVYARMOR					"Plate Training"
+#define RTRAIT_MEDIUMARMOR				"Maille Training"
+#define RTRAIT_HEAVYARMOR				"Plate Training"
+#define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
+#define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
+#define RTRAIT_MANIAC_AWOKEN			"Awoken"
+#define RTRAIT_NOFATSTAM					"Indefatigable" //for ai
 
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
-#define TRAIT_NOFATSTAM				"nofatstam" //for ai
-#define TRAIT_NOSLEEP				"nosleep"
+#define TRAIT_NOSLEEP				"Fatal Insomnia"
 #define TRAIT_BASHDOORS				"bashdoors"
 #define TRAIT_NOMOOD 			"no_mood"
 #define TRAIT_SIMPLE_WOUNDS		"simple_wounds"
@@ -28,6 +28,8 @@
 #define TRAIT_STEELHEARTED 			"steelhearted" //no bad mood from dismembering or seeing this
 #define TRAIT_IWASREVIVED "iwasrevived" //prevents PQ gain from reviving the same person twice
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
+#define TRAIT_SCHIZO_AMBIENCE "schizo_ambience" //replaces all ambience with creepy shit
+#define TRAIT_SCREENSHAKE "screenshake" //screen will always be shaking, you cannot stop it
 
 GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_WEBWALK = "I can move freely between webs.",
@@ -36,15 +38,19 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_NOSEGRAB = "I love to grab the idiots by their noses.",
 	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
-	RTRAIT_TORTURER = "I've learned the art of confessions.",
-	RTRAIT_HATEWOMEN = "Double damage against female mobs.",
-	RTRAIT_GOODLOVER = "It's a lucky thing to share my bed.",
 	RTRAIT_NOBLE = "<span class='blue'>I'm of noble blood.</span>",
 	RTRAIT_EMPATH = "I can notice stress levels in detail.",
 	RTRAIT_BREADY = "Defensive stance does not passively fatigue me.",
 	RTRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
-	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor."
-	))
+	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
+	RTRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
+	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
+	RTRAIT_MANIAC_AWOKEN = "I am <b>WAKING UP</b> and the sheeple know this. They will resist.",
+	RTRAIT_NOFATSTAM = "I have boundless energy, I will never tire.",
+	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
+	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
+	TRAIT_NOSLEEP = "I can't sleep.",
+))
 
 
 
@@ -156,13 +162,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOHUNGER			"no_hunger"
 #define TRAIT_NOMETABOLISM		"no_metabolism"
 #define TRAIT_TOXIMMUNE			"toxin_immune"
+#define TRAIT_HARDDISMEMBER		"hard_dismember"
 #define TRAIT_EASYDISMEMBER		"easy_dismember"
 #define TRAIT_LIMBATTACHMENT 	"limb_attach"
 #define TRAIT_NOLIMBDISABLE		"no_limb_disable"
 #define TRAIT_EASYLIMBDISABLE	"easy_limb_disable"
 #define TRAIT_TOXINLOVER		"toxinlover"
 #define TRAIT_NOBREATH			"no_breath"
-#define TRAIT_ANTIMAGIC			"anti_magic"
+#define TRAIT_ANTIMAGIC			"Anti-Magic"
 #define TRAIT_HOLY				"holy"
 #define TRAIT_DEPRESSION		"depression"
 #define TRAIT_JOLLY				"jolly"
@@ -210,6 +217,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOPAIN			"no_pain"
 #define TRAIT_DRUQK				"druqk"
 #define TRAIT_BURIED_COIN_GIVEN "buried_coin_given" // prevents a human corpse from being used for a corpse multiple times
+#define TRAIT_BLOODLOSS_IMMUNE "bloodloss_immune" // can bleed, but will never die from blood loss
 
 //non-mob traits
 #define TRAIT_PARALYSIS			"paralysis" //Used for limb-based paralysis, where replacing the limb will fix it

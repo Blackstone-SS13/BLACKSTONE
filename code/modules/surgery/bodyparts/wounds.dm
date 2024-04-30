@@ -121,6 +121,7 @@
 				return TRUE
 
 /obj/item/bodypart/chest/try_crit(bclass,dam,mob/living/user,zone_precise)
+	var/resistance = HAS_TRAIT(owner, RTRAIT_CRITICAL_RESISTANCE)
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
@@ -224,7 +225,8 @@
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					if(zone_precise == BODY_ZONE_CHEST)
 						owner.vomit(blood = TRUE)
-						owner.death()
+						if(!resistance)
+							owner.death()
 					return TRUE
 			else
 				if(owner.mind && owner.mind.has_antag_datum(/datum/antagonist/zombie))
@@ -232,11 +234,13 @@
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					if(zone_precise == BODY_ZONE_CHEST)
 						owner.vomit(blood = TRUE)
-						owner.death()
 						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
+						if(!resistance)
+							owner.death()
 						return TRUE
 
 /obj/item/bodypart/head/try_crit(bclass,dam,mob/living/user,zone_precise)
+	var/resistance = HAS_TRAIT(owner, RTRAIT_CRITICAL_RESISTANCE)
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
@@ -254,7 +258,8 @@
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The neck is broken!</span>"
 				add_wound(/datum/wound/necksnap)
 				shake_camera(owner, 2, 2)
-				owner.death()
+				if(!resistance)
+					owner.death()
 		return FALSE
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_PICK || bclass == BCLASS_SMASH)
 		if(dam < 5)
@@ -272,7 +277,7 @@
 				if(prob(used) || (brute_dam >= max_damage))
 					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 					owner.flash_fullscreen("whiteflash3")
-					owner.Unconscious(10 SECONDS + (from_behind * 10 SECONDS))
+					owner.Unconscious(5 SECONDS + (from_behind * 10 SECONDS))
 					if(owner.client)
 						winset(owner.client, "outputwindow.output", "max-lines=1")
 						winset(owner.client, "outputwindow.output", "max-lines=100")
@@ -289,8 +294,9 @@
 				playsound(owner, "headcrush", 100, FALSE)
 			set_disabled(BODYPART_DISABLED_CRIT)
 			shake_camera(owner, 2, 2)
-			owner.death()
-			brainkill = TRUE
+			if(!resistance)
+				owner.death()
+				brainkill = TRUE
 			return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		if(!can_bloody_wound())
@@ -331,7 +337,8 @@
 			if(prob(round(max(dam / 3, 1), 1)))
 				for(var/datum/wound/artery/A in wounds)
 					if(bclass == BCLASS_STAB)
-						owner.death()
+						if(!resistance)
+							owner.death()
 						return TRUE
 					return FALSE
 				playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
@@ -341,8 +348,9 @@
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
 				if(bclass == BCLASS_STAB)
-					owner.death()
-					brainkill = TRUE
+					if(!resistance)
+						owner.death()
+						brainkill = TRUE
 					return TRUE
 	if(bclass == BCLASS_PUNCH)
 		if(!can_bloody_wound())
@@ -361,7 +369,7 @@
 			if(prob(used) || (dam >= 30 ))
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 				owner.flash_fullscreen("whiteflash3")
-				owner.Unconscious(10 SECONDS + (from_behind * 10 SECONDS))
+				owner.Unconscious(5 SECONDS + (from_behind * 10 SECONDS))
 			return FALSE
 
 /obj/item/bodypart/attacked_by(bclass, dam, mob/living/user, zone_precise)
