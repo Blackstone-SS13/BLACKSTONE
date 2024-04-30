@@ -18,7 +18,7 @@
 	give_bank_account = TRUE
 
 /datum/outfit/job/roguetown/templar/pre_equip(mob/living/carbon/human/H)
-	..()	
+	..()
 	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
 	
 	var/datum/patrongods/ourpatron
