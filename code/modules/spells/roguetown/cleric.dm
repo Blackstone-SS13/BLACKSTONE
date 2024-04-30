@@ -367,6 +367,8 @@
 			S.AOE_flash(user, range = 8)
 		testing("curerot2")
 		if(was_zombie)
+			if(was_zombie.become_rotman && prob(5)) //5% chance to NOT become a rotman
+				was_zombie.become_rotman = FALSE
 			target.mind.remove_antag_datum(/datum/antagonist/zombie)
 			target.Unconscious(20 SECONDS)
 			target.emote("breathgasp")
@@ -377,17 +379,15 @@
 		var/datum/component/rot/rot = target.GetComponent(/datum/component/rot)
 		if(rot)
 			rot.amount = 0
-		var/is_rotman = HAS_TRAIT(target, TRAIT_ROTMAN)
 		if(iscarbon(target))
 			var/mob/living/carbon/stinky = target
 			for(var/obj/item/bodypart/rotty in stinky.bodyparts)
-				if(!is_rotman)
-					rotty.rotted = FALSE
+				rotty.rotted = FALSE
 				rotty.skeletonized = FALSE
 				rotty.update_limb()
 				rotty.update_disabled()
 		target.update_body()
-		if(!is_rotman)
+		if(!HAS_TRAIT(target, TRAIT_ROTMAN))
 			target.visible_message("<span class='notice'>The rot leaves [target]'s body!</span>", "<span class='green'>I feel the rot leave my body!</span>")
 		else
 			target.visible_message("<span class='warning'>The rot fails to leave [target]'s body!</span>", "<span class='warning'>I feel no different...</span>")

@@ -107,22 +107,24 @@
 			REMOVE_TRAIT(zombie, trait, "[type]")
 		zombie.remove_client_colour(/datum/client_colour/monochrome)
 		if(has_turned && become_rotman)
+			zombie.STACON = max(zombie.STACON - 2, 1) //ur rotting bro
 			zombie.STASPD = max(zombie.STASPD - 2, 1)
 			zombie.STAINT = max(zombie.STAINT - 3, 1)
 			for(var/trait in traits_rotman)
 				ADD_TRAIT(zombie, trait, "[type]")
 			to_chat(zombie, "<span class='green'>I no longer crave for flesh... <i>But I still feel ill.</i></span>")
 		else
-			zombie.skin_tone = skin_tone
 			if(!was_i_undead)
 				zombie.mob_biotypes &= ~MOB_UNDEAD
 			zombie.faction -= "undead"
-			for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
-				zombie_part.rotted = FALSE
-				zombie_part.update_disabled()
-				zombie_part.update_limb()
 			zombie.regenerate_organs()
+			zombie.skin_tone = skin_tone
 			to_chat(zombie, "<span class='green'>I no longer crave for flesh...</span>")
+		for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
+			zombie_part.rotted = FALSE
+			zombie_part.update_disabled()
+			zombie_part.update_limb()
+		zombie.update_body()
 	return ..()
 
 /datum/antagonist/zombie/proc/transform_zombie()
