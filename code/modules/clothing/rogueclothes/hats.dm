@@ -63,6 +63,21 @@
 	toggle_icon_state = TRUE
 	max_integrity = 100
 
+/obj/item/clothing/head/roguetown/roguehood/nochood
+	name = "moon hood"
+	desc = ""
+	color = null
+	icon_state = "nochood_ticon"
+	item_state = "nochood_t"
+	icon = 'icons/roguetown/clothing/head.dmi'
+	body_parts_covered = NECK
+	slot_flags = ITEM_SLOT_HEAD
+	dynamic_hair_suffix = ""
+	edelay_type = 1
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+	max_integrity = 100
+
 /obj/item/clothing/head/roguetown/necrahood
 	name = "death shroud"
 	color = null
