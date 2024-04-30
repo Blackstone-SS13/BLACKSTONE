@@ -2113,15 +2113,6 @@
 	icon_state = "chess"
 	},
 /area/rogue/indoors)
-"hX" = (
-/obj/structure/table/wood{
-	icon_state = "tablewood1";
-	dir = 1
-	},
-/obj/item/paper/scroll,
-/obj/item/natural/feather,
-/turf/open/floor/rogue/cobble,
-/area/rogue/under/town/basement)
 "hY" = (
 /obj/structure/chair/wood/rogue{
 	icon_state = "chair2";
@@ -10829,6 +10820,11 @@
 	icon_state = "wooden_floort"
 	},
 /area/rogue/outdoors/beach)
+"NT" = (
+/obj/item/bedsheet/rogue/fabric,
+/obj/structure/bed/rogue,
+/turf/open/floor/rogue/cobble,
+/area/rogue/under/town/basement)
 "NW" = (
 /obj/structure/fluff/railing/stonehedge,
 /turf/open/floor/rogue/dirt,
@@ -13341,6 +13337,11 @@
 	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/outdoors/beach)
+"WR" = (
+/obj/structure/chair/wood/rogue,
+/obj/effect/landmark/start/bailiff,
+/turf/open/floor/rogue/cobble,
+/area/rogue/under/town/basement)
 "WS" = (
 /obj/machinery/light/rogue/torchholder{
 	icon_state = "torchwall1";
@@ -13617,6 +13618,7 @@
 /area/rogue/indoors/town/manor)
 "XV" = (
 /obj/structure/chair/wood/rogue,
+/obj/effect/landmark/start/councillor,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
 "XW" = (
@@ -13931,6 +13933,11 @@
 /obj/machinery/light/rogue/torchholder/r,
 /turf/open/floor/rogue/churchmarble,
 /area/rogue/indoors/town/church/chapel)
+"Zj" = (
+/obj/structure/chair/wood/rogue,
+/obj/effect/landmark/start/councillor,
+/turf/open/floor/rogue/blocks,
+/area/rogue/under/town/basement)
 "Zk" = (
 /obj/structure/fluff/wallclock,
 /obj/effect/landmark/latejoin,
@@ -51821,7 +51828,7 @@ aa
 aa
 ba
 ag
-We
+Zj
 lo
 as
 as
@@ -52292,11 +52299,11 @@ aa
 aa
 aa
 ba
-nn
+NT
 as
 as
-ag
-ag
+WR
+Qy
 al
 iq
 YP
@@ -52609,8 +52616,8 @@ al
 uo
 ag
 as
-XV
-hX
+as
+nn
 ba
 iq
 YP
