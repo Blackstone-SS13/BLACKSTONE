@@ -630,8 +630,8 @@
 	range = 3
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
-	sound = 'sound/misc/area.ogg'
 	invocation_type = "none"
+	sound = 'sound/misc/area.ogg'
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	miracle = TRUE
