@@ -10,6 +10,7 @@ SUBSYSTEM_DEF(vote)
 	var/started_time = null
 	var/time_remaining = 0
 	var/mode = null
+	var/autovote = TRUE
 	var/question = null
 	var/list/choices = list()
 	var/list/voted = list()
