@@ -47,7 +47,9 @@
 	verbs += /mob/living/proc/mob_sleep
 	verbs += /mob/living/proc/lay_down
 	ADD_TRAIT(src, TRAIT_PACIFISM, TRAIT_GENERIC)
-	name = pick("Wanderer", "Traveler", "Pilgrim", "Mourner", "Sorrowful", "Forlorn", "Regretful", "Piteous", "Rueful", "Dejected")
+	var/first_part = pick("Sorrowful", "Forlorn", "Regretful", "Piteous", "Rueful", "Dejected", "Desolate", "Mournful", "Melancholic", "Woeful")
+	var/second_part = pick("Wanderer", "Traveler", "Pilgrim", "Vagabond", "Nomad", "Wayfarer", "Spirit", "Specter", "Wraith", "Phantom")
+	name = first_part + " " + second_part
 
 	//initialize limbs
 	create_bodyparts()
@@ -105,6 +107,15 @@
 	if(statpanel("Status"))
 		stat(null, "Intent: [a_intent]")
 		stat(null, "Move Mode: [m_intent]")
+	return
+
+/mob/living/carbon/spirit/toggle_move_intent(mob/user) // Override so they can't run.
+	return
+
+/mob/living/carbon/spirit/toggle_rogmove_intent(intent, silent = FALSE) // Override so they can't run.
+	return
+
+/mob/living/carbon/spirit/mmb_intent_change(input as text) // There's no need for them to change MMB intents
 	return
 
 /mob/living/carbon/spirit/returntolobby()
