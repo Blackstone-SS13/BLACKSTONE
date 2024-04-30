@@ -90,15 +90,15 @@
 
 /datum/species/aasimar/get_skin_list()
 	return list(
-	"Planetar" = "ffd859",
-	"Deva"	   = "b6f1f2",
-	"Solar" = "daeaeb",
-	"Empyrea" = "a9ded1",
-	"Gaeia" = "db874f",
-	"Celestial" = "e1c565",
-	"Olympia" = "C7f9cc",
-	"Necral" = "23130c",
-	"Abyssal" = "22577a"
+		"Planetar" = SKIN_COLOR_PLANETAR,
+		"Deva"	   = SKIN_COLOR_DEVA,
+		"Solar" = SKIN_COLOR_SOLAR,
+		"Empyrea" = SKIN_COLOR_EMPYREA,
+		"Gaeia" = SKIN_COLOR_GAEIA,
+		"Celestial" = SKIN_COLOR_CELESTIAL,
+		"Olympia" = SKIN_COLOR_OLYMPIA,
+		"Necral" = SKIN_COLOR_NECRAL,
+		"Abyssal" = SKIN_COLOR_ABYSSAL,
 	)
 
 /datum/species/aasimar/get_hairc_list()

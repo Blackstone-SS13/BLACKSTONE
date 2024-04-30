@@ -67,13 +67,13 @@
 
 /datum/species/elf/wood/get_skin_list()
 	return list(
-	"Dandelion Creek" = "ffe0d1",
-	"Roseveil" = "fcccb3",
-	"Azuregrove" = "edc6b3",
-	"Arborshome" = "e2b9a3",
-	"Almondvalle" = "c9a893",
-	"Walnut Woods" = "ba9882",
-	"Timberborn" = "5d4c41"
+		"Dandelion Creek" = SKIN_COLOR_DANDELION_CREEK,
+		"Roseveil" = SKIN_COLOR_ROSEVEIL,
+		"Azuregrove" = SKIN_COLOR_AZUREGROVE,
+		"Arborshome" = SKIN_COLOR_ARBORSHOME,
+		"Almondvalle" = SKIN_COLOR_ALMONDVALLE,
+		"Walnut Woods" = SKIN_COLOR_WALNUT_WOODS,
+		"Timberborn" = SKIN_COLOR_TIMBERBORN,
 	)
 
 /datum/species/elf/wood/get_hairc_list()

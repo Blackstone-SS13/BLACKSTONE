@@ -52,17 +52,17 @@
 
 /datum/species/human/northern/get_skin_list()
 	return list(
-	"Grenzelhoft" = "fff0e9",
-	"Hammerhold" = "ffe0d1",
-	"Avar" = "fcccb3",
-	"Rockhill" = "edc6b3",
-	"Otava" = "e2b9a3",
-	"Etrusca" = "d9a284",
-	"Gronn" = "c9a893",
-	"Giza" = "ba9882",
-	"Shalvistine" = "ac8369",
-	"Lalvestine" = "9c6f52",
-	"Ebon" = "4e3729"
+		"Grenzelhoft" = SKIN_COLOR_GRENZELHOFT,
+		"Hammerhold" = SKIN_COLOR_HAMMERHOLD,
+		"Avar" = SKIN_COLOR_AVAR,
+		"Rockhill" = SKIN_COLOR_ROCKHILL,
+		"Otava" = SKIN_COLOR_OTAVA,
+		"Etrusca" = SKIN_COLOR_ETRUSCA,
+		"Gronn" = SKIN_COLOR_GRONN,
+		"Giza" = SKIN_COLOR_GIZA,
+		"Shalvistine" = SKIN_COLOR_SHALVISTINE,
+		"Lalvestine" = SKIN_COLOR_LALVESTINE,
+		"Ebon" = SKIN_COLOR_EBON,
 	)
 
 /datum/species/human/northern/get_hairc_list()
@@ -115,5 +115,6 @@
 
 /datum/species/human/northern/get_accent(mob/living/carbon/human/H)
 	switch(H.skin_tone)
-		if("fff0e9") //Grenzelhoft
+		if(SKIN_COLOR_GRENZELHOFT) //Grenzelhoft
 			return strings("german_replacement.json", "german")
+	return null
