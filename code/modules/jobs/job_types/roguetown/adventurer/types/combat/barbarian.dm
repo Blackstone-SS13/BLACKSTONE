@@ -10,7 +10,7 @@
 /datum/outfit/job/roguetown/adventurer/barbarian/pre_equip(mob/living/carbon/human/H)
 	..() // Compared to the Warrior the barbarian is more suited to the wilds. But they are able to make use of almost any weapon by talent and killer instinct.
 	H.adjust_blindness(-3)
-	var/classes = list("Warrior","Hunter Killer","ROLL THE DICE!",)
+	var/classes = list("Warrior","Hunter Killer",)
 	var/classchoice = input("Choose your archetypes", "Available archetypes") as anything in classes
 
 	switch(classchoice)
@@ -95,8 +95,7 @@
 			H.change_stat("strength", 2) 
 			H.change_stat("constitution", 2)
 			H.change_stat("endurance", 3)
-
-			
+/*
 			if("ROLL THE DICE!")
 				if(prob(49)) // Warrior
 					H.set_blindness(0)
@@ -114,7 +113,6 @@
 					H.mind.adjust_skillrank(/datum/skill/labor/butchering, 2, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/craft/traps, 1, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/labor/fishing, pick(0,1), TRUE)
-					
 					H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
@@ -181,7 +179,6 @@
 				else // Bear Wolf. Barbarian Unique. They don't get armor.
 					H.set_blindness(0)
 					to_chat(src, "<span class='warning'>You are a barbarian of the outlands, having fought many monstrous beasts and men in your time -- you now find yourself in the lands of nobles and beggars.</span>")
-					
 					H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
@@ -211,7 +208,7 @@
 					H.change_stat("strength", pick(3,4)) // The bear wolf is an endurance fighter. Never tiring. Unrelenting.
 					H.change_stat("constitution", 3)
 					H.change_stat("endurance", 4)
-
+*/
 	if(ishumannorthern(H) && prob(70))
 		var/list/skin_slop = H.dna.species.get_skin_list()
 		H.skin_tone = skin_slop["Gronn"]
