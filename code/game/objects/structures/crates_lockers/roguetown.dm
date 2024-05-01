@@ -97,6 +97,7 @@
 	keylock = TRUE
 	lockid = "lord"
 	locked = TRUE
+	masterkey = TRUE
 	base_icon_state = "closetlord"
 	icon_state = "closetlord"
 

@@ -138,7 +138,9 @@
 		return
 	if(mind.has_antag_datum(/datum/antagonist/skeleton))
 		return
-	mind.add_antag_datum(/datum/antagonist/zombie)
+	if(HAS_TRAIT(src, TRAIT_ZOMBIE_IMMUNE))
+		return
+	return mind.add_antag_datum(/datum/antagonist/zombie)
 
 /mob/living/carbon/human/gib(no_brain, no_organs, no_bodyparts, safe_gib = FALSE)
 	for(var/mob/living/carbon/human/CA in viewers(7, src))

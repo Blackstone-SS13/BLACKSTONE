@@ -8,11 +8,11 @@
 	"Tiefling",
 	"Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
-	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
 
 /datum/outfit/job/roguetown/adventurer/paladin/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
+	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 	
 	var/datum/patrongods/ourpatron
 	if(istype(H.PATRON, /datum/patrongods))
@@ -37,6 +37,9 @@
 			neck = /obj/item/clothing/neck/roguetown/psicross/necra
 		if("Pestra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
+		if("Noc")
+			neck = /obj/item/clothing/neck/roguetown/psicross/noc
+
 
 
 

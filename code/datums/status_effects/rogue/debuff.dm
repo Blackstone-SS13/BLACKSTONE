@@ -39,7 +39,7 @@
 ////////////////////
 
 /datum/status_effect/debuff/thirstyt1
-	id = "thirsty"
+	id = "thirsty1"
 	alert_type = /obj/screen/alert/status_effect/debuff/thirstyt1
 	effectedstats = list("endurance" = -1)
 	duration = 100
@@ -50,7 +50,7 @@
 	icon_state = "thirst1"
 
 /datum/status_effect/debuff/thirstyt2
-	id = "thirsty"
+	id = "thirsty2"
 	alert_type = /obj/screen/alert/status_effect/debuff/thirstyt2
 	effectedstats = list("speed" = -1, "endurance" = -2)
 	duration = 100
@@ -61,7 +61,7 @@
 	icon_state = "thirst2"
 
 /datum/status_effect/debuff/thirstyt3
-	id = "thirsty"
+	id = "thirsty3"
 	alert_type = /obj/screen/alert/status_effect/debuff/thirstyt3
 	effectedstats = list("strength" = -1, "speed" = -2, "endurance" = -3)
 	duration = 100

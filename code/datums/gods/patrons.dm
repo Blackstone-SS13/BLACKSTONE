@@ -26,8 +26,11 @@ GLOBAL_LIST_EMPTY(patronlist)
 /datum/patrongods/noc
 	name = "Noc"
 	domain = "God of the Moon, Night, and Knowledge"
-	summary = "The Firstborn of Psydon, twin of Astrala, gifted man divine knowledge."
+	summary = "The Firstborn of Psydon, twin of Astrata, gifted man divine knowledge."
 	worshippers = " Magic Practitioners, Scholars"
+	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
+	t1 = /obj/effect/proc_holder/spell/invoked/blindness
+	t2 = /obj/effect/proc_holder/spell/invoked/invisibility
 
 /datum/patrongods/dendor
 	name = "Dendor"

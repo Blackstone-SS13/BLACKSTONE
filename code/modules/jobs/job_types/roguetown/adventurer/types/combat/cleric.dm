@@ -5,14 +5,14 @@
 	allowed_sexes = list("male","female")
 	allowed_races = list("Humen", "Elf", "Dwarf", "Aasimar", "Dark Elf",
 	"Aasimar")
-	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 	ispilgrim = FALSE
 	vampcompat = FALSE
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
 
 /datum/outfit/job/roguetown/adventurer/cleric/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
+	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 
 	var/datum/patrongods/ourpatron
 	if(istype(H.PATRON, /datum/patrongods))
@@ -37,6 +37,9 @@
 			neck = /obj/item/clothing/neck/roguetown/psicross/necra
 		if("Pestra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
+    if("Noc")
+		  neck = /obj/item/clothing/neck/roguetown/psicross/noc
+
 	// CLASS ARCHETYPES
 	H.adjust_blindness(-3)
 	var/classes = list("Life Cleric","War Cleric",)
