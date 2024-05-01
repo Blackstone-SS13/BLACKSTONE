@@ -29,7 +29,24 @@
 
 /obj/structure/flora/newtree/obj_destruction(damage_flag)
 	var/turf/NT = get_turf(src)
-	if(!istype(NT, /turf/open/transparent/openspace))
+	var/turf/UPNT = get_step_multiz(src, UP)
+	src.obj_flags = CAN_BE_HIT | BLOCK_Z_IN_UP //so the logs actually fall when pulled by zfall
+
+	if(locate(/obj/structure/flora/newtree) in UPNT) //theoretically you'd be able to break trees through a floor but no one is building floors under a tree so this is probably fine
+		for(var/obj/structure/flora/newtree/D in UPNT)
+			D.obj_destruction(damage_flag)
+	for(var/obj/item/grown/log/tree/I in UPNT)
+		UPNT.zFall(I)
+
+	for(var/turf/B in get_adjacent_open_turfs(src))
+		for(var/obj/i in B)//i straight up can't use locate here, it does not work for some reason
+			if(istype(i, /obj/structure/flora/newbranch))
+				i.obj_flags = CAN_BE_HIT // this code is so garbage i hate it
+				i.obj_destruction(damage_flag)
+				for(var/obj/item/grown/log/tree/BRA in B)
+					B.zFall(BRA)
+
+	if(!istype(NT, /turf/open/transparent/openspace) && !(locate(/obj/structure/flora/roguetree/stump) in NT))//if i don't add the stump check it spawns however many zlevels it goes up because of src recursion
 		new /obj/structure/flora/roguetree/stump(NT)
 	playsound(src, 'sound/misc/treefall.ogg', 100, FALSE)
 	. = ..()
