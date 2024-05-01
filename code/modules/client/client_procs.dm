@@ -149,6 +149,9 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			return
 		if(condemnedsomeone)
 			return
+		if(get_playerquality(src.key) < 30)
+			to_chat(src, "<span class='red'>You don't have enough PQ to condemn players.</span>")
+			return
 		var/list/selections = GLOB.character_ckey_list.Copy()
 		if(!selections.len)
 			return
