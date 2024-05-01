@@ -1088,6 +1088,7 @@
 #include "code\game\objects\items\rogueitems\coins.dm"
 #include "code\game\objects\items\rogueitems\cup.dm"
 #include "code\game\objects\items\rogueitems\dmusicbox.dm"
+#include "code\game\objects\items\rogueitems\dye.dm"
 #include "code\game\objects\items\rogueitems\flintsparker.dm"
 #include "code\game\objects\items\rogueitems\gems.dm"
 #include "code\game\objects\items\rogueitems\instruments.dm"
