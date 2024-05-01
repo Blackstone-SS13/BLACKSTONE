@@ -72,6 +72,7 @@
 			return TRUE
 	else to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
 
+/* This is literally free respawns. wtf.
 /mob/living/proc/check_prayer_underworld(mob/living/L,message)
 	if(!L || !message)
 		return FALSE
@@ -101,7 +102,7 @@
 			return TRUE
 		else
 			return TRUE
-	else to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
+	else to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")*/
 
 /datum/emote/living/bow
 	key = "bow"
