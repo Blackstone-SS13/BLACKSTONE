@@ -2245,6 +2245,10 @@
 "iD" = (
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/rtfield)
+"iE" = (
+/obj/item/reagent_containers/glass/bucket/wooden,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/under/town/sewer)
 "iF" = (
 /obj/structure/roguewindow/openclose{
 	icon_state = "woodwindowdir";
@@ -4947,6 +4951,13 @@
 "tF" = (
 /turf/closed/wall/mineral/rogue/wooddark/window,
 /area/rogue/outdoors/town)
+"tG" = (
+/obj/machinery/light/rogue/torchholder{
+	icon_state = "torchwall1";
+	dir = 8
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/under/town/sewer)
 "tH" = (
 /turf/closed/wall/mineral/rogue/wooddark,
 /area/rogue/indoors/town)
@@ -10940,10 +10951,6 @@
 	icon_state = "horzw"
 	},
 /area/rogue/under/town/basement)
-"Ow" = (
-/obj/structure/roguemachine/drugmachine,
-/turf/closed/wall/mineral/rogue/stonebrick,
-/area/rogue/indoors/town/shop)
 "Ox" = (
 /obj/structure/chair/bench/coucha,
 /turf/open/floor/carpet/royalblack,
@@ -12110,6 +12117,10 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/bath)
+"SC" = (
+/obj/machinery/light/rogue/forge,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/under/town/sewer)
 "SD" = (
 /obj/structure/flora/roguegrass/bush/wall/tall,
 /turf/open/floor/rogue/grass,
@@ -12464,6 +12475,13 @@
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors/town/garrison)
+"TQ" = (
+/obj/machinery/light/rogue/torchholder{
+	icon_state = "torchwall1";
+	dir = 4
+	},
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/under/town/sewer)
 "TR" = (
 /turf/closed/mineral/rogue/bedrock,
 /area/rogue/outdoors/rtfield)
@@ -13105,6 +13123,10 @@
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town)
+"Wc" = (
+/obj/machinery/anvil,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/under/town/sewer)
 "We" = (
 /obj/structure/chair/wood/rogue,
 /turf/open/floor/rogue/blocks,
@@ -13288,6 +13310,10 @@
 	dir = 1
 	},
 /area/rogue/indoors/town/manor)
+"WI" = (
+/obj/structure/fluff/grindwheel,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/under/town/sewer)
 "WK" = (
 /obj/structure/fluff/railing/border{
 	icon_state = "border";
@@ -52984,10 +53010,10 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
+iE
+kI
+kI
+TQ
 ci
 ci
 ci
@@ -53141,8 +53167,8 @@ aa
 aa
 aa
 aa
-aa
 kI
+Wc
 kI
 kI
 kI
@@ -53298,8 +53324,8 @@ aa
 aa
 aa
 aa
-aa
 kI
+SC
 kI
 kI
 kI
@@ -53455,10 +53481,10 @@ aa
 aa
 aa
 aa
-aa
 kI
 kI
 kI
+iE
 kI
 kI
 PO
@@ -53612,8 +53638,8 @@ aa
 aa
 aa
 aa
-aa
 kI
+WI
 kI
 kI
 kI
@@ -53769,7 +53795,7 @@ aa
 aa
 aa
 aa
-aa
+kI
 kI
 kI
 kI
@@ -53926,7 +53952,7 @@ ax
 ax
 aa
 aa
-aa
+kI
 kI
 kI
 kI
@@ -54083,10 +54109,10 @@ ax
 ax
 ax
 ax
-ax
+ci
 ci
 kI
-kI
+tG
 kI
 kI
 PO
@@ -54230,12 +54256,12 @@ aa
 ci
 ci
 aa
+It
+It
 aa
 aa
-aa
-aa
-aa
-aa
+It
+It
 aa
 aa
 aa
@@ -75312,7 +75338,7 @@ sk
 sw
 sw
 fg
-Ow
+sA
 gg
 eS
 eS
