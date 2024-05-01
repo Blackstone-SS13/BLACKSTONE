@@ -82,9 +82,9 @@
 /datum/outfit/job/roguetown/bandit/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
@@ -104,23 +104,23 @@
 	else
 		wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 		armor = /obj/item/clothing/suit/roguetown/armor/leather
-	var/loadoutm = rand(1,4)
+	var/loadoutm = rand(1,5)
 	switch(loadoutm)
 		if(1) 
 			beltr = /obj/item/rogueweapon/sword/iron
 			mask = /obj/item/clothing/mask/rogue/facemask/steel
 			neck = /obj/item/clothing/neck/roguetown/coif
 			head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 		if(2)
 			backr = /obj/item/rogueweapon/halberd/bardiche
 			neck = /obj/item/clothing/neck/roguetown/bervor
 			head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
-			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 		if(3)
 			beltr = /obj/item/rogueweapon/flail
 			backr = /obj/item/rogueweapon/shield/wood
-			H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 2, TRUE)
 		if(4)
 			backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 			beltl = /obj/item/quiver/bolts
@@ -128,6 +128,12 @@
 			head = /obj/item/clothing/head/roguetown/roguehood
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 			H.change_stat("perception", 2)
+		if(5)
+			beltr = /obj/item/rogueweapon/mace
+			neck = /obj/item/clothing/neck/roguetown/coif
+			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 1)
