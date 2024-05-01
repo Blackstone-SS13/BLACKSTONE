@@ -45,3 +45,9 @@
 	name = "3x silver rings"
 	req_bar = /obj/item/ingot/silver
 	created_item = list(/obj/item/clothing/ring/silver, /obj/item/clothing/ring/silver, /obj/item/clothing/ring/silver)
+
+/datum/anvil_recipe/valuables/emeringg
+	name = "Emerald Ring (+ Gemerald)"
+	req_bar = /obj/item/ingot/gold
+	additional_items = list(/obj/item/roguegem/green)	
+	created_item = /obj/item/scomstone
