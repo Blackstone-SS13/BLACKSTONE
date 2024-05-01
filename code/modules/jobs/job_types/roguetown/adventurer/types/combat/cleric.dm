@@ -37,8 +37,8 @@
 			neck = /obj/item/clothing/neck/roguetown/psicross/necra
 		if("Pestra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
-    if("Noc")
-		  neck = /obj/item/clothing/neck/roguetown/psicross/noc
+	    if("Noc")
+			  neck = /obj/item/clothing/neck/roguetown/psicross/noc
 
 	// CLASS ARCHETYPES
 	H.adjust_blindness(-3)
