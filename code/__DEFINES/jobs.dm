@@ -100,8 +100,6 @@
 #define KNIGHT		(1<<2)
 #define WIZARD		(1<<3)
 #define SHERIFF		(1<<4)
-#define BAILIFF		(1<<5)
-#define COUNCILLOR	(1<<6)
 
 #define GARRISON		(1<<1)
 
