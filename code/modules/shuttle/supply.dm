@@ -224,7 +224,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 			if(!AM.anchored || istype(AM, /obj/mecha))
 				if(istype(AM, /obj/item/paper/scroll/cargo))
 					var/obj/item/paper/scroll/cargo/C = AM
-					if(C.signedjob in list("Priest", "Court Magician", "Merchant", "King", "Sheriff","Bailiff"))
+					if(C.signedjob in list("Priest", "Court Magician", "Merchant", "King", "Sheriff"))
 						for(var/datum/supply_order/SO in C.orders)
 							SSshuttle.shoppinglist += SO
 							C.orders -= SO
