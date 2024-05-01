@@ -84,7 +84,7 @@
 
 /datum/anvil_recipe/valuables/terminus
 	name = "Terminus Est (+ 1 Gold Bar, + 1 Steel, + 1 Roultz)"
-	req_bar = /obj/item/ingot/steel
+	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/steel, /obj/item/roguegem)	
 	created_item = /obj/item/rogueweapon/sword/long/exe/cloth
 
