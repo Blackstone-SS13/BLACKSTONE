@@ -5,7 +5,8 @@
 	allowed_races = list("Half-Elf",
 	 "Dark Elf",
 	 "Tiefling",
-	 "Humen")
+	 "Humen",
+     "Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/necromancer
 	pickprob = 30
 
