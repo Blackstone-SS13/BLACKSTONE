@@ -36,7 +36,10 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	*/
 
 /client
-	var/commendedsomeone
+	/// Whether or not we have already commended someone this round.
+	var/commendedsomeone = FALSE
+	/// Whether or not we have already condemned someone this round.
+	var/condemnedsomeone = FALSE
 
 /client/Topic(href, href_list, hsrc)
 	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
@@ -131,14 +134,39 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			return
 		var/theykey = selections[selection]
 		if(theykey == ckey)
-			to_chat(src,"You can't commend yourself.")
+			to_chat(src, "<span class='red'>You can't commend yourself.</span>")
 			return
 		if(theykey)
 			commendedsomeone = TRUE
 			add_commend(theykey, ckey)
-			to_chat(src,"[selection] commended.")
+			to_chat(src, "<span class='green'>[selection] commended.</span>")
 			log_game("COMMEND: [ckey] commends [theykey].")
 			log_admin("COMMEND: [ckey] commends [theykey].")
+		return
+
+	if(href_list["condemnsomeone"])
+		if(SSticker.current_state != GAME_STATE_FINISHED)
+			return
+		if(condemnedsomeone)
+			return
+		var/list/selections = GLOB.character_ckey_list.Copy()
+		if(!selections.len)
+			return
+		var/selection = input(src,"Which Character?") as null|anything in sortList(selections)
+		if(!selection)
+			return
+		if(condemnedsomeone)
+			return
+		var/theykey = selections[selection]
+		if(theykey == ckey)
+			to_chat(src,"<span class='red'>You can't condemn yourself.</span>")
+			return
+		if(theykey)
+			commendedsomeone = TRUE
+			add_commend(theykey, ckey)
+			to_chat(src, "<span class='red'>[selection] condemned.</span>")
+			log_game("CONDEMN: [ckey] condemns [theykey].")
+			log_admin("CONDEMN: [ckey] condemns [theykey].")
 		return
 
 	switch(href_list["_src_"])

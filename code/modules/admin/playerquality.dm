@@ -208,16 +208,49 @@
 	fdel(json_file)
 	WRITE_FILE(json_file, json_encode(json))
 
-	//add the pq, only on the first commend
-	if(curcomm == 1)
-//	if(get_playerquality(key) < 29)
+	//add PQ
+	if(get_playerquality(key) < 30)
 		adjust_playerquality(1, ckey(key))
+
+/proc/add_condemn(key, giver)
+	if(!giver || !key)
+		return
+	var/curcomm = 0
+	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/condemns.json")
+	if(!fexists(json_file))
+		WRITE_FILE(json_file, "{}")
+	var/list/json = json_decode(file2text(json_file))
+	if(json[giver])
+		curcomm = json[giver]
+	curcomm++
+	json[giver] = curcomm
+	fdel(json_file)
+	WRITE_FILE(json_file, json_encode(json))
+
+	//remove PQ
+	if(get_playerquality(key) > -30)
+		adjust_playerquality(-1, ckey(key))
 
 /proc/get_commends(key)
 	if(!key)
 		return
 	var/curcomm = 0
 	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/commends.json")
+	if(!fexists(json_file))
+		WRITE_FILE(json_file, "{}")
+	var/list/json = json_decode(file2text(json_file))
+
+	for(var/X in json)
+		curcomm += json[X]
+	if(!curcomm)
+		curcomm = 0
+	return curcomm
+
+/proc/get_condemns(key)
+	if(!key)
+		return
+	var/curcomm = 0
+	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/condemns.json")
 	if(!fexists(json_file))
 		WRITE_FILE(json_file, "{}")
 	var/list/json = json_decode(file2text(json_file))

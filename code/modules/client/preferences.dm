@@ -1472,8 +1472,11 @@ Slots: [job.spawn_positions]</span>
 		user.show_triumphs_list()
 
 	else if(href_list["preference"] == "playerquality")
-		var/amt = get_commends(user.ckey)
-		to_chat(user, "PlayerQuality represents the aggregate data collected automatically by the game to determine your reliability level as a RolePlayer. <font color='blue'>You have earned [amt] commendations from other players.</font>")
+		var/commends = get_commends(user.ckey)
+		var/condemns = get_condemns(user.ckey)
+		to_chat(user, "PlayerQuality represents the aggregate data collected automatically by the game to determine your reliability level as a RolePlayer.\n\
+					<font color='blue'>You have earned [commends] commendations from other players.</font>\n\
+					<font color='red'>You have earned [condemns] condemnations from other players.</font>")
 
 
 	else if(href_list["preference"] == "keybinds")

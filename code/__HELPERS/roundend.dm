@@ -645,6 +645,7 @@
 	set waitfor = 0
 	to_chat(C,"<a href='?src=[C];playerlistrogue=1'>* SHOW PLAYER LIST *</a>")
 	to_chat(C,"<a href='?src=[C];commendsomeone=1'>* Commend a Character *</a>")
+	to_chat(C,"<a href='?src=[C];condemnsomeone=1'>* Condemn a Character *</a>")
 
 /datum/action/report
 	name = "Show roundend report"
