@@ -35,6 +35,7 @@
 		return "Normal"
 
 /proc/adjust_playerquality(amt, key, admin, reason)
+	key = ckey(key)
 	var/curpq = 0
 	var/json_file = file("data/player_saves/[copytext(key,1,2)]/[key]/pq_num.json")
 	if(!fexists(json_file))
