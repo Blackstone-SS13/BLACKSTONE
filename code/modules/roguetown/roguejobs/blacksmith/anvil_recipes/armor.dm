@@ -145,3 +145,27 @@
 	name = "steel mask"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/mask/rogue/facemask/steel
+
+/datum/anvil_recipe/armor/astratahelm
+	name = "astrata helmet (+2 steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
+
+/datum/anvil_recipe/armor/necrahelm
+	name = "necra helmet (+2 steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
+
+/datum/anvil_recipe/armor/nochelm
+	name = "noc helmet (+2 steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
+
+/datum/anvil_recipe/armor/dendorhelm
+	name = "dendor helmet (+2 steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm

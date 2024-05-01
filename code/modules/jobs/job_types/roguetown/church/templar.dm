@@ -9,7 +9,7 @@
 	allowed_races = list("Humen",
 	"Tiefling",
 	"Aasimar")
-	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
 	total_positions = 2
@@ -19,7 +19,7 @@
 
 /datum/outfit/job/roguetown/templar/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
+	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
 	
 	var/datum/patrongods/ourpatron
 	if(istype(H.PATRON, /datum/patrongods))
@@ -35,20 +35,27 @@
 		H.PATRON = ourpatron
 		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
 	
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
+	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 	switch(ourpatron.name)
 		if("Astrata")
 			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
 		if("Dendor")
 			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
 		if("Necra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/necra
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
 		if("Pestra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
+		if("Noc")
+			neck = /obj/item/clothing/neck/roguetown/psicross/noc
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	shoes = /obj/item/clothing/shoes/roguetown/boots
-	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/rogueweapon/shield/tower/metal
 	belt = /obj/item/storage/belt/rogue/leather/black
