@@ -1052,26 +1052,25 @@
 /mob/living/resist_grab(moving_resist)
 	. = TRUE
 
-	var/resist_chance = 50
-	var/mob/living/L = pulledby
-	if(pulledby.grab_state >= GRAB_AGGRESSIVE)
-		resist_chance -= 25
-	var/diffy = STASTR - L.STASTR
-	if(diffy > 0)
-		resist_chance = 50 + (diffy * 25)
-//		if(!L.rogfat_add(diffy * 10)) //hard to keep a grip on them
-//			resist_chance = 100
-	if(diffy < 0)
-		resist_chance = 50 - (diffy * 25)
-	if(L.mind)
-		resist_chance -= (L.mind.get_skill_level(/datum/skill/combat/wrestling) * 10)
-	if(mind)
-		resist_chance += (mind.get_skill_level(/datum/skill/combat/wrestling) * 10)
 
-	if(!(mobility_flags & MOBILITY_STAND))
-		resist_chance -= 20
+	var/resist_chance = 50
+	to_chat("DEBUG: [resist_chance]")
+	var/mob/living/L = pulledby
+	var/wrestling_diff = (mind.get_skill_level(/datum/skill/combat/wrestling) * 10) - (L.mind.get_skill_level(/datum/skill/combat/wrestling) * 10)
+
+	resist_chance = resist_chance + ((STASTR - L.STASTR) * 10)
+	to_chat("DEBUG: STRDIF [resist_chance]")
+
+if(pulledby.grab_state >= GRAB_AGGRESSIVE)
+	resist_chance -= 20
+	to_chat("DEBUG: AGGROGRAB [resist_chance]")
+	resist_chance = resist_chance + (wrestling_diff * 10)
+if(!(mobility_flags & MOBILITY_STAND))		
+	resist_chance -= 20
+	to_chat("DEBUG: ONFLOOR [resist_chance]")
 
 	resist_chance = max(resist_chance, 1)
+	to_chat("DEBUG: MAX [resist_chance]")
 
 
 	if(moving_resist && client) //we resisted by trying to move
