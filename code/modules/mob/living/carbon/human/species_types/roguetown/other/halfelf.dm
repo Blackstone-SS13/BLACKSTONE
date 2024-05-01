@@ -54,13 +54,12 @@
 
 /datum/species/human/halfelf/get_skin_list()
 	return list(
-	"Timber-Gronn" = "ffe0d1",
-	"Giza-Azure" = "fcccb3",
-	"Walnut-Stine" = "edc6b3",
-	"Etrustcan-Dandelion" = "e2b9a3",
-	"Ebon-Born" = "5a4a41"
+		"Timber-Gronn" = SKIN_COLOR_TIMBER_GRONN,
+		"Giza-Azure" = SKIN_COLOR_GIZA_AZURE,
+		"Walnut-Stine" = SKIN_COLOR_WALNUT_STINE,
+		"Etrustcan-Dandelion" = SKIN_COLOR_ETRUSTCAN_DANDELION,
+		"Ebon-Born" = SKIN_COLOR_EBON_BORN,
 	)
-
 
 /datum/species/human/halfelf/get_hairc_list()
 	return sortList(list(

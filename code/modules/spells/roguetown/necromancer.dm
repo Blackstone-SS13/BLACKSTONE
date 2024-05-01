@@ -30,8 +30,7 @@
 		else
 			target.adjustBruteLoss(20)
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/eyebite
 	name = "Eyebite"
@@ -54,11 +53,10 @@
 		var/mob/living/carbon/target = targets[1]
 		target.visible_message("<span class='info'>A loud crunching sound has come from [target]!</span>", "<span class='userdanger'>I feel arcane teeth biting into my eyes!</span>")
 		target.adjustBruteLoss(30)
-		target.blind_eyes(1)
+		target.blind_eyes(2)
 		target.blur_eyes(10)
 		return TRUE
-	else
-		return FALSE
+	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/raise_undead
 	name = "Raise Undead"
@@ -81,9 +79,8 @@
 	if(!isclosedturf(T))
 		new /mob/living/carbon/human/species/skeleton/npc/no_equipment(T)
 		return TRUE
-	else
-		to_chat(user, "<span class='warning'>The targeted location is blocked. My summon fails to come forth.</span>")
-		return FALSE
+	to_chat(user, "<span class='warning'>The targeted location is blocked. My summon fails to come forth.</span>")
+	return FALSE
 
 /obj/effect/proc_holder/spell/invoked/projectile/sickness
 	name = "Ray of Sickness"

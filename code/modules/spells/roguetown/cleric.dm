@@ -100,7 +100,7 @@
 			if(affecting)
 				if(affecting.heal_damage(20, 20, 0, null, FALSE))
 					C.update_damage_overlays()
-				if(affecting.heal_wounds(10))
+				if(affecting.heal_wounds(30))
 					C.update_damage_overlays()
 		else
 			target.adjustBruteLoss(-5)
@@ -148,7 +148,7 @@
 			if(affecting)
 				if(affecting.heal_damage(50, 50, 0, null, FALSE))
 					C.update_damage_overlays()
-				if(affecting.heal_wounds(20))
+				if(affecting.heal_wounds(40))
 					C.update_damage_overlays()
 		else
 			target.adjustBruteLoss(-50)
@@ -350,7 +350,7 @@
 		var/mob/living/target = targets[1]
 		if(target == user)
 			return FALSE
-		var/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
+		var/datum/antagonist/zombie/was_zombie = target.mind?.has_antag_datum(/datum/antagonist/zombie)
 		var/has_rot = was_zombie
 		if(!has_rot && iscarbon(target))
 			var/mob/living/carbon/stinky = target
@@ -367,6 +367,8 @@
 			S.AOE_flash(user, range = 8)
 		testing("curerot2")
 		if(was_zombie)
+			if(was_zombie.become_rotman && prob(5)) //5% chance to NOT become a rotman
+				was_zombie.become_rotman = FALSE
 			target.mind.remove_antag_datum(/datum/antagonist/zombie)
 			target.Unconscious(20 SECONDS)
 			target.emote("breathgasp")
@@ -385,7 +387,10 @@
 				rotty.update_limb()
 				rotty.update_disabled()
 		target.update_body()
-		target.visible_message("<span class='notice'>The rot leaves [target]'s body!</span>", "<span class='green'>I feel the rot leave my body!</span>")
+		if(!HAS_TRAIT(target, TRAIT_ROTMAN))
+			target.visible_message("<span class='notice'>The rot leaves [target]'s body!</span>", "<span class='green'>I feel the rot leave my body!</span>")
+		else
+			target.visible_message("<span class='warning'>The rot fails to leave [target]'s body!</span>", "<span class='warning'>I feel no different...</span>")
 		return TRUE
 	return FALSE
 

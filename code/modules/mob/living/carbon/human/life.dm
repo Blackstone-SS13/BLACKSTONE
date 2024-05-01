@@ -100,6 +100,7 @@
 
 		if(dna?.species)
 			dna.species.spec_life(src) // for mutantraces
+
 	if(!typing)
 		set_typing_indicator(FALSE)
 	//Update our name based on whether our face is obscured/disfigured
