@@ -165,7 +165,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			to_chat(src,"<span class='red'>You can't condemn yourself.</span>")
 			return
 		if(theykey)
-			commendedsomeone = TRUE
+			condemnedsomeone = TRUE
 			add_commend(theykey, ckey)
 			to_chat(src, "<span class='red'>[selection] condemned.</span>")
 			log_game("CONDEMN: [ckey] condemns [theykey].")
