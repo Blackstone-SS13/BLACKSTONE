@@ -31,6 +31,7 @@
 	var/overlay_plane = BLACKNESS_PLANE
 	var/aesthetic = FALSE //If the weather has no purpose other than looks
 	var/immunity_type = "storm" //Used by mobs to prevent them from being affected by the weather
+	var/protect_indoors = FALSE /// TRUE value protects areas with outdoors marked as false, regardless of area type
 
 	var/stage = END_STAGE //The stage of the weather, from 1-4
 
@@ -82,6 +83,8 @@
 		affectareas -= get_areas(V)
 	for(var/V in affectareas)
 		var/area/A = V
+		if(protect_indoors && !A.outdoors)
+			continue
 		if(A.z in impacted_z_levels)
 			impacted_areas |= A
 	weather_duration = rand(weather_duration_lower, weather_duration_upper)
