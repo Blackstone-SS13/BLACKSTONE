@@ -646,7 +646,7 @@
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	invocation_type = "none"
-	sound = 'sound/misc/area.ogg'
+	sound = 'sound/misc/area.ogg' //This sound doesnt play for some reason. Fix me.
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	miracle = TRUE
