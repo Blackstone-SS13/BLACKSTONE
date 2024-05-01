@@ -10940,6 +10940,10 @@
 	icon_state = "horzw"
 	},
 /area/rogue/under/town/basement)
+"Ow" = (
+/obj/structure/roguemachine/drugmachine,
+/turf/closed/wall/mineral/rogue/stonebrick,
+/area/rogue/indoors/town/shop)
 "Ox" = (
 /obj/structure/chair/bench/coucha,
 /turf/open/floor/carpet/royalblack,
@@ -75308,7 +75312,7 @@ sk
 sw
 sw
 fg
-sA
+Ow
 gg
 eS
 eS
