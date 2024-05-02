@@ -111,8 +111,7 @@
 
 	var/datum/devotion/cleric_holder/cleric = null // Used for cleric_holder for priests
 
-	possible_rmb_intents = list(/datum/rmb_intent/feint,\
-	/datum/rmb_intent/aimed,\
+	possible_rmb_intents = list(/datum/rmb_intent/aimed,\
 	/datum/rmb_intent/strong,\
 	/datum/rmb_intent/swift,\
 	/datum/rmb_intent/riposte,\
