@@ -425,7 +425,7 @@
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
-client/verb/body_toggle_eye_nose()
+/client/verb/body_toggle_eye_nose()
 	set name = "body-toggle-eye-nose"
 	set hidden = 1
 
@@ -442,7 +442,7 @@ client/verb/body_toggle_eye_nose()
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
-client/verb/body_toggle_mouth_ears()
+/client/verb/body_toggle_mouth_ears()
 	set name = "body-toggle-mouth-ears"
 	set hidden = 1
 
