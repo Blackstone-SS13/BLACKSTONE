@@ -260,12 +260,13 @@
 	skill_experience[S] = max(0, skill_experience[S] + amt) //Prevent going below 0
 	var/old_level = known_skills[S]
 	switch(skill_experience[S])
-		if(SKILL_EXP_LEGENDARY to INFINITY)
+		//Manual growth capped to Skilled. We hate trainoids.
+		/*if(SKILL_EXP_LEGENDARY to INFINITY)
 			known_skills[S] = SKILL_LEVEL_LEGENDARY
 		if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY)
 			known_skills[S] = SKILL_LEVEL_MASTER
 		if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER)
-			known_skills[S] = SKILL_LEVEL_EXPERT
+			known_skills[S] = SKILL_LEVEL_EXPERT*/
 		if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT)
 			known_skills[S] = SKILL_LEVEL_JOURNEYMAN
 		if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN)
@@ -277,6 +278,9 @@
 	if(isnull(old_level) || known_skills[S] == old_level)
 		return //same level or we just started earning xp towards the first level.
 	if(silent)
+		return	
+	if(known_skills[S] >= SKILL_LEVEL_JOURNEYMAN)
+		to_chat(current, "<span class='nicegreen'>I have learned all I could about [S.name]!</span>")
 		return
 	if(known_skills[S] >= old_level)
 		if(known_skills[S] > old_level)
