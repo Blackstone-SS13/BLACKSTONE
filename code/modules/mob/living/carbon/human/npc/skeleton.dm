@@ -108,4 +108,11 @@
 		r_hand = /obj/item/rogueweapon/stoneaxe/woodcut
 
 /mob/living/carbon/human/species/skeleton/npc/no_equipment
-    skel_outfit = null
+    skel_outfit = /datum/outfit/job/roguetown/npc/Lskeleton
+
+/datum/outfit/job/roguetown/npc/Lskeleton/pre_equip(mob/living/carbon/human/H)
+	H.STASPD = 1
+	H.STACON = 2
+	H.STAEND = 15
+	H.STAINT = 1
+	H.STASTR = 6
