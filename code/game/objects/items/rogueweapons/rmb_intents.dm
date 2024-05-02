@@ -55,7 +55,10 @@
 				if(I?.associated_skill)
 					theirskill = L.mind.get_skill_level(I.associated_skill)
 		if(ourskill > theirskill)
-			perc += ((ourskill - theirskill)*10)
+			if(istype(user.rmb_intent, /datum/rmb_intent/feint))
+				perc += (ourskill - theirskill)*15
+			else
+				perc += (ourskill - theirskill)*10
 	if(user.STAINT < L.STAINT)
 		perc -= 15
 	if(L.d_intent == INTENT_DODGE)
