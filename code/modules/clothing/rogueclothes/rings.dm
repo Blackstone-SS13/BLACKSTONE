@@ -20,7 +20,7 @@
 /obj/item/clothing/ring/gold
 	name = "gold ring"
 	icon_state = "ring_g"
-	sellprice = 47
+	sellprice = 45
 
 /obj/item/clothing/ring/active
 	var/active = FALSE
