@@ -9,7 +9,7 @@
 	allowed_races = list("Humen",
 	"Humen",
 	"Aasimar")
-	allowed_sexes = list(MALE, FEMALE)
+	allowed_sexes = list(MALE)
 	display_order = JDO_SHERIFF
 	tutorial = "You either inherited this role or were elected to it, you belong to no nobility and serve the king as loyal as you may, for he has paid you well. Enforce the law and ensure order prevails, you and the bailiff serve on the same authority; However, unlike the Bailiff you enforce the laws and maintain order in the town. You also oversee the general quality and conscription of Guards for the Town and Manor. The Bailiff can commandeer guards for his own protection, however he does not lead them as you do."
 	whitelist_req = FALSE
