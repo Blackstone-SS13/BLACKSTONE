@@ -2157,6 +2157,7 @@
 #include "code\modules\jobs\job_types\roguetown\nobility\magician.dm"
 #include "code\modules\jobs\job_types\roguetown\nobility\sheriff.dm"
 #include "code\modules\jobs\job_types\roguetown\nobility\steward.dm"
+#include "code\modules\jobs\job_types\roguetown\youngfolk\clerk.dm"
 #include "code\modules\jobs\job_types\roguetown\other\deathknight.dm"
 #include "code\modules\jobs\job_types\roguetown\other\skeleton.dm"
 #include "code\modules\jobs\job_types\roguetown\other\tester.dm"
