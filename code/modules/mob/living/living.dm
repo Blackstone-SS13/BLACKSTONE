@@ -1066,7 +1066,7 @@
 		visible_message("DEBUG: ONFLOOR [resist_chance]")      
 	
 	if(pulledby.grab_state >= GRAB_AGGRESSIVE)
-		resist_chance -= 20 - max((wrestling_diff * 10), 0)
+		resist_chance -= 20 - max((wrestling_diff * 10), 0) //not working properly yet
 		visible_message("DEBUG: AGGROGRAB [resist_chance]")
 		resist_chance = max(resist_chance, 50 + min((wrestling_diff * 5), 0))
 		visible_message("DEBUG: MAX [resist_chance]")
