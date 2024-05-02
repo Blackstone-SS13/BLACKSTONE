@@ -65,19 +65,19 @@
 	created_item = /obj/item/clothing/ring/topaz
 
 /datum/anvil_recipe/valuables/emerings
-	name = "Silver Emerald Ring (+ Gemerald)"
+	name = "Steel Emerald Ring (+ Gemerald)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/green)	
 	created_item = /obj/item/clothing/ring/emeralds
 
 /datum/anvil_recipe/valuables/rubys
-	name = "Silver Ruby Ring (+ Roultz)"
+	name = "Steel Ruby Ring (+ Roultz)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem)	
 	created_item = /obj/item/clothing/ring/rubys
 
 /datum/anvil_recipe/valuables/topazs
-	name = "Silver Topaz Ring (+ Topaz)"
+	name = "Steel Topaz Ring (+ Topaz)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/yellow)	
 	created_item = /obj/item/clothing/ring/topazs
