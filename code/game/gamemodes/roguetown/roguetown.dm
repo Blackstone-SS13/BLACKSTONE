@@ -88,7 +88,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 							H.allmig_reward = 0
 				return TRUE
 		else
-			if(!SSvote.mode)
+			if(!SSvote.mode && SSticker.autovote)
 				SSvote.initiate_vote("endround", pick("Zlod", "Sun King", "Gaia", "Moon Queen", "Aeon", "Gemini", "Aries"))
 
 	if(headrebdecree)

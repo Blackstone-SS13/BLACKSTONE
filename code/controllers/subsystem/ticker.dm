@@ -42,6 +42,7 @@ SUBSYSTEM_DEF(ticker)
 	var/station_time_rate_multiplier = 50		//factor of station time progressal vs real time.
 	var/time_until_vote = 120 MINUTES
 	var/last_vote_time = null
+	var/autovote = TRUE
 	var/firstvote = TRUE
 
 	var/totalPlayers = 0					//used for pregame stats on statpanel
@@ -241,13 +242,13 @@ SUBSYSTEM_DEF(ticker)
 				declare_completion(force_ending)
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
 			if(firstvote)
-				if(world.time > round_start_time + time_until_vote)
+				if(world.time > round_start_time + time_until_vote && autovote)
 					SSvote.initiate_vote("restart", "The Gods")
 					time_until_vote = 20 MINUTES
 					last_vote_time = world.time
 					firstvote = FALSE
 			else
-				if(world.time > last_vote_time + time_until_vote)
+				if(world.time > last_vote_time + time_until_vote && autovote)
 					SSvote.initiate_vote("restart", "The Gods")
 
 /datum/controller/subsystem/ticker
