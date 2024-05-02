@@ -35,7 +35,6 @@
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 
 	if(H.gender == FEMALE)
-		pants = /obj/item/clothing/under/roguetown/tights
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/blue
 
 	pants = /obj/item/clothing/under/roguetown/tights
