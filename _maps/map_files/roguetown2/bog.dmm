@@ -56,6 +56,10 @@
 	},
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/indoors)
+"bc" = (
+/obj/effect/landmark/start/villager,
+/turf/open/floor/rogue/cobblerock,
+/area/rogue/outdoors/bog)
 "bl" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood2";
@@ -65,6 +69,10 @@
 /obj/item/natural/feather,
 /obj/item/candle/yellow/lit,
 /turf/open/floor/rogue/twig,
+/area/rogue/indoors)
+"bA" = (
+/obj/effect/landmark/start/orphanlate,
+/turf/open/floor/rogue/blocks,
 /area/rogue/indoors)
 "bB" = (
 /obj/structure/mineral_door/wood/window{
@@ -976,6 +984,14 @@
 /obj/structure/stairs,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
+"rs" = (
+/obj/structure/fluff/traveltile{
+	aallmig = "rwfieldbog";
+	aportalgoesto = "bogrtout";
+	aportalid = "bogrtin"
+	},
+/turf/open/floor/rogue/cobblerock,
+/area/rogue/outdoors/bog)
 "ru" = (
 /obj/structure/rack/rogue,
 /obj/item/flashlight/flare/torch/lantern,
@@ -1238,6 +1254,12 @@
 /obj/structure/roguewindow,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/indoors)
+"vB" = (
+/obj/effect/landmark/start/villager{
+	dir = 1
+	},
+/turf/open/floor/rogue/cobblerock,
+/area/rogue/outdoors/bog)
 "vD" = (
 /turf/closed/wall/mineral/rogue/decowood,
 /area/rogue/indoors)
@@ -1378,6 +1400,10 @@
 	},
 /turf/open/floor/rogue/grass,
 /area/rogue/outdoors/bog)
+"xD" = (
+/obj/machinery/light/rogue/firebowl/standing,
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/under/cavewet/bogcaves)
 "xO" = (
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
@@ -1690,6 +1716,12 @@
 	},
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors)
+"BK" = (
+/obj/effect/landmark/start/grenzelhoftlate{
+	dir = 8
+	},
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/under/cavewet/bogcaves)
 "BN" = (
 /obj/structure/chair/wood/rogue{
 	icon_state = "chair2";
@@ -1795,6 +1827,10 @@
 /obj/effect/landmark/start/bogguardsman,
 /turf/open/floor/rogue/blocks/paving,
 /area/rogue/under/town/basement)
+"CQ" = (
+/obj/effect/landmark/start/orphanlate,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/bog)
 "CR" = (
 /mob/living/simple_animal/hostile/retaliate/rogue/cow,
 /turf/open/floor/rogue/dirt/road,
@@ -2577,6 +2613,12 @@
 	},
 /turf/open/floor/rogue/dirt,
 /area/rogue/outdoors/bog)
+"Ou" = (
+/obj/effect/landmark/start/desertriderlate{
+	dir = 8
+	},
+/turf/open/floor/rogue/naturalstone,
+/area/rogue/under/cavewet/bogcaves)
 "Ov" = (
 /obj/structure/fluff/railing/border{
 	icon_state = "border";
@@ -2978,6 +3020,10 @@
 /obj/item/rope/chain,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors)
+"UT" = (
+/obj/effect/landmark/start/orphanlate,
+/turf/open/floor/rogue/cobblerock,
+/area/rogue/outdoors/bog)
 "UV" = (
 /mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame,
 /turf/open/floor/rogue/dirt,
@@ -139260,7 +139306,7 @@ JD
 JD
 "}
 (20,1,3) = {"
-jV
+rs
 jV
 jV
 jV
@@ -139517,7 +139563,7 @@ JD
 JD
 "}
 (21,1,3) = {"
-jV
+rs
 jV
 jV
 jV
@@ -139774,7 +139820,7 @@ JD
 JD
 "}
 (22,1,3) = {"
-jV
+rs
 jV
 jV
 jV
@@ -147025,7 +147071,7 @@ Og
 Og
 EZ
 Og
-jV
+bc
 jV
 jV
 jV
@@ -148316,7 +148362,7 @@ jV
 jV
 Og
 Og
-Og
+xt
 fO
 uT
 uT
@@ -149081,7 +149127,7 @@ Og
 Og
 Og
 RT
-jV
+bc
 jV
 jV
 Og
@@ -151137,7 +151183,7 @@ EZ
 EZ
 Og
 EZ
-jV
+bc
 jV
 ja
 Og
@@ -154708,7 +154754,7 @@ Og
 Og
 jV
 Og
-Og
+xt
 Og
 nX
 EZ
@@ -155468,7 +155514,7 @@ Xt
 xS
 Zc
 Ih
-nE
+bA
 FC
 zL
 Ld
@@ -157562,7 +157608,7 @@ jV
 jV
 jV
 jV
-jV
+UT
 jV
 Kx
 nX
@@ -161390,7 +161436,7 @@ nX
 jV
 jV
 jV
-Og
+xt
 Og
 Hz
 Og
@@ -166264,7 +166310,7 @@ EZ
 nX
 nX
 EZ
-EZ
+CQ
 Og
 Og
 Og
@@ -167045,7 +167091,7 @@ jV
 jV
 jV
 Og
-Og
+xt
 nX
 Hz
 nX
@@ -170123,7 +170169,7 @@ zL
 zL
 zL
 nX
-EZ
+CQ
 Og
 jV
 jV
@@ -171413,7 +171459,7 @@ oq
 jV
 jV
 jV
-jV
+Lw
 jV
 nX
 Og
@@ -171930,7 +171976,7 @@ jV
 jV
 jV
 jV
-jV
+vB
 jV
 jV
 jV
@@ -172180,7 +172226,7 @@ nE
 zL
 EZ
 nX
-jb
+Og
 jV
 jV
 jV
@@ -172438,7 +172484,7 @@ zL
 nX
 nX
 Og
-jV
+bc
 jV
 jV
 jV
@@ -172702,7 +172748,7 @@ jV
 jV
 jV
 jV
-jV
+vB
 jV
 jV
 jV
@@ -173465,7 +173511,7 @@ EZ
 Og
 EZ
 nX
-EZ
+ai
 jV
 jV
 jV
@@ -173979,7 +174025,7 @@ Og
 Og
 MZ
 Og
-nX
+oq
 jV
 jV
 jV
@@ -197026,7 +197072,7 @@ RT
 Og
 Og
 Og
-nX
+MZ
 Og
 Og
 nX
@@ -197284,9 +197330,9 @@ nX
 Og
 nX
 Og
-Og
+RT
 nX
-Og
+RT
 nX
 nX
 nX
@@ -197793,11 +197839,11 @@ Og
 Og
 Og
 nX
-nX
+MZ
 Og
 Og
 nX
-nX
+MZ
 Og
 nX
 nX
@@ -329123,11 +329169,11 @@ nt
 nt
 nt
 fQ
-fQ
-fQ
-fQ
-fQ
-fQ
+ST
+ST
+ST
+ST
+ST
 fQ
 fQ
 nt
@@ -329381,9 +329427,9 @@ fQ
 fQ
 fQ
 fQ
-fQ
-fQ
-fQ
+ST
+ST
+ST
 fQ
 fQ
 fQ
@@ -329638,9 +329684,9 @@ fQ
 fQ
 fQ
 fQ
-fQ
-fQ
-fQ
+ST
+ST
+ST
 fQ
 fQ
 fQ
@@ -329894,11 +329940,11 @@ fQ
 fQ
 fQ
 fQ
-fQ
-fQ
-fQ
-fQ
-fQ
+xD
+ST
+ST
+ST
+ST
 fQ
 fQ
 fQ
@@ -330151,12 +330197,12 @@ fQ
 fQ
 fQ
 fQ
-fQ
-fQ
-fQ
-fQ
-fQ
-fQ
+ST
+ST
+ST
+ST
+ST
+ST
 fQ
 fQ
 fQ
@@ -330409,11 +330455,11 @@ fQ
 fQ
 fQ
 fQ
-fQ
-fQ
-fQ
-fQ
-fQ
+BK
+ST
+ST
+Ou
+xD
 fQ
 fQ
 fQ
@@ -330666,10 +330712,10 @@ JD
 JD
 JD
 JD
-JD
-JD
-JD
-JD
+BK
+BK
+Ou
+Ou
 JD
 JD
 JD
@@ -330923,10 +330969,10 @@ JD
 JD
 JD
 JD
-JD
-JD
-JD
-JD
+BK
+BK
+Ou
+Ou
 JD
 JD
 JD
