@@ -803,9 +803,7 @@
 		qdel(src)
 		return
 	else
-		if(H.advsetup()) TODO ITS TIME FOR THE NEW CLASS MENU SETUP HA HA
-			qdel(src)
-
+		SSrole_class_handler.setup_class_handler(H)
 
 /obj/screen/eye_intent
 	name = "eye intent"

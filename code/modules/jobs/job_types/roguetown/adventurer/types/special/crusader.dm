@@ -7,7 +7,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/crusader
 	traits_applied = list(RTRAIT_HEAVYARMOR)
 
-	maxchosen = 1
+	maximum_possible_slots = 1
 
 	tutorial = "The crusaders... Knights who have pledged \
 	their wealth and lands to the church, taking up the banner \
@@ -50,10 +50,10 @@
 	H.change_stat("constitution", 2)
 	H.change_stat("intelligence", -1)
 
-	for(var/I in GLOB.adv_classes)
+	for(var/I in SSrole_class_handler.all_classes)
 		var/datum/advclass/A = I
 		if(A.name == name)
-			if(A.amtchosen > 1)
+			if(A.total_slots_occupied > 1)
 				armor = /obj/item/clothing/cloak/stabard/crusader/t
 				cloak = /obj/item/clothing/cloak/raincloak/furcloak
 				beltl = /obj/item/clothing/head/roguetown/helmet/heavy/crusader/t

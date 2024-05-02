@@ -3,7 +3,7 @@ GLOBAL_LIST_EMPTY(billagerspawns)
 GLOBAL_VAR_INIT(adventurer_hugbox_duration, 20 SECONDS)
 GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 /*
-	Retarded job that goes in with the ghetto dynamic mode
+	dyn vagrants, the pilgrim and adventurer are finally whole again.
 */
 /datum/job/roguetown/vagrants
 	title = "Vagrant"
@@ -29,7 +29,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 
 	display_order = JDO_VAGRANT
 	show_in_credits = FALSE
-	min_pq = 0
+	min_pq = -999
 
 /datum/job/roguetown/vagrants/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -38,53 +38,10 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 		H.advsetup = 1
 		H.invisibility = INVISIBILITY_MAXIMUM
 		H.become_blind("advsetup")
-		H.Stun(100)
-
-		if(!H.possibleclass)
-			H.possibleclass = list()
 
 		if(GLOB.adventurer_hugbox_duration)
 			///FOR SOME RETARDED FUCKING REASON THIS REFUSED TO WORK WITHOUT A FUCKING TIMER IT JUST FUCKED SHIT UP
 			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, adv_hugboxing_start)), 1)
-
-		if(M.client)
-			return FALSE
-			// Heres where we begin the hell
-
-
-/*
-/mob/living/carbon/human/proc/advsetup()
-	if(!advsetup)
-		testing("RETARD")
-		return TRUE
-	var/blacklisted = check_blacklist(ckey)
-	if(possibleclass.len && !blacklisted)
-		var/datum/advclass/C = input(src, "What is my class?", "Adventure") as null|anything in sortNames(possibleclass)
-		if(C && advsetup)
-			if(C.maxchosen > -1)
-				for(var/datum/advclass/A in GLOB.adv_classes)
-					if(A.type == C.type)
-						if(A.amtchosen >= A.maxchosen)
-							possibleclass -= C
-							to_chat(src, "<span class='warning'>Not enough slots for [C] left! Choose something different.</span>")
-							return FALSE
-						else
-							A.amtchosen++
-			if(alert(src, "[C.name]\n[C.tutorial]", "Are you sure?", "Yes", "No") != "Yes")
-				return FALSE
-			if(advsetup)
-				advsetup = 0
-				C.equipme(src)
-				invisibility = 0
-				cure_blind("advsetup")
-				return TRUE
-	else
-		testing("RETARD2")
-		advsetup = 0
-		invisibility = 0
-		cure_blind("advsetup")
-		return TRUE
-*/
 
 /mob/living/carbon/human/proc/adv_hugboxing_start()
 	to_chat(src, "<span class='warning'>I will be in danger once I start moving.</span>")

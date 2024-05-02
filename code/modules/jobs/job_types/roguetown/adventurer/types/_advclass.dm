@@ -14,8 +14,8 @@
 	var/list/allowed_patrons = ALL_PATRON_NAMES_LIST
 	var/list/allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	var/pickprob = 100
-	var/maxchosen = -1
-	var/amtchosen = 0
+	var/maximum_possible_slots = -1
+	var/total_slots_occupied = 0
 	var/min_pq = -100
 
 	var/horse = FALSE
@@ -35,15 +35,12 @@
 	post_equip(H)
 
 	H.advjob = name
-	H.advsetup = 0
-	H.invisibility = null
-	H.cure_blind("advsetup")
-	H.SetStun(0)
-	sleep(1)
-	testing("[H] spawn troch")
+
+	//sleep(1)
+	//testing("[H] spawn troch")
 	var/obj/item/flashlight/flare/torch/T = new()
 	T.spark_act()
-	H.put_in_hands(T)
+	H.put_in_hands(T, forced = TRUE)
 
 	var/turf/TU = get_turf(H)
 	if(TU)
@@ -76,13 +73,19 @@
 	if(!(H.age in allowed_ages))
 		return FALSE
 
-	if(maxchosen > -1)
-		if(amtchosen >= maxchosen)
+	if(maximum_possible_slots > -1)
+		if(total_slots_occupied >= maximum_possible_slots)
 			return FALSE
 
-	if(!(get_playerquality(H.client.ckey) >= min_pq))
-		return FALSE
+	if(min_pq != -100) // If someone sets this we actually do the check.
+		if(!(get_playerquality(H.client.ckey) >= min_pq))
+			return FALSE
 
 	if(prob(pickprob))
 		return TRUE
 
+// Basically the handler has a chance to plus up a class, heres a generic proc you can override to handle behavior related to it.
+// For now you just get an extra stat in everything depending on how many plusses you managed to get.
+/datum/advclass/proc/boost_by_plus_power(plus_factor, mob/living/carbon/human/H)
+	for(var/S in MOBSTATS)
+		H.change_stat(S, plus_factor)

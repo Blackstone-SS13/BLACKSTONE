@@ -4,6 +4,8 @@ SUBSYSTEM_DEF(triumphs)
 	init_order = INIT_ORDER_TRIUMPHS
 	var/list/topten
 
+	var/list/triumph_buy_datums
+
 //amke this queue events and do them all at once when the triumph subsystem fires, like clearing the list or adding tris.
 //cache for get_triumphs and edit cache immediately
 
@@ -11,6 +13,9 @@ SUBSYSTEM_DEF(triumphs)
 	. = ..()
 	if(!topten)
 		topten = get_triumphs_top()
+
+	triumph_buy_datums = list() // init empty list
+	init_subtypes(/datum/triumph_buy, triumph_buy_datums) // Make all the relevant datums
 
 /mob/proc/adjust_triumphs(amt, counted = TRUE)
 	if(!key)

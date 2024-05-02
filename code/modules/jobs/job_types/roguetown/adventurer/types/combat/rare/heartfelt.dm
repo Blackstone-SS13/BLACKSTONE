@@ -6,7 +6,7 @@
 	allowed_sexes = list("male")
 	allowed_races = list("Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/heartfeltlord
-	maxchosen = 1
+	maximum_possible_slots = 1
 	pickprob = 100
 	traits_applied = list(RTRAIT_NOBLE, RTRAIT_NOSEGRAB, RTRAIT_HEAVYARMOR)
 	category_flags = RT_TYPE_COMBAT_CLASS

@@ -10,7 +10,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/masterchef
 
-	maxchosen = 1
+	maximum_possible_slots = 1
 	pickprob = 5
 
 	category_flags = RT_TYPE_FREE_CLASS

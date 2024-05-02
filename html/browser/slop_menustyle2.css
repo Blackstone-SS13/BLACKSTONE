@@ -107,6 +107,13 @@ a.class_desc_YES_LINK:hover
 
 }
 
+.footer {
+   position: fixed;
+   left: 6;
+   bottom: 4;
+   width: 100%;
+}
+
 #button_div 
 {
 	flex: none;

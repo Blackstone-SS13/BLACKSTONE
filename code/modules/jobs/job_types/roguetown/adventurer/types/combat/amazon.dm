@@ -6,8 +6,9 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/amazon
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	pickprob = 13
-	maxchosen = 2
+
 	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
+	maximum_possible_slots = 2
 	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/amazon/pre_equip(mob/living/carbon/human/H)

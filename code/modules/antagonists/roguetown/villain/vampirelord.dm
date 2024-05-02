@@ -135,7 +135,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 	var/selected = input(src, "Which class was I?", "VAMPIRE SPAWN") as anything in visoptions
 
-	for(var/datum/advclass/A in GLOB.adv_classes)
+	for(var/datum/advclass/A in SSrole_class_handler.all_classes)
 		if(A.name == selected)
 			equipOutfit(A.outfit)
 			return
