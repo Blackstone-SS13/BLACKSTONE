@@ -72,7 +72,7 @@ SUBSYSTEM_DEF(weather)
 				eligible_zlevels["[z]"][W] = probability
 	return ..()
 
-/datum/controller/subsystem/weather/proc/run_weather(datum/weather/weather_datum_type )
+/datum/controller/subsystem/weather/proc/run_weather(datum/weather/weather_datum_type, z_levels)
 	if (istext(weather_datum_type))
 		for (var/V in subtypesof(/datum/weather))
 			var/datum/weather/W = V
@@ -83,20 +83,20 @@ SUBSYSTEM_DEF(weather)
 		CRASH("run_weather called with invalid weather_datum_type: [weather_datum_type || "null"]")
 		return
 
-//	if (isnull(z_levels))
-//		z_levels = SSmapping.levels_by_trait(initial(weather_datum_type.target_trait))
-//	else if (isnum(z_levels))
-//		z_levels = list(z_levels)
-//	else if (!islist(z_levels))
-//		CRASH("run_weather called with invalid z_levels: [z_levels || "null"]")
-//		return
+	if (isnull(z_levels))
+		z_levels = SSmapping.levels_by_trait(initial(weather_datum_type.target_trait))
+	else if (isnum(z_levels))
+		z_levels = list(z_levels)
+	else if (!islist(z_levels))
+		CRASH("run_weather called with invalid z_levels: [z_levels || "null"]")
+		return
 
-//	var/datum/weather/W = new weather_datum_type(z_levels)
-//	W.telegraph()
+	var/datum/weather/W = new weather_datum_type(z_levels)
+	W.telegraph()
 
-///datum/controller/subsystem/weather/proc/make_eligible(z, possible_weather)
-//	eligible_zlevels[z] = possible_weather
-//	next_hit_by_zlevel["[z]"] = null
+/datum/controller/subsystem/weather/proc/make_eligible(z, possible_weather)
+	eligible_zlevels[z] = possible_weather
+	next_hit_by_zlevel["[z]"] = null
 
 /datum/controller/subsystem/weather/proc/get_weather(z, area/active_area)
 	var/datum/weather/A
