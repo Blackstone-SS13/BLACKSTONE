@@ -49,7 +49,7 @@
 	icon_state = "inblock"
 	tranged = 1 //we can't attack directly with this intent, but we can charge it
 	tshield = 1
-	chargetime = 0
+	chargetime = 1
 	warnie = "shieldwarn"
 
 /obj/item/rogueweapon/shield/wood
@@ -58,7 +58,7 @@
 	icon_state = "woodsh"
 	dropshrink = 0.8
 	wdefense = 15
-	coverage = 100
+	coverage = 40
 
 /obj/item/rogueweapon/shield/wood/attack_hand(mob/user)
 	if(!overlays.len)
@@ -96,7 +96,7 @@
 	wlength = WLENGTH_NORMAL
 	resistance_flags = FLAMMABLE
 	wdefense = 15
-	coverage = 100
+	coverage = 70
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	max_integrity = 200
 
@@ -121,7 +121,7 @@
 	resistance_flags = null
 	flags_1 = CONDUCT_1
 	wdefense = 18
-	coverage = 100
+	coverage = 70
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = 300

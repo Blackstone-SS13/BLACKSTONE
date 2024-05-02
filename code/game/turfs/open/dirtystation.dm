@@ -27,8 +27,8 @@
 	var/static/list/high_dirt_areas = typecacheof(list(/area/science/test_area,
 														/area/mine/production,
 														/area/mine/living_quarters,
-														/area/vacant_room/office,
-														/area/ruin/space))
+														/area/vacant_room/office
+														))
 	if(is_type_in_typecache(A, high_dirt_areas))
 		new /obj/effect/decal/cleanable/dirt(src)	//vanilla, but it works
 		return
