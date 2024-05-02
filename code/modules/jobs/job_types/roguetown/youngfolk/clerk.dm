@@ -25,27 +25,22 @@
 /datum/outfit/job/roguetown/clerk/pre_equip(mob/living/carbon/human/H)
 	..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
+	
+	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+		H.change_stat("strength", -1)
+
 	if(H.gender == MALE)
-		pants = /obj/item/clothing/under/roguetown/tights
 		armor = /obj/item/clothing/cloak/tabard/knight
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
-		belt = /obj/item/storage/belt/rogue/leather
-		beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
-		beltl = /obj/item/keyring/steward
-		backr = /obj/item/storage/backpack/rogue/satchel
-		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-			H.change_stat("strength", -1)
 
 	if(H.gender == FEMALE)
 		pants = /obj/item/clothing/under/roguetown/tights
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/blue
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
-		belt = /obj/item/storage/belt/rogue/leather
-		beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
-		beltl = /obj/item/keyring/steward
-		backr = /obj/item/storage/backpack/rogue/satchel
-		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-			H.change_stat("strength", -1)
+
+	pants = /obj/item/clothing/under/roguetown/tights
+	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
+	belt = /obj/item/storage/belt/rogue/leather
+	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
+	beltl = /obj/item/keyring/clerk
+	backr = /obj/item/storage/backpack/rogue/satchel
