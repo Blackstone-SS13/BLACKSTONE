@@ -27,24 +27,36 @@
 						user.put_in_hands(I)
 			return
 
-/obj/structure/flora/newtree/obj_destruction(damage_flag)
+/obj/structure/flora/newtree/obj_destruction(damage_flag)//this proc is stupidly long for a destruction proc
 	var/turf/NT = get_turf(src)
 	var/turf/UPNT = get_step_multiz(src, UP)
 	src.obj_flags = CAN_BE_HIT | BLOCK_Z_IN_UP //so the logs actually fall when pulled by zfall
 
-	if(locate(/obj/structure/flora/newtree) in UPNT) //theoretically you'd be able to break trees through a floor but no one is building floors under a tree so this is probably fine
-		for(var/obj/structure/flora/newtree/D in UPNT)
-			D.obj_destruction(damage_flag)
+	for(var/obj/structure/flora/newtree/D in UPNT)//theoretically you'd be able to break trees through a floor but no one is building floors under a tree so this is probably fine
+		D.obj_destruction(damage_flag)
 	for(var/obj/item/grown/log/tree/I in UPNT)
 		UPNT.zFall(I)
 
-	for(var/turf/B in get_adjacent_open_turfs(src))
-		for(var/obj/i in B)//i straight up can't use locate here, it does not work for some reason
-			if(istype(i, /obj/structure/flora/newbranch))
-				i.obj_flags = CAN_BE_HIT // this code is so garbage i hate it
-				i.obj_destruction(damage_flag)
-				for(var/obj/item/grown/log/tree/BRA in B)
-					B.zFall(BRA)
+	for(var/DI in GLOB.cardinals)
+		var/turf/B = get_step(src, DI)
+		for(var/obj/structure/flora/newbranch/BRANCH in B)//i straight up can't use locate here, it does not work for some reason
+			if(istype(BRANCH, /obj/structure/flora/newbranch/connector) && BRANCH.dir == DI)
+				var/turf/BI = get_step(B, DI)
+				for(var/obj/structure/flora/newbranch/bi in BI)
+					bi.obj_flags = CAN_BE_HIT
+					bi.obj_destruction(damage_flag)
+				for(var/atom/bio in BI)
+					BI.zFall(bio)
+			if(BRANCH.dir == DI)
+				BRANCH.obj_flags = CAN_BE_HIT // this code is so garbage i hate it
+				BRANCH.obj_destruction(damage_flag)
+			for(var/atom/BRA in B)//unload a sack of rocks on a branch and stand under it, it'll be funny bro
+				B.zFall(BRA)
+	
+	for(var/DIA in GLOB.diagonals)
+		var/turf/DIAG = get_step(src, DIA)
+		for(var/obj/structure/flora/newleaf/LEAF in DIAG)
+			LEAF.obj_destruction(damage_flag)
 
 	if(!istype(NT, /turf/open/transparent/openspace) && !(locate(/obj/structure/flora/roguetree/stump) in NT))//if i don't add the stump check it spawns however many zlevels it goes up because of src recursion
 		new /obj/structure/flora/roguetree/stump(NT)
