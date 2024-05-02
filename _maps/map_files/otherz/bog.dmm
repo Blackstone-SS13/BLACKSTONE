@@ -2332,10 +2332,6 @@
 	},
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/bog)
-"Kp" = (
-/obj/structure/chair/stool/rogue,
-/turf/open/floor/rogue/dirt,
-/area/rogue/outdoors/bog)
 "Kr" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/rogue/blocks/paving,
@@ -2353,10 +2349,6 @@
 /obj/item/rope/chain,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
-"KA" = (
-/obj/machinery/light/rogue/firebowl,
-/turf/open/floor/rogue/dirt,
-/area/rogue/under/cavewet/bogcaves)
 "KG" = (
 /obj/structure/stairs/stone{
 	icon_state = "stonestairs";
@@ -2446,12 +2438,6 @@
 /obj/item/ingot/iron,
 /obj/item/ingot/iron,
 /turf/open/floor/rogue/blocks,
-/area/rogue/indoors)
-"LH" = (
-/obj/effect/landmark/start/bogguardsman{
-	dir = 4
-	},
-/turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors)
 "LQ" = (
 /obj/structure/table/wood{
@@ -2724,10 +2710,6 @@
 	},
 /turf/open/floor/rogue/blocks/paving,
 /area/rogue/under/town/basement)
-"PV" = (
-/obj/machinery/light/rogue/firebowl,
-/turf/open/floor/rogue/volcanic,
-/area/rogue/under/cavewet/bogcaves)
 "PZ" = (
 /obj/machinery/light/rogue/firebowl,
 /turf/open/floor/rogue/metal,
@@ -3102,10 +3084,6 @@
 	},
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/town/basement)
-"VV" = (
-/obj/effect/landmark/start/bogguardsman,
-/turf/open/floor/rogue/ruinedwood,
-/area/rogue/outdoors/bog)
 "VY" = (
 /obj/structure/closet/crate/roguecloset,
 /obj/item/candle/yellow,
@@ -190737,7 +190715,7 @@ vE
 vE
 vE
 vE
-KA
+Ob
 Ob
 Ob
 Dr
@@ -233410,7 +233388,7 @@ kg
 zL
 Oq
 mg
-LH
+mg
 Ac
 nt
 nt
@@ -256287,7 +256265,7 @@ Ob
 NR
 NR
 NR
-KA
+Ob
 Ob
 Ob
 Ob
@@ -257049,7 +257027,7 @@ vE
 vE
 vE
 Ob
-KA
+Ob
 Ob
 Ob
 Ob
@@ -258586,7 +258564,7 @@ vE
 vE
 vE
 Ob
-KA
+Ob
 Ob
 Ob
 Ob
@@ -258597,7 +258575,7 @@ Ob
 os
 os
 Ob
-KA
+Ob
 Ob
 os
 os
@@ -258607,7 +258585,7 @@ Ob
 Ob
 Ob
 Ob
-KA
+Ob
 vE
 vE
 vE
@@ -260650,7 +260628,7 @@ os
 os
 os
 os
-PV
+os
 os
 Ob
 Ob
@@ -260896,7 +260874,7 @@ vE
 vE
 os
 os
-PV
+os
 os
 os
 os
@@ -261940,7 +261918,7 @@ GA
 GA
 os
 os
-PV
+os
 Ob
 vE
 vE
@@ -300745,7 +300723,7 @@ Mu
 wB
 px
 Mu
-VV
+kg
 kg
 KQ
 nt
@@ -308204,9 +308182,9 @@ ce
 ce
 ce
 ce
-nt
-nt
-nt
+ZW
+ZW
+ZW
 ce
 ce
 ce
@@ -308461,9 +308439,9 @@ ce
 ce
 ce
 ce
-nt
-nt
-nt
+ZW
+ZW
+ZW
 ce
 ce
 ce
@@ -308718,9 +308696,9 @@ ce
 ce
 ce
 ce
-nt
-nt
-nt
+ZW
+ZW
+ZW
 ce
 ce
 ce
@@ -310772,13 +310750,13 @@ nX
 nX
 nX
 nX
-Wt
+nX
 jV
 jV
 jV
 jV
 jV
-Wt
+nX
 nX
 nt
 nt
@@ -313078,7 +313056,6 @@ To
 To
 nX
 nX
-Kp
 nX
 nX
 nX
@@ -313086,7 +313063,8 @@ nX
 nX
 nX
 nX
-Wt
+nX
+nX
 jV
 jV
 jV
@@ -313334,8 +313312,8 @@ nX
 nX
 nX
 nX
-Kp
-Lo
+nX
+nX
 nX
 nX
 nX
@@ -313593,7 +313571,7 @@ nX
 nX
 nX
 nX
-Kp
+nX
 nX
 nX
 nX
@@ -315135,8 +315113,8 @@ Le
 Mp
 LZ
 nX
-Kp
-Lo
+nX
+nX
 nX
 nX
 nX
@@ -315393,7 +315371,7 @@ To
 nX
 nX
 nX
-Kp
+nX
 nX
 nX
 nX
@@ -316174,7 +316152,7 @@ nX
 jV
 jV
 jV
-Wt
+nX
 nX
 nX
 nX
@@ -319249,7 +319227,7 @@ Ct
 Ct
 Ct
 Ct
-Wt
+nX
 jV
 jV
 jV
@@ -319780,7 +319758,7 @@ jV
 jV
 jV
 jV
-Wt
+nX
 nX
 nX
 nX
@@ -321056,7 +321034,7 @@ vE
 vE
 vE
 vE
-Wt
+nX
 nX
 nX
 nX
@@ -323119,7 +323097,7 @@ Ob
 Ob
 Ob
 Ob
-Wt
+nX
 nX
 nX
 nX
@@ -323391,7 +323369,7 @@ jV
 jV
 jV
 jV
-Wt
+nX
 nX
 nX
 nX
@@ -327255,7 +327233,7 @@ nX
 nX
 nX
 nX
-Wt
+nX
 jV
 jV
 jV
