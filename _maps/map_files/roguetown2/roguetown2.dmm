@@ -3286,16 +3286,16 @@
 /area/rogue/indoors/town/garrison)
 "mR" = (
 /obj/structure/rack/rogue,
-/obj/item/clothing/shoes/roguetown/boots/armor,
-/obj/item/clothing/shoes/roguetown/boots/armor,
-/obj/item/clothing/shoes/roguetown/boots/armor,
-/obj/item/clothing/shoes/roguetown/boots/armor,
-/obj/item/clothing/shoes/roguetown/boots/armor,
-/obj/item/clothing/shoes/roguetown/boots/armor,
-/obj/item/clothing/shoes/roguetown/boots/armor,
-/obj/item/clothing/shoes/roguetown/boots/armor,
-/obj/item/clothing/shoes/roguetown/boots/armor,
-/obj/item/clothing/shoes/roguetown/boots/armor,
+/obj/item/clothing/shoes/roguetown/boots/leather,
+/obj/item/clothing/shoes/roguetown/boots/leather,
+/obj/item/clothing/shoes/roguetown/boots/leather,
+/obj/item/clothing/shoes/roguetown/boots/leather,
+/obj/item/clothing/shoes/roguetown/boots/leather,
+/obj/item/clothing/shoes/roguetown/boots/leather,
+/obj/item/clothing/shoes/roguetown/boots/leather,
+/obj/item/clothing/shoes/roguetown/boots/leather,
+/obj/item/clothing/shoes/roguetown/boots/leather,
+/obj/item/clothing/shoes/roguetown/boots/leather,
 /turf/open/floor/rogue/woodturned,
 /area/rogue/outdoors/town)
 "mS" = (
