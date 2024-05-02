@@ -894,15 +894,15 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!weather_type)
 		return
 
-	var/turf/T = get_turf(mob)
-	var/z_level = input("Z-Level to target?", "Z-Level", T?.z) as num|null
-	if(!isnum(z_level))
-		return
+	//var/turf/T = get_turf(mob)
+	//var/z_level = input("Z-Level to target?", "Z-Level", T?.z) as num|null
+	//if(!isnum(z_level))
+	//	return
 
-	SSweather.run_weather(weather_type, z_level)
+	SSweather.run_weather(weather_type)
 
-	message_admins("[key_name_admin(usr)] started weather of type [weather_type] on the z-level [z_level].")
-	log_admin("[key_name(usr)] started weather of type [weather_type] on the z-level [z_level].")
+	message_admins("[key_name_admin(usr)] started weather of type [weather_type] globally")
+	log_admin("[key_name(usr)] started weather of type [weather_type] globally.")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Run Weather")
 
 /client/proc/mass_zombie_infection()
