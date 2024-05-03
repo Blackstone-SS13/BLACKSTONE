@@ -219,3 +219,33 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	status_flags &= ~GODMODE
 	REMOVE_TRAIT(src, TRAIT_PACIFISM, ADVENTURER_HUGBOX_TRAIT)
 	to_chat(src, "<span class='danger'>My joy is gone! Danger surrounds me.</span>")
+
+/mob/living/carbon/human/proc/advsetup()
+	if(!advsetup)
+		testing("RETARD")
+		return TRUE
+	var/blacklisted = check_blacklist(ckey)
+	if(possibleclass.len && !blacklisted)
+		var/datum/advclass/C = input(src, "What is my class?", "Adventure") as null|anything in sortNames(possibleclass)
+			if(C && advsetup)
+				if(C.maxchosen > -1)
+				for(var/datum/advclass/A in GLOB.adv_classes)
+					if(A.type == C.type)
+						if(A.amtchosen >= A.maxchosen)
+						possibleclass -= C
+						to_chat(src, "Not enough slots for [C] left! Choose something different.")
+						return FALSE
+					else
+						A.amtchosen++
+	if(alert(src, "[C.name]\n[C.tutorial]", "Are you sure?", "Yes", "No") != "Yes")
+	return FALSE
+		if(advsetup)
+			advsetup = 0
+			C.equipme(src)
+		if(C.type == (/datum/advclass/rogue))
+			src.grant_language(/datum/language/dwarvish)
+			invisibility = 0
+			cure_blind("advsetup")
+		return TRUE
+	if(C.type == (/datum/advclass/cyclops))
+		src.pre_equip(cyclops)
