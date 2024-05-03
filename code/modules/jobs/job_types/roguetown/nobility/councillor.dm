@@ -5,6 +5,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
+	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	allowed_races = list("Humen",
 	"Elf",
 	"Half-Elf",
@@ -35,11 +36,13 @@
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/councillor
 	backpack_contents = list(/obj/item/keyring/councillor = 1)
 	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE) //aren't they suppose to be booknerds?
+		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-		H.change_stat("intelligence", 4)
+		H.change_stat("intelligence", 3)
 		H.change_stat("constitution", 1)
+		H.change_stat("fortune", 2)
 
