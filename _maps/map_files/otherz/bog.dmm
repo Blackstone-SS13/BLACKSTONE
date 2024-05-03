@@ -15,6 +15,14 @@
 /obj/item/clothing/suit/roguetown/armor/gambeson,
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/town/basement)
+"ah" = (
+/obj/structure/table/wood{
+	icon_state = "largetable";
+	dir = 10
+	},
+/obj/item/reagent_containers/glass/bucket/wooden,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors)
 "ai" = (
 /obj/effect/landmark/start/villager,
 /turf/open/floor/rogue/dirt/road,
@@ -32,6 +40,18 @@
 /obj/structure/well,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/bog)
+"ar" = (
+/obj/structure/table/wood{
+	icon_state = "largetable";
+	dir = 9
+	},
+/obj/item/ingot/iron,
+/obj/item/ingot/iron,
+/obj/item/ingot/iron,
+/obj/item/rogueweapon/hammer,
+/obj/item/rogueweapon/tongs,
+/turf/open/floor/rogue/blocks,
+/area/rogue/indoors)
 "aB" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1";
@@ -150,8 +170,6 @@
 	icon_state = "largetable";
 	dir = 5
 	},
-/obj/item/rogueweapon/tongs,
-/obj/item/rogueweapon/tongs,
 /obj/item/rogueweapon/tongs,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
@@ -425,6 +443,10 @@
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
+"iL" = (
+/obj/structure/chair/stool/rogue,
+/turf/open/floor/rogue/cobblerock,
+/area/rogue/outdoors/bog)
 "iO" = (
 /obj/structure/roguewindow/openclose{
 	icon_state = "woodwindowdir";
@@ -514,8 +536,6 @@
 	dir = 10
 	},
 /obj/item/rogueweapon/shovel,
-/obj/item/rogueweapon/shovel,
-/obj/item/rogueweapon/shovel,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
 "ka" = (
@@ -571,10 +591,6 @@
 /area/rogue/under/town/basement)
 "kf" = (
 /obj/structure/closet/crate/chest,
-/obj/item/rogueore/iron,
-/obj/item/rogueore/iron,
-/obj/item/rogueore/iron,
-/obj/item/rogueore/iron,
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors)
 "kg" = (
@@ -2068,14 +2084,6 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/bog)
-"Fp" = (
-/obj/structure/closet/crate/chest,
-/obj/item/rogueore/coal,
-/obj/item/rogueore/coal,
-/obj/item/rogueore/coal,
-/obj/item/rogueore/coal,
-/turf/open/floor/rogue/blocks,
-/area/rogue/indoors)
 "Fq" = (
 /obj/structure/bed/rogue/shit,
 /obj/effect/landmark/start/adventurer{
@@ -2205,9 +2213,6 @@
 	icon_state = "largetable";
 	dir = 8
 	},
-/obj/item/rogueweapon/pick,
-/obj/item/rogueweapon/pick,
-/obj/item/rogueweapon/pick,
 /obj/item/rogueweapon/pick,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
@@ -2393,10 +2398,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/rogue/blocks/paving,
 /area/rogue/under/town/basement)
-"Ku" = (
-/obj/structure/rack/rogue/shelf,
-/turf/open/floor/rogue/blocks,
-/area/rogue/indoors)
 "Kx" = (
 /obj/machinery/light/rogue/firebowl/stump,
 /turf/open/floor/rogue/dirt,
@@ -2490,16 +2491,6 @@
 	},
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/outdoors/bog)
-"Lx" = (
-/obj/structure/table/wood{
-	icon_state = "longtable";
-	dir = 1
-	},
-/obj/item/ingot/iron,
-/obj/item/ingot/iron,
-/obj/item/ingot/iron,
-/turf/open/floor/rogue/blocks,
-/area/rogue/indoors)
 "LH" = (
 /obj/effect/landmark/start/bogguardsman{
 	dir = 4
@@ -2560,16 +2551,6 @@
 /area/rogue/outdoors/bog)
 "Mu" = (
 /turf/closed/wall/mineral/rogue/wooddark,
-/area/rogue/indoors)
-"Mx" = (
-/obj/structure/table/wood{
-	icon_state = "longtable"
-	},
-/obj/item/reagent_containers/glass/bucket/wooden,
-/obj/machinery/light/rogue/torchholder{
-	pixel_y = 26
-	},
-/turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
 "MA" = (
 /obj/structure/fluff/railing/fence{
@@ -2636,7 +2617,7 @@
 	icon_state = "stonestairs";
 	dir = 8
 	},
-/turf/open/floor/rogue/dirt,
+/turf/open/floor/rogue/cobblerock,
 /area/rogue/under/cavewet/bogcaves)
 "NU" = (
 /obj/machinery/light/rogue/torchholder{
@@ -2866,9 +2847,6 @@
 	dir = 4
 	},
 /obj/item/rogueweapon/hammer,
-/obj/item/rogueweapon/hammer,
-/obj/item/rogueweapon/hammer,
-/obj/item/rogueweapon/hammer,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
 "Rt" = (
@@ -3083,8 +3061,6 @@
 	dir = 9
 	},
 /obj/item/flashlight/flare/torch/lantern,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/flashlight/flare/torch/lantern,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
 "UP" = (
@@ -3222,6 +3198,20 @@
 "WF" = (
 /obj/structure/closet/crate/chest,
 /turf/open/floor/rogue/twig,
+/area/rogue/indoors)
+"WJ" = (
+/obj/machinery/light/rogue/torchholder{
+	icon_state = "torchwall1";
+	dir = 8
+	},
+/obj/structure/closet/crate/chest,
+/obj/item/rogueore/coal,
+/obj/item/rogueore/coal,
+/obj/item/rogueore/iron,
+/obj/item/rogueore/iron,
+/obj/item/rogueore/iron,
+/obj/item/rogueore/iron,
+/turf/open/floor/rogue/blocks,
 /area/rogue/indoors)
 "WO" = (
 /obj/structure/rack/rogue,
@@ -163063,7 +163053,7 @@ Og
 Og
 Og
 dr
-FK
+nE
 FC
 FC
 nE
@@ -163320,7 +163310,7 @@ YV
 YV
 nX
 zL
-Ku
+nE
 nE
 nE
 nE
@@ -164091,7 +164081,7 @@ Og
 Og
 Yu
 zL
-Ku
+pL
 nE
 nE
 nE
@@ -164348,7 +164338,7 @@ YV
 Og
 Og
 dr
-FK
+nE
 FC
 FC
 nE
@@ -164863,11 +164853,11 @@ EZ
 Og
 zL
 zL
-Qg
+kf
+WY
 nE
-nE
-nE
-Fp
+WY
+kf
 zL
 zL
 Og
@@ -165120,11 +165110,11 @@ Og
 EZ
 Og
 zL
-Mx
-nE
-FC
-nE
-Ef
+zL
+zL
+BB
+zL
+zL
 zL
 Og
 nX
@@ -165377,11 +165367,11 @@ Og
 YV
 zL
 zL
-Lx
+Qg
 nE
 nE
 nE
-nE
+nj
 zL
 zL
 nX
@@ -165890,7 +165880,7 @@ YV
 Og
 YV
 wa
-nE
+WY
 nE
 nE
 nE
@@ -166148,10 +166138,10 @@ Og
 YV
 zL
 zL
-YS
-WY
-nE
-nj
+ar
+ah
+FK
+WJ
 YS
 zL
 zL
@@ -256602,7 +256592,7 @@ Ob
 Nu
 Nu
 Nu
-Ob
+Nu
 Ob
 Ob
 Ob
@@ -256860,7 +256850,7 @@ Nu
 Nu
 Nu
 Nu
-Ob
+Nu
 Ob
 Ob
 Ob
@@ -257118,7 +257108,7 @@ Nu
 Nu
 Nu
 Nu
-Ob
+Nu
 Ob
 Ob
 Ob
@@ -312622,7 +312612,7 @@ YO
 YO
 nX
 nX
-nX
+jV
 nX
 nX
 LZ
@@ -312878,16 +312868,16 @@ fo
 Le
 nm
 nX
+jV
+nX
+jV
+nX
+nX
+jV
 nX
 nX
 nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
 jV
 jV
 jV
@@ -313135,16 +313125,16 @@ To
 To
 To
 nX
+jV
+iL
+jV
+jV
 nX
-Kp
+jV
 nX
 nX
-nX
-nX
-nX
-nX
-nX
-Wt
+jV
+XI
 jV
 jV
 jV
@@ -313391,17 +313381,17 @@ nX
 nX
 nX
 nX
-nX
-Kp
+jV
+iL
 Lo
-nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
+jV
+jV
+jV
 jV
 jV
 jV
@@ -313649,16 +313639,16 @@ nX
 nX
 nX
 nX
-nX
+jV
 nX
 Kp
 nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
+jV
 jV
 jV
 jV
@@ -313907,15 +313897,15 @@ To
 To
 To
 nX
+jV
+jV
 nX
+jV
 nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
 jV
 jV
 jV
@@ -314165,14 +314155,14 @@ Le
 tq
 LZ
 nX
+jV
+jV
 nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
 jV
 jV
 jV
@@ -314421,15 +314411,15 @@ Le
 Le
 EK
 LZ
-nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
+jV
+jV
+jV
+jV
 jV
 jV
 jV
@@ -314678,15 +314668,15 @@ Lo
 Le
 Le
 nm
-nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
+jV
+jV
+jV
+jV
 jV
 jV
 jV
@@ -314935,15 +314925,15 @@ Le
 Le
 xO
 LZ
-nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
+jV
+jV
+jV
+jV
 jV
 jV
 jV
@@ -315193,14 +315183,14 @@ Le
 Mp
 LZ
 nX
-Kp
+iL
 Lo
 nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
 jV
 jV
 jV
@@ -315449,15 +315439,15 @@ To
 To
 To
 nX
-nX
-nX
+jV
+jV
 Kp
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
+jV
 jV
 jV
 jV
@@ -315705,16 +315695,16 @@ nX
 nX
 nX
 nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
 LZ
 nm
 zY
-nX
-nX
+jV
+jV
 jV
 jV
 jV
@@ -315960,18 +315950,18 @@ YO
 YO
 nX
 nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
+jV
 nX
 LZ
 Le
 zY
 nX
-nX
+jV
 jV
 jV
 jV
@@ -316215,20 +316205,20 @@ LZ
 fo
 Le
 nm
-nX
-nX
-nX
-nX
-nX
-nX
-nX
+jV
+jV
+jV
+jV
+jV
+jV
+jV
 nX
 nX
 LZ
 fo
 zY
 nX
-nX
+jV
 jV
 jV
 jV
@@ -316474,8 +316464,8 @@ To
 To
 nX
 nX
-nX
-nX
+jV
+jV
 nX
 LZ
 nm
