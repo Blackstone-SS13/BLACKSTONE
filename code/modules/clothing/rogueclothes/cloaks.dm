@@ -679,6 +679,13 @@
 	inhand_mod = FALSE
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_CLOAK
 
+/obj/item/clothing/cloak/cape/attackby(obj/item/I, mob/user) // of the clothing you want to change
+	. = ..()
+ 	if(istype(I,/obj/item/roguedye)) // is the item attacking this object a dye? if yes, continue
+ 	color = I.color // Defines the clothing's color as the dye's color
+ 	update_icon_state() // Updates the icon so color is re-added
+ 	return ..()
+
 /obj/item/clothing/cloak/cape/knight
 	color = CLOTHING_PURPLE
 
