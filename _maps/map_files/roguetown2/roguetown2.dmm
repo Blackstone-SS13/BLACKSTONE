@@ -11559,7 +11559,7 @@
 /area/rogue/indoors/town/manor)
 "QI" = (
 /obj/structure/mineral_door/wood/deadbolt{
-	lockid = graveyard
+	lockid = "graveyard"
 	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/outdoors/town)
