@@ -234,9 +234,9 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 						if(A.amtchosen >= A.maxchosen)
 							possibleclass -= C
 							to_chat(src, "Not enough slots for [C] left! Choose something different.")
-								return FALSE
-							else
-								A.amtchosen++
+							return FALSE
+						else
+							A.amtchosen++
 	if(alert(src, "[C.name]\n[C.tutorial]", "Are you sure?", "Yes", "No") != "Yes")
 	return FALSE
 		if(advsetup)
@@ -246,6 +246,6 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 			src.grant_language(/datum/language/dwarvish)
 			invisibility = 0
 			cure_blind("advsetup")
-		return TRUE
+			return TRUE
 	if(C.type == (/datum/advclass/cyclops))
 		src.pre_equip(cyclops)
