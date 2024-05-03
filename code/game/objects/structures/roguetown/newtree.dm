@@ -27,9 +27,39 @@
 						user.put_in_hands(I)
 			return
 
-/obj/structure/flora/newtree/obj_destruction(damage_flag)
+/obj/structure/flora/newtree/obj_destruction(damage_flag)//this proc is stupidly long for a destruction proc
 	var/turf/NT = get_turf(src)
-	if(!istype(NT, /turf/open/transparent/openspace))
+	var/turf/UPNT = get_step_multiz(src, UP)
+	src.obj_flags = CAN_BE_HIT | BLOCK_Z_IN_UP //so the logs actually fall when pulled by zfall
+
+	for(var/obj/structure/flora/newtree/D in UPNT)//theoretically you'd be able to break trees through a floor but no one is building floors under a tree so this is probably fine
+		D.obj_destruction(damage_flag)
+	for(var/obj/item/grown/log/tree/I in UPNT)
+		UPNT.zFall(I)
+
+	for(var/DI in GLOB.cardinals)
+		var/turf/B = get_step(src, DI)
+		for(var/obj/structure/flora/newbranch/BRANCH in B)//i straight up can't use locate here, it does not work
+			if(BRANCH.dir == DI)
+				var/turf/BI = get_step(B, DI)
+				for(var/obj/structure/flora/newbranch/bi in BI)//2 tile end branch
+					if(bi.dir == DI)
+						bi.obj_flags = CAN_BE_HIT
+						bi.obj_destruction(damage_flag)
+					for(var/atom/bio in BI)
+						BI.zFall(bio)
+				for(var/obj/structure/flora/newleaf/bil in BI)//2 tile end leaf
+					bil.obj_destruction(damage_flag)
+				BRANCH.obj_flags = CAN_BE_HIT 
+				BRANCH.obj_destruction(damage_flag)
+			for(var/atom/BRA in B)//unload a sack of rocks on a branch and stand under it, it'll be funny bro
+				B.zFall(BRA)
+	
+	for(var/turf/DIA in block(get_step(src, SOUTHWEST), get_step(src, NORTHEAST)))
+		for(var/obj/structure/flora/newleaf/LEAF in DIA)
+			LEAF.obj_destruction(damage_flag)
+
+	if(!istype(NT, /turf/open/transparent/openspace) && !(locate(/obj/structure/flora/roguetree/stump) in NT))//if i don't add the stump check it spawns however many zlevels it goes up because of src recursion
 		new /obj/structure/flora/roguetree/stump(NT)
 	playsound(src, 'sound/misc/treefall.ogg', 100, FALSE)
 	. = ..()
