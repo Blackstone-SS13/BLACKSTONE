@@ -1,0 +1,25 @@
+{
+
+    "gronnish": {
+        "I": "gronnsman",
+        "me": "gronnsman",
+        "are": "am",
+		"is": "am",
+        "friend": "clanmate",
+		"sheriff": "warchief",
+        "priest": "shaman",
+        "enemy": "prey",
+        "big": "huge",
+		"axe": "whacker",
+        "mace": "big stick",
+        "guard": "watcher",
+        "wizard": "seer",
+		"queen": "matron",
+        "help": "fix",
+        "stupid": "wise",
+        "sword": "sharp whacker",
+		"rapier": "pokey whacker",
+		"greatsword": "biggest whacker",
+		"staff": "stick"
+    }
+}

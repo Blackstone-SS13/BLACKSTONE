@@ -117,4 +117,6 @@
 	switch(H.skin_tone)
 		if(SKIN_COLOR_GRENZELHOFT) //Grenzelhoft
 			return strings("german_replacement.json", "german")
+		if(SKIN_COLOR_GRONN) //gronn
+			return strings("gronn_replacement.json", "gronnish")
 	return null
