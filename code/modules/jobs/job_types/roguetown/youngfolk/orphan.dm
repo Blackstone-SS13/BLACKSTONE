@@ -16,6 +16,7 @@
 	outfit = /datum/outfit/job/roguetown/orphan
 	display_order = JDO_ORPHAN
 	show_in_credits = FALSE
+	min_pq = -30
 
 /datum/job/roguetown/orphan/New()
 	. = ..()
