@@ -1054,29 +1054,22 @@
 
 	var/wrestling_diff = 0
 	var/resist_chance = 50
-	visible_message("DEBUG: [resist_chance]")
 	var/mob/living/L = pulledby
 
-	if(!mind)
+	if(mind)
+		wrestling_diff += (mind.get_skill_level(/datum/skill/combat/wrestling)) //NPCs don't use this
+	if(L.mind)
 		wrestling_diff -= (L.mind.get_skill_level(/datum/skill/combat/wrestling))
-	else
-		wrestling_diff = (mind.get_skill_level(/datum/skill/combat/wrestling)) - (L.mind.get_skill_level(/datum/skill/combat/wrestling))
-		visible_message("DEBUG: WRSTDIFF [wrestling_diff]")
 	
 	resist_chance += ((STASTR - L.STASTR) * 10)
-	visible_message("DEBUG: STRDIF [resist_chance]")
-	if(!(mobility_flags & MOBILITY_STAND))
-		resist_chance += -20 + min((wrestling_diff * 5), -20) //Can improve resist chance at high skill difference
-		visible_message("DEBUG: ONFLOOR [resist_chance]")      
 	
+	if(!(mobility_flags & MOBILITY_STAND))
+		resist_chance += -20 + min((wrestling_diff * 5), -20) //Can improve resist chance at high skill difference     
 	if(pulledby.grab_state >= GRAB_AGGRESSIVE)
 		resist_chance += -20 + max((wrestling_diff * 10), 0) 
-		visible_message("DEBUG: AGGROGRAB [resist_chance]")
 		resist_chance = max(resist_chance, 50 + min((wrestling_diff * 5), 0))
-		visible_message("DEBUG: MAX [resist_chance]")
 	else
 		resist_chance = max(resist_chance, 70 + min((wrestling_diff * 5), 0))
-		visible_message("DEBUG: MAX_PASSIVE [resist_chance]")
 
 	if(moving_resist && client) //we resisted by trying to move
 		client.move_delay = world.time + 20
