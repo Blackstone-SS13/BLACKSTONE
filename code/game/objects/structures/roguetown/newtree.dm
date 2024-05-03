@@ -39,23 +39,24 @@
 
 	for(var/DI in GLOB.cardinals)
 		var/turf/B = get_step(src, DI)
-		for(var/obj/structure/flora/newbranch/BRANCH in B)//i straight up can't use locate here, it does not work for some reason
-			if(istype(BRANCH, /obj/structure/flora/newbranch/connector) && BRANCH.dir == DI)
-				var/turf/BI = get_step(B, DI)
-				for(var/obj/structure/flora/newbranch/bi in BI)
-					bi.obj_flags = CAN_BE_HIT
-					bi.obj_destruction(damage_flag)
-				for(var/atom/bio in BI)
-					BI.zFall(bio)
+		for(var/obj/structure/flora/newbranch/BRANCH in B)//i straight up can't use locate here, it does not work
 			if(BRANCH.dir == DI)
-				BRANCH.obj_flags = CAN_BE_HIT // this code is so garbage i hate it
+				var/turf/BI = get_step(B, DI)
+				for(var/obj/structure/flora/newbranch/bi in BI)//2 tile end branch
+					if(bi.dir == DI)
+						bi.obj_flags = CAN_BE_HIT
+						bi.obj_destruction(damage_flag)
+					for(var/atom/bio in BI)
+						BI.zFall(bio)
+				for(var/obj/structure/flora/newleaf/bil in BI)//2 tile end leaf
+					bil.obj_destruction(damage_flag)
+				BRANCH.obj_flags = CAN_BE_HIT 
 				BRANCH.obj_destruction(damage_flag)
 			for(var/atom/BRA in B)//unload a sack of rocks on a branch and stand under it, it'll be funny bro
 				B.zFall(BRA)
 	
-	for(var/DIA in GLOB.diagonals)
-		var/turf/DIAG = get_step(src, DIA)
-		for(var/obj/structure/flora/newleaf/LEAF in DIAG)
+	for(var/turf/DIA in block(get_step(src, SOUTHWEST), get_step(src, NORTHEAST)))
+		for(var/obj/structure/flora/newleaf/LEAF in DIA)
 			LEAF.obj_destruction(damage_flag)
 
 	if(!istype(NT, /turf/open/transparent/openspace) && !(locate(/obj/structure/flora/roguetree/stump) in NT))//if i don't add the stump check it spawns however many zlevels it goes up because of src recursion
