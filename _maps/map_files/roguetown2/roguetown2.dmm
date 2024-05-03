@@ -1034,7 +1034,7 @@
 	},
 /area/rogue/under/town/basement)
 "dH" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/mineral_door/wood{
 	lockid = "graveyard"
 	},
 /turf/open/floor/rogue/woodturned,
@@ -11558,7 +11558,7 @@
 /turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/manor)
 "QI" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/mineral_door/wood{
 	lockid = "graveyard"
 	},
 /turf/open/floor/rogue/woodturned,
