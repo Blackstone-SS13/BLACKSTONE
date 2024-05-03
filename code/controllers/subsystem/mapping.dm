@@ -241,9 +241,10 @@ SUBSYSTEM_DEF(mapping)
 	var/list/otherZ = list()
 
 	#ifndef FASTLOAD
-	otherZ += load_map_config("_maps/map_files/otherz/smallforest.json")
-	otherZ += load_map_config("_maps/map_files/otherz/smalldecap.json")
-	otherZ += load_map_config("_maps/map_files/otherz/smallswamp.json")
+	//otherZ += load_map_config("_maps/map_files/otherz/smallforest.json")
+	//otherZ += load_map_config("_maps/map_files/otherz/smalldecap.json")
+	//otherZ += load_map_config("_maps/map_files/otherz/smallswamp.json")
+	otherZ += load_map_config("_maps/map_files/otherz/bog.json")
 	otherZ += load_map_config("_maps/map_files/otherz/underworld.json")
 	#endif
 	#ifdef ROGUEWORLD
