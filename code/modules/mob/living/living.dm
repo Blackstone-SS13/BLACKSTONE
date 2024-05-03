@@ -1075,6 +1075,7 @@
 		client.move_delay = world.time + 20
 	if(prob(resist_chance))
 		rogfat_add(rand(5,15))
+		L.rogfat_add(5)
 		visible_message("<span class='warning'>[src] breaks free of [pulledby]'s grip!</span>", \
 						"<span class='notice'>I break free of [pulledby]'s grip!</span>", null, null, pulledby)
 		to_chat(pulledby, "<span class='danger'>[src] breaks free of my grip!</span>")
@@ -1083,6 +1084,7 @@
 		return FALSE
 	else
 		rogfat_add(rand(5,15))
+		L.rogfat_add(rand(5,15))
 		var/shitte = ""
 //		if(client?.prefs.showrolls)
 //			shitte = " ([resist_chance]%)"
