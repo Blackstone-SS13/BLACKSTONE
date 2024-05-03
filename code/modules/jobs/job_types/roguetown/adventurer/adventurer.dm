@@ -232,11 +232,11 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 				for(var/datum/advclass/A in GLOB.adv_classes)
 					if(A.type == C.type)
 						if(A.amtchosen >= A.maxchosen)
-						possibleclass -= C
-						to_chat(src, "Not enough slots for [C] left! Choose something different.")
-						return FALSE
-					else
-						A.amtchosen++
+							possibleclass -= C
+							to_chat(src, "Not enough slots for [C] left! Choose something different.")
+								return FALSE
+							else
+								A.amtchosen++
 	if(alert(src, "[C.name]\n[C.tutorial]", "Are you sure?", "Yes", "No") != "Yes")
 	return FALSE
 		if(advsetup)
