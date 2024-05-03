@@ -172,6 +172,10 @@
 /obj/item/bedsheet/rogue/cloth,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
+"cY" = (
+/obj/structure/bars,
+/turf/open/floor/rogue/cobblerock,
+/area/rogue/indoors)
 "db" = (
 /obj/structure/closet/crate/roguecloset,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -192,7 +196,7 @@
 "df" = (
 /obj/structure/mineral_door/wood/red{
 	locked = 1;
-	lockid = "woodsm"
+	lockid = "velder"
 	},
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors)
@@ -571,10 +575,6 @@
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
-"km" = (
-/obj/structure/fluff/walldeco/wantedposter,
-/turf/open/floor/rogue/cobblerock,
-/area/rogue/outdoors/bog)
 "kC" = (
 /obj/structure/fluff/railing/border{
 	icon_state = "border";
@@ -763,13 +763,6 @@
 /obj/structure/chair/stool/rogue,
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
-"of" = (
-/obj/structure/table/wood,
-/obj/item/flint{
-	pixel_x = -1
-	},
-/turf/open/floor/rogue/ruinedwood/spiral,
-/area/rogue/indoors)
 "oj" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1";
@@ -862,7 +855,7 @@
 /area/rogue/indoors)
 "pQ" = (
 /obj/structure/mineral_door/wood/fancywood{
-	lockid = "woodsm"
+	lockid = "velder"
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
@@ -1141,33 +1134,15 @@
 /turf/closed/wall/mineral/rogue/wooddark/vertical,
 /area/rogue/indoors)
 "uq" = (
-/obj/item/roguekey/walls{
-	lockid = "farm";
-	name = "farm key"
-	},
-/obj/item/roguekey/walls{
-	lockid = "farm";
-	name = "farm key"
-	},
+/obj/item/roguekey/farm,
+/obj/item/roguekey/farm,
 /obj/structure/closet/crate/drawer{
 	pixel_y = 16
 	},
-/obj/item/roguekey/walls{
-	lockid = "farm";
-	name = "farm key"
-	},
-/obj/item/roguekey/walls{
-	lockid = "farm";
-	name = "farm key"
-	},
-/obj/item/roguekey/walls{
-	lockid = "farm";
-	name = "farm key"
-	},
-/obj/item/roguekey/walls{
-	lockid = "farm";
-	name = "farm key"
-	},
+/obj/item/roguekey/farm,
+/obj/item/roguekey/farm,
+/obj/item/roguekey/farm,
+/obj/item/roguekey/farm,
 /turf/open/floor/rogue/twig,
 /area/rogue/indoors)
 "uu" = (
@@ -1489,7 +1464,7 @@
 /area/rogue/indoors)
 "yL" = (
 /obj/structure/mineral_door/wood/window{
-	lockid = "woodsm"
+	lockid = "velder"
 	},
 /turf/open/floor/rogue/tile{
 	icon_state = "chess"
@@ -1699,6 +1674,30 @@
 	},
 /turf/open/floor/rogue/twig,
 /area/rogue/indoors)
+"Bw" = (
+/obj/structure/rack/rogue,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/garrison,
+/turf/open/floor/rogue/blocks,
+/area/rogue/under/town/basement)
 "BA" = (
 /obj/structure/fluff/railing/border{
 	icon_state = "border";
@@ -1722,6 +1721,13 @@
 	},
 /turf/open/floor/rogue/naturalstone,
 /area/rogue/under/cavewet/bogcaves)
+"BM" = (
+/obj/structure/closet/crate/drawer{
+	pixel_y = 16
+	},
+/obj/item/roguekey/velder,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors)
 "BN" = (
 /obj/structure/chair/wood/rogue{
 	icon_state = "chair2";
@@ -1826,6 +1832,12 @@
 	},
 /obj/effect/landmark/start/bogguardsman,
 /turf/open/floor/rogue/blocks/paving,
+/area/rogue/under/town/basement)
+"CN" = (
+/obj/effect/landmark/start/bogguardsman{
+	dir = 8
+	},
+/turf/open/floor/rogue/blocks,
 /area/rogue/under/town/basement)
 "CQ" = (
 /obj/effect/landmark/start/orphanlate,
@@ -2054,30 +2066,12 @@
 /obj/structure/closet/crate/drawer{
 	pixel_y = 16
 	},
-/obj/item/roguekey/blacksmith{
-	lockid = "townblacksmith";
-	name = "town blacksmith key"
-	},
-/obj/item/roguekey/blacksmith{
-	lockid = "townblacksmith";
-	name = "town blacksmith key"
-	},
-/obj/item/roguekey/blacksmith{
-	lockid = "townblacksmith";
-	name = "town blacksmith key"
-	},
-/obj/item/roguekey/blacksmith{
-	lockid = "townblacksmith";
-	name = "town blacksmith key"
-	},
-/obj/item/roguekey/blacksmith{
-	lockid = "townblacksmith";
-	name = "town blacksmith key"
-	},
-/obj/item/roguekey/blacksmith{
-	lockid = "townblacksmith";
-	name = "town blacksmith key"
-	},
+/obj/item/roguekey/blacksmith/town,
+/obj/item/roguekey/blacksmith/town,
+/obj/item/roguekey/blacksmith/town,
+/obj/item/roguekey/blacksmith/town,
+/obj/item/roguekey/blacksmith/town,
+/obj/item/roguekey/blacksmith/town,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors)
 "Gt" = (
@@ -2098,7 +2092,7 @@
 /area/rogue/indoors)
 "GH" = (
 /obj/structure/mineral_door/wood/fancywood{
-	lockid = "woodsm";
+	lockid = "velder";
 	name = "Elder's Home"
 	},
 /turf/open/floor/rogue/dirt/road,
@@ -2218,25 +2212,13 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
 "Is" = (
-/obj/item/roguekey/walls{
-	lockid = "butcher";
-	name = "butcher's key"
-	},
+/obj/item/roguekey/butcher,
 /obj/structure/closet/crate/drawer{
 	pixel_y = 16
 	},
-/obj/item/roguekey/walls{
-	lockid = "butcher";
-	name = "butcher's key"
-	},
-/obj/item/roguekey/walls{
-	lockid = "butcher";
-	name = "butcher's key"
-	},
-/obj/item/roguekey/walls{
-	lockid = "butcher";
-	name = "butcher's key"
-	},
+/obj/item/roguekey/butcher,
+/obj/item/roguekey/butcher,
+/obj/item/roguekey/butcher,
 /turf/open/floor/rogue/twig,
 /area/rogue/indoors)
 "Iu" = (
@@ -2769,8 +2751,9 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/town/basement)
 "QC" = (
-/obj/structure/closet/crate/drawer{
-	pixel_y = 16
+/obj/structure/table/wood,
+/obj/item/flint{
+	pixel_x = -1
 	},
 /obj/item/clothing/mask/cigarette/rollie/nicotine,
 /obj/item/clothing/mask/cigarette/rollie/nicotine,
@@ -3181,6 +3164,10 @@
 /area/rogue/under/town/basement)
 "WQ" = (
 /obj/structure/closet/crate/chest,
+/turf/open/floor/rogue/ruinedwood/spiral,
+/area/rogue/indoors)
+"WU" = (
+/obj/structure/stairs,
 /turf/open/floor/rogue/ruinedwood/spiral,
 /area/rogue/indoors)
 "WX" = (
@@ -103623,7 +103610,7 @@ gm
 Vm
 mR
 kd
-VL
+Bw
 sD
 wZ
 ag
@@ -104138,7 +104125,7 @@ ke
 xp
 oF
 zK
-sD
+CN
 WO
 Xi
 gm
@@ -152971,8 +152958,8 @@ zL
 zL
 zL
 zL
-Og
-Hz
+zL
+zL
 EZ
 Og
 Og
@@ -153225,11 +153212,11 @@ eT
 zL
 VY
 mg
+mg
+or
 aB
 lq
 zL
-nX
-Og
 nX
 EZ
 Og
@@ -153480,13 +153467,13 @@ YW
 zN
 zN
 zL
-SC
+Wh
+mg
+mg
 mg
 mg
 IX
 zL
-EZ
-EZ
 nX
 RT
 Og
@@ -153737,13 +153724,13 @@ uR
 zN
 zN
 zL
-or
+aB
+mg
+mg
 mg
 mg
 mg
 zL
-nX
-Og
 EZ
 Og
 nX
@@ -153996,11 +153983,11 @@ mn
 zL
 DF
 mg
+mg
+SC
 Wh
 Wh
 zL
-EZ
-Og
 nX
 Og
 EZ
@@ -154256,8 +154243,8 @@ df
 zL
 zL
 zL
-EZ
-nX
+zL
+zL
 Og
 EZ
 EZ
@@ -171750,13 +171737,13 @@ jV
 jV
 jV
 HS
-zf
+cY
+NH
 Un
 Un
 Un
-Un
-Un
-Mn
+NH
+cY
 jV
 jV
 jV
@@ -172007,13 +171994,13 @@ jV
 jV
 jV
 jV
+cY
 Un
 Un
 Un
 Un
 Un
-Un
-Un
+cY
 jV
 jV
 jV
@@ -172264,13 +172251,13 @@ jV
 jV
 jV
 jV
+zf
 Un
 Un
 Un
 Un
 Un
-Un
-Un
+Mn
 jV
 jV
 jV
@@ -172521,14 +172508,14 @@ jV
 jV
 jV
 jV
-ZM
-NH
 Un
 Un
 Un
-NH
-ZM
-km
+Un
+Un
+Un
+Un
+jV
 jV
 jV
 jV
@@ -172778,13 +172765,13 @@ jV
 jV
 jV
 jV
-zf
 Un
 Un
 Un
 Un
 Un
-Mn
+Un
+Un
 jV
 jV
 jV
@@ -173035,13 +173022,13 @@ jV
 jV
 jV
 jV
+cY
 Un
 Un
 Un
 Un
 Un
-Un
-Un
+cY
 jV
 jV
 jV
@@ -173292,13 +173279,13 @@ jV
 jV
 jV
 Uv
+cY
+NH
 Un
 Un
 Un
-Un
-Un
-Un
-Un
+NH
+cY
 jV
 jV
 jV
@@ -218238,6 +218225,8 @@ ce
 nt
 nt
 nt
+nt
+nt
 RQ
 XH
 XH
@@ -218246,8 +218235,6 @@ XH
 XH
 XH
 AW
-nt
-nt
 nt
 nt
 nt
@@ -218494,6 +218481,8 @@ ce
 ce
 nt
 nt
+nt
+nt
 RQ
 nc
 Mu
@@ -218507,8 +218496,6 @@ XH
 XH
 XH
 AW
-nt
-nt
 nt
 nt
 nt
@@ -218751,6 +218738,8 @@ ce
 ce
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -218764,8 +218753,6 @@ vD
 vD
 Mu
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -219008,6 +218995,8 @@ ce
 ce
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -219021,8 +219010,6 @@ mg
 mg
 Ac
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -219265,6 +219252,8 @@ ce
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -219272,14 +219261,12 @@ RK
 mg
 mg
 mg
-of
-vD
 QC
+vD
+BM
 KO
 Ac
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -219522,6 +219509,8 @@ ce
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -219535,8 +219524,6 @@ vD
 vD
 Mu
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -219779,6 +219766,8 @@ ce
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -219792,8 +219781,6 @@ yR
 yR
 yR
 YP
-nt
-nt
 nt
 nt
 nt
@@ -220036,6 +220023,8 @@ ce
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -220045,8 +220034,6 @@ xk
 jj
 vD
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -220293,6 +220280,8 @@ ce
 ce
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -220302,8 +220291,6 @@ xk
 jj
 vD
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -220550,6 +220537,8 @@ ce
 ce
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -220559,8 +220548,6 @@ rb
 Tf
 vD
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -220807,6 +220794,8 @@ ce
 ce
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -220816,8 +220805,6 @@ mg
 zb
 vD
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -221064,6 +221051,8 @@ ce
 ce
 nt
 nt
+nt
+nt
 Wu
 kg
 vD
@@ -221073,8 +221062,6 @@ ZA
 mg
 Ac
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -221321,6 +221308,8 @@ ce
 ce
 nt
 nt
+nt
+nt
 Wu
 kg
 Mu
@@ -221330,8 +221319,6 @@ vD
 vD
 Mu
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -221578,6 +221565,8 @@ ce
 ce
 ce
 nt
+nt
+nt
 Wu
 kg
 zL
@@ -221587,8 +221576,6 @@ kg
 kg
 kg
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -221835,6 +221822,8 @@ ce
 ce
 ce
 nt
+nt
+nt
 Wu
 kg
 zL
@@ -221844,8 +221833,6 @@ jD
 yR
 yR
 YP
-nt
-nt
 nt
 nt
 nt
@@ -222092,14 +222079,14 @@ ce
 ce
 ce
 nt
+nt
+nt
 VE
 wY
 zL
 zL
 zL
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -222350,13 +222337,13 @@ ce
 ce
 ce
 nt
+nt
+nt
 VE
 yR
 yR
 yR
 YP
-nt
-nt
 nt
 nt
 nt
@@ -227496,10 +227483,10 @@ nt
 nt
 nt
 nt
-nt
-nt
-nt
-nt
+RQ
+XH
+XH
+AW
 nt
 nt
 nt
@@ -227752,12 +227739,12 @@ nt
 nt
 nt
 nt
-nt
-nt
+RQ
+nc
 kg
 kg
-nt
-nt
+AR
+AW
 nt
 nt
 nt
@@ -228008,14 +227995,14 @@ nt
 nt
 nt
 nt
-nt
-nt
+RQ
+nc
 kg
 kg
 kg
 kg
-nt
-nt
+AR
+AW
 nt
 nt
 nt
@@ -228272,8 +228259,8 @@ kg
 kg
 kg
 kg
-nt
-nt
+AR
+AW
 nt
 nt
 nt
@@ -228530,7 +228517,7 @@ kg
 kg
 kg
 kg
-nt
+KQ
 nt
 nt
 nt
@@ -228787,7 +228774,7 @@ kg
 kg
 kg
 kg
-nt
+KQ
 nt
 nt
 nt
@@ -229044,7 +229031,7 @@ kg
 kg
 kg
 kg
-nt
+KQ
 nt
 nt
 nt
@@ -229301,7 +229288,7 @@ kg
 kg
 kg
 kg
-nt
+KQ
 nt
 nt
 nt
@@ -229558,7 +229545,7 @@ kg
 kg
 kg
 kg
-nt
+KQ
 nt
 nt
 nt
@@ -229815,7 +229802,7 @@ kg
 kg
 kg
 kg
-nt
+KQ
 nt
 nt
 nt
@@ -230072,7 +230059,7 @@ kg
 kg
 kg
 kg
-nt
+KQ
 nt
 nt
 nt
@@ -230329,7 +230316,7 @@ kg
 kg
 kg
 kg
-nt
+KQ
 nt
 nt
 nt
@@ -230586,7 +230573,7 @@ kg
 kg
 kg
 kg
-nt
+KQ
 nt
 nt
 nt
@@ -230842,8 +230829,8 @@ kg
 kg
 kg
 kg
-nt
-nt
+jD
+YP
 nt
 nt
 nt
@@ -231092,14 +231079,14 @@ nt
 nt
 nt
 nt
-nt
-nt
+VE
+wY
 kg
 kg
 kg
 kg
-nt
-nt
+jD
+YP
 nt
 nt
 nt
@@ -231350,12 +231337,12 @@ nt
 nt
 nt
 nt
-nt
-nt
+VE
+wY
 kg
 kg
-nt
-nt
+jD
+YP
 nt
 nt
 nt
@@ -231608,10 +231595,10 @@ nt
 nt
 nt
 nt
-nt
-nt
-nt
-nt
+VE
+yR
+yR
+YP
 nt
 nt
 nt
@@ -235749,7 +235736,7 @@ mg
 jj
 cJ
 mg
-cJ
+WU
 ZM
 ZM
 ZM
@@ -236006,7 +235993,7 @@ mg
 jj
 cJ
 mg
-cJ
+WU
 ZM
 ZM
 ZM
@@ -284032,14 +284019,14 @@ nt
 nt
 nt
 nt
+nt
+nt
 RQ
 XH
 XH
 XH
 XH
 AW
-nt
-nt
 nt
 nt
 nt
@@ -284289,6 +284276,8 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
@@ -284299,8 +284288,6 @@ XH
 XH
 XH
 AW
-nt
-nt
 nt
 nt
 nt
@@ -284546,6 +284533,8 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
@@ -284556,8 +284545,6 @@ kg
 kg
 kg
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -284803,6 +284790,8 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
@@ -284813,8 +284802,6 @@ kg
 kg
 kg
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -285060,6 +285047,8 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
@@ -285070,8 +285059,6 @@ yR
 yR
 yR
 YP
-nt
-nt
 nt
 nt
 nt
@@ -285317,14 +285304,14 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
 kg
 kg
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -285574,14 +285561,14 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
 kg
 kg
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -285831,14 +285818,14 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
 kg
 kg
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -286088,14 +286075,14 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
 kg
 kg
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -286345,14 +286332,14 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
 kg
 kg
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -286602,14 +286589,14 @@ nt
 nt
 nt
 nt
+nt
+nt
 Wu
 kg
 kg
 kg
 kg
 KQ
-nt
-nt
 nt
 nt
 nt
@@ -286859,14 +286846,14 @@ nt
 nt
 nt
 nt
+nt
+nt
 VE
 yR
 yR
 yR
 yR
 YP
-nt
-nt
 nt
 nt
 nt
@@ -287116,11 +287103,11 @@ ce
 nt
 nt
 nt
-TX
-TX
-TX
 nt
 nt
+TX
+TX
+TX
 nt
 nt
 nt
@@ -287373,11 +287360,11 @@ ce
 nt
 nt
 nt
+nt
+nt
 TX
 nt
 TX
-nt
-nt
 nt
 nt
 nt
@@ -287630,11 +287617,11 @@ ce
 nt
 nt
 nt
-TX
-TX
-TX
 nt
 nt
+TX
+TX
+TX
 nt
 nt
 nt
@@ -301536,7 +301523,7 @@ nt
 nt
 nt
 Wu
-kg
+Cz
 kg
 kg
 kg
@@ -301544,7 +301531,7 @@ kg
 kg
 nt
 qv
-kg
+Cz
 KQ
 ce
 ce
@@ -303594,11 +303581,11 @@ nt
 nt
 nt
 Wu
+Cz
 kg
 kg
 kg
-kg
-kg
+Cz
 KQ
 nt
 nt
@@ -305648,6 +305635,7 @@ nt
 nt
 nt
 Wu
+Cz
 kg
 kg
 kg
@@ -305655,8 +305643,7 @@ kg
 kg
 kg
 kg
-kg
-kg
+Cz
 KQ
 ce
 ce
