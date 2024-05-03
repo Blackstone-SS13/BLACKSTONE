@@ -18,6 +18,7 @@
 
 	outfit = /datum/outfit/job/roguetown/grabber
 	display_order = JDO_GRABBER
+	min_pq = -10
 
 /datum/outfit/job/roguetown/grabber/pre_equip(mob/living/carbon/human/H)
 	..()
