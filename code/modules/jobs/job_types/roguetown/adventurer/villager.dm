@@ -20,7 +20,9 @@
 	display_order = JDO_VILLAGER
 	isvillager = TRUE
 	give_bank_account = TRUE
-	min_pq = -20
+	min_pq = -15
+	wanderer_examine = FALSE
+	advjob_examine = TRUE
 
 /*
 /datum/job/roguetown/adventurer/villager/New()

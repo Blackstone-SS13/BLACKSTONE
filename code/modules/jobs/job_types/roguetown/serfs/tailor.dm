@@ -11,7 +11,6 @@
 	display_order = 6
 	min_pq = -10
 
-
 /datum/outfit/job/roguetown/tailor
 	name = "Tailor"
 	jobtype = /datum/job/roguetown/tailor

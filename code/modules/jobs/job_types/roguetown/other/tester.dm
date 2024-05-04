@@ -10,6 +10,7 @@
 	total_positions = 0
 	spawn_positions = 0
 #endif
+	min_pq = null //no pq
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen",
 	"Humen",

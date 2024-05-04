@@ -985,7 +985,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(job.plevel_req > user.client.patreonlevel())
 				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
 				continue
-			if(get_playerquality(user.ckey) < job.min_pq && !job.required)
+			if(!job.required && !isnull(job.min_pq) && (get_playerquality(user.ckey) < job.min_pq))
 				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
 				continue
 			if(!(user.client.prefs.age in job.allowed_ages))
@@ -1155,7 +1155,7 @@ Slots: [job.spawn_positions]</span>
 		if(1)
 			jpval = JP_HIGH
 
-	if(job.required && get_playerquality(user.ckey) < job.min_pq)
+	if(job.required && !isnull(job.min_pq) && (get_playerquality(user.ckey) < job.min_pq))
 		if(job_preferences[job.title] == JP_LOW)
 			jpval = null
 		else

@@ -92,7 +92,7 @@
 	var/list/peopleknowme = list()
 
 	var/plevel_req = 0
-	var/min_pq = -999
+	var/min_pq = 0
 
 	var/show_in_credits = TRUE
 
@@ -102,6 +102,12 @@
 
 	//is the job required for game progression
 	var/required = FALSE
+
+	/// This job is a "wanderer" on examine
+	var/wanderer_examine = FALSE
+
+	/// This job uses adventurer classes on examine
+	var/advjob_examine = FALSE
 
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
