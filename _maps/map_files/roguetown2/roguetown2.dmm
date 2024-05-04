@@ -10052,12 +10052,9 @@
 /turf/open/floor/rogue/wood,
 /area/rogue/outdoors/town)
 "LX" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/turf/open/floor/rogue/ruinedwood{
-	icon_state = "horzw"
-	},
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/tavern)
 "LY" = (
 /obj/structure/bars,
@@ -10091,6 +10088,10 @@
 /turf/closed/wall/mineral/rogue/wood,
 /area/rogue/indoors/town/tavern)
 "Md" = (
+/obj/structure/fluff/railing/border{
+	icon_state = "border";
+	dir = 8
+	},
 /obj/structure/fluff/railing/wood{
 	icon_state = "woodrailing";
 	dir = 8;
@@ -10230,10 +10231,15 @@
 /turf/closed/wall/mineral/rogue/decowood,
 /area/rogue/indoors/town/tavern)
 "ME" = (
-/obj/structure/fluff/railing/wood{
+/obj/structure/fluff/railing/border{
+	icon_state = "border";
 	dir = 1
 	},
-/turf/open/transparent/openspace,
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = -1
+	},
+/turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/tavern)
 "MF" = (
 /obj/structure/ladder,
@@ -10836,6 +10842,15 @@
 	},
 /turf/open/floor/plating/ashplanet/rocky,
 /area/rogue/outdoors/beach)
+"ON" = (
+/obj/structure/fluff/railing/border{
+	icon_state = "border";
+	dir = 8
+	},
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/rogue/woodturned,
+/area/rogue/indoors/town/tavern)
 "OO" = (
 /obj/structure/table/wood,
 /obj/item/storage/roguebag,
@@ -13533,6 +13548,15 @@
 	icon_state = "bfloorz"
 	},
 /area/rogue/indoors/town/manor)
+"YD" = (
+/obj/structure/fluff/railing/border{
+	icon_state = "border";
+	dir = 4
+	},
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/rogue/woodturned,
+/area/rogue/indoors/town/tavern)
 "YE" = (
 /obj/structure/mineral_door/wood{
 	icon_state = "wcv";
@@ -120866,7 +120890,7 @@ BS
 BS
 BS
 BB
-LX
+YD
 Gy
 Gy
 Gy
@@ -121337,7 +121361,7 @@ GD
 BS
 BS
 BB
-LX
+ON
 Gy
 Gy
 Gy
@@ -121499,7 +121523,7 @@ Md
 Md
 Md
 Md
-Md
+BS
 BS
 BS
 BS
@@ -121656,7 +121680,7 @@ BB
 Ml
 BB
 BB
-BB
+BS
 BS
 BS
 BS
