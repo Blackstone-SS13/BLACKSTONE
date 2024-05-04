@@ -205,7 +205,7 @@
 	var/obj/item/grabbing/bite/bite = zombie.get_item_by_slot(SLOT_MOUTH)
 	if(!bite)
 		for(var/mob/living/carbon/human in view(1, zombie))
-			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction))
+			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction) || HAS_TRAIT(human, TRAIT_ZOMBIE_IMMUNE))
 				continue
 			human.onbite(zombie)
 	else if(istype(bite))

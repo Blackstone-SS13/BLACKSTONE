@@ -8,7 +8,8 @@
 	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 	ispilgrim = FALSE
 	vampcompat = FALSE
-	outfit = /datum/outfit/job/roguetown/adventurer/cleric
+	outfit = /datum/outfit/job/roguetown/adventurer/cleric+
+	traits_applied = list(RTRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/cleric/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -69,7 +70,6 @@
 		H.change_stat("constitution", 2)
 		H.change_stat("endurance", 3)
 		H.change_stat("speed", -1)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
 	C.holder_mob = H
 	C.update_devotion(50, 50)

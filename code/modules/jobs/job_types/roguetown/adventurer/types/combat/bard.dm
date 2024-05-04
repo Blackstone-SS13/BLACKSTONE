@@ -17,6 +17,7 @@
 	"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/bard
+	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
 /datum/outfit/job/roguetown/adventurer/bard/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -58,7 +59,6 @@
 			backr = /obj/item/rogue/instrument/harp
 		if(H.dna.species.id == "tiefling")
 			backr = /obj/item/rogue/instrument/guitar
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	H.change_stat("perception", 1)
 	H.change_stat("speed", 2)
 	H.change_stat("strength", -1)
