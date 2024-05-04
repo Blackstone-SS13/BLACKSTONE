@@ -153,8 +153,9 @@
 	zombie.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	zombie.update_a_intents()
 	zombie.setToxLoss(0, 0)
-	zombie.aggressive = 1
+	zombie.aggressive = TRUE
 	zombie.mode = AI_IDLE
+	zombie.handle_ai()
 
 	var/obj/item/organ/eyes/eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(zombie, drop_if_replaced = TRUE)

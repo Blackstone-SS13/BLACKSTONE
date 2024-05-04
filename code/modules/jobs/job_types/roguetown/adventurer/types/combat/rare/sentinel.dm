@@ -9,7 +9,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/sentinal
 	maxchosen = 5
 	pickprob = 50
-	applied_traits = list(RTRAIT_MEDIUMARMOR)
+	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
 /datum/outfit/job/roguetown/adventurer/sentinal/pre_equip(mob/living/carbon/human/H)
 	..()
