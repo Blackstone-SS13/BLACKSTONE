@@ -26,7 +26,11 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/chainlegs/iron
 	neck = /obj/item/clothing/neck/roguetown/shalal
-	
+
+	var/obj/item/flashlight/flare/torch/T = new()
+	T.spark_act()
+	H.put_in_hands(T,forced=TRUE)
+
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
 		if(!(H.hairstyle in acceptable))
