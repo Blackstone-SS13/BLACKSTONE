@@ -29,9 +29,9 @@
 	//quick and gay way to do random loadouts
 	var equipment = rand(1, 2)
 	if (equipment == 1) {
-		backl = /obj/item/rogueweapon/spear/billhook
+		r_hand = /obj/item/rogueweapon/spear/billhook
 	} else if (equipment == 2) {
-		backl = /obj/item/rogueweapon/halberd
+		r_hand = /obj/item/rogueweapon/halberd
 	}
 
 	if(H.gender == FEMALE)
