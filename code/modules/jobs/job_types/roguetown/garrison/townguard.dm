@@ -21,7 +21,7 @@
 
 	outfit = /datum/outfit/job/roguetown/guardsman
 	give_bank_account = 16
-	min_pq = -4
+	min_pq = 3
 
 	/// Chance to be spawned as a bowman instead
 	var/bowman_chance = 35
