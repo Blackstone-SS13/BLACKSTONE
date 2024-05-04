@@ -21,7 +21,7 @@
 	whitelist_req = TRUE
 	outfit = /datum/outfit/job/roguetown/bogguardsman
 	give_bank_account = 16
-	min_pq = 0
+	min_pq = 1
 
 	/// Chance to be spawned as a crossbowman instead
 	var/crossbowman_chance = 35
