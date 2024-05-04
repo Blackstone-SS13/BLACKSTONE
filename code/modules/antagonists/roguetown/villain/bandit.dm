@@ -91,13 +91,17 @@
 	H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 	belt = /obj/item/storage/belt/rogue/leather
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/natural/cloth = 1)
 	if(prob(23))
 		gloves = /obj/item/clothing/gloves/roguetown/leather
 		armor = /obj/item/clothing/suit/roguetown/armor/gambeson
@@ -120,11 +124,15 @@
 	beltl = /obj/item/quiver/bolts
 	mask = /obj/item/clothing/mask/rogue/facemask/steel
 	head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
+	if(prob(40))
+		neck = /obj/item/clothing/neck/roguetown/chaincoif
 	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 1)
 	H.change_stat("speed", 1)
 	H.change_stat("intelligence", -3)
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	var/obj/item/bodypart/B = H.get_bodypart("head")
 	if(B)
 		B.sellprice = rand(66, 123)
