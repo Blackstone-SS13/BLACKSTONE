@@ -10,6 +10,8 @@
 	outfit = /datum/outfit/job/roguetown/apothecary
 	outfit_female = /datum/outfit/job/roguetown/apothecary/female
 	display_order = 6
+	min_pq = -10
+
 /datum/outfit/job/roguetown/apothecary
 	name = "Apothecary"
 	jobtype = /datum/job/roguetown/apothecary

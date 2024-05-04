@@ -12,7 +12,7 @@
 
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = 19
-	min_pq = -10
+	min_pq = 1
 
 /datum/outfit/job/roguetown/archivist/pre_equip(mob/living/carbon/human/H)
 	..()

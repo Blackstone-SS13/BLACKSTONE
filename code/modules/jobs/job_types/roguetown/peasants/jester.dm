@@ -22,7 +22,7 @@
 	outfit = /datum/outfit/job/roguetown/jester
 	display_order = JDO_JESTER
 	give_bank_account = TRUE
-	min_pq = -10
+	min_pq = -4 //retard jesters are funny so low PQ requirement
 
 /datum/outfit/job/roguetown/jester/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -139,7 +139,7 @@ SUBSYSTEM_DEF(job)
 		if(job.plevel_req > player.client.patreonlevel())
 			JobDebug("FOC incompatible with PATREON LEVEL, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 			continue
-		if(get_playerquality(player.ckey) < job.min_pq)
+		if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq))
 			continue
 		if(!(player.client.prefs.gender in job.allowed_sexes))
 			JobDebug("FOC incompatible with sex, Player: [player], Job: [job.title]")
@@ -220,7 +220,7 @@ SUBSYSTEM_DEF(job)
 			JobDebug("GRJ incompatible with sex, Player: [player], Job: [job.title]")
 			continue
 
-		if(get_playerquality(player.ckey) < job.min_pq)
+		if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq))
 			JobDebug("GRJ incompatible with minPQ, Player: [player], Job: [job.title]")
 			continue
 
@@ -449,7 +449,7 @@ SUBSYSTEM_DEF(job)
 					JobDebug("DO incompatible with PATREON LEVEL, Player: [player], Job: [job.title], Race: [player.client.prefs.pref_species.name]")
 					continue
 
-				if(get_playerquality(player.ckey) < job.min_pq)
+				if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq))
 					continue
 
 				if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
@@ -538,7 +538,7 @@ SUBSYSTEM_DEF(job)
 				if(job.plevel_req > player.client.patreonlevel())
 					continue
 
-				if(get_playerquality(player.ckey) < job.min_pq && level != JP_LOW) //since its required people on low can roll for it
+				if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq) && level != JP_LOW) //since its required people on low can roll for it
 					continue
 
 				if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
