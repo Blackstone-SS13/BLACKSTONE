@@ -9,6 +9,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/puritan
 	maxchosen = 2
 	pickprob = 11
+	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
 /datum/outfit/job/roguetown/adventurer/puritan/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -40,4 +41,3 @@
 		H.change_stat("strength", 1)
 		H.change_stat("perception", 3)
 	H.verbs |= /mob/living/carbon/human/proc/torture_victim
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)

@@ -121,7 +121,7 @@
 		return TRUE
 
 	// target non-monkey mobs when aggressive, with a small probability of monkey v monkey
-	if(aggressive && (!istype(L, /mob/living/carbon/spirit/) || prob(MONKEY_AGGRESSIVE_MVM_PROB)))
+	if(aggressive && (!istype(L, /mob/living/carbon/spirit) || prob(MONKEY_AGGRESSIVE_MVM_PROB)))
 		return TRUE
 
 	return FALSE

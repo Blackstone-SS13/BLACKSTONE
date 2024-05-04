@@ -13,6 +13,7 @@
 	"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/nudist
+	traits_applied = list(RTRAIT_NUDIST)
 	isvillager = FALSE
 	ispilgrim = TRUE
 
@@ -27,8 +28,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-	H.change_stat("strength", 4)
-	H.change_stat("endurance", 3)
+	H.change_stat("strength", 3)
+	H.change_stat("endurance", 4)
 	H.change_stat("constitution", 3)
 	H.change_stat("intelligence", -3)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)

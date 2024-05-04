@@ -11,7 +11,7 @@
 	"Dark Elf",
 	"Tiefling")
 	outfit = /datum/outfit/job/roguetown/adventurer/sfighter
-
+	traits_applied = list(RTRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/sfighter/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -52,4 +52,3 @@
 	else
 		beltr = /obj/item/rogueweapon/sword/sabre
 
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)

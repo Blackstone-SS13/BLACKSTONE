@@ -6,6 +6,7 @@
 	allowed_races = list("Dwarf","Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dwarfwarrior
 	maxchosen = 2
+	traits_applied = list(RTRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/dwarfwarrior/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -39,4 +40,3 @@
 	H.change_stat("speed", -1)
 	H.change_stat("strength", 2)
 	H.change_stat("endurance", 2)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)

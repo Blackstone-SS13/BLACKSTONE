@@ -9,6 +9,7 @@
 	"Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
 	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
+	traits_applied = list(RTRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/paladin/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -69,7 +70,6 @@
 		H.change_stat("constitution", 2)
 		H.change_stat("endurance", 2)
 		H.change_stat("speed", -2)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	if(H.dna?.species)
 		if(H.dna.species.id == "human")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
