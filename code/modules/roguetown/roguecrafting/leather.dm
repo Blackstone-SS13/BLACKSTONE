@@ -26,6 +26,13 @@
 				/obj/item/natural/fibers = 1)
 	sellprice = 45
 
+/datum/crafting_recipe/roguetown/leather/waterskin
+	name = "waterskin"
+	result = /obj/item/reagent_containers/glass/bottle/waterskin
+	reqs = list(/obj/item/natural/hide = 3,
+				/obj/item/natural/fibers = 2)
+	sellprice = 45
+
 /datum/crafting_recipe/roguetown/leather/gloves
 	name = "leather gloves"
 	result = list(/obj/item/clothing/gloves/roguetown/leather,
