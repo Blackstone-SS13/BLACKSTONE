@@ -122,7 +122,9 @@
 	reqs = list(/obj/item/grown/log/tree/small = 2,
 				/obj/item/grown/log/tree/stick = 2,
 				/obj/item/natural/fibers = 2)
+
 	verbage = "constructs"
+	craftsound = 'sound/foley/Building-01.ogg'
 	skillcraft = /datum/skill/craft/carpentry
 /*
 /datum/crafting_recipe/roguetown/structure/stairs
