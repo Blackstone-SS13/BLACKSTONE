@@ -4,6 +4,7 @@
 	allowed_races = list("Humen",
 							"Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/whitecheese
+	traits_applied = list(RTRAIT_HEAVYARMOR, RTRAIT_BREADY, TRAIT_STEELHEARTED)
 	// oh god oh fuck this dont seem very safe to do
 	// this looks kinda op so imma just leave it at patreon level 1 until someone puts this behind a different lock
 	plevel_req = 1
@@ -48,9 +49,6 @@
 		if(H.dna.species.id == "human")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/evil/blkknight()
 
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_BREADY, TRAIT_GENERIC)
 	H.change_stat("intelligence", 3)
 	H.change_stat("strength", 4)
 	H.change_stat("endurance", 4)

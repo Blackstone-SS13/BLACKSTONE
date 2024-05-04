@@ -4,7 +4,7 @@
 #define RTRAIT_NOSTINK 					"Dead Nose"
 #define RTRAIT_ZJUMP 					"High Jumping"
 #define RTRAIT_NOSEGRAB 				"Intimidating"
-#define RTRAIT_SEEPRICES				"Giza Blood"
+#define RTRAIT_SEEPRICES				"Giza Blooded"
 #define RTRAIT_STRONGBITE				"Strong Bite"
 #define RTRAIT_NOBLE					"Noble Blooded"
 #define RTRAIT_EMPATH					"Empath"
@@ -14,7 +14,8 @@
 #define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
 #define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
 #define RTRAIT_MANIAC_AWOKEN			"Awoken"
-#define RTRAIT_NOFATSTAM					"Indefatigable" //for ai
+#define RTRAIT_NOFATSTAM				"Indefatigable" //for ai
+#define RTRAIT_NUDIST					"Nudist" //you can't wear most clothes
 
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
 #define TRAIT_NOSLEEP				"Fatal Insomnia"
@@ -47,6 +48,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
 	RTRAIT_MANIAC_AWOKEN = "I am <b>WAKING UP</b> and the sheeple know this. They will resist.",
 	RTRAIT_NOFATSTAM = "I have boundless energy, I will never tire.",
+	RTRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "I can't sleep.",
@@ -320,4 +322,5 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define SLEEPING_CARP_TRAIT "sleeping_carp"
 #define MADE_UNCLONEABLE "made-uncloneable"
 #define TIMESTOP_TRAIT "timestop"
-#define ADVENTURER_HUGBOX_TRAIT "adventurer_hugbox"
+#define HUGBOX_TRAIT "hugbox"
+#define ADVENTURER_TRAIT "adventurer"

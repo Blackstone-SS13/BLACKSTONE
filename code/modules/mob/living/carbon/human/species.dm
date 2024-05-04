@@ -1241,6 +1241,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!I.species_exception || !is_type_in_list(src, I.species_exception))
 			return FALSE
 
+	var/is_nudist = HAS_TRAIT(H, RTRAIT_NUDIST)
 	var/num_arms = H.get_num_arms(FALSE)
 	var/num_legs = H.get_num_legs(FALSE)
 
@@ -1296,6 +1297,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_ARMOR)
 			if(H.wear_armor)
 				return FALSE
+			if(is_nudist)
+				return FALSE
 			if(I.blocking_behavior & BULKYBLOCKS)
 				if(H.cloak)
 					return FALSE
@@ -1315,6 +1318,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_GLOVES)
 			if(H.gloves)
 				return FALSE
+			if(is_nudist)
+				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_GLOVES) )
 				return FALSE
 			if(num_arms < 1)
@@ -1322,6 +1327,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_SHOES)
 			if(H.shoes)
+				return FALSE
+			if(is_nudist)
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_SHOES) )
 				return FALSE
@@ -1335,14 +1342,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_BELT)
 			if(H.belt)
 				return FALSE
-
+			if(is_nudist)
+				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_BELT))
 				return
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_BELT_R)
 			if(H.beltr)
 				return FALSE
-
 			if(!H.belt)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_HIP))
@@ -1351,7 +1358,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_BELT_L)
 			if(H.beltl)
 				return FALSE
-
 			if(!H.belt)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_HIP))
@@ -1368,11 +1374,15 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_PANTS)
 			if(H.wear_pants)
 				return FALSE
+			if(is_nudist)
+				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_PANTS) )
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_SHIRT)
 			if(H.wear_shirt)
+				return FALSE
+			if(is_nudist)
 				return FALSE
 			if(I.blocking_behavior & BULKYBLOCKS)
 				if(H.cloak)
@@ -1390,6 +1400,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_CLOAK)
 			if(H.cloak)
+				return FALSE
+			if(is_nudist)
 				return FALSE
 			if( (I.slot_flags & ITEM_SLOT_BACK_R) )
 				if(H.backr)
@@ -1416,6 +1428,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_WRISTS)
 			if(H.wear_wrists)
+				return FALSE
+			if(is_nudist)
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_WRISTS) )
 				return FALSE

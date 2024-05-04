@@ -154,8 +154,9 @@
 	zombie.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	zombie.update_a_intents()
 	zombie.setToxLoss(0, 0)
-	zombie.aggressive = 1
+	zombie.aggressive = TRUE
 	zombie.mode = AI_IDLE
+	zombie.handle_ai()
 
 	var/obj/item/organ/eyes/eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(zombie, drop_if_replaced = TRUE)
@@ -203,9 +204,9 @@
 	if(world.time - last_bite < 10 SECONDS)
 		return
 	var/obj/item/grabbing/bite/bite = zombie.get_item_by_slot(SLOT_MOUTH)
-	if(!bite)
+	if(!bite || !get_location_accessible(src, BODY_ZONE_PRECISE_MOUTH, grabs="other"))
 		for(var/mob/living/carbon/human in view(1, zombie))
-			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction))
+			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction) || HAS_TRAIT(human, TRAIT_ZOMBIE_IMMUNE))
 				continue
 			human.onbite(zombie)
 	else if(istype(bite))
