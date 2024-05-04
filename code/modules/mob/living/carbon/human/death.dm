@@ -45,9 +45,8 @@
 				dust(just_ash=TRUE,drop_items=TRUE)
 				return
 
-	if(!gibbed)
-		if(!is_in_roguetown(src))
-			zombie_check()
+	if(!gibbed && !is_in_roguetown(src))
+		zombie_check()
 
 	if(client || mind)
 		SSticker.deaths++
