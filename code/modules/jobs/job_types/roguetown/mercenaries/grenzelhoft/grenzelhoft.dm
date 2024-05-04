@@ -33,6 +33,9 @@
 	} else if (equipment == 2) {
 		r_hand = /obj/item/rogueweapon/halberd
 	}
+	var/obj/item/flashlight/flare/torch/T = new()
+	T.spark_act()
+	H.put_in_hands(T,forced=TRUE)
 
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
