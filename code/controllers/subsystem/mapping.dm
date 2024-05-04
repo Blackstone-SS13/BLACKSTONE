@@ -428,6 +428,7 @@ GLOBAL_LIST_EMPTY(the_station_areas)
 /client/proc/admin_away()
 	set name = "Load Away Mission"
 	set category = "Fun"
+	set hidden = 1
 
 	if(!holder ||!check_rights(R_FUN))
 		return

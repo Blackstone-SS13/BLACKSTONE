@@ -707,6 +707,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 /client/proc/check_ai_laws()
 	set name = "Check AI Laws"
 	set category = "Admin"
+	set hidden = 1
 	if(holder)
 		src.holder.output_ai_laws()
 
@@ -791,6 +792,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set name = "Toggle Admin AI Interact"
 	set category = "Admin"
 	set desc = ""
+	set hidden = 1
 
 	AI_Interact = !AI_Interact
 	if(mob && IsAdminGhost(mob))
@@ -802,6 +804,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 /client/proc/end_party()
 	set category = "GameMaster"
 	set name = "EndPlaytest"
+	set hidden = 1
 	if(!holder)
 		return
 	if(!SSticker.end_party)

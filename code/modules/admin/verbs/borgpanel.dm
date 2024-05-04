@@ -2,6 +2,7 @@
 	set category = "Admin"
 	set name = "Show Borg Panel"
 	set desc = ""
+	set hidden = 1
 
 	if(!check_rights(R_ADMIN))
 		return
