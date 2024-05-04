@@ -20,6 +20,7 @@
 	outfit = /datum/outfit/job/roguetown/nightman
 	display_order = JDO_NIGHTMAN
 	give_bank_account = TRUE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/nightman/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -60,7 +60,8 @@
 		if(!V.disguised)
 			return "<span class='boldnotice'>Another deadite.</span>"
 	if(istype(examined_datum, /datum/antagonist/zombie))
-		return "<span class='boldnotice'>Another deadite. My ally.</span>"
+		var/datum/antagonist/zombie/fellow_zombie = examined_datum
+		return "<span class='boldnotice'>Another deadite. [fellow_zombie.has_turned ? "My ally." : "<span class='warning'>Hasn't turned yet.</span>"]</span>"
 	if(istype(examined_datum, /datum/antagonist/skeleton))
 		return "<span class='boldnotice'>Another deadite.</span>"
 
@@ -108,8 +109,8 @@
 			REMOVE_TRAIT(zombie, trait, "[type]")
 		zombie.remove_client_colour(/datum/client_colour/monochrome)
 		if(has_turned && become_rotman)
-			zombie.STACON = max(zombie.STACON - 3, 1) //ur rotting bro
-			zombie.STASPD = max(zombie.STASPD - 4, 1)
+			zombie.STACON = max(zombie.STACON - 2, 1) //ur rotting bro
+			zombie.STASPD = max(zombie.STASPD - 3, 1)
 			zombie.STAINT = max(zombie.STAINT - 3, 1)
 			for(var/trait in traits_rotman)
 				ADD_TRAIT(zombie, trait, "[type]")

@@ -151,6 +151,7 @@
 #define ORPHAN		(1<<3)
 #define PRINCE		(1<<4)
 #define SHOPHAND	(1<<5)
+#define CLERK 		(1<<6)
 
 #define MERCENARIES		(1<<6)
 
@@ -172,6 +173,7 @@
 #define JDO_PRINCE 1.2
 #define JDO_HAND 2
 #define JDO_STEWARD 3
+#define JDO_CLERK 3.1
 
 #define JDO_MAGICIAN 5
 #define JDO_WAPP 6

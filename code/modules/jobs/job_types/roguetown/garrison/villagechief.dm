@@ -37,6 +37,7 @@
 	beltr = /obj/item/rogueweapon/mace/cudgel
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	r_hand = /obj/item/rogueweapon/woodstaff
+	l_hand = /obj/item/keyring/velder
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
