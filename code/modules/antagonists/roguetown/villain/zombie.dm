@@ -204,7 +204,7 @@
 	if(world.time - last_bite < 10 SECONDS)
 		return
 	var/obj/item/grabbing/bite/bite = zombie.get_item_by_slot(SLOT_MOUTH)
-	if(!bite)
+	if(!bite || !get_location_accessible(src, BODY_ZONE_PRECISE_MOUTH, grabs="other"))
 		for(var/mob/living/carbon/human in view(1, zombie))
 			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction) || HAS_TRAIT(human, TRAIT_ZOMBIE_IMMUNE))
 				continue
