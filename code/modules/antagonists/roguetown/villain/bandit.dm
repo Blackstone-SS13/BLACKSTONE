@@ -119,7 +119,6 @@
 		if(1)
 			beltr = /obj/item/rogueweapon/sword/iron
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-			beltl = /obj/item/storage/belt/rogue/pouch
 		if(2)
 			beltr = /obj/item/rogueweapon/huntingknife/cleaver
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
