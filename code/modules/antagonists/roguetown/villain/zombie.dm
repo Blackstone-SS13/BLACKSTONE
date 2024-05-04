@@ -173,15 +173,14 @@
 	zombie.skin_tone = SKIN_COLOR_ROT
 	zombie.update_body()
 
-	if(prob(8))
-		zombie.STASTR = 18
-	else
-		zombie.STASTR = rand(12,14)
 
-	if(prob(8))
-		zombie.STASPD = 7
-	else
-		zombie.STASPD = rand(2,4)
+	// Now you get what you had in life + the debuff from rotting limbs aka -8
+	// Outside of one 2% chance remaining for zombie era strength
+	if(prob(2))
+		zombie.STASTR = 18
+
+	// This is the original first commit values for it, aka 5-7
+	zombie.STASPD = rand(5,7)
 
 	zombie.STAINT = 1
 	last_bite = world.time
@@ -281,7 +280,7 @@
  * We instead just transform at the end
  */
 /mob/living/carbon/human/proc/zombie_infect_attempt()
-	if(!prob(7))
+	if(!prob(3)) // Since zombies are biting a lot now, we drop this down to 3% chance of a conversion
 		return 
 	var/datum/antagonist/zombie/zombie_antag = zombie_check()
 	if(!zombie_antag)
