@@ -334,11 +334,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 					if(T.get_lumcount() > 0.15)
 						if(!isspawn)
 							to_chat(H, "<span class='warning'>Astrata spurns me! I must get out of her rays!</span>") // VLord is more punished for daylight excursions.
-							sleep(100)
 							var/turf/N = H.loc
 							if(N.can_see_sky())
 								if(N.get_lumcount() > 0.15)
-									H.dust()
+									H.fire_act(3)
+									handle_vitae(-500)
 							to_chat(H, "<span class='warning'>That was too close. I must avoid the sun.</span>")
 						else if (isspawn && !disguised)
 							H.fire_act(1,5)
@@ -1229,14 +1229,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	releasedrain = 100
 	chargedrain = 0
 	chargetime = 0
-	range = 15
+	range = 10
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = null
 	invocation_type = "shout"
 	associated_skill = /datum/skill/magic/blood
 	antimagic_allowed = TRUE
-	charge_max = 5 SECONDS
+	charge_max = 10 SECONDS
 	include_user = 0
 	max_targets = 1
 
@@ -1259,26 +1259,26 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		if(willroll >= bloodroll)
 			to_chat(user, "I fail to ensnare their mind.")
 			if(willroll - bloodroll >= 3)
-				to_chat(L, "I feel like something is messing with my head.")
+				to_chat(L, "I feel like someone or something unholy is messing with my head. I should get out of here!")
 				var/holyskill = user.mind.get_skill_level(/datum/skill/magic/holy)
 				var/arcaneskill = user.mind.get_skill_level(/datum/skill/magic/arcane)
-				if(holyskill + arcaneskill >= 3)
-					to_chat(L, "I feel like the magic came from [user]")
+				if(holyskill + arcaneskill >= 1)
+					to_chat(L, "I feel like the unholy magic came from [user]. I should use my magic or miracles on them.")
 
 /obj/effect/proc_holder/spell/targeted/transfix/master
 	name = "Subjugate"
 	overlay_state = "transfixmaster"
-	releasedrain = 200
+	releasedrain = 1000
 	chargedrain = 0
 	chargetime = 0
-	range = 15
+	range = 10
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = null
 	invocation_type = "shout"
 	associated_skill = /datum/skill/magic/blood
 	antimagic_allowed = TRUE
-	charge_max = 5 SECONDS
+	charge_max = 30 SECONDS
 	include_user = 0
 	max_targets = 0
 

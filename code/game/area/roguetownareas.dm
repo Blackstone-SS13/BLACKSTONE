@@ -174,7 +174,7 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	converted_type = /area/rogue/indoors/shelter/woods
 
 /area/rogue/outdoors/bog
-	name = "the bog"
+	name = "bog"
 	icon_state = "bog"
 	ambientsounds = AMB_BOGDAY
 	ambientnight = AMB_BOGNIGHT
@@ -272,6 +272,8 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 30,
 				/mob/living/carbon/human/species/goblin/npc/sea = 20)
 	converted_type = /area/rogue/outdoors/caves
+
+/area/rogue/under/cavewet/bogcaves
 
 /area/rogue/under/cave/spider
 	icon_state = "spider"

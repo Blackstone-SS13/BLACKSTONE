@@ -17,6 +17,7 @@
 	outfit = /datum/outfit/job/roguetown/prince
 	display_order = JDO_PRINCE
 	give_bank_account = TRUE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/prince/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -63,5 +64,5 @@
 			H.change_stat("endurance", -2)
 			H.change_stat("strength", -4)
 			H.change_stat("constitution", 1)
-			H.change_stat("speed", 2)		
+			H.change_stat("speed", 2)
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
