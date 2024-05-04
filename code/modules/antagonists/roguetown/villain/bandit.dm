@@ -101,7 +101,13 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	backr = /obj/item/storage/backpack/rogue/satchel
-	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/natural/cloth = 1)
+	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1)
+	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	beltl = /obj/item/quiver/bolts
+	mask = /obj/item/clothing/mask/rogue/facemask/steel
+	head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
+	if(prob(40))
+		neck = /obj/item/clothing/neck/roguetown/chaincoif
 	if(prob(23))
 		gloves = /obj/item/clothing/gloves/roguetown/leather
 		armor = /obj/item/clothing/suit/roguetown/armor/gambeson
@@ -120,12 +126,6 @@
 		if(3)
 			beltr = /obj/item/rogueweapon/flail
 			H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 2, TRUE)
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
-	beltl = /obj/item/quiver/bolts
-	mask = /obj/item/clothing/mask/rogue/facemask/steel
-	head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
-	if(prob(40))
-		neck = /obj/item/clothing/neck/roguetown/chaincoif
 	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 1)
