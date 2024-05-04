@@ -7,7 +7,7 @@
 	amount_per_transfer_from_this = 6
 	possible_transfer_amounts = list(3,6,9)
 	volume = 64
-	dropshrink = 0.6
+	dropshrink = 0.5
 	sellprice = 10
 	closed = FALSE
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_NECK
@@ -17,5 +17,4 @@
 	drinksounds = list('sound/items/drink_bottle (1).ogg','sound/items/drink_bottle (2).ogg')
 	fillsounds = list('sound/items/fillcup.ogg')
 	poursounds = list('sound/items/fillbottle.ogg')
-	experimental_onhip = TRUE
 
