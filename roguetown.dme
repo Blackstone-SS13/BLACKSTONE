@@ -1377,7 +1377,6 @@
 #include "code\modules\admin\verbs\map_template_loadverb.dm"
 #include "code\modules\admin\verbs\mapping.dm"
 #include "code\modules\admin\verbs\maprotation.dm"
-#include "code\modules\admin\verbs\one_click_antag.dm"
 #include "code\modules\admin\verbs\onlyone.dm"
 #include "code\modules\admin\verbs\panicbunker.dm"
 #include "code\modules\admin\verbs\playsound.dm"
