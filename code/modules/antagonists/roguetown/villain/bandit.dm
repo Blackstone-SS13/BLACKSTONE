@@ -100,7 +100,7 @@
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/random
 	shoes = /obj/item/clothing/shoes/roguetown/boots
-	backl = /obj/item/storage/backpack/rogue/satchel
+	backr = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/natural/cloth = 1)
 	if(prob(23))
 		gloves = /obj/item/clothing/gloves/roguetown/leather
