@@ -98,8 +98,10 @@
 /client/verb/adminwho()
 	set category = "Admin"
 	set name = "Adminwho"
-	set hidden = 1
-	if(!check_rights(0))
+	set desc = "Lists all admins currently online."
+	
+	if(!check_rights(R_ADMIN))
+		to_chat(src, "You do not have the rights to use this command.")
 		return
 	var/msg = "<b>Current Admins:</b>\n"
 	if(holder)

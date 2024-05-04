@@ -20,6 +20,7 @@
 	outfit = /datum/outfit/job/roguetown/cook
 	display_order = JDO_COOK
 	give_bank_account = 8
+	min_pq = -10
 
 /datum/outfit/job/roguetown/cook/pre_equip(mob/living/carbon/human/H)
 	..()

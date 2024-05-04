@@ -98,6 +98,12 @@
 	icon_state = "hornkey"
 	lockid = "tavern"
 
+/obj/item/roguekey/velder
+	name = "elder's key"
+	desc = "This key should open and close the elder's home."
+	icon_state = "brownkey"
+	lockid = "velder"
+
 /obj/item/roguekey/roomi
 	name = "room I key"
 	desc = "The key to the first room."
@@ -154,11 +160,27 @@
 	icon_state = "brownkey"
 	lockid = "blacksmith"
 
+/obj/item/roguekey/blacksmith/town
+	name = "town blacksmith key"
+	lockid = "townblacksmith"
+
 /obj/item/roguekey/walls
 	name = "walls key"
 	desc = "This is a rusty key."
 	icon_state = "rustkey"
 	lockid = "walls"
+
+/obj/item/roguekey/farm
+	name = "farm key"
+	desc = "This is a rusty key that'll open farm doors."
+	icon_state = "rustkey"
+	lockid = "farm"
+
+/obj/item/roguekey/butcher
+	name = "butcher key"
+	desc = "This is a rusty key that'll open butcher doors."
+	icon_state = "rustkey"
+	lockid = "butcher"
 
 /obj/item/roguekey/church
 	name = "church key"

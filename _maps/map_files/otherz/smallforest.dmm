@@ -1755,14 +1755,6 @@
 "Tf" = (
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors)
-"Tg" = (
-/obj/structure/mineral_door/wood{
-	icon_state = "wcr";
-	locked = 1;
-	lockid = "garrison"
-	},
-/turf/open/floor/rogue/dirt,
-/area/rogue/outdoors/woods)
 "Tj" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/rogue/woodturned,
@@ -34216,7 +34208,7 @@ Jc
 Jc
 Jc
 Jc
-Tg
+Jc
 Jc
 ub
 Jc
@@ -34347,7 +34339,7 @@ Jc
 Jc
 Jc
 Jc
-Tg
+Jc
 Jc
 Jc
 Jc
