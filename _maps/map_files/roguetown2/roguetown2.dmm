@@ -5047,6 +5047,10 @@
 /obj/structure/fluff/millstone,
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/town/basement)
+"uD" = (
+/obj/effect/landmark/start/prisoner,
+/turf/open/floor/rogue/cobble,
+/area/rogue/under/town/basement)
 "uE" = (
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors)
@@ -13516,6 +13520,10 @@
 	icon_state = "chess"
 	},
 /area/rogue/outdoors/town)
+"YB" = (
+/obj/effect/landmark/start/prisoner,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/under/town/basement)
 "YC" = (
 /obj/machinery/light/rogue/torchholder{
 	icon_state = "torchwall1";
@@ -54599,7 +54607,7 @@ cv
 cz
 ba
 as
-as
+uD
 ag
 cO
 bX
@@ -54751,7 +54759,7 @@ aa
 aa
 bX
 cl
-ah
+YB
 bb
 ah
 bX
