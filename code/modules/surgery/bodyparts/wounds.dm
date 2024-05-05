@@ -116,12 +116,8 @@
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		if(!can_bloody_wound())
 			return FALSE
-		if(user)
-			if(bclass == BCLASS_CHOP)
-				if(istype(user.rmb_intent, /datum/rmb_intent/strong))
-					dam += 30
-			else
-				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
+		if(user && bclass == BCLASS_CHOP)
+			if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30
 		if(prob(round(max(dam / 3, 1), 1)))
 			for(var/datum/wound/artery/A in wounds)
@@ -159,11 +155,14 @@
 			dam += round(max((brute_dam / max_damage)*20, 1), 1)
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 			dam += 20
+		if(user)
+			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
+				dam += 30
 		var/foundf
 		for(var/datum/wound/fracture/W in wounds)
 			foundf= TRUE
 		if(!foundf)
-			if(prob(round(max(dam / 3, 1), 1)))
+			if(prob(round(max(dam / 4, 1), 1)))
 				var/list/phrases = list("The ribs shatter in a splendid way!", "The ribs are smashed!", "The chest is mauled!", "The chest caves in!")
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
 				add_wound(/datum/wound/fracture)
@@ -179,15 +178,11 @@
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		if(!can_bloody_wound())
 			return FALSE
-		if(brute_dam)
+		if(brute_dam && bclass != BCLASS_CHOP)
 			dam += round(max((brute_dam / max_damage)*20, 1), 1)
-		if(user)
-			if(bclass == BCLASS_CHOP)
-				if(istype(user.rmb_intent, /datum/rmb_intent/strong))
-					dam += 30
-			else
-				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-					dam += 30
+		if(user && bclass != BCLASS_CHOP)
+			if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
+				dam += 30
 		var/foundy
 		for(var/datum/wound/artery/A in wounds)
 			foundy= TRUE
@@ -303,7 +298,7 @@
 				from_behind = TRUE
 				used += 50
 			if(can_bloody_wound())
-				if(prob(used) || (brute_dam >= max_damage))
+				if(prob(used) && bclass != BCLASS_CHOP || (brute_dam >= max_damage))
 					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 					owner.flash_fullscreen("whiteflash3")
 					owner.Unconscious(5 SECONDS + (from_behind * 10 SECONDS))
