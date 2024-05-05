@@ -94,7 +94,7 @@
 	//Max devotion limit - Templars are stronger but cannot pray to gain more abilities beyond t1
 	C.max_devotion = 250
 	C.max_progression = CLERIC_REQ_1
-	C.update_devotion(50, 0)
+	C.update_devotion(50, 50)
 	C.holder_mob = H
 	C.grant_spells_templar(H)
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
