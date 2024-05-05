@@ -1472,9 +1472,7 @@ Slots: [job.spawn_positions]</span>
 		user.show_triumphs_list()
 
 	else if(href_list["preference"] == "playerquality")
-		var/amt = get_commends(user.ckey)
-		to_chat(user, "PlayerQuality represents the aggregate data collected automatically by the game to determine your reliability level as a RolePlayer. <font color='blue'>You have earned [amt] commendations from other players.</font>")
-
+		check_pq_menu(user.ckey)
 
 	else if(href_list["preference"] == "keybinds")
 		switch(href_list["task"])
