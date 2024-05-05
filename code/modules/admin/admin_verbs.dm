@@ -792,7 +792,6 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 	set name = "Toggle Admin AI Interact"
 	set category = "Admin"
 	set desc = ""
-	set hidden = 1
 
 	AI_Interact = !AI_Interact
 	if(mob && IsAdminGhost(mob))
@@ -817,7 +816,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 /client/proc/delete_player_book()
 	set category = "Admin"
 	set name = "Delete Player Made Book"
-	if(!holder)	
+	if(!holder)
 		return
 	if(SSlibrarian.del_player_book(input(src, "What is the book file you want to delete? (spaces and other characters are their url encode versions for the file name, so for example spaces are +)")))
 		to_chat(src, "<span class='notice'>Book has been successfully deleted</span>")
