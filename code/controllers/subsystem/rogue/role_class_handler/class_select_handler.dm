@@ -84,7 +84,7 @@
 	if(pheqoo > 20) // If you are over 20, you get one more combat class roll! Nice job!
 		total_combat_class += 1
 
-	var/triamphs = SStriumphs.get_triumphs(linked_client.ckey)
+	var/triamphs = SStriumphs.get_triumphs(linked_client.key)
 	if(triamphs >= 30) // If you got more than 30
 		if(prob(35)) // You get a 35% chance to get one more combat class option, these are not equal to PQ.
 			total_combat_class += 1

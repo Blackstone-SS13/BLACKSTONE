@@ -1,3 +1,8 @@
+/*
+	A fun fact is that it is important to note triumph procs all used key, whilas player quality likes to use ckey
+	It doesn't help that the params to insert a json key in both are just key to go with byond clients having a ckey and key
+*/
+
 SUBSYSTEM_DEF(triumphs)
 	name = "Triumphs"
 	flags = SS_NO_FIRE
