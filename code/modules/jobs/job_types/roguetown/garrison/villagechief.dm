@@ -19,7 +19,7 @@
 	whitelist_req = TRUE
 	outfit = /datum/outfit/job/roguetown/woodsman
 	display_order = JDO_CHIEF
-	min_pq = 1
+	min_pq = 3
 	give_bank_account = 16
 
 /datum/outfit/job/roguetown/woodsman
@@ -39,14 +39,16 @@
 	r_hand = /obj/item/rogueweapon/woodstaff
 	l_hand = /obj/item/keyring/velder
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
 		H.change_stat("strength", 5)
 		H.change_stat("perception", 4)
 		H.change_stat("endurance", 4)
