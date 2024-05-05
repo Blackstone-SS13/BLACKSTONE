@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(role_class_handler)
 
 	/*
 		This one is kinda retarded, its basically for datums certain ckeys will get in the session
-		"key" = list(the datums), which will be its own copy that the person its hooked to can drain numbers out of on their own.
+		"ckey" = list(the datums), which will be its own copy that the person its hooked to can drain numbers out of on their own.
 	*/
 	var/list/special_session_queue
 
