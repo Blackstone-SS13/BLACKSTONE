@@ -118,7 +118,7 @@
 			return FALSE
 		if(user && bclass != BCLASS_CHOP)
 			if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-					dam += 30
+				dam += 30
 		if(prob(round(max(dam / 3, 1), 1)))
 			for(var/datum/wound/artery/A in wounds)
 				if(bclass == BCLASS_STAB)
