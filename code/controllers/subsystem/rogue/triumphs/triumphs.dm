@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(triumphs)
 
 	var/list/fire_on_PostSetup // These fire on_roundstart() right after roundstart
 
-	var/list/post_equip_calls
+	var/list/post_equip_calls // These get on_activate() called in /datum/outfit/job/roguetown/post_equip() in roguetown.dm
 
 /datum/controller/subsystem/triumphs/Initialize()
 	. = ..()
@@ -67,7 +67,9 @@ SUBSYSTEM_DEF(triumphs)
 				if(central_state_data[catty_key]["[page_numba]"].len == page_display_limit)
 					break
 
-// TRIUMPH SS SIDED
+/*
+	This occurs when you try to buy a triumph condition and sets it up
+*/
 /datum/controller/subsystem/triumphs/proc/attempt_to_buy_triumph_condition(client/C, triumph_buy_typepath)
 	var/datum/triumph_buy/stick_it_in = new triumph_buy_typepath
 
@@ -77,23 +79,28 @@ SUBSYSTEM_DEF(triumphs)
 		stick_it_in.key_of_buyer = C.key
 		stick_it_in.ckey_of_buyer = C.ckey
 
+		// These basically just auto occur when you buy them. Some stuff we don't need people to be able to counter-buy
 		if(stick_it_in.fire_on_buy)
 			stick_it_in.on_activate()
 			return
 
+		// These get a proc fired after the round just begins to help them setup
 		if(stick_it_in.fire_on_PostSetup)
 			fire_on_PostSetup += stick_it_in
 
 		active_triumph_buy_queue += stick_it_in
 
-// TRIUMPH SS SIDED
+/*
+	This occurs when you try to unbuy a triumph condition and removes it
+*/
 /datum/controller/subsystem/triumphs/proc/attempt_to_unbuy_triumph_condition(client/C, datum/triumph_buy/pull_it_out)
-
 	var/triumph_amount = get_triumphs(C.key) - pull_it_out.triumph_cost
 	if(triumph_amount >= 0)
 		triumph_adjust(pull_it_out.triumph_cost*-1, C.key)
 		active_triumph_buy_queue -= pull_it_out
 
+// Same deal as the role class stuff, we are only really just caching this to update displays as people buy stuff.
+// So we have to be careful to not leave it in when unneeded otherwise we will have to keep track of which menus are actually open.
 /datum/controller/subsystem/triumphs/proc/startup_triumphs_menu(client/C)
 	if(C)
 		var/datum/triumph_buy_menu/check_this = active_triumph_menus[C.key]
@@ -106,12 +113,40 @@ SUBSYSTEM_DEF(triumphs)
 			active_triumph_menus[C.key] = BIGBOY
 			BIGBOY.triumph_menu_startup_slop()
 
-/datum/controller/subsystem/triumphs/proc/fire_on_PostSetup()
+/*
+	This tells all alive triumph datums to re_update their visuals, shitty but ya
+*/
+/datum/controller/subsystem/triumphs/proc/call_menu_refresh()
+	for(var/MENS in active_triumph_menus)
+		var/datum/triumph_buy_menu/current_view = active_triumph_menus[MENS]
+		if(!current_view.linked_client)
+			active_triumph_menus.Remove(MENS)
+			qdel(current_view)
+			continue
 
+		current_view.show_menu()
+
+
+// We cleanup the datum thats just holding the stuff for displaying the menu.
+/datum/controller/subsystem/triumphs/proc/remove_triumph_buy_menu(client/C)
+	if(C && active_triumph_menus[C.key])
+		var/datum/triumph_buy_menu/me_local = active_triumph_menus[C.key]
+		C << browse(null, "window=triumph_buy_window")
+		active_triumph_menus.Remove(C.key)
+		qdel(me_local)
+
+// Called from the place its slopped in in SSticker, this will occur right after the gamemode starts ideally, aka roundstart.
+/datum/controller/subsystem/triumphs/proc/fire_on_PostSetup()
 	for(var/datum/triumph_buy/thing in fire_on_PostSetup)
 		thing.on_PostSetup()
 
 
+
+
+
+/*
+	Ye olde helpers below
+*/
 /datum/controller/subsystem/triumphs/proc/triumph_adjust(amt, key)
 	var/curtriumphs = 0
 	var/json_file = file("data/triumphs.json")

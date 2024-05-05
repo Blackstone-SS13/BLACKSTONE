@@ -13,6 +13,11 @@
 /datum/triumph_buy_menu/New()
 	..()
 
+/datum/triumph_buy_menu/Destroy(force, ...)
+	linked_client = null
+	. = ..()
+	
+
 /datum/triumph_buy_menu/proc/triumph_menu_startup_slop()
 	var/datum/asset/thicc_assets = get_asset_datum(/datum/asset/simple/blackedstone_browser_slop_layout)
 	thicc_assets.send(linked_client)
@@ -39,8 +44,12 @@
 
 	data += {"
 		<body>
-			<div id='triumph_quantity'> I currently have: [SStriumphs.get_triumphs(linked_client.key)] Triumphs</div>
-			<div><span id='top_categories'>CATEGORIES:</span>
+			<div style='width:100%;'>
+				<span id='triumph_quantity'> My triumphs: [SStriumphs.get_triumphs(linked_client.key)] Triumphs</span>
+				<a id='triumph_close_button' href='?src=\ref[src];close_menu=1'>CLOSE MENU</a>
+			</div>
+			<div style='width:100%;float:left'>
+				<span id='top_categories'>CATEGORIES:</span>
 		"}
 
 	for(var/cat_key in SStriumphs.central_state_data)
@@ -65,7 +74,7 @@
 	if(current_category == TRIUMPH_CAT_ACTIVE_DATUMS)
 		if(SStriumphs.active_triumph_buy_queue.len)
 			for(var/datum/triumph_buy/auugh in SStriumphs.active_triumph_buy_queue)
-				if((!auugh.visible_on_active_menu) && (linked_client.key != auugh.key_of_buyer)) // If we aren't visible on active menu and the menu owner's key isn't the same as key of buyer
+				if(!auugh.visible_on_active_menu) // If we aren't set to be able to be visible on the main menu
 					continue
 				data += {"
 					<tr class='triumph_text_row'>
@@ -163,5 +172,8 @@
 				else
 					SStriumphs.attempt_to_buy_triumph_condition(linked_client, target_datum.type) // regular buy, just send over the type for a duplicate
 			show_menu()
+
+	if(href_list["close_menu"])
+		SStriumphs.remove_triumph_buy_menu(linked_client)
 
 	

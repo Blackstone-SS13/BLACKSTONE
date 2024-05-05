@@ -46,6 +46,7 @@
 	viable_combat_classes = null
 	viable_free_classes = null
 	rolled_classes = null
+	ckey_special_classes = null
 	. = ..()
 
 // I hope to god you have a client before you call this, cause the checks on the SS
@@ -142,9 +143,12 @@
 
 	if(cur_picked_class == filled_class)
 		cur_picked_class = null
-		linked_client << browse(null, "window=class_select_yea")
 
-	browser_slop()
+		if(linked_client) // In the current state we will still auto-adjust cached datums with no linked client
+			linked_client << browse(null, "window=class_select_yea")
+
+	if(linked_client) // So make sure we don't go further than this without one I guess
+		browser_slop()
 
 
 /datum/class_select_handler/proc/browser_slop()
@@ -192,7 +196,7 @@
 		<a class='bottom_buttons' href='?src=\ref[src];reroll=1'>Reroll Classes</a><br>
 	</div>
 	"}
-	// Eh nah, I don't feel like dealing with this right now
+	// Eh nah, I don't feel like dealing with this right now, you can just buy your stuff on the actual join menu
 	//	<a class='bottom_buttons' href='?src=\ref[src];triumph_menu=1'>Spend my Triumphs</a>
 	
 
@@ -285,14 +289,4 @@
 	linked_client << browse(null, "window=class_handler_main")
 	linked_client << browse(null, "window=class_select_yea")
 
-// Preload all the retarded shit we need for the menus
-/datum/class_select_handler/proc/preload_assets()
-	var/list/file_paths = list(
-	'icons/roguetown/misc/try4.png',
-	'icons/roguetown/misc/try4_border.png',
-	'html/browser/slop_menustyle2.css',
-	'icons/roguetown/misc/haha_skull.gif'
-	)
 
-	for(var/asses in file_paths)
-		linked_client << browse_rsc(asses)

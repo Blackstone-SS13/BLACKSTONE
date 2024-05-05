@@ -105,10 +105,10 @@ SUBSYSTEM_DEF(role_class_handler)
 /datum/controller/subsystem/role_class_handler/proc/setup_class_handler(mob/living/carbon/human/H)
 	// Also insure we somehow don't call this without a ref in the params
 	if(H)
-		// insure they somehow aren't closing the datum they got and opening a new one.
+		// insure they somehow aren't closing the datum they got and opening a new one w rolls
 		var/datum/class_select_handler/GOT_IT = active_menus[H.client.ckey]
 		if(GOT_IT)
-			if(!GOT_IT.linked_client) // we remove this ref when they actually finish so its a ok indicator this is a new startup
+			if(!GOT_IT.linked_client) // this ref will disappear if they disconnect neways probably, as its a client
 				GOT_IT.linked_client = H.client // too bad the firing of slop just checks the mob for what it can even use anyways
 			GOT_IT.fire_slop_into_my_mouth()
 		else
@@ -136,14 +136,15 @@ SUBSYSTEM_DEF(role_class_handler)
 	if(plus_factor) // If we get any plus factor at all, we run the datums boost proc on the human also.
 		picked_class.boost_by_plus_power(plus_factor, H)
 
-	// We aren't actually deleting these anymore, If you do want to do it just remove it from active_menus and it'll prob delete
+
+	// In retrospect, If I don't just delete these Ill have to actually attempt to keep track of when a byond browser window is actually open lol
+	// soooo..... this will be the place where we take the out, as it means they finished class selection, and we can safely delete the handler.
 	related_handler.ForceCloseMenus() // force menus closed
-	// Cleanup
-	related_handler.linked_client = null 
-	related_handler.cur_picked_class = null
-	related_handler.viable_combat_classes = list()
-	related_handler.viable_free_classes = list()
-	related_handler.rolled_classes = list()
+	
+	// Remove the key from the list and with it the value too
+	active_menus.Remove(related_handler.linked_client.ckey)
+	// Call qdel on it
+	qdel(related_handler)
 
 	adjust_class_amount(picked_class, 1) // adjust the amount here, we are handling one guy right now.
 	picked_class.extra_slop_proc_ending(H)

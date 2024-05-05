@@ -346,3 +346,22 @@ a.triumph_numbers_selected, a.triumph_numbers_selected:link, a.triumph_numbers_s
     /* position of strike through from top */
     top:90%;
 }
+
+a#triumph_close_button, a#triumph_close_button:link, a#triumph_close_button:visited, a#triumph_close_button:active {
+	font-family: "VT323", monospace;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 24px;
+	color: #ff0000;
+	float: right;
+
+	text-decoration: none;
+	text-align: right;
+	background: transparent;
+
+	cursor:default;
+}
+
+a#triumph_close_button:hover{
+	color: #ffd000;
+}
