@@ -22,7 +22,7 @@
 	
 		if("Ranger")
 			H.set_blindness(0)
-			to_chat(src, "<span class='warning'>Rangers are masters of nature, often hired as pathfinders, bodyguards and mercenaries in areas of wilderness untraversable to common soldiery.</span>")
+			to_chat(H, "<span class='warning'>Rangers are masters of nature, often hired as pathfinders, bodyguards and mercenaries in areas of wilderness untraversable to common soldiery.</span>")
 			shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt	
 			neck = /obj/item/storage/belt/rogue/pouch/coins/poor
@@ -64,7 +64,7 @@
 			H.change_stat("speed", 2)
 		if("Gloom Stalker")
 			H.set_blindness(0) 
-			to_chat(src, "<span class='warning'>Rangers are masters of nature, often hired as pathfinders, bodyguards and mercenaries in areas of wilderness untraversable to common soldiery.</span>")
+			to_chat(H, "<span class='warning'>Rangers are masters of nature, often hired as pathfinders, bodyguards and mercenaries in areas of wilderness untraversable to common soldiery.</span>")
 			shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt	
 			neck = /obj/item/storage/belt/rogue/pouch/coins/poor

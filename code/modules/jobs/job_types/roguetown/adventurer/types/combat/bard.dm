@@ -29,7 +29,7 @@
 	
 		if("Bard")
 			H.set_blindness(0)
-			to_chat(src, "<span class='warning'>Bards make their fortunes in brothels, flop houses and taverns -- gaining fame for their songs and legends. If there is any truth to them, that is.</span>")
+			to_chat(H, "<span class='warning'>Bards make their fortunes in brothels, flop houses and taverns -- gaining fame for their songs and legends. If there is any truth to them, that is.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
@@ -70,7 +70,7 @@
 			H.change_stat("speed", 2)
 		if("Skald")
 			H.set_blindness(0)
-			to_chat(src, "<span class='warning'>Skalds are wandering storytellers, and for many villages they are local historians keeping the tales of great legends and heroes alive.</span>")
+			to_chat(H, "<span class='warning'>Skalds are wandering storytellers, and for many villages they are local historians keeping the tales of great legends and heroes alive.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)

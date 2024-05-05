@@ -22,7 +22,7 @@
 	
 		if("Warrior")
 			H.set_blindness(0)
-			to_chat(src, "<span class='warning'>Warriors are well rounded fighters, experienced often in many theaters of warfare and battle they are capable of rising to any challenge that might greet them on the path.</span>")
+			to_chat(H, "<span class='warning'>Warriors are well rounded fighters, experienced often in many theaters of warfare and battle they are capable of rising to any challenge that might greet them on the path.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,2), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(3,3,4), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,3,4), TRUE)
@@ -69,7 +69,7 @@
 				beltr = /obj/item/rogueweapon/sword/sabre
 		if("Monster Hunter")
 			H.set_blindness(0)
-			to_chat(src, "<span class='warning'>Monsters Hunters are typically contracted champions of the common folk dedicated to the slaying of both lesser vermin and greater beasts of the wilds.</span>")
+			to_chat(H, "<span class='warning'>Monsters Hunters are typically contracted champions of the common folk dedicated to the slaying of both lesser vermin and greater beasts of the wilds.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,2), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, rand(1,2), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)

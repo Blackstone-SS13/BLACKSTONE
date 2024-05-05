@@ -49,8 +49,8 @@
 	switch(classchoice)
 	
 		if("Paladin")
-			to_chat(src, "<span class='warning'>You are a ranger.</span>")
 			H.set_blindness(0) // No introduction text due to there being no real difference in Paladin archetypes for now.
+			to_chat(H, "<span class='warning'>You are a paladin.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
@@ -87,6 +87,7 @@
 			backl = /obj/item/storage/backpack/rogue/satchel
 		if("Battle Master")
 			H.set_blindness(0)
+			to_chat(H, "<span class='warning'>You are a battle-master.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
