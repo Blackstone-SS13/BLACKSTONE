@@ -33,7 +33,7 @@
 
 /datum/antagonist/bandit/greet()
 	to_chat(owner.current, "<span class='alertsyndie'>I am a BANDIT!</span>")
-	to_chat(owner.current, "<span class='info'>Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn.</span>")
+	to_chat(owner.current, "<span class='info'>Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn. I must feed the idol money and valuable metals to satisfy my greed!</span>")
 	owner.announce_objectives()
 	..()
 
