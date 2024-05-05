@@ -30,6 +30,7 @@
 	ADD_TRAIT(H, TRAIT_BANDITCAMP, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /datum/antagonist/bandit/greet()
 	to_chat(owner.current, "<span class='alertsyndie'>I am a BANDIT!</span>")
@@ -130,7 +131,6 @@
 	H.change_stat("constitution", 1)
 	H.change_stat("speed", 1)
 	H.change_stat("intelligence", -3)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	var/obj/item/bodypart/B = H.get_bodypart("head")
 	if(B)
 		B.sellprice = rand(66, 123)
