@@ -61,6 +61,6 @@
 	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 3)
-	H.change_stat("intelligence", -3)
+	H.change_stat("intelligence", -4)
 	if(H.dna?.species)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
