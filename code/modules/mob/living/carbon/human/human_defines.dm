@@ -94,7 +94,6 @@
 	var/list/possibleclass
 	var/advsetup = 0
 
-	var/datum
 
 //	var/alignment = ALIGNMENT_TN
 
