@@ -94,7 +94,7 @@ SUBSYSTEM_DEF(triumphs)
 			fire_on_PostSetup += stick_it_in
 
 		active_triumph_buy_queue += stick_it_in
-
+		call_menu_refresh()
 /*
 	This occurs when you try to unbuy a triumph condition and removes it
 */
@@ -124,12 +124,18 @@ SUBSYSTEM_DEF(triumphs)
 /datum/controller/subsystem/triumphs/proc/call_menu_refresh()
 	for(var/MENS in active_triumph_menus)
 		var/datum/triumph_buy_menu/current_view = active_triumph_menus[MENS]
-		if(!current_view.linked_client)
+		if(!current_view) // Insure we actually have something yes?
+			active_triumph_menus.Remove(MENS)
+			continue
+
+		if(!current_view.linked_client) // We have something and it has no client
 			active_triumph_menus.Remove(MENS)
 			qdel(current_view)
 			continue
 
 		current_view.show_menu()
+
+			
 
 
 // We cleanup the datum thats just holding the stuff for displaying the menu.
@@ -142,6 +148,7 @@ SUBSYSTEM_DEF(triumphs)
 
 // Called from the place its slopped in in SSticker, this will occur right after the gamemode starts ideally, aka roundstart.
 /datum/controller/subsystem/triumphs/proc/fire_on_PostSetup()
+	call_menu_refresh()
 	for(var/datum/triumph_buy/thing in fire_on_PostSetup)
 		thing.on_PostSetup()
 
