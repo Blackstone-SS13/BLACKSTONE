@@ -14,7 +14,7 @@
 		"Aasimar",
 		"Half-Elf",
 		"Tiefling",
-		"Dark Elf"
+		"Dark Elf",
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	tutorial = "You've handed your resume, which mostly consisted of showing up, and in exchange you have a spot among the Bog Guards. You have a roof over your head, coin in your pocket, and a thankless job protecting the outskirts of town against bandits and volfs."
