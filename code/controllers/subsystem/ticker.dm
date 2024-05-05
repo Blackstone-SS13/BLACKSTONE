@@ -479,6 +479,7 @@ SUBSYSTEM_DEF(ticker)
 //	SEND_SOUND(world, sound('sound/misc/roundstart.ogg'))
 
 	current_state = GAME_STATE_PLAYING
+	
 	Master.SetRunLevel(RUNLEVEL_GAME)
 /*
 	if(SSevents.holidays)
@@ -506,7 +507,7 @@ SUBSYSTEM_DEF(ticker)
 	job_change_locked = FALSE
 
 //	setup_hell()
-
+	SStriumphs.fire_on_PostSetup()
 	for(var/i in GLOB.start_landmarks_list)
 		var/obj/effect/landmark/start/S = i
 		if(istype(S))							//we can not runtime here. not in this important of a proc.

@@ -16,7 +16,6 @@
 	// Total amounts of each we get by default.
 	var/total_free_class = 5
 	var/total_combat_class = 1
-	var/rerolls_left = 3
 
 	//classes we rolled, basically you get a datum followed by a number in here on how many times you rerolled it.
 	var/list/rolled_classes = list()
@@ -25,11 +24,18 @@
 	var/datum/advclass/cur_picked_class
 	var/plus_power = 0
 
+	//Special forced entries , If your key is in here you autoget the contents of it on your options.
+	var/list/ckey_special_classes = list()
+
 // The normal route for first use of this list.
 /datum/class_select_handler/proc/fire_slop_into_my_mouth()
+
+	var/datum/asset/thicc_assets = get_asset_datum(/datum/asset/simple/blackedstone_browser_slop_layout)
+	thicc_assets.send(linked_client)
+
 	assemble_the_CLASSES()
 	gacha_rolls()
-	preload_assets()
+	//preload_assets()
 	browser_slop()
 
 /datum/class_select_handler/Destroy()
@@ -45,13 +51,18 @@
 // I hope to god you have a client before you call this, cause the checks on the SS
 /datum/class_select_handler/proc/assemble_the_CLASSES()
 	var/mob/living/carbon/human/H = linked_client.mob
-	for(var/datum/advclass/FREE_HOLES in SSrole_class_handler.free_classes)
-		if(FREE_HOLES.check_requirements(H))
-			viable_free_classes += FREE_HOLES
+	for(var/datum/advclass/FREES in SSrole_class_handler.free_classes)
+		if(FREES.check_requirements(H))
+			viable_free_classes += FREES
 		
-	for(var/datum/advclass/EXTRA_MAYO in SSrole_class_handler.combat_classes)
-		if(EXTRA_MAYO.check_requirements(H))
-			viable_combat_classes += EXTRA_MAYO
+	for(var/datum/advclass/COMBATS in SSrole_class_handler.combat_classes)
+		if(COMBATS.check_requirements(H))
+			viable_combat_classes += COMBATS
+
+	if(SSrole_class_handler.special_session_queue[linked_client.ckey])
+		for(var/datum/advclass/SNOWFLAKES in SSrole_class_handler.special_session_queue[linked_client.ckey])
+			if(SNOWFLAKES.check_requirements(H))
+				ckey_special_classes += SNOWFLAKES
 
 	//We got all our things. We indeed do after-all need set amounts of each to display now, we need to cover gacha class+ system too.
 	// They might also reroll too/something runs out and we need a replacement and we got it prepped
@@ -100,10 +111,10 @@
 		else
 			rolled_classes[combat_class] = 0
 
-
 // Something is calling to tell this datum a class it rolled is currently maxed out.
 // More shitcode!
 /datum/class_select_handler/proc/rolled_class_is_full(datum/advclass/filled_class)
+
 	rolled_classes -= filled_class // Remove it from rolled classes
 
 	if(filled_class in viable_free_classes)
@@ -170,16 +181,21 @@
 			for(var/i in 1 to plus_factor)
 				plus_str += "+"
 		data += "<div class='class_bar_div'><a class='vagrant' href='?src=\ref[src];class_selected=1;selected_class=\ref[datums];'><img class='ninetysskull' src='haha_skull.gif' width=32 height=32>[datums.name]<span id='green_plussa'>[plus_str]</span><img class='ninetysskull' src='haha_skull.gif' width=32 height=32></a></div>"
-		
+	if(ckey_special_classes.len)
+		for(var/datum/advclass/datums in ckey_special_classes)
+			data += "<div class='class_bar_div'><a class='vagrant' href='?src=\ref[src];special_selected=1;selected_special=\ref[datums];'><img class='ninetysskull' src='haha_skull.gif' width=32 height=32>[datums.name]<img class='ninetysskull' src='haha_skull.gif' width=32 height=32></a></div>"
 	data += "</div>"
 
 	//Buttondiv Segment
 	data += {"
 	<div class='footer'>
 		<a class='bottom_buttons' href='?src=\ref[src];reroll=1'>Reroll Classes</a><br>
-		<a class='bottom_buttons' href='?src=\ref[src];triumph_menu=1'>Spend my Triumphs</a>
 	</div>
 	"}
+	// Eh nah, I don't feel like dealing with this right now
+	//	<a class='bottom_buttons' href='?src=\ref[src];triumph_menu=1'>Spend my Triumphs</a>
+	
+
 
 	//Closing Tags
 	data += {"
@@ -209,7 +225,7 @@
 				<span class="title_shit">Description:</span> <span class="post_title_shit">[cur_picked_class.tutorial]</span>
 			</div>
 				<div id='button_div'>
-					<a class='class_desc_YES_LINK' href='?src=\ref[src];yes_to_class_select=1;'>This is my background</a><br>
+					<a class='class_desc_YES_LINK' href='?src=\ref[src];yes_to_class_select=1;special_class=1;'>This is my background</a><br>
 					<a class='bottom_buttons' href='?src=\ref[src];no_to_class_select=1'>I reject this background</a>
 				</div>
 			</div>
@@ -241,6 +257,7 @@
 		return
 
 	if(href_list["reroll"])
+		var/rerolls_left = SSrole_class_handler.get_session_rerolls(linked_client.ckey)
 		if(rerolls_left > 0)
 			linked_client << browse(null, "window=class_select_yea")
 			plus_power = 0
@@ -248,17 +265,21 @@
 			rolled_classes = list() // Make sure to empty this out
 			gacha_rolls()
 			browser_slop()
-			rerolls_left -= 1
+			SSrole_class_handler.adjust_session_rerolls(linked_client.ckey, -1)
 			return
 
+	if(href_list["special_selected"])
+		var/special_class = href_list["selected_special"]
+		var/locvar_check = locate(special_class)
+
+		if(locvar_check in ckey_special_classes)
+			cur_picked_class = locvar_check
+			class_select_slop()
 
 	if(href_list["triumph_menu"])
 		to_chat(world, "TODO: TRIUMPH MENU")
 		browser_slop()
 		return
-
-	if(href_list["retard_close"])
-		linked_client << browse(null, "window=class_handler_main")
 
 /datum/class_select_handler/proc/ForceCloseMenus()
 	linked_client << browse(null, "window=class_handler_main")

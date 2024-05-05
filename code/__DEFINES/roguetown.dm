@@ -87,3 +87,12 @@ GLOBAL_LIST_EMPTY(sunlights)
 #define RT_TYPE_COMBAT_CLASS 4 // Combat class - oriented towards combat
 #define RT_TYPE_VILLAGER_CLASS 8 // Villager class - Villagers can use it
 #define RT_TYPE_ANTAG_CLASS 16 // Antag class - results in an antag
+
+
+/*
+	Defines for the triumph buy datum categories
+*/
+#define TRIUMPH_CAT_ROUND_EFX "ROUND-EFX"
+#define TRIUMPH_CAT_CHARACTER "CHARACTER"
+#define TRIUMPH_CAT_MISC "MISC!"
+#define TRIUMPH_CAT_ACTIVE_DATUMS "ACTIVE"

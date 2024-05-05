@@ -53,10 +53,12 @@
 	H.update_body()
 
 /datum/outfit/job/roguetown/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	.=..()
+	. = ..()
 	if(H.mind)
 		if(H.ckey)
 			if(check_crownlist(H.ckey))
 				H.mind.special_items["Champion Circlet"] = /obj/item/clothing/head/roguetown/crown/sparrowcrown
 			give_special_items(H)
+	for(var/datum/triumph_buy/thing in SStriumphs.post_equip_calls)
+		thing.on_activate(H)
 	return

@@ -211,6 +211,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<tr>"
 			dat += "<td width='50%' align='left'>"
 			dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a>"
+			dat += "<td><a style='white-space:nowrap;' href='?_src_=prefs;preference=triumph_buy_menu'>Triumph Buy Menu</a></td>"
 			dat += "<td width='50%' align='right'>"
 			dat += "<a href='?_src_=prefs;preference=keybinds;task=menu'>Keybinds</a>"
 			dat += "</table>"
@@ -219,7 +220,6 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<table width=100%>"
 			dat += "<tr>"
 			dat += "<td width='100%' align='center'>"
-
 			dat += "<a href='?_src_=prefs;preference=job;task=menu'>Class Selection</a><br>"
 			dat += "<a href='?_src_=prefs;preference=antag;task=menu'>Villain Selection</a><br>"
 
@@ -1473,6 +1473,11 @@ Slots: [job.spawn_positions]</span>
 
 	else if(href_list["preference"] == "playerquality")
 		check_pq_menu(user.ckey)
+		var/amt = get_commends(user.ckey)
+		to_chat(user, "PlayerQuality represents the aggregate data collected automatically by the game to determine your reliability level as a RolePlayer. <font color='blue'>You have earned [amt] commendations from other players.</font>")
+
+	else if(href_list["preference"] == "triumph_buy_menu")
+		SStriumphs.startup_triumphs_menu(user.client)
 
 	else if(href_list["preference"] == "keybinds")
 		switch(href_list["task"])

@@ -1,7 +1,13 @@
 /*
 	Basically we got a subsystem for the shitty subjob handling and new menu as of 4/30/2024 that goes with it
 */
+/*
+TODO ANTAG QUEUE SYSTEM
+*/
 
+/*
+	REMINDER TO RETEST THE OVERFILL HELPER
+*/
 SUBSYSTEM_DEF(role_class_handler)
 	name = "Role Class Handler"
 	flags = SS_NO_FIRE
@@ -9,9 +15,24 @@ SUBSYSTEM_DEF(role_class_handler)
 
 	/*
 		This one is important, its all the open class select handlers
+		Its an assc list too active_menus[ckey] = /datum/class_select_handler
+		If someone makes one they shouldn't be getting a new one in the current session
 	*/
 	var/list/active_menus
 
+
+	/*
+		This one is just an assc list, basically
+		"ckey" = num to track the rerolls per server session attached to a ckey.
+		You are only getting THREE (by default)
+	*/
+	var/list/session_rerolls
+
+	/*
+		This one is kinda retarded, its basically for datums certain ckeys will get in the session
+		"key" = list(the datums), which will be its own copy that the person its hooked to can drain numbers out of on their own.
+	*/
+	var/list/special_session_queue
 
 //Time for sloppa vars
 	// List of all classes, assc list: Name - Datum
@@ -46,6 +67,8 @@ SUBSYSTEM_DEF(role_class_handler)
 	init_subtypes(/datum/advclass, all_classes) // Init all the classes
 
 	// Idk make some lists?
+	session_rerolls = list()
+	special_session_queue = list()
 	free_classes = list()
 	combat_classes = list()
 	villager_classes = list()
@@ -77,22 +100,22 @@ SUBSYSTEM_DEF(role_class_handler)
 
 /*
 	We setup the class handler here, aka the menu
+	We will cache it per server session via an assc list with a ckey leading to the datum.
 */
 /datum/controller/subsystem/role_class_handler/proc/setup_class_handler(mob/living/carbon/human/H)
-	// insure they somehow aren't closing the datum they got and opening a new one.
-	var/pre_existing_handler = FALSE
-	for(var/datum/class_select_handler/get_it in active_menus)
-		if(get_it.linked_client == H.client)
-			get_it.fire_slop_into_my_mouth()
-			pre_existing_handler = TRUE
-			break
-
-	if(!pre_existing_handler)
-		var/datum/class_select_handler/XTRA_MEATY = new()
-		XTRA_MEATY.linked_client = H.client
-		XTRA_MEATY.fire_slop_into_my_mouth()
-		active_menus += XTRA_MEATY
-
+	// Also insure we somehow don't call this without a ref in the params
+	if(H)
+		// insure they somehow aren't closing the datum they got and opening a new one.
+		var/datum/class_select_handler/GOT_IT = active_menus[H.client.ckey]
+		if(GOT_IT)
+			if(!GOT_IT.linked_client) // we remove this ref when they actually finish so its a ok indicator this is a new startup
+				GOT_IT.linked_client = H.client // too bad the firing of slop just checks the mob for what it can even use anyways
+			GOT_IT.fire_slop_into_my_mouth()
+		else
+			var/datum/class_select_handler/XTRA_MEATY = new()
+			XTRA_MEATY.linked_client = H.client
+			XTRA_MEATY.fire_slop_into_my_mouth()
+			active_menus[H.client.ckey] = XTRA_MEATY
 
 //Attempt to finish the class handling ordeal, aka they picked something
 // Since this is class handler related, might as well also have the class handler send itself into the params
@@ -113,24 +136,43 @@ SUBSYSTEM_DEF(role_class_handler)
 	if(plus_factor) // If we get any plus factor at all, we run the datums boost proc on the human also.
 		picked_class.boost_by_plus_power(plus_factor, H)
 
-	// Time for cleanup, you can also just change it to a qdel, this stuff is also cleaned out in the destroy() on the class handler.
+	// We aren't actually deleting these anymore, If you do want to do it just remove it from active_menus and it'll prob delete
 	related_handler.ForceCloseMenus() // force menus closed
-	// Cleanup anything holding references, aka these lists holding refs to class datums and the other two
+	// Cleanup
 	related_handler.linked_client = null 
 	related_handler.cur_picked_class = null
-	related_handler.viable_combat_classes = null
-	related_handler.viable_free_classes = null
-	related_handler.rolled_classes = null
-	// and now we remove our one reference to it and it should be gone unironically unless I missed something
-	active_menus -= related_handler
+	related_handler.viable_combat_classes = list()
+	related_handler.viable_free_classes = list()
+	related_handler.rolled_classes = list()
 
 	adjust_class_amount(picked_class, 1) // adjust the amount here, we are handling one guy right now.
+	picked_class.extra_slop_proc_ending(H)
 
 // A dum helper to adjust the class amount, we could do it elsewhere but this will also inform any relevant class handlers open.
 /datum/controller/subsystem/role_class_handler/proc/adjust_class_amount(datum/advclass/target_datum, amount)
 	target_datum.total_slots_occupied += amount
 
-	if(target_datum.total_slots_occupied >= target_datum.maximum_possible_slots) // We just hit a cap, iterate all the class handlers and inform them.
-		for(var/datum/class_select_handler/CUCKS in active_menus)
-			if(target_datum in CUCKS.rolled_classes) // We found the target datum in one of the classes they rolled aka in the list of options they got visible,
-				CUCKS.rolled_class_is_full(target_datum) //  inform the datum of its error.
+	if((target_datum.total_slots_occupied >= target_datum.maximum_possible_slots)) // We just hit a cap, iterate all the class handlers and inform them.
+		for(var/CUCKS in active_menus)
+			var/datum/class_select_handler/found_menu = active_menus[CUCKS]
+			
+			if(target_datum in found_menu.rolled_classes) // We found the target datum in one of the classes they rolled aka in the list of options they got visible,
+				found_menu.rolled_class_is_full(target_datum) //  inform the datum of its error.
+
+// If they aren't in the list, they get 3 by default.
+/datum/controller/subsystem/role_class_handler/proc/get_session_rerolls(ckey)
+	if(!session_rerolls[ckey])
+		session_rerolls[ckey] = 3
+
+	return session_rerolls[ckey]
+
+
+/datum/controller/subsystem/role_class_handler/proc/adjust_session_rerolls(ckey, number)
+	session_rerolls[ckey] += number
+
+
+/datum/controller/subsystem/role_class_handler/proc/add_to_special_session_queue(ckey, datum)
+	if(!special_session_queue[ckey])
+		special_session_queue[ckey] = list()
+
+	special_session_queue[ckey] += datum

@@ -4,73 +4,113 @@ SUBSYSTEM_DEF(triumphs)
 	init_order = INIT_ORDER_TRIUMPHS
 	var/list/topten
 
-	var/list/triumph_buy_datums
+	var/list/triumph_buy_datums //this is basically the total list of triumph buy datums on init
 
-//amke this queue events and do them all at once when the triumph subsystem fires, like clearing the list or adding tris.
-//cache for get_triumphs and edit cache immediately
+	var/list/active_triumph_buy_queue // This is a list of all active datums
+
+	//init list to hold triumph buy menus for the session (aka menu data)
+	// Assc list "key" = datum
+	var/list/active_triumph_menus
+
+	// This represents the triumph buy organization on the main SS for triumphs
+	// Each key is a category name
+	// And then the list will have a number in a string that leads to a list of datums
+	var/list/central_state_data 
+
+	// display limit per page in a category on the user menu
+	var/page_display_limit = 12
+
+	var/list/fire_on_PostSetup // These fire on_roundstart() right after roundstart
+
+	var/list/post_equip_calls
 
 /datum/controller/subsystem/triumphs/Initialize()
 	. = ..()
 	if(!topten)
 		topten = get_triumphs_top()
 
+	fire_on_PostSetup = list()
 	triumph_buy_datums = list() // init empty list
-	init_subtypes(/datum/triumph_buy, triumph_buy_datums) // Make all the relevant datums
+	active_triumph_buy_queue = list()
+	active_triumph_menus = list()
+	post_equip_calls = list()
 
-/mob/proc/adjust_triumphs(amt, counted = TRUE)
-	if(!key)
-		return
-	else
-		SStriumphs.triumph_adjust(amt, key)
-	if(amt > 0)
-		if(counted)
-			SSticker.tri_gained += amt
-		to_chat(src, "\n<font color='purple'>[amt] TRIUMPH(S) awarded.</font>")
-	else if(amt < 0)
-		if(counted)
-			SSticker.tri_lost += amt
-		to_chat(src, "\n<font color='purple'>[amt*-1] TRIUMPH(S) lost.</font>")
-
-/client/proc/adjust_triumphs(amt, counted = TRUE)
-	if(!ckey)
-		return
-	else
-		SStriumphs.triumph_adjust(amt, ckey)
-
-	if(amt > 0)
-		if(counted)
-			SSticker.tri_gained += amt
-		to_chat(src, "\n<font color='purple'>[amt] TRIUMPH(S) awarded.</font>")
-	else if(amt < 0)
-		if(counted)
-			SSticker.tri_lost += amt
-		to_chat(src, "\n<font color='purple'>[amt*-1] TRIUMPH(S) lost.</font>")
+	central_state_data = list(
+		TRIUMPH_CAT_ROUND_EFX = 0,
+		TRIUMPH_CAT_CHARACTER = 0,
+		TRIUMPH_CAT_MISC = 0,
+		TRIUMPH_CAT_ACTIVE_DATUMS = 0
+	)
 
 
+	for(var/cur_path in subtypesof(/datum/triumph_buy))
+		var/datum/triumph_buy/cur_datum = new cur_path // We will do this
+		triumph_buy_datums += cur_datum
+		central_state_data[cur_datum.category] += 1 // Tally up the totals here to save on a total of one loop
 
-/datum/mind/proc/adjust_triumphs(amt, counted = TRUE)
-	if(!key)
-		return
-	else
-		SStriumphs.triumph_adjust(amt, key)
-	if(amt > 0)
-		if(counted)
-			SSticker.tri_gained += amt
-		if(current)
-			to_chat(current, "\n<font color='purple'>[amt] TRIUMPH(S) awarded.</font>")
-	else if(amt < 0)
-		if(counted)
-			SSticker.tri_lost += amt
-		if(current)
-			to_chat(current, "\n<font color='purple'>[amt*-1] TRIUMPH(S) lost.</font>")
+	// Make a local copy I guess?
+	var/list/copy_list = triumph_buy_datums.Copy()
 
-/mob/proc/show_triumphs_list()
-	return SStriumphs.triumph_leaderboard(src)
+	//Figure out how many lists we are about to make to represent the pages
+	for(var/catty_key in central_state_data)
+		var/page_count = ceil(central_state_data[catty_key]/page_display_limit) // Get the page count total
+		central_state_data[catty_key] = list() // Now we swap the numbers out for lists on each cat as it will contain lists representing one page
 
-/mob/proc/get_triumphs()
-	if(!key)
-		return
-	return SStriumphs.get_triumphs(key)
+		// Now fill in the lists starting at index "1" 
+		for(var/page_numba in 1 to page_count)
+			central_state_data[catty_key]["[page_numba]"] = list()
+			for(var/ii = copy_list.len, ii > 0, ii--)
+				var/datum/triumph_buy/current_triumph_buy_datum = copy_list[ii]
+				if(current_triumph_buy_datum.category == catty_key)
+					central_state_data[catty_key]["[page_numba]"] += current_triumph_buy_datum
+					copy_list -= current_triumph_buy_datum
+				if(central_state_data[catty_key]["[page_numba]"].len == page_display_limit)
+					break
+
+// TRIUMPH SS SIDED
+/datum/controller/subsystem/triumphs/proc/attempt_to_buy_triumph_condition(client/C, triumph_buy_typepath)
+	var/datum/triumph_buy/stick_it_in = new triumph_buy_typepath
+
+	var/triumph_amount = get_triumphs(C.key) - stick_it_in.triumph_cost
+	if(triumph_amount >= 0)
+		triumph_adjust(stick_it_in.triumph_cost*-1, C.key)
+		stick_it_in.key_of_buyer = C.key
+		stick_it_in.ckey_of_buyer = C.ckey
+
+		if(stick_it_in.fire_on_buy)
+			stick_it_in.on_activate()
+			return
+
+		if(stick_it_in.fire_on_PostSetup)
+			fire_on_PostSetup += stick_it_in
+
+		active_triumph_buy_queue += stick_it_in
+
+// TRIUMPH SS SIDED
+/datum/controller/subsystem/triumphs/proc/attempt_to_unbuy_triumph_condition(client/C, datum/triumph_buy/pull_it_out)
+
+	var/triumph_amount = get_triumphs(C.key) - pull_it_out.triumph_cost
+	if(triumph_amount >= 0)
+		triumph_adjust(pull_it_out.triumph_cost*-1, C.key)
+		active_triumph_buy_queue -= pull_it_out
+
+/datum/controller/subsystem/triumphs/proc/startup_triumphs_menu(client/C)
+	if(C)
+		var/datum/triumph_buy_menu/check_this = active_triumph_menus[C.key]
+		if(check_this)
+			check_this.linked_client = C
+			check_this.triumph_menu_startup_slop()
+		else
+			var/datum/triumph_buy_menu/BIGBOY = new()
+			BIGBOY.linked_client = C
+			active_triumph_menus[C.key] = BIGBOY
+			BIGBOY.triumph_menu_startup_slop()
+
+/datum/controller/subsystem/triumphs/proc/fire_on_PostSetup()
+
+	for(var/datum/triumph_buy/thing in fire_on_PostSetup)
+		thing.on_PostSetup()
+
 
 /datum/controller/subsystem/triumphs/proc/triumph_adjust(amt, key)
 	var/curtriumphs = 0
@@ -153,201 +193,9 @@ SUBSYSTEM_DEF(triumphs)
 		nulist += X
 		nulist[X] = json[X]
 
-
-
-//		for(var/Y in json)
-//			if(Y == X)
-//				continue
-//			if(json[Y] > json[X])
-//				json.Swap(json.Find(X),json.Find(Y))
-//				break
 	return nulist
 
 
-/mob/dead/new_player/verb/hiderole()
-	set category = "Triumphs"
-	set name = "HideRole"
-	if(SSticker.current_state <= GAME_STATE_PREGAME)
-		if(client.ckey in GLOB.hiderole)
-			to_chat(src, "I am hidden until the next round.")
-		else
-			if(client.patreonlevel() >= 1)
-				if(alert(src,"Hide your choice of role this round?","ROGUETOWN","YES","NO") == "YES")
-					if(SSticker.current_state <= GAME_STATE_PREGAME)
-						to_chat(src, "Anonymous... OK")
-						GLOB.hiderole += client.ckey
-					else
-						to_chat(src, "It's too late.")
-			else
-				if(alert(src,"Hide your choice of role this round?","ROGUETOWN","YES","NO") == "YES")
-					if(SSticker.current_state <= GAME_STATE_PREGAME)
-						if(get_triumphs() >= 1)
-							adjust_triumphs(-1)
-							to_chat(src, "Anonymous... OK")
-							GLOB.hiderole += client.ckey
-						else
-							to_chat(src, "I haven't TRIUMPHED enough.")
-					else
-						to_chat(src, "It's too late.")
-	else
-		to_chat(src, "It's too late.")
-
-/mob/dead/new_player/verb/donatorupgrade()
-	set category = "Triumphs"
-	set name = "DonateTriumphs"
-	if(!client)
-		return
-	var/plev = client.patreonlevel()
-	var/amt = input(src, "Donate Triumphs (Gives you donator bonuses for one round)", "ROGUETOWN") as null|anything in list("10 TRI", "25 TRI", "50 TRI")
-	var/added
-	var/amt2take = 0
-	if(amt == "10 TRI")
-		added = 1
-		amt2take = 10
-	if(amt == "25 TRI")
-		added = 2
-		amt2take = 25
-	if(amt == "50 TRI")
-		added = 3
-		amt2take = 50
-	if(!amt2take || !added)
-		return
-	if(plev >= added)
-		to_chat(src, "No need to trade for what you already possess.")
-		return
-	if(src.get_triumphs() < amt2take)
-		to_chat(src, "<span class='warning'>I haven't TRIUMPHED enough.</span>")
-		return
-	src.adjust_triumphs(-1 * amt2take)
-	GLOB.temporary_donators[ckey] = added
-	client.patreonlevel = -1 //reset our shit
-	var/shown_patreon_level = client.patreonlevel()
-	client.add_patreon_verbs()
-	if(!shown_patreon_level)
-		shown_patreon_level = "NONE"
-	switch(shown_patreon_level)
-		if(1)
-			shown_patreon_level = "Silver"
-		if(2)
-			shown_patreon_level = "Gold"
-		if(3)
-			shown_patreon_level = "Mythril"
-		if(4)
-			shown_patreon_level = "Magistrate"
-		if(5)
-			shown_patreon_level = "Lord"
-	to_chat(src, "<span class='info'>Your Patreon Level: [shown_patreon_level]</span>")
-
-/mob/dead/new_player/verb/forcerogueworld()
-	set category = "Triumphs"
-	set name = "Rogueworld"
-	set hidden=1
-#ifdef TESTSERVER
-	return
-#endif
-	if(!client)
-		return
-	if(SSticker.current_state > GAME_STATE_PREGAME)
-		to_chat(src, "<span class='warning'>Too late.</span>")
-		return
-	var/datum/game_mode/chaosmode/C = SSticker.mode
-	if(istype(C))
-		if(C.allmig || C.roguefight)
-			to_chat(src, "<span class='warning'>Too late.</span>")
-			return
-		if(alert(src,"Force ROGUEWORLD? (30 TRI)","ROGUETOWN","YES","NO") == "YES")
-			if(SSticker.current_state <= GAME_STATE_PREGAME)
-				if(get_triumphs() >= 30)
-					adjust_triumphs(-30)
-					to_chat(world, "<span class='greentext'>ROGUEWORLD has been summoned by [client.ckey]!</span>")
-					var/icon/ikon
-					var/file_path = "icons/rogueworld_title.dmi"
-					ASSERT(fexists(file_path))
-					ikon = new(fcopy_rsc(file_path))
-					if(SStitle.splash_turf && ikon)
-						SStitle.splash_turf.icon = ikon
-					for(var/mob/dead/new_player/player in GLOB.player_list)
-						player.playsound_local(player, 'sound/music/wartitle.ogg', 100, TRUE)
-					SSticker.isrogueworld = TRUE
-					SSticker.failedstarts = 13
-					SSticker.current_state = GAME_STATE_SETTING_UP
-					Master.SetRunLevel(RUNLEVEL_SETUP)
-					if(SSticker.start_immediately)
-						SSticker.fire()
-				else
-					to_chat(src, "I haven't TRIUMPHED enough.")
-
-/mob/dead/new_player/verb/wipetriumphs()
-	set category = "Triumphs"
-	set name = "WipeTriumphs"
-	if(!client)
-		return
-	if(SSticker.current_state > GAME_STATE_PREGAME)
-		to_chat(src, "<span class='warning'>Too late.</span>")
-		return
-	if(alert(src,"Burn down the hall of TRIUMPHS?","ROGUETOWN","YES","NO") == "YES")
-		if(SSticker.current_state <= GAME_STATE_PREGAME)
-			if(get_triumphs() >= 1000)
-				to_chat(world, "<span class='redtext'>[client.ckey] burns the hall of triumphs to the ground!</span>")
-				SStriumphs.wipe_triumphs(key)
-			else
-				to_chat(src, "I haven't TRIUMPHED enough.")
-
-/client/proc/adjusttriumph()
-	set category = "GameMaster"
-	set name = "Adjust Triumphs"
-	var/input = input(src, "how much") as num
-	if(mob && input)
-		mob.adjust_triumphs(input)
-
-#ifdef TESTSERVER
-/client/verb/adjusttriumphnerds()
-	set category = "DEBUGTEST"
-	set name = "Adjust Triumphs"
-	var/input = input(src, "how much") as num
-	if(mob && input)
-		mob.adjust_triumphs(input)
-
-/*
-/client/verb/scalethingz()
-	set category = "DEBUGTEST"
-	set name = "scale thing"
-	if(!isliving(mob))
-		return
-	var/atom/thing = input(mob, "what thing", "ROGUETOWN") as null|anything in range(mob, 2)
-	var/input = input(mob, "scale?") as num
-	if(input && thing)
-		var/matrix/M = new
-		M.Scale(input,input)
-		thing.transform = M*/
-#endif
-
-/*
-/mob/dead/ghost/verb/hiderole()
-	set category = "Triumphs"
-	set name = "Invade"
-	var/plev = client.patreonlevel()
-	if(src in GLOB.ambush_candidates)
-		to_chat(src, "I leave the invader queue.")
-		ambush_candidates -= src
-		return
-	if(alert(src,"Invade another player? (You will join an ambush)","ROGUETOWN","YES","NO") == "YES")
-		if((get_triumphs() < 5) && (plev < 3))
-			to_chat(src, "I haven't TRIUMPHED enough.")
-			return
-		else
-			ambush_candidates |= src
-			to_chat(src, "I join the invader queue.")
 
 
-	//to_chat(src, "It's my turn to invade, but I didn't have enough triumphs.")
-	//ambush_candidates -= src
-*/
-/*
-/mob/dead/new_player/verb/paramsthing()
-	set category = "DEBUGTEST"
-	set name = "Paramstest"
-	var/list/L = list()
-	L["fuck"] = "negro"
-	testing("list [list2params(L)]")
-*/
+
