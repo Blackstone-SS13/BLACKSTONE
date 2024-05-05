@@ -6,9 +6,7 @@
 	total_positions = 0
 	spawn_positions = 2
 	f_title = "Princess"
-	allowed_races = list("Humen",
-	"Humen",
-	"Half-Elf")
+	allowed_races = list("Humen", "Half-Elf") //lady cant be an elf, but prince could be a bastard child which is funny
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_YOUNG)
 

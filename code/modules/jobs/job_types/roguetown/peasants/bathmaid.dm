@@ -7,13 +7,14 @@
 	spawn_positions = 0 // Disabled due to ERP removal, originally 3
 
 	allowed_sexes = list("female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Dark Elf",
-	"Half-Elf",
-	"Tiefling",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Dwarf",
+		"Aasimar",
+		"Half-Elf",
+		"Tiefling",
+		"Dark Elf"
 	)
 
 	tutorial = "Nobody would envy your lot in life, for the role of the bathwench is not something so idly taken. It comes from a place of desperation, least usually: for any with true compassion or skill would seek position with a nunnery or the medical trade. Launder clothes and soothe wounds, that is your loathsome creed."
