@@ -116,7 +116,7 @@
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		if(!can_bloody_wound())
 			return FALSE
-		if(user && bclass == BCLASS_CHOP)
+		if(user && bclass != BCLASS_CHOP)
 			if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					dam += 30
 		if(prob(round(max(dam / 3, 1), 1)))
