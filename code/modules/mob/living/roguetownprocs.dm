@@ -21,13 +21,13 @@
 		chance2hit += 10
 
 	if(user.mind)
-		chance2hit += (user.mind.get_skill_level(associated_skill) * 5)
+		chance2hit += (user.mind.get_skill_level(associated_skill) * 8)
 
 	if(used_intent)
 		if(used_intent.blade_class == BCLASS_STAB)
-			chance2hit += 20
+			chance2hit += 10
 		if(used_intent.blade_class == BCLASS_CUT)
-			chance2hit += 12
+			chance2hit += 6
 
 	if(I)
 		if(I.wlength == WLENGTH_SHORT)
