@@ -20,7 +20,7 @@
 /obj/item/clothing/ring/gold
 	name = "gold ring"
 	icon_state = "ring_g"
-	sellprice = 70
+	sellprice = 45
 
 /obj/item/clothing/ring/active
 	var/active = FALSE
@@ -82,3 +82,33 @@
 	var/datum/component/magcom = GetComponent(/datum/component/anti_magic)
 	if(magcom)
 		magcom.RemoveComponent()
+
+/obj/item/clothing/ring/emerald
+    name = "emerald ring"
+    icon_state = "g_ring_emerald"
+    sellprice = 70
+
+/obj/item/clothing/ring/ruby
+    name = "ruby ring"
+    icon_state = "g_ring_ruby"
+    sellprice = 70
+
+/obj/item/clothing/ring/topaz
+    name = "topaz ring"
+    icon_state = "g_ring_topaz"
+    sellprice = 70
+
+/obj/item/clothing/ring/emeralds
+    name = "emerald ring"
+    icon_state = "s_ring_emerald"
+    sellprice = 50
+
+/obj/item/clothing/ring/rubys
+    name = "ruby ring"
+    icon_state = "s_ring_ruby"
+    sellprice = 50
+
+/obj/item/clothing/ring/topazs
+    name = "topaz ring"
+    icon_state = "s_ring_topaz"
+    sellprice = 50

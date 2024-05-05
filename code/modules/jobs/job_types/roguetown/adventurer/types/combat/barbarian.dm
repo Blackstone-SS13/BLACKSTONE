@@ -7,6 +7,7 @@
 	allowed_races = list("Humen",
 	"Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
+	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
 
 
 /datum/outfit/job/roguetown/adventurer/barbarian/pre_equip(mob/living/carbon/human/H)
@@ -22,6 +23,7 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	belt = /obj/item/storage/belt/rogue/leather
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	beltl = /obj/item/rogueweapon/huntingknife
@@ -60,7 +62,5 @@
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 3)
 	H.change_stat("intelligence", -3)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	if(H.dna?.species)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()

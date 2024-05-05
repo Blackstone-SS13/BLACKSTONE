@@ -18,7 +18,7 @@
 	whitelist_req = TRUE
 	display_order = JDO_SHEPHERD
 	give_bank_account = 3
-	min_pq = -4
+	min_pq = 0
 
 /datum/outfit/job/roguetown/shepherd
 	name = "Confessor"

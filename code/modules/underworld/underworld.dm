@@ -201,7 +201,7 @@ GLOBAL_VAR_INIT(underworld_coins, 0)
 	should_track = FALSE
 
 /proc/coin_upkeep()
-	if(GLOB.underworld_coins < 3)
+	if(GLOB.underworld_coins < 8)
 		for(var/obj/effect/landmark/underworldcoin/B in GLOB.landmarks_list)
 			new /obj/item/underworld/coin(B.loc)
 	
@@ -270,7 +270,7 @@ GLOBAL_VAR_INIT(underworld_coins, 0)
 			return "head"
 		if(BODY_ZONE_PRECISE_MOUTH)
 			return "head"
-		if(BODY_ZONE_PRECISE_HAIR)
+		if(BODY_ZONE_PRECISE_SKULL)
 			return "head"
 		if(BODY_ZONE_PRECISE_EARS)
 			return "head"

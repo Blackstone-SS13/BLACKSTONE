@@ -12,6 +12,7 @@
 
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = 19
+	min_pq = 1
 
 /datum/outfit/job/roguetown/archivist/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -29,7 +30,7 @@
 	beltl = /obj/item/keyring/archivist
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/mid
 	mask = /obj/item/clothing/mask/rogue/spectacles
-	
+
 
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 6, TRUE)

@@ -28,8 +28,9 @@ SUBSYSTEM_DEF(treasury)
 	var/treasury_value = 0
 	var/list/bank_accounts = list()
 	var/list/stockpile_datums = list()
+	var/multiple_item_penalty = 0.66
+	var/interest_rate = 0.25
 	var/next_treasury_check = 0
-	var/list/acceptable_treasure_typecache = list()
 	var/list/log_entries = list()
 
 
@@ -51,6 +52,7 @@ SUBSYSTEM_DEF(treasury)
 /datum/controller/subsystem/treasury/fire(resumed = 0)
 	if(world.time > next_treasury_check)
 		next_treasury_check = world.time + rand(5 MINUTES, 8 MINUTES)
+		var/list/stockpile_items = list()
 		if(SSticker.current_state == GAME_STATE_PLAYING)
 			for(var/datum/roguestock/X in stockpile_datums)
 				if(!X.stable_price && !X.transport_item)
@@ -62,21 +64,28 @@ SUBSYSTEM_DEF(treasury)
 		var/amt_to_generate = 0
 		for(var/obj/item/I in A)
 			if(!isturf(I.loc))
-				return
-			if(!(I.type in acceptable_treasure_typecache))
-				return
-			if(I.get_real_price() <= 0)
-				return
+				continue
+			if(I.get_real_price() <= 0 || istype(I, /obj/item/roguecoin))
+				continue
 			if(!I.submitted_to_stockpile)
 				I.submitted_to_stockpile = TRUE
-			amt_to_generate += (I.get_real_price()*0.25)
+			if(I.type in stockpile_items)
+				stockpile_items[I.type] *= multiple_item_penalty
+			else
+				stockpile_items[I.type] = I.get_real_price()
+			amt_to_generate += (stockpile_items[I.type]*interest_rate)
 		amt_to_generate = amt_to_generate - (amt_to_generate * queens_tax)
 		amt_to_generate = round(amt_to_generate)
 		give_money_treasury(amt_to_generate, "wealth horde")
+		var/people_told = 0
 		for(var/mob/living/carbon/human/X in GLOB.human_list)
-			if(X.job == "King" || X.job == "Queen")
-				send_ooc_note("Income from wealth horde: +[amt_to_generate]", name = X.real_name)
-				return
+			switch(X.job)
+				if("King", "Queen", "Steward", "Clerk")
+					people_told += 1
+					send_ooc_note("Income from wealth horde: +[amt_to_generate]", name = X.real_name)
+					if(people_told > 3)
+						return
+			
 
 /datum/controller/subsystem/treasury/proc/create_bank_account(name, initial_deposit)
 	if(!name)

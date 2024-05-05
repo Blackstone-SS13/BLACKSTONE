@@ -82,7 +82,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/voice_color = "a0a0a0"
 	var/detail_color = "000"
 	var/datum/species/pref_species = new /datum/species/human/northern()	//Mutant race
-	var/datum/patrongods/selected_patron = new /datum/patrongods/astrata()
+	var/datum/patrongods/selected_patron
 	var/list/features = list("mcolor" = "FFF", "ethcolor" = "9c3030", "tail_lizard" = "Smooth", "tail_human" = "None", "snout" = "Round", "horns" = "None", "ears" = "None", "wings" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None", "legs" = "Normal Legs", "moth_wings" = "Plain", "moth_markings" = "None")
 	var/list/randomise = list(RANDOM_UNDERWEAR = TRUE, RANDOM_UNDERWEAR_COLOR = TRUE, RANDOM_UNDERSHIRT = TRUE, RANDOM_SOCKS = TRUE, RANDOM_BACKPACK = TRUE, RANDOM_JUMPSUIT_STYLE = FALSE, RANDOM_HAIRSTYLE = TRUE, RANDOM_HAIR_COLOR = TRUE, RANDOM_FACIAL_HAIRSTYLE = TRUE, RANDOM_FACIAL_HAIR_COLOR = TRUE, RANDOM_SKIN_TONE = TRUE, RANDOM_EYE_COLOR = TRUE)
 	var/list/friendlyGenders = list("Male" = "male", "Female" = "female")
@@ -108,7 +108,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	var/list/ignoring = list()
 
-	var/clientfps = 20//0 is sync
+	var/clientfps = 100//0 is sync
 
 	var/parallax
 
@@ -165,6 +165,8 @@ GLOBAL_LIST_EMPTY(chosen_names)
 		charflaw = pick(GLOB.character_flaws)
 		charflaw = GLOB.character_flaws[charflaw]
 		charflaw = new charflaw()
+	if(!selected_patron)
+		selected_patron = GLOB.patronlist[GLOB.patronlist[1]]
 	key_bindings = deepCopyList(GLOB.hotkey_keybinding_list_by_key) // give them default keybinds and update their movement keys
 	C.update_movement_keys()
 	real_name = pref_species.random_name(gender,1)
@@ -666,7 +668,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<b>Income Updates:</b> <a href='?_src_=prefs;preference=income_pings'>[(chat_toggles & CHAT_BANKCARD) ? "Allowed" : "Muted"]</a><br>"
 			dat += "<br>"
 */
-//			dat += "<b>FPS:</b> <a href='?_src_=prefs;preference=clientfps;task=input'>[clientfps]</a><br>"
+			dat += "<b>FPS:</b> <a href='?_src_=prefs;preference=clientfps;task=input'>[clientfps]</a><br>"
 /*
 			dat += "<b>Parallax (Fancy Space):</b> <a href='?_src_=prefs;preference=parallaxdown' oncontextmenu='window.location.href=\"?_src_=prefs;preference=parallaxup\";return false;'>"
 			switch (parallax)
@@ -983,7 +985,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(job.plevel_req > user.client.patreonlevel())
 				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
 				continue
-			if(get_playerquality(user.ckey) < job.min_pq && !job.required)
+			if(!job.required && !isnull(job.min_pq) && (get_playerquality(user.ckey) < job.min_pq))
 				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
 				continue
 			if(!(user.client.prefs.age in job.allowed_ages))
@@ -1153,7 +1155,7 @@ Slots: [job.spawn_positions]</span>
 		if(1)
 			jpval = JP_HIGH
 
-	if(job.required && get_playerquality(user.ckey) < job.min_pq)
+	if(job.required && !isnull(job.min_pq) && (get_playerquality(user.ckey) < job.min_pq))
 		if(job_preferences[job.title] == JP_LOW)
 			jpval = null
 		else
@@ -1679,7 +1681,7 @@ Slots: [job.spawn_positions]</span>
 				if("patron")
 					var/datum/patrongods/god_input = input(user, "Choose your character's patron god", "Patron God") as null|anything in GLOB.patronlist
 					if(god_input)
-						selected_patron = god_input
+						selected_patron = GLOB.patronlist[god_input] || GLOB.patronlist[GLOB.patronlist[1]]
 						to_chat(user, "<font color='purple'>Patron: [selected_patron]</font>")
 						to_chat(user, "<font color='purple'>Domain: [selected_patron.domain]</font>")
 						to_chat(user, "<font color='purple'>Background: [selected_patron.summary]</font>")

@@ -25,8 +25,6 @@
 	var/lastcycle = 0
 	///If our plant doesn't have direct access to the sky, it can't grow (nor can weeds)
 	var/seesky = TRUE
-	///PQ gain per crop farmed, should be a very stupidly small amount
-	var/crop_pq = 0.01
 
 /obj/machinery/crop/Crossed(atom/movable/moveable_atom)
 	if(isliving(moveable_atom))
@@ -173,7 +171,6 @@
 	var/mob/living/current_farmer = user
 	var/datum/mind/farmer_mind = current_farmer.mind
 	var/exp_gained = 0
-	var/pq_gained = 0
 
 	if(istype(attacking_item, /obj/item/seeds))
 		to_chat(user, "<span class='warning'>Something is already growing here.</span>")
@@ -188,6 +185,7 @@
 		if(growth < 100)
 			to_chat(user, "<span class='warning'>This crop is not ready to harvest.</span>")
 			return
+		user.visible_message("<span class='notice'>[user] harvests [src] with [attacking_item].</span>")
 		for(var/i in 1 to myseed.yield)
 			if(plant_hp <= 0)
 				return
@@ -199,12 +197,8 @@
 			new myseed.product(src.loc)
 			myseed.yield -= 1
 			playsound(src,"plantcross", 100, FALSE)
-			user.visible_message("<span class='notice'>[user] harvests [src] with [attacking_item].</span>")
 			exp_gained = round(current_farmer.STAINT / initial(myseed.yield)) //So we don't gain a fuck ton of EXP if our plant happens to have multiple crops
 			farmer_mind.adjust_experience(/datum/skill/labor/farming, exp_gained)
-			pq_gained += crop_pq
-		if(pq_gained && user.ckey)
-			adjust_playerquality(pq_gained, user.ckey)
 		if(myseed.yield <= 0)
 			if(myseed.delonharvest)
 				qdel(src)
@@ -277,7 +271,6 @@
 	var/mob/living/current_farmer = user
 	var/datum/mind/farmer_mind = current_farmer.mind
 	var/exp_gained = 0
-	var/pq_gained = 0
 
 	if(!myseed)
 		qdel(src)
@@ -314,9 +307,6 @@
 				user.visible_message("<span class='warning'>[user] spoils something from [src]!</span>")
 			exp_gained = round(current_farmer.STAINT / initial(myseed.yield)) //So we don't gain a fuck ton of EXP if our plant happens to have multiple crops
 			farmer_mind.adjust_experience(/datum/skill/labor/farming, exp_gained)
-			pq_gained += crop_pq
-		if(pq_gained && user.ckey)
-			adjust_playerquality(pq_gained, user.ckey)
 		if(myseed.yield <= 0)
 			if(myseed.delonharvest)
 				qdel(src)

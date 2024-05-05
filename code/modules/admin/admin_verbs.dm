@@ -11,6 +11,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/admin_ghost,
 	/client/proc/ghost_up,
 	/datum/admins/proc/start_vote,
+	/client/proc/toggle_autovote,
 	/datum/admins/proc/show_player_panel,
 	/datum/admins/proc/admin_heal,
 	/datum/admins/proc/admin_sleep,
@@ -395,6 +396,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 			M.density = initial(M.density)
 		ghost.can_reenter_corpse = 1 //force re-entering even when otherwise not possible
 		ghost.reenter_corpse()
+		show_popup_menus = FALSE
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Admin Reenter") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	else if(isnewplayer(mob))
 //		to_chat(src, "<font color='red'>Error: Aghost: Can't admin-ghost whilst in the lobby. Join or Observe first.</font>")
@@ -411,6 +413,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		body.ghostize(1)
 		if(body && !body.key)
 			body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
+		show_popup_menus = TRUE
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Admin Ghost") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/invisimin()
@@ -424,6 +427,14 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		else
 			mob.invisibility = INVISIBILITY_OBSERVER
 			to_chat(mob, "<span class='adminnotice'><b>Invisimin on. You are now as invisible as a ghost.</b></span>")
+
+/client/proc/toggle_autovote()
+	set name = "Toggle Magnum Mode"
+	set category = "Server"
+	if(check_rights(R_POLL))
+		SSticker.autovote = !SSticker.autovote
+		message_admins(SSticker.autovote ? "[key_name_admin(usr)] has enabled automatic round restart votes." : "[key_name_admin(usr)] has disabled automatic round restart votes.")
+		log_admin(SSticker.autovote ? "[key_name(usr)] has enabled automatic round restart votes." : "[key_name(usr)] has disabled automatic round restart votes.")
 
 /client/proc/check_antagonists()
 	set name = "Check Antagonists"

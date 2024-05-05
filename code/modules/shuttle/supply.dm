@@ -23,13 +23,12 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 		/obj/item/shared_storage,
 		/obj/structure/extraction_point,
 		/obj/machinery/syndicatebomb,
-		/obj/item/hilbertshotel,
 		/obj/item/swapper,
 		/obj/docking_port,
 		/obj/machinery/launchpad,
 		/obj/machinery/disposal,
-		/obj/structure/disposalpipe,
-		/obj/item/hilbertshotel
+		/obj/structure/disposalpipe
+
 	)))
 
 /obj/docking_port/mobile/supply
@@ -224,7 +223,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 			if(!AM.anchored || istype(AM, /obj/mecha))
 				if(istype(AM, /obj/item/paper/scroll/cargo))
 					var/obj/item/paper/scroll/cargo/C = AM
-					if(C.signedjob in list("Priest", "Court Magician", "Merchant", "King", "Sheriff"))
+					if(C.signedjob in list("Priest", "Court Magician", "Merchant", "King", "Sheriff","Bailiff"))
 						for(var/datum/supply_order/SO in C.orders)
 							SSshuttle.shoppinglist += SO
 							C.orders -= SO
@@ -237,7 +236,7 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 						continue
 					if(istype(thing, /obj/item/paper/scroll/cargo))
 						var/obj/item/paper/scroll/cargo/C = AM
-						if(C.signedjob in list("Priest", "Court Magician", "Merchant", "King", "Sheriff"))
+						if(C.signedjob in list("Priest", "Court Magician", "Merchant", "King", "Sheriff","Bailiff"))
 							for(var/datum/supply_order/SO in C.orders)
 								SSshuttle.shoppinglist += SO
 								C.orders -= SO

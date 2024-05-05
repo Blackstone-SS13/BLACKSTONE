@@ -8,6 +8,11 @@
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/rogueweapon/sword/iron
 
+/datum/anvil_recipe/weapons/iswordshort
+	name = "iron short sword"
+	req_bar = /obj/item/ingot/iron
+	created_item = /obj/item/rogueweapon/sword/iron/short
+
 /datum/anvil_recipe/weapons/idagger
 	name = "iron dagger"
 	req_bar = /obj/item/ingot/iron
@@ -76,6 +81,12 @@
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/rogueweapon/stoneaxe/battle
+
+/datum/anvil_recipe/weapons/ccleaver
+	name = "knife (+steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/rogueweapon/huntingknife/cleaver/combat
 
 /datum/anvil_recipe/weapons/smace
 	name = "steel mace (+2 steel)"

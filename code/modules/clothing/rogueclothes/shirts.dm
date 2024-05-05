@@ -34,6 +34,9 @@
 /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	color = CLOTHING_BLACK
 
+/obj/item/clothing/suit/roguetown/shirt/undershirt/purple
+	color = CLOTHING_PURPLE
+
 /obj/item/clothing/suit/roguetown/shirt/undershirt/lord
 	desc = ""
 	color = "#616898"
@@ -205,6 +208,36 @@
 	desc = ""
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "astratarobe"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	sleeved = null
+	boobed = TRUE
+	color = null
+	flags_inv = HIDEBOOB
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+
+/obj/item/clothing/suit/roguetown/shirt/robe/noc
+	slot_flags = ITEM_SLOT_ARMOR
+	name = "moon robe"
+	desc = ""
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	icon_state = "nocrobe"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	sleeved = null
+	boobed = TRUE
+	color = null
+	flags_inv = HIDEBOOB
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+
+/obj/item/clothing/suit/roguetown/shirt/robe/necromancer
+	slot_flags = ITEM_SLOT_ARMOR
+	name = "necromancer robes"
+	desc = ""
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	icon_state = "necromrobe"
 	icon = 'icons/roguetown/clothing/armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
 	sleeved = null

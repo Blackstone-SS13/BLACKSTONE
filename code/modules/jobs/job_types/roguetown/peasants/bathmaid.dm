@@ -23,6 +23,7 @@
 	display_order = JDO_NIGHTMAIDEN
 	give_bank_account = TRUE
 	can_random = FALSE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/nightmaiden/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -31,7 +32,6 @@
 	armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy
 	neck = /obj/item/storage/belt/rogue/pouch
 	backpack_contents = list(/obj/item/roguekey/nightmaiden = 1)
-	ADD_TRAIT(H, RTRAIT_GOODLOVER, TRAIT_GENERIC)
 
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)

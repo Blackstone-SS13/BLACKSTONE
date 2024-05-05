@@ -89,15 +89,15 @@
 			var/turf/pickedturf = safepick(turfs)
 			if(!pickedturf)
 				return
-			to_chat(L, "<font color='yellow'>INSOLENT WRETCH, YOUR STRUGGLE CONTINUES</font>")
+			to_chat(L, "<font color='yellow'>INSOLENT WRETCH, YOUR STRUGGLE IS DESERVED.</font>")
 			L.forceMove(pickedturf)
 			return FALSE
 	if(length(message2recognize) > 15)
 		if(findtext(message2recognize, "[M.PATRON]"))
 			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
-			to_chat(L, "<font color='yellow'>I, [M.PATRON], have heard your prayer and grant you favor.</font>")
-			var/obj/item/underworld/coin/C = new
-			L.put_in_active_hand(C)
+			to_chat(L, "<font color='yellow'>I, [M.PATRON], have heard your prayer and yet cannot aid you.</font>")
+			/*var/obj/item/underworld/coin/C = new 
+			L.put_in_active_hand(C)*/
 			return TRUE
 		else
 			return TRUE

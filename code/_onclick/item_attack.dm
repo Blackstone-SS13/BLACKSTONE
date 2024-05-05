@@ -212,7 +212,7 @@
 		used_str--
 	used_str = CLAMP(used_str, 1, 20)
 	if(used_str >= 11)
-		newforce = newforce + (newforce * ((used_str - 10) * 0.3))
+		newforce = newforce + (newforce * ((used_str - 10) * 0.1))
 	else if(used_str <= 9)
 		newforce = newforce - (newforce * ((10 - used_str) * 0.1))
 
@@ -366,7 +366,7 @@
 			return "body"
 		if(BODY_ZONE_PRECISE_MOUTH)
 			return "body"
-		if(BODY_ZONE_PRECISE_HAIR)
+		if(BODY_ZONE_PRECISE_SKULL)
 			return "body"
 		if(BODY_ZONE_PRECISE_EARS)
 			return "body"

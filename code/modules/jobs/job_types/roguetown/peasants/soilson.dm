@@ -23,6 +23,7 @@
 	outfit = /datum/outfit/job/roguetown/farmer
 	display_order = 24
 	give_bank_account = 17
+	min_pq = -10
 
 /datum/outfit/job/roguetown/farmer/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -35,6 +36,7 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, pick(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/labor/farming, pick(4,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
 	if(H.gender == MALE)
 		head = /obj/item/clothing/head/roguetown/roguehood/random

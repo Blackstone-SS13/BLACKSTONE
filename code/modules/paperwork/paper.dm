@@ -135,14 +135,13 @@
 /obj/item/paper/examine(mob/user)
 	. = ..()
 	if(!mailer)
-		. += "<a href='?src=[REF(src)];read=1'>Read</a>"
+		. += "<a href='?src=[REF(src)];read=1'>Read</a> (<a href='?src=[REF(src)];Help=1'>Help</a>)"
 	else
 		. += "It's from [mailer], addressed to [mailedto].</a>"
 
 /obj/item/paper/proc/read(mob/user)
 //	var/datum/asset/assets = get_asset_datum(/datum/asset/spritesheet/simple/paper)
 //	assets.send(user)
-	user << browse_rsc('html/book.png')
 	if(!user.client || !user.hud_used)
 		return
 	if(!user.hud_used.reads)
@@ -153,15 +152,7 @@
 		return
 	if(in_range(user, src) || isobserver(user))
 //		var/obj/screen/read/R = user.hud_used.reads
-		var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
-			<html><head><style type=\"text/css\">
-			body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
-		dat += info
-		dat += "<br>"
-		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
-		dat += "</body></html>"
-		user << browse(dat, "window=reading;size=500x400;can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=0;border=0")
-		onclose(user, "reading", src)
+		format_browse(info, user)
 	else
 		return "<span class='warning'>I'm too far away to read it.</span>"
 
@@ -275,8 +266,8 @@
 /obj/item/paper/proc/updateinfolinks()
 	info_links = info
 	for(var/i in 1 to min(fields, 15))
-		addtofield(i, "<font face=\"[PEN_FONT]\"><A href='?src=[REF(src)];write=[i]'>write</A></font>", 1)
-	info_links = info_links + "<font face=\"[PEN_FONT]\"><A href='?src=[REF(src)];write=end'>write</A></font>"
+		addtofield(i, "<A href='?src=[REF(src)];write=[i]'>write</A> (<A href='?src=[REF(src)];help=1'>\[?\]</A>)", 1)
+	info_links = info_links + "<A href='?src=[REF(src)];write=end'>write</A> <A href='?src=[REF(src)];help=1'>\[?\]</A>"
 
 
 /obj/item/paper/proc/clearpaper()
@@ -372,6 +363,7 @@
 	if(href_list["help"])
 		openhelp(usr)
 		return
+
 	if(href_list["write"])
 		var/id = href_list["write"]
 		var/t =  stripped_multiline_input("Enter what you want to write:", "Write", no_trim=TRUE)
@@ -394,6 +386,9 @@
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
 
 		if(t != null)	//No input from the user means nothing needs to be added
+			if((length(info) + length(t)) > maxlen)
+				to_chat(usr, "<span class='warning'>Too long. Try again.</span>")
+				return
 			if(id!="end")
 				addtofield(text2num(id), t) // He wants to edit a field, let him.
 			else
@@ -402,8 +397,18 @@
 				testing("[findtext(info, "\n")]")
 				updateinfolinks()
 			playsound(src, 'sound/items/write.ogg', 100, FALSE)
-			usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links]<HR>[stamps]</BODY><div align='right'style='position:fixed;bottom:0;font-style:bold;'><A href='?src=[REF(src)];help=1'>\[?\]</A></div></HTML>", "window=[name]") // Update the window
+			format_browse(info_links, usr)
 			update_icon_state()
+
+/obj/item/paper/proc/format_browse(t, mob/user)
+	user << browse_rsc('html/book.png')
+	var/dat = {"<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">
+			<html><head><style type=\"text/css\">
+			body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
+	dat += "[t]<br>"
+	dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
+	dat += "</body></html>"
+	user << browse(dat, "window=reading;size=500x400;can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=0;border=0")
 
 /obj/item/paper/attackby(obj/item/P, mob/living/carbon/human/user, params)
 	if(resistance_flags & ON_FIRE)
@@ -420,17 +425,13 @@
 			to_chat(user, "<span class='warning'>[src] is full of verba.</span>")
 			return
 		if(user.can_read(src))
-			var/t = stripped_multiline_input("Write Something", "Paper", no_trim=TRUE)
-			if(t)
-				if((length(info) + length(t)) > maxlen)
-					to_chat(user, "<span class='warning'>Too long. Try again.</span>")
-					return
-				info += t
+			format_browse(info_links, user)
 			update_icon_state()
 			return
 		else
 			to_chat(user, "<span class='warning'>I can't write.</span>")
 			return
+		return
 
 	if(istype(P, /obj/item/paper))
 		var/obj/item/paper/p = P

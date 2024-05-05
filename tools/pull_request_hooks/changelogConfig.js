@@ -40,51 +40,16 @@ export const CHANGELOG_ENTRIES = [
 	],
 
 	[
-		["soundadd"],
+		["sound"],
 		{
-			placeholders: ["added a new sound thingy"],
+			placeholders: ["added/modified/removed audio or sound effects"],
 		},
 	],
 
 	[
-		["sounddel"],
+		["image"],
 		{
-			placeholders: ["removed an old sound thingy"],
-		},
-	],
-
-	[
-		["imageadd"],
-		{
-			placeholders: ["added some icons and images"],
-		},
-	],
-
-	[
-		["imagedel"],
-		{
-			placeholders: ["deleted some icons and images"],
-		},
-	],
-
-	[
-		["mapadd"],
-		{
-			placeholders: ["added a new map or section to a map"],
-		},
-	],
-
-	[
-		["maptweak"],
-		{
-			placeholders: ["tweaked a map"],
-		},
-	],
-
-	[
-		["ui"],
-		{
-			placeholders: ["changed something relating to user interfaces"],
+			placeholders: ["added/modified/removed some icons or images"],
 		},
 	],
 

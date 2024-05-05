@@ -26,8 +26,10 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 
 	display_order = JDO_ADVENTURER
 	show_in_credits = FALSE
-	min_pq = -4
+	min_pq = 0
 	
+	wanderer_examine = TRUE
+	advjob_examine = TRUE
 	var/isvillager = FALSE
 	var/ispilgrim = FALSE
 
@@ -197,7 +199,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 /mob/living/carbon/human/proc/adv_hugboxing_start()
 	to_chat(src, "<span class='warning'>I will be in danger once I start moving.</span>")
 	status_flags |= GODMODE
-	ADD_TRAIT(src, TRAIT_PACIFISM, ADVENTURER_HUGBOX_TRAIT)
+	ADD_TRAIT(src, TRAIT_PACIFISM, HUGBOX_TRAIT)
 	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(adv_hugboxing_moved))
 	//Lies, it goes away even if you don't move after enough time
 	if(GLOB.adventurer_hugbox_duration_still)
@@ -215,5 +217,5 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	if(!(status_flags & GODMODE))
 		return
 	status_flags &= ~GODMODE
-	REMOVE_TRAIT(src, TRAIT_PACIFISM, ADVENTURER_HUGBOX_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_PACIFISM, HUGBOX_TRAIT)
 	to_chat(src, "<span class='danger'>My joy is gone! Danger surrounds me.</span>")

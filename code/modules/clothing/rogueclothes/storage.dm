@@ -155,7 +155,8 @@
 			if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, H, null, TRUE, TRUE))
 				qdel(H)
 
-
+/obj/item/storage/belt/rogue/pouch/food/PopulateContents()
+	new /obj/item/reagent_containers/food/snacks/rogue/crackerscooked(src)
 
 /obj/item/storage/backpack/rogue/satchel
 	name = "satchel"
@@ -217,3 +218,11 @@
 		STR.max_w_class = WEIGHT_CLASS_NORMAL
 		STR.max_items = 14
 		STR.not_while_equipped = TRUE
+
+/obj/item/storage/backpack/rogue/backpack/surgery/PopulateContents()
+	new /obj/item/scalpel(src)
+	new /obj/item/hemostat(src)
+	new /obj/item/retractor(src)
+	new /obj/item/circular_saw/bonesaw(src)
+	new /obj/item/cautery(src)
+	new /obj/item/surgical_drapes(src)

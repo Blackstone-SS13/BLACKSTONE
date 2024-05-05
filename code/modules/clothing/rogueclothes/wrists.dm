@@ -38,3 +38,9 @@
 	slot_flags = ITEM_SLOT_WRISTS
 	icon_state = "wrappings"
 	item_state = "wrappings"
+
+/obj/item/clothing/wrists/roguetown/nocwrappings
+	name = "moon wrappings"
+	slot_flags = ITEM_SLOT_WRISTS
+	icon_state = "nocwrappings"
+	item_state = "nocwrappings"

@@ -32,7 +32,7 @@
 	skin_tone_wording = "Origin City-State"
 
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP,TRAIT_NIGHT_VISION)
+	inherent_traits = list(TRAIT_NOMOBSWAP)
 	default_features = list("mcolor" = "FFF", "ears" = "ElfW", "wings" = "None")
 	use_skintones = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
@@ -85,13 +85,13 @@
 
 /datum/species/elf/dark/get_skin_list()
 	return list(
-	"Commorah" = "9796a9",
-	"Gloomhaven" = "897489",
-	"Darkpila" = "938f9c",
-	"Sshanntynlan" = "737373",
-	"Llurth Dreir" = "6a616d",
-	"Tafravma" = "5f5f70",
-	"Yuethindrynn" = "2F2F38",
+		"Commorah" = SKIN_COLOR_COMMORAH,
+		"Gloomhaven" = SKIN_COLOR_GLOOMHAVEN,
+		"Darkpila" = SKIN_COLOR_DARKPILA,
+		"Sshanntynlan" = SKIN_COLOR_SSHANNTYNLAN,
+		"Llurth Dreir" = SKIN_COLOR_LLURTH_DREIR,
+		"Tafravma" = SKIN_COLOR_TAFRAVMA,
+		"Yuethindrynn" = SKIN_COLOR_YUETHINDRYNN,
 	)
 
 /datum/species/elf/dark/get_hairc_list()
@@ -129,5 +129,5 @@
 /datum/species/elf/dark/random_surname()
 	return " [pick(world.file2list("strings/rt/names/elf/elfsnf.txt"))]"
 
-/datum/species/elf/dark/get_accent_list()
+/datum/species/elf/dark/get_accent(mob/living/carbon/human/H)
 	return strings("french_replacement.json", "french")

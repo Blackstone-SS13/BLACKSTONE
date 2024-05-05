@@ -224,8 +224,6 @@
 					return FALSE
 				drained = max(drained, 5)
 				if(do_parry(used_weapon, drained, user)) //show message, invoke parry cd
-					if(istype(rmb_intent, /datum/rmb_intent/riposte))
-						user.apply_status_effect(/datum/status_effect/debuff/riposted)
 					if(used_weapon.associated_skill && mind)
 						var/amt2raise = STAINT/2
 						mind.adjust_experience(used_weapon.associated_skill, amt2raise, FALSE)

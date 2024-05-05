@@ -11,7 +11,7 @@
 	"Dark Elf",
 	"Tiefling")
 	outfit = /datum/outfit/job/roguetown/adventurer/sfighter
-
+	traits_applied = list(RTRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/sfighter/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -25,6 +25,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("endurance", 3)
 		H.change_stat("constitution", 2)
@@ -51,4 +52,3 @@
 	else
 		beltr = /obj/item/rogueweapon/sword/sabre
 
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)

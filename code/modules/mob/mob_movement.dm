@@ -418,11 +418,43 @@
 	var/next_in_line
 	switch(mob.zone_selected)
 		if(BODY_ZONE_HEAD)
-			next_in_line = BODY_ZONE_PRECISE_R_EYE
-		if(BODY_ZONE_PRECISE_R_EYE)
-			next_in_line = BODY_ZONE_PRECISE_MOUTH
+			next_in_line = BODY_ZONE_PRECISE_NECK
 		else
 			next_in_line = BODY_ZONE_HEAD
+
+	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	selector.set_selected_zone(next_in_line, mob)
+
+/client/verb/body_toggle_eye_nose()
+	set name = "body-toggle-eye-nose"
+	set hidden = 1
+
+	if(!check_has_body_select())
+		return
+
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_PRECISE_R_EYE)
+			next_in_line = BODY_ZONE_PRECISE_NOSE
+		else
+			next_in_line = BODY_ZONE_PRECISE_R_EYE
+
+	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	selector.set_selected_zone(next_in_line, mob)
+
+/client/verb/body_toggle_mouth_ears()
+	set name = "body-toggle-mouth-ears"
+	set hidden = 1
+
+	if(!check_has_body_select())
+		return
+
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_PRECISE_MOUTH)
+			next_in_line = BODY_ZONE_PRECISE_EARS
+		else
+			next_in_line = BODY_ZONE_PRECISE_MOUTH
 
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
@@ -435,8 +467,15 @@
 	if(!check_has_body_select())
 		return
 
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_R_ARM)
+			next_in_line = BODY_ZONE_PRECISE_R_HAND
+		else
+			next_in_line = BODY_ZONE_R_ARM
+
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_R_ARM, mob)
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the chest, bound to 5
 /client/verb/body_chest()
@@ -446,8 +485,15 @@
 	if(!check_has_body_select())
 		return
 
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_CHEST)
+			next_in_line = BODY_ZONE_PRECISE_STOMACH
+		else
+			next_in_line = BODY_ZONE_CHEST
+
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_CHEST, mob)
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the left arm, bound to 6
 /client/verb/body_l_arm()
@@ -457,8 +503,15 @@
 	if(!check_has_body_select())
 		return
 
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_L_ARM)
+			next_in_line = BODY_ZONE_PRECISE_L_HAND
+		else
+			next_in_line = BODY_ZONE_L_ARM
+
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_L_ARM, mob)
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the right leg, bound to 1
 /client/verb/body_r_leg()
@@ -468,8 +521,15 @@
 	if(!check_has_body_select())
 		return
 
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_R_LEG)
+			next_in_line = BODY_ZONE_PRECISE_R_FOOT
+		else
+			next_in_line = BODY_ZONE_R_LEG
+
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_R_LEG, mob)
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the groin, bound to 2
 /client/verb/body_groin()
@@ -490,8 +550,15 @@
 	if(!check_has_body_select())
 		return
 
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_L_LEG)
+			next_in_line = BODY_ZONE_PRECISE_L_FOOT
+		else
+			next_in_line = BODY_ZONE_L_LEG
+
 	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_L_LEG, mob)
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Verb to toggle the walk or run status
 /client/verb/toggle_walk_run()
@@ -523,6 +590,9 @@
 /mob/living/update_sneak_invis(reset = FALSE)
 	if(stat || IsSleeping() || (world.time < mob_timers[MT_FOUNDSNEAK] + 30 SECONDS))
 		alpha = 255
+		return
+	if(world.time < mob_timers[MT_INVISIBILITY]) // Check if the mob is affected by the invisibility spell
+		alpha = 0
 		return
 	var/turf/T = get_turf(src)
 	if(!T)

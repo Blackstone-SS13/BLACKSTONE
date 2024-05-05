@@ -23,6 +23,7 @@
 	var/isvillager = FALSE
 	var/horse = FALSE
 	var/vampcompat = TRUE
+	var/list/traits_applied
 
 /datum/advclass/proc/equipme(mob/living/carbon/human/H)
 	if(!H)
@@ -49,6 +50,8 @@
 		if(horse)
 			new horse(TU)
 
+	for(var/trait in traits_applied)
+		ADD_TRAIT(H, trait, ADVENTURER_TRAIT)
 	if(isvillager)
 		for(var/mob/M in GLOB.billagerspawns)
 			to_chat(M, "<span class='info'>[H.real_name] is the [name].</span>")

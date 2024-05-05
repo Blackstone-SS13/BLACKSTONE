@@ -27,29 +27,50 @@
 	var/obj/item/bodypart/affecting
 	var/dam = levels * rand(10,50)
 	add_stress(/datum/stressevent/felldown)
+	var/chat_message
 	switch(rand(1,4))
 		if(1)
-			affecting = get_bodypart("[pick("r","l")]_leg")
-			to_chat(src, "<span class='danger'>I fall on my leg!</span>")
-			if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "melee", damage = dam)))
-				update_damage_overlays()
+			affecting = get_bodypart(pick(BODY_ZONE_R_LEG, BODY_ZONE_L_LEG))
+			chat_message = "<span class='danger'>I fall on my [affecting]!</span>"
 		if(2)
-			affecting = get_bodypart("[pick("r","l")]_arm")
-			to_chat(src, "<span class='danger'>I fall on my arm!</span>")
-			if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "melee", damage = dam)))
-				update_damage_overlays()
+			affecting = get_bodypart(pick(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM))
+			chat_message = "<span class='danger'>I fall on my arm!</span>"
 		if(3)
-			affecting = get_bodypart("chest")
-			to_chat(src, "<span class='danger'>I fall flat! I'm winded!</span>")
+			affecting = get_bodypart(BODY_ZONE_CHEST)
+			chat_message = "<span class='danger'>I fall flat! I'm winded!</span>"
 			emote("gasp")
 			adjustOxyLoss(50)
-			if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "melee", damage = dam)))
-				update_damage_overlays()
 		if(4)
-			affecting = get_bodypart("head")
-			to_chat(src, "<span class='danger'>I fall on my head!</span>")
-			if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "melee", damage = dam)))
-				update_damage_overlays()
+			affecting = get_bodypart(BODY_ZONE_HEAD)
+			chat_message = "<span class='danger'>I fall on my head!</span>"
+	if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "melee", damage = dam)))
+		update_damage_overlays()
+		if(levels >= 1)
+			if(!HAS_TRAIT_FROM(affecting, TRAIT_PARALYSIS, CRIT_TRAIT))
+				affecting.temporary_crit_paralysis(20 SECONDS)
+			else if(!(locate(/datum/wound/fracture) in affecting.wounds))
+				var/static/list/adjectives = list(
+					"beautiful",
+					"lovely",
+					"crunchy",
+					"disgusting",
+					"marvelous",
+					"wonderful",
+					"sickening",
+					"disturbing",
+					"horrifying",
+					"twisted",
+				)
+				chat_message += " <span class='crit'>The bone shatters in a [pick(adjectives)] way!</span>"
+				if(prob(3))
+					playsound(src, pick('sound/combat/tf2crit.ogg'), 100, FALSE)
+				else
+					playsound(src, "wetbreak", 100, FALSE)
+				affecting.add_wound(/datum/wound/fracture)
+				affecting.update_disabled()
+
+	if(chat_message)
+		to_chat(src, chat_message)
 
 	AdjustKnockdown(levels * 15)
 
@@ -297,10 +318,18 @@
 		msg += "<B>[parse_zone(check_zone(user.zone_selected))]:</B>\n"
 		if(BP)
 			if(get_location_accessible(src, check_zone(user.zone_selected)))
-				if(BP.disabled == BODYPART_DISABLED_CRIT)
-					msg += "I notice a broken bone.\n"
-				if(BP.disabled == BODYPART_DISABLED_FALL)
-					msg += "The leg is numb to touch.\n"
+				switch(BP.disabled)
+					if(BODYPART_DISABLED_FRACTURE)
+						msg += "[BP] is broken.\n"
+					if(BODYPART_DISABLED_DAMAGE)
+						msg += "[BP] is numb to touch.\n"
+					if(BODYPART_DISABLED_PARALYSIS)
+						msg += "[BP] is limp.\n"
+					if(BODYPART_DISABLED_ROT)
+						if(BP.skeletonized)
+							msg += "[BP] is skeletonized.\n"
+						else
+							msg += "[BP] is rotting.\n"
 				if(BP.bandage)
 					var/usedclass = "'notice'"
 					if(BP.bandage.return_blood_DNA())

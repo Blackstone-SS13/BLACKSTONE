@@ -11,7 +11,7 @@
 
 /obj/screen/alert/status_effect/debuff/hungryt1
 	name = "Hungry"
-	desc = "Hunger exists only in the mind of the living."
+	desc = "Hunger weakens this living body."
 	icon_state = "hunger1"
 
 /datum/status_effect/debuff/hungryt2
@@ -22,7 +22,7 @@
 
 /obj/screen/alert/status_effect/debuff/hungryt2
 	name = "Hungry"
-	desc = "Hunger exists only in the mind of the living."
+	desc = "This living body suffers heavily from hunger."
 	icon_state = "hunger2"
 
 /datum/status_effect/debuff/hungryt3
@@ -33,13 +33,13 @@
 
 /obj/screen/alert/status_effect/debuff/hungryt3
 	name = "Hungry"
-	desc = "Hunger exists only in the mind of the living."
+	desc = "My body can barely hold it!"
 	icon_state = "hunger3"
 
 ////////////////////
 
 /datum/status_effect/debuff/thirstyt1
-	id = "thirsty"
+	id = "thirsty1"
 	alert_type = /obj/screen/alert/status_effect/debuff/thirstyt1
 	effectedstats = list("endurance" = -1)
 	duration = 100
@@ -50,25 +50,25 @@
 	icon_state = "thirst1"
 
 /datum/status_effect/debuff/thirstyt2
-	id = "thirsty"
+	id = "thirsty2"
 	alert_type = /obj/screen/alert/status_effect/debuff/thirstyt2
 	effectedstats = list("speed" = -1, "endurance" = -2)
 	duration = 100
 
 /obj/screen/alert/status_effect/debuff/thirstyt2
 	name = "Thirsty"
-	desc = "I need water."
+	desc = "My mouth feels much drier."
 	icon_state = "thirst2"
 
 /datum/status_effect/debuff/thirstyt3
-	id = "thirsty"
+	id = "thirsty3"
 	alert_type = /obj/screen/alert/status_effect/debuff/thirstyt3
 	effectedstats = list("strength" = -1, "speed" = -2, "endurance" = -3)
 	duration = 100
 
 /obj/screen/alert/status_effect/debuff/thirstyt3
 	name = "Thirsty"
-	desc = "I need water."
+	desc = "I urgently need water!"
 	icon_state = "thirst3"
 
 /////////
@@ -157,7 +157,7 @@
 
 /obj/screen/alert/status_effect/debuff/sleepytime
 	name = "Tired"
-	desc = ""
+	desc = "I should get some rest."
 	icon_state = "sleepy"
 
 /datum/status_effect/debuff/trainsleep
@@ -167,5 +167,5 @@
 
 /obj/screen/alert/status_effect/debuff/trainsleep
 	name = "Muscle Soreness"
-	desc = ""
+	desc = "My muscles need some sleep to recover."
 	icon_state = "muscles"

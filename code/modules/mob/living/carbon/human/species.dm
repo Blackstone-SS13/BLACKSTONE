@@ -1241,6 +1241,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!I.species_exception || !is_type_in_list(src, I.species_exception))
 			return FALSE
 
+	var/is_nudist = HAS_TRAIT(H, RTRAIT_NUDIST)
 	var/num_arms = H.get_num_arms(FALSE)
 	var/num_legs = H.get_num_legs(FALSE)
 
@@ -1296,6 +1297,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_ARMOR)
 			if(H.wear_armor)
 				return FALSE
+			if(is_nudist)
+				return FALSE
 			if(I.blocking_behavior & BULKYBLOCKS)
 				if(H.cloak)
 					return FALSE
@@ -1315,6 +1318,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_GLOVES)
 			if(H.gloves)
 				return FALSE
+			if(is_nudist)
+				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_GLOVES) )
 				return FALSE
 			if(num_arms < 1)
@@ -1322,6 +1327,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_SHOES)
 			if(H.shoes)
+				return FALSE
+			if(is_nudist)
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_SHOES) )
 				return FALSE
@@ -1335,14 +1342,14 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_BELT)
 			if(H.belt)
 				return FALSE
-
+			if(is_nudist)
+				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_BELT))
 				return
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_BELT_R)
 			if(H.beltr)
 				return FALSE
-
 			if(!H.belt)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_HIP))
@@ -1351,7 +1358,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_BELT_L)
 			if(H.beltl)
 				return FALSE
-
 			if(!H.belt)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_HIP))
@@ -1368,11 +1374,15 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_PANTS)
 			if(H.wear_pants)
 				return FALSE
+			if(is_nudist)
+				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_PANTS) )
 				return FALSE
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_SHIRT)
 			if(H.wear_shirt)
+				return FALSE
+			if(is_nudist)
 				return FALSE
 			if(I.blocking_behavior & BULKYBLOCKS)
 				if(H.cloak)
@@ -1390,6 +1400,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_CLOAK)
 			if(H.cloak)
+				return FALSE
+			if(is_nudist)
 				return FALSE
 			if( (I.slot_flags & ITEM_SLOT_BACK_R) )
 				if(H.backr)
@@ -1416,6 +1428,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_WRISTS)
 			if(H.wear_wrists)
+				return FALSE
+			if(is_nudist)
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_WRISTS) )
 				return FALSE
@@ -1858,7 +1872,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!nodmg)
 			if(user.limb_destroyer)
 				var/easy_dismember = HAS_TRAIT(target, TRAIT_EASYDISMEMBER) || affecting.rotted
-				if(prob(damage/2) || (easy_dismember && prob(damage/2))) //try twice
+				var/probability = damage / (2 - easy_dismember)
+				if(HAS_TRAIT(target, TRAIT_HARDDISMEMBER) && !easy_dismember)
+					probability = min(probability, 5)
+				if(prob(probability))
 					if(affecting.brute_dam > 0)
 						if(affecting.dismember())
 							playsound(get_turf(target), "desceration", 80, TRUE)
@@ -2262,15 +2279,16 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	//dismemberment
 	var/bloody = 0
-	var/probability = I.get_dismemberment_chance(affecting)
 	var/easy_dismember = HAS_TRAIT(H, TRAIT_EASYDISMEMBER) || affecting.rotted
-	if(prob(probability) || (easy_dismember && prob(probability))) //try twice
-		if(affecting.brute_dam > 0)
-			if(affecting.dismember(I.damtype, user, selzone))
-				bloody = 1
-				I.add_mob_blood(H)
-				user.update_inv_hands()
-				playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
+	var/probability = I.get_dismemberment_chance(affecting)
+	if(HAS_TRAIT(H, TRAIT_HARDDISMEMBER) && !easy_dismember)
+		probability = min(probability, 5)
+	if(affecting.brute_dam && prob(probability))
+		if(affecting.dismember(I.damtype, user, selzone))
+			bloody = 1
+			I.add_mob_blood(H)
+			user.update_inv_hands()
+			playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
 
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == BODYPART_ORGANIC)

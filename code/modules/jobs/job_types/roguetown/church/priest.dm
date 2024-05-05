@@ -16,7 +16,7 @@
 
 	display_order = JDO_PRIEST
 	give_bank_account = 115
-	min_pq = -4
+	min_pq = 2
 
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -39,6 +39,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/holy, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 		if(H.age == AGE_OLD)
 			H.mind.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 		H.change_stat("strength", -1)
@@ -156,19 +157,12 @@
 	if(!recruit.cleric)
 		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
 		holder.holder_mob = recruit
-		//Max devotion limit - Templars are stronger but cannot pray to gain more abilities
-		holder.max_devotion = 200
-		holder.update_devotion(50, 50)
+		//Max devotion limit - Templars are stronger but cannot pray to gain more abilities beyond t1
+		holder.max_devotion = 250
+		holder.max_progression = CLERIC_REQ_1
+		holder.update_devotion(50, 0)
+		holder.grant_spells_templar(recruit)
 	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
-	var/static/list/templar_spells = list(
-		/obj/effect/proc_holder/spell/invoked/lesser_heal, 
-		/obj/effect/proc_holder/spell/targeted/churn, 
-		/obj/effect/proc_holder/spell/targeted/burialrite,
-	)
-	for(var/spell in templar_spells)
-		if(recruit.mind.has_spell(spell))
-			continue
-		recruit.mind.AddSpell(new spell)
 
 /obj/effect/proc_holder/spell/self/convertrole/monk
 	name = "Recruit Acolyte"

@@ -15,11 +15,12 @@
 	"Aasimar"
 	)
 	tutorial = "Chores, some more chores- Even more chores.. Oh how the life of a humble cleric is exhausting… You have faith, but even you know you gave up a life of adventure for that of the security in the Church. Assist the Priest in their daily tasks, maybe today will be the day something interesting happens."
-	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra")
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 	outfit = /datum/outfit/job/roguetown/monk
 
 	display_order = JDO_MONK
 	give_bank_account = TRUE
+	min_pq = 0
 
 /datum/outfit/job/roguetown/monk
 	name = "Acolyte"
@@ -38,6 +39,13 @@
 			wrists = /obj/item/clothing/wrists/roguetown/wrappings
 			shoes = /obj/item/clothing/shoes/roguetown/sandals
 			armor = /obj/item/clothing/suit/roguetown/shirt/robe/astrata
+		if("Noc")
+			head = /obj/item/clothing/head/roguetown/roguehood/nochood
+			neck = /obj/item/clothing/neck/roguetown/psicross/noc
+			wrists = /obj/item/clothing/wrists/roguetown/nocwrappings
+			shoes = /obj/item/clothing/shoes/roguetown/sandals
+			armor = /obj/item/clothing/suit/roguetown/shirt/robe/noc
+			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 		if("Dendor")
 			head = /obj/item/clothing/head/roguetown/dendormask
 			neck = /obj/item/clothing/neck/roguetown/psicross/dendor

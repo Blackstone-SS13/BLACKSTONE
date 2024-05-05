@@ -31,7 +31,7 @@
 	desc = "(RMB WHILE DEFENSE IS ACTIVE) A deceptive half-attack with no follow-through, meant to force your opponent to open their guard. Useless against someone who is dodging."
 	icon_state = "rmbfeint"
 
-/datum/rmb_intent/feint/special_attack(mob/living/user, atom/target)
+/datum/rmb_intent/special_attack(mob/living/user, atom/target)
 	if(!isliving(target))
 		return
 	if(!user)
@@ -55,11 +55,12 @@
 				if(I?.associated_skill)
 					theirskill = L.mind.get_skill_level(I.associated_skill)
 		if(ourskill > theirskill)
-			perc += 100
+			if(istype(user.rmb_intent, /datum/rmb_intent/feint))
+				perc += (ourskill - theirskill)*15
+			else
+				perc += (ourskill - theirskill)*10
 	if(user.STAINT < L.STAINT)
 		perc -= 15
-	if(istype(L.rmb_intent, /datum/rmb_intent/riposte))
-		perc += 15
 	if(L.d_intent == INTENT_DODGE)
 		perc = 0
 	if(!L.cmode)
@@ -94,7 +95,7 @@
 
 /datum/rmb_intent/riposte
 	name = "defend"
-	desc = "Successfully parrying your enemy's attack will open their defense briefly. No delay between dodge and parry rolls. 15% easier to be feinted while active."
+	desc = "No delay between dodge and parry rolls."
 	icon_state = "rmbdef"
 
 /datum/rmb_intent/guard

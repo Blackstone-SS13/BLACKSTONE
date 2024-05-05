@@ -16,6 +16,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/gravedigger
 	pickprob = 11
+	traits_applied = list(RTRAIT_NOSTINK)
 
 /datum/outfit/job/roguetown/adventurer/gravedigger/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -45,4 +46,3 @@
 		H.change_stat("strength", 1)
 		H.change_stat("perception", 1)
 		H.change_stat("intelligence", -2)
-		ADD_TRAIT(H, RTRAIT_NOSTINK, TRAIT_GENERIC)
