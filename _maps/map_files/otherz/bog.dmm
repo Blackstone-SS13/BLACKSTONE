@@ -24,7 +24,7 @@
 "cJ" = (/obj/structure/stairs,/turf/open/transparent/openspace,/area/rogue/indoors)
 "cP" = (/obj/structure/roguewindow/openclose,/turf/open/floor/rogue/metal,/area/rogue/indoors)
 "cV" = (/obj/structure/bed/rogue/inn/hay,/obj/item/bedsheet/rogue/cloth,/turf/open/floor/rogue/cobble,/area/rogue/under/town/basement)
-"cY" = (/obj/structure/bars,/turf/open/floor/rogue/cobblerock,/area/rogue/indoors)
+"cY" = (/obj/structure/bars/tough,/turf/open/floor/rogue/cobblerock,/area/rogue/indoors)
 "db" = (/obj/structure/rack/rogue/shelf/big,/obj/structure/rack/rogue/shelf,/obj/item/reagent_containers/glass/bucket/wooden{pixel_y = 21},/turf/open/floor/rogue/tile{icon_state = "tile"},/area/rogue/indoors)
 "dd" = (/turf/closed/mineral/rogue/bedrock,/area/rogue/outdoors/bog)
 "df" = (/obj/structure/mineral_door/wood/red{locked = 1; lockid = "velder"},/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/indoors)
