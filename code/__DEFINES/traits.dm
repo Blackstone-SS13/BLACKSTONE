@@ -5,6 +5,7 @@
 #define RTRAIT_ZJUMP 					"High Jumping"
 #define RTRAIT_NOSEGRAB 				"Intimidating"
 #define RTRAIT_SEEPRICES				"Giza Blooded"
+#define RTRAIT_SEEPRICES_SHITTY			"Giza-in-training"
 #define RTRAIT_STRONGBITE				"Strong Bite"
 #define RTRAIT_NOBLE					"Noble Blooded"
 #define RTRAIT_EMPATH					"Empath"
@@ -38,6 +39,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_ZJUMP = "Who needs to climb when you can make great leaps?",
 	RTRAIT_NOSEGRAB = "I love to grab the idiots by their noses.",
 	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
+	RTRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... Kind of. I'm kind of bad at it.",
 	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
 	RTRAIT_NOBLE = "<span class='blue'>I'm of noble blood.</span>",
 	RTRAIT_EMPATH = "I can notice stress levels in detail.",
