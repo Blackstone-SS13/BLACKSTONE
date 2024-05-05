@@ -81,6 +81,8 @@
 			msg += " - GM: [admin]"
 		if(reason)
 			msg += " - RSN: [reason]"
+		message_admins("[admin] adjusted [key]'s PQ by [amt] for reason: [reason]")
+		log_admin("[admin] adjusted [key]'s PQ by [amt] for reason: [reason]")
 
 /client/proc/check_pq()
 	set category = "GameMaster"
