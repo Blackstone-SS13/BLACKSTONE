@@ -416,7 +416,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	if(job.plevel_req > client.patreonlevel())
 		testing("PATREONLEVEL [client.patreonlevel()] req [job.plevel_req]")
 		return JOB_UNAVAILABLE_GENERIC
-	if(get_playerquality(ckey) < job.min_pq)
+	if(!isnull(job.min_pq) && (get_playerquality(ckey) < job.min_pq))
 		return JOB_UNAVAILABLE_GENERIC
 	if(!(client.prefs.gender in job.allowed_sexes))
 		return JOB_UNAVAILABLE_RACE

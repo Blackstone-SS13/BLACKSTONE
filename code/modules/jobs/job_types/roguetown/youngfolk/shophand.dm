@@ -5,7 +5,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	
+
 	allowed_races = list("Humen",
 	"Humen",
 	"Elf",
@@ -21,6 +21,7 @@
 	outfit = /datum/outfit/job/roguetown/shophand
 	display_order = JDO_SHOPHAND
 	give_bank_account = TRUE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/shophand/pre_equip(mob/living/carbon/human/H)
 	..()

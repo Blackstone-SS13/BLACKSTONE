@@ -1,5 +1,5 @@
 /datum/advclass/peasant
-	name = "Peasant"
+	name = "Farmer"
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen",
 	"Humen",

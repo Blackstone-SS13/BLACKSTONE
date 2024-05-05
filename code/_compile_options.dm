@@ -11,7 +11,7 @@
 //0 test
 //12 minutes norma
 //#define ROUNDTIMERBOAT (300 MINUTES)
-#define INITIAL_ROUND_TIMER (99 MINUTES)
+#define INITIAL_ROUND_TIMER (120 MINUTES)
 #define ROUND_EXTENSION_TIME (30 MINUTES)
 //180 norma
 //60 test

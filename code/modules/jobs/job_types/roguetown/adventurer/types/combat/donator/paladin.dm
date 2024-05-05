@@ -9,6 +9,7 @@
 	"Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
 	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
+	traits_applied = list(RTRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/paladin/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -39,8 +40,6 @@
 			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 		if("Noc")
 			neck = /obj/item/clothing/neck/roguetown/psicross/noc
-
-
 
 
 	H.adjust_blindness(-3)

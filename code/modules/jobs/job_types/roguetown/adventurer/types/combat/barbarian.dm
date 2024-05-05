@@ -6,6 +6,7 @@
 	allowed_races = list("Humen",
 	"Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
+	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
 
 /datum/outfit/job/roguetown/adventurer/barbarian/pre_equip(mob/living/carbon/human/H)
 	..() // Compared to the Warrior the barbarian is more suited to the wilds. But they are able to make use of almost any weapon by talent and killer instinct.

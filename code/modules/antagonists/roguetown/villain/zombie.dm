@@ -27,7 +27,6 @@
 	var/static/list/traits_zombie = list(
 		RTRAIT_NOFATSTAM,
 		TRAIT_NOMOOD,
-		TRAIT_NOLIMBDISABLE,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_NOBREATH,
@@ -41,6 +40,7 @@
 		TRAIT_SPELLCOCKBLOCK,
 		TRAIT_ZOMBIE_SPEECH,
 		TRAIT_ZOMBIE_IMMUNE,
+		TRAIT_BLOODLOSS_IMMUNE,
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
@@ -59,7 +59,8 @@
 		if(!V.disguised)
 			return "<span class='boldnotice'>Another deadite.</span>"
 	if(istype(examined_datum, /datum/antagonist/zombie))
-		return "<span class='boldnotice'>Another deadite. My ally.</span>"
+		var/datum/antagonist/zombie/fellow_zombie = examined_datum
+		return "<span class='boldnotice'>Another deadite. [fellow_zombie.has_turned ? "My ally." : "<span class='warning'>Hasn't turned yet.</span>"]</span>"
 	if(istype(examined_datum, /datum/antagonist/skeleton))
 		return "<span class='boldnotice'>Another deadite.</span>"
 
@@ -107,8 +108,8 @@
 			REMOVE_TRAIT(zombie, trait, "[type]")
 		zombie.remove_client_colour(/datum/client_colour/monochrome)
 		if(has_turned && become_rotman)
-			zombie.STACON = max(zombie.STACON - 3, 1) //ur rotting bro
-			zombie.STASPD = max(zombie.STASPD - 4, 1)
+			zombie.STACON = max(zombie.STACON - 2, 1) //ur rotting bro
+			zombie.STASPD = max(zombie.STASPD - 3, 1)
 			zombie.STAINT = max(zombie.STAINT - 3, 1)
 			for(var/trait in traits_rotman)
 				ADD_TRAIT(zombie, trait, "[type]")
@@ -152,8 +153,9 @@
 	zombie.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	zombie.update_a_intents()
 	zombie.setToxLoss(0, 0)
-	zombie.aggressive = 1
+	zombie.aggressive = TRUE
 	zombie.mode = AI_IDLE
+	zombie.handle_ai()
 
 	var/obj/item/organ/eyes/eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(zombie, drop_if_replaced = TRUE)
@@ -172,15 +174,14 @@
 	zombie.skin_tone = SKIN_COLOR_ROT
 	zombie.update_body()
 
-	if(prob(8))
-		zombie.STASTR = 18
-	else
-		zombie.STASTR = rand(12,14)
 
-	if(prob(8))
-		zombie.STASPD = 7
-	else
-		zombie.STASPD = rand(2,4)
+	// Now you get what you had in life + the debuff from rotting limbs aka -8
+	// Outside of one 2% chance remaining for zombie era strength
+	if(prob(2))
+		zombie.STASTR = 18
+
+	// This is the original first commit values for it, aka 5-7
+	zombie.STASPD = rand(5,7)
 
 	zombie.STAINT = 1
 	last_bite = world.time
@@ -202,9 +203,9 @@
 	if(world.time - last_bite < 10 SECONDS)
 		return
 	var/obj/item/grabbing/bite/bite = zombie.get_item_by_slot(SLOT_MOUTH)
-	if(!bite)
+	if(!bite || !get_location_accessible(src, BODY_ZONE_PRECISE_MOUTH, grabs="other"))
 		for(var/mob/living/carbon/human in view(1, zombie))
-			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction))
+			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction) || HAS_TRAIT(human, TRAIT_ZOMBIE_IMMUNE))
 				continue
 			human.onbite(zombie)
 	else if(istype(bite))
@@ -280,7 +281,7 @@
  * We instead just transform at the end
  */
 /mob/living/carbon/human/proc/zombie_infect_attempt()
-	if(!prob(7))
+	if(!prob(3)) // Since zombies are biting a lot now, we drop this down to 3% chance of a conversion
 		return 
 	var/datum/antagonist/zombie/zombie_antag = zombie_check()
 	if(!zombie_antag)

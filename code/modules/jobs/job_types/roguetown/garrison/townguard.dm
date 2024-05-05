@@ -21,7 +21,7 @@
 
 	outfit = /datum/outfit/job/roguetown/guardsman
 	give_bank_account = 16
-	min_pq = -4
+	min_pq = 2
 
 	/// Chance to be spawned as a bowman instead
 	var/bowman_chance = 35
@@ -58,6 +58,7 @@
 
 /datum/outfit/job/roguetown/guardsman/pre_equip(mob/living/carbon/human/H)
 	. = ..()
+	head = /obj/item/clothing/head/roguetown/helmet/leather
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	cloak = /obj/item/clothing/cloak/stabard/guard
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/merc

@@ -108,7 +108,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 
 	var/list/ignoring = list()
 
-	var/clientfps = 20//0 is sync
+	var/clientfps = 100//0 is sync
 
 	var/parallax
 
@@ -668,7 +668,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<b>Income Updates:</b> <a href='?_src_=prefs;preference=income_pings'>[(chat_toggles & CHAT_BANKCARD) ? "Allowed" : "Muted"]</a><br>"
 			dat += "<br>"
 */
-//			dat += "<b>FPS:</b> <a href='?_src_=prefs;preference=clientfps;task=input'>[clientfps]</a><br>"
+			dat += "<b>FPS:</b> <a href='?_src_=prefs;preference=clientfps;task=input'>[clientfps]</a><br>"
 /*
 			dat += "<b>Parallax (Fancy Space):</b> <a href='?_src_=prefs;preference=parallaxdown' oncontextmenu='window.location.href=\"?_src_=prefs;preference=parallaxup\";return false;'>"
 			switch (parallax)
@@ -985,7 +985,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(job.plevel_req > user.client.patreonlevel())
 				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
 				continue
-			if(get_playerquality(user.ckey) < job.min_pq && !job.required)
+			if(!job.required && !isnull(job.min_pq) && (get_playerquality(user.ckey) < job.min_pq))
 				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
 				continue
 			if(!(user.client.prefs.age in job.allowed_ages))
@@ -1155,7 +1155,7 @@ Slots: [job.spawn_positions]</span>
 		if(1)
 			jpval = JP_HIGH
 
-	if(job.required && get_playerquality(user.ckey) < job.min_pq)
+	if(job.required && !isnull(job.min_pq) && (get_playerquality(user.ckey) < job.min_pq))
 		if(job_preferences[job.title] == JP_LOW)
 			jpval = null
 		else

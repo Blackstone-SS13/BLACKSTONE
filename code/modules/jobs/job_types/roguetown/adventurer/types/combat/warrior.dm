@@ -10,7 +10,7 @@
 	"Dark Elf",
 	"Tiefling")
 	outfit = /datum/outfit/job/roguetown/adventurer/sfighter
-
+	traits_applied = list(RTRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/sfighter/pre_equip(mob/living/carbon/human/H)
 	..()

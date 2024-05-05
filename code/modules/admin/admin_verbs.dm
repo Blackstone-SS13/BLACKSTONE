@@ -11,6 +11,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/admin_ghost,
 	/client/proc/ghost_up,
 	/datum/admins/proc/start_vote,
+	/client/proc/toggle_autovote,
 	/datum/admins/proc/show_player_panel,
 	/datum/admins/proc/admin_heal,
 	/datum/admins/proc/admin_sleep,
@@ -426,6 +427,14 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		else
 			mob.invisibility = INVISIBILITY_OBSERVER
 			to_chat(mob, "<span class='adminnotice'><b>Invisimin on. You are now as invisible as a ghost.</b></span>")
+
+/client/proc/toggle_autovote()
+	set name = "Toggle Magnum Mode"
+	set category = "Server"
+	if(check_rights(R_POLL))
+		SSticker.autovote = !SSticker.autovote
+		message_admins(SSticker.autovote ? "[key_name_admin(usr)] has enabled automatic round restart votes." : "[key_name_admin(usr)] has disabled automatic round restart votes.")
+		log_admin(SSticker.autovote ? "[key_name(usr)] has enabled automatic round restart votes." : "[key_name(usr)] has disabled automatic round restart votes.")
 
 /client/proc/check_antagonists()
 	set name = "Check Antagonists"

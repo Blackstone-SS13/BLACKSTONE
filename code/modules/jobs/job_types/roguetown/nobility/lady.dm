@@ -18,6 +18,7 @@
 
 	display_order = JDO_LADY
 	give_bank_account = TRUE
+	min_pq = 3
 
 /datum/outfit/job/roguetown/lady/pre_equip(mob/living/carbon/human/H)
 	. = ..()

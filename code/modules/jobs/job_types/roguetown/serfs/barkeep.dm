@@ -21,6 +21,7 @@
 	outfit = /datum/outfit/job/roguetown/barkeep
 	display_order = JDO_BARKEEP
 	give_bank_account = 43
+	min_pq = -4
 
 /datum/outfit/job/roguetown/barkeep/pre_equip(mob/living/carbon/human/H)
 	..()

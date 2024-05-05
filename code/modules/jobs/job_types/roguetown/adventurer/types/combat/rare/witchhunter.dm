@@ -9,6 +9,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/puritan
 	maxchosen = 2
 	pickprob = 11
+	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
 /datum/outfit/job/roguetown/adventurer/puritan/pre_equip(mob/living/carbon/human/H)
 	..()

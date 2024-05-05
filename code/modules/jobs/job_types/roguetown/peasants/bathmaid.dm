@@ -23,6 +23,7 @@
 	display_order = JDO_NIGHTMAIDEN
 	give_bank_account = TRUE
 	can_random = FALSE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/nightmaiden/pre_equip(mob/living/carbon/human/H)
 	..()

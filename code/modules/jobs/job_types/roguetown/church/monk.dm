@@ -20,6 +20,7 @@
 
 	display_order = JDO_MONK
 	give_bank_account = TRUE
+	min_pq = 0
 
 /datum/outfit/job/roguetown/monk
 	name = "Acolyte"
