@@ -38,6 +38,10 @@
 		H.change_stat("constitution", -2)
 		H.change_stat("speed", -2)
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
+	//50% chance to be raceswapped to Giza because slop lore
+	if(ishumannorthern(H) && prob(50))
+		H.skin_tone = SKIN_COLOR_GIZA
+		H.update_body()
 
 	if(H.charflaw)
 		if(H.charflaw.type != /datum/charflaw/badsight)

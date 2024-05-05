@@ -33,8 +33,7 @@
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
 	//50% chance to be raceswapped to Giza because slop lore
 	if(ishumannorthern(H) && prob(50))
-		var/list/skin_slop = H.dna.species.get_skin_list()
-		H.skin_tone = skin_slop["Giza"]
+		H.skin_tone = SKIN_COLOR_GIZA
 		H.update_body()
 	if(H.gender == MALE)
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
