@@ -8,9 +8,9 @@
 	allowed_races = list(
 		"Humen",
 		"Elf",
+		"Half-Elf",
 		"Dwarf",
 		"Aasimar",
-		"Half-Elf",
 	) //same shit as town guard
 	allowed_sexes = list(MALE)
 	allowed_ages = list(AGE_YOUNG)

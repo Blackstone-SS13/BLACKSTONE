@@ -10,9 +10,9 @@
 	allowed_races = list(
 		"Humen",
 		"Elf",
+		"Half-Elf",
 		"Dwarf",
 		"Aasimar",
-		"Half-Elf",
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	tutorial = "You've enough training to point your spear in the right direction, and you've enough mammons in your pocket to want to keep this job: But you know youre just as disposable as the last poor bastards to call themselves a Guard."

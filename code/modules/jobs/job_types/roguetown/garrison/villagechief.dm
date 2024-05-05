@@ -10,9 +10,9 @@
 	allowed_races = list(
 		"Humen",
 		"Elf",
+		"Half-Elf",
 		"Dwarf",
 		"Aasimar",
-		"Half-Elf",
 	) //same as town guard
 	allowed_ages = list(AGE_OLD)
 	tutorial = "You are as venerable and ancient as the trees themselves, wise even for your years. The King may lead officially, but people look to you as Ealdorman to solve lesser issues. Remember the old ways of the law, not everything must end in bloodshed: no matter how much the Guards wish it were the case."
