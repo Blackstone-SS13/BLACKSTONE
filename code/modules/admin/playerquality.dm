@@ -192,6 +192,10 @@
 	if(!amt2change && !raisin)
 		return
 	adjust_playerquality(amt2change, theykey, src.ckey, raisin)
+	for(var/client/C in GLOB.clients) // I hate this, but I'm not refactoring the cancer above this point.
+		if(lowertext(C.key) == lowertext(theykey))
+			to_chat(C, "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message linkify\">Your PQ has been adjusted by [amt2change] by [key] for reason: [raisin]</span></span>")
+			return
 
 /proc/add_commend(key, giver)
 	if(!giver || !key)
