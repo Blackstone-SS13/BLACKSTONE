@@ -280,10 +280,12 @@
 			cur_picked_class = locvar_check
 			class_select_slop()
 
+	/* hahaha.... woops
 	if(href_list["triumph_menu"])
 		to_chat(world, "TODO: TRIUMPH MENU")
 		browser_slop()
 		return
+	*/
 
 /datum/class_select_handler/proc/ForceCloseMenus()
 	linked_client << browse(null, "window=class_handler_main")
