@@ -71,7 +71,10 @@
 				<tbody>
 	"}
 
+	
 	if(current_category == TRIUMPH_CAT_ACTIVE_DATUMS)
+		// Mostly so we can stop the filler message from not being displayed if someone has a non-visible triumph buy, and theres nothing else in.
+		var/found_one_blank_sloppy_toppy = FALSE 
 		if(SStriumphs.active_triumph_buy_queue.len)
 			for(var/datum/triumph_buy/auugh in SStriumphs.active_triumph_buy_queue)
 				if(!auugh.visible_on_active_menu) // If we aren't set to be able to be visible on the main menu
@@ -83,7 +86,10 @@
 						<td class='triumph_filler_cells'><a class='triumph_text_buy' href='?src=\ref[src];handle_buy_button=\ref[auugh];'>UNBUY</a></td>
 					</tr>
 				"}
-		else
+				found_one_blank_sloppy_toppy = TRUE // WE GOT ONE WOOHOO
+
+
+		if(!found_one_blank_sloppy_toppy) // We didn't find anything that could be visible, so cram in the mssage
 			data += {"
 				<tr class='triumph_text_row'>
 					<td class='triumph_text_desc'>CURRENTLY NOTHING</td>
@@ -132,7 +138,7 @@
 	</html>
 	"}
 
-	linked_client << browse(data, "window=triumph_buy_window;size=500x760;can_close=1;can_minimize=0;can_maximize=0;can_resize=0;titlebar=1")
+	linked_client << browse(data, "window=triumph_buy_window;size=500x760;can_close=0;can_minimize=0;can_maximize=0;can_resize=0;titlebar=1")
 
 // TRIUMPH BUY MENU SIDED PROC
 /datum/triumph_buy_menu/Topic(href, list/href_list)

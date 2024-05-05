@@ -4,6 +4,7 @@
 	category = TRIUMPH_CAT_ROUND_EFX
 	pre_round_only = TRUE
 	fire_on_PostSetup = TRUE
+	visible_on_active_menu = TRUE
 
 	conflicts_with = list(/datum/triumph_buy/goblin_class)
 
