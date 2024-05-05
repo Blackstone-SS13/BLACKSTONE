@@ -53,10 +53,11 @@
 		return
 	return SStriumphs.get_triumphs(key)
 
-
+/*
 /client/proc/adjusttriumph()
 	set category = "GameMaster"
 	set name = "Adjust Triumphs"
 	var/input = input(src, "how much") as num
 	if(mob && input)
 		mob.adjust_triumphs(input)
+*/
