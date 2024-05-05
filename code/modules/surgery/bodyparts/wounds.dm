@@ -88,7 +88,9 @@
 				temporary_crit_paralysis()
 				playsound(owner, "drybreak", 100, FALSE)
 		return FALSE
-	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
+	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH)
+		for(var/datum/wound/fracture/W in wounds)
+			return FALSE
 		if(brute_dam)
 			dam += round(max((brute_dam / max_damage)*20, 1), 1)
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
@@ -96,29 +98,29 @@
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				dam += 30
-		var/foundf 
-		for(var/datum/wound/fracture/W in wounds)
-			foundf= TRUE
-		if(!foundf)
-			if(prob(round( max(dam / 3, 1), 1)) )
-				var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-				add_wound(/datum/wound/fracture)
-				if(prob(3))
-					playsound(owner, pick('sound/combat/tf2crit.ogg'), 100, FALSE)
-				else
-					playsound(owner, "wetbreak", 100, FALSE)
-				owner.emote("paincrit", TRUE)
-				owner.Slowdown(20)
-				shake_camera(owner, 2, 2)
-				update_disabled()
-				return FALSE
+		if(prob(round( max(dam / 3, 1), 1)) )
+			var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
+			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
+			add_wound(/datum/wound/fracture)
+			if(prob(3))
+				playsound(owner, pick('sound/combat/tf2crit.ogg'), 100, FALSE)
+			else
+				playsound(owner, "wetbreak", 100, FALSE)
+			owner.emote("paincrit", TRUE)
+			owner.Slowdown(20)
+			shake_camera(owner, 2, 2)
+			update_disabled()
+			return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		if(!can_bloody_wound())
 			return FALSE
-		if(user && bclass != BCLASS_CHOP)
-			if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-				dam += 30
+		if(user)
+			if(bclass == BCLASS_CHOP)
+				if(istype(user.rmb_intent, /datum/rmb_intent/strong))
+					dam += 30
+			else
+				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
+					dam += 30
 		if(prob(round(max(dam / 3, 1), 1)))
 			for(var/datum/wound/artery/A in wounds)
 				if(bclass == BCLASS_STAB)
@@ -145,7 +147,9 @@
 				owner.emote("groin")
 				owner.Stun(10)
 		return FALSE
-	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
+	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH)
+		for(var/datum/wound/fracture/W in wounds)
+			return FALSE
 		if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 			if(dam)
 				owner.emote("groin")
@@ -155,37 +159,31 @@
 			dam += round(max((brute_dam / max_damage)*20, 1), 1)
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 			dam += 20
-		if(user)
-			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
-				dam += 30
-		var/foundf
-		for(var/datum/wound/fracture/W in wounds)
-			foundf= TRUE
-		if(!foundf)
-			if(prob(round(max(dam / 4, 1), 1)))
-				var/list/phrases = list("The ribs shatter in a splendid way!", "The ribs are smashed!", "The chest is mauled!", "The chest caves in!")
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-				add_wound(/datum/wound/fracture)
-				owner.emote("paincrit", TRUE)
-				if(prob(3))
-					playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-				else
-					playsound(owner, "wetbreak", 100, FALSE)
-				update_disabled()
-				owner.Slowdown(20)
-				shake_camera(owner, 2, 2)
-				return FALSE
+		if(prob(round(max(dam / 3, 1), 1)))
+			var/list/phrases = list("The ribs shatter in a splendid way!", "The ribs are smashed!", "The chest is mauled!", "The chest caves in!")
+			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
+			add_wound(/datum/wound/fracture)
+			owner.emote("paincrit", TRUE)
+			if(prob(3))
+				playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
+			else
+				playsound(owner, "wetbreak", 100, FALSE)
+			update_disabled()
+			owner.Slowdown(20)
+			shake_camera(owner, 2, 2)
+			return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		if(!can_bloody_wound())
 			return FALSE
-		if(brute_dam && bclass != BCLASS_CHOP)
+		if(brute_dam)
 			dam += round(max((brute_dam / max_damage)*20, 1), 1)
-		if(user && bclass != BCLASS_CHOP)
-			if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-				dam += 30
-		var/foundy
-		for(var/datum/wound/artery/A in wounds)
-			foundy= TRUE
+		if(user)
+			if(bclass == BCLASS_CHOP)
+				if(istype(user.rmb_intent, /datum/rmb_intent/strong))
+					dam += 30
+			else
+				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
+					dam += 30
 		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
 			if (prob(round(max(dam / 3, 1), 1)))
 				if(!can_bloody_wound())
@@ -223,15 +221,13 @@
 				if(organ_spilled)
 					shake_camera(owner, 2, 2)
 					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] spills [owner.p_their()] organs!</span>"
-					if(!foundy)
-						add_wound(/datum/wound/artery)
-						owner.emote("paincrit", TRUE)
-						owner.Slowdown(20)
-						shake_camera(owner, 2, 2)
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					return TRUE
 				return FALSE
 		if(prob(round(max(dam / 4, 1), 1)))
+			var/foundy
+			for(var/datum/wound/artery/A in wounds)
+				foundy= TRUE
 			if(!foundy)
 				if(prob(3))
 					playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
@@ -283,7 +279,7 @@
 				if(!resistance)
 					owner.death()
 		return FALSE
-	if(bclass == BCLASS_BLUNT || bclass == BCLASS_PICK || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
+	if(bclass == BCLASS_BLUNT || bclass == BCLASS_PICK || bclass == BCLASS_SMASH)
 		if(dam < 5)
 			return FALSE
 		var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
@@ -298,32 +294,30 @@
 				from_behind = TRUE
 				used += 50
 			if(can_bloody_wound())
-				if(prob(used) && bclass != BCLASS_CHOP || (brute_dam >= max_damage))
+				if(prob(used) || (brute_dam >= max_damage))
 					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] is knocked out[from_behind ? " FROM BEHIND" : ""]!</span>"
 					owner.flash_fullscreen("whiteflash3")
 					owner.Unconscious(5 SECONDS + (from_behind * 10 SECONDS))
 					if(owner.client)
 						winset(owner.client, "outputwindow.output", "max-lines=1")
 						winset(owner.client, "outputwindow.output", "max-lines=100")
-				return FALSE
-		var/foundf 
+				return FALSE 
 		for(var/datum/wound/fracture/W in wounds)
-			foundf= TRUE
-		if(!foundf)
-			if(prob(used) && (brute_dam / max_damage >= 0.9))
-				var/list/phrases = list("The skull shatters in a gruesome way!", "The head is smashed!", "The skull is broken!", "The skull caves in!")
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-				add_wound(/datum/wound/fracture)
-				if(prob(3))
-					playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-				else
-					playsound(owner, "headcrush", 100, FALSE)
-				update_disabled()
-				shake_camera(owner, 2, 2)
-				if(!resistance)
-					owner.death()
-					brainkill = TRUE
-				return FALSE
+			return FALSE
+		if(prob(used) && (brute_dam / max_damage >= 0.9))
+			var/list/phrases = list("The skull shatters in a gruesome way!", "The head is smashed!", "The skull is broken!", "The skull caves in!")
+			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
+			add_wound(/datum/wound/fracture)
+			if(prob(3))
+				playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
+			else
+				playsound(owner, "headcrush", 100, FALSE)
+			update_disabled()
+			shake_camera(owner, 2, 2)
+			if(!resistance)
+				owner.death()
+				brainkill = TRUE
+			return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		if(!can_bloody_wound())
 			return FALSE
