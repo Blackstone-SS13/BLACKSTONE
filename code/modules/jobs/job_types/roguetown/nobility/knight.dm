@@ -34,7 +34,7 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/merc
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/full
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor
-	beltl = /obj/item/keyring/guardcastle
+	beltl = /obj/item/keyring/knight
 	belt = /obj/item/storage/belt/rogue/leather/hand
 	backr = /obj/item/storage/backpack/rogue/satchel
 	if(H.mind)
