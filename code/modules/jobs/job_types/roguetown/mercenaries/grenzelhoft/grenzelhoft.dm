@@ -27,12 +27,11 @@
 	head = /obj/item/clothing/head/roguetown/chaperon
 
 	//quick and gay way to do random loadouts
-	var equipment = rand(1, 2)
-	if (equipment == 1) {
+	var/equipment = rand(1, 2)
+	if(equipment == 1)
 		r_hand = /obj/item/rogueweapon/spear/billhook
-	} else if (equipment == 2) {
+	else if (equipment == 2)
 		r_hand = /obj/item/rogueweapon/halberd
-	}
 	var/obj/item/flashlight/flare/torch/T = new()
 	T.spark_act()
 	H.put_in_hands(T,forced=TRUE)

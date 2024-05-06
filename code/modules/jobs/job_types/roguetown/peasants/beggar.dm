@@ -6,11 +6,14 @@
 	total_positions = -1
 	spawn_positions = -1
 
-	allowed_races = list("Humen",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Dark Elf"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Dwarf",
+		"Aasimar",
+		"Half-Elf",
+		"Tiefling",
+		"Dark Elf",
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	outfit = /datum/outfit/job/roguetown/vagrant

@@ -208,8 +208,7 @@
 					H.change_stat("endurance", 4)
 */
 	if(ishumannorthern(H) && prob(70))
-		var/list/skin_slop = H.dna.species.get_skin_list()
-		H.skin_tone = skin_slop["Gronn"]
+		H.skin_tone = SKIN_COLOR_GRONN
 		H.update_body()
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)

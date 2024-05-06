@@ -7,9 +7,7 @@
 	spawn_positions = 8
 
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen"
-	)
+	allowed_races = list("Humen")
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	tutorial = "Having proven yourself loyal and capable, you are entrusted to defend the Royal Family and their Court, trained regularly in combat and siege warfare you stand a small chance of surviving the King's reign."
 	display_order = JDO_CASTLEGUARD
@@ -17,7 +15,7 @@
 
 	outfit = /datum/outfit/job/roguetown/manorguard
 	give_bank_account = 22
-	min_pq = 3
+	min_pq = 2
 
 
 /datum/job/roguetown/manorguard/after_spawn(mob/living/L, mob/M, latejoin = TRUE)

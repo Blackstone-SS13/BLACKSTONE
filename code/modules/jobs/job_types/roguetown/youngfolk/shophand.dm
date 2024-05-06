@@ -6,12 +6,14 @@
 	total_positions = 2
 	spawn_positions = 2
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Dwarf",
+		"Aasimar",
+		"Half-Elf",
+		"Tiefling",
+		"Dark Elf",
 	)
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_YOUNG)
@@ -25,7 +27,7 @@
 
 /datum/outfit/job/roguetown/shophand/pre_equip(mob/living/carbon/human/H)
 	..()
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
+	ADD_TRAIT(H, RTRAIT_SEEPRICES_SHITTY, "[type]")
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
@@ -34,10 +36,6 @@
 		beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltl = /obj/item/keyring/merchant
 		backr = /obj/item/storage/backpack/rogue/satchel
-		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-			H.change_stat("strength", -1)
-
 	if(H.gender == FEMALE)
 		pants = /obj/item/clothing/under/roguetown/tights
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/blue
@@ -46,6 +44,16 @@
 		beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltl = /obj/item/keyring/merchant
 		backr = /obj/item/storage/backpack/rogue/satchel
-		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-			H.change_stat("strength", -1)
+	if(H.mind)
+		//basically orphan+ skills
+		H.mind.adjust_skillrank(/datum/skill/misc/stealing, rand(3,6), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, rand(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/labor/mathematics, rand(2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, rand(1,2), TRUE)
+		H.change_stat("strength", -2)
+		H.change_stat("intelligence", 1)
+		H.change_stat("perception", 1)
+		H.change_stat("fortune", 2)
