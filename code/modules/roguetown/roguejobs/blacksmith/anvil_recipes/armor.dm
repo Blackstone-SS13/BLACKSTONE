@@ -44,19 +44,19 @@
 	created_item = /obj/item/clothing/suit/roguetown/armor/chainmail
 
 /datum/anvil_recipe/armor/hauberk
-	name = "hauberk (+2 steel)"
+	name = "hauberk (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 
 /datum/anvil_recipe/armor/plate
-	name = "half-plate armor (+3 steel)"
+	name = "half-plate armor (+2 steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel,/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate
 
 /datum/anvil_recipe/armor/platefull
-	name = "full-plate armor (+4 steel)"
+	name = "full-plate armor (+3 steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/full
@@ -82,7 +82,7 @@
 	created_item = /obj/item/clothing/under/roguetown/chainlegs
 
 /datum/anvil_recipe/armor/hplate
-	name = "cuirass (+2 steel)"
+	name = "cuirass (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/half
@@ -113,25 +113,25 @@
 	created_item = /obj/item/clothing/head/roguetown/helmet/sallet
 
 /datum/anvil_recipe/armor/helmetsallv
-	name = "visored sallet (+2 steel)"
+	name = "visored sallet (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/sallet/visored
 
 /datum/anvil_recipe/armor/helmetbuc
-	name = "bucket helmet (+2 steel)"
+	name = "bucket helmet (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 
 /datum/anvil_recipe/armor/helmetpig
-	name = "pigface helmet (+2 steel)"
+	name = "pigface helmet (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/pigface
 
 /datum/anvil_recipe/armor/helmetknight
-	name = "knight's helmet (+2 steel)"
+	name = "knight's helmet (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/knight
@@ -147,25 +147,25 @@
 	created_item = /obj/item/clothing/mask/rogue/facemask/steel
 
 /datum/anvil_recipe/armor/astratahelm
-	name = "astrata helmet (+2 steel)"
+	name = "astrata helmet (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
 
 /datum/anvil_recipe/armor/necrahelm
-	name = "necra helmet (+2 steel)"
+	name = "necra helmet (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
 
 /datum/anvil_recipe/armor/nochelm
-	name = "noc helmet (+2 steel)"
+	name = "noc helmet (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
 
 /datum/anvil_recipe/armor/dendorhelm
-	name = "dendor helmet (+2 steel)"
+	name = "dendor helmet (+steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
