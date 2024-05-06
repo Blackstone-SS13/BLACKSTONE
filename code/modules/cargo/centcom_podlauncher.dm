@@ -13,6 +13,7 @@
 	set name = "Config/Launch Supplypod"
 	set desc = ""
 	set category = "Admin"
+	set hidden = 1
 	var/datum/centcom_podlauncher/plaunch  = new(usr)//create the datum
 	plaunch.ui_interact(usr)//datum has a tgui component, here we open the window
 

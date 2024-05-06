@@ -7,12 +7,12 @@
 	spawn_positions = 10
 	selection_color = JCOLOR_SOLDIER
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Dwarf",
-	"Aasimar",
-	"Half-Elf"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Aasimar",
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	tutorial = "Responsible for the safety of the town and the enforcement of the King's law, you are the vanguard of the city faced with punishing those who defy his Royal Majesty. Though you've many lords to obey, as both the Church and the Sheriff have great sway over your life."
@@ -21,7 +21,7 @@
 
 	outfit = /datum/outfit/job/roguetown/guardsman
 	give_bank_account = 16
-	min_pq = 2
+	min_pq = 1
 
 	/// Chance to be spawned as a bowman instead
 	var/bowman_chance = 35

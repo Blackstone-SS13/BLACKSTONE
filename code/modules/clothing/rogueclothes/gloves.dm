@@ -79,13 +79,12 @@
 	name = "plate gauntlets"
 	desc = ""
 	icon_state = "gauntlets"
-	armor = list("melee" = 100, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CHOP, BCLASS_CUT, BCLASS_BLUNT)
 	resistance_flags = null
 	blocksound = PLATEHIT
-	body_parts_covered = ARMS|HANDS
 
-	max_integrity = 400
+	max_integrity = 300
 	blade_dulling = DULLING_BASH
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'

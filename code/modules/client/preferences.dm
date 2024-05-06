@@ -986,7 +986,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
 				continue
 			if(!job.required && !isnull(job.min_pq) && (get_playerquality(user.ckey) < job.min_pq))
-				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
+				HTML += "<font color=#a59461>[used_name] (Min PQ: [job.min_pq])</font></td> <td> </td></tr>"
 				continue
 			if(!(user.client.prefs.age in job.allowed_ages))
 				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
@@ -1472,9 +1472,7 @@ Slots: [job.spawn_positions]</span>
 		user.show_triumphs_list()
 
 	else if(href_list["preference"] == "playerquality")
-		var/amt = get_commends(user.ckey)
-		to_chat(user, "PlayerQuality represents the aggregate data collected automatically by the game to determine your reliability level as a RolePlayer. <font color='blue'>You have earned [amt] commendations from other players.</font>")
-
+		check_pq_menu(user.ckey)
 
 	else if(href_list["preference"] == "keybinds")
 		switch(href_list["task"])

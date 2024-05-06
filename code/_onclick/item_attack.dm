@@ -120,7 +120,7 @@
 		user.rogfat_add(10)
 	if(M.checkdefense(user.used_intent, user))
 		if(M.d_intent == INTENT_PARRY)
-			if(!M.get_active_held_item()) //we parried with a bracer, redirect damage
+			if(!M.get_active_held_item() && !M.get_inactive_held_item()) //we parried with a bracer, redirect damage
 				if(M.active_hand_index == 1)
 					user.tempatarget = "l_arm"
 				else
