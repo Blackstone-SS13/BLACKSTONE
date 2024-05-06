@@ -79,8 +79,6 @@
 			beltr = /obj/item/rogueweapon/huntingknife
 			id = /obj/item/clothing/ring/silver
 			cloak = /obj/item/clothing/cloak/tabard/crusader
-			if(prob(30))
-				head = /obj/item/clothing/head/roguetown/helmet/sallet/visored
 			if(prob(70))
 				backr = /obj/item/rogueweapon/sword
 			else
@@ -119,9 +117,9 @@
 			id = /obj/item/clothing/ring/silver
 			cloak = /obj/item/clothing/cloak/tabard/crusader
 			backr = /obj/item/rogueweapon/flail
-			if(prob(40))
+			if(prob(50))
 				l_hand = /obj/item/rogueweapon/shield/wood
-			else if(prob(20))
+			else
 				l_hand = /obj/item/rogueweapon/shield/tower/metal
 			backl = /obj/item/storage/backpack/rogue/satchel
 		
