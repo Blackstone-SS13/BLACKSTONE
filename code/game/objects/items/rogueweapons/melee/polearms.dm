@@ -46,7 +46,7 @@
 	pixel_x = -16
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
-	wdefense = 10
+	wdefense = 2
 	bigboy = TRUE
 	gripsprite = TRUE
 	associated_skill = /datum/skill/combat/polearms
@@ -92,7 +92,7 @@
 
 
 /obj/item/rogueweapon/spear
-	force = 18
+	force = 15
 	force_wielded = 30
 	possible_item_intents = list(SPEAR_THRUST, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, SPEAR_BASH)
@@ -108,16 +108,15 @@
 	gripsprite = TRUE
 	wlength = WLENGTH_GREAT
 	w_class = WEIGHT_CLASS_BULKY
-	slot_flags = ITEM_SLOT_BACK
-	minstr = 4
-	max_blade_int = 150
+	minstr = 8
+	max_blade_int = 100
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/skill/combat/polearms
 	dropshrink = 0.6
 	blade_dulling = DULLING_BASHCHOP
 	walking_stick = TRUE
-	wdefense = 6
+	wdefense = 4
 	thrown_bclass = BCLASS_STAB
 	throwforce = 25
 
@@ -136,10 +135,8 @@
 	icon_state = "billhook"
 	smeltresult = /obj/item/ingot/steel
 	max_blade_int = 200
-	minstr = 6
+	minstr = 8
 	wdefense = 6
-	force = 15
-	force_wielded = 33
 
 /obj/item/rogueweapon/spear/improvisedbillhook
 	force = 12
@@ -175,12 +172,12 @@
 	max_integrity = 50
 
 /obj/item/rogueweapon/halberd
-	force = 10
-	force_wielded = 36
+	force = 15
+	force_wielded = 30
 	possible_item_intents = list(SPEAR_THRUST, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(SPEAR_THRUST,SPEAR_CUT, /datum/intent/axe/chop, SPEAR_BASH) 
+	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, /datum/intent/axe/chop, SPEAR_BASH)
 	name = "halberd"
-	desc = "An iron halberd -- designed to defeat armor and crush opponents from afar."
+	desc = "An iron halberd, mostly used by town guards."
 	icon_state = "halberd"
 	icon = 'icons/roguetown/weapons/64.dmi'
 	pixel_y = -16
@@ -199,7 +196,7 @@
 	dropshrink = 0.6
 	blade_dulling = DULLING_BASHCHOP
 	walking_stick = TRUE
-	wdefense = 4
+	wdefense = 6
 
 /obj/item/rogueweapon/halberd/getonmobprop(tag)
 	. = ..()
