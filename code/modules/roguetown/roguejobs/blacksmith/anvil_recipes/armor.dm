@@ -45,7 +45,8 @@
 /datum/anvil_recipe/armor/studded
 	name = "studded leather armor (+leather armor)"
 	req_bar = /obj/item/ingot/iron
-	additional_items = list(/obj/item/clothing/suit/roguetown/armor/leather/studded)
+	additional_items = list(/obj/item/clothing/suit/roguetown/armor/leather)
+	created_item = /obj/item/clothing/suit/roguetown/armor/leather/studded
 
 // --------- STEEL -----------
 
