@@ -57,12 +57,6 @@
 	icon_state = "spikekey"
 	lockid = "garrison"
 
-/obj/item/roguekey/knight
-	name = "knight"
-	desc = "This key belongs to one of the royal knights."
-	icon_state = "greenkey"
-	lockid = "knight"
-
 /obj/item/roguekey/dungeon
 	name = "dungeon key"
 	desc = "This key should unlock the rusty bars and doors of the dungeon."
@@ -75,9 +69,15 @@
 	icon_state = "cheesekey"
 	lockid = "vault"
 
+/obj/item/roguekey/knight
+	name = "knight"
+	desc = "This key belongs to one of the royal knights"
+	icon_state = "greenkey"
+	lockid = "knight"
+
 /obj/item/roguekey/sheriff
 	name = "sheriff's key"
-	desc = "This key opens the sheriff quarters.
+	desc = "This key leads to the sheriff quarters."
 	icon_state = "cheesekey"
 	lockid = "sheriff"
 
