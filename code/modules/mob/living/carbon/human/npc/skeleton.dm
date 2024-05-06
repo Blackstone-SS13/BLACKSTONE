@@ -47,7 +47,7 @@
 	for(var/obj/item/bodypart/B in src.bodyparts)
 		B.skeletonize()
 	// src.remove_all_languages()
-	// removing this because i wanna actually be able to talk as a skellybones fella
+	// uncomment this to prohibit skeletons from knowing or speaking any languages. This is commented to allow skeletons to be the main subject of admin events. (eg: skeleton traders, skeletons concealing their bones and blending in with the kingdom society, the underworld bar skeletons, skeletons telling skeleton jokes)
 	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
 		eyes.Remove(src,1)
@@ -108,4 +108,7 @@
 		r_hand = /obj/item/rogueweapon/stoneaxe/woodcut
 
 /mob/living/carbon/human/species/skeleton/npc/no_equipment
+    skel_outfit = null
+
+/mob/living/carbon/human/species/skeleton/no_equipment
     skel_outfit = null
