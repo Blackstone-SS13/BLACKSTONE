@@ -112,10 +112,13 @@ SUBSYSTEM_DEF(role_class_handler)
 				GOT_IT.linked_client = H.client // too bad the firing of slop just checks the mob for what it can even use anyways
 			GOT_IT.fire_slop_into_my_mouth()
 		else
+
 			var/datum/class_select_handler/XTRA_MEATY = new()
 			XTRA_MEATY.linked_client = H.client
 			XTRA_MEATY.fire_slop_into_my_mouth()
 			active_menus[H.client.ckey] = XTRA_MEATY
+		if(!(H.client.ckey in session_rerolls)) // no key in sess rerolls
+			session_rerolls[H.client.ckey] = 3 // Set it and give them 3
 
 //Attempt to finish the class handling ordeal, aka they picked something
 // Since this is class handler related, might as well also have the class handler send itself into the params
@@ -162,9 +165,6 @@ SUBSYSTEM_DEF(role_class_handler)
 
 // If they aren't in the list, they get 3 by default.
 /datum/controller/subsystem/role_class_handler/proc/get_session_rerolls(ckey)
-	if(!session_rerolls[ckey])
-		session_rerolls[ckey] = 3
-
 	return session_rerolls[ckey]
 
 

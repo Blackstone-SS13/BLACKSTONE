@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(triumphs)
 	var/list/active_triumph_buy_queue // This is a list of all active datums
 
 	//init list to hold triumph buy menus for the session (aka menu data)
-	// Assc list "key" = datum
+	// Assc list "ckey" = datum
 	var/list/active_triumph_menus
 
 	// This represents the triumph buy organization on the main SS for triumphs
@@ -78,9 +78,9 @@ SUBSYSTEM_DEF(triumphs)
 /datum/controller/subsystem/triumphs/proc/attempt_to_buy_triumph_condition(client/C, triumph_buy_typepath)
 	var/datum/triumph_buy/stick_it_in = new triumph_buy_typepath
 
-	var/triumph_amount = get_triumphs(C.key) - stick_it_in.triumph_cost
+	var/triumph_amount = get_triumphs(C.ckey) - stick_it_in.triumph_cost
 	if(triumph_amount >= 0)
-		triumph_adjust(stick_it_in.triumph_cost*-1, C.key)
+		triumph_adjust(stick_it_in.triumph_cost*-1, C.ckey)
 		stick_it_in.key_of_buyer = C.key
 		stick_it_in.ckey_of_buyer = C.ckey
 
@@ -99,23 +99,23 @@ SUBSYSTEM_DEF(triumphs)
 	This occurs when you try to unbuy a triumph condition and removes it
 */
 /datum/controller/subsystem/triumphs/proc/attempt_to_unbuy_triumph_condition(client/C, datum/triumph_buy/pull_it_out)
-	var/triumph_amount = get_triumphs(C.key) - pull_it_out.triumph_cost
+	var/triumph_amount = get_triumphs(C.ckey) - pull_it_out.triumph_cost
 	if(triumph_amount >= 0)
-		triumph_adjust(pull_it_out.triumph_cost*-1, C.key)
+		triumph_adjust(pull_it_out.triumph_cost*-1, C.ckey)
 		active_triumph_buy_queue -= pull_it_out
 
 // Same deal as the role class stuff, we are only really just caching this to update displays as people buy stuff.
 // So we have to be careful to not leave it in when unneeded otherwise we will have to keep track of which menus are actually open.
 /datum/controller/subsystem/triumphs/proc/startup_triumphs_menu(client/C)
 	if(C)
-		var/datum/triumph_buy_menu/check_this = active_triumph_menus[C.key]
+		var/datum/triumph_buy_menu/check_this = active_triumph_menus[C.ckey]
 		if(check_this)
 			check_this.linked_client = C
 			check_this.triumph_menu_startup_slop()
 		else
 			var/datum/triumph_buy_menu/BIGBOY = new()
 			BIGBOY.linked_client = C
-			active_triumph_menus[C.key] = BIGBOY
+			active_triumph_menus[C.ckey] = BIGBOY
 			BIGBOY.triumph_menu_startup_slop()
 
 /*
@@ -140,10 +140,10 @@ SUBSYSTEM_DEF(triumphs)
 
 // We cleanup the datum thats just holding the stuff for displaying the menu.
 /datum/controller/subsystem/triumphs/proc/remove_triumph_buy_menu(client/C)
-	if(C && active_triumph_menus[C.key])
-		var/datum/triumph_buy_menu/me_local = active_triumph_menus[C.key]
+	if(C && active_triumph_menus[C.ckey])
+		var/datum/triumph_buy_menu/me_local = active_triumph_menus[C.ckey]
 		C << browse(null, "window=triumph_buy_window")
-		active_triumph_menus.Remove(C.key)
+		active_triumph_menus.Remove(C.ckey)
 		qdel(me_local)
 
 // Called from the place its slopped in in SSticker, this will occur right after the gamemode starts ideally, aka roundstart.
@@ -157,47 +157,47 @@ SUBSYSTEM_DEF(triumphs)
 
 
 /*
-	Ye olde helpers below
+	Ye olde helpers below, to note you can put anything into the json_key
+	Previously it was just client key for a pretty leaderboard now it is client ckey
 */
-/datum/controller/subsystem/triumphs/proc/triumph_adjust(amt, key)
+/datum/controller/subsystem/triumphs/proc/triumph_adjust(amt, json_key)
 	var/curtriumphs = 0
 	var/json_file = file("data/triumphs.json")
 	if(!fexists(json_file))
 		WRITE_FILE(json_file, "{}")
 	var/list/json = json_decode(file2text(json_file))
 
-	if(json[key])
-		curtriumphs = json[key]
+	if(json[json_key])
+		curtriumphs = json[json_key]
 	curtriumphs += amt
 
-	json[key] = curtriumphs
+	json[json_key] = curtriumphs
 
 	fdel(json_file)
 	WRITE_FILE(json_file, json_encode(json))
 
-/datum/controller/subsystem/triumphs/proc/wipe_triumphs(key)
+/datum/controller/subsystem/triumphs/proc/wipe_triumphs(json_key)
 	var/json_file = file("data/triumphs.json")
 	if(fexists(json_file))
 		fdel(json_file)
-//	WRITE_FILE(json_file, "{}")
-//	var/list/json = json_decode(file2text(json_file))
+
 	var/list/json = list()
 
-	if(key)
-		json[key] = 1
+	if(json_key)
+		json[json_key] = 1
 
 	WRITE_FILE(json_file, json_encode(json))
 
-/datum/controller/subsystem/triumphs/proc/get_triumphs(key)
+/datum/controller/subsystem/triumphs/proc/get_triumphs(json_key)
 	var/json_file = file("data/triumphs.json")
 	if(!fexists(json_file))
 		return 0
 	var/list/json = json_decode(file2text(json_file))
 
-	if(json[key])
-		return json[key]
+	if(json[json_key])
+		return json[json_key]
 	else
-		triumph_adjust(0, key)
+		triumph_adjust(0, json_key)
 	return 0
 
 /datum/controller/subsystem/triumphs/proc/triumph_leaderboard(mob/user)
@@ -221,7 +221,7 @@ SUBSYSTEM_DEF(triumphs)
 	if(outputt)
 		user << browse(outputt.Join(),"window=topten;size=300x500")
 
-/datum/controller/subsystem/triumphs/proc/get_triumphs_top(key)
+/datum/controller/subsystem/triumphs/proc/get_triumphs_top()
 	var/json_file = file("data/triumphs.json")
 	if(!fexists(json_file))
 		return list()
@@ -241,8 +241,4 @@ SUBSYSTEM_DEF(triumphs)
 		nulist[X] = json[X]
 
 	return nulist
-
-
-
-
 

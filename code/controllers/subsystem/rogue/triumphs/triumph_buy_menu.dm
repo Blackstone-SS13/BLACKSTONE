@@ -45,7 +45,7 @@
 	data += {"
 		<body>
 			<div style='width:100%;'>
-				<span id='triumph_quantity'> My triumphs: [SStriumphs.get_triumphs(linked_client.key)] Triumphs</span>
+				<span id='triumph_quantity'> My triumphs: [SStriumphs.get_triumphs(linked_client.ckey)] Triumphs</span>
 				<a id='triumph_close_button' href='?src=\ref[src];close_menu=1'>CLOSE MENU</a>
 			</div>
 			<div style='width:100%;float:left'>
