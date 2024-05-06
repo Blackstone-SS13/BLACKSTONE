@@ -231,7 +231,7 @@
 	force = 15
 	force_wielded = 30
 	possible_item_intents = list(/datum/intent/spear/thrust/eaglebeak, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(/datum/intent/spear/thrust/eaglebeak, /datum/intent/mace/smash, SPEAR_BASH)
+	gripped_intents = list(/datum/intent/spear/thrust/eaglebeak, /datum/intent/mace/smash/eaglebeak, SPEAR_BASH)
 	name = "eagle's beak"
 	desc = ""
 	icon_state = "eaglebeak"
@@ -274,6 +274,10 @@
 /datum/intent/spear/thrust/eaglebeak
 	penfactor = 20
 	damfactor = 0.9
+
+/datum/intent/mace/smash/eaglebeak
+	reach = 2
+	swingdelay = 12
 
 /obj/item/rogueweapon/greatsword
 	force = 12
