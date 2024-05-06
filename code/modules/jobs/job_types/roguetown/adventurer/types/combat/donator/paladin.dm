@@ -49,6 +49,7 @@
 	switch(classchoice)
 	
 		if("Paladin")
+			to_chat(src, "<span class='warning'>Paladins are holy warriors who have taken sacred vows to uphold justice and righteousness. Often, they were promised redemption for past sins if they crusaded in the name of the gods.</span>")
 			H.set_blindness(0) // No introduction text due to there being no real difference in Paladin archetypes for now.
 			to_chat(H, "<span class='warning'>You are a paladin.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
@@ -119,9 +120,9 @@
 			cloak = /obj/item/clothing/cloak/tabard/crusader
 			backr = /obj/item/rogueweapon/flail
 			if(prob(40))
-				r_hand = /obj/item/rogueweapon/shield/wood
+				l_hand = /obj/item/rogueweapon/shield/wood
 			else if(prob(20))
-				r_hand = /obj/item/rogueweapon/shield/tower/metal
+				l_hand = /obj/item/rogueweapon/shield/tower/metal
 			backl = /obj/item/storage/backpack/rogue/satchel
 		
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)

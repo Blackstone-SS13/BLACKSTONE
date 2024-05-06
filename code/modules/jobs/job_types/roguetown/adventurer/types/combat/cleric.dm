@@ -113,9 +113,9 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/mace
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-	backr = /obj/item/rogueweapon/shield/wood
+	l_hand = /obj/item/rogueweapon/mace
 	backl = /obj/item/storage/backpack/rogue/satchel
-	backpack_contents = list(/obj/item/rogueweapon/huntingknife)
+	backr = /obj/item/rogueweapon/shield/wood
 
 
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)

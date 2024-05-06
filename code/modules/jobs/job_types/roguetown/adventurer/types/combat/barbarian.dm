@@ -32,7 +32,6 @@
 			H.mind.adjust_skillrank(/datum/skill/labor/butchering, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/traps, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/labor/fishing, pick(0,1), TRUE)
-			
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
@@ -59,7 +58,6 @@
 		if("Hunter Killer")
 			H.set_blindness(0)
 			to_chat(H, "<span class='warning'>Barbarians are great warriors of the outlands, often regarded as the strongest of their tribes -- should they have any that live. These incredible titans of strength and brutality are motivated most often by a single... all consuming instinct. SURVIVE.</span>")
-			
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
@@ -73,13 +71,12 @@
 			H.mind.adjust_skillrank(/datum/skill/labor/butchering, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/traps, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
-			
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 			beltr = /obj/item/rogueweapon/stoneaxe/woodcut
-			r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+			beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 			l_hand = /obj/item/quiver/arrows
 			belt = /obj/item/storage/belt/rogue/leather
 			neck = /obj/item/storage/belt/rogue/pouch/coins/poor

@@ -178,7 +178,7 @@
 	force = 10
 	force_wielded = 36
 	possible_item_intents = list(SPEAR_THRUST, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(SPEAR_CUT, /datum/intent/axe/chop, SPEAR_BASH) // Removed spear_thrust intent until a new one is made for Halberd. Right now it's better at thrusting then a spear -- even though it's a pole axe.
+	gripped_intents = list(SPEAR_THRUST,SPEAR_CUT, /datum/intent/axe/chop, SPEAR_BASH) 
 	name = "halberd"
 	desc = "An iron halberd -- designed to defeat armor and crush opponents from afar."
 	icon_state = "halberd"

@@ -62,7 +62,7 @@
 			backl = /obj/item/storage/backpack/rogue/satchel
 			l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel
 			beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-			r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+			l_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 			beltr = /obj/item/quiver/bolts
 			H.change_stat("intelligence", 1)
 			H.change_stat("perception", 2)
@@ -103,7 +103,7 @@
 			backl = /obj/item/storage/backpack/rogue/satchel
 			l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel
 			beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
-			r_hand = /obj/item/rogueweapon/sword/iron
+			l_hand = /obj/item/rogueweapon/sword/iron
 			H.change_stat("constitution", 2)
 			H.change_stat("strength", 1)
 			H.change_stat("speed", 1)

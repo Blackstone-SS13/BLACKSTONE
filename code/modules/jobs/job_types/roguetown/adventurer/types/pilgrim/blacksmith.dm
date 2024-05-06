@@ -61,9 +61,8 @@
 			if(prob(50))
 				H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 			H.change_stat("strength", 1)
-			H.change_stat("endurance", 3)
+			H.change_stat("endurance", 2)
 			H.change_stat("constitution", 2)
-			H.change_stat("intelligence", -1)
 			H.change_stat("speed", -1)
 	else
 		
