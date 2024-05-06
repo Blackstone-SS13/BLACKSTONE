@@ -16,6 +16,12 @@
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/neck/roguetown/gorget
 
+/datum/anvil_recipe/armor/ibreastplate
+	name = "iron breastplate (+iron)"
+	req_bar = /obj/item/ingot/iron
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/clothing/suit/roguetown/armor/plate/half/iron
+
 /datum/anvil_recipe/armor/ichainglove
 	name = "chain gauntlets"
 	req_bar = /obj/item/ingot/iron
@@ -35,6 +41,11 @@
 	name = "iron skullcap"
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/head/roguetown/helmet/skullcap
+
+/datum/anvil_recipe/armor/studded
+	name = "studded leather armor (+leather armor)"
+	req_bar = /obj/item/ingot/iron
+	additional_items = list(/obj/item/clothing/suit/roguetown/armor/leather/studded)
 
 // --------- STEEL -----------
 
@@ -61,6 +72,18 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/full
 
+/datum/anvil_recipe/armor/coatplates
+	name = "coat of plates (+hide)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/natural/hide)
+	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine/coatplates
+
+/datum/anvil_recipe/armor/brigandine
+	name = "brigandine (+steel + gambeson)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel, /obj/item/clothing/suit/roguetown/armor/gambeson)
+	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine
+
 /datum/anvil_recipe/armor/chaincoif
 	name = "chain coif"
 	req_bar = /obj/item/ingot/steel
@@ -80,6 +103,12 @@
 	name = "chain chausses"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/under/roguetown/chainlegs
+
+/datum/anvil_recipe/armor/platelegs
+	name = "plated chausses (+steel)"
+	req_bar = /obj/item/ingot/steel 
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/under/roguetown/platelegs
 
 /datum/anvil_recipe/armor/hplate
 	name = "cuirass (+2 steel)"
