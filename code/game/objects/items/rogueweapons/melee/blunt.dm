@@ -123,7 +123,7 @@
 /datum/intent/mace/rangedthrust
 	name = "thrust"
 	blade_class = BCLASS_STAB
-	attack_verb = list("stabs")
+	attack_verb = list("thrusts")
 	animname = "stab"
 	icon_state = "instab"
 	reach = 2
