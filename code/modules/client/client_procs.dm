@@ -1086,7 +1086,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		testing("[mob] [mob.type] YEA CLIE")
 
 /client/proc/commendsomeone()
-	if(alert(src,"Was there a character during this round that you would like to anonymously commend?","YES","NO") != "YES")
+	if(alert(src,"Was there a character during this round that you would like to anonymously commend?", "Commendation", "YES", "NO") != "YES")
 		return
 	if(SSticker.current_state != GAME_STATE_FINISHED)
 		return
