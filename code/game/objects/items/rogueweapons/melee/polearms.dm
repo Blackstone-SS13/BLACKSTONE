@@ -278,6 +278,7 @@
 /datum/intent/mace/smash/eaglebeak
 	reach = 2
 	swingdelay = 12
+	clickcd = 14
 
 /obj/item/rogueweapon/greatsword
 	force = 12
