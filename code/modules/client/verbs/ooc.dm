@@ -180,14 +180,17 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	else
 		color2use = "#[color2use]"
 	var/chat_color = "#c5c5c5"
+	var/msg_to_send = ""
+	
 	for(var/client/C in GLOB.clients)
 		var/real_key = C.holder ? "([key])" : ""
 		if(C.prefs.chat_toggles & CHAT_OOC)
 			if(SSticker.current_state != GAME_STATE_FINISHED && (istype(C.mob, /mob/dead/new_player) || C.holder))
+				msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>"
 				if(holder)
-					to_chat(C, "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='#4972bc'><span class='message linkify'>[msg]</span></font>")
-				else
-					to_chat(C, "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='[chat_color]'><span class='message linkify'>[msg]</span></font>")
+					msg_to_send = "<font color='[color2use]'><EM>[keyname][real_key]:</EM></font> <font color='#4972bc'><span class='message linkify'>[msg]</span></font>"
+					
+				to_chat(C, msg_to_send)
 
 
 /proc/toggle_ooc(toggle = null)
