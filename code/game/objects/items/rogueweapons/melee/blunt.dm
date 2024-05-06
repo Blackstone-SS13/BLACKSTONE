@@ -117,7 +117,7 @@
 	hitsound = list('sound/combat/hits/blunt/metalblunt (1).ogg', 'sound/combat/hits/blunt/metalblunt (2).ogg', 'sound/combat/hits/blunt/metalblunt (3).ogg')
 	penfactor = 80
 	damfactor = 1.1
-	swingdelay = 8
+	swingdelay = 10
 	icon_state = "insmash"
 	
 /datum/intent/mace/rangedthrust
@@ -132,6 +132,7 @@
 	warnie = "mobwarning"
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 25
+	damfactor = 0.9
 
 /obj/item/rogueweapon/mace/woodclub
 	force = 15
