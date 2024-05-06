@@ -25,8 +25,15 @@
 //	if(has_inspect_verb || (obj_integrity < max_integrity))
 //		. += "<span class='notice'><a href='?src=[REF(src)];inspect=1'>Inspect</a></span>"
 
-	if(get_real_price() > 0 && (HAS_TRAIT(user, RTRAIT_SEEPRICES) || simpleton_price))
-		. += "<span class='info'>Value: [get_real_price()] mammon</span>"
+	var/real_value = get_real_price()
+	if(real_value > 0)
+		if(HAS_TRAIT(user, RTRAIT_SEEPRICES) || simpleton_price)
+			. += "<span class='info'>Value: [real_value] mammon</span>"
+		else if(HAS_TRAIT(user, RTRAIT_SEEPRICES_SHITTY))
+			//you can get up to 50% of the value if you have shitty see prices
+			var/static/fumbling_seed = text2num(GLOB.rogue_round_id)
+			var/fumbled_value = max(1, real_value * clamp(noise_hash(real_value, fumbling_seed) - 0.5, -0.5, 0.5))
+			. += "<span class='info'>Value: [fumbled_value] mammon... <i>I think</i></span>"
 
 //	. += "[gender == PLURAL ? "They are" : "It is"] a [weightclass2text(w_class)] item."
 
