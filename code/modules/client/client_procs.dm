@@ -1085,20 +1085,18 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 			mob.ghostize(can_reenter_corpse)
 		testing("[mob] [mob.type] YEA CLIE")
 
-/client/proc/commendsomeone()
-	if(alert(src,"Was there a character during this round that you would like to anonymously commend?", "Commendation", "YES", "NO") != "YES")
-		return
-	if(SSticker.current_state != GAME_STATE_FINISHED)
-		return
+/client/proc/commendsomeone(var/forced = FALSE)
 	if(commendedsomeone)
+		if(!forced)
+			to_chat(src, "<span class='danger'>You already commended someone this round.</span>")
+		return
+	if(alert(src,"Was there a character during this round that you would like to anonymously commend?", "Commendation", "YES", "NO") != "YES")
 		return
 	var/list/selections = GLOB.character_ckey_list.Copy()
 	if(!selections.len)
 		return
 	var/selection = input(src,"Which Character?") as null|anything in sortList(selections)
 	if(!selection)
-		return
-	if(commendedsomeone)
 		return
 	var/theykey = selections[selection]
 	if(theykey == ckey)

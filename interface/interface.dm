@@ -178,6 +178,11 @@ Hotkey-Mode: (hotkey-mode must be on)
 		for(var/obj/screen/scannies/S in screen)
 			S.alpha = 70
 
+/client/verb/triggercommend()
+	set category = "OOC"
+	set name = "Commend Someone"
+	commendsomeone()
+
 /*
 /client/verb/set_blur()
 	set name = "AAOn"
