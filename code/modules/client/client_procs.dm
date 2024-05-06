@@ -116,31 +116,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		view_rogue_manifest()
 		return
 
-	if(href_list["commendsomeone"])
-		if(SSticker.current_state != GAME_STATE_FINISHED)
-			return
-		if(commendedsomeone)
-			return
-		var/list/selections = GLOB.character_ckey_list.Copy()
-		if(!selections.len)
-			return
-		var/selection = input(src,"Which Character?") as null|anything in sortList(selections)
-		if(!selection)
-			return
-		if(commendedsomeone)
-			return
-		var/theykey = selections[selection]
-		if(theykey == ckey)
-			to_chat(src,"You can't commend yourself.")
-			return
-		if(theykey)
-			commendedsomeone = TRUE
-			add_commend(theykey, ckey)
-			to_chat(src,"[selection] commended.")
-			log_game("COMMEND: [ckey] commends [theykey].")
-			log_admin("COMMEND: [ckey] commends [theykey].")
-		return
-
 	switch(href_list["_src_"])
 		if("holder")
 			hsrc = holder
@@ -1109,3 +1084,30 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		if(isliving(mob)) //no ghost can call this
 			mob.ghostize(can_reenter_corpse)
 		testing("[mob] [mob.type] YEA CLIE")
+
+/client/proc/commendsomeone()
+	if(alert(src,"Was there a character during this round that you would like to anonymously commend?","YES","NO") != "YES")
+		return
+	if(SSticker.current_state != GAME_STATE_FINISHED)
+		return
+	if(commendedsomeone)
+		return
+	var/list/selections = GLOB.character_ckey_list.Copy()
+	if(!selections.len)
+		return
+	var/selection = input(src,"Which Character?") as null|anything in sortList(selections)
+	if(!selection)
+		return
+	if(commendedsomeone)
+		return
+	var/theykey = selections[selection]
+	if(theykey == ckey)
+		to_chat(src,"You can't commend yourself.")
+		return
+	if(theykey)
+		commendedsomeone = TRUE
+		add_commend(theykey, ckey)
+		to_chat(src,"[selection] commended.")
+		log_game("COMMEND: [ckey] commends [theykey].")
+		log_admin("COMMEND: [ckey] commends [theykey].")
+	return
