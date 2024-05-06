@@ -1090,7 +1090,10 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		if(!forced)
 			to_chat(src, "<span class='danger'>You already commended someone this round.</span>")
 		return
-	if(alert(src,"Was there a character during this round that you would like to anonymously commend?", "Commendation", "YES", "NO") != "YES")
+			if(confirm != "Yes")
+		return
+	var/confirm = alert(src,"Was there a character during this round that you would like to anonymously commend?", "Commendation", "YES", "NO")
+	if(confirm != "YES")
 		return
 	var/list/selections = GLOB.character_ckey_list.Copy()
 	if(!selections.len)
