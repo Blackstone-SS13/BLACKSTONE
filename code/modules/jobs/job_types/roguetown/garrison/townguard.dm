@@ -7,12 +7,12 @@
 	spawn_positions = 10
 	selection_color = JCOLOR_SOLDIER
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Dwarf",
-	"Aasimar",
-	"Half-Elf"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Aasimar",
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	tutorial = "You've enough training to point your spear in the right direction, and you've enough mammons in your pocket to want to keep this job: But you know youre just as disposable as the last poor bastards to call themselves a Guard."
@@ -21,7 +21,7 @@
 
 	outfit = /datum/outfit/job/roguetown/guardsman
 	give_bank_account = 16
-	min_pq = 2
+	min_pq = 1
 
 	/// Chance to be spawned as a bowman instead
 	var/bowman_chance = 35
