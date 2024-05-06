@@ -55,8 +55,7 @@
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 	//70% chance to be raceswapped to Gronn because slop lore
 	if(ishumannorthern(H) && prob(70))
-		var/list/skin_slop = H.dna.species.get_skin_list()
-		H.skin_tone = skin_slop["Gronn"]
+		H.skin_tone = SKIN_COLOR_GRONN
 		H.update_body()
 	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)

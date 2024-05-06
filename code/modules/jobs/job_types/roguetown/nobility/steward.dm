@@ -6,13 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Dwarf",
-	"Dwarf",
-	"Aasimar",
-	"Half-Elf")
+	allowed_races = list("Humen")
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_STEWARD
 	tutorial = "Coin, Coin, Coin! Oh beautiful coin: You're addicted to it, and you hold the position as the King's personal treasurer of both coin and information. You know the power silver and gold has on a man's mortal soul, and you know just what lengths they'll go to in order to get even more. Keep your festering economy and your rats alive, the'yre the only two things you can weigh any trust into anymore."
@@ -44,6 +38,10 @@
 		H.change_stat("constitution", -2)
 		H.change_stat("speed", -2)
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
+	//50% chance to be raceswapped to Giza because slop lore
+	if(ishumannorthern(H) && prob(50))
+		H.skin_tone = SKIN_COLOR_GIZA
+		H.update_body()
 
 	if(H.charflaw)
 		if(H.charflaw.type != /datum/charflaw/badsight)
