@@ -13,7 +13,7 @@
 	tutorial = "Elevated upon your throne through a web of intrigue and political upheaval, you are the absolute authority of these lands and at the center of every plot within it. Every man, woman and child is envious of your position and would replace you in less than a heartbeat: Show them the error in their ways."
 	bypass_lastclass = FALSE
 	whitelist_req = FALSE
-	min_pq = 3
+	min_pq = 5
 	give_bank_account = 1000
 	required = TRUE
 

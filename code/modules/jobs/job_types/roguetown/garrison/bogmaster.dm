@@ -21,7 +21,7 @@
 	whitelist_req = TRUE
 	outfit = /datum/outfit/job/roguetown/bogmaster
 	give_bank_account = 35
-	min_pq = 3
+	min_pq = 4
 
 /datum/job/roguetown/bogmaster/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
