@@ -37,22 +37,32 @@
 		
 		
 		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(1,2,3), TRUE) // If you can make a sword you can swing one.
+			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,2,3), TRUE) 
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE) 
+			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE) // The strongest fists in the land.
+			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE) 
+			H.mind.adjust_skillrank(/datum/skill/misc/swimming, pick(0,0,1), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(1,1,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/crafting, pick(1,2,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/masonry, pick(0,0,1), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/engineering, pick(2,2,3), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(1,2,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/sewing, pick(1,1,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/traps, pick(1,1,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/cooking, pick(0,0,1), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-
 			if(prob(50))
 				H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
-
-			if(H.age == AGE_OLD)
-				H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
 			H.change_stat("strength", 1)
-			H.change_stat("intelligence", -1)
+			H.change_stat("endurance", 2)
+			H.change_stat("constitution", 2)
 			H.change_stat("speed", -1)
 	else
 		
