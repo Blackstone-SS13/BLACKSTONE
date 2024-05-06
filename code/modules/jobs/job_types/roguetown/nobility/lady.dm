@@ -1,7 +1,7 @@
 /datum/job/roguetown/lady
 	title = "Queen"
-	flag = MERCHANT
-	department_flag = SERFS
+	flag = LADY
+	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -18,9 +18,8 @@
 
 /datum/outfit/job/roguetown/lady/pre_equip(mob/living/carbon/human/H)
 	. = ..()
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_SEEPRICES, RTRAIT_NOBLE, TRAIT_GENERIC)
 	beltl = /obj/item/roguekey/manor
-//	head = /obj/item/clothing/head/roguetown/hennin
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
 	armor = /obj/item/clothing/suit/roguetown/armor/armordress
