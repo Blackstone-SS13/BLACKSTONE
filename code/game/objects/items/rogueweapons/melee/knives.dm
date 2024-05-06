@@ -57,7 +57,7 @@
 	clickcd = 8
 
 /datum/intent/dagger/thrust/pick
-	name = "stab"
+	name = "icepick stab"
 	icon_state = "inpick"
 	attack_verb = list("stabs", "impales")
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
