@@ -986,7 +986,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
 				continue
 			if(!job.required && !isnull(job.min_pq) && (get_playerquality(user.ckey) < job.min_pq))
-				HTML += "<font color=#a59461>[used_name]</font></td> <td> </td></tr>"
+				HTML += "<font color=#a59461>[used_name] (Min PQ: [job.min_pq])</font></td> <td> </td></tr>"
 				continue
 			if(!(user.client.prefs.age in job.allowed_ages))
 				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
