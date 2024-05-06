@@ -54,8 +54,6 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-			if(prob(99))
-				H.mind.add_antag_datum(/datum/antagonist/vampire)
 			if(H.age == AGE_OLD)
 				H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			H.change_stat("strength", 1)
