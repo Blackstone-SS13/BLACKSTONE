@@ -150,6 +150,7 @@
 		if(16) // hedge knight - give challenge to knights/templars ~6% chance 15-20 bandits roundstart average 1 hedge knight - lacks protection to hands or feet
 			r_hand = /obj/item/rogueweapon/greatsword/zwei
 			beltr = /obj/item/rogueweapon/sword
+			beltl = /obj/item/flashlight/flare/torch/lantern
 			armor = /obj/item/clothing/suit/roguetown/armor/plate/full
 			gloves = /obj/item/clothing/gloves/roguetown/leather
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/pigface
