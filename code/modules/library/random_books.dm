@@ -34,7 +34,7 @@
 /obj/structure/bookcase/random/Initialize(mapload)
 	. = ..()
 	if(book_count && isnum(book_count))
-		book_count += pick(-5,-5,-5,-5,-5,-4,-4,-4,-4,-3,-3,-3,,-2,-2,-1,-1,0,)
+		book_count += pick(-5,-5,-5,-5,-5,-4,-4,-4,-4,-3,-3,-3,-2,-2,-1,-1,0,)
 		. = INITIALIZE_HINT_LATELOAD
 
 /obj/structure/bookcase/random/LateInitialize()
