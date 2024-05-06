@@ -26,7 +26,7 @@
 
 /obj/structure/bookcase/random
 	var/category = null
-	var/book_count = 10
+	var/book_count = 5
 	icon_state = "bookcase"
 	anchored = TRUE
 	state = 2
@@ -34,7 +34,7 @@
 /obj/structure/bookcase/random/Initialize(mapload)
 	. = ..()
 	if(book_count && isnum(book_count))
-		book_count += pick(-1,-1,0,1,1)
+		book_count += pick(-5,-5,-5,-5,-5,-4,-4,-4,-4,-3,-3,-3,-2,-2,-1,-1,0,)
 		. = INITIALIZE_HINT_LATELOAD
 
 /obj/structure/bookcase/random/LateInitialize()
@@ -42,7 +42,7 @@
 	update_icon()
 
 /obj/structure/bookcase/random/archive
-	book_count = 5
+	book_count = 10
 
 /obj/structure/bookcase/random/archive/Initialize(mapload)
 	. = ..()
