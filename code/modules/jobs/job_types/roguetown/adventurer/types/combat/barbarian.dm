@@ -51,10 +51,10 @@
 				armor = /obj/item/clothing/suit/roguetown/armor/leather/hide
 			if(prob(40))
 				cloak = /obj/item/clothing/cloak/raincloak/furcloak/brown
-				H.change_stat("intelligence", -2)
-				H.change_stat("strength", 3) // Barbs are traditionally a mix of strength/resilience. 
-				H.change_stat("constitution", 3)
-				H.change_stat("endurance", 2)
+			H.change_stat("intelligence", -2)
+			H.change_stat("strength", 3) // Barbs are traditionally a mix of strength/resilience. 
+			H.change_stat("constitution", 3)
+			H.change_stat("endurance", 2)
 		if("Hunter Killer")
 			H.set_blindness(0)
 			to_chat(H, "<span class='warning'>Barbarians are great warriors of the outlands, often regarded as the strongest of their tribes -- should they have any that live. These incredible titans of strength and brutality are motivated most often by a single... all consuming instinct. SURVIVE.</span>")
