@@ -13,7 +13,7 @@
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/bailiff
 	give_bank_account = 40
-	min_pq = 5
+	min_pq = 3
 
 /datum/outfit/job/roguetown/bailiff/pre_equip(mob/living/carbon/human/H)
 	..()
