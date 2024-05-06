@@ -299,7 +299,7 @@
 		msg += "[m3] pale skin.\n"
 
 	if(eyesclosed)
-		msg += "[m2] eyes are closed.\n"
+		msg += "[capitalize(m2)] eyes are closed.\n"
 
 	if(bleed_rate)
 		msg += "<B>[m1] bleeding!</B>\n"
