@@ -64,7 +64,6 @@
 	penfactor = 80
 	clickcd = 14
 	swingdelay = 12
-	blade_class = BCLASS_PICK
 	damfactor = 1.1
 
 /obj/item/rogueweapon/huntingknife/getonmobprop(tag)
