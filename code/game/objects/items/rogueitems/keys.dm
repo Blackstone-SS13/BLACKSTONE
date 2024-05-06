@@ -104,6 +104,27 @@
 	icon_state = "brownkey"
 	lockid = "velder"
 
+/obj/item/roguekey/tavern/village
+	lockid = "vtavern"
+
+/obj/item/roguekey/roomi/village
+	lockid = "vroomi"
+
+/obj/item/roguekey/roomii/village
+	lockid = "vroomii"
+
+/obj/item/roguekey/roomiii/village
+	lockid = "vroomiii"
+
+/obj/item/roguekey/roomiv/village
+	lockid = "vroomiv"
+
+/obj/item/roguekey/roomv/village
+	lockid = "vroomv"
+
+/obj/item/roguekey/roomvi/village
+	lockid = "vroomvi"
+
 /obj/item/roguekey/roomi
 	name = "room I key"
 	desc = "The key to the first room."
