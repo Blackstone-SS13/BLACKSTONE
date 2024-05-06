@@ -118,7 +118,7 @@
 		if(1 to 3) // sword bandit
 			beltr = /obj/item/rogueweapon/sword/iron
 			if(prob(40))
-				l_hand = /obj/item/rogueweapon/shield/wood
+				backl = /obj/item/rogueweapon/shield/wood
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			H.change_stat("endurance", 1)
 		if(4 to 6) // knife bandit - dodge maxing
@@ -144,11 +144,11 @@
 		if(13 to 15) // spear bandit
 			r_hand = /obj/item/rogueweapon/spear
 			if(prob(40))
-				l_hand = /obj/item/rogueweapon/shield/wood
+				backl = /obj/item/rogueweapon/shield/wood
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 			H.change_stat("endurance", 1)
 		if(16) // hedge knight - give challenge to knights/templars ~6% chance 15-20 bandits roundstart average 1 hedge knight - lacks protection to hands or feet
-			backl = /obj/item/rogueweapon/greatsword/zwei
+			r_hand = /obj/item/rogueweapon/greatsword/zwei
 			beltr = /obj/item/rogueweapon/sword
 			armor = /obj/item/clothing/suit/roguetown/armor/plate/full
 			gloves = /obj/item/clothing/gloves/roguetown/leather
