@@ -113,7 +113,6 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/mace
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-	l_hand = /obj/item/rogueweapon/mace
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/rogueweapon/shield/wood
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife)
