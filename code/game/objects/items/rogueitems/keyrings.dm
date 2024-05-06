@@ -128,7 +128,7 @@
 		desc = ""
 
 /obj/item/keyring/sheriff
-	keys = list(/obj/item/roguekey/sheriff, /obj/item/roguekey/dungeon, /obj/item/roguekey/garrison)
+	keys = list(/obj/item/roguekey/sheriff, /obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/manor)
 
 /obj/item/keyring/bailiff
 	keys = list(/obj/item/roguekey/bailiff, /obj/item/roguekey/dungeon, /obj/item/roguekey/garrison) 
@@ -143,7 +143,7 @@
 	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/manor)
 
 /obj/item/keyring/knight	
-	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/manor, /obj/item/roguekey/manor)
+	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/manor)
 
 /obj/item/keyring/velder
 	keys = list(/obj/item/roguekey/velder, /obj/item/roguekey/blacksmith/town, /obj/item/roguekey/farm, /obj/item/roguekey/butcher)
