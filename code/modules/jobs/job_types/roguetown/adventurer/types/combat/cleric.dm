@@ -116,6 +116,7 @@
 	l_hand = /obj/item/rogueweapon/mace
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/rogueweapon/shield/wood
+	backpack_contents = list(/obj/item/rogueweapon/huntingknife)
 
 
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
