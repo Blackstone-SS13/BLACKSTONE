@@ -182,7 +182,6 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	var/chat_color = "#c5c5c5"
 	for(var/client/C in GLOB.clients)
 		var/real_key = C.holder ? "([key])" : ""
-		var/can_hear = FALSE
 		if(C.prefs.chat_toggles & CHAT_OOC)
 			if(SSticker.current_state != GAME_STATE_FINISHED && (istype(C.mob, /mob/dead/new_player) || C.holder))
 				if(holder)
