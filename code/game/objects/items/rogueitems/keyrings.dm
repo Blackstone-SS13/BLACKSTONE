@@ -2,7 +2,7 @@
 
 /obj/item/keyring
 	name = "keyring"
-	desc = "Will help you organize your keys."
+	desc = ""
 	icon_state = "keyring0"
 	icon = 'icons/roguetown/items/keys.dmi'
 	lefthand_file = 'icons/mob/inhands/misc/food_lefthand.dmi'
@@ -50,7 +50,7 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/keyring/proc/addtoring(obj/item/I)
+/obj/item/keyring/proc/addtoring(var/obj/item/I)
 	if(!I || !istype(I))
 		return 0
 	I.loc = src
@@ -126,27 +126,17 @@
 /obj/item/keyring/sheriff
 	keys = list(/obj/item/roguekey/sheriff, /obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/walls, /obj/item/roguekey/manor, /obj/item/roguekey/graveyard)
 
-/obj/item/keyring/bailiff
-	keys = list(/obj/item/roguekey/sheriff, /obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/walls, /obj/item/roguekey/manor, /obj/item/roguekey/graveyard)
-
-
-/obj/item/keyring/councillor
-	keys = list(/obj/item/roguekey/sheriff, /obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/walls, /obj/item/roguekey/manor, /obj/item/roguekey/graveyard)
-
 /obj/item/keyring/guard
 	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/garrison)
 
 /obj/item/keyring/guardcastle
 	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/walls, /obj/item/roguekey/manor)
 
-/obj/item/keyring/velder
-	keys = list(/obj/item/roguekey/velder, /obj/item/roguekey/blacksmith/town, /obj/item/roguekey/farm, /obj/item/roguekey/butcher)
-
-/obj/item/keyring/vtavern
-	keys = list(/obj/item/roguekey/tavern/village, /obj/item/roguekey/roomvi/village, /obj/item/roguekey/roomv/village, /obj/item/roguekey/roomiv/village, /obj/item/roguekey/roomiii/village, /obj/item/roguekey/roomii/village, /obj/item/roguekey/roomi/village)
-
 /obj/item/keyring/gatemaster
-	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/walls, /obj/item/roguekey/manor)
+	keys = list(/obj/item/roguekey/garrison, /obj/item/roguekey/walls, /obj/item/roguekey/dungeon, /obj/item/roguekey/manor)
+
+/obj/item/keyring/knight
+	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/walls, /obj/item/roguekey/manor, /obj/item/roguekey/knight)
 
 /obj/item/keyring/merchant
 	keys = list(/obj/item/roguekey/shop, /obj/item/roguekey/merchant)
@@ -178,14 +168,9 @@
 /obj/item/keyring/steward
 	keys = list(/obj/item/roguekey/steward, /obj/item/roguekey/walls, /obj/item/roguekey/dungeon, /obj/item/roguekey/manor, /obj/item/roguekey/graveyard)
 
-/obj/item/keyring/clerk
-	keys = list(/obj/item/roguekey/walls, /obj/item/roguekey/dungeon, /obj/item/roguekey/manor, /obj/item/roguekey/graveyard)
-
 /obj/item/keyring/dungeoneer
 	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/manor, /obj/item/roguekey/garrison)
 
 /obj/item/keyring/servant
 	keys = list(/obj/item/roguekey/manor, /obj/item/roguekey/garrison)
 
-/obj/item/keyring/archivist
-	keys = list(/obj/item/roguekey/manor, /obj/item/roguekey/archive)
