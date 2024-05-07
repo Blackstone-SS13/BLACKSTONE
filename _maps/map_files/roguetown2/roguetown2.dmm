@@ -994,7 +994,7 @@
 /area/rogue/under/town/basement)
 "dH" = (
 /obj/structure/mineral_door/wood/deadbolt{
-	lockid = graveyard
+	lockid = "graveyard"
 	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/under/town/basement)
@@ -6420,7 +6420,7 @@
 "Ah" = (
 /obj/structure/mineral_door/wood{
 	name = "Room VI";
-	chat_color_name = room;
+	chat_color_name = "room";
 	lockid = "roomvi"
 	},
 /turf/open/floor/rogue/ruinedwood{
@@ -10056,7 +10056,7 @@
 "Mg" = (
 /obj/structure/mineral_door/wood{
 	name = "Room VI";
-	chat_color_name = room;
+	chat_color_name = "room";
 	lockid = "roomvi"
 	},
 /turf/open/floor/rogue/woodturned,
@@ -10104,7 +10104,7 @@
 "Mp" = (
 /obj/structure/mineral_door/wood{
 	name = "Room VI";
-	chat_color_name = room;
+	chat_color_name = "room";
 	lockid = "roomvi"
 	},
 /turf/open/floor/rogue/wood,
@@ -11209,7 +11209,7 @@
 "Qm" = (
 /obj/structure/mineral_door/wood{
 	name = "Room V";
-	chat_color_name = room;
+	chat_color_name = "room";
 	lockid = "roomv"
 	},
 /turf/open/floor/rogue/wood,
@@ -11334,7 +11334,7 @@
 /area/rogue/indoors/town/manor)
 "QI" = (
 /obj/structure/mineral_door/wood/deadbolt{
-	lockid = graveyard
+	lockid = "graveyard"
 	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/outdoors/town)
@@ -12073,7 +12073,7 @@
 "Tw" = (
 /obj/structure/mineral_door/wood{
 	name = "Fancy Room III";
-	chat_color_name = room;
+	chat_color_name = "room";
 	lockid = "fancyroomiii"
 	},
 /turf/open/floor/rogue/wood,
@@ -13485,7 +13485,7 @@
 "YJ" = (
 /obj/structure/mineral_door/wood{
 	name = "Room VI";
-	chat_color_name = room;
+	chat_color_name = "room";
 	lockid = "roomvi"
 	},
 /turf/open/floor/rogue/woodturned,
@@ -13503,7 +13503,7 @@
 "YM" = (
 /obj/structure/mineral_door/wood{
 	name = "Room IV";
-	chat_color_name = room;
+	chat_color_name = "room";
 	lockid = "roomiv"
 	},
 /turf/open/floor/rogue/wood,
