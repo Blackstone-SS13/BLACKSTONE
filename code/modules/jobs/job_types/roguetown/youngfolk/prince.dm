@@ -10,6 +10,7 @@
 		"Humen",
 		"Elf",
 		"Half-Elf",
+		"Aasimar"
 	) //Maybe a system to force-pick lineage based on king and queen should be implemented.
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_YOUNG)
