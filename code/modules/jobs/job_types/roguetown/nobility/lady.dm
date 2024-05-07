@@ -45,6 +45,8 @@
 			H.change_stat("speed", 2)
 			H.change_stat("perception", 2)
 			H.change_stat("fortune", 5)
+	else
+		head = /obj/item/clothing/head/roguetown/hennin
 //		SSticker.rulermob = H
 	if(prob(66))
 		armor = /obj/item/clothing/suit/roguetown/armor/armordress/alt
