@@ -33,7 +33,7 @@ GLOBAL_LIST_EMPTY(berrycolors)
 	var/color_index = "good"
 	can_distill = TRUE
 	distill_reagent = /datum/reagent/consumable/ethanol/beer/wine
-	rotprocess = 10 MINUTES
+	rotprocess = 15 MINUTES
 
 /obj/item/reagent_containers/food/snacks/grown/berries/rogue/Initialize()
 	if(GLOB.berrycolors[color_index])
