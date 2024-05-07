@@ -10,7 +10,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Aasimar",
+		"Aasimar"
 	) //same shit as town guard
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_YOUNG)

@@ -2,13 +2,15 @@
 /datum/advclass/sfighter
 	name = "Warrior"
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Half-Elf",
-	"Dark Elf",
-	"Tiefling")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/sfighter
 	traits_applied = list(RTRAIT_HEAVYARMOR)
 
