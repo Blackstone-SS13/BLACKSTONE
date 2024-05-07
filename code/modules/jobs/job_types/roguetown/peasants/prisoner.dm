@@ -3,8 +3,8 @@
 	flag = GRAVEDIGGER
 	department_flag = PEASANTS
 	faction = "Station"
-	total_positions = -1
-	spawn_positions = -1
+	total_positions = 1
+	spawn_positions = 0
 
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
@@ -36,13 +36,13 @@
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
-		H.change_stat("strength", -4)
-		H.change_stat("intelligence", -3)
-		H.change_stat("speed", -2)
-		H.change_stat("constitution", -3)
+		H.change_stat("strength", 1)
+		H.change_stat("intelligence", 3)
+		H.change_stat("speed", 3)
+		H.change_stat("constitution", -2)
 		H.change_stat("endurance", -2)
 		var/datum/antagonist/new_antag = new /datum/antagonist/prisoner()
 		H.mind.add_antag_datum(new_antag)
