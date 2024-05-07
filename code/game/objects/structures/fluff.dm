@@ -923,7 +923,7 @@
 
 /obj/structure/fluff/statue/evil
 	name = "idol"
-	desc = "A statue built to the robber-god, Matthios, who stole the gift of fire from the underworld. It is said that he grants the wishes of those pagan bandits (free folk) who feed him money."
+	desc = "A statue built to the robber-god, Matthios, who stole the gift of fire from the underworld. It is said that he grants the wishes of those pagan bandits (free folk) who feed him money and valuable metals."
 	icon_state = "evilidol"
 	icon = 'icons/roguetown/misc/structure.dmi'
 
@@ -931,7 +931,7 @@
 	if(user.mind)
 		var/datum/antagonist/bandit/B = user.mind.has_antag_datum(/datum/antagonist/bandit)
 		if(B)
-			if(istype(W, /obj/item/roguecoin) || istype(W, /obj/item/roguegem))
+			if(istype(W, /obj/item/roguecoin) || istype(W, /obj/item/roguegem) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/ingot) || istype(W, /obj/item/clothing/neck/roguetown/psicross))
 				if(B.tri_amt >= 10)
 					to_chat(user, "<span class='warning'>The mouth doesn't open.</span>")
 					return
@@ -942,12 +942,31 @@
 					B.contrib -= 100
 					var/obj/item/I
 					switch(B.tri_amt)
+						if(1)
+							I = new /obj/item/reagent_containers/glass/bottle/rogue/healthpot(user.loc)
+							I = new /obj/item/storage/backpack/rogue/backpack(user.loc)
 						if(2)
+							I = new /obj/item/reagent_containers/powder/moondust(user.loc)
+							I = new /obj/item/reagent_containers/powder/moondust(user.loc)
+							I = new /obj/item/reagent_containers/powder/moondust(user.loc)
+						if(3)
 							I = new /obj/item/clothing/suit/roguetown/armor/plate/scale(user.loc)
 						if(4)
+							I = new /obj/item/clothing/neck/roguetown/bervor(user.loc)
+						if(5)
 							I = new /obj/item/clothing/head/roguetown/helmet/horned(user.loc)
 						if(6)
-							I = new /obj/item/rogueweapon/spear/billhook(user.loc)
+							I = new /obj/item/reagent_containers/glass/bottle/rogue/healthpot(user.loc)
+							I = new /obj/item/reagent_containers/powder/moondust(user.loc)
+							I = new /obj/item/reagent_containers/powder/moondust(user.loc)
+						if(7)
+							I = new /obj/item/clothing/shoes/roguetown/boots/armor(user.loc)
+						if(8)
+							I = new /obj/item/clothing/gloves/roguetown/plate(user.loc)
+						if(9)
+							I = new /obj/item/clothing/wrists/roguetown/bracers(user.loc)
+						if(10)
+							I = new /obj/item/clothing/neck/roguetown/blkknight(user.loc)
 					if(I)
 						I.sellprice = 0
 					playsound(loc,'sound/items/carvgood.ogg', 50, TRUE)
