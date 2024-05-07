@@ -664,7 +664,7 @@
 						to_chat(user, "<span class='warning'>[attachment] is full!</span>")
 						return
 					user.visible_message("<span class='info'>[user] places [W] into the pot.</span>")
-					reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrimentamount)
+					pot.reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrimentamount)
 					playsound(src, "bubbles", 100, TRUE)
 					qdel(W)
 				return
