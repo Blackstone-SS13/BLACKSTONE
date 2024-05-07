@@ -80,9 +80,9 @@
 	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine/coatplates
 
 /datum/anvil_recipe/armor/brigandine
-	name = "brigandine (+steel + gambeson)"
+	name = "brigandine (+steel + 2 cloth)"
 	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/ingot/steel, /obj/item/clothing/suit/roguetown/armor/gambeson)
+	additional_items = list(/obj/item/ingot/steel, /obj/item/natural/cloth, /obj/item/natural/cloth)
 	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine
 
 /datum/anvil_recipe/armor/chaincoif
