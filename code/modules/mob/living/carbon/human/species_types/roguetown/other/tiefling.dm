@@ -50,6 +50,7 @@
 	specstats_f = list("strength" = -1, "perception" = 1, "intelligence" = 2, "constitution" = -2, "endurance" = 1, "speed" = 1, "fortune" = -1)
 	enflamed_icon = "widefire"
 
+	mutanttongue = /obj/item/organ/tongue/lizard // added for hiss/lisp due to forked/long tongue
 
 /datum/species/tieberian/check_roundstart_eligible()
 	return TRUE
@@ -133,6 +134,7 @@
 
 /datum/species/tieberian/random_surname()
 	return " [pick(world.file2list("strings/rt/names/other/tieflast.txt"))]"
-
+/* old spanish tiefling, obsolete
 /datum/species/tieberian/get_accent(mob/living/carbon/human/H)
 	return strings("spanish_replacement.json", "spanish")
+*/
