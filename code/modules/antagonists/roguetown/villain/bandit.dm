@@ -138,7 +138,6 @@
 			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 			beltl = /obj/item/quiver/bolts
 			beltr = /obj/item/rogueweapon/stoneaxe/woodcut/steel
-			head = /obj/item/clothing/head/roguetown/helmet/kettle
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
 			H.change_stat("perception", 3)
 		if(13 to 15) // spear bandit
