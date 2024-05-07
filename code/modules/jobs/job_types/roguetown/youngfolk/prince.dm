@@ -6,7 +6,11 @@
 	total_positions = 0
 	spawn_positions = 2
 	f_title = "Princess"
-	allowed_races = list("Humen", "Half-Elf") //lord and lady cant be an elf, but prince could be a bastard child which is funny
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+	) //Maybe a system to force-pick lineage based on king and queen should be implemented.
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_YOUNG)
 
