@@ -103,8 +103,6 @@
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	backr = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1)
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
-	beltl = /obj/item/quiver/bolts
 	mask = /obj/item/clothing/mask/rogue/facemask/steel
 	head = /obj/item/clothing/head/roguetown/helmet/leather/volfhelm
 	if(prob(40))
@@ -115,17 +113,55 @@
 	else
 		wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 		armor = /obj/item/clothing/suit/roguetown/armor/leather
-	var/loadoutm = rand(1,3)
+	var/loadoutm = rand(1,16)
 	switch(loadoutm)
-		if(1)
+		if(1 to 3) // sword bandit
 			beltr = /obj/item/rogueweapon/sword/iron
+			if(prob(40))
+				backl = /obj/item/rogueweapon/shield/wood
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		if(2)
+			H.change_stat("endurance", 1)
+		if(4 to 6) // knife bandit - dodge maxing
 			beltr = /obj/item/rogueweapon/huntingknife/cleaver
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-		if(3)
-			beltr = /obj/item/rogueweapon/flail
-			H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
+			H.change_stat("speed", 3)
+			H.change_stat("strength", -2)
+		if(7 to 9) // flail bandit small chance to two handed flail
+			if(prob(80))
+				beltr = /obj/item/rogueweapon/flail
+				H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 1, TRUE)
+			else
+				r_hand = /obj/item/rogueweapon/flail/peasantwarflail
+				H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+			H.change_stat("strength", 1)
+		if(10 to 12) // crossbow bandit
+			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+			beltl = /obj/item/quiver/bolts
+			beltr = /obj/item/rogueweapon/stoneaxe/woodcut/steel
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
+			H.change_stat("perception", 3)
+		if(13 to 15) // spear bandit
+			r_hand = /obj/item/rogueweapon/spear
+			if(prob(40))
+				backl = /obj/item/rogueweapon/shield/wood
+			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+			H.change_stat("endurance", 1)
+		if(16) // hedge knight - give challenge to knights/templars ~6% chance 15-20 bandits roundstart average 1 hedge knight - lacks protection to hands or feet
+			r_hand = /obj/item/rogueweapon/greatsword/zwei
+			beltr = /obj/item/rogueweapon/sword
+			beltl = /obj/item/flashlight/flare/torch/lantern
+			armor = /obj/item/clothing/suit/roguetown/armor/plate/full
+			gloves = /obj/item/clothing/gloves/roguetown/leather
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/pigface
+			if(prob(30))
+				neck = /obj/item/clothing/neck/roguetown/bervor
+			else
+				neck = /obj/item/clothing/neck/roguetown/gorget
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, rand(2,3), TRUE) // either expert or master skill - knights start with master and templars expert sword skill
+			H.change_stat("strength", 1)
+			H.change_stat("constitution", 1)
+			H.change_stat("speed", -2)
+			ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	H.change_stat("strength", 3)
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 1)
