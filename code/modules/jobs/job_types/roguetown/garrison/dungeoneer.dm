@@ -21,7 +21,7 @@
 
 	outfit = /datum/outfit/job/roguetown/dungeoneer
 	give_bank_account = 5
-	min_pq = 3
+	min_pq = 2
 
 
 /datum/outfit/job/roguetown/dungeoneer/pre_equip(mob/living/carbon/human/H)
