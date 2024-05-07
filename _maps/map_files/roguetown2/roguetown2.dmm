@@ -5588,6 +5588,12 @@
 	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors/town/manor)
+"wR" = (
+/obj/structure/chair/bench/church/r{
+	dir = 1
+	},
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/town)
 "wT" = (
 /turf/closed/wall/mineral/rogue/pipe{
 	icon_state = "iron_corner";
@@ -10818,6 +10824,13 @@
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/tavern)
+"Pa" = (
+/obj/structure/chair/bench/church/mid{
+	icon_state = "church_benchmid";
+	dir = 1
+	},
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/town)
 "Pb" = (
 /obj/structure/mineral_door/wood,
 /turf/open/floor/rogue/woodturned,
@@ -11913,6 +11926,13 @@
 	icon_state = "horzw"
 	},
 /area/rogue/indoors/town/church)
+"Ta" = (
+/obj/structure/stairs{
+	icon_state = "stairs";
+	dir = 8
+	},
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/town)
 "Tb" = (
 /turf/closed/wall/mineral/rogue/roofwall/outercorner{
 	dir = 8
@@ -13695,6 +13715,13 @@
 	},
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/garrison)
+"ZE" = (
+/obj/structure/chair/bench/church{
+	icon_state = "church_benchleft";
+	dir = 1
+	},
+/turf/open/floor/rogue/blocks,
+/area/rogue/outdoors/town)
 "ZF" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -74449,10 +74476,10 @@ ht
 kp
 eS
 eS
-gg
-gg
-gg
-gg
+eS
+eS
+eS
+eS
 eS
 eS
 eS
@@ -74606,10 +74633,10 @@ er
 wA
 eS
 eS
-gg
-lR
-lR
-le
+eS
+eS
+eS
+eS
 eS
 eS
 eS
@@ -74763,13 +74790,13 @@ YT
 oM
 eS
 eS
-gg
-kB
-sM
-nG
 eS
 eS
 eS
+eS
+ZE
+ZE
+ZE
 eS
 eS
 eS
@@ -74919,16 +74946,16 @@ er
 wA
 eS
 eS
-eS
+Ux
+Ux
+Ux
 gg
-lR
-lR
-le
+eS
+Pa
+Pa
+Pa
 eS
 eS
-eS
-eS
-va
 eS
 eS
 eS
@@ -75074,18 +75101,18 @@ er
 er
 er
 wA
-eS
-eS
-eS
-gg
-gg
 to
-gg
+eS
+lR
+lR
+lR
+le
+eS
+wR
+wR
+wR
 eS
 eS
-eS
-eS
-iA
 eS
 eS
 eS
@@ -75231,16 +75258,16 @@ er
 er
 er
 qD
-eS
-eS
-eS
-eS
-eS
 UN
 Ol
-eS
-eS
-eS
+lR
+kB
+sM
+nG
+gg
+gg
+gg
+gg
 eS
 eS
 eS
@@ -75388,16 +75415,16 @@ er
 er
 YT
 Tl
-eS
-eS
-eS
-eS
-eS
 UN
 Xt
+lR
+lR
+lR
+le
 eS
-eS
-eS
+ZE
+ZE
+ZE
 eS
 eS
 eS
@@ -75545,16 +75572,16 @@ er
 Sk
 mE
 eS
-eS
-eS
-eS
-eS
-eS
 qB
 eS
+Ta
+Ta
+Ta
+gg
 eS
-eS
-eS
+Pa
+Pa
+Pa
 eS
 eS
 eS
@@ -75709,9 +75736,9 @@ eS
 eS
 eS
 eS
-eS
-eS
-eS
+wR
+wR
+wR
 eS
 eS
 eS
@@ -75870,7 +75897,7 @@ eS
 eS
 eS
 eS
-va
+eS
 eS
 eS
 eS
@@ -76017,17 +76044,17 @@ wA
 eS
 eS
 eS
-VA
-VA
 eS
 eS
 eS
-VA
-VA
 eS
 eS
 eS
-iA
+eS
+eS
+eS
+eS
+va
 eS
 eS
 eS
@@ -76174,17 +76201,17 @@ wA
 eS
 eS
 eS
+VA
+VA
 eS
 eS
 eS
+VA
+VA
 eS
 eS
 eS
-eS
-eS
-eS
-eS
-eS
+va
 eS
 eS
 eS
@@ -76341,7 +76368,7 @@ eS
 eS
 eS
 eS
-eS
+iA
 eS
 eS
 eS
