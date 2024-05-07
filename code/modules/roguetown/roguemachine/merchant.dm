@@ -171,7 +171,7 @@
 	if(href_list["buy"])
 		var/mob/M = usr
 		var/path = text2path(href_list["buy"])
-		if(!istype(path, /datum/supply_pack))
+		if(!ispath(path, /datum/supply_pack))
 			message_admins("RETARDED MOTHERFUCKER [usr.key] IS TRYING TO BUY A [path] WITH THE GOLDFACE")
 			return
 		var/datum/supply_pack/PA = new path
