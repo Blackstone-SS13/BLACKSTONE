@@ -5,13 +5,14 @@
 	faction = "Station"
 	total_positions = -1
 	spawn_positions = -1
-	allowed_races = list("Humen",
-	"Dwarf",
-	"Elf",
-	"Half-Elf",
-	"Tiefling",
-	"Dark Elf",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
 	)
 	tutorial = "Pilgrims begin far outside of the town and must reach it in order to ply their various trades. Sometimes, they build their own settlements and enjoy the terrible nature."
 

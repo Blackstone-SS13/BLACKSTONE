@@ -12,7 +12,7 @@
 	total_positions = 5
 	spawn_positions = 5
 	give_bank_account = 3
-	min_pq = 1 //good fragger role
+	min_pq = 2 //good fragger role
 
 /datum/outfit/job/roguetown/mercenary/desert_rider/pre_equip(mob/living/carbon/human/H)
 	..()
