@@ -33,17 +33,30 @@
 	neck = /obj/item/clothing/neck/roguetown/talkstone
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	r_hand = /obj/item/rogueweapon/woodstaff
+	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/slimepotion/lovepotion,/datum/reagent/berrypoison,/datum/reagent/medicine/healthpot)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/arcane, pick(6,5), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-		H.change_stat("strength", -2)
-		H.change_stat("intelligence", 5)
-		H.change_stat("constitution", -2)
-		H.change_stat("speed", -2)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, pick(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, pick(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, pick(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
+		H.change_stat("strength", -1)
+		H.change_stat("intelligence", 4)
+		H.change_stat("constitution", -1) // Need to port more ss13 spells into RT.
 		if(H.age == AGE_OLD)
 			H.change_stat("speed", -1)
 			H.change_stat("intelligence", 1)
+			H.change_stat("perception", 1)
 			if(H.dna.species.id == "human")
 				belt = /obj/item/storage/belt/rogue/leather/plaquegold
 				cloak = null

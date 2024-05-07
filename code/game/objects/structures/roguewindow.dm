@@ -32,11 +32,23 @@
 	icon_state = "[base_state]"
 
 /obj/structure/roguewindow/stained
-	icon_state = "stained-silver"
-	base_state = "stained-silver"
+	icon_state = null
+	base_state = null
 	opacity = TRUE
-	max_integrity = 100
+	max_integrity = 100 
 	integrity_failure = 0.75
+
+/obj/structure/roguewindow/stained/silver
+	icon_state = "stained-silver"
+	base_state = "stained-silverbr"
+
+/obj/structure/roguewindow/stained/yellow
+	icon_state = "stained-yellow"
+	base_state = "stained-yellowbr"
+	
+/obj/structure/roguewindow/stained/zizo
+	icon_state = "stained-zizo"
+	base_state = "stained-zizobr"
 
 /obj/structure/roguewindow/openclose
 	icon_state = "woodwindowdir"
