@@ -1,14 +1,14 @@
 /datum/job/roguetown/lady
 	title = "Queen"
-	flag = MERCHANT
-	department_flag = SERFS
+	flag = LADY
+	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 
 	allowed_sexes = list(FEMALE)
 	allowed_races = list("Humen")
-	tutorial = "Picked out of your political value rather than likely any form of love, you have become the King's most trusted confidant and likely friend throughout your marriage. Your loyalty and, perhaps, love; will be tested this day. For the daggers that threaten your beloved are as equally pointed at your own throat.."
+	tutorial = "Picked out of your political value rather than likely any form of love, you have become the King's most trusted confidant and likely friend throughout your marriage. Your loyalty and, perhaps, love; will be tested this day. For the daggers that threaten your beloved are as equally pointed at your own throat."
 
 	outfit = /datum/outfit/job/roguetown/lady
 
@@ -19,8 +19,8 @@
 /datum/outfit/job/roguetown/lady/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	beltl = /obj/item/roguekey/manor
-//	head = /obj/item/clothing/head/roguetown/hennin
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
 	armor = /obj/item/clothing/suit/roguetown/armor/armordress
@@ -48,6 +48,8 @@
 			H.change_stat("speed", 2)
 			H.change_stat("perception", 2)
 			H.change_stat("fortune", 5)
+	else
+		head = /obj/item/clothing/head/roguetown/hennin
 //		SSticker.rulermob = H
 	if(prob(66))
 		armor = /obj/item/clothing/suit/roguetown/armor/armordress/alt
