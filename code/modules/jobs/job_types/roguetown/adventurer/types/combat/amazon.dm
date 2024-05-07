@@ -2,7 +2,7 @@
 	name = "Amazon"
 	tutorial = "Amazons are warrior-women from the mysterious isle of Issa. These rare fighters are so tough they can beat an average man!"
 	allowed_sexes = list("female")
-		allowed_races = list(
+	allowed_races = list(
 		"Humen",
 		"Elf",
 		"Half-Elf",
