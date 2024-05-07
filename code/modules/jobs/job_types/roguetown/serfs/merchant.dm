@@ -78,4 +78,4 @@
 		H.change_stat("intelligence", 2)
 		H.change_stat("perception", 3)
 		H.change_stat("strength", -1)
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_GENERIC)
