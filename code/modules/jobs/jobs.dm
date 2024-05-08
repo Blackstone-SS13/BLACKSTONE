@@ -74,6 +74,7 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	"Town Guard",
 	"Bog Guard",
 	"Bog Master",
+	"Soldier",
 	"Castle Guard",
 	"Veteran",
 	"Dungeoneer",
