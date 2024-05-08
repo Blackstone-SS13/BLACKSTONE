@@ -9,7 +9,7 @@
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen")
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
-	tutorial = "You are a soldier apart of the kings royal retinue, the sheriff is your direct superior"
+	tutorial = "You are a soldier apart of the kings royal retinue, the king is your direct superior, knights may also direct you in times of crisis"
 	display_order = JDO_SOLDIER
 	whitelist_req = TRUE
 
