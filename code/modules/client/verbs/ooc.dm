@@ -206,6 +206,10 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 
 	if(!mob)
 		return
+	
+	if(mob.stat != CONSCIOUS)
+		to_chat(src, "<span class = 'danger'>I can't use that.</span>")
+		return
 
 	//if(CONFIG_GET(flag/usewhitelist))
 	//	if(whitelisted() != 1)
