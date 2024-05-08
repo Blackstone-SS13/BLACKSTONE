@@ -156,6 +156,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Castle Guard"
 	icon_state = "arrow"
 
+/obj/effect/landmark/start/soldier
+	name = "Soldier"
+	icon_state = "arrow"
+
 /obj/effect/landmark/start/bogmaster
 	name = "Bog Master"
 	icon_state = "arrow"
@@ -562,7 +566,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/bandit/Initialize()
 	..()
 	GLOB.bandit_starts += loc
-
 
 /obj/effect/landmark/start/delf
 	name = "delf"
