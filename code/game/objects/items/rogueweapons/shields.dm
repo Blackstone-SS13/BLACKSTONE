@@ -99,6 +99,8 @@
 	coverage = 70
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	max_integrity = 200
+	var/shielding
+	shielding = FALSE
 
 /obj/item/rogueweapon/shield/tower/getonmobprop(tag)
 	. = ..()
@@ -127,6 +129,30 @@
 	max_integrity = 300
 	blade_dulling = DULLING_BASH
 	sellprice = 30
+
+/obj/item/rogueweapon/shield/tower/equipped(mob/user, slot)
+	. = ..()
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/shielder = user
+	if(slot == SLOT_HANDS)
+		shielder.change_stat("speed", -2)
+		to_chat(shielder, "<span class='red'>I lose speed.</span>")
+		shielding = TRUE
+	if(slot == SLOT_BACK_L && shielding|| slot == SLOT_BACK_R && shielding)
+		shielder.change_stat("speed", 2)
+		to_chat(shielder, "<span class='green'>I gain speed.</span>")
+		shielding = FALSE
+
+/obj/item/rogueweapon/shield/tower/dropped(mob/user)
+	. = ..()
+	if(!ishuman(user))
+		return
+	if(shielding)
+		var/mob/living/carbon/human/shielder = user
+		shielder.change_stat("speed", 2)
+		to_chat(shielder, "<span class='green'>I gain speed.</span>")
+		shielding = FALSE
 
 /obj/item/rogueweapon/shield/tower/metal/getonmobprop(tag)
 	if(tag)
