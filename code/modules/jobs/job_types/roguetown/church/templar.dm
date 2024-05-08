@@ -57,6 +57,7 @@
 			neck = /obj/item/clothing/neck/roguetown/psicross/noc
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
+	neck = /obj/item/clothing/neck/roguetown/chaincoif/iron
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	shoes = /obj/item/clothing/shoes/roguetown/boots
