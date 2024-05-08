@@ -1,4 +1,4 @@
-// traitors, bandits, pro thieves, werewolves, vampires, demons, cultists
+// traitors, bandits, pro thieves, werewolves, vampires, demons, cultists, siege
 /*
 
 /datum/game_mode/chaosmode
@@ -27,11 +27,13 @@
 	var/list/datum/mind/vampires = list()
 	var/list/datum/mind/werewolves = list()
 	var/list/datum/mind/bandits = list()
+	var/list/datum/mind/siege = list()
 
 	var/list/datum/mind/pre_villains = list()
 	var/list/datum/mind/pre_werewolves = list()
 	var/list/datum/mind/pre_vampires = list()
 	var/list/datum/mind/pre_bandits = list()
+	var/list/datum/mind/pre_siege = list()
 	var/list/datum/mind/pre_delfs = list()
 	var/list/datum/mind/pre_rebels = list()
 
@@ -140,7 +142,7 @@
 	if(allmig || roguefight)
 		return TRUE
 
-	var/list/modez_random = list(1,2,3)
+	var/list/modez_random = list(1,2,3,4)
 	modez_random = shuffle(modez_random)
 	for(var/i in modez_random)
 		switch(i)
@@ -159,8 +161,46 @@
 			if(3)
 				if(prob(30))
 					pick_maniac()
+			if(4)
+				if(prob(20))
+					pick_siege()
 
 	return TRUE
+	
+/datum/game_mode/chaosmode/proc/pick_siege()
+	//SIEGE
+	banditgoal = rand(200,400)
+	restricted_jobs = list("King",
+	"Queen",
+	"Merchant",
+	"Priest",
+	"Knight")
+	var/num_siege = 0
+	if(num_players() >= 10)
+		num_siege = CLAMP(round(num_players() / 2), 30, 40)
+#ifdef TESTSERVER
+	num_siege = 999
+#endif
+	if(num_siege)
+		antag_candidates = get_players_for_role(ROLE_SIEGE, pre_do=TRUE) //pre_do checks for their preferences since they don't have a job yet
+		for(var/i = 0, i < num_siege, ++i)
+			var/datum/mind/siege = pick_n_take(antag_candidates)
+			var/found = FALSE
+			for(var/M in allantags)
+				if(M == siege)
+					found = TRUE
+					allantags -= M
+					break
+			if(!found)
+				continue
+			pre_siege += siege
+			bandito.assigned_role = "Siege"
+			bandito.special_role = ROLE_SIEGE
+			testing("[key_name(siege)] has been selected as a sieger")
+			log_game("[key_name(bandito)] has been selected as a sieger")
+	for(var/antag in pre_siege)
+		GLOB.pre_setup_antags |= antag
+	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_bandits()
 	//BANDITS
