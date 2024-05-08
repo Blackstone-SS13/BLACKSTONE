@@ -146,6 +146,12 @@
 			var/obj/item/mainhand = get_active_held_item()
 			var/obj/item/offhand = get_inactive_held_item()
 			var/used_index = active_hand_index
+			var/obj/item/rogueweapon/shield/buckler/skiller = get_inactive_held_item()  // buckler code
+			var/obj/item/rogueweapon/shield/buckler/skillerbuck = get_active_held_item()
+			if(istype(offhand, /obj/item/rogueweapon/shield/buckler))
+				skiller.bucklerskill(H)
+			if(istype(mainhand, /obj/item/rogueweapon/shield/buckler))
+				skillerbuck.bucklerskill(H)  //buckler code end
 			var/weapon_parry = FALSE
 			if(mainhand)
 				if(mainhand.can_parry)
