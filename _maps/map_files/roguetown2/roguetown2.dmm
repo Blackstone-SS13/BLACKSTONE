@@ -2244,6 +2244,12 @@
 	icon_state = "paving"
 	},
 /area/rogue/indoors/town/bath)
+"iW" = (
+/obj/effect/landmark/start/soldier{
+	dir = 1
+	},
+/turf/open/floor/rogue/carpet/lord/left,
+/area/rogue/indoors/town/manor)
 "iX" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/rogue/cobblerock,
@@ -2777,6 +2783,13 @@
 	},
 /turf/open/floor/rogue/concrete,
 /area/rogue/indoors/town/garrison)
+"lj" = (
+/obj/machinery/light/rogue/torchholder/r,
+/obj/effect/landmark/start/soldier{
+	dir = 1
+	},
+/turf/open/floor/rogue/carpet/lord/right,
+/area/rogue/indoors/town/manor)
 "lk" = (
 /obj/structure/closet/crate/roguecloset,
 /obj/item/reagent_containers/glass/bottle/rogue/healthpot,
@@ -3753,12 +3766,10 @@
 	},
 /area/rogue/outdoors/town)
 "ps" = (
-/obj/effect/landmark/start/manorguardsman{
-	dir = 8
+/obj/effect/landmark/start/soldier{
+	dir = 1
 	},
-/turf/open/floor/rogue/tile/masonic{
-	dir = 8
-	},
+/turf/open/floor/rogue/carpet/lord/center,
 /area/rogue/indoors/town/manor)
 "pt" = (
 /turf/closed/wall/mineral/rogue/stone,
@@ -4004,12 +4015,10 @@
 /turf/open/floor/rogue/cobblerock,
 /area/rogue/outdoors/rtfield)
 "qr" = (
-/obj/effect/landmark/start/manorguardsman{
-	dir = 4
+/obj/effect/landmark/start/soldier{
+	dir = 1
 	},
-/turf/open/floor/rogue/tile/masonic{
-	dir = 4
-	},
+/turf/open/floor/rogue/carpet/lord/right,
 /area/rogue/indoors/town/manor)
 "qs" = (
 /obj/structure/mineral_door/wood/fancywood{
@@ -5383,9 +5392,6 @@
 "wb" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
-	},
-/obj/effect/landmark/start/manorguardsman{
-	dir = 8
 	},
 /turf/open/floor/rogue/tile/masonic,
 /area/rogue/indoors/town/manor)
@@ -10815,6 +10821,13 @@
 	icon_state = "newstone2"
 	},
 /area/rogue/under/town/basement)
+"OT" = (
+/obj/machinery/light/rogue/torchholder/l,
+/obj/effect/landmark/start/soldier{
+	dir = 1
+	},
+/turf/open/floor/rogue/carpet/lord/left,
+/area/rogue/indoors/town/manor)
 "OU" = (
 /obj/structure/fluff/railing/border{
 	icon_state = "border";
@@ -12134,9 +12147,6 @@
 "TL" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
-	},
-/obj/effect/landmark/start/manorguardsman{
-	dir = 4
 	},
 /turf/open/floor/rogue/tile/masonic{
 	dir = 1
@@ -73981,7 +73991,7 @@ pA
 nR
 eG
 TL
-qr
+fH
 QL
 fn
 fn
@@ -74136,9 +74146,9 @@ fo
 yM
 fo
 fo
-yM
-fo
-fo
+OT
+iW
+iW
 vM
 fo
 fo
@@ -74293,9 +74303,9 @@ Xb
 pY
 fp
 QD
-fp
-fp
-fp
+ps
+ps
+ps
 fp
 fp
 fp
@@ -74450,9 +74460,9 @@ fq
 Ra
 fq
 fq
-Ra
-fq
-fq
+lj
+qr
+qr
 fq
 fq
 fq
@@ -74609,7 +74619,7 @@ ob
 mw
 eG
 wb
-ps
+ga
 eG
 gl
 gl
