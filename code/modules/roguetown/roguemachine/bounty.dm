@@ -2,7 +2,7 @@
 	name = "Excidium"
 	desc = ""
 	icon = 'icons/roguetown/misc/machines.dmi'
-	icon_state = "atm-b"
+	icon_state = "atm-b" // TODO: change this
 	density = FALSE
 	blade_dulling = DULLING_BASH
 
@@ -18,52 +18,80 @@
 /obj/structure/roguemachine/bounty/attack_hand(mob/user)
 	if(!ishuman(user)) return
 
+	// We need to check the user's bank account later
 	var/mob/living/carbon/human/H = user
 
 	// menu will look like this:
 	// 1. Consult bounties
 	// 2. Create bounty
 
+	//TODO: Should bounties on the same person stack up or be separate?
+
 	// Main Menu
 	var/list/choices = list("Consult bounties", "Set bounty")
 	var/selection = input(user, "The Excidium listens", src) as null|anything in choices
+
 	switch(selection)
+
 		if("Consult bounties")
 
-			//...
+			// Empty?
+			if(bounties.len == 0)
+				say("No bounties are currently active.")
+				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+				return
+
+			// List all bounties
+			for(var/datum/bounty/saved_bounty in bounties)
+				say("A bounty of [saved_bounty.amount] mammons has been set on [saved_bounty.target] for [saved_bounty.reason].")
 
 		if("Set bounty")
 
-			// Set bounty procedure
-			var/target = input(user, "Whose name shall be etched on the wanted list?", src) as GLOB.player_list
-			if(!target)
+			var/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in GLOB.player_list
+			if(isnull(target))
 				say("No target selected.")
+				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 				return
 
-			var/amount = input(user, "How much silver shall be stained red for their demise?", src) as num
-			if(amount < 1 || !amount)
+			var/amount = input(user, "How many mammons shall be stained red for their demise?", src) as null|num
+			if(isnull(amount) || amount < 1)
 				say("Invalid amount.")
+				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+				return
+		
+			// Has user a bank account?
+			if(!(H in SStreasury.bank_accounts))
+				say("You have no bank account.")
+				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 				return
 
-			var/reason = input(user, "For what sin do you summon the hounds of hell?", src) as text
-			if(reason == ""	|| !reason)
+			// Has user enough money?
+			if(SStreasury.bank_accounts[H].balance < amount)
+				say("Insufficient balance funds.")
+				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+				return
+
+			var/reason = input(user, "For what sin do you summon the hounds of hell?", src) as null|text
+			if(isnull(reason) || reason == "")
 				say("No reason given.")
+				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 				return
 
-			var/confirm = input(user, "Do you dare to unleash this darkness upon the world?", src) as null|anything in list("Yes", "No")	
-			if(confirm == "No" || !confirm) return
-
-			say("Bounty set.")
-			//now the Excidium waits X seconds for the user to insert the sum
-			//else the procedure fails
+			var/confirm = input(user, "Do you dare unleash this darkness upon the world?", src) as null|anything in list("Yes", "No")	
+			if(isnull(confirm) || confirm == "No") return
 			
-			// Create bounty
-			var/datum/bounty/new_bounty
-			new_bounty.amount = amount
-			//new_bounty.target = target
+
+			// Deduct money from user
+			SStreasury.bank_accounts[H].balance -= round(amount)
+
+			// Finally create bounty
+			var/datum/bounty/new_bounty = new /datum/bounty
+			new_bounty.amount = round(amount)
+			new_bounty.target = target
 			new_bounty.reason = reason
 			bounties += new_bounty
-			say("Bounty set.")
+			say("The bounty has been set.")
+			playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 
 /obj/structure/roguemachine/atm/attackby(obj/item/P, mob/user, params)
 	if(ishuman(user)) return
