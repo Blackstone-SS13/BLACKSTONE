@@ -38,7 +38,7 @@
 	SKIN_COLOR_SHALVISTINE,
 	SKIN_COLOR_EBON
 	)
-	if(!(H.skin_tone in canonical_heritage_check_list))
+	if(ishumannorthern(H) && !(H.skin_tone in canonical_heritage_check_list))
 		H.skin_tone = pick(canonical_heritage_check_list)
 		H.update_body()
 
