@@ -9,7 +9,16 @@
 	outfit = /datum/outfit/job/roguetown/tailor
 	outfit_female = /datum/outfit/job/roguetown/tailor/female
 	display_order = 6
-	min_pq = -10
+	min_pq = 0
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
+	)
 
 /datum/outfit/job/roguetown/tailor
 	name = "Tailor"

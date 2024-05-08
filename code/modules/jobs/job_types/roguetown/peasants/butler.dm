@@ -10,11 +10,9 @@
 	allowed_races = list(
 		"Humen",
 		"Elf",
-		"Dwarf",
-		"Aasimar",
 		"Half-Elf",
-		"Tiefling",
-		"Dark Elf",
+		"Dwarf",
+		"Aasimar"
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 

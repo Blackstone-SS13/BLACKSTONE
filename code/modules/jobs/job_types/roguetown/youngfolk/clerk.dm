@@ -11,7 +11,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Aasimar",
+		"Aasimar"
 	)
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_YOUNG)

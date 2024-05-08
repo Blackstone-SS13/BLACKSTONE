@@ -2,7 +2,7 @@
 	name = "Vagrant"
 	tutorial = "Dwarves like to blow things up."
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Dwarf","Dwarf")
+	allowed_races = list("Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dbomb
 	traits_applied = list(RTRAIT_HEAVYARMOR)
 

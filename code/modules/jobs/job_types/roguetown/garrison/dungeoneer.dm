@@ -8,11 +8,10 @@
 
 	allowed_races = list(
 		"Humen",
-		"Elf",
 		"Dwarf",
-		"Aasimar",
-		"Half-Elf",
-	) //same as town guard
+		"Tiefling",
+		"Dark Elf"
+	)
 	allowed_sexes = list(MALE, FEMALE)
 
 	display_order = JDO_DUNGEONEER

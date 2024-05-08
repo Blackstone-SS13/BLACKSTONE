@@ -6,7 +6,10 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	allowed_races = list("Humen")
+	allowed_races = list(
+		"Humen",
+		"Aasimar"
+	)
 	allowed_sexes = list(MALE)
 
 	tutorial = "As a Witch Hunter, the Queen has emboldened your sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
