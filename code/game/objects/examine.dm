@@ -32,7 +32,7 @@
 		else if(HAS_TRAIT(user, RTRAIT_SEEPRICES_SHITTY))
 			//you can get up to 50% of the value if you have shitty see prices
 			var/static/fumbling_seed = text2num(GLOB.rogue_round_id)
-			var/fumbled_value = max(1, real_value * clamp(noise_hash(real_value, fumbling_seed) - 0.5, -0.5, 0.5))
+			var/fumbled_value = max(1, round(real_value - (real_value * clamp(noise_hash(real_value, fumbling_seed) - 0.5, -0.5, 0.5)), 1))
 			. += "<span class='info'>Value: [fumbled_value] mammon... <i>I think</i></span>"
 
 //	. += "[gender == PLURAL ? "They are" : "It is"] a [weightclass2text(w_class)] item."
