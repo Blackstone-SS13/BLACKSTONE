@@ -1,11 +1,11 @@
-/datum/job/roguetown/councillor
-	title = "Councillor"
-	flag = COUNCILLOR
+/datum/job/roguetown/chancellor
+	title = "Chancellor"
+	flag = CHANCELLOR
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
+	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -14,14 +14,14 @@
 		"Aasimar",
 	)
 	allowed_sexes = list(MALE, FEMALE)
-	display_order = JDO_COUNCILLOR
-	tutorial = "You may have inherited this role, bought your way into it, or were appointed by the bailiff; whatever it was you now serve as a assistant, planner, and juror for the Bailiff. You help him oversee the taxation, construction, and planning of new laws. You only answer to the Bailiff, Queen, King, Princes, or Princesses. However, your main focus is to assist the Bailiff."
+	display_order = JDO_CHANCELLOR
+	tutorial = "You may have inherited this role, bought your way into it, or were appointed; whatever it was you now serve the court as assistant, planner, juror, tax collector - whatever functions don't require a sword. You answer directly to the Bailiff & Steward, and your main focus is to assist them. You act as a check & balance within the court."
 	whitelist_req = FALSE
-	outfit = /datum/outfit/job/roguetown/councillor
+	outfit = /datum/outfit/job/roguetown/chancellor
 	give_bank_account = 40
-	min_pq = 2
+	min_pq = 1
 
-/datum/outfit/job/roguetown/councillor/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/chancellor/pre_equip(mob/living/carbon/human/H)
 	..()
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	armor = /obj/item/clothing/suit/roguetown/armor/gambeson/councillor
@@ -34,14 +34,14 @@
 	beltl = /obj/item/keyring/guardcastle
 	beltr = /obj/item/rogueweapon/huntingknife/idagger/steel
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/councillor
-	backpack_contents = list(/obj/item/keyring/councillor = 1)
+	backpack_contents = list(/obj/item/keyring/chancellor = 1)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 		H.change_stat("intelligence", 3)
 		H.change_stat("constitution", 1)
 		H.change_stat("fortune", 2)

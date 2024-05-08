@@ -65,7 +65,7 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	"Prince",
 	"Sheriff",
 	"Bailiff",
-	"Councillor",
+	"Chancellor",
 	"Steward",
 	"Court Magician"
 	))

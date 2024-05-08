@@ -70,7 +70,7 @@
 	if(user)
 		if(user.get_inactive_held_item() != G && !isturf(G.loc))
 			return
-	
+
 	var/amt_to_merge = min(G.quantity, MAX_COIN_STACK_SIZE - quantity)
 	if(amt_to_merge <= 0)
 		return
@@ -128,7 +128,7 @@
 		drop_sound = 'sound/foley/coins1.ogg'
 	else
 		drop_sound = 'sound/foley/coinphy (1).ogg'
-		
+
 	if(quantity == 1)
 		name = initial(name)
 		desc = initial(desc)

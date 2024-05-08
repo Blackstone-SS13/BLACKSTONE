@@ -102,7 +102,7 @@
 #define WIZARD		(1<<4)
 #define SHERIFF		(1<<5)
 #define BAILIFF		(1<<6)
-#define COUNCILLOR	(1<<7)
+#define CHANCELLOR	(1<<7)
 
 #define GARRISON		(1<<1)
 
@@ -179,7 +179,7 @@
 #define JDO_MAGICIAN 5
 #define JDO_WAPP 6
 #define JDO_BAILIFF 7
-#define JDO_COUNCILLOR 7.1
+#define JDO_CHANCELLOR 7.1
 
 #define JDO_SHERIFF 7.2
 #define JDO_CASTLEGUARD 7.3
@@ -239,3 +239,4 @@
 
 #define JDO_VAGRANT 34
 #define JDO_ORPHAN 35
+

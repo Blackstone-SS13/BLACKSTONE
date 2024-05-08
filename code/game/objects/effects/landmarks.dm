@@ -168,8 +168,8 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Bailiff"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/councillor
-	name = "Councillor"
+/obj/effect/landmark/start/chancellor
+	name = "Chancellor"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/veteran
@@ -358,7 +358,6 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 /obj/effect/landmark/start/sapprentice
 	name = "Smithy Apprentice"
 	icon_state = "arrow"
-
 
 // START LANDMARKS FOLLOW. Don't change the names unless
 // you are refactoring shitty landmark code.
