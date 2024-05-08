@@ -2,10 +2,13 @@
 	name = "Necromancer"
 	tutorial = "Ostracized and hunted by society for their dark magics and perversion of life, Necromancers have been known to summon ghosts, ghouls, and zombies; you cannot."
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Half-Elf",
-	 "Dark Elf",
-	 "Tiefling",
-	 "Humen")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Tiefling",
+		"Dark Elf"
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/necromancer
 	pickprob = 30
 	traits_applied = list(TRAIT_ZOMBIE_IMMUNE)

@@ -4,7 +4,7 @@
 	live outside of society and explore the far corners of the creation. They \
 	protect dwarfish settlements from wild beasts and sell their notes to the cartographers."
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Dwarf","Dwarf")
+	allowed_races = list("Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dranger
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 

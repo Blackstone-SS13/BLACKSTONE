@@ -2,13 +2,15 @@
 /datum/advclass/sfighter
 	name = "Warrior"
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Half-Elf",
-	"Dark Elf",
-	"Tiefling")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/sfighter
 	traits_applied = list(RTRAIT_HEAVYARMOR)
 
@@ -102,7 +104,7 @@
 				H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-				backr = /obj/item/rogueweapon/spear/billhook
+				r_hand = /obj/item/rogueweapon/spear/billhook
 			else
 				armor = /obj/item/clothing/suit/roguetown/armor/plate/scale // No helms for monster hunters.
 				H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)

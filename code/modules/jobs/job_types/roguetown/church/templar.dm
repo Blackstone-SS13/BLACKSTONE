@@ -12,8 +12,6 @@
 		"Dwarf",
 		"Aasimar",
 		"Half-Elf",
-		"Tiefling",
-		"Dark Elf",
 	)
 	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 	outfit = /datum/outfit/job/roguetown/templar

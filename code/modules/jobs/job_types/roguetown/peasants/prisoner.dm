@@ -10,11 +10,11 @@
 	allowed_races = list(
 		"Humen",
 		"Elf",
-		"Dwarf",
-		"Aasimar",
 		"Half-Elf",
+		"Dwarf",
 		"Tiefling",
 		"Dark Elf",
+		"Aasimar"
 	)
 	tutorial = "How does it feel to be the rat in the cage? You're unwanted, unloved and entirely worthless in society. You're kept around for the amusement of the Guards and for the oft chance someone comes to pay your ransom. Might as well start praying to whatever god you find solace in."
 
