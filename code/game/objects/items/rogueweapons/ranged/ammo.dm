@@ -50,7 +50,7 @@
 	caliber = "arrow"
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "arrow"
-	force = 20
+	force = 35 //20 damage is crazy for a ranged weapon, a sword does as much damage as this
 	dropshrink = 0.6
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
 	max_integrity = 20
