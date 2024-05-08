@@ -32,7 +32,7 @@
 	H.put_in_hands(T,forced=TRUE)
 
 	// A quick check to make sure the desert rider is canonical
-	var/list/canonical_heritage_check_list = list(
+	var/static/list/canonical_heritage_check_list = list(
 	SKIN_COLOR_GIZA,
 	SKIN_COLOR_LALVESTINE,
 	SKIN_COLOR_SHALVISTINE,
@@ -45,7 +45,7 @@
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
 		if(!(H.hairstyle in acceptable))
-			H.hairstyle = pick(acceptable) 
+			H.hairstyle = pick(acceptable)
 			H.update_hair()
 	backpack_contents = list(/obj/item/roguekey/mercenary)
 	if(H.mind)
