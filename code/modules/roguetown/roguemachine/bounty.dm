@@ -38,7 +38,6 @@
 			// Empty?
 			if(bounties.len == 0)
 				say("No bounties are currently active.")
-				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 				return
 
 			// List all bounties
@@ -50,31 +49,26 @@
 			var/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in GLOB.player_list
 			if(isnull(target))
 				say("No target selected.")
-				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 				return
 
 			var/amount = input(user, "How many mammons shall be stained red for their demise?", src) as null|num
 			if(isnull(amount) || amount < 1)
 				say("Invalid amount.")
-				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 				return
 		
 			// Has user a bank account?
 			if(!(H in SStreasury.bank_accounts))
 				say("You have no bank account.")
-				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 				return
 
 			// Has user enough money?
-			if(SStreasury.bank_accounts[H].balance < amount)
+			if(SStreasury.bank_accounts[H] < amount)
 				say("Insufficient balance funds.")
-				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 				return
 
 			var/reason = input(user, "For what sin do you summon the hounds of hell?", src) as null|text
 			if(isnull(reason) || reason == "")
 				say("No reason given.")
-				playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 				return
 
 			var/confirm = input(user, "Do you dare unleash this darkness upon the world?", src) as null|anything in list("Yes", "No")	
