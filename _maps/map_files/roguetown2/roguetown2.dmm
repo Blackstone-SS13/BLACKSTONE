@@ -5594,6 +5594,10 @@
 	},
 /turf/open/floor/rogue/blocks,
 /area/rogue/outdoors/town)
+"wS" = (
+/obj/structure/feedinghole,
+/turf/open/floor/rogue/ruinedwood,
+/area/rogue/indoors/town)
 "wT" = (
 /turf/closed/wall/mineral/rogue/pipe{
 	icon_state = "iron_corner";
@@ -75118,7 +75122,7 @@ eS
 eS
 eS
 kw
-DT
+wS
 DT
 DT
 Zn
@@ -95502,7 +95506,7 @@ fn
 BE
 wP
 eA
-xB
+Ig
 xD
 xF
 xG
@@ -95659,7 +95663,7 @@ fn
 fn
 rY
 vp
-xB
+Ig
 xD
 xF
 xG
@@ -95816,7 +95820,7 @@ fn
 fn
 LD
 eA
-xB
+Ig
 xD
 xF
 xG
@@ -95973,7 +95977,7 @@ LT
 hd
 vp
 vp
-xB
+Ig
 xD
 xF
 xG
@@ -96130,7 +96134,7 @@ LT
 ui
 ET
 vp
-xB
+Ig
 xE
 xF
 xG
@@ -96287,7 +96291,7 @@ fn
 BF
 BF
 vp
-xB
+Ig
 xE
 xF
 xG
@@ -96444,7 +96448,7 @@ BF
 BF
 BF
 vp
-xB
+Ig
 xE
 xF
 xG
