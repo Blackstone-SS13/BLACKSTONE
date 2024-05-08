@@ -30,6 +30,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	var/list/datum/mind/vampires = list()
 	var/list/datum/mind/pre_rebels = list()
 	var/mob/living/carbon/human/vlord = null
+	var/list/datum/mind/siege = list()
+	var/list/datum/mind/pre_siege = list()
 // MINOR ANTAGS
 	var/list/datum/mind/pre_werewolves = list()
 	var/list/datum/mind/werewolves = list()
@@ -141,7 +143,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		return TRUE
 	if(SSticker.manualmodes)
 		forcedmodes |= SSticker.manualmodes
-	var/list/major_modes = list(1, 2, 3)
+	var/list/major_modes = list(1, 2, 3, 4)
 	var/list/minor_modes = list(1,2,3)
 	if(prob(25))
 		minor_modes += 4 //maniac
@@ -177,6 +179,9 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		if(3)
 			pick_vampires()
 			log_game("Major Antagonist: Vampire Lord")
+		if(4)
+			pick_siege()
+			log_game("Major Antagonist: Siege")
 	minor_modes = shuffle(minor_modes)
 	for(var/m in minor_modes)
 		switch(m)
@@ -194,6 +199,42 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		if(prob(30))
 			continue
 		return TRUE
+
+/datum/game_mode/chaosmode/proc/pick_siege()
+	//SIEGE
+	banditgoal = rand(200,400)
+	restricted_jobs = list("King",
+	"Queen",
+	"Merchant",
+	"Priest",
+	"Knight")
+	var/num_siege = 0
+	if(num_players() >= 10)
+		num_siege = CLAMP(round(num_players() / 2), 30, 40)
+#ifdef TESTSERVER
+	num_siege = 999
+#endif
+	if(num_siege)
+		antag_candidates = get_players_for_role(ROLE_SIEGE, pre_do=TRUE) //pre_do checks for their preferences since they don't have a job yet
+		for(var/i = 0, i < num_siege, ++i)
+			var/datum/mind/siege = pick_n_take(antag_candidates)
+			var/found = FALSE
+			for(var/M in allantags)
+				if(M == siege)
+					found = TRUE
+					allantags -= M
+					break
+			if(!found)
+				continue
+			pre_siege += siege
+			siege.assigned_role = "Siege"
+			siege.special_role = ROLE_SIEGE
+			testing("[key_name(siege)] has been selected as a sieger")
+			log_game("[key_name(siege)] has been selected as a sieger")
+	for(var/antag in pre_siege)
+		GLOB.pre_setup_antags |= antag
+	restricted_jobs = list()
+
 
 /datum/game_mode/chaosmode/proc/pick_bandits()
 	//BANDITS
@@ -438,6 +479,12 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		bandito.add_antag_datum(new_antag)
 		GLOB.pre_setup_antags -= bandito
 		bandits += bandito
+///////////////// SIEGE
+	for(var/datum/mind/siege in pre_siege)
+		var/datum/antagonist/new_antag = new /datum/antagonist/siege()
+		siege.add_antag_datum(new_antag)
+		GLOB.pre_setup_antags -= siege
+		siege += siege
 ///////////////// ASPIRANTS
 	for(var/datum/mind/rogue in pre_aspirants) // Do the aspirant first, so the suppporter works right.
 		if(rogue.special_role == ROLE_ASPIRANT)
