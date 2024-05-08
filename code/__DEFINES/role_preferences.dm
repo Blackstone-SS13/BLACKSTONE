@@ -9,6 +9,7 @@
 #define ROLE_MANIAC			"Maniac"
 #define ROLE_WEREWOLF			"Werewolf"
 #define ROLE_VAMPIRE			"Vampire"
+#define ROLE_SIEGE			"Siege"
 #define ROLE_NBEAST				"Vampire Lord"
 #define ROLE_BANDIT				"Bandit"
 #define ROLE_DELF				"Dark Elf"
