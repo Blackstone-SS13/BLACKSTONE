@@ -19,7 +19,7 @@
 /obj/projectile/bullet/reusable/bolt
 	name = "bolt"
 	damage = 80
-	penfactor = 80
+	armor_penetration = 80
 	damage_type = BRUTE
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "bolt_proj"
