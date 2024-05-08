@@ -135,6 +135,9 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 	if(check_whisper(original_message, forced) || !can_speak_basic(original_message, ignore_spam, forced))
 		return
+	
+	if(check_looc(original_message, forced) || !can_speak_basic(original_message, ignore_spam, forced))
+		return
 
 	if(in_critical)
 		if(!(crit_allowed_modes[message_mode]))

@@ -118,6 +118,12 @@
 		whisper(copytext(message, 2),sanitize = FALSE)//already sani'd
 		return 1
 
+/mob/proc/check_looc(message, forced)
+	if(copytext(message, 1, 3) == "\[\[" || copytext(message, 1, 3) == "((" || copytext(message, 1, 3) == "{{")
+		var/client/C = src.client
+		C.looc(copytext(message, 3))
+		return 1
+
 ///Check if the mob has a hivemind channel
 /mob/proc/hivecheck()
 	return 0

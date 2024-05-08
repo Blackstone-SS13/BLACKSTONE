@@ -194,6 +194,65 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 				
 			to_chat(C, msg_to_send)
 
+/client/proc/looc(msg as text)
+
+	if(GLOB.say_disabled)	//This is here to try to identify lag problems
+		to_chat(usr, "<span class='danger'>Speech is currently admin-disabled.</span>")
+		return
+
+	if(!GLOB.looc_allowed)
+		to_chat(src, "<span class = 'danger'>LOOC is currently disabled.</span>")
+		return
+
+	if(!mob)
+		return
+
+	//if(CONFIG_GET(flag/usewhitelist))
+	//	if(whitelisted() != 1)
+	//		to_chat(src, "<span class='danger'>I can't use that.</span>")
+	//		return
+
+	if(blacklisted())
+		to_chat(src, "<span class='danger'>I can't use that.</span>")
+		return
+
+	if(get_playerquality(ckey) <= -5)
+		to_chat(src, "<span class='danger'>Your PQ is too low!</span>")
+		return
+
+	if(is_banned_from(ckey, "OOC"))
+		to_chat(src, "<span class='danger'>I have been banned from OOC.</span>")
+		return
+
+	if(QDELETED(src))
+		return
+
+	if(!msg)
+		return
+	
+	if(!holder)
+		if(handle_spam_prevention(msg, MUTE_OOC))
+			return
+		if(findtext(msg, "byond://"))
+			to_chat(src, "<B>FOOL</B>")
+			log_admin("[key_name(src)] has attempted to advertise in LOOC: [msg]")
+			message_admins("[key_name_admin(src)] has attempted to advertise in LOOC: [msg]")
+			return
+
+	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
+	var/raw_msg = msg
+
+	mob.log_talk(raw_msg, LOG_LOOC)
+
+	var/color2use = "#6a6ac3"
+	var/msg_to_send = ""
+	for(var/mob/living/L in range(7, src.mob))
+		msg_to_send = "<font color='[color2use]'><b>(LOOC) [src.mob]:</b> <span class='message linkify'>[msg]</span>"
+		to_chat(L, msg_to_send)
+
+/client/proc/inputlooc() // for the bind
+	var/msg = input(src, "", "looc") as text|null
+	looc(msg)
 
 /proc/toggle_ooc(toggle = null)
 	if(toggle != null) //if we're specifically en/disabling ooc
@@ -204,6 +263,16 @@ GLOBAL_VAR_INIT(normal_ooc_colour, "#002eb8")
 	else //otherwise just toggle it
 		GLOB.ooc_allowed = !GLOB.ooc_allowed
 	message_admins("<B>The OOC channel has been globally [GLOB.ooc_allowed ? "enabled" : "disabled"].</B>")
+
+/proc/toggle_looc(toggle = null)
+	if(toggle != null) //if we're specifically en/disabling ooc
+		if(toggle != GLOB.looc_allowed)
+			GLOB.looc_allowed = toggle
+		else
+			return
+	else //otherwise just toggle it
+		GLOB.looc_allowed = !GLOB.looc_allowed
+	message_admins("<B>The LOOC channel has been globally [GLOB.looc_allowed ? "enabled" : "disabled"].</B>")
 
 /proc/toggle_dooc(toggle = null)
 	if(toggle != null)

@@ -13,6 +13,16 @@
 	user.get_adminhelp()
 	return TRUE
 
+/datum/keybinding/client/looc
+	hotkey_keys = list("O")
+	name = "looc"
+	full_name = "LOOC"
+	description = "Local out of character chat."
+
+/datum/keybinding/client/looc/down(client/user)
+	user.inputlooc()
+	return TRUE
+
 /*
 /datum/keybinding/client/screenshot
 	hotkey_keys = list("F2")
