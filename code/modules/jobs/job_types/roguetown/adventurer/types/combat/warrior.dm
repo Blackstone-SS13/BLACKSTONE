@@ -102,7 +102,7 @@
 				H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-				backr = /obj/item/rogueweapon/spear/billhook
+				r_hand = /obj/item/rogueweapon/spear/billhook
 			else
 				armor = /obj/item/clothing/suit/roguetown/armor/plate/scale // No helms for monster hunters.
 				H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
