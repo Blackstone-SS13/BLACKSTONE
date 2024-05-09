@@ -106,7 +106,7 @@
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/obj/screen/gameover, Fade), TRUE), 100)
 //		addtimer(CALLBACK(client, PROC_REF(ghostize), 1, src), 150)
 		add_client_colour(/datum/client_colour/monochrome)
-		client.verbs += /client/proc/descend
+		client.verbs.Add(GLOB.ghost_verbs)
 
 	for(var/s in ownedSoullinks)
 		var/datum/soullink/S = s
