@@ -109,6 +109,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		else
 			H.set_species(/datum/species/elf/wood) //setspecies randomizes body
 		H.after_creation()
+	var/obj/item/organ/eyes/eyes = owner.current.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
 		eyes.Remove(owner.current,1)
 		QDEL_NULL(eyes)
