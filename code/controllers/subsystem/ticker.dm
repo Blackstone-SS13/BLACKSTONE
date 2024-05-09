@@ -271,12 +271,11 @@ SUBSYSTEM_DEF(ticker)
 							to_chat(player, "<span class='warning'>You cannot be [V] and thus are not considered.</span>")
 							continue
 				readied_jobs.Add(V)
-	if("Merchant" in readied_jobs)
-		if(("King" in readied_jobs) || ("Queen Consort" in readied_jobs))
-			if("King" in readied_jobs)
-				rulertype = "King"
-			else
-				rulertype = "Queen"
+	if(("King" in readied_jobs) || ("Queen Consort" in readied_jobs))
+		if("King" in readied_jobs)
+			rulertype = "King"
+		else
+			rulertype = "Queen"
 		/*	
 			// These else conditions stop the round from starting unless there is a merchant, king, and queen.
 		else
