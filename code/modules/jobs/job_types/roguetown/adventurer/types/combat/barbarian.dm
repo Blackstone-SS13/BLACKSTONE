@@ -13,7 +13,7 @@
 		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
-	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
+	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_NOPAINSTUN)
 
 /datum/outfit/job/roguetown/adventurer/barbarian/pre_equip(mob/living/carbon/human/H)
 	..() // Compared to the Warrior the barbarian is more suited to the wilds. But they are able to make use of almost any weapon by talent and killer instinct.
@@ -214,14 +214,12 @@
 					H.change_stat("constitution", 3)
 					H.change_stat("endurance", 4)
 */
-	if(ishumannorthern(H) && prob(70))
+	if(ishumannorthern(H) && prob(70)) //gronn lore
 		H.skin_tone = SKIN_COLOR_GRONN
 		H.update_body()
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	if(H.dna?.species)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
-
+	H.cmode_music = 'sound/music/combat_gronn.ogg'
 /* 
 
 	var/randy = rand(1,5)

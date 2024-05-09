@@ -85,7 +85,7 @@
 	if(owner.current)
 		if(ishuman(owner.current))
 			var/mob/living/carbon/human/dreamer = owner.current
-			dreamer.cmode_music = 'sound/music/combatmaniac2.ogg'
+			dreamer.cmode_music = 'sound/music/combat_maniac2.ogg'
 			owner.adjust_skillrank(/datum/skill/combat/knives, 6, TRUE)
 			owner.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
 			owner.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
