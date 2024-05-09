@@ -96,12 +96,13 @@
 #define NOBLEMEN		(1<<0)
 
 #define LORD		(1<<0)
-#define STEWARD		(1<<1)
-#define KNIGHT		(1<<2)
-#define WIZARD		(1<<3)
-#define SHERIFF		(1<<4)
-#define BAILIFF		(1<<5)
-#define COUNCILLOR	(1<<6)
+#define LADY		(1<<1)
+#define STEWARD		(1<<2)
+#define KNIGHT		(1<<3)
+#define WIZARD		(1<<4)
+#define SHERIFF		(1<<5)
+#define BAILIFF		(1<<6)
+#define COUNCILLOR	(1<<7)
 
 #define GARRISON		(1<<1)
 

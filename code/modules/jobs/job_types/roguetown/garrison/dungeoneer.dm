@@ -8,11 +8,10 @@
 
 	allowed_races = list(
 		"Humen",
-		"Elf",
 		"Dwarf",
-		"Aasimar",
-		"Half-Elf",
-	) //same as town guard
+		"Tiefling",
+		"Dark Elf"
+	)
 	allowed_sexes = list(MALE, FEMALE)
 
 	display_order = JDO_DUNGEONEER
@@ -21,7 +20,7 @@
 
 	outfit = /datum/outfit/job/roguetown/dungeoneer
 	give_bank_account = 5
-	min_pq = 3
+	min_pq = 2
 
 
 /datum/outfit/job/roguetown/dungeoneer/pre_equip(mob/living/carbon/human/H)

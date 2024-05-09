@@ -1,16 +1,16 @@
-
 /datum/advclass/rogue
 	name = "Rogue"
 	tutorial = "Where is the gold?"
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Dark Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/rogue
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 	category_flags = RT_TYPE_COMBAT_CLASS

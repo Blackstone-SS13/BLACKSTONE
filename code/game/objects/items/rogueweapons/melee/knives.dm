@@ -46,9 +46,9 @@
 	clickcd = 10
 
 /datum/intent/dagger/thrust
-	name = "stab"
+	name = "thrust"
 	icon_state = "instab"
-	attack_verb = list("stabs")
+	attack_verb = list("thrusts")
 	animname = "stab"
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
@@ -57,13 +57,14 @@
 	clickcd = 8
 
 /datum/intent/dagger/thrust/pick
-	name = "thrust"
+	name = "icepick stab"
+	icon_state = "inpick"
 	attack_verb = list("stabs", "impales")
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 50
-	clickcd = CLICK_CD_MELEE
-	swingdelay = 0
-	blade_class = BCLASS_PICK
+	penfactor = 80
+	clickcd = 14
+	swingdelay = 12
+	damfactor = 1.1
 
 /obj/item/rogueweapon/huntingknife/getonmobprop(tag)
 	. = ..()
@@ -152,7 +153,7 @@
 	penfactor = 30
 
 /obj/item/rogueweapon/huntingknife/idagger
-	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut)
+	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut, /datum/intent/dagger/thrust/pick)
 	force = 15
 	max_integrity = 100
 	name = "Iron dagger"

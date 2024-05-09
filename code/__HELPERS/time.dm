@@ -64,12 +64,12 @@ GLOBAL_VAR_INIT(dayspassed, FALSE)
 					foundnd = TRUE
 				if(!foundnd)
 					SSweather.run_weather(/datum/weather/rain, 1)
-			if(GLOB.forecast == "fog")
+		/*	if(GLOB.forecast == "fog")
 				var/foundnd
 				for(var/datum/weather/fog/R in SSweather.curweathers)
 					foundnd = TRUE
 				if(!foundnd)
-					SSweather.run_weather(/datum/weather/fog, 1)
+					SSweather.run_weather(/datum/weather/fog, 1) */
 		else
 			switch(GLOB.forecast) //end the weather now
 				if("rain")

@@ -38,13 +38,18 @@
 	used = TRUE
 
 
-/obj/item/book/granter/attack_self(mob/user)
+/obj/item/book/granter/attack_self(mob/living/user)
 	if(reading)
 		to_chat(user, "<span class='warning'>You're already reading this!</span>")
 		return FALSE
 	if(!user.can_read(src))
 		return FALSE
 	if(already_known(user))
+		return FALSE
+	if(!user.can_read(src))
+		return FALSE
+	if(user.STAINT < 12)
+		to_chat(user, "<span class='warning'>You cant make sense of the sprawling runes!</span>")
 		return FALSE
 	if(used)
 		if(oneuse)
@@ -424,3 +429,82 @@
 	icon_state = "cooking_learing_sweets"
 	oneuse = FALSE
 	remarks = list("So that is how icing is made!", "Placing fruit on top? How simple...", "Huh layering cake seems harder then this...", "This book smells like candy", "A clown must have made this page, or they forgot to spell check it before printing...", "Wait, a way to cook slime to be safe?")
+
+//! --BLACKSTONE SCROLLS-- !/
+/obj/item/book/granter/spell/blackstone/
+    desc = "A scroll of potential known only to those that can decipher its secrets."
+    icon = 'icons/roguetown/items/misc.dmi'
+    oneuse = TRUE
+    drop_sound = 'sound/foley/dropsound/paper_drop.ogg'
+    pickup_sound =  'sound/blank.ogg'
+
+/obj/item/book/granter/spell/blackstone/onlearned(mob/living/carbon/user)
+	..()
+	if(oneuse == TRUE)
+		name = "siphoned scroll"
+		desc = "A scroll once inscribed with magical scripture. The surface is now barren of knowledge, siphoned by someone else. It's utterly useless."
+		icon_state = "scroll"
+		user.visible_message("<span class='warning'>[src] has had its magic ink ripped from the scroll!</span>")
+
+/obj/item/book/granter/spell/blackstone/fireball
+	name = "Scroll of Fireball"
+	spell = /obj/effect/proc_holder/spell/invoked/projectile/fireball
+	spellname = "fireball"
+	icon_state ="scrollred"
+	remarks = list("Ignis et oleum..", "Flammam continere ad momentum..", "Flammam iactare..", "Sit flamma constructum..")
+
+/obj/item/book/granter/spell/blackstone/greaterfireball
+	name = "Scroll of Greater Fireball"
+	spell = /obj/effect/proc_holder/spell/invoked/projectile/fireball/greater
+	spellname = "greater fireball"
+	icon_state ="scrollred"
+	remarks = list("Ignis et oleum..", "Flammam continere ad momentum..", "Flammam iactare..", "Sit flamma constructum..")
+
+/obj/item/book/granter/spell/blackstone/lightning
+	name = "Scroll of Lightning"
+	spell = /obj/effect/proc_holder/spell/invoked/projectile/lightningbolt
+	spellname = "lightning"
+	icon_state ="scrollyellow"
+	remarks = list("Essentia fulgurum digitorum..", "Fulgur de nubibus desuper..", "Fulgur eiecit digitos..", "Praecipe intus aedificatur..")
+
+/obj/item/book/granter/spell/blackstone/fetch
+	name = "Scroll of Fetch"
+	spell = /obj/effect/proc_holder/spell/invoked/projectile/fetch
+	spellname = "fetch"
+	icon_state ="scrollpurple"
+	remarks = list("Returnus Revico..", "Manus de reverti..", "Menus de returnus..")
+
+/obj/item/book/granter/spell/blackstone/blindness
+	name = "Scroll of Blindness"
+	spell = /obj/effect/proc_holder/spell/invoked/blindness
+	spellname = "blindness"
+	icon_state ="scrollpurple"
+	remarks = list("Occultare oculos..", "Vivus amoevtar..", "Visioner removan..")
+
+/obj/item/book/granter/spell/blackstone/invisibility
+	name = "Scroll of Invisibility"
+	spell = /obj/effect/proc_holder/spell/invoked/invisibility
+	spellname = "invisibility"
+	icon_state ="scrollpurple"
+	remarks = list("Pallium nihilum..", "Occultare veritatem..", "Veritatem removan menor..")
+
+/obj/item/book/granter/spell/blackstone/skeleton
+	name = "Scroll of Raise Skeleton"
+	spell = /obj/effect/proc_holder/spell/invoked/raise_undead
+	spellname = "Raise Skeleton"
+	icon_state ="scrolldarkred"
+	remarks = list("Redi damnatos..", "Exitio ad Necram scriptor exolvuntur..", "Ossa in propinquus..")
+
+/obj/item/book/granter/spell/blackstone/sicknessray
+	name = "Scroll of Sickness Ray"
+	spell = /obj/effect/proc_holder/spell/invoked/projectile/sickness
+	spellname = "Ray of Sickness"
+	icon_state ="scrollgreen"
+	remarks = list("Foe rubiginem meam..", "Pestilentia in terris..", "Trabes putrida..")
+
+/obj/item/book/granter/spell/blackstone/bonechill
+	name = "Scroll of Bone Chill"
+	spell = /obj/effect/proc_holder/spell/invoked/bonechill
+	spellname = "Bone Chill"
+	icon_state ="scrolldarkred"
+	remarks = list("Mediolanum ventis..", "Sana damnatorum..", "Frigidus ossa mortuorum..")

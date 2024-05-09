@@ -1,11 +1,11 @@
 /datum/advclass/noble
 	name = "Noble"
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Half-Elf",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/noble
 	traits_applied = list(RTRAIT_NOBLE)

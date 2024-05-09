@@ -2,7 +2,7 @@
 /datum/intent/spear/thrust
 	name = "thrust"
 	blade_class = BCLASS_STAB
-	attack_verb = list("stabs")
+	attack_verb = list("thrusts")
 	animname = "stab"
 	icon_state = "instab"
 	reach = 2
@@ -46,7 +46,7 @@
 	pixel_x = -16
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
-	wdefense = 2
+	wdefense = 10
 	bigboy = TRUE
 	gripsprite = TRUE
 	associated_skill = /datum/skill/combat/polearms
@@ -92,7 +92,7 @@
 
 
 /obj/item/rogueweapon/spear
-	force = 15
+	force = 18
 	force_wielded = 30
 	possible_item_intents = list(SPEAR_THRUST, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, SPEAR_BASH)
@@ -116,7 +116,7 @@
 	dropshrink = 0.6
 	blade_dulling = DULLING_BASHCHOP
 	walking_stick = TRUE
-	wdefense = 4
+	wdefense = 5
 	thrown_bclass = BCLASS_STAB
 	throwforce = 25
 
@@ -137,6 +137,7 @@
 	max_blade_int = 200
 	minstr = 8
 	wdefense = 6
+	throwforce = 15
 
 /obj/item/rogueweapon/spear/improvisedbillhook
 	force = 12
@@ -147,6 +148,7 @@
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 100
 	wdefense = 4
+	throwforce = 10
 
 /obj/item/rogueweapon/spear/stone
 	force = 15
@@ -170,12 +172,13 @@
 	walking_stick = TRUE
 	wdefense = 4
 	max_integrity = 50
+	throwforce = 20
 
 /obj/item/rogueweapon/halberd
 	force = 15
 	force_wielded = 30
 	possible_item_intents = list(SPEAR_THRUST, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, /datum/intent/axe/chop, SPEAR_BASH)
+	gripped_intents = list(SPEAR_THRUST, /datum/intent/spear/cut/halberd, /datum/intent/sword/chop, SPEAR_BASH)
 	name = "halberd"
 	desc = "An iron halberd, mostly used by town guards."
 	icon_state = "halberd"
@@ -211,6 +214,8 @@
 
 
 /obj/item/rogueweapon/halberd/bardiche
+	possible_item_intents = list(/datum/intent/spear/thrust/eaglebeak, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
+	gripped_intents = list(/datum/intent/spear/thrust/eaglebeak, /datum/intent/spear/cut/halberd, /datum/intent/axe/chop, SPEAR_BASH)
 	name = "bardiche"
 	desc = "A beautiful variant of the halberd."
 	icon_state = "bardiche"
@@ -218,11 +223,15 @@
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 200
 
+/datum/intent/spear/cut/halberd
+	damfactor = 0.9
+	swingdelay = 10
+
 /obj/item/rogueweapon/eaglebeak
 	force = 15
 	force_wielded = 30
-	possible_item_intents = list(SPEAR_BASH, SPEAR_THRUST) //bash is for nonlethal takedowns, only targets limbs
-	gripped_intents = list(SPEAR_BASH, SPEAR_THRUST, /datum/intent/mace/smash)
+	possible_item_intents = list(/datum/intent/spear/thrust/eaglebeak, SPEAR_BASH) //bash is for nonlethal takedowns, only targets limbs
+	gripped_intents = list(/datum/intent/spear/thrust/eaglebeak, /datum/intent/mace/smash/eaglebeak, SPEAR_BASH)
 	name = "eagle's beak"
 	desc = ""
 	icon_state = "eaglebeak"
@@ -261,6 +270,15 @@
 	icon_state = "polehammer"
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 200
+
+/datum/intent/spear/thrust/eaglebeak
+	penfactor = 20
+	damfactor = 0.9
+
+/datum/intent/mace/smash/eaglebeak
+	reach = 2
+	swingdelay = 12
+	clickcd = 14
 
 /obj/item/rogueweapon/greatsword
 	force = 12

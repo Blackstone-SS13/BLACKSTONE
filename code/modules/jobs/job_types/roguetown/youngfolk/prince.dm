@@ -6,11 +6,16 @@
 	total_positions = 0
 	spawn_positions = 2
 	f_title = "Princess"
-	allowed_races = list("Humen", "Half-Elf") //lord and lady cant be an elf, but prince could be a bastard child which is funny
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Aasimar"
+	) //Maybe a system to force-pick lineage based on king and queen should be implemented.
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_YOUNG)
 
-	tutorial = "You’ve never felt the gnawing of the winter, never known the bite of hunger and certainly have never known a honest day's work. You are as free as any bird in the sky, and you may revel in your debauchery for as long as your parents remain upon the throne: But someday you’ll have to grow up, and that will be the day your carelessness will cost you more than a few mammons.."
+	tutorial = "You’ve never felt the gnawing of the winter, never known the bite of hunger and certainly have never known a honest day's work. You are as free as any bird in the sky, and you may revel in your debauchery for as long as your parents remain upon the throne: But someday you’ll have to grow up, and that will be the day your carelessness will cost you more than a few mammons."
 
 	outfit = /datum/outfit/job/roguetown/prince
 	display_order = JDO_PRINCE
@@ -23,10 +28,10 @@
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guard
 		armor = /obj/item/clothing/suit/roguetown/armor/chainmail
-		shoes = /obj/item/clothing/shoes/roguetown/boots
+		shoes = /obj/item/clothing/shoes/roguetown/nobleboot
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/roguekey/manor
-		beltr = /obj/item/storage/belt/rogue/pouch
+		beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 		backr = /obj/item/storage/backpack/rogue/satchel
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
@@ -41,7 +46,7 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 			H.change_stat("perception", 1)
-			H.change_stat("strength", -3)
+			H.change_stat("strength", -2)
 			H.change_stat("endurance", -1)
 			H.change_stat("constitution", 1)
 			H.change_stat("speed", 1)
@@ -51,6 +56,7 @@
 		neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 		belt = /obj/item/storage/belt/rogue/leather/cloth/lady
 		armor = /obj/item/clothing/suit/roguetown/armor/armordress
+		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
@@ -60,7 +66,7 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
 			H.change_stat("perception", 2)
 			H.change_stat("endurance", -2)
-			H.change_stat("strength", -4)
+			H.change_stat("strength", -3)
 			H.change_stat("constitution", 1)
 			H.change_stat("speed", 2)
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)

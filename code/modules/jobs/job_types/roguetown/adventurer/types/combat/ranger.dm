@@ -1,14 +1,15 @@
 /datum/advclass/ranger
 	name = "Ranger"
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	 "Elf",
-	 "Half-Elf",
-	 "Elf",
-	 "Dark Elf",
-	 "Tiefling",
-	"Aasimar")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/ranger
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 	category_flags = RT_TYPE_COMBAT_CLASS

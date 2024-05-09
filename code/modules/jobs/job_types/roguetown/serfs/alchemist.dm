@@ -9,11 +9,11 @@
 	allowed_races = list(
 		"Humen",
 		"Elf",
-		"Dwarf",
-		"Aasimar",
 		"Half-Elf",
+		"Dwarf",
 		"Tiefling",
-		"Dark Elf"
+		"Dark Elf",
+		"Aasimar"
 	)
 
 	tutorial = "You came to rockhill either to seek knowledge or riches."

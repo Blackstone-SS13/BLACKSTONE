@@ -9,11 +9,11 @@
 	allowed_races = list("Humen")
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_BAILIFF
-	tutorial = "You judge the common folk and their wrongdoings if necessary. You help plan with the Councillors or the King on any new issues, laws, judgings, and construction that are required to adapt to the world. You serve on the same level as Sheriff, however unlike him you are from Petty Nobility. You have two assistant Councillors that may serve as jurors to assist you in your job. You are required to collect taxes for the King, judge people, make sure the town and manor are not in decay, and to help plan or construct new buildings. You are allowed some command over Guards, however it is not the focus of your job unless special circumstances are to change this."
+	tutorial = "You judge the common folk and their wrongdoings if necessary. You help plan with the Councillors and maybe the King on any new issues, laws, judgings, and construction that are required to adapt to the world. You serve on a lesser level then the Sheriff,  you are from petty nobility unlike the noble Sheriff. You have two assistant Councillors that may serve as jurors to assist you in your job. You are required to enforce taxes for the King, judge people, make sure the town and manor are not in decay, and to help plan or construct new buildings. You are allowed some limited control over Guards, however it is not the focus of your job unless special circumstances are to change this."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/bailiff
 	give_bank_account = 40
-	min_pq = 5
+	min_pq = 4
 
 /datum/outfit/job/roguetown/bailiff/pre_equip(mob/living/carbon/human/H)
 	..()

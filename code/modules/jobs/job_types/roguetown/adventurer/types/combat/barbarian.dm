@@ -3,10 +3,17 @@
 	name = "Barbarian"
 	tutorial = "..."
 	allowed_sexes = list("male")
-	allowed_races = list("Humen",
-	"Humen")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
-	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
+	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_NOPAINSTUN)
 	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/barbarian/pre_equip(mob/living/carbon/human/H)
@@ -208,14 +215,12 @@
 					H.change_stat("constitution", 3)
 					H.change_stat("endurance", 4)
 */
-	if(ishumannorthern(H) && prob(70))
+	if(ishumannorthern(H) && prob(70)) //gronn lore
 		H.skin_tone = SKIN_COLOR_GRONN
 		H.update_body()
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	if(H.dna?.species)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
-
+	H.cmode_music = 'sound/music/combat_gronn.ogg'
 /* 
 
 	var/randy = rand(1,5)

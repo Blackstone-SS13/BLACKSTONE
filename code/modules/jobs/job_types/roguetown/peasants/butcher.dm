@@ -9,11 +9,11 @@
 	allowed_races = list(
 		"Humen",
 		"Elf",
-		"Dwarf",
-		"Aasimar",
 		"Half-Elf",
+		"Dwarf",
 		"Tiefling",
 		"Dark Elf",
+		"Aasimar"
 	)
 	tutorial = "Some say you're a strange individual, some say you're a cheat, while some claim you're a savant in the art of sausage making. Without your skilled hands and knifework, most of the livestock around the town would be wasted. "
 

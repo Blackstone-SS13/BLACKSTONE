@@ -9,11 +9,11 @@
 	allowed_races = list(
 		"Humen",
 		"Elf",
-		"Dwarf",
-		"Aasimar",
 		"Half-Elf",
+		"Dwarf",
 		"Tiefling",
 		"Dark Elf",
+		"Aasimar"
 	)
 
 	tutorial = "Grabber is the lowest position in the Merchant's Guild, reserved for the strong, loyal newcomers. They can be like family to the merchant in these foreign lands."

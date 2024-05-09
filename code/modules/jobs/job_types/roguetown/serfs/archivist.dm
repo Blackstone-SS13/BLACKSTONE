@@ -7,12 +7,18 @@
 	total_positions = 1
 	spawn_positions = 1
 	spells = list(/obj/effect/proc_holder/spell/invoked/projectile/fetch)
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Aasimar"
+	)
 	allowed_patrons = list("Noc")
 	allowed_ages = list(AGE_OLD, AGE_MIDDLEAGED)
 
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = 19
-	min_pq = 1
+	min_pq = 0
 
 /datum/outfit/job/roguetown/archivist/pre_equip(mob/living/carbon/human/H)
 	..()
