@@ -188,7 +188,7 @@
 	desc = "A coat with plates concealed inside an exterior fabric."
 	icon_state = "brigandine"
 	blocksound = SOFTHIT
-	body_parts_covered = CHEST|GROIN|VITALS|ARMS
+	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
 	allowed_sex = list(MALE, FEMALE)
@@ -197,7 +197,7 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
 	equip_delay_self = 40
-	armor_class = ARMOR_CLASS_MEDIUM
+	armor_class = ARMOR_CLASS_HEAVY
 
 /obj/item/clothing/suit/roguetown/armor/brigandine/Initialize()
 	. = ..()
