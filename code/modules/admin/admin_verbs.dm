@@ -410,7 +410,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		var/mob/body = mob
 		body.invisibility = INVISIBILITY_MAXIMUM
 		body.density = 0
-		body.ghostize(1)
+		body.ghostize(1, nodraw = TRUE)
 		if(body && !body.key)
 			body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 		show_popup_menus = TRUE

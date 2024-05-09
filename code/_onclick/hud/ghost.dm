@@ -126,6 +126,22 @@
 	using.hud = src
 	static_inventory += using
 
+/datum/hud/adminghost/New(mob/owner)
+	..()
+	var/atom/movable/screen/using
+
+	using = new /atom/movable/screen/ghost/orbit(null, src)
+	using.screen_loc = ui_ghost_orbit
+	static_inventory += using
+
+	using = new /atom/movable/screen/ghost/reenter_corpse(null, src)
+	using.screen_loc = ui_ghost_reenter_corpse
+	static_inventory += using
+
+	using = new /atom/movable/screen/ghost/teleport(null, src)
+	using.screen_loc = ui_ghost_teleport
+	static_inventory += using
+
 /datum/hud/ghost/show_hud(version = 0, mob/viewmob)
 	// don't show this HUD if observing; show the HUD of the observee
 	var/mob/dead/observer/O = mymob
