@@ -7502,16 +7502,6 @@
 	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/church)
-"EL" = (
-/turf/closed/wall/mineral/rogue/wooddark,
-/area/rogue)
-"EM" = (
-/turf/closed/wall/mineral/rogue/wood,
-/area/rogue)
-"EN" = (
-/obj/structure/roguewindow/openclose,
-/turf/open/floor/rogue/wood,
-/area/rogue)
 "EO" = (
 /obj/structure/rogue/trophy/deer,
 /turf/open/floor/rogue/wood,
@@ -7589,51 +7579,6 @@
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/town/church)
-"Fg" = (
-/obj/structure/table/wood{
-	icon_state = "tablewood1"
-	},
-/obj/item/rogueweapon/stoneaxe/woodcut,
-/turf/open/floor/rogue/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue)
-"Fh" = (
-/turf/open/floor/rogue/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue)
-"Fi" = (
-/obj/machinery/light/rogue/firebowl,
-/turf/open/floor/rogue/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue)
-"Fj" = (
-/obj/item/storage/roguebag,
-/turf/open/floor/rogue/woodturned,
-/area/rogue)
-"Fk" = (
-/obj/structure/bed/rogue/shit,
-/turf/open/floor/rogue/woodturned,
-/area/rogue)
-"Fl" = (
-/turf/open/floor/rogue/woodturned,
-/area/rogue)
-"Fm" = (
-/obj/structure/chair/wood/rogue{
-	dir = 4
-	},
-/turf/open/floor/rogue/woodturned,
-/area/rogue)
-"Fn" = (
-/obj/structure/table/wood,
-/obj/item/rogueweapon/sickle,
-/turf/open/floor/rogue/woodturned,
-/area/rogue)
-"Fo" = (
-/turf/open/floor/rogue/wood,
-/area/rogue)
 "Fp" = (
 /obj/structure/table/wood{
 	icon_state = "largetable";
@@ -7741,36 +7686,6 @@
 /obj/machinery/light/rogue/oven/west,
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors/town/church)
-"FH" = (
-/obj/structure/bars/grille,
-/turf/open/transparent/openspace,
-/area/rogue)
-"FI" = (
-/obj/structure/ladder,
-/turf/open/floor/rogue/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue)
-"FJ" = (
-/obj/item/roguekey/walls{
-	lockid = "farm";
-	name = "farm key"
-	},
-/turf/open/floor/rogue/woodturned,
-/area/rogue)
-"FK" = (
-/obj/structure/table/wood,
-/obj/item/natural/stone,
-/turf/open/floor/rogue/woodturned,
-/area/rogue)
-"FL" = (
-/obj/structure/roguewindow/openclose{
-	dir = 8
-	},
-/turf/open/floor/rogue/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue)
 "FM" = (
 /obj/structure/table/wood{
 	icon_state = "largetable";
@@ -7870,16 +7785,6 @@
 /obj/item/reagent_containers/food/snacks/rogue/meat/steak,
 /turf/open/floor/rogue/tile,
 /area/rogue/indoors/town/church)
-"Ge" = (
-/obj/structure/bed/rogue/shit,
-/turf/open/floor/rogue/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue)
-"Gf" = (
-/obj/structure/closet/crate/chest,
-/turf/open/floor/rogue/wood,
-/area/rogue)
 "Gg" = (
 /obj/structure/chair/wood/rogue{
 	dir = 4
@@ -7935,20 +7840,6 @@
 	},
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/tavern)
-"Gn" = (
-/obj/structure/roguewindow/openclose{
-	dir = 1
-	},
-/turf/open/floor/rogue/ruinedwood{
-	icon_state = "horzw"
-	},
-/area/rogue)
-"Go" = (
-/obj/structure/roguewindow/openclose{
-	dir = 1
-	},
-/turf/open/floor/rogue/wood,
-/area/rogue)
 "Gp" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -9636,14 +9527,6 @@
 /obj/machinery/light/rogue/torchholder/r,
 /turf/open/floor/rogue/churchrough,
 /area/rogue/indoors/town/church)
-"Mz" = (
-/turf/closed/wall/mineral/rogue/roofwall/outercorner,
-/area/rogue/outdoors/mountains)
-"MA" = (
-/turf/closed/wall/mineral/rogue/roofwall/middle{
-	dir = 1
-	},
-/area/rogue/outdoors/mountains)
 "MB" = (
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/outdoors/town)
@@ -9679,14 +9562,6 @@
 /obj/item/rogueweapon/mace/church,
 /turf/open/floor/rogue/churchrough,
 /area/rogue/indoors/town/church)
-"MI" = (
-/turf/closed/wall/mineral/rogue/roofwall/middle{
-	dir = 8
-	},
-/area/rogue/outdoors/mountains)
-"MJ" = (
-/turf/closed/wall/mineral/rogue/roofwall/center,
-/area/rogue/outdoors/mountains)
 "MK" = (
 /turf/open/floor/rogue/metal{
 	icon_state = "plating2"
@@ -9699,11 +9574,6 @@
 /obj/structure/roguewindow,
 /turf/open/floor/rogue/churchrough,
 /area/rogue/indoors/town/church)
-"MN" = (
-/turf/closed/wall/mineral/rogue/roofwall/outercorner{
-	dir = 4
-	},
-/area/rogue/outdoors/mountains)
 "MO" = (
 /obj/machinery/light/rogue/firebowl,
 /turf/open/floor/rogue/wood,
@@ -86991,11 +86861,11 @@ xA
 xA
 xA
 xA
-EL
-EM
-EM
-EM
-EL
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -87148,11 +87018,11 @@ xA
 xA
 xA
 xA
-EM
-Fg
-FH
-Fh
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -87305,11 +87175,11 @@ xA
 xA
 xA
 xA
-EM
-Fh
-FI
-Fh
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -87462,11 +87332,11 @@ xA
 xA
 xA
 xA
-EM
-Fh
-Fh
-Fh
-Gn
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -87619,11 +87489,11 @@ xA
 xA
 xA
 xA
-EM
-Fi
-Fh
-Ge
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -87776,11 +87646,11 @@ xA
 xA
 xA
 xA
-EN
-Fj
-Fl
-Fl
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -87933,11 +87803,11 @@ xA
 xA
 xA
 xA
-EM
-Fk
-Fl
-Fk
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -88090,11 +87960,11 @@ xA
 xA
 xA
 xA
-EM
-Fl
-FJ
-Fl
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -88247,11 +88117,11 @@ xA
 xA
 xA
 xA
-EM
-Fm
-Fk
-Fj
-Go
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -88404,11 +88274,11 @@ xA
 xA
 xA
 xA
-EM
-Fn
-FK
-Fl
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -88561,11 +88431,11 @@ xA
 xA
 xA
 xA
-EN
-Fl
-Fl
-Fl
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -88718,11 +88588,11 @@ xA
 xA
 xA
 xA
-EM
-Fl
-Fl
-Fl
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -88875,11 +88745,11 @@ xA
 xA
 xA
 xA
-EM
-Fl
-Fl
-Fl
-Go
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -89032,11 +88902,11 @@ xA
 xA
 xA
 xA
-EM
-Fo
-Fo
-Gf
-EM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -89189,11 +89059,11 @@ xA
 xA
 xA
 xA
-EL
-EM
-FL
-EM
-EL
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -111327,11 +111197,11 @@ xA
 xA
 xA
 xA
-JM
-JM
-JM
-JM
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -111484,11 +111354,11 @@ xA
 xA
 xA
 xA
-JM
-Mz
-MI
-MN
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -111641,11 +111511,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -111798,11 +111668,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -111955,11 +111825,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -112112,11 +111982,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -112269,11 +112139,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -112426,11 +112296,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -112583,11 +112453,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -112740,11 +112610,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -112897,11 +112767,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -113054,11 +112924,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -113211,11 +113081,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-MJ
-JO
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -113368,11 +113238,11 @@ xA
 xA
 xA
 xA
-JM
-MA
-JL
-JP
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
@@ -113525,11 +113395,11 @@ xA
 xA
 xA
 xA
-JM
-JM
-JM
-JM
-JM
+xA
+xA
+xA
+xA
+xA
 xA
 xA
 xA
