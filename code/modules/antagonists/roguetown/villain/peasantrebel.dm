@@ -24,7 +24,7 @@
 	. = ..()
 	owner.special_role = ROLE_PREBEL
 	var/mob/living/carbon/human/H = owner.current
-	H.cmode_music = 'sound/music/combatbandit.ogg'
+	H.cmode_music = 'sound/music/combat_bandit.ogg'
 	H.add_stress(/datum/stressevent/prebel)
 
 /datum/antagonist/prebel/greet()
