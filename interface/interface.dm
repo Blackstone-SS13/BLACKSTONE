@@ -168,14 +168,14 @@ Hotkey-Mode: (hotkey-mode must be on)
 		prefs.crt = FALSE
 		prefs.save_preferences()
 		to_chat(src, "CRT... OFF")
-		for(var/obj/screen/scannies/S in screen)
+		for(var/atom/movable/screen/scannies/S in screen)
 			S.alpha = 0
 	else
 		winset(src, "mapwindow.map", "zoom-mode=blur")
 		prefs.crt = TRUE
 		prefs.save_preferences()
 		to_chat(src, "CRT... ON")
-		for(var/obj/screen/scannies/S in screen)
+		for(var/atom/movable/screen/scannies/S in screen)
 			S.alpha = 70
 
 /client/verb/triggercommend()

@@ -2256,7 +2256,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 							can_impale = FALSE
 				if(can_impale)
 					if(user.Adjacent(H))
-						//H.throw_alert("embeddedobject", /obj/screen/alert/embeddedobject)
+						//H.throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 						affecting.embedded_objects |= I
 						I.add_mob_blood(H)
 						I.forceMove(H)
@@ -2522,11 +2522,11 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if (burn_damage)
 			switch(burn_damage)
 				if(0 to 2)
-					H.throw_alert("temp", /obj/screen/alert/hot, 1)
+					H.throw_alert("temp", /atom/movable/screen/alert/hot, 1)
 				if(2 to 4)
-					H.throw_alert("temp", /obj/screen/alert/hot, 2)
+					H.throw_alert("temp", /atom/movable/screen/alert/hot, 2)
 				else
-					H.throw_alert("temp", /obj/screen/alert/hot, 3)
+					H.throw_alert("temp", /atom/movable/screen/alert/hot, 3)
 		burn_damage = burn_damage * heatmod * H.physiology.heat_mod
 		if (H.stat < UNCONSCIOUS && (prob(burn_damage) * 10) / 4) //40% for level 3 damage on humans
 			H.emote("pain")
@@ -2539,13 +2539,13 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		H.add_movespeed_modifier(MOVESPEED_ID_COLD, override = TRUE, multiplicative_slowdown = ((BODYTEMP_COLD_DAMAGE_LIMIT - H.bodytemperature) / COLD_SLOWDOWN_FACTOR), blacklisted_movetypes = FLOATING)
 		switch(H.bodytemperature)
 			if(200 to BODYTEMP_COLD_DAMAGE_LIMIT)
-				H.throw_alert("temp", /obj/screen/alert/cold, 1)
+				H.throw_alert("temp", /atom/movable/screen/alert/cold, 1)
 				H.apply_damage(COLD_DAMAGE_LEVEL_1*coldmod*H.physiology.cold_mod, BURN)
 			if(120 to 200)
-				H.throw_alert("temp", /obj/screen/alert/cold, 2)
+				H.throw_alert("temp", /atom/movable/screen/alert/cold, 2)
 				H.apply_damage(COLD_DAMAGE_LEVEL_2*coldmod*H.physiology.cold_mod, BURN)
 			else
-				H.throw_alert("temp", /obj/screen/alert/cold, 3)
+				H.throw_alert("temp", /atom/movable/screen/alert/cold, 3)
 				H.apply_damage(COLD_DAMAGE_LEVEL_3*coldmod*H.physiology.cold_mod, BURN)
 
 	else
@@ -2560,21 +2560,21 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(HAZARD_HIGH_PRESSURE to INFINITY)
 			if(!HAS_TRAIT(H, TRAIT_RESISTHIGHPRESSURE))
 				H.adjustBruteLoss(min(((adjusted_pressure / HAZARD_HIGH_PRESSURE) -1 ) * PRESSURE_DAMAGE_COEFFICIENT, MAX_HIGH_PRESSURE_DAMAGE) * H.physiology.pressure_mod)
-				H.throw_alert("pressure", /obj/screen/alert/highpressure, 2)
+				H.throw_alert("pressure", /atom/movable/screen/alert/highpressure, 2)
 			else
 				H.clear_alert("pressure")
 		if(WARNING_HIGH_PRESSURE to HAZARD_HIGH_PRESSURE)
-			H.throw_alert("pressure", /obj/screen/alert/highpressure, 1)
+			H.throw_alert("pressure", /atom/movable/screen/alert/highpressure, 1)
 		if(WARNING_LOW_PRESSURE to WARNING_HIGH_PRESSURE)
 			H.clear_alert("pressure")
 		if(HAZARD_LOW_PRESSURE to WARNING_LOW_PRESSURE)
-			H.throw_alert("pressure", /obj/screen/alert/lowpressure, 1)
+			H.throw_alert("pressure", /atom/movable/screen/alert/lowpressure, 1)
 		else
 			if(HAS_TRAIT(H, TRAIT_RESISTLOWPRESSURE))
 				H.clear_alert("pressure")
 			else
 				H.adjustBruteLoss(LOW_PRESSURE_DAMAGE * H.physiology.pressure_mod)
-				H.throw_alert("pressure", /obj/screen/alert/lowpressure, 2)
+				H.throw_alert("pressure", /atom/movable/screen/alert/lowpressure, 2)
 
 //////////
 // FIRE //
