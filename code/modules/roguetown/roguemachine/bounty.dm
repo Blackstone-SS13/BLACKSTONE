@@ -14,9 +14,7 @@
 	var/amount
 	var/reason
 
-/**
- * Shows all active bounties to the user.
- */
+///Shows all active bounties to the user.
 /obj/structure/roguemachine/bounty/proc/consult_bounties()
 
 	// Empty?
@@ -26,13 +24,11 @@
 
 	// List all bounties
 	for(var/datum/bounty/saved_bounty in bounties)
-		say("A bounty of [saved_bounty.amount] mammons has been set on [saved_bounty.target] for [saved_bounty.reason].")
+		say("A bounty of [saved_bounty.amount] mammons has been put on [saved_bounty.target] for '[saved_bounty.reason]'.")
 
-/**
- * Sets a bounty on a target player through user input.
- *
- * @param user The player setting the bounty.
- */
+
+///Sets a bounty on a target player through user input.
+///@param user: The player setting the bounty.
 /obj/structure/roguemachine/bounty/proc/set_bounty(var/mob/living/carbon/human/user)
 	var/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in GLOB.player_list
 	if(isnull(target))
@@ -54,7 +50,7 @@
 		say("Insufficient balance funds.")
 		return
 
-	var/reason = input(user, "For what sin do you summon the hounds of hell?", src) as null|text
+	var/reason = input(user, "For what sins do you summon the hounds of hell?", src) as null|text
 	if(isnull(reason) || reason == "")
 		say("No reason given.")
 		return
@@ -99,28 +95,29 @@
 			set_bounty(H)
 
 /obj/structure/roguemachine/bounty/attackby(obj/item/P, mob/user, params)
-	if(ishuman(user)) return
 
+	if(!(ishuman(user))) return
+
+	// Only heads are allowed
+	if(P.type != /obj/item/bodypart/head) return
+
+	// Save the head in case it's not the right one
+	var/obj/item/bodypart/head/stored_head = P
 	var/correct_head = FALSE
 
-	//if you're putting a head...
-	//Excidium will eat head, check if its the right head, give money or spit out head
-	/*if(P.type == HEAD)
-		// Save the head in case it's not the right one
-		var/obj/item/head/stored_head = P
-		del(P)
-		//TODO: add nom nom sounds
-		say("Measuring cranial dimensions...")
-		for(var/datum/bounty/b in bounties)
-			if(b.target == stored_head.owner)
+	qdel(P)
+	//TODO: add nom nom sounds
+	say("Measuring cranial dimensions...")
+	for(var/datum/bounty/b in bounties)
+		if(b.target == stored_head.owner)
 			correct_head = TRUE
-			say("The Excidium has been sated.")
-			//TODO: give out reward
+			say("I have been sated.")
+		//TODO: give out reward
 
-		// No valid bounty for this head?
-		if(correct_head == FALSE)
-			say("The Excidium spits out the head.")
-			spawn(src, stored_head)*/
+	// No valid bounty for this head?
+	if(correct_head == FALSE)
+		say("This skull carries no price.")
+		//spawn(stored_head)
 
 
 
