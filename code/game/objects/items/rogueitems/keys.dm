@@ -271,3 +271,127 @@
 	desc = "Was this key enchanted by a wizard locksmith..?"//what is grenchensnacker.
 	icon_state = "eyekey"
 	lockid = "porta"
+
+//custom key
+/obj/item/roguekey/custom
+	name = "custom key"
+	desc = "A simple iron key, to be used with simple iron locks."
+	icon_state = "brownkey"
+	lockid = "help" //this does nothing since the lockhash is gonna change
+
+/obj/item/roguekey/custom/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/rogueweapon/hammer))
+		name = input(user, "What would you name this key?") as text
+
+//custom key blank
+/obj/item/customblank //i'd prefer not to make a seperate item for this honestly
+	name = "blank custom key"
+	desc = "A key without its teeth carved in. Endless possibilities..."
+	icon = 'icons/roguetown/items/keys.dmi'
+	icon_state = "brownkey"
+	w_class = WEIGHT_CLASS_TINY
+	dropshrink = 0.75
+	var/lockid
+
+/obj/item/customblank/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/rogueweapon/hammer))
+		var/input = input(user, "What would you like to set the key ID to?") as num
+		lockid = 10000 + input //having custom lock ids start with cd prevents people from cloning keys that they normally don't have access to. same thing is done with customlock
+
+/obj/item/customblank/attack_right(mob/user)
+	if(istype(user.get_active_held_item(), /obj/item/roguekey))
+		var/obj/item/roguekey/held = user.get_active_held_item()
+		src.lockid = held.lockhash
+		to_chat(user, "<span class='small'>You trace the teeth from [held] to [src].</span>")
+	if(istype(user.get_active_held_item(), /obj/item/customlock))
+		var/obj/item/customlock/held = user.get_active_held_item()
+		src.lockid = held.lockid
+		to_chat(user, "<span class='small'>You fine tune the [src] to the lock's internals.</span>")
+	if(istype(user.get_active_held_item(), /obj/item/rogueweapon/hammer) && src.lockid != null)
+		var/obj/item/roguekey/custom/F = new (src.loc)
+		F.lockhash = src.lockid
+		to_chat(user, "<span class='small'>You finish the [F].</span>")
+		qdel(src)
+	
+
+//custom lock unfinished
+/obj/item/customlock
+	name = "unfinished lock"
+	desc = "A lock without its pins set. Endless possibilities..."
+	icon = 'icons/roguetown/items/keys.dmi'
+	icon_state = "lock"
+	w_class = WEIGHT_CLASS_SMALL
+	dropshrink = 0.75
+	var/lockid = null
+
+/obj/item/customlock/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/rogueweapon/hammer))
+		var/input = input(user, "What would you like to set the key ID to?") as num
+		lockid = 10000 + input //having custom lock ids start with cd prevents people from cloning keys that they normally don't have access to. same thing is done with customblank
+	if(istype(I, /obj/item/roguekey))
+		var/obj/item/roguekey/ID = I
+		if(ID.lockhash == src.lockid)
+			to_chat(user, "<span class='small'>[I] twists cleanly in [src].</span>")
+		else
+			to_chat(user, "<span class='warning'>[I] jams in [src],</span>")
+	if(istype(I, /obj/item/customblank))
+		var/obj/item/customblank/ID = I
+		if(ID.lockid == src.lockid)
+			to_chat(user, "<span class='small'>[I] twists cleanly in [src],</span>") //this makes no sense since the teeth aren't formed yet but i want people to be able to check whether the locks theyre making actually fit
+		else
+			to_chat(user, "<span class='warning'>[I] jams in [src].</span>")
+
+/obj/item/customlock/attack_right(mob/user)
+	if(istype(user.get_active_held_item(), /obj/item/roguekey))
+		var/obj/item/roguekey/held = user.get_active_held_item()
+		src.lockid = held.lockid
+		to_chat(user, "<span class='small'>You align the lock's internals to [held].</span>") //locks for non-custom keys
+	if(istype(user.get_active_held_item(), /obj/item/customblank))
+		var/obj/item/customblank/held = user.get_active_held_item()
+		src.lockid = held.lockid
+		to_chat(user, "<span class='small'>You align the lock's internals to [held].</span>")
+	if(istype(user.get_active_held_item(), /obj/item/rogueweapon/hammer) && src.lockid != null)
+		var/obj/item/customlock/finished/F = new (src.loc)
+		F.lockid = src.lockid
+		to_chat(user, "<span class='small'>You finish [F].</span>")
+		qdel(src)
+
+//finished lock
+/obj/item/customlock/finished
+	name = "lock"
+	desc = "A simple iron lock, to be used with simple iron keys."
+	var/holdname = null
+
+/obj/item/customlock/finished/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/rogueweapon/hammer))
+		src.holdname = input(user, "What would you like to name this?", "") as text
+	else
+		..()
+
+/obj/item/customlock/finished/attack_right(mob/user)//does nothing
+
+/obj/item/customlock/finished/attack_obj(obj/structure/K, mob/living/user)
+	if(istype(K, /obj/structure/closet))
+		var/obj/structure/closet/KE = K
+		if(KE.keylock == TRUE)
+			to_chat(user, "<span class='warning'>[K] already has a lock.</span>")
+		else
+			KE.keylock = TRUE
+			KE.lockhash = src.lockid
+			if(src.holdname != null)
+				KE.name = (" " + src.holdname + "KE.name")
+			to_chat(user, "<span class='small'>You add [src] to the [K].</span>")
+			qdel(src)
+	if(istype(K, /obj/structure/mineral_door/wood/deadbolt))
+		var/obj/structure/mineral_door/wood/deadbolt/KE = K
+		if(KE.keylock == TRUE)
+			to_chat(user, "<span class='warning'>[K] already has a lock.</span>")
+		else
+			KE.keylock = TRUE
+			KE.lockhash = src.lockid
+			if(src.holdname != null)
+				KE.name = src.holdname
+			to_chat(user, "<span class='small'>You add [src] to the [K].</span>")
+			qdel(src)
+			
+
