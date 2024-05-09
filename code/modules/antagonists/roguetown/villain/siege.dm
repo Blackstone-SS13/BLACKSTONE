@@ -34,10 +34,10 @@
     if(is_baron)
         // Placeholder: Replace this with the code to assign the baron's objectives
         if(owner.current)
-            to_chat(owner.current, "<span class='boldnotice'>Baron Objectives Placeholder</span>")
+            to_chat(owner.current, "<span class='boldnotice'>Siege Rockhill!</span>")
     else
-        // Existing code to assign soldier's objectives
-        // ... (existing objective assignment code)
+        if(owner.current)
+            to_chat(owner.current, "<span class='boldnotice'>Follow the Baron's orders.</span>")
 
 /datum/antagonist/siege/proc/finalize_siege()
     if(owner.current)
@@ -59,7 +59,7 @@
 
 /datum/antagonist/siege/proc/equip_soldier()
     if(owner.current)
-        to_chat(owner.current, "<span class='boldnotice'>You are one of the barons men!</span>")
+        to_chat(owner.current, "<span class='boldnotice'>You are one of the Baron's men!</span>")
 
 /datum/outfit/job/roguetown/baron/pre_equip(mob/living/carbon/human/H)
 	..()
