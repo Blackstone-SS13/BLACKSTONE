@@ -672,9 +672,9 @@
 			for(var/I in 1 to 10)
 				var/choice = input(usr, "Select Gamemodes", "Select Gamemodes") as anything in roguegamemodes|null
 				if(!choice || choice == "CANCEL")
-					message_admins("<font color='blue'>\
-						[usr.key] has forced the gamemode.</font>")
 					return
+				message_admins("<font color='blue'>\
+					[usr.key] has forced the gamemode.</font>")
 				SSticker.manualmodes |= choice
 				roguegamemodes -= choice		
 	else
