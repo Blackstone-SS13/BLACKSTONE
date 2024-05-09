@@ -387,17 +387,17 @@ Works together with spawning an observer, noted above.
 			SSdroning.kill_droning(client)
 //			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.musicvol, channel = CHANNEL_MUSIC)
 //			play_priomusic(S)
-		var/mob/dead/observer/rogue/ghost	// Transfer safety to observer spawning proc.
-		if(admin && check_rights(R_WATCH,0))
+		var/mob/dead/observer/ghost	// Transfer safety to observer spawning proc.
+		if(admin && check_rights(R_WATCH, FALSE))
 			ghost = new /mob/dead/observer/admin(src)
 		else if(drawskip)
 			ghost = new /mob/dead/observer/rogue/nodraw(src)
 		else
-			ghost = new(src)
-		ghost.ghostize_time = world.time
-		SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
+			ghost = new /mob/dead/observer/rogue(src)
 		if(!admin)
 			ghost.add_client_colour(/datum/client_colour/monochrome)
+		ghost.ghostize_time = world.time
+		SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
 		ghost.can_reenter_corpse = can_reenter_corpse
 		ghost.key = key
 		return ghost
