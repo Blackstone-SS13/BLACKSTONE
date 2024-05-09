@@ -674,7 +674,7 @@
 				if(!choice || choice == "CANCEL")
 					return
 				message_admins("<font color='blue'>\
-					[usr.key] has forced the gamemode.</font>")
+					[usr.key] has forced the [choice] gamemode.</font>")
 				SSticker.manualmodes |= choice
 				roguegamemodes -= choice		
 	else
