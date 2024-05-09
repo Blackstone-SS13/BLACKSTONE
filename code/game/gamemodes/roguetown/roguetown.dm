@@ -1,5 +1,5 @@
 // This mode will become the main basis for the typical roguetown round. Based off of chaos mode.
-var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "Aspirants", "Bandits", "Maniac", "CANCEL") // This is mainly used for forcemgamemodes
+var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "Aspirants", "Bandits", "Maniac", "Siege", "CANCEL") // This is mainly used for forcemgamemodes
 
 /datum/game_mode/chaosmode
 	name = "roguemode"
@@ -30,8 +30,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	var/list/datum/mind/vampires = list()
 	var/list/datum/mind/pre_rebels = list()
 	var/mob/living/carbon/human/vlord = null
-	var/list/datum/mind/siege = list()
-	var/list/datum/mind/pre_siege = list()
+	var/list/datum/mind/siegers = list()
+	var/list/datum/mind/pre_siegers = list()
 // MINOR ANTAGS
 	var/list/datum/mind/pre_werewolves = list()
 	var/list/datum/mind/werewolves = list()
@@ -138,7 +138,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 /datum/game_mode/proc/after_DO()
 	return
 
-/datum/game_mode/chaosmode/after_DO()
+/datum/game_mode/chaosmode/after_DO()//TODO: WHY THE FUCK THIS AFTER JOBS IT SHOUILD BE BEFORE
 	if(allmig || roguefight)
 		return TRUE
 	if(SSticker.manualmodes)
@@ -169,7 +169,11 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 					log_game("Minor Antagonist: Maniac)")
 				if("Extended")
 					log_game("Major Antagonist: Extended")
+				if("Siege")
+					pick_siege()
+					log_game("Major Antagonist: Siege")
 		return TRUE
+	message_admins("pikcing major")
 	switch(majorpicked)
 		if(1)
 			pick_rebels()
@@ -209,7 +213,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	"Priest",
 	"Knight")
 	var/num_siege = 0
-	if(num_players() >= 10)
+	if(num_players() <= 10)
 		num_siege = CLAMP(round(num_players() / 2), 30, 40)
 #ifdef TESTSERVER
 	num_siege = 999
@@ -226,12 +230,12 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 					break
 			if(!found)
 				continue
-			pre_siege += siege
+			pre_siegers += siege
 			siege.assigned_role = "Siege"
 			siege.special_role = ROLE_SIEGE
 			testing("[key_name(siege)] has been selected as a sieger")
 			log_game("[key_name(siege)] has been selected as a sieger")
-	for(var/antag in pre_siege)
+	for(var/antag in pre_siegers)
 		GLOB.pre_setup_antags |= antag
 	restricted_jobs = list()
 
@@ -480,11 +484,11 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		GLOB.pre_setup_antags -= bandito
 		bandits += bandito
 ///////////////// SIEGE
-	for(var/datum/mind/siege in pre_siege)
+	for(var/datum/mind/siege in pre_siegers)
 		var/datum/antagonist/new_antag = new /datum/antagonist/siege()
 		siege.add_antag_datum(new_antag)
 		GLOB.pre_setup_antags -= siege
-		siege += siege
+		siegers += siege
 ///////////////// ASPIRANTS
 	for(var/datum/mind/rogue in pre_aspirants) // Do the aspirant first, so the suppporter works right.
 		if(rogue.special_role == ROLE_ASPIRANT)
