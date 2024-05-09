@@ -94,6 +94,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	for(var/datum/mind/MF in get_minds("Vampire Spawn"))
 		owner.i_know_person(MF)
 		owner.person_knows_me(MF)
+	for(var/datum/mind/MF in get_minds("Death Knight"))
+		owner.i_know_person(MF)
+		owner.person_knows_me(MF)
 
 	var/mob/living/carbon/human/H = owner.current
 	if(H.mobid in GLOB.character_list)
@@ -106,6 +109,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		else
 			H.set_species(/datum/species/elf/wood) //setspecies randomizes body
 		H.after_creation()
+	if(eyes)
+		eyes.Remove(owner.current,1)
+		QDEL_NULL(eyes)
+	eyes = new /obj/item/organ/eyes/night_vision/zombie
+	eyes.Insert(owner.current)
 	H.equipOutfit(/datum/outfit/job/roguetown/vamplord)
 
 	return TRUE
@@ -115,6 +123,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	for(var/datum/mind/MF in get_minds())
 		owner.become_unknown_to(MF)
 	for(var/datum/mind/MF in get_minds("Vampire Spawn"))
+		owner.i_know_person(MF)
+		owner.person_knows_me(MF)
+	for(var/datum/mind/MF in get_minds("Death Knight"))
 		owner.i_know_person(MF)
 		owner.person_knows_me(MF)
 
@@ -798,9 +809,17 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /datum/antagonist/skeleton/knight/on_gain()
 	. = ..()
 	owner.current.verbs |= /mob/living/carbon/human/proc/vampire_telepathy
+	owner.unknow_all_people()
+	for(var/datum/mind/MF in get_minds())
+		owner.become_unknown_to(MF)
+	for(var/datum/mind/MF in get_minds("Vampire Spawn"))
+		owner.i_know_person(MF)
+		owner.person_knows_me(MF)
+	for(var/datum/mind/MF in get_minds("Death Knight"))
+		owner.i_know_person(MF)
+		owner.person_knows_me(MF)
 	add_objective(/datum/objective/vlordserve)
 	greet()
-
 /datum/antagonist/skeleton/knight/greet()
 	to_chat(owner.current, "<span class='userdanger'>I am returned to serve. I will obey, so that I may return to rest.</span>")
 	owner.announce_objectives()
