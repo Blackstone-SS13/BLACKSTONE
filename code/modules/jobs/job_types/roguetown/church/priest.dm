@@ -76,11 +76,12 @@
 		if(!istype(HU.head, /obj/item/clothing/head/roguetown/crown/serpcrown))
 			continue
 		
-		//Abdicate previous King, pretty slop code
+		//Abdicate previous King
 		for(var/mob/living/carbon/human/HL in GLOB.human_list)
 			if(HL.mind)
 				if(HL.mind.assigned_role == "King" || HL.mind.assigned_role == "Queen Consort")
-					HL.mind.assigned_role = "Towner"
+					HL.mind.assigned_role = "Towner" //So they don't get the innate traits of the king
+			//would be better to change their title directly, but that's not possible since the title comes from the job datum
 			if(HL.job == "King")
 				HL.job = "King Emeritus"
 			if(HL.job == "Queen Consort")
