@@ -106,6 +106,12 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/rogueweapon/greatsword
 
+/datum/anvil_recipe/weapons/buckler
+	name = "buckler (+steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/rogueweapon/shield/buckler
+
 /// UPGRADED WEAPONS
 
 //GOLD
