@@ -99,8 +99,8 @@
 	set category = "Admin"
 	set name = "Adminwho"
 	set desc = "Lists all admins currently online."
-	if(!holder)
-		return
+	if(!check_rights(R_ADMIN))
+		to_chat(src, "You do not have the rights to use this command.")
 	var/msg = "<b>Current Admins:</b>\n"
 	if(holder)
 		for(var/client/C in GLOB.admins)
