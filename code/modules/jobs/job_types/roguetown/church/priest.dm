@@ -76,27 +76,19 @@
 		if(!istype(HU.head, /obj/item/clothing/head/roguetown/crown/serpcrown))
 			continue
 		
-		//Abdicate previous King
+		//Abdicate previous King, pretty slop code
 		for(var/mob/living/carbon/human/HL in GLOB.human_list)
 			if(HL.mind)
-				if(HL.mind.assigned_role == "King")
-					switch(HL.gender)
-						if("male")
-							HL.mind.assigned_role = "King Emeritus"
-						if("female")
-							HL.mind.assigned_role = "Queen Emeritus"
+				if(HL.mind.assigned_role == "King" || HL.mind.assigned_role == "Queen Consort")
+					HL.mind.assigned_role = "Towner"
 			if(HL.job == "King")
 				switch(HL.gender)
 					if("male")
-						HL.mind.assigned_role = "King Emeritus"
+						HL.job.title = "King Emeritus"
 					if("female")
-						HL.mind.assigned_role = "Queen Emeritus"
-				HL.job = "King Emeritus"
-			if(HL.mind)
-				if(HL.mind.assigned_role == "Queen Consort")
-					HL.mind.assigned_role = "Queen Dowager"
+						HL.job.title = "Queen Emeritus"
 			if(HL.job == "Queen Consort")
-				HL.job = "Queen Dowager"
+				HL.job.title = "Queen Dowager"
 
 		//Coronate new King (or Queen)
 		HU.mind.assigned_role = "King"

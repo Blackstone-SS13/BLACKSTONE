@@ -50,7 +50,7 @@
 		user.visible_message("<span class='warning'>[user] points [src] at [target].</span>")
 		if(ishuman(user))
 			var/mob/living/carbon/human/HU = user
-			if((HU.job != "King") && (HU.job != "Queen"))
+			if((HU.job != "King") && (HU.job != "Queen Consort"))
 				return
 			if(ishuman(target))
 				var/mob/living/carbon/human/H = target
