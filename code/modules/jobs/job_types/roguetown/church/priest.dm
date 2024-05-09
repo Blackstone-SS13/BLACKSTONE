@@ -101,7 +101,7 @@
 		//Coronate new King (or Queen)
 		HU.mind.assigned_role = "King"
 		HU.job = "King"
-		switch(HL.gender)
+		switch(HU.gender)
 			if("male")
 				SSticker.rulertype = "King"
 			if("female")
