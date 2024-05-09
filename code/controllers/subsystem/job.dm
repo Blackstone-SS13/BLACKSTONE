@@ -95,14 +95,6 @@ SUBSYSTEM_DEF(job)
 		player.mind.assigned_role = rank
 		unassigned -= player
 		job.current_positions++
-
-		if(rank == "Queen Consort") //making Queen if there's no King
-			var/datum/job/kingjob = GetJob("King")
-			if(kingjob.current_positions == 0)
-				SSticker.rulertype = "Queen"
-				player.mind.assigned_role = "King"
-				kingjob.current_positions++
-				
 		if(!latejoin)
 			if(player.client)
 				if(job.bypass_lastclass)
