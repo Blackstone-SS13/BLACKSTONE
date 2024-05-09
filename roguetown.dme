@@ -2172,7 +2172,7 @@
 #include "code\modules\jobs\job_types\roguetown\peasants\prisoner.dm"
 #include "code\modules\jobs\job_types\roguetown\peasants\soilson.dm"
 #include "code\modules\jobs\job_types\roguetown\serfs\alchemist.dm"
-#include "code\modules\jobs\job_types\roguetown\serfs\archivist.dm"
+#include "code\modules\jobs\job_types\roguetown\nobility\archivist.dm"
 #include "code\modules\jobs\job_types\roguetown\serfs\barkeep.dm"
 #include "code\modules\jobs\job_types\roguetown\serfs\blacksmith.dm"
 #include "code\modules\jobs\job_types\roguetown\serfs\mason.dm"
