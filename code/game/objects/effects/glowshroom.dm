@@ -31,30 +31,34 @@
 	if(isliving(mover) && mover.z == z)
 //		var/throwdir = get_dir(src, mover)
 		var/mob/living/L = mover
-		if(L.PATRON.name != "Dendor") //Dendor kneestinger immunity
-			if(L.electrocute_act(30, src)) 
-				L.consider_ambush()
-				if(L.throwing)
-					L.throwing.finalize(FALSE)
-	//			if(mover.loc != loc && L.stat == CONSCIOUS)
-	//				L.throw_at(get_step(L, throwdir), 1, 1, L, spin = FALSE)
-				return FALSE
+
+		if(istype(L.PATRON, /datum/patrongods/dendor)) //Dendor kneestinger immunity
+			return TRUE
+
+		if(L.electrocute_act(30, src)) 
+			L.consider_ambush()
+			if(L.throwing)
+				L.throwing.finalize(FALSE)
+//			if(mover.loc != loc && L.stat == CONSCIOUS)
+//				L.throw_at(get_step(L, throwdir), 1, 1, L, spin = FALSE)
+			return FALSE
 	. = ..()
 
 /obj/structure/glowshroom/Crossed(AM as mob|obj)
 	if(isliving(AM))
 		var/mob/living/L = AM
 		if(L.z == z)
-			if(L.electrocute_act(30, src))
-				L.emote("painscream")
-				L.consider_ambush()
+			if(!(istype(L.PATRON, /datum/patrongods/dendor)))
+				if(L.electrocute_act(30, src))
+					L.emote("painscream")
+					L.consider_ambush()
 	. = ..()
 
 /obj/structure/glowshroom/attackby(obj/item/W, mob/user, params)
 	if(isliving(user) && W && user.z == z)
 		if(W.flags_1 & CONDUCT_1)
 			var/mob/living/L = user
-			if(L.electrocute_act(30, src))
+			if(L.electrocute_act(30, src)) // The kneestingers will let you pass if you worship dendor, but they won't take your stupid ass hitting them.
 				L.emote("painscream")
 				L.consider_ambush()
 				if(L.throwing)
