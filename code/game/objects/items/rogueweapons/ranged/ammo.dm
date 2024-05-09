@@ -18,7 +18,7 @@
 
 /obj/projectile/bullet/reusable/bolt
 	name = "bolt"
-	damage = 60
+	damage = 65
 	damage_type = BRUTE
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "bolt_proj"
@@ -49,7 +49,7 @@
 	caliber = "arrow"
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "arrow"
-	force = 35
+	force = 30
 	dropshrink = 0.6
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust)
 	max_integrity = 20
