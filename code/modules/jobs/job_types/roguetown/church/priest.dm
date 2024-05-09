@@ -8,7 +8,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = JCOLOR_CHURCH
-	f_title = "Priestess"
 	allowed_races = list("Humen", "Aasimar")
 	allowed_patrons = list("Astrata")
 	tutorial = "The Divine is all that matters in a world of the immoral. The Weeping God left his children to rule over us mortals and you will preach their wisdom to any who still heed their will. The faithless are growing in number, it is up to you to shepard them to a Gods-fearing future."
@@ -76,30 +75,37 @@
 			continue
 		if(!istype(HU.head, /obj/item/clothing/head/roguetown/crown/serpcrown))
 			continue
+		
+		//Abdicate previous King
 		for(var/mob/living/carbon/human/HL in GLOB.human_list)
 			if(HL.mind)
 				if(HL.mind.assigned_role == "King")
-					HL.mind.assigned_role = "Ex-King"
+					switch(HL.gender)
+						if("male")
+							HL.mind.assigned_role = "King Emeritus"
+						if("female")
+							HL.mind.assigned_role = "Queen Emeritus"
 			if(HL.job == "King")
-				HL.job = "Ex-King"
+				switch(HL.gender)
+					if("male")
+						HL.mind.assigned_role = "King Emeritus"
+					if("female")
+						HL.mind.assigned_role = "Queen Emeritus"
+				HL.job = "King Emeritus"
 			if(HL.mind)
-				if(HL.mind.assigned_role == "Queen")
-					HL.mind.assigned_role = "Ex-Queen"
-			if(HL.job == "Queen")
-				HL.job = "Ex-Queen"
-		switch(HU.gender)
-			if("male")
-				HU.mind.assigned_role = "King"
-				HU.job = "King"
-			if("female")
-				HU.mind.assigned_role = "Queen"
-				HU.job = "Queen"
+				if(HL.mind.assigned_role == "Queen Consort")
+					HL.mind.assigned_role = "Queen Dowager"
+			if(HL.job == "Queen Consort")
+				HL.job = "Queen Dowager"
+
+		//Coronate new King (or Queen)
+		HU.mind.assigned_role = "King"
+		HU.job = "King"
 		SSticker.rulermob = HU
 		var/dispjob = mind.assigned_role
 		GLOB.badomens -= "nolord"
 		say("By the authority of the gods, I pronounce you Ruler of all Rockhill!")
 		priority_announce("[real_name] the [dispjob] has named [HU.real_name] the inheritor of ROGUETOWN!", title = "Long Live [HU.real_name]!", sound = 'sound/misc/bell.ogg')
-		return
 
 /mob/living/carbon/human/proc/churchexcommunicate()
 	set name = "Curse"

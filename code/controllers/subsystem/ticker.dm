@@ -272,7 +272,7 @@ SUBSYSTEM_DEF(ticker)
 							continue
 				readied_jobs.Add(V)
 	if("Merchant" in readied_jobs)
-		if(("King" in readied_jobs) || ("Queen" in readied_jobs))
+		if(("King" in readied_jobs) || ("Queen Consort" in readied_jobs))
 			if("King" in readied_jobs)
 				rulertype = "King"
 			else
@@ -547,21 +547,12 @@ SUBSYSTEM_DEF(ticker)
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/select_ruler()
-	switch(rulertype)
-		if("King")
-			for(var/mob/living/carbon/human/K in world)
-				if(istype(K, /mob/living/carbon/human/dummy))
-					continue
-				if(K.job == "King")
-					rulermob = K
-					return
-		if("Queen")
-			for(var/mob/living/carbon/human/Q in world)
-				if(istype(Q, /mob/living/carbon/human/dummy))
-					continue
-				if(Q.job == "Queen")
-					rulermob = Q
-					return
+	for(var/mob/living/carbon/human/K in world)
+		if(istype(K, /mob/living/carbon/human/dummy))
+			continue
+		if(K.job == "King")
+			rulermob = K
+			return
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/i in GLOB.new_player_list)

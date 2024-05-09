@@ -1,5 +1,6 @@
 /datum/job/roguetown/lord
 	title = "King"
+	f_title = "Queen"
 	flag = LORD
 	department_flag = NOBLEMEN
 	faction = "Station"
@@ -22,22 +23,28 @@
 	if(L)
 		SSticker.select_ruler()
 		to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is King of Rockhill.</span></span></b>")
-		addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
+		if(SSticker.rulertype == "King")
+			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is King of Rockhill.</span></span></b>")
+			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
+		else
+			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is Queen of Rockhill.</span></span></b>")
+			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
 
 
 /datum/outfit/job/roguetown/lord/pre_equip(mob/living/carbon/human/H)
 	..()
+	head = /obj/item/clothing/head/roguetown/crown/serpcrown
+	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
+	cloak = /obj/item/clothing/cloak/lordcloak
+	belt = /obj/item/storage/belt/rogue/leather/plaquegold
+	l_hand = /obj/item/rogueweapon/lordscepter
+	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
+	id = /obj/item/clothing/ring/active/nomag	
 	if(H.gender == MALE)
-		head = /obj/item/clothing/head/roguetown/crown/serpcrown
 		pants = /obj/item/clothing/under/roguetown/tights/black
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/black
-		cloak = /obj/item/clothing/cloak/lordcloak
-		shoes = /obj/item/clothing/shoes/roguetown/boots
-		belt = /obj/item/storage/belt/rogue/leather/plaquegold
-		backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
-		id = /obj/item/clothing/ring/active/nomag
-		l_hand = /obj/item/rogueweapon/lordscepter
+		shoes = /obj/item/clothing/shoes/roguetown/boots	
 		if(H.mind)
 			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
 			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
@@ -72,6 +79,28 @@
 			if(istype(H.wear_mask, /obj/item/clothing/mask/rogue/eyepatch/left))
 				qdel(H.wear_mask)
 				mask = /obj/item/clothing/mask/rogue/lordmask/l
+	else //Queen
+		armor = /obj/item/clothing/suit/roguetown/armor/armordress
+		belt = /obj/item/storage/belt/rogue/leather/plaquegold
+		shoes = /obj/item/clothing/shoes/roguetown/shortboots
+		if(H.mind)
+			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
+			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
+			if(H.age == AGE_OLD)
+				H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
+			H.change_stat("intelligence", 3)
+			H.change_stat("endurance", 3)
+			H.change_stat("speed", 2)
+			H.change_stat("perception", 2)
+			H.change_stat("fortune", 5)
 
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
