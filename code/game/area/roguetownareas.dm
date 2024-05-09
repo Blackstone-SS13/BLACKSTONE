@@ -188,9 +188,9 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/turf/open/floor/rogue/dirt,
 				/turf/open/floor/rogue/grass,
 				/turf/open/water)
+	//Minotaurs too strong for the lazy amount of places this area covers
 	ambush_mobs = list(
 				/mob/living/carbon/human/species/skeleton/npc/ambush = 20,
-				/mob/living/simple_animal/hostile/retaliate/rogue/minotaur = 20,
 				/mob/living/simple_animal/hostile/retaliate/rogue/wolf = 40,
 				/mob/living/simple_animal/hostile/retaliate/rogue/bigrat = 60,
 				/mob/living/simple_animal/hostile/retaliate/rogue/spider = 40,
