@@ -101,6 +101,11 @@
 		//Coronate new King (or Queen)
 		HU.mind.assigned_role = "King"
 		HU.job = "King"
+		switch(HL.gender)
+			if("male")
+				SSticker.rulertype = "King"
+			if("female")
+				SSticker.rulertype = "Queen"
 		SSticker.rulermob = HU
 		var/dispjob = mind.assigned_role
 		GLOB.badomens -= "nolord"
