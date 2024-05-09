@@ -189,13 +189,13 @@
 						used_weapon = offhand
 						used_index = get_inactive_hand_index()
 						prob2defend += offhandthing
-				if(U?.mind) //attacker skill gain
+				if(U?.mind)
 					if(intenty.masteritem)
 						if(!intenty.masteritem.associated_skill) //nme weapon improvised
 							prob2defend = prob2defend + 10
-						else
+						else //attacker skill gain
 							var/attacker_skill = U.mind.get_skill_level(intenty.masteritem.associated_skill)
-							var/defender_skill = H.mind?.get_skill_level(intenty.masteritem.associated_skill)
+							var/defender_skill = mind?.get_skill_level(intenty.masteritem.associated_skill)
 							prob2defend = prob2defend - (attacker_skill * 20)
 							if((U.mobility_flags & MOBILITY_STAND) && defender_skill && (attacker_skill < defender_skill - SKILL_LEVEL_NOVICE))
 								U.mind.adjust_experience(intenty.masteritem.associated_skill, max(round(U.STAINT/2), 0), FALSE)
@@ -283,7 +283,7 @@
 							prob2defend = prob2defend - (U.mind.get_skill_level(intenty.masteritem.associated_skill) * 10)
 					else //attacker skill gain
 						var/attacker_skill = U.mind.get_skill_level(/datum/skill/combat/unarmed)
-						var/defender_skill = mind.get_skill_level(/datum/skill/combat/unarmed)
+						var/defender_skill = mind?.get_skill_level(/datum/skill/combat/unarmed)
 						prob2defend = prob2defend - (U.mind.get_skill_level(/datum/skill/combat/unarmed) * 10)
 						if((U.mobility_flags & MOBILITY_STAND) && defender_skill && (attacker_skill < defender_skill - SKILL_LEVEL_NOVICE))
 							U.mind.adjust_experience(/datum/skill/combat/unarmed, max(round(U.STAINT/2), 0), FALSE)
@@ -297,10 +297,10 @@
 //								drained = drained + 15
 					if(do_unarmed_parry(usename, drained, user))
 						if(H?.mind) //defender skill gain
-							var/attacker_skill = U.mind.get_skill_level(/datum/skill/combat/unarmed)
-							var/defender_skill = mind.get_skill_level(/datum/skill/combat/unarmed)
+							var/attacker_skill = U.mind?.get_skill_level(/datum/skill/combat/unarmed)
+							var/defender_skill = H.mind.get_skill_level(/datum/skill/combat/unarmed)
 							if((mobility_flags & MOBILITY_STAND) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
-								mind.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
+								H.mind.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
 						flash_fullscreen("blackflash2")
 						return TRUE
 					else
