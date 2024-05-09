@@ -1820,12 +1820,13 @@
 /area/rogue/indoors/town/dwarfin)
 "hw" = (
 /obj/structure/bars/pipe,
-/turf/open/floor/rogue/wood,
-/area/rogue/indoors/town/manor)
-"hx" = (
-/obj/structure/fluff/railing/wood{
+/obj/structure/roguewindow/openclose{
 	dir = 1
 	},
+/turf/closed,
+/area/rogue/indoors/town/manor)
+"hx" = (
+/obj/structure/fluff/railing/wood,
 /obj/structure/telescope,
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/outdoors/town)
@@ -2257,9 +2258,7 @@
 /turf/open/floor/carpet/stellar,
 /area/rogue/indoors/town/magician)
 "jt" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/railing/wood,
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/outdoors/town)
 "ju" = (
@@ -2473,8 +2472,7 @@
 /area/rogue/indoors/town/manor)
 "ku" = (
 /obj/structure/mineral_door/wood/deadbolt{
-	dir = 4;
-	locked = 1
+	dir = 4
 	},
 /turf/open/floor/rogue/herringbone,
 /area/rogue/indoors/town/church)
@@ -2622,14 +2620,13 @@
 	},
 /area/rogue/indoors)
 "lc" = (
-/obj/structure/fluff/railing/wood{
+/obj/structure/table/wood{
+	icon_state = "tablewood1";
 	dir = 1
 	},
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/turf/open/floor/rogue/blocks,
-/area/rogue/outdoors/town)
+/obj/item/paper/scroll,
+/turf/open/floor/rogue/wood,
+/area/rogue/indoors/town/manor)
 "le" = (
 /obj/effect/decal/cobbleedge{
 	dir = 1;
@@ -2665,11 +2662,12 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors/town/garrison)
 "ll" = (
-/obj/machinery/light/rogue/torchholder{
-	dir = 4
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
 	},
-/turf/open/floor/rogue/grass,
-/area/rogue/outdoors/town)
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/mountains)
 "lm" = (
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/garrison)
@@ -2708,7 +2706,7 @@
 	dir = 1
 	},
 /obj/item/candle/yellow/lit,
-/turf/open/floor/rogue/wood,
+/turf/open/floor/rogue/tile/tilerg,
 /area/rogue/indoors/town/manor)
 "lx" = (
 /obj/machinery/light/rogue/torchholder{
@@ -3032,7 +3030,7 @@
 /area/rogue/indoors/town)
 "mV" = (
 /obj/machinery/light/rogue/wallfire/candle/r,
-/turf/open/floor/rogue/tile/tilerg,
+/turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
 "mW" = (
 /obj/structure/chair/wood/rogue{
@@ -3545,8 +3543,11 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
 "pj" = (
-/obj/machinery/light/rogue/torchholder/c,
-/turf/open/floor/rogue/tile/tilerg,
+/obj/structure/table/wood{
+	icon_state = "tablewood1"
+	},
+/obj/item/storage/roguebag,
+/turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/manor)
 "pk" = (
 /obj/machinery/light/rogue/torchholder{
@@ -3606,9 +3607,7 @@
 /area/rogue/indoors/town/bath)
 "pu" = (
 /obj/machinery/light/rogue/torchholder/c,
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/railing/wood,
 /turf/open/floor/rogue/blocks,
 /area/rogue/outdoors/town)
 "pv" = (
@@ -3942,12 +3941,11 @@
 /area/rogue/indoors)
 "qQ" = (
 /obj/structure/table/wood{
-	icon_state = "tablewood1";
+	icon_state = "longtable_mid";
 	dir = 1
 	},
-/obj/item/candle/yellow,
-/turf/open/floor/rogue/wood,
-/area/rogue/indoors/town/manor)
+/turf/open/floor/rogue/cobble,
+/area/rogue/outdoors/town)
 "qR" = (
 /obj/machinery/light/rogue/hearth,
 /turf/open/floor/rogue/ruinedwood{
@@ -4177,6 +4175,10 @@
 /obj/structure/closet/crate/chest/lootbox,
 /turf/open/floor/rogue/cobble,
 /area/rogue/outdoors/town)
+"rU" = (
+/obj/structure/bars/pipe,
+/turf/closed/wall/mineral/rogue/craftstone,
+/area/rogue/indoors/town/manor)
 "rV" = (
 /obj/structure/fluff/psycross,
 /turf/open/floor/rogue/herringbone,
@@ -4186,21 +4188,11 @@
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/town)
 "rY" = (
-/obj/structure/closet/crate/chest,
-/obj/item/roguekey/manor,
-/obj/item/roguekey/walls,
-/obj/item/roguekey/blacksmith,
-/obj/item/roguekey/steward,
-/obj/item/roguekey/church,
-/obj/item/roguekey/dungeon,
-/obj/item/roguekey/graveyard,
-/obj/item/roguekey/garrison,
-/obj/item/roguekey/mason,
-/obj/item/roguekey/mercenary,
-/obj/item/roguekey/nightmaiden,
-/obj/item/roguekey/tavern,
-/turf/open/floor/rogue/tile/tilerg,
-/area/rogue/indoors/town/manor)
+/obj/machinery/light/rogue/torchholder{
+	dir = 4
+	},
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/town)
 "rZ" = (
 /turf/closed/mineral/rogue,
 /area/rogue/outdoors/rtfield)
@@ -4541,6 +4533,12 @@
 /obj/machinery/light/rogue/campfire,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/rtfield)
+"tw" = (
+/obj/structure/roguewindow/openclose{
+	dir = 4
+	},
+/turf/closed,
+/area/rogue/indoors/town/manor)
 "tx" = (
 /obj/structure/closet/crate/chest,
 /obj/item/rope/chain,
@@ -5322,12 +5320,13 @@
 	},
 /area/rogue/indoors/town/dwarfin)
 "wP" = (
-/obj/structure/closet/crate/roguecloset,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/turf/open/floor/rogue/tile/tilerg,
+/obj/structure/table/wood{
+	icon_state = "tablewood1";
+	dir = 1
+	},
+/obj/item/candle/yellow,
+/obj/item/natural/feather,
+/turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
 "wQ" = (
 /obj/structure/bed/rogue/shit,
@@ -6454,6 +6453,19 @@
 /obj/structure/bars/pipe{
 	dir = 1
 	},
+/obj/structure/closet/crate/chest,
+/obj/item/roguekey/manor,
+/obj/item/roguekey/walls,
+/obj/item/roguekey/blacksmith,
+/obj/item/roguekey/steward,
+/obj/item/roguekey/church,
+/obj/item/roguekey/dungeon,
+/obj/item/roguekey/graveyard,
+/obj/item/roguekey/garrison,
+/obj/item/roguekey/mason,
+/obj/item/roguekey/mercenary,
+/obj/item/roguekey/nightmaiden,
+/obj/item/roguekey/tavern,
 /turf/open/floor/rogue/tile/tilerg,
 /area/rogue/indoors/town/manor)
 "Bj" = (
@@ -6575,9 +6587,12 @@
 /area/rogue/indoors/town/tavern)
 "BE" = (
 /obj/machinery/light/rogue/wallfire/candle/l,
-/turf/open/floor/rogue/wood,
-/area/rogue/indoors/town/manor)
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/town/roofs)
 "BF" = (
+/obj/structure/table/wood{
+	icon_state = "longtable"
+	},
 /turf/open/floor/rogue/tile/tilerg,
 /area/rogue/indoors/town/manor)
 "BG" = (
@@ -6684,7 +6699,8 @@
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/tavern)
 "BZ" = (
-/turf/closed/wall/mineral/rogue/roofwall/center,
+/obj/machinery/light/rogue/torchholder/c,
+/turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
 "Ca" = (
 /turf/closed/wall/mineral/rogue/decowood,
@@ -7267,12 +7283,9 @@
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/indoors/town)
 "DU" = (
-/obj/structure/mineral_door/wood/donjon{
-	dir = 8;
-	locked = 1;
-	lockid = "steward"
-	},
-/turf/open/floor/rogue/ruinedwood,
+/obj/structure/closet/crate/roguecloset,
+/obj/item/flint,
+/turf/open/floor/carpet/royalblack,
 /area/rogue/indoors/town/manor)
 "DV" = (
 /obj/structure/closet/crate/chest,
@@ -7281,11 +7294,9 @@
 /turf/open/floor/rogue/hexstone,
 /area/rogue/indoors/town/manor)
 "DW" = (
-/obj/structure/table/wood{
-	icon_state = "longtable"
-	},
-/turf/open/floor/rogue/wood,
-/area/rogue/indoors/town/manor)
+/obj/structure/fluff/railing/border,
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/town)
 "DY" = (
 /obj/structure/fermenting_barrel/water,
 /turf/open/floor/rogue/woodturned,
@@ -7605,6 +7616,16 @@
 	icon_state = "wooden_floort"
 	},
 /area/rogue/outdoors/town/roofs)
+"Ft" = (
+/obj/structure/closet/crate/roguecloset,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/turf/open/floor/carpet/royalblack,
+/area/rogue/indoors/town/manor)
 "Fv" = (
 /obj/structure/roguewindow/openclose{
 	dir = 1
@@ -8052,9 +8073,7 @@
 /turf/open/floor/rogue/metal,
 /area/rogue/indoors/town/shop)
 "Hi" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/railing/wood,
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/town/roofs)
 "Hj" = (
@@ -9357,9 +9376,7 @@
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/tavern)
 "LT" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/railing/wood,
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
 "LU" = (
@@ -10087,7 +10104,7 @@
 /area/rogue/outdoors/beach)
 "OK" = (
 /obj/structure/fluff/walldeco/stone,
-/turf/closed/wall/mineral/rogue/stone,
+/turf/closed/wall/mineral/rogue/craftstone,
 /area/rogue/indoors/town/manor)
 "OL" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -11241,9 +11258,7 @@
 /turf/open/floor/plating/ashplanet/rocky,
 /area/rogue/outdoors/beach)
 "Tg" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
@@ -11420,11 +11435,8 @@
 /area/rogue/outdoors/rtfield)
 "TS" = (
 /obj/structure/chair/bench/ultimacouch/r,
-/obj/structure/chair/bench/ultimacouch/r{
-	icon_state = "ultimacochright"
-	},
-/turf/open/floor/rogue/wood,
-/area/rogue/indoors/town/manor)
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/town/roofs)
 "TT" = (
 /obj/structure/closet/crate/chest,
 /obj/item/reagent_containers/food/snacks/rogue/meat/poultry,
@@ -11469,9 +11481,11 @@
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
 "Uc" = (
-/obj/structure/closet/crate/roguecloset,
-/turf/open/floor/carpet/royalblack,
-/area/rogue/indoors/town/manor)
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/turf/open/transparent/openspace,
+/area/rogue/outdoors/mountains)
 "Ud" = (
 /obj/structure/closet/crate/roguecloset,
 /obj/item/reagent_containers/glass/cup/silver,
@@ -11570,9 +11584,7 @@
 	},
 /area/rogue/outdoors/beach)
 "Uu" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	pixel_y = -1
@@ -12003,7 +12015,10 @@
 	},
 /area/rogue/outdoors/beach)
 "Wb" = (
-/turf/closed/wall/mineral/rogue/roofwall/innercorner,
+/obj/structure/chair/bench/ultimacouch/r{
+	icon_state = "ultimacochright"
+	},
+/turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
 "We" = (
 /obj/structure/chair/wood/rogue,
@@ -12088,9 +12103,7 @@
 /turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
 "Wr" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
@@ -12916,9 +12929,7 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/outdoors/town)
 "ZF" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/railing/wood,
 /turf/open/floor/rogue/blocks,
 /area/rogue/outdoors/town)
 "ZG" = (
@@ -68659,7 +68670,7 @@ er
 er
 er
 er
-LG
+DW
 eS
 eS
 eS
@@ -68816,7 +68827,7 @@ er
 er
 er
 er
-LG
+DW
 eS
 eS
 eS
@@ -69782,7 +69793,7 @@ kx
 kx
 kx
 kx
-lc
+ZF
 er
 er
 wq
@@ -70506,14 +70517,14 @@ iP
 eS
 eS
 YO
-eA
-eA
 vp
 vp
 vp
 vp
 vp
 vp
+vp
+ew
 ze
 eS
 ew
@@ -70663,14 +70674,14 @@ ey
 ze
 eS
 YO
-eA
+vp
 yr
 BG
 qN
 qN
 qN
 qN
-eA
+ew
 eS
 eS
 ew
@@ -70827,7 +70838,7 @@ ui
 RS
 qN
 qN
-eA
+ew
 eS
 eS
 lC
@@ -70976,15 +70987,15 @@ nY
 ey
 eS
 eS
-gg
+YO
 vp
 RP
 qN
-eA
+vp
 qN
 qN
 AU
-eA
+ew
 eS
 eS
 lC
@@ -71141,7 +71152,7 @@ qN
 qN
 qN
 Bh
-eA
+ew
 eS
 eS
 lC
@@ -71298,7 +71309,7 @@ RY
 qN
 Bj
 rK
-eA
+ew
 eS
 eS
 lC
@@ -71455,7 +71466,7 @@ vp
 OK
 De
 vp
-vp
+ew
 eS
 eS
 ew
@@ -71606,9 +71617,9 @@ eS
 eS
 YO
 YO
-ll
+YO
 eS
-oC
+rY
 YO
 YO
 YO
@@ -71763,7 +71774,7 @@ ze
 eS
 YO
 YO
-YO
+ew
 eS
 oC
 oC
@@ -73181,7 +73192,7 @@ YO
 eS
 eS
 eS
-eS
+UN
 eA
 eA
 eA
@@ -75400,7 +75411,7 @@ VA
 eS
 eS
 eS
-va
+qQ
 eS
 eS
 eS
@@ -75665,7 +75676,7 @@ fa
 fa
 WV
 zk
-WV
+pj
 rL
 eG
 sN
@@ -75903,9 +75914,9 @@ ew
 ew
 ew
 PS
+eS
+eS
 ew
-ew
-ZF
 er
 er
 wq
@@ -94552,7 +94563,7 @@ By
 By
 Bf
 DJ
-Bf
+GA
 BS
 BS
 Dt
@@ -94683,15 +94694,15 @@ xB
 xB
 xB
 xB
-eA
-fn
+xB
+xB
 BE
-fn
-fn
+xB
+xB
 BE
-wP
-eA
-Ig
+xB
+xB
+xB
 xD
 xF
 xG
@@ -94838,15 +94849,15 @@ ey
 ey
 ey
 ey
+iP
 xB
 xB
-eA
-fn
-fn
-fn
-fn
-fn
-rY
+xB
+vp
+vp
+vp
+vp
+vp
 vp
 Ig
 xD
@@ -94995,16 +95006,16 @@ hd
 hd
 hd
 hd
+xI
+xB
 xB
 xB
 vp
-Uc
-eL
 fn
 fn
 fn
 LD
-eA
+vp
 Ig
 xD
 xF
@@ -95152,11 +95163,11 @@ hd
 hd
 hd
 hd
+xI
+xB
+xB
 xB
 vp
-vp
-Uc
-eL
 fn
 LT
 hd
@@ -95309,10 +95320,10 @@ hd
 hd
 hd
 hd
-eA
-vp
-vp
-vp
+xI
+xB
+xB
+xB
 eA
 nt
 LT
@@ -95466,15 +95477,15 @@ hd
 hd
 hd
 hd
+xI
+xB
+xB
+xB
 vp
 fn
-BE
-fn
-vp
 fn
 fn
-BF
-BF
+fn
 vp
 Ig
 xE
@@ -95623,15 +95634,15 @@ hd
 hd
 hd
 hd
-vp
+xI
+xB
+xB
+xB
+rU
 hs
-DW
+BF
 fn
-hw
 fn
-BF
-BF
-BF
 vp
 Ig
 xE
@@ -95782,15 +95793,15 @@ yb
 hd
 Cn
 TS
+xB
+xB
+hw
+Wb
 lv
 fn
-hw
-fn
-BF
-BF
 eX
 vp
-xB
+Ig
 xE
 xF
 xG
@@ -95937,14 +95948,14 @@ hd
 hd
 hd
 hd
+xI
+xB
+xB
+xB
 vp
 Dd
-fn
-fn
-vp
-fn
 mV
-BF
+fn
 Bi
 vp
 xB
@@ -96094,10 +96105,10 @@ hd
 hd
 hd
 hd
-eA
-vp
-vp
-vp
+xI
+xB
+xB
+xB
 vp
 vp
 vp
@@ -96913,7 +96924,7 @@ BS
 FO
 BW
 Sq
-GA
+Bf
 BS
 MZ
 GV
@@ -97730,8 +97741,8 @@ xB
 xB
 xB
 xB
-xA
-xA
+Uc
+Uc
 xA
 xA
 JK
@@ -98201,8 +98212,8 @@ xB
 xB
 xB
 xB
-xA
-xA
+JJ
+JJ
 xA
 xA
 xA
@@ -98358,8 +98369,8 @@ xB
 xB
 xB
 xB
-xA
-xA
+ll
+ll
 xA
 xA
 xA
@@ -117784,7 +117795,7 @@ er
 er
 er
 er
-LG
+DW
 lR
 MO
 lR
@@ -117792,7 +117803,7 @@ Mb
 er
 er
 er
-LG
+DW
 lR
 MO
 lR
@@ -117941,7 +117952,7 @@ er
 er
 er
 er
-LG
+DW
 lR
 lR
 vu
@@ -117949,7 +117960,7 @@ Mb
 er
 er
 er
-LG
+DW
 LW
 lR
 LW
@@ -119020,12 +119031,12 @@ er
 er
 er
 er
-KO
-KO
-KO
-KO
-KO
-KO
+er
+er
+er
+er
+er
+er
 er
 er
 JW
@@ -119176,16 +119187,16 @@ Nr
 Nr
 JX
 er
-KO
-KO
-KO
-KO
-KO
-KO
-KO
-KO
-KO
-KO
+er
+er
+Rn
+sn
+sn
+sn
+sn
+nA
+er
+er
 JW
 JW
 JW
@@ -119333,16 +119344,16 @@ JY
 Kc
 JX
 er
-KO
-Rn
-sn
-sn
-sn
-sn
-sn
-sn
-nA
-KO
+er
+er
+Mf
+fn
+fn
+fn
+fn
+FS
+er
+er
 er
 er
 er
@@ -119489,17 +119500,17 @@ JZ
 JZ
 JV
 JX
-KO
-KO
+er
+er
+er
 Mf
-xH
-xH
-eA
-BF
+lc
+fn
+fn
 ET
-eA
 FS
-KO
+er
+er
 er
 er
 er
@@ -119646,17 +119657,17 @@ JZ
 JZ
 JV
 JX
-KO
-Rn
-BZ
-qQ
+er
+er
+er
+Mf
+wP
 fn
-eA
-pj
+fn
 hd
-Wb
-Tb
-KO
+FS
+er
+er
 er
 er
 er
@@ -119803,17 +119814,17 @@ JZ
 JZ
 JV
 JX
-Rn
+er
+er
+er
+Mf
 BZ
-xH
 fn
-fn
-eA
-BF
-eA
+eL
+eL
 FS
-KO
-KO
+er
+er
 er
 er
 er
@@ -119960,17 +119971,17 @@ JZ
 JZ
 JV
 JX
+er
+er
+er
 Mf
-xH
+Co
 fn
-fn
-fn
-Wb
 DU
-kr
-Tb
-KO
-KO
+Ft
+FS
+er
+er
 er
 er
 er
@@ -120117,17 +120128,17 @@ JZ
 JZ
 JV
 JX
-Mf
-xH
-fn
-fn
-Co
-FS
-KO
-KO
-KO
-KO
-KO
+er
+er
+er
+kr
+QJ
+tw
+QJ
+QJ
+Tb
+er
+er
 er
 er
 er
@@ -120274,17 +120285,17 @@ JZ
 JZ
 JV
 JX
-kr
-QJ
-DU
-QJ
-QJ
-Tb
+er
+er
+er
 KO
 KO
 KO
 KO
 KO
+KO
+er
+er
 er
 er
 er
@@ -120431,17 +120442,17 @@ JZ
 JZ
 JV
 JX
+er
+er
+er
 KO
 KO
 KO
 KO
 KO
 KO
-KO
-KO
-KO
-KO
-KO
+er
+er
 er
 er
 er
@@ -120583,10 +120594,10 @@ JZ
 JZ
 JZ
 JZ
-JZ
-JZ
-JZ
-JV
+JT
+JT
+JT
+Ka
 JX
 er
 er
@@ -120739,7 +120750,7 @@ JZ
 JZ
 JZ
 JZ
-JZ
+JV
 MB
 MB
 ya
@@ -120896,7 +120907,7 @@ JZ
 JZ
 JZ
 JZ
-JZ
+JV
 MB
 MB
 MB
@@ -121053,7 +121064,7 @@ JZ
 JZ
 JZ
 JZ
-JZ
+JV
 MB
 MB
 Kb
@@ -121210,7 +121221,7 @@ JZ
 JZ
 JZ
 JZ
-JZ
+JV
 MB
 MB
 MB
@@ -121368,9 +121379,9 @@ JZ
 JZ
 JZ
 JZ
-JZ
-JZ
-JV
+JY
+JY
+Kc
 JX
 JX
 er
