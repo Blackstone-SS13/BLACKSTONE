@@ -22,6 +22,16 @@
 	give_bank_account = TRUE
 	min_pq = 2
 
+/datum/job/roguetown/exlady //just used to change the ladys title
+	title = "Queen Dowager"
+	flag = ADVENTURER
+	department_flag = NOBLEMEN
+	faction = "Station"
+	total_positions = 0
+	spawn_positions = 0
+	display_order = JDO_LADY
+	give_bank_account = TRUE
+
 /datum/outfit/job/roguetown/lady/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)

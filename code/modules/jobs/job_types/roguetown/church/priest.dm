@@ -82,13 +82,9 @@
 				if(HL.mind.assigned_role == "King" || HL.mind.assigned_role == "Queen Consort")
 					HL.mind.assigned_role = "Towner"
 			if(HL.job == "King")
-				switch(HL.gender)
-					if("male")
-						HL.job.title = "King Emeritus"
-					if("female")
-						HL.job.title = "Queen Emeritus"
+				HL.job = "King Emeritus"
 			if(HL.job == "Queen Consort")
-				HL.job.title = "Queen Dowager"
+				HL.job = "Queen Dowager"
 
 		//Coronate new King (or Queen)
 		HU.mind.assigned_role = "King"

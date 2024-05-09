@@ -18,6 +18,17 @@
 	give_bank_account = 1000
 	required = TRUE
 
+/datum/job/roguetown/exlord //just used to change the lords title
+	title = "King Emeritus"
+	f_title = "Queen Emeritus"
+	flag = ADVENTURER
+	department_flag = NOBLEMEN
+	faction = "Station"
+	total_positions = 0
+	spawn_positions = 0
+	display_order = JDO_LADY
+	give_bank_account = TRUE
+
 /datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
 	if(L)
