@@ -30,7 +30,13 @@
 ///Sets a bounty on a target player through user input.
 ///@param user: The player setting the bounty.
 /obj/structure/roguemachine/bounty/proc/set_bounty(var/mob/living/carbon/human/user)
-	var/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in GLOB.player_list
+	var/list/eligible_players = list()
+	for(var/mob/living/H in GLOB.player_list)
+		if(H.client)
+			//if(H != user)
+			eligible_players += H.real_name
+		
+	var/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in eligible_players
 	if(isnull(target))
 		say("No target selected.")
 		return
@@ -107,16 +113,26 @@
 
 	qdel(P)
 	//TODO: add nom nom sounds
-	say("Measuring cranial dimensions...")
+	var/random_say = rand(1, 3)
+	if(random_say == 1)
+		say("Commencing cephalic dissection...")
+	else if(random_say == 2)
+		say("Analyzing skull structure...")
+	else
+		say("Performing intra-cranial inspection...")
+	sleep(3 SECONDS)
 	for(var/datum/bounty/b in bounties)
-		if(b.target == stored_head.owner)
+		if(b.target == stored_head.real_name)
 			correct_head = TRUE
 			say("I have been sated.")
+			playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1) 
 		//TODO: give out reward
 
 	// No valid bounty for this head?
 	if(correct_head == FALSE)
 		say("This skull carries no price.")
+		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+		stored_head.forceMove(src.loc)
 		//spawn(stored_head)
 
 
