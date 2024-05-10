@@ -5,6 +5,7 @@
 	job_rank = ROLE_SIEGE
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "baron's men"
+	var/datum/team/siege/siege_team
 	var/is_baron = FALSE
 	confess_lines = list("FOR THE BARON!!", "I WILL NOT SERVE THE KING!", "I WILL NOT FOLLOW YOUR LAWS!")
 
@@ -38,6 +39,50 @@
 		if(owner.current)
 			to_chat(owner.current, "<span class='boldnotice'>Follow the Baron's orders.</span>")
 
+/datum/antagonist/siege/apply_innate_effects(mob/living/mob_override)
+	var/mob/living/M = mob_override || owner.current
+	add_antag_hud(antag_hud_type, antag_hud_name, M)
+
+/datum/antagonist/siege/remove_innate_effects(mob/living/mob_override)
+	var/mob/living/M = mob_override || owner.current
+	remove_antag_hud(antag_hud_type, M)
+
+/datum/antagonist/siege/on_gain()
+	. = ..()
+	create_objectives()
+
+/datum/antagonist/siege/on_removal()
+	remove_objectives()
+	. = ..()
+
+/datum/antagonist/siege/create_team(datum/team/prebels/new_team)
+	if(!new_team)
+		//For now only one siege at a time
+		for(var/datum/antagonist/siege/H in GLOB.antagonists)
+			if(!H.owner)
+				continue
+			if(H.siege_team)
+				siege_team = H.siege_team
+				return
+		siege_team = new /datum/team/siege()
+		siege_team.update_objectives()
+		return
+	if(!istype(new_team))
+		stack_trace("Wrong team type passed to [type] initialization.")
+	siege_team = new_team
+
+/datum/antagonist/siege/get_team()
+	return siege_team
+
+/datum/antagonist/siege/proc/create_objectives()
+	if(get_team())
+		objectives |= siege_team.objectives
+
+/datum/antagonist/siege/proc/remove_objectives()
+	if(get_team())
+		objectives -= siege_team.objectives
+
+
 /datum/antagonist/siege/proc/finalize_siege()
 	if(owner.current)
 		owner.current.playsound_local(get_turf(owner.current), 'sound/music/traitor.ogg', 80, FALSE, pressure_affected = FALSE)
@@ -46,7 +91,6 @@
 		ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 		ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 		
-
 /datum/antagonist/siege/proc/move_to_spawnpoint()
 	if(owner.current && length(GLOB.soldier_starts))
 		owner.current.forceMove(pick(GLOB.soldier_starts))
@@ -112,12 +156,64 @@
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
+
+/datum/objective/usurp
+	name = "Usurp Crown"
+	explanation_text = "Put the Baron on the throne with the crown."
+	team_explanation_text = "Put the Baron on the throne with the crown."
+
+/datum/objective/usurp/check_completion()
+	var/list/datum/mind/owners = get_owners()
+	for(var/datum/mind/M in owners)
+		if(M.assigned_role == "King" && M.current.job == "King")
+			return TRUE
+	return FALSE
+
+/datum/team/siege
+	name = "Baron's Men"
+
+/datum/team/siege/proc/update_objectives(initial = FALSE)
+	if(!(locate(/datum/objective/usurp) in objectives))
+		var/datum/objective/usurp/usurp = new
+		usurp.team = src
+		objectives += usurp
+	for(var/datum/mind/M in members)
+		var/datum/antagonist/siege/R = M.has_antag_datum(/datum/antagonist/siege)
+		if(!R)
+			R = M.has_antag_datum(/datum/antagonist/siege/baron)
+		R.objectives |= objectives
+
+/datum/team/siege/roundend_report()
+	to_chat(world, "<span class='header'> * [name] * </span>")
+	to_chat(world, "[printplayerlist(members)]")
+
+	if(objectives.len)
+		var/win = TRUE
+		var/objective_count = 1
+		for(var/datum/objective/objective in objectives)
+			if(objective.check_completion())
+				to_chat(world, "<B>Goal #[objective_count]</B>: [objective.explanation_text] <span class='greentext'>TRIUMPH!</span>")
+			else
+				to_chat(world, "<B>Goal #[objective_count]</B>: [objective.explanation_text] <span class='redtext'>FAIL.</span>")
+				win = FALSE
+			objective_count++
+		if(win)
+			for(var/datum/mind/M in members)
+				if(considered_alive(M))
+					M.adjust_triumphs(5)
+			to_chat(world, "<span class='greentext'>The Baron's Siege has triumphed!</span>")
+		else
+			to_chat(world, "<span class='redtext'>The Baron's Siege has FAILED!</span>")
+
+/datum/antagonist/siege/get_team()
+	return siege_team
+
 /datum/antagonist/siege/baron
 	name = "The Baron"
 	confess_lines = list("THE CROWN BELONGS TO THE STRONG!", "I WILL NOT BE WEAK!")
 	is_baron = TRUE
 
-/datum/antagonist/baron/greet()
+/datum/antagonist/siege/baron/greet()
 	to_chat(owner.current, "<span class='alertsyndie'>I am the BARON!</span>")
 	to_chat(owner.current, "<span class='info'>The King of Rockhill is weak, and a weakling has no right to be King. I will show them my strength and take the crown for my own!</span>")
 	owner.announce_objectives()

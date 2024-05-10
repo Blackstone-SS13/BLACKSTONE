@@ -67,39 +67,44 @@
 		to_chat(src, "<span class='warning'>I need to do this in the chapel.</span>")
 		return FALSE
 	for(var/mob/living/carbon/human/HU in get_step(src, src.dir))
-		if(!HU.mind)
-			continue
-		if(HU.mind.assigned_role == "King")
-			continue
-		if(!HU.head)
-			continue
-		if(!istype(HU.head, /obj/item/clothing/head/roguetown/crown/serpcrown))
-			continue
-		
-		//Abdicate previous King
-		for(var/mob/living/carbon/human/HL in GLOB.human_list)
-			if(HL.mind)
-				if(HL.mind.assigned_role == "King" || HL.mind.assigned_role == "Queen Consort")
-					HL.mind.assigned_role = "Towner" //So they don't get the innate traits of the king
-			//would be better to change their title directly, but that's not possible since the title comes from the job datum
-			if(HL.job == "King")
-				HL.job = "King Emeritus"
-			if(HL.job == "Queen Consort")
-				HL.job = "Queen Dowager"
+		if(HU.attempt_coronate())
+			say("By the authority of the gods, I pronounce you Ruler of all Rockhill!")
+			return
 
-		//Coronate new King (or Queen)
-		HU.mind.assigned_role = "King"
-		HU.job = "King"
-		switch(HU.gender)
-			if("male")
-				SSticker.rulertype = "King"
-			if("female")
-				SSticker.rulertype = "Queen"
-		SSticker.rulermob = HU
-		var/dispjob = mind.assigned_role
-		GLOB.badomens -= "nolord"
-		say("By the authority of the gods, I pronounce you Ruler of all Rockhill!")
-		priority_announce("[real_name] the [dispjob] has named [HU.real_name] the inheritor of ROGUETOWN!", title = "Long Live [HU.real_name]!", sound = 'sound/misc/bell.ogg')
+/mob/living/carbon/human/proc/attempt_coronate()
+	if(!mind)
+		return FALSE
+	if(mind.assigned_role == "King")
+		return FALSE
+	if(!head)
+		return FALSE
+	if(!istype(head, /obj/item/clothing/head/roguetown/crown/serpcrown))
+		return FALSE
+		
+	//Abdicate previous King
+	for(var/mob/living/carbon/human/HL in GLOB.human_list)
+		if(HL.mind)
+			if(HL.mind.assigned_role == "King" || HL.mind.assigned_role == "Queen Consort")
+				HL.mind.assigned_role = "Towner" //So they don't get the innate traits of the king
+		//would be better to change their title directly, but that's not possible since the title comes from the job datum
+		if(HL.job == "King")
+			HL.job = "King Emeritus"
+		if(HL.job == "Queen Consort")
+			HL.job = "Queen Dowager"
+
+	//Coronate new King (or Queen)
+	mind.assigned_role = "King"
+	job = "King"
+	switch(gender)
+		if("male")
+			SSticker.rulertype = "King"
+		if("female")
+			SSticker.rulertype = "Queen"
+	SSticker.rulermob = src
+	var/dispjob = mind.assigned_role
+	GLOB.badomens -= "nolord"
+	priority_announce("[real_name] the [dispjob] has named [real_name] the inheritor of ROGUETOWN!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
+	return TRUE
 
 /mob/living/carbon/human/proc/churchexcommunicate()
 	set name = "Curse"

@@ -213,7 +213,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	"Priest",
 	"Knight")
 	var/num_siege = 0
-	if(num_players() <= 10)
+	if(num_players() >= 10)
 		num_siege = CLAMP(round(num_players() / 2), 30, 40)
 #ifdef TESTSERVER
 	num_siege = 999
@@ -516,7 +516,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 				pre_aspirants -= rogue
 	var/mob/living/king = SSticker.rulermob
 	var/datum/antagonist/ruler = new /datum/antagonist/aspirant/ruler() // Do the king last.
-	king.mind.add_antag_datum(ruler)
+	king?.mind.add_antag_datum(ruler)
 
 ///////////////// REBELS
 	for(var/datum/mind/rebelguy in pre_rebels)

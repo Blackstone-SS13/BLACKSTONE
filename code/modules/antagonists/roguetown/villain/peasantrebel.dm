@@ -171,6 +171,13 @@
 	explanation_text = "Put a rebel on the throne with the crown, and make a new decree."
 	team_explanation_text = "Put a rebel on the throne with the crown, and make a new decree."
 
+/datum/objective/prebel/check_completion()
+	var/list/datum/mind/owners = get_owners()
+	for(var/datum/mind/M in owners)
+		if(M.assigned_role == "King" && M.current.job == "King")
+			return TRUE
+	return FALSE
+
 /datum/team/prebels/proc/update_objectives(initial = FALSE)
 	if(!(locate(/datum/objective/prebel) in objectives))
 		var/datum/objective/prebel/preb = new

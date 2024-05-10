@@ -13,6 +13,9 @@
 	..()
 	density = TRUE
 	M.set_mob_offsets("bed_buckle", _x = 0, _y = 8)
+	var/mob/living/carbon/human/trycoronate = M
+	if(trycoronate.mind?.has_antag_datum(/datum/antagonist/siege/baron) || trycoronate.mind?.has_antag_datum(/datum/antagonist/prebel/head))
+		trycoronate.attempt_coronate()
 
 /obj/structure/roguethrone/post_unbuckle_mob(mob/living/M)
 	..()
