@@ -167,6 +167,7 @@
 	H.change_stat("constitution", 1)
 	H.change_stat("speed", 1)
 	H.change_stat("intelligence", -3)
+	H.verbs |= /mob/proc/wolfhowl
 	var/obj/item/bodypart/B = H.get_bodypart("head")
 	if(B)
 		B.sellprice = rand(66, 123)
@@ -208,4 +209,9 @@
 		to_chat(owner.current, "<span class='redtext'>I've failed to satisfy my greed.</span>")
 		if(owner.current)
 			owner.current.playsound_local(get_turf(owner.current), 'sound/misc/fail.ogg', 100, FALSE, pressure_affected = FALSE)
+
+/mob/proc/wolfhowl()
+		set name = "HOWL!"
+		set category = "Noises"
+		emote("wolfhowl")
 
