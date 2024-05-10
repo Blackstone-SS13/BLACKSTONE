@@ -43,10 +43,6 @@
 	specstats_f = list("strength" = 1, "perception" = -1, "intelligence" = -1, "constitution" = 1, "endurance" = 2, "speed" = 1, "fortune" = 0)
 	enflamed_icon = "widefire"
 
-
-/datum/species/halforc/check_roundstart_eligible()
-	return TRUE
-
 /datum/species/halforc/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
@@ -61,26 +57,6 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/orcish)
-
-/datum/species/halforc/handle_speech(datum/source, mob/speech_args)
-	. = ..()
-	var/message = speech_args[SPEECH_MESSAGE]
-	if(message)
-		if(message[1])
-			if(message[1] != "*")
-				message = " [message]"
-				var/list/accent_words = strings("accent_universal.json", "universal")
-
-				for(var/key in accent_words)
-					var/value = accent_words[key]
-					if(islist(value))
-						value = pick(value)
-
-					message = replacetextEx(message, " [uppertext(key)]", " [uppertext(value)]")
-					message = replacetextEx(message, " [capitalize(key)]", " [capitalize(value)]")
-					message = replacetextEx(message, " [key]", " [value]")
-
-	speech_args[SPEECH_MESSAGE] = trim(message)
 
 /datum/species/halforc/qualifies_for_rank(rank, list/features)
 	return TRUE
