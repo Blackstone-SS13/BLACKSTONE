@@ -62,7 +62,7 @@
 /obj/effect/landmark/mapGenerator/sunlights
 	mapGeneratorType = /datum/mapGenerator/sunlights
 	endTurfX = 255
-	endTurfY = 255
+	endTurfY = 400
 	startTurfX = 1
 	startTurfY = 1
 

@@ -302,11 +302,22 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 
 /datum/preferences/proc/_load_species(S)
 	var/species_name
+	testing("begin _load_species()")
 	S["species"] >> species_name
 	if(species_name)
 		var/newtype = GLOB.species_list[species_name]
 		if(newtype)
 			pref_species = new newtype
+			if(!spec_check())
+				testing("spec_check() failed on type [newtype] and name [species_name], defaulting to [default_species].")
+				pref_species = new default_species.type()
+			else
+				testing("spec_check() succeeded on type [newtype] and name [species_name].")
+		else
+			testing("GLOB.species_list failed on name [species_name], defaulting to [default_species].")
+			pref_species = new default_species.type()
+	else
+		pref_species = new default_species.type()
 
 /datum/preferences/proc/_load_flaw(S)
 	var/charflaw_type

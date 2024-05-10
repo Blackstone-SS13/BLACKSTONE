@@ -293,7 +293,7 @@
 				var/mob/living/carbon/human/H = L
 				if(prob(20))
 					if(!HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
-//						H.throw_alert("embeddedobject", /obj/screen/alert/embeddedobject)
+//						H.throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 						var/obj/item/bodypart/BP = pick(H.bodyparts)
 						var/obj/item/natural/thorn/TH = new(src.loc)
 						BP.embedded_objects |= TH

@@ -99,7 +99,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	if(H.mobid in GLOB.character_list)
 		GLOB.character_list[H.mobid] = null
 	GLOB.chosen_names -= H.real_name
-	if(H.dna.species?.id != "human" && H.dna.species?.id != "elf")
+	if(!ishumannorthern(H) && !iself(H))
 		H.age = AGE_ADULT
 		if(prob(50))
 			H.set_species(/datum/species/human/northern)
@@ -145,7 +145,10 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	H.mind.adjust_skillrank(/datum/skill/magic/blood, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
 	pants = /obj/item/clothing/under/roguetown/tights/black
@@ -172,8 +175,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	do_sound = FALSE
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
-	r_sleeve_status = SLEEVE_NOMOD
-	l_sleeve_status = SLEEVE_NOMOD
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/suit/roguetown/shirt/vampire
 	slot_flags = ITEM_SLOT_SHIRT
@@ -182,8 +184,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	body_parts_covered = CHEST|GROIN|LEGS|VITALS
 	icon_state = "vrobe"
 	item_state = "vrobe"
-	r_sleeve_status = SLEEVE_NORMAL
-	l_sleeve_status = SLEEVE_NORMAL
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/head/roguetown/vampire
 	name = "crown of darkness"
@@ -192,7 +193,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	slot_flags = ITEM_SLOT_HEAD
 	dynamic_hair_suffix = null
 	sellprice = 1000
-	resistance_flags = FIRE_PROOF
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/suit/roguetown/armor/chainmail/iron/vampire
 	icon_state = "vunder"
@@ -202,6 +203,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	desc = ""
 	body_parts_covered = CHEST|GROIN|VITALS
 	armor_class = 2
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/suit/roguetown/armor/plate/vampire
 	slot_flags = ITEM_SLOT_ARMOR
@@ -220,6 +222,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	smeltresult = /obj/item/ingot/steel
 	equip_delay_self = 40
 	armor_class = 3
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/shoes/roguetown/boots/armor/vampire
 	name = "ancient ceremonial plated boots"
@@ -231,14 +234,19 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	color = null
 	blocksound = PLATEHIT
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
-/obj/item/clothing/head/roguetown/helmet/heavy/guard
+/obj/item/clothing/head/roguetown/helmet/heavy/vampire
 	name = "ancient ceremonial helm"
 	icon_state = "vhelmet"
+	max_integrity = 250
+	block2add = FOV_BEHIND
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /obj/item/clothing/gloves/roguetown/chain/vampire
 	name = "ancient ceremonial gloves"
 	icon_state = "vgloves"
+	resistance_flags = FIRE_PROOF | ACID_PROOF
 
 /datum/antagonist/vampirelord/on_removal()
 	if(!silent && owner.current)
@@ -616,13 +624,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 						P.name = naming
 					user.playsound_local(get_turf(src), 'sound/misc/vcraft.ogg', 100, FALSE, pressure_affected = FALSE)
 		if("Shape Armor")
-			if(alert(user, "Craft a new set of armor? Cost:1500","","Yes","No") == "Yes")
-				if(!check_withdraw(-1500))
+			if(alert(user, "Craft a new set of armor? Cost:5000","","Yes","No") == "Yes")
+				if(!check_withdraw(-5000))
 					to_chat(user, "I don't have enough vitae!")
 					return
 				if(do_after(user, 100))
-					lord.handle_vitae(-1500)
-					var/list/armorpieces = list(/obj/item/clothing/under/roguetown/platelegs/vampire, /obj/item/clothing/suit/roguetown/armor/chainmail/iron/vampire, /obj/item/clothing/suit/roguetown/armor/chainmail/iron/vampire, /obj/item/clothing/shoes/roguetown/boots/armor/vampire, /obj/item/clothing/head/roguetown/helmet/heavy/guard)
+					lord.handle_vitae(-5000)
+					var/list/armorpieces = list(/obj/item/clothing/under/roguetown/platelegs/vampire, /obj/item/clothing/suit/roguetown/armor/chainmail/iron/vampire, /obj/item/clothing/suit/roguetown/armor/plate/vampire, /obj/item/clothing/shoes/roguetown/boots/armor/vampire, /obj/item/clothing/head/roguetown/helmet/heavy/vampire, /obj/item/clothing/gloves/roguetown/chain/vampire)
 					for(var/obj/item/A in armorpieces)
 						new A(src.loc)
 				user.playsound_local(get_turf(src), 'sound/misc/vcraft.ogg', 100, FALSE, pressure_affected = FALSE)
@@ -884,7 +892,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /datum/objective/vampirelord/infiltrate/two/check_completion()
 	var/datum/game_mode/chaosmode/C = SSticker.mode
-	var/list/noblejobs = list("King", "Queen", "Prince", "Princess", "Hand", "Steward")
+	var/list/noblejobs = list("King", "Queen Consort", "Prince", "Princess", "Hand", "Steward")
 	for(var/datum/mind/V in C.vampires)
 		if(V.current.job in noblejobs)
 			return TRUE
