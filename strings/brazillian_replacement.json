@@ -26,8 +26,11 @@
 		"thank": "obrigado",
 		"love": "amor",
 		"beautiful": "bonito",
+		"god": "deus",
 		"bad": "ruim",
 		"good": "bom",
+		"great": "ótimo",
+		"cool": "legal",
 		"morning": "manhã",
 		"afternoon": "tarde",
 		"evening": "tarde",
@@ -71,8 +74,6 @@
 		" no ": " não ",
 		"sh": "ch",
 		"the ": "o ",
-		"s": "ss",
-		"r": "rr",
 		"ish": "eesh"
 	}
 }
