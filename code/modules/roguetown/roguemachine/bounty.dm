@@ -6,6 +6,9 @@
 	density = FALSE
 	blade_dulling = DULLING_BASH
 
+	/// State of the machine, can be turned on or off by the King
+	var/state = TRUE
+
 	/// List of all created and non-completed bounties
 	var/list/bounties = list()
 
@@ -13,7 +16,26 @@
 	var/target
 	var/amount
 	var/reason
-	var/employer 
+	var/employer
+
+	/// Whats displayed when consulting the bounties
+	var/banner
+
+
+///Composes a random bounty banner based on the given bounty info.
+///@param new_bounty:  The bounty datum.
+/obj/structure/roguemachine/bounty/proc/compose_bounty(var/datum/bounty/new_bounty)
+	var/random_phrasing = rand(1, 3)
+	if(random_phrasing == 1)
+		new_bounty.banner += "A dire bounty hangs upon the head of [new_bounty.target], for '[new_bounty.reason]'.<BR>"
+		new_bounty.banner += "The patron, [new_bounty.employer], offers [new_bounty.amount] mammons for the task.<BR>"	
+	else if(random_phrasing == 2)
+		new_bounty.banner += "The head of [new_bounty.target] is wanted for '[new_bounty.reason]''.<BR>"
+		new_bounty.banner += "The employer, [new_bounty.employer], offers [new_bounty.amount] mammons for the deed.<BR>"
+	else
+		new_bounty.banner += "[new_bounty.employer] hath offered to pay [new_bounty.amount] mammons for the head of [new_bounty.target].<BR>"
+		new_bounty.banner += "By reason of the following: '[new_bounty.reason]'.<BR>"
+	new_bounty.banner += "--------------<BR>"
 
 ///Shows all active bounties to the user.
 /obj/structure/roguemachine/bounty/proc/consult_bounties(var/mob/living/carbon/human/user)
@@ -26,17 +48,7 @@
 	consult_menu += "<center>BOUNTIES<BR>"
 	consult_menu += "--------------<BR>"
 	for(var/datum/bounty/saved_bounty in bounties)
-		var/random_phrasing = rand(1, 3)
-		if(random_phrasing == 1)
-			consult_menu += "A dire bounty hangs upon the head of [saved_bounty.target], for '[saved_bounty.reason]'.<BR>"
-			consult_menu += "The patron, [saved_bounty.employer], offers [saved_bounty.amount] mammons for the task.<BR>"	
-		else if(random_phrasing == 2)
-			consult_menu += "The head of [saved_bounty.target] is wanted for '[saved_bounty.reason]''.<BR>"
-			consult_menu += "The employer, [saved_bounty.employer], offers [saved_bounty.amount] mammons for the deed.<BR>"
-		else
-			consult_menu += "[saved_bounty.employer] hath offered to pay [saved_bounty.amount] mammons for the head of [saved_bounty.target].<BR>"
-			consult_menu += "By reason of the following: '[saved_bounty.reason]'.<BR>"
-		consult_menu += "--------------<BR>"
+		consult_menu += saved_bounty.banner
 
 	var/datum/browser/popup = new(user, "BOUNTIES", "", 500, 300)
 	popup.set_content(consult_menu)
@@ -82,17 +94,32 @@
 	// Deduct money from user
 	SStreasury.bank_accounts[user] -= round(amount)
 
+	//Deduct royal tax from amount
+	var/royal_tax = round(amount * 0.15)
+	SStreasury.treasury_value += royal_tax
+	amount -= royal_tax
+
+
 	// Finally create bounty
 	var/datum/bounty/new_bounty = new /datum/bounty
 	new_bounty.amount = round(amount)
 	new_bounty.target = target
 	new_bounty.reason = reason
 	new_bounty.employer = user.real_name
+	compose_bounty(new_bounty)
 	bounties += new_bounty
+
 	say("The bounty has been set.")
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 
 /obj/structure/roguemachine/bounty/attack_hand(mob/user)
+
+	if(state == FALSE)
+		say("By King's decree, the Excidium is currently inactive.")
+		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+		sleep(3 SECONDS)
+		return
+
 	if(!ishuman(user)) return
 
 	// We need to check the user's bank account later
@@ -111,6 +138,11 @@
 			set_bounty(H)
 
 /obj/structure/roguemachine/bounty/attackby(obj/item/P, mob/user, params)
+
+	if(state == FALSE) //vulnerable to spam abuse?
+		say("By King's decree, the Excidium is currently inactive.")
+		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+		return
 
 	if(!(ishuman(user))) return
 
@@ -143,7 +175,8 @@
 	if(correct_head == FALSE)
 		say("This skull carries no price.")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-		stored_head.forceMove(src.loc)
+		var/obj/item/bodypart/head/incorrect_head = new stored_head(src.loc)
+		//spawn the head back
 
 
 
