@@ -320,25 +320,25 @@
 	name = "Loose Braid"
 	icon_state = "fhair_tressshoulder"
 	gender = FEMALE
-	specuse = list("humen","dwarf", "tiefling", "aasimar")
+	specuse = list("humen", "dwarfm", "tiefling", "aasimar")
 
 /datum/sprite_accessory/hair/fmys
 	name = "Mystery"
 	icon_state = "fhair_himecut2"
 	gender = FEMALE
-	specuse = list("humen","dwarf", "tiefling", "aasimar")
+	specuse = list("humen", "dwarfm", "tiefling", "aasimar")
 
 /datum/sprite_accessory/hair/fhomely
 	name = "Homely"
 	icon_state = "fhair_homely"
 	gender = FEMALE
-	specuse = list("humen","dwarf", "tiefling")
+	specuse = list("humen", "dwarfm", "tiefling")
 
 /datum/sprite_accessory/hair/fqueen
 	name = "Queenly"
 	icon_state = "fhair_bob2"
 	gender = FEMALE
-	specuse = list("humen","dwarf", "tiefling", "aasimar")
+	specuse = list("humen", "dwarfm", "tiefling", "aasimar")
 /datum/sprite_accessory/hair/fpix
 	name = "Pixie"
 	icon_state = "fhair_pixie"

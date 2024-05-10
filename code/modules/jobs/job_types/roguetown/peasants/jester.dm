@@ -55,9 +55,9 @@
 			if(H.dna?.species)
 				if(iself(H) || ishalfelf(H))
 					H.dna.species.soundpack_m = new /datum/voicepack/male/elf/jester()
-				if(H.dna.species.id == "humen")
+				if(ishumannothern(H))
 					H.dna.species.soundpack_m = new /datum/voicepack/male/jester()
-				if(H.dna.species.id == "dwarf")
+				if(isdwarf(H))
 					H.dna.species.soundpack_m = new /datum/voicepack/male/dwarf/jester()
 		H.hair_color = "cd65cb"
 		H.facial_hair_color = "cd65cb"

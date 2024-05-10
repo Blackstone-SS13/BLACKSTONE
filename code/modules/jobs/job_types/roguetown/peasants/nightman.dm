@@ -50,7 +50,7 @@
 	if(H.dna?.species)
 		if(iself(H) || ishalfelf(H))
 			armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
-		else if(H.dna.species.id == "humen")
+		else if(ishumannorthern(H))
 			H.dna.species.soundpack_m = new /datum/voicepack/male/zeth()
-		else if(H.dna.species.id == "dwarf")
+		else if(isdwarf(H))
 			armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
