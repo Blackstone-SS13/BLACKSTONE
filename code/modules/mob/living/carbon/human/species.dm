@@ -134,6 +134,11 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	return TRUE
 
 
+/proc/get_selectable_species()
+	if(!GLOB.roundstart_races.len)
+		generate_selectable_species()
+	return GLOB.roundstart_races
+
 /proc/generate_selectable_species()
 	for(var/species_type in subtypesof(/datum/species))
 		var/datum/species/species = new species_type

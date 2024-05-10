@@ -2313,9 +2313,9 @@ Slots: [job.spawn_positions]</span>
 
 	var/datum/species/chosen_species
 	chosen_species = pref_species.type
-	if(!(pref_species.name in GLOB.roundstart_races))
-		chosen_species = /datum/species/human/northern
-		pref_species = new /datum/species/human/northern
+	if(!(pref_species.name in get_selectable_species()))
+		chosen_species = default_species.type
+		pref_species = new default_species.type()
 		random_character(gender)
 	if(parent)
 		if(pref_species.patreon_req > parent.patreonlevel())
