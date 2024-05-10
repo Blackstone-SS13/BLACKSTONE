@@ -8,6 +8,10 @@
 	},
 /turf/open/floor/rogue/tile/masonic,
 /area/rogue/indoors/town/manor)
+"aaz" = (
+/obj/structure/roguemachine/submission,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/bog)
 "aaI" = (
 /obj/structure/fluff/walldeco/painting{
 	pixel_y = 32
@@ -8355,6 +8359,10 @@
 	icon_state = "wooden_floort"
 	},
 /area/rogue/outdoors/beach)
+"mPY" = (
+/obj/structure/roguemachine/stockpile,
+/turf/open/floor/rogue/cobble/mossy,
+/area/rogue/outdoors/bog)
 "mQq" = (
 /obj/structure/chair/stool/rogue,
 /turf/open/floor/rogue/naturalstone,
@@ -264822,7 +264830,7 @@ ryI
 dMN
 xou
 ryI
-wGD
+aaz
 lOV
 lOV
 lOV
@@ -265224,7 +265232,7 @@ ryI
 xou
 fjC
 ryI
-tVC
+mPY
 lOV
 lOV
 lOV
