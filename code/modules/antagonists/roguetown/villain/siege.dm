@@ -3,7 +3,7 @@
 	roundend_category = "siege"
 	antagpanel_category = "Siege"
 	job_rank = ROLE_SIEGE
-	antag_hud_type = ANTAG_HUD_TRAITOR
+	antag_hud_type = ANTAG_HUD_OPS
 	antag_hud_name = "baron's men"
 	var/datum/team/siege/siege_team
 	var/is_baron = FALSE
@@ -48,7 +48,7 @@
 	remove_objectives()
 	. = ..()
 
-/datum/antagonist/siege/create_team(datum/team/prebels/new_team)
+/datum/antagonist/siege/create_team(datum/team/siege/new_team)
 	if(!new_team)
 		//For now only one siege at a time
 		for(var/datum/antagonist/siege/H in GLOB.antagonists)
@@ -74,7 +74,6 @@
 /datum/antagonist/siege/proc/remove_objectives()
 	if(get_team())
 		objectives -= siege_team.objectives
-
 
 /datum/antagonist/siege/proc/finalize_siege()
 	if(owner.current)
@@ -103,8 +102,7 @@
 		H.after_creation()
 	if(H)
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "SOLDIER"), 5 SECONDS)
-		to_chat(H, "<span class='boldnotice'>You are one of the Baron's men!</span>")
-		H.equipOutfit(/datum/outfit/job/roguetown/bandit)
+		H.equipOutfit(/datum/outfit/job/roguetown/soldier)
 		H.cmode_music = 'sound/music/combat_bandit.ogg'
 
 /datum/outfit/job/roguetown/soldier/pre_equip(mob/living/carbon/human/H)
@@ -116,7 +114,6 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/studded
 	gloves = /obj/item/clothing/gloves/roguetown/chain
 	shoes = /obj/item/clothing/shoes/roguetown/boots
-	beltl = /obj/item/keyring/guardcastle
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/sword
 	backr = /obj/item/storage/backpack/rogue/satchel
@@ -223,7 +220,6 @@
 	H.cmode_music = 'sound/music/combat_bandit.ogg'
 	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "BARON"), 5 SECONDS)
 	if(H)
-		to_chat(H, "<span class='boldnotice'>You are the Baron!</span>")
 		H.equipOutfit(/datum/outfit/job/roguetown/baron)
 
 /datum/outfit/job/roguetown/baron/pre_equip(mob/living/carbon/human/H)
@@ -235,7 +231,6 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/merc
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/full
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor
-	beltl = /obj/item/keyring/guardcastle
 	belt = /obj/item/storage/belt/rogue/leather/hand
 	backr = /obj/item/storage/backpack/rogue/satchel
 	if(H.mind)
