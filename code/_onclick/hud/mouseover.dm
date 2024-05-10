@@ -176,17 +176,17 @@
 				return
 			p.client.mouseovertext.screen_loc = null
 
-/obj/screen
+/atom/movable/screen
 	nomouseover = TRUE
 
-/obj/screen/movable/mouseover
+/atom/movable/screen/movable/mouseover
 	name = ""
 	icon = 'icons/mouseover.dmi'
 	icon_state = "mouseover"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	layer = ABOVE_HUD_LAYER+1
 
-/obj/screen/movable/mouseover/maptext
+/atom/movable/screen/movable/mouseover/maptext
 	name = ""
 	icon = null
 	icon_state = null
@@ -194,7 +194,7 @@
 	maptext_width = 96
 	alpha = 150
 
-/obj/screen/movable/mouseover/proc/movethis(list/PM, hudobj = FALSE)
+/atom/movable/screen/movable/mouseover/proc/movethis(list/PM, hudobj = FALSE)
 	if(locked) //no! I am locked! begone!
 		return
 
@@ -229,7 +229,7 @@
 	moved = screen_loc
 
 /client/proc/genmouseobj()
-	mouseovertext = new /obj/screen/movable/mouseover/maptext
-	mouseoverbox = new /obj/screen/movable/mouseover
+	mouseovertext = new /atom/movable/screen/movable/mouseover/maptext
+	mouseoverbox = new /atom/movable/screen/movable/mouseover
 	var/datum/asset/stuff = get_asset_datum(/datum/asset/simple/roguefonts)
 	stuff.send(src)

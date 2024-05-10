@@ -401,7 +401,7 @@
 
 ///Validate the client's mob has a valid zone selected
 /client/proc/check_has_body_select()
-	return mob && mob.hud_used && mob.hud_used.zone_select && istype(mob.hud_used.zone_select, /obj/screen/zone_sel)
+	return mob && mob.hud_used && mob.hud_used.zone_select && istype(mob.hud_used.zone_select, /atom/movable/screen/zone_sel)
 
 /**
   * Hidden verb to set the target zone of a mob to the head
@@ -422,7 +422,7 @@
 		else
 			next_in_line = BODY_ZONE_HEAD
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
 /client/verb/body_toggle_eye_nose()
@@ -439,7 +439,7 @@
 		else
 			next_in_line = BODY_ZONE_PRECISE_R_EYE
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
 /client/verb/body_toggle_mouth_ears()
@@ -456,7 +456,7 @@
 		else
 			next_in_line = BODY_ZONE_PRECISE_MOUTH
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the right arm, bound to 4
@@ -474,7 +474,7 @@
 		else
 			next_in_line = BODY_ZONE_R_ARM
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the chest, bound to 5
@@ -492,7 +492,7 @@
 		else
 			next_in_line = BODY_ZONE_CHEST
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the left arm, bound to 6
@@ -510,7 +510,7 @@
 		else
 			next_in_line = BODY_ZONE_L_ARM
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the right leg, bound to 1
@@ -528,7 +528,7 @@
 		else
 			next_in_line = BODY_ZONE_R_LEG
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the groin, bound to 2
@@ -539,7 +539,7 @@
 	if(!check_has_body_select())
 		return
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(BODY_ZONE_PRECISE_GROIN, mob)
 
 ///Hidden verb to target the left leg, bound to 3
@@ -557,7 +557,7 @@
 		else
 			next_in_line = BODY_ZONE_L_LEG
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
 ///Verb to toggle the walk or run status
@@ -579,7 +579,7 @@
 	else
 		m_intent = MOVE_INTENT_RUN
 	if(hud_used && hud_used.static_inventory)
-		for(var/obj/screen/mov_intent/selector in hud_used.static_inventory)
+		for(var/atom/movable/screen/mov_intent/selector in hud_used.static_inventory)
 			selector.update_icon()
 
 
@@ -631,7 +631,7 @@
 						return
 			m_intent = MOVE_INTENT_RUN
 	if(hud_used && hud_used.static_inventory)
-		for(var/obj/screen/rogmove/selector in hud_used.static_inventory)
+		for(var/atom/movable/screen/rogmove/selector in hud_used.static_inventory)
 			selector.update_icon()
 	if(!silent)
 		playsound_local(src, 'sound/misc/click.ogg', 100)
@@ -668,7 +668,7 @@
 	else
 		fixedeye = 1
 		nodirchange = TRUE
-	for(var/obj/screen/eye_intent/eyet in hud_used.static_inventory)
+	for(var/atom/movable/screen/eye_intent/eyet in hud_used.static_inventory)
 		eyet.update_icon(src)
 	playsound_local(src, 'sound/misc/click.ogg', 100)
 
