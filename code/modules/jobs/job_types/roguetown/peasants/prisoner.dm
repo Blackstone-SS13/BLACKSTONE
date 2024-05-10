@@ -22,7 +22,7 @@
 	bypass_jobban = TRUE
 	display_order = JDO_PRISONER
 	give_bank_account = 10
-	min_pq = -49 // No minimum PQ
+	min_pq = null // No minimum PQ
 	can_random = FALSE
 
 /datum/outfit/job/roguetown/prisoner/pre_equip(mob/living/carbon/human/H)

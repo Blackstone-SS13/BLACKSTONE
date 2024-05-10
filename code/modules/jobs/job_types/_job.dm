@@ -93,7 +93,6 @@
 
 	var/plevel_req = 0
 	var/min_pq = 0
-	var/max_pq = 0
 
 	var/show_in_credits = TRUE
 
