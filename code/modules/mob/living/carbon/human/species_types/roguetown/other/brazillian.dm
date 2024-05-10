@@ -2,9 +2,9 @@
 	race = /datum/species/lizard/brazil
 
 /datum/species/lizard/brazil
-	name = "Argonian"
+	name = "Saxhleel"
 	id = "argonian"
-	desc = "<b>Argonians</b><br>\
+	desc = "<b>Saxhleel</b><br>\
 	A mysterious species of reptilian humanoids hailing from bogs all over Enigma. \
 	They speak a strange tongue and are said to be a creation of Dendor himself."
 
