@@ -1,28 +1,26 @@
 {
     "brazillian": {
-		"shi": "chee",
-		"thi": "thee",
-		" yes ": " sim ",
-		" no ": " não ",
-		"sh": "ch",
-		"the ": "o ",
-		"s": "ss",
-		"r": "rr",
-		"ish": "eesh",
 		"hello": "olá",
-		"goodbye": "adeus",
+		"goodbye": [
+			"adeus",
+			"fique bem",
+			"fique com deus"
+		],
 		"my ": "meu ",
 		"your ": "seu",
 		"you ": "você ",
 		"you're": "você é",
-		"I ": "eu ",
-		"I'm": "eu sou ",
+		"I ": "Eu ",
+		"I'm": "Eu sou ",
 		"please": "por favor",
 		"is": "é",
 		"of ": "de ",
 		"and ": "e ",
 		"in ": "em ",
-		"bye": "tchau",
+		"bye": [
+			"tchau",
+			"até mais"
+		],
 		"thankful": "grato",
 		"thanks": "obrigado",
 		"thank": "obrigado",
@@ -65,6 +63,15 @@
 		"father": "pai",
 		"house": "casa",
 		"dick": "caralho",
-		"boss": "chefe"
+		"boss": "chefe",
+		"shi": "chee",
+		"thi": "thee",
+		" yes ": " sim ",
+		" no ": " não ",
+		"sh": "ch",
+		"the ": "o ",
+		"s": "ss",
+		"r": "rr",
+		"ish": "eesh"
 	}
 }
