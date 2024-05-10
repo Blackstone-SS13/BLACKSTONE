@@ -530,9 +530,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(DIGITIGRADE in species_traits)
 		C.Digitigrade_Leg_Swap(FALSE)
 
-	if(ishuman(C))
-		random_character(C)
-
 	C.mob_biotypes = inherent_biotypes
 
 	regenerate_organs(C,old_species)

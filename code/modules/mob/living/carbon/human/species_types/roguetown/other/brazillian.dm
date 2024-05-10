@@ -8,9 +8,9 @@
 	A mysterious species of reptilian humanoids hailing from bogs all over Enigma. \
 	They speak a strange tongue and are said to be a creation of Dendor himself."
 
-	skin_tone_wording = "Marsh"
+	skin_tone_wording = "Bog"
 
-	species_traits = list(MUTCOLORS,EYECOLOR,LIPS)
+	species_traits = list(EYECOLOR,LIPS)
 	inherent_traits = list(TRAIT_NOMOBSWAP,RTRAIT_RETARD_ANATOMY)
 	use_skintones = TRUE
 	disliked_food = NONE
@@ -23,6 +23,10 @@
 	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_male.dmi'
 	soundpack_m = /datum/voicepack/male/elf
 	soundpack_f = /datum/voicepack/female/elf
+	exotic_bloodtype = null
+	default_features = list("tail_lizard" = "Smooth", "snout" = "Round", "horns" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None")
+	mutant_bodyparts = list("tail_lizard", "snout", "frills", "spines", "body_markings")
+	mutanttongue = /obj/item/organ/tongue
 	specstats = list(
 		"strength" = 0, 
 		"perception" = 3, 
