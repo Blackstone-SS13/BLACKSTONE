@@ -102,10 +102,8 @@
 	
 	var/datum/admins/A = GLOB.deadmins[ckey]
 	if(!A)
-		A = GLOB.admin_datums[ckey]
-		if (!A)
-			if(!check_rights(R_ADMIN))
-				return
+		if(!check_rights(R_ADMIN))
+			return
 
 	var/msg = "<b>Current Admins:</b>\n"
 	if(holder)
