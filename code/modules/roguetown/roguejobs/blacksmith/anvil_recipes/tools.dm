@@ -110,3 +110,8 @@
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/thresher
+
+/datum/anvil_recipe/tools/pot
+	name = "pot"
+	req_bar = /obj/item/ingot/iron
+	created_item = /obj/item/reagent_containers/glass/pot //weird how it's a child of glass but whatevs
