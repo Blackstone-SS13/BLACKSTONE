@@ -5,13 +5,14 @@
 	faction = "Station"
 	total_positions = -1
 	spawn_positions = -1
-	allowed_races = list("Humen",
-	"Dwarf",
-	"Elf",
-	"Half-Elf",
-	"Tiefling",
-	"Dark Elf",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
 	)
 	tutorial = "Pilgrims begin far outside of the town and must reach it in order to ply their various trades. Sometimes, they build their own settlements and enjoy the terrible nature."
 
@@ -21,4 +22,6 @@
 	isvillager = FALSE
 	ispilgrim = TRUE
 	display_order = JDO_PILGRIM
-	min_pq = -999
+	min_pq = -20
+	wanderer_examine = TRUE
+	advjob_examine = TRUE

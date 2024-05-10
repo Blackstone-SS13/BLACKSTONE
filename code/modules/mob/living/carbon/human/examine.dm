@@ -52,10 +52,12 @@
 			var/used_title = J.title
 			if(gender == FEMALE && J.f_title)
 				used_title = J.f_title
-			if(used_title == "Adventurer")
+			if(J.wanderer_examine && J.advjob_examine)
 				used_title = advjob
 				. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the wandering [race_name] [used_title].")
 			else
+				if(J.advjob_examine)
+					used_title = advjob
 				if(islatejoin)
 					. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the returning [race_name] [used_title].")
 				else
@@ -297,7 +299,7 @@
 		msg += "[m3] pale skin.\n"
 
 	if(eyesclosed)
-		msg += "[m2] eyes are closed.\n"
+		msg += "[capitalize(m2)] eyes are closed.\n"
 
 	if(bleed_rate)
 		msg += "<B>[m1] bleeding!</B>\n"

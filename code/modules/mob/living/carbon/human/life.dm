@@ -85,12 +85,6 @@
 				charflaw.flaw_on_life(src)
 			if(health <= 0)
 				adjustOxyLoss(0.5)
-			else
-				if(!(NOBLOOD in dna.species.species_traits))
-					if(blood_volume <= BLOOD_VOLUME_SURVIVE)
-						adjustOxyLoss(0.5)
-						if(blood_volume <= 20)
-							adjustOxyLoss(5)
 			if(!client && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 				if(mob_timers["slo"])
 					if(world.time > mob_timers["slo"] + 90 SECONDS)
@@ -106,6 +100,7 @@
 
 		if(dna?.species)
 			dna.species.spec_life(src) // for mutantraces
+
 	if(!typing)
 		set_typing_indicator(FALSE)
 	//Update our name based on whether our face is obscured/disfigured
@@ -177,13 +172,13 @@
 		var/datum/species/S = dna.species
 
 		if(S.breathid == "o2")
-			throw_alert("not_enough_oxy", /obj/screen/alert/not_enough_oxy)
+			throw_alert("not_enough_oxy", /atom/movable/screen/alert/not_enough_oxy)
 		else if(S.breathid == "tox")
-			throw_alert("not_enough_tox", /obj/screen/alert/not_enough_tox)
+			throw_alert("not_enough_tox", /atom/movable/screen/alert/not_enough_tox)
 		else if(S.breathid == "co2")
-			throw_alert("not_enough_co2", /obj/screen/alert/not_enough_co2)
+			throw_alert("not_enough_co2", /atom/movable/screen/alert/not_enough_co2)
 		else if(S.breathid == "n2")
-			throw_alert("not_enough_nitro", /obj/screen/alert/not_enough_nitro)
+			throw_alert("not_enough_nitro", /atom/movable/screen/alert/not_enough_nitro)
 
 		return FALSE
 	else
@@ -382,7 +377,7 @@
 	//Puke if toxloss is too high
 	if(!stat)
 		if(prob(33))
-			if(getToxLoss() >= 75 && blood_volume)
+			if(getToxLoss() >= 75)
 				mob_timers["puke"] = world.time
 				vomit(1, blood = TRUE)
 

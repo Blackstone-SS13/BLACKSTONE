@@ -7,6 +7,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/heartfelthand
 	maxchosen = 1
 	pickprob = 100
+	traits_applied = list(RTRAIT_HEAVYARMOR, RTRAIT_SEEPRICES)
 
 /datum/outfit/job/roguetown/adventurer/heartfelthand/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -16,23 +17,24 @@
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	armor = /obj/item/clothing/suit/roguetown/armor/heartfelt/hand
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
-	gloves = /obj/item/clothing/gloves/roguetown/leather/black
-	beltl = /obj/item/rogueweapon/sword/decorated
+	gloves =/obj/item/clothing/gloves/roguetown/angle
+	beltl = /obj/item/rogueweapon/sword/sabre/dec
 	beltr = /obj/item/rogueweapon/huntingknife
 	backr = /obj/item/storage/backpack/rogue/satchel/heartfelt
 	mask = /obj/item/clothing/mask/rogue/spectacles/golden
 	id = /obj/item/scomstone
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
-		H.change_stat("strength", -3)
-		H.change_stat("perception", 2)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
+		H.change_stat("strength", 2)
+		H.change_stat("perception", 3)
 		H.change_stat("intelligence", 3)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)

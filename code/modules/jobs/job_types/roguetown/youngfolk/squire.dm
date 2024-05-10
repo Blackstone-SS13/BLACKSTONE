@@ -5,10 +5,12 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	allowed_races = list("Humen",
-	"Humen",
-	"Half-Elf")
-	allowed_sexes = list(MALE, FEMALE)
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf"
+	) //same shit as town guard
+	allowed_sexes = list(MALE)
 	allowed_ages = list(AGE_YOUNG)
 
 	tutorial = "Mom 'n' Da said you were going to be something, they had better aspirations for you than the life of a peasant. You practiced the basics in the field alongside your friends, swordfighting with sticks, chasing rabbits with grain flail, and helping around the house lifting heavy bags of grain. The Knight took notice of your potential and brought you on as his personal ward. You're going to be something someday. "
@@ -16,6 +18,7 @@
 	outfit = /datum/outfit/job/roguetown/squire
 	display_order = JDO_SQUIRE
 	give_bank_account = TRUE
+	min_pq = -5 //squires aren't great but they can do some damage
 
 /datum/outfit/job/roguetown/squire/pre_equip(mob/living/carbon/human/H)
 	..()

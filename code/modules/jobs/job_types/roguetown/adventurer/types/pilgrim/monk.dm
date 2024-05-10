@@ -1,14 +1,14 @@
 /datum/advclass/monk
 	name = "Monk"
 	allowed_sexes = list("male", "female")
-	tutorial = "A traveling monk of the God Ravox, unmatched in unarmed combat and with an unwavering devotion to Justice."
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/monk
 	isvillager = FALSE
@@ -28,15 +28,21 @@
 	backl = /obj/item/storage/backpack/rogue/backpack
 	r_hand = /obj/item/rogueweapon/woodstaff
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
+		to_chat(src, "<span class='warning'>Monks are pilgrims of powerful belief who empart the teachings of their Temple or God by their interactions with the people of the world. A good monk would seek to help travellers on the road, feed the hungry and teach the weak to become strong. A bad one however...</span>")
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(0,1), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE) 
+		H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(0,1), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(1,2), TRUE) 
+		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(0,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.change_stat("strength", 3)
-		H.change_stat("intelligence", 1)
-		H.change_stat("endurance", 2)
+		H.change_stat("constitution", 1)
+		H.change_stat("speed", 2)
 		H.change_stat("perception", -1)
-	if(H.PATRON != /datum/patrongods/ravox)
-//		H.PATRON = GLOB.patronlist["Ravox"]
-		H.PATRON = new /datum/patrongods/ravox
-		to_chat(H, "<span class='warning'> My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")

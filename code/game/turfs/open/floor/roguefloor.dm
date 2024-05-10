@@ -174,7 +174,7 @@
 	var/obj/structure/closet/dirthole/holie
 	var/obj/machinery/crop/planted_crop
 	var/dirt_amt = 3
-/*
+
 /turf/open/floor/rogue/dirt/get_slowdown(mob/user)
 	var/returned = slowdown
 	for(var/obj/item/I in user.held_items)
@@ -184,7 +184,7 @@
 				if(!L.cmode)
 					returned = max(returned-2, 0)
 	return returned
-*/
+
 
 /turf/open/floor/rogue/dirt/attack_right(mob/user)
 	if(isliving(user))

@@ -3,7 +3,7 @@
 	icon = 'icons/roguetown/clothing/cloaks.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	slot_flags = ITEM_SLOT_CLOAK
-	desc = ""
+	desc = "Protects you from the weather and your identity from everyone else."
 	edelay_type = 1
 	equip_delay_self = 10
 	bloody_icon_state = "bodyblood"
@@ -15,7 +15,7 @@
 
 /obj/item/clothing/cloak/tabard
 	name = "tabard"
-	desc = ""
+	desc = "A hooded vest meant for knights."
 	color = null
 	icon_state = "tabard"
 	item_state = "tabard"
@@ -222,6 +222,7 @@
 
 /obj/item/clothing/cloak/stabard
 	name = "surcoat"
+	desc = "A medieval overcoat meant to be used over the armor."
 	icon_state = "stabard"
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
@@ -329,9 +330,16 @@
 
 /obj/item/clothing/cloak/stabard/bog
 	name = "bogman tabard"
-	desc = "A tabard colored in a sickly, disgusting green."
+	desc = "A tabard colored in a glorius green of the mighty protectors of the BOG." // THE BOG DESERVES A BETTER DESCRIPTION!
 	color = CLOTHING_GREEN
 	detail_color = CLOTHING_DARK_GREEN
+
+/obj/item/clothing/cloak/stabard/grenzelhoft
+	name = "grenzelhoft mercenary tabard"
+	desc = "A tabard bearing the colors of the Grenzelhoft emperiate mercenary guild."
+	color = CLOTHING_YELLOW
+	detail_color = CLOTHING_RED
+	detail_tag = "_box"
 
 /obj/item/clothing/cloak/stabard/dungeon
 	color = CLOTHING_BLACK
@@ -359,6 +367,12 @@
 /obj/item/clothing/cloak/stabard/surcoat
 	name = "jupon"
 	icon_state = "surcoat"
+
+/obj/item/clothing/cloak/stabard/surcoat/bailiff
+	color = "#641E16"
+
+/obj/item/clothing/cloak/stabard/surcoat/councillor
+	color = "#2d2d2d"
 
 /obj/item/clothing/cloak/stabard/surcoat/attack_right(mob/user)
 	if(picked)
@@ -519,7 +533,7 @@
 
 /obj/item/clothing/cloak/apron
 	name = "apron"
-	desc = ""
+	desc = "An apron used by many workshop workers."
 	color = null
 	icon_state = "apron"
 	item_state = "apron"
@@ -532,7 +546,7 @@
 
 /obj/item/clothing/cloak/apron/waist
 	name = "apron"
-	desc = ""
+	desc = "An apron used by many workshop workers."
 	color = null
 	icon_state = "waistpron"
 	item_state = "waistpron"
@@ -548,7 +562,7 @@
 
 /obj/item/clothing/cloak/apron/cook
 	name = "cook apron"
-	desc = ""
+	desc = "An apron meant to show how clean the cook is."
 	color = null
 	icon_state = "aproncook"
 	item_state = "aproncook"
@@ -570,7 +584,7 @@
 
 /obj/item/clothing/cloak/raincloak
 	name = "cloak"
-	desc = ""
+	desc = "This one will help against the rainy weather."
 	color = null
 	icon_state = "rain_cloak"
 	item_state = "rain_cloak"
@@ -624,9 +638,12 @@
 /obj/item/clothing/cloak/raincloak/blue
 	color = CLOTHING_BLUE
 
+/obj/item/clothing/cloak/raincloak/purple
+	color = CLOTHING_PURPLE
+
 /obj/item/clothing/head/hooded/rainhood
 	name = "hood"
-	desc = ""
+	desc = "This one will shelter me from the weather and my identity too."
 	icon_state = "rain_hood"
 	item_state = "rain_hood"
 	slot_flags = ITEM_SLOT_HEAD
@@ -646,6 +663,7 @@
 
 /obj/item/clothing/cloak/raincloak/furcloak
 	name = "fur cloak"
+	desc = "This glorious cloak is made of animal fur. Very soft and warm."
 	icon_state = "furgrey"
 	inhand_mod = FALSE
 	hoodtype = /obj/item/clothing/head/hooded/rainhood/furhood
@@ -667,7 +685,7 @@
 
 /obj/item/clothing/cloak/cape
 	name = "cape"
-	desc = ""
+	desc = "A beautiful, flowing cape. Too bad it tangles too much on the vegetation."
 	color = null
 	icon_state = "cape"
 	item_state = "cape"

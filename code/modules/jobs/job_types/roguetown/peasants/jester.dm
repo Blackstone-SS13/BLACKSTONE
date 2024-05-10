@@ -6,13 +6,14 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Dark Elf",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
 	)
 
 	tutorial = "The Grenzelhofts were known for their Jesters, wisemen with a tongue just as sharp as their wit. You command a position of a fool, envious of the position your superiors have upon you. Your cheap tricks and illusions of intelligence will only work for so long, and someday youll find yourself at the end of something sharper than you."
@@ -22,6 +23,7 @@
 	outfit = /datum/outfit/job/roguetown/jester
 	display_order = JDO_JESTER
 	give_bank_account = TRUE
+	min_pq = -4 //retard jesters are funny so low PQ requirement
 
 /datum/outfit/job/roguetown/jester/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -35,8 +37,7 @@
 	neck = /obj/item/clothing/neck/roguetown/coif
 	//Desc says grenzelhoft has great jesters so 50% change to raceswap because slop lore
 	if(ishumannorthern(H) && prob(50))
-		var/list/skin_slop = H.dna.species.get_skin_list()
-		H.skin_tone = skin_slop["Grenzelhoft"]
+		H.skin_tone = SKIN_COLOR_GRENZELHOFT
 		H.update_body()
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)

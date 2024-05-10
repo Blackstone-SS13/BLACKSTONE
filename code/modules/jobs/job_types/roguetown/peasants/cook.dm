@@ -6,20 +6,21 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
 	)
 	tutorial = "Working closely with the barkeep who owns Skull Crack Inn, the cook should focus on cooking food for all the hungry mouths of Roguetown."
 
 	outfit = /datum/outfit/job/roguetown/cook
 	display_order = JDO_COOK
 	give_bank_account = 8
+	min_pq = -10
 
 /datum/outfit/job/roguetown/cook/pre_equip(mob/living/carbon/human/H)
 	..()

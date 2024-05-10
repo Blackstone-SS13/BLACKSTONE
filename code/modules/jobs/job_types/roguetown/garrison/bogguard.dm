@@ -3,17 +3,18 @@
 	flag = GUARDSMAN
 	department_flag = GARRISON
 	faction = "Station"
-	total_positions = 10
-	spawn_positions = 10
+	total_positions = 20
+	spawn_positions = 20
 	selection_color = JCOLOR_SOLDIER
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = list("Humen",
+	allowed_races = list(
+		"Humen",
 		"Elf",
-		"Dwarf",
-		"Aasimar",
 		"Half-Elf",
+		"Dwarf",
 		"Tiefling",
-		"Dark Elf"
+		"Dark Elf",
+		"Aasimar"
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	tutorial = "You've handed your resume, which mostly consisted of showing up, and in exchange you have a spot among the Bog Guards. You have a roof over your head, coin in your pocket, and a thankless job protecting the outskirts of town against bandits and volfs."
@@ -21,7 +22,7 @@
 	whitelist_req = TRUE
 	outfit = /datum/outfit/job/roguetown/bogguardsman
 	give_bank_account = 16
-	min_pq = 0
+	min_pq = 1
 
 	/// Chance to be spawned as a crossbowman instead
 	var/crossbowman_chance = 35

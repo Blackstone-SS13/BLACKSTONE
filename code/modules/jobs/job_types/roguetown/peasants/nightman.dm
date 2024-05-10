@@ -7,11 +7,14 @@
 	spawn_positions = 0
 
 	allowed_sexes = list("male")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Half-Elf"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
 	)
 
 	tutorial = "The Nightmaster is technically a noble. Owner of the Whitevein Lounge, a decaying bathhouse converted into a den of low-lifes. A troublemaking rake that the others hate to tolerate."
@@ -20,6 +23,7 @@
 	outfit = /datum/outfit/job/roguetown/nightman
 	display_order = JDO_NIGHTMAN
 	give_bank_account = TRUE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/nightman/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -30,7 +34,6 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger = 1)
-	ADD_TRAIT(H, RTRAIT_GOODLOVER, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)

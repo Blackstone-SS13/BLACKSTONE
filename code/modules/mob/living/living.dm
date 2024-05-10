@@ -318,10 +318,10 @@
 			if(I.wlength > WLENGTH_NORMAL)
 				CZ = TRUE
 			else //we have a short/medium weapon, so allow hitting legs
-				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_HAIR, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
+				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 		else
 			if(!CZ) //we are punching, no legs
-				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_HAIR, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
+				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 	else if(!(L.mobility_flags & MOBILITY_STAND) && (mobility_flags & MOBILITY_STAND)) //we are prone, victim is standing
 		if(I)
 			if(I.wlength > WLENGTH_NORMAL)
@@ -1052,27 +1052,24 @@
 /mob/living/resist_grab(moving_resist)
 	. = TRUE
 
+	var/wrestling_diff = 0
 	var/resist_chance = 50
 	var/mob/living/L = pulledby
-	if(pulledby.grab_state >= GRAB_AGGRESSIVE)
-		resist_chance -= 25
-	var/diffy = STASTR - L.STASTR
-	if(diffy > 0)
-		resist_chance = 50 + (diffy * 25)
-//		if(!L.rogfat_add(diffy * 10)) //hard to keep a grip on them
-//			resist_chance = 100
-	if(diffy < 0)
-		resist_chance = 50 - (diffy * 25)
-	if(L.mind)
-		resist_chance -= (L.mind.get_skill_level(/datum/skill/combat/wrestling) * 10)
+
 	if(mind)
-		resist_chance += (mind.get_skill_level(/datum/skill/combat/wrestling) * 10)
-
+		wrestling_diff += (mind.get_skill_level(/datum/skill/combat/wrestling)) //NPCs don't use this
+	if(L.mind)
+		wrestling_diff -= (L.mind.get_skill_level(/datum/skill/combat/wrestling))
+	
+	resist_chance += ((STASTR - L.STASTR) * 10)
+	
 	if(!(mobility_flags & MOBILITY_STAND))
-		resist_chance -= 20
-
-	resist_chance = max(resist_chance, 1)
-
+		resist_chance += -20 + min((wrestling_diff * 5), -20) //Can improve resist chance at high skill difference     
+	if(pulledby.grab_state >= GRAB_AGGRESSIVE)
+		resist_chance += -20 + max((wrestling_diff * 10), 0) 
+		resist_chance = max(resist_chance, 50 + min((wrestling_diff * 5), 0))
+	else
+		resist_chance = max(resist_chance, 70 + min((wrestling_diff * 5), 0))
 
 	if(moving_resist && client) //we resisted by trying to move
 		client.move_delay = world.time + 20
@@ -1143,11 +1140,11 @@
 			clear_alert("gravity")
 		else
 			if(has_gravity >= GRAVITY_DAMAGE_TRESHOLD)
-				throw_alert("gravity", /obj/screen/alert/veryhighgravity)
+				throw_alert("gravity", /atom/movable/screen/alert/veryhighgravity)
 			else
-				throw_alert("gravity", /obj/screen/alert/highgravity)
+				throw_alert("gravity", /atom/movable/screen/alert/highgravity)
 	else
-		throw_alert("gravity", /obj/screen/alert/weightless)
+		throw_alert("gravity", /atom/movable/screen/alert/weightless)
 	if(!override && !is_flying())
 		float(!has_gravity)
 
@@ -1437,7 +1434,7 @@
 		src.visible_message("<span class='warning'>[src] catches fire!</span>", \
 						"<span class='danger'>I'm set on fire!</span>")
 		new/obj/effect/dummy/lighting_obj/moblight/fire(src)
-		throw_alert("fire", /obj/screen/alert/fire)
+		throw_alert("fire", /atom/movable/screen/alert/fire)
 		update_fire()
 		SEND_SIGNAL(src, COMSIG_LIVING_IGNITED,src)
 		return TRUE
@@ -1809,6 +1806,8 @@
 			if(M == src)
 				continue
 			if(see_invisible < M.invisibility)
+				continue
+			if(M.mob_timers[MT_INVISIBILITY] > world.time) // Check if the mob is affected by the invisibility spell
 				continue
 			var/probby = 3 * STAPER
 			if(M.mind)

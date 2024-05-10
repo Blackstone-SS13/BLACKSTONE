@@ -6,8 +6,9 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	allowed_races = list("Humen",
-	"Humen"
+	allowed_races = list(
+		"Humen",
+		"Aasimar"
 	)
 	allowed_sexes = list(MALE)
 
@@ -17,7 +18,7 @@
 	outfit = /datum/outfit/job/roguetown/puritan
 	display_order = JDO_PURITAN
 	give_bank_account = 36
-	min_pq = -4
+	min_pq = 0
 
 /datum/job/roguetown/puritan/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()

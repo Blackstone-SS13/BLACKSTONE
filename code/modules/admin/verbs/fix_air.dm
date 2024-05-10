@@ -3,6 +3,7 @@
 	set name = "Fix Air"
 	set category = "Admin"
 	set desc = ""
+	set hidden = 1
 
 	if(!holder)
 		//to_chat(src, "Only administrators may use this command.")

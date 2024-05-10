@@ -1,7 +1,7 @@
 
 /obj/structure/roguetent
 	name = "tent door"
-	desc = ""
+	desc = "A door made of sturdy fabric and wooden frames."
 	icon = 'icons/turf/roguewall.dmi'
 	icon_state = "tent_door1"
 	layer = TABLE_LAYER

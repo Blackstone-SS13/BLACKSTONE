@@ -1,11 +1,9 @@
 
 /obj/item/bodypart/proc/can_dismember(obj/item/I)
-	if(dismemberable)
-		return TRUE
+	return dismemberable
 
 /obj/item/bodypart/proc/can_disable(obj/item/I)
-	if(disableable)
-		return TRUE
+	return disableable
 
 /obj/item/bodypart/var/list/dismemsound = list('sound/combat/dismemberment/dismem (1).ogg',
 'sound/combat/dismemberment/dismem (2).ogg',
@@ -225,7 +223,7 @@
 			C.handcuffed = null
 			C.update_handcuffed()
 		if(C.hud_used)
-			var/obj/screen/inventory/hand/R = C.hud_used.hand_slots["[held_index]"]
+			var/atom/movable/screen/inventory/hand/R = C.hud_used.hand_slots["[held_index]"]
 			if(R)
 				R.update_icon()
 		if(C.gloves && (C.get_num_arms(FALSE) < 1))
@@ -244,7 +242,7 @@
 			C.handcuffed = null
 			C.update_handcuffed()
 		if(C.hud_used)
-			var/obj/screen/inventory/hand/L = C.hud_used.hand_slots["[held_index]"]
+			var/atom/movable/screen/inventory/hand/L = C.hud_used.hand_slots["[held_index]"]
 			if(L)
 				L.update_icon()
 		if(C.gloves && (C.get_num_arms(FALSE) < 1))
@@ -346,7 +344,7 @@
 		if(C.dna.species.mutanthands && !is_pseudopart)
 			C.put_in_hand(new C.dna.species.mutanthands(), held_index)
 		if(C.hud_used)
-			var/obj/screen/inventory/hand/hand = C.hud_used.hand_slots["[held_index]"]
+			var/atom/movable/screen/inventory/hand/hand = C.hud_used.hand_slots["[held_index]"]
 			if(hand)
 				hand.update_icon()
 		C.update_inv_gloves()

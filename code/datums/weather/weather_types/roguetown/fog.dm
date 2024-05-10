@@ -1,12 +1,10 @@
-
-/datum/weather/fog
+/* /datum/weather/fog
 	name = "fog"
 	desc = ""
 
 	telegraph_duration = 10 SECONDS
 	telegraph_message = "<span class='warning'>The fog is coming.</span>"
 	telegraph_sound = 'sound/blank.ogg'
-
 	weather_message = ""
 	weather_overlay = "rain1"
 	weather_duration_lower = 5 MINUTES
@@ -25,7 +23,7 @@
 	impacted_z_levels = list()
 	var/lastlightning = 0
 
-	particles = list(/obj/screen/weather/fog)
+	particles = list(/atom/movable/screen/weather/fog)
 
 
 /datum/weather/fog/process()
@@ -33,4 +31,4 @@
 	if(GLOB.forecast != "fog")
 		wind_down()
 		return
-#endif
+#endif */

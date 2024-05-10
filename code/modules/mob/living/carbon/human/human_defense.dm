@@ -201,7 +201,7 @@
 		if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
 			if(can_embed(I))
 				if(prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
-					//throw_alert("embeddedobject", /obj/screen/alert/embeddedobject)
+					//throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 					var/obj/item/bodypart/L = pick(bodyparts)
 					L.embedded_objects |= I
 					I.add_mob_blood(src)//it embedded itself in you, of course it's bloody!
@@ -991,17 +991,18 @@
 	if(status == "is OK." || status == "no damage")
 		no_damage = TRUE
 	var/isdisabled = ""
-	if(FB.is_disabled() == BODYPART_DISABLED_CRIT)
-		isdisabled = "shattered "
-	if(FB.is_disabled() == BODYPART_DISABLED_DAMAGE)
-		isdisabled = "numb "
-	if(FB.is_disabled() == BODYPART_DISABLED_PARALYSIS || FB.is_disabled() == BODYPART_DISABLED_FALL)
-		isdisabled = "limp "
-	if(FB.is_disabled() == BODYPART_DISABLED_ROT)
-		if(FB.skeletonized)
-			isdisabled = "skeletonized "
-		else
-			isdisabled = "rotting "
+	switch(FB.is_disabled())
+		if(BODYPART_DISABLED_FRACTURE)
+			isdisabled = "broken "
+		if(BODYPART_DISABLED_DAMAGE)
+			isdisabled = "numb "
+		if(BODYPART_DISABLED_PARALYSIS)
+			isdisabled = "limp "
+		if(BODYPART_DISABLED_ROT)
+			if(FB.skeletonized)
+				isdisabled = "skeletonized "
+			else
+				isdisabled = "rotting "
 	to_chat(src, "\t <span class='[no_damage ? "notice" : "warning"]'>My [isdisabled][FB.name] [status].</span>")
 
 	for(var/obj/item/I in FB.embedded_objects)

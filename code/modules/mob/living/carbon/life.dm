@@ -47,9 +47,9 @@
 			updatehealth()
 		update_stress()
 		handle_nausea()
-		if(blood_volume > BLOOD_VOLUME_SURVIVE)
+		if((blood_volume > BLOOD_VOLUME_SURVIVE) || HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 			if(!heart_attacking)
-				adjustOxyLoss(-1.6)
+				adjustOxyLoss(-1.5)
 			else
 				if(getOxyLoss() < 20)
 					heart_attacking = FALSE
@@ -66,7 +66,7 @@
 					for(var/obj/item/bodypart/affecting as anything in bodyparts)
 						//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
 						if(affecting.get_bleedrate() < 1)
-							if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, null, BODYPART_ORGANIC) || affecting.heal_wounds(3))
+							if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, null, BODYPART_ORGANIC) || affecting.heal_wounds(3, sleep_heal = TRUE))
 								src.update_damage_overlays()
 					adjustToxLoss(-buckled.sleepy)
 					if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
@@ -101,12 +101,10 @@
 					if(hydration > 0 || yess)
 						if(!bleed_rate)
 							blood_volume = min(blood_volume + 10, BLOOD_VOLUME_MAXIMUM)
-						for(var/X in bodyparts)
-							var/obj/item/bodypart/affecting = X
-							if(affecting.get_bleedrate() <= 0.1)
-								if(affecting.heal_damage(0.15, 0.15, null, BODYPART_ORGANIC))
-									src.update_damage_overlays()
-								if(affecting.heal_wounds(1))
+						for(var/obj/item/bodypart/affecting as anything in bodyparts)
+							//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
+							if(affecting.get_bleedrate() < 1)
+								if(affecting.heal_damage(0.5, 0.5, null, BODYPART_ORGANIC) || affecting.heal_wounds(1, sleep_heal = TRUE))
 									src.update_damage_overlays()
 						adjustToxLoss(-0.1)
 
@@ -345,7 +343,7 @@
 		adjustOxyLoss(1)
 
 		failed_last_breath = 1
-		throw_alert("not_enough_oxy", /obj/screen/alert/not_enough_oxy)
+		throw_alert("not_enough_oxy", /atom/movable/screen/alert/not_enough_oxy)
 		return 0
 
 	var/safe_oxy_min = 16
@@ -375,7 +373,7 @@
 		else
 			adjustOxyLoss(3)
 			failed_last_breath = 1
-		throw_alert("not_enough_oxy", /obj/screen/alert/not_enough_oxy)
+		throw_alert("not_enough_oxy", /atom/movable/screen/alert/not_enough_oxy)
 
 	else //Enough oxygen
 		failed_last_breath = 0
@@ -406,7 +404,7 @@
 	if(Toxins_partialpressure > safe_tox_max)
 		var/ratio = (breath_gases[/datum/gas/plasma][MOLES]/safe_tox_max) * 10
 		adjustToxLoss(CLAMP(ratio, MIN_TOXIC_GAS_DAMAGE, MAX_TOXIC_GAS_DAMAGE))
-		throw_alert("too_much_tox", /obj/screen/alert/too_much_tox)
+		throw_alert("too_much_tox", /atom/movable/screen/alert/too_much_tox)
 	else
 		clear_alert("too_much_tox")
 

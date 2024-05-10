@@ -6,7 +6,7 @@
 	to_chat(c, "<span class='notice'>Left Mouse Button        = Construct / Upgrade</span>")
 	to_chat(c, "<span class='notice'>Right Mouse Button       = Deconstruct / Delete / Downgrade</span>")
 	to_chat(c, "<span class='notice'>Left Mouse Button + ctrl = R-Window</span>")
-	to_chat(c, "<span class='notice'>Left Mouse Button + alt  = Airlock</span>")
+	to_chat(c, "<span class='notice'>Left Mouse Button + alt  = Door</span>")
 	to_chat(c, "")
 	to_chat(c, "<span class='notice'>Use the button in the upper left corner to</span>")
 	to_chat(c, "<span class='notice'>change the direction of built objects.</span>")
@@ -20,6 +20,8 @@
 	var/alt_click = pa.Find("alt")
 
 	if(istype(object,/turf) && left_click && !alt_click && !ctrl_click)
+		to_chat(src, "<span class='notice'>Basic mode is only partially funcational, please use Adv. Build.</span>")
+		return
 		var/turf/T = object
 		if(isspaceturf(object))
 			T.PlaceOnTop(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
@@ -41,7 +43,7 @@
 		return
 	else if(istype(object,/turf) && alt_click && left_click)
 		log_admin("Build Mode: [key_name(c)] built an airlock at [AREACOORD(object)]")
-		new/obj/machinery/door/airlock(get_turf(object))
+		new/obj/structure/mineral_door/wood(get_turf(object))
 	else if(istype(object,/turf) && ctrl_click && left_click)
 		var/obj/structure/window/reinforced/window
 		if(BM.build_dir == NORTHWEST)

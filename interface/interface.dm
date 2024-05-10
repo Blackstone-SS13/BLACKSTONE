@@ -53,6 +53,19 @@
 		to_chat(src, "<span class='danger'>The Github URL is not set in the server configuration.</span>")
 	return
 
+/client/verb/mentorhelp()
+	set name = "Mentorhelp"
+	set desc = ""
+	set category = "Admin"
+	var/mentorhelpurl = CONFIG_GET(string/mentorhelpurl)
+	if(mentorhelpurl)
+		if(alert("This will open the mentorhelp channel in your browser. Are you sure?",,"Yes","No")!="Yes")
+			return
+		src << link(mentorhelpurl)
+	else
+		to_chat(src, "<span class='danger'>The mentorhelp channel is not set in the server configuration.</span>")
+	return
+
 /client/verb/reportissue()
 	set name = "report-issue"
 	set desc = ""
@@ -168,15 +181,20 @@ Hotkey-Mode: (hotkey-mode must be on)
 		prefs.crt = FALSE
 		prefs.save_preferences()
 		to_chat(src, "CRT... OFF")
-		for(var/obj/screen/scannies/S in screen)
+		for(var/atom/movable/screen/scannies/S in screen)
 			S.alpha = 0
 	else
 		winset(src, "mapwindow.map", "zoom-mode=blur")
 		prefs.crt = TRUE
 		prefs.save_preferences()
 		to_chat(src, "CRT... ON")
-		for(var/obj/screen/scannies/S in screen)
+		for(var/atom/movable/screen/scannies/S in screen)
 			S.alpha = 70
+
+/client/verb/triggercommend()
+	set category = "OOC"
+	set name = "Commend Someone"
+	commendsomeone()
 
 /*
 /client/verb/set_blur()

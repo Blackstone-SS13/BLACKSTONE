@@ -6,10 +6,14 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Dwarf",
-	"Dwarf",
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
 	)
 
 	tutorial = "You came to rockhill either to seek knowledge or riches."
@@ -17,6 +21,7 @@
 	outfit = /datum/outfit/job/roguetown/alchemist
 	display_order = 6
 	give_bank_account = 12
+	min_pq = -10
 
 /datum/outfit/job/roguetown/alchemist
 	name = "Alchemist"

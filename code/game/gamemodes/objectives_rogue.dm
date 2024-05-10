@@ -37,17 +37,6 @@
 		else
 			explanation_text = "Pray to ZIZO."
 
-/datum/objective/rt_maniac
-	name = "slaying"
-	explanation_text = "Mark pieces of flesh and leave them to be discovered. Have at least 4 different people witness your crimes."
-	martyr_compatible = 0
-	triumph_count = 10
-	var/people_seen[0]
-
-/datum/objective/rt_maniac/check_completion()
-	if(people_seen.len >= 4)
-		return TRUE
-
 /datum/objective/werewolf
 	name = "conquer"
 	explanation_text = "Destroy all elder vampires in ROGUETOWN. I can sniff them in my true form."
@@ -71,3 +60,8 @@
 	if(istype(C))
 		if(C.vampire_werewolf() == "vampire")
 			return TRUE
+
+/datum/objective/maniac
+	name = "WAKE UP"
+	explanation_text = "FOLLOWING my HEART shall be the WHOLE of the law."
+	flavor = "Dream"

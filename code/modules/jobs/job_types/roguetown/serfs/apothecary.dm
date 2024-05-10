@@ -6,10 +6,21 @@
 	total_positions = 0
 	spawn_positions = 0
 
-
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
+	)
+	
 	outfit = /datum/outfit/job/roguetown/apothecary
 	outfit_female = /datum/outfit/job/roguetown/apothecary/female
 	display_order = 6
+	min_pq = -10
+
 /datum/outfit/job/roguetown/apothecary
 	name = "Apothecary"
 	jobtype = /datum/job/roguetown/apothecary

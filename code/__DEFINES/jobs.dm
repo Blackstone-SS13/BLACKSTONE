@@ -96,10 +96,13 @@
 #define NOBLEMEN		(1<<0)
 
 #define LORD		(1<<0)
-#define STEWARD		(1<<1)
-#define KNIGHT		(1<<2)
-#define WIZARD		(1<<3)
-#define SHERIFF		(1<<4)
+#define LADY		(1<<1)
+#define STEWARD		(1<<2)
+#define KNIGHT		(1<<3)
+#define WIZARD		(1<<4)
+#define SHERIFF		(1<<5)
+#define BAILIFF		(1<<6)
+#define COUNCILLOR	(1<<7)
 
 #define GARRISON		(1<<1)
 
@@ -149,12 +152,19 @@
 #define ORPHAN		(1<<3)
 #define PRINCE		(1<<4)
 #define SHOPHAND	(1<<5)
+#define CLERK 		(1<<6)
+
+#define MERCENARIES		(1<<6)
+
+#define DESERT_RIDER	(1<<0)
+#define GRENZELHOFT		(1<<1)
 
 #define JCOLOR_NOBLE "#aa83b9"
 #define JCOLOR_CHURCH "#c0ba8d"
 #define JCOLOR_SOLDIER "#b18484"
 #define JCOLOR_SERF "#819e82"
 #define JCOLOR_PEASANT "#b6a68c"
+#define JCOLOR_MERCENARIES "#c86e3a"
 
 
 // job display orders //
@@ -164,12 +174,15 @@
 #define JDO_PRINCE 1.2
 #define JDO_HAND 2
 #define JDO_STEWARD 3
+#define JDO_CLERK 3.1
 
 #define JDO_MAGICIAN 5
 #define JDO_WAPP 6
+#define JDO_BAILIFF 7
+#define JDO_COUNCILLOR 7.1
 
-#define JDO_SHERIFF 7
-#define JDO_CASTLEGUARD 7.1
+#define JDO_SHERIFF 7.2
+#define JDO_CASTLEGUARD 7.3
 #define JDO_TOWNGUARD 8
 #define JDO_BOGGUARD 8.1
 #define JDO_GATEMASTER 9
@@ -221,7 +234,8 @@
 #define JDO_ADVENTURER 32.1
 #define JDO_PILGRIM 32.2
 
-#define JDO_MERCENARY 33
+#define JDO_GRENZELHOFT 33.1
+#define JDO_DESERT_RIDER 33.2
 
 #define JDO_VAGRANT 34
 #define JDO_ORPHAN 35

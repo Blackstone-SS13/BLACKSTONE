@@ -6,9 +6,15 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Half-Elf")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
+	)
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_YOUNG)
 
@@ -17,6 +23,7 @@
 	outfit = /datum/outfit/job/roguetown/churchling
 	display_order = JDO_CHURCHLING
 	give_bank_account = TRUE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/churchling/pre_equip(mob/living/carbon/human/H)
 	..()

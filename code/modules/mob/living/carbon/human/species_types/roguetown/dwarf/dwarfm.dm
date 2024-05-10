@@ -68,14 +68,14 @@
 
 /datum/species/dwarf/mountain/get_skin_list()
 	return list(
-	"Platinum" = "ffe0d1",
-	"Aurum" = "fcccb3",
-	"Quicksilver" = "edc6b3",
-	"Brass" = "e2b9a3",
-	"Iron" = "d9a284",
-	"Malachite" = "c69b83",
-	"Obsidian" = "3b2e27",
-	"Brimstone" = "271f1a"
+		"Platinum" = SKIN_COLOR_PLATINUM,
+		"Aurum" = SKIN_COLOR_AURUM,
+		"Quicksilver" = SKIN_COLOR_QUICKSILVER,
+		"Brass" = SKIN_COLOR_BRASS,
+		"Iron" = SKIN_COLOR_IRON,
+		"Malachite" = SKIN_COLOR_MALACHITE,
+		"Obsidian" = SKIN_COLOR_OBSIDIAN,
+		"Brimstone" = SKIN_COLOR_BRIMSTONE,
 	)
 
 /datum/species/dwarf/mountain/get_hairc_list()
@@ -124,3 +124,8 @@
 
 /datum/species/dwarf/mountain/random_surname()
 	return " [pick(world.file2list("strings/rt/names/dwarf/dwarmlast.txt"))]"
+
+/* this accent is HORRIBLE right now, someone please fix this shit
+/datum/species/dwarf/mountain/get_accent(mob/living/carbon/human/H)
+	return strings("dwarf_replacement.json", "dwarf")
+*/

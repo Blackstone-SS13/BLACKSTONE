@@ -6,15 +6,13 @@
 	total_positions = 1
 	spawn_positions = 1
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen"
-	)
+	allowed_races = list("Humen")
 	tutorial = "Tales speak of the Gatemaster's legendary ability to stand still at a gate and ask people questions."
 	display_order = JDO_GATEMASTER
 
 	outfit = /datum/outfit/job/roguetown/watchman
 	give_bank_account = 3
-	min_pq = -4
+	min_pq = 4
 
 /datum/outfit/job/roguetown/watchman
 	name = "Gateman"

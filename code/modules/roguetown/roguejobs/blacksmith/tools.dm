@@ -31,17 +31,26 @@
 			user.visible_message("<span class='warning'>[attacked_item] is broken! I cannot fix it...</span>")
 			return
 
-		if(blacksmith_mind.get_skill_level(attacked_item.anvilrepair) > 0)
-			// People with maximum repairing skill will insta-fix anything in a single swing (3.4 * 6 * 0.05 = 1.02)
-			repair_percent *= 3.4 * blacksmith_mind.get_skill_level(attacked_item.anvilrepair)
+		if(blacksmith_mind.get_skill_level(attacked_item.anvilrepair) <= 0)
+			if(prob(30))
+				repair_percent = 0.01
+			else
+				repair_percent = 0
+		else
+			repair_percent *= blacksmith_mind.get_skill_level(attacked_item.anvilrepair)
 
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
-		repair_percent *= attacked_item.max_integrity
-		exp_gained = min(attacked_item.obj_integrity + repair_percent, attacked_item.max_integrity) - attacked_item.obj_integrity
-		attacked_item.obj_integrity = min(attacked_item.obj_integrity + repair_percent, attacked_item.max_integrity)
-		user.visible_message("<span class='info'>[user] repairs [attacked_item]!</span>")
-		blacksmith_mind.adjust_experience(attacked_item.anvilrepair, exp_gained/2) //We gain as much exp as we fix divided by 2
-		return
+		if(repair_percent)
+			repair_percent *= attacked_item.max_integrity
+			exp_gained = min(attacked_item.obj_integrity + repair_percent, attacked_item.max_integrity) - attacked_item.obj_integrity
+			attacked_item.obj_integrity = min(attacked_item.obj_integrity + repair_percent, attacked_item.max_integrity)
+			user.visible_message("<span class='info'>[user] repairs [attacked_item]!</span>")
+			blacksmith_mind.adjust_experience(attacked_item.anvilrepair, exp_gained/2) //We gain as much exp as we fix divided by 2
+			return
+		else
+			user.visible_message("<span class='warning'>[user] damages [attacked_item]!</span>")
+			attacked_item.take_damage(5, BRUTE, "melee")
+			return
 
 	if(isstructure(attacked_object))
 		var/obj/structure/attacked_structure = attacked_object

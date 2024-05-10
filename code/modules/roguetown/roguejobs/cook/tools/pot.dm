@@ -19,7 +19,3 @@
 	possible_item_intents = list(INTENT_GENERIC, /datum/intent/fill, INTENT_POUR, INTENT_SPLASH)
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
 	slot_flags = null
-
-/obj/item/reagent_containers/glass/pot/proc/makeSoup(nutrimentamount)
-	reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrimentamount)
-	playsound(src, "bubbles", 100, TRUE)

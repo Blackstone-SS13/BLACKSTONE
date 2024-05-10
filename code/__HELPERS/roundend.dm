@@ -184,12 +184,12 @@
 		client.verbs += /client/proc/lobbyooc
 
 /client/proc/show_game_over()
-	var/obj/screen/splash/credits/S = new(src, FALSE)
+	var/atom/movable/screen/splash/credits/S = new(src, FALSE)
 	S.Fade(FALSE,FALSE)
 	RollCredits()
 //	if(GLOB.credits_icons.len)
 //		for(var/i=0, i<=GLOB.credits_icons.len, i++)
-//			var/obj/screen/P = new()
+//			var/atom/movable/screen/P = new()
 //			P.layer = SPLASHSCREEN_LAYER+1
 //			P.appearance = GLOB.credits_icons
 //			screen += P
@@ -644,7 +644,7 @@
 /datum/controller/subsystem/ticker/proc/give_show_playerlist_button(client/C)
 	set waitfor = 0
 	to_chat(C,"<a href='?src=[C];playerlistrogue=1'>* SHOW PLAYER LIST *</a>")
-	to_chat(C,"<a href='?src=[C];commendsomeone=1'>* Commend a Character *</a>")
+	C.commendsomeone(forced = TRUE)
 
 /datum/action/report
 	name = "Show roundend report"
@@ -708,9 +708,9 @@
 	var/count = 1
 	for(var/datum/objective/objective in objectives)
 		if(objective.check_completion())
-			objective_parts += "<b>Objective #[count]</b>: [objective.explanation_text] <span class='greentext'>Success!</span>"
+			objective_parts += "<b>[objective.flavor] #[count]</b>: [objective.explanation_text] <span class='greentext'>Success!</span>"
 		else
-			objective_parts += "<b>Objective #[count]</b>: [objective.explanation_text] <span class='redtext'>Fail.</span>"
+			objective_parts += "<b>[objective.flavor] #[count]</b>: [objective.explanation_text] <span class='redtext'>Fail.</span>"
 		count++
 	return objective_parts.Join("<br>")
 

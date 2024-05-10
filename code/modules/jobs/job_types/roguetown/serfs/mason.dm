@@ -6,11 +6,14 @@
 	total_positions = 3
 	spawn_positions = 2
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Dwarf",
-	"Dwarf",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Dark Elf",
+		"Aasimar"
 	)
 	allowed_sexes = list(MALE, FEMALE)
 
@@ -19,6 +22,7 @@
 	outfit = /datum/outfit/job/roguetown/mason
 	display_order = JDO_MASON
 	give_bank_account = 8
+	min_pq = 0
 
 /datum/outfit/job/roguetown/mason/pre_equip(mob/living/carbon/human/H)
 	..()

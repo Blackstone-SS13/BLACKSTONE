@@ -10,6 +10,7 @@
 	total_positions = 0
 	spawn_positions = 0
 #endif
+	min_pq = null //no pq
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen",
 	"Humen",
@@ -24,7 +25,7 @@
 	tutorial = ""
 	outfit = /datum/outfit/job/roguetown/tester
 	plevel_req = 0
-	display_order = JDO_MERCENARY
+	display_order = JDO_DESERT_RIDER
 
 /datum/outfit/job/roguetown/tester/pre_equip(mob/living/carbon/human/H)
 	..()
