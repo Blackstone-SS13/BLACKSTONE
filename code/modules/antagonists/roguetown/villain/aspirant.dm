@@ -16,6 +16,10 @@
 /datum/antagonist/aspirant/ruler
 	name = "Ruler"
 
+/datum/antagonist/aspirant/on_gain()
+	. = ..()
+	owner.special_role = ROLE_ASPIRANT
+
 /datum/antagonist/aspirant/greet()
 	to_chat(owner, "<span class='danger'>I have grown weary of being near the throne, but never on it. I have decided that it is time I ruled Enigma.</span>")
 	..()
