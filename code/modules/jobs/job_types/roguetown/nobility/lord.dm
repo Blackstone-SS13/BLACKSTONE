@@ -79,7 +79,7 @@
 			H.change_stat("perception", 2)
 			H.change_stat("fortune", 5)
 		if(H.dna?.species)
-			if(H.dna.species.id == "human")
+			if(H.dna.species.id == "humen")
 				H.dna.species.soundpack_m = new /datum/voicepack/male/evil()
 
 		if(H.wear_mask)

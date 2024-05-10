@@ -38,7 +38,7 @@ SUBSYSTEM_DEF(librarian)
 	if(!(istext(input) && istext(book_title) && istext(author) && istext(author_ckey) && istext(icon)))
 		return "This book is incorrectly formatted!"
 
-	testing("playerbook2file1").
+	testing("playerbook2file1")
 	var/list/contents = list("book_title" = "[book_title]", "author" = "[author]", "author_ckey" = "[author_ckey]", "icon" = "[icon]",  "text" = "[input]")
 	//url_encode should escape all the characters that do not belong in a file name. If not, god help us
 	var/file_name = "data/player_generated_books/[url_encode(book_title)].json"

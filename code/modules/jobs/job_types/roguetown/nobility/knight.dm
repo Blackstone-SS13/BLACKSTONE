@@ -58,7 +58,7 @@
 		H.change_stat("endurance", 2)
 		H.change_stat("speed", -1)
 		if(H.dna?.species)
-			if(H.dna.species.id == "human")
+			if(H.dna.species.id == "humen")
 				H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)

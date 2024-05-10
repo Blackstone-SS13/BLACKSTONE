@@ -2441,6 +2441,7 @@
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\human\_human.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\human\humen.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\other\aasimar.dm"
+#include "code\modules\mob\living\carbon\human\species_types\roguetown\other\brazillian.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\other\halfelf.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\other\tiefling.dm"
 #include "code\modules\mob\living\carbon\human\species_types\roguetown\other\werewolf.dm"

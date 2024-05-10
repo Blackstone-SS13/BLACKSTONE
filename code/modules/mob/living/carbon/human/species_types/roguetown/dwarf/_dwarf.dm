@@ -12,9 +12,6 @@
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/dwarvish)
 
-/datum/species/dwarf/check_roundstart_eligible()
-	return FALSE
-
 /datum/species/dwarf/after_creation(mob/living/carbon/C)
 	..()
 //	if(!C.has_language(/datum/language/dwarvish))
