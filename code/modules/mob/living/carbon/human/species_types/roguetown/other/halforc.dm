@@ -9,7 +9,7 @@
 	Half Orcs are known for their strength and lineage derived from their orcish heritage. \
 	They mostly take cosmetics characteristics from their human side. \
 	Every civilized society treats Half Orcs with distain and hate \
-	The only known nation to completely integrate half orcs are the tribes of gronn. \"
+	The only known nation to completely integrate half orcs are the tribes of gronn."
 
 
 	skin_tone_wording = "Clan"
