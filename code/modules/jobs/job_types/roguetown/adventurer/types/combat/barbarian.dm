@@ -11,7 +11,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
 	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_NOPAINSTUN)
