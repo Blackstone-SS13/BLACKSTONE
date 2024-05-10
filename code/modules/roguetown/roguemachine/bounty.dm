@@ -146,11 +146,12 @@
 	// Only heads are allowed
 	if(P.type != /obj/item/bodypart/head) return
 
+	var/machine_location = get_turf(src)
 	var/obj/item/bodypart/head/stored_head = P
 	var/correct_head = FALSE
 
 	qdel(P)
-	//TODO: add nom nom sounds
+
 	var/random_say = rand(1, 3)
 	if(random_say == 1)
 		say("Commencing cephalic dissection...")
@@ -158,25 +159,42 @@
 		say("Analyzing skull structure...")
 	else
 		say("Performing intra-cranial inspection...")
-	sleep(3 SECONDS)
+
+	sleep(1 SECONDS)
+
+	var/random_sound = rand(1, 3)
+	if(random_sound == 1)
+		playsound(src, 'sound/combat/fracture/headcrush (4).ogg', 100, FALSE, -1)
+	else if(random_sound == 2)
+		playsound(src, 'sound/combat/fracture/headcrush (3).ogg', 100, FALSE, -1)
+	else
+		playsound(src, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
+
+	sleep(2 SECONDS)
+
 	for(var/datum/bounty/b in bounties)
 		if(b.target == stored_head.real_name)
 			correct_head = TRUE
-			say("I have been sated.")
+			say("A bounty has been sated.")
 			playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1) 
+
+			sleep(1 SECONDS)
+
+			playsound(T, 'sound/misc/coindispense.ogg', 100, FALSE, -1)
+			var/obj/item/roguecoin/copper/reward = new /obj/item/roguecoin/copper(machine_location)
+			reward.set_quantity(b.amount)
+
 			bounties -= b
-			
-		//TODO: give out reward. function to determine optimal coin type
 
 	// No valid bounty for this head?
 	if(correct_head == FALSE)
-		say("This skull carried no price.")
+		say("This skull carried no reward.")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 
 	// Head has been "analyzed". Return it.
 	sleep(2 SECONDS)
-	var/location = get_turf(src)
-	stored_head = new /obj/item/bodypart/head(location)
+	playsound(src, '/sound/combat/vite.ogg', 100, FALSE, -1)
+	stored_head = new /obj/item/bodypart/head(machine_location)
 	stored_head.name = "mutilated head"
 	stored_head.desc = "This head has been violated beyond recognition, the work of a horrific machine."
 
