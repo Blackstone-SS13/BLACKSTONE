@@ -24,20 +24,13 @@
 	finalize_siege()
 
 /datum/antagonist/siege/greet()
-	to_chat(owner.current, "<span class='alertsyndie'>I am a BARON'S SOLDIER!</span>")
-	to_chat(owner.current, "<span class='info'>I joined the army of the Baron, helping him mobilize troops throughout the land. Now we will take Rockhill and reap the rewards!</span>")
+	to_chat(owner, "<span class='alertsyndie'>I am a BARON'S SOLDIER!</span>")
+	to_chat(owner, "<span class='info'>I joined the army of the Baron, helping him mobilize troops throughout the land. Now we will take Rockhill and reap the rewards!</span>")
 	owner.announce_objectives()
-	..()
 
 /datum/antagonist/siege/proc/forge_objectives()
-	return
-	if(is_baron)
-		// Placeholder: Replace this with the code to assign the baron's objectives
-		if(owner.current)
-			to_chat(owner.current, "<span class='boldnotice'>Siege Rockhill!</span>")
-	else
-		if(owner.current)
-			to_chat(owner.current, "<span class='boldnotice'>Follow the Baron's orders.</span>")
+	if(siege_team)
+		objectives |= siege_team.objectives
 
 /datum/antagonist/siege/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/M = mob_override || owner.current
@@ -214,10 +207,9 @@
 	is_baron = TRUE
 
 /datum/antagonist/siege/baron/greet()
-	to_chat(owner.current, "<span class='alertsyndie'>I am the BARON!</span>")
-	to_chat(owner.current, "<span class='info'>The King of Rockhill is weak, and a weakling has no right to be King. I will show them my strength and take the crown for my own!</span>")
+	to_chat(owner, "<span class='alertsyndie'>I am the BARON!</span>")
+	to_chat(owner, "<span class='info'>The King of Rockhill is weak, and a weakling has no right to be King. I will show them my strength and take the crown for my own!</span>")
 	owner.announce_objectives()
-	..()
 
 /datum/antagonist/siege/proc/equip_baron()
 	var/mob/living/carbon/human/H = owner.current
