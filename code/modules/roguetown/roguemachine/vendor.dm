@@ -26,6 +26,7 @@
 			update_icon()
 			return attack_hand(user)
 		else
+			playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 			to_chat(user, "<span class='warning'>Wrong key.</span>")
 			return
 	if(istype(P, /obj/item/keyring))

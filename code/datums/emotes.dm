@@ -78,13 +78,10 @@
 		user.log_message(msg, LOG_EMOTE)
 		msg = "<b>[user]</b> " + msg
 
-	var/freq = get_rand_frequency() //bespoke vary system so deep voice/high voiced humans
-
 	if(isliving(user))
 		var/mob/living/L = user
 		for(var/obj/item/implant/I in L.implants)
 			I.trigger(key, L)
-		freq = L.get_emote_frequency()
 
 	var/tmp_sound = get_sound(user)
 	if(tmp_sound && (!only_forced_audio || !intentional))
@@ -100,9 +97,6 @@
 			user.audible_message(msg)
 		else
 			user.visible_message(msg)
-
-/mob/living/proc/get_emote_frequency()
-	return get_rand_frequency()
 
 /mob/living/carbon/human/get_emote_frequency()
 	var/cont = 44100

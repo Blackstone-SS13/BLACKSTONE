@@ -47,3 +47,15 @@
 	var/mob/living/carbon/human/H = user.mob
 	H.toggle_eye_intent(H)
 	return TRUE
+
+/datum/keybinding/human/looc // First, I laughed how blackstone had no RP. But it was just getting sad. So I'm adding this in.
+	hotkey_keys = list("L")
+	name = "looc"
+	full_name = "Local OOC"
+	description = "Finally communicate in a seperate channel without having to use IC chat for OOC stuff."
+
+/datum/keybinding/human/looc/down(client/user)
+	var/message = input(usr, "SPEAK YOUR VIEWS OF THE FABRIC", "ROGUETOWN")
+	if(message)
+		for(var/mob/living/L in view(7, user.mob))
+			to_chat(L, "<LOOC> [user.mob.real_name]: [message]") // You're not getting colors.
