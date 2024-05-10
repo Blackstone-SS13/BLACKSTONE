@@ -79,13 +79,13 @@
 /datum/sprite_accessory/hair/bald
 	name = "Bald"
 	icon_state = ""
-	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf", "aasimar")
+	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf", "aasimar", "halforc")
 	gender = MALE
 
 /datum/sprite_accessory/hair/skinhead
 	name = "Shaved"
 	icon_state = "hair_skinhead"
-	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf")
+	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf", "halforc")
 	gender = MALE
 	under_layer = TRUE
 
@@ -124,7 +124,7 @@
 	name = "Berserker"
 	icon_state = "hair_shavedmohawk"
 	gender = MALE
-	specuse = list("humen", "dwarfm")
+	specuse = list("humen", "dwarfm", "halforc")
 	under_layer = TRUE
 
 /datum/sprite_accessory/hair/bedhead
@@ -156,7 +156,7 @@
 	name = "Cavehead"
 	icon_state = "hair_thinning"
 	gender = MALE
-	specuse = list("dwarfm","humen")
+	specuse = list("dwarfm","humen", "halforc")
 	under_layer = TRUE
 
 /datum/sprite_accessory/hair/thinningrear
@@ -213,7 +213,7 @@
 	name = "Bog"
 	icon_state = "hair_bog"
 	gender = MALE
-	specuse = list("humen", "tiefling", "aasimar")
+	specuse = list("humen", "tiefling", "aasimar", "halforc")
 
 
 /datum/sprite_accessory/hair/scout
@@ -278,19 +278,19 @@
 	name = "Tied Ponytail"
 	icon_state = "fhair_longstraightponytail"
 	gender = FEMALE
-	specuse = list("humen", "dwarfm", "tiefling", "aasimar")
+	specuse = list("humen", "dwarfm", "tiefling", "aasimar", "halforc")
 
 /datum/sprite_accessory/hair/fmess
 	name = "Messy"
 	icon_state = "fhair_messy"
 	gender = FEMALE
-	specuse = list("humen", "dwarfm", "tiefling")
+	specuse = list("humen", "dwarfm", "tiefling", "halforc")
 
 /datum/sprite_accessory/hair/ftwin
 	name = "Tails"
 	icon_state = "fhair_twintail"
 	gender = FEMALE
-	specuse = list("dwarfm", "humen", "tiefling")
+	specuse = list("dwarfm", "humen", "tiefling", "halforc")
 
 /datum/sprite_accessory/hair/fbuns
 	name = "Buns"
@@ -314,7 +314,7 @@
 	name = "Barbarian"
 	icon_state = "fhair_amazon"
 	gender = FEMALE
-	specuse = list("humen", "dwarfm", "tiefling")
+	specuse = list("humen", "dwarfm", "tiefling", "halforkf")
 
 /datum/sprite_accessory/hair/fbuns
 	name = "Loose Braid"
