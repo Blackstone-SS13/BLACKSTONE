@@ -53,9 +53,6 @@
 	enflamed_icon = "widefire"
 	possible_faiths = list(FAITH_PSYDON, FAITH_ELF)
 
-/datum/species/elf/wood/check_roundstart_eligible()
-	return TRUE
-
 /datum/species/elf/wood/get_span_language(datum/language/message_language)
 	if(!message_language)
 		return

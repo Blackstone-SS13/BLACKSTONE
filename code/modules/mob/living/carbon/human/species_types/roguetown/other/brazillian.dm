@@ -11,7 +11,7 @@
 	skin_tone_wording = "Bog"
 
 	species_traits = list(EYECOLOR,LIPS)
-	inherent_traits = list(TRAIT_NOMOBSWAP,RTRAIT_RETARD_ANATOMY)
+	inherent_traits = list(TRAIT_NOMOBSWAP,RTRAIT_RETARD_ANATOMY,RTRAIT_NASTY_EATER)
 	use_skintones = TRUE
 	disliked_food = NONE
 	liked_food = NONE
@@ -26,13 +26,14 @@
 	exotic_bloodtype = null
 	default_features = list("tail_lizard" = "Smooth", "snout" = "Round", "horns" = "None", "frills" = "None", "spines" = "None", "body_markings" = "None")
 	mutant_bodyparts = list("tail_lizard", "snout", "frills", "spines", "body_markings")
-	mutanttongue = /obj/item/organ/tongue
+	mutanttongue = /obj/item/organ/tongue/lizard
+	mutanteyes = /obj/item/organ/eyes/night_vision/argonian
 	specstats = list(
 		"strength" = 0, 
 		"perception" = 3, 
-		"intelligence" = -1, 
-		"constitution" = 0, 
-		"endurance" = 1, 
+		"intelligence" = -2, 
+		"constitution" = 2, 
+		"endurance" = 2, 
 		"speed" = 2, 
 		"fortune" = -2,
 	)
@@ -40,15 +41,12 @@
 		"strength" = 0, 
 		"perception" = 3, 
 		"intelligence" = -1, 
-		"constitution" = 0, 
-		"endurance" = 1, 
+		"constitution" = 2, 
+		"endurance" = 2, 
 		"speed" = 2, 
 		"fortune" = -2,
 	)
 	enflamed_icon = "widefire"
-
-/datum/species/lizard/brazil/check_roundstart_eligible()
-	return TRUE
 
 /datum/species/lizard/brazil/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()

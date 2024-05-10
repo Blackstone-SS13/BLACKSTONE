@@ -1114,6 +1114,13 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			if(!puzzle_imprison(target))
 				to_chat(usr,"<span class='warning'>Imprisonment failed!</span>")
 				return
+		if(ADMIN_PUNISHMENT_BRAZIL)
+			if(!ishuman(target))
+				to_chat(usr,"<span class='warning'>Target must be human!</span>")
+				return
+			var/mob/living/carbon/human/ligga = target
+			ligga.set_species(/datum/species/lizard/brazil)
+			to_chat(ligga, "<span class='userdanger'>I have been sent to Brazil!</span>")
 
 	punish_log(target, punishment)
 

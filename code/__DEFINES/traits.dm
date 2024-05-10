@@ -18,6 +18,7 @@
 #define RTRAIT_NOFATSTAM				"Indefatigable" //for ai
 #define RTRAIT_NUDIST					"Nudist" //you can't wear most clothes
 #define RTRAIT_RETARD_ANATOMY			"Inhumen Anatomy" //can't wear hats and shoes
+#define RTRAIT_NASTY_EATER 				"Inhumen Digestion" //can drink murky water and eat organs
 
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
 #define TRAIT_NOSLEEP				"Fatal Insomnia"
@@ -53,6 +54,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_NOFATSTAM = "I have boundless energy, I will never tire.",
 	RTRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
 	RTRAIT_RETARD_ANATOMY = "My anatomy is inhumen, preventing me from wearing hats and shoes.",
+	RTRAIT_NASTY_EATER = "I can eat organs, and water that would be toxic to humen will not affect me.",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "<span class='warning'>I can't sleep.</span>",

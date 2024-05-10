@@ -106,6 +106,11 @@
 			sight_flags &= ~SEE_BLACKNESS
 	owner.update_sight()
 
+
+/obj/item/organ/eyes/night_vision/argonian
+	name = "lizard eyes"
+	desc = ""
+
 /obj/item/organ/eyes/night_vision/alien
 	name = "alien eyes"
 	desc = ""

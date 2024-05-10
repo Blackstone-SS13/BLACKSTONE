@@ -49,9 +49,6 @@
 	specstats_f = list("strength" = -1, "perception" = 1, "intelligence" = 1, "constitution" = -2, "endurance" = 0, "speed" = 2, "fortune" = -1)
 	enflamed_icon = "widefire"
 
-/datum/species/human/halfelf/check_roundstart_eligible()
-	return TRUE
-
 /datum/species/human/halfelf/get_skin_list()
 	return list(
 		"Timber-Gronn" = SKIN_COLOR_TIMBER_GRONN,

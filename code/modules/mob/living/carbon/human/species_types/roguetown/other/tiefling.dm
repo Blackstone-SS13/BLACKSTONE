@@ -50,10 +50,6 @@
 	specstats_f = list("strength" = -1, "perception" = 1, "intelligence" = 2, "constitution" = -2, "endurance" = 1, "speed" = 1, "fortune" = -1)
 	enflamed_icon = "widefire"
 
-
-/datum/species/tieberian/check_roundstart_eligible()
-	return TRUE
-
 /datum/species/tieberian/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
