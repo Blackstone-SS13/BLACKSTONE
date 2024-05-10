@@ -173,7 +173,6 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 					pick_siege()
 					log_game("Major Antagonist: Siege")
 		return TRUE
-	message_admins("pikcing major")
 	switch(majorpicked)
 		if(1)
 			pick_rebels()
@@ -185,6 +184,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 			log_game("Major Antagonist: Vampire Lord")
 		if(4)
 			pick_siege()
+			minor_modes = list(2,3) //Remove bandit, would take up too many players
 			log_game("Major Antagonist: Siege")
 	minor_modes = shuffle(minor_modes)
 	for(var/m in minor_modes)
