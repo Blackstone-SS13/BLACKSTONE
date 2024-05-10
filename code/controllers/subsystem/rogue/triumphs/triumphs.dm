@@ -195,7 +195,7 @@ SUBSYSTEM_DEF(triumphs)
 /*
 	At round end we save the cache
 */
-/datum/controller/subsystem/triumphs/proc/time_for_roundend()
+/datum/controller/subsystem/triumphs/proc/time_for_reboot()
 	var/json_file = file(triumphs_json_path)
 	if(!fexists(json_file))
 		WRITE_FILE(json_file, "{}")

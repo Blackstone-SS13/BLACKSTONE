@@ -34,7 +34,7 @@
 	thicc_assets.send(linked_client)
 
 	assemble_the_CLASSES()
-	gacha_rolls()
+	lower_quality_gacha_rolls()
 	//preload_assets()
 	browser_slop()
 
@@ -68,7 +68,17 @@
 	//We got all our things. We indeed do after-all need set amounts of each to display now, we need to cover gacha class+ system too.
 	// They might also reroll too/something runs out and we need a replacement and we got it prepped
 	// Heres some rewards for PQ/triumphs and maybe other shit.
-	goodboy_extras()
+	// I think by default this is actually a lot of possible rolls in the first place.
+	var/player_quality = get_playerquality(linked_client.ckey, FALSE)
+	if(player_quality > 10)
+		total_free_class += 2
+	if(player_quality > 20) // If you are over 20, you get one more combat class roll! Nice job! This ones consistent
+		total_combat_class += 1
+
+	// You get one extra class select option for every 12 triumphs. So at 100 that'd be 8 + 1(PQ) + 1(DEFAULT) for 10 total.
+	var/triumph_count = SStriumphs.get_triumphs(linked_client.ckey)
+	triumph_count = round(triumph_count/12)
+	total_combat_class += triumph_count
 
 	// If for some reason we don't have the amounts to even cover what we want, reduce it
 	if(total_free_class > viable_free_classes.len)
@@ -77,40 +87,31 @@
 	if(total_combat_class > viable_combat_classes.len)
 		total_combat_class = viable_combat_classes.len
 
-//Some extras for people who are playing "properly"
-// If you start cramming in a ton of stuff here in an effort to JUST get more slots; you are a retarded asshole and fuck you.
-/datum/class_select_handler/proc/goodboy_extras()
-	var/pheqoo = get_playerquality(linked_client.ckey, FALSE)
-	if(pheqoo > 20) // If you are over 20, you get one more combat class roll! Nice job!
-		total_combat_class += 1
+//The actual mathematics solution also was kind of fucked up along with the code one
+// So we cope here as rolling some plusses on classes properly isn't worth it
+/datum/class_select_handler/proc/lower_quality_gacha_rolls()
+	// Begin rolling to our alotted amount
+	var/list/free_classes = viable_free_classes.Copy()
+	for(var/i=1, i <= total_free_class, i++) // We just do the normal thing
+		var/datum/advclass/pickme = pick(free_classes) // Pick one
+		free_classes -= pickme
+		rolled_classes[pickme] = 0
 
-	var/triamphs = SStriumphs.get_triumphs(linked_client.ckey)
-	if(triamphs >= 30) // If you got more than 30
-		if(prob(35)) // You get a 35% chance to get one more combat class option, these are not equal to PQ.
-			total_combat_class += 1
-
-//Normal route
-/datum/class_select_handler/proc/gacha_rolls()
-	//Gacha time, maybe I get a SSR Hunter
-	for(var/i=1, i <= total_free_class, i++)
+	for(var/i in 1 to total_free_class)
 		var/datum/advclass/pickme = pick(viable_free_classes)
 		if(pickme in rolled_classes)
 			rolled_classes[pickme] += 1
-			i--
-			continue
-		else
-			rolled_classes[pickme] = 0
 
-	
-	//Getting a + on this will be harder because you get less rolls and theres usually a lot, but If you do its pretty major honestly.
-	for(var/i=1, i <= total_combat_class, i++)
-		var/datum/advclass/combat_class = pick(viable_combat_classes)
-		if(combat_class in rolled_classes)
-			rolled_classes[combat_class] += 1
-			i--
-			continue 
-		else
-			rolled_classes[combat_class] = 0
+	var/list/combat_classes = viable_combat_classes.Copy()
+	for(var/i=1, i <= total_combat_class, i++) // We just do the normal thing
+		var/datum/advclass/pickme = pick(combat_classes) // Pick one
+		combat_classes -= pickme
+		rolled_classes[pickme] = 0
+
+	for(var/i in 1 to total_combat_class)
+		var/datum/advclass/pickme = pick(viable_combat_classes)
+		if(pickme in rolled_classes)
+			rolled_classes[pickme] += 1
 
 // Something is calling to tell this datum a class it rolled is currently maxed out.
 // More shitcode!
@@ -267,7 +268,7 @@
 			plus_power = 0
 			cur_picked_class = null
 			rolled_classes = list() // Make sure to empty this out
-			gacha_rolls()
+			lower_quality_gacha_rolls()
 			browser_slop()
 			SSrole_class_handler.adjust_session_rerolls(linked_client.ckey, -1)
 			return
@@ -292,3 +293,26 @@
 	linked_client << browse(null, "window=class_select_yea")
 
 
+
+//This was theoretically really bad as it could technically be a infinite loop replaced with a more mathematical solution
+/datum/class_select_handler/proc/old_gacha_rolls()
+	//Gacha time, maybe I get a SSR Hunter
+	for(var/i=1, i <= total_free_class, i++)
+		var/datum/advclass/pickme = pick(viable_free_classes)
+		if(pickme in rolled_classes)
+			rolled_classes[pickme] += 1
+			i--
+			continue
+		else
+			rolled_classes[pickme] = 0
+
+	
+	//Getting a + on this will be harder because you get less rolls and theres usually a lot, but If you do its pretty major honestly.
+	for(var/i=1, i <= total_combat_class, i++)
+		var/datum/advclass/combat_class = pick(viable_combat_classes)
+		if(combat_class in rolled_classes)
+			rolled_classes[combat_class] += 1
+			i--
+			continue 
+		else
+			rolled_classes[combat_class] = 0

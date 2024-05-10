@@ -295,7 +295,7 @@
 	//stop collecting feedback during grifftime
 	SSblackbox.Seal()
 
-	SStriumphs.time_for_roundend()
+	
 
 	sleep(10 SECONDS)
 	ready_for_reboot = TRUE

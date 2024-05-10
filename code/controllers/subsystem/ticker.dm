@@ -825,6 +825,7 @@ SUBSYSTEM_DEF(ticker)
 		to_chat(world, "<span class='boldannounce'>A game master has delayed the round end.</span>")
 		return
 
+	SStriumphs.time_for_reboot()
 	to_chat(world, "<span class='boldannounce'>Rebooting World in [DisplayTimeText(delay)]. [reason]</span>")
 
 	var/start_wait = world.time

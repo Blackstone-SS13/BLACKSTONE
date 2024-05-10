@@ -1,4 +1,5 @@
 /datum/triumph_buy/wipe_triumphs
+	
 	desc = "Burn down the hall of triumphs! Bring everyone back to ZERO!"
 	triumph_cost = 100
 	category = TRIUMPH_CAT_MISC
