@@ -15,7 +15,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/icon_override_f
 	var/list/possible_ages = list(AGE_YOUNG, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	var/sexes = 1		// whether or not the race has sexual characteristics. at the moment this is only 0 for skeletons and shadows
-	var/patreon_req
+	var/patreon_req = 0
 	var/max_age = 75
 	var/list/offset_features = list(OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0),\
 	OFFSET_CLOAK = list(0,0), OFFSET_FACEMASK = list(0,0), OFFSET_HEAD = list(0,0), \
@@ -137,11 +137,13 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /proc/generate_selectable_species()
 	for(var/I in subtypesof(/datum/species))
 		var/datum/species/S = new I
+		GLOB.species_list[S.name] = I
 		if(S.check_roundstart_eligible())
 			GLOB.roundstart_races += S.name
 			qdel(S)
 	if(!GLOB.roundstart_races.len)
-		GLOB.roundstart_races += "human"
+		GLOB.roundstart_races += "Humen"
+	sortList(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_asc))
 
 /datum/species/proc/check_roundstart_eligible()
 	if(id in (CONFIG_GET(keyed_list/roundstart_races)))

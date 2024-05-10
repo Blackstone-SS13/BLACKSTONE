@@ -3,7 +3,7 @@
 
 /datum/species/elf/dark
 	name = "Dark Elf"
-	id = "elf"
+	id = "elfd"
 	desc = "<b>Dark Elf</b><br>\
 	Elves, are a generic term for tall, pointy-eared humanoids\
     Of whom trace their original heritage to the ancient mysterious Snow Elves. \

@@ -120,11 +120,14 @@
 
 
 /datum/preferences/proc/spec_check(mob/user)
+	if(!istype(pref_species))
+		return FALSE
 	if(!(pref_species.name in GLOB.roundstart_races))
 		return FALSE
-	if(user)
-		if(pref_species.patreon_req > user.patreonlevel())
-			return FALSE
+	if(!pref_species.check_roundstart_eligible())
+		return FALSE
+	if(user && (pref_species.patreon_req > user.patreonlevel()))
+		return FALSE
 	return TRUE
 
 /mob/proc/patreonlevel()

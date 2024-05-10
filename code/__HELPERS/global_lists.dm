@@ -40,10 +40,7 @@
 
 
 	//Species
-	for(var/spath in subtypesof(/datum/species))
-		var/datum/species/S = new spath()
-		GLOB.species_list[S.name] = spath
-	sortList(GLOB.species_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
+	generate_selectable_species()
 
 	//Surgeries
 	for(var/path in subtypesof(/datum/surgery))
