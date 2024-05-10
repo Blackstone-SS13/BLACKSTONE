@@ -68,7 +68,7 @@
 	if(hud_used)
 		hud_used.throw_icon?.update_icon()
 		hud_used.give_intent?.update_icon()
-		var/obj/screen/inventory/hand/H
+		var/atom/movable/screen/inventory/hand/H
 		H = hud_used.hand_slots["[oindex]"]
 		if(H)
 			H.update_icon()
@@ -166,7 +166,7 @@
 	throw_mode_off()
 	if(!target || !isturf(loc))
 		return
-	if(istype(target, /obj/screen))
+	if(istype(target, /atom/movable/screen))
 		return
 
 	var/atom/movable/thrown_thing
@@ -779,7 +779,7 @@
 		become_blind(EYES_COVERED)
 	else if(tinttotal >= TINT_DARKENED)
 		cure_blind(EYES_COVERED)
-		overlay_fullscreen("tint", /obj/screen/fullscreen/impaired, 2)
+		overlay_fullscreen("tint", /atom/movable/screen/fullscreen/impaired, 2)
 	else
 		cure_blind(EYES_COVERED)
 		clear_fullscreen("tint", 0)
@@ -819,7 +819,7 @@
 	if(!client)
 		return
 	if(cmode)
-		overlay_fullscreen("CMODE", /obj/screen/fullscreen/crit/cmode)
+		overlay_fullscreen("CMODE", /atom/movable/screen/fullscreen/crit/cmode)
 	else
 		clear_fullscreen("CMODE")
 
@@ -861,14 +861,14 @@
 					visionseverity = 9
 				if(-INFINITY to -24)
 					visionseverity = 10
-			overlay_fullscreen("critvision", /obj/screen/fullscreen/crit/vision, visionseverity)
+			overlay_fullscreen("critvision", /atom/movable/screen/fullscreen/crit/vision, visionseverity)
 		else
 			clear_fullscreen("critvision")
 		if(!succumb_timer)
 			succumb_timer = world.time
-		overlay_fullscreen("crit", /obj/screen/fullscreen/crit, severity)
-		overlay_fullscreen("DD", /obj/screen/fullscreen/crit/death)
-		overlay_fullscreen("DDZ", /obj/screen/fullscreen/crit/zeth)
+		overlay_fullscreen("crit", /atom/movable/screen/fullscreen/crit, severity)
+		overlay_fullscreen("DD", /atom/movable/screen/fullscreen/crit/death)
+		overlay_fullscreen("DDZ", /atom/movable/screen/fullscreen/crit/zeth)
 	else
 		if(succumb_timer)
 			succumb_timer = 0
@@ -880,7 +880,7 @@
 		if(hud_used.stressies)
 			hud_used.stressies.update_icon()
 //	if(blood_volume <= 0)
-//		overlay_fullscreen("DD", /obj/screen/fullscreen/crit/death)
+//		overlay_fullscreen("DD", /atom/movable/screen/fullscreen/crit/death)
 //	else
 //		clear_fullscreen("DD")
 
@@ -902,7 +902,7 @@
 				severity = 6
 			if(45 to INFINITY)
 				severity = 7
-		overlay_fullscreen("oxy", /obj/screen/fullscreen/oxy, severity)
+		overlay_fullscreen("oxy", /atom/movable/screen/fullscreen/oxy, severity)
 	else
 		clear_fullscreen("oxy")
 /*
@@ -923,7 +923,7 @@
 				severity = 5
 			if(85 to INFINITY)
 				severity = 6
-		overlay_fullscreen("brute", /obj/screen/fullscreen/brute, severity)
+		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
 		clear_fullscreen("brute")*/
 
@@ -941,11 +941,11 @@
 				severity = 4
 			if(80 to 99)
 				severity = 5
-				overlay_fullscreen("painflash", /obj/screen/fullscreen/painflash)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
 			if(99 to INFINITY)
 				severity = 6
-				overlay_fullscreen("painflash", /obj/screen/fullscreen/painflash)
-		overlay_fullscreen("brute", /obj/screen/fullscreen/brute, severity)
+				overlay_fullscreen("painflash", /atom/movable/screen/fullscreen/painflash)
+		overlay_fullscreen("brute", /atom/movable/screen/fullscreen/brute, severity)
 	else
 		clear_fullscreen("brute")
 		clear_fullscreen("painflash")
@@ -1014,7 +1014,7 @@
 	if(handcuffed)
 //		drop_all_held_items()
 		stop_pulling()
-		throw_alert("handcuffed", /obj/screen/alert/restrained/handcuffed, new_master = src.handcuffed)
+		throw_alert("handcuffed", /atom/movable/screen/alert/restrained/handcuffed, new_master = src.handcuffed)
 		SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "handcuffed", /datum/mood_event/handcuffed)
 	else
 		clear_alert("handcuffed")

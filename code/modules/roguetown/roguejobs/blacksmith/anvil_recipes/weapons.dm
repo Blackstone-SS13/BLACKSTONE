@@ -106,6 +106,12 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/rogueweapon/greatsword
 
+/datum/anvil_recipe/weapons/buckler
+	name = "buckler (+steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/rogueweapon/shield/buckler
+
 /// UPGRADED WEAPONS
 
 //GOLD
@@ -144,6 +150,18 @@
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/rogueweapon/sword/rapier)
 	created_item = /obj/item/rogueweapon/sword/rapier/dec
+
+// SILVER
+/datum/anvil_recipe/weapons/esaber
+	name = "elvish saber"
+	req_bar = /obj/item/ingot/silver
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/rogueweapon/sword/sabre/elf
+
+/datum/anvil_recipe/weapons/edagger
+	name = "elvish dagger"
+	req_bar = /obj/item/ingot/silver
+	created_item = /obj/item/rogueweapon/huntingknife/elvish
 
 ///STICK HANDLE
 /datum/anvil_recipe/weapons/saxe

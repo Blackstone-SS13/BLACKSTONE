@@ -19,8 +19,6 @@
 /datum/antagonist/aspirant/on_gain()
 	. = ..()
 	owner.special_role = ROLE_ASPIRANT
-	var/mob/living/carbon/human/H = owner.current
-	H.cmode_music = 'sound/music/combatbandit.ogg'
 
 /datum/antagonist/aspirant/greet()
 	to_chat(owner, "<span class='danger'>I have grown weary of being near the throne, but never on it. I have decided that it is time I ruled Enigma.</span>")

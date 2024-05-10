@@ -15,6 +15,7 @@
 		RTRAIT_NOSTINK,
 		RTRAIT_EMPATH,
 		RTRAIT_NOFATSTAM,
+		TRAIT_NOPAIN,
 		TRAIT_NOPAINSTUN,
 		TRAIT_STEELHEARTED,
 		TRAIT_NOMOOD,
@@ -66,7 +67,7 @@
 	/// Wonders we have made
 	var/list/wonders_made = list()
 	/// Hallucinations screen object
-	var/obj/screen/fullscreen/maniac/hallucinations
+	var/atom/movable/screen/fullscreen/maniac/hallucinations
 
 /datum/antagonist/maniac/New()
 	set_keys()
@@ -85,7 +86,7 @@
 	if(owner.current)
 		if(ishuman(owner.current))
 			var/mob/living/carbon/human/dreamer = owner.current
-			dreamer.cmode_music = 'sound/music/combatmaniac2.ogg'
+			dreamer.cmode_music = 'sound/music/combat_maniac2.ogg'
 			owner.adjust_skillrank(/datum/skill/combat/knives, 6, TRUE)
 			owner.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
 			owner.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
@@ -97,7 +98,7 @@
 			dreamer.STAEND = 20
 		for(var/trait in applied_traits)
 			ADD_TRAIT(owner.current, trait, "[type]")
-		hallucinations = owner.current.overlay_fullscreen("maniac", /obj/screen/fullscreen/maniac)
+		hallucinations = owner.current.overlay_fullscreen("maniac", /atom/movable/screen/fullscreen/maniac)
 	LAZYINITLIST(owner.learned_recipes)
 	owner.learned_recipes |= recipe_progression[1]
 	forge_villain_objectives()
@@ -158,8 +159,8 @@
 /datum/antagonist/maniac/proc/agony(mob/living/carbon/dreamer)
 	var/sound/im_sick = sound('sound/villain/imsick.ogg', TRUE, FALSE, CHANNEL_IMSICK, 100)
 	SEND_SOUND(dreamer, im_sick)
-	dreamer.overlay_fullscreen("dream", /obj/screen/fullscreen/dreaming)
-	dreamer.overlay_fullscreen("wakeup", /obj/screen/fullscreen/dreaming/waking_up)
+	dreamer.overlay_fullscreen("dream", /atom/movable/screen/fullscreen/dreaming)
+	dreamer.overlay_fullscreen("wakeup", /atom/movable/screen/fullscreen/dreaming/waking_up)
 	for(var/trait in final_traits)
 		ADD_TRAIT(dreamer, trait, "[type]")
 	waking_up = TRUE
