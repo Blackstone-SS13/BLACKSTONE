@@ -5,11 +5,11 @@
 	name = "Half Orc"
 	id = "halforc"
 	desc = "<b>Half Orcs</b><br>\
-	Half Orcs are usually born through unconsentual relations of Orc and Human \
+	Born through a union between one of the Maurading Orcs and one of the civilized races, \
 	Half Orcs are known for their strength and lineage derived from their orcish heritage. \
-	They mostly take their cosmetics characteristics from their human side. \
-	Most of Civilized society is reviled and disgusted with half orcs. \
-	The only known human nation to completely integrate half orcs are the tribes of gronn. \""
+	They mostly take cosmetics characteristics from their human side. \
+	Every civilized society treats Half Orcs with distain and hate \
+	The only known nation to completely integrate half orcs are the tribes of gronn. \"
 
 
 	skin_tone_wording = "Clan"
