@@ -255,7 +255,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	blocksound = SOFTHIT
 	allowed_sex = list("female")
-	allowed_race = list("humen", "tiefling", "argonian", "elf", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "aasimar")
 	blade_dulling = DULLING_BASHCHOP
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
@@ -291,7 +291,7 @@
 	name = "arming jacket"
 	icon_state = "dgamb"
 	allowed_sex = list(MALE)
-	allowed_race = list("hume n", "tiefling", "argonian", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar")
 
 /obj/item/clothing/suit/roguetown/armor/leather
 	name = "leather armor"
@@ -382,7 +382,7 @@
 	icon_state = "nightman"
 	sleeved = 'icons/roguetown/clothing/onmob/armor.dmi'
 	allowed_sex = list(MALE)
-	allowed_race = list("hume n", "tiefling", "argonian", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar")
 
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/hand
@@ -391,7 +391,7 @@
 	icon_state = "handcoat"
 	color = null
 	allowed_sex = list(MALE, FEMALE)
-	allowed_race = list("hume n", "tiefling", "argonian", "dwarf", "elf", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "dwarf", "elfd", "elfw", "helf", "aasimar")
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/black
 	color = "#3c3a38"

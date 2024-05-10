@@ -109,13 +109,13 @@
 			H.change_stat("speed", 1)
 
 	if(H.dna?.species)
-		if(H.dna.species.id == "humen")
-			backr = /obj/item/rogue/instrument/lute
-		if(H.dna.species.id == "dwarf")
-			backr = /obj/item/rogue/instrument/accord
-		if(H.dna.species.id == "elf")
+		if(iself(H) || ishalfelf(H))
 			backr = /obj/item/rogue/instrument/harp
-		if(H.dna.species.id == "tiefling" || H.dna.species.id == "argonian")
+		else if(H.dna.species.id == "humen")
+			backr = /obj/item/rogue/instrument/lute
+		else if(H.dna.species.id == "dwarf")
+			backr = /obj/item/rogue/instrument/accord
+		else if(H.dna.species.id == "tiefling" || H.dna.species.id == "argonian")
 			backr = /obj/item/rogue/instrument/guitar
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)

@@ -3,7 +3,7 @@
 
 /datum/species/elf/wood
 	name = "Elf"
-	id = "elfs"
+	id = "elfw"
 	desc = "<b>Elf</b><br>\
 	Elves, or Wood-Elf by the Elder races, are a generic term for tall, pointy-eared \
 	humanoids that trace their original heritage to the ancient mysterious Snow Elves. \
