@@ -1242,7 +1242,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return FALSE
 
 	var/is_nudist = HAS_TRAIT(H, RTRAIT_NUDIST)
-	var/is_retarded = HAS_TRAIT(H, TRAIT_RETARD_ANATOMY)
+	var/is_retarded = HAS_TRAIT(H, RTRAIT_RETARD_ANATOMY)
 	var/num_arms = H.get_num_arms(FALSE)
 	var/num_legs = H.get_num_legs(FALSE)
 
