@@ -213,7 +213,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	"Priest",
 	"Knight")
 	var/num_siege = 0
-	if(num_players() >= 10)
+	if(num_players() <= 10)
 		num_siege = CLAMP(round(num_players() / 2), 30, 40)
 #ifdef TESTSERVER
 	num_siege = 999
