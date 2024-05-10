@@ -14,9 +14,7 @@
 
 	//This uses the "IDs" as below -- they should not have spaces in them though since they're strings it won't matter much
 	//It needs at least 1 to do anything, no limit in max number of templates
-	//Each ID should be unique!!
-	templates = list( "brahmin_ranch_1","brahmin_ranch_2","brahmin_ranch_3" )
-
+	templates = list( "bog_shack_small_1","bog_shack_small_2","bog_shack_small_3" )
 
 //The template path as directly below should be unique, though doesn't matter what it's actually named since we use the ID for everything.
 /datum/map_template/bog_shack_small_1
@@ -24,6 +22,7 @@
 	//Your IDs must be unique! Make sure you don't just copy and paste and forget to change it!
 	id = "bog_shack_small_1"
 	//Mapppath is a direct pointer to the DMM file of your mini map, make sure no typos! The map file can be anywhere as long as this is set properly.
+	//Do NOT include (checkmark) the .dmm file! Just stick it in a folder and you're done with it.
 	mappath = "_maps/map_files/templates/lil_bog_shack/bog_shack_small_1.dmm"
 
 /datum/map_template/bog_shack_small_2
