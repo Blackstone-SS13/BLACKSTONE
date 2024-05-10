@@ -111,11 +111,11 @@
 	if(H.dna?.species)
 		if(iself(H) || ishalfelf(H))
 			backr = /obj/item/rogue/instrument/harp
-		else if(H.dna.species.id == "humen")
+		else if(ishumannorthern(H))
 			backr = /obj/item/rogue/instrument/lute
-		else if(H.dna.species.id == "dwarf")
+		else if(isdwarf(H))
 			backr = /obj/item/rogue/instrument/accord
-		else if(H.dna.species.id == "tiefling" || H.dna.species.id == "argonian")
+		else if(istiefling(H) || isargonian(H))
 			backr = /obj/item/rogue/instrument/guitar
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)

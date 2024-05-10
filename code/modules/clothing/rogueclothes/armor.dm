@@ -391,7 +391,7 @@
 	icon_state = "handcoat"
 	color = null
 	allowed_sex = list(MALE, FEMALE)
-	allowed_race = list("humen", "tiefling", "argonian", "dwarf", "elfd", "elfw", "helf", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "dwarfm", "elfd", "elfw", "helf", "aasimar")
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/black
 	color = "#3c3a38"

@@ -84,7 +84,7 @@
 /obj/item/clothing/suit/roguetown/shirt/undershirt/puritan
 	name = "archivists silks"
 	icon_state = "puritan_shirt"
-	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarf", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarfm", "aasimar")
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 	icon_state = "sailorblues"

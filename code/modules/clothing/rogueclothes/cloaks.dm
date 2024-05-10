@@ -721,12 +721,12 @@
 
 /obj/item/clothing/cloak/cape/puritan
 	icon_state = "puritan_cape"
-	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarf", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarfm", "aasimar")
 
 /obj/item/clothing/cloak/cape/archivist
 	icon_state = "puritan_cape"
 	color = CLOTHING_BLACK
-	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarf", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarfm", "aasimar")
 
 /obj/item/clothing/cloak/cape/rogue
 	name = "cape"

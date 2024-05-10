@@ -1,7 +1,7 @@
 //used in various places
-#define ALL_RACES_LIST		list("humen", "dwarf", "elf", "tiefling", "argonian", "aasimar")
+#define ALL_RACES_LIST		list("humen", "dwarfm", "elfw", "elfd", "helf", "tiefling", "argonian", "aasimar")
 
-#define ALL_RACES_LIST_NAMES		list("Humen", "Half-Elf", "Elf", "Elf", "Dwarf","Dwarf","Tiefling", "Aasimar")
+#define ALL_RACES_LIST_NAMES		list("Humen", "Elf", "Dark Elf", "Half-Elf", "Dwarf","Dwarf","Tiefling", "Aasimar")
 
 #define ALL_PATRON_NAMES_LIST		list("Astrata", "Noc", "Xylix", "Eora", "Malum", "Dendor", "Abyssor", "Necra", "Pestra", "Malum", "Ravox")
 
