@@ -42,11 +42,13 @@
 	if(!H.dna?.species || H.dna?.species.id == "dwarf")
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress
 	else
-		armor = /obj/item/clothing/suit/roguetown/armor/armordress
+		if(prob(66))
+			armor = /obj/item/clothing/suit/roguetown/armor/armordress/alt
+		else
+			armor = /obj/item/clothing/suit/roguetown/armor/armordress
 	head = /obj/item/clothing/head/roguetown/hennin
 //		SSticker.rulermob = H
-	if(prob(66))
-		armor = /obj/item/clothing/suit/roguetown/armor/armordress/alt
+
 	id = /obj/item/clothing/ring/silver
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	if(H.mind)
