@@ -95,6 +95,7 @@ GLOBAL_LIST_INIT(our_forest_sex, typecacheof(list(
 #define iswoodelf(A) (is_species(A, /datum/species/elf/wood))
 #define ishalfelf(A) (is_species(A, /datum/species/human/halfelf))
 #define istiefling(A) (is_species(A, /datum/species/tieberian))
+#define isargonian(A) (is_species(A, /datum/species/lizard/brazillian))
 
 //more carbon mobs
 #define ismonkey(A) (istype(A, /mob/living/carbon/monkey))
