@@ -40,6 +40,10 @@
 
 
 	//Species
+	for(var/species_path in subtypesof(/datum/species))
+		var/datum/species/species = new species_path()
+		GLOB.species_list[species.name] = species_path
+	sortList(GLOB.species_list, GLOBAL_PROC_REF(cmp_typepaths_asc))
 	generate_selectable_species()
 
 	//Surgeries

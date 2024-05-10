@@ -135,18 +135,17 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 
 /proc/generate_selectable_species()
-	for(var/I in subtypesof(/datum/species))
-		var/datum/species/S = new I
-		GLOB.species_list[S.name] = I
-		if(S.check_roundstart_eligible())
-			GLOB.roundstart_races += S.name
-			qdel(S)
+	for(var/species_type in subtypesof(/datum/species))
+		var/datum/species/species = new species_type
+		if(species.check_roundstart_eligible())
+			GLOB.roundstart_races += species.name
+		qdel(species)
 	if(!GLOB.roundstart_races.len)
 		GLOB.roundstart_races += "Humen"
 	sortList(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_asc))
 
 /datum/species/proc/check_roundstart_eligible()
-	if(id in (CONFIG_GET(keyed_list/roundstart_races)))
+	if(name && id && (id in (CONFIG_GET(keyed_list/roundstart_races))))
 		return TRUE
 	return FALSE
 
