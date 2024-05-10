@@ -53,6 +53,19 @@
 		to_chat(src, "<span class='danger'>The Github URL is not set in the server configuration.</span>")
 	return
 
+/client/verb/mentorhelp()
+	set name = "Mentorhelp"
+	set desc = ""
+	set category = "Admin"
+	var/mentorhelpurl = CONFIG_GET(string/mentorhelpurl)
+	if(mentorhelpurl)
+		if(alert("This will open the mentorhelp channel in your browser. Are you sure?",,"Yes","No")!="Yes")
+			return
+		src << link(mentorhelpurl)
+	else
+		to_chat(src, "<span class='danger'>The mentorhelp channel is not set in the server configuration.</span>")
+	return
+
 /client/verb/reportissue()
 	set name = "report-issue"
 	set desc = ""
