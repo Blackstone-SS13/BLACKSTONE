@@ -484,11 +484,17 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		GLOB.pre_setup_antags -= bandito
 		bandits += bandito
 ///////////////// SIEGE
-	for(var/datum/mind/siege in pre_siegers)
-		var/datum/antagonist/new_antag = new /datum/antagonist/siege()
-		siege.add_antag_datum(new_antag)
-		GLOB.pre_setup_antags -= siege
-		siegers += siege
+	if(pre_siegers.len)
+		var/datum/mind/leader_mind = pick_n_take(pre_siegers)
+		var/datum/antagonist/baron = new /datum/antagonist/siege/baron()
+		GLOB.pre_setup_antags -= leader_mind
+		siegers += leader_mind
+		leader_mind.add_antag_datum(baron)
+		for(var/datum/mind/siege in pre_siegers)
+			var/datum/antagonist/new_antag = new /datum/antagonist/siege()
+			siege.add_antag_datum(new_antag)
+			GLOB.pre_setup_antags -= siege
+			siegers += siege
 ///////////////// ASPIRANTS
 	for(var/datum/mind/rogue in pre_aspirants) // Do the aspirant first, so the suppporter works right.
 		if(rogue.special_role == ROLE_ASPIRANT)

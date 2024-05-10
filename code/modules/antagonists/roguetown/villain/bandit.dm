@@ -51,7 +51,10 @@
 		objectives += escape_objective*/
 
 /datum/antagonist/bandit/proc/move_to_spawnpoint()
-	owner.current.forceMove(pick(GLOB.bandit_starts))
+	if(GLOB.bandit_starts.len)
+		owner.current.forceMove(pick(GLOB.bandit_starts))
+	else
+		message_admins("NO BANDIT SPAWNS REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
 
 /datum/antagonist/bandit/proc/equip_bandit()
 

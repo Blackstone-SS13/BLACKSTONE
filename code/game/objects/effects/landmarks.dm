@@ -567,6 +567,15 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	..()
 	GLOB.bandit_starts += loc
 
+/obj/effect/landmark/start/soldier
+	name = "soldier"
+	icon = 'icons/mob/landmarks.dmi'
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/bandit/Initialize()
+	..()
+	GLOB.soldier_starts += loc
+
 /obj/effect/landmark/start/delf
 	name = "delf"
 	icon = 'icons/mob/landmarks.dmi'
