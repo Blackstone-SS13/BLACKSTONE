@@ -39,7 +39,7 @@
 	beltl = /obj/item/roguekey/manor
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
-	if(H.dna && H.dna.species.id == "dwarf")
+	if(!H.dna?.species || H.dna?.species.id == "dwarf")
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress
 	else
 		armor = /obj/item/clothing/suit/roguetown/armor/armordress
