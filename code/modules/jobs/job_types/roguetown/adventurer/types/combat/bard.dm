@@ -109,7 +109,7 @@
 			H.change_stat("speed", 1)
 
 	if(H.dna?.species)
-		if(H.dna.species.id == "human")
+		if(H.dna.species.id == "humen")
 			backr = /obj/item/rogue/instrument/lute
 		if(H.dna.species.id == "dwarf")
 			backr = /obj/item/rogue/instrument/accord

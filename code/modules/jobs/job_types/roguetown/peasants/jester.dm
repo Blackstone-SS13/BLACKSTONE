@@ -52,7 +52,7 @@
 		H.STALUC = rand(1, 20)
 /*		if(H.gender == MALE)
 			if(H.dna?.species)
-				if(H.dna.species.id == "human")
+				if(H.dna.species.id == "humen")
 					H.dna.species.soundpack_m = new /datum/voicepack/male/jester()
 				if(H.dna.species.id == "dwarf")
 					H.dna.species.soundpack_m = new /datum/voicepack/male/dwarf/jester()
