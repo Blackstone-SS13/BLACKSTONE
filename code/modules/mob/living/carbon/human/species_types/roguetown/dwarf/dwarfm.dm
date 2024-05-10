@@ -39,6 +39,7 @@
 	soundpack_m = /datum/voicepack/male/dwarf
 	soundpack_f = /datum/voicepack/female/dwarf
 	custom_clothes = TRUE
+	clothes_id = "dwarf"
 	offset_features = list(OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0), OFFSET_WRISTS = list(0,0),\
 	OFFSET_CLOAK = list(0,0), OFFSET_FACEMASK = list(0,-4), OFFSET_HEAD = list(0,-4), \
 	OFFSET_FACE = list(0,-4), OFFSET_BELT = list(0,-5), OFFSET_BACK = list(0,-4), \

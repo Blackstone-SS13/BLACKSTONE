@@ -5,6 +5,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species
 	var/id	// if the game needs to manually check my race to do something not included in a proc here, it will use this
 	var/limbs_id		//this is used if you want to use a different species limb sprites. Mainly used for angels as they look like humans.
+	var/clothes_id //id for clothes
 	var/name	// this is the fluff name. these will be left generic (such as 'Lizardperson' for the lizard race) so servers can change them to whatever
 	var/desc
 	var/default_color = "#FFF"	// if alien colors are disabled, this is the color that will be used by that race
@@ -126,8 +127,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 /datum/species/New()
 
-	if(!limbs_id)	//if we havent set a limbs id to use, just use our own id
-		limbs_id = name
+	if(!limbs_id) //if we havent set a limbs id to use, just use our own id
+		limbs_id = id
+	if(!clothes_id)
+		clothes_id = id
 	..()
 
 /datum/species/proc/after_creation(mob/living/carbon/human/H)
