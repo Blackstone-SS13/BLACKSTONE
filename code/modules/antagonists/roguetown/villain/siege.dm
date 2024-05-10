@@ -9,17 +9,6 @@
 	var/is_baron = FALSE
 	confess_lines = list("FOR THE BARON!!", "I WILL NOT SERVE THE KING!", "I WILL NOT FOLLOW YOUR LAWS!")
 
-/datum/antagonist/siege/herald
-	name = "Baron's Herald"
-	roundend_category = "siege"
-	antagpanel_category = "Siege"
-	job_rank = ROLE_SIEGE
-	antag_hud_type = ANTAG_HUD_OPS
-	antag_hud_name = "baron's men"
-	var/datum/team/siege/siege_team
-	var/is_baron = FALSE
-	confess_lines = list("FOR THE BARON!!", "I WILL NOT SERVE THE KING!", "I WILL NOT FOLLOW YOUR LAWS!")
-
 /datum/antagonist/siege/on_gain()
 	owner.special_role = "Siege"
 	owner.assigned_role = "Siege"
