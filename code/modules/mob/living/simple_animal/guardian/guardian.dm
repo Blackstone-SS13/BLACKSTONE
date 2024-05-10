@@ -420,7 +420,7 @@ GLOBAL_LIST_EMPTY(parasites) //all currently existing/living guardians
 			to_chat(src, "<span class='holoparasite'>I attempt to reset <font color=\"[G.namedatum.colour]\"><b>[G.real_name]</b></font>'s personality...</span>")
 			var/list/mob/candidates = pollGhostCandidates("Do you want to play as [src.real_name]'s [G.real_name]?", ROLE_PAI, null, FALSE, 100)
 			if(LAZYLEN(candidates))
-				var/mobr/C = pick(candidates)
+				var/mob/C = pick(candidates)
 				to_chat(G, "<span class='holoparasite'>My user reset you, and my body was taken over by a ghost. Looks like they weren't happy with my performance.</span>")
 				to_chat(src, "<span class='holoparasite bold'>My <font color=\"[G.namedatum.colour]\">[G.real_name]</font> has been successfully reset.</span>")
 				message_admins("[key_name_admin(C)] has taken control of ([ADMIN_LOOKUPFLW(G)])")
