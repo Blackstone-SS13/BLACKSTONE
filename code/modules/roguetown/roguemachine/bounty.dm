@@ -116,8 +116,6 @@
 
 	if(state == FALSE)
 		say("By King's decree, the Excidium is currently inactive.")
-		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-		sleep(3 SECONDS)
 		return
 
 	if(!ishuman(user)) return
@@ -139,9 +137,8 @@
 
 /obj/structure/roguemachine/bounty/attackby(obj/item/P, mob/user, params)
 
-	if(state == FALSE) //vulnerable to spam abuse?
+	if(state == FALSE)
 		say("By King's decree, the Excidium is currently inactive.")
-		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 		return
 
 	if(!(ishuman(user))) return
@@ -149,7 +146,6 @@
 	// Only heads are allowed
 	if(P.type != /obj/item/bodypart/head) return
 
-	// Save the head in case it's not the right one
 	var/obj/item/bodypart/head/stored_head = P
 	var/correct_head = FALSE
 
@@ -169,14 +165,20 @@
 			say("I have been sated.")
 			playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1) 
 			bounties -= b
-		//TODO: give out reward
+			
+		//TODO: give out reward. function to determine optimal coin type
 
 	// No valid bounty for this head?
 	if(correct_head == FALSE)
-		say("This skull carries no price.")
+		say("This skull carried no price.")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-		var/obj/item/bodypart/head/incorrect_head = new stored_head(src.loc)
-		//spawn the head back
+
+	// Head has been "analyzed". Return it.
+	sleep(2 SECONDS)
+	var/location = get_turf(src)
+	stored_head = new /obj/item/bodypart/head(location)
+	stored_head.name = "mutilated head"
+	stored_head.desc = "This head has been violated beyond recognition, the work of a horrific machine."
 
 
 
