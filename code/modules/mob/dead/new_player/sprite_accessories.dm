@@ -428,19 +428,19 @@
 	name = "Raider"
 	icon_state = "facial_viking"
 	gender = MALE
-	specuse = list("humen")
+	specuse = list("humen", "halforc")
 
 /datum/sprite_accessory/facial_hair/vandyke
 	name = "Rumata"
 	icon_state = "facial_vandyke"
 	gender = MALE
-	specuse = list("humen", "tiefling")
+	specuse = list("humen", "tiefling", "halforc")
 
 /datum/sprite_accessory/facial_hair/burns
 	name = "Sideburns"
 	icon_state = "facial_burns"
 	gender = MALE
-	specuse = list("humen", "elfd", "elfw", "helf", "tiefling")
+	specuse = list("humen", "elfd", "elfw", "helf", "tiefling", "halforc")
 
 
 /datum/sprite_accessory/facial_hair/chops
@@ -513,13 +513,13 @@
 	name = "Earrings"
 	icon_state = "earrings_sil"
 	gender = FEMALE
-	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf")
+	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf", "halforc")
 
 /datum/sprite_accessory/accessories/earrings
 	name = "Earrings (G)"
 	icon_state = "earrings"
 	gender = FEMALE
-	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf")
+	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf", "halforc")
 
 /datum/sprite_accessory/accessories/earrings/em
 	name = "Earrings (E)"
@@ -531,13 +531,13 @@
 	name = "Pierced Brow (L)"
 	icon_state = "eyepierce"
 	gender = FEMALE
-	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf")
+	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf", "halforc")
 
 /datum/sprite_accessory/accessories/eyepierce/alt
 	name = "Pierced Brow (R)"
 	icon_state = "eyepiercealt"
 	gender = FEMALE
-	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf")
+	specuse = list("humen", "dwarfm", "elfd", "elfw", "helf", "halforc")
 
 /datum/sprite_accessory/accessories/choker
 	name = "Neckband"
