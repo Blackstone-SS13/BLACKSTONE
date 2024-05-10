@@ -145,8 +145,6 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		forcedmodes |= SSticker.manualmodes
 	var/list/major_modes = list(1, 2, 3, 4)
 	var/list/minor_modes = list(1,2,3)
-	if(prob(25))
-		minor_modes += 4 //maniac
 	var/majorpicked = pick(major_modes)
 	if(forcedmodes.len)
 		message_admins("Manual gamemodes selected.")
@@ -186,6 +184,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 			pick_siege()
 			minor_modes = list(2,3) //Remove bandit, would take up too many players
 			log_game("Major Antagonist: Siege")
+	if(prob(25))
+		minor_modes += 4 //maniac
 	minor_modes = shuffle(minor_modes)
 	for(var/m in minor_modes)
 		switch(m)
