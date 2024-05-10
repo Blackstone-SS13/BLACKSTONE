@@ -643,7 +643,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	if(!client)
 		return
 	mind.areas_entered += A.first_time_text
-	var/obj/screen/area_text/T = new()
+	var/atom/movable/screen/area_text/T = new()
 	client.screen += T
 	T.maptext = {"<span style='vertical-align:top; text-align:center;
 				color: #820000; font-size: 300%;
@@ -657,7 +657,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 	animate(T, alpha = 255, time = 10, easing = EASE_IN)
 	addtimer(CALLBACK(src, PROC_REF(clear_area_text), T), 35)
 
-/mob/living/proc/clear_area_text(obj/screen/A)
+/mob/living/proc/clear_area_text(atom/movable/screen/A)
 	if(!A)
 		return
 	if(!client)
@@ -669,7 +669,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 			client.screen -= A
 			qdel(A)
 
-/mob/living/proc/clear_time_icon(obj/screen/A)
+/mob/living/proc/clear_time_icon(atom/movable/screen/A)
 	if(!A)
 		return
 	if(!client)

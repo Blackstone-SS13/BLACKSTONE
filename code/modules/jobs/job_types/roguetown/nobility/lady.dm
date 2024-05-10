@@ -1,5 +1,5 @@
 /datum/job/roguetown/lady
-	title = "Queen"
+	title = "Queen Consort"
 	flag = LADY
 	department_flag = NOBLEMEN
 	faction = "Station"
@@ -22,6 +22,16 @@
 	give_bank_account = TRUE
 	min_pq = 2
 
+/datum/job/roguetown/exlady //just used to change the ladys title
+	title = "Queen Dowager"
+	flag = ADVENTURER
+	department_flag = NOBLEMEN
+	faction = "Station"
+	total_positions = 0
+	spawn_positions = 0
+	display_order = JDO_LADY
+	give_bank_account = TRUE
+
 /datum/outfit/job/roguetown/lady/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
@@ -30,32 +40,7 @@
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
 	armor = /obj/item/clothing/suit/roguetown/armor/armordress
-	if(SSticker.rulertype == "Queen")
-		head = /obj/item/clothing/head/roguetown/crown/serpcrown
-		cloak = /obj/item/clothing/cloak/lordcloak
-		belt = /obj/item/storage/belt/rogue/leather/plaquegold
-		armor = /obj/item/clothing/suit/roguetown/armor/armordress/alt
-		l_hand = /obj/item/rogueweapon/lordscepter
-		if(H.mind)
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
-			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-			if(H.age == AGE_OLD)
-				H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-			H.change_stat("intelligence", 3)
-			H.change_stat("endurance", 3)
-			H.change_stat("speed", 2)
-			H.change_stat("perception", 2)
-			H.change_stat("fortune", 5)
-	else
-		head = /obj/item/clothing/head/roguetown/hennin
+	head = /obj/item/clothing/head/roguetown/hennin
 //		SSticker.rulermob = H
 	if(prob(66))
 		armor = /obj/item/clothing/suit/roguetown/armor/armordress/alt
@@ -66,11 +51,3 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-
-/datum/job/roguetown/lady/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
-	..()
-	if(SSticker.rulertype == "Queen")
-		SSticker.select_ruler()
-		if(L)
-			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is Queen of Rockhill.</span></span></b>")
-			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)

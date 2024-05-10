@@ -271,12 +271,6 @@ SUBSYSTEM_DEF(ticker)
 							to_chat(player, "<span class='warning'>You cannot be [V] and thus are not considered.</span>")
 							continue
 				readied_jobs.Add(V)
-	if("Merchant" in readied_jobs)
-		if(("King" in readied_jobs) || ("Queen" in readied_jobs))
-			if("King" in readied_jobs)
-				rulertype = "King"
-			else
-				rulertype = "Queen"
 		/*	
 			// These else conditions stop the round from starting unless there is a merchant, king, and queen.
 		else
@@ -547,21 +541,12 @@ SUBSYSTEM_DEF(ticker)
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/select_ruler()
-	switch(rulertype)
-		if("King")
-			for(var/mob/living/carbon/human/K in world)
-				if(istype(K, /mob/living/carbon/human/dummy))
-					continue
-				if(K.job == "King")
-					rulermob = K
-					return
-		if("Queen")
-			for(var/mob/living/carbon/human/Q in world)
-				if(istype(Q, /mob/living/carbon/human/dummy))
-					continue
-				if(Q.job == "Queen")
-					rulermob = Q
-					return
+	for(var/mob/living/carbon/human/K in world)
+		if(istype(K, /mob/living/carbon/human/dummy))
+			continue
+		if(K.job == "King")
+			rulermob = K
+			return
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/i in GLOB.new_player_list)
@@ -600,7 +585,7 @@ SUBSYSTEM_DEF(ticker)
 			qdel(player)
 			living.notransform = TRUE
 			if(living.client)
-				var/obj/screen/splash/S = new(living.client, TRUE)
+				var/atom/movable/screen/splash/S = new(living.client, TRUE)
 				S.Fade(TRUE)
 			livings += living
 	if(livings.len)

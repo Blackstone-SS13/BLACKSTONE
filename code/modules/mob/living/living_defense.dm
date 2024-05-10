@@ -130,7 +130,7 @@
 					if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
 						if(can_embed(I))
 							if(prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-								//throw_alert("embeddedobject", /obj/screen/alert/embeddedobject)
+								//throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 								simple_embedded_objects |= I
 								I.add_mob_blood(src)//it embedded itself in you, of course it's bloody!
 								I.forceMove(src)
@@ -567,7 +567,7 @@
 	return TRUE
 
 //called when the mob receives a bright flash
-/mob/living/proc/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0, type = /obj/screen/fullscreen/flash)
+/mob/living/proc/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0, type = /atom/movable/screen/fullscreen/flash)
 	if(HAS_TRAIT(src, TRAIT_NOFLASH))
 		return FALSE
 	if(get_eye_protection() < intensity && (override_blindness_check || !(HAS_TRAIT(src, TRAIT_BLIND))))

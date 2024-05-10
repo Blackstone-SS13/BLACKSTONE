@@ -52,7 +52,7 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(4,4,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, pick(3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE) 

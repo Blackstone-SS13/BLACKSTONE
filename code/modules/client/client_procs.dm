@@ -1038,7 +1038,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	var/pos = 0
 	for(var/D in GLOB.cardinals)
 		pos++
-		var/obj/screen/char_preview/O = LAZYACCESS(char_render_holders, "[D]")
+		var/atom/movable/screen/char_preview/O = LAZYACCESS(char_render_holders, "[D]")
 		if(O)
 			screen -= O
 			char_render_holders -= O
@@ -1059,8 +1059,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 				O.screen_loc = "character_preview_map:0:2,0:10"
 
 /client/proc/clear_character_previews()
-	for(var/obj/screen/S in char_render_holders)
-//		var/obj/screen/S = char_render_holders[index]
+	for(var/atom/movable/screen/S in char_render_holders)
+//		var/atom/movable/screen/S = char_render_holders[index]
 		screen -= S
 		qdel(S)
 	char_render_holders = list()
