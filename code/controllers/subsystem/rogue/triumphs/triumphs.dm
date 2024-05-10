@@ -223,7 +223,9 @@ SUBSYSTEM_DEF(triumphs)
 // Wipe the triumphs of everyone
 // We will also wipe the file mostly cause someone might attempt to crash the server if this occurs
 // (And they can go fuck themselves)
-/datum/controller/subsystem/triumphs/proc/wipe_all_triumphs()
+/datum/controller/subsystem/triumphs/proc/wipe_all_triumphs(target_ckey)
+	if(!target_ckey)
+		return
 	triumph_amount_cache = list()
 
 	var/json_file = file(triumphs_json_path)
