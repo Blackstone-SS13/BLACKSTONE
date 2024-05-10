@@ -68,7 +68,7 @@
 		addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "SOLDIER"), 5 SECONDS)
 		to_chat(H, "<span class='boldnotice'>You are one of the Baron's men!</span>")
 		H.equipOutfit(/datum/outfit/job/roguetown/bandit)
-		H.cmode_music = 'sound/music/combatbandit.ogg'
+		H.cmode_music = 'sound/music/combat_bandit.ogg'
 
 /datum/outfit/job/roguetown/soldier/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -132,7 +132,7 @@
 		H.age = AGE_ADULT
 		H.set_species(/datum/species/human/northern) //setspecies randomizes body
 		H.after_creation()
-	H.cmode_music = 'sound/music/combatbandit.ogg'
+	H.cmode_music = 'sound/music/combat_bandit.ogg'
 	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "BARON"), 5 SECONDS)
 	if(H)
 		to_chat(H, "<span class='boldnotice'>You are the Baron!</span>")
