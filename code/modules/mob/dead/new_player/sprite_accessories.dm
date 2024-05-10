@@ -680,6 +680,7 @@
 
 /datum/sprite_accessory/body_markings
 	icon = 'icons/mob/mutant_bodyparts.dmi'
+	specuse = list("argonian")
 
 /datum/sprite_accessory/body_markings/none
 	name = "None"
@@ -703,10 +704,11 @@
 /datum/sprite_accessory/tails
 	icon = 'icons/mob/mutant_bodyparts.dmi'
 	gender = MALE
-	specuse = list()
+	specuse = list("argonian")
 
 /datum/sprite_accessory/tails_animated
 	icon = 'icons/mob/mutant_bodyparts.dmi'
+	specuse = list("argonian")
 
 /datum/sprite_accessory/tails/lizard/smooth
 	name = "Smooth"
@@ -760,6 +762,7 @@
 
 /datum/sprite_accessory/snouts
 	icon = 'icons/mob/mutant_bodyparts.dmi'
+	specuse = list("argonian")
 
 /datum/sprite_accessory/snouts/sharp
 	name = "Sharp"
@@ -891,6 +894,7 @@
 
 /datum/sprite_accessory/frills
 	icon = 'icons/mob/mutant_bodyparts.dmi'
+	specuse = list("argonian")
 
 /datum/sprite_accessory/frills/none
 	name = "None"
@@ -910,9 +914,11 @@
 
 /datum/sprite_accessory/spines
 	icon = 'icons/mob/mutant_bodyparts.dmi'
+	specuse = list("argonian")
 
 /datum/sprite_accessory/spines_animated
 	icon = 'icons/mob/mutant_bodyparts.dmi'
+	specuse = list("argonian")
 
 /datum/sprite_accessory/spines/none
 	name = "None"
