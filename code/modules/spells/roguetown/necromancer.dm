@@ -23,7 +23,7 @@
 			if(affecting?.heal_wounds(30))
 				target.update_damage_overlays()
 			target.visible_message("<span class='danger'>[target] reforms under the vile energy!</span>", "<span class='notice'>I'm remade by dark magic!</span>")
-			return TRUE /* // Zombies apparently aren't allies.
+			return TRUE */ // Zombies apparently aren't allies.
 		target.visible_message("<span class='info'>Necrotic energy floods over [target]!</span>", "<span class='userdanger'>I feel colder as the dark energy floods into me!</span>")
 		if(iscarbon(target))
 			target.Paralyze(50)
