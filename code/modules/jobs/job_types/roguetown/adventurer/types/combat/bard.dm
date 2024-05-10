@@ -114,7 +114,7 @@
 			backr = /obj/item/rogue/instrument/accord
 		if(H.dna.species.id == "elf")
 			backr = /obj/item/rogue/instrument/harp
-		if(H.dna.species.id == "tiefling")
+		if(H.dna.species.id == "tiefling" || H.dna.species.id == "argonian")
 			backr = /obj/item/rogue/instrument/guitar
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)
