@@ -44,7 +44,7 @@
 	tastes = list("cheese" = 1)
 	foodtype = GRAIN
 	eat_effect = null
-	rotprocess = 15 MINUTES
+	rotprocess = 20 MINUTES
 	become_rot_type = null
 	slice_path = null
 
