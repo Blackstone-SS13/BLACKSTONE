@@ -93,7 +93,6 @@
 
 	var/plevel_req = 0
 	var/min_pq = 0
-	var/max_pq = 0
 
 	var/show_in_credits = TRUE
 
@@ -218,7 +217,7 @@
 	if(!H)
 		return FALSE
 	if(CONFIG_GET(flag/enforce_human_authority) && (title in GLOB.command_positions))
-		if(H.dna.species.id != "human")
+		if((H.dna.species.id != "human") && (H.dna.species.id != "humen"))
 			H.set_species(/datum/species/human)
 			H.apply_pref_name("human", preference_source)
 	if(!visualsOnly)

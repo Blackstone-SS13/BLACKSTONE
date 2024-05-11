@@ -61,7 +61,7 @@ GLOBAL_LIST_INIT(nonhuman_positions, list(
 
 GLOBAL_LIST_INIT(noble_positions, list(
 	"King",
-	"Queen",
+	"Queen Consort",
 	"Prince",
 	"Sheriff",
 	"Bailiff",
@@ -108,7 +108,6 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Cook",
 	"Gravedigger",
 	"Jester",
-	"Lunatic",
 	"Miner",
 	"Hunter",
 	"Fisher",

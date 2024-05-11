@@ -688,25 +688,6 @@
 	else
 		to_chat(src, "<span class='info'>I will hear like a mortal.</span>")
 
-
-/client/proc/ghost_up()
-	set category = "GameMaster"
-	set name = "GhostUp"
-	if(!holder)
-		return
-	. = TRUE
-	if(isobserver(mob))
-		mob.ghost_up()
-
-/client/proc/ghost_down()
-	set category = "GameMaster"
-	set name = "GhostDown"
-	if(!holder)
-		return
-	. = TRUE
-	if(isobserver(mob))
-		mob.ghost_down()
-
 ///Moves a mob upwards in z level
 /mob/proc/ghost_up()
 	if(zMove(UP, TRUE))

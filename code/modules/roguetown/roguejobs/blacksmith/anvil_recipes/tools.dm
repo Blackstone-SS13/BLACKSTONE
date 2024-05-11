@@ -94,3 +94,24 @@
 	name = "3x cogs"
 	req_bar = /obj/item/ingot/iron
 	created_item = list(/obj/item/roguegear, /obj/item/roguegear, /obj/item/roguegear)
+
+/datum/anvil_recipe/tools/locks
+	name = "5x locks"
+	req_bar = /obj/item/ingot/iron
+	created_item = list(/obj/item/customlock, /obj/item/customlock, /obj/item/customlock, /obj/item/customlock, /obj/item/customlock)
+
+/datum/anvil_recipe/tools/keys
+	name = "5x keys"
+	req_bar = /obj/item/ingot/iron
+	created_item = list(/obj/item/customblank, /obj/item/customblank, /obj/item/customblank, /obj/item/customblank, /obj/item/customblank)
+
+/datum/anvil_recipe/tools/thresher
+	name = "thresher (+stick)"
+	req_bar = /obj/item/ingot/iron
+	additional_items = list(/obj/item/grown/log/tree/stick)
+	created_item = /obj/item/rogueweapon/thresher
+
+/datum/anvil_recipe/tools/pot
+	name = "pot"
+	req_bar = /obj/item/ingot/iron
+	created_item = /obj/item/reagent_containers/glass/pot //weird how it's a child of glass but whatevs
