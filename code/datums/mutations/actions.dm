@@ -119,6 +119,8 @@
 	school = "evocation"
 	charge_max = 600
 	clothes_req = FALSE
+	learnable = TRUE
+	rarity = 0
 	range = 20
 	projectile_type = /obj/projectile/magic/aoe/fireball/firebreath
 	base_icon_state = "fireball"

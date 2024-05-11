@@ -1,7 +1,6 @@
 #define TARGET_CLOSEST 1
 #define TARGET_RANDOM 2
 
-
 /obj/effect/proc_holder
 	var/panel = "Debug"//What panel the proc holder needs to go on.
 	var/active = FALSE //Used by toggle based abilities.
@@ -129,6 +128,8 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 	opacity = 0
 
 	var/school = "evocation" //not relevant at now, but may be important later if there are changes to how spells work. the ones I used for now will probably be changed... maybe spell presets? lacking flexibility but with some other benefit?
+	var/learnable = FALSE // The spell is acquirable outside of admin intervention or through spawning. Default to "No" because many shouldn't be learned.
+	var/rarity = 0 // Percentage chance to scribe.
 
 	var/charge_type = "recharge" //can be recharge or charges, see charge_max and charge_counter descriptions; can also be based on the holder's vars now, use "holder_var" for that
 

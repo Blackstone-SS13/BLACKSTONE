@@ -53,6 +53,8 @@
 	name = "Mindread"
 	desc = ""
 	charge_max = 50
+	learnable = TRUE
+	rarity = 0
 	range = 7
 	clothes_req = FALSE
 	action_icon_state = "mindread"

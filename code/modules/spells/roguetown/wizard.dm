@@ -3,6 +3,8 @@
 	name = "Bolt of Lightning"
 	desc = ""
 	clothes_req = FALSE
+	learnable = TRUE
+	rarity = 0
 	overlay_state = "lightning"
 	sound = 'sound/magic/lightning.ogg'
 	range = 8
@@ -154,6 +156,8 @@
 /obj/effect/proc_holder/spell/invoked/projectile/fireball
 	name = "Fireball"
 	desc = ""
+	learnable = TRUE
+	rarity = 80
 	clothes_req = FALSE
 	range = 8
 	projectile_type = /obj/projectile/magic/aoe/fireball/rogue
@@ -205,6 +209,8 @@
 	desc = ""
 	clothes_req = FALSE
 	range = 8
+	learnable = TRUE
+	rarity = 10
 	projectile_type = /obj/projectile/magic/aoe/fireball/rogue/great
 	overlay_state = "fireball"
 	sound = list('sound/magic/fireball.ogg')
@@ -230,6 +236,8 @@
 	name = "Fetch"
 	desc = ""
 	clothes_req = FALSE
+	learnable = TRUE
+	rarity = 0
 	range = 15
 	projectile_type = /obj/projectile/magic/fetch
 	overlay_state = ""
