@@ -82,7 +82,7 @@
 		else
 			contents += "Withdrawing Disabled...<BR><BR>"
 	var/datum/browser/popup = new(user, "VENDORTHING", "", 370, 220)
-		if(!canread)
+	if(!canread)
 		contents = stars(contents)
 	popup.set_content(contents)
 	popup.open()
