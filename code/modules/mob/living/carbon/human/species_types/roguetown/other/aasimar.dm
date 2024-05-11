@@ -47,7 +47,7 @@
 	enflamed_icon = "widefire"
 
 /datum/species/aasimar/check_roundstart_eligible()
-	return FALSE //THE DIVINE LIGHT IS SEVERED
+	return TRUE //THE DIVINE LIGHT IS MENDED
 
 /datum/species/aasimar/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
