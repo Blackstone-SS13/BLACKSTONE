@@ -3,8 +3,7 @@
 #define TAB_STOCK 3
 #define TAB_IMPORT 4
 #define TAB_BOUNTIES 5
-#define TAB_EXCIDIUM 6
-#define TAB_LOG 7
+#define TAB_LOG 6
 
 /obj/structure/roguemachine/steward
 	name = "nerve master"
@@ -270,20 +269,6 @@
 					contents += "Demand: [A.demand2word()]<BR>"
 				contents += "<a href='?src=\ref[src];import=\ref[A]'>\[Import [A.importexport_amt] ([A.get_import_price()])\]</a><BR><BR>"
 		if(TAB_BOUNTIES)
-			contents += "<a href='?src=\ref[src];switchtab=[TAB_MAIN]'>\[Return\]</a><BR>"
-			contents += "<center>Bounties<BR>"
-			contents += "--------------<BR>"
-			contents += "Treasury: [SStreasury.treasury_value]m<BR>"
-			contents += "Lord's Tax: [SStreasury.tax_value*100]%</center><BR>"
-			for(var/datum/roguestock/bounty/A in SStreasury.stockpile_datums)
-				contents += "[A.name]<BR>"
-				contents += "[A.desc]<BR>"
-				contents += "Total Collected: [A.held_items]<BR>"
-				if(A.percent_bounty)
-					contents += "Bounty Price: <a href='?src=\ref[src];setbounty=\ref[A]'>[A.payout_price]%</a><BR><BR>"
-				else
-					contents += "Bounty Price: <a href='?src=\ref[src];setbounty=\ref[A]'>[A.payout_price]</a><BR><BR>"
-		if(TAB_EXCIDIUM)
 			contents += "<a href='?src=\ref[src];switchtab=[TAB_MAIN]'>\[Return\]</a><BR>"
 			contents += "<center>Bounties<BR>"
 			contents += "--------------<BR>"
