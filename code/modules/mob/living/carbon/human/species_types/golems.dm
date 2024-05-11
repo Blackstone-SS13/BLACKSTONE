@@ -1048,8 +1048,6 @@
 	name = "Snowball"
 	desc = ""
 	item_type = /obj/item/toy/snowball
-	learnable = TRUE
-	rarity = 0
 	charge_max = 15
 	action_icon = 'icons/obj/toy.dmi'
 	action_icon_state = "snowball"

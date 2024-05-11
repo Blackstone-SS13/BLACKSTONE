@@ -101,8 +101,6 @@
 	desc = ""
 	school = "evocation"
 	charge_max = 200
-	learnable = TRUE
-	rarity = 0
 	clothes_req = TRUE
 	invocation = "UN'LTD P'WAH"
 	invocation_type = "shout"

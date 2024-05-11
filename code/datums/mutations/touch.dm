@@ -15,8 +15,6 @@
 	drawmessage = "You channel electricity into your hand."
 	dropmessage = "You let the electricity from your hand dissipate."
 	hand_path = /obj/item/melee/touch_attack/shock
-	learnable = TRUE
-	rarity = 0
 	charge_max = 100
 	clothes_req = FALSE
 	action_icon_state = "zap"

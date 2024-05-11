@@ -5,8 +5,6 @@
 	school = "evocation"
 	charge_max = 200
 	clothes_req = TRUE
-	learnable = TRUE
-	rarity = 0
 	invocation = "FORTI GY AMA"
 	invocation_type = "shout"
 	range = 7
@@ -234,8 +232,6 @@
 	desc = ""
 
 	school = "transmutation"
-	learnable = TRUE
-	rarity = 0
 	charge_max = 300
 	clothes_req = FALSE
 	invocation = "STI KALY"

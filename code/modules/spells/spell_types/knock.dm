@@ -4,8 +4,6 @@
 
 	school = "transmutation"
 	charge_max = 100
-	learnable = TRUE
-	rarity = 0
 	clothes_req = FALSE
 	invocation = "AULIE OXIN FIERA"
 	invocation_type = "whisper"
