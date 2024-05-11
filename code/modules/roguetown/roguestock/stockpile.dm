@@ -43,9 +43,9 @@
 	desc = "Chunks of unrefined gold."
 	item_type = /obj/item/rogueore/gold
 	held_items = 0
-	payout_price = 15
-	withdraw_price = 20
-	export_price = 20
+	payout_price = 50
+	withdraw_price = 60
+	export_price = 60
 	importexport_amt = 10
 
 /datum/roguestock/stockpile/cloth
