@@ -9,6 +9,7 @@
 // BEGIN_INCLUDE
 #include "_maps\_basemap.dm"
 #include "_maps\blackstone.dm"
+#include "_maps\templates\bog_shack_small.dm"
 #include "code\__byond_version_compat.dm"
 #include "code\_compile_options.dm"
 #include "code\rt.dm"
