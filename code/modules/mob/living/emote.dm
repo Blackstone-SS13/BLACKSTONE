@@ -831,7 +831,7 @@
 
 /datum/emote/living/wolfhowl
 	key = "wolfhowl"
-	message = "Howls!"
+	message = "howls!"
 	emote_type = EMOTE_AUDIBLE
 	only_forced_audio = TRUE
 
