@@ -2,9 +2,9 @@
 	race = /datum/species/lizard/brazil
 
 /datum/species/lizard/brazil
-	name = "Saxhleel"
+	name = "Argonian"
 	id = "argonian"
-	desc = "<b>Saxhleel</b><br>\
+	desc = "<b>Argonian</b><br>\
 	A mysterious species of reptilian humanoids hailing from bogs all over Enigma. \
 	They speak a strange tongue and are said to be a creation of Dendor himself."
 
@@ -31,20 +31,20 @@
 	specstats = list(
 		"strength" = 0, 
 		"perception" = 3, 
-		"intelligence" = -2, 
-		"constitution" = 2, 
-		"endurance" = 2, 
-		"speed" = 2, 
-		"fortune" = -2,
+		"intelligence" = -3, 
+		"constitution" = 0, 
+		"endurance" = 1, 
+		"speed" = 3, 
+		"fortune" = -3,
 	)
 	specstats_f = list(
 		"strength" = 0, 
 		"perception" = 3, 
-		"intelligence" = -1, 
-		"constitution" = 2, 
-		"endurance" = 2, 
-		"speed" = 2, 
-		"fortune" = -2,
+		"intelligence" = -3, 
+		"constitution" = 0, 
+		"endurance" = 1, 
+		"speed" = 3, 
+		"fortune" = -3,
 	)
 	enflamed_icon = "widefire"
 

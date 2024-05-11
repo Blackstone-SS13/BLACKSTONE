@@ -39,11 +39,16 @@
 	beltl = /obj/item/roguekey/manor
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
-	armor = /obj/item/clothing/suit/roguetown/armor/armordress
+	if(!H.dna?.species || H.dna?.species.id == "dwarf")
+		armor = /obj/item/clothing/suit/roguetown/shirt/dress
+	else
+		if(prob(66))
+			armor = /obj/item/clothing/suit/roguetown/armor/armordress/alt
+		else
+			armor = /obj/item/clothing/suit/roguetown/armor/armordress
 	head = /obj/item/clothing/head/roguetown/hennin
 //		SSticker.rulermob = H
-	if(prob(66))
-		armor = /obj/item/clothing/suit/roguetown/armor/armordress/alt
+
 	id = /obj/item/clothing/ring/silver
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	if(H.mind)
