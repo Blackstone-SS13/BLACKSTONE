@@ -234,7 +234,7 @@
 		ghost = corpse.ghostize(force_respawn = TRUE)
 
 	if(ghost)
-		testing("pacify_corpse success ([brainmob.mind?.key || "no key"])")
+		testing("pacify_corpse success ([corpse.mind?.key || "no key"])")
 		var/user_acknowledgement = user ? user.real_name : "a mysterious force"
 		to_chat(ghost, "<span class='rose'>My soul finds peace buried in creation, thanks to [user_acknowledgement].</span>")
 		ghost.returntolobby(RESPAWNTIME*-1)

@@ -386,6 +386,11 @@
 	stressadd = 1
 	desc = "<span class='red'>Helldweller... better stay away.</span>"
 
+/datum/stressevent/brazillian
+	timer = 1 MINUTES
+	stressadd = 1
+	desc = "<span class='red'>A vile lizard.</span>"
+
 /datum/stressevent/paracrowd
 	timer = 15 SECONDS
 	stressadd = 2

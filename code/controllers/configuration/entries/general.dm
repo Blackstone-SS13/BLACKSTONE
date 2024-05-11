@@ -212,6 +212,9 @@
 /datum/config_entry/string/githuburl
 	config_entry_value = ""
 
+/datum/config_entry/string/mentorhelpurl
+	config_entry_value = ""
+
 /datum/config_entry/string/roundstatsurl
 
 /datum/config_entry/string/gamelogurl

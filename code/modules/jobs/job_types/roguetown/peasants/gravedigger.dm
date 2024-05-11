@@ -12,6 +12,7 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
+		"Argonian",
 		"Dark Elf",
 		"Aasimar"
 	)

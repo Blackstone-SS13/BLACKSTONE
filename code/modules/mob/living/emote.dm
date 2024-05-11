@@ -522,7 +522,7 @@
 			else if(H.zone_selected == BODY_ZONE_PRECISE_EARS)
 				message_param = "kisses %t on the ear."
 				var/mob/living/carbon/human/E = target
-				if(E.dna.species?.id == "elf")
+				if(iself(E) || ishalfelf(E))
 					if(!E.cmode)
 						to_chat(target, "<span class='love'>It tickles...</span>")
 			else if(H.zone_selected == BODY_ZONE_PRECISE_R_EYE || H.zone_selected == BODY_ZONE_PRECISE_L_EYE)

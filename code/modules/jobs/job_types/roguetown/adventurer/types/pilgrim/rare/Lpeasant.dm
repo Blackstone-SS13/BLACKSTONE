@@ -1,8 +1,10 @@
 /datum/advclass/farmermaster
 	name = "Master Farmer"
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Elf",
-	"Human")
+	allowed_races = list(
+		"Elf",
+		"Humen",
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/farmermaster
 	isvillager = FALSE
 	ispilgrim = TRUE
