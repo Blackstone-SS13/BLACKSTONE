@@ -5,7 +5,8 @@
 	icon_state = "cooldecal"
 	density = FALSE
 	blade_dulling = DULLING_BASH
-	pixel_y = -15
+	anchored = TRUE
+	pixel_x = -17
 
 	/// List of all created and non-completed bounties
 	var/list/bounties = list()
@@ -179,7 +180,7 @@
 	//Deduct royal tax from amount
 	var/royal_tax = round(amount * 0.1)
 	SStreasury.treasury_value += royal_tax
-	log_to_steward("+[royal_tax] to treasury (bounty tax)")
+	SStreasury.log_entries += "+[royal_tax] to treasury (bounty tax)"
 
 	amount -= royal_tax
 
@@ -195,9 +196,6 @@
 	//Announce it locally and on scomm
 	var/bounty_announcement = "The Excidium hungers for the head of [target]."
 	say(bounty_announcement)
-	for(var/obj/structure/roguemachine/scomm/S in SSroguemachine.scomm_machines)
-		S.repeat_message(bounty_announcement)
-	for(var/obj/item/scomstone/S in SSroguemachine.scomm_machines)
-		S.repeat_message(bounty_announcement)
+	scom_announce(bounty_announcement)
 
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
