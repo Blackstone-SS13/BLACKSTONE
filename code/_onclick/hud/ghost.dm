@@ -100,7 +100,7 @@
 	name = "move up"
 	icon_state = "pai"
 
-/atom/movable/screen/ghost/teleport/Click()
+/atom/movable/screen/ghost/moveup/Click()
 	var/mob/dead/observer/G = usr
 	G.ghost_up()
 
