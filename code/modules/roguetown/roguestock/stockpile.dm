@@ -44,8 +44,8 @@
 	item_type = /obj/item/rogueore/gold
 	held_items = 0
 	payout_price = 50
-	withdraw_price = 60
-	export_price = 60
+	withdraw_price = 75
+	export_price = 75
 	importexport_amt = 10
 
 /datum/roguestock/stockpile/cloth
@@ -53,9 +53,19 @@
 	desc = "Lengths of cloth for sewing and tailoring."
 	item_type = /obj/item/natural/cloth
 	held_items = 5
-	payout_price = 2
-	withdraw_price = 4
-	export_price = 4
+	payout_price = 3
+	withdraw_price = 5
+	export_price = 5
+	importexport_amt = 10
+
+/datum/roguestock/stockpile/fibers
+	name = "Fibers"
+	desc = "Strands used to make cloth and other items."
+	item_type = /obj/item/natural/fibers
+	held_items = 5
+	payout_price = 1
+	withdraw_price = 3
+	export_price = 3
 	importexport_amt = 10
 
 /datum/roguestock/stockpile/hide
@@ -64,8 +74,8 @@
 	item_type = /obj/item/natural/hide
 	held_items = 0
 	payout_price = 10
-	withdraw_price = 14
-	export_price = 14
+	withdraw_price = 15
+	export_price = 15
 	importexport_amt = 5
 
 /datum/roguestock/stockpile/fur
@@ -74,8 +84,8 @@
 	item_type = /obj/item/natural/fur
 	held_items = 0
 	payout_price = 15
-	withdraw_price = 19
-	export_price = 19
+	withdraw_price = 23
+	export_price = 23
 	importexport_amt = 5
 
 /datum/roguestock/stockpile/salt
@@ -128,6 +138,24 @@
 	name = "Egg"
 	desc = "Egg laid by a hen."
 	item_type = /obj/item/reagent_containers/food/snacks/egg
+	payout_price = 3
+	export_price = 5
+	withdraw_price = 5
+	importexport_amt = 5
+
+/datum/roguestock/stockpile/butter
+	name = "Butter"
+	desc = "The product of milk and salt."
+	item_type = /obj/item/reagent_containers/food/snacks/butter
+	payout_price = 9
+	export_price = 13
+	withdraw_price = 13
+	importexport_amt = 5
+
+/datum/roguestock/stockpile/cheese
+	name = "Cheese"
+	desc = "The product of milk and salt."
+	item_type = /obj/item/reagent_containers/food/snacks/rogue/cheese
 	payout_price = 3
 	export_price = 5
 	withdraw_price = 5
