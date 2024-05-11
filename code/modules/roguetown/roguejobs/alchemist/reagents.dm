@@ -41,6 +41,7 @@
 	metabolization_rate = 0.1
 
 /datum/reagent/berrypoison/on_mob_life(mob/living/carbon/M)
-	M.add_nausea(9)
-	M.adjustToxLoss(3, 0)
+	if(!HAS_TRAIT(M, RTRAIT_NASTY_EATER))
+		M.add_nausea(9)
+		M.adjustToxLoss(3, 0)
 	return ..()

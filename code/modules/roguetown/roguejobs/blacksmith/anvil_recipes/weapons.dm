@@ -151,6 +151,18 @@
 	additional_items = list(/obj/item/rogueweapon/sword/rapier)
 	created_item = /obj/item/rogueweapon/sword/rapier/dec
 
+// SILVER
+/datum/anvil_recipe/weapons/esaber
+	name = "elvish saber"
+	req_bar = /obj/item/ingot/silver
+	additional_items = list(/obj/item/ingot/silver)
+	created_item = /obj/item/rogueweapon/sword/sabre/elf
+
+/datum/anvil_recipe/weapons/edagger
+	name = "elvish dagger"
+	req_bar = /obj/item/ingot/silver
+	created_item = /obj/item/rogueweapon/huntingknife/elvish
+
 ///STICK HANDLE
 /datum/anvil_recipe/weapons/saxe
 	name = "steel axe (+ stick)"

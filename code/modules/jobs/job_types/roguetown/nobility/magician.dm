@@ -57,7 +57,7 @@
 			H.change_stat("speed", -1)
 			H.change_stat("intelligence", 1)
 			H.change_stat("perception", 1)
-			if(H.dna.species.id == "human")
+			if(H.dna.species.id == "humen")
 				belt = /obj/item/storage/belt/rogue/leather/plaquegold
 				cloak = null
 				head = /obj/item/clothing/head/roguetown/wizhat

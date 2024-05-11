@@ -11,7 +11,9 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
-		"Aasimar"
+		"Argonian",
+		"Aasimar",
+		"Dark Elf"
 	)
 	tutorial = "You've lived in this shithole for effectively all your life. You are not an explorer, nor exactly a warrior in many cases. You're just some average poor bastard who thinks they'll be something someday."
 

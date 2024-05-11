@@ -24,7 +24,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 
 /mob/dead/new_player/Initialize()
 //	if(client && SSticker.state == GAME_STATE_STARTUP)
-//		var/obj/screen/splash/S = new(client, TRUE, TRUE)
+//		var/atom/movable/screen/splash/S = new(client, TRUE, TRUE)
 //		S.Fade(TRUE)
 
 	if(length(GLOB.newplayer_start))
@@ -478,7 +478,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		SSjob.SendToLateJoin(character)
 		testing("basedtest 7")
 //		if(!arrivals_docked)
-		var/obj/screen/splash/Spl = new(character.client, TRUE)
+		var/atom/movable/screen/splash/Spl = new(character.client, TRUE)
 		Spl.Fade(TRUE)
 //			character.playsound_local(get_turf(character), 'sound/blank.ogg', 25)
 

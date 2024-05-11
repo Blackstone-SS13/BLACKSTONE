@@ -131,7 +131,7 @@
 		//skew.Translate(-224,0)
 		var/matrix/newmatrix = skew 
 		for(var/C in hud_used.plane_masters)
-			var/obj/screen/plane_master/whole_screen = hud_used.plane_masters[C]
+			var/atom/movable/screen/plane_master/whole_screen = hud_used.plane_masters[C]
 			if(whole_screen.plane == HUD_PLANE)
 				continue
 			animate(whole_screen, transform = newmatrix, time = 1, easing = QUAD_EASING)

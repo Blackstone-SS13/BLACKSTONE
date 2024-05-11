@@ -3,7 +3,7 @@
 
 /datum/species/human/northern
 	name = "Humen"
-	id = "human"
+	id = "humen"
 	desc = "<b>Humen</b><br>\
 	Humen (or Human) are the eldest of the weeping gods creation. Noted for their\
 	tenacity and overwhelming population, humans tend to outnumber the other races. \

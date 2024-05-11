@@ -12,6 +12,7 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
+		"Argonian",
 		"Dark Elf",
 		"Aasimar"
 	)
@@ -109,13 +110,13 @@
 			H.change_stat("speed", 1)
 
 	if(H.dna?.species)
-		if(H.dna.species.id == "human")
-			backr = /obj/item/rogue/instrument/lute
-		if(H.dna.species.id == "dwarf")
-			backr = /obj/item/rogue/instrument/accord
-		if(H.dna.species.id == "elf")
+		if(iself(H) || ishalfelf(H))
 			backr = /obj/item/rogue/instrument/harp
-		if(H.dna.species.id == "tiefling")
+		else if(ishumannorthern(H))
+			backr = /obj/item/rogue/instrument/lute
+		else if(isdwarf(H))
+			backr = /obj/item/rogue/instrument/accord
+		else if(istiefling(H) || isargonian(H))
 			backr = /obj/item/rogue/instrument/guitar
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)

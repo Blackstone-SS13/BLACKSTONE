@@ -214,11 +214,11 @@
 
 /datum/status_effect/buff/blessed
 	id = "blessed"
-	alert_type = /obj/screen/alert/status_effect/buff/blessed
+	alert_type = /atom/movable/screen/alert/status_effect/buff/blessed
 	effectedstats = list("fortune" = 1)
 	duration = 20 MINUTES
 
-/obj/screen/alert/status_effect/buff/blessed
+/atom/movable/screen/alert/status_effect/buff/blessed
 	name = "Blessed"
 	desc = ""
 	icon_state = "buff"

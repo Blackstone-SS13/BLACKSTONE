@@ -219,6 +219,7 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	associated_skill = /datum/skill/combat/swords
+	max_integrity = 9999
 	throwforce = 15
 	thrown_bclass = BCLASS_CUT
 	dropshrink = 0.75

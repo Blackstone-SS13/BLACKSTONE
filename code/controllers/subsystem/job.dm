@@ -21,7 +21,6 @@ SUBSYSTEM_DEF(job)
 		SetupOccupations()
 	if(CONFIG_GET(flag/load_jobs_from_txt))
 		LoadJobs()
-	generate_selectable_species()
 	set_overflow_role(CONFIG_GET(string/overflow_job))
 	return ..()
 
@@ -367,7 +366,6 @@ SUBSYSTEM_DEF(job)
 
 	//Shuffle players and jobs
 	unassigned = shuffle(unassigned)
-	unassigned = sort_male_female(unassigned)
 
 	HandleFeedbackGathering()
 

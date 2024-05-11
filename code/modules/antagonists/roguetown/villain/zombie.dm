@@ -18,6 +18,7 @@
 	var/STASPD
 	var/STAINT
 	var/skin_tone
+	var/cmode_music
 	var/list/base_intents
 	/// Whether or not we have been turned
 	var/has_turned = FALSE
@@ -83,6 +84,7 @@
 	STASPD = zombie.STASPD
 	STAINT = zombie.STAINT
 	skin_tone = zombie.skin_tone
+	cmode_music = zombie.cmode_music
 	return ..()
 
 /datum/antagonist/zombie/on_removal()
@@ -104,6 +106,7 @@
 		zombie.STASTR = STASTR
 		zombie.STASPD = STASPD
 		zombie.STAINT = STAINT
+		zombie.cmode_music = cmode_music
 		for(var/trait in traits_zombie)
 			REMOVE_TRAIT(zombie, trait, "[type]")
 		zombie.remove_client_colour(/datum/client_colour/monochrome)

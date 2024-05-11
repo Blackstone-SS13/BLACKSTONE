@@ -322,7 +322,7 @@ client/
 	if(hud_used?.fov)
 		hud_used.fov.alpha = 255
 		hud_used.fov_blocker.alpha = 255
-	var/obj/screen/plane_master/game_world_fov_hidden/PM = locate(/obj/screen/plane_master/game_world_fov_hidden) in client.screen
+	var/atom/movable/screen/plane_master/game_world_fov_hidden/PM = locate(/atom/movable/screen/plane_master/game_world_fov_hidden) in client.screen
 	PM.backdrop(src)
 
 /mob/proc/hide_cone()
@@ -331,17 +331,17 @@ client/
 	if(hud_used?.fov)
 		hud_used.fov.alpha = 0
 		hud_used.fov_blocker.alpha = 0
-	var/obj/screen/plane_master/game_world_fov_hidden/PM = locate(/obj/screen/plane_master/game_world_fov_hidden) in client.screen
+	var/atom/movable/screen/plane_master/game_world_fov_hidden/PM = locate(/atom/movable/screen/plane_master/game_world_fov_hidden) in client.screen
 	PM.backdrop(src)
 
-/obj/screen/fov_blocker
+/atom/movable/screen/fov_blocker
 	icon = 'icons/mob/vision_cone.dmi'
 	icon_state = "combat_v"
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	plane = FIELD_OF_VISION_BLOCKER_PLANE
 	screen_loc = "1,1"
 
-/obj/screen/fov
+/atom/movable/screen/fov
 	icon = 'icons/mob/vision_cone.dmi'
 	icon_state = "combat"
 	name = " "

@@ -12,6 +12,7 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
+		"Argonian",
 		"Dark Elf",
 		"Aasimar"
 	)
@@ -62,7 +63,7 @@
 		H.change_stat("perception", 3)
 		H.change_stat("strength", -1)
 		if(H.dna?.species)
-			if(H.dna.species.id == "human")
+			if(H.dna.species.id == "humen")
 				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 	else
 		shoes = /obj/item/clothing/shoes/roguetown/gladiator
@@ -78,3 +79,4 @@
 		H.change_stat("intelligence", 2)
 		H.change_stat("perception", 3)
 		H.change_stat("strength", -1)
+	H.cmode_music = 'sound/music/combat_merchant.ogg'

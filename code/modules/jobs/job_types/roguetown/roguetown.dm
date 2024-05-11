@@ -46,9 +46,8 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
 		if(H.dna)
 			H.dna.species.random_underwear(H.gender)
-			if(H.dna.species)
-				if(H.dna.species.name in list("Elf"))
-					H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+			if(iself(H) || ishalfelf(H))
+				H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	H.underwear_color = null
 	H.update_body()
 

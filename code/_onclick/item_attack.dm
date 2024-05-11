@@ -403,7 +403,7 @@
 		if(I.damtype == BRUTE)
 			next_attack_msg.Cut()
 			if(woundcritroll(user.used_intent.blade_class, newforce, user, hitlim) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-//				throw_alert("embeddedobject", /obj/screen/alert/embeddedobject)
+//				throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 				simple_embedded_objects |= I
 				I.add_mob_blood(src)
 				I.forceMove(src)

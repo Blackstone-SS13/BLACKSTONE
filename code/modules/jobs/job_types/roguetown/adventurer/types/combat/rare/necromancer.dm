@@ -7,7 +7,8 @@
 		"Elf",
 		"Half-Elf",
 		"Tiefling",
-		"Dark Elf"
+		"Argonian",
+		"Dark Elf",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/necromancer
 	pickprob = 30

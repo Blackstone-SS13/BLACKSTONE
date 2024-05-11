@@ -773,7 +773,7 @@
 		threatcount += 2
 
 	//Check for nonhuman scum
-	if(dna && dna.species.id && dna.species.id != "human")
+	if(dna && dna.species.id && dna.species.id != "human" && dna.species.id != "humen")
 		threatcount += 1
 
 	//mindshield implants imply trustworthyness
