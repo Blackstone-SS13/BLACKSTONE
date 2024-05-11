@@ -97,6 +97,10 @@
 	result = /obj/item/clothing/cloak/raincloak/brown
 	reqs = list(/obj/item/natural/hide = 2)
 
+/datum/crafting_recipe/roguetown/leather/whip
+	name = "leather whip"
+	result = /obj/item/clothing/cloak/raincloak/brown
+	reqs = list(/obj/item/natural/hide = 2)
 
 /obj/item/clothing/cloak/raincloak/brown
 	sellprice = 20

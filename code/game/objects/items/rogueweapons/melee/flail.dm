@@ -93,31 +93,31 @@
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 0
 	recovery = 7
-	penfactor = 30
+	penfactor = 10
 	reach = 2
-	icon_state = "instrike"
+	icon_state = "inlash"
 
 /datum/intent/whip/crack
 	name = "crack"
 	blade_class = BCLASS_CUT
-	attack_verb = list("cracks", "strikes")
+	attack_verb = list("cracks", "strikes") //something something dwarf fotresss
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 0
 	recovery = 10
 	penfactor = 40
 	reach = 3
-	icon_state = "instrike"
+	icon_state = "incrack"
 
 /obj/item/rogueweapon/whip
-	force = 20
+	force = 16
 	possible_item_intents = list(/datum/intent/whip/crack, /datum/intent/whip/lash)
 	name = "whip"
 	desc = "A leather whip, built to last with an iron tip"
 	icon_state = "whip"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	item_state = "whip"
-	lefthand_file = 'icons/mob/inhands/weapons/roguebig_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/roguebig_righthand.dmi'
+	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/melee_righthand.dmi'
 	sharpness = IS_BLUNT
 	//dropshrink = 0.75
 	wlength = WLENGTH_NORMAL
@@ -139,7 +139,7 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
 /obj/item/rogueweapon/whip/antique
-	force = 30
+	force = 23
 	name = "Repenta En"
 	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle"
 	minstr = 11
