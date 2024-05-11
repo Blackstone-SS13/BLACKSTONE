@@ -172,6 +172,7 @@
 
 	sleep(2 SECONDS)
 
+	//give reward for every bounty that matches
 	for(var/datum/bounty/b in bounties)
 		if(b.target == stored_head.real_name)
 			correct_head = TRUE
@@ -180,7 +181,7 @@
 
 			sleep(1 SECONDS)
 
-			playsound(T, 'sound/misc/coindispense.ogg', 100, FALSE, -1)
+			playsound(src, 'sound/misc/coindispense.ogg', 100, FALSE, -1)
 			var/obj/item/roguecoin/copper/reward = new /obj/item/roguecoin/copper(machine_location)
 			reward.set_quantity(b.amount)
 
@@ -193,7 +194,7 @@
 
 	// Head has been "analyzed". Return it.
 	sleep(2 SECONDS)
-	playsound(src, '/sound/combat/vite.ogg', 100, FALSE, -1)
+	playsound(src, 'sound/combat/vite.ogg', 100, FALSE, -1)
 	stored_head = new /obj/item/bodypart/head(machine_location)
 	stored_head.name = "mutilated head"
 	stored_head.desc = "This head has been violated beyond recognition, the work of a horrific machine."
