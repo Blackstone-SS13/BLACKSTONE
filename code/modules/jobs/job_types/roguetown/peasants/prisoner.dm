@@ -23,6 +23,7 @@
 	display_order = JDO_PRISONER
 	give_bank_account = 10
 	min_pq = -49 // No minimum PQ
+	max_pq = null
 	can_random = FALSE
 
 /datum/outfit/job/roguetown/prisoner/pre_equip(mob/living/carbon/human/H)
