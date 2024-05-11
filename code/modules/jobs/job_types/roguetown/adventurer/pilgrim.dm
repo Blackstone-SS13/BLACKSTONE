@@ -20,8 +20,6 @@
 	outfit = null
 	outfit_female = null
 	bypass_jobban = FALSE
-	isvillager = FALSE
-	ispilgrim = TRUE
 	display_order = JDO_PILGRIM
 	min_pq = -20
 	wanderer_examine = TRUE

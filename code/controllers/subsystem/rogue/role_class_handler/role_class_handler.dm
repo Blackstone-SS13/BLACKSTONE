@@ -132,7 +132,7 @@ SUBSYSTEM_DEF(role_class_handler)
 	H.advsetup = FALSE // This is actually on a lot of shit, so its a ghetto selector protector if u need one
 	picked_class.equipme(H)
 	H.invisibility = 0
-	var/obj/screen/advsetup/GET_IT_OUT = locate() in H.hud_used.static_inventory // dis line sux its basically a loop anyways if i remember
+	var/atom/movable/screen/advsetup/GET_IT_OUT = locate() in H.hud_used.static_inventory // dis line sux its basically a loop anyways if i remember
 	qdel(GET_IT_OUT)
 	H.cure_blind("advsetup")
 
