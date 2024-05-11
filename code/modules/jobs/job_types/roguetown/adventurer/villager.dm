@@ -3,8 +3,8 @@
 	flag = ADVENTURER
 	department_flag = PEASANTS
 	faction = "Station"
-	total_positions = 30
-	spawn_positions = 30
+	total_positions = 50
+	spawn_positions = 50
 	allowed_races = list(
 		"Humen",
 		"Elf",
