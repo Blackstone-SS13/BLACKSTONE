@@ -85,6 +85,67 @@
 	smeltresult = /obj/item/ingot/steel
 	minstr = 5
 
+
+/datum/intent/whip/lash
+	name = "lash"
+	blade_class = BCLASS_BLUNT
+	attack_verb = list("lashes", "cracks")
+	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
+	chargetime = 0
+	recovery = 7
+	penfactor = 30
+	reach = 2
+	icon_state = "instrike"
+
+/datum/intent/whip/crack
+	name = "crack"
+	blade_class = BCLASS_CUT
+	attack_verb = list("cracks", "strikes")
+	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
+	chargetime = 0
+	recovery = 10
+	penfactor = 40
+	reach = 3
+	icon_state = "instrike"
+
+/obj/item/rogueweapon/whip
+	force = 20
+	possible_item_intents = list(/datum/intent/whip/crack, /datum/intent/whip/lash)
+	name = "whip"
+	desc = "A leather whip, built to last with an iron tip"
+	icon_state = "whip"
+	icon = 'icons/roguetown/weapons/32.dmi'
+	item_state = "whip"
+	lefthand_file = 'icons/mob/inhands/weapons/roguebig_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/weapons/roguebig_righthand.dmi'
+	sharpness = IS_BLUNT
+	//dropshrink = 0.75
+	wlength = WLENGTH_NORMAL
+	w_class = WEIGHT_CLASS_NORMAL
+	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BELT
+	associated_skill = /datum/skill/combat/whipsflails
+	anvilrepair = /datum/skill/craft/tanning
+	parrysound = list('sound/combat/parry/parrygen.ogg')
+	swingsound = WHIPWOOSH
+	throwforce = 5
+	wdefense = 0
+	minstr = 6
+
+/obj/item/rogueweapon/whip/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+/obj/item/rogueweapon/whip/antique
+	force = 30
+	name = "Repenta En"
+	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle"
+	minstr = 11
+	icon_state = "gwhip"
+
+
 /obj/item/rogueweapon/flail/peasantwarflail
 	force = 10
 	force_wielded = 35
