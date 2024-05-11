@@ -13,9 +13,6 @@
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/elvish)
 
-/datum/species/elf/check_roundstart_eligible()
-	return FALSE
-
 /datum/species/elf/after_creation(mob/living/carbon/C)
 	..()
 //	if(!C.has_language(/datum/language/elvish))

@@ -87,7 +87,7 @@
 			if(get_triumphs() > 0)
 				adjust_triumphs(-1)
 
-		if(job == "King" || job == "Queen")
+		if(job == "King")
 			for(var/mob/living/carbon/human/HU in GLOB.player_list)
 				if(!HU.stat)
 					if(is_in_roguetown(HU))
