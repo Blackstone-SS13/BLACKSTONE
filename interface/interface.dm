@@ -196,6 +196,17 @@ Hotkey-Mode: (hotkey-mode must be on)
 	set name = "Commend Someone"
 	commendsomeone()
 
+/client/verb/changefps()
+	set category = "Options"
+	set name = "ChangeFPS"
+	if(!prefs)
+		return
+	var/newfps = input(usr, "Enter new FPS", "New FPS", 100) as null|num
+	if (!isnull(newfps))
+		prefs.clientfps = clamp(newfps, 1, 1000)
+		fps = prefs.clientfps
+		prefs.save_preferences()
+
 /*
 /client/verb/set_blur()
 	set name = "AAOn"

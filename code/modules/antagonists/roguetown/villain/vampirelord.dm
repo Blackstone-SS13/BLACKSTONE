@@ -99,7 +99,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	if(H.mobid in GLOB.character_list)
 		GLOB.character_list[H.mobid] = null
 	GLOB.chosen_names -= H.real_name
-	if(H.dna.species?.id != "human" && H.dna.species?.id != "elf")
+	if(!ishumannorthern(H) && !iself(H))
 		H.age = AGE_ADULT
 		if(prob(50))
 			H.set_species(/datum/species/human/northern)

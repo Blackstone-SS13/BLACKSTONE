@@ -12,6 +12,7 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
+		"Argonian",
 		"Dark Elf",
 		"Aasimar"
 	)
@@ -49,15 +50,17 @@
 		H.STASTR = rand(1, 20)
 		H.STAINT = rand(1, 20)
 		H.STALUC = rand(1, 20)
-/*		if(H.gender == MALE)
+/*		
+		if(H.gender == MALE)
 			if(H.dna?.species)
-				if(H.dna.species.id == "human")
+				if(iself(H) || ishalfelf(H))
+					H.dna.species.soundpack_m = new /datum/voicepack/male/elf/jester()
+				if(ishumannothern(H))
 					H.dna.species.soundpack_m = new /datum/voicepack/male/jester()
-				if(H.dna.species.id == "dwarf")
+				if(isdwarf(H))
 					H.dna.species.soundpack_m = new /datum/voicepack/male/dwarf/jester()
-				if(H.dna.species.id == "elf")
-					H.dna.species.soundpack_m = new /datum/voicepack/male/elf/jester()*/
-//		H.hair_color = "cd65cb"
-//		H.facial_hair_color = "cd65cb"
-//		H.update_body_parts_head_only()
+		H.hair_color = "cd65cb"
+		H.facial_hair_color = "cd65cb"
+		H.update_body_parts_head_only()
+*/
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)
