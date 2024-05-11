@@ -1,13 +1,11 @@
 /obj/structure/roguemachine/bounty
 	name = "Excidium"
-	desc = ""
-	icon = 'icons/roguetown/misc/machines.dmi'
-	icon_state = "atm-b" // TODO: change this
+	desc = "A machine that sets and collects bounties on heads."
+	icon = 'icons/roguetown/rav/map_project/spookystatues.dmi'
+	icon_state = "cooldecal"
 	density = FALSE
 	blade_dulling = DULLING_BASH
-
-	/// State of the machine, can be turned on or off by the King
-	var/state = TRUE
+	pixel_y = -15
 
 	/// List of all created and non-completed bounties
 	var/list/bounties = list()
@@ -21,6 +19,87 @@
 	/// Whats displayed when consulting the bounties
 	var/banner
 
+/obj/structure/roguemachine/bounty/attack_hand(mob/user)
+
+	if(!ishuman(user)) return
+
+	// We need to check the user's bank account later
+	var/mob/living/carbon/human/H = user
+
+	// Main Menu
+	var/list/choices = list("Consult bounties", "Set bounty")
+	var/selection = input(user, "The Excidium listens", src) as null|anything in choices
+
+	switch(selection)
+
+		if("Consult bounties")
+			consult_bounties(H)
+
+		if("Set bounty")
+			set_bounty(H)
+
+/obj/structure/roguemachine/bounty/attackby(obj/item/P, mob/user, params)
+
+	if(!(ishuman(user))) return
+
+	// Only heads are allowed
+	if(P.type != /obj/item/bodypart/head) return
+
+	var/machine_location = get_turf(src)
+	var/obj/item/bodypart/head/stored_head = P
+	var/correct_head = FALSE
+
+	qdel(P)
+
+	var/random_say = rand(1, 3)
+	if(random_say == 1)
+		say("Commencing cephalic dissection...")
+	else if(random_say == 2)
+		say("Analyzing skull structure...")
+	else
+		say("Performing intra-cranial inspection...")
+
+	sleep(1 SECONDS)
+
+	var/random_sound = rand(1, 3)
+	if(random_sound == 1)
+		playsound(src, 'sound/combat/fracture/headcrush (4).ogg', 100, FALSE, -1)
+		sleep(1 SECONDS)
+		playsound(src, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
+	else if(random_sound == 2)
+		playsound(src, 'sound/combat/fracture/headcrush (3).ogg', 100, FALSE, -1)
+		sleep(1 SECONDS)
+		playsound(src, 'sound/combat/fracture/headcrush (4).ogg', 100, FALSE, -1)
+	else
+		playsound(src, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
+		sleep(1 SECONDS)
+		playsound(src, 'sound/combat/fracture/headcrush (3).ogg', 100, FALSE, -1)
+
+	sleep(2 SECONDS)
+
+	//give reward for every bounty that matches
+	for(var/datum/bounty/b in bounties)
+		if(b.target == stored_head.real_name)
+			correct_head = TRUE
+			say("A bounty has been sated.")
+			sleep(1 SECONDS)
+			playsound(src, 'sound/misc/coindispense.ogg', 100, FALSE, -1)
+			var/obj/item/roguecoin/copper/reward = new /obj/item/roguecoin/copper(machine_location)
+			reward.set_quantity(b.amount)
+
+			bounties -= b
+
+	// No valid bounty for this head?
+	if(correct_head == FALSE)
+		say("This skull carried no reward.")
+		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+
+	// Head has been "analyzed". Return it.
+	sleep(2 SECONDS)
+	playsound(src, 'sound/combat/vite.ogg', 100, FALSE, -1)
+	stored_head = new /obj/item/bodypart/head(machine_location)
+	stored_head.name = "mutilated head"
+	stored_head.desc = "This head has been violated beyond recognition, the work of a horrific machine."
 
 ///Composes a random bounty banner based on the given bounty info.
 ///@param new_bounty:  The bounty datum.
@@ -69,8 +148,11 @@
 		return
 
 	var/amount = input(user, "How many mammons shall be stained red for their demise?", src) as null|num
-	if(isnull(amount) || amount < 1)
+	if(isnull(amount))
 		say("Invalid amount.")
+		return
+	if(amount < 20)
+		say("Insufficient amount. Bounty must be at least 20 mammons.")
 		return
 
 	// Has user a bank account?
@@ -95,10 +177,11 @@
 	SStreasury.bank_accounts[user] -= round(amount)
 
 	//Deduct royal tax from amount
-	var/royal_tax = round(amount * 0.15)
+	var/royal_tax = round(amount * 0.1)
 	SStreasury.treasury_value += royal_tax
-	amount -= royal_tax
+	log_to_steward("+[royal_tax] to treasury (bounty tax)")
 
+	amount -= royal_tax
 
 	// Finally create bounty
 	var/datum/bounty/new_bounty = new /datum/bounty
@@ -109,95 +192,12 @@
 	compose_bounty(new_bounty)
 	bounties += new_bounty
 
-	say("The bounty has been set.")
+	//Announce it locally and on scomm
+	var/bounty_announcement = "The Excidium hungers for the head of [target]."
+	say(bounty_announcement)
+	for(var/obj/structure/roguemachine/scomm/S in SSroguemachine.scomm_machines)
+		S.repeat_message(bounty_announcement)
+	for(var/obj/item/scomstone/S in SSroguemachine.scomm_machines)
+		S.repeat_message(bounty_announcement)
+
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
-
-/obj/structure/roguemachine/bounty/attack_hand(mob/user)
-
-	if(state == FALSE)
-		say("By King's decree, the Excidium is currently inactive.")
-		return
-
-	if(!ishuman(user)) return
-
-	// We need to check the user's bank account later
-	var/mob/living/carbon/human/H = user
-
-	// Main Menu
-	var/list/choices = list("Consult bounties", "Set bounty")
-	var/selection = input(user, "The Excidium listens", src) as null|anything in choices
-
-	switch(selection)
-
-		if("Consult bounties")
-			consult_bounties(H)
-
-		if("Set bounty")
-			set_bounty(H)
-
-/obj/structure/roguemachine/bounty/attackby(obj/item/P, mob/user, params)
-
-	if(state == FALSE)
-		say("By King's decree, the Excidium is currently inactive.")
-		return
-
-	if(!(ishuman(user))) return
-
-	// Only heads are allowed
-	if(P.type != /obj/item/bodypart/head) return
-
-	var/machine_location = get_turf(src)
-	var/obj/item/bodypart/head/stored_head = P
-	var/correct_head = FALSE
-
-	qdel(P)
-
-	var/random_say = rand(1, 3)
-	if(random_say == 1)
-		say("Commencing cephalic dissection...")
-	else if(random_say == 2)
-		say("Analyzing skull structure...")
-	else
-		say("Performing intra-cranial inspection...")
-
-	sleep(1 SECONDS)
-
-	var/random_sound = rand(1, 3)
-	if(random_sound == 1)
-		playsound(src, 'sound/combat/fracture/headcrush (4).ogg', 100, FALSE, -1)
-	else if(random_sound == 2)
-		playsound(src, 'sound/combat/fracture/headcrush (3).ogg', 100, FALSE, -1)
-	else
-		playsound(src, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
-
-	sleep(2 SECONDS)
-
-	//give reward for every bounty that matches
-	for(var/datum/bounty/b in bounties)
-		if(b.target == stored_head.real_name)
-			correct_head = TRUE
-			say("A bounty has been sated.")
-			playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1) 
-
-			sleep(1 SECONDS)
-
-			playsound(src, 'sound/misc/coindispense.ogg', 100, FALSE, -1)
-			var/obj/item/roguecoin/copper/reward = new /obj/item/roguecoin/copper(machine_location)
-			reward.set_quantity(b.amount)
-
-			bounties -= b
-
-	// No valid bounty for this head?
-	if(correct_head == FALSE)
-		say("This skull carried no reward.")
-		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-
-	// Head has been "analyzed". Return it.
-	sleep(2 SECONDS)
-	playsound(src, 'sound/combat/vite.ogg', 100, FALSE, -1)
-	stored_head = new /obj/item/bodypart/head(machine_location)
-	stored_head.name = "mutilated head"
-	stored_head.desc = "This head has been violated beyond recognition, the work of a horrific machine."
-
-
-
