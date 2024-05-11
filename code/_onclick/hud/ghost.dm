@@ -96,13 +96,21 @@
 	var/mob/dead/observer/G = usr
 	G.dead_tele()
 
-/atom/movable/screen/ghost/pai
-	name = "pAI Candidate"
+/atom/movable/screen/ghost/moveup
+	name = "move up"
 	icon_state = "pai"
 
-/atom/movable/screen/ghost/pai/Click()
+/atom/movable/screen/ghost/teleport/Click()
 	var/mob/dead/observer/G = usr
-	G.register_pai()
+	G.ghost_up()
+
+/atom/movable/screen/ghost/movedown
+	name = "move down"
+	icon_state = "pai"
+
+/atom/movable/screen/ghost/movedown/Click()
+	var/mob/dead/observer/G = usr
+	G.ghost_down()
 
 /datum/hud/ghost/New(mob/owner)
 	..()
@@ -140,6 +148,14 @@
 
 	using = new /atom/movable/screen/ghost/teleport(null, src)
 	using.screen_loc = ui_ghost_teleport
+	static_inventory += using
+
+	using = new /atom/movable/screen/ghost/moveup(null, src)
+	using.screen_loc = ui_ghost_moveup
+	static_inventory += using
+
+	using = new /atom/movable/screen/ghost/movedown(null, src)
+	using.screen_loc = ui_ghost_movedown
 	static_inventory += using
 
 /datum/hud/ghost/show_hud(version = 0, mob/viewmob)
