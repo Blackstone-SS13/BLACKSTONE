@@ -668,3 +668,32 @@
 		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, update_sneak_invis), TRUE), 15 SECONDS)
 		addtimer(CALLBACK(target, TYPE_PROC_REF(/atom/movable, visible_message), "<span class='warning'>[target] fades back into view.</span>", "<span class='notice'>You become visible again.</span>"), 15 SECONDS)
 	return FALSE
+
+/obj/effect/proc_holder/spell/invoked/moonbeam
+	name = "Moonbeam"
+	overlay_state = "moonbeam"
+	releasedrain = 90
+	chargedrain = 0
+	chargetime = 50
+	range = 5
+	warnie = "sydwarning"
+	no_early_release = TRUE
+	movement_interrupt = FALSE
+	chargedloop = /datum/looping_sound/invokeholy
+	sound = 'sound/magic/area.ogg'
+	invocation_type = "none"
+	associated_skill = /datum/skill/magic/holy
+	antimagic_allowed = TRUE
+	devotion_cost = -130
+
+/obj/effect/proc_holder/spell/invoked/moonbeam/cast(list/targets, mob/user = usr)
+	if(isliving(targets[1]))
+		var/mob/living/target = targets[1]
+		if(target.anti_magic_check(TRUE, TRUE))
+			return FALSE
+		target.Stun(50)
+		S.AOE_flash(user, range = 8)
+		target.adjust_fire_stacks(5)
+		target.IgniteMob()
+		// explosion(get_turf(target), light_impact_range = 1, flame_range = 1, smoke = FALSE)
+		// Make explosion affects and instakills Undeads/Vampires?

@@ -470,3 +470,19 @@
 	item_state = "esaber"
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
+
+/* /obj/item/rogueweapon/sword/sabre/spell
+	force = 20
+	name = "Flame Blade"
+	icon_state = "flameblade"
+	desc = "A blade created from a spell, burns whom are hit by it."
+	light_range = 7
+	on = FALSE
+	on_damage = 15
+	fuel = 9999 MINUTES
+
+/datum/intent/sword/cut/flameblade
+	clickcd = 10
+	damfactor = 0.5
+	on_damage = //Should put target on fire when hit (bypass Armor)
+*/

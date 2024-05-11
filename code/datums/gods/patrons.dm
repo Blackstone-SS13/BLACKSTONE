@@ -31,6 +31,7 @@ GLOBAL_LIST_EMPTY(patronlist)
 	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/invoked/blindness
 	t2 = /obj/effect/proc_holder/spell/invoked/invisibility
+	t3 = /obj/effect/proc_holder/spell/invoked/moonbeam
 
 /datum/patrongods/dendor
 	name = "Dendor"

@@ -252,3 +252,92 @@
 			playsound(get_turf(target), 'sound/magic/magic_nulled.ogg', 100)
 			qdel(src)
 			return BULLET_ACT_BLOCK
+
+/* /obj/effect/proc_holder/spell/invoked/flameblade
+	name = "Flame Blade"
+	desc = "A spell known by War Casters to conjure a blade of fire from the depths of Malum's Forge"
+	clothes_req = FALSE
+	overlay_state = ""
+	sound = list('sound/magic/churn.ogg')
+	active = FALSE
+	releasedrain = 5	
+	chargedrain = 0
+	chargetime = 0
+	warnie = "spellwarning"
+	no_early_release = TRUE
+	charging_slowdown = 1
+	chargedloop = /datum/looping_sound/invokegen
+	associated_skill = /datum/skill/magic/arcane
+
+/obj/effect/proc_holder/spell/invoked/flameblade/conjuration
+	var/obj/item/rogueweapon/sword/sabre/spell/T = new()
+	T.spark_act()
+	H.put_in_hands(T,forced=TRUE)
+*/
+
+/* /obj/effect/proc_holder/spell/invoked/arcaneum
+	name = "Arcaneum"
+	desc = ""
+	clothes_req = FALSE
+	overlay_state = "arcaneum"
+	sound = list('sound/magic/area.ogg')
+	active = FALSE
+	releasedrain = 5	
+	chargedrain = 0
+	chargetime = 0
+	warnie = "spellwarning"
+	no_early_release = TRUE
+	charging_slowdown = 1
+	associated_skill = /datum/skill/magic/arcane
+
+/obj/effect/proc_holder/spell/invoked/arcaneum/conjuration
+
+	var/mob/current_owner
+	var/last_arca
+	if(world.time < last_arca + 30 SECONDS)
+		to_chat(user, "<span class='warning'>I am still exhausted from using Arcaneum recently. Maybe I should wait.</span>")
+		return
+	var/input = stripped_input(user, "Who are you trying to remember?", "Arcaneum")
+	if(!input)
+		return
+	if(!user.key)
+		return
+	if(world.time < last_arca + 30 SECONDS)
+		to_chat(user, "<span class='warning'>I am still exhausted from using Arcaneum recently. Maybe I should wait.</span>")
+		return
+	if(!user.mind || !user.mind.do_i_know(name=input))
+		to_chat(user, "<span class='warning'>I don't know anyone by that name.</span>")
+		return
+	for(var/mob/living/carbon/human/HL in GLOB.human_list)
+		if(HL.real_name == input)
+			/datum/examine_effect/proc/trigger(mob/user)
+		return
+	return
+*/
+
+/* /obj/effect/proc_holder/spell/invoked/truesight
+
+
+/obj/effect/proc_holder/spell/invoked/truesight/conjuration
+	var/closest_dist
+	var/the_dir
+	for(var/mob/living/carbon/human/humie as anything in GLOB.human_list)
+		if(humie == src)
+			continue
+		if(humie.mob_biotypes & MOB_UNDEAD)
+			continue
+		if(humie.stat >= DEAD)
+			continue
+		var/total_distance = get_dist(src, humie)
+		if(!closest_dist)
+			closest_dist = total_distance
+			the_dir = get_dir(src, humie)
+		else
+			if(total_distance < closest_dist)
+				closest_dist = total_distance
+				the_dir = get_dir(src, humie)
+	if(!closest_dist)
+		to_chat(src, "<span class='warning'>I don't sense anyone near me.</span>")
+		return FALSE
+	to_chat(src, "<span class='warning'>[closest_dist] meters away, closest person, [dir2text(the_dir)]...</span>")
+	return TRUE
