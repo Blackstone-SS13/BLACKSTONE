@@ -109,15 +109,12 @@
 	icon_state = "incrack"
 
 /obj/item/rogueweapon/whip
-	force = 16
+	force = 14
 	possible_item_intents = list(/datum/intent/whip/crack, /datum/intent/whip/lash)
 	name = "whip"
-	desc = "A leather whip, built to last with an iron tip"
+	desc = "A leather whip, built to last with an sharp stone for a tip"
 	icon_state = "whip"
 	icon = 'icons/roguetown/weapons/32.dmi'
-	item_state = "whip"
-	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/weapons/melee_righthand.dmi'
 	sharpness = IS_BLUNT
 	//dropshrink = 0.75
 	wlength = WLENGTH_NORMAL
@@ -135,8 +132,11 @@
 	. = ..()
 	if(tag)
 		switch(tag)
+			if("gen")
+				return list("shrink" = 0.5,"sx" = -10,"sy" = -3,"nx" = 11,"ny" = -2,"wx" = -7,"wy" = -3,"ex" = 3,"ey" = -3,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 22,"sturn" = -23,"wturn" = -23,"eturn" = 29,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
 
 /obj/item/rogueweapon/whip/antique
 	force = 23
