@@ -8,8 +8,8 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	flag = ADVENTURER
 	department_flag = PEASANTS
 	faction = "Station"
-	total_positions = 75
-	spawn_positions = 75
+	total_positions = 40
+	spawn_positions = 40
 	allowed_races = list(
 		"Humen",
 		"Elf",
