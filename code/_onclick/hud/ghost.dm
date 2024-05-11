@@ -108,6 +108,13 @@
 	name = "move down"
 	icon_state = "pai"
 
+/atom/movable/screen/ghost/bigassuselessbutton
+	name = "AFTER LIFE"
+	icon = 'icons/mob/ghostspin.dmi'
+	icon_state = ""
+	screen_loc = "WEST-4,SOUTH+6"
+	nomouseover = FALSE
+
 /atom/movable/screen/ghost/movedown/Click()
 	var/mob/dead/observer/G = usr
 	G.ghost_down()
@@ -156,6 +163,9 @@
 
 	using = new /atom/movable/screen/ghost/movedown(null, src)
 	using.screen_loc = ui_ghost_movedown
+	static_inventory += using
+
+	using = new /atom/movable/screen/ghost/bigassuselessbutton(null, src)
 	static_inventory += using
 
 /datum/hud/ghost/show_hud(version = 0, mob/viewmob)
