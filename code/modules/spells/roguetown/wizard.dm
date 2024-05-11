@@ -275,7 +275,7 @@
 	H.put_in_hands(T,forced=TRUE)
 */
 
-/* /obj/effect/proc_holder/spell/invoked/arcaneum
+/obj/effect/proc_holder/spell/invoked/arcaneum
 	name = "Arcaneum"
 	desc = ""
 	clothes_req = FALSE
@@ -312,11 +312,9 @@
 		if(HL.real_name == input)
 			/datum/examine_effect/proc/trigger(mob/user)
 		return
-	return
-*/
+	
 
-/* /obj/effect/proc_holder/spell/invoked/truesight
-
+ /obj/effect/proc_holder/spell/invoked/truesight
 
 /obj/effect/proc_holder/spell/invoked/truesight/conjuration
 	var/closest_dist
@@ -339,5 +337,5 @@
 	if(!closest_dist)
 		to_chat(src, "<span class='warning'>I don't sense anyone near me.</span>")
 		return FALSE
-	to_chat(src, "<span class='warning'>[closest_dist] meters away, closest person, [dir2text(the_dir)]...</span>")
+	to_chat(src, "<span class='warning'>[closest_dist] meters away, closest person being there, [dir2text(the_dir)]...</span>")
 	return TRUE

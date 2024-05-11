@@ -691,9 +691,13 @@
 		var/mob/living/target = targets[1]
 		if(target.anti_magic_check(TRUE, TRUE))
 			return FALSE
+		target.visible_message("<span class='warning'>[target] is struck by a moon beam!</span>", "<span class='notice'>I'm struck by a moon beam!</span>")
 		target.Stun(50)
 		S.AOE_flash(user, range = 8)
 		target.adjust_fire_stacks(5)
 		target.IgniteMob()
-		// explosion(get_turf(target), light_impact_range = 1, flame_range = 1, smoke = FALSE)
-		// Make explosion affects and instakills Undeads/Vampires?
+		if(target.mob_biotypes & MOB_UNDEAD)
+			target.visible_message("<span class='warning'>[target] is destroyed by the moon beam!</span>", "<span class='notice'>I've been destroyed by a moon beam!</span>")
+			explosion(get_turf(target), light_impact_range = 1, flame_range = 1, smoke = FALSE)
+			target.gib()
+			return TRUE
