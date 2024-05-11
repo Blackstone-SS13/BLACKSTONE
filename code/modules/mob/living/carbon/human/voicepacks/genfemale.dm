@@ -48,7 +48,7 @@
 			if("haltyell")
 				used = list('sound/vo/female/gen/haltyell (1).ogg','sound/vo/female/gen/haltyell (2).ogg')
 			if("wolfhowl")
-				used = 'sound/vo/male/gen/wolfhowl.ogg'
+				used = 'sound/villain/wolfhowl.ogg'
 			if("hmm")
 				used = 'sound/vo/female/gen/hmm.ogg'
 			if("huh")
