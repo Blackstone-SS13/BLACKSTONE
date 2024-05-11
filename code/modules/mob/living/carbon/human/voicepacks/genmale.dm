@@ -53,7 +53,7 @@
 				if(prob(3))
 					used = 'sound/vo/male/gen/HEY.ogg'
 			if("wolfhowl")
-				used = 'sound/vo/male/gen/wolfhowl.ogg'
+				used = 'sound/villain/wolfhowl.ogg'
 			if("hmm")
 				used = 'sound/vo/male/gen/hmm.ogg'
 			if("huh")
