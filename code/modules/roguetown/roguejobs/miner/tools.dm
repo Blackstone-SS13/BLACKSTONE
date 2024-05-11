@@ -8,6 +8,7 @@
 	sharpness = IS_BLUNT
 	//dropshrink = 0.8
 	wlength = 10
+	max_integrity = 400
 	slot_flags = ITEM_SLOT_HIP
 	toolspeed = 1
 	associated_skill = /datum/skill/combat/axesmaces
