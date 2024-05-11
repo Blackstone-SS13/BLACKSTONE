@@ -1,6 +1,6 @@
 /obj/structure/roguemachine/bounty
 	name = "Excidium"
-	desc = "A machine that sets and collects bounties on heads."
+	desc = "A machine that sets and collects bounties. Its bloodied maw could easily fit a human head."
 	icon = 'icons/roguetown/rav/map_project/spookystatues.dmi'
 	icon_state = "cooldecal"
 	density = FALSE
@@ -194,8 +194,8 @@
 	bounties += new_bounty
 
 	//Announce it locally and on scomm
+	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 	var/bounty_announcement = "The Excidium hungers for the head of [target]."
 	say(bounty_announcement)
 	scom_announce(bounty_announcement)
 
-	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
