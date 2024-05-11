@@ -1440,7 +1440,7 @@
 "kRf" = (/obj/structure/closet/crate/chest,/obj/item/seeds/apple,/obj/item/seeds/apple,/obj/item/seeds/pipeweed,/obj/item/seeds/pipeweed,/turf/open/floor/rogue/twig,/area/rogue/indoors)
 "kRo" = (/obj/structure/roguewindow/openclose{dir = 1},/turf/open/floor/rogue/ruinedwood{icon_state = "horzw"},/area/rogue/indoors/town/tavern)
 "kRR" = (/obj/structure/roguewindow/openclose{dir = 8},/turf/open/floor/rogue/wood,/area/rogue/indoors/town/shop)
-"kRS" = (/obj/structure/roguemachine/bounty{step_x = -17; pixel_x = 0},/turf/closed/wall/mineral/rogue/craftstone,/area/rogue/outdoors/town)
+"kRS" = (/obj/structure/roguemachine/bounty,/turf/closed/wall/mineral/rogue/craftstone,/area/rogue/outdoors/town)
 "kSh" = (/obj/machinery/light/rogue/torchholder{dir = 4},/turf/open/transparent/openspace,/area/rogue/indoors/town/church)
 "kTT" = (/obj/structure/closet/crate/drawer,/obj/item/reagent_containers/glass/bottle/rogue/healthpot,/obj/machinery/light/rogue/torchholder{dir = 1; pixel_y = -6},/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/indoors)
 "kUR" = (/obj/structure/chair/wood/rogue,/turf/open/floor/rogue/wood,/area/rogue/indoors/town/manor)
