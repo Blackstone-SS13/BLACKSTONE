@@ -74,7 +74,7 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE) 
+			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE) 
 			H.mind.adjust_skillrank(/datum/skill/magic/holy, 4, TRUE)
 			H.change_stat("intelligence", 2)
 			H.change_stat("perception", 1) // More intelligence and no speed penalty for Life Clerics.
@@ -106,7 +106,7 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE) 
+			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE) 
 			H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
 			H.change_stat("intelligence", 1)
 			H.change_stat("strength", 2)
