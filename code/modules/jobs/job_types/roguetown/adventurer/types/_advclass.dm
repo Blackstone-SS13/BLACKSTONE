@@ -60,3 +60,22 @@
 /datum/advclass/proc/post_equip(mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,TYPE_PROC_REF(/mob/living/carbon/human, add_credit)), 20)
 	return
+
+/datum/outfit/job/roguetown/adventurer
+	name = "Adventurer"
+	/// List of patrons we are allowed to use
+	var/list/allowed_patrons
+	/// Default patron in case the patron is not allowed
+	var/datum/patron/default_patron
+
+/datum/outfit/job/roguetown/adventurer/pre_equip(mob/living/carbon/human/H, visualsOnly)
+	. = ..()
+	var/datum/patron/ourpatron = H.patron
+	if(!ourpatron || !(ourpatron.type in allowed_patrons))
+		var/list/datum/patron/possiblegods = list()
+		for(var/god in GLOB.patronlist)
+			if(!(god in allowed_patrons))
+				continue
+			possiblegods |= patron
+		H.patron = GLOB.patronlist[default_patron] || pick(possiblegods)
+		to_chat(H, "<span class='warning'>[ourpatron] had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")

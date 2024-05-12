@@ -14,7 +14,6 @@
 		"Half-Elf",
 		"Half Orc"
 	)
-	allowed_patrons = ALL_CLERIC_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
 	total_positions = 2
@@ -22,24 +21,11 @@
 	display_order = JDO_TEMPLAR
 	give_bank_account = TRUE
 
+/datum/outfit/job/roguetown/templar
+	allowed_patrons = ALL_CLERIC_PATRONS
+
 /datum/outfit/job/roguetown/templar/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/static/list/allowed_patrons = ALL_CLERIC_PATRONS
-	
-	var/datum/patron/ourpatron
-	if(istype(H.patron, /datum/patron))
-		ourpatron = H.patron
-
-	if(!ourpatron || !(ourpatron.type in allowed_patrons))
-		var/list/datum/patron/possiblegods = list()
-		for(var/god in GLOB.patronlist)
-			var/datum/patron/patron = GLOB.patronlist[god]
-			if(patron.type in allowed_patrons)
-				possiblegods |= patron
-		ourpatron = pick(possiblegods)
-		H.patron = ourpatron
-		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")
-	
 	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 	switch(ourpatron.name)

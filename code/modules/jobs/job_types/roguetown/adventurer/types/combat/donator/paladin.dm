@@ -4,32 +4,20 @@
 	name = "Paladin"
 	tutorial = "Paladins are holy warriors who have taken sacred vows to uphold justice and righteousness. Often, they were promised redemption for past sins if they crusaded in the name of the gods."	
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Tiefling",
-	"Aasimar")
+	allowed_races = list(
+		"Humen",
+		"Tiefling",
+		"Aasimar",
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
-	allowed_patrons = ALL_CLERIC_PATRONS
 	traits_applied = list(RTRAIT_HEAVYARMOR)
+
+/datum/outfit/job/roguetown/adventurer/paladin
+	allowed_patrons = ALL_CLERIC_PATRONS
 
 /datum/outfit/job/roguetown/adventurer/paladin/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/static/list/allowed_patrons = ALL_CLERIC_PATRONS
-	
-	var/datum/patron/ourpatron
-	if(istype(H.patron, /datum/patron))
-		ourpatron = H.patron
-
-	if(!ourpatron || !(ourpatron.type in allowed_patrons))
-		var/list/datum/patron/possiblegods = list()
-		for(var/god in GLOB.patronlist)
-			var/datum/patron/patron = GLOB.patronlist[god]
-			if(patron.type in allowed_patrons)
-				possiblegods |= patron
-		ourpatron = pick(possiblegods)
-		H.patron = ourpatron
-		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")
-	
-	switch(ourpatron.name)
+	switch(H.patron.name)
 		if("Astrata")
 			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 		if("Dendor")
