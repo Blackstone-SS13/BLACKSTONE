@@ -28,6 +28,7 @@
 /datum/outfit/job/roguetown/bapprentice/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, pick(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(1,2), TRUE)
@@ -41,6 +42,7 @@
 		beltr = /obj/item/roguekey/blacksmith
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/vest
 		backr = /obj/item/storage/backpack/rogue/satchel
+		backpack_contents = list(/obj/item/rogueweapon/hammer = 1, /obj/item/rogueweapon/tongs = 1)
 		wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	else
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
@@ -50,3 +52,7 @@
 		beltr = /obj/item/roguekey/blacksmith
 		cloak = /obj/item/clothing/cloak/apron/brown
 		backr = /obj/item/storage/backpack/rogue/satchel
+		backpack_contents = list(/obj/item/rogueweapon/hammer = 1, /obj/item/rogueweapon/tongs = 1)
+	H.change_stat("strength", 1)
+	H.change_stat("endurance", 1)
+	H.change_stat("constitution", 1)
