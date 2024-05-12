@@ -5699,7 +5699,7 @@
 /area/rogue/indoors/town/garrison)
 "hme" = (
 /obj/structure/roguewindow/stained/yellow,
-/turf/closed/wall/mineral/rogue/decostone/long,
+/turf/open/floor/rogue/church,
 /area/rogue/under/town/basement)
 "hmk" = (
 /obj/structure/mineral_door/wood/deadbolt{
@@ -11417,7 +11417,7 @@
 /turf/closed/wall/mineral/rogue/wooddark,
 /area/rogue/indoors/town/dwarfin)
 "pxW" = (
-/obj/structure/fluff/statue/knightalt,
+/obj/structure/fluff/statue/knightalt/r,
 /obj/structure/fluff/walldeco/customflag{
 	pixel_x = -32
 	},
