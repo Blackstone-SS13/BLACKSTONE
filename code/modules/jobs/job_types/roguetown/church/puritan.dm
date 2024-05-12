@@ -116,18 +116,24 @@
 
 /mob/living/carbon/human/proc/confess_sins(resist)
 	if(!resist)
-		var/datum/mind/M = mind
-		if(M)
-			for(var/datum/antagonist/A in M.antag_datums)
-				if(A.confess_lines)
-					say(pick(A.confess_lines), spans = list("torture"))
-					return
-	say(pick("I DON'T KNOW!",
-			"STOP THE PAIN!!",
-			"I DON'T DESERVE THIS!",
-			"THE PAIN!",
-			"I HAVE NOTHING TO SAY...!",
-			"WHY ME?!"), spans = list("torture"))
+		var/list/confessions = list()
+		for(var/datum/antagonist/antag in mind?.antag_datums)
+			if(length(antag.confess_lines))
+				confessions += antag.confess_lines
+		if(length(patron.confess_lines))
+			confessions += patron.confess_lines
+		if(length(confessions))
+			say(pick(antag.confess_lines), spans = list("torture"))
+			return
+	var/static/list/innocent_lines = list(
+		"I DON'T KNOW!",
+		"STOP THE PAIN!!",
+		"I DON'T DESERVE THIS!",
+		"THE PAIN!",
+		"I HAVE NOTHING TO SAY...!",
+		"WHY ME?!",
+	)
+	say(pick(innocent_lines), spans = list("torture"))
 
 /mob/living/carbon/human/proc/faith_test()
 	set name = "FaithTest"

@@ -5,3 +5,8 @@
 	worshippers = "Madmen, some dwarves, the occasional mathematician"
 	associated_faith = /datum/faith/godless
 	preference_accessible = FALSE
+	confess_lines = list(
+		"Gods are WORTHLESS!",
+		"I DON'T NEED GODS!",
+		"I AM MY OWN GOD!",
+	)
