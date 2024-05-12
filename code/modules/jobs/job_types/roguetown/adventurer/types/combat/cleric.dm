@@ -31,7 +31,7 @@
 		var/list/datum/patron/possiblegods = list()
 		for(var/god in GLOB.patronlist)
 			var/datum/patron/patron = GLOB.patronlist[god]
-			if(patron.name in allowed_patrons)
+			if(patron.type in allowed_patrons)
 				possiblegods |= patron
 		ourpatron = pick(possiblegods)
 		H.patron = ourpatron
