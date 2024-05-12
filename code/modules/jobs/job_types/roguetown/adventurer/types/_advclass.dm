@@ -2,7 +2,7 @@
 	var/name
 	var/outfit
 	var/tutorial = "Choose me!"
-	var/list/allowed_sexes = list("male","female")
+	var/list/allowed_sexes
 	var/list/allowed_races = list(
 		"Humen",
 		"Elf",
