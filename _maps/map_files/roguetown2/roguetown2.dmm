@@ -1162,7 +1162,7 @@
 /turf/open/transparent/openspace,
 /area/rogue/outdoors/town)
 "es" = (
-/obj/effect/landmark/start/vagrantlate{
+/obj/effect/landmark/start/beggarlate{
 	dir = 8
 	},
 /turf/open/floor/rogue/dirt/road,
@@ -3796,7 +3796,7 @@
 /obj/structure/chair/wood/rogue{
 	dir = 8
 	},
-/obj/effect/landmark/start/vagrant{
+/obj/effect/landmark/start/beggar{
 	dir = 8
 	},
 /turf/open/floor/rogue/tile,
@@ -4850,7 +4850,7 @@
 /area/rogue/indoors/town/dwarfin)
 "uO" = (
 /obj/structure/chair/wood/rogue/fancy,
-/obj/effect/landmark/start/vagrant,
+/obj/effect/landmark/start/beggar,
 /turf/open/floor/rogue/tile,
 /area/rogue/outdoors/town)
 "uP" = (
@@ -10303,7 +10303,7 @@
 /obj/structure/chair/wood/rogue{
 	dir = 4
 	},
-/obj/effect/landmark/start/vagrant{
+/obj/effect/landmark/start/beggar{
 	dir = 4
 	},
 /turf/open/floor/rogue/tile,
