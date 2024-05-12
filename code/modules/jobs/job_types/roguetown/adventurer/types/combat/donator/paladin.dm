@@ -29,7 +29,7 @@
 		H.patron = ourpatron
 		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")
 	
-	switch(ourpatron.patron.name)
+	switch(ourpatron.name)
 		if("Astrata")
 			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 		if("Dendor")
