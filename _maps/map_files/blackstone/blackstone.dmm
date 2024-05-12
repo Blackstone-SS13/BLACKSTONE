@@ -8018,6 +8018,10 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/rogue/blocks,
 /area/rogue/under/town/basement)
+"kCG" = (
+/obj/machinery/light/rogue/wallfire/candle/l,
+/turf/open/floor/rogue/wood,
+/area/rogue/indoors/town/manor)
 "kDc" = (
 /turf/open/water/swamp/deep,
 /area/rogue/outdoors/bog)
@@ -8589,7 +8593,7 @@
 /obj/structure/roguewindow/openclose{
 	dir = 8
 	},
-/turf/closed,
+/turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
 "ltT" = (
 /turf/open/floor/rogue/twig,
@@ -14241,7 +14245,7 @@
 "tDq" = (
 /obj/structure/bars/pipe,
 /obj/structure/roguewindow/openclose,
-/turf/closed,
+/turf/open/floor/rogue/wood,
 /area/rogue/indoors/town/manor)
 "tEU" = (
 /obj/structure/fluff/walldeco/stone{
@@ -383097,7 +383101,7 @@ fZJ
 fZJ
 aCU
 oif
-oif
+kCG
 oif
 hsT
 aCU
