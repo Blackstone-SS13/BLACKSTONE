@@ -15,7 +15,6 @@
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	tutorial = "These walls are your life, this town is your duty, you've watched the moss grow and wither out from when you were a young boy, your masters are the King and the Sheriff, they don't know what it's like to be on the walls, but disobey them and you'll surely find yourself on the outside of them."
-	display_order = JDO_TOWNGUARD
 	display_order = JDO_WATCHMEN
 
 	outfit = /datum/outfit/job/roguetown/watchmen
@@ -55,9 +54,9 @@
 /datum/outfit/job/roguetown/watchmen/proc/assign_skills(mob/living/carbon/human/watchmen)
 	watchmen.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 	watchmen.mind.adjust_skillrank(/datum/skill/combat/bows, pick(3,3,4), TRUE)
-	watchmen.mind.adjust_skillrank(/datum/skill/combat/crossbows, (2,2,3), TRUE)
-	watchmen.mind.adjust_skillrank(/datum/skill/combat/wrestling, (3,3,4), TRUE)
-	watchmen.mind.adjust_skillrank(/datum/skill/combat/unarmed, (3,3,4), TRUE) 
+	watchmen.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,2,3), TRUE)
+	watchmen.mind.adjust_skillrank(/datum/skill/combat/wrestling, pick(3,3,4), TRUE)
+	watchmen.mind.adjust_skillrank(/datum/skill/combat/unarmed, pick(3,3,4), TRUE) 
 	watchmen.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 	watchmen.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(1,2), TRUE)
 	watchmen.mind.adjust_skillrank(/datum/skill/combat/whipsflails, pick(1,2), TRUE)
