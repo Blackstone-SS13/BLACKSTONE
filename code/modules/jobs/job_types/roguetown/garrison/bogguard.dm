@@ -17,7 +17,6 @@
 		"Aasimar",
 		"Half Orc"
 	)
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	tutorial = "You've handed your resume, which mostly consisted of showing up, and in exchange you have a spot among the Bog Guards. You have a roof over your head, coin in your pocket, and a thankless job protecting the outskirts of town against bandits and volfs."
 	display_order = JDO_TOWNGUARD
 	whitelist_req = TRUE
@@ -90,17 +89,23 @@
 
 /datum/outfit/job/roguetown/bogguardsman/proc/assign_skills(mob/living/carbon/human/bogger)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE) 
 	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE) 
+	bogger.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	bogger.change_stat("perception", 1)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+	bogger.change_stat("strength", 1)
+	bogger.change_stat("perception", 2) 
+	bogger.change_stat("constitution", 1)
 	bogger.change_stat("endurance", 1)
 	bogger.change_stat("speed", 1)
 
@@ -121,3 +126,5 @@
 	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
 	bogger.change_stat("perception", 2)
 	bogger.change_stat("speed", 2)
+	bogger.change_stat("constitution", 1)
+	bogger.change_stat("endurance", 1)

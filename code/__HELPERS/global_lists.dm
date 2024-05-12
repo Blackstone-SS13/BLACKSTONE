@@ -70,10 +70,21 @@
 	for(var/i in 0 to 20)
 		GLOB.mouseicons_human += file("icons/effects/mousemice/swang/[i * 5].dmi")
 
+	// Faiths
+	for(var/path in subtypesof(/datum/faith))
+		var/datum/faith/faith = new path()
+		GLOB.faithlist[path] = faith
+		if(faith.preference_accessible)
+			GLOB.preference_faiths[path] = faith
+
 	// Patron Gods
-	for(var/god in subtypesof(/datum/patrongods))
-		var/datum/patrongods/A = new god()
-		GLOB.patronlist[A.name] = A
+	for(var/path in subtypesof(/datum/patron))
+		var/datum/patron/patron = new path()
+		GLOB.patronlist[path] = patron
+		LAZYINITLIST(GLOB.patrons_by_faith[patron.associated_faith])
+		GLOB.patrons_by_faith[patron.associated_faith][path] = patron
+		if(patron.preference_accessible)
+			GLOB.preference_patrons[path] = patron
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.

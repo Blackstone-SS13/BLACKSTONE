@@ -17,7 +17,6 @@
 	ispilgrim = FALSE
 	vampcompat = FALSE
 
-
 /datum/outfit/job/roguetown/adventurer/monk/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/roguehood

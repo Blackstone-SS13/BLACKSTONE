@@ -4,32 +4,20 @@
 	name = "Paladin"
 	tutorial = "Paladins are holy warriors who have taken sacred vows to uphold justice and righteousness. Often, they were promised redemption for past sins if they crusaded in the name of the gods."	
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Tiefling",
-	"Aasimar")
+	allowed_races = list(
+		"Humen",
+		"Tiefling",
+		"Aasimar",
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
-	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
 	traits_applied = list(RTRAIT_HEAVYARMOR)
+
+/datum/outfit/job/roguetown/adventurer/paladin
+	allowed_patrons = ALL_CLERIC_PATRONS
 
 /datum/outfit/job/roguetown/adventurer/paladin/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
-	
-	var/datum/patrongods/ourpatron
-	if(istype(H.PATRON, /datum/patrongods))
-		ourpatron = H.PATRON
-
-	if(!ourpatron || !(ourpatron.name in allowed_patrons))
-		var/list/datum/patrongods/possiblegods = list()
-		for(var/god in GLOB.patronlist)
-			var/datum/patrongods/patron = GLOB.patronlist[god]
-			if(patron.name in allowed_patrons)
-				possiblegods |= patron
-		ourpatron = pick(possiblegods)
-		H.PATRON = ourpatron
-		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
-	
-	switch(ourpatron.name)
+	switch(H.patron.name)
 		if("Astrata")
 			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 		if("Dendor")
@@ -130,7 +118,7 @@
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 		if(H.dna.species.id == "tiefling")
 			cloak = /obj/item/clothing/cloak/tabard/crusader/tief
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
+	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
 	//Max devotion limit - Paladins are stronger but cannot pray to gain all abilities beyond t1
 	C.max_devotion = 250
 	C.max_progression = CLERIC_REQ_1
