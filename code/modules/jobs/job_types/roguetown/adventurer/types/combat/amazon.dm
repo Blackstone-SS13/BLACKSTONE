@@ -10,7 +10,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/amazon
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)

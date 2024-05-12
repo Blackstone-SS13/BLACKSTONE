@@ -8,11 +8,10 @@
 	Elves, are a generic term for tall, pointy-eared humanoids\
     Of whom trace their original heritage to the ancient mysterious Snow Elves. \
 	These ones are of a dark complexion and originate mostly from the underdark. \
-    Their culture and entire lives normally involve serving Lolth, the spider queen. \
-    Previously rare but in recent times, more and more dark elfs can be seen on the surface\
-    It's rumored that Lolth has been weakened and her power wanes over the dark elfs. \
+    Their culture and entire lives normally involve serving the evil gods of the inhumen pantheon. \
+    Previously rare but in recent times, more and more dark elfs can be seen on the surface. \
     The ones who aren't overtly cruel and bloodthirsty; tend to flee to the surface lest they get culled by their own society, \
-    While some more sinister ones abandon Lolth in search of new and greater power."
+    while some more sinister ones abandon their cities in search of new and greater power."
 
 /*
 	Former RT Desc: These guys were undead which doesn't really fit considering now you have a ton of them walking around.
@@ -62,8 +61,6 @@
 	specstats = list("strength" = -2, "perception" = -1, "intelligence" = 1, "constitution" = -1, "endurance" = 1, "speed" = 2, "fortune" = 0)
 	specstats_f = list("strength" = 1, "perception" = -1, "intelligence" = 2, "constitution" = 0, "endurance" = 1, "speed" = 1, "fortune" = 0)
 	enflamed_icon = "widefire"
-	possible_faiths = list(FAITH_SPIDER)
-
 
 /datum/species/elf/dark/get_span_language(datum/language/message_language)
 	if(!message_language)

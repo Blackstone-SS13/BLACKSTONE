@@ -15,6 +15,9 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/rogue
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
+/datum/outfit/job/roguetown/adventurer/rogue
+	allowed_patrons = list(/datum/patron/divine/xylix, /datum/patron/inhumen/matthios)
+
 /datum/outfit/job/roguetown/adventurer/rogue/pre_equip(mob/living/carbon/human/H)
 	..()
 	shoes = /obj/item/clothing/shoes/roguetown/boots

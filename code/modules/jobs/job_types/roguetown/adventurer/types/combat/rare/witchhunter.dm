@@ -11,6 +11,9 @@
 	pickprob = 11
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
+/datum/outfit/job/roguetown/adventurer/puritan
+	allowed_patrons = list(/datum/patron/old_god)
+
 /datum/outfit/job/roguetown/adventurer/puritan/pre_equip(mob/living/carbon/human/H)
 	..()
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/puritan

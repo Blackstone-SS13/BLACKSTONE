@@ -11,12 +11,16 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/nudist
 	traits_applied = list(RTRAIT_NUDIST)
 	isvillager = FALSE
 	ispilgrim = TRUE
+
+/datum/outfit/job/roguetown/adventurer/nudist
+	allowed_patrons = list(/datum/patron/divine/dendor)
 
 /datum/outfit/job/roguetown/adventurer/nudist/pre_equip(mob/living/carbon/human/H)
 	..()
