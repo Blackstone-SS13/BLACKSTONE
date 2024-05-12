@@ -42,14 +42,14 @@
 	new /obj/item/rogueweapon/mace/cudgel(src)
 	new /obj/item/rope/chain(src)
 	
-/datum/roguestock/import/townguard
-	name = "Town Guard Equipment Crate"
-	desc = "Starting kit for a new Town Guard."
-	item_type = /obj/structure/closet/crate/chest/steward/townguard
+/datum/roguestock/import/watchmen
+	name = "Watchmen Equipment Crate"
+	desc = "Starting kit for a new Watchmen"
+	item_type = /obj/structure/closet/crate/chest/steward/watchmen
 	export_price = 50
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/townguard/Initialize()
+/obj/structure/closet/crate/chest/steward/watchmen/Initialize()
 	. = ..()
 	new /obj/item/clothing/cloak/stabard/guard(src)
 	new /obj/item/keyring/guard(src)
