@@ -138,6 +138,9 @@
 /obj/item/keyring/guardcastle
 	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/garrison, /obj/item/roguekey/walls, /obj/item/roguekey/manor)
 
+/obj/item/keyring/bogguard
+	keys = list(/obj/item/roguekey/dungeon, /obj/item/roguekey/garrison)
+
 /obj/item/keyring/velder
 	keys = list(/obj/item/roguekey/velder, /obj/item/roguekey/blacksmith/town, /obj/item/roguekey/farm, /obj/item/roguekey/butcher)
 
