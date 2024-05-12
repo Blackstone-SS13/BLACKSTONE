@@ -1699,12 +1699,12 @@ Slots: [job.spawn_positions]</span>
 						if(!patron.name)
 							continue
 						patrons_named[patron.name] = patron
-					var/god_input = input(user, "Choose your character's patron god", "Patron God") as null|anything in patrons_named
+					var/datum/faith/current_faith = GLOB.faithlist[selected_patron?.associated_faith]
+					var/god_input = input(user, "Choose your character's patron god", "[current_faith.name]") as null|anything in patrons_named
 					if(god_input)
 						selected_patron = patrons_named[god_input]
 						var/datum/faith/patron_faith = GLOB.faithlist[selected_patron.associated_faith]
 						to_chat(user, "<font color='purple'>Patron: [selected_patron]</font>")
-						to_chat(user, "<font color='purple'>Faith: [patron_faith?.name || "FUCK!"]</font>")
 						to_chat(user, "<font color='purple'>Domain: [selected_patron.domain]</font>")
 						to_chat(user, "<font color='purple'>Background: [selected_patron.desc]</font>")
 						to_chat(user, "<font color='purple'>Likely Worshippers: [selected_patron.worshippers]</font>")
