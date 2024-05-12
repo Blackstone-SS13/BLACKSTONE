@@ -3999,9 +3999,7 @@
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors/town/church)
 "eVw" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
+/obj/structure/fluff/railing/wood,
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town)
 "eVL" = (
@@ -6809,6 +6807,12 @@
 /obj/item/reagent_containers/food/snacks/rogue/crackerscooked,
 /turf/open/floor/rogue/blocks,
 /area/rogue/indoors/town/garrison)
+"iIQ" = (
+/obj/item/reagent_containers/food/snacks/crow{
+	dir = 8
+	},
+/turf/open/floor/rogue/ruinedwood,
+/area/rogue/outdoors/bog)
 "iJC" = (
 /turf/open/floor/rogue/ruinedwood,
 /area/rogue/indoors/town/tavern)
@@ -9392,9 +9396,7 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
 "mGb" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
+/obj/structure/fluff/railing/border,
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/church)
 "mGn" = (
@@ -14315,9 +14317,9 @@
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/tavern)
 "tIR" = (
-/obj/structure/ladder,
-/turf/open/floor/rogue/churchrough,
-/area/rogue/indoors/town/church)
+/obj/structure/fluff/statue/gargoyle/moss,
+/turf/open/floor/rogue/blocks,
+/area/rogue/under/town/basement)
 "tIU" = (
 /obj/structure/fluff/walldeco/customflag,
 /turf/closed/wall/mineral/rogue/stone/moss,
@@ -16123,7 +16125,8 @@
 /turf/open/floor/rogue/cobble,
 /area/rogue/indoors)
 "wlM" = (
-/obj/structure/mineral_door/wood/deadbolt{
+/obj/structure/mineral_door/wood{
+	locked = 1;
 	lockid = "graveyard"
 	},
 /turf/open/floor/rogue/woodturned,
@@ -17436,6 +17439,10 @@
 /area/rogue/indoors/town/manor)
 "xUi" = (
 /obj/structure/flora/roguegrass/bush,
+/turf/open/floor/rogue/dirt/road,
+/area/rogue/outdoors/town)
+"xUm" = (
+/obj/structure/fluff/walldeco/steward,
 /turf/open/floor/rogue/dirt/road,
 /area/rogue/outdoors/town)
 "xUG" = (
@@ -202197,16 +202204,16 @@ vRu
 rSC
 rSC
 cTA
-cBf
+tIR
 iTw
 iTw
 iTw
 iTw
+jkK
 iTw
 iTw
 iTw
-iTw
-iTw
+jkK
 iTw
 iTw
 iTw
@@ -203001,7 +203008,7 @@ vRu
 rSC
 rSC
 cTA
-cBf
+tIR
 cBf
 cBf
 cBf
@@ -283794,7 +283801,7 @@ wbg
 wbg
 mwE
 aOn
-aOn
+xUm
 wbg
 mwE
 mwE
@@ -288628,7 +288635,7 @@ gPy
 pku
 pku
 uBI
-pku
+wrj
 avQ
 xAt
 xAt
@@ -309952,7 +309959,7 @@ jvj
 ihO
 qPA
 rfx
-scu
+feY
 wbg
 wbg
 lOz
@@ -313577,7 +313584,7 @@ rfx
 rfx
 oAn
 swu
-hob
+wbg
 wbg
 oAn
 aOv
@@ -368743,7 +368750,7 @@ uuE
 uuE
 uuE
 uuE
-jCh
+uuE
 nqU
 hXv
 foz
@@ -369145,7 +369152,7 @@ uuE
 uuE
 uuE
 uuE
-jCh
+uuE
 nqU
 hDw
 vET
@@ -476500,7 +476507,7 @@ uuE
 rUt
 rUt
 rOF
-rOF
+iIQ
 rOF
 eFy
 eFy
@@ -513764,7 +513771,7 @@ fWH
 fCM
 qzV
 iYx
-tIR
+uKB
 uKB
 eZN
 iYx
