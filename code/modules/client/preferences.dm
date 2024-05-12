@@ -990,16 +990,16 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(!job.required && !isnull(job.min_pq) && (get_playerquality(user.ckey) < job.min_pq))
 				HTML += "<font color=#a59461>[used_name] (Min PQ: [job.min_pq])</font></td> <td> </td></tr>"
 				continue
-			if(!(user.client.prefs.age in job.allowed_ages))
+			if(length(job.allowed_ages) && !(user.client.prefs.age in job.allowed_ages))
 				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
 				continue
-			if(!(user.client.prefs.pref_species.name in job.allowed_races))
+			if(length(job.allowed_races) && !(user.client.prefs.pref_species.name in job.allowed_races))
 				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
 				continue
-			if(!(user.client.prefs.selected_patron.type in job.allowed_patrons))
+			if(length(job.allowed_patrons) && !(user.client.prefs.selected_patron.type in job.allowed_patrons))
 				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
 				continue
-			if(!(user.client.prefs.gender in job.allowed_sexes))
+			if(length(job.allowed_sexes) && !(user.client.prefs.gender in job.allowed_sexes))
 				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
 				continue
 //			if((job_preferences[SSjob.overflow_role] == JP_LOW) && (rank != SSjob.overflow_role) && !is_banned_from(user.ckey, SSjob.overflow_role))
