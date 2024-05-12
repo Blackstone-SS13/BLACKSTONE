@@ -86,6 +86,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "VAMPIRE LORD"), 5 SECONDS)
 		greet()
 	return ..()
+
 // OLD AND EDITED
 /datum/antagonist/vampirelord/proc/equip_lord()
 	owner.unknow_all_people()
@@ -116,6 +117,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(owner.current)
 	H.equipOutfit(/datum/outfit/job/roguetown/vamplord)
+	H.patron = GLOB.patronlist[/datum/patron/inhumen/zizo]
 
 	return TRUE
 
@@ -794,7 +796,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 						addomen("sunsteal")
 						for(var/mob/living/carbon/human/W in GLOB.human_list)
 							var/datum/patron/patron = W.client.prefs.selected_patron
-							if(istype(patron, /datum/patron/divine_pantheon/astrata))
+							if(istype(patron, /datum/patron/divine/astrata))
 								if(!W.mind.antag_datums)
 									to_chat(W, "<span class='userdanger'>You feel the pain of your Patron!</span>")
 									W.emote_scream()

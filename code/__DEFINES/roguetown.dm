@@ -3,7 +3,7 @@
 
 #define ALL_RACES_LIST_NAMES list("Humen", "Elf", "Dark Elf", "Half-Elf", "Dwarf", "Tiefling", "Argonian", "Aasimar", "Half Orc")
 
-#define ALL_CLERIC_PATRONS list(/datum/patron/divine_pantheon/astrata, /datum/patron/divine_pantheon/noc, /datum/patron/divine_pantheon/dendor, /datum/patron/divine_pantheon/necra, /datum/patron/divine_pantheon/pestra)
+#define ALL_CLERIC_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/necra, /datum/patron/divine/pestra)
 
 #define PLATEHIT "plate"
 #define CHAINHIT "chain"
