@@ -148,7 +148,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Court Magician"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/guardsman
+/obj/effect/landmark/start/watchmen
 	name = "Town Guard"
 	icon_state = "arrow"
 
@@ -180,7 +180,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Dungeoneer"
 	icon_state = "arrow"
 
-/obj/effect/landmark/start/watchman
+/obj/effect/landmark/start/gatemaster
 	name = "Gatemaster"
 	icon_state = "arrow"
 
