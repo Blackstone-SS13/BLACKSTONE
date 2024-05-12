@@ -33,7 +33,7 @@
 	OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(0,0))
 
 
-/datum/species/goblin/on_species_gain(mob/living/carbon/C, datum/species/old_species)
+/datum/species/goblinp/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/orcish)
