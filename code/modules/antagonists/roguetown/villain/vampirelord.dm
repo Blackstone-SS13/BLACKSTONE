@@ -13,7 +13,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	job_rank = ROLE_VAMPIRE
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "vampire"
-	confess_lines = list("I AM ANCIENT", "I AM THE LAND", "CHILD OF KAIN!")
+	confess_lines = list(
+		"I AM ANCIENT", 
+		"I AM THE LAND", 
+		"CHILD OF KAIN!",
+	)
 	var/isspawn = FALSE
 	var/disguised = FALSE
 	var/ascended = FALSE
@@ -86,6 +90,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "VAMPIRE LORD"), 5 SECONDS)
 		greet()
 	return ..()
+
 // OLD AND EDITED
 /datum/antagonist/vampirelord/proc/equip_lord()
 	owner.unknow_all_people()
@@ -116,6 +121,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(owner.current)
 	H.equipOutfit(/datum/outfit/job/roguetown/vamplord)
+	H.patron = GLOB.patronlist[/datum/patron/inhumen/zizo]
 
 	return TRUE
 
@@ -470,7 +476,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 // SPAWN
 /datum/antagonist/vampirelord/lesser
 	name = "Vampire Spawn"
-	confess_lines = list("THE CRIMSON CALLS!", "MY MASTER COMMANDS", "THE SUN IS ENEMY!")
+	confess_lines = list(
+		"THE CRIMSON CALLS!", 
+		"MY MASTER COMMANDS", 
+		"THE SUN IS ENEMY!",
+	)
 	isspawn = TRUE
 
 /datum/antagonist/vampirelord/lesser/move_to_spawnpoint()
@@ -792,12 +802,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 							sunstolen = FALSE
 						priority_announce("The Sun is torn from the sky!", "Terrible Omen", 'sound/misc/astratascream.ogg')
 						addomen("sunsteal")
-						for(var/mob/living/carbon/human/W in GLOB.human_list)
-							var/datum/patrongods/patron = W.client.prefs.selected_patron
-							if(patron.name == "Astrata")
-								if(!W.mind.antag_datums)
-									to_chat(W, "<span class='userdanger'>You feel the pain of your Patron!</span>")
-									W.emote_scream()
+						for(var/mob/living/carbon/human/astrater in GLOB.human_list)
+							if(!istype(astrater.patron, /datum/patron/divine/astrata) || !length(astrater.mind?.antag_datums))
+								continue
+							to_chat(astrater, "<span class='userdanger'>You feel the pain of [astrater.patron.name]!</span>")
+							astrater.emote_scream()
 
 	if(user.mind.special_role == "Vampire Spawn")
 		to_chat(user, "I don't have the power to use this!")

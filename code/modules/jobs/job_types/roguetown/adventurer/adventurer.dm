@@ -69,13 +69,13 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 #endif
 		for(var/I in shuffle(classes))
 			var/datum/advclass/A = I
-			if(!(H.gender in A.allowed_sexes))
+			if(length(A.allowed_sexes) && !(H.gender in A.allowed_sexes))
 				testing("[A.name] fail11")
 				continue
-			if(!(H.dna.species.name in A.allowed_races))
+			if(length(A.allowed_races) && !(H.dna.species.name in A.allowed_races))
 				testing("[A.name] fail22")
 				continue
-			if(!(H.age in A.allowed_ages))
+			if(length(A.allowed_ages) && !(H.age in A.allowed_ages))
 				testing("[A.name] fail33")
 				continue
 			if(A.maxchosen > -1)
