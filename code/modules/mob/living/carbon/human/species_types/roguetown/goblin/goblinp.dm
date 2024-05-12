@@ -17,8 +17,8 @@
 	limbs_icon_f = 'icons/roguetown/mob/bodies/m/mg.dmi'
 	dam_icon = 'icons/roguetown/mob/bodies/dam/dam_male.dmi'
 	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_female.dmi'
-	soundpack_m = /datum/voicepack/goblin
-	soundpack_f = /datum/voicepack/goblin
+	soundpack_m = /datum/voicepack/male/goblin
+	soundpack_f = /datum/voicepack/male/goblin
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	nojumpsuit = 1
 	offset_features = list(OFFSET_ID = list(0,0), OFFSET_WRISTS = list(0,0),\
