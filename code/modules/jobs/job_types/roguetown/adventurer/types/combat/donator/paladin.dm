@@ -23,13 +23,13 @@
 		var/list/datum/patron/possiblegods = list()
 		for(var/god in GLOB.patronlist)
 			var/datum/patron/patron = GLOB.patronlist[god]
-			if(patron.name in allowed_patrons)
+			if(patron.patron.type in allowed_patrons)
 				possiblegods |= patron
 		ourpatron = pick(possiblegods)
 		H.patron = ourpatron
 		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")
 	
-	switch(ourpatron.name)
+	switch(ourpatron.patron.name)
 		if("Astrata")
 			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 		if("Dendor")

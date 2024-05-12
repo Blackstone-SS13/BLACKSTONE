@@ -1699,7 +1699,7 @@ Slots: [job.spawn_positions]</span>
 						if(!patron.name)
 							continue
 						patrons_named[patron.name] = patron
-					var/datum/faith/current_faith = GLOB.faithlist[selected_patron?.associated_faith]
+					var/datum/faith/current_faith = GLOB.faithlist[selected_patron?.associated_faith] || GLOB.faithlist[default_faith]
 					var/god_input = input(user, "Choose your character's patron god", "[current_faith.name]") as null|anything in patrons_named
 					if(god_input)
 						selected_patron = patrons_named[god_input]
