@@ -34,7 +34,7 @@
 	if(!H || !H.mind)
 		return
 
-	var/datum/patron/A = H.PATRON
+	var/datum/patron/A = H.patron
 	var/spelllist = list(A.t0, A.t1, A.t2, A.t3)
 	for(var/spell_type in spelllist)
 		if(H.mind.has_spell(spell_type))
@@ -47,7 +47,7 @@
 	if(!H || !H.mind)
 		return
 
-	var/datum/patron/A = H.PATRON
+	var/datum/patron/A = H.patron
 	var/spelllist = list(A.t0, A.t1)
 	level = CLERIC_T1
 	for(var/spell in spelllist)
@@ -59,7 +59,7 @@
 	if(!H || !H.mind)
 		return
 
-	var/datum/patron/A = H.PATRON
+	var/datum/patron/A = H.patron
 	var/spelllist = list(/obj/effect/proc_holder/spell/targeted/churn, A.t0)
 	level = CLERIC_T0
 	for(var/spell in spelllist)

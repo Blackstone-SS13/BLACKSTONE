@@ -794,7 +794,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 						addomen("sunsteal")
 						for(var/mob/living/carbon/human/W in GLOB.human_list)
 							var/datum/patron/patron = W.client.prefs.selected_patron
-							if(patron.name == "Astrata")
+							if(istype(patron, /datum/patron/divine_pantheon/astrata))
 								if(!W.mind.antag_datums)
 									to_chat(W, "<span class='userdanger'>You feel the pain of your Patron!</span>")
 									W.emote_scream()

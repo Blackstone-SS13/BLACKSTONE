@@ -1,9 +1,9 @@
 //used in various places
-#define ALL_RACES_LIST		list("humen", "dwarfm", "elfw", "elfd", "helf", "tiefling", "argonian", "aasimar", "halforc")
+#define ALL_RACES_LIST list("humen", "dwarfm", "elfw", "elfd", "helf", "tiefling", "argonian", "aasimar", "halforc")
 
-#define ALL_RACES_LIST_NAMES		list("Humen", "Elf", "Dark Elf", "Half-Elf", "Dwarf", "Tiefling", "Aasimar")
+#define ALL_RACES_LIST_NAMES list("Humen", "Elf", "Dark Elf", "Half-Elf", "Dwarf", "Tiefling", "Argonian", "Aasimar", "Half Orc")
 
-#define ALL_PATRON_NAMES_LIST		list("Astrata", "Noc", "Xylix", "Eora", "Malum", "Dendor", "Abyssor", "Necra", "Pestra", "Malum", "Ravox")
+#define ALL_CLERIC_PATRONS list(/datum/patron/divine_pantheon/astrata, /datum/patron/divine_pantheon/noc, /datum/patron/divine_pantheon/dendor, /datum/patron/divine_pantheon/necra, /datum/patron/divine_pantheon/pestra)
 
 #define PLATEHIT "plate"
 #define CHAINHIT "chain"

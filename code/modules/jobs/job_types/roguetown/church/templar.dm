@@ -14,7 +14,7 @@
 		"Half-Elf",
 		"Half Orc"
 	)
-	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
+	allowed_patrons = ALL_CLERIC_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
 	total_positions = 2
@@ -24,11 +24,11 @@
 
 /datum/outfit/job/roguetown/templar/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
+	var/static/list/allowed_patrons = ALL_CLERIC_PATRONS
 	
 	var/datum/patron/ourpatron
-	if(istype(H.PATRON, /datum/patron))
-		ourpatron = H.PATRON
+	if(istype(H.patron, /datum/patron))
+		ourpatron = H.patron
 
 	if(!ourpatron || !(ourpatron.name in allowed_patrons))
 		var/list/datum/patron/possiblegods = list()
@@ -37,8 +37,8 @@
 			if(patron.name in allowed_patrons)
 				possiblegods |= patron
 		ourpatron = pick(possiblegods)
-		H.PATRON = ourpatron
-		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
+		H.patron = ourpatron
+		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")
 	
 	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
@@ -95,7 +95,7 @@
 	if(H.dna?.species)
 		if(H.dna.species.id == "humen")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
+	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
 	//Max devotion limit - Templars are stronger but cannot pray to gain more abilities beyond t1
 	C.max_devotion = 250
 	C.max_progression = CLERIC_REQ_1

@@ -6,7 +6,7 @@
 	name = "Astrata"
 	domain = "Goddess of the Sun, Day, and Order"
 	desc = "The Firstborn of Psydon, twin of Noc, gifted man the Sun as her divine gift."
-	worshippers = "The Noble Hearted, Zealots, Farmers"
+	worshippers = "The Noble Hearted, Zealots and Farmers"
 	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/invoked/sacred_flame_rogue
 	t2 = /obj/effect/proc_holder/spell/invoked/heal
@@ -16,7 +16,7 @@
 	name = "Noc"
 	domain = "God of the Moon, Night, and Knowledge"
 	desc = "The Firstborn of Psydon, twin of Astrata, gifted man divine knowledge."
-	worshippers = " Magic Practitioners, Scholars"
+	worshippers = "Wizards and Scholars"
 	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/invoked/blindness
 	t2 = /obj/effect/proc_holder/spell/invoked/invisibility
@@ -24,7 +24,7 @@
 /datum/patron/divine_pantheon/dendor
 	name = "Dendor"
 	domain = "God of the Earth and Nature"
-	desc = "The Primordial Son, patron of beasts and the wood. Gone mad with time."
+	desc = "The Primordial Son of Psydon, patron of beasts and the wood. Gone mad with time."
 	worshippers = "Druids, Beasts, Madmen"
 	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/targeted/blesscrop
@@ -40,7 +40,7 @@
 /datum/patron/divine_pantheon/ravox
 	name = "Ravox"
 	domain = "God of War, Justice and Strength"
-	desc = "The strongest of Psydons children, he watches man from afar."
+	desc = "The strongest of Psydon's children, he watches man from afar."
 	worshippers = "Warriors, Sellswords & those who seek Justice"
 
 /datum/patron/divine_pantheon/necra
@@ -57,7 +57,7 @@
 	name = "Xylix"
 	domain = "God of Trickery, Freedom and Inspiration"
 	desc = "The Mad-God, gifted man wanderlust and a thousand tricks."
-	worshippers = "Cheats & Frauds, Silver-Tongued devils and Roguish Types"
+	worshippers = "Cheats, Frauds, Silver-Tongued devils and Roguish Types"
 
 /datum/patron/divine_pantheon/pestra
 	name = "Pestra"

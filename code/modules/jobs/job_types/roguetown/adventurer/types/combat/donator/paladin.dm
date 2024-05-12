@@ -8,26 +8,26 @@
 	"Tiefling",
 	"Aasimar")
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
-	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
+	allowed_patrons = ALL_CLERIC_PATRONS
 	traits_applied = list(RTRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/paladin/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
+	var/static/list/allowed_patrons = ALL_CLERIC_PATRONS
 	
 	var/datum/patron/ourpatron
-	if(istype(H.PATRON, /datum/patron))
-		ourpatron = H.PATRON
+	if(istype(H.patron, /datum/patron))
+		ourpatron = H.patron
 
-	if(!ourpatron || !(ourpatron.name in allowed_patrons))
+	if(!ourpatron || !(ourpatron.type in allowed_patrons))
 		var/list/datum/patron/possiblegods = list()
 		for(var/god in GLOB.patronlist)
 			var/datum/patron/patron = GLOB.patronlist[god]
 			if(patron.name in allowed_patrons)
 				possiblegods |= patron
 		ourpatron = pick(possiblegods)
-		H.PATRON = ourpatron
-		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.PATRON].")
+		H.patron = ourpatron
+		to_chat(H, "<span class='warning'>My patron had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")
 	
 	switch(ourpatron.name)
 		if("Astrata")
@@ -130,7 +130,7 @@
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 		if(H.dna.species.id == "tiefling")
 			cloak = /obj/item/clothing/cloak/tabard/crusader/tief
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
+	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
 	//Max devotion limit - Paladins are stronger but cannot pray to gain all abilities beyond t1
 	C.max_devotion = 250
 	C.max_progression = CLERIC_REQ_1

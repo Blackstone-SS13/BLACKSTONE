@@ -996,7 +996,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			if(!(user.client.prefs.pref_species.name in job.allowed_races))
 				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
 				continue
-			if(!(user.client.prefs.selected_patron.name in job.allowed_patrons))
+			if(!(user.client.prefs.selected_patron.type in job.allowed_patrons))
 				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
 				continue
 			if(!(user.client.prefs.gender in job.allowed_sexes))
@@ -1690,8 +1690,7 @@ Slots: [job.spawn_positions]</span>
 						var/datum/faith/faith = faiths_named[faith_input]
 						to_chat(user, "<font color='purple'>Faith: [faith.name]</font>")
 						to_chat(user, "<font color='purple'>Background: [faith.desc]</font>")
-						var/patron_path = GLOB.patrons_by_faith[faith_input][1]
-						selected_patron = GLOB.patronlist[patron_path]
+						selected_patron = GLOB.patronlist[faith.godhead] || GLOB.patronlist[default_patron]
 					return
 
 				if("patron")
@@ -2396,7 +2395,7 @@ Slots: [job.spawn_positions]</span>
 //	character.accessory = accessory
 	character.detail = detail
 	character.socks = socks
-	character.PATRON = selected_patron
+	character.patron = selected_patron
 	character.backpack = backpack
 
 	character.jumpsuit_style = jumpsuit_style
