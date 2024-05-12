@@ -1,4 +1,4 @@
-/datum/job/roguetown/vagrants/villager
+/datum/job/roguetown/villager
 	title = "Towner"
 	flag = ADVENTURER
 	department_flag = PEASANTS
@@ -25,6 +25,9 @@
 	min_pq = -15
 	wanderer_examine = FALSE
 	advjob_examine = TRUE
+
+	free_slot_rolls_count = 20
+
 
 /*
 /datum/job/roguetown/adventurer/villager/New()

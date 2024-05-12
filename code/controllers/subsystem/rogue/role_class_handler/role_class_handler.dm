@@ -47,8 +47,11 @@ SUBSYSTEM_DEF(role_class_handler)
 	// List of all classes villagers can be (These are townies)
 	var/list/villager_classes
 
-	// List of all antag classes avail
+	// List of all antag classes avail, these naturally result in antags
 	var/list/antag_classes
+
+	// List of all challenge classes avail, these are meant to not consume rng roll slots atm
+	var/list/challenge_classes
 
 
 /*
@@ -73,6 +76,7 @@ SUBSYSTEM_DEF(role_class_handler)
 	combat_classes = list()
 	villager_classes = list()
 	antag_classes = list()
+	challenge_classes = list()
 
 	//Time to sort these retards, and sort them we shall.
 	for(var/datum/advclass/retard_datum in all_classes)
@@ -91,12 +95,14 @@ SUBSYSTEM_DEF(role_class_handler)
 		if(retard_datum.category_flags & (RT_TYPE_ANTAG_CLASS))
 			antag_classes += retard_datum
 
+		if(retard_datum.category_flags & (RT_TYPE_CHALLENGE_CLASS))
+			challenge_classes += retard_datum
+
 	//init list to hold active class select handlers (aka menu data)
 	active_menus = list(
 	)
 
 	//Well that about covers it really.
-
 
 /*
 	We setup the class handler here, aka the menu
@@ -110,13 +116,20 @@ SUBSYSTEM_DEF(role_class_handler)
 		if(GOT_IT)
 			if(!GOT_IT.linked_client) // this ref will disappear if they disconnect neways probably, as its a client
 				GOT_IT.linked_client = H.client // too bad the firing of slop just checks the mob for what it can even use anyways
-			GOT_IT.fire_slop_into_my_mouth()
-		else
+			GOT_IT.second_step()
 
+		else
 			var/datum/class_select_handler/XTRA_MEATY = new()
 			XTRA_MEATY.linked_client = H.client
-			XTRA_MEATY.fire_slop_into_my_mouth()
+
+			if(H.job) // Set the totals being rolled via whats currently on the job
+				var/datum/job/roguetown/RT_JOB = SSjob.name_occupations[H.job]
+				XTRA_MEATY.total_combat_class = RT_JOB.combat_slot_rolls_count
+				XTRA_MEATY.total_free_class = RT_JOB.free_slot_rolls_count
+
+			XTRA_MEATY.initial_setup()
 			active_menus[H.client.ckey] = XTRA_MEATY
+
 		if(!(H.client.ckey in session_rerolls)) // no key in sess rerolls
 			session_rerolls[H.client.ckey] = 3 // Set it and give them 3
 
@@ -172,8 +185,10 @@ SUBSYSTEM_DEF(role_class_handler)
 	session_rerolls[ckey] += number
 
 
-/datum/controller/subsystem/role_class_handler/proc/add_to_special_session_queue(ckey, datum)
+/datum/controller/subsystem/role_class_handler/proc/add_to_special_session_queue(ckey, datum, key_id)
 	if(!special_session_queue[ckey])
 		special_session_queue[ckey] = list()
 
-	special_session_queue[ckey] += datum
+	special_session_queue[ckey]["[key_id]"] = datum
+
+/datum/controller/subsystem/role_class_handler/proc/remove_from_special_session_queue(ckey, key_id)

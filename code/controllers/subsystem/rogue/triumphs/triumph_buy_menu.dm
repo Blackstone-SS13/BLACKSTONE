@@ -83,9 +83,14 @@
 					<tr class='triumph_text_row'>
 						<td class='triumph_text_desc'>[auugh.desc] | Bought by: [auugh.key_of_buyer]</td>
 						<td class='triumph_filler_cells'><span class='triumph_cost'>[auugh.triumph_cost]</span></td>
-						<td class='triumph_filler_cells'><a class='triumph_text_buy' href='?src=\ref[src];handle_buy_button=\ref[auugh];'>UNBUY</a></td>
-					</tr>
 				"}
+				if(SSticker.HasRoundStarted() && auugh.pre_round_only)
+					data += "<td class='triumph_filler_cells'><a class='triumph_text_buy' href='?src=\ref[src];handle_buy_button=\ref[auugh];'><span class='strikethru_back'>ROUND STARTED</span></a></td>"
+				else
+					data += "<td class='triumph_filler_cells'><a class='triumph_text_buy' href='?src=\ref[src];handle_buy_button=\ref[auugh];'>UNBUY</a></td>"
+				
+				data += "</tr>"
+
 				found_one_blank_sloppy_toppy = TRUE // WE GOT ONE WOOHOO
 
 
@@ -107,7 +112,7 @@
 				"}
 
 			var/string = "<td class='triumph_filler_cells'><a class='triumph_text_buy' href='?src=\ref[src];handle_buy_button=\ref[current_check];'>BUY</a></td>"
-			if(SSticker.current_state == GAME_STATE_PLAYING && current_check.pre_round_only)
+			if(SSticker.HasRoundStarted() && current_check.pre_round_only)
 				string = "<td class='triumph_filler_cells'><a class='triumph_text_buy' href='?src=\ref[src];handle_buy_button=\ref[current_check];'><span class='strikethru_back'>CONFLICT</span></a></td>"
 			else
 				for(var/datum/triumph_buy/conflict_check in SStriumphs.active_triumph_buy_queue)
@@ -168,7 +173,7 @@
 				if(target_datum.type in current_actives.conflicts_with)
 					conflicting = TRUE
 
-			if(SSticker.current_state == GAME_STATE_PLAYING && target_datum.pre_round_only)
+			if(SSticker.HasRoundStarted() && target_datum.pre_round_only)
 				conflicting = TRUE
 
 			if(!conflicting)
@@ -176,7 +181,7 @@
 				if(current_category == TRIUMPH_CAT_ACTIVE_DATUMS) // ACTIVE datums are ones already bought anyways
 					SStriumphs.attempt_to_unbuy_triumph_condition(linked_client, target_datum) // By unbuy, i mean you unbuy someone elses buy and thus we need a ref to it anyways
 				else
-					SStriumphs.attempt_to_buy_triumph_condition(linked_client, target_datum.type) // regular buy, just send over the type for a duplicate
+					SStriumphs.attempt_to_buy_triumph_condition(linked_client, target_datum) // regular buy, just send over the ref to the reference case
 			show_menu()
 
 	if(href_list["close_menu"])

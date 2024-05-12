@@ -85,6 +85,37 @@ a.bottom_buttons:hover
 
 }
 
+a.mo_bottom_buttons, a.mo_bottom_buttons:link, a.mo_bottom_buttons:visited, a.mo_bottom_buttons:active {
+	font-family: "VT323", monospace;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 20px;
+	color: #00ff73;
+
+	text-decoration: none;
+	text-align: center;
+	background: transparent;
+
+	padding: 1px 4px 1px 4px;
+	margin: 0 2px 0 0;
+	cursor:default;
+}
+
+a.mo_bottom_buttons:hover
+{
+	color: #ffffff;
+
+}
+
+.bottom_button_cost {
+	font-family: "Silkscreen", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 12px;
+	color: #ffffff;
+}
+
+
 a.class_desc_YES_LINK, a.class_desc_YES_LINK:link, a.class_desc_YES_LINK:visited, a.class_desc_YES_LINK:active {
 	font-family: "Jacquarda Bastarda 9", serif;
 	font-weight: 400;

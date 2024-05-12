@@ -42,14 +42,13 @@ SUBSYSTEM_DEF(triumphs)
 	/*
 		TRIUMPH BUY DATUM THINGS
 										*/
+
+	var/current_refund_percentage = 0.50 // Current refund percentage is 50%
 	//this is basically the total list of triumph buy datums on init
 	var/list/triumph_buy_datums 
 
 	// This is a list of all active datums
 	var/list/active_triumph_buy_queue 
-
-	// These fire on_roundstart() right after roundstart
-	var/list/fire_on_PostSetup 
 
 	// These get on_activate() called in /datum/outfit/job/roguetown/post_equip() in roguetown.dm
 	var/list/post_equip_calls 
@@ -71,7 +70,6 @@ SUBSYSTEM_DEF(triumphs)
 	if(!triumph_leaderboard_top_ten)
 		triumph_leaderboard_top_ten = get_triumphs_top()
 
-	fire_on_PostSetup = list()
 	triumph_buy_datums = list() // init empty list
 	active_triumph_buy_queue = list()
 	active_triumph_menus = list()
@@ -112,25 +110,37 @@ SUBSYSTEM_DEF(triumphs)
 /*
 	This occurs when you try to buy a triumph condition and sets it up
 */
-/datum/controller/subsystem/triumphs/proc/attempt_to_buy_triumph_condition(client/C, triumph_buy_typepath)
-	var/datum/triumph_buy/stick_it_in = new triumph_buy_typepath
-
-	var/triumph_amount = get_triumphs(C.ckey) - stick_it_in.triumph_cost
+/datum/controller/subsystem/triumphs/proc/attempt_to_buy_triumph_condition(client/C, datum/triumph_buy/ref_datum)
+	// This segments the payment part
+	var/triumph_amount = get_triumphs(C.ckey) - ref_datum.triumph_cost
 	if(triumph_amount >= 0)
-		triumph_adjust(stick_it_in.triumph_cost*-1, C.ckey)
+		triumph_adjust(ref_datum.triumph_cost*-1, C.ckey)
+
+		var/datum/triumph_buy/stick_it_in = new ref_datum.type
+
 		stick_it_in.key_of_buyer = C.key
 		stick_it_in.ckey_of_buyer = C.ckey
-
-		// These basically just auto occur when you buy them. Some stuff we don't need people to be able to counter-buy
-		if(stick_it_in.fire_on_buy)
-			stick_it_in.on_activate()
-			return
-
-		// These get a proc fired after the round just begins to help them setup
-		if(stick_it_in.fire_on_PostSetup)
-			fire_on_PostSetup += stick_it_in
-
 		active_triumph_buy_queue += stick_it_in
+
+		// The thing someone is buying conflicts with things
+		if(stick_it_in.conflicts_with.len)
+			for(var/cur_check_path in stick_it_in.conflicts_with) // Time to refund anything already bought it personally hates
+				for(var/datum/triumph_buy/active_datum in active_triumph_buy_queue)
+					if(ispath(cur_check_path, active_datum.type))
+						// Give the person who originally bought it a 50% refund
+						var/ckey_cur_owna = active_datum.ckey_of_buyer
+						var/refund_amount = round(active_datum.triumph_cost * current_refund_percentage)
+						triumph_adjust(refund_amount, ckey_cur_owna)
+
+						if(GLOB.directory[ckey_cur_owna]) // If they are still logged into the game, inform them they got refunded
+							to_chat(GLOB.directory[ckey_cur_owna], "<span class='redtext'>You were refunded [refund_amount] triumphs due to CONFLICTS.</span>")
+
+						// Cleanup Time
+						active_datum.on_removal()
+						active_triumph_buy_queue -= active_datum
+
+
+		stick_it_in.on_buy()
 		call_menu_refresh()
 /*
 	This occurs when you try to unbuy a triumph condition and removes it
@@ -139,6 +149,17 @@ SUBSYSTEM_DEF(triumphs)
 	var/triumph_amount = get_triumphs(C.ckey) - pull_it_out.triumph_cost
 	if(triumph_amount >= 0)
 		triumph_adjust(pull_it_out.triumph_cost*-1, C.ckey)
+
+		// Give the person who originally bought it a 50% refund
+		var/ckey_prev_owna = pull_it_out.ckey_of_buyer
+		var/refund_amount = round(pull_it_out.triumph_cost * current_refund_percentage)
+		triumph_adjust(refund_amount, ckey_prev_owna)
+
+		if(GLOB.directory[ckey_prev_owna]) // If they are still logged into the game, inform them they got refunded
+			to_chat(GLOB.directory[ckey_prev_owna], "<span class='redtext'>You were refunded [refund_amount] triumphs due to a UNBUY.</span>")
+
+		pull_it_out.on_removal()
+
 		active_triumph_buy_queue -= pull_it_out
 
 // Same deal as the role class stuff, we are only really just caching this to update displays as people buy stuff.
@@ -186,11 +207,6 @@ SUBSYSTEM_DEF(triumphs)
 // Called from the place its slopped in in SSticker, this will occur right after the gamemode starts ideally, aka roundstart.
 /datum/controller/subsystem/triumphs/proc/fire_on_PostSetup()
 	call_menu_refresh()
-	for(var/datum/triumph_buy/thing in fire_on_PostSetup)
-		thing.on_PostSetup()
-
-
-
 
 /*
 	At round end we save the cache
