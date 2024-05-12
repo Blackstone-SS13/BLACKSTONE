@@ -37,7 +37,7 @@
 /obj/structure/closet/crate/chest/steward/bogguard/Initialize()
 	. = ..()
 	new /obj/item/clothing/cloak/stabard/bog(src)
-	new /obj/item/keyring/guard(src)
+	new /obj/item/keyring/watchmen(src)
 	new /obj/item/clothing/suit/roguetown/armor/gambeson(src)
 	new /obj/item/rogueweapon/mace/cudgel(src)
 	new /obj/item/rope/chain(src)
