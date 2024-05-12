@@ -89,14 +89,14 @@
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/bogguardsman/proc/assign_skills(mob/living/carbon/human/bogger)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,3,4), TRUE) // Town guards have stronger street skills then castle guards.
+	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE) 
 	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(3,4), TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/whipsflails, pick(3,4), TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE) 
 	bogger.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
