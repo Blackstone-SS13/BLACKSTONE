@@ -46,7 +46,7 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/half
 	neck = /obj/item/clothing/neck/roguetown/gorget
 	shoes = /obj/item/clothing/shoes/roguetown/boots
-	beltl = /obj/item/keyring/guardcastle
+	beltl = /obj/item/keyring/bogguard
 	beltr = /obj/item/rogueweapon/sword
 	belt = /obj/item/storage/belt/rogue/leather
 	backr = /obj/item/storage/backpack/rogue/satchel
