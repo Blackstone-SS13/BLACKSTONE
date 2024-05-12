@@ -12,7 +12,7 @@
 	"Dwarf"
 	)
 	var/list/allowed_patrons
-	var/list/allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	var/list/allowed_ages
 	var/pickprob = 100
 	var/maxchosen = -1
 	var/amtchosen = 0
