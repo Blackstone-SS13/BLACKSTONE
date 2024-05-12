@@ -92,9 +92,9 @@
 	return ..()
 
 /obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
-	if(I.get_sharpness() && !user.combat_mode)
+	if(I.get_sharpness() && !user.cmode)
 		add_fingerprint(user)
-		playsound(loc, 'sound/weapons/slice.ogg', 50, 1, -1)
+		playsound(loc, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
 		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
 			"<span class='notice'>You begin to cut open [src]...</span>")
 		if(do_after(user, 5 SECONDS, target = src))
