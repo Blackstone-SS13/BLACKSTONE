@@ -571,7 +571,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["all_quirks"]			, all_quirks)
 
 	//Patron
-	WRITE_FILE(S["selected_patron"]		, selected_patron.name)
+	WRITE_FILE(S["selected_patron"]		, selected_patron.type)
 
 	return TRUE
 
