@@ -793,7 +793,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 						priority_announce("The Sun is torn from the sky!", "Terrible Omen", 'sound/misc/astratascream.ogg')
 						addomen("sunsteal")
 						for(var/mob/living/carbon/human/W in GLOB.human_list)
-							var/datum/patrongods/patron = W.client.prefs.selected_patron
+							var/datum/patron/patron = W.client.prefs.selected_patron
 							if(patron.name == "Astrata")
 								if(!W.mind.antag_datums)
 									to_chat(W, "<span class='userdanger'>You feel the pain of your Patron!</span>")

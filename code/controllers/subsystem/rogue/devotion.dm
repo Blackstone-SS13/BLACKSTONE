@@ -30,7 +30,7 @@
 	return FALSE
 
 /datum/devotion/cleric_holder/proc/update_devotion(dev_amt, prog_amt)
-	var/datum/patrongods/P = patron
+	var/datum/patron/P = patron
 	devotion += dev_amt
 	//Max devotion limit
 	if(devotion > max_devotion)

@@ -27,7 +27,7 @@
 
 /datum/outfit/job/roguetown/monk/pre_equip(mob/living/carbon/human/H)
 	..()
-	var/datum/patrongods/A = H.PATRON
+	var/datum/patron/A = H.PATRON
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 	beltl = /obj/item/roguekey/church

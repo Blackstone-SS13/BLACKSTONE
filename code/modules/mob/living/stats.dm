@@ -17,7 +17,10 @@
 	var/BUFLUC = 0
 	var/statbuf = FALSE
 	var/list/statindex = list()
-	var/datum/patrongods/PATRON = null
+	var/datum/patron/PATRON = /datum/patron/godless
+
+/mob/living/proc/init_faith()
+	PATRON = GLOB.patronlist[/datum/patron/godless]
 
 /datum/species
 	var/list/specstats = list("strength" = 0, "perception" = 0, "intelligence" = 0, "constitution" = 0, "endurance" = 0, "speed" = 0, "fortune" = 0)

@@ -62,7 +62,6 @@
 	specstats = list("strength" = -2, "perception" = -1, "intelligence" = 1, "constitution" = -1, "endurance" = 1, "speed" = 2, "fortune" = 0)
 	specstats_f = list("strength" = 1, "perception" = -1, "intelligence" = 2, "constitution" = 0, "endurance" = 1, "speed" = 1, "fortune" = 0)
 	enflamed_icon = "widefire"
-	possible_faiths = list(FAITH_SPIDER)
 
 
 /datum/species/elf/dark/get_span_language(datum/language/message_language)

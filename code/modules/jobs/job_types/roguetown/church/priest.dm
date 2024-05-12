@@ -147,7 +147,7 @@
 	new_role = "Templar"
 	recruitment_faction = "Templars"
 	recruitment_message = "Serve the ten, %RECRUIT!"
-	accept_message = "FOR PSYDON!"
+	accept_message = "FOR THE TEN!"
 	refuse_message = "I refuse."
 	charge_max = 200 //templars get cool spells, so higher cooldown
 
@@ -170,7 +170,7 @@
 	new_role = "Acolyte"
 	recruitment_faction = "Church"
 	recruitment_message = "Serve the ten, %RECRUIT!"
-	accept_message = "FOR PSYDON!"
+	accept_message = "FOR THE TEN!"
 	refuse_message = "I refuse."
 
 /obj/effect/proc_holder/spell/self/convertrole/monk/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)

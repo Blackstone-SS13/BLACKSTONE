@@ -26,14 +26,14 @@
 	..()
 	var/allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra", "Noc")
 	
-	var/datum/patrongods/ourpatron
-	if(istype(H.PATRON, /datum/patrongods))
+	var/datum/patron/ourpatron
+	if(istype(H.PATRON, /datum/patron))
 		ourpatron = H.PATRON
 
 	if(!ourpatron || !(ourpatron.name in allowed_patrons))
-		var/list/datum/patrongods/possiblegods = list()
+		var/list/datum/patron/possiblegods = list()
 		for(var/god in GLOB.patronlist)
-			var/datum/patrongods/patron = GLOB.patronlist[god]
+			var/datum/patron/patron = GLOB.patronlist[god]
 			if(patron.name in allowed_patrons)
 				possiblegods |= patron
 		ourpatron = pick(possiblegods)

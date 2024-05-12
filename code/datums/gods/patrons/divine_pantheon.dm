@@ -1,93 +1,76 @@
-GLOBAL_LIST_EMPTY(patronlist)
+/datum/patron/divine_pantheon
+	name = null
+	associated_faith = /datum/faith/divine_pantheon
 
-#define CLERIC_SPELLS "Cleric"
-#define PRIEST_SPELLS "Priest"
-
-/datum/patrongods
-	var/name
-	var/domain
-	var/summary
-	var/worshippers
-	var/t0
-	var/t1
-	var/t2
-	var/t3
-
-/datum/patrongods/astrata
+/datum/patron/divine_pantheon/astrata
 	name = "Astrata"
 	domain = "Goddess of the Sun, Day, and Order"
-	summary = "The Firstborn of Psydon, twin of Noc, gifted man the Sun as her divine gift."
+	desc = "The Firstborn of Psydon, twin of Noc, gifted man the Sun as her divine gift."
 	worshippers = "The Noble Hearted, Zealots, Farmers"
 	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/invoked/sacred_flame_rogue
 	t2 = /obj/effect/proc_holder/spell/invoked/heal
 	t3 = /obj/effect/proc_holder/spell/invoked/revive
 
-/datum/patrongods/noc
+/datum/patron/divine_pantheon/noc
 	name = "Noc"
 	domain = "God of the Moon, Night, and Knowledge"
-	summary = "The Firstborn of Psydon, twin of Astrata, gifted man divine knowledge."
+	desc = "The Firstborn of Psydon, twin of Astrata, gifted man divine knowledge."
 	worshippers = " Magic Practitioners, Scholars"
 	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/invoked/blindness
 	t2 = /obj/effect/proc_holder/spell/invoked/invisibility
 
-/datum/patrongods/dendor
+/datum/patron/divine_pantheon/dendor
 	name = "Dendor"
 	domain = "God of the Earth and Nature"
-	summary = "The Primordial Son, patron of beasts and the wood. Gone mad with time."
+	desc = "The Primordial Son, patron of beasts and the wood. Gone mad with time."
 	worshippers = "Druids, Beasts, Madmen"
 	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/targeted/blesscrop
 	t2 = /obj/effect/proc_holder/spell/targeted/beasttame
 	t3 = /obj/effect/proc_holder/spell/targeted/conjure_glowshroom
 
-/datum/patrongods/abyssor
+/datum/patron/divine_pantheon/abyssor
 	name = "Abyssor"
 	domain = "God of the Ocean, Storms and the Tide"
-	summary = "The Beloved Son, gifted primordial men food and water."
+	desc = "The Beloved Son, gifted primordial men food and water."
 	worshippers = "Men of the Sea, Primitive Aquatics"
 
-/datum/patrongods/ravox
+/datum/patron/divine_pantheon/ravox
 	name = "Ravox"
 	domain = "God of War, Justice and Strength"
-	summary = "The strongest of Psydons children, he watches man from afar."
+	desc = "The strongest of Psydons children, he watches man from afar."
 	worshippers = "Warriors, Sellswords & those who seek Justice"
 
-/datum/patrongods/necra
+/datum/patron/divine_pantheon/necra
 	name = "Necra"
 	domain = "Goddess of Death and the Afterlife"
-	summary = "The Veiled Lady, a feared but respected God who leads the dead."
+	desc = "The Veiled Lady, a feared but respected God who leads the dead."
 	worshippers = " Necromancers, The Dead, Gravekeepers"
 	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/targeted/burialrite
 	t2 = /obj/effect/proc_holder/spell/targeted/churn
 	t3 = /obj/effect/proc_holder/spell/targeted/soulspeak
 
-/datum/patrongods/xylix
+/datum/patron/divine_pantheon/xylix
 	name = "Xylix"
 	domain = "God of Trickery, Freedom and Inspiration"
-	summary = "The Mad-God, gifted man wanderlust and a thousand tricks."
+	desc = "The Mad-God, gifted man wanderlust and a thousand tricks."
 	worshippers = "Cheats & Frauds, Silver-Tongued devils and Roguish Types"
 
-/datum/patrongods/pestra
+/datum/patron/divine_pantheon/pestra
 	name = "Pestra"
 	domain = "Goddess of Decay, Disease and Medicine"
-	summary = "The Loving Daughter of Psydon, gifted man medicine."
+	desc = "The Loving Daughter of Psydon, gifted man medicine."
 	worshippers = "The Sick, Phyicians, Apothecaries"
 	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t1 = /obj/effect/proc_holder/spell/invoked/attach_limb
 	t2 = /obj/effect/proc_holder/spell/invoked/heal
 	t3 = /obj/effect/proc_holder/spell/invoked/cure_rot
 
-/datum/patrongods/malum
+/datum/patron/divine_pantheon/malum
 	name = "Malum"
 	domain = "God of Fire, Destruction and Rebirth"
-	summary = "The Opinionless God, his children hold no malice in their actions."
+	desc = "The Opinionless God, his children hold no malice in their actions."
 	worshippers = "Smiths, Miners, Artists"
-
-/datum/patrongods/eora
-	name = "Eora"
-	domain = "Goddess of Degeneracy, Debauchery and Addiction"
-	summary = "The Fallen Daughter, once used to be a goddess of love and family but has now fallen from grace."
-	worshippers = "Drunkards, Junkies, Gamblers and Bards"
