@@ -67,7 +67,8 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/bog
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shoes = /obj/item/clothing/shoes/roguetown/boots
-	beltl = /obj/item/keyring/bogger.	belt = /obj/item/storage/belt/rogue/leather
+	beltl = /obj/item/keyring/guard
+	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/sword
 	backr = /obj/item/storage/backpack/rogue/satchel
 	if(is_crossbowman)
