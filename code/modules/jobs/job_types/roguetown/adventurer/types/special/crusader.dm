@@ -25,13 +25,16 @@
 	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/riding, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
 
 	belt = /obj/item/storage/belt/rogue/leather/plaquegold
 	pants = /obj/item/clothing/under/roguetown/chainlegs
@@ -49,7 +52,11 @@
 
 	H.change_stat("endurance", 2)
 	H.change_stat("constitution", 2)
-	H.change_stat("intelligence", -1)
+	H.change_stat("intelligence", 1)
+	H.change_stat("perception", 1)
+	H.change_stat("strength", 2)
+	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 	for(var/I in SSrole_class_handler.all_classes)
 		var/datum/advclass/A = I
@@ -74,11 +81,16 @@
 		if(!(H.hairstyle in acceptable))
 			H.hairstyle = pick(acceptable)
 			H.update_hair()
-	else
-		H.change_stat("strength", 2)
-		H.change_stat("speed", -1)
 
-	H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/churn)
+
+	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
+	//Max devotion limit - Paladins are stronger but cannot pray to gain all abilities beyond t1
+	C.max_devotion = 250
+	C.max_progression = CLERIC_REQ_1
+	C.update_devotion(50, 50)
+	C.holder_mob = H
+	C.grant_spells_templar(H)
+	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 
 /obj/item/clothing/cloak/stabard/crusader
 	name = "surcoat of the golden order"
