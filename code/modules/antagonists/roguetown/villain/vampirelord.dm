@@ -802,12 +802,12 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 							sunstolen = FALSE
 						priority_announce("The Sun is torn from the sky!", "Terrible Omen", 'sound/misc/astratascream.ogg')
 						addomen("sunsteal")
-						for(var/mob/living/carbon/human/W in GLOB.human_list)
-							var/datum/patron/patron = W.client.prefs.selected_patron
-							if(istype(patron, /datum/patron/divine/astrata))
-								if(!W.mind.antag_datums)
-									to_chat(W, "<span class='userdanger'>You feel the pain of your Patron!</span>")
-									W.emote_scream()
+						for(var/mob/living/carbon/human/astrater in GLOB.human_list)
+							if(!istype(astrater.patron, /datum/patron/divine/astrata))
+								continue
+							if(!length(W.mind.antag_datums))
+								to_chat(W, "<span class='userdanger'>You feel the pain of your Patron!</span>")
+								W.emote_scream()
 
 	if(user.mind.special_role == "Vampire Spawn")
 		to_chat(user, "I don't have the power to use this!")
