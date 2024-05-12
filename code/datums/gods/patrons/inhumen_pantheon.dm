@@ -11,7 +11,7 @@
 /datum/patron/inhumen_pantheon/graggar
 	name = "Graggar"
 	domain = "God of Conquest, Murder and Pillaging"
-	desc = "The Heartless One, Graggar taught elves that might makes right and created the goblins."
+	desc = "The Heartless One, Graggar taught elves that might makes right and created goblins in his image."
 	worshippers = "Prisoners, Murderers and the Cruel"
 
 /datum/patron/inhumen_pantheon/matthios 
