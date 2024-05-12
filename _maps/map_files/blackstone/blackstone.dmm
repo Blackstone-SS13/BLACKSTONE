@@ -1,4 +1,11 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aaa" = (
+/obj/structure/mineral_door/wood{
+	locked = 1;
+	lockid = "archive"
+	},
+/turf/open/floor/rogue/cobble,
+/area/rogue/under/town/basement)
 "aab" = (
 /turf/closed/wall/mineral/rogue/stone,
 /area/rogue/under/cavewet/bogcaves)
@@ -5691,12 +5698,11 @@
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/garrison)
 "hme" = (
-/obj/structure/mineral_door/wood{
-	locked = 1;
-	lockid = "archive"
+/obj/structure/fluff/railing/border{
+	dir = 8
 	},
-/turf/open/floor/rogue/cobble,
-/area/rogue/under/town/basement)
+/turf/open/floor/rogue/wood,
+/area/rogue/indoors/town/garrison)
 "hmk" = (
 /obj/structure/mineral_door/wood/deadbolt{
 	lockid = "butcher"
@@ -6700,6 +6706,15 @@
 "iBK" = (
 /turf/open/water/sewer,
 /area/rogue/under/cave)
+"iDa" = (
+/obj/structure/mineral_door/wood/donjon{
+	dir = 1;
+	locked = 1;
+	max_integrity = 9999;
+	lockid = "garrison"
+	},
+/turf/open/floor/rogue/wood,
+/area/rogue/indoors/town/garrison)
 "iDg" = (
 /obj/structure/stairs{
 	dir = 4
@@ -6872,7 +6887,9 @@
 /turf/open/floor/rogue/woodturned,
 /area/rogue/indoors/town/tavern)
 "iOI" = (
-/obj/structure/stairs,
+/obj/structure/stairs{
+	dir = 1
+	},
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
 "iPt" = (
@@ -9359,8 +9376,8 @@
 	locked = 1;
 	lockid = "archive"
 	},
-/turf/open/floor/rogue/blocks,
-/area/rogue/under/town/basement)
+/turf/open/floor/rogue/wood,
+/area/rogue/indoors/town/garrison)
 "mFJ" = (
 /obj/structure/table/wood{
 	icon_state = "longtable"
@@ -9927,11 +9944,12 @@
 /turf/open/floor/plating/ashplanet/rocky,
 /area/rogue/outdoors/beach)
 "nyz" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
+/obj/structure/mineral_door/wood{
+	locked = 1;
+	lockid = "archive"
 	},
-/turf/open/floor/rogue/wood,
-/area/rogue/indoors/town/garrison)
+/turf/open/floor/rogue/blocks,
+/area/rogue/under/town/basement)
 "nyP" = (
 /obj/structure/rack/rogue,
 /turf/open/floor/rogue/ruinedwood/turned,
@@ -11247,9 +11265,7 @@
 /turf/open/floor/rogue/tile,
 /area/rogue/outdoors/town)
 "pqw" = (
-/obj/structure/stairs{
-	dir = 1
-	},
+/obj/structure/stairs,
 /turf/open/floor/rogue/cobble,
 /area/rogue/under/town/basement)
 "pqA" = (
@@ -12601,10 +12617,6 @@
 	icon_state = "greenblocks"
 	},
 /area/rogue/under/town/basement)
-"rpC" = (
-/obj/structure/mineral_door/wood/deadbolt,
-/turf/open/floor/rogue/wood,
-/area/rogue/indoors/town/garrison)
 "rpY" = (
 /obj/structure/table/wood{
 	icon_state = "longtable";
@@ -89966,7 +89978,7 @@ iTw
 cdP
 iTw
 iTw
-hme
+aaa
 iTw
 iTw
 iTw
@@ -89977,7 +89989,7 @@ iTw
 cdP
 iTw
 iTw
-iOI
+pqw
 jyI
 sYw
 bpD
@@ -90358,7 +90370,7 @@ bpD
 bpD
 sYw
 jyI
-pqw
+iOI
 iTw
 iTw
 abd
@@ -192489,7 +192501,7 @@ vRu
 sYw
 jyI
 fPR
-iOI
+pqw
 jyI
 sYw
 vRu
@@ -192867,7 +192879,7 @@ eJr
 eJr
 eJr
 eJr
-mEM
+nyz
 ppi
 fPR
 txa
@@ -295403,9 +295415,9 @@ wbg
 wbg
 tNj
 eak
-nyz
+hme
 rBV
-pGD
+iDa
 rBV
 weS
 kIh
@@ -295808,7 +295820,7 @@ vuU
 kIh
 kIh
 tNj
-kIh
+jLs
 uMv
 kIh
 rBV
@@ -297012,7 +297024,7 @@ wbg
 tNj
 vCO
 rBV
-rpC
+mEM
 rBV
 rBV
 rBV
