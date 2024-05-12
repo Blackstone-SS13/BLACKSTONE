@@ -123,7 +123,7 @@
 		if(length(patron.confess_lines))
 			confessions += patron.confess_lines
 		if(length(confessions))
-			say(pick(antag.confess_lines), spans = list("torture"))
+			say(pick(confessions), spans = list("torture"))
 			return
 	var/static/list/innocent_lines = list(
 		"I DON'T KNOW!",
