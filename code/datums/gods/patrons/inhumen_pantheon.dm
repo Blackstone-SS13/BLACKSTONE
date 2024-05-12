@@ -24,3 +24,4 @@
 	domain = "Goddess of Degeneracy, Debauchery and Addiction"
 	desc = "The Fallen Daughter of Psydon, once used to be a goddess of love and family but has now fallen from grace as she leads mortals to hedonism."
 	worshippers = "Drunkards, Junkies, Gamblers and Bards"
+	t0 = /obj/effect/proc_holder/spell/invoked/lesser_heal

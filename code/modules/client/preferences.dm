@@ -1691,7 +1691,6 @@ Slots: [job.spawn_positions]</span>
 						to_chat(user, "<font color='purple'>Faith: [faith.name]</font>")
 						to_chat(user, "<font color='purple'>Background: [faith.desc]</font>")
 						selected_patron = GLOB.patronlist[faith.godhead] || GLOB.patronlist[default_patron]
-					return
 
 				if("patron")
 					var/list/patrons_named = list()
