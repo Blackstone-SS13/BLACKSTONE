@@ -45,7 +45,7 @@
 /datum/outfit/job/roguetown/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
 	. = ..()
 	var/datum/patron/ourpatron = H.patron
-	if(length(allowed_patrons && (!ourpatron || !(ourpatron.type in allowed_patrons)))
+	if(length(allowed_patrons && (!ourpatron || !(ourpatron.type in allowed_patrons))))
 		var/list/datum/patron/possiblegods = list()
 		for(var/god in GLOB.patronlist)
 			if(!(god in allowed_patrons))
