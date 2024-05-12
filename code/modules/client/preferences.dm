@@ -1703,7 +1703,6 @@ Slots: [job.spawn_positions]</span>
 					var/god_input = input(user, "Choose your character's patron god", "[current_faith.name]") as null|anything in patrons_named
 					if(god_input)
 						selected_patron = patrons_named[god_input]
-						var/datum/faith/patron_faith = GLOB.faithlist[selected_patron.associated_faith]
 						to_chat(user, "<font color='purple'>Patron: [selected_patron]</font>")
 						to_chat(user, "<font color='purple'>Domain: [selected_patron.domain]</font>")
 						to_chat(user, "<font color='purple'>Background: [selected_patron.desc]</font>")
