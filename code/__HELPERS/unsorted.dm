@@ -41,6 +41,14 @@
 	else if(dx<0)
 		.+=360
 
+/proc/Get_Learnable_Spells()
+	var/ret = list()
+	for(var/S in GLOB.spells)
+		var/obj/effect/proc_holder/spell/spell = S
+		if(spell.learnable)
+			ret += spell
+	return ret
+
 /proc/Get_Pixel_Angle(y, x)//for getting the angle when animating something's pixel_x and pixel_y
 	if(!y)
 		return (x>=0)?90:270

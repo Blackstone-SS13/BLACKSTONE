@@ -74,6 +74,8 @@
 	for(var/god in subtypesof(/datum/patrongods))
 		var/datum/patrongods/A = new god()
 		GLOB.patronlist[A.name] = A
+	
+	GLOB.learnables = Get_Learnable_Spells()
 
 //creates every subtype of prototype (excluding prototype) and adds it to list L.
 //if no list/L is provided, one is created.

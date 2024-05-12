@@ -4,6 +4,8 @@
 	releasedrain = 30
 	chargetime = 5
 	range = 7
+	learnable = TRUE
+	rarity = 0
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
 	chargedloop = null
@@ -37,6 +39,8 @@
 	overlay_state = "raiseskele"
 	releasedrain = 30
 	chargetime = 15
+	learnable = TRUE
+	rarity = 0
 	range = 7
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
@@ -63,6 +67,8 @@
 	desc = ""
 	clothes_req = FALSE
 	range = 7
+	learnable = TRUE
+	rarity = 0
 	overlay_state = "raiseskele"
 	sound = list('sound/magic/magnet.ogg')
 	releasedrain = 40
@@ -86,6 +92,8 @@
 	name = "Ray of Sickness"
 	desc = ""
 	clothes_req = FALSE
+	learnable = TRUE
+	rarity = 0
 	range = 15
 	projectile_type = /obj/projectile/magic/sickness
 	overlay_state = "raiseskele"

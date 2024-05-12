@@ -146,3 +146,11 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 //alternate appearance flags
 #define AA_TARGET_SEE_APPEARANCE (1<<0)
 #define AA_MATCH_TARGET_OVERLAYS (1<<1)
+
+// spell rarities
+#define SPELL_COMMON (1 << 0)
+#define SPELL_UNCOMMON (1 << 1)
+#define SPELL_RARE (1 << 2)
+#define SPELL_EPIC (1 << 3)
+#define SPELL_LEGENDARY (1 << 4)
+#define SPELL_ALL (SPELL_COMMON | SPELL_UNCOMMON | SPELL_RARE | SPELL_EPIC | SPELL_LEGENDARY)
