@@ -36,7 +36,8 @@ var/global/feeding_hole_reset_timer
 					if(!R.check_item(P))
 						continue
 					if(!R.transport_item)
-						R.held_items += 1 //stacked logs need to check for multiple
+						// TODO sdante
+						R.held_items[0] += 1 //stacked logs need to check for multiple
 						qdel(P)
 						stock_announce("[R.name] has been stockpiled.")
 					else

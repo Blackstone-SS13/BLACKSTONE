@@ -6,6 +6,7 @@
 	density = FALSE
 	blade_dulling = DULLING_BASH
 	pixel_y = 32
+	var/stockpile_index = 1
 	var/budget = 0
 
 /proc/stock_announce(message)
@@ -20,15 +21,6 @@
 	SSroguemachine.stock_machines -= src
 	return ..()
 
-/obj/structure/roguemachine/stockpile/attackby(obj/item/P, mob/user, params)
-	if(istype(P, /obj/item/roguecoin))
-		budget += P.get_real_price()
-		qdel(P)
-		update_icon()
-		playsound(loc, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
-		return attack_hand(user)
-	..()
-
 /obj/structure/roguemachine/stockpile/Topic(href, href_list)
 	. = ..()
 	if(!usr.canUseTopic(src, BE_CLOSE))
@@ -41,13 +33,13 @@
 			return
 		if(D.withdraw_disabled)
 			return
-		if(D.held_items <= 0)
+		if(D.held_items[stockpile_index] <= 0)
 			say("Insufficient stock.")
 			return
 		if(D.withdraw_price > budget)
 			say("Insufficient mammon.")
 		else
-			D.held_items--
+			D.held_items[stockpile_index]--
 			budget -= D.withdraw_price
 			SStreasury.give_money_treasury(D.withdraw_price, "stockpile withdraw")
 			var/obj/item/I = new D.item_type(loc)
@@ -87,7 +79,7 @@
 	for(var/datum/roguestock/stockpile/A in SStreasury.stockpile_datums)
 		contents += "[A.name]<BR>"
 		contents += "[A.desc]<BR>"
-		contents += "Stockpiled Amount: [A.held_items]<BR>"
+		contents += "Stockpiled Amount: [A.held_items[stockpile_index]]<BR>"
 		if(!A.withdraw_disabled)
 			contents += "<a href='?src=[REF(src)];withdraw=[REF(A)]'>\[Withdraw ([A.withdraw_price])\]</a><BR><BR>"
 		else
@@ -135,17 +127,15 @@
 /obj/structure/roguemachine/stockpile/attackby(obj/item/P, mob/user, params)
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
+		if(istype(P, /obj/item/roguecoin))
+			budget += P.get_real_price()
+			qdel(P)
+			update_icon()
+			playsound(loc, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+			return attack_hand(user)
 		if(istype(P, /obj/item/natural/bundle))
 			say("Single item entries only. Please unstack.")
 			return
-		if(istype(P, /obj/item/roguecoin))
-			if(H in SStreasury.bank_accounts)
-				SStreasury.generate_money_account(P.get_real_price(), H)
-				qdel(P)
-				playsound(src, 'sound/misc/coininsert.ogg', 100, FALSE, -1)
-				return
-			else
-				say("No account found. Submit your fingers to a shylock for inspection.")
 		else
 			for(var/datum/roguestock/R in SStreasury.stockpile_datums)
 				if(istype(P,R.item_type))
@@ -153,7 +143,7 @@
 						continue
 					var/amt = R.get_payout_price(P)
 					if(!R.transport_item)
-						R.held_items += 1 //stacked logs need to check for multiple
+						R.held_items[stockpile_index] += 1 //stacked logs need to check for multiple
 						qdel(P)
 						stock_announce("[R.name] has been stockpiled.")
 					else
