@@ -51,7 +51,7 @@
 			if(!(god in allowed_patrons))
 				continue
 			possiblegods |= god
-		H.patron = GLOB.patronlist[default_patron] || pick(possiblegods)
+		H.patron = GLOB.patronlist[default_patron] || GLOB.patronlist[pick(possiblegods)]
 		to_chat(H, "<span class='warning'>[ourpatron] had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")
 	if(H.mind)
 		if(H.gender == FEMALE)
