@@ -29,18 +29,25 @@
 		return attack_hand(usr, href_list["navigate"])
 	if(href_list["withdraw"])
 		var/datum/roguestock/D = locate(href_list["withdraw"]) in SStreasury.stockpile_datums
+
+		var/remote = href_list["remote"]
+		var/source_stockpile = stockpile_index
+		var/total_price = D.withdraw_price
+		if (remote)
+			total_price += D.transport_fee
+			source_stockpile = stockpile_index == 1 ? 2 : 1
+
 		if(!D)
 			return
 		if(D.withdraw_disabled)
 			return
-		if(D.held_items[stockpile_index] <= 0)
+		if(D.held_items[source_stockpile] <= 0)
 			say("Insufficient stock.")
-			return
-		if(D.withdraw_price > budget)
+		else if(total_price > budget)
 			say("Insufficient mammon.")
 		else
-			D.held_items[stockpile_index]--
-			budget -= D.withdraw_price
+			D.held_items[source_stockpile]--
+			budget -= total_price
 			SStreasury.give_money_treasury(D.withdraw_price, "stockpile withdraw")
 			var/obj/item/I = new D.item_type(loc)
 			var/mob/user = usr
@@ -79,9 +86,12 @@
 	for(var/datum/roguestock/stockpile/A in SStreasury.stockpile_datums)
 		contents += "[A.name]<BR>"
 		contents += "[A.desc]<BR>"
-		contents += "Stockpiled Amount: [A.held_items[stockpile_index]]<BR>"
+		contents += "Stockpiled Amount (Local): [A.held_items[stockpile_index]]<BR>"
+		var/remote_stockpile = stockpile_index == 1 ? 2 : 1
+		contents += "Stockpiled Amount (Remote): [A.held_items[remote_stockpile]]<BR>"
 		if(!A.withdraw_disabled)
-			contents += "<a href='?src=[REF(src)];withdraw=[REF(A)]'>\[Withdraw ([A.withdraw_price])\]</a><BR><BR>"
+			contents += "<a href='?src=[REF(src)];withdraw=[REF(A)]'>\[Withdraw Local ([A.withdraw_price])\] </a>"
+			contents += "<a href='?src=[REF(src)];withdraw=[REF(A)];remote=1'>\[Withdraw Remote ([A.withdraw_price+A.transport_fee])\]</a><BR><BR>"
 		else
 			contents += "Withdrawing Disabled...<BR><BR>"
 	

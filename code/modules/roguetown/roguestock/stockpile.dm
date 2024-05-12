@@ -5,6 +5,7 @@
 	held_items = list(2, 2)
 	payout_price = 3
 	withdraw_price = 5
+	transport_fee = 3
 	export_price = 5
 	importexport_amt = 20
 
@@ -15,6 +16,7 @@
 	held_items = list(2, 0)
 	payout_price = 3
 	withdraw_price = 5
+	transport_fee = 3
 	export_price = 5
 	importexport_amt = 10
 
@@ -25,6 +27,7 @@
 	held_items = list(5, 0)
 	payout_price = 4
 	withdraw_price = 6
+	transport_fee = 4
 	export_price = 6
 	importexport_amt = 20
 
@@ -35,6 +38,7 @@
 	held_items = list(4, 0)
 	payout_price = 5
 	withdraw_price = 8
+	transport_fee = 6
 	export_price = 8
 	importexport_amt = 10
 
@@ -45,6 +49,7 @@
 	held_items = list(0, 0)
 	payout_price = 10
 	withdraw_price = 20
+	transport_fee = 10
 	export_price = 15
 	importexport_amt = 10
 
@@ -55,6 +60,7 @@
 	held_items = list(0, 2)
 	payout_price = 1
 	withdraw_price = 5
+	transport_fee = 2
 	export_price = 5
 	importexport_amt = 15
 
@@ -65,6 +71,7 @@
 	held_items = list(0, 0)
 	payout_price = 3
 	withdraw_price = 10
+	transport_fee = 3
 	export_price = 7
 	importexport_amt = 10
 
@@ -75,6 +82,7 @@
 	held_items = list(0, 0)
 	payout_price = 5
 	withdraw_price = 15
+	transport_fee = 5
 	export_price = 15
 	importexport_amt = 5
 
@@ -85,6 +93,7 @@
 	held_items = list(2, 0)
 	payout_price = 5
 	withdraw_price = 15
+	transport_fee = 2
 	export_price = 8
 	importexport_amt = 15
 
@@ -95,5 +104,6 @@
 	held_items = list(0, 4)
 	payout_price = 3
 	export_price = 5
+	transport_fee = 1
 	withdraw_price = 15
 	importexport_amt = 20
