@@ -1,11 +1,12 @@
 /obj/structure/roguemachine/stockpile
-	name = "stockpile"
+	name = "vomitorium"
 	desc = ""
 	icon = 'icons/roguetown/misc/machines.dmi'
-	icon_state = "stockpile_vendor"
+	icon_state = "submit"
 	density = FALSE
 	blade_dulling = DULLING_BASH
 	pixel_y = 32
+	var/stockpile_index = 1
 	var/budget = 0
 
 /proc/stock_announce(message)
@@ -35,24 +36,32 @@
 		return
 	if(href_list["withdraw"])
 		var/datum/roguestock/D = locate(href_list["withdraw"]) in SStreasury.stockpile_datums
+
+		var/remote = href_list["remote"]
+		var/source_stockpile = stockpile_index
+		var/total_price = D.withdraw_price
+		if (remote)
+			total_price += D.transport_fee
+			source_stockpile = stockpile_index == 1 ? 2 : 1
+
 		if(!D)
 			return
 		if(D.withdraw_disabled)
 			return
-		if(D.held_items <= 0)
+		if(D.held_items[source_stockpile] <= 0)
 			say("Insufficient stock.")
-			return
-		if(D.withdraw_price > budget)
+		else if(total_price > budget)
 			say("Insufficient mammon.")
 		else
-			D.held_items--
-			budget -= D.withdraw_price
+			D.held_items[source_stockpile]--
+			budget -= total_price
 			SStreasury.give_money_treasury(D.withdraw_price, "stockpile withdraw")
 			var/obj/item/I = new D.item_type(loc)
 			var/mob/user = usr
 			if(!user.put_in_hands(I))
 				I.forceMove(get_turf(user))
 			playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+		return attack_hand(usr, "withdraw")
 	if(href_list["change"])
 		if(!usr.canUseTopic(src, BE_CLOSE))
 			return
@@ -60,6 +69,7 @@
 			if(budget > 0)
 				budget2change(budget, usr)
 				budget = 0
+		return attack_hand(usr, "withdraw")
 	return attack_hand(usr)
 
 /obj/structure/roguemachine/stockpile/attack_hand(mob/living/user)

@@ -6,8 +6,8 @@
 	density = FALSE
 	blade_dulling = DULLING_BASH
 	pixel_y = 32
-	var/stockpile_index = 1
-	var/budget = 0
+	var/stockpile_index = -1
+	var/withdraw_tab = null
 
 /proc/stock_announce(message)
 	for(var/obj/structure/roguemachine/stockpile/S in SSroguemachine.stock_machines)
@@ -16,6 +16,7 @@
 /obj/structure/roguemachine/stockpile/Initialize()
 	. = ..()
 	SSroguemachine.stock_machines += src
+	withdraw_tab = 	return new /datum/tab/withdraw(stockpile_index)
 
 /obj/structure/roguemachine/stockpile/Destroy()
 	SSroguemachine.stock_machines -= src
@@ -78,24 +79,7 @@
 	return contents
 
 /obj/structure/roguemachine/stockpile/proc/get_withdraw_contents()
-	var/contents = "<center>TOWN STOCKPILE<BR>"
-	contents += "<a href='?src=[REF(src)];navigate=directory'>(back)</a><BR>"
-	contents += "--------------<BR>"
-	contents += "<a href='?src=[REF(src)];change=1'>Stored Mammon: [budget]</a></center><BR>"
-
-	for(var/datum/roguestock/stockpile/A in SStreasury.stockpile_datums)
-		contents += "[A.name]<BR>"
-		contents += "[A.desc]<BR>"
-		contents += "Stockpiled Amount (Local): [A.held_items[stockpile_index]]<BR>"
-		var/remote_stockpile = stockpile_index == 1 ? 2 : 1
-		contents += "Stockpiled Amount (Remote): [A.held_items[remote_stockpile]]<BR>"
-		if(!A.withdraw_disabled)
-			contents += "<a href='?src=[REF(src)];withdraw=[REF(A)]'>\[Withdraw Local ([A.withdraw_price])\] </a>"
-			contents += "<a href='?src=[REF(src)];withdraw=[REF(A)];remote=1'>\[Withdraw Remote ([A.withdraw_price+A.transport_fee])\]</a><BR><BR>"
-		else
-			contents += "Withdrawing Disabled...<BR><BR>"
 	
-	return contents
 
 /obj/structure/roguemachine/stockpile/proc/get_deposit_contents()
 	var/contents = "<center>SUBMISSION HOLE<BR>"
