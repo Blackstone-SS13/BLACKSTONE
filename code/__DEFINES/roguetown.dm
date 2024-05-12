@@ -1,5 +1,5 @@
 //used in various places
-#define ALL_RACES_LIST		list("humen", "dwarfm", "elfw", "elfd", "helf", "tiefling", "argonian", "aasimar")
+#define ALL_RACES_LIST		list("humen", "dwarfm", "elfw", "elfd", "helf", "tiefling", "argonian", "aasimar", "halforc")
 
 #define ALL_RACES_LIST_NAMES		list("Humen", "Elf", "Dark Elf", "Half-Elf", "Dwarf", "Tiefling", "Aasimar")
 

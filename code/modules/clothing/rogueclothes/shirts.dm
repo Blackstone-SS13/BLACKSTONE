@@ -84,7 +84,7 @@
 /obj/item/clothing/suit/roguetown/shirt/undershirt/puritan
 	name = "archivists silks"
 	icon_state = "puritan_shirt"
-	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarfm", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarfm", "aasimar", "halforc")
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 	icon_state = "sailorblues"
@@ -328,7 +328,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	allowed_sex = list(MALE)
-	allowed_race = list("humen", "tiefling", "argonian", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
 	color = null
 	sellprice = 100
 

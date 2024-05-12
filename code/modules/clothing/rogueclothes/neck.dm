@@ -192,7 +192,7 @@
 	item_state = "talkstone"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
-	allowed_race = list("human", "dwarf", "elf", "tiefling", "aasimar", "goblin")
+	allowed_race = list("human", "dwarf", "elf", "tiefling", "aasimar", "goblin", "halforc")
 	sellprice = 98
 
 /obj/item/clothing/neck/roguetown/horus

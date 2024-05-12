@@ -14,7 +14,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_YOUNG)
@@ -58,3 +59,4 @@
 		H.change_stat("intelligence", 1)
 		H.change_stat("perception", 1)
 		H.change_stat("fortune", 2)
+	H.cmode_music = 'sound/music/combat_merchant.ogg'

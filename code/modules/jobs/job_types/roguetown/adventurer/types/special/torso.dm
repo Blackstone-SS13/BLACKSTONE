@@ -11,7 +11,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/torso
 	traits_applied = list(RTRAIT_HEAVYARMOR, RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
