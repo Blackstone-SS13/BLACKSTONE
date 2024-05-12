@@ -191,6 +191,12 @@
 	icon_state = "rustkey"
 	lockid = "walls"
 
+/obj/item/roguekey/gatemaster
+	name = "gatemaster key"
+	desc = "This is a rusty key."
+	icon_state = "rustkey"
+	lockid = "gatemaster"
+
 /obj/item/roguekey/farm
 	name = "farm key"
 	desc = "This is a rusty key that'll open farm doors."
