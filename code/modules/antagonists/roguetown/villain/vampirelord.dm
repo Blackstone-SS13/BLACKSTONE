@@ -13,7 +13,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	job_rank = ROLE_VAMPIRE
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "vampire"
-	confess_lines = list("I AM ANCIENT", "I AM THE LAND", "CHILD OF KAIN!")
+	confess_lines = list(
+		"I AM ANCIENT", 
+		"I AM THE LAND", 
+		"CHILD OF KAIN!",
+	)
 	var/isspawn = FALSE
 	var/disguised = FALSE
 	var/ascended = FALSE
@@ -472,7 +476,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 // SPAWN
 /datum/antagonist/vampirelord/lesser
 	name = "Vampire Spawn"
-	confess_lines = list("THE CRIMSON CALLS!", "MY MASTER COMMANDS", "THE SUN IS ENEMY!")
+	confess_lines = list(
+		"THE CRIMSON CALLS!", 
+		"MY MASTER COMMANDS", 
+		"THE SUN IS ENEMY!",
+	)
 	isspawn = TRUE
 
 /datum/antagonist/vampirelord/lesser/move_to_spawnpoint()

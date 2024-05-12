@@ -9,4 +9,5 @@
 		"Gods are WORTHLESS!",
 		"I DON'T NEED GODS!",
 		"I AM MY OWN GOD!",
+		"NO GODS, NO MASTERS!",
 	)
