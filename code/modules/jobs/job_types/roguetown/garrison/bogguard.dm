@@ -67,8 +67,7 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/bog
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shoes = /obj/item/clothing/shoes/roguetown/boots
-	beltl = /obj/item/keyring/guard
-	belt = /obj/item/storage/belt/rogue/leather
+	beltl = /obj/item/keyring/bogger.	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/sword
 	backr = /obj/item/storage/backpack/rogue/satchel
 	if(is_crossbowman)
@@ -89,17 +88,24 @@
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/bogguardsman/proc/assign_skills(mob/living/carbon/human/bogger)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,3,4), TRUE) // Town guards have stronger street skills then castle guards.
+	bogger.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE) 
+	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(3,4), TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/whipsflails, pick(3,4), TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE) 
+	bogger.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-	bogger.change_stat("perception", 1)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+	bogger.change_stat("strength", 1)
+	bogger.change_stat("perception", 2) 
+	bogger.change_stat("constitution", 1)
 	bogger.change_stat("endurance", 1)
 	bogger.change_stat("speed", 1)
 
@@ -120,3 +126,5 @@
 	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
 	bogger.change_stat("perception", 2)
 	bogger.change_stat("speed", 2)
+	bogger.change_stat("constitution", 1)
+	bogger.change_stat("endurance", 1)
