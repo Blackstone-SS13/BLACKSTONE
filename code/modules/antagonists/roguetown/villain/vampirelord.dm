@@ -805,7 +805,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 						for(var/mob/living/carbon/human/astrater in GLOB.human_list)
 							if(!istype(astrater.patron, /datum/patron/divine/astrata))
 								continue
-							if(!length(W.mind.antag_datums))
+							if(!length(W.mind?.antag_datums))
 								to_chat(W, "<span class='userdanger'>You feel the pain of your Patron!</span>")
 								W.emote_scream()
 
