@@ -74,6 +74,4 @@
 		H.change_stat("perception", 2)
 		H.change_stat("speed", 3)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-
-
-	H.cmode_music = 'sound/music/combat_desertrider.ogg'
+	H.cmode_music = 'sound/music/combat_desertrider.ogg' //GREATEST COMBAT TRACK IN THE GAME SO FAR BESIDES MAYBE MANIAC2.OGG
