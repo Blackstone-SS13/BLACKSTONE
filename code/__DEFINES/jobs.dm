@@ -107,7 +107,7 @@
 #define GARRISON		(1<<1)
 
 #define GUARDSMAN	(1<<0)
-#define WATCHMEN	(1<<1)
+#define WATCHMAN	(1<<1)
 #define DUNGEONEER	(1<<2)
 #define GATEMASTER	(1<<3)
 #define WOODSMAN	(1<<4)
@@ -184,7 +184,7 @@
 
 #define JDO_SHERIFF 7.2
 #define JDO_CASTLEGUARD 7.3
-#define JDO_TOWNGUARD 8
+#define JDO_WATCHMEN 8
 #define JDO_BOGGUARD 8.1
 #define JDO_GATEMASTER 9
 #define JDO_BOGMASTER 9.1
