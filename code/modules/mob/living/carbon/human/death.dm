@@ -45,7 +45,7 @@
 				dust(just_ash=TRUE,drop_items=TRUE)
 				return
 
-	if(!gibbed && !is_in_roguetown(src))
+	if(!gibbed && can_death_zombify(src))
 		zombie_check()
 
 	if(client || mind)
