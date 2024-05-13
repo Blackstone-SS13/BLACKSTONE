@@ -11,7 +11,7 @@
 		"Dark Elf",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/necromancer
-	maxchosen = 2
+	maxchosen = 1
 	pickprob = 30
 	traits_applied = list(TRAIT_ZOMBIE_IMMUNE)
 
