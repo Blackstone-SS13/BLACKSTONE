@@ -140,6 +140,8 @@ SUBSYSTEM_DEF(job)
 			continue
 		if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq))
 			continue
+		if(!isnull(job.max_pq) && (get_playerquality(player.ckey) > job.max_pq))
+			continue
 		if(!(player.client.prefs.gender in job.allowed_sexes))
 			JobDebug("FOC incompatible with sex, Player: [player], Job: [job.title]")
 			continue
@@ -221,6 +223,10 @@ SUBSYSTEM_DEF(job)
 
 		if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq))
 			JobDebug("GRJ incompatible with minPQ, Player: [player], Job: [job.title]")
+			continue
+
+		if(!isnull(job.max_pq) && (get_playerquality(player.ckey) > job.max_pq))
+			JobDebug("GRJ incompatible with maxPQ, Player: [player], Job: [job.title]")
 			continue
 
 		if(check_blacklist(player.client.ckey) && !job.bypass_jobban)
@@ -448,6 +454,9 @@ SUBSYSTEM_DEF(job)
 					continue
 
 				if(!isnull(job.min_pq) && (get_playerquality(player.ckey) < job.min_pq))
+					continue
+
+				if(!isnull(job.max_pq) && (get_playerquality(player.ckey) > job.max_pq))
 					continue
 
 				if((player.client.prefs.lastclass == job.title) && (!job.bypass_lastclass))
