@@ -9,11 +9,11 @@
 	allowed_races = list("Goblin")
 	tutorial = "Working closely with the barkeep who owns Skull Crack Inn, the cook should focus on cooking food for all the hungry mouths of Roguetown."
 
-	outfit = /datum/outfit/job/roguetown/cook
+	outfit = /datum/outfit/job/roguetown/goblincook
 	display_order = JDO_GOBLINCOOK
 	min_pq = -10
 
-/datum/outfit/job/roguetown/cook/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/goblincook/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
