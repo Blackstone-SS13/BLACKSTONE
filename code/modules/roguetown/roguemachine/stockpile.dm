@@ -26,6 +26,8 @@
 		return attack_hand(usr, href_list["navigate"])
 	
 	if(withdraw_tab.perform_action(href, href_list))
+		if(href_list["remote"])
+			playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 		return attack_hand(usr, "withdraw")
 
 	// If we don't get a valid option, default to returning to the directory
@@ -42,7 +44,7 @@
 	return contents
 
 /obj/structure/roguemachine/stockpile/proc/get_withdraw_contents()
-	return withdraw_tab.get_contents()
+	return withdraw_tab.get_contents("EXTRACT FROM THE STOCKPILE", TRUE)
 
 /obj/structure/roguemachine/stockpile/proc/get_deposit_contents()
 	var/contents = "<center>FEED THE STOCKPILE<BR>"
@@ -71,7 +73,7 @@
 
 	var/contents
 	if(menu_name == "withdraw")
-		contents = get_withdraw_contents("EXTRACT FROM THE STOCKPILE", TRUE)
+		contents = get_withdraw_contents()
 	else if(menu_name == "deposit")
 		contents = get_deposit_contents()
 	else
@@ -100,6 +102,7 @@
 						R.held_items[stockpile_index] += 1 //stacked logs need to check for multiple
 						qdel(P)
 						stock_announce("[R.name] has been stockpiled.")
+						playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
 					else
 						var/area/A = GLOB.areas_by_type[R.transport_item]
 						if(!A)
@@ -111,9 +114,8 @@
 							turfs += T
 						var/turf/T = pick(turfs)
 						P.forceMove(T)
-						playsound(T, 'sound/misc/hiss.ogg', 100, FALSE, -1)
-					playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
-					flick("submit_anim",src)
+						playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+						playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 					if(amt)
 						if(!SStreasury.give_money_account(amt, H, "+[amt] from [R.name] bounty"))
 							say("No account found. Submit your fingers to a shylock for inspection.")

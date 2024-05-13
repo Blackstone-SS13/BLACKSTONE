@@ -29,6 +29,9 @@
 	if(!usr.canUseTopic(src, BE_CLOSE))
 		return
 	if(withdraw_tab.perform_action(href, href_list))
+		if(href_list["withdraw"])
+			playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
+			flick("submit_anim",src)
 		return attack_hand(usr, "withdraw")
 	return attack_hand(usr)
 
