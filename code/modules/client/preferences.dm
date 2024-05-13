@@ -1690,7 +1690,8 @@ Slots: [job.spawn_positions]</span>
 						var/datum/faith/faith = faiths_named[faith_input]
 						to_chat(user, "<font color='purple'>Faith: [faith.name]</font>")
 						to_chat(user, "<font color='purple'>Background: [faith.desc]</font>")
-						selected_patron = GLOB.patronlist[faith.godhead] || GLOB.patronlist[default_patron]
+						to_chat(user, "<font color='purple'>Likely Worshippers: [faith.worshippers]</font>")
+						selected_patron = GLOB.patronlist[faith.godhead] || GLOB.patronlist[pick(GLOB.patrons_by_faith[faith_input])]
 
 				if("patron")
 					var/list/patrons_named = list()

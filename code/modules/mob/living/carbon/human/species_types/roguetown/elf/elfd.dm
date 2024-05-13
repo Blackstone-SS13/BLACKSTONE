@@ -10,7 +10,7 @@
 	These ones are of a dark complexion and originate mostly from the underdark. \
     Their culture and entire lives normally involve serving the evil gods of the inhumen pantheon. \
     Previously rare but in recent times, more and more dark elfs can be seen on the surface. \
-    The ones who aren't overtly cruel and bloodthirsty; tend to flee to the surface lest they get culled by their own society, \
+    The ones who aren't overtly cruel and bloodthirsty, tend to flee to the surface lest they get culled by their own society, \
     while some more sinister ones abandon their cities in search of new and greater power."
 
 /*
