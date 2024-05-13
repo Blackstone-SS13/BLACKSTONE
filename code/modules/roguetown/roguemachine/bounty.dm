@@ -8,9 +8,6 @@
 	anchored = TRUE
 	pixel_x = -17
 
-	/// List of all created and non-completed bounties
-	var/list/bounties = list()
-
 /datum/bounty
 	var/target
 	var/amount
@@ -79,7 +76,7 @@
 	sleep(2 SECONDS)
 
 	//give reward for every bounty that matches
-	for(var/datum/bounty/b in bounties)
+	for(var/datum/bounty/b in GLOB.head_bounties)
 		if(b.target == stored_head.real_name)
 			correct_head = TRUE
 			say("A bounty has been sated.")
@@ -88,7 +85,7 @@
 			var/obj/item/roguecoin/copper/reward = new /obj/item/roguecoin/copper(machine_location)
 			reward.set_quantity(b.amount)
 
-			bounties -= b
+			GLOB.head_bounties -= b
 
 	// No valid bounty for this head?
 	if(correct_head == FALSE)
@@ -120,14 +117,14 @@
 ///Shows all active bounties to the user.
 /obj/structure/roguemachine/bounty/proc/consult_bounties(var/mob/living/carbon/human/user)
 
-	if(bounties.len == 0)
+	if(GLOB.head_bounties.len == 0)
 		say("No bounties are currently active.")
 		return
 
 	var/consult_menu
 	consult_menu += "<center>BOUNTIES<BR>"
 	consult_menu += "--------------<BR>"
-	for(var/datum/bounty/saved_bounty in bounties)
+	for(var/datum/bounty/saved_bounty in GLOB.head_bounties)
 		consult_menu += saved_bounty.banner
 
 	var/datum/browser/popup = new(user, "BOUNTIES", "", 500, 300)
@@ -184,14 +181,14 @@
 
 	amount -= royal_tax
 
-	// Finally create bounty
+	// Finally create bounty TODO: make a global proc for this that also applies to bandit bounties idk how to do that
 	var/datum/bounty/new_bounty = new /datum/bounty
 	new_bounty.amount = round(amount)
 	new_bounty.target = target
 	new_bounty.reason = reason
 	new_bounty.employer = user.real_name
 	compose_bounty(new_bounty)
-	bounties += new_bounty
+	GLOB.head_bounties += new_bounty
 
 	//Announce it locally and on scomm
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)

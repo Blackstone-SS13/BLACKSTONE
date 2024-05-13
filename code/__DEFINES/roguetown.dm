@@ -43,3 +43,4 @@ GLOBAL_LIST_INIT(wolf_suffixes, list("Fang", "Claw", "Stalker", "Prowler", "Roar
 #define FAMILY_FULL 3
 
 GLOBAL_LIST_EMPTY(sunlights)
+GLOBAL_LIST_EMPTY(head_bounties)
