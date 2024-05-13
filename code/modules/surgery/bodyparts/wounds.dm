@@ -52,6 +52,8 @@
 /obj/item/bodypart/proc/try_crit(bclass,dam,mob/living/user,zone_precise)
 	if(!dam)
 		return
+	if(brute_dam < max_damage / 2)
+		return FALSE
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
@@ -156,6 +158,8 @@
 				owner.emote("groin")
 				owner.Stun(5) //implement once targetting groin is harder
 				return FALSE
+		if(brute_dam < max_damage / 2)
+			return FALSE
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 			used += 20
 		if(user)
@@ -181,6 +185,8 @@
 					return TRUE
 				return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
+		if(brute_dam < max_damage / 2)
+			return FALSE
 		var/used = round((brute_dam / max_damage)*20 + (dam / 4), 1)
 		if(!can_bloody_wound())
 			return FALSE
@@ -271,6 +277,8 @@
 
 /obj/item/bodypart/head/try_crit(bclass,dam,mob/living/user,zone_precise)
 	var/resistance = HAS_TRAIT(owner, RTRAIT_CRITICAL_RESISTANCE)
+	if(brute_dam < max_damage / 2)
+		return FALSE
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
