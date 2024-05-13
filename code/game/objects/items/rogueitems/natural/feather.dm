@@ -16,3 +16,11 @@
 	muteinmouth = TRUE
 	spitoutmouth = FALSE
 	w_class = WEIGHT_CLASS_TINY
+
+/obj/item/natural/feather/magic
+	name = "magic feather"
+	color = "#ffee00"
+	desc = "A fluffy feather that seems to shimmer with a faint magical aura."
+	var/uses = 0
+	var/max_uses = 3 // TODO: Balance this
+	

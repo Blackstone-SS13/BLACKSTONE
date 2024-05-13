@@ -448,7 +448,8 @@
 	pickup_sound =  'sound/blank.ogg'
 	var/obj/effect/proc_holder/spell/target = null
 
-/obj/item/book/granter/spell/generic/proc/pick_spell(rarity = SPELL_ALL)
+/obj/item/book/granter/spell/generic/Initialize(loc, rarity = SPELL_ALL)
+	. = ..()
 	target = pick(GLOB.learnables)
 	var/obj/effect/proc_holder/spell/S = new target
 	spellname = S.name

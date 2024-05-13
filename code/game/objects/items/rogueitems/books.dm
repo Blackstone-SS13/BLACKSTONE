@@ -432,6 +432,52 @@
 	var/qdel_source = FALSE
 
 /obj/item/manuscript/attackby(obj/item/I, mob/living/user)
+	if(resistance_flags & ON_FIRE)
+		return ..()
+
+	if(is_blind(user))
+		return ..()
+
+	if(istype(I, /obj/item/natural/feather/magic))
+		var/qualifying = 0
+		var/exp_gain = 0
+		var/obj/item/natural/feather/magic/F = I
+
+		if(prob(5)) // They rolled a nat20
+			qualifying = SPELL_EPIC | SPELL_LEGENDARY
+			exp_gain = 100
+			to_chat(user, "You feel your feather moving with a life of its own, as you struggle to comprehend what you write.")
+		else
+			var/skill_score = 0
+			var/spell_score = 0
+			if(/datum/skill/magic/arcane in user.mind.known_skills)
+				skill_score = user.mind.known_skills[/datum/skill/magic/arcane] * 0.1
+			spell_score = number_of_pages * 10 + skill_score
+			if(spell_score >= 10) // No, this doesn't make sense right now. I'm going to sleep on it
+				qualifying |= SPELL_COMMON // and figure out how to balance this thing.
+			if(spell_score >= 50)
+				qualifying |= SPELL_UNCOMMON
+			if(spell_score >= 95)
+				qualifying |= SPELL_RARE
+			if(spell_score >= 105)
+				qualifying |= SPELL_EPIC
+			if(spell_score >= 115)
+				qualifying |= SPELL_LEGENDARY
+			
+			if(qualifying)
+				var/obj/item/book/granter/spell/generic/SB = new /obj/item/book/granter/spell/generic(get_turf(I.loc), qualifying)
+				if(user.Adjacent(SB))
+					SB.add_fingerprint(user)
+					user.put_in_hands(SB)
+				if(exp_gain)
+					user.mind.adjust_experience(/datum/skill/magic/arcane, exp_gain)
+				to_chat(user, "As you finish writing, the feather glows and envelops the manuscript, becoming a new spellbook.")
+			// else something here about the feather not being able to write a spellbook
+			if(F.uses >= F.max_uses)
+				to_chat(user, "The feather's magic glows dimly, and then it turns into dust.")
+				new /obj/item/ash(get_turf(user.loc))
+				qdel(F)
+		return
 	// why is a book crafting kit using the craft system, but crafting a book isn't? Well the crafting system for *some reason* is made in such a way as to make reworking it to allow you to put reqs vars in the crafted item near *impossible.*
 	if(istype(I, /obj/item/book_crafting_kit))
 		var/obj/item/book/rogue/playerbook/PB = new /obj/item/book/rogue/playerbook(get_turf(I.loc), TRUE, user, compiled_pages)
