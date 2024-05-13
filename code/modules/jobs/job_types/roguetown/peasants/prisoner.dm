@@ -23,7 +23,7 @@
 	bypass_jobban = TRUE
 	display_order = JDO_PRISONER
 	give_bank_account = 10
-	min_pq = -49 // No minimum PQ
+	min_pq = -49
 	max_pq = null
 	can_random = FALSE
 

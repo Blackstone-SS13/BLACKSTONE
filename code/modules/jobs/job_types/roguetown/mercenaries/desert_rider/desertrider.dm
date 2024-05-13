@@ -19,6 +19,7 @@
 	spawn_positions = 5
 	give_bank_account = 3
 	min_pq = 2 //good fragger role
+	max_pq = null
 
 /datum/outfit/job/roguetown/mercenary/desert_rider/pre_equip(mob/living/carbon/human/H)
 	..()

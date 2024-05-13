@@ -23,6 +23,7 @@
 	display_order = JDO_BARKEEP
 	give_bank_account = 43
 	min_pq = -4
+	max_pq = null
 
 /datum/outfit/job/roguetown/barkeep/pre_equip(mob/living/carbon/human/H)
 	..()

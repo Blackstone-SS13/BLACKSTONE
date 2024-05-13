@@ -24,6 +24,7 @@
 	display_order = JDO_BUTCHER
 	give_bank_account = TRUE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/beastmaster/pre_equip(mob/living/carbon/human/H)
 	..()

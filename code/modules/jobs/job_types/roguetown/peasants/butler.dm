@@ -22,6 +22,7 @@
 	display_order = JDO_BUTLER
 	give_bank_account = 5
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/butler/pre_equip(mob/living/carbon/human/H)
 	..()

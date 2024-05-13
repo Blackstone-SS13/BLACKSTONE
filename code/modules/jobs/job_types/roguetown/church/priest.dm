@@ -17,6 +17,7 @@
 	display_order = JDO_PRIEST
 	give_bank_account = 115
 	min_pq = 2
+	max_pq = null
 
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
 	..()

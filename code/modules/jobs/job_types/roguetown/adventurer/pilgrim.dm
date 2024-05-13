@@ -24,5 +24,6 @@
 	ispilgrim = TRUE
 	display_order = JDO_PILGRIM
 	min_pq = -20
+	max_pq = null
 	wanderer_examine = TRUE
 	advjob_examine = TRUE

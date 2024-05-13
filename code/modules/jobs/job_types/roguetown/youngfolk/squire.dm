@@ -19,6 +19,7 @@
 	display_order = JDO_SQUIRE
 	give_bank_account = TRUE
 	min_pq = -5 //squires aren't great but they can do some damage
+	max_pq = null
 
 /datum/outfit/job/roguetown/squire/pre_equip(mob/living/carbon/human/H)
 	..()

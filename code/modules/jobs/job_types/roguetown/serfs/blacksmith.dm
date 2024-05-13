@@ -23,6 +23,7 @@
 	display_order = JDO_ARMORER
 	give_bank_account = 11
 	min_pq = 1
+	max_pq = null
 
 /datum/outfit/job/roguetown/armorsmith/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -82,6 +83,7 @@
 	display_order = JDO_WSMITH
 	give_bank_account = 11
 	min_pq = 1
+	max_pq = null
 
 /datum/outfit/job/roguetown/weaponsmith/pre_equip(mob/living/carbon/human/H)
 	..()

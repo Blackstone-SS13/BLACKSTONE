@@ -19,8 +19,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	outfit = /datum/outfit/job/roguetown/lunatic 
-	min_pq
-	max_pq = null = null 
+	min_pq = null //This role is meant to be locked to only those with -50 PQ, then be unrollable once they hit -49 so they can roll Prisoner, don't fuck with this.
 	max_pq = -50
 	tutorial = "The Lunatic, shunned by society and a magnet for misfortune. Your task is simple yet perilous: survive by any means, though your very existence invites danger from every corner. Seek redemption through kindness and camaraderie; it's your quickest escape from this cursed plight. Tread carefully, for trust is hard-won and easily lost."
 	display_order = JDO_LUNATIC

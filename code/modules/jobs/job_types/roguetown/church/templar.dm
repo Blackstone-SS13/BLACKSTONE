@@ -16,6 +16,7 @@
 	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
+	max_pq = null
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_TEMPLAR
