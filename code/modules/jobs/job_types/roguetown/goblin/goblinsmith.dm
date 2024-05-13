@@ -10,7 +10,7 @@
 	display_order = JDO_GOBLINSMITH
 	outfit = /datum/job/roguetown/goblinsmith
 
-/datum/outfit/job/roguetown/goblismith/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/goblinsmith/pre_equip(mob/living/carbon/human/H)
 	..()
 	belt = /obj/item/storage/belt/rogue/leather
 
