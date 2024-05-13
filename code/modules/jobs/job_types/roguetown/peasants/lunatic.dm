@@ -38,10 +38,3 @@
 		H.change_stat("constitution", -4)
 		H.change_stat("endurance", -4)
 		H.change_stat("speed", -4)
-	for(var/obj/item/bodypart/limb in H.bodyparts)
-		if(istype(limb))
-			if(limb.body_zone == BODY_ZONE_HEAD || limb.body_zone == BODY_ZONE_CHEST)
-				continue
-			if(prob(25))
-				limb.drop_limb()
-				qdel(limb)
