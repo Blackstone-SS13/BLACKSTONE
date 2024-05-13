@@ -87,16 +87,16 @@
 ///Composes a random bounty banner based on the given bounty info.
 ///@param new_bounty:  The bounty datum.
 /obj/structure/roguemachine/bounty/proc/compose_bounty(var/datum/bounty/new_bounty)
-	var/random_phrasing = rand(1, 3)
-	if(random_phrasing == 1)
-		new_bounty.banner += "A dire bounty hangs upon the head of [new_bounty.target], for '[new_bounty.reason]'.<BR>"
-		new_bounty.banner += "The patron, [new_bounty.employer], offers [new_bounty.amount] mammons for the task.<BR>"	
-	else if(random_phrasing == 2)
-		new_bounty.banner += "The head of [new_bounty.target] is wanted for '[new_bounty.reason]''.<BR>"
-		new_bounty.banner += "The employer, [new_bounty.employer], offers [new_bounty.amount] mammons for the deed.<BR>"
-	else
-		new_bounty.banner += "[new_bounty.employer] hath offered to pay [new_bounty.amount] mammons for the head of [new_bounty.target].<BR>"
-		new_bounty.banner += "By reason of the following: '[new_bounty.reason]'.<BR>"
+	switch(rand(1, 3))
+		if(1)
+			new_bounty.banner += "A dire bounty hangs upon the head of [new_bounty.target], for '[new_bounty.reason]'.<BR>"
+			new_bounty.banner += "The patron, [new_bounty.employer], offers [new_bounty.amount] mammons for the task.<BR>"	
+		if(2)
+			new_bounty.banner += "The head of [new_bounty.target] is wanted for '[new_bounty.reason]''.<BR>"
+			new_bounty.banner += "The employer, [new_bounty.employer], offers [new_bounty.amount] mammons for the deed.<BR>"
+		if(3)
+			new_bounty.banner += "[new_bounty.employer] hath offered to pay [new_bounty.amount] mammons for the head of [new_bounty.target].<BR>"
+			new_bounty.banner += "By reason of the following: '[new_bounty.reason]'.<BR>"
 	new_bounty.banner += "--------------<BR>"
 
 ///Shows all active bounties to the user.
@@ -166,7 +166,7 @@
 
 	amount -= royal_tax
 
-	// Finally create bounty TODO: make a global proc for this that also applies to bandit bounties idk how to do that
+	// Finally create bounty
 	var/datum/bounty/new_bounty = new /datum/bounty
 	new_bounty.amount = round(amount)
 	new_bounty.target = target
