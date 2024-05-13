@@ -14,6 +14,7 @@
 		"Half-Elf",
 		"Half Orc"
 	)
+	allowed_patrons = ALL_CLERIC_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
 	total_positions = 2
