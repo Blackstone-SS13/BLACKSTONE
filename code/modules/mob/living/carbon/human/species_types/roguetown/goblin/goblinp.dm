@@ -21,6 +21,7 @@
 	soundpack_f = /datum/voicepack/male/goblin
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	nojumpsuit = 1
+	mutanteyes = /obj/item/organ/eyes/goblin
 	offset_features = list(OFFSET_ID = list(0,0), OFFSET_WRISTS = list(0,0),\
 	OFFSET_CLOAK = list(0,0), \
 	OFFSET_FACE = list(0,-4), OFFSET_BELT = list(0,-1), OFFSET_BACK = list(0,-4), \
