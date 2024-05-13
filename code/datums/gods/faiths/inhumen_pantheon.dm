@@ -1,4 +1,4 @@
-/datum/faith/inhumen_pantheon
+/datum/faith/inhumen
 	name = "Inhumen Pantheon"
 	desc = "The nine are FALSE GODS.\n\
 		They keep us trapped in tartarus and choke out our divine light, \

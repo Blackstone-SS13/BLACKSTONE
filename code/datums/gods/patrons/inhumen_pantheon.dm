@@ -1,6 +1,6 @@
 /datum/patron/inhumen
 	name = null
-	associated_faith = /datum/faith/inhumen_pantheon
+	associated_faith = /datum/faith/inhumen
 	confess_lines = list(
 		"PSYDON IS THE DEMIURGE!",
 		"THE NINE ARE WORTHLESS COWARDS!",

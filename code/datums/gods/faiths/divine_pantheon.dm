@@ -1,4 +1,4 @@
-/datum/faith/divine_pantheon
+/datum/faith/divine
 	name = "Divine Pantheon"
 	desc = "The most accepted religion in Rockhill. May Almighty Psydon and His nine children protect us from Zizo!"
 	worshippers = "Humans and citizens of Rockhill"
