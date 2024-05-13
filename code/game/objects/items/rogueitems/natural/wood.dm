@@ -87,9 +87,10 @@
 		qdel(src)
 	if(istype(I, /obj/item/natural/bundle/stick))
 		var/obj/item/natural/bundle/stick/B = I
-		if(B.amount <= 9)
+		if(B.amount < B.maxamount)
 			H.visible_message("[user] adds the [src] to the bundle.")
 			B.amount += 1
+			B.update_bundle()
 			qdel(src)
 	..()
 

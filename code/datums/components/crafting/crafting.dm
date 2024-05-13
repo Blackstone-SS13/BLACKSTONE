@@ -102,6 +102,9 @@
 		if(istype(I, /obj/item/stack))
 			var/obj/item/stack/S = I
 			.["other"][I.type] += S.amount
+		else if(istype(I, /obj/item/natural/bundle))
+			var/obj/item/natural/bundle/B = I
+			.["other"][B.stacktype] += B.amount
 		else if(I.tool_behaviour)
 			.["tool_behaviour"] += I.tool_behaviour
 			.["other"][I.type] += 1
@@ -379,6 +382,35 @@
 							S = locate(S.type) in Deletion
 							S.add(data)
 						surroundings -= S
+			else if(ispath(A, /obj/item/natural) || A == /obj/item/grown/log/tree/stick)
+				while(amt > 0)
+					for(var/obj/item/natural/bundle/B in get_environment(user))
+						if(B.stacktype == A)
+							if(B.amount > amt)
+								B.amount -= amt
+								amt = 0
+								B.update_bundle()
+								for(var/b in amt)
+									surroundings -= B.stacktype
+								if(B.amount == 1)
+									new B.stacktype(B.loc)
+									qdel(B)
+								if(B.amount == 0)
+									qdel(B)
+								continue main_loop
+							else
+								qdel(B)
+								amt -= B.amount
+								for(var/b in B.amount)
+									surroundings -= B.stacktype
+						else
+							continue
+					var/atom/movable/I
+					while(amt > 0)
+						I = locate(A) in surroundings
+						Deletion += I
+						surroundings -= I
+						amt--
 			else
 				var/atom/movable/I
 				while(amt > 0)
