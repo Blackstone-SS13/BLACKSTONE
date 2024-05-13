@@ -14,10 +14,11 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_ages = list(AGE_YOUNG)
+	allowed_ages = YOUNG_AGES_LIST
 
 	tutorial = "The Merchant has taken you under his wing to learn the arcane arts of mercantilism, numeracy, literacy, and the joy of organizing the shelves. It is mind numbing and repetitive, but at least you have a roof over your head and comfortable surroundings. Given time, perhaps you will run the town's barter."
 
@@ -58,3 +59,4 @@
 		H.change_stat("intelligence", 1)
 		H.change_stat("perception", 1)
 		H.change_stat("fortune", 2)
+	H.cmode_music = 'sound/music/combat_merchant.ogg'

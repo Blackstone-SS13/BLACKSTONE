@@ -15,18 +15,21 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/rogue
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
+/datum/outfit/job/roguetown/adventurer/rogue
+	allowed_patrons = list(/datum/patron/divine/xylix, /datum/patron/inhumen/matthios)
+
 /datum/outfit/job/roguetown/adventurer/rogue/pre_equip(mob/living/carbon/human/H)
 	..()
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(2,3,3), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3), TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/knives, pick(4,4,5), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(4,6), TRUE)

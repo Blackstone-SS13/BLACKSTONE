@@ -37,9 +37,22 @@
 	backpack = null
 	satchel  = null
 	duffelbag = null
+	/// List of patrons we are allowed to use
+	var/list/allowed_patrons
+	/// Default patron in case the patron is not allowed
+	var/datum/patron/default_patron
 
 /datum/outfit/job/roguetown/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	..()
+	. = ..()
+	var/datum/patron/ourpatron = H.patron
+	if(length(allowed_patrons) && (!ourpatron || !(ourpatron.type in allowed_patrons)))
+		var/list/datum/patron/possiblegods = list()
+		for(var/god in GLOB.patronlist)
+			if(!(god in allowed_patrons))
+				continue
+			possiblegods |= god
+		H.patron = GLOB.patronlist[default_patron] || GLOB.patronlist[pick(possiblegods)]
+		to_chat(H, "<span class='warning'>[ourpatron] had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")
 	if(H.mind)
 		if(H.gender == FEMALE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
@@ -52,7 +65,7 @@
 	H.update_body()
 
 /datum/outfit/job/roguetown/post_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	.=..()
+	. = ..()
 	if(H.mind)
 		if(H.ckey)
 			if(check_crownlist(H.ckey))

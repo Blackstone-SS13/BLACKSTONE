@@ -13,7 +13,7 @@
 		"Half-Elf",
 		"Aasimar"
 	)
-	allowed_patrons = list("Noc")
+	allowed_patrons = list(/datum/patron/divine/noc)
 	allowed_ages = list(AGE_OLD, AGE_MIDDLEAGED)
 
 	outfit = /datum/outfit/job/roguetown/archivist

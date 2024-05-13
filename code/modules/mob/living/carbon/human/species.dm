@@ -115,8 +115,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	//in __DEFINES/mobs.dm, defaults to NONE, so people actually have to think about it
 	var/changesource_flags = NONE
 
-	var/possible_faiths
-
 	//Wording for skin tone on examine and on character setup
 	var/skin_tone_wording = "Skin Tone"
 
