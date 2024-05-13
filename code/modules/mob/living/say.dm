@@ -107,7 +107,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	var/static/regex/ooc_regex = regex(@"\((.*?)\)")
 	if(findtext(message, ooc_regex))
 		emote("me", 1, "mumbles incoherently.")
-		to_chat(src, "<span class='warning'>That was stupid of me.</span>")
+		to_chat(src, "<span class='warning'>That was stupid of me. I should meditate on my actions.</span>")
 		message_admins("[key_name_admin(src)] tried to say an OOC message IC! Laugh at this loser!")
 		add_stress(/datum/stressevent/ooc_ic)
 		return
