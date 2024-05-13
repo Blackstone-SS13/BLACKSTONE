@@ -70,7 +70,8 @@
 			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
 			L.add_stress(/datum/stressevent/psyprayer)
 			return TRUE
-	else to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
+	else 
+		to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
 
 /mob/living/proc/check_prayer_underworld(mob/living/L,message)
 	if(!L || !message)
@@ -101,7 +102,27 @@
 			return TRUE
 		else
 			return TRUE
-	else to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
+	else 
+		to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
+
+/datum/emote/living/pray
+	key = "meditate"
+	key_third_person = "meditate"
+	message = "meditates."
+	restraint_check = FALSE
+	emote_type = EMOTE_VISIBLE
+
+/mob/living/carbon/human/verb/emote_meditate()
+	set name = "Meditate"
+	set category = "Emotes"
+
+	emote("meditate", intentional = TRUE)
+
+/datum/emote/living/pray/run_emote(mob/user, params, type_override, intentional)
+	if(isliving(user))
+		var/msg = input("Say your meditation:", "Voices in your head") as text|null
+		if(msg)
+			user.schizohelp(msg)
 
 /datum/emote/living/bow
 	key = "bow"
