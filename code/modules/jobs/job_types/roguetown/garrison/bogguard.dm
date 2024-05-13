@@ -114,12 +114,12 @@
 	is_crossbowman = TRUE
 
 /datum/outfit/job/roguetown/bogguardsman/crossbowman/assign_skills(mob/living/carbon/human/bogger)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/bows, 4, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/crossbows, 5, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
