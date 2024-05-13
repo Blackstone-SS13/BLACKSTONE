@@ -8,9 +8,11 @@
 	stockpile_index = stockpile_param
 	parent_structure = structure_param
 
-/datum/withdraw_tab/proc/get_contents()
-	var/contents = "<center>TOWN STOCKPILE<BR>"
-	contents += "<a href='?src=[REF(parent_structure)];navigate=directory'>(back)</a><BR>"
+/datum/withdraw_tab/proc/get_contents(title, show_back)
+	var/contents = "<center>[title]<BR>"
+	if(show_back)
+		contents += "<a href='?src=[REF(parent_structure)];navigate=directory'>(back)</a><BR>"
+	
 	contents += "--------------<BR>"
 	contents += "<a href='?src=[REF(parent_structure)];change=1'>Stored Mammon: [budget]</a></center><BR>"
 
@@ -71,3 +73,7 @@
 	qdel(C)
 	parent_structure.update_icon()
 	playsound(parent_structure.loc, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+
+/proc/stock_announce(message)
+	for(var/obj/structure/roguemachine/stockpile/S in SSroguemachine.stock_machines)
+		S.say(message, spans = list("info"))

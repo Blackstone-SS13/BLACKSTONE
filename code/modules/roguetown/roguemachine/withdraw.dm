@@ -1,4 +1,4 @@
-/obj/structure/roguemachine/stockpile
+/obj/structure/roguemachine/withdraw
 	name = "vomitorium"
 	desc = ""
 	icon = 'icons/roguetown/misc/machines.dmi'
@@ -7,89 +7,38 @@
 	blade_dulling = DULLING_BASH
 	pixel_y = 32
 	var/stockpile_index = 1
-	var/budget = 0
+	var/datum/withdraw_tab/withdraw_tab = null
 
-/proc/stock_announce(message)
-	for(var/obj/structure/roguemachine/stockpile/S in SSroguemachine.stock_machines)
-		S.say(message, spans = list("info"))
-
-/obj/structure/roguemachine/stockpile/Initialize()
+/obj/structure/roguemachine/withdraw/Initialize()
 	. = ..()
 	SSroguemachine.stock_machines += src
+	withdraw_tab = new(stockpile_index, src)
 
-/obj/structure/roguemachine/stockpile/Destroy()
+/obj/structure/roguemachine/withdraw/Destroy()
 	SSroguemachine.stock_machines -= src
 	return ..()
 
-/obj/structure/roguemachine/stockpile/attackby(obj/item/P, mob/user, params)
+/obj/structure/roguemachine/withdraw/attackby(obj/item/P, mob/user, params)
 	if(istype(P, /obj/item/roguecoin))
-		budget += P.get_real_price()
-		qdel(P)
-		update_icon()
-		playsound(loc, 'sound/misc/machinevomit.ogg', 100, TRUE, -1)
+		withdraw_tab.insert_coins(P)
 		return attack_hand(user)
 	..()
 
-/obj/structure/roguemachine/stockpile/Topic(href, href_list)
+/obj/structure/roguemachine/withdraw/Topic(href, href_list)
 	. = ..()
 	if(!usr.canUseTopic(src, BE_CLOSE))
 		return
-	if(href_list["withdraw"])
-		var/datum/roguestock/D = locate(href_list["withdraw"]) in SStreasury.stockpile_datums
-
-		var/remote = href_list["remote"]
-		var/source_stockpile = stockpile_index
-		var/total_price = D.withdraw_price
-		if (remote)
-			total_price += D.transport_fee
-			source_stockpile = stockpile_index == 1 ? 2 : 1
-
-		if(!D)
-			return
-		if(D.withdraw_disabled)
-			return
-		if(D.held_items[source_stockpile] <= 0)
-			say("Insufficient stock.")
-		else if(total_price > budget)
-			say("Insufficient mammon.")
-		else
-			D.held_items[source_stockpile]--
-			budget -= total_price
-			SStreasury.give_money_treasury(D.withdraw_price, "stockpile withdraw")
-			var/obj/item/I = new D.item_type(loc)
-			var/mob/user = usr
-			if(!user.put_in_hands(I))
-				I.forceMove(get_turf(user))
-			playsound(src, 'sound/misc/hiss.ogg', 100, FALSE, -1)
-		return attack_hand(usr, "withdraw")
-	if(href_list["change"])
-		if(!usr.canUseTopic(src, BE_CLOSE))
-			return
-		if(ishuman(usr))
-			if(budget > 0)
-				budget2change(budget, usr)
-				budget = 0
+	if(withdraw_tab.perform_action(href, href_list))
 		return attack_hand(usr, "withdraw")
 	return attack_hand(usr)
 
-/obj/structure/roguemachine/stockpile/attack_hand(mob/living/user)
+/obj/structure/roguemachine/withdraw/attack_hand(mob/living/user)
 	. = ..()
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(loc, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
-	var/contents
-	contents += "<center>TOWN STOCKPILE<BR>"
-	contents += "--------------<BR>"
-	contents += "<a href='?src=[REF(src)];change=1'>Stored Mammon: [budget]</a></center><BR>"
-	for(var/datum/roguestock/stockpile/A in SStreasury.stockpile_datums)
-		contents += "[A.name]<BR>"
-		contents += "[A.desc]<BR>"
-		contents += "Stockpiled Amount: [A.held_items]<BR>"
-		if(!A.withdraw_disabled)
-			contents += "<a href='?src=[REF(src)];withdraw=[REF(A)]'>\[Withdraw ([A.withdraw_price])\]</a><BR><BR>"
-		else
-			contents += "Withdrawing Disabled...<BR><BR>"
+	var/contents = withdraw_tab.get_contents("VOMITORIUM", FALSE)
 	var/datum/browser/popup = new(user, "VENDORTHING", "", 370, 220)
 	popup.set_content(contents)
 	popup.open()

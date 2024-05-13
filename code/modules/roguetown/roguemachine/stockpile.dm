@@ -9,10 +9,6 @@
 	var/stockpile_index = -1
 	var/datum/withdraw_tab/withdraw_tab = null
 
-/proc/stock_announce(message)
-	for(var/obj/structure/roguemachine/stockpile/S in SSroguemachine.stock_machines)
-		S.say(message, spans = list("info"))
-
 /obj/structure/roguemachine/stockpile/Initialize()
 	. = ..()
 	SSroguemachine.stock_machines += src
@@ -38,10 +34,10 @@
 
 /obj/structure/roguemachine/stockpile/proc/get_directory_contents()
 	var/contents = "<center>TOWN STOCKPILE<BR>"
-	contents += "--------------</center><BR>"
+	contents += "--------------<BR>"
 
-	contents += "<a href='?src=[REF(src)];navigate=withdraw'>Withdraw Goods</a><BR>"
-	contents += "<a href='?src=[REF(src)];navigate=deposit'>Check Current Deposit Prices</a><BR><BR>"
+	contents += "<a href='?src=[REF(src)];navigate=withdraw'>EXTRACT</a><BR>"
+	contents += "<a href='?src=[REF(src)];navigate=deposit'>FEED</a></center><BR><BR>"
 	
 	return contents
 
@@ -49,7 +45,7 @@
 	return withdraw_tab.get_contents()
 
 /obj/structure/roguemachine/stockpile/proc/get_deposit_contents()
-	var/contents = "<center>SUBMISSION HOLE<BR>"
+	var/contents = "<center>FEED THE STOCKPILE<BR>"
 	contents += "<a href='?src=[REF(src)];navigate=directory'>(back)</a><BR>"
 	contents += "----------<BR>"
 	contents += "</center>"
@@ -75,7 +71,7 @@
 
 	var/contents
 	if(menu_name == "withdraw")
-		contents = get_withdraw_contents()
+		contents = get_withdraw_contents("EXTRACT FROM THE STOCKPILE", TRUE)
 	else if(menu_name == "deposit")
 		contents = get_deposit_contents()
 	else
