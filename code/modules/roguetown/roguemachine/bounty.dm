@@ -49,29 +49,14 @@
 
 	qdel(P)
 
-	var/random_say = rand(1, 3)
-	if(random_say == 1)
-		say("Commencing cephalic dissection...")
-	else if(random_say == 2)
-		say("Analyzing skull structure...")
-	else
-		say("Performing intra-cranial inspection...")
+	say(pick(list("Performing intra-cranial inspection...", "Analyzing skull structure...", "Commencing cephalic dissection...")))
 
 	sleep(1 SECONDS)
 
-	var/random_sound = rand(1, 3)
-	if(random_sound == 1)
-		playsound(src, 'sound/combat/fracture/headcrush (4).ogg', 100, FALSE, -1)
-		sleep(1 SECONDS)
-		playsound(src, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
-	else if(random_sound == 2)
-		playsound(src, 'sound/combat/fracture/headcrush (3).ogg', 100, FALSE, -1)
-		sleep(1 SECONDS)
-		playsound(src, 'sound/combat/fracture/headcrush (4).ogg', 100, FALSE, -1)
-	else
-		playsound(src, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
-		sleep(1 SECONDS)
-		playsound(src, 'sound/combat/fracture/headcrush (3).ogg', 100, FALSE, -1)
+	var/list/headcrush = list('sound/combat/fracture/headcrush (2).ogg', 'sound/combat/fracture/headcrush (3).ogg', 'sound/combat/fracture/headcrush (4).ogg')
+	playsound(src, pick_n_take(headcrush), 100, FALSE, -1)
+	sleep(1 SECONDS)
+	playsound(src, pick(headcrush), 100, FALSE, -1)
 
 	sleep(2 SECONDS)
 
