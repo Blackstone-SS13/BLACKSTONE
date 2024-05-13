@@ -159,3 +159,23 @@
 		else
 			return 1
 	return chargetime
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
+	name = "recurve bow"
+	desc = "a short bow made with layers of different material"
+	randomspread = 1
+	spread = 1
+	force = 9
+	icon_state = "bowr"
+	item_state = "bowr"
+	possible_item_intents = list(/datum/intent/arc/bow/recurve, /datum/intent/shoot/bow/recurve,INTENT_GENERIC)
+
+/datum/intent/arc/bow/recurve
+	chargetime = 0.8
+	chargedrain = 1.2
+	charging_slowdown = 2.5
+
+/datum/intent/shoot/bow/recurve
+	chargetime = 0.8
+	chargedrain = 1.2
+	charging_slowdown = 2.5
