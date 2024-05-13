@@ -9,7 +9,7 @@
 		"Half-Elf",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/sentinal
-	maxchosen = 5
+	maxchosen = 2
 	pickprob = 50
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
