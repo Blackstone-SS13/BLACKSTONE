@@ -196,3 +196,4 @@
 	say(bounty_announcement)
 	scom_announce(bounty_announcement)
 
+	message_admins("[ADMIN_LOOKUPFLW(user)] has set a bounty on Target: '[target]' for Reason: '[reason]'")
