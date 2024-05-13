@@ -12,7 +12,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/necromancer
 	maxchosen = 1
-	pickprob = 30
+	pickprob = 5
 	traits_applied = list(TRAIT_ZOMBIE_IMMUNE)
 
 /datum/outfit/job/roguetown/adventurer/necromancer
