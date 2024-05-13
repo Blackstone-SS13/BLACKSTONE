@@ -68,7 +68,6 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	playsound(loc, 'sound/misc/keyboard_enter.ogg', 100, FALSE, -1)
-	var/canread = user.can_read(src, TRUE)
 	var/contents
 	contents += "<center>TOWN STOCKPILE<BR>"
 	contents += "--------------<BR>"
@@ -81,8 +80,6 @@
 			contents += "<a href='?src=[REF(src)];withdraw=[REF(A)]'>\[Withdraw ([A.withdraw_price])\]</a><BR><BR>"
 		else
 			contents += "Withdrawing Disabled...<BR><BR>"
-	if(!canread)
-		contents = stars(contents)
 	var/datum/browser/popup = new(user, "VENDORTHING", "", 370, 220)
 	popup.set_content(contents)
 	popup.open()

@@ -401,15 +401,12 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	//Character
 	_load_appearence(S)
 
-	var/patron_name
-	S["selected_patron"]	>> patron_name
-	if(patron_name)
-		selected_patron = GLOB.patronlist[patron_name]
+	var/patron_typepath
+	S["selected_patron"]	>> patron_typepath
+	if(patron_typepath)
+		selected_patron = GLOB.patronlist[patron_typepath]
 		if(!selected_patron) //failsafe
-			selected_patron = GLOB.patronlist[GLOB.patronlist[1]]
-		// var/newtype = GLOB.patronlist[patron_name]
-		// if(newtype)
-			// selected_patron = new newtype
+			selected_patron = GLOB.patronlist[default_patron]
 
 	//Custom names
 	for(var/custom_name_id in GLOB.preferences_custom_names)
@@ -574,7 +571,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 	WRITE_FILE(S["all_quirks"]			, all_quirks)
 
 	//Patron
-	WRITE_FILE(S["selected_patron"]		, selected_patron.name)
+	WRITE_FILE(S["selected_patron"]		, selected_patron.type)
 
 	return TRUE
 

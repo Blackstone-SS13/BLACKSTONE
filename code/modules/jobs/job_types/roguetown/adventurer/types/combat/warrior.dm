@@ -10,7 +10,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/sfighter
 	traits_applied = list(RTRAIT_HEAVYARMOR)
