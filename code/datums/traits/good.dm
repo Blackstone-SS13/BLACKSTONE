@@ -50,6 +50,46 @@
 			C.adjustBruteLoss(-0.8, FALSE)
 			C.adjustFireLoss(-0.4, FALSE)
 
+/datum/quirk/rapidregen
+	name = "Rapid Regeneration"
+	desc = ""
+	value = 2
+	mob_trait = RTRAIT_RAPID_REGENERATION
+	gain_text = "<span class='notice'>I feel like my wounds heal faster.</span>"
+	lose_text = "<span class='danger'>I no longer feel like I can self-heal efficiently.</span>"
+	
+
+/datum/quirk/rapidregen/on_process()
+// BODY_ZONE_L_ARM,BODY_ZONE_R_ARM,BODY_ZONE_HEAD,BODY_ZONE_CHEST,BODY_ZONE_L_LEG,BODY_ZONE_R_LEG
+	var/mob/living/carbon/C = quirk_holder
+//	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_HEAD)
+	switch(C.nutrition)
+		if (350 to 1000)
+			C.adjustBruteLoss(-0.5, TRUE)
+			C.adjustFireLoss(-0.5, TRUE)
+			C.adjust_nutrition(-2, TRUE)
+			C.get_bodypart(BODY_ZONE_HEAD).heal_damage(1, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_HEAD).heal_wounds(5, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_L_ARM).heal_damage(1, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_L_ARM).heal_wounds(5, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_R_ARM).heal_damage(1, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_R_ARM).heal_wounds(5, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_CHEST).heal_damage(1, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_CHEST).heal_wounds(5, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_L_LEG).heal_damage(1, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_L_LEG).heal_wounds(5, null, BODYPART_ORGANIC)	
+			C.get_bodypart(BODY_ZONE_R_LEG).heal_damage(1, null, BODYPART_ORGANIC)
+			C.get_bodypart(BODY_ZONE_R_LEG).heal_wounds(5, null, BODYPART_ORGANIC)			
+			C.update_damage_overlays()
+		if (345 to 349)
+			to_chat(C, "I am wasting away. I desperately need to eat something or someone!")
+			C.adjust_nutrition(-2, TRUE)
+		if (250 to 344)
+			C.adjust_nutrition(-2, TRUE)
+		if (0 to 249)
+			C.adjust_nutrition(-0.05, TRUE)
+			C.adjustOxyLoss(2, TRUE)
+
 /datum/quirk/empath
 	name = "Empath"
 	desc = ""
