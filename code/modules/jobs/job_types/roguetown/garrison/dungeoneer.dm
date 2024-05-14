@@ -13,7 +13,7 @@
 		"Argonian",
 		"Dark Elf"
 	)
-	allowed_sexes = list(MALE, FEMALE)
+	allowed_sexes = list(MALE, FEMALE) //only allows females because muh dark elves
 
 	display_order = JDO_DUNGEONEER
 

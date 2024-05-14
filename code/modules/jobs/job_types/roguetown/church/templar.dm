@@ -5,7 +5,7 @@
 	department_flag = CHURCHMEN
 	faction = "Station"
 	tutorial = "Templars are warriors who have forsaken wealth and title in lieu of service to the church, due to either zealotry or a past shame. They guard the church and its priest, while keeping a watchful eye against heresy and nite-creechers. Within troubled dreams, they wonder if the blood they shed makes them holy or stained."
-	allowed_sexes = list("male")
+	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",

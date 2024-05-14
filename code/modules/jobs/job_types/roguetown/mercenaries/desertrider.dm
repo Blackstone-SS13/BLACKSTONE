@@ -1,7 +1,7 @@
 /datum/job/roguetown/mercenary/desert_rider
 	title = "Desert Rider Mercenary"
 	flag = DESERT_RIDER
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen", 
 		"Half-Elf", 
