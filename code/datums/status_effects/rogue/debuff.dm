@@ -79,7 +79,7 @@
 	duration = 1
 
 /datum/status_effect/debuff/uncookedfood/on_apply()
-	if(iscarbon(owner))
+	if(iscarbon(owner) && !HAS_TRAIT(owner, RTRAIT_NASTY_EATER))
 		var/mob/living/carbon/C = owner
 		C.add_nausea(100)
 	return ..()
@@ -100,7 +100,7 @@
 
 /datum/status_effect/debuff/burnedfood/on_apply()
 	owner.add_stress(/datum/stressevent/burntmeal)
-	if(iscarbon(owner))
+	if(iscarbon(owner) && !HAS_TRAIT(owner, RTRAIT_NASTY_EATER))
 		var/mob/living/carbon/C = owner
 		C.add_nausea(100)
 	return ..()
@@ -112,7 +112,7 @@
 
 /datum/status_effect/debuff/rotfood/on_apply()
 	owner.add_stress(/datum/stressevent/rotfood)
-	if(iscarbon(owner))
+	if(iscarbon(owner) && !HAS_TRAIT(owner, RTRAIT_NASTY_EATER))
 		var/mob/living/carbon/C = owner
 		C.add_nausea(200)
 	return ..()
