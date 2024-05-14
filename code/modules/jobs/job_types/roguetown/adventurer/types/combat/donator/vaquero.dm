@@ -41,7 +41,7 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/vest
 	cloak = /obj/item/clothing/cloak/half/red
 	if(prob(33))
-			cloak = /obj/item/clothing/cloak/half/black
+			cloak = /obj/item/clothing/cloak/half
 	if(prob(33))
 			cloak = /obj/item/clothing/cloak/half/orange
 	backl = /obj/item/storage/backpack/rogue/satchel
