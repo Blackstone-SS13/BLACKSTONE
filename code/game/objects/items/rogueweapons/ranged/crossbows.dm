@@ -108,8 +108,6 @@
 		spread = 0
 	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
 		var/obj/projectile/BB = CB.BB
-		if(user.STAPER > 10)
-			BB.damage = BB.damage * (user.STAPER / 10)
 	cocked = FALSE
 	..()
 
