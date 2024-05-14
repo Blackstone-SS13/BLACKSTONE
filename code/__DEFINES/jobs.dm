@@ -100,9 +100,10 @@
 #define STEWARD		(1<<2)
 #define KNIGHT		(1<<3)
 #define WIZARD		(1<<4)
-#define SHERIFF		(1<<5)
-#define BAILIFF		(1<<6)
-#define COUNCILLOR	(1<<7)
+#define PHYSICIAN	(1<<5)
+#define SHERIFF		(1<<6)
+#define BAILIFF		(1<<7)
+#define COUNCILLOR	(1<<8)
 
 #define GARRISON		(1<<1)
 
@@ -117,6 +118,7 @@
 #define CLERIC		(1<<1)
 #define PURITAN		(1<<2)
 #define MONK		(1<<3)
+#define GRAVEDIGGER	(1<<4)
 
 #define SERFS			(1<<3)
 
@@ -134,15 +136,14 @@
 #define HUNTER		(1<<0)
 #define FARMER		(1<<1)
 #define BEASTMASTER	(1<<2)
-#define FISHER		(1<<4)
-#define LUMBERJACK	(1<<5)
-#define GRAVEDIGGER	(1<<6)
-#define MINER		(1<<7)
-#define BUTLER		(1<<8)
-#define JESTER		(1<<8)
-#define ADVENTURER	(1<<9)
-#define COOK		(1<<10)
-#define GRABBER		(1<<11)
+#define FISHER		(1<<3)
+#define LUMBERJACK	(1<<4)
+#define MINER		(1<<5)
+#define BUTLER		(1<<6)
+#define JESTER		(1<<7)
+#define ADVENTURER	(1<<8)
+#define COOK		(1<<9)
+#define GRABBER		(1<<10)
 
 #define YOUNGFOLK		(1<<5)
 
@@ -177,6 +178,7 @@
 #define JDO_CLERK 3.1
 
 #define JDO_MAGICIAN 5
+#define JDO_PHYSICIAN 5.1
 #define JDO_WAPP 6
 #define JDO_BAILIFF 7
 #define JDO_COUNCILLOR 7.1
