@@ -7,7 +7,12 @@
 	job_rank = ROLE_MANIAC
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "villain"
-	confess_lines = list("I gave the lady no time to squeal.", "I am down on whores.", "I shant quit ripping them.")
+	confess_lines = list(
+		"I gave them no time to squeal.",
+		"I shant quit ripping them.",
+		"They deserve to be put at my blade.",
+		"Do what thou wilt shall be the whole of the law.",
+	)
 	/// Traits we apply to the owner
 	var/static/list/applied_traits = list(
 		RTRAIT_CRITICAL_RESISTANCE,

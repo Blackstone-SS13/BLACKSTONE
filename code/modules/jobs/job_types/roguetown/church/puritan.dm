@@ -6,11 +6,12 @@
 	total_positions = 0
 	spawn_positions = 0
 
+	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Aasimar"
 	)
-	allowed_sexes = list(MALE)
+	allowed_patrons = list(/datum/patron/old_god)
 
 	tutorial = "As a Witch Hunter, the Queen has emboldened your sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
 	whitelist_req = TRUE
@@ -19,6 +20,7 @@
 	display_order = JDO_PURITAN
 	give_bank_account = 36
 	min_pq = 0
+	max_pq = null
 
 /datum/job/roguetown/puritan/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -116,18 +118,24 @@
 
 /mob/living/carbon/human/proc/confess_sins(resist)
 	if(!resist)
-		var/datum/mind/M = mind
-		if(M)
-			for(var/datum/antagonist/A in M.antag_datums)
-				if(A.confess_lines)
-					say(pick(A.confess_lines), spans = list("torture"))
-					return
-	say(pick("I DON'T KNOW!",
-			"STOP THE PAIN!!",
-			"I DON'T DESERVE THIS!",
-			"THE PAIN!",
-			"I HAVE NOTHING TO SAY...!",
-			"WHY ME?!"), spans = list("torture"))
+		var/list/confessions = list()
+		for(var/datum/antagonist/antag in mind?.antag_datums)
+			if(length(antag.confess_lines))
+				confessions += antag.confess_lines
+		if(length(patron.confess_lines))
+			confessions += patron.confess_lines
+		if(length(confessions))
+			say(pick(confessions), spans = list("torture"))
+			return
+	var/static/list/innocent_lines = list(
+		"I DON'T KNOW!",
+		"STOP THE PAIN!!",
+		"I DON'T DESERVE THIS!",
+		"THE PAIN!",
+		"I HAVE NOTHING TO SAY...!",
+		"WHY ME?!",
+	)
+	say(pick(innocent_lines), spans = list("torture"))
 
 /mob/living/carbon/human/proc/faith_test()
 	set name = "FaithTest"

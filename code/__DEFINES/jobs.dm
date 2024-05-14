@@ -144,6 +144,7 @@
 #define ADVENTURER	(1<<9)
 #define COOK		(1<<10)
 #define GRABBER		(1<<11)
+#define LUNATIC		(1<<12)
 
 #define YOUNGFOLK		(1<<5)
 
@@ -227,6 +228,7 @@
 #define JDO_NIGHTMAIDEN 28.2
 
 #define JDO_JESTER 29
+#define JDO_LUNATIC 29.1
 #define JDO_PRISONER 30
 
 #define JDO_CHIEF 31

@@ -15,6 +15,9 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/mage
 	category_flags = RT_TYPE_COMBAT_CLASS
 
+/datum/outfit/job/roguetown/adventurer/mage
+	allowed_patrons = list(/datum/patron/divine/noc)
+
 /datum/outfit/job/roguetown/adventurer/mage/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/roguehood/mage

@@ -24,6 +24,7 @@
 	display_order = JDO_VILLAGER
 	give_bank_account = TRUE
 	min_pq = -15
+	max_pq = null
 	wanderer_examine = FALSE
 	advjob_examine = TRUE
 

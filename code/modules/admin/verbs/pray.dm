@@ -26,7 +26,7 @@
 	var/deity
 	if(ishuman(src))
 		var/mob/living/carbon/human/human_user = src
-		deity = human_user.PATRON.name
+		deity = human_user.patron.name
 	if(usr.job == "Chaplain")
 		cross.icon_state = "kingyellow"
 		font_color = "blue"
@@ -104,9 +104,10 @@
 	log_prayer("[src.key]/([src.name]): [msg]")
 
 	var/deity = " to Psydon"
-	if(ishuman(src))
-		var/mob/living/carbon/human/human_user = src
-		deity = " to [human_user.PATRON.name]"
+	if(isliving(src))
+		var/mob/living/living_user = src
+		if(living_user.patron)
+			deity = " to [living_user.patron.name]"
 
 	var/datum/antagonist/maniac/maniac = mind?.has_antag_datum(/datum/antagonist/maniac)
 	if(maniac)
@@ -114,7 +115,8 @@
 			deity = " to THE GODHEAD"
 			INVOKE_ASYNC(maniac, TYPE_PROC_REF(/datum/antagonist/maniac, wake_up))
 		else
-			deity = " to Zizo"
+			var/datum/patron/zizo = GLOB.patronlist[/datum/patron/inhumen/zizo]
+			deity = " to [zizo.name]"
 	
 	var/display_name = "[real_name]"
 	if(!real_name)

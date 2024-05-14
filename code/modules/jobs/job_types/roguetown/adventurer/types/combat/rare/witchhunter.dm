@@ -12,6 +12,9 @@
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 	category_flags = RT_TYPE_COMBAT_CLASS
 
+/datum/outfit/job/roguetown/adventurer/puritan
+	allowed_patrons = list(/datum/patron/old_god)
+
 /datum/outfit/job/roguetown/adventurer/puritan/pre_equip(mob/living/carbon/human/H)
 	..()
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/puritan
