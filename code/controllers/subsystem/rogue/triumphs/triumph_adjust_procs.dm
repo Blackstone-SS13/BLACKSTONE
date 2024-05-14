@@ -7,6 +7,8 @@
 		return
 	var/ckeey = ckey(key)
 	SStriumphs.triumph_adjust(amt, ckeey)
+	SStriumphs.adjust_leaderboard(key)
+
 	if(amt > 0)
 		if(counted)
 			SSticker.tri_gained += amt
@@ -29,6 +31,7 @@
 		return
 
 	SStriumphs.triumph_adjust(amt, ckey)
+	SStriumphs.adjust_leaderboard(key)
 
 	if(amt > 0)
 		if(counted)
@@ -47,6 +50,8 @@
 		return
 	else
 		SStriumphs.triumph_adjust(amt, ckey)
+		SStriumphs.adjust_leaderboard(key)
+
 	if(amt > 0)
 		if(counted)
 			SSticker.tri_gained += amt

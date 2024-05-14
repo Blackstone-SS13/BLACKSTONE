@@ -2,6 +2,7 @@
 	TO BE UNTICKED IF THESE PEOPLE EVER ACTUALLY MAKE PLAYABLE GOBLINS ELSEWHERE
 	5/11/2024
 */
+/*
 /datum/triumph_buy/goblin_class
 	triumph_buy_id = "Goblins"
 	desc = "A sixpack of goblins for one person. WARNING: MAY BE BUGGY"
@@ -54,3 +55,4 @@
 	var/mob/living/carbon/human/species/goblin/target_goblin = new(H.loc)
 	H.mind.transfer_to(target_goblin)
 	qdel(H)
+*/

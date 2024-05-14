@@ -85,7 +85,7 @@ SUBSYSTEM_DEF(triumphs)
 /datum/controller/subsystem/triumphs/Initialize()
 	. = ..()
 
-
+	prep_the_triumphs_leaderboard()
 
 
 	for(var/cur_path in subtypesof(/datum/triumph_buy))
@@ -230,27 +230,12 @@ SUBSYSTEM_DEF(triumphs)
 		var/cur_client_triumph_count = not_new_guy["triumph_count"]
 		triumph_amount_cache[target_ckey] = cur_client_triumph_count
 
-		if(cur_client_triumph_count > 5) // You aren't tracked at all unless you got 5, no iterating a bunch of losers repeatedly
-			if(triumph_leaderboard_positions_tracked > triumph_leaderboard.len)
-				triumph_leaderboard += list("key" = C.key, "triumph_count" = cur_client_triumph_count)
-				return // Just end here
-
-			// Well this is a convenient place to do it cause I got a client for a key to make it purty
-			if(cur_client_triumph_count >= triumph_leaderboard[triumph_leaderboard.len]["triumph_count"]) // Our guys greater than or equal to last place
-				triumph_leaderboard.Cut(triumph_leaderboard.len) // Remove the last position
-				triumph_leaderboard += list("key" = C.key, "triumph_count" = cur_client_triumph_count) // Add our guy to the end
-				for(var/i = triumph_leaderboard.len, i > 0, i--) // Iterate in inverse
-					if(cur_client_triumph_count > triumph_leaderboard[i]["triumph_count"]) // begin pushin dis guy up
-						triumph_leaderboard.Swap(i, i-1)
-						continue
-
-					break // Just break
 
 /*
 	We save everything when its time for reboot
 */
 /datum/controller/subsystem/triumphs/proc/reboot_saving_time()
-	to_chat(world, "<span class='boldannounce'> Recording triumphs to the WORLD END MACHINE. </span>")
+	to_chat(world, "<span class='boldannounce'> Recording VICTORIES to the WORLD END MACHINE. </span>")
 	for(var/target_ckey in triumph_amount_cache) 
 		var/list/saving_data = list()
 		// this will be for example "data/player_saves/a/ass/triumphs.json" if their ckey was ass
@@ -264,7 +249,7 @@ SUBSYSTEM_DEF(triumphs)
 		WRITE_FILE(target_file, json_encode(saving_data))
 
 	// handle the leaderboard here too i guess
-	var/leaderboard_file = file("data/triumphs_leaderboard.json")
+	var/leaderboard_file = file("data/triumph_leaderboards/triumphs_leaderboard_season_[GLOB.triumph_wipe_season].json")
 	if(fexists(leaderboard_file))
 		fdel(leaderboard_file)
 	WRITE_FILE(leaderboard_file, json_encode(triumph_leaderboard))
@@ -277,6 +262,47 @@ SUBSYSTEM_DEF(triumphs)
 		triumph_amount_cache[ckey] += amt
 	else
 		triumph_amount_cache[ckey] = 0
+
+
+// Adjust leaderboard
+// I want a key here so it looks pretty
+/datum/controller/subsystem/triumphs/proc/adjust_leaderboard(CLIENT_KEY_not_CKEY)
+	var/user_key = CLIENT_KEY_not_CKEY
+	var/triumph_total = triumph_amount_cache[ckey(CLIENT_KEY_not_CKEY)]
+
+	if(5 > triumph_total) // You aren't tracked at all unless you got 5, no iterating a bunch of losers repeatedly
+		return
+
+	// You automatically get added in if we haven't filled in all the crap
+	if(triumph_leaderboard_positions_tracked > triumph_leaderboard.len)
+		triumph_leaderboard[user_key] = triumph_total
+
+	// Guy in last place is still greater than this guy
+	if(triumph_leaderboard[triumph_leaderboard[triumph_leaderboard.len]] > triumph_total) 
+		return
+
+	triumph_leaderboard.Cut(triumph_leaderboard.len) // Cut the end
+	triumph_leaderboard[user_key] = triumph_total // Add our guy to the end
+
+	sort_leaderboard() // Now sort it, sort it NOW!
+
+/datum/controller/subsystem/triumphs/proc/sort_leaderboard()
+	if(triumph_leaderboard.len > 1) // If we got more than one guy in here time to sort lol
+		var/list/sorted_list = list()
+		for(var/cache_key in triumph_leaderboard)
+			if(!sorted_list.len)
+				sorted_list[cache_key] = triumph_leaderboard[cache_key]
+
+			for(var/sorted_key in sorted_list)
+				if(sorted_list[sorted_key] < triumph_leaderboard[cache_key])
+					sorted_list.Insert(sorted_list.Find(sorted_key), cache_key)
+					sorted_list[cache_key] = triumph_leaderboard[cache_key]
+					break
+
+			if(sorted_list.Find(cache_key))
+				continue
+
+		triumph_leaderboard = sorted_list
 
 // Wipe the triumphs of one person
 /datum/controller/subsystem/triumphs/proc/wipe_target_triumphs(target_ckey)
@@ -299,6 +325,10 @@ SUBSYSTEM_DEF(triumphs)
 	fdel(target_file)
 	WRITE_FILE(target_file, json_encode(wipe_season))
 
+	// Wipe the leaderboard list, time for a fresh season.
+	// But leave the old leaderboard file in, we mite do somethin w it later
+	triumph_leaderboard = list() 
+
 // Return a value of the triumphs they got
 /datum/controller/subsystem/triumphs/proc/get_triumphs(target_ckey)
 	if(!(target_ckey in triumph_amount_cache))
@@ -311,18 +341,19 @@ SUBSYSTEM_DEF(triumphs)
 	TRIUMPH LEADERBOARD STUFF
 */
 // Display leaderboard browser popup
-/datum/controller/subsystem/triumphs/proc/triumph_leaderboard(client/C)
-	prep_the_triumphs_leaderboard()
+/datum/controller/subsystem/triumphs/proc/show_triumph_leaderboard(client/C)
 
 	var/webpagu = "<B>CHAMPIONS OF PSYDONIA</B><br>"
-
+	webpagu += "Current Season: [GLOB.triumph_wipe_season]"
 	webpagu += "<hr><br>"
 
 	if(triumph_leaderboard.len)
 		var/position_number = 0
-		for(var/list in triumph_leaderboard)
+		for(var/key in triumph_leaderboard)
 			position_number++
-			webpagu += "[position_number]. [list["key"]] - [list["triumph_count"]]<br>"
+			webpagu += "[position_number]. [key] - [triumph_leaderboard[key]]<br>"
+			if(position_number >= triumph_leaderboard_positions_tracked)
+				break
 	else
 		webpagu += "The hall of triumphs is quite empty, Yes?"
 
@@ -331,9 +362,10 @@ SUBSYSTEM_DEF(triumphs)
 // Idk I didn't touch this one a ton
 // Just sorts by numbers
 /datum/controller/subsystem/triumphs/proc/prep_the_triumphs_leaderboard()
-	var/json_file = file("data/triumphs_leaderboard.json")
-	if(!fexists(json_file)) 
-		return // If theres no file just return, we got a empty list up there neways
+	var/json_file = file("data/triumph_leaderboards/triumphs_leaderboard_season_[GLOB.triumph_wipe_season].json")
+	if(!fexists(json_file)) // If theres no file then fuck you!
+		return // we got a empty list up there neways
 
 	triumph_leaderboard = json_decode(file2text(json_file))
 
+	sort_leaderboard() 
