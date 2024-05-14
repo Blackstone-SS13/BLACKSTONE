@@ -201,3 +201,23 @@ SUBSYSTEM_DEF(treasury)
 /datum/controller/subsystem/treasury/proc/log_to_steward(log)
 	log_entries += log
 	return
+
+///Calculates and deducts taxes from bank accounts, adding the amount to the treasury
+/datum/controller/subsystem/treasury/proc/tax_accounts()
+	var/total_taxed = 0
+	for(var/account in bank_accounts)
+		if(bank_accounts[account] > 0)
+			var/to_be_taxed = TRUE
+
+			//Exclude nobility from taxes. UGLY CODE
+			for(var/mob/living/character in GLOB.player_list)
+				if(character == account && character.job in GLOB.noble_positions)
+					to_be_taxed = FALSE
+					break
+
+			if(to_be_taxed)
+				var/taxed_amount = round(bank_accounts[account] * tax_value)
+				bank_accounts[account] -= taxed_amount
+				SStreasury.treasury_value += taxed_amount
+				total_taxed += taxed_amount
+	log_to_steward("+[total_taxed] taxed from the populace")
