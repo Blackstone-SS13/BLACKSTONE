@@ -112,7 +112,7 @@
 	name = "Grain"
 	desc = "Spelt grain."
 	item_type = /obj/item/reagent_containers/food/snacks/grown/wheat
-	held_items = list(0, 0)
+	held_items = list(0, 4)
 	payout_price = 2
 	withdraw_price = 3
 	transport_fee = 1
@@ -178,7 +178,7 @@
 	name = "Cheese"
 	desc = "The product of milk and salt."
 	item_type = /obj/item/reagent_containers/food/snacks/rogue/cheese
-	held_items = list(0, 4)
+	held_items = list(0, 0)
 	payout_price = 3
 	withdraw_price = 5
 	transport_fee = 3
