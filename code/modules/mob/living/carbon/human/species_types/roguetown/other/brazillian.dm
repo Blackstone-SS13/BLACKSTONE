@@ -11,7 +11,7 @@
 	skin_tone_wording = "Bog"
 
 	species_traits = list(EYECOLOR,LIPS)
-	inherent_traits = list(TRAIT_NOMOBSWAP,RTRAIT_RETARD_ANATOMY,RTRAIT_NASTY_EATER)
+	inherent_traits = list(TRAIT_NOMOBSWAP,RTRAIT_RETARD_ANATOMY,RTRAIT_NASTY_EATER,RTRAIT_RAPID_REGENERATION)
 	use_skintones = TRUE
 	disliked_food = NONE
 	liked_food = NONE
@@ -52,10 +52,12 @@
 	..()
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
+	C.add_quirk(/datum/quirk/rapidregen)
 
 /datum/species/lizard/brazil/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
+	C.remove_quirk(/datum/quirk/rapidregen)
 
 /datum/species/lizard/brazil/qualifies_for_rank(rank, list/features)
 	return TRUE
