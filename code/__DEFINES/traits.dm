@@ -19,6 +19,7 @@
 #define RTRAIT_NUDIST					"Nudist" //you can't wear most clothes
 #define RTRAIT_RETARD_ANATOMY			"Inhumen Anatomy" //can't wear hats and shoes
 #define RTRAIT_NASTY_EATER 				"Inhumen Digestion" //can drink murky water and eat organs
+#define RTRAIT_RAPID_REGENERATION		"Rapid Regeneration"
 
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
 #define TRAIT_NOSLEEP				"Fatal Insomnia"
@@ -58,6 +59,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "<span class='warning'>I can't sleep.</span>",
+	RTRAIT_RAPID_REGENERATION = "I can slowly heal my wounds at the cost of extreme nutritional-intake requirements.",
 ))
 
 
