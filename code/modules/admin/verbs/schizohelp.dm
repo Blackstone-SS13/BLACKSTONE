@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY_TYPED(schizohelps, /datum/schizohelp)
 	var/datum/schizohelp/ticket = new(src)
 	var/display_name = get_schizo_name()
 	var/message = "<span class='info'><i>[display_name] meditates...</i>\n[msg]</span>"
-	var/message_admins = "<span class='info'><i>[display_name] ([real_name || src.name]) [ADMIN_FLW(src)] [ADMIN_SM(src)] meditates...</i>\n[msg]</span>"
+	var/message_admins = "<span class='info'><i>[display_name] ([key || "NO KEY"]) [ADMIN_FLW(src)] [ADMIN_SM(src)] meditates...</i>\n[msg]</span>"
 	for(var/client/voice in (GLOB.clients - client))
 		if(!(client.prefs.toggles & SCHIZO_VOICE) || check_rights_for(voice, R_ADMIN))
 			continue
