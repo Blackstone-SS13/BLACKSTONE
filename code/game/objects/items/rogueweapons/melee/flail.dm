@@ -142,7 +142,7 @@
 	force = 23
 	name = "Repenta En"
 	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle"
-	minstr = 11
+	minstr = 7
 	icon_state = "gwhip"
 
 
