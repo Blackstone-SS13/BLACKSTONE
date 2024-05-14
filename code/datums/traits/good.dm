@@ -82,7 +82,7 @@
 			C.get_bodypart(BODY_ZONE_R_LEG).heal_wounds(5, null, BODYPART_ORGANIC)			
 			C.update_damage_overlays()
 		if (345 to 349)
-			to_chat(C, "I am wasting away. I desperately need to eat something or someone!")
+			to_chat(C, "I am wasting away! I desperately need to eat something or someone!")
 			C.adjust_nutrition(-2, TRUE)
 		if (250 to 344)
 			C.adjust_nutrition(-2, TRUE)
