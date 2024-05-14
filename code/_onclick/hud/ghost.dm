@@ -55,7 +55,7 @@
 						O.livingname = G.name
 						O.ckey = G.ckey
 						SSdroning.area_entered(get_area(O), O.client)
-					verbs.Remove(GLOB.ghost_verbs)
+					G.client.verbs -= GLOB.ghost_verbs
 
 				return
 
@@ -70,7 +70,7 @@
 				O.livingname = G.name
 				O.ckey = G.ckey
 				SSdroning.area_entered(get_area(O), O.client)
-			verbs.Remove(GLOB.ghost_verbs)
+			G.client.verbs -= GLOB.ghost_verbs
 /*		if(world.time < G.ghostize_time + RESPAWNTIME)
 			var/ttime = round((G.ghostize_time + RESPAWNTIME - world.time) / 10)
 			var/list/thingsz = list("My connection to the world is still too strong.",\
