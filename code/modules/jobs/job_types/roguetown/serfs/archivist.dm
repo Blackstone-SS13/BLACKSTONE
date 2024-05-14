@@ -37,7 +37,7 @@
 	wrists = /obj/item/clothing/wrists/roguetown/nocwrappings
 	neck = /obj/item/clothing/neck/roguetown/psicross/noc
 	mask = /obj/item/clothing/mask/rogue/spectacles
-	head = /obj/item/clothing/head/roguetown/roguehood/nochood
+	head = head = /obj/item/clothing/head/roguetown/nightman
 
 
 	if(H.mind)
