@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_sexes = list(MALE, FEMALE)
+	allowed_sexes = list(MALE, FEMALE) //same as town guard
 	allowed_races = list(
 		"Humen",
 		"Elf",
