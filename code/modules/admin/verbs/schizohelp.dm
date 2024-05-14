@@ -1,4 +1,4 @@
-GLOBAL_LIST_EMPTY(schizohelps)
+GLOBAL_LIST_EMPTY_TYPED(schizohelps, /datum/schizohelp)
 
 /mob
 	COOLDOWN_DECLARE(schizohelp_cooldown)
@@ -10,11 +10,11 @@ GLOBAL_LIST_EMPTY(schizohelps)
 	if(!msg)
 		return
 
-	to_chat(src, "<span class='info'>You meditate...\n<i>[msg]</i></span>")
+	to_chat(src, "<span class='info'><i>You meditate...</i>\n[msg]</span>")
 	var/datum/schizohelp/ticket = new(src)
 	var/display_name = get_schizo_name()
-	var/message = "<span class='info'>[display_name] meditates...\n<i>[msg]</i></span>"
-	var/message_admins = "<span class='info'>[display_name] ([real_name || src.name]) [ADMIN_FLW(src)] [ADMIN_SM(src)] meditates...\n<i>[msg]</i></span>"
+	var/message = "<span class='info'><i>[display_name] meditates...</i>\n[msg]</span>"
+	var/message_admins = "<span class='info'><i>[display_name] ([real_name || src.name]) [ADMIN_FLW(src)] [ADMIN_SM(src)] meditates...</i>\n[msg]</span>"
 	for(var/client/voice in (GLOB.clients - client))
 		if(!(client.prefs.toggles & SCHIZO_VOICE) || check_rights_for(voice, R_ADMIN))
 			continue
@@ -34,6 +34,9 @@ GLOBAL_LIST_EMPTY(schizohelps)
 		"Doubtful",
 		"Confused",
 		"Hysteric",
+		"Unstable",
+		"Unsure",
+		"Unsettled",
 	)
 	var/static/list/possible_nouns = list(
 		"Fool",
@@ -41,6 +44,7 @@ GLOBAL_LIST_EMPTY(schizohelps)
 		"Nimrod",
 		"Lunatic",
 		"Imbecile",
+		"Simpleton",
 	)
 	/// generate a consistent but anonymous name
 	var/static/fumbling_seed = text2num(GLOB.rogue_round_id)
@@ -53,6 +57,12 @@ GLOBAL_LIST_EMPTY(schizohelps)
 	if(QDELETED(schizo))
 		to_chat(src, "<span class='warning'>This meditation can no longer be answered...</span>")
 		return
+	if(schizo.owner == src.mob)
+		to_chat(src, "<span class='warning'>I can't answer my own meditation!</span>")
+		return
+	if(schizo.answers[src.key])
+		to_chat(src, "<span class='warning'>I have already answered this meditation!</span>")
+		return
 	var/answer = input("Answer their meditations...", "VOICE")
 	if(!answer || QDELETED(schizo))
 		return
@@ -61,10 +71,12 @@ GLOBAL_LIST_EMPTY(schizohelps)
 /datum/schizohelp
 	/// Guy who made this schizohelp "ticket"
 	var/mob/owner
-	/// How many answers we got so far
-	var/answers = 0
+	/// Answers we got so far, indexed by client key
+	var/list/answers = list()
 	/// How many answers we can get at maximum
 	var/max_answers = 3
+	/// How much time we have to be answered
+	var/timeout = 5 MINUTES
 
 /datum/schizohelp/New(mob/owner)
 	. = ..()
@@ -72,25 +84,29 @@ GLOBAL_LIST_EMPTY(schizohelps)
 		src.owner = owner
 		RegisterSignal(owner, COMSIG_PARENT_QDELETING, PROC_REF(owner_qdeleted))
 	GLOB.schizohelps += src
-
+	if(timeout)
+		QDEL_IN(src, timeout)
+	
 /datum/schizohelp/Destroy(force)
 	. = ..()
 	owner = null
+	answers = null
 	GLOB.schizohelps -= src
 
 /datum/schizohelp/proc/answer_schizo(answer, mob/voice)
-	if(QDELETED(src))
+	if(QDELETED(src) || !voice.client)
 		return
-	to_chat(owner, "<i>I hear a voice in my head... <b>[answer]</i></b>")
+	to_chat(owner, "<i>I hear a voice in my head...\n<b>[answer]</i></b>")
 	for(var/client/admin in GLOB.admins)
 		if(!(admin.prefs.chat_toggles & CHAT_PRAYER))
 			continue
-		to_chat(admin, "<span class='info'>[voice] ([voice.key || "NO KEY"]) [ADMIN_FLW(owner)] [ADMIN_SM(owner)] answered [owner] ([owner.key || "NO KEY"])'s [ADMIN_FLW(owner)] [ADMIN_SM(owner)] meditation: [answer]</span>")
-	answers++
+		to_chat(admin, "<span class='info'>[voice] ([voice.key || "NO KEY"]) [ADMIN_FLW(owner)] [ADMIN_SM(owner)] answered [owner] ([owner.key || "NO KEY"])'s [ADMIN_FLW(owner)] [ADMIN_SM(owner)] meditation:\n[answer]</span>")
+	answers[voice.key] = answer
 	if(answers >= max_answers)
 		qdel(src)
 
 /datum/schizohelp/proc/owner_qdeleted(mob/source)
 	if(QDELETED(src))
 		return
+	UnregisterSignal(owner, COMSIG_PARENT_QDELETING)
 	qdel(src)
