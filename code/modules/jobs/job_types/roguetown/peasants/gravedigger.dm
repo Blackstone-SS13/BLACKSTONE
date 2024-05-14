@@ -12,7 +12,12 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Aasimar"
+		"Aasimar"		
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc"
 	)
 	tutorial = "The dead should stay dead, and they will under your watch. A life of devotion is rarely one of riches, but you turn a coin by plying your trade to the fallen. Your job isnt considered highly, but without you, who else will maintain the sanctity of death?"
 
