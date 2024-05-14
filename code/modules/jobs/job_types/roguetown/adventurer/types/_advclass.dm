@@ -64,13 +64,13 @@
 	On the datum! Wow!
 */
 /datum/advclass/proc/check_requirements(mob/living/carbon/human/H)
-	if(!(H.gender in allowed_sexes))
+	if(length(allowed_sexes) && !(H.gender in allowed_sexes))
 		return FALSE
 
-	if(!(H.dna.species.name in allowed_races))
+	if(length(allowed_races) && !(H.dna.species.name in allowed_races))
 		return FALSE
 
-	if(!(H.age in allowed_ages))
+	if(length(allowed_ages) && !(H.age in allowed_ages))
 		return FALSE
 
 	if(maximum_possible_slots > -1)

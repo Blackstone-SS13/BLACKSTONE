@@ -264,46 +264,6 @@ SUBSYSTEM_DEF(triumphs)
 		triumph_amount_cache[ckey] = 0
 
 
-// Adjust leaderboard
-// I want a key here so it looks pretty
-/datum/controller/subsystem/triumphs/proc/adjust_leaderboard(CLIENT_KEY_not_CKEY)
-	var/user_key = CLIENT_KEY_not_CKEY
-	var/triumph_total = triumph_amount_cache[ckey(CLIENT_KEY_not_CKEY)]
-
-	if(5 > triumph_total) // You aren't tracked at all unless you got 5, no iterating a bunch of losers repeatedly
-		return
-
-	// You automatically get added in if we haven't filled in all the crap
-	if(triumph_leaderboard_positions_tracked > triumph_leaderboard.len)
-		triumph_leaderboard[user_key] = triumph_total
-
-	// Guy in last place is still greater than this guy
-	if(triumph_leaderboard[triumph_leaderboard[triumph_leaderboard.len]] > triumph_total) 
-		return
-
-	triumph_leaderboard.Cut(triumph_leaderboard.len) // Cut the end
-	triumph_leaderboard[user_key] = triumph_total // Add our guy to the end
-
-	sort_leaderboard() // Now sort it, sort it NOW!
-
-/datum/controller/subsystem/triumphs/proc/sort_leaderboard()
-	if(triumph_leaderboard.len > 1) // If we got more than one guy in here time to sort lol
-		var/list/sorted_list = list()
-		for(var/cache_key in triumph_leaderboard)
-			if(!sorted_list.len)
-				sorted_list[cache_key] = triumph_leaderboard[cache_key]
-
-			for(var/sorted_key in sorted_list)
-				if(sorted_list[sorted_key] < triumph_leaderboard[cache_key])
-					sorted_list.Insert(sorted_list.Find(sorted_key), cache_key)
-					sorted_list[cache_key] = triumph_leaderboard[cache_key]
-					break
-
-			if(sorted_list.Find(cache_key))
-				continue
-
-		triumph_leaderboard = sorted_list
-
 // Wipe the triumphs of one person
 /datum/controller/subsystem/triumphs/proc/wipe_target_triumphs(target_ckey)
 	if(target_ckey)
@@ -359,8 +319,7 @@ SUBSYSTEM_DEF(triumphs)
 
 	C << browse(webpagu, "window=triumph_leaderboard;size=300x500")
 
-// Idk I didn't touch this one a ton
-// Just sorts by numbers
+// PREP THE BOARD
 /datum/controller/subsystem/triumphs/proc/prep_the_triumphs_leaderboard()
 	var/json_file = file("data/triumph_leaderboards/triumphs_leaderboard_season_[GLOB.triumph_wipe_season].json")
 	if(!fexists(json_file)) // If theres no file then fuck you!
@@ -369,3 +328,44 @@ SUBSYSTEM_DEF(triumphs)
 	triumph_leaderboard = json_decode(file2text(json_file))
 
 	sort_leaderboard() 
+
+// Adjust leaderboard
+// I want a key here so it looks pretty
+/datum/controller/subsystem/triumphs/proc/adjust_leaderboard(CLIENT_KEY_not_CKEY)
+	var/user_key = CLIENT_KEY_not_CKEY
+	var/triumph_total = triumph_amount_cache[ckey(CLIENT_KEY_not_CKEY)]
+
+	if(5 > triumph_total) // You aren't tracked at all unless you got 5, no iterating a bunch of losers repeatedly
+		return
+
+	// You automatically get added in if we haven't filled in all the crap
+	if(triumph_leaderboard_positions_tracked > triumph_leaderboard.len)
+		triumph_leaderboard[user_key] = triumph_total
+
+	// Guy in last place is still greater than this guy
+	if(triumph_leaderboard[triumph_leaderboard[triumph_leaderboard.len]] > triumph_total) 
+		return
+
+	triumph_leaderboard.Cut(triumph_leaderboard.len) // Cut the end
+	triumph_leaderboard[user_key] = triumph_total // Add our guy to the end
+
+	sort_leaderboard() // Now sort it, sort it NOW!
+
+// Sort what we got
+/datum/controller/subsystem/triumphs/proc/sort_leaderboard()
+	if(triumph_leaderboard.len > 1) // If we got more than one guy in here time to sort lol
+		var/list/sorted_list = list()
+		for(var/cache_key in triumph_leaderboard)
+			if(!sorted_list.len)
+				sorted_list[cache_key] = triumph_leaderboard[cache_key]
+
+			for(var/sorted_key in sorted_list)
+				if(sorted_list[sorted_key] < triumph_leaderboard[cache_key])
+					sorted_list.Insert(sorted_list.Find(sorted_key), cache_key)
+					sorted_list[cache_key] = triumph_leaderboard[cache_key]
+					break
+
+			if(sorted_list.Find(cache_key))
+				continue
+
+		triumph_leaderboard = sorted_list
