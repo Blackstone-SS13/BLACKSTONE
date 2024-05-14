@@ -135,32 +135,26 @@
 	detail_tag = "_psy"
 
 /obj/item/clothing/cloak/tabard/crusader/tief
-	detail_tag = "_psy"
 	color = CLOTHING_RED
 	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/cloak/tabard/crusader/astrata
-	detail_tag = "_psy"
 	color = CLOTHING_YELLOW
 	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/cloak/tabard/crusader/dendor
-	detail_tag = "_psy"
 	color = CLOTHING_BROWN
 	detail_color = CLOTHING_BLACK
 
 /obj/item/clothing/cloak/tabard/crusader/necra
-	detail_tag = "_psy"
 	color = CLOTHING_BLACK
 	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/cloak/tabard/crusader/pestra
-	detail_tag = "_psy"
 	color = CLOTHING_GREEN
 	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/cloak/tabard/crusader/noc
-	detail_tag = "_psy"
 	color = CLOTHING_PURPLE
 	detail_color = CLOTHING_BLACK
 
