@@ -104,7 +104,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, lowertext(config.ic_filter_regex.match))
 		return
 	
-	var/static/regex/ooc_regex = regex(@"\((.*?)\)")
+	var/static/regex/ooc_regex = regex(@"^(?:[\(\[\{].*|.*[\)\]\}])$")
 	if(findtext(message, ooc_regex))
 		emote("me", 1, "mumbles incoherently.")
 		to_chat(src, "<span class='warning'>That was stupid of me. I should meditate on my actions.</span>")

@@ -105,7 +105,7 @@
 	else 
 		to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
 
-/datum/emote/living/pray
+/datum/emote/living/meditate
 	key = "meditate"
 	key_third_person = "meditate"
 	message = "meditates."
@@ -118,8 +118,11 @@
 
 	emote("meditate", intentional = TRUE)
 
-/datum/emote/living/pray/run_emote(mob/user, params, type_override, intentional)
+/datum/emote/living/meditate/run_emote(mob/user, params, type_override, intentional)
 	if(isliving(user))
+		if(!COOLDOWN_FINISHED(user, schizohelp_cooldown))
+			to_chat(user, "<span class='warning'>I need to wait before meditating again.</span>")
+			return
 		var/msg = input("Say your meditation:", "Voices in your head") as text|null
 		if(msg)
 			user.schizohelp(msg)

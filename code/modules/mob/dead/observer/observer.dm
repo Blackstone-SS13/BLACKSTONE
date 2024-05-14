@@ -386,7 +386,7 @@ Works together with spawning an observer, noted above.
 //			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.musicvol, channel = CHANNEL_MUSIC)
 //			play_priomusic(S)
 		var/mob/dead/observer/ghost	// Transfer safety to observer spawning proc.
-		if(admin && check_rights(R_WATCH, FALSE))
+		if(admin && check_rights(R_WATCH, show_msg = FALSE))
 			ghost = new /mob/dead/observer/admin(src)
 		else if(drawskip)
 			ghost = new /mob/dead/observer/rogue/nodraw(src)
@@ -561,7 +561,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "Ghost"
 	set name = "Do Not Resuscitate"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	if(!client)
 		return
@@ -604,7 +604,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Teleport"
 	set desc= "Teleport to a location"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	if(!isobserver(usr))
 		to_chat(usr, "<span class='warning'>Not when you're not dead!</span>")
@@ -637,7 +637,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set hidden = 1
 	var/list/mobs
 	if(client.holder)
-		if(check_rights(R_WATCH,0))
+		if(check_rights(R_WATCH, FALSE))
 			mobs = getpois(mobs_only=1,skip_mindless=1)
 		else
 			mobs = gethaunt()
@@ -762,7 +762,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Jump to Mob"
 	set desc = ""
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	if(isobserver(usr)) //Make sure they're an observer!
 
@@ -791,7 +791,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "View Range"
 	set desc = ""
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_DEBUG))
 		return
 	var/max_view = client.prefs.unlock_content ? GHOST_MAX_VIEW_RANGE_MEMBER : GHOST_MAX_VIEW_RANGE_DEFAULT
 	if(client.view == CONFIG_GET(string/default_view))
@@ -840,8 +840,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = ""
 	set category = "Ghost"
 	set hidden = 1
-	if(!check_rights(0))
-		return
 	ghostvision = !(ghostvision)
 	update_sight()
 	to_chat(usr, "<span class='boldnotice'>I [(ghostvision?"now":"no longer")] have ghost vision.</span>")
@@ -850,8 +848,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Toggle Darkness"
 	set category = "Ghost"
 	set hidden = 1
-	if(!check_rights(0))
-		return
 	switch(lighting_alpha)
 		if (LIGHTING_PLANE_ALPHA_VISIBLE)
 			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
@@ -937,7 +933,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(src, "<span class='warning'>This creature is too powerful for you to possess!</span>")
 		return FALSE
 
-	if(can_reenter_corpse && mind && mind.current)
+	if(can_reenter_corpse && mind?.current)
 		if(alert(src, "Your soul is still tied to your former life as [mind.current.name], if you go forward there is no going back to that life. Are you sure you wish to continue?", "Move On", "Yes", "No") == "No")
 			return FALSE
 	if(target.key)
@@ -961,7 +957,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "View Crew Manifest"
 	set category = "Ghost"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	var/dat
 	dat += "<h4>Crew Manifest</h4>"
@@ -1019,7 +1015,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = ""
 	set category = "Ghost"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	if(data_huds_on) //remove old huds
 		remove_data_huds()
@@ -1035,7 +1031,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = ""
 	set category = "Ghost"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	if(health_scan) //remove old huds
 		to_chat(src, "<span class='notice'>Health scan disabled.</span>")
@@ -1049,7 +1045,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = ""
 	set category = "Ghost"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	if(gas_scan)
 		to_chat(src, "<span class='notice'>Gas scan disabled.</span>")
@@ -1064,7 +1060,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		roundstart character."
 	set category = "Ghost"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	set_ghost_appearance()
 	if(client && client.prefs)
@@ -1130,7 +1126,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Observe"
 	set category = "OOC"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	var/list/creatures = getpois()
 
@@ -1159,7 +1155,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "pAI Setup"
 	set desc = ""
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	register_pai()
 
@@ -1203,7 +1199,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = ""
 	set category = "Ghost"
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_DEBUG))
 		return
 	if(!spawners_menu)
 		spawners_menu = new(src)
@@ -1215,7 +1211,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "T-ray view"
 	set desc = ""
 	set hidden = 1
-	if(!check_rights(0))
+	if(!check_rights(R_WATCH))
 		return
 	var/static/t_ray_view = FALSE
 	t_ray_view = !t_ray_view

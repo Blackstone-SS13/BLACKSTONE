@@ -118,7 +118,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	
 	// Schizohelp
 	if(href_list["schizohelp"])
-		answer_schizo(locate(href_list["schizohelp"]))
+		answer_schizohelp(locate(href_list["schizohelp"]))
 		return
 
 	switch(href_list["_src_"])
