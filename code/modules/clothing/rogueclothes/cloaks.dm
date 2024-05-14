@@ -136,6 +136,31 @@
 	color = CLOTHING_RED
 	detail_color = CLOTHING_WHITE
 
+/obj/item/clothing/cloak/tabard/crusaderastrata
+	detail_tag = "_psy"
+	color = CLOTHING_ORANGE
+	detail_color = CLOTHING_YELLOW
+
+/obj/item/clothing/cloak/tabard/crusaderdendor
+	detail_tag = "_psy"
+	color = CLOTHING_BROWN
+	detail_color = CLOTHING_BLACK
+
+/obj/item/clothing/cloak/tabard/crusadernecra
+	detail_tag = "_psy"
+	color = CLOTHING_BLACK
+	detail_color = CLOTHING_WHITE
+
+/obj/item/clothing/cloak/tabard/crusaderpestra
+	detail_tag = "_psy"
+	color = CLOTHING_WHITE
+	detail_color = CLOTHING_RED
+
+/obj/item/clothing/cloak/tabard/crusadernoc
+	detail_tag = "_psy"
+	color = CLOTHING_PURPLE
+	detail_color = CLOTHING_BLACK
+
 /obj/item/clothing/cloak/tabard/crusader/tief/attack_right(mob/user)
 	if(picked)
 		return
