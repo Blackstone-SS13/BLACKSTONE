@@ -388,21 +388,18 @@
 						if(B.stacktype == A)
 							if(B.amount > amt)
 								B.amount -= amt
-								amt = 0
 								B.update_bundle()
-								for(var/b in amt)
-									surroundings -= B.stacktype
-								if(B.amount == 1)
-									new B.stacktype(B.loc)
-									qdel(B)
-								if(B.amount == 0)
-									qdel(B)
+								switch(B.amount)
+									if(1)
+										new B.stacktype(B.loc)
+										qdel(B)
+									if(0)
+										qdel(B)
+								amt = 0
 								continue main_loop
 							else
 								qdel(B)
 								amt -= B.amount
-								for(var/b in B.amount)
-									surroundings -= B.stacktype
 						else
 							continue
 					var/atom/movable/I
