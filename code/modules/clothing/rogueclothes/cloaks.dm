@@ -131,10 +131,32 @@
 		L.update_inv_cloak()
 	picked = TRUE
 
-/obj/item/clothing/cloak/tabard/crusader/tief
+/obj/item/clothing/cloak/tabard/crusader
 	detail_tag = "_psy"
+
+/obj/item/clothing/cloak/tabard/crusader/tief
 	color = CLOTHING_RED
 	detail_color = CLOTHING_WHITE
+
+/obj/item/clothing/cloak/tabard/crusader/astrata
+	color = "#9B7538"
+	detail_color = CLOTHING_WHITE
+
+/obj/item/clothing/cloak/tabard/crusader/dendor
+	color = "#4B5637"
+	detail_color = "#3D1D1C"
+
+/obj/item/clothing/cloak/tabard/crusader/necra
+	color = "#222223"
+	detail_color = "#96998C" 
+
+/obj/item/clothing/cloak/tabard/crusader/pestra
+	color = CLOTHING_WHITE
+	detail_color = CLOTHING_GREEN
+
+/obj/item/clothing/cloak/tabard/crusader/noc
+	color = "#2C2231"
+	detail_color = "#9AB0B0"
 
 /obj/item/clothing/cloak/tabard/crusader/tief/attack_right(mob/user)
 	if(picked)

@@ -16,6 +16,7 @@
 	outfit = /datum/outfit/job/roguetown/manorguard
 	give_bank_account = 22
 	min_pq = 2
+	max_pq = null
 
 
 /datum/job/roguetown/manorguard/after_spawn(mob/living/L, mob/M, latejoin = TRUE)

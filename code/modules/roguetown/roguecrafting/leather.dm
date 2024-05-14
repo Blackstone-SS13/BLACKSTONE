@@ -100,7 +100,7 @@
 /datum/crafting_recipe/roguetown/leather/whip
 	name = "leather whip"
 	result = /obj/item/rogueweapon/whip/antique
-	reqs = list(/obj/item/natural/hide = 2)
+	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/stone = 1)
 
 /obj/item/clothing/cloak/raincloak/brown
 	sellprice = 20

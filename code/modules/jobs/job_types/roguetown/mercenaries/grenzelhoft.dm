@@ -12,6 +12,7 @@
 	total_positions = 5
 	spawn_positions = 5
 	min_pq = 2 //good fragger role
+	max_pq = null
 
 /datum/outfit/job/roguetown/mercenary/grenzelhoft/pre_equip(mob/living/carbon/human/H)
 	..()
