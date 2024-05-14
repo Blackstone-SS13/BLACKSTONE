@@ -297,7 +297,11 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		new_player_panel()
 		return FALSE
 
-	var/mob/dead/observer/observer = new()
+	var/mob/dead/observer/observer	// Transfer safety to observer spawning proc.
+	if(check_rights(R_WATCH, FALSE))
+		observer = new /mob/dead/observer/admin(src)
+	else
+		observer = new /mob/dead/observer/rogue(src)
 	spawning = TRUE
 
 	observer.started_as_observer = TRUE
