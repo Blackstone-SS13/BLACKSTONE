@@ -17,6 +17,7 @@
 	allowed_patrons = ALL_CLERIC_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
+	max_pq = null
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_TEMPLAR
@@ -33,17 +34,22 @@
 		if("Astrata")
 			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
+			cloak = /obj/item/clothing/cloak/tabard/crusader/astrata
 		if("Dendor")
 			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
+			cloak = /obj/item/clothing/cloak/tabard/crusader/dendor
 		if("Necra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/necra
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
+			cloak = /obj/item/clothing/cloak/tabard/crusader/necra
 		if("Pestra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
+			cloak = /obj/item/clothing/cloak/tabard/crusader/pestra
 		if("Noc")
 			neck = /obj/item/clothing/neck/roguetown/psicross/noc
 			head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
+			cloak = /obj/item/clothing/cloak/tabard/crusader/noc
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/tights/black

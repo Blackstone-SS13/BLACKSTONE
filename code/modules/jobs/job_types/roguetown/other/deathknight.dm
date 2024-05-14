@@ -6,6 +6,7 @@
 	total_positions = 0
 	spawn_positions = 0
 	min_pq = null //no pq
+	max_pq = null
 
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen","Humen", "Half-Elf","Dark Elf","Elf","Elf", "Dwarf","Dwarf")

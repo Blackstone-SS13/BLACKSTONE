@@ -105,6 +105,8 @@
 				. += "<span class='userdanger'>BANDIT!</span>"
 			if(mind.special_role == "Vampire Lord")
 				. += "<span class='userdanger'>A MONSTER!</span>"
+			if(mind.assigned_role == "Lunatic")
+				. += "<span class='userdanger'>LUNATIC!</span>"
 		if(HAS_TRAIT(src, RTRAIT_MANIAC_AWOKEN))
 			. += "<span class='userdanger'>MANIAC!</span>"
 

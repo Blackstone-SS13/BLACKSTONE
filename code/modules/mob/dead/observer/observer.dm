@@ -70,14 +70,10 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 	see_in_dark = 2
 	var/next_gmove
 	var/misting = 0
-
-/mob/dead/observer/rogue
 	draw_icon = TRUE
 
-/mob/dead/observer/rogue/Initialize()
-	..()
-	if(!(istype(src, /mob/dead/observer/rogue/arcaneeye)))
-		verbs.Add(GLOB.ghost_verbs)
+/mob/dead/observer/admin
+	hud_type = /datum/hud/adminghost
 
 /mob/dead/observer/rogue/nodraw
 	draw_icon = FALSE
@@ -131,6 +127,9 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 		/mob/dead/observer/proc/dead_tele,
 		/mob/dead/observer/proc/open_spawners_menu,
 		/mob/dead/observer/proc/tray_view)
+
+	if(!(istype(src, /mob/dead/observer/rogue/arcaneeye)))
+		client.verbs.Add(GLOB.ghost_verbs)
 
 	if(icon_state in GLOB.ghost_forms_with_directions_list)
 		ghostimage_default = image(src.icon,src,src.icon_state + "")
@@ -376,7 +375,7 @@ Transfer_mind is there to check if mob is being deleted/not going to have a body
 Works together with spawning an observer, noted above.
 */
 
-/mob/proc/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip)
+/mob/proc/ghostize(can_reenter_corpse = TRUE, force_respawn = FALSE, drawskip = FALSE, admin = FALSE)
 	if(key)
 		stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
 //		stop_all_loops()
@@ -384,38 +383,24 @@ Works together with spawning an observer, noted above.
 			SSdroning.kill_rain(client)
 			SSdroning.kill_loop(client)
 			SSdroning.kill_droning(client)
-			if(client.holder)
-				if(check_rights(R_WATCH,0))
-					stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
-					var/mob/dead/observer/ghost = new(src)	// Transfer safety to observer spawning proc.
-					SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
-					ghost.can_reenter_corpse = can_reenter_corpse
-					ghost.ghostize_time = world.time
-					ghost.key = key
-					return ghost
-//		if(client)
 //			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.musicvol, channel = CHANNEL_MUSIC)
 //			play_priomusic(S)
-		var/mob/dead/observer/rogue/ghost	// Transfer safety to observer spawning proc.
-		if(drawskip)
+		var/mob/dead/observer/ghost	// Transfer safety to observer spawning proc.
+		if(admin && check_rights(R_WATCH, FALSE))
+			ghost = new /mob/dead/observer/admin(src)
+		else if(drawskip)
 			ghost = new /mob/dead/observer/rogue/nodraw(src)
 		else
-			ghost = new(src)
+			ghost = new /mob/dead/observer/rogue(src)
+		if(!admin)
+			ghost.add_client_colour(/datum/client_colour/monochrome)
 		ghost.ghostize_time = world.time
-		var/bnw = TRUE
-		if(client)
-			if(client.holder)
-				if(check_rights_for(client,R_WATCH))
-					bnw = FALSE
 		SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
 		ghost.can_reenter_corpse = can_reenter_corpse
 		ghost.key = key
-		if(!bnw)
-			return ghost
-		ghost.add_client_colour(/datum/client_colour/monochrome)
 		return ghost
 
-/mob/living/carbon/human/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip = FALSE)
+/mob/living/carbon/human/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip = FALSE, admin = FALSE)
 	if(mind)
 		if(mind.has_antag_datum(/datum/antagonist/zombie))
 			if(force_respawn)
@@ -517,6 +502,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	SSdroning.kill_droning(src.client)
 	remove_client_colour(/datum/client_colour/monochrome)
 	client.change_view(CONFIG_GET(string/default_view))
+	client.verbs.Remove(GLOB.ghost_verbs)
 	SStgui.on_transfer(src, mind.current) // Transfer NanoUIs.
 	mind.current.key = key
 	return TRUE
