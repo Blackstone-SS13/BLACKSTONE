@@ -1,34 +1,58 @@
 /*
 	A fun fact is that it is important to note triumph procs all used key, whilas player quality likes to use ckey
 	It doesn't help that the params to insert a json key in both are just key to go with byond clients having a ckey and key
+
+	As to how it currently saves, loads, and decides what decides to get wiped. Here is the following information:
+
+	When client joins - 
+		We get their triumphs from their saved file
+		If the version number is below the current wipe season we put them back to 0
+		It is then cached into a global list attached to their ckey
+
+	When server reboots - 
+		We save all the things in the cache to the relevant directories
+
+	Simple enough
 */
 
+//To note any triumph files that try to be loaded in at a lower number than current wipe season get wiped.
+// Also we have to handle this here cause the triumphs ss might get loaded too late to handle clients joining fast enough
+GLOBAL_VAR_INIT(triumph_wipe_season, get_triumph_wipe_season())
+/proc/get_triumph_wipe_season()
+	var/current_wipe_season
+	var/json_file = file("data/triumph_wipe_season.json")
+	if(!fexists(json_file)) // If theres no file we start from the beginning lol
+		var/list/uhh_ohhh = list("current_wipe_season" = 1)
+		current_wipe_season = 1
+		WRITE_FILE(json_file, json_encode(uhh_ohhh))
+		return current_wipe_season
+
+	var/list/json = json_decode(file2text(json_file))
+	current_wipe_season = json["current_wipe_season"]
+
+	return current_wipe_season
+	
+// I need some shit early v early, so uhhh enjoy having lists on the define
 SUBSYSTEM_DEF(triumphs)
 	name = "Triumphs"
 	flags = SS_NO_FIRE
 	init_order = INIT_ORDER_TRIUMPHS
 
 	// List of top ten for display in browser page on button click
-	var/list/triumph_leaderboard_top_ten
-
-	// A path for triumphs
-	var/triumphs_json_path = "data/triumphs.json"
+	var/list/triumph_leaderboard = list()
+	var/triumph_leaderboard_positions_tracked = 21
 
 	// A cache for triumphs
 	// Basically when client first hops in for the session we will cram their ckey in and retrieve from file
 	// When the server session is about to end we will write it all in.
-	var/list/triumph_amount_cache = list(
-	)
-
-
-
+	var/list/triumph_amount_cache = list()
 
 	/*
 		TRIUMPH BUY MENU THINGS
 								*/
 	//init list to hold triumph buy menus for the session (aka menu data)
 	// Assc list "ckey" = datum
-	var/list/active_triumph_menus
+	var/list/active_triumph_menus = list()
 
 	// display limit per page in a category on the user menu
 	var/page_display_limit = 12
@@ -36,7 +60,12 @@ SUBSYSTEM_DEF(triumphs)
 	// This represents the triumph buy organization on the main SS for triumphs
 	// Each key is a category name
 	// And then the list will have a number in a string that leads to a list of datums
-	var/list/central_state_data 
+	var/list/central_state_data = list(
+		TRIUMPH_CAT_ROUND_EFX = 0,
+		TRIUMPH_CAT_CHARACTER = 0,
+		TRIUMPH_CAT_MISC = 0,
+		TRIUMPH_CAT_ACTIVE_DATUMS = 0
+	)
 
 
 	/*
@@ -45,42 +74,18 @@ SUBSYSTEM_DEF(triumphs)
 
 	var/current_refund_percentage = 0.50 // Current refund percentage is 50%
 	//this is basically the total list of triumph buy datums on init
-	var/list/triumph_buy_datums 
+	var/list/triumph_buy_datums = list()
 
 	// This is a list of all active datums
-	var/list/active_triumph_buy_queue 
+	var/list/active_triumph_buy_queue = list()
 
 	// These get on_activate() called in /datum/outfit/job/roguetown/post_equip() in roguetown.dm
-	var/list/post_equip_calls 
+	var/list/post_equip_calls = list()
 
 /datum/controller/subsystem/triumphs/Initialize()
 	. = ..()
-	/*
-		At roundstart we load the cache... all of it i guess
-		This could be different if triumphs were saved in single file, 
-		But they come in one chunk cause I can't think of a better way to do topten rn
-	*/
-	var/json_file = file(triumphs_json_path)
-	if(!fexists(json_file)) // If we don't have a file at all, just fill in some blank shit
-		WRITE_FILE(json_file, "{}")
-		triumph_amount_cache = list()
-	else
-		triumph_amount_cache = json_decode(file2text(json_file))
 
-	if(!triumph_leaderboard_top_ten)
-		triumph_leaderboard_top_ten = get_triumphs_top()
 
-	triumph_buy_datums = list() // init empty list
-	active_triumph_buy_queue = list()
-	active_triumph_menus = list()
-	post_equip_calls = list()
-
-	central_state_data = list(
-		TRIUMPH_CAT_ROUND_EFX = 0,
-		TRIUMPH_CAT_CHARACTER = 0,
-		TRIUMPH_CAT_MISC = 0,
-		TRIUMPH_CAT_ACTIVE_DATUMS = 0
-	)
 
 
 	for(var/cur_path in subtypesof(/datum/triumph_buy))
@@ -194,8 +199,6 @@ SUBSYSTEM_DEF(triumphs)
 		current_view.show_menu()
 
 			
-
-
 // We cleanup the datum thats just holding the stuff for displaying the menu.
 /datum/controller/subsystem/triumphs/proc/remove_triumph_buy_menu(client/C)
 	if(C && active_triumph_menus[C.ckey])
@@ -208,16 +211,63 @@ SUBSYSTEM_DEF(triumphs)
 /datum/controller/subsystem/triumphs/proc/fire_on_PostSetup()
 	call_menu_refresh()
 
-/*
-	At round end we save the cache
-*/
-/datum/controller/subsystem/triumphs/proc/time_for_reboot()
-	var/json_file = file(triumphs_json_path)
-	if(!fexists(json_file))
-		WRITE_FILE(json_file, "{}")
+/datum/controller/subsystem/triumphs/proc/handle_client_login(client/C)
+	var/target_ckey = C.ckey
+	if(!(target_ckey in triumph_amount_cache)) // If they are already cached who care they jus comin back for the same sess
+		var/target_file = file("data/player_saves/[target_ckey[1]]/[target_ckey]/triumphs.json") 
+		if(!fexists(target_file)) // no file or new player, write them in something
+			var/list/new_guy = list("triumph_count" = 0, "triumph_wipe_season" = GLOB.triumph_wipe_season)
+			WRITE_FILE(new_guy, json_encode(new_guy))
+			triumph_amount_cache[target_ckey] = 0
+			return
 
-	fdel(json_file)
-	WRITE_FILE(json_file, json_encode(triumph_amount_cache))
+		// This is not a new guy
+		var/list/not_new_guy = json_decode(file2text(target_file))
+		if(GLOB.triumph_wipe_season > not_new_guy["triumph_wipe_season"]) // Their file is behind in wipe seasons, time to be set to 0
+			triumph_amount_cache[target_ckey] = 0
+			return
+
+		var/cur_client_triumph_count = not_new_guy["triumph_count"]
+		triumph_amount_cache[target_ckey] = cur_client_triumph_count
+
+		if(cur_client_triumph_count > 5) // You aren't tracked at all unless you got 5, no iterating a bunch of losers repeatedly
+			if(triumph_leaderboard_positions_tracked > triumph_leaderboard.len)
+				triumph_leaderboard += list("key" = C.key, "triumph_count" = cur_client_triumph_count)
+				return // Just end here
+
+			// Well this is a convenient place to do it cause I got a client for a key to make it purty
+			if(cur_client_triumph_count >= triumph_leaderboard[triumph_leaderboard.len]["triumph_count"]) // Our guys greater than or equal to last place
+				triumph_leaderboard.Cut(triumph_leaderboard.len) // Remove the last position
+				triumph_leaderboard += list("key" = C.key, "triumph_count" = cur_client_triumph_count) // Add our guy to the end
+				for(var/i = triumph_leaderboard.len, i > 0, i--) // Iterate in inverse
+					if(cur_client_triumph_count > triumph_leaderboard[i]["triumph_count"]) // begin pushin dis guy up
+						triumph_leaderboard.Swap(i, i-1)
+						continue
+
+					break // Just break
+
+/*
+	We save everything when its time for reboot
+*/
+/datum/controller/subsystem/triumphs/proc/reboot_saving_time()
+	to_chat(world, "<span class='boldannounce'> Recording triumphs to the WORLD END MACHINE. </span>")
+	for(var/target_ckey in triumph_amount_cache) 
+		var/list/saving_data = list()
+		// this will be for example "data/player_saves/a/ass/triumphs.json" if their ckey was ass
+		var/target_file = file("data/player_saves/[target_ckey[1]]/[target_ckey]/triumphs.json") 
+		if(fexists(target_file))
+			fdel(target_file)
+
+		saving_data["triumph_wipe_season"] = GLOB.triumph_wipe_season
+		saving_data["triumph_count"] = triumph_amount_cache[target_ckey]
+		
+		WRITE_FILE(target_file, json_encode(saving_data))
+
+	// handle the leaderboard here too i guess
+	var/leaderboard_file = file("data/triumphs_leaderboard.json")
+	if(fexists(leaderboard_file))
+		fdel(leaderboard_file)
+	WRITE_FILE(leaderboard_file, json_encode(triumph_leaderboard))
 
 
 
@@ -233,67 +283,57 @@ SUBSYSTEM_DEF(triumphs)
 	if(target_ckey)
 		if(!(target_ckey in triumph_amount_cache))
 			return
-		else
+		else 
 			triumph_amount_cache[target_ckey] = 0
 
-// Wipe the triumphs of everyone
-// We will also wipe the file mostly cause someone might attempt to crash the server if this occurs
-// (And they can go fuck themselves)
+// Wipe the entire list
+// Adjust the season up by 1 too so anyone behind gets wiped if they rejoin later
 /datum/controller/subsystem/triumphs/proc/wipe_all_triumphs(target_ckey)
 	if(!target_ckey)
 		return
 	triumph_amount_cache = list()
 
-	var/json_file = file(triumphs_json_path)
-	if(!fexists(json_file))
-		WRITE_FILE(json_file, "{}")
-
-	fdel(json_file)
-	WRITE_FILE(json_file, json_encode(triumph_amount_cache))
+	var/target_file = file("data/triumph_wipe_season.json")
+	GLOB.triumph_wipe_season += 1
+	var/list/wipe_season = list("current_wipe_season" = GLOB.triumph_wipe_season)
+	fdel(target_file)
+	WRITE_FILE(target_file, json_encode(wipe_season))
 
 // Return a value of the triumphs they got
 /datum/controller/subsystem/triumphs/proc/get_triumphs(target_ckey)
-	if(!(triumph_amount_cache[target_ckey]))
+	if(!(target_ckey in triumph_amount_cache))
 		triumph_amount_cache[target_ckey] = 0
 
 	return triumph_amount_cache[target_ckey]
 
+
+/*
+	TRIUMPH LEADERBOARD STUFF
+*/
 // Display leaderboard browser popup
 /datum/controller/subsystem/triumphs/proc/triumph_leaderboard(client/C)
-	if(!triumph_leaderboard_top_ten || !triumph_leaderboard_top_ten.len)
-		triumph_leaderboard_top_ten = get_triumphs_top()
-		message_admins("FAILED triumph_leaderboard_top_ten")
-		return
+	prep_the_triumphs_leaderboard()
 
-	var/list/output = list("<B>CHAMPIONS OF PSYDONIA</B><br>")
+	var/webpagu = "<B>CHAMPIONS OF PSYDONIA</B><br>"
 
-	output += "<hr><br>"
-	var/vals = 0
-	for(var/X in triumph_leaderboard_top_ten)
-		vals++
-		if(vals >= 21)
-			break
-		output += "[vals]. [X] - [triumph_leaderboard_top_ten[X]]<br>"
+	webpagu += "<hr><br>"
 
-	C << browse(output.Join(),"window=triumph_leaderboard_top_ten;size=300x500")
+	if(triumph_leaderboard.len)
+		var/position_number = 0
+		for(var/list in triumph_leaderboard)
+			position_number++
+			webpagu += "[position_number]. [list["key"]] - [list["triumph_count"]]<br>"
+	else
+		webpagu += "The hall of triumphs is quite empty, Yes?"
+
+	C << browse(webpagu, "window=triumph_leaderboard;size=300x500")
 
 // Idk I didn't touch this one a ton
 // Just sorts by numbers
-/datum/controller/subsystem/triumphs/proc/get_triumphs_top()
-	var/list/sorted_list = list()
-	if(triumph_amount_cache.len)
-		for(var/cache_key in triumph_amount_cache)
-			if(!sorted_list.len)
-				sorted_list[cache_key] = triumph_amount_cache[cache_key]
+/datum/controller/subsystem/triumphs/proc/prep_the_triumphs_leaderboard()
+	var/json_file = file("data/triumphs_leaderboard.json")
+	if(!fexists(json_file)) 
+		return // If theres no file just return, we got a empty list up there neways
 
-			for(var/sorted_key in sorted_list)
-				if(sorted_list[sorted_key] < triumph_amount_cache[cache_key])
-					sorted_list.Insert(sorted_list.Find(sorted_key), cache_key)
-					sorted_list[cache_key] = triumph_amount_cache[cache_key]
-					break
-
-			if(sorted_list.Find(cache_key))
-				continue
-		
-	return sorted_list
+	triumph_leaderboard = json_decode(file2text(json_file))
 

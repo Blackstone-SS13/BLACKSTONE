@@ -1,3 +1,4 @@
+#define FASTLOAD
 #ifndef TESTING
 //    #define FASTLOAD
 //    #define DEPLOY_TEST
