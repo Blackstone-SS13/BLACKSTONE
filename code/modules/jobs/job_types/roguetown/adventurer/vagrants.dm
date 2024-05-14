@@ -11,16 +11,21 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	flag = DYN_VAGRANTS
 	department_flag = PEASANTS
 	faction = "Station"
+
+	// Everyone can be a homeless man looking for work!
 	allowed_races = list(
-	"Humen",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Dark Elf",
-	"Aasimar",
-	"Argonians"
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc",
+		"Argonian"
 	)
+
 	tutorial = "A traveler of unknown origin whomst has come to these lands."
 
 
@@ -30,6 +35,8 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	display_order = JDO_VAGRANT
 	show_in_credits = FALSE
 	min_pq = -999
+	wanderer_examine = TRUE
+	advjob_examine = TRUE
 
 	total_positions = -1
 	spawn_positions = 420

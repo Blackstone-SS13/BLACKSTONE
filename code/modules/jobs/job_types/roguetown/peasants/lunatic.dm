@@ -31,8 +31,8 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
 	if(H.gender == MALE)
 		armor = /obj/item/clothing/suit/roguetown/shirt/rags
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant
-		pants = /obj/item/clothing/under/roguetown/tights/vagrant
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/beggar
+		pants = /obj/item/clothing/under/roguetown/tights/beggar
 		H.change_stat("strength", -4)
 		H.change_stat("intelligence", -4)
 		H.change_stat("constitution", -4)
