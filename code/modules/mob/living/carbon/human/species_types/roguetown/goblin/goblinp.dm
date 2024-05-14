@@ -21,6 +21,7 @@
 	soundpack_f = /datum/voicepack/male/goblin
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	nojumpsuit = 1
+	mutanteyes = /obj/item/organ/eyes/goblin
 	offset_features = list(OFFSET_ID = list(0,0), OFFSET_WRISTS = list(0,0),\
 	OFFSET_CLOAK = list(0,0), \
 	OFFSET_FACE = list(0,-4), OFFSET_BELT = list(0,-1), OFFSET_BACK = list(0,-4), \
@@ -31,6 +32,7 @@
 	OFFSET_FACE_F = list(0,-5), OFFSET_BELT_F = list(0,-1), OFFSET_BACK_F = list(0,-5), \
 	OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-3), \
 	OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(0,0))
+	specstats = list("strength" = -3, "perception" = 2, "intelligence" = -4, "constitution" = -3, "endurance" = 3, "speed" = 4, "fortune" = -1)
 
 
 /datum/species/goblinp/on_species_gain(mob/living/carbon/C, datum/species/old_species)
