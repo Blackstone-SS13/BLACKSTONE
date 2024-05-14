@@ -138,8 +138,8 @@
 
 /obj/item/clothing/cloak/tabard/crusaderastrata
 	detail_tag = "_psy"
-	color = CLOTHING_Yellow
-	detail_color = CLOTHING_White
+	color = CLOTHING_YELLOW
+	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/cloak/tabard/crusaderdendor
 	detail_tag = "_psy"
