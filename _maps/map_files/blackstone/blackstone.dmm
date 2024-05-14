@@ -2428,7 +2428,7 @@
 "slS" = (/obj/structure/chair/wood/rogue{dir = 8},/turf/open/floor/rogue/woodturned,/area/rogue/indoors)
 "slZ" = (/obj/structure/fermenting_barrel/random/beer,/turf/open/floor/rogue/blocks,/area/rogue/under/town/basement)
 "sma" = (/obj/machinery/light/rogue/firebowl/standing,/turf/open/floor/rogue/ruinedwood{icon_state = "horzw"},/area/rogue/under/town/basement)
-"smi" = (/obj/effect/decal/cobbleedge{dir = 1; icon_state = "borderfall"},/obj/effect/decal/cleanable/blood/old,/turf/open/floor/rogue/blocks,/area/rogue/outdoors/town)
+"smi" = (/obj/effect/decal/cobbleedge{dir = 1; icon_state = "borderfall"},/obj/effect/decal/cleanable/blood/old,/obj/structure/roguemachine/bounty,/turf/open/floor/rogue/blocks,/area/rogue/outdoors/town)
 "smt" = (/obj/item/grown/log/tree/small,/turf/open/floor/rogue/dirt,/area/rogue/indoors)
 "sna" = (/obj/effect/landmark/start/farmer{dir = 8},/obj/structure/chair/stool/rogue,/turf/open/floor/rogue/twig,/area/rogue/indoors)
 "snj" = (/obj/structure/bars/passage{redstone_id = "tourneybottom"},/turf/open/floor/rogue/cobblerock,/area/rogue/under/town/basement)
