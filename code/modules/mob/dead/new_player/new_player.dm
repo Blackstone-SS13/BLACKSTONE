@@ -418,7 +418,9 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		return JOB_UNAVAILABLE_GENERIC
 	if(!isnull(job.min_pq) && (get_playerquality(ckey) < job.min_pq))
 		return JOB_UNAVAILABLE_GENERIC
-	if(length(job.allowed_sexes) && !(client.prefs.gender in job.allowed_sexes))
+	if(!isnull(job.max_pq) && (get_playerquality(ckey) > job.max_pq))
+		return JOB_UNAVAILABLE_GENERIC
+	if(!(client.prefs.gender in job.allowed_sexes))
 		return JOB_UNAVAILABLE_RACE
 	if(length(job.allowed_ages) && !(client.prefs.age in job.allowed_ages))
 		return JOB_UNAVAILABLE_RACE

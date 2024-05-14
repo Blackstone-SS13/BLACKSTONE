@@ -2180,6 +2180,7 @@
 #include "code\modules\jobs\job_types\roguetown\peasants\grabber.dm"
 #include "code\modules\jobs\job_types\roguetown\peasants\gravedigger.dm"
 #include "code\modules\jobs\job_types\roguetown\peasants\jester.dm"
+#include "code\modules\jobs\job_types\roguetown\peasants\lunatic.dm"
 #include "code\modules\jobs\job_types\roguetown\peasants\nightman.dm"
 #include "code\modules\jobs\job_types\roguetown\peasants\prisoner.dm"
 #include "code\modules\jobs\job_types\roguetown\peasants\soilson.dm"

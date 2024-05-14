@@ -23,6 +23,7 @@
 	outfit = /datum/outfit/job/roguetown/bogmaster
 	give_bank_account = 35
 	min_pq = 4
+	max_pq = null
 
 /datum/job/roguetown/bogmaster/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
