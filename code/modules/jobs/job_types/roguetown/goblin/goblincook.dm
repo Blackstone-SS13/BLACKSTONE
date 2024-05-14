@@ -5,26 +5,30 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-
+	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
-	tutorial = "Working closely with the barkeep who owns Skull Crack Inn, the cook should focus on cooking food for all the hungry mouths of Roguetown."
+	allowed_patrons = list("Graggar")
+	tutorial = "Cook, farm, butcher. Make king happy with apple pies! Don't forget about your brothers."
 
 	outfit = /datum/outfit/job/roguetown/goblincook
 	display_order = JDO_GOBLINCOOK
-	min_pq = -10
+	min_pq = 0
+	max_pq = null
 
 /datum/outfit/job/roguetown/goblincook/pre_equip(mob/living/carbon/human/H)
 	..()
-	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/labor/butchering, 2, TRUE)
+	armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
 	belt = /obj/item/storage/belt/rogue/leather/rope
-	beltl = /obj/item/roguekey/tavern
 	cloak = /obj/item/clothing/cloak/apron/cook
 	head = /obj/item/clothing/head/roguetown/cookhat
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-	H.change_stat("constitution", 2)
+	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/labor/butchering, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/labor/farming, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
+		H.change_stat("intelligence", 1)
+		H.change_stat("fortune", 1)
