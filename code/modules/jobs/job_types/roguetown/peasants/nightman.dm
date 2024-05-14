@@ -15,7 +15,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 
 	tutorial = "The Nightmaster is technically a noble. Owner of the Whitevein Lounge, a decaying bathhouse converted into a den of low-lifes. A troublemaking rake that the others hate to tolerate."
@@ -25,6 +26,7 @@
 	display_order = JDO_NIGHTMAN
 	give_bank_account = TRUE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/nightman/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -13,7 +13,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	tutorial = "Pilgrims begin far outside of the town and must reach it in order to ply their various trades. Sometimes, they build their own settlements and enjoy the terrible nature."
 
@@ -24,5 +25,6 @@
 	ispilgrim = TRUE
 	display_order = JDO_PILGRIM
 	min_pq = -20
+	max_pq = null
 	wanderer_examine = TRUE
 	advjob_examine = TRUE

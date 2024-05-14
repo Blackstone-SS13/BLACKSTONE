@@ -14,7 +14,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	tutorial = "The dead don't speak, least if you're doing your job right. You've a pilfers dream—for few have enough to pay for your services out-of-pocket. So you take it from the fallen. Your job isnt considered highly, but without you, who else would disgrace the sanctity of the dead?"
 
@@ -22,6 +23,7 @@
 	display_order = JDO_GRAVEMAN
 	give_bank_account = TRUE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/undertaker/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -14,7 +14,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	allowed_sexes = list(MALE, FEMALE)
 
@@ -24,6 +25,7 @@
 	display_order = JDO_MASON
 	give_bank_account = 8
 	min_pq = 0
+	max_pq = null
 
 /datum/outfit/job/roguetown/mason/pre_equip(mob/living/carbon/human/H)
 	..()

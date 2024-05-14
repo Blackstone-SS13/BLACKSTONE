@@ -97,6 +97,10 @@
 	result = /obj/item/clothing/cloak/raincloak/brown
 	reqs = list(/obj/item/natural/hide = 2)
 
+/datum/crafting_recipe/roguetown/leather/whip
+	name = "leather whip"
+	result = /obj/item/rogueweapon/whip/antique
+	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/stone = 1)
 
 /obj/item/clothing/cloak/raincloak/brown
 	sellprice = 20
@@ -115,3 +119,7 @@
 	result = /obj/item/natural/saddle
 	reqs = list(/obj/item/natural/hide = 2)
 
+/datum/crafting_recipe/roguetown/leather/vest
+	name = "leather vest"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/vest
+	reqs = list(/obj/item/natural/hide = 2)

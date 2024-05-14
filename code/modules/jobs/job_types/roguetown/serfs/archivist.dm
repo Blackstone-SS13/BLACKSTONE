@@ -13,12 +13,13 @@
 		"Half-Elf",
 		"Aasimar"
 	)
-	allowed_patrons = list("Noc")
+	allowed_patrons = list(/datum/patron/divine/noc)
 	allowed_ages = list(AGE_OLD, AGE_MIDDLEAGED)
 
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = 19
 	min_pq = 0
+	max_pq = null
 
 /datum/outfit/job/roguetown/archivist/pre_equip(mob/living/carbon/human/H)
 	..()
