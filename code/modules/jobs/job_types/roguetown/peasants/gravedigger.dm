@@ -23,7 +23,7 @@
 
 /datum/outfit/job/roguetown/undertaker/pre_equip(mob/living/carbon/human/H)
 	..()
-	pants = /obj/item/clothing/under/roguetown/tights/black
+	pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
 	cloak = /obj/item/clothing/cloak/raincloak/mortus
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	belt = /obj/item/storage/belt/rogue/leather
@@ -31,11 +31,7 @@
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backr = /obj/item/rogueweapon/shovel
 	neck = /obj/item/clothing/neck/roguetown/psicross/necra
-	if(H.gender == FEMALE)
-		pants = null
-		shirt = /obj/item/clothing/suit/roguetown/shirt/dress/gen/black
-	else
-		armor = /obj/item/clothing/suit/roguetown/armor/leather/vest/black
+	armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
