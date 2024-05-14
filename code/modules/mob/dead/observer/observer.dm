@@ -129,7 +129,7 @@ GLOBAL_VAR_INIT(observer_default_invisibility, INVISIBILITY_OBSERVER)
 		/mob/dead/observer/proc/tray_view)
 
 	if(!(istype(src, /mob/dead/observer/rogue/arcaneeye)))
-		client.verbs.Add(GLOB.ghost_verbs)
+		client.verbs += GLOB.ghost_verbs
 
 	if(icon_state in GLOB.ghost_forms_with_directions_list)
 		ghostimage_default = image(src.icon,src,src.icon_state + "")
@@ -502,7 +502,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	SSdroning.kill_droning(src.client)
 	remove_client_colour(/datum/client_colour/monochrome)
 	client.change_view(CONFIG_GET(string/default_view))
-	client.verbs.Remove(GLOB.ghost_verbs)
+	client.verbs -= GLOB.ghost_verbs
 	SStgui.on_transfer(src, mind.current) // Transfer NanoUIs.
 	mind.current.key = key
 	return TRUE
@@ -551,7 +551,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		qdel(M)
 		return
 
-	client.verbs.Remove(GLOB.ghost_verbs)
+	client.verbs -= GLOB.ghost_verbs
 	M.key = key
 //	M.Login()	//wat
 	return
