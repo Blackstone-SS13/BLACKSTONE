@@ -139,24 +139,24 @@
 	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/cloak/tabard/crusader/astrata
-	color = CLOTHING_YELLOW
+	color = "#9B7538"
 	detail_color = CLOTHING_WHITE
 
 /obj/item/clothing/cloak/tabard/crusader/dendor
-	color = CLOTHING_BROWN
-	detail_color = CLOTHING_BLACK
+	color = "#4B5637"
+	detail_color = "#3D1D1C"
 
 /obj/item/clothing/cloak/tabard/crusader/necra
-	color = CLOTHING_BLACK
-	detail_color = CLOTHING_WHITE
+	color = "#222223"
+	detail_color = "#96998C" 
 
 /obj/item/clothing/cloak/tabard/crusader/pestra
-	color = CLOTHING_GREEN
-	detail_color = CLOTHING_WHITE
+	color = CLOTHING_WHITE
+	detail_color = CLOTHING_GREEN
 
 /obj/item/clothing/cloak/tabard/crusader/noc
-	color = CLOTHING_PURPLE
-	detail_color = CLOTHING_BLACK
+	color = "#2C2231"
+	detail_color = "#9AB0B0"
 
 /obj/item/clothing/cloak/tabard/crusader/tief/attack_right(mob/user)
 	if(picked)
