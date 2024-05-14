@@ -21,7 +21,7 @@
 
 	tutorial = "The Nightmaster is technically a noble. Owner of the Whitevein Lounge, a decaying bathhouse converted into a den of low-lifes. A troublemaking rake that the others hate to tolerate."
 
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	allowed_ages = ADULT_AGES_LIST
 	outfit = /datum/outfit/job/roguetown/nightman
 	display_order = JDO_NIGHTMAN
 	give_bank_account = TRUE
