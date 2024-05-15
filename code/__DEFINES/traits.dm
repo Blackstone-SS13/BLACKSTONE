@@ -25,8 +25,9 @@
 #define TRAIT_BASHDOORS				"bashdoors"
 #define TRAIT_NOMOOD 			"no_mood"
 #define TRAIT_SIMPLE_WOUNDS		"simple_wounds"
-#define TRAIT_BANDITCAMP 				"banditcamp"
+#define TRAIT_BANDITCAMP 			"banditcamp"
 #define TRAIT_VAMPMANSION			"vampiremansion"
+#define TRAIT_GOBLINCAVE			"goblincave"
 #define TRAIT_LIMPDICK 				"limp_dick"
 #define TRAIT_SEXPASS				"sexpass"
 #define TRAIT_STEELHEARTED 			"steelhearted" //no bad mood from dismembering or seeing this
