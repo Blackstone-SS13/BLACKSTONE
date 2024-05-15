@@ -123,7 +123,7 @@
 	result = /obj/item/rogueweapon/whip
 	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/stone = 1)
 
-/datum/crafting_recipe/roguetown/instrument/drum
+/datum/crafting_recipe/roguetown/leather/drum
 	name = "Drum"
 	result = /obj/item/rogue/instrument/drum
 	reqs = list(/obj/item/natural/hide = 1,/obj/item/grown/log/tree/small = 1)
