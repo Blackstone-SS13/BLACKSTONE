@@ -148,7 +148,7 @@
 
 /obj/item/clothing/cloak/tabard/crusader/necra
 	color = "#222223"
-	detail_color = "#96998C" 
+	detail_color = "#CACBC5" 
 
 /obj/item/clothing/cloak/tabard/crusader/pestra
 	color = CLOTHING_WHITE
@@ -844,6 +844,9 @@
 
 /obj/item/clothing/cloak/half/red
 	color = CLOTHING_RED
+
+/obj/item/clothing/cloak/half/orange
+	color = CLOTHING_ORANGE
 
 /obj/item/clothing/cloak/half/vet
 	name = "town watch cloak"
