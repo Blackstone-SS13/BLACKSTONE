@@ -7,7 +7,7 @@
 	spawn_positions = 10
 	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
-	allowed_patrons = list("Graggar")
+	allowed_patrons = list(/datum/patron/inhumen/graggar)
 	tutorial = "Goblin Guards rensposible for their kingdom and his majesty King."
 	display_order = JDO_GOBLINGUARD
 	min_pq = 1
