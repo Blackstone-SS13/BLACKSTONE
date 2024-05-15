@@ -20,7 +20,6 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	cloak = /obj/item/clothing/cloak/apron/cook
-	head = /obj/item/clothing/head/roguetown/cookhat
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
