@@ -562,6 +562,7 @@
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
 	boobed = TRUE
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 
 /obj/item/clothing/cloak/apron/brown
 	color = CLOTHING_BROWN
@@ -815,7 +816,7 @@
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
 	allowed_sex = list(MALE)
-	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 	sellprice = 50
 	nodismemsleeves = TRUE
 
