@@ -123,3 +123,13 @@
 	name = "leather vest"
 	result = /obj/item/clothing/suit/roguetown/armor/leather/vest
 	reqs = list(/obj/item/natural/hide = 2)
+
+/datum/crafting_recipe/roguetown/leather/goblinhelmet
+	name = "goblin helmet"
+	result = /obj/item/clothing/head/roguetown/helmet/leather/goblin
+	reqs = list(/obj/item/natural/hide = 1)
+
+/datum/crafting_recipe/roguetown/leather/goblinarmor
+	name = "goblin armor"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/goblin
+	reqs = list(/obj/item/natural/hide = 2)
