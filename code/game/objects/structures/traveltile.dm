@@ -143,7 +143,7 @@
 		if(HAS_TRAIT(L, TRAIT_BANDITCAMP))
 			for(var/mob/living/carbon/human/H in hearers(6,src))
 				if(!HAS_TRAIT(H, TRAIT_BANDITCAMP))
-					to_chat(user, "<b>I discover the entrance to the strange mansion</b>")
+					to_chat(user, "<b>I discovered the entrance to the strange house.</b>")
 					ADD_TRAIT(H, TRAIT_BANDITCAMP, TRAIT_GENERIC)
 			return TRUE
 		else
@@ -157,7 +157,7 @@
 		if(HAS_TRAIT(L, TRAIT_GOBLINCAVE))
 			for(var/mob/living/carbon/human/H in hearers(6,src))
 				if(!HAS_TRAIT(H, TRAIT_GOBLINCAVE))
-					to_chat(user, "<b>I discover the entrance to the strange mansion</b>")
+					to_chat(user, "<b>I discovered the entrance to the strange cave.</b>")
 					ADD_TRAIT(H, TRAIT_GOBLINCAVE, TRAIT_GENERIC)
 			return TRUE
 		else
@@ -171,7 +171,7 @@
 		if(HAS_TRAIT(L, TRAIT_VAMPMANSION))
 			for(var/mob/living/carbon/human/H in hearers(6,src))
 				if(!HAS_TRAIT(H, TRAIT_VAMPMANSION))
-					to_chat(user, "<b>I discover the entrance to the vampire mansion.</b>")
+					to_chat(user, "<b>I discovered the entrance to the strange mansion.</b>")
 					ADD_TRAIT(H, TRAIT_VAMPMANSION, TRAIT_GENERIC)
 			return TRUE
 		else
