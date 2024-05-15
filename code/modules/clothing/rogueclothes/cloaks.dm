@@ -564,7 +564,7 @@
 	boobed = TRUE
 
 /obj/item/clothing/cloak/apron/blacksmith
-	name = "Smith's apron"
+	name = "leather apron"
 	desc = "A leather apron used by those who temper metals and work forges."
 	color = null
 	icon_state = "blacksmith"
