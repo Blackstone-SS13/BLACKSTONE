@@ -570,7 +570,7 @@
 	icon_state = "blacksmith"
 	item_state = "blacksmith"
 	body_parts_covered = CHEST|GROIN
-	armor = list("melee" = 12, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 12, "acid" = 0)
+	armor = list("melee" = 12, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 24, "acid" = 0)
 	boobed = TRUE
 
 /obj/item/clothing/cloak/apron/brown
