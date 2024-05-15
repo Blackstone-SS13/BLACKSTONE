@@ -3,8 +3,8 @@
 	flag = PURITAN
 	department_flag = CHURCHMEN
 	faction = "Station"
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 1
+	spawn_positions = 1
 
 	allowed_sexes = list(MALE)
 	allowed_races = list(
