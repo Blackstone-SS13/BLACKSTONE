@@ -211,10 +211,10 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<tr>"
 			dat += "<td width='33%' align='left'>"
 			dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a>"
-			dat += "<td><a style='white-space:nowrap;' href='?_src_=prefs;preference=triumph_buy_menu'>Triumph Buy Menu</a></td>"
+			dat += "<td></td>"
 			dat += "</td>"
 			dat += "<td width='33%' align='center'>"
-			dat += "<b>Be voice:</b> <a href='?_src_=prefs;preference=schizo_voice'>[(toggles & SCHIZO_VOICE) ? "Enabled":"Disabled"]</a><br>"
+			dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=triumph_buy_menu'>Triumph Buy Menu</a>"
 			dat += "</td>"
 			dat += "<td width='33%' align='right'>"
 			dat += "<a href='?_src_=prefs;preference=keybinds;task=menu'>Keybinds</a>"
@@ -853,11 +853,16 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<a href ='?_src_=prefs;preference=keybinds;task=keybindings_set'>\[Reset to default\]</a>"
 			dat += "</body>"
 
+		
 	if(!IsGuestKey(user.key))
 		dat += "<a href='?_src_=prefs;preference=save'>Save</a><br>"
 		dat += "<a href='?_src_=prefs;preference=load'>Undo</a><br>"
-	dat += "<center>"
 
+	// well.... one empty slot here for something I suppose lol
+	dat += "<table width='100%'>"
+	dat += "<tr>"
+	dat += "<td width='33%' align='left'></td>"
+	dat += "<td width='33%' align='center'>"
 	if(SSticker.current_state <= GAME_STATE_PREGAME)
 		switch(N.ready)
 			if(PLAYER_NOT_READY)
@@ -866,10 +871,15 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				dat += "<a href='byond://?src=[REF(N)];ready=[PLAYER_NOT_READY]'>UNREADY</a> <b>READY</b>"
 	else
 		dat += "<a href='byond://?src=[REF(N)];late_join=1'>JOINLATE</a>"
-
+	dat += "</td>"
+	dat += "<td width='33%' align='right'>"
+	dat += "<b>Be voice:</b> <a href='?_src_=prefs;preference=schizo_voice'>[(toggles & SCHIZO_VOICE) ? "Enabled":"Disabled"]</a><br>"
+	dat += "</td>"
+	dat += "</tr>"
+	dat += "</table>"
 //	dat += "<a href='?_src_=prefs;preference=reset_all'>Reset Setup</a>"
-	dat += "</center>"
 
+	
 	if(user.client.is_new_player())
 		dat = list("<center>REGISTER!</center>")
 
