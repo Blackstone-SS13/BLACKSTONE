@@ -118,6 +118,11 @@
 	result = /obj/item/natural/saddle
 	reqs = list(/obj/item/natural/hide = 2)
 
+/datum/crafting_recipe/roguetown/leather/vest
+	name = "leather vest"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/vest
+	reqs = list(/obj/item/natural/hide = 2)
+
 /datum/crafting_recipe/roguetown/leather/whip
 	name = "leather whip"
 	result = /obj/item/rogueweapon/whip
@@ -127,3 +132,13 @@
 	name = "Drum"
 	result = /obj/item/rogue/instrument/drum
 	reqs = list(/obj/item/natural/hide = 1,/obj/item/grown/log/tree/small = 1)
+
+/datum/crafting_recipe/roguetown/leather/goblinhelmet
+	name = "goblin helmet"
+	result = /obj/item/clothing/head/roguetown/helmet/leather/goblin
+	reqs = list(/obj/item/natural/hide = 1)
+
+/datum/crafting_recipe/roguetown/leather/goblinarmor
+	name = "goblin armor"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/goblin
+	reqs = list(/obj/item/natural/hide = 2)

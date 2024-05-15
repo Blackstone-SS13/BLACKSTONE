@@ -8,7 +8,7 @@
 	spawn_positions = 1
 	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
-	allowed_patrons = list("Graggar")
+	allowed_patrons = list(/datum/patron/inhumen/graggar)
 	tutorial = "Goblin King is a fatty lazy pig who wishes to do nothing but eat apple pies and fart while sitting on his stone throne."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/goblinking
@@ -25,6 +25,8 @@
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
+	head = /obj/item/clothing/head/roguetown/crown/serpcrown/surplus
+	cloak = /obj/item/clothing/cloak/heartfelt
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
@@ -41,7 +43,7 @@
 		return
 	var/inputty = input("Make an announcement", "ROGUETOWN") as text|null
 	if(inputty)
-		if(!istype(get_area(src), /area/rogue/outdoors/mountains/decap))
+		if(!istype(get_area(src), /area/rogue/indoors/shelter/mountains/decap))
 			to_chat(src, "<span class='warning'>I need to do this from the Goblin Kingdom.</span>")
 			return FALSE
 		priority_announce("[inputty]", title = "The Goblin King Squeals", sound = 'sound/misc/dun.ogg')
@@ -56,7 +58,7 @@
 	var/datum/job/smithjob = SSjob.GetJob("Goblin Smith")
 	var/list/souloptions = list("Goblin Cook", "Goblin Guard", "Goblin Smith")
 	var/pickedsoul = input("Which worker shall join kingdom?", "Available workers") as null|anything in souloptions
-	if(!istype(get_area(src), /area/rogue/outdoors/mountains/decap))
+	if(!istype(get_area(src), /area/rogue/indoors/shelter/mountains/decap))
 		to_chat(src, "<span class='warning'>I need to do this from the Goblin Kingdom.</span>")
 		return FALSE
 	if(!pickedsoul)

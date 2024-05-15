@@ -3,13 +3,14 @@
 	flag = GOBLINGUARD
 	department_flag = GOBLIN
 	faction = "Station"
-	total_positions = 10
+	total_positions = 15
 	spawn_positions = 10
 	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
-	allowed_patrons = list("Graggar")
+	allowed_patrons = list(/datum/patron/inhumen/graggar)
 	tutorial = "Goblin Guards rensposible for their kingdom and his majesty King."
 	display_order = JDO_GOBLINGUARD
+	outfit = /datum/outfit/job/roguetown/goblinguard
 	min_pq = 1
 	max_pq = null
 
