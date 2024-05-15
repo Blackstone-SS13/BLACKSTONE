@@ -86,6 +86,8 @@
 	if(total_free_class && viable_free_classes.len)
 		var/list/free_classes = viable_free_classes.Copy()
 		for(var/i=1, i <= total_free_class, i++) // We just do the normal thing
+			if(!free_classes.len)
+				break
 			var/datum/advclass/pickme = pick(free_classes) // Pick one
 			free_classes -= pickme
 			rolled_classes[pickme] = 0
@@ -98,6 +100,8 @@
 	if(total_combat_class && viable_combat_classes.len)
 		combat_classes = viable_combat_classes.Copy()
 		for(var/i=1, i <= total_combat_class, i++) // We just do the normal thing
+			if(!combat_classes.len)
+				break
 			var/datum/advclass/pickme = pick(combat_classes) // Pick one
 			combat_classes -= pickme
 			rolled_classes[pickme] = 0

@@ -234,19 +234,19 @@ SUBSYSTEM_DEF(triumphs)
 /*
 	We save everything when its time for reboot
 */
-/datum/controller/subsystem/triumphs/proc/reboot_saving_time()
+/datum/controller/subsystem/triumphs/proc/end_triumph_saving_time()
 	to_chat(world, "<span class='boldannounce'> Recording VICTORIES to the WORLD END MACHINE. </span>")
-	for(var/target_ckey in triumph_amount_cache) 
-		var/list/saving_data = list()
-		// this will be for example "data/player_saves/a/ass/triumphs.json" if their ckey was ass
-		var/target_file = file("data/player_saves/[target_ckey[1]]/[target_ckey]/triumphs.json") 
-		if(fexists(target_file))
-			fdel(target_file)
-
-		saving_data["triumph_wipe_season"] = GLOB.triumph_wipe_season
-		saving_data["triumph_count"] = triumph_amount_cache[target_ckey]
-		
-		WRITE_FILE(target_file, json_encode(saving_data))
+	//for(var/target_ckey in triumph_amount_cache) 
+	//	var/list/saving_data = list()
+	//	// this will be for example "data/player_saves/a/ass/triumphs.json" if their ckey was ass
+	//	var/target_file = file("data/player_saves/[target_ckey[1]]/[target_ckey]/triumphs.json") 
+	//	if(fexists(target_file))
+	//		fdel(target_file)
+//
+//		saving_data["triumph_wipe_season"] = GLOB.triumph_wipe_season
+//		saving_data["triumph_count"] = triumph_amount_cache[target_ckey]
+//		
+//		WRITE_FILE(target_file, json_encode(saving_data))
 
 	// handle the leaderboard here too i guess
 	var/leaderboard_file = file("data/triumph_leaderboards/triumphs_leaderboard_season_[GLOB.triumph_wipe_season].json")
@@ -257,11 +257,19 @@ SUBSYSTEM_DEF(triumphs)
 
 
 // Adjust triumphs
-/datum/controller/subsystem/triumphs/proc/triumph_adjust(amt, ckey)
-	if(ckey in triumph_amount_cache)
-		triumph_amount_cache[ckey] += amt
+/datum/controller/subsystem/triumphs/proc/triumph_adjust(amt, target_ckey)
+	if(target_ckey in triumph_amount_cache)
+		triumph_amount_cache[target_ckey] += amt
+		var/list/saving_data = list()
+		var/target_file = file("data/player_saves/[target_ckey[1]]/[target_ckey]/triumphs.json") 
+		if(fexists(target_file))
+			fdel(target_file)
+
+		saving_data["triumph_wipe_season"] = GLOB.triumph_wipe_season
+		saving_data["triumph_count"] = triumph_amount_cache[target_ckey]
+		WRITE_FILE(target_file, json_encode(saving_data))
 	else
-		triumph_amount_cache[ckey] = 0
+		triumph_amount_cache[target_ckey] = 0
 
 
 // Wipe the triumphs of one person
