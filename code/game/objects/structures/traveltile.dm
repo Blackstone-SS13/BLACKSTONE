@@ -150,6 +150,20 @@
 			to_chat(user, "<b>It is a dead end.</b>")
 			return FALSE
 
+/obj/structure/fluff/traveltile/goblin/can_go(mob/user)
+	. = ..()
+	if(.)
+		var/mob/living/L = user
+		if(HAS_TRAIT(L, TRAIT_GOBLINCAVE))
+			for(var/mob/living/carbon/human/H in hearers(6,src))
+				if(!HAS_TRAIT(H, TRAIT_GOBLINCAVE))
+					to_chat(user, "<b>I discover the entrance to the strange mansion</b>")
+					ADD_TRAIT(H, TRAIT_GOBLINCAVE, TRAIT_GENERIC)
+			return TRUE
+		else
+			to_chat(user, "<b>It is a dead end.</b>")
+			return FALSE
+
 /obj/structure/fluff/traveltile/vampire/can_go(mob/user)
 	. = ..()
 	if(.)
