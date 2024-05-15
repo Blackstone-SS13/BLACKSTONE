@@ -471,16 +471,30 @@
 	lefthand_file = 'icons/mob/inhands/weapons/swords_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/swords_righthand.dmi'
 
+
+/*
 /obj/item/rogueweapon/sword/sabre/spell
 	force = 15
 	name = "Flame Blade"
 	icon_state = "flameblade"
+	possible_item_intents = list(/datum/intent/sword/bcut, /datum/intent/sword/bthrust)
 	desc = "A blade created from a spell, burns whom are hit by it."
 	light_range = 7
-	fuel = 9999 MINUTES
 	
-/obj/item/rogueweapon/sword/sabre/spell/effect(mob/living/target, mob/living/user, nodmg)
-	. = ..()
+/datum/intent/sword/bcut
+	clickcd = 8
 	target.adjust_fire_stacks(5)
 	target.IgniteMob()
+
+/datum/intent/sword/bthrust
+	clickcd = 8
+	target.adjust_fire_stacks(5)
+	target.IgniteMob()
+
+*/
+/*
+/obj/item/rogueweapon/sword/sabre/spell/effect(mob/living/target, mob/living/user, nodmg)
+	target.adjust_fire_stacks(5)
+	target.IgniteMob()
+*/
 
