@@ -31,6 +31,14 @@
 	free_slot_rolls_count = 20
 
 
+/datum/job/roguetown/villager/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+	..()
+	if(L)
+		var/mob/living/carbon/human/H = L
+		H.advsetup = 1
+		H.invisibility = INVISIBILITY_MAXIMUM
+		H.become_blind("advsetup")
+
 /*
 /datum/job/roguetown/adventurer/villager/New()
 	. = ..()
