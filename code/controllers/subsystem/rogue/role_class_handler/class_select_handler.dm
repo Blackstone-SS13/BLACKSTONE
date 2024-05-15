@@ -83,18 +83,19 @@
 // So we cope here as rolling some plusses on classes properly isn't worth it
 /datum/class_select_handler/proc/lower_quality_gacha_rolls()
 	// Begin rolling to our alotted amount
-	var/list/free_classes = viable_free_classes.Copy()
-	for(var/i=1, i <= total_free_class, i++) // We just do the normal thing
-		var/datum/advclass/pickme = pick(free_classes) // Pick one
-		free_classes -= pickme
-		rolled_classes[pickme] = 0
+	if(total_free_class && viable_free_classes.len)
+		var/list/free_classes = viable_free_classes.Copy()
+		for(var/i=1, i <= total_free_class, i++) // We just do the normal thing
+			var/datum/advclass/pickme = pick(free_classes) // Pick one
+			free_classes -= pickme
+			rolled_classes[pickme] = 0
 
-	for(var/i in 1 to total_free_class)
-		var/datum/advclass/pickme = pick(viable_free_classes)
-		if(pickme in rolled_classes)
-			rolled_classes[pickme] += 1
+		for(var/i in 1 to total_free_class)
+			var/datum/advclass/pickme = pick(viable_free_classes)
+			if(pickme in rolled_classes)
+				rolled_classes[pickme] += 1
 	
-	if(total_combat_class)
+	if(total_combat_class && viable_combat_classes.len)
 		combat_classes = viable_combat_classes.Copy()
 		for(var/i=1, i <= total_combat_class, i++) // We just do the normal thing
 			var/datum/advclass/pickme = pick(combat_classes) // Pick one
@@ -126,21 +127,23 @@
 			attempt_pick_list = viable_combat_classes
 
 	// And also make an arbitrary three attempts for no reason to get a new class in
-	var/total_attempts = 3
-	var/datum/advclass/attempted_pick
-	for(var/i=1, i <= total_attempts, i++)
-		attempted_pick = pick(attempt_pick_list)
+	// As long as we have something in the list
+	if(attempt_pick_list.len)
+		var/total_attempts = 3
+		var/datum/advclass/attempted_pick
+		for(var/i=1, i <= total_attempts, i++)
+			attempted_pick = pick(attempt_pick_list)
 
-		if(attempted_pick in rolled_classes)
-			if(attempted_pick.category_flags & (RT_TYPE_COMBAT_CLASS))
-				if(prob(30))
+			if(attempted_pick in rolled_classes)
+				if(attempted_pick.category_flags & (RT_TYPE_COMBAT_CLASS))
+					if(prob(30))
+						rolled_classes[attempted_pick] += 1
+				else
 					rolled_classes[attempted_pick] += 1
+				continue
 			else
-				rolled_classes[attempted_pick] += 1
-			continue
-		else
-			rolled_classes[attempted_pick] = 0
-			break
+				rolled_classes[attempted_pick] = 0
+				break
 
 	if(cur_picked_class == filled_class)
 		cur_picked_class = null
