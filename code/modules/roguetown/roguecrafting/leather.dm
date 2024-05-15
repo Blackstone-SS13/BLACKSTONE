@@ -97,6 +97,12 @@
 	result = /obj/item/clothing/cloak/raincloak/brown
 	reqs = list(/obj/item/natural/hide = 2)
 
+/datum/crafting_recipe/roguetown/leather/apron
+	name = "leather apron"
+	result = /obj/item/clothing/cloak/apron/blacksmith
+	reqs = list(/obj/item/natural/hide = 2,
+				/obj/item/natural/fibers = 1)
+
 /datum/crafting_recipe/roguetown/leather/whip
 	name = "leather whip"
 	result = /obj/item/rogueweapon/whip
