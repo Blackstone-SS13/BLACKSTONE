@@ -357,6 +357,6 @@
 
 /turf/closed/wall/mineral/rogue/stone/bluemoss
     icon = 'icons/turf/walls/blue_mossy_stone.dmi'
-
+    climbdiff = 4
 /turf/closed/wall/mineral/rogue/stone/window/bluemoss
     icon = 'icons/turf/walls/blue_mossy_stone.dmi'
