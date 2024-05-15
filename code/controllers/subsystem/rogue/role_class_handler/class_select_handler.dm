@@ -101,7 +101,7 @@
 			combat_classes -= pickme
 			rolled_classes[pickme] = 0
 
-		for(var/i in 1 to total_combat_class)
+		for(var/i in 1 to 2)
 			var/datum/advclass/pickme = pick(viable_combat_classes)
 			if(pickme in rolled_classes)
 				rolled_classes[pickme] += 1
@@ -132,7 +132,11 @@
 		attempted_pick = pick(attempt_pick_list)
 
 		if(attempted_pick in rolled_classes)
-			rolled_classes[attempted_pick] += 1
+			if(attempted_pick.category_flags & (RT_TYPE_COMBAT_CLASS))
+				if(prob(30))
+					rolled_classes[attempted_pick] += 1
+			else
+				rolled_classes[attempted_pick] += 1
 			continue
 		else
 			rolled_classes[attempted_pick] = 0
