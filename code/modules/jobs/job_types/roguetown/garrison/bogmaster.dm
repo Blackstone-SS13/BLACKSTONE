@@ -5,6 +5,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
+	allowed_patrons = ALL_NORMAL_PATRONS
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
