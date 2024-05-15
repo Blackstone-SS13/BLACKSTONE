@@ -132,7 +132,6 @@ GLOBAL_VAR_INIT(dayspassed, FALSE)
 		T.maptext_height = 209
 		T.maptext_x = 12
 		T.maptext_y = -120
-		
 		playsound_local(src, 'sound/misc/newday.ogg', 100, FALSE)
 		animate(T, alpha = 255, time = 10, easing = EASE_IN)
 		addtimer(CALLBACK(src, PROC_REF(clear_area_text), T), 35)
