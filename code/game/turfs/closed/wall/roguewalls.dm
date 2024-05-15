@@ -354,3 +354,11 @@
 	baseturfs = list(/turf/open/floor/rogue/concrete)
 	climbdiff = 1
 	damage_deflection = 20
+
+/turf/closed/wall/mineral/rogue/stone/moss/blue
+    icon = 'icons/turf/walls/mossy_stone.dmi'
+	icon_state = "Blue_Moss_Stone"
+
+/turf/closed/wall/mineral/rogue/stone/window/moss/blueprint_data
+    icon = 'icons/turf/walls/mossy_stone.dmi'
+	icon_state = "Blue_Moss_Stonewindow"
