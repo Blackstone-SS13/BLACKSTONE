@@ -11,6 +11,8 @@
 	tutorial = "Goblin rensposible for fresh iron and steel"
 	display_order = JDO_GOBLINSMITH
 	outfit = /datum/outfit/job/roguetown/goblinsmith
+	min_pq = 0
+	max_pq = null
 
 /datum/outfit/job/roguetown/goblinsmith/pre_equip(mob/living/carbon/human/H)
 	..()
