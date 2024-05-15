@@ -133,7 +133,6 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	var/action_buttons_screen_locs = list()
 
 	var/domhand = 2
-	var/alignment = ALIGNMENT_TN
 	var/datum/charflaw/charflaw
 
 	var/family = FAMILY_NONE
@@ -210,9 +209,13 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			// Top-level menu table
 			dat += "<table width=100%>"
 			dat += "<tr>"
-			dat += "<td width='50%' align='left'>"
+			dat += "<td width='33%' align='left'>"
 			dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a>"
-			dat += "<td width='50%' align='right'>"
+			dat += "</td>"
+			dat += "<td width='33%' align='center'>"
+			dat += "<b>Be voice:</b> <a href='?_src_=prefs;preference=schizo_voice'>[(toggles & SCHIZO_VOICE) ? "Enabled":"Disabled"]</a><br>"
+			dat += "</td>"
+			dat += "<td width='33%' align='right'>"
 			dat += "<a href='?_src_=prefs;preference=keybinds;task=menu'>Keybinds</a>"
 			dat += "</table>"
 
@@ -232,8 +235,6 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				dat += "<center><h2>Quirk Setup</h2>"
 				dat += "<a href='?_src_=prefs;preference=trait;task=menu'>Configure Quirks</a><br></center>"
 				dat += "<center><b>Current Quirks:</b> [all_quirks.len ? all_quirks.Join(", ") : "None"]</center>"
-
-
 
 			// Encapsulating table
 			dat += "<table width = '100%'>"
@@ -908,7 +909,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	popup.open(FALSE)
 	onclose(user, "capturekeypress", src)
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 15, list/splitJobs = list("Sheriff", "Priest", "Merchant", "Butler", "Village Elder"), widthPerColumn = 295, height = 620) //295 620
+/datum/preferences/proc/SetChoices(mob/user, limit = 14, list/splitJobs = list("Sheriff", "Priest", "Merchant", "Butler", "Village Elder", "Goblin King"), widthPerColumn = 295, height = 620) //295 620
 	if(!SSjob)
 		return
 
@@ -2094,11 +2095,6 @@ Slots: [job.spawn_positions]</span>
 					var/list/loly = list("Not yet.","Work in progress.","Don't click me.","Stop clicking this.","Nope.","Be patient.","Sooner or later.")
 					to_chat(user, "<font color='red'>[pick(loly)]</font>")
 					return
-				if("alignment")
-///					to_chat(user, "<font color='puple'>Alignment is how you communicate to the Game Masters if your character follows a certain set of behavior restrictions. This allows you to </font>")
-					var/new_alignment = input(user, "Alignment is how you communicate to the Game Masters and other players the intent of your character. Your character will be under less administrative scrutiny for evil actions if you choose evil alignments, but you will experience subtle disadvantages. Alignment is overwritten for antagonists.", "Alignment") as null|anything in ALL_ALIGNMENTS_LIST
-					if(new_alignment)
-						alignment = new_alignment
 				if("hotkeys")
 					hotkeys = !hotkeys
 					if(hotkeys)
@@ -2286,6 +2282,15 @@ Slots: [job.spawn_positions]</span>
 				if("widescreenpref")
 					widescreenpref = !widescreenpref
 					user.client.change_view(CONFIG_GET(string/default_view))
+				
+				if("schizo_voice")
+					toggles ^= SCHIZO_VOICE
+					if(toggles & SCHIZO_VOICE)
+						to_chat(user, "<span class='warning'>You are now a voice.\n\
+										As a voice, you will receive meditations from players asking about game mechanics!\n\
+										Good voices will be rewarded with PQ for answering meditations, while bad ones are punished at the discretion of jannies.</span>")
+					else
+						to_chat(user, "<span class='warning'>You are no longer a voice.</span>")
 
 				if("save")
 					save_preferences()
@@ -2372,11 +2377,6 @@ Slots: [job.spawn_positions]</span>
 
 	character.gender = gender
 	character.domhand = domhand
-//#ifdef MATURESERVER
-//	character.alignment = alignment
-//#else
-//	character.alignment = ALIGNMENT_TN
-//#endif
 
 	character.eye_color = eye_color
 	character.voice_color = voice_color

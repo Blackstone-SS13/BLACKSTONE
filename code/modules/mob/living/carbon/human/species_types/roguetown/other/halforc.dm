@@ -103,4 +103,4 @@
 	return
 
 /datum/species/halforc/get_accent(mob/living/carbon/human/H)
-	return strings("proper_replacement.json", "proper")
+	return strings("middlespeak.json", "middle")

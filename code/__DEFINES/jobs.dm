@@ -160,6 +160,13 @@
 #define DESERT_RIDER	(1<<0)
 #define GRENZELHOFT		(1<<1)
 
+#define GOBLIN		(1<<7)
+
+#define GOBLINKING	(1<<0)
+#define GOBLINCOOK	(1<<1)
+#define GOBLINGUARD	(1<<2)
+#define GOBLINSMITH	(1<<3)
+
 #define JCOLOR_NOBLE "#aa83b9"
 #define JCOLOR_CHURCH "#c0ba8d"
 #define JCOLOR_SOLDIER "#b18484"
@@ -241,3 +248,8 @@
 
 #define JDO_VAGRANT 34
 #define JDO_ORPHAN 35
+
+#define JDO_GOBLINKING 36
+#define JDO_GOBLINCOOK 37
+#define JDO_GOBLINGUARD 38
+#define JDO_GOBLINSMITH 39
