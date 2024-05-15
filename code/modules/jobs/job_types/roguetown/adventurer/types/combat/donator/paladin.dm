@@ -20,14 +20,19 @@
 	switch(H.patron.name)
 		if("Astrata")
 			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+			cloak = /obj/item/clothing/cloak/tabard/crusader/astrata
 		if("Dendor")
 			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
+			cloak = /obj/item/clothing/cloak/tabard/crusader/dendor
 		if("Necra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/necra
+			cloak = /obj/item/clothing/cloak/tabard/crusader/necra
 		if("Pestra")
 			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
+			cloak = /obj/item/clothing/cloak/tabard/crusader/pestra
 		if("Noc")
 			neck = /obj/item/clothing/neck/roguetown/psicross/noc
+			cloak = /obj/item/clothing/cloak/tabard/crusader/noc
 
 
 	H.adjust_blindness(-3)
