@@ -157,7 +157,7 @@ SUBSYSTEM_DEF(treasury)
 
 ///Deposits money into a character's bank account. Taxes are deducted from the deposit and added to the treasury.
 ///@param amt: The amount of money to deposit.
-///@param character: The character for whom the money account is generated.
+///@param character: The character making the deposit.
 ///@return TRUE if the money was successfully deposited, FALSE otherwise.
 /datum/controller/subsystem/treasury/proc/generate_money_account(amt, mob/living/carbon/human/character)
 	if(!amt)
