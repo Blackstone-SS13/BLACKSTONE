@@ -4,7 +4,7 @@
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = 0
-	spawn_positions = 0
+	spawn_positions = 0 //disabled due to ERP removal
 
 	allowed_sexes = list(MALE)
 	allowed_races = list(
@@ -16,7 +16,7 @@
 		"Argonian",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
 
 	tutorial = "The Nightmaster is technically a noble. Owner of the Whitevein Lounge, a decaying bathhouse converted into a den of low-lifes. A troublemaking rake that the others hate to tolerate."

@@ -11,7 +11,7 @@
 		"Humen",
 		"Elf",
 		"Half-Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_patrons = list(/datum/patron/divine/noc)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)

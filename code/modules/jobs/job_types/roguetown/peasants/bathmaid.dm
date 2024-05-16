@@ -15,7 +15,7 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 

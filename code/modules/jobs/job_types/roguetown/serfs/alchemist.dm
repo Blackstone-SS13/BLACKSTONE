@@ -11,10 +11,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Tiefling",
-		"Argonian",
-		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 
 	tutorial = "You came to rockhill either to seek knowledge or riches."

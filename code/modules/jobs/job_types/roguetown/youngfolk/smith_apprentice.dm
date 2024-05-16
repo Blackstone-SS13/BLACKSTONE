@@ -11,11 +11,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Tiefling",
-		"Argonian",
-		"Dark Elf",
-		"Aasimar"
-	)
+	) //only "tough" races
 	allowed_ages = YOUNG_AGES_LIST
 
 	tutorial = "Long hours and back-breaking work wouldnt even describe a quarter of what you do in a day for your Master. Its exhausting, filthy and you dont get much freetime: but someday youll get your own smithy, and youll have TWICE as many apprentices as your master does."

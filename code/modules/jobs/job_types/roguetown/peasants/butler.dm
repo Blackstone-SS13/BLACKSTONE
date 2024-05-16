@@ -12,7 +12,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_ages = ADULT_AGES_LIST
 

@@ -14,7 +14,7 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = YOUNG_AGES_LIST
