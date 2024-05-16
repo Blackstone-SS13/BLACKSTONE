@@ -8,7 +8,7 @@
 	desc = "<b>Goblin</b><br>\
 	A vile, cursed race of green skinned fiends with brains as small as their hearts. Be not fooled by their appearance - What they lack in stature, they possess in sheer malice."
 	species_traits = list(NO_UNDERWEAR,NOEYESPRITES)
-	inherent_traits = list(RTRAIT_BREADY,TRAIT_STEELHEARTED,TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE)
+	inherent_traits = list(RTRAIT_BREADY,TRAIT_STEELHEARTED,TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE, TRAIT_ZOMBIE_IMMUNE)
 	no_equip = list(SLOT_SHIRT, SLOT_WEAR_MASK, SLOT_GLOVES, SLOT_SHOES, SLOT_PANTS, SLOT_S_STORE)
 	possible_ages = list(AGE_ADULT)
 	default_features = list("mcolor" = "FFF", "wings" = "None")
@@ -32,7 +32,7 @@
 	OFFSET_FACE_F = list(0,-5), OFFSET_BELT_F = list(0,-1), OFFSET_BACK_F = list(0,-5), \
 	OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-3), \
 	OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(0,0))
-	specstats = list("strength" = -3, "perception" = 2, "intelligence" = -4, "constitution" = -3, "endurance" = 3, "speed" = 4, "fortune" = -1)
+	specstats = list("strength" = -2, "perception" = 2, "intelligence" = -4, "constitution" = -3, "endurance" = 3, "speed" = 4, "fortune" = -1)
 
 
 /datum/species/goblinp/on_species_gain(mob/living/carbon/C, datum/species/old_species)
