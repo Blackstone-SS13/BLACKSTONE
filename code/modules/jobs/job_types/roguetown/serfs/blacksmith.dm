@@ -8,11 +8,15 @@
 
 	allowed_races = list(
 		"Humen",
+		"Elf",
 		"Half-Elf",
 		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
 		"Half Orc",
-	) //only "tough" races
-
+	)
 	tutorial = "You studied for many decades under your master with a few other apprentices to become an Armorer, a trade that certainly has seen a boom in revenue in recent times with many a bannerlord seeing the importance in maintaining a well-equipped army."
 
 	outfit = /datum/outfit/job/roguetown/armorsmith
@@ -72,10 +76,15 @@
 
 	allowed_races = list(
 		"Humen",
+		"Elf",
 		"Half-Elf",
 		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
 		"Half Orc",
-	) //only "tough" races
+	)
 
 	tutorial = "You studied for many decades under your master with a few other apprentices to become a Weaponsmith, a trade that is as ancient as the secrets of steel itself! You've repaired the blades of cooks, the cracked hoes of peasants and greased the spears of many soldiers into war."
 
