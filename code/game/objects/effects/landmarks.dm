@@ -173,7 +173,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/veteran
-	name = "Veteran"
+	name = "Captain of the Guard"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/dungeoneer

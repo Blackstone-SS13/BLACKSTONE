@@ -61,12 +61,12 @@
 /datum/outfit/job/roguetown/bogguardsman/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	head = /obj/item/clothing/head/roguetown/helmet/skullcap
-	armor = /obj/item/clothing/suit/roguetown/armor/gambeson
 	cloak = /obj/item/clothing/cloak/stabard/bog
 	neck = /obj/item/clothing/neck/roguetown/chaincoif
-	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/bog
+	gloves = /obj/item/clothing/gloves/roguetown/leather
+	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
 	pants = /obj/item/clothing/under/roguetown/trou/leather
-	shoes = /obj/item/clothing/shoes/roguetown/boots
+	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	beltl = /obj/item/keyring/guard
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/sword
@@ -93,11 +93,11 @@
 	bogger.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE) 
+	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE) 
+	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
@@ -105,7 +105,7 @@
 	bogger.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	bogger.change_stat("strength", 1)
-	bogger.change_stat("perception", 2) 
+	bogger.change_stat("perception", 2)
 	bogger.change_stat("constitution", 1)
 	bogger.change_stat("endurance", 1)
 	bogger.change_stat("speed", 1)

@@ -6,11 +6,11 @@
 	allowed_patrons = ALL_NORMAL_PATRONS
 	total_positions = 1
 	spawn_positions = 1
-
 	allowed_races = list("Humen")
 	allowed_sexes = list(MALE)
+	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	display_order = JDO_SHERIFF
-	tutorial = "Law and Order, your divine reason for existence. These animals are undeserving of your protection, for it is their sons and daughters roving the countryside with blade in hand; how many men have you lost this week just to the horrors in the woods alone? Are you the one to stand between this town and chaos, or will you fail it like they expect you to?"
+	tutorial = "Law was always your priority, even if it means putting it in front of your  family. You enforce that these laws are brought well by the guards and remind the people that you're the harbinger if they're unlawful. Along with the Captain, you recruit and train the reformed, and you're the one who applies the orders, to defend Rockhill from mischief..."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/sheriff
 	give_bank_account = 26
@@ -32,6 +32,7 @@
 	cloak = /obj/item/clothing/cloak/cape/guard
 	backpack_contents = list(/obj/item/keyring/sheriff = 1)
 	if(H.mind)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)

@@ -1,5 +1,5 @@
 /datum/job/roguetown/veteran
-	title = "Veteran"
+	title = "Captain of the Guard"
 	flag = GUARDSMAN
 	department_flag = GARRISON
 	faction = "Station"
@@ -15,8 +15,8 @@
 		"Aasimar",
 		"Half Orc",
 	) //same as town guard
-	tutorial = "You've served the garrison your whole life. There isn't a way to kill a man you havent practiced in the tapestries of war itself. You wouldn't call yourself a hero, those belong to the men left rotting in the fields of where you practiced your ancient trade. You don't sleep well at night anymore, you don't like remembering what you've had to do to survive. Trading adventure for stable pay was the only logical solution, and maybe someday you'll get to lay down the blade..."
-	allowed_ages = list(AGE_OLD)
+	tutorial = "War has always been a constant of your life, and you always chose the side of defense and justice. You rose up through the ranks as a guardman and you're now the head above all of them. Lead and train your men to defend the kingdom and maintain the peace. Recruit those who feels able to aid the Kingdom against the offensives and push the tides to be yours..."
+	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	display_order = JDO_VET
 	whitelist_req = TRUE
 
@@ -25,19 +25,34 @@
 	min_pq = 4
 	max_pq = null
 
+/datum/job/roguetown/veteran/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+	..()
+	if(ishuman(L))
+		var/mob/living/carbon/human/H = L
+		var/prev_real_name = H.real_name
+		var/prev_name = H.name
+		H.real_name = "Captain [prev_real_name]"
+		H.name = "Captain [prev_name]"
+
 /datum/outfit/job/roguetown/veteran/pre_equip(mob/living/carbon/human/H)
 	..()
-	pants = /obj/item/clothing/under/roguetown/trou/leather
+	head = /obj/item/clothing/head/roguetown/helmet/sallet/visored
+	pants = /obj/item/clothing/under/roguetown/chainlegs
+	gloves = gloves = /obj/item/clothing/gloves/roguetown/plate
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	cloak = /obj/item/clothing/cloak/half/vet
-	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guardsecond
-	armor = /obj/item/clothing/suit/roguetown/armor/plate/scale
+	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail
+	armor = /obj/item/clothing/suit/roguetown/armor/plate
 	neck = /obj/item/clothing/neck/roguetown/gorget
-	shoes = /obj/item/clothing/shoes/roguetown/boots
+	shoes = /obj/item/clothing/shoes/roguetown/boots/armor
 	beltl = /obj/item/keyring/guardcastle
-	belt = /obj/item/storage/belt/rogue/leather
-	backr = /obj/item/storage/backpack/rogue/satchel
+	beltr = /obj/item/rogueweapon/mace
+	belt = /obj/item/storage/belt/rogue/leather/black
+	backl = /obj/item/rogueweapon/shield/tower
+	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
 	if(H.mind)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
