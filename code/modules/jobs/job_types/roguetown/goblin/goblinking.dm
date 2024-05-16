@@ -36,6 +36,7 @@
 		H.change_stat("endurance", 1)
 		H.change_stat("speed", -2)
 
+/*
 /mob/living/carbon/human/proc/goblinannouncement()
 	set name = "Announcement"
 	set category = "Goblin King"
