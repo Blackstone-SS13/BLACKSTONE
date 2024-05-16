@@ -103,7 +103,7 @@
 	reqs = list(/obj/item/natural/hide = 2)
 
 
-/datum/crafting_recipe/roguetown/leather/apron
+/datum/crafting_recipe/roguetown/leather/apron/blacksmith
 	name = "leather apron"
 	result = /obj/item/clothing/cloak/apron/blacksmith
 	reqs = list(/obj/item/natural/hide = 2,
