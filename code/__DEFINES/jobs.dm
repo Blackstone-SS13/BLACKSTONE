@@ -100,10 +100,10 @@
 #define STEWARD		(1<<2)
 #define KNIGHT		(1<<3)
 #define WIZARD		(1<<4)
-#define PHYSICIAN 	(1<<4)
-#define SHERIFF		(1<<5)
-#define BAILIFF		(1<<6)
-#define COUNCILLOR	(1<<7)
+#define PHYSICIAN 	(1<<5)
+#define SHERIFF		(1<<6)
+#define BAILIFF		(1<<7)
+#define COUNCILLOR	(1<<8)
 
 #define GARRISON		(1<<1)
 
