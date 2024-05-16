@@ -53,8 +53,7 @@
 	cloak = /obj/item/clothing/cloak/raincloak/mortus
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltr = /obj/item/rogueweapon/huntingknife/idagger/steel
-	backr = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
-	beltl = /obj/item/quiver/bolts
+	beltl = /obj/item/rogueweapon/huntingknife/idagger/steel
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	H.change_stat("strength", -1)

@@ -50,7 +50,7 @@
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(3,4), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
