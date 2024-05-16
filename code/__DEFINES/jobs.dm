@@ -100,6 +100,7 @@
 #define STEWARD		(1<<2)
 #define KNIGHT		(1<<3)
 #define WIZARD		(1<<4)
+#define PHYSICIAN 	(1<<4)
 #define SHERIFF		(1<<5)
 #define BAILIFF		(1<<6)
 #define COUNCILLOR	(1<<7)
@@ -185,6 +186,7 @@
 #define JDO_CLERK 3.1
 
 #define JDO_MAGICIAN 5
+#define JDO_PHYSICIAN 5.1
 #define JDO_WAPP 6
 #define JDO_BAILIFF 7
 #define JDO_COUNCILLOR 7.1
