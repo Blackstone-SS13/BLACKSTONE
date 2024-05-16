@@ -41,7 +41,7 @@
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(1,2,3), TRUE) // If you can make a sword you can swing one.
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,2,3), TRUE) 
-			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(0,1), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE) 
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
