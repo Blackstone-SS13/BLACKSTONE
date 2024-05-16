@@ -56,8 +56,8 @@
         "young": "jung",
 		"soldier": "soldat",
 		"knight": "ritter",
-		"kingdom": "konigreich",
-		"king": "konig",
+		"kingdom": "königreich",
+		"king": "könig",
 		"princess": "prinzess",
 		"prince": "prinz",
 		"dwarf": "zwarf",
@@ -65,11 +65,25 @@
 		"wizard": "vizard",
 		"witch": "vitch",
 		"beast": "biest",
-		"forest": "forst",
+		"forest": [
+            "wald",
+            "forst"
+        ],
 		"necromancer": "nekromant",
 		"demon": "dämon",
 		"vampire": "vampir",
 		"goblin": "kobold",
-        "black": "schwarz"
+        "black": "schwarz",
+        "church": "kirche",
+        "is ": "ist ",
+        "queen": "königin",
+        "bog": [
+            "moor",
+            "sumpf"
+        ],
+        "town": "stadt",
+        "an ": "eine ",
+        "fellow": "kollege",
+        "colleague": "kollege"
     }
 }
