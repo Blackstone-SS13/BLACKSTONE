@@ -117,3 +117,9 @@
 		if(SKIN_COLOR_GRENZELHOFT) //Grenzelhoft
 			return strings("german_replacement.json", "german")
 	return null
+
+/datum/species/human/northern/get_accent(mob/living/carbon/human/H)
+	switch(H.skin_tone)
+		if(SKIN_COLOR_ROCKHILL) //Rockhill
+			return strings("Anglish.json", "Anglish")
+	return null
