@@ -101,7 +101,7 @@
 
 /obj/structure/roguemachine/mail/attackby(obj/item/P, mob/user, params)
 	if(istype(P, /obj/item/paper/confession))
-		if((user.mind.assigned_role == "Confessor") || (user.mind.assigned_role == "Witch Hunter"))
+		if((user.mind.assigned_role == "Confessor") || (user.mind.assigned_role == "Inquisitor"))
 			var/obj/item/paper/confession/C = P
 			if(C.signed)
 				if(GLOB.confessors)

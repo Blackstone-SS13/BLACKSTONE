@@ -5,6 +5,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
+	allowed_patrons = ALL_NORMAL_PATRONS
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
@@ -15,7 +16,7 @@
 		"Argonian",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
 	tutorial = "You are the most experienced idiot to volunteer to the Bog Guard... What a mistake that was. You report to the Sheriff, and your job is to keep the bogmen in line and to ensure the routes to the keep are safe. May the ten have mercy on you..."
 	display_order = JDO_BOGMASTER
@@ -23,6 +24,7 @@
 	outfit = /datum/outfit/job/roguetown/bogmaster
 	give_bank_account = 35
 	min_pq = 4
+	max_pq = null
 
 /datum/job/roguetown/bogmaster/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()

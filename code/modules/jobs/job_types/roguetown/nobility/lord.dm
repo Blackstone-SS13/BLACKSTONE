@@ -15,6 +15,7 @@
 	bypass_lastclass = FALSE
 	whitelist_req = FALSE
 	min_pq = 5
+	max_pq = null
 	give_bank_account = 1000
 	required = TRUE
 

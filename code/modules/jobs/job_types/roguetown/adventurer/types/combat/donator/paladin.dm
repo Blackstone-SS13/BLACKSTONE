@@ -48,7 +48,7 @@
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,3,3,4), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
@@ -67,6 +67,17 @@
 			beltr = /obj/item/rogueweapon/huntingknife
 			id = /obj/item/clothing/ring/silver
 			cloak = /obj/item/clothing/cloak/tabard/crusader
+			switch(H.patron.name)	
+				if("Astrata")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/astrata
+				if("Dendor")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/dendor
+				if("Necra")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/necra
+				if("Pestra")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/pestra
+				if("Noc")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/noc
 			if(prob(70))
 				backr = /obj/item/rogueweapon/sword
 			else
@@ -90,7 +101,7 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(2,3), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
 			H.change_stat("perception", 1)
 			H.change_stat("strength", 2)
 			H.change_stat("constitution", 2) 

@@ -8,19 +8,9 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	flag = ADVENTURER
 	department_flag = PEASANTS
 	faction = "Station"
-	total_positions = 75
-	spawn_positions = 75
-	allowed_races = list(
-		"Humen",
-		"Elf",
-		"Half-Elf",
-		"Dwarf",
-		"Tiefling",
-		"Argonian",
-		"Dark Elf",
-		"Aasimar",
-		"Half Orc"
-	)
+	total_positions = 40
+	spawn_positions = 40
+	allowed_races = ALL_RACES_LIST_NAMES
 	tutorial = "Hero of nothing, adventurer by trade. Whatever led you to this fate is up to the wind to decide, and you've never fancied yourself for much other than the thrill. Someday your pride is going to catch up to you, and you're going to find out why most men don't end up in the annals of history."
 
 
@@ -30,6 +20,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	display_order = JDO_ADVENTURER
 	show_in_credits = FALSE
 	min_pq = 0
+	max_pq = null
 	
 	wanderer_examine = TRUE
 	advjob_examine = TRUE

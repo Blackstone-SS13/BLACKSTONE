@@ -42,7 +42,7 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltr = /obj/item/rogueweapon/sword/sabre/elf
 	backpack_contents = list(/obj/item/bait = 1, /obj/item/rogueweapon/huntingknife/elvish = 1, /obj/item/flashlight/flare/torch/lantern = 1)
-	beltl = /obj/item/quiver/Parrows
+	beltl = /obj/item/quiver/arrows
 	H.change_stat("perception", 5)
 	H.change_stat("endurance", 2)
 	H.ambushable = FALSE

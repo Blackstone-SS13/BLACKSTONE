@@ -14,7 +14,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc",
 	)
 	allowed_ages = YOUNG_AGES_LIST
 
@@ -24,6 +25,7 @@
 	display_order = JDO_BAPP
 	give_bank_account = TRUE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/bapprentice/pre_equip(mob/living/carbon/human/H)
 	..()

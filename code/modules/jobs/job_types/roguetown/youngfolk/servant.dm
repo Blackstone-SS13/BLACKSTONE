@@ -11,10 +11,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Tiefling",
-		"Argonian",
-		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_ages = YOUNG_AGES_LIST
 
@@ -24,6 +21,7 @@
 	display_order = JDO_SERVANT
 	give_bank_account = TRUE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/servant/pre_equip(mob/living/carbon/human/H)
 	..()

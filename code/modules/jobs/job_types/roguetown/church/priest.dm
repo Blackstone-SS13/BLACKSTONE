@@ -1,14 +1,17 @@
 
 /datum/job/roguetown/priest
 	title = "Priest"
-	f_title = "Priestess"
 	flag = PRIEST
 	department_flag = CHURCHMEN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = JCOLOR_CHURCH
-	allowed_races = list("Humen", "Aasimar")
+	allowed_sexes = list(MALE)
+	allowed_races = list(
+		"Humen", 
+		"Aasimar",
+	)
 	allowed_patrons = list(/datum/patron/divine/astrata)
 	tutorial = "The Divine is all that matters in a world of the immoral. The Weeping God left his children to rule over us mortals and you will preach their wisdom to any who still heed their will. The faithless are growing in number, it is up to you to shepard them to a Gods-fearing future."
 	whitelist_req = FALSE
@@ -17,6 +20,7 @@
 	display_order = JDO_PRIEST
 	give_bank_account = 115
 	min_pq = 2
+	max_pq = null
 
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
 	..()

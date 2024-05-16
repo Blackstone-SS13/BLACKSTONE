@@ -15,6 +15,7 @@
 	whitelist_req = TRUE
 	give_bank_account = 44
 	min_pq = 3
+	max_pq = null
 
 /*
 /datum/job/roguetown/hand/special_job_check(mob/dead/new_player/player)

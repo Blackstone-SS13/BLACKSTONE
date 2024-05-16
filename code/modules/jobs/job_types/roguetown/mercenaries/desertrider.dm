@@ -1,14 +1,8 @@
 /datum/job/roguetown/mercenary/desert_rider
 	title = "Desert Rider Mercenary"
 	flag = DESERT_RIDER
-	allowed_sexes = list("male", "female")
-	allowed_races = list(
-		"Humen", 
-		"Half-Elf", 
-		"Tiefling", 
-		"Argonian", 
-		"Dark Elf",
-	)
+	allowed_sexes = list(MALE, FEMALE)
+	allowed_races = list("Humen", "Half-Elf")
 	tutorial = "Blood, like the desert sand, stains your hands, a crimson testament to the gold you covet. A desert rider, renowned mercenary of the far east, your scimitar whispers tales of centuries-old tradition. Your loyalty, a fleeting mirage in the shifting sands, will yield to the allure of fortune."
 	outfit = /datum/outfit/job/roguetown/mercenary/desert_rider
 	display_order = JDO_DESERT_RIDER
@@ -19,6 +13,7 @@
 	spawn_positions = 5
 	give_bank_account = 3
 	min_pq = 2 //good fragger role
+	max_pq = null
 
 /datum/outfit/job/roguetown/mercenary/desert_rider/pre_equip(mob/living/carbon/human/H)
 	..()

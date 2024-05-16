@@ -10,7 +10,7 @@
 		"Humen",
 		"Elf",
 		"Half-Elf",
-		"Dwarf"
+		"Dwarf",
 	)
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_STEWARD
@@ -18,6 +18,7 @@
 	outfit = /datum/outfit/job/roguetown/steward
 	give_bank_account = 17
 	min_pq = 2
+	max_pq = null
 
 /datum/outfit/job/roguetown/steward/pre_equip(mob/living/carbon/human/H)
 	..()
