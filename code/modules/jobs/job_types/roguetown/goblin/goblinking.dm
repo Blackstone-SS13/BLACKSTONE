@@ -28,9 +28,12 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
 	head = /obj/item/clothing/head/roguetown/crown/serpcrown/surplus
 	cloak = /obj/item/clothing/cloak/heartfelt
+	ADD_TRAIT(H, RTRAIT_CRITICAL_RESISTANCE, TRAIT_GENERIC)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
 		H.change_stat("strength", -1)
 		H.change_stat("intelligence", 2)
 		H.change_stat("constitution", 6)
