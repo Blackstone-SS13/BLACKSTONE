@@ -10,9 +10,9 @@
 	reqs = list(/obj/item/natural/cloth = 1)
 	craftdiff = 0
 
-/datum/crafting_recipe/roguetown/sewing/redheadband
-	name = "red headband"
-	result = list(/obj/item/clothing/head/roguetown/headband)
+/datum/crafting_recipe/roguetown/sewing/loincloth
+	name = "loincloth"
+	result = list(/obj/item/clothing/under/roguetown/loincloth)
 	reqs = list(/obj/item/natural/cloth = 1)
 	craftdiff = 0
 
@@ -53,6 +53,13 @@
 				/obj/item/natural/fibers = 2)
 	craftdiff = 1
 
+/datum/crafting_recipe/roguetown/sewing/knitcap
+	name = "knit cap"
+	result = list(/obj/item/clothing/head/roguetown/knitcap)
+	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 1
+
 /datum/crafting_recipe/roguetown/sewing/basichood
 	name = "hood"
 	result = list(/obj/item/clothing/head/roguetown/roguehood)
@@ -72,13 +79,6 @@
 /datum/crafting_recipe/roguetown/sewing/coif
 	name = "coif"
 	result = list(/obj/item/clothing/neck/roguetown/coif)
-	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 2
-
-/datum/crafting_recipe/roguetown/sewing/knitcap
-	name = "knit cap"
-	result = list(/obj/item/clothing/head/roguetown/knitcap)
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 2
@@ -112,6 +112,8 @@
 				/obj/item/natural/fibers = 1)
 	craftdiff = 2
 
+/* craftdif of 3+ */
+
 /datum/crafting_recipe/roguetown/sewing/fancyhat
 	name = "fancy hat"
 	result = list(/obj/item/clothing/head/roguetown/fancyhat)
@@ -122,7 +124,7 @@
 /datum/crafting_recipe/roguetown/sewing/gambeson
 	name = "gambeson"
 	result = /obj/item/clothing/suit/roguetown/armor/gambeson
-	reqs = list(/obj/item/natural/fibers = 20)
+	reqs = list(/obj/item/natural/fibers = 18)
 	tools = list(/obj/item/needle)
 	craftdiff = 3
 
@@ -150,6 +152,6 @@
 /datum/crafting_recipe/roguetown/sewing/jupon
 	name = "jupon"
 	result = list(/obj/item/clothing/cloak/stabard/surcoat)
-	reqs = list(/obj/item/natural/cloth = 4,
+	reqs = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3

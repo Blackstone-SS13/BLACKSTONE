@@ -148,7 +148,7 @@
 
 /obj/item/clothing/cloak/tabard/crusader/necra
 	color = "#222223"
-	detail_color = "#96998C" 
+	detail_color = "#CACBC5" 
 
 /obj/item/clothing/cloak/tabard/crusader/pestra
 	color = CLOTHING_WHITE
@@ -562,6 +562,7 @@
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
 	boobed = TRUE
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 
 /obj/item/clothing/cloak/apron/blacksmith
 	name = "leather apron"
@@ -825,7 +826,7 @@
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
 	allowed_sex = list(MALE)
-	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 	sellprice = 50
 	nodismemsleeves = TRUE
 

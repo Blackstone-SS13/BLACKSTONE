@@ -79,6 +79,11 @@
 	reqs = list(/obj/item/natural/hide = 1)
 	sellprice = 26
 
+/datum/crafting_recipe/roguetown/leather/vest
+	name = "leather vest"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/vest
+	reqs = list(/obj/item/natural/hide = 2)
+
 /datum/crafting_recipe/roguetown/leather/armor
 	name = "leather armor"
 	result = /obj/item/clothing/suit/roguetown/armor/leather
@@ -97,16 +102,12 @@
 	result = /obj/item/clothing/cloak/raincloak/brown
 	reqs = list(/obj/item/natural/hide = 2)
 
+
 /datum/crafting_recipe/roguetown/leather/apron
 	name = "leather apron"
 	result = /obj/item/clothing/cloak/apron/blacksmith
 	reqs = list(/obj/item/natural/hide = 2,
 				/obj/item/natural/fibers = 1)
-
-/datum/crafting_recipe/roguetown/leather/whip
-	name = "leather whip"
-	result = /obj/item/rogueweapon/whip
-	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/stone = 1)
 
 /obj/item/clothing/cloak/raincloak/brown
 	sellprice = 20
@@ -115,7 +116,6 @@
 	name = "fur cloak"
 	result = /obj/item/clothing/cloak/raincloak/furcloak/crafted
 	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/fur = 1)
-
 
 /obj/item/clothing/cloak/raincloak/furcloak/crafted
 	sellprice = 55
@@ -128,4 +128,24 @@
 /datum/crafting_recipe/roguetown/leather/vest
 	name = "leather vest"
 	result = /obj/item/clothing/suit/roguetown/armor/leather/vest
+	reqs = list(/obj/item/natural/hide = 2)
+
+/datum/crafting_recipe/roguetown/leather/whip
+	name = "leather whip"
+	result = /obj/item/rogueweapon/whip
+	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/stone = 1)
+
+/datum/crafting_recipe/roguetown/leather/drum
+	name = "Drum"
+	result = /obj/item/rogue/instrument/drum
+	reqs = list(/obj/item/natural/hide = 1,/obj/item/grown/log/tree/small = 1)
+
+/datum/crafting_recipe/roguetown/leather/goblinhelmet
+	name = "goblin helmet"
+	result = /obj/item/clothing/head/roguetown/helmet/leather/goblin
+	reqs = list(/obj/item/natural/hide = 1)
+
+/datum/crafting_recipe/roguetown/leather/goblinarmor
+	name = "goblin armor"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/goblin
 	reqs = list(/obj/item/natural/hide = 2)

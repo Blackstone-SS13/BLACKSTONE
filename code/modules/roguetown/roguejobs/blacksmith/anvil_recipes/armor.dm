@@ -48,6 +48,18 @@
 	additional_items = list(/obj/item/clothing/suit/roguetown/armor/leather)
 	created_item = /obj/item/clothing/suit/roguetown/armor/leather/studded
 
+/datum/anvil_recipe/armor/helmetgoblin
+	name = "iron goblin helmet (+iron)"
+	req_bar = /obj/item/ingot/iron
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/clothing/head/roguetown/helmet/goblin
+
+/datum/anvil_recipe/armor/plategoblin
+	name = "iron goblin mail (+iron)"
+	req_bar = /obj/item/ingot/iron
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/clothing/suit/roguetown/armor/plate/half/iron/goblin
+
 // --------- STEEL -----------
 
 /datum/anvil_recipe/armor/haubergeon
