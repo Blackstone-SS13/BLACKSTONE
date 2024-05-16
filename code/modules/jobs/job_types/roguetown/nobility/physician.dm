@@ -20,7 +20,7 @@
 	whitelist_req = TRUE
 	give_bank_account = 25
 	min_pq = 2
-	max_pq = 2
+	max_pq = null
 
 /datum/outfit/job/roguetown/physician
 	name = "Physician"
