@@ -54,6 +54,7 @@
 		H.change_stat("speed", 1)
 		H.change_stat("constitution", 1)
 		H.change_stat("perception", 2)
+		H.patron = GLOB.patronlist[/datum/patron/old_god]
 	H.verbs |= /mob/living/carbon/human/proc/torture_victim
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)

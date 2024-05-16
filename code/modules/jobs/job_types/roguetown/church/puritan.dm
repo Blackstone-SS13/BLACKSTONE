@@ -5,15 +5,13 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-
 	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Aasimar"
 	)
-	allowed_patrons = list(/datum/patron/old_god)
 
-	tutorial = "As a Inquisitor, the Queen has emboldened your sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
+	tutorial = "As a Inquisitor, the Queen has emboldened your radical sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
 	whitelist_req = TRUE
 
 	outfit = /datum/outfit/job/roguetown/puritan
@@ -64,6 +62,7 @@
 		H.change_stat("intelligence", 3)
 		H.change_stat("strength", 2)
 		H.change_stat("perception", 3)
+		H.patron = GLOB.patronlist[/datum/patron/old_god]
 //		if(H.mind.has_antag_datum(/datum/antagonist))
 //			return
 //		var/datum/antagonist/new_antag = new /datum/antagonist/purishep()
