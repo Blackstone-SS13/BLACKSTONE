@@ -13,14 +13,13 @@
 		"Dwarf",
 		"Aasimar"
 	)
-	allowed_patrons = ALL_CLERIC_PATRONS
+	allowed_patrons = list(/datum/patron/divine/astrata, /datum/patron/divine/dendor, /datum/patron/divine/pestra, /datum/patron/divine/noc)
 	outfit = /datum/outfit/job/roguetown/monk
 	tutorial = "Chores, some more chores- Even more chores.. Oh how the life of a humble cleric is exhausting… You have faith, but even you know you gave up a life of adventure for that of the security in the Church. Assist the Priest in their daily tasks, maybe today will be the day something interesting happens."
 
 	display_order = JDO_MONK
 	give_bank_account = TRUE
 	min_pq = 0
-	max_pq = null
 
 /datum/outfit/job/roguetown/monk
 	name = "Acolyte"
@@ -39,6 +38,16 @@
 			wrists = /obj/item/clothing/wrists/roguetown/wrappings
 			shoes = /obj/item/clothing/shoes/roguetown/sandals
 			armor = /obj/item/clothing/suit/roguetown/shirt/robe/astrata
+		if("Dendor")
+			head = /obj/item/clothing/head/roguetown/dendormask
+			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
+			armor = /obj/item/clothing/suit/roguetown/shirt/robe/dendor
+		if("Pestra") //PLEASE add plague doctor gear later, this SUCKS dude
+			head = /obj/item/clothing/head/roguetown/necrahood
+			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
+			shoes = /obj/item/clothing/shoes/roguetown/boots
+			pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
+			armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra
 		if("Noc")
 			head = /obj/item/clothing/head/roguetown/roguehood/nochood
 			neck = /obj/item/clothing/neck/roguetown/psicross/noc
@@ -46,22 +55,6 @@
 			shoes = /obj/item/clothing/shoes/roguetown/sandals
 			armor = /obj/item/clothing/suit/roguetown/shirt/robe/noc
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
-		if("Dendor")
-			head = /obj/item/clothing/head/roguetown/dendormask
-			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
-			armor = /obj/item/clothing/suit/roguetown/shirt/robe/dendor
-		if("Necra")
-			head = /obj/item/clothing/head/roguetown/necrahood
-			neck = /obj/item/clothing/neck/roguetown/psicross/necra
-			shoes = /obj/item/clothing/shoes/roguetown/boots
-			pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
-			armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra
-		if("Pestra") //PLEASE add plague doctor gear later, this SUCKS dude
-			head = /obj/item/clothing/head/roguetown/necrahood
-			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
-			shoes = /obj/item/clothing/shoes/roguetown/boots
-			pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
-			armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
