@@ -148,6 +148,10 @@
 	name = "amulet of Pestra"
 	desc = ""
 
+/obj/item/clothing/neck/roguetown/psicross/wood
+	name = "wooden psycross"
+	icon_state = "psicrossw"
+
 /obj/item/clothing/neck/roguetown/psicross/silver
 	name = "silver psycross"
 	icon_state = "psicrossiron"
@@ -192,7 +196,7 @@
 	item_state = "talkstone"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
-	allowed_race = list("human", "dwarf", "elf", "tiefling", "aasimar", "goblinp", "halforc")
+	allowed_race = list("human", "dwarf", "elf", "tiefling", "aasimar", "goblin", "halforc")
 	sellprice = 98
 
 /obj/item/clothing/neck/roguetown/horus
