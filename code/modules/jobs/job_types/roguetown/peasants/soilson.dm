@@ -7,7 +7,7 @@
 	spawn_positions = 5
 	display_order = JDO_SOILSON
 	selection_color = JCOLOR_PEASANT
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",

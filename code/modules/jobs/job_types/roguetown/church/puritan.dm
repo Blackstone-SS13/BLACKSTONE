@@ -8,7 +8,7 @@
 	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
-		"Aasimar"
+		"Aasimar",
 	)
 
 	tutorial = "As a Inquisitor, the Queen has emboldened your radical sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."

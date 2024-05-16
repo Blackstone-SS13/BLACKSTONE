@@ -2,7 +2,7 @@
 	title = "Grenzelhoft Mercenary"
 	flag = GRENZELHOFT
 	tutorial = "Experts, Professionals, Expensive. Those are the first words that come to mind when the emperiate Grenzelhoft mercenary guild is mentioned. While you may work for coin like any common sellsword, mantaining the prestige of the guild will be of utmost priority."
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list("Humen", "Aasimar", "Half-Elf")
 	outfit = /datum/outfit/job/roguetown/mercenary/grenzelhoft
 	display_order = JDO_GRENZELHOFT

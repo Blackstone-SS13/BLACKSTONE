@@ -12,17 +12,7 @@
 #endif
 	min_pq = null //no pq
 	max_pq = null
-	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Half-Elf",
-	"Dark Elf",
-	"Tiefling",
-	"Dwarf",
-	"Dwarf"
-	)
+
 	tutorial = ""
 	outfit = /datum/outfit/job/roguetown/tester
 	plevel_req = 0
