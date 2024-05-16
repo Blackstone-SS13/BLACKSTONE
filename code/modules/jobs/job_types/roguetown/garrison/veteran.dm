@@ -43,7 +43,7 @@
 	cloak = /obj/item/clothing/cloak/half/vet
 	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail
 	armor = /obj/item/clothing/suit/roguetown/armor/plate
-	neck = /obj/item/clothing/neck/roguetown/gorget
+	neck = /obj/item/clothing/neck/roguetown/bervor
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor
 	beltl = /obj/item/keyring/guardcastle
 	beltr = /obj/item/rogueweapon/mace
