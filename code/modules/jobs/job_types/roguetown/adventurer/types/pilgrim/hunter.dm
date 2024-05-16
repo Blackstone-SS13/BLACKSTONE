@@ -1,6 +1,6 @@
 /datum/advclass/hunter
 	name = "Hunter"
-	tutorial = "You are a hunter, with your bow you hunt the fauna in the bog, skinning what you kill to use in skincrafting \ 
+	tutorial = "You are a hunter, with your bow you hunt the fauna in the bog, skinning what you kill to use in skincrafting, \ 
 	and cooking any meat left over, your role is one that is not done by many, but important in the circulation of clothing and light armor"
 	allowed_sexes = list("male", "female")
 	allowed_races = list(
