@@ -1,25 +1,23 @@
 /datum/job/roguetown/puritan
-	title = "Witch Hunter"
+	title = "Inquisitor"
 	flag = PURITAN
 	department_flag = CHURCHMEN
 	faction = "Station"
-	total_positions = 0
-	spawn_positions = 0
-
+	total_positions = 1
+	spawn_positions = 1
 	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Aasimar"
 	)
-	allowed_patrons = list(/datum/patron/old_god)
 
-	tutorial = "As a Witch Hunter, the Queen has emboldened your sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
+	tutorial = "As a Inquisitor, the Queen has emboldened your radical sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
 	whitelist_req = TRUE
 
 	outfit = /datum/outfit/job/roguetown/puritan
 	display_order = JDO_PURITAN
 	give_bank_account = 36
-	min_pq = 0
+	min_pq = 5
 	max_pq = null
 
 /datum/job/roguetown/puritan/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
@@ -32,8 +30,9 @@
 	L.mind.add_antag_datum(new_antag)
 
 /datum/outfit/job/roguetown/puritan
-	name = "Witch Hunter"
+	name = "Inquisitor"
 	jobtype = /datum/job/roguetown/puritan
+	allowed_patrons = list(/datum/patron/old_god)	
 
 /datum/outfit/job/roguetown/puritan/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -47,7 +46,7 @@
 	head = /obj/item/clothing/head/roguetown/puritan
 	gloves = /obj/item/clothing/gloves/roguetown/leather
 	beltl = /obj/item/rogueweapon/sword/rapier
-	backpack_contents = list(/obj/item/keyring/puritan = 1)
+	backpack_contents = list(/obj/item/keyring/puritan = 1, /obj/item/rogueweapon/huntingknife/idagger/silver)
 
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
@@ -71,6 +70,7 @@
 //	ADD_TRAIT(H, RTRAIT_TORTURER, TRAIT_GENERIC)
 	H.verbs |= /mob/living/carbon/human/proc/faith_test
 	H.verbs |= /mob/living/carbon/human/proc/torture_victim
+	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
 
 /mob/living/carbon/human/proc/torture_victim()
 	set name = "ExtractConfession"

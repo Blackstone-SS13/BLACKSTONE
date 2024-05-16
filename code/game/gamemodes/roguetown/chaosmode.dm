@@ -238,7 +238,7 @@
 	"Queen",
 	"Prisoner",
 	"Dungeoneer",
-	"Witch Hunter",
+	"Inquisitor",
 	"Confessor",
 	"Town Guard",
 	"Castle Guard",
