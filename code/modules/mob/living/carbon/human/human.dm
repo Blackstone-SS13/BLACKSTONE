@@ -109,7 +109,7 @@
 		if(VD)
 			if(statpanel("Stats"))
 				stat("Vitae:",VD.vitae)
-		if((mind.assigned_role == "Shepherd") || (mind.assigned_role == "Witch Hunter"))
+		if((mind.assigned_role == "Shepherd") || (mind.assigned_role == "Inquisitor"))
 			if(statpanel("Status"))
 				stat("Confessions sent: [GLOB.confessors.len]")
 

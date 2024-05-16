@@ -66,7 +66,7 @@
 	var/list/roundstart_experience
 
 	//allowed sex/race for picking
-	var/list/allowed_sexes = list(MALE,FEMALE)
+	var/list/allowed_sexes
 	var/list/allowed_races
 	var/list/allowed_patrons
 	var/list/allowed_ages = ADULT_AGES_LIST
@@ -93,6 +93,7 @@
 
 	var/plevel_req = 0
 	var/min_pq = 0
+	var/max_pq = 0
 
 	var/show_in_credits = TRUE
 

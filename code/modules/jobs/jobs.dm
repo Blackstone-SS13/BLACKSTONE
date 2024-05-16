@@ -86,7 +86,7 @@ GLOBAL_LIST_INIT(church_positions, list(
 	"Cleric",
 	"Acolyte",
 	"Templar",
-	"Witch Hunter",
+	"Inquisitor",
 	"Confessor"
 	))
 
@@ -108,6 +108,7 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Cook",
 	"Gravedigger",
 	"Jester",
+	"Lunatic",
 	"Miner",
 	"Hunter",
 	"Fisher",

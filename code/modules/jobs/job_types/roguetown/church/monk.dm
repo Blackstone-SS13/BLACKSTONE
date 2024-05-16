@@ -6,12 +6,13 @@
 	total_positions = 3
 	spawn_positions = 4
 
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_patrons = ALL_CLERIC_PATRONS
 	outfit = /datum/outfit/job/roguetown/monk
@@ -20,6 +21,7 @@
 	display_order = JDO_MONK
 	give_bank_account = TRUE
 	min_pq = 0
+	max_pq = null
 
 /datum/outfit/job/roguetown/monk
 	name = "Acolyte"

@@ -243,9 +243,6 @@ RULESURL https://wiki.moviesfreepremium.xyz/blackstone/rules
 ## Github address
 GITHUBURL https://github.com/Blackstone-SS13/BLACKSTONE
 
-## Mentorhelp address
-MENTORHELPURL https://discord.com/channels/1209810478612873256/1227349306651181157
-
 ## Round specific stats address
 ## Link to round specific parsed logs; IE statbus. It is appended with the RoundID automatically by ticker/Reboot()
 ## This will take priority over the game logs address during reboot.

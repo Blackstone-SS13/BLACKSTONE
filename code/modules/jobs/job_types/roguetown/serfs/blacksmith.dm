@@ -15,15 +15,15 @@
 		"Argonian",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
-
 	tutorial = "You studied for many decades under your master with a few other apprentices to become an Armorer, a trade that certainly has seen a boom in revenue in recent times with many a bannerlord seeing the importance in maintaining a well-equipped army."
 
 	outfit = /datum/outfit/job/roguetown/armorsmith
 	display_order = JDO_ARMORER
 	give_bank_account = 11
 	min_pq = 1
+	max_pq = null
 
 /datum/outfit/job/roguetown/armorsmith/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -74,10 +74,16 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Dwarf",
-	"Dwarf",
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc",
 	)
 
 	tutorial = "You studied for many decades under your master with a few other apprentices to become a Weaponsmith, a trade that is as ancient as the secrets of steel itself! You've repaired the blades of cooks, the cracked hoes of peasants and greased the spears of many soldiers into war."
@@ -86,6 +92,7 @@
 	display_order = JDO_WSMITH
 	give_bank_account = 11
 	min_pq = 1
+	max_pq = null
 
 /datum/outfit/job/roguetown/weaponsmith/pre_equip(mob/living/carbon/human/H)
 	..()

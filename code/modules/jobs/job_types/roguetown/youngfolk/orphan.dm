@@ -14,7 +14,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc",
 	)
 	allowed_ages = YOUNG_AGES_LIST
 
@@ -24,6 +25,7 @@
 	display_order = JDO_ORPHAN
 	show_in_credits = FALSE
 	min_pq = -30
+	max_pq = null
 
 /datum/job/roguetown/orphan/New()
 	. = ..()

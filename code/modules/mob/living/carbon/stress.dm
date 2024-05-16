@@ -487,12 +487,12 @@
 /datum/stressevent/joke
 	timer = 30 MINUTES
 	stressadd = -5
-//	desc = "<span class='green'>I heard a good joke.</span>"
+	desc = "<span class='green'>I heard a good joke.</span>"
 
 /datum/stressevent/tragedy
 	timer = 30 MINUTES
 	stressadd = -5
-//	desc = "<span class='green'>Life isn't so bad after all.</span>"
+	desc = "<span class='green'>Life isn't so bad after all.</span>"
 
 /datum/stressevent/blessed
 	timer = 60 MINUTES
@@ -589,3 +589,8 @@
 /datum/stressevent/moondust_purest
 	stressadd = -6
 	desc = "<span class='green'>PUREST moondust surges through me!</span>"
+
+/datum/stressevent/ooc_ic
+	stressadd = 6
+	desc = "<span class='red'>Bad omen! I've broken some kind of wall...</span>"
+	timer = 5 MINUTES

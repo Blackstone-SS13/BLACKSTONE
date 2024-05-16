@@ -15,7 +15,7 @@
 		"Tiefling",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
 	tutorial = "You've handed your resume, which mostly consisted of showing up, and in exchange you have a spot among the Bog Guards. You have a roof over your head, coin in your pocket, and a thankless job protecting the outskirts of town against bandits and volfs."
 	display_order = JDO_TOWNGUARD
@@ -23,6 +23,7 @@
 	outfit = /datum/outfit/job/roguetown/bogguardsman
 	give_bank_account = 16
 	min_pq = 1
+	max_pq = null
 
 	/// Chance to be spawned as a crossbowman instead
 	var/crossbowman_chance = 35

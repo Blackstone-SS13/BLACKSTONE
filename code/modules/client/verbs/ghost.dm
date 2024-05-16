@@ -47,7 +47,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 				O.patron = prefs.selected_patron
 				SSdroning.area_entered(get_area(O), O.client)
 				break
-			verbs.Remove(GLOB.ghost_verbs)
+			verbs -= GLOB.ghost_verbs
 		if("No")
 			usr << "You have second thoughts."	
 
@@ -83,7 +83,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 		qdel(M)
 		return
 
+	client?.verbs -= GLOB.ghost_verbs
 	M.key = key
-	client.verbs.Remove(GLOB.ghost_verbs)
 	qdel(src)
 	return

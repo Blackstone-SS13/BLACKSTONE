@@ -11,9 +11,10 @@
 		"Dwarf",
 		"Tiefling",
 		"Argonian",
-		"Dark Elf"
-	)
-	allowed_sexes = list(MALE, FEMALE)
+		"Dark Elf",
+		"Half Orc",
+	) //"evil" races only
+	allowed_sexes = list(MALE, FEMALE) //only allows females because muh dark elves
 
 	display_order = JDO_DUNGEONEER
 
@@ -22,6 +23,7 @@
 	outfit = /datum/outfit/job/roguetown/dungeoneer
 	give_bank_account = 5
 	min_pq = 2
+	max_pq = null
 
 
 /datum/outfit/job/roguetown/dungeoneer/pre_equip(mob/living/carbon/human/H)
