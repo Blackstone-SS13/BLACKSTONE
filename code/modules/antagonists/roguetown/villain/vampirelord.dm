@@ -769,6 +769,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 			return
 		if(C.deathknights.len >= 3)
 			to_chat(user, "You cannot summon any more death knights.")
+			return
 		var/choice = input(user,"What to do?", "ROGUETOWN") as anything in useoptions|null
 		switch(choice)
 			if("Create Death Knight")
