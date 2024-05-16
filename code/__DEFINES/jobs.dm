@@ -136,14 +136,15 @@
 #define HUNTER		(1<<0)
 #define FARMER		(1<<1)
 #define BEASTMASTER	(1<<2)
-#define FISHER		(1<<3)
-#define LUMBERJACK	(1<<4)
-#define MINER		(1<<5)
-#define BUTLER		(1<<6)
-#define JESTER		(1<<7)
-#define ADVENTURER	(1<<8)
-#define COOK		(1<<9)
-#define GRABBER		(1<<10)
+#define FISHER		(1<<4)
+#define LUMBERJACK	(1<<5)
+#define GRAVEDIGGER	(1<<6)
+#define MINER		(1<<7)
+#define BUTLER		(1<<8)
+#define JESTER		(1<<8)
+#define ADVENTURER	(1<<9)
+#define COOK		(1<<10)
+#define GRABBER		(1<<11)
 
 #define YOUNGFOLK		(1<<5)
 
@@ -159,6 +160,13 @@
 
 #define DESERT_RIDER	(1<<0)
 #define GRENZELHOFT		(1<<1)
+
+#define GOBLIN		(1<<7)
+
+#define GOBLINKING	(1<<0)
+#define GOBLINCOOK	(1<<1)
+#define GOBLINGUARD	(1<<2)
+#define GOBLINSMITH	(1<<3)
 
 #define JCOLOR_NOBLE "#aa83b9"
 #define JCOLOR_CHURCH "#c0ba8d"
@@ -228,6 +236,7 @@
 #define JDO_NIGHTMAIDEN 28.2
 
 #define JDO_JESTER 29
+#define JDO_LUNATIC 29.1
 #define JDO_PRISONER 30
 
 #define JDO_CHIEF 31
@@ -241,3 +250,8 @@
 
 #define JDO_VAGRANT 34
 #define JDO_ORPHAN 35
+
+#define JDO_GOBLINKING 36
+#define JDO_GOBLINCOOK 37
+#define JDO_GOBLINGUARD 38
+#define JDO_GOBLINSMITH 39

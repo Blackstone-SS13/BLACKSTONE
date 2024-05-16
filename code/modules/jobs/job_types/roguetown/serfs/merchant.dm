@@ -24,6 +24,7 @@
 	bypass_lastclass = TRUE
 	give_bank_account = 22
 	min_pq = 1
+	max_pq = null
 	required = TRUE
 
 /datum/outfit/job/roguetown/merchant/pre_equip(mob/living/carbon/human/H)

@@ -300,7 +300,7 @@
 		if(underworld_spirit)
 			var/mob/dead/observer/ghost = underworld_spirit.ghostize()
 			qdel(underworld_spirit)
-			ghost.mind?.current = target
+			ghost.mind.transfer_to(target, TRUE)
 		target.grab_ghost(force = TRUE) // even suicides
 		target.emote("breathgasp")
 		target.Jitter(100)

@@ -3,6 +3,7 @@
 	flag = SHERIFF
 	department_flag = NOBLEMEN
 	faction = "Station"
+	allowed_patrons = ALL_NORMAL_PATRONS
 	total_positions = 1
 	spawn_positions = 1
 
@@ -14,6 +15,7 @@
 	outfit = /datum/outfit/job/roguetown/sheriff
 	give_bank_account = 26
 	min_pq = 4
+	max_pq = null
 
 /datum/outfit/job/roguetown/sheriff/pre_equip(mob/living/carbon/human/H)
 	..()

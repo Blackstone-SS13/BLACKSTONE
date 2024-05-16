@@ -25,6 +25,7 @@
 	display_order = JDO_GRAVEMAN
 	give_bank_account = TRUE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/undertaker/pre_equip(mob/living/carbon/human/H)
 	..()

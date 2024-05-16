@@ -131,10 +131,32 @@
 		L.update_inv_cloak()
 	picked = TRUE
 
-/obj/item/clothing/cloak/tabard/crusader/tief
+/obj/item/clothing/cloak/tabard/crusader
 	detail_tag = "_psy"
+
+/obj/item/clothing/cloak/tabard/crusader/tief
 	color = CLOTHING_RED
 	detail_color = CLOTHING_WHITE
+
+/obj/item/clothing/cloak/tabard/crusader/astrata
+	color = "#9B7538"
+	detail_color = CLOTHING_WHITE
+
+/obj/item/clothing/cloak/tabard/crusader/dendor
+	color = "#4B5637"
+	detail_color = "#3D1D1C"
+
+/obj/item/clothing/cloak/tabard/crusader/necra
+	color = "#222223"
+	detail_color = "#CACBC5" 
+
+/obj/item/clothing/cloak/tabard/crusader/pestra
+	color = CLOTHING_WHITE
+	detail_color = CLOTHING_GREEN
+
+/obj/item/clothing/cloak/tabard/crusader/noc
+	color = "#2C2231"
+	detail_color = "#9AB0B0"
 
 /obj/item/clothing/cloak/tabard/crusader/tief/attack_right(mob/user)
 	if(picked)
@@ -540,6 +562,7 @@
 	alternate_worn_layer = TABARD_LAYER
 	body_parts_covered = CHEST|GROIN
 	boobed = TRUE
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 
 /obj/item/clothing/cloak/apron/brown
 	color = CLOTHING_BROWN
@@ -793,7 +816,7 @@
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
 	allowed_sex = list(MALE)
-	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 	sellprice = 50
 	nodismemsleeves = TRUE
 
@@ -821,6 +844,9 @@
 
 /obj/item/clothing/cloak/half/red
 	color = CLOTHING_RED
+
+/obj/item/clothing/cloak/half/orange
+	color = CLOTHING_ORANGE
 
 /obj/item/clothing/cloak/half/vet
 	name = "town watch cloak"

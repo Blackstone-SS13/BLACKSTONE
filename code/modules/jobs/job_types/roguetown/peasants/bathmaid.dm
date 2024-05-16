@@ -26,6 +26,7 @@
 	give_bank_account = TRUE
 	can_random = FALSE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/nightmaiden/pre_equip(mob/living/carbon/human/H)
 	..()
