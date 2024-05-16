@@ -3,14 +3,18 @@
 	flag = ADVENTURER
 	department_flag = PEASANTS
 	faction = "Station"
-	total_positions = 30
-	spawn_positions = 30
-	allowed_races = list("Humen",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
+	total_positions = 50
+	spawn_positions = 50
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Aasimar",
+		"Dark Elf",
+		"Half Orc"
 	)
 	tutorial = "You've lived in this shithole for effectively all your life. You are not an explorer, nor exactly a warrior in many cases. You're just some average poor bastard who thinks they'll be something someday."
 
@@ -20,6 +24,9 @@
 	display_order = JDO_VILLAGER
 	isvillager = TRUE
 	give_bank_account = TRUE
+	min_pq = -15
+	wanderer_examine = FALSE
+	advjob_examine = TRUE
 
 /*
 /datum/job/roguetown/adventurer/villager/New()

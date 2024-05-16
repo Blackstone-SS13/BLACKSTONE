@@ -20,7 +20,7 @@
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_MOUTH)
 			zone = BODY_ZONE_HEAD
-		if(BODY_ZONE_PRECISE_HAIR)
+		if(BODY_ZONE_PRECISE_SKULL)
 			zone = BODY_ZONE_HEAD
 		if(BODY_ZONE_PRECISE_EARS)
 			zone = BODY_ZONE_HEAD
@@ -569,11 +569,20 @@
 		playsound_local(src, 'sound/misc/comboff.ogg', 100)
 		SSdroning.play_area_sound(get_area(src), client)
 		cmode = FALSE
+		if(HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE))
+			if(HAS_TRAIT(src, TRAIT_SCREENSHAKE))
+				animate(client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
+				animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
+			else if(HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE))
+				animate(client, pixel_y)
 	else
 		cmode = TRUE
 		playsound_local(src, 'sound/misc/combon.ogg', 100)
 		if(L.cmode_music)
 			SSdroning.play_combat_music(L.cmode_music, client)
+		if(client && HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE))
+			animate(client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
+			animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
 	if(hud_used)
 		if(hud_used.cmode_button)
 			hud_used.cmode_button.update_icon()
@@ -596,7 +605,7 @@
 		if(19)
 			zone_selected = BODY_ZONE_HEAD
 		if(18)
-			zone_selected = BODY_ZONE_PRECISE_HAIR
+			zone_selected = BODY_ZONE_PRECISE_SKULL
 		if(17)
 			zone_selected = BODY_ZONE_PRECISE_EARS
 		if(16)
@@ -643,7 +652,7 @@
 	switch(choice)
 		if(BODY_ZONE_HEAD)
 			aimheight = 19
-		if(BODY_ZONE_PRECISE_HAIR)
+		if(BODY_ZONE_PRECISE_SKULL)
 			aimheight = 18
 		if(BODY_ZONE_PRECISE_EARS)
 			aimheight = 17
@@ -784,7 +793,7 @@
 		if(flashwindow)
 			window_flash(O.client)
 		if(source)
-			var/obj/screen/alert/notify_action/A = O.throw_alert("[REF(source)]_notify_action", /obj/screen/alert/notify_action)
+			var/atom/movable/screen/alert/notify_action/A = O.throw_alert("[REF(source)]_notify_action", /atom/movable/screen/alert/notify_action)
 			if(A)
 				if(O.client.prefs && O.client.prefs.UI_style)
 					A.icon = ui_style2icon(O.client.prefs.UI_style)
@@ -852,14 +861,16 @@
 		var/datum/antagonist/A = M.mind.has_antag_datum(/datum/antagonist/)
 		if(A)
 			poll_message = "[poll_message] Status:[A.name]."
-	var/list/mob/dead/observer/candidates = pollCandidatesForMob(poll_message, ROLE_PAI, null, FALSE, 100, M)
+	var/list/mob/candidates = pollCandidatesForMob(poll_message, ROLE_PAI, null, FALSE, 100, M)
 
 	if(LAZYLEN(candidates))
-		var/mob/dead/observer/C = pick(candidates)
+		var/mob/C = pick(candidates)
 		to_chat(M, "Your mob has been taken over by a ghost!")
 		message_admins("[key_name_admin(C)] has taken control of ([ADMIN_LOOKUPFLW(M)])")
 		M.ghostize(0,drawskip=TRUE)
 		M.key = C.key
+		if(!QDELETED(C))	
+			qdel(C)
 		return TRUE
 	else
 		to_chat(M, "There were no ghosts willing to take control.")

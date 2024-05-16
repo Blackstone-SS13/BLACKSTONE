@@ -9,11 +9,12 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/adjust_pq,
 	/client/proc/hearallasghost,
 	/client/proc/admin_ghost,
-	/client/proc/ghost_up,
 	/datum/admins/proc/start_vote,
+	/client/proc/toggle_autovote,
 	/datum/admins/proc/show_player_panel,
 	/datum/admins/proc/admin_heal,
 	/datum/admins/proc/admin_sleep,
+	/client/proc/ghost_up,
 	/client/proc/ghost_down,
 	/client/proc/jumptoarea,
 	/client/proc/jumptokey,
@@ -26,6 +27,8 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/cmd_admin_say,
 	/client/proc/deadmin,				/*destroys our own admin datum so we can play as a regular player*/
 	/client/proc/set_context_menu_enabled,
+	/client/proc/delete_player_book,
+	/client/proc/adminwho
 	)
 GLOBAL_LIST_INIT(admin_verbs_admin, world.AVerbsAdmin())
 GLOBAL_PROTECT(admin_verbs_admin)
@@ -115,7 +118,6 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/set_dynex_scale,
 	/client/proc/drop_dynex_bomb,
 	/client/proc/cinematic,
-	/client/proc/one_click_antag,
 	/client/proc/cmd_admin_add_freeform_ai_law,
 	/client/proc/object_say,
 	/client/proc/toggle_random_events,
@@ -395,6 +397,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 			M.density = initial(M.density)
 		ghost.can_reenter_corpse = 1 //force re-entering even when otherwise not possible
 		ghost.reenter_corpse()
+		show_popup_menus = FALSE
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Admin Reenter") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	else if(isnewplayer(mob))
 //		to_chat(src, "<font color='red'>Error: Aghost: Can't admin-ghost whilst in the lobby. Join or Observe first.</font>")
@@ -411,6 +414,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		body.ghostize(1)
 		if(body && !body.key)
 			body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
+		show_popup_menus = TRUE
 		SSblackbox.record_feedback("tally", "admin_verb", 1, "Admin Ghost") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/invisimin()
@@ -424,6 +428,14 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		else
 			mob.invisibility = INVISIBILITY_OBSERVER
 			to_chat(mob, "<span class='adminnotice'><b>Invisimin on. You are now as invisible as a ghost.</b></span>")
+
+/client/proc/toggle_autovote()
+	set name = "Toggle Magnum Mode"
+	set category = "Server"
+	if(check_rights(R_POLL))
+		SSticker.autovote = !SSticker.autovote
+		message_admins(SSticker.autovote ? "[key_name_admin(usr)] has enabled automatic round restart votes." : "[key_name_admin(usr)] has disabled automatic round restart votes.")
+		log_admin(SSticker.autovote ? "[key_name(usr)] has enabled automatic round restart votes." : "[key_name(usr)] has disabled automatic round restart votes.")
 
 /client/proc/check_antagonists()
 	set name = "Check Antagonists"
@@ -697,6 +709,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 /client/proc/check_ai_laws()
 	set name = "Check AI Laws"
 	set category = "Admin"
+	set hidden = 1
 	if(holder)
 		src.holder.output_ai_laws()
 
@@ -792,6 +805,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 /client/proc/end_party()
 	set category = "GameMaster"
 	set name = "EndPlaytest"
+	set hidden = 1
 	if(!holder)
 		return
 	if(!SSticker.end_party)
@@ -802,9 +816,10 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		to_chat(src, "<span class='interface'>Ending DISABLED.</span>")
 
 /client/proc/delete_player_book()
+	set name = "Database Delete Player Book"
 	set category = "Admin"
-	set name = "Delete Player Made Book"
-	if(!holder)	
+	set desc = ""
+	if(!holder)
 		return
 	if(SSlibrarian.del_player_book(input(src, "What is the book file you want to delete? (spaces and other characters are their url encode versions for the file name, so for example spaces are +)")))
 		to_chat(src, "<span class='notice'>Book has been successfully deleted</span>")

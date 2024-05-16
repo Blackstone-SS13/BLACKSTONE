@@ -329,32 +329,15 @@ Turf and target are separate in case you want to teleport some distance from a t
 /proc/sortmobs()
 	var/list/moblist = list()
 	var/list/sortmob = sortNames(GLOB.mob_list)
-	for(var/mob/living/silicon/ai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/camera/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/pai/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/silicon/robot/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/human/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/brain/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/alien/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/dead/observer/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/dead/new_player/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/monkey/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/simple_animal/slime/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/simple_animal/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/true_devil/M in sortmob)
-		moblist.Add(M)
+	var/list/types = list()
+	for(var/mob/M in sortmob)
+		if(M.type in types)
+			types[M.type].Add(M)
+		else
+			types[M.type] = list(M)
+	var/types_sort = sortNames(types)
+	for(var/T in types_sort)
+		moblist.Add(types_sort[T])
 	return moblist
 
 // Format a power value in W, kW, MW, or GW.
@@ -693,12 +676,11 @@ Turf and target are separate in case you want to teleport some distance from a t
 		return "right hand"
 	else if (zone == BODY_ZONE_L_INHAND)
 		return "left hand"
-	else if (zone == BODY_ZONE_PRECISE_HAIR)
-		return "hair"
+	else if (zone == BODY_ZONE_PRECISE_SKULL)
+		return "skull"
 	else if (zone == BODY_ZONE_PRECISE_MOUTH)
 		return "mouth"
-	else
-		return zone
+	return zone
 
 /mob/living/carbon/proc/parse_zone(zone, mob/living/target)
 	if(zone == BODY_ZONE_PRECISE_R_HAND)
@@ -733,12 +715,11 @@ Turf and target are separate in case you want to teleport some distance from a t
 		return parse_inhand(zone)
 	else if (zone == BODY_ZONE_L_INHAND)
 		return parse_inhand(zone)
-	else if (zone == BODY_ZONE_PRECISE_HAIR)
-		return "hair"
+	else if (zone == BODY_ZONE_PRECISE_SKULL)
+		return "skull"
 	else if (zone == BODY_ZONE_PRECISE_MOUTH)
 		return "mouth"
-	else
-		return zone
+	return zone
 
 /*
 

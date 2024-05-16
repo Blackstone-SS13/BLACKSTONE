@@ -48,6 +48,7 @@
 /client/proc/cmd_admin_headset_message(mob/M in GLOB.mob_list)
 	set category = "Special Verbs"
 	set name = "Headset Message"
+	set hidden = 1
 
 	admin_headset_message(M)
 
@@ -505,6 +506,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/cmd_admin_add_freeform_ai_law()
 	set category = "Fun"
 	set name = "Add Custom AI law"
+	set hidden = 1
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -729,6 +731,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	set category = "Admin"
 	set name = "Call Shuttle"
+	set hidden = 1
 
 	if(EMERGENCY_AT_LEAST_DOCKED)
 		return
@@ -749,6 +752,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/admin_cancel_shuttle()
 	set category = "Admin"
 	set name = "Cancel Shuttle"
+	set hidden = 1
 	if(!check_rights(0))
 		return
 	if(alert(src, "You sure?", "Confirm", "Yes", "No") != "Yes")
@@ -816,6 +820,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Special Verbs"
 	set name = "Set Security Level"
 	set desc = ""
+	set hidden = 1
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -832,6 +837,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Toggle Nuke"
 	set category = "Fun"
 	set popup_menu = 0
+	set hidden = 1
 	if(!check_rights(R_DEBUG))
 		return
 
@@ -910,6 +916,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Mass Zombie Infection"
 	set desc = "Infects all humans with a latent organ that will zombify \
 		them on death."
+	set hidden = 1
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -930,6 +937,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Fun"
 	set name = "Mass Zombie Cure"
 	set desc = ""
+	set hidden = 1
 	if(!check_rights(R_ADMIN))
 		return
 
@@ -948,6 +956,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Fun"
 	set name = "Polymorph All"
 	set desc = ""
+	set hidden = 1
 
 	if(!check_rights(R_ADMIN))
 		return
@@ -1040,7 +1049,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!check_rights(R_ADMIN) || !check_rights(R_FUN))
 		return
 
-	var/list/punishment_list = list(ADMIN_PUNISHMENT_LIGHTNING, ADMIN_PUNISHMENT_BRAINDAMAGE, ADMIN_PUNISHMENT_GIB, ADMIN_PUNISHMENT_BSA, ADMIN_PUNISHMENT_FIREBALL, ADMIN_PUNISHMENT_ROD, ADMIN_PUNISHMENT_SUPPLYPOD_QUICK, ADMIN_PUNISHMENT_SUPPLYPOD, ADMIN_PUNISHMENT_MAZING)
+	var/list/punishment_list = list(ADMIN_PUNISHMENT_LIGHTNING, ADMIN_PUNISHMENT_BRAINDAMAGE, ADMIN_PUNISHMENT_GIB, ADMIN_PUNISHMENT_BSA, ADMIN_PUNISHMENT_FIREBALL, ADMIN_PUNISHMENT_ROD, ADMIN_PUNISHMENT_SUPPLYPOD_QUICK, ADMIN_PUNISHMENT_SUPPLYPOD, ADMIN_PUNISHMENT_MAZING, ADMIN_PUNISHMENT_BRAZIL)
 
 	var/punishment = input("Choose a punishment", "DIVINE SMITING") as null|anything in sortList(punishment_list)
 
@@ -1105,6 +1114,20 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			if(!puzzle_imprison(target))
 				to_chat(usr,"<span class='warning'>Imprisonment failed!</span>")
 				return
+		if(ADMIN_PUNISHMENT_BRAZIL)
+			if(!ishuman(target))
+				to_chat(usr,"<span class='warning'>Target must be human!</span>")
+				return
+			var/mob/living/carbon/human/ligga = target
+			ligga.emote("painscream")
+			ligga.patron = GLOB.patronlist[/datum/patron/divine/dendor] || GLOB.patronlist[/datum/patron/godless]
+			var/old_name = ligga.real_name
+			var/datum/species/lizard/brazil/brazil = new /datum/species/lizard/brazil
+			ligga.set_species(brazil)
+			brazil.random_character(ligga)
+			ligga.fully_replace_character_name(ligga.real_name, old_name)
+			ligga.regenerate_icons()
+			to_chat(ligga, "<span class='userdanger'>I have been sent to <span class='green'>Brazil</span>!</span>")
 
 	punish_log(target, punishment)
 

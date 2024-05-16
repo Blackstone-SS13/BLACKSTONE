@@ -42,6 +42,7 @@ SUBSYSTEM_DEF(ticker)
 	var/station_time_rate_multiplier = 50		//factor of station time progressal vs real time.
 	var/time_until_vote = 120 MINUTES
 	var/last_vote_time = null
+	var/autovote = TRUE
 	var/firstvote = TRUE
 
 	var/totalPlayers = 0					//used for pregame stats on statpanel
@@ -140,7 +141,7 @@ SUBSYSTEM_DEF(ticker)
 	else
 		login_music = "[global.config.directory]/title_music/sounds/[pick(music)]"
 
-	login_music = 'sound/music/title.ogg'
+
 
 	if(!GLOB.syndicate_code_phrase)
 		GLOB.syndicate_code_phrase	= generate_code_phrase(return_list=TRUE)
@@ -241,13 +242,13 @@ SUBSYSTEM_DEF(ticker)
 				declare_completion(force_ending)
 				Master.SetRunLevel(RUNLEVEL_POSTGAME)
 			if(firstvote)
-				if(world.time > round_start_time + time_until_vote)
+				if(world.time > round_start_time + time_until_vote && autovote)
 					SSvote.initiate_vote("restart", "The Gods")
 					time_until_vote = 20 MINUTES
 					last_vote_time = world.time
 					firstvote = FALSE
 			else
-				if(world.time > last_vote_time + time_until_vote)
+				if(world.time > last_vote_time + time_until_vote && autovote)
 					SSvote.initiate_vote("restart", "The Gods")
 
 /datum/controller/subsystem/ticker
@@ -270,12 +271,6 @@ SUBSYSTEM_DEF(ticker)
 							to_chat(player, "<span class='warning'>You cannot be [V] and thus are not considered.</span>")
 							continue
 				readied_jobs.Add(V)
-	if("Merchant" in readied_jobs)
-		if(("King" in readied_jobs) || ("Queen" in readied_jobs))
-			if("King" in readied_jobs)
-				rulertype = "King"
-			else
-				rulertype = "Queen"
 		/*	
 			// These else conditions stop the round from starting unless there is a merchant, king, and queen.
 		else
@@ -546,21 +541,12 @@ SUBSYSTEM_DEF(ticker)
 		CHECK_TICK
 
 /datum/controller/subsystem/ticker/proc/select_ruler()
-	switch(rulertype)
-		if("King")
-			for(var/mob/living/carbon/human/K in world)
-				if(istype(K, /mob/living/carbon/human/dummy))
-					continue
-				if(K.job == "King")
-					rulermob = K
-					return
-		if("Queen")
-			for(var/mob/living/carbon/human/Q in world)
-				if(istype(Q, /mob/living/carbon/human/dummy))
-					continue
-				if(Q.job == "Queen")
-					rulermob = Q
-					return
+	for(var/mob/living/carbon/human/K in world)
+		if(istype(K, /mob/living/carbon/human/dummy))
+			continue
+		if(K.job == "King")
+			rulermob = K
+			return
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
 	for(var/i in GLOB.new_player_list)
@@ -599,7 +585,7 @@ SUBSYSTEM_DEF(ticker)
 			qdel(player)
 			living.notransform = TRUE
 			if(living.client)
-				var/obj/screen/splash/S = new(living.client, TRUE)
+				var/atom/movable/screen/splash/S = new(living.client, TRUE)
 				S.Fade(TRUE)
 			livings += living
 	if(livings.len)
@@ -823,9 +809,7 @@ SUBSYSTEM_DEF(ticker)
 		to_chat(world, "<span class='boldannounce'>A game master has delayed the round end.</span>")
 		return
 
-//	to_chat(world, "<span class='boldannounce'>Rebooting World in [DisplayTimeText(delay)]. [reason]</span>")
-
-	to_chat(world, "<span class='boldannounce'>Rebooting World in [DisplayTimeText(delay)].</span>")
+	to_chat(world, "<span class='boldannounce'>Rebooting World in [DisplayTimeText(delay)]. [reason]</span>")
 
 	var/start_wait = world.time
 	UNTIL(round_end_sound_sent || (world.time - start_wait) > (delay * 2))	//don't wait forever

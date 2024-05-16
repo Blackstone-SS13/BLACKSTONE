@@ -1,22 +1,22 @@
 
 /datum/job/roguetown/priest
 	title = "Priest"
+	f_title = "Priestess"
 	flag = PRIEST
 	department_flag = CHURCHMEN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = JCOLOR_CHURCH
-	f_title = "Priestess"
-	allowed_races = list("Humen","Humen","Elf", "Dwarf","Half-Elf",	"Aasimar")
-	allowed_patrons = list("Astrata")
+	allowed_races = list("Humen", "Aasimar")
+	allowed_patrons = list(/datum/patron/divine/astrata)
 	tutorial = "The Divine is all that matters in a world of the immoral. The Weeping God left his children to rule over us mortals and you will preach their wisdom to any who still heed their will. The faithless are growing in number, it is up to you to shepard them to a Gods-fearing future."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/priest
 
 	display_order = JDO_PRIEST
 	give_bank_account = 115
-	min_pq = -4
+	min_pq = 2
 
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -39,14 +39,15 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/holy, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 		if(H.age == AGE_OLD)
 			H.mind.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 		H.change_stat("strength", -1)
 		H.change_stat("intelligence", 2)
-		H.change_stat("constitution", -2)
+		H.change_stat("constitution", -1)
 		H.change_stat("endurance", 1)
-		H.change_stat("speed", -2)
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON) // This creates the cleric holder used for devotion spells
+		H.change_stat("speed", -1)
+	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron) // This creates the cleric holder used for devotion spells
 	C.holder_mob = H
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 	C.grant_spells_priest(H)
@@ -74,30 +75,31 @@
 			continue
 		if(!istype(HU.head, /obj/item/clothing/head/roguetown/crown/serpcrown))
 			continue
+		
+		//Abdicate previous King
 		for(var/mob/living/carbon/human/HL in GLOB.human_list)
 			if(HL.mind)
-				if(HL.mind.assigned_role == "King")
-					HL.mind.assigned_role = "Ex-King"
+				if(HL.mind.assigned_role == "King" || HL.mind.assigned_role == "Queen Consort")
+					HL.mind.assigned_role = "Towner" //So they don't get the innate traits of the king
+			//would be better to change their title directly, but that's not possible since the title comes from the job datum
 			if(HL.job == "King")
-				HL.job = "Ex-King"
-			if(HL.mind)
-				if(HL.mind.assigned_role == "Queen")
-					HL.mind.assigned_role = "Ex-Queen"
-			if(HL.job == "Queen")
-				HL.job = "Ex-Queen"
+				HL.job = "King Emeritus"
+			if(HL.job == "Queen Consort")
+				HL.job = "Queen Dowager"
+
+		//Coronate new King (or Queen)
+		HU.mind.assigned_role = "King"
+		HU.job = "King"
 		switch(HU.gender)
 			if("male")
-				HU.mind.assigned_role = "King"
-				HU.job = "King"
+				SSticker.rulertype = "King"
 			if("female")
-				HU.mind.assigned_role = "Queen"
-				HU.job = "Queen"
+				SSticker.rulertype = "Queen"
 		SSticker.rulermob = HU
 		var/dispjob = mind.assigned_role
 		GLOB.badomens -= "nolord"
 		say("By the authority of the gods, I pronounce you Ruler of all Rockhill!")
 		priority_announce("[real_name] the [dispjob] has named [HU.real_name] the inheritor of ROGUETOWN!", title = "Long Live [HU.real_name]!", sound = 'sound/misc/bell.ogg')
-		return
 
 /mob/living/carbon/human/proc/churchexcommunicate()
 	set name = "Curse"
@@ -111,7 +113,7 @@
 			return FALSE
 		if(inputty in GLOB.excommunicated_players)
 			GLOB.excommunicated_players -= inputty
-			priority_announce("[real_name] has forgiven [inputty]. Once more walk in the light!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
+			priority_announce("[real_name] has forgiven [inputty]. Once more walk in the light!", title = "Hail the Nine!", sound = 'sound/misc/bell.ogg')
 			for(var/mob/living/carbon/human/H in GLOB.player_list)
 				if(H.real_name == inputty)
 					H.remove_stress(/datum/stressevent/psycurse)
@@ -144,8 +146,8 @@
 	name = "Recruit Templar"
 	new_role = "Templar"
 	recruitment_faction = "Templars"
-	recruitment_message = "Serve the ten, %RECRUIT!"
-	accept_message = "FOR PSYDON!"
+	recruitment_message = "Serve the nine, %RECRUIT!"
+	accept_message = "FOR THE NINE!"
 	refuse_message = "I refuse."
 	charge_max = 200 //templars get cool spells, so higher cooldown
 
@@ -154,28 +156,21 @@
 	if(!.)
 		return
 	if(!recruit.cleric)
-		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
+		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.patron)
 		holder.holder_mob = recruit
-		//Max devotion limit - Templars are stronger but cannot pray to gain more abilities
-		holder.max_devotion = 200
-		holder.update_devotion(50, 50)
+		//Max devotion limit - Templars are stronger but cannot pray to gain more abilities beyond t1
+		holder.max_devotion = 250
+		holder.max_progression = CLERIC_REQ_1
+		holder.update_devotion(50, 0)
+		holder.grant_spells_templar(recruit)
 	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
-	var/static/list/templar_spells = list(
-		/obj/effect/proc_holder/spell/invoked/lesser_heal, 
-		/obj/effect/proc_holder/spell/targeted/churn, 
-		/obj/effect/proc_holder/spell/targeted/burialrite,
-	)
-	for(var/spell in templar_spells)
-		if(recruit.mind.has_spell(spell))
-			continue
-		recruit.mind.AddSpell(new spell)
 
 /obj/effect/proc_holder/spell/self/convertrole/monk
 	name = "Recruit Acolyte"
 	new_role = "Acolyte"
 	recruitment_faction = "Church"
-	recruitment_message = "Serve the ten, %RECRUIT!"
-	accept_message = "FOR PSYDON!"
+	recruitment_message = "Serve the nine, %RECRUIT!"
+	accept_message = "FOR THE NINE!"
 	refuse_message = "I refuse."
 
 /obj/effect/proc_holder/spell/self/convertrole/monk/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
@@ -183,7 +178,7 @@
 	if(!.)
 		return
 	if(!recruit.cleric)
-		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
+		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.patron)
 		holder.holder_mob = recruit
 		holder.update_devotion(50, 50)
 		holder.grant_spells(recruit)

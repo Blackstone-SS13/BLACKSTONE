@@ -1,14 +1,16 @@
 /datum/advclass/miner
 	name = "Miner"
 	allowed_sexes = list("male")
-	allowed_races = list("Humen",
-	"Humen",
-	"Dark Elf",
-	"Tiefling",
-	"Half-Elf",
-	"Dwarf",
-	"Dwarf",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/miner
 	isvillager = TRUE
@@ -28,12 +30,21 @@
 	backl = /obj/item/storage/backpack/rogue/backpack
 	backpack_contents = list(/obj/item/flint = 1)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE) // Tough. Well fed. The strongest of the strong.
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE) 
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.change_stat("strength", 1)
-		H.change_stat("intelligence", -2)
+		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(0,1), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/traps, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, pick(0,1), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+		H.change_stat("strength", 2)
+		H.change_stat("intelligence", -1)
 		H.change_stat("endurance", 1)
+		H.change_stat("constitution", 2)

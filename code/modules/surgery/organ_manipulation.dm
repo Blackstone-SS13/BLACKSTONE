@@ -6,16 +6,14 @@
 	steps = list(
 		/datum/surgery_step/incise,
 		/datum/surgery_step/retract_skin,
-		/datum/surgery_step/saw,
 		/datum/surgery_step/clamp_bleeders,
-		/datum/surgery_step/incise,
+		/datum/surgery_step/saw,
 		/datum/surgery_step/manipulate_organs,
-		//there should be bone fixing
 		/datum/surgery_step/close
 		)
 
 /datum/surgery/organ_manipulation/soft
-	possible_locs = list(BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+	possible_locs = list(BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
 	steps = list(
 		/datum/surgery_step/incise,
 		/datum/surgery_step/retract_skin,

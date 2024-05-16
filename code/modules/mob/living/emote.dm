@@ -64,7 +64,7 @@
 				return FALSE
 		else
 			L.mob_timers[MT_PSYPRAY] = world.time
-		if(!findtext(message2recognize, "[M.PATRON]"))
+		if(!findtext(message2recognize, "[M.patron]"))
 			return FALSE
 		else
 			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
@@ -89,15 +89,15 @@
 			var/turf/pickedturf = safepick(turfs)
 			if(!pickedturf)
 				return
-			to_chat(L, "<font color='yellow'>INSOLENT WRETCH, YOUR STRUGGLE CONTINUES</font>")
+			to_chat(L, "<font color='yellow'>INSOLENT WRETCH, YOUR STRUGGLE IS DESERVED.</font>")
 			L.forceMove(pickedturf)
 			return FALSE
 	if(length(message2recognize) > 15)
-		if(findtext(message2recognize, "[M.PATRON]"))
+		if(findtext(message2recognize, "[M.patron]"))
 			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
-			to_chat(L, "<font color='yellow'>I, [M.PATRON], have heard your prayer and grant you favor.</font>")
-			var/obj/item/underworld/coin/C = new
-			L.put_in_active_hand(C)
+			to_chat(L, "<font color='yellow'>I, [M.patron], have heard your prayer and yet cannot aid you.</font>")
+			/*var/obj/item/underworld/coin/C = new 
+			L.put_in_active_hand(C)*/
 			return TRUE
 		else
 			return TRUE
@@ -522,7 +522,7 @@
 			else if(H.zone_selected == BODY_ZONE_PRECISE_EARS)
 				message_param = "kisses %t on the ear."
 				var/mob/living/carbon/human/E = target
-				if(E.dna.species?.id == "elf")
+				if(iself(E) || ishalfelf(E))
 					if(!E.cmode)
 						to_chat(target, "<span class='love'>It tickles...</span>")
 			else if(H.zone_selected == BODY_ZONE_PRECISE_R_EYE || H.zone_selected == BODY_ZONE_PRECISE_L_EYE)

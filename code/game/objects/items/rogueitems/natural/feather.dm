@@ -3,7 +3,7 @@
 	name = "feather"
 	icon_state = "feather"
 	possible_item_intents = list(/datum/intent/use)
-	desc = ""
+	desc = "A fluffy feather."
 	force = 0
 	throwforce = 0
 	obj_flags = null

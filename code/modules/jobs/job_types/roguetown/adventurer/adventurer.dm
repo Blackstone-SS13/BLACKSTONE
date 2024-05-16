@@ -10,13 +10,16 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	faction = "Station"
 	total_positions = 75
 	spawn_positions = 75
-	allowed_races = list("Humen",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Dark Elf",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc"
 	)
 	tutorial = "Hero of nothing, adventurer by trade. Whatever led you to this fate is up to the wind to decide, and you've never fancied yourself for much other than the thrill. Someday your pride is going to catch up to you, and you're going to find out why most men don't end up in the annals of history."
 
@@ -26,8 +29,10 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 
 	display_order = JDO_ADVENTURER
 	show_in_credits = FALSE
-	min_pq = -4
+	min_pq = 0
 	
+	wanderer_examine = TRUE
+	advjob_examine = TRUE
 	var/isvillager = FALSE
 	var/ispilgrim = FALSE
 
@@ -64,13 +69,13 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 #endif
 		for(var/I in shuffle(classes))
 			var/datum/advclass/A = I
-			if(!(H.gender in A.allowed_sexes))
+			if(length(A.allowed_sexes) && !(H.gender in A.allowed_sexes))
 				testing("[A.name] fail11")
 				continue
-			if(!(H.dna.species.name in A.allowed_races))
+			if(length(A.allowed_races) && !(H.dna.species.name in A.allowed_races))
 				testing("[A.name] fail22")
 				continue
-			if(!(H.age in A.allowed_ages))
+			if(length(A.allowed_ages) && !(H.age in A.allowed_ages))
 				testing("[A.name] fail33")
 				continue
 			if(A.maxchosen > -1)
@@ -197,7 +202,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 /mob/living/carbon/human/proc/adv_hugboxing_start()
 	to_chat(src, "<span class='warning'>I will be in danger once I start moving.</span>")
 	status_flags |= GODMODE
-	ADD_TRAIT(src, TRAIT_PACIFISM, ADVENTURER_HUGBOX_TRAIT)
+	ADD_TRAIT(src, TRAIT_PACIFISM, HUGBOX_TRAIT)
 	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(adv_hugboxing_moved))
 	//Lies, it goes away even if you don't move after enough time
 	if(GLOB.adventurer_hugbox_duration_still)
@@ -215,5 +220,5 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	if(!(status_flags & GODMODE))
 		return
 	status_flags &= ~GODMODE
-	REMOVE_TRAIT(src, TRAIT_PACIFISM, ADVENTURER_HUGBOX_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_PACIFISM, HUGBOX_TRAIT)
 	to_chat(src, "<span class='danger'>My joy is gone! Danger surrounds me.</span>")

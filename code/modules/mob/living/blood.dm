@@ -19,7 +19,7 @@
 		//Blood regeneration if there is some space
 		if(blood_volume < BLOOD_VOLUME_NORMAL)
 			blood_volume += 0.1 // regenerate blood VERY slowly
-			if(blood_volume < BLOOD_VOLUME_OKAY)
+			if((blood_volume < BLOOD_VOLUME_OKAY) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 				adjustOxyLoss(round((BLOOD_VOLUME_NORMAL - blood_volume) * 0.02, 1))
 
 /mob/living/proc/update_bleed_rate()
@@ -40,42 +40,43 @@
 		blood_volume = min(blood_volume+0.5, BLOOD_VOLUME_MAXIMUM)
 
 	//Effects of bloodloss
-	switch(blood_volume)
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			remove_status_effect(/datum/status_effect/debuff/bleedingworse)
-			remove_status_effect(/datum/status_effect/debuff/bleedingworst)
-			apply_status_effect(/datum/status_effect/debuff/bleeding)
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			if(prob(3))
-				blur_eyes(6)
-				to_chat(src, "<span class='warning'>I feel faint.</span>")
-			remove_status_effect(/datum/status_effect/debuff/bleeding)
-			remove_status_effect(/datum/status_effect/debuff/bleedingworst)
-			apply_status_effect(/datum/status_effect/debuff/bleedingworse)
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			if(prob(3) && !IsUnconscious())
-				Unconscious(rand(5 SECONDS,10 SECONDS))
-				to_chat(src, "<span class='warning'>I feel drained.</span>")
-			remove_status_effect(/datum/status_effect/debuff/bleedingworse)
-			remove_status_effect(/datum/status_effect/debuff/bleeding)
-			apply_status_effect(/datum/status_effect/debuff/bleedingworst)
+	if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+		switch(blood_volume)
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+				remove_status_effect(/datum/status_effect/debuff/bleedingworst)
+				apply_status_effect(/datum/status_effect/debuff/bleeding)
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				if(prob(3))
+					blur_eyes(6)
+					to_chat(src, "<span class='warning'>I feel faint.</span>")
+				remove_status_effect(/datum/status_effect/debuff/bleeding)
+				remove_status_effect(/datum/status_effect/debuff/bleedingworst)
+				apply_status_effect(/datum/status_effect/debuff/bleedingworse)
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				if(prob(3) && !IsUnconscious())
+					Unconscious(rand(5 SECONDS,10 SECONDS))
+					to_chat(src, "<span class='warning'>I feel drained.</span>")
+				remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+				remove_status_effect(/datum/status_effect/debuff/bleeding)
+				apply_status_effect(/datum/status_effect/debuff/bleedingworst)
+		if(blood_volume <= BLOOD_VOLUME_BAD)
+			adjustOxyLoss(1)
+			if(blood_volume <= BLOOD_VOLUME_SURVIVE)
+				adjustOxyLoss(1.5)
+		
 	if(bleed_rate)
 		bleed(bleed_rate)
-
-	if(blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE)
-		adjustOxyLoss(1.6)
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/handle_blood()
 	blood_volume = min(blood_volume, BLOOD_VOLUME_MAXIMUM)
-	if(dna)
-		if(dna.species)
-			if(NOBLOOD in dna.species.species_traits)
-				blood_volume = BLOOD_VOLUME_NORMAL
-				return
+	if(dna?.species)
+		if(NOBLOOD in dna.species.species_traits)
+			blood_volume = BLOOD_VOLUME_NORMAL
+			return
 
 	if(bodytemperature >= TCRYO && !(HAS_TRAIT(src, TRAIT_HUSK))) //cryosleep or husked people do not pump the blood.
-
 		//Blood regeneration if there is some space
 		if(blood_volume < BLOOD_VOLUME_NORMAL && blood_volume)
 			var/nutrition_ratio = 1
@@ -96,25 +97,30 @@
 			blood_volume = min(BLOOD_VOLUME_NORMAL, blood_volume + 0.5 * nutrition_ratio)
 
 		//Effects of bloodloss
-		switch(blood_volume)
-			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-				remove_status_effect(/datum/status_effect/debuff/bleedingworse)
-				remove_status_effect(/datum/status_effect/debuff/bleedingworst)
-				apply_status_effect(/datum/status_effect/debuff/bleeding)
-			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-				if(prob(3))
-					blur_eyes(6)
-					to_chat(src, "<span class='warning'>I feel faint.</span>")
-				remove_status_effect(/datum/status_effect/debuff/bleeding)
-				remove_status_effect(/datum/status_effect/debuff/bleedingworst)
-				apply_status_effect(/datum/status_effect/debuff/bleedingworse)
-			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-				if(prob(3) && !IsUnconscious())
-					Unconscious(rand(5 SECONDS,10 SECONDS))
-					to_chat(src, "<span class='warning'>I feel drained.</span>")
-				remove_status_effect(/datum/status_effect/debuff/bleedingworse)
-				remove_status_effect(/datum/status_effect/debuff/bleeding)
-				apply_status_effect(/datum/status_effect/debuff/bleedingworst)
+		if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+			switch(blood_volume)
+				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+					remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+					remove_status_effect(/datum/status_effect/debuff/bleedingworst)
+					apply_status_effect(/datum/status_effect/debuff/bleeding)
+				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+					if(prob(3))
+						blur_eyes(6)
+						to_chat(src, "<span class='warning'>I feel faint.</span>")
+					remove_status_effect(/datum/status_effect/debuff/bleeding)
+					remove_status_effect(/datum/status_effect/debuff/bleedingworst)
+					apply_status_effect(/datum/status_effect/debuff/bleedingworse)
+				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+					if(prob(3) && !IsUnconscious())
+						Unconscious(rand(5 SECONDS,10 SECONDS))
+						to_chat(src, "<span class='warning'>I feel drained.</span>")
+					remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+					remove_status_effect(/datum/status_effect/debuff/bleeding)
+					apply_status_effect(/datum/status_effect/debuff/bleedingworst)
+			if(blood_volume <= BLOOD_VOLUME_BAD)
+				adjustOxyLoss(1)
+				if(blood_volume <= BLOOD_VOLUME_SURVIVE)
+					adjustOxyLoss(1.5)
 
 //		var/temp_bleed = 0
 		//Bleeding out
@@ -126,10 +132,6 @@
 			bleed(bleed_rate)
 		else
 			remove_stress(/datum/stressevent/bleeding)
-
-//	if(blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE)
-//		adjustOxyLoss(1.6)
-	//handled in life
 
 /mob/living/carbon/proc/get_bleed_rate()
 	var/bleedrate = 0
@@ -171,11 +173,8 @@
 
 /mob/living/carbon/human/bleed(amt)
 	amt *= physiology.bleed_mod
-	if(!(NOBLOOD in dna.species.species_traits))
-		if(!mind || !mind.has_antag_datum(/datum/antagonist/zombie))
-			..()
-
-
+	if(!(NOBLOOD in dna.species.species_traits) && !mind?.has_antag_datum(/datum/antagonist/zombie))
+		return ..()
 
 /mob/living/proc/restore_blood()
 	blood_volume = initial(blood_volume)

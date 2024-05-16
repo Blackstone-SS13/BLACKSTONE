@@ -1,6 +1,6 @@
 <?php
 //This file contains things that should not be touched by the automatic live tracker
- 
+
 //Github lets you have it sign the message with a secret that you can validate. This prevents people from faking events.
 //This var should match the secret you configured for this webhook on github.
 //This is required as otherwise somebody could trick the script into leaking the api key.
@@ -10,8 +10,11 @@ $hookSecret = '08ajh0qj93209qj90jfq932j32r';
 //This requires the public_repo (or repo for private repositories) and read:org permissions
 $apiKey = '209ab8d879c0f987d06a09b9d879c0f987d06a09b9d8787d0a089c';
 
-//Used to prevent potential RCEs
+//The repository auto-updates are sourced from.
 $repoOwnerAndName = "tgstation/tgstation";
+
+//Whitelist of repository names that have PRs auto-tagged
+$repoAutoTaggerWhitelist = array("tgstation", "TerraGov-Marine-Corps");
 
 //Auto update settings
 $enable_live_tracking = true;	//auto update this file from the repository
@@ -67,11 +70,11 @@ announce_secret - Announce secret/security prs that have a [s] in front of the t
 $servers[$configitem]['announce_secret'] = false;
 $servers[$configitem]['announce_secret'] = 'only';
 
-announce_unvalidated - Announce prs by unvalidated users (see the validation setting above)? Defaults to no. 
+announce_unvalidated - Announce prs by unvalidated users (see the validation setting above)? Defaults to no.
 	Can also be set to 'only' to only announce prs by unvalidated users.
 $servers[$configitem]['announce_unvalidated'] = false;
 
-//Note: the same webhook or game server can be given in mutiple announce endpoints with different settings, allowing you to say, have embeds only show on prs to certain repos by excluding the repo in a endpoint with embed = false, and including the repo in a endpoint with embed = true true. This could also be used to only block closed and reopened events on prs by unvalidated users.
+//Note: the same webhook or game server can be given in mutiple announce endpoints with different settings, allowing you to say, have embeds only show on prs to certain repos by excluding the repo in an endpoint with embed = false, and including the repo in an endpoint with embed = true true. This could also be used to only block closed and reopened events on prs by unvalidated users.
 
 
 
@@ -104,7 +107,7 @@ $configitem = -1;//ignore me
 $discordWebHooks[++$configitem] = array();
 
 // Webhook Url (you can get this from discord via the webhook setting menu of the server or a channel.)
-$discordWebHooks[$configitem]['url'] = 'https://discordapp.com/api/webhooks/538933489920245771/xaoYtVuype-P1rb_uthQLkh_C4iVL3sjtIvFEp7rsfhbBs8tDsSJgE0a9MNWJaoSPBPK';
+$discordWebHooks[$configitem]['url'] = 'https://discord.com/api/webhooks/538933489920245771/xaoYtVuype-P1rb_uthQLkh_C4iVL3sjtIvFEp7rsfhbBs8tDsSJgE0a9MNWJaoSPBPK';
 
 // show an embed with more info?
 $discordWebHooks[$configitem]['embed'] = true;
@@ -118,7 +121,7 @@ $discordWebHooks[$configitem]['no_text'] = false;
 $discordWebHooks[++$configitem] = array();
 
 // Webhook Url (you can get this from discord via the webhook setting menu of the server or a channel.)
-$discordWebHooks[$configitem]['url'] = 'https://discordapp.com/api/webhooks/538933686956064769/q0uDel7S6eutvRIyEwsuZo_ppzAoxqUNeU2PRChYVsYoJmmn2f2YYSDoMjy9FhhXKqpI';
+$discordWebHooks[$configitem]['url'] = 'https://discord.com/api/webhooks/538933686956064769/q0uDel7S6eutvRIyEwsuZo_ppzAoxqUNeU2PRChYVsYoJmmn2f2YYSDoMjy9FhhXKqpI';
 
 // show an embed with more info?
 $discordWebHooks[$configitem]['embed'] = true;

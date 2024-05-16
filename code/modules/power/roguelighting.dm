@@ -62,7 +62,7 @@
 /obj/effect/landmark/mapGenerator/sunlights
 	mapGeneratorType = /datum/mapGenerator/sunlights
 	endTurfX = 255
-	endTurfY = 255
+	endTurfY = 400
 	startTurfX = 1
 	startTurfY = 1
 
@@ -664,7 +664,7 @@
 						to_chat(user, "<span class='warning'>[attachment] is full!</span>")
 						return
 					user.visible_message("<span class='info'>[user] places [W] into the pot.</span>")
-					addtimer(CALLBACK(pot, TYPE_PROC_REF(/obj/item/reagent_containers/glass/pot, makeSoup), nutrimentamount), rand(1 MINUTES, 3 MINUTES))
+					pot.reagents.add_reagent(/datum/reagent/consumable/nutriment, nutrimentamount)
 					qdel(W)
 				return
 	. = ..()

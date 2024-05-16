@@ -8,12 +8,15 @@
 	display_order = JDO_SOILSON
 	selection_color = JCOLOR_PEASANT
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar"
 	)
 
 	tutorial = "It is a simple life you live, your basic understanding of life is something many would be envious of if they knew how perfect it was. You know a good day's work, the sweat on your brow is yours: Famines and plague may take its toll, but you know how to celebrate life well. Till the soil and produce fresh food for those around you, and maybe youll be more than an unsung hero someday."
@@ -23,6 +26,7 @@
 	outfit = /datum/outfit/job/roguetown/farmer
 	display_order = 24
 	give_bank_account = 17
+	min_pq = -10
 
 /datum/outfit/job/roguetown/farmer/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -35,6 +39,7 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, pick(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/labor/farming, pick(4,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 
 	if(H.gender == MALE)
 		head = /obj/item/clothing/head/roguetown/roguehood/random

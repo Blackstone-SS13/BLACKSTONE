@@ -2,11 +2,22 @@
 	name = "Amazon"
 	tutorial = "Amazons are warrior-women from the mysterious isle of Issa. These rare fighters are so tough they can beat an average man!"
 	allowed_sexes = list("female")
-	allowed_races = list("Humen")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc"
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/amazon
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	pickprob = 13
 	maxchosen = 2
+	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
 
 /datum/outfit/job/roguetown/adventurer/amazon/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -21,6 +32,7 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	belt = /obj/item/storage/belt/rogue/leather
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	beltl = /obj/item/rogueweapon/huntingknife
@@ -47,8 +59,6 @@
 	H.change_stat("perception", 2)
 	H.change_stat("endurance", 2)
 	H.change_stat("speed", 1)
-	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	if(H.wear_mask) //for stupid retards with bad eyes
 		var/obj/I = H.wear_mask
 		H.dropItemToGround(H.wear_mask, TRUE)

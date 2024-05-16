@@ -5,6 +5,7 @@
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
+	min_pq = null //no pq
 
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Humen","Humen", "Half-Elf","Dark Elf","Elf","Elf", "Dwarf","Dwarf")
@@ -41,7 +42,7 @@
 		H.remove_all_languages()
 		H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/simple/claw)
 		H.update_a_intents()
-		H.cmode_music = 'sound/music/combatbandit.ogg'
+		H.cmode_music = 'sound/music/combat_weird.ogg'
 
 		var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
 		if(eyes)
@@ -59,7 +60,7 @@
 		H.name = "skeleton"
 		H.real_name = "skeleton"
 		ADD_TRAIT(H, TRAIT_NOMOOD, TRAIT_GENERIC)
-		ADD_TRAIT(H, TRAIT_NOFATSTAM, TRAIT_GENERIC)
+		ADD_TRAIT(H, RTRAIT_NOFATSTAM, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOHUNGER, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOBREATH, TRAIT_GENERIC)

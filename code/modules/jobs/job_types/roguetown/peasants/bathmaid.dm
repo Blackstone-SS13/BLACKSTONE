@@ -7,13 +7,15 @@
 	spawn_positions = 0 // Disabled due to ERP removal, originally 3
 
 	allowed_sexes = list("female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Dark Elf",
-	"Half-Elf",
-	"Tiefling",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar"
 	)
 
 	tutorial = "Nobody would envy your lot in life, for the role of the bathwench is not something so idly taken. It comes from a place of desperation, least usually: for any with true compassion or skill would seek position with a nunnery or the medical trade. Launder clothes and soothe wounds, that is your loathsome creed."
@@ -23,6 +25,7 @@
 	display_order = JDO_NIGHTMAIDEN
 	give_bank_account = TRUE
 	can_random = FALSE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/nightmaiden/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -31,7 +34,6 @@
 	armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy
 	neck = /obj/item/storage/belt/rogue/pouch
 	backpack_contents = list(/obj/item/roguekey/nightmaiden = 1)
-	ADD_TRAIT(H, RTRAIT_GOODLOVER, TRAIT_GENERIC)
 
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)

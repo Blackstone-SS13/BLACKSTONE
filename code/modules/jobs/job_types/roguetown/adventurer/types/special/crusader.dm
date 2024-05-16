@@ -1,10 +1,12 @@
 /datum/advclass/crusader
 	name = "Crusader"
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-							"Humen",
-							"Tiefling")
+	allowed_races = list(
+		"Humen",
+		"Tiefling",
+	)
 	outfit = /datum/outfit/job/roguetown/adventurer/crusader
+	traits_applied = list(RTRAIT_HEAVYARMOR)
 	special_req = TRUE
 	maxchosen = 0
 	isvillager = FALSE
@@ -74,8 +76,7 @@
 		H.change_stat("strength", 2)
 		H.change_stat("speed", -1)
 
-//	H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/churn)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/churn)
 
 /obj/item/clothing/cloak/stabard/crusader
 	name = "surcoat of the golden order"

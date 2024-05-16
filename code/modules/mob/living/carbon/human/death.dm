@@ -45,9 +45,8 @@
 				dust(just_ash=TRUE,drop_items=TRUE)
 				return
 
-	if(!gibbed)
-		if(!is_in_roguetown(src))
-			zombie_check()
+	if(!gibbed && can_death_zombify(src))
+		zombie_check()
 
 	if(client || mind)
 		SSticker.deaths++
@@ -88,12 +87,13 @@
 			if(get_triumphs() > 0)
 				adjust_triumphs(-1)
 
-		if(job == "King" || job == "Queen")
+		if(job == "King")
 			for(var/mob/living/carbon/human/HU in GLOB.player_list)
 				if(!HU.stat)
 					if(is_in_roguetown(HU))
 						HU.playsound_local(get_turf(HU), 'sound/music/lorddeath.ogg', 80, FALSE, pressure_affected = FALSE)
-
+		else if(job == "Priest")
+			addomen("nopriest")
 //		if(yeae)
 //			if(mind)
 //				if((mind.assigned_role == "Lord") || (mind.assigned_role == "Priest") || (mind.assigned_role == "Sheriff") || (mind.assigned_role == "Merchant"))
@@ -127,18 +127,30 @@
 	if(is_devil(src))
 		INVOKE_ASYNC(is_devil(src), TYPE_PROC_REF(/datum/antagonist/devil, beginResurrectionCheck), src)
 
+/mob/living/carbon/human/revive(full_heal, admin_revive)
+	. = ..()
+	if(!.)
+		return
+	if(job == "King")
+		removeomen("nolord")
+	else if(job == "Priest")
+		removeomen("nopriest")
+
 /mob/living/carbon/human/proc/zombie_check()
 	if(!mind)
 		return
+	var/already_zombie = mind.has_antag_datum(/datum/antagonist/zombie)
+	if(already_zombie)
+		return already_zombie
 	if(mind.has_antag_datum(/datum/antagonist/vampirelord))
 		return
 	if(mind.has_antag_datum(/datum/antagonist/werewolf))
 		return
-	if(mind.has_antag_datum(/datum/antagonist/zombie))
-		return
 	if(mind.has_antag_datum(/datum/antagonist/skeleton))
 		return
-	mind.add_antag_datum(/datum/antagonist/zombie)
+	if(HAS_TRAIT(src, TRAIT_ZOMBIE_IMMUNE))
+		return
+	return mind.add_antag_datum(/datum/antagonist/zombie)
 
 /mob/living/carbon/human/gib(no_brain, no_organs, no_bodyparts, safe_gib = FALSE)
 	for(var/mob/living/carbon/human/CA in viewers(7, src))
@@ -165,3 +177,6 @@
 	ADD_TRAIT(src, TRAIT_BADDNA, MADE_UNCLONEABLE)
 	blood_volume = 0
 	return TRUE
+
+/proc/can_death_zombify(mob/living/carbon/human)
+	return hasomen("nopriest") || !is_in_roguetown(human)

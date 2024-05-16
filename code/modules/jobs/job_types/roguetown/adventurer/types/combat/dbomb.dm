@@ -2,8 +2,9 @@
 	name = "Vagrant"
 	tutorial = "Dwarves like to blow things up."
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Dwarf","Dwarf")
+	allowed_races = list("Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dbomb
+	traits_applied = list(RTRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/dbomb/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -33,6 +34,6 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	H.change_stat("strength", 1)
 	H.change_stat("endurance", 1)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)

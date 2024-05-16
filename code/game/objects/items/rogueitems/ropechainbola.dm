@@ -1,7 +1,7 @@
 
 /obj/item/rope
 	name = "rope"
-	desc = ""
+	desc = "A woven hemp rope."
 	gender = PLURAL
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "rope"
@@ -117,7 +117,7 @@
 		return
 
 
-/datum/intent/whip
+/datum/intent/whips
 	name = "strike"
 	blade_class = BCLASS_BLUNT
 	attack_verb = list("whips", "strikes", "smacks")
@@ -126,7 +126,7 @@
 
 /obj/item/rope/chain
 	name = "chain"
-	desc = ""
+	desc = "A heavy steel chain."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "chain"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
@@ -137,7 +137,7 @@
 	breakouttime = 1 MINUTES
 	slipouttime = 5 MINUTES
 	cuffsound = 'sound/blank.ogg'
-	possible_item_intents = list(/datum/intent/tie, /datum/intent/whip)
+	possible_item_intents = list(/datum/intent/tie, /datum/intent/whips)
 	firefuel = null
 	smeltresult = /obj/item/ingot/iron
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'

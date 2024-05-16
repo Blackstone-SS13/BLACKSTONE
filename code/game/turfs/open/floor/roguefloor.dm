@@ -121,7 +121,7 @@
 
 /turf/open/floor/rogue/grass
 	name = "grass"
-	desc = ""
+	desc = "Grass, sodden with mud and bogwater." 
 	icon_state = "grass"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_GRASS
@@ -139,7 +139,7 @@
 
 /turf/open/floor/rogue/dirt/ambush
 	name = "dirt"
-	desc = ""
+	desc = "The dirt is pocked with the scars of countless wars."
 	icon_state = "dirt"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_GRASS
@@ -157,7 +157,7 @@
 
 /turf/open/floor/rogue/dirt
 	name = "dirt"
-	desc = ""
+	desc = "The dirt is pocked with the scars of countless wars."
 	icon_state = "dirt"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_GRASS
@@ -174,7 +174,7 @@
 	var/obj/structure/closet/dirthole/holie
 	var/obj/machinery/crop/planted_crop
 	var/dirt_amt = 3
-/*
+
 /turf/open/floor/rogue/dirt/get_slowdown(mob/user)
 	var/returned = slowdown
 	for(var/obj/item/I in user.held_items)
@@ -184,7 +184,7 @@
 				if(!L.cmode)
 					returned = max(returned-2, 0)
 	return returned
-*/
+
 
 /turf/open/floor/rogue/dirt/attack_right(mob/user)
 	if(isliving(user))
@@ -292,7 +292,7 @@
 
 /turf/open/floor/rogue/dirt/road
 	name = "dirt"
-	desc = ""
+	desc = "The dirt is pocked with the scars of countless steps."
 	icon_state = "road"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_SAND
@@ -390,7 +390,7 @@
 
 /turf/open/floor/rogue/underworld/road
 	name = "ash"
-	desc = ""
+	desc = "Smells like burnt wood."
 	icon_state = "ash"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_SAND
@@ -408,7 +408,7 @@
 
 /turf/open/floor/rogue/volcanic
 	name = "dirt"
-	desc = ""
+	desc = "The dirt is pocked with the scars of countless steps."
 	icon_state = "lavafloor"
 	layer = MID_TURF_LAYER
 	footstep = FOOTSTEP_SAND

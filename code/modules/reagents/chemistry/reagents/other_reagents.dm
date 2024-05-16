@@ -159,8 +159,9 @@
 	taste_description = "lead"
 
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M)
-	M.adjustToxLoss(1)
-	M.add_nausea(50)
+	if(!HAS_TRAIT(M, RTRAIT_NASTY_EATER))
+		M.adjustToxLoss(1)
+		M.add_nausea(50)
 	..()
 
 /*

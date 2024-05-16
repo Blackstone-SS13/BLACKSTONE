@@ -14,7 +14,11 @@
 	job_rank = ROLE_VAMPIRE
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "vampire"
-	confess_lines = list("I WANT YOUR BLOOD!", "DRINK THE BLOOD!", "CHILD OF KAIN!")
+	confess_lines = list(
+		"I WANT YOUR BLOOD!", 
+		"DRINK THE BLOOD!", 
+		"CHILD OF KAIN!",
+	)
 	var/disguised = TRUE
 	var/vitae = 1000
 	var/last_transform
@@ -56,14 +60,14 @@
 		ADD_TRAIT(owner.current, RTRAIT_NOBLE, TRAIT_GENERIC)
 	owner.special_role = name
 	ADD_TRAIT(owner.current, RTRAIT_STRONGBITE, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_NOFATSTAM, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, RTRAIT_NOFATSTAM, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOBREATH, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOPAIN, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_LIMPDICK, TRAIT_GENERIC)
-	owner.current.cmode_music = 'sound/music/combatvamp.ogg'
+	owner.current.cmode_music = 'sound/music/combat_vamp2.ogg'
 	var/obj/item/organ/eyes/eyes = owner.current.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
 		eyes.Remove(owner.current,1)
@@ -241,11 +245,11 @@
 
 /datum/status_effect/buff/bloodstrength
 	id = "bloodstrength"
-	alert_type = /obj/screen/alert/status_effect/buff/bloodstrength
+	alert_type = /atom/movable/screen/alert/status_effect/buff/bloodstrength
 	effectedstats = list("strength" = 6)
 	duration = 1 MINUTES
 
-/obj/screen/alert/status_effect/buff/bloodstrength
+/atom/movable/screen/alert/status_effect/buff/bloodstrength
 	name = "Night Muscles"
 	desc = ""
 	icon_state = "bleed1"
@@ -273,14 +277,14 @@
 
 /datum/status_effect/buff/celerity
 	id = "celerity"
-	alert_type = /obj/screen/alert/status_effect/buff/celerity
+	alert_type = /atom/movable/screen/alert/status_effect/buff/celerity
 	effectedstats = list("speed" = 15,"perception" = 10)
 	duration = 30 SECONDS
 
 /datum/status_effect/buff/celerity/nextmove_modifier()
 	return 0.60
 
-/obj/screen/alert/status_effect/buff/celerity
+/atom/movable/screen/alert/status_effect/buff/celerity
 	name = "Quickening"
 	desc = ""
 	icon_state = "bleed1"
@@ -308,11 +312,11 @@
 
 /datum/status_effect/buff/fortitude
 	id = "fortitude"
-	alert_type = /obj/screen/alert/status_effect/buff/fortitude
+	alert_type = /atom/movable/screen/alert/status_effect/buff/fortitude
 	effectedstats = list("endurance" = 20,"constitution" = 20)
 	duration = 30 SECONDS
 
-/obj/screen/alert/status_effect/buff/fortitude
+/atom/movable/screen/alert/status_effect/buff/fortitude
 	name = "Armor of Darkness"
 	desc = ""
 	icon_state = "bleed1"
@@ -403,8 +407,8 @@
 		SSdroning.kill_loop(client)
 		SSdroning.kill_droning(client)
 		client.move_delay = initial(client.move_delay)
-		var/obj/screen/gameover/hog/H = new()
+		var/atom/movable/screen/gameover/hog/H = new()
 		H.layer = SPLASHSCREEN_LAYER+0.1
 		client.screen += H
 		H.Fade()
-		addtimer(CALLBACK(H, TYPE_PROC_REF(/obj/screen/gameover, Fade), TRUE), 100)
+		addtimer(CALLBACK(H, TYPE_PROC_REF(/atom/movable/screen/gameover, Fade), TRUE), 100)

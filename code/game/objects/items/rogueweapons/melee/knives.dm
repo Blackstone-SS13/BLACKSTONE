@@ -5,7 +5,7 @@
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust, /datum/intent/dagger/chop)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	name = "hunting knife"
-	desc = ""
+	desc = "This survival knife might be able to get you through the wild."
 	icon_state = "huntingknife"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	item_state = "bone_dagger"
@@ -23,6 +23,7 @@
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	throwforce = 12
 	wdefense = 3
+	wbalance = 1
 	thrown_bclass = BCLASS_CUT
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/steel
@@ -45,24 +46,25 @@
 	clickcd = 10
 
 /datum/intent/dagger/thrust
-	name = "stab"
+	name = "thrust"
 	icon_state = "instab"
-	attack_verb = list("stabs")
+	attack_verb = list("thrusts")
 	animname = "stab"
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 20
+	penfactor = 40
 	chargetime = 0
 	clickcd = 8
 
 /datum/intent/dagger/thrust/pick
-	name = "thrust"
+	name = "icepick stab"
+	icon_state = "inpick"
 	attack_verb = list("stabs", "impales")
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 50
-	clickcd = CLICK_CD_MELEE
-	swingdelay = 0
-	blade_class = BCLASS_PICK
+	penfactor = 80
+	clickcd = 14
+	swingdelay = 12
+	damfactor = 1.1
 
 /obj/item/rogueweapon/huntingknife/getonmobprop(tag)
 	. = ..()
@@ -84,12 +86,12 @@
 	penfactor = 10
 	damfactor = 1.5
 	swingdelay = 5
-	clickcd = CLICK_CD_MELEE
+	clickcd = 10
 
 /obj/item/rogueweapon/huntingknife/cleaver
 	force = 15
 	name = "cleaver"
-	desc = ""
+	desc = "Chop, chop, chop!"
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
 	icon_state = "cleav"
 	icon = 'icons/roguetown/weapons/32.dmi'
@@ -104,7 +106,7 @@
 /obj/item/rogueweapon/huntingknife/cleaver/combat
 	force = 16
 	name = "knife"
-	desc = ""
+	desc = "A combat knife. Swift and deadly if you hit."
 	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
 	icon_state = "combatknife"
 	icon = 'icons/roguetown/weapons/32.dmi'
@@ -151,16 +153,17 @@
 	penfactor = 30
 
 /obj/item/rogueweapon/huntingknife/idagger
-	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut)
+	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut, /datum/intent/dagger/thrust/pick)
 	force = 15
 	max_integrity = 100
-	name = "dagger"
-	desc = ""
+	name = "Iron dagger"
+	desc = "This is a common dagger of iron."
 	icon_state = "idagger"
 	smeltresult = /obj/item/ingot/iron
 
 /obj/item/rogueweapon/huntingknife/idagger/steel
-	name = "dagger"
+	name = "steel dagger"
+	desc = "This is a dagger made of solid steel, more durable."
 	icon_state = "sdagger"
 	max_integrity = 150
 	smeltresult = /obj/item/ingot/steel
@@ -169,7 +172,8 @@
 	icon_state = "sdaggeralt"
 
 /obj/item/rogueweapon/huntingknife/idagger/silver
-	name = "dagger"
+	name = "silver dagger"
+	desc = "This silver dagger can be the banishment of vampires and werewolves."
 	icon_state = "sildagger"
 	smeltresult = null
 	sellprice = 50
@@ -203,9 +207,22 @@
 /obj/item/rogueweapon/huntingknife/stoneknife
 	possible_item_intents = list(/datum/intent/dagger/cut,/datum/intent/dagger/chop)
 	name = "stone knife"
-	desc = ""
+	desc = "A crudely crafted knife made of stone."
 	icon_state = "stone_knife"
 	smeltresult = null
 	max_integrity = 50
 	max_blade_int = 50
 	wdefense = 1
+
+/obj/item/rogueweapon/huntingknife/elvish
+	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut)
+	name = "elvish dagger"
+	desc = "This beautiful dagger is of intricate, elvish design. Sharper, too."
+	force = 19
+	icon_state = "elfdagger"
+	item_state = "elfdag"
+
+/obj/item/rogueweapon/huntingknife/elvish/drow
+	name = "drow dagger"
+	desc = "This ominous, dark handled dagger was crafted by the assassin race of drow."
+	force = 25

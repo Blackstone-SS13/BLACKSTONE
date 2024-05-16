@@ -6,14 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Dwarf",
-	"Dwarf",
-	"Aasimar",
-	"Half-Elf")
+	allowed_races = list("Humen")
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/job/roguetown/hand
 	display_order = JDO_HAND
@@ -21,7 +14,7 @@
 	bypass_lastclass = TRUE
 	whitelist_req = TRUE
 	give_bank_account = 44
-	min_pq = -4
+	min_pq = 3
 
 /*
 /datum/job/roguetown/hand/special_job_check(mob/dead/new_player/player)

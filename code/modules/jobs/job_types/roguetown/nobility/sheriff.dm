@@ -6,19 +6,18 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Aasimar")
+	allowed_races = list("Humen")
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_SHERIFF
 	tutorial = "Law and Order, your divine reason for existence. These animals are undeserving of your protection, for it is their sons and daughters roving the countryside with blade in hand; how many men have you lost this week just to the horrors in the woods alone? Are you the one to stand between this town and chaos, or will you fail it like they expect you to?"
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/sheriff
 	give_bank_account = 26
-	min_pq = 2
+	min_pq = 4
 
 /datum/outfit/job/roguetown/sheriff/pre_equip(mob/living/carbon/human/H)
 	..()
+	head = /obj/item/clothing/head/roguetown/helmet/sallet/visored
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/sheriff
 	neck = /obj/item/clothing/neck/roguetown/gorget
@@ -107,7 +106,8 @@
 	//only migrants and peasants
 	if(!(recruit.job in GLOB.peasant_positions) && \
 		!(recruit.job in GLOB.serf_positions) && \
-		!(recruit.job in GLOB.allmig_positions))
+		!(recruit.job in GLOB.allmig_positions) && \
+		!(recruit.job in GLOB.mercenary_positions))
 		return FALSE
 	//need to see their damn face
 	if(!recruit.get_face_name(null))

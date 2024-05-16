@@ -6,11 +6,15 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Half-Elf"
-	)
 	allowed_sexes = list("male")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Aasimar"
+	)
+	allowed_patrons = ALL_CLERIC_PATRONS
 	tutorial = "Confessors are shady agents of the church hired to spy on the populace and keep them moral. As the most fanatical members of the clergy, their main concern is assisting the local Puritan with their work in extracting confessions of sin as well as hunting night beasts and cultists that hide in plain sight."
 
 	outfit = /datum/outfit/job/roguetown/shepherd
@@ -18,7 +22,7 @@
 	whitelist_req = TRUE
 	display_order = JDO_SHEPHERD
 	give_bank_account = 3
-	min_pq = -4
+	min_pq = 0
 
 /datum/outfit/job/roguetown/shepherd
 	name = "Confessor"

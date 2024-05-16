@@ -6,14 +6,16 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc"
 	)
 
 	tutorial = "Liquor Lodging and Lavish Baths, youre the life of the party and a rich bastard because of it. Well before that pesky merchant came around and convinced people to take up the bottle instead of the tankred, you were the reason the hardworking men and women of this town could rest."
@@ -21,6 +23,7 @@
 	outfit = /datum/outfit/job/roguetown/barkeep
 	display_order = JDO_BARKEEP
 	give_bank_account = 43
+	min_pq = -4
 
 /datum/outfit/job/roguetown/barkeep/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -6,18 +6,23 @@
 	total_positions = 0
 	spawn_positions = 0
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Half-Elf",
-	"Dwarf",
-	"Dwarf"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc"
 	)
 
 	tutorial = "Grabber is the lowest position in the Merchant's Guild, reserved for the strong, loyal newcomers. They can be like family to the merchant in these foreign lands."
 
 	outfit = /datum/outfit/job/roguetown/grabber
 	display_order = JDO_GRABBER
+	min_pq = -10
 
 /datum/outfit/job/roguetown/grabber/pre_equip(mob/living/carbon/human/H)
 	..()

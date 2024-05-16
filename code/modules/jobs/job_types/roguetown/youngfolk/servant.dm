@@ -6,16 +6,24 @@
 	total_positions = 4
 	spawn_positions = 4
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Half-Elf")
-	allowed_ages = list(AGE_YOUNG)
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar"
+	)
+	allowed_ages = YOUNG_AGES_LIST
 
 	tutorial = "Granted a comfortable life in the Lord's manor as one of his servants! You will appreciate it more and more every day as you clean the floors and are beaten for nothing."
 
 	outfit = /datum/outfit/job/roguetown/servant
 	display_order = JDO_SERVANT
 	give_bank_account = TRUE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/servant/pre_equip(mob/living/carbon/human/H)
 	..()

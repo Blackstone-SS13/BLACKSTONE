@@ -11,6 +11,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	var/completed = 0					//currently only used for custom objectives.
 	var/martyr_compatible = 0			//If the objective is compatible with martyr objective, i.e. if you can still do it while dead.
 	var/triumph_count = 1
+	var/flavor = "Objective" //so it appear as "goal", "dream", "aspiration", etc
 
 /datum/objective/New(text)
 	if(text)
@@ -346,7 +347,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	for(var/mob/living/player in GLOB.player_list)
 		if((get_area(player) in SSshuttle.emergency.shuttle_areas) && player.mind && player.stat != DEAD && ishuman(player))
 			var/mob/living/carbon/human/H = player
-			if(H.dna.species.id != "human")
+			if(H.dna.species.id != "humen")
 				return FALSE
 	return TRUE
 

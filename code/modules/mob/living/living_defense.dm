@@ -130,7 +130,7 @@
 					if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
 						if(can_embed(I))
 							if(prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-								//throw_alert("embeddedobject", /obj/screen/alert/embeddedobject)
+								//throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 								simple_embedded_objects |= I
 								I.add_mob_blood(src)//it embedded itself in you, of course it's bloody!
 								I.forceMove(src)
@@ -223,10 +223,15 @@
 //	if(user.pulling != src)
 //		return
 
-	var/probby =  50 - ((user.STASTR - STASTR) * 10)
-	if(src.dir == turn(get_dir(src,user), 180))//they are behind us
+	var/probby =  20 - ((user.STASTR - STASTR) * 10)
+	if(src.pulling == user && !instant)
+		probby += 30
+	
+	if(src.dir == turn(get_dir(src,user), 180))
 		probby = (probby - 30)
+	
 	probby = clamp(probby, 5, 95)
+	
 	if(prob(probby) && !instant && !stat && cmode)
 		visible_message("<span class='warning'>[user] struggles with [src]!</span>",
 						"<span class='warning'>[user] struggles to restrain me!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)
@@ -235,9 +240,11 @@
 		else
 			to_chat(user, "<span class='warning'>I struggle with [src]!</span>")
 		playsound(src.loc, 'sound/foley/struggle.ogg', 100, FALSE, -1)
-		user.Immobilize(30)
-		user.changeNext_move(35)
+		user.Immobilize(2 SECONDS)
+		user.changeNext_move(2 SECONDS)
 		user.rogfat_add(5)
+		src.Immobilize(1 SECONDS)
+		src.changeNext_move(1 SECONDS)
 		return
 
 	if(!instant)
@@ -560,7 +567,7 @@
 	return TRUE
 
 //called when the mob receives a bright flash
-/mob/living/proc/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0, type = /obj/screen/fullscreen/flash)
+/mob/living/proc/flash_act(intensity = 1, override_blindness_check = 0, affect_silicon = 0, visual = 0, type = /atom/movable/screen/fullscreen/flash)
 	if(HAS_TRAIT(src, TRAIT_NOFLASH))
 		return FALSE
 	if(get_eye_protection() < intensity && (override_blindness_check || !(HAS_TRAIT(src, TRAIT_BLIND))))

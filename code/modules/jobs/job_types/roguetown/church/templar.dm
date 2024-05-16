@@ -6,25 +6,48 @@
 	faction = "Station"
 	tutorial = "Templars are warriors who have forsaken wealth and title in lieu of service to the church, due to either zealotry or a past shame. They guard the church and its priest, while keeping a watchful eye against heresy and nite-creechers. Within troubled dreams, they wonder if the blood they shed makes them holy or stained."
 	allowed_sexes = list("male")
-	allowed_races = list("Humen",
-	"Tiefling",
-	"Aasimar")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Dwarf",
+		"Aasimar",
+		"Half-Elf",
+		"Half Orc"
+	)
+	allowed_patrons = ALL_CLERIC_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar
 	min_pq = 2
 	total_positions = 2
 	spawn_positions = 2
-	spells = list(/obj/effect/proc_holder/spell/invoked/lesser_heal, /obj/effect/proc_holder/spell/targeted/churn, /obj/effect/proc_holder/spell/targeted/burialrite)
 	display_order = JDO_TEMPLAR
 	give_bank_account = TRUE
 
+/datum/outfit/job/roguetown/templar
+	allowed_patrons = ALL_CLERIC_PATRONS
+
 /datum/outfit/job/roguetown/templar/pre_equip(mob/living/carbon/human/H)
 	..()
+	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+	switch(H.patron.name)
+		if("Astrata")
+			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
+		if("Dendor")
+			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
+		if("Necra")
+			neck = /obj/item/clothing/neck/roguetown/psicross/necra
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
+		if("Pestra")
+			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
+		if("Noc")
+			neck = /obj/item/clothing/neck/roguetown/psicross/noc
+			head = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	shoes = /obj/item/clothing/shoes/roguetown/boots
-	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backr = /obj/item/rogueweapon/shield/tower/metal
 	belt = /obj/item/storage/belt/rogue/leather/black
@@ -46,6 +69,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 2)
@@ -53,12 +77,16 @@
 		H.change_stat("endurance", 3)
 		H.change_stat("speed", -2)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	if(H.dna?.species)
-		if(H.dna.species.id == "human")
+		if(H.dna.species.id == "humen")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON)
-	//Max devotion limit - Templars are stronger but cannot pray to gain more abilities
-	C.max_devotion = 200
+	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
+	//Max devotion limit - Templars are stronger but cannot pray to gain more abilities beyond t1
+	C.max_devotion = 250
+	C.max_progression = CLERIC_REQ_1
 	C.update_devotion(50, 50)
 	C.holder_mob = H
+	C.grant_spells_templar(H)
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)

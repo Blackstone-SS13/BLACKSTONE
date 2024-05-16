@@ -116,31 +116,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		view_rogue_manifest()
 		return
 
-	if(href_list["commendsomeone"])
-		if(SSticker.current_state != GAME_STATE_FINISHED)
-			return
-		if(commendedsomeone)
-			return
-		var/list/selections = GLOB.character_ckey_list.Copy()
-		if(!selections.len)
-			return
-		var/selection = input(src,"Which Character?") as null|anything in sortList(selections)
-		if(!selection)
-			return
-		if(commendedsomeone)
-			return
-		var/theykey = selections[selection]
-		if(theykey == ckey)
-			to_chat(src,"You can't commend yourself.")
-			return
-		if(theykey)
-			commendedsomeone = TRUE
-			add_commend(theykey, ckey)
-			to_chat(src,"[selection] commended.")
-			log_game("COMMEND: [ckey] commends [theykey].")
-			log_admin("COMMEND: [ckey] commends [theykey].")
-		return
-
 	switch(href_list["_src_"])
 		if("holder")
 			hsrc = holder
@@ -261,6 +236,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		connecting_admin = TRUE
 	else if(GLOB.deadmins[ckey])
 		verbs += /client/proc/readmin
+		verbs += /client/proc/adminwho
 		connecting_admin = TRUE
 	if(CONFIG_GET(flag/autoadmin))
 		if(!GLOB.admin_datums[ckey])
@@ -1063,7 +1039,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 	var/pos = 0
 	for(var/D in GLOB.cardinals)
 		pos++
-		var/obj/screen/char_preview/O = LAZYACCESS(char_render_holders, "[D]")
+		var/atom/movable/screen/char_preview/O = LAZYACCESS(char_render_holders, "[D]")
 		if(O)
 			screen -= O
 			char_render_holders -= O
@@ -1084,8 +1060,8 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 				O.screen_loc = "character_preview_map:0:2,0:10"
 
 /client/proc/clear_character_previews()
-	for(var/obj/screen/S in char_render_holders)
-//		var/obj/screen/S = char_render_holders[index]
+	for(var/atom/movable/screen/S in char_render_holders)
+//		var/atom/movable/screen/S = char_render_holders[index]
 		screen -= S
 		qdel(S)
 	char_render_holders = list()
@@ -1109,3 +1085,28 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		if(isliving(mob)) //no ghost can call this
 			mob.ghostize(can_reenter_corpse)
 		testing("[mob] [mob.type] YEA CLIE")
+
+/client/proc/commendsomeone(var/forced = FALSE)
+	if(commendedsomeone)
+		if(!forced)
+			to_chat(src, "<span class='danger'>You already commended someone this round.</span>")
+		return
+	if(alert(src,"Was there a character during this round that you would like to anonymously commend?", "Commendation", "YES", "NO") != "YES")
+		return
+	var/list/selections = GLOB.character_ckey_list.Copy()
+	if(!selections.len)
+		return
+	var/selection = input(src,"Which Character?") as null|anything in sortList(selections)
+	if(!selection)
+		return
+	var/theykey = selections[selection]
+	if(theykey == ckey)
+		to_chat(src,"You can't commend yourself.")
+		return
+	if(theykey)
+		commendedsomeone = TRUE
+		add_commend(theykey, ckey)
+		to_chat(src,"[selection] commended.")
+		log_game("COMMEND: [ckey] commends [theykey].")
+		log_admin("COMMEND: [ckey] commends [theykey].")
+	return

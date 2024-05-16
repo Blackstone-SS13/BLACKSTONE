@@ -29,10 +29,13 @@
 	icon_state = "priestunder"
 	sleeved = null
 	allowed_sex = list(MALE)
-	allowed_race = list("human", "tiefling", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar")
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/black
 	color = CLOTHING_BLACK
+
+/obj/item/clothing/suit/roguetown/shirt/undershirt/purple
+	color = CLOTHING_PURPLE
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/lord
 	desc = ""
@@ -81,7 +84,7 @@
 /obj/item/clothing/suit/roguetown/shirt/undershirt/puritan
 	name = "archivists silks"
 	icon_state = "puritan_shirt"
-	allowed_race = list("human", "tiefling", "elf", "dwarf", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarfm", "aasimar", "halforc")
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 	icon_state = "sailorblues"
@@ -214,6 +217,36 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
+/obj/item/clothing/suit/roguetown/shirt/robe/noc
+	slot_flags = ITEM_SLOT_ARMOR
+	name = "moon robe"
+	desc = ""
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	icon_state = "nocrobe"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	sleeved = null
+	boobed = TRUE
+	color = null
+	flags_inv = HIDEBOOB
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+
+/obj/item/clothing/suit/roguetown/shirt/robe/necromancer
+	slot_flags = ITEM_SLOT_ARMOR
+	name = "necromancer robes"
+	desc = ""
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	icon_state = "necromrobe"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	sleeved = null
+	boobed = TRUE
+	color = null
+	flags_inv = HIDEBOOB
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+
 /obj/item/clothing/suit/roguetown/shirt/robe/dendor
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "briar robe"
@@ -295,7 +328,7 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	allowed_sex = list(MALE)
-	allowed_race = list("human", "tiefling", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
 	color = null
 	sellprice = 100
 

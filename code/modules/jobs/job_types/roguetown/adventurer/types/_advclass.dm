@@ -2,17 +2,17 @@
 	var/name
 	var/outfit
 	var/tutorial = "Choose me!"
-	var/list/allowed_sexes = list("male","female")
-	var/list/allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Dark Elf",
-	"Dwarf",
-	"Dwarf"
+	var/list/allowed_sexes
+	var/list/allowed_races = list(
+		"Humen",
+		"Elf",
+		"Elf",
+		"Dark Elf",
+		"Dwarf",
+		"Dwarf"
 	)
-	var/list/allowed_patrons = ALL_PATRON_NAMES_LIST
-	var/list/allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	var/list/allowed_patrons
+	var/list/allowed_ages
 	var/pickprob = 100
 	var/maxchosen = -1
 	var/amtchosen = 0
@@ -23,6 +23,7 @@
 	var/isvillager = FALSE
 	var/horse = FALSE
 	var/vampcompat = TRUE
+	var/list/traits_applied
 
 /datum/advclass/proc/equipme(mob/living/carbon/human/H)
 	if(!H)
@@ -49,6 +50,8 @@
 		if(horse)
 			new horse(TU)
 
+	for(var/trait in traits_applied)
+		ADD_TRAIT(H, trait, ADVENTURER_TRAIT)
 	if(isvillager)
 		for(var/mob/M in GLOB.billagerspawns)
 			to_chat(M, "<span class='info'>[H.real_name] is the [name].</span>")
@@ -57,3 +60,4 @@
 /datum/advclass/proc/post_equip(mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,TYPE_PROC_REF(/mob/living/carbon/human, add_credit)), 20)
 	return
+

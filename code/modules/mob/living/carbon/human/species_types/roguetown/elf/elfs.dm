@@ -1,9 +1,9 @@
-/mob/living/carbon/human/species/elf/snow
-	race = /datum/species/elf/snow
+/mob/living/carbon/human/species/elf/wood
+	race = /datum/species/elf/wood
 
-/datum/species/elf/snow
+/datum/species/elf/wood
 	name = "Elf"
-	id = "elf"
+	id = "elfw"
 	desc = "<b>Elf</b><br>\
 	Elves, or Wood-Elf by the Elder races, are a generic term for tall, pointy-eared \
 	humanoids that trace their original heritage to the ancient mysterious Snow Elves. \
@@ -21,7 +21,7 @@
 
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP,TRAIT_NIGHT_VISION)
+	inherent_traits = list(TRAIT_NOMOBSWAP)
 	default_features = list("mcolor" = "FFF", "ears" = "Elf", "wings" = "None")
 	use_skintones = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
@@ -51,12 +51,8 @@
 	specstats = list("strength" = -2, "perception" = 1, "intelligence" = 2, "constitution" = -1, "endurance" = 0, "speed" = 2, "fortune" = 0)
 	specstats_f = list("strength" = -4, "perception" = 1, "intelligence" = 2, "constitution" = -2, "endurance" = 0, "speed" = 3, "fortune" = 0)
 	enflamed_icon = "widefire"
-	possible_faiths = list(FAITH_PSYDON, FAITH_ELF)
 
-/datum/species/elf/snow/check_roundstart_eligible()
-	return TRUE
-
-/datum/species/elf/snow/get_span_language(datum/language/message_language)
+/datum/species/elf/wood/get_span_language(datum/language/message_language)
 	if(!message_language)
 		return
 //	if(message_language.type == /datum/language/elvish)
@@ -65,18 +61,18 @@
 //		return list(SPAN_SELF)
 	return message_language.spans
 
-/datum/species/elf/snow/get_skin_list()
+/datum/species/elf/wood/get_skin_list()
 	return list(
-	"Dandelion Creek" = "ffe0d1",
-	"Roseveil" = "fcccb3",
-	"Azuregrove" = "edc6b3",
-	"Arborshome" = "e2b9a3",
-	"Almondvalle" = "c9a893",
-	"Walnut Woods" = "ba9882",
-	"Timberborn" = "5d4c41"
+		"Dandelion Creek" = SKIN_COLOR_DANDELION_CREEK,
+		"Roseveil" = SKIN_COLOR_ROSEVEIL,
+		"Azuregrove" = SKIN_COLOR_AZUREGROVE,
+		"Arborshome" = SKIN_COLOR_ARBORSHOME,
+		"Almondvalle" = SKIN_COLOR_ALMONDVALLE,
+		"Walnut Woods" = SKIN_COLOR_WALNUT_WOODS,
+		"Timberborn" = SKIN_COLOR_TIMBERBORN,
 	)
 
-/datum/species/elf/snow/get_hairc_list()
+/datum/species/elf/wood/get_hairc_list()
 	return sortList(list(
 	"black - oil" = "181a1d",
 	"black - cave" = "201616",
@@ -108,7 +104,7 @@
 
 	))
 
-/datum/species/elf/snow/random_name(gender,unique,lastname)
+/datum/species/elf/wood/random_name(gender,unique,lastname)
 
 	var/randname
 	if(unique)
@@ -129,8 +125,8 @@
 			randname = pick( world.file2list("strings/rt/names/elf/elfwf.txt") )
 	return randname
 
-/datum/species/elf/snow/random_surname()
+/datum/species/elf/wood/random_surname()
 	return " [pick(world.file2list("strings/rt/names/elf/elfwlast.txt"))]"
 
-//datum/species/elf/snow/get_accent_list()
-//	return strings("russian_replacement.json", "russian")
+/datum/species/elf/wood/get_accent(mob/living/carbon/human/H)
+	return strings("russian_replacement.json", "russian")

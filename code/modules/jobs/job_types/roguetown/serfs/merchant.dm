@@ -6,12 +6,15 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = JCOLOR_SERF
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Dwarf",
-	"Tiefling",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar"
 	)
 	tutorial = "You were born into wealth, learning from before you could talk about the basics of mathematics. Counting coins is a simple pleasure for any person, but you've made it an artform. These people are addicted to your wares and you are the literal beating heart of this economy: Dont let these filthy-covered troglodytes ever forget that."
 
@@ -20,23 +23,30 @@
 	outfit = /datum/outfit/job/roguetown/merchant
 	bypass_lastclass = TRUE
 	give_bank_account = 22
+	min_pq = 1
 	required = TRUE
 
 /datum/outfit/job/roguetown/merchant/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,4,4), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 6, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/labor/mathematics, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/labor/mathematics, 5, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
 	//50% chance to be raceswapped to Giza because slop lore
 	if(ishumannorthern(H) && prob(50))
-		var/list/skin_slop = H.dna.species.get_skin_list()
-		H.skin_tone = skin_slop["Giza"]
+		H.skin_tone = SKIN_COLOR_GIZA
 		H.update_body()
 	if(H.gender == MALE)
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
@@ -50,10 +60,10 @@
 		head = /obj/item/clothing/head/roguetown/chaperon
 		id = /obj/item/clothing/ring/gold
 		H.change_stat("intelligence", 2)
-		H.change_stat("perception", 1)
-		H.change_stat("strength", -2)
+		H.change_stat("perception", 3)
+		H.change_stat("strength", -1)
 		if(H.dna?.species)
-			if(H.dna.species.id == "human")
+			if(H.dna.species.id == "humen")
 				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 	else
 		shoes = /obj/item/clothing/shoes/roguetown/gladiator
@@ -67,6 +77,6 @@
 		head = /obj/item/clothing/head/roguetown/chaperon
 		id = /obj/item/clothing/ring/gold
 		H.change_stat("intelligence", 2)
-		H.change_stat("perception", 1)
-		H.change_stat("strength", -2)
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
+		H.change_stat("perception", 3)
+		H.change_stat("strength", -1)
+	H.cmode_music = 'sound/music/combat_merchant.ogg'

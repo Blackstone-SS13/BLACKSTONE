@@ -1,15 +1,16 @@
 /datum/advclass/cheesemaker
 	name = "Cheesemaker"
 	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Elf",
-	"Half-Elf",
-	"Tiefling",
-	"Dark Elf",
-	"Dwarf",
-	"Aasimar"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/cheesemaker
 	isvillager = TRUE
@@ -17,11 +18,22 @@
 
 /datum/outfit/job/roguetown/adventurer/cheesemaker/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/labor/farming, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE) 
+	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(0,1,2), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE) 
+	H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(0,1,1), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/knives, pick(3,3,4), TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/labor/butchering, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/labor/farming, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	mouth = /obj/item/rogueweapon/huntingknife
 	belt = /obj/item/storage/belt/rogue/leather
 	pants = /obj/item/clothing/under/roguetown/tights/random
@@ -35,4 +47,4 @@
 	beltl = /obj/item/flint
 	backpack_contents = list(/obj/item/reagent_containers/powder/flour/salt = 1,/obj/item/reagent_containers/food/snacks/rogue/cheese=1,/obj/item/reagent_containers/food/snacks/rogue/cheddar=1)
 	H.change_stat("intelligence", 1)
-	H.change_stat("constitution", 1)
+	H.change_stat("constitution", 4) // Cheese diet.

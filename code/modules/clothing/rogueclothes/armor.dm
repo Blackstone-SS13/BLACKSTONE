@@ -39,7 +39,7 @@
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
-	armor_class = ARMOR_CLASS_MEDIUM
+	armor_class = ARMOR_CLASS_LIGHT
 
 /obj/item/clothing/suit/roguetown/armor/chainmail/Initialize()
 	. = ..()
@@ -55,7 +55,7 @@
 	body_parts_covered = CHEST|GROIN|VITALS
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
-	armor_class = ARMOR_CLASS_MEDIUM
+	armor_class = ARMOR_CLASS_LIGHT
 
 /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
@@ -135,12 +135,12 @@
 	icon_state = "ibreastplate"
 	max_integrity = 200
 	smeltresult = /obj/item/ingot/iron
-	armor_class = ARMOR_CLASS_HEAVY
+	armor_class = ARMOR_CLASS_MEDIUM
 
 /obj/item/clothing/suit/roguetown/armor/plate/scale
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "scalemail"
-	desc = ""
+	desc = "Metal scales interwoven intricately to form flexible protection!"
 	body_parts_covered = CHEST|VITALS|GROIN|LEGS
 	allowed_sex = list(MALE, FEMALE)
 	icon_state = "lamellar"
@@ -193,7 +193,9 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
 	allowed_sex = list(MALE, FEMALE)
 	nodismemsleeves = TRUE
+	max_integrity = 350
 	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
 	equip_delay_self = 40
 	armor_class = ARMOR_CLASS_HEAVY
 
@@ -231,17 +233,29 @@
 	GLOB.lordcolor -= src
 	return ..()
 
+/obj/item/clothing/suit/roguetown/armor/brigandine/coatplates
+	slot_flags = ITEM_SLOT_ARMOR
+	name = "coat of plates"
+	desc = "A leather coat with plates attached to it to increase protection while retaining mobility"
+	icon_state = "coat_of_plates"
+	blocksound = PLATEHIT
+	body_parts_covered = CHEST|GROIN|VITALS|ARMS
+	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	max_integrity = 250
+	armor_class = ARMOR_CLASS_HEAVY
+
 /obj/item/clothing/suit/roguetown/armor/armordress
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "padded dress"
-	desc = ""
+	desc = "This dress has been padded with leather for extra protection."
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	icon_state = "armordress"
 	armor = list("melee" = 50, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	blocksound = SOFTHIT
 	allowed_sex = list("female")
-	allowed_race = list("human", "tiefling", "elf", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "aasimar", "halforc")
 	blade_dulling = DULLING_BASHCHOP
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
@@ -256,7 +270,7 @@
 /obj/item/clothing/suit/roguetown/armor/gambeson
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
 	name = "gambeson"
-	desc = ""
+	desc = "A large shirt meant to be used below armor."
 	icon_state = "gambeson"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	armor = list("melee" = 40, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
@@ -270,15 +284,18 @@
 	l_sleeve_status = SLEEVE_NORMAL
 	armor_class = ARMOR_CLASS_LIGHT
 
+/obj/item/clothing/suit/roguetown/armor/gambeson/councillor
+	color = "#646464"
+
 /obj/item/clothing/suit/roguetown/armor/gambeson/lord
 	name = "arming jacket"
 	icon_state = "dgamb"
 	allowed_sex = list(MALE)
-	allowed_race = list("human", "tiefling", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar")
 
 /obj/item/clothing/suit/roguetown/armor/leather
 	name = "leather armor"
-	desc = ""
+	desc = "Flexible cowhide armor. Lightweight, better than nothing."
 	icon_state = "leather"
 //	color = "#514339"
 	body_parts_covered = CHEST|GROIN|VITALS
@@ -296,13 +313,14 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/hide
 	name = "hide armor"
-	desc = ""
+	desc = "A light armor of wildbeast hide. Far more durable than leather."
 	icon_state = "hidearmor"
 	max_integrity = 230
 	armor_class = ARMOR_CLASS_LIGHT
 
 /obj/item/clothing/suit/roguetown/armor/leather/studded
 	name = "studded leather armor"
+	desc = "Studded leather is the most durable of all hides and leathers and about as light."
 	icon_state = "studleather"
 	item_state = "studleather"
 	blocksound = SOFTHIT
@@ -315,7 +333,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest
 	name = "leather vest"
-	desc = ""
+	desc = "A leather vest. Not very protective, but fashion."
 	icon_state = "vest"
 	item_state = "vest"
 	color = "#514339"
@@ -334,6 +352,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor
 	name = "sea jacket"
+	desc = "A sailor's garb."
 	icon_state = "sailorvest"
 	color = null
 	slot_flags = ITEM_SLOT_ARMOR
@@ -359,25 +378,27 @@
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/sailor/nightman
 	name = "silk jacket"
+	desc = "A soft and comfortable jacket."
 	icon_state = "nightman"
 	sleeved = 'icons/roguetown/clothing/onmob/armor.dmi'
 	allowed_sex = list(MALE)
-	allowed_race = list("human", "tiefling", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "aasimar")
 
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/hand
 	name = "Hand's vest"
+	desc = "A soft vest of finest fabric."
 	icon_state = "handcoat"
 	color = null
 	allowed_sex = list(MALE, FEMALE)
-	allowed_race = list("human", "tiefling", "dwarf", "elf", "aasimar")
+	allowed_race = list("humen", "tiefling", "argonian", "dwarfm", "elfd", "elfw", "helf", "aasimar")
 
 /obj/item/clothing/suit/roguetown/armor/leather/vest/black
 	color = "#3c3a38"
 
 /obj/item/clothing/suit/roguetown/armor/workervest
 	name = "striped tunic"
-	desc = ""
+	desc = "This cheap tunic is often used by sturdy laborous men and women."
 	icon_state = "workervest"
 	armor = null
 	blocksound = SOFTHIT

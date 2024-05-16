@@ -14,11 +14,15 @@
 	job_rank = ROLE_WEREWOLF
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "werewolf"
+	confess_lines = list(
+		"THE BEAST INSIDE ME!", 
+		"BEWARE THE BEAST!", 
+		"MY LUPINE MARK!",
+	)
 	var/special_role = ROLE_WEREWOLF
 	var/transformed
 	var/transforming
 	var/transform_cooldown
-	confess_lines = list("THE BEAST INSIDE ME!", "BEWARE THE BEAST!", "MY LUPINE MARK!")
 	var/wolfname = "Werevolf"
 	var/last_howl = 0
 	var/pre_transform

@@ -6,17 +6,25 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Half-Elf")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar"
+	)
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_ages = list(AGE_YOUNG)
+	allowed_ages = YOUNG_AGES_LIST
 
 	tutorial = "Your family were zealots, they scolded you with a studded belt and prayed like sinners every waking hour of the day they weren’t toiling in the fields. You escaped them by becoming a churchling, and a guaranteed education isnt so bad"
 
 	outfit = /datum/outfit/job/roguetown/churchling
 	display_order = JDO_CHURCHLING
 	give_bank_account = TRUE
+	min_pq = -10
 
 /datum/outfit/job/roguetown/churchling/pre_equip(mob/living/carbon/human/H)
 	..()

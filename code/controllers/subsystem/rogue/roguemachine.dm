@@ -43,17 +43,20 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 
 /proc/is_in_roguetown(atom/A)
 	if(!A)
-		return
+		return FALSE
 	var/turf/T = get_turf(A)
 	if(!T)
-		return
-	var/area/AR = get_area(T)
-	var/list/L = list(/area/rogue/outdoors/town,\
-/area/rogue/indoors/town,\
-/area/rogue/under/town)
-	for(var/X in L)
-		if(istype(AR, X))
-			return TRUE
+		return FALSE
+	var/area/the_area = get_area(T)
+	var/static/list/safe_areas = typecacheof(list(
+		/area/rogue/outdoors/town,\
+		/area/rogue/indoors/town,\
+		/area/rogue/under/town,\
+	))
+	if(is_type_in_typecache(the_area.type, safe_areas))
+		return TRUE
+	return FALSE
+
 #ifdef TESTING
 /mob/living/verb/maxzcdec()
 	set category = "DEBUGTEST"

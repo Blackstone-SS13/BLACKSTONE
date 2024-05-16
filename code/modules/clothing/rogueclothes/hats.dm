@@ -63,6 +63,22 @@
 	toggle_icon_state = TRUE
 	max_integrity = 100
 
+/obj/item/clothing/head/roguetown/roguehood/nochood
+	name = "moon hood"
+	desc = ""
+	color = null
+	icon_state = "nochood"
+	item_state = "nochood"
+	icon = 'icons/roguetown/clothing/head.dmi'
+	body_parts_covered = NECK
+	slot_flags = ITEM_SLOT_HEAD
+	flags_inv = HIDEFACE|HIDEFACIALHAIR
+	dynamic_hair_suffix = ""
+	edelay_type = 1
+	adjustable = CAN_CADJUST
+	toggle_icon_state = TRUE
+	max_integrity = 100
+
 /obj/item/clothing/head/roguetown/necrahood
 	name = "death shroud"
 	color = null
@@ -77,6 +93,15 @@
 	icon_state = "dendormask"
 	item_state = "dendormask"
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
+	dynamic_hair_suffix = ""
+
+/obj/item/clothing/head/roguetown/necromhood
+	name = "necromancers hood"
+	color = null
+	icon_state = "necromhood"
+	item_state = "necromhood"
+	body_parts_covered = NECK
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	dynamic_hair_suffix = ""
 
 /obj/item/clothing/head/roguetown/priestmask
@@ -211,6 +236,20 @@
 	item_state = "chap_alt"
 	flags_inv = HIDEEARS
 	color = "#cf99e3"
+
+/obj/item/clothing/head/roguetown/chaperon/bailiff
+	name = "chaperon hat"
+	icon_state = "chap_alt"
+	item_state = "chap_alt"
+	flags_inv = HIDEEARS
+	color = "#C0392B"
+
+/obj/item/clothing/head/roguetown/chaperon/councillor
+	name = "chaperon hat"
+	icon_state = "chap_alt"
+	item_state = "chap_alt"
+	flags_inv = HIDEEARS
+	color = "#7dcea0"
 
 /obj/item/clothing/head/roguetown/chef
 	name = "chef's hat"
@@ -480,6 +519,42 @@
 	name = "bucket helmet"
 	icon_state = "topfhelm"
 	item_state = "topfhelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_RIGHT|FOV_LEFT
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
+	name = "astrata helmet"
+	icon_state = "astratahelm"
+	item_state = "astratahelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_RIGHT|FOV_LEFT
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/nochelm
+	name = "noc helmet"
+	icon_state = "nochelm"
+	item_state = "nochelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_RIGHT|FOV_LEFT
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
+	name = "necra helmet"
+	icon_state = "necrahelm"
+	item_state = "necrahelm"
+	emote_environment = 3
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
+	block2add = FOV_RIGHT|FOV_LEFT
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
+	name = "dendor helmet"
+	icon_state = "dendorhelm"
+	item_state = "dendorhelm"
 	emote_environment = 3
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	block2add = FOV_RIGHT|FOV_LEFT

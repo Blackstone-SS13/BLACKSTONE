@@ -386,6 +386,11 @@
 	stressadd = 1
 	desc = "<span class='red'>Helldweller... better stay away.</span>"
 
+/datum/stressevent/brazillian
+	timer = 1 MINUTES
+	stressadd = 1
+	desc = "<span class='red'>A vile lizard.</span>"
+
 /datum/stressevent/paracrowd
 	timer = 15 SECONDS
 	stressadd = 2
@@ -437,10 +442,14 @@
 	desc = "<span class='red'>I've confessed to sin, it feels good.</span>"
 	timer = 15 MINUTES
 
-/datum/stressevent/maniac
+/datum/stressevent/saw_wonder
 	stressadd = 4
-	desc = "<span class='red'>THE MANIAC COULD BE HERE!</span>"
-	timer = 30 MINUTES
+	desc = "<span class='deadsay'><b>I have seen something nightmarish, and I fear for my life!</b></span>"
+	timer = null
+
+/datum/stressevent/maniac_woke_up
+	desc = "<span class='danger'><b>No... I want to go back...</b></span>"
+	stressadd = 10
 
 /datum/stressevent/drankrat
 	stressadd = 1

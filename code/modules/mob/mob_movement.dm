@@ -401,7 +401,7 @@
 
 ///Validate the client's mob has a valid zone selected
 /client/proc/check_has_body_select()
-	return mob && mob.hud_used && mob.hud_used.zone_select && istype(mob.hud_used.zone_select, /obj/screen/zone_sel)
+	return mob && mob.hud_used && mob.hud_used.zone_select && istype(mob.hud_used.zone_select, /atom/movable/screen/zone_sel)
 
 /**
   * Hidden verb to set the target zone of a mob to the head
@@ -418,13 +418,45 @@
 	var/next_in_line
 	switch(mob.zone_selected)
 		if(BODY_ZONE_HEAD)
-			next_in_line = BODY_ZONE_PRECISE_R_EYE
-		if(BODY_ZONE_PRECISE_R_EYE)
-			next_in_line = BODY_ZONE_PRECISE_MOUTH
+			next_in_line = BODY_ZONE_PRECISE_NECK
 		else
 			next_in_line = BODY_ZONE_HEAD
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
+	selector.set_selected_zone(next_in_line, mob)
+
+/client/verb/body_toggle_eye_nose()
+	set name = "body-toggle-eye-nose"
+	set hidden = 1
+
+	if(!check_has_body_select())
+		return
+
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_PRECISE_R_EYE)
+			next_in_line = BODY_ZONE_PRECISE_NOSE
+		else
+			next_in_line = BODY_ZONE_PRECISE_R_EYE
+
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
+	selector.set_selected_zone(next_in_line, mob)
+
+/client/verb/body_toggle_mouth_ears()
+	set name = "body-toggle-mouth-ears"
+	set hidden = 1
+
+	if(!check_has_body_select())
+		return
+
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_PRECISE_MOUTH)
+			next_in_line = BODY_ZONE_PRECISE_EARS
+		else
+			next_in_line = BODY_ZONE_PRECISE_MOUTH
+
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the right arm, bound to 4
@@ -435,8 +467,15 @@
 	if(!check_has_body_select())
 		return
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_R_ARM, mob)
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_R_ARM)
+			next_in_line = BODY_ZONE_PRECISE_R_HAND
+		else
+			next_in_line = BODY_ZONE_R_ARM
+
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the chest, bound to 5
 /client/verb/body_chest()
@@ -446,8 +485,15 @@
 	if(!check_has_body_select())
 		return
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_CHEST, mob)
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_CHEST)
+			next_in_line = BODY_ZONE_PRECISE_STOMACH
+		else
+			next_in_line = BODY_ZONE_CHEST
+
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the left arm, bound to 6
 /client/verb/body_l_arm()
@@ -457,8 +503,15 @@
 	if(!check_has_body_select())
 		return
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_L_ARM, mob)
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_L_ARM)
+			next_in_line = BODY_ZONE_PRECISE_L_HAND
+		else
+			next_in_line = BODY_ZONE_L_ARM
+
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the right leg, bound to 1
 /client/verb/body_r_leg()
@@ -468,8 +521,15 @@
 	if(!check_has_body_select())
 		return
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_R_LEG, mob)
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_R_LEG)
+			next_in_line = BODY_ZONE_PRECISE_R_FOOT
+		else
+			next_in_line = BODY_ZONE_R_LEG
+
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Hidden verb to target the groin, bound to 2
 /client/verb/body_groin()
@@ -479,7 +539,7 @@
 	if(!check_has_body_select())
 		return
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
 	selector.set_selected_zone(BODY_ZONE_PRECISE_GROIN, mob)
 
 ///Hidden verb to target the left leg, bound to 3
@@ -490,8 +550,15 @@
 	if(!check_has_body_select())
 		return
 
-	var/obj/screen/zone_sel/selector = mob.hud_used.zone_select
-	selector.set_selected_zone(BODY_ZONE_L_LEG, mob)
+	var/next_in_line
+	switch(mob.zone_selected)
+		if(BODY_ZONE_L_LEG)
+			next_in_line = BODY_ZONE_PRECISE_L_FOOT
+		else
+			next_in_line = BODY_ZONE_L_LEG
+
+	var/atom/movable/screen/zone_sel/selector = mob.hud_used.zone_select
+	selector.set_selected_zone(next_in_line, mob)
 
 ///Verb to toggle the walk or run status
 /client/verb/toggle_walk_run()
@@ -512,7 +579,7 @@
 	else
 		m_intent = MOVE_INTENT_RUN
 	if(hud_used && hud_used.static_inventory)
-		for(var/obj/screen/mov_intent/selector in hud_used.static_inventory)
+		for(var/atom/movable/screen/mov_intent/selector in hud_used.static_inventory)
 			selector.update_icon()
 
 
@@ -523,6 +590,9 @@
 /mob/living/update_sneak_invis(reset = FALSE)
 	if(stat || IsSleeping() || (world.time < mob_timers[MT_FOUNDSNEAK] + 30 SECONDS))
 		alpha = 255
+		return
+	if(world.time < mob_timers[MT_INVISIBILITY]) // Check if the mob is affected by the invisibility spell
+		alpha = 0
 		return
 	var/turf/T = get_turf(src)
 	if(!T)
@@ -561,7 +631,7 @@
 						return
 			m_intent = MOVE_INTENT_RUN
 	if(hud_used && hud_used.static_inventory)
-		for(var/obj/screen/rogmove/selector in hud_used.static_inventory)
+		for(var/atom/movable/screen/rogmove/selector in hud_used.static_inventory)
 			selector.update_icon()
 	if(!silent)
 		playsound_local(src, 'sound/misc/click.ogg', 100)
@@ -598,7 +668,7 @@
 	else
 		fixedeye = 1
 		nodirchange = TRUE
-	for(var/obj/screen/eye_intent/eyet in hud_used.static_inventory)
+	for(var/atom/movable/screen/eye_intent/eyet in hud_used.static_inventory)
 		eyet.update_icon(src)
 	playsound_local(src, 'sound/misc/click.ogg', 100)
 
@@ -617,25 +687,6 @@
 		to_chat(src, "<span class='notice'>I will hear all now.</span>")
 	else
 		to_chat(src, "<span class='info'>I will hear like a mortal.</span>")
-
-
-/client/proc/ghost_up()
-	set category = "GameMaster"
-	set name = "GhostUp"
-	if(!holder)
-		return
-	. = TRUE
-	if(isobserver(mob))
-		mob.ghost_up()
-
-/client/proc/ghost_down()
-	set category = "GameMaster"
-	set name = "GhostDown"
-	if(!holder)
-		return
-	. = TRUE
-	if(isobserver(mob))
-		mob.ghost_down()
 
 ///Moves a mob upwards in z level
 /mob/proc/ghost_up()

@@ -1,9 +1,9 @@
 /obj/item/rogueweapon/stoneaxe
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
-	force = 12
+	force = 20
 	possible_item_intents = list(/datum/intent/axe/chop/stone)
 	name = "stone axe"
-	desc = ""
+	desc = "A rough stone axe. Badly balanced."
 	icon_state = "stoneaxe"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	item_state = "axe"
@@ -117,7 +117,7 @@
 	return ..()
 
 /obj/item/rogueweapon/stoneaxe/woodcut
-	force = 18
+	force = 23
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "axe"
 	icon_state = "axe"
@@ -128,7 +128,7 @@
 
 /obj/item/rogueweapon/stoneaxe/woodcut/steel
 	icon_state = "saxe"
-	force = 20
+	force = 26
 	max_blade_int = 500
 	smeltresult = /obj/item/ingot/steel
 	wdefense = 3

@@ -7,11 +7,18 @@
 	total_positions = 1
 	spawn_positions = 1
 	spells = list(/obj/effect/proc_holder/spell/invoked/projectile/fetch)
-	allowed_patrons = list("Noc")
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Aasimar"
+	)
+	allowed_patrons = list(/datum/patron/divine/noc)
 	allowed_ages = list(AGE_OLD, AGE_MIDDLEAGED)
 
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = 19
+	min_pq = 0
 
 /datum/outfit/job/roguetown/archivist/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -29,7 +36,7 @@
 	beltl = /obj/item/keyring/archivist
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/mid
 	mask = /obj/item/clothing/mask/rogue/spectacles
-	
+
 
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 6, TRUE)

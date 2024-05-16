@@ -95,7 +95,7 @@
 	var/mob/M = user.mob
 	M.toggle_move_intent()
 	return TRUE
-
+*/
 /datum/keybinding/mob/target_head_cycle
 	hotkey_keys = list("Numpad8")
 	name = "target_head_cycle"
@@ -104,6 +104,26 @@
 
 /datum/keybinding/mob/target_head_cycle/down(client/user)
 	user.body_toggle_head()
+	return TRUE
+
+/datum/keybinding/mob/target_eye_nose
+	hotkey_keys = list("Numpad7")
+	name = "target_eye_nose"
+	full_name = "Target: Cycle eye and nose"
+	description = ""
+
+/datum/keybinding/mob/target_eye_nose/down(client/user)
+	user.body_toggle_eye_nose()
+	return TRUE
+
+/datum/keybinding/mob/target_mouth_ears
+	hotkey_keys = list("Numpad9")
+	name = "target_mouth_ears"
+	full_name = "Target: Cycle mouth and ears"
+	description = ""
+
+/datum/keybinding/mob/target_mouth_ears/down(client/user)
+	user.body_toggle_mouth_ears()
 	return TRUE
 
 /datum/keybinding/mob/target_r_arm
@@ -165,4 +185,3 @@
 /datum/keybinding/mob/target_left_leg/down(client/user)
 	user.body_l_leg()
 	return TRUE
-*/

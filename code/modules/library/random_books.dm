@@ -26,7 +26,7 @@
 
 /obj/structure/bookcase/random
 	var/category = null
-	var/book_count = 10
+	var/book_count = 5
 	icon_state = "bookcase"
 	anchored = TRUE
 	state = 2
@@ -34,7 +34,7 @@
 /obj/structure/bookcase/random/Initialize(mapload)
 	. = ..()
 	if(book_count && isnum(book_count))
-		book_count += pick(-1,-1,0,1,1)
+		book_count += pick(-5,-5,-5,-5,-5,-4,-4,-4,-4,-3,-3,-3,-2,-2,-1,-1,0,)
 		. = INITIALIZE_HINT_LATELOAD
 
 /obj/structure/bookcase/random/LateInitialize()
@@ -42,7 +42,7 @@
 	update_icon()
 
 /obj/structure/bookcase/random/archive
-	book_count = 5
+	book_count = 10
 
 /obj/structure/bookcase/random/archive/Initialize(mapload)
 	. = ..()
@@ -90,10 +90,13 @@
 
 /proc/create_random_books_rogue(amount = 2, location)
 	var/list/possible_books = subtypesof(/obj/item/book/rogue/)
+	var/list/player_book_titles = SSlibrarian.pull_player_book_titles()
 	for(var/b in 1 to amount)
-		if(prob(50))
-			var/obj/item/book/rogue/playerbook/newbook = new /obj/item/book/rogue/playerbook(src)
-			if(prob(50))
+		if(prob(0.1))
+			new /obj/item/book_crafting_kit(location)
+		if(prob(clamp(length(player_book_titles), 10, 90)))
+			var/obj/item/book/rogue/playerbook/newbook = new /obj/item/book/rogue/playerbook(location)
+			if(prob(33))
 				newbook.pages = SSlibrarian.file2playerbook("ruined")["text"]
 		else
 			var/obj/item/book/rogue/addition = pick(possible_books)
@@ -104,7 +107,7 @@
 			if(istype(newbook, /obj/item/book/rogue/bibble))
 				qdel(newbook)
 				continue
-			if(prob(50))
+			if(prob(33))
 				newbook.bookfile = "ruined.json"
 
 

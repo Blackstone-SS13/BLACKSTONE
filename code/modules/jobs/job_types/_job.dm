@@ -67,9 +67,9 @@
 
 	//allowed sex/race for picking
 	var/list/allowed_sexes = list(MALE,FEMALE)
-	var/list/allowed_races = ALL_RACES_LIST_NAMES
-	var/list/allowed_patrons = ALL_PATRON_NAMES_LIST
-	var/list/allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	var/list/allowed_races
+	var/list/allowed_patrons
+	var/list/allowed_ages = ADULT_AGES_LIST
 
 	/// Innate skill levels unlocked at roundstart. Format is list(/datum/skill/foo = SKILL_EXP_NOVICE) with exp as an integer or as per code/_DEFINES/skills.dm
 	var/list/skills
@@ -92,7 +92,7 @@
 	var/list/peopleknowme = list()
 
 	var/plevel_req = 0
-	var/min_pq = -999
+	var/min_pq = 0
 
 	var/show_in_credits = TRUE
 
@@ -102,6 +102,12 @@
 
 	//is the job required for game progression
 	var/required = FALSE
+
+	/// This job is a "wanderer" on examine
+	var/wanderer_examine = FALSE
+
+	/// This job uses adventurer classes on examine
+	var/advjob_examine = FALSE
 
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
@@ -211,7 +217,7 @@
 	if(!H)
 		return FALSE
 	if(CONFIG_GET(flag/enforce_human_authority) && (title in GLOB.command_positions))
-		if(H.dna.species.id != "human")
+		if((H.dna.species.id != "human") && (H.dna.species.id != "humen"))
 			H.set_species(/datum/species/human)
 			H.apply_pref_name("human", preference_source)
 	if(!visualsOnly)

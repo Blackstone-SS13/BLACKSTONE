@@ -3,16 +3,15 @@
 
 /datum/species/elf/dark
 	name = "Dark Elf"
-	id = "elf"
+	id = "elfd"
 	desc = "<b>Dark Elf</b><br>\
 	Elves, are a generic term for tall, pointy-eared humanoids\
     Of whom trace their original heritage to the ancient mysterious Snow Elves. \
 	These ones are of a dark complexion and originate mostly from the underdark. \
-    Their culture and entire lives normally involve serving Lolth, the spider queen. \
-    Previously rare but in recent times, more and more dark elfs can be seen on the surface\
-    It's rumored that Lolth has been weakened and her power wanes over the dark elfs. \
-    The ones who aren't overtly cruel and bloodthirsty; tend to flee to the surface lest they get culled by their own society, \
-    While some more sinister ones abandon Lolth in search of new and greater power."
+    Their culture and entire lives normally involve serving the evil gods of the inhumen pantheon. \
+    Previously rare but in recent times, more and more dark elfs can be seen on the surface. \
+    The ones who aren't overtly cruel and bloodthirsty, tend to flee to the surface lest they get culled by their own society, \
+    while some more sinister ones abandon their cities in search of new and greater power."
 
 /*
 	Former RT Desc: These guys were undead which doesn't really fit considering now you have a ton of them walking around.
@@ -32,7 +31,7 @@
 	skin_tone_wording = "Origin City-State"
 
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,OLDGREY)
-	inherent_traits = list(TRAIT_NOMOBSWAP,TRAIT_NIGHT_VISION)
+	inherent_traits = list(TRAIT_NOMOBSWAP)
 	default_features = list("mcolor" = "FFF", "ears" = "ElfW", "wings" = "None")
 	use_skintones = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
@@ -62,8 +61,6 @@
 	specstats = list("strength" = -2, "perception" = -1, "intelligence" = 1, "constitution" = -1, "endurance" = 1, "speed" = 2, "fortune" = 0)
 	specstats_f = list("strength" = 1, "perception" = -1, "intelligence" = 2, "constitution" = 0, "endurance" = 1, "speed" = 1, "fortune" = 0)
 	enflamed_icon = "widefire"
-	possible_faiths = list(FAITH_SPIDER)
-
 
 /datum/species/elf/dark/get_span_language(datum/language/message_language)
 	if(!message_language)
@@ -80,18 +77,16 @@
 	. = ..()
 	C.grant_language(/datum/language/common)
 */
-/datum/species/elf/dark/check_roundstart_eligible()
-	return TRUE
 
 /datum/species/elf/dark/get_skin_list()
 	return list(
-	"Commorah" = "9796a9",
-	"Gloomhaven" = "897489",
-	"Darkpila" = "938f9c",
-	"Sshanntynlan" = "737373",
-	"Llurth Dreir" = "6a616d",
-	"Tafravma" = "5f5f70",
-	"Yuethindrynn" = "2F2F38",
+		"Commorah" = SKIN_COLOR_COMMORAH,
+		"Gloomhaven" = SKIN_COLOR_GLOOMHAVEN,
+		"Darkpila" = SKIN_COLOR_DARKPILA,
+		"Sshanntynlan" = SKIN_COLOR_SSHANNTYNLAN,
+		"Llurth Dreir" = SKIN_COLOR_LLURTH_DREIR,
+		"Tafravma" = SKIN_COLOR_TAFRAVMA,
+		"Yuethindrynn" = SKIN_COLOR_YUETHINDRYNN,
 	)
 
 /datum/species/elf/dark/get_hairc_list()
@@ -129,5 +124,5 @@
 /datum/species/elf/dark/random_surname()
 	return " [pick(world.file2list("strings/rt/names/elf/elfsnf.txt"))]"
 
-/datum/species/elf/dark/get_accent_list()
+/datum/species/elf/dark/get_accent(mob/living/carbon/human/H)
 	return strings("french_replacement.json", "french")

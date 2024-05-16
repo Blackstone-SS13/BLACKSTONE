@@ -3,7 +3,7 @@
 
 /datum/species/human/halfelf
 	name = "Half-Elf"
-	id = "human"
+	id = "helf"
 	desc = "<b>Half Elf</b><br>\
 	The child of an Elf and Humen, Half-Elves are generally frowned \
 	upon by more conservative peoples, although as racial tensions lower, \
@@ -49,18 +49,14 @@
 	specstats_f = list("strength" = -1, "perception" = 1, "intelligence" = 1, "constitution" = -2, "endurance" = 0, "speed" = 2, "fortune" = -1)
 	enflamed_icon = "widefire"
 
-/datum/species/human/halfelf/check_roundstart_eligible()
-	return TRUE
-
 /datum/species/human/halfelf/get_skin_list()
 	return list(
-	"Timber-Gronn" = "ffe0d1",
-	"Giza-Azure" = "fcccb3",
-	"Walnut-Stine" = "edc6b3",
-	"Etrustcan-Dandelion" = "e2b9a3",
-	"Ebon-Born" = "5a4a41"
+		"Timber-Gronn" = SKIN_COLOR_TIMBER_GRONN,
+		"Giza-Azure" = SKIN_COLOR_GIZA_AZURE,
+		"Walnut-Stine" = SKIN_COLOR_WALNUT_STINE,
+		"Etrustcan-Dandelion" = SKIN_COLOR_ETRUSTCAN_DANDELION,
+		"Ebon-Born" = SKIN_COLOR_EBON_BORN,
 	)
-
 
 /datum/species/human/halfelf/get_hairc_list()
 	return sortList(list(

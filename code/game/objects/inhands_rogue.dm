@@ -66,13 +66,13 @@
 	var/used_mask = 'icons/roguetown/helpers/inhand_64.dmi'
 	var/icon/returned = icon(used_mask, "blank")
 	var/icon/blended
-//	var/skipoverlays = FALSE
+	var/skipoverlays = FALSE
 	if(behind)
 		var/icon/J = new(icon)
 		var/list/istates = J.IconStates()
 		if(istates.Find("[icon_state]_behind"))
 			blended=icon("icon"=icon, "icon_state"="[icon_state]_behind")
-//			skipoverlays = TRUE
+			skipoverlays = TRUE
 		else
 		//	blended=icon("icon"=icon, "icon_state"=icon_state)
 //			blended=getFlatIcon(src)
@@ -91,13 +91,13 @@
 //	if(color) //getflat does this i think?
 //		blended.Blend(color,ICON_MULTIPLY)
 
-//	if(!skipoverlays)
-//		for(var/V in overlays)
-//			var/image/IM = V
-//			var/icon/image_overlay = new(IM.icon,IM.icon_state)
-//			if(IM.color)
-//				image_overlay.Blend(IM.color,ICON_MULTIPLY)
-//			blended.Blend(image_overlay,ICON_OVERLAY)
+	if(!skipoverlays)
+		for(var/V in overlays)
+			var/image/IM = V
+			var/icon/image_overlay = new(IM.icon,IM.icon_state)
+			if(IM.color)
+				image_overlay.Blend(IM.color,ICON_MULTIPLY)
+			blended.Blend(image_overlay,ICON_OVERLAY)
 
 	var/icon/holder
 	if(blended.Height() == 32)

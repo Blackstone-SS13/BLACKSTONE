@@ -7,13 +7,12 @@
 	spawn_positions = 3
 
 	f_title = "Maid"
-	allowed_races = list("Humen",
-	"Humen",
-	"Elf",
-	"Dwarf",
-	"Dwarf",
-	"Aasimar",
-	"Half-Elf"
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Aasimar"
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 
@@ -22,6 +21,7 @@
 	outfit = /datum/outfit/job/roguetown/butler
 	display_order = JDO_BUTLER
 	give_bank_account = 5
+	min_pq = -10
 
 /datum/outfit/job/roguetown/butler/pre_equip(mob/living/carbon/human/H)
 	..()
