@@ -37,6 +37,7 @@
 	backr = /obj/item/rogueweapon/shovel
 	neck = /obj/item/clothing/neck/roguetown/psicross/necra
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra
+	head = /obj/item/clothing/head/roguetown/necrahood
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
