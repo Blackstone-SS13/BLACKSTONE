@@ -6,6 +6,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
+	selection_color = JCOLOR_GOBLIN
 	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
 	allowed_patrons = list(/datum/patron/inhumen/graggar)
