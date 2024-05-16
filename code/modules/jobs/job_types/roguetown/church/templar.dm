@@ -12,7 +12,7 @@
 		"Dwarf",
 		"Aasimar",
 		"Half-Elf",
-		"Half Orc"
+		"Half Orc",
 	)
 	allowed_patrons = ALL_CLERIC_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar

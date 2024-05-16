@@ -9,7 +9,7 @@
 	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_patrons = list(/datum/patron/old_god)
 
