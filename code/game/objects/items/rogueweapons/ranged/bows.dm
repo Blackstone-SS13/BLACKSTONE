@@ -159,3 +159,27 @@
 		else
 			return 1
 	return chargetime
+
+/obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
+	name = "recurve bow"
+	desc = "A long but slender bow, finely crafted from horn, sinew, and wood. It has an atypical shape."
+	icon_state = "bowr"
+	possible_item_intents = list(/datum/intent/shoot/bow/recurve, /datum/intent/arc/bow/recurve,INTENT_GENERIC)
+	randomspread = 1
+	spread = 1
+	force = 9
+	verbage = "nock"
+	cartridge_wording = "arrow"
+	load_sound = 'sound/foley/nockarrow.ogg'
+	associated_skill = /datum/skill/combat/bows
+
+
+/datum/intent/shoot/bow/recurve
+	chargetime = 0.75
+	chargedrain = 1.5
+	charging_slowdown = 2.5
+
+/datum/intent/arc/bow/recurve
+	chargetime = 0.75
+	chargedrain = 1.5
+	charging_slowdown = 2.5
