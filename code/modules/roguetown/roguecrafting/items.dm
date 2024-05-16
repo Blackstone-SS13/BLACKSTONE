@@ -238,3 +238,9 @@
 			/obj/item/natural/cloth = 1)
 	tools = list(/obj/item/needle = 1)
 	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/woodcross
+	name = "wooden amulet"
+	result = /obj/item/clothing/neck/roguetown/psicross/wood
+	reqs = list(/obj/item/natural/fibers = 2,
+				/obj/item/grown/log/tree/stick = 2)

@@ -148,6 +148,10 @@
 	name = "amulet of Pestra"
 	desc = ""
 
+/obj/item/clothing/neck/roguetown/psicross/wood
+	name = "wooden psycross"
+	icon_state = "psicrossw"
+
 /obj/item/clothing/neck/roguetown/psicross/silver
 	name = "silver psycross"
 	icon_state = "psicrossiron"
