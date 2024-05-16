@@ -15,7 +15,7 @@
 		"Argonian",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
 	allowed_ages = ADULT_AGES_LIST
 	

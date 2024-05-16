@@ -10,7 +10,7 @@
 		"Humen",
 		"Elf",
 		"Half-Elf",
-		"Dwarf"
+		"Dwarf",
 	)
 	allowed_sexes = list(MALE, FEMALE)
 	display_order = JDO_STEWARD
