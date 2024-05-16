@@ -335,7 +335,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	restricted_jobs = list("King",
 	"Queen Consort",
 	"Dungeoneer",
-	"Witch Hunter",
+	"Inquisitor",
 	"Confessor",
 	"Town Guard",
 	"Castle Guard",

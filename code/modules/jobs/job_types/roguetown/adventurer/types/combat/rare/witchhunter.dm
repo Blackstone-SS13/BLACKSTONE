@@ -7,7 +7,7 @@
 	allowed_sexes = list("male")
 	allowed_races = list("Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/puritan
-	maxchosen = 0
+	maxchosen = 2
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
 /datum/outfit/job/roguetown/adventurer/puritan

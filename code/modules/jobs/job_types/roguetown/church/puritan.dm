@@ -1,5 +1,5 @@
 /datum/job/roguetown/puritan
-	title = "Witch Hunter"
+	title = "Inquisitor"
 	flag = PURITAN
 	department_flag = CHURCHMEN
 	faction = "Station"
@@ -13,7 +13,7 @@
 	)
 	allowed_patrons = list(/datum/patron/old_god)
 
-	tutorial = "As a Witch Hunter, the Queen has emboldened your sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
+	tutorial = "As a Inquisitor, the Queen has emboldened your sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
 	whitelist_req = TRUE
 
 	outfit = /datum/outfit/job/roguetown/puritan
@@ -32,7 +32,7 @@
 	L.mind.add_antag_datum(new_antag)
 
 /datum/outfit/job/roguetown/puritan
-	name = "Witch Hunter"
+	name = "Inquisitor"
 	jobtype = /datum/job/roguetown/puritan
 
 /datum/outfit/job/roguetown/puritan/pre_equip(mob/living/carbon/human/H)
