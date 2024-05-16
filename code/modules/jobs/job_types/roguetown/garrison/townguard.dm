@@ -106,10 +106,10 @@
 	guard.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	guard.change_stat("strength", 1)
+	guard.change_stat("strength", 2)
 	guard.change_stat("perception", 2)
 	guard.change_stat("constitution", 1)
-	guard.change_stat("endurance", 1)
+	guard.change_stat("endurance", 2)
 	guard.change_stat("speed", 1)
 
 /datum/outfit/job/roguetown/guardsman/bowman

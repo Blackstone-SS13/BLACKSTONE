@@ -5,7 +5,7 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-
+	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	allowed_sexes = list(MALE) //same as town guard
 	allowed_races = list(
 		"Humen",
@@ -15,8 +15,7 @@
 		"Aasimar",
 		"Half Orc",
 	) //same as town guard
-	tutorial = "War has always been a constant of your life, and you always chose the side of defense and justice. You rose up through the ranks as a guardman and you're now the head above all of them. Lead and train your men to defend the kingdom and maintain the peace. Recruit those who feels able to aid the Kingdom against the offensives and push the tides to be yours..."
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	tutorial = "War has always been a constant of your life, and you always chose the side of defense and justice. You rose up through the ranks as a guardman and you're now the head above all of them. Lead and train your men to defend the kingdom and maintain the peace. Recruit those who you believe capable of aiding the Kingdom against offenders and pushing the tides of the kingdom's battles in your favor..."allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	display_order = JDO_VET
 	whitelist_req = TRUE
 
@@ -71,7 +70,7 @@
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 4)
 		H.change_stat("endurance", 2)
-		H.change_stat("speed", 2)
+		H.change_stat("speed", 1)
 
 	if(H.charflaw)
 		if(H.charflaw.type != /datum/charflaw/noeyer)
