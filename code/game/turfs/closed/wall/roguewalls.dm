@@ -355,8 +355,8 @@
 	climbdiff = 1
 	damage_deflection = 20
 
-/turf/closed/wall/mineral/rogue/stone/bluemoss
-    icon = 'icons/turf/walls/blue_mossy_stone.dmi'
-    climbdiff = 4
-/turf/closed/wall/mineral/rogue/stone/window/bluemoss
-    icon = 'icons/turf/walls/blue_mossy_stone.dmi'
+/turf/closed/wall/mineral/rogue/stone/blue_moss
+	icon = 'icons/turf/walls/blue_mossy.dmi'
+
+/turf/closed/wall/mineral/rogue/stone/window/blue_moss
+	icon = 'icons/turf/walls/blue_mossy.dmi'
