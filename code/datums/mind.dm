@@ -114,9 +114,9 @@
 	var/datum/mind/M = person
 	if(ishuman(M.current))
 		var/mob/living/carbon/human/H = M.current
-		if(!known_people[H.real_name])
-			known_people[H.real_name] = list()
-		known_people[H.real_name]["VCOLOR"] = H.voice_color
+		if(!known_people[H])
+			known_people[H] = list()
+		known_people[H]["VCOLOR"] = H.voice_color
 		var/used_title
 		if(H.job)
 			var/datum/job/J = SSjob.GetJob(H.job)
@@ -125,9 +125,9 @@
 				used_title = J.f_title
 		if(!used_title)
 			used_title = "unknown"
-		known_people[H.real_name]["FJOB"] = used_title
-		known_people[H.real_name]["FGENDER"] = H.gender
-		known_people[H.real_name]["FAGE"] = H.age
+		known_people[H]["FJOB"] = used_title
+		known_people[H]["FGENDER"] = H.gender
+		known_people[H]["FAGE"] = H.age
 
 /datum/mind/proc/person_knows_me(person) //we are added to their lists, they are added to ours
 	if(!person)
@@ -138,9 +138,9 @@
 	if(M.known_people)
 		if(ishuman(current))
 			var/mob/living/carbon/human/H = current
-			if(!M.known_people[H.real_name])
-				M.known_people[H.real_name] = list()
-			M.known_people[H.real_name]["VCOLOR"] = H.voice_color
+			if(!M.known_people[H])
+				M.known_people[H] = list()
+			M.known_people[H]["VCOLOR"] = H.voice_color
 			var/used_title
 			if(H.job)
 				var/datum/job/J = SSjob.GetJob(H.job)
@@ -149,9 +149,9 @@
 					used_title = J.f_title
 			if(!used_title)
 				used_title = "unknown"
-			M.known_people[H.real_name]["FJOB"] = used_title
-			M.known_people[H.real_name]["FGENDER"] = H.gender
-			M.known_people[H.real_name]["FAGE"] = H.age
+			M.known_people[H]["FJOB"] = used_title
+			M.known_people[H]["FGENDER"] = H.gender
+			M.known_people[H]["FAGE"] = H.age
 
 /datum/mind/proc/do_i_know(datum/mind/person, name)
 	if(!person && !name)
@@ -160,12 +160,12 @@
 		var/mob/living/carbon/human/H = person.current
 		if(!istype(H))
 			return
-		for(var/P in known_people)
-			if(H.real_name == P)
+		for(var/mob/living/carbon/human/P in known_people)
+			if(H == P)
 				return TRUE
 	if(name)
-		for(var/P in known_people)
-			if(name == P)
+		for(var/mob/living/carbon/human/P in known_people)
+			if(name == P.real_name)
 				return TRUE
 
 /datum/mind/proc/become_unknown_to(person) //we are removed from mind
@@ -176,8 +176,8 @@
 	var/datum/mind/M = person
 	var/mob/living/carbon/human/H = current
 	if(M.known_people && istype(H))
-		if(M.known_people[H.real_name])
-			M.known_people[H.real_name] = null
+		if(M.known_people[H])
+			M.known_people[H] = null
 
 
 /datum/mind/proc/unknow_all_people()
