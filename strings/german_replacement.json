@@ -55,9 +55,9 @@
         "yes": "ja",
         "young": "jung",
 		"soldier": "soldat",
-		"knight": "cavalier",
-		"kingdom": "reich",
-		"king": "kaiser",
+		"knight": "ritter",
+		"kingdom": "konigreich",
+		"king": "konig",
 		"princess": "prinzess",
 		"prince": "prinz",
 		"dwarf": "zwarf",
@@ -69,6 +69,7 @@
 		"necromancer": "nekromant",
 		"demon": "dämon",
 		"vampire": "vampir",
-		"goblin": "kobold"
+		"goblin": "kobold",
+        "black": "schwarz"
     }
 }
