@@ -173,6 +173,7 @@
 #define JCOLOR_SERF "#819e82"
 #define JCOLOR_PEASANT "#b6a68c"
 #define JCOLOR_MERCENARIES "#c86e3a"
+#define JCOLOR_GOBLIN "#2a3b6e"
 
 
 // job display orders //
