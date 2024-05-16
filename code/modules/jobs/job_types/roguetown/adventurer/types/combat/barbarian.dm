@@ -85,7 +85,7 @@
 			H.mind.adjust_skillrank(/datum/skill/craft/traps, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
