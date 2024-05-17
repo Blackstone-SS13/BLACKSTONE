@@ -15,7 +15,7 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
-	traits_applied = list(RTRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
+	traits_applied = list(RTRAIT_CRITICAL_RESISTANCE, TRAIT_STEELHEARTED)
 
 /datum/outfit/job/roguetown/adventurer/barbarian
 	allowed_patrons = list(/datum/patron/divine/ravox, /datum/patron/inhumen/graggar)
