@@ -25,7 +25,7 @@
 		while(fibercount > 0)
 			if(fibercount == 1)
 				new /obj/item/natural/fibers(get_turf(user))
-					fibercount--
+				fibercount--
 			else if(fibercount >= 2)
 				var/obj/item/natural/bundle/fibers/B = new(get_turf(user))
 				B.amount = clamp(fibercount, 2, 6)
@@ -266,4 +266,22 @@
 	icon2 = "stickbundle2"
 	icon2step = 7
 	icon3 = "stickbundle3"
+
+
+/obj/item/natural/bowstring
+	name = "fibre bowstring"
+	desc = "a simple cord of bowstring"
+	icon_state = "fibers"
+	possible_item_intents = list(/datum/intent/use)
+	force = 0
+	throwforce = 0
+	obj_flags = null
+	color = COLOR_BEIGE
+	firefuel = 5 MINUTES
+	resistance_flags = FLAMMABLE
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
 

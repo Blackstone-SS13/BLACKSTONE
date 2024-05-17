@@ -33,6 +33,13 @@
 				/obj/item/natural/fibers = 2)
 	sellprice = 45
 
+/datum/crafting_recipe/roguetown/leather/quiver
+	name = "quiver"
+	result = /obj/item/quiver
+	reqs = list(/obj/item/natural/hide = 2,
+				/obj/item/natural/fibers = 2)
+	sellprice = 30
+
 /datum/crafting_recipe/roguetown/leather/gloves
 	name = "leather gloves"
 	result = list(/obj/item/clothing/gloves/roguetown/leather,
