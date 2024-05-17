@@ -103,7 +103,7 @@
 				SSticker.rulertype = "Queen"
 		SSticker.rulermob = HU
 		var/dispjob = mind.assigned_role
-		GLOB.badomens -= "nolord"
+		removeomen("nolord")
 		say("By the authority of the gods, I pronounce you Ruler of all Rockhill!")
 		priority_announce("[real_name] the [dispjob] has named [HU.real_name] the inheritor of ROGUETOWN!", title = "Long Live [HU.real_name]!", sound = 'sound/misc/bell.ogg')
 
