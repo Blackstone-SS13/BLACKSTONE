@@ -21,6 +21,7 @@
 	max_pq = null
 
 /datum/outfit/job/roguetown/archivist/pre_equip(mob/living/carbon/human/H)
+	allowed_patrons = list(/datum/patron/divine/noc)
 	..()
 	if(H.gender == FEMALE)
 		shirt = /obj/item/clothing/suit/roguetown/shirt/dress/gen/black
