@@ -12,7 +12,7 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Half Orc",
+		"Half Orc"
 	) //"evil" races only
 	allowed_sexes = list(MALE, FEMALE) //only allows females because muh dark elves
 
