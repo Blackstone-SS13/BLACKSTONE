@@ -32,6 +32,19 @@
 	reqs = list(/obj/item/natural/fibers = 3)
 	verbage = "braids"
 
+/datum/crafting_recipe/roguetown/bowstring
+	name = "fiber bowstring"
+	result = /obj/item/natural/bowstring
+	reqs = list(/obj/item/natural/fibers = 2)
+	verbage = "twists"
+
+/datum/crafting_recipe/roguetown/bow
+	name = "wooden bow"
+	result = /obj/item/rope
+	reqs = list(/obj/item/natural/bowstring = 1, /obj/item/grown/log/tree/bowpartial = 1)
+	verbage = "carves"
+	craftdiff = 2
+
 /datum/crafting_recipe/roguetown/torch
 	name = "torch"
 	result = /obj/item/flashlight/flare/torch
