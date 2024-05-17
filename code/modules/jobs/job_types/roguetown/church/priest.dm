@@ -22,6 +22,7 @@
 	max_pq = null
 
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
+	allowed_patrons = list(/datum/patron/divine/astrata)
 	..()
 	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
 	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
@@ -36,7 +37,6 @@
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 	id = /obj/item/clothing/ring/active/nomag
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/priest
-	allowed_patrons = list(/datum/patron/divine/astrata)
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/templar)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/monk)
