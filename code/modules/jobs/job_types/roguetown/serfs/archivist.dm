@@ -13,7 +13,6 @@
 		"Half-Elf",
 		"Aasimar",
 	)
-	allowed_patrons = list(/datum/patron/divine/noc)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
 
 	outfit = /datum/outfit/job/roguetown/archivist
@@ -37,6 +36,7 @@
 	beltl = /obj/item/keyring/archivist
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/mid
 	mask = /obj/item/clothing/mask/rogue/spectacles
+	allowed_patrons = list(/datum/patron/divine/noc)
 
 
 	if(H.mind)
