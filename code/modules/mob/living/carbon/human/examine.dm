@@ -54,9 +54,8 @@
 			var/used_title = J.title
 			if(gender == FEMALE && J.f_title)
 				used_title = J.f_title
-			if(J.wanderer_examine && J.advjob_examine)
-				used_title = advjob
-				. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the wandering [race_name] [used_title].")
+			if(J.wanderer_examine)
+				. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the wandering [race_name].")
 			else
 				if(J.advjob_examine)
 					used_title = advjob
@@ -106,6 +105,8 @@
 				. += "<span class='userdanger'>BANDIT!</span>"
 			if(mind.special_role == "Vampire Lord")
 				. += "<span class='userdanger'>A MONSTER!</span>"
+			if(mind.assigned_role == "Lunatic")
+				. += "<span class='userdanger'>LUNATIC!</span>"
 		if(HAS_TRAIT(src, RTRAIT_MANIAC_AWOKEN))
 			. += "<span class='userdanger'>MANIAC!</span>"
 

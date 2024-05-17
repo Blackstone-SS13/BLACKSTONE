@@ -1,7 +1,7 @@
 //terrify mobs scream
 /datum/advclass/barbarian
 	name = "Barbarian"
-	tutorial = "..."
+	tutorial = "A jack-of-all-trades warrior sort. Is skilled in all weapons, but master of none"
 	allowed_sexes = list("male")
 	allowed_races = list(
 		"Humen",
@@ -11,10 +11,14 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
 	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED, TRAIT_NOPAINSTUN)
+
+/datum/outfit/job/roguetown/adventurer/barbarian
+	allowed_patrons = list(/datum/patron/divine/ravox, /datum/patron/inhumen/graggar)
 
 /datum/outfit/job/roguetown/adventurer/barbarian/pre_equip(mob/living/carbon/human/H)
 	..() // Compared to the Warrior the barbarian is more suited to the wilds. But they are able to make use of almost any weapon by talent and killer instinct.
@@ -32,9 +36,9 @@
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/crafting, pick(0,1), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, pick(3,4), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/labor/butchering, 2, TRUE)
@@ -68,21 +72,23 @@
 			to_chat(H, "<span class='warning'>Barbarians are great warriors of the outlands, often regarded as the strongest of their tribes -- should they have any that live. These incredible titans of strength and brutality are motivated most often by a single... all consuming instinct. SURVIVE.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/crafting, pick(1,2), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/tanning, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, pick(1,2), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/labor/butchering, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/traps, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			beltr = /obj/item/rogueweapon/stoneaxe/woodcut
 			beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 			l_hand = /obj/item/quiver/arrows
@@ -198,7 +204,6 @@
 					H.mind.adjust_skillrank(/datum/skill/labor/butchering, 2, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/craft/traps, 1, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
-					
 					H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE) 

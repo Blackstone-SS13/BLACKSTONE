@@ -11,6 +11,7 @@
 		diag_hud.add_to_hud(src)
 	faction += "[REF(src)]"
 	GLOB.mob_living_list += src
+	init_faith()
 
 /mob/living/prepare_huds()
 	..()
@@ -1079,6 +1080,7 @@
 						"<span class='notice'>I break free of [pulledby]'s grip!</span>", null, null, pulledby)
 		to_chat(pulledby, "<span class='danger'>[src] breaks free of my grip!</span>")
 		log_combat(pulledby, src, "broke grab")
+		pulledby.changeNext_move(CLICK_CD_GRABBING)
 		pulledby.stop_pulling()
 		return FALSE
 	else

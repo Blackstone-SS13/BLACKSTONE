@@ -64,13 +64,14 @@
 				return FALSE
 		else
 			L.mob_timers[MT_PSYPRAY] = world.time
-		if(!findtext(message2recognize, "[M.PATRON]"))
+		if(!findtext(message2recognize, "[M.patron]"))
 			return FALSE
 		else
 			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
 			L.add_stress(/datum/stressevent/psyprayer)
 			return TRUE
-	else to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
+	else 
+		to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
 
 /mob/living/proc/check_prayer_underworld(mob/living/L,message)
 	if(!L || !message)
@@ -93,15 +94,38 @@
 			L.forceMove(pickedturf)
 			return FALSE
 	if(length(message2recognize) > 15)
-		if(findtext(message2recognize, "[M.PATRON]"))
+		if(findtext(message2recognize, "[M.patron]"))
 			L.playsound_local(L, 'sound/misc/notice (2).ogg', 100, FALSE)
-			to_chat(L, "<font color='yellow'>I, [M.PATRON], have heard your prayer and yet cannot aid you.</font>")
+			to_chat(L, "<font color='yellow'>I, [M.patron], have heard your prayer and yet cannot aid you.</font>")
 			/*var/obj/item/underworld/coin/C = new 
 			L.put_in_active_hand(C)*/
 			return TRUE
 		else
 			return TRUE
-	else to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
+	else 
+		to_chat(L, "<span class='danger'>My prayer was kinda short...</span>")
+
+/datum/emote/living/meditate
+	key = "meditate"
+	key_third_person = "meditate"
+	message = "meditates."
+	restraint_check = FALSE
+	emote_type = EMOTE_VISIBLE
+
+/mob/living/carbon/human/verb/emote_meditate()
+	set name = "Meditate"
+	set category = "Emotes"
+
+	emote("meditate", intentional = TRUE)
+
+/datum/emote/living/meditate/run_emote(mob/user, params, type_override, intentional)
+	if(isliving(user))
+		if(!COOLDOWN_FINISHED(user, schizohelp_cooldown))
+			to_chat(user, "<span class='warning'>I need to wait before meditating again.</span>")
+			return
+		var/msg = input("Say your meditation:", "Voices in your head") as text|null
+		if(msg)
+			user.schizohelp(msg)
 
 /datum/emote/living/bow
 	key = "bow"

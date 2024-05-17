@@ -4,9 +4,9 @@
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = 0
-	spawn_positions = 0
+	spawn_positions = 0 //disabled due to ERP removal
 
-	allowed_sexes = list("male")
+	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -15,16 +15,18 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc",
 	)
 
 	tutorial = "The Nightmaster is technically a noble. Owner of the Whitevein Lounge, a decaying bathhouse converted into a den of low-lifes. A troublemaking rake that the others hate to tolerate."
 
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	allowed_ages = ADULT_AGES_LIST
 	outfit = /datum/outfit/job/roguetown/nightman
 	display_order = JDO_NIGHTMAN
 	give_bank_account = TRUE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/nightman/pre_equip(mob/living/carbon/human/H)
 	..()

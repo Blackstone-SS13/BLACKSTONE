@@ -6,7 +6,7 @@
 	total_positions = 8
 	spawn_positions = 8
 
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE)
 	allowed_races = list("Humen")
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	tutorial = "Having proven yourself loyal and capable, you are entrusted to defend the Royal Family and their Court, trained regularly in combat and siege warfare you stand a small chance of surviving the King's reign."
@@ -16,6 +16,7 @@
 	outfit = /datum/outfit/job/roguetown/manorguard
 	give_bank_account = 22
 	min_pq = 2
+	max_pq = null
 
 
 /datum/job/roguetown/manorguard/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
@@ -49,7 +50,7 @@
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(3,4), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)

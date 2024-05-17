@@ -297,7 +297,11 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		new_player_panel()
 		return FALSE
 
-	var/mob/dead/observer/observer = new()
+	var/mob/dead/observer/observer	// Transfer safety to observer spawning proc.
+	if(check_rights(R_WATCH, FALSE))
+		observer = new /mob/dead/observer/admin(src)
+	else
+		observer = new /mob/dead/observer/rogue(src)
 	spawning = TRUE
 
 	observer.started_as_observer = TRUE
@@ -409,18 +413,20 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		return JOB_UNAVAILABLE_PLAYTIME
 	if(latejoin && !job.special_check_latejoin(client))
 		return JOB_UNAVAILABLE_GENERIC
-	if(!(client.prefs.pref_species.name in job.allowed_races))
+	if(length(job.allowed_races) && !(client.prefs.pref_species.name in job.allowed_races))
 		return JOB_UNAVAILABLE_RACE
-	if(!(client.prefs.selected_patron.name in job.allowed_patrons))
+	if(length(job.allowed_patrons) && !(client.prefs.selected_patron.type in job.allowed_patrons))
 		return JOB_UNAVAILABLE_PATRON
 	if(job.plevel_req > client.patreonlevel())
 		testing("PATREONLEVEL [client.patreonlevel()] req [job.plevel_req]")
 		return JOB_UNAVAILABLE_GENERIC
 	if(!isnull(job.min_pq) && (get_playerquality(ckey) < job.min_pq))
 		return JOB_UNAVAILABLE_GENERIC
-	if(!(client.prefs.gender in job.allowed_sexes))
+	if(!isnull(job.max_pq) && (get_playerquality(ckey) > job.max_pq))
+		return JOB_UNAVAILABLE_GENERIC
+	if(length(job.allowed_sexes) && !(client.prefs.gender in job.allowed_sexes))
 		return JOB_UNAVAILABLE_RACE
-	if(!(client.prefs.age in job.allowed_ages))
+	if(length(job.allowed_ages) && !(client.prefs.age in job.allowed_ages))
 		return JOB_UNAVAILABLE_RACE
 	if((client.prefs.lastclass == job.title) && !job.bypass_lastclass)
 		return JOB_UNAVAILABLE_GENERIC
@@ -596,6 +602,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 					cat_name = "Youngfolk"
 				if (MERCENARIES)
 					cat_name = "Mercenaries"
+				if (GOBLIN)
+					cat_name = "Goblins"
 
 			dat += "<fieldset style='width: 185px; border: 2px solid [cat_color]; display: inline'>"
 			dat += "<legend align='center' style='font-weight: bold; color: [cat_color]'>[cat_name]</legend>"

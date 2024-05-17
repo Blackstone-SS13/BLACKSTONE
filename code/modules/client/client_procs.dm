@@ -115,6 +115,11 @@ GLOBAL_LIST_EMPTY(respawncounts)
 			return
 		view_rogue_manifest()
 		return
+	
+	// Schizohelp
+	if(href_list["schizohelp"])
+		answer_schizohelp(locate(href_list["schizohelp"]))
+		return
 
 	switch(href_list["_src_"])
 		if("holder")
@@ -236,6 +241,7 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		connecting_admin = TRUE
 	else if(GLOB.deadmins[ckey])
 		verbs += /client/proc/readmin
+		verbs += /client/proc/adminwho
 		connecting_admin = TRUE
 	if(CONFIG_GET(flag/autoadmin))
 		if(!GLOB.admin_datums[ckey])

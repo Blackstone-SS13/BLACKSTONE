@@ -1,5 +1,8 @@
 /datum/advclass/cheesemaker
 	name = "Cheesemaker"
+	tutorial = "Cheese cheese cheese! You have a rare wheel of cheese and know how to make more of the rare delicacy \
+	As very skilled cook you come with some ingredients to make food and feed the masses. \
+	cook up some quisine with food gathered from the local flora and fauna"
 	allowed_sexes = list("male", "female")
 	allowed_races = list(
 		"Humen",
@@ -9,7 +12,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/cheesemaker
 	isvillager = TRUE

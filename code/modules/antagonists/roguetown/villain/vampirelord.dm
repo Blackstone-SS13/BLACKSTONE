@@ -13,7 +13,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	job_rank = ROLE_VAMPIRE
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "vampire"
-	confess_lines = list("I AM ANCIENT", "I AM THE LAND", "CHILD OF KAIN!")
+	confess_lines = list(
+		"I AM ANCIENT", 
+		"I AM THE LAND", 
+		"CHILD OF KAIN!",
+	)
 	var/isspawn = FALSE
 	var/disguised = FALSE
 	var/ascended = FALSE
@@ -86,12 +90,16 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		addtimer(CALLBACK(owner.current, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "VAMPIRE LORD"), 5 SECONDS)
 		greet()
 	return ..()
+
 // OLD AND EDITED
 /datum/antagonist/vampirelord/proc/equip_lord()
 	owner.unknow_all_people()
 	for(var/datum/mind/MF in get_minds())
 		owner.become_unknown_to(MF)
 	for(var/datum/mind/MF in get_minds("Vampire Spawn"))
+		owner.i_know_person(MF)
+		owner.person_knows_me(MF)
+	for(var/datum/mind/MF in get_minds("Death Knight"))
 		owner.i_know_person(MF)
 		owner.person_knows_me(MF)
 
@@ -106,7 +114,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		else
 			H.set_species(/datum/species/elf/wood) //setspecies randomizes body
 		H.after_creation()
+	var/obj/item/organ/eyes/eyes = owner.current.getorganslot(ORGAN_SLOT_EYES)
+	if(eyes)
+		eyes.Remove(owner.current,1)
+		QDEL_NULL(eyes)
+	eyes = new /obj/item/organ/eyes/night_vision/zombie
+	eyes.Insert(owner.current)
 	H.equipOutfit(/datum/outfit/job/roguetown/vamplord)
+	H.patron = GLOB.patronlist[/datum/patron/inhumen/zizo]
 
 	return TRUE
 
@@ -115,6 +130,9 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	for(var/datum/mind/MF in get_minds())
 		owner.become_unknown_to(MF)
 	for(var/datum/mind/MF in get_minds("Vampire Spawn"))
+		owner.i_know_person(MF)
+		owner.person_knows_me(MF)
+	for(var/datum/mind/MF in get_minds("Death Knight"))
 		owner.i_know_person(MF)
 		owner.person_knows_me(MF)
 
@@ -458,7 +476,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 // SPAWN
 /datum/antagonist/vampirelord/lesser
 	name = "Vampire Spawn"
-	confess_lines = list("THE CRIMSON CALLS!", "MY MASTER COMMANDS", "THE SUN IS ENEMY!")
+	confess_lines = list(
+		"THE CRIMSON CALLS!", 
+		"MY MASTER COMMANDS", 
+		"THE SUN IS ENEMY!",
+	)
 	isspawn = TRUE
 
 /datum/antagonist/vampirelord/lesser/move_to_spawnpoint()
@@ -740,9 +762,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/structure/vampire/necromanticbook/attack_hand(mob/living/carbon/human/user)
 	var/datum/antagonist/vampirelord/lord = user.mind.has_antag_datum(/datum/antagonist/vampirelord)
+	var/datum/game_mode/chaosmode/C = SSticker.mode
 	if(user.mind.special_role == "Vampire Lord")
 		if(!unlocked)
 			to_chat(user, "I have yet to regain this aspect of my power!")
+			return
+		if(C.deathknights.len >= 3)
+			to_chat(user, "You cannot summon any more death knights.")
 			return
 		var/choice = input(user,"What to do?", "ROGUETOWN") as anything in useoptions|null
 		switch(choice)
@@ -753,7 +779,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 						return
 					if(do_after(user, 100))
 						to_chat(user, "I have summoned a knight from the underworld. I need only wait for them to materialize.")
-						var/datum/game_mode/chaosmode/C = SSticker.mode
 						C.deathknightspawn = TRUE
 						for(var/mob/dead/observer/D in GLOB.player_list)
 							D.death_knight_spawn()
@@ -780,12 +805,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 							sunstolen = FALSE
 						priority_announce("The Sun is torn from the sky!", "Terrible Omen", 'sound/misc/astratascream.ogg')
 						addomen("sunsteal")
-						for(var/mob/living/carbon/human/W in GLOB.human_list)
-							var/datum/patrongods/patron = W.client.prefs.selected_patron
-							if(patron.name == "Astrata")
-								if(!W.mind.antag_datums)
-									to_chat(W, "<span class='userdanger'>You feel the pain of your Patron!</span>")
-									W.emote_scream()
+						for(var/mob/living/carbon/human/astrater in GLOB.human_list)
+							if(!istype(astrater.patron, /datum/patron/divine/astrata) || !length(astrater.mind?.antag_datums))
+								continue
+							to_chat(astrater, "<span class='userdanger'>You feel the pain of [astrater.patron.name]!</span>")
+							astrater.emote_scream()
 
 	if(user.mind.special_role == "Vampire Spawn")
 		to_chat(user, "I don't have the power to use this!")
@@ -806,9 +830,17 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /datum/antagonist/skeleton/knight/on_gain()
 	. = ..()
 	owner.current.verbs |= /mob/living/carbon/human/proc/vampire_telepathy
+	owner.unknow_all_people()
+	for(var/datum/mind/MF in get_minds())
+		owner.become_unknown_to(MF)
+	for(var/datum/mind/MF in get_minds("Vampire Spawn"))
+		owner.i_know_person(MF)
+		owner.person_knows_me(MF)
+	for(var/datum/mind/MF in get_minds("Death Knight"))
+		owner.i_know_person(MF)
+		owner.person_knows_me(MF)
 	add_objective(/datum/objective/vlordserve)
 	greet()
-
 /datum/antagonist/skeleton/knight/greet()
 	to_chat(owner.current, "<span class='userdanger'>I am returned to serve. I will obey, so that I may return to rest.</span>")
 	owner.announce_objectives()
@@ -880,7 +912,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /datum/objective/vampirelord/infiltrate/one/check_completion()
 	var/datum/game_mode/chaosmode/C = SSticker.mode
-	var/list/churchjobs = list("Priest", "Priestess", "Cleric", "Acolyte", "Templar", "Churchling", "Crusader")
+	var/list/churchjobs = list("Priest", "Priestess", "Cleric", "Acolyte", "Templar", "Churchling", "Crusader", "Inquisitor")
 	for(var/datum/mind/V in C.vampires)
 		if(V.current.job in churchjobs)
 			return TRUE

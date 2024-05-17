@@ -11,10 +11,10 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_ages = list(AGE_YOUNG)
+	allowed_ages = YOUNG_AGES_LIST
 
 	tutorial = "You have been granted the privilege of serving as a clerk in the Steward's office. You help the Steward with anything they need, and learn how coin keeps the town moving and prosperous."
 
@@ -22,6 +22,7 @@
 	display_order = JDO_CLERK
 	give_bank_account = TRUE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/clerk/pre_equip(mob/living/carbon/human/H)
 	..()

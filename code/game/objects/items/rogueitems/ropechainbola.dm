@@ -117,7 +117,7 @@
 		return
 
 
-/datum/intent/whip
+/datum/intent/whips
 	name = "strike"
 	blade_class = BCLASS_BLUNT
 	attack_verb = list("whips", "strikes", "smacks")
@@ -137,7 +137,7 @@
 	breakouttime = 1 MINUTES
 	slipouttime = 5 MINUTES
 	cuffsound = 'sound/blank.ogg'
-	possible_item_intents = list(/datum/intent/tie, /datum/intent/whip)
+	possible_item_intents = list(/datum/intent/tie, /datum/intent/whips)
 	firefuel = null
 	smeltresult = /obj/item/ingot/iron
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'

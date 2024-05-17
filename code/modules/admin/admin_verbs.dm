@@ -13,9 +13,8 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/toggle_autovote,
 	/datum/admins/proc/show_player_panel,
 	/datum/admins/proc/admin_heal,
+	/datum/admins/proc/admin_revive,
 	/datum/admins/proc/admin_sleep,
-	/client/proc/ghost_up,
-	/client/proc/ghost_down,
 	/client/proc/jumptoarea,
 	/client/proc/jumptokey,
 	/datum/admins/proc/checkpq,
@@ -28,6 +27,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/deadmin,				/*destroys our own admin datum so we can play as a regular player*/
 	/client/proc/set_context_menu_enabled,
 	/client/proc/delete_player_book,
+	/client/proc/adminwho
 	)
 GLOBAL_LIST_INIT(admin_verbs_admin, world.AVerbsAdmin())
 GLOBAL_PROTECT(admin_verbs_admin)
@@ -65,8 +65,6 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/set_admin_notice, /*announcement all clients see when joining the server.*/
 	/client/proc/admin_ghost,			/*allows us to ghost/reenter body at will*/
 	/client/proc/hearallasghost,
-	/client/proc/ghost_up,
-	/client/proc/ghost_down,
 	/client/proc/toggle_view_range,		/*changes how far we can see*/
 	/client/proc/getserverlogs,		/*for accessing server logs*/
 	/client/proc/getcurrentlogs,		/*for accessing server logs for the current round*/
@@ -410,7 +408,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		var/mob/body = mob
 		body.invisibility = INVISIBILITY_MAXIMUM
 		body.density = 0
-		body.ghostize(1)
+		body.ghostize(TRUE, admin = TRUE)
 		if(body && !body.key)
 			body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 		show_popup_menus = TRUE

@@ -11,10 +11,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Tiefling",
-		"Argonian",
-		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 
 	tutorial = "You came to rockhill either to seek knowledge or riches."
@@ -23,6 +20,7 @@
 	display_order = 6
 	give_bank_account = 12
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/alchemist
 	name = "Alchemist"

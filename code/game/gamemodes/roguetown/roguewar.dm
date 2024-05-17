@@ -121,7 +121,7 @@
 	"Merchant",
 	"Gatemaster",
 	"Sheriff",
-	"Witch Hunter",
+	"Inquisitor",
 	"Village Elder",
 	"Town Guard")
 	var/num_bandits = 0
@@ -233,7 +233,7 @@
 	restricted_jobs = list("Lord",
 	"Prisoner",
 	"Dungeoneer",
-	"Witch Hunter",
+	"Inquisitor",
 	"Shepherd",
 	"Monk",
 	"Cleric",
@@ -271,7 +271,7 @@
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_vampires()
-	restricted_jobs = list("Monk","Priest","Witch Hunter","Shepherd")
+	restricted_jobs = list("Monk","Priest","Inquisitor","Shepherd")
 	var/num_vampires = rand(1,3)
 #ifdef TESTSERVER
 	num_vampires = 100
@@ -302,7 +302,7 @@
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_werewolves()
-	restricted_jobs = list("Prisoner","Knight","Witch Hunter","Shepherd")
+	restricted_jobs = list("Prisoner","Knight","Inquisitor","Shepherd")
 	var/num_werewolves = rand(1,3)
 #ifdef TESTSERVER
 	num_werewolves = 100

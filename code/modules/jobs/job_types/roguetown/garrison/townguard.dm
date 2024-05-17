@@ -6,7 +6,7 @@
 	total_positions = 10
 	spawn_positions = 10
 	selection_color = JCOLOR_SOLDIER
-	allowed_sexes = list(MALE, FEMALE)
+	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -22,6 +22,7 @@
 	outfit = /datum/outfit/job/roguetown/guardsman
 	give_bank_account = 16
 	min_pq = 1
+	max_pq = null
 
 	/// Chance to be spawned as a bowman instead
 	var/bowman_chance = 35

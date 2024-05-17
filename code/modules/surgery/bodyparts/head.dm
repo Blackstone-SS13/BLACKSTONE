@@ -91,6 +91,19 @@
 		tongue = null
 	return ..()
 
+/obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
+	if(I.get_sharpness() && !user.cmode)
+		add_fingerprint(user)
+		playsound(loc, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
+		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
+			"<span class='notice'>You begin to cut open [src]...</span>")
+		if(do_after(user, 5 SECONDS, target = src))
+			drop_organs(user)
+			user.visible_message("<span class='danger'>[user] cuts [src] open!</span>",\
+				"<span class='notice'>You finish cutting [src] open.</span>")
+		return
+	return ..()
+
 /obj/item/bodypart/head/examine(mob/user)
 	. = ..()
 

@@ -6,7 +6,7 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_sexes = list(MALE, FEMALE)
+	allowed_sexes = list(MALE) //same as town guard
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -14,7 +14,7 @@
 		"Dwarf",
 		"Aasimar"
 	) //same as town guard
-	tutorial = "You've known combat your entire life. There isn't a way to kill a man you havent practiced in the tapestries of war itself. You wouldn't call yourself a hero, those belong to the men left rotting in the fields of where you practiced your ancient trade. You don't sleep well at night anymore, you don't like remembering what you've had to do to survive. Trading adventure for stable pay was the only logical solution, and maybe someday you'll get to lay down the blade..."
+	tutorial = "You've served the garrison your whole life. There isn't a way to kill a man you havent practiced in the tapestries of war itself. You wouldn't call yourself a hero, those belong to the men left rotting in the fields of where you practiced your ancient trade. You don't sleep well at night anymore, you don't like remembering what you've had to do to survive. Trading adventure for stable pay was the only logical solution, and maybe someday you'll get to lay down the blade..."
 	allowed_ages = list(AGE_OLD)
 	display_order = JDO_VET
 	whitelist_req = TRUE
@@ -22,6 +22,7 @@
 	outfit = /datum/outfit/job/roguetown/veteran
 	give_bank_account = 35
 	min_pq = 4
+	max_pq = null
 
 /datum/outfit/job/roguetown/veteran/pre_equip(mob/living/carbon/human/H)
 	..()
