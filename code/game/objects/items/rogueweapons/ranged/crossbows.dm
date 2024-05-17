@@ -106,8 +106,6 @@
 			spread = 150 - (150 * (user.client.chargedprog / 100))
 	else
 		spread = 0
-	for(var/obj/item/ammo_casing/CB in get_ammo_list(FALSE, TRUE))
-		var/obj/projectile/BB = CB.BB
 	cocked = FALSE
 	..()
 
