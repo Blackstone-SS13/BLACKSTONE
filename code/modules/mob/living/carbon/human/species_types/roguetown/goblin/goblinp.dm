@@ -33,7 +33,11 @@
 	OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-3), \
 	OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(0,0))
 	specstats = list("strength" = -3, "perception" = 2, "intelligence" = -4, "constitution" = -3, "endurance" = 3, "speed" = 4, "fortune" = -1)
-
+	var/obj/item/headdy = get_bodypart("head")
+		if(headdy)
+		headdy.icon = 'icons/roguetown/mob/monster/goblins.dmi'
+		headdy.icon_state = "[src.dna.species.id]_head"
+		headdy.sellprice = rand(7,40)
 
 /datum/species/goblinp/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
