@@ -15,7 +15,7 @@
 		"Aasimar",
 		"Half Orc",
 	) //same as town guard
-	tutorial = "War has always been a constant of your life, and you always chose the side of defense and justice. You rose up through the ranks as a guardman and you're now the head above all of them. Lead and train your men to defend the kingdom and maintain the peace. Recruit those who you believe capable of aiding the Kingdom against offenders and pushing the tides of the kingdom's battles in your favor..."allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	tutorial = "War has always been a constant of your life, and you always chose the side of defense and justice. You rose up through the ranks as a guardman and you're now the head above all of them. Lead and train your men to defend the kingdom and maintain the peace. Recruit those who you believe capable of aiding the Kingdom against offenders and pushing the tides of the kingdom's battles in your favor..."
 	display_order = JDO_VET
 	whitelist_req = TRUE
 
@@ -64,14 +64,16 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 		H.change_stat("strength", 4)
 		H.change_stat("perception", 2)
 		H.change_stat("intelligence", 4)
 		H.change_stat("endurance", 2)
 		H.change_stat("speed", 1)
-
+		if(H.dna?.species)
+			if(H.dna.species.id == "humen")
+				H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 	if(H.charflaw)
 		if(H.charflaw.type != /datum/charflaw/noeyer)
 			if(H.charflaw.type != /datum/charflaw/noeyel)
