@@ -36,7 +36,7 @@
 	var/obj/item/headdy = get_bodypart("head")
 		if(headdy)
 		headdy.icon = 'icons/roguetown/mob/monster/goblins.dmi'
-		headdy.icon_state = "[src.dna.species.id]_head"
+		headdy.icon_state = "[src.id]_head"
 		headdy.sellprice = rand(7,40)
 
 /datum/species/goblinp/on_species_gain(mob/living/carbon/C, datum/species/old_species)
