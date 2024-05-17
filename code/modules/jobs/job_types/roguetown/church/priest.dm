@@ -24,7 +24,7 @@
 /datum/outfit/job/roguetown/priest
     name = "Priest"
     jobtype = /datum/job/roguetown/priest
-    allowed_patrons = list(/datum/patron/astrata)
+	allowed_patrons = list(/datum/patron/divine/astrata)
 
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
 	..()
