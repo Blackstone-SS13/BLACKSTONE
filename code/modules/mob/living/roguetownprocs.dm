@@ -466,7 +466,7 @@
 							prob2defend = prob2defend + (H.mind.get_skill_level(/datum/skill/combat/unarmed) * 10)
 			prob2defend = clamp(prob2defend, 5, 99)
 			if(client?.prefs.showrolls)
-				to_chat(src, "<span class='info'>Roll to dodge... [prob2defend]% Drained: [drained]</span>")
+				to_chat(src, "<span class='info'>Roll to dodge... [prob2defend]%</span>")
 			if(!prob(prob2defend))
 				return FALSE
 			if(!H.rogfat_add(max(drained,5)))
