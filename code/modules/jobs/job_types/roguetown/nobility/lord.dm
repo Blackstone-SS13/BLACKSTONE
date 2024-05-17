@@ -40,7 +40,7 @@ GLOBAL_VAR(lordsurname)
 			chopped_name -= chopped_name[1]
 			GLOB.lordsurname = jointext(chopped_name, " ")
 		else
-			GLOB.lordsurname = H.real_name
+			GLOB.lordsurname = "of [H.real_name]"
 
 /datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
