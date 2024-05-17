@@ -306,7 +306,12 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_maniac()
-	restricted_jobs = list("King", "Queen Consort")
+	restricted_jobs = list("King",
+	"Queen Consort",
+	"Goblin Cook",
+	"Goblin Guard",
+	"Goblin King",
+	"Goblin Smith")
 	antag_candidates = get_players_for_role(ROLE_MANIAC)
 	var/datum/mind/villain = pick_n_take(antag_candidates)
 	if(villain)
@@ -348,7 +353,11 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	"Templar",
 	"Bog Guard",
 	"Bog Master",
-	"Knight")
+	"Knight",
+	"Goblin Cook",
+	"Goblin Guard",
+	"Goblin King",
+	"Goblin Smith")
 	antag_candidates = get_players_for_role(ROLE_NBEAST)
 	antag_candidates = shuffle(antag_candidates)
 	for(var/datum/mind/vampire in antag_candidates)
@@ -375,7 +384,23 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_werewolves()
-	restricted_jobs = list("Acolyte", "Templar", "Priest","Adventurer","Confessor","Town Guard","Captain of the Guard","Castle Guard","Sheriff","Knight","Bog Guard","Bog Master","Inquisitor")
+	restricted_jobs = list("Acolyte",
+	"Templar",
+	"Priest",
+	"Adventurer",
+	"Confessor",
+	"Town Guard",
+	"Captain of the Guard",
+	"Castle Guard",
+	"Sheriff",
+	"Knight",
+	"Bog Guard",
+	"Bog Master",
+	"Inquisitor",
+	"Goblin Cook",
+	"Goblin Guard",
+	"Goblin King",
+	"Goblin Smith")
 /*	var/num_werewolves = rand(1,3)
 #ifdef TESTSERVER
 	num_werewolves = 100
