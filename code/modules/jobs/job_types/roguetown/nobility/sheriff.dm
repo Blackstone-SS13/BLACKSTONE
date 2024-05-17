@@ -10,7 +10,7 @@
 	allowed_sexes = list(MALE)
 	allowed_races = list("Humen")
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
-	tutorial = "War has always been a constant of your life, and you always chose the side of defense and justice. You rose up through the ranks as a guardman and you're now the head above all of them. Lead and train your men to defend the kingdom and maintain the peace. Recruit those who you believe capable of aiding the Kingdom against offenders and pushing the tides of the kingdom's battles in your favor..."
+	tutorial = "War has always been a constant of your life, and you always chose the side of justice. You rose up through the ranks as a watchman, and now rule over them - Ensure that they enforce the laws of this land properly."
 
 	display_order = JDO_SHERIFF
 	whitelist_req = FALSE
