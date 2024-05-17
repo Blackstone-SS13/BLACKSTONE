@@ -99,7 +99,7 @@
 	else
 		var/lord = find_lord()
 		if(lord)
-			INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(lord_purge_requested), lord)
+			INVOKE_ASYNC(GLOBAL_PROC, GLOBAL_PROC_REF(lord_purge_requested), src, lord)
 		else
 			purge_laws()
 
