@@ -36,7 +36,6 @@
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)

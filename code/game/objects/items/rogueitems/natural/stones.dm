@@ -84,7 +84,7 @@ GLOBAL_LIST_INIT(stone_personalities, list(
 	"Daredevil",
 	"Barbarics",
 	"Fanciness",
-	"Relaxing",
+	"Relaxing",	
 	"Blacked",
 	"Greed",
 	"Evil",
@@ -121,7 +121,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	"One must think, where did this stone come from?",
 	"If all stones were like this, then they would be some pretty great stones.",
 	"I wish my personality was like this stones",
-	"I could sure do a whole lot with this stone",
+	"I could sure do a whole lot with this stone", 
 	"I love stones!"
 ))
 /obj/item/natural/stone
@@ -149,7 +149,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	var/stone_title = "stone" // Our stones title
 	var/stone_desc = "[desc]" // Total Bonus desc the stone will be getting
 
-	icon_state = "stone[rand(1,5)]"
+	icon_state = "stone[rand(1,5)]" 
 
 	var/bonus_force = 0 // Total bonus force the rock will be getting
 	var/list/given_intent_list = list(/datum/intent/hit) // By default you get this at least
@@ -188,7 +188,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 			desc_jumbler += pick(GLOB.stone_sharpness_descs)
 
 	if(name_jumbler.len) // Both name jumbler and desc jumbler should be symmetrical in insertions conceptually anyways.
-		for(var/i in 1 to name_jumbler.len) //Theres only two right now
+		for(var/i in 1 to name_jumbler.len) //Theres only two right now 
 			if(!name_jumbler.len) // If list somehow empty get the hell out! Now~!
 				break
 			//Remove so theres no repeats
@@ -230,7 +230,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 			var/cock = pick(extra_intent_list) // We pick one
 			given_intent_list += cock // Add it to the list
 			extra_intent_list -= cock // Remove it from the prev list
-
+	
 	//Now that we have built the history and lore of this stone, we apply it to the main vars.
 	name = stone_title
 	desc = stone_desc

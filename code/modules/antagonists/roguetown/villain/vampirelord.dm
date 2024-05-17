@@ -762,9 +762,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/structure/vampire/necromanticbook/attack_hand(mob/living/carbon/human/user)
 	var/datum/antagonist/vampirelord/lord = user.mind.has_antag_datum(/datum/antagonist/vampirelord)
+	var/datum/game_mode/chaosmode/C = SSticker.mode
 	if(user.mind.special_role == "Vampire Lord")
 		if(!unlocked)
 			to_chat(user, "I have yet to regain this aspect of my power!")
+			return
+		if(C.deathknights.len >= 3)
+			to_chat(user, "You cannot summon any more death knights.")
 			return
 		var/choice = input(user,"What to do?", "ROGUETOWN") as anything in useoptions|null
 		switch(choice)
@@ -775,7 +779,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 						return
 					if(do_after(user, 100))
 						to_chat(user, "I have summoned a knight from the underworld. I need only wait for them to materialize.")
-						var/datum/game_mode/chaosmode/C = SSticker.mode
 						C.deathknightspawn = TRUE
 						for(var/mob/dead/observer/D in GLOB.player_list)
 							D.death_knight_spawn()
