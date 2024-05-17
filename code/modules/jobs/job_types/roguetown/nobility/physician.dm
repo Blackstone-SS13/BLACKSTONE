@@ -59,7 +59,7 @@
 			H.change_stat("speed", -1)
 			H.change_stat("intelligence", 1)
 			H.change_stat("perception", 1)
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC, RTRAIT_NOSTINK)
+	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
 	C.holder_mob = H
