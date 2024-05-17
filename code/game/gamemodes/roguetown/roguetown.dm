@@ -232,8 +232,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_aspirants()
-	var/list/possible_jobs_aspirants = list("Prince", "Princess", "Captain of the Guard", "Steward", "Hand", "Knight")
-	var/list/possible_jobs_helpers = list("Captain of the Guard", "Prince", "Princess", "Hand",  "Steward", "Knight")
+	var/list/possible_jobs_aspirants = list("Prince", "Princess", "Guard Captain", "Steward", "Hand", "Knight")
+	var/list/possible_jobs_helpers = list("Guard Captain", "Prince", "Princess", "Hand",  "Steward", "Knight")
 	var/list/rolesneeded = list("Aspirant","Loyalist","Supporter")
 
 	antag_candidates = get_players_for_role(ROLE_ASPIRANT)
@@ -343,7 +343,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	"Priest",
 	"Acolyte",
 	"Cleric",
-	"Captain of the Guard",
+	"Guard Captain",
 	"Court Magician",
 	"Templar",
 	"Bog Guard",
@@ -375,7 +375,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_werewolves()
-	restricted_jobs = list("Acolyte", "Templar", "Priest","Adventurer","Confessor","Watchman","Veteran","Man-at-arms","Captain of the Guard","Knight","Bog Guard","Bog Master","Inquisitor")
+	restricted_jobs = list("Acolyte", "Templar", "Priest","Adventurer","Confessor","Watchman","Veteran","Man-at-arms","Guard Captain","Knight","Bog Guard","Bog Master","Inquisitor")
 /*	var/num_werewolves = rand(1,3)
 #ifdef TESTSERVER
 	num_werewolves = 100

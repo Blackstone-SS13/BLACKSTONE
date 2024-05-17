@@ -1,5 +1,5 @@
 /datum/job/roguetown/sheriff
-	title = "Captain of the Guard"
+	title = "Guard Captain"
 	flag = SHERIFF
 	department_flag = NOBLEMEN
 	faction = "Station"
@@ -30,7 +30,7 @@
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
-			S.name = "watchman cape ([index])"
+			S.name = "captain cape ([index])"
 		var/prev_real_name = H.real_name
 		var/prev_name = H.name
 		H.real_name = "Captain [prev_real_name]"
@@ -72,6 +72,8 @@
 		H.change_stat("endurance", 2)
 		H.change_stat("speed", 1)
 		H.change_stat("fortune", 2)
+	if(ishumannorthern(H))
+		H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
 		if(!(H.hairstyle in acceptable))
@@ -80,6 +82,7 @@
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	H.verbs |= /mob/proc/haltyell
 
 /obj/effect/proc_holder/spell/self/convertrole

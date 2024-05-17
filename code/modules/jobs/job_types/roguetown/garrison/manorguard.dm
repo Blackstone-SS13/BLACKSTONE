@@ -29,7 +29,7 @@
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
-			S.name = "man-at-arms tabard ([index])"
+			S.name = "man-at-arms jupon ([index])"
 
 /datum/outfit/job/roguetown/manorguard/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -46,21 +46,23 @@
 	beltr = /obj/item/rogueweapon/sword
 	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/rope/chain = 1)
+	r_hand = /obj/item/rogueweapon/spear
 	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, pick(3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3,4), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE) 
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE) 
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("constitution", 1)

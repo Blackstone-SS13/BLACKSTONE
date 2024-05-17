@@ -51,7 +51,6 @@
 			if(!index)
 				index = H.real_name
 			S.name = "watchman tabard ([index])"
-
 /datum/outfit/job/roguetown/guardsman
 	name = "Watchman"
 	/// Whether or not we are a bowman

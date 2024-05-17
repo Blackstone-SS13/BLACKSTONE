@@ -21,6 +21,14 @@
 	..()
 	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
+		if(istype(H.cloak, /obj/item/clothing/cloak/tabard/knight/guard))
+			var/obj/item/clothing/S = H.cloak
+			var/index = findtext(H.real_name, " ")
+			if(index)
+				index = copytext(H.real_name, 1,index)
+			if(!index)
+				index = H.real_name
+			S.name = "knight tabard ([index])"
 		var/prev_real_name = H.real_name
 		var/prev_name = H.name
 		H.real_name = "Sir [prev_real_name]"
@@ -59,9 +67,8 @@
 		H.change_stat("constitution", 3)
 		H.change_stat("endurance", 2)
 		H.change_stat("speed", -1)
-		if(H.dna?.species)
-			if(H.dna.species.id == "humen")
-				H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
+	if(ishumannorthern(H))
+		H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)

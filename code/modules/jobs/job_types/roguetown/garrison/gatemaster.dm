@@ -27,8 +27,7 @@
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
-			S.name = "man-at-arms tabard ([index])"
-
+			S.name = "gatemaster jupon ([index])"
 /datum/outfit/job/roguetown/gatemaster
 	name = "Gatemaster"
 	jobtype = /datum/job/roguetown/gatemaster
@@ -45,15 +44,16 @@
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	belt = /obj/item/storage/belt/rogue/leather/black
-	beltl = /obj/item/keyring/gatemaster
-	beltr = /obj/item/rogueweapon/mace/cudgel
+	beltl = /obj/item/rogueweapon/mace/cudgel
+	beltr = /obj/item/quiver/bolts
 	backr = /obj/item/storage/backpack/rogue/satchel/black
-	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/rope/chain = 1)
+	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
+	backpack_contents = list(/obj/item/keyring/gatemaster = 1, /obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/rope/chain = 1)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
@@ -76,3 +76,5 @@
 			H.update_hair()
 	H.verbs |= /mob/proc/haltyell
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)

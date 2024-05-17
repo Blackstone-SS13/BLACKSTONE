@@ -27,6 +27,19 @@
 	max_pq = null
 	give_bank_account = 16
 
+/datum/job/roguetown/woodsman/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+	. = ..()
+	if(ishuman(L))
+		var/mob/living/carbon/human/H = L
+		if(istype(H.cloak, /obj/item/clothing/cloak/raincloak/furcloak))
+			var/obj/item/clothing/S = H.cloak
+			var/index = findtext(H.real_name, " ")
+			if(index)
+				index = copytext(H.real_name, 1,index)
+			if(!index)
+				index = H.real_name
+			S.name = "bog elder cloak ([index])"
+
 /datum/outfit/job/roguetown/woodsman
 	name = "Bog Elder"
 	jobtype = /datum/job/roguetown/woodsman

@@ -38,7 +38,7 @@
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
-			S.name = "bogman tabard ([index])"
+			S.name = "bog master tabard ([index])"
 
 /datum/outfit/job/roguetown/bogmaster/pre_equip(mob/living/carbon/human/H)
 	. = ..()
@@ -76,10 +76,12 @@
 		H.change_stat("intelligence", 2)
 		H.change_stat("endurance", 2)
 		H.change_stat("speed", 1)
-
+	if(ishumannorthern(H))
+		H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 	H.verbs |= /mob/proc/haltyell
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 
 /obj/effect/proc_holder/spell/self/convertrole/bog
 	name = "Recruit Bogmen"
