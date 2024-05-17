@@ -21,8 +21,12 @@
 	min_pq = 2
 	max_pq = null
 
+/datum/outfit/job/roguetown/priest
+    name = "Priest"
+    jobtype = /datum/job/roguetown/priest
+    allowed_patrons = list(/datum/patron/astrata)
+
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
-	allowed_patrons = list(/datum/patron/divine/astrata)
 	..()
 	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
 	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
