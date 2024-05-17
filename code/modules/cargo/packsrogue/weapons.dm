@@ -40,6 +40,12 @@
 	cost = 5
 	contains = list(/obj/item/gun/ballistic/revolver/grenadelauncher/bow)
 
+/datum/supply_pack/rogue/weapons/rbow
+	name = "Imported Bow"
+	cost = 8
+	contains = list(/obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve)
+
+
 /datum/supply_pack/rogue/weapons/quivers
 	name = "Quivers"
 	cost = 15
