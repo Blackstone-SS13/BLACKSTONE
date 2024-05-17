@@ -12,6 +12,7 @@
 #define RTRAIT_BREADY					"Battleready"
 #define RTRAIT_MEDIUMARMOR				"Maille Training"
 #define RTRAIT_HEAVYARMOR				"Plate Training"
+#define RTRAIT_DODGEEXPERT              "Fast Reflexes"
 #define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
 #define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
 #define RTRAIT_MANIAC_AWOKEN			"Awoken"
@@ -48,6 +49,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_BREADY = "Defensive stance does not passively fatigue me.",
 	RTRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
 	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
+	RTRAIT_DODGEEXPERT = "I can dodge easly while only wearing light armor.",
 	RTRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
 	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
 	RTRAIT_MANIAC_AWOKEN = "<span class='warning'>I am <b>WAKING UP</b> and the sheeple know this. They will resist.</span>",

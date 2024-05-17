@@ -425,7 +425,10 @@
 		if(L.rogfat >= L.maxrogfat)
 			return FALSE
 		if(L)
-			prob2defend = prob2defend + (L.STASPD * 10)
+			if(H.check_dodge_skill())
+				prob2defend = prob2defend + (L.STASPD * 15)
+			else
+				prob2defend = prob2defend + (L.STASPD * 10)
 		if(U)
 			prob2defend = prob2defend - (U.STASPD * 10)
 		if(I)
@@ -439,6 +442,8 @@
 			if(!H.check_armor_skill())
 				H.Knockdown(1)
 				return FALSE
+			if(H.check_dodge_skill())
+				drained = drained - 5
 //			if(H.mind)
 //				drained = drained + max((H.checkwornweight() * 10)-(mind.get_skill_level(/datum/skill/misc/athletics) * 10),0)
 //			else
@@ -461,7 +466,7 @@
 							prob2defend = prob2defend + (H.mind.get_skill_level(/datum/skill/combat/unarmed) * 10)
 			prob2defend = clamp(prob2defend, 5, 99)
 			if(client?.prefs.showrolls)
-				to_chat(src, "<span class='info'>Roll to dodge... [prob2defend]%</span>")
+				to_chat(src, "<span class='info'>Roll to dodge... [prob2defend]% Drained: [drained]</span>")
 			if(!prob(prob2defend))
 				return FALSE
 			if(!H.rogfat_add(max(drained,5)))
