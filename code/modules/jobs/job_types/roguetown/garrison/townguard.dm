@@ -59,18 +59,18 @@
 
 /datum/outfit/job/roguetown/guardsman/pre_equip(mob/living/carbon/human/H)
 	. = ..()
-	head = /obj/item/clothing/head/roguetown/helmet/leather
-	pants = /obj/item/clothing/under/roguetown/trou/leather
+	head = /obj/item/clothing/head/roguetown/helmet
+	pants = /obj/item/clothing/under/roguetown/chainlegs
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/merc
+	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail
-	neck = /obj/item/clothing/neck/roguetown/gorget
+	neck = /obj/item/clothing/neck/roguetown/chaincoif
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	beltl = /obj/item/keyring/guard
-	belt = /obj/item/storage/belt/rogue/leather
+	belt = /obj/item/storage/belt/rogue/leather/black
 	beltr = /obj/item/rogueweapon/mace/cudgel
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
-	backr = /obj/item/storage/backpack/rogue/satchel
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
+	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel = 1, /obj/item/rope/chain = 1)
 	if(is_bowman)
 		backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
