@@ -13,7 +13,7 @@
 		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/ranger
-	traits_applied = list(RTRAIT_MEDIUMARMOR)
+	traits_applied = list(RTRAIT_MEDIUMARMOR, RTRAIT_DODGEEXPERT)
 
 /datum/outfit/job/roguetown/adventurer/ranger/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -113,6 +113,7 @@
 			gloves = /obj/item/clothing/gloves/roguetown/fingerless
 	
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	if(prob(23))
 		if(!H.has_language(/datum/language/elvish))
 			H.grant_language(/datum/language/elvish)
