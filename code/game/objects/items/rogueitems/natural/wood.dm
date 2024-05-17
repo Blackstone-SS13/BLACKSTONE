@@ -28,7 +28,6 @@
 	smeltresult = /obj/item/rogueore/coal
 
 /obj/item/grown/log/tree/small/attackby(obj/item/I, mob/living/user, params)
-	var/mob/living/carbon/human/H = user
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(user.used_intent?.blade_class == BCLASS_CUT)
 		playsound(get_turf(src.loc), 'sound/items/wood_sharpen.ogg', 100)

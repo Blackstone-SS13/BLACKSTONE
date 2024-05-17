@@ -276,7 +276,7 @@
 	force = 0
 	throwforce = 0
 	obj_flags = null
-	color = "#454032"
+	color = COLOR_BEIGE
 	firefuel = 5 MINUTES
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_MOUTH
