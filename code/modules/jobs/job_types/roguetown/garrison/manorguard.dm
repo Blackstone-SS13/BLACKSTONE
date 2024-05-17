@@ -1,5 +1,5 @@
 /datum/job/roguetown/manorguard
-	title = "Castle Guard"
+	title = "Man-at-arms"
 	flag = GUARDSMAN
 	department_flag = GARRISON
 	faction = "Station"
@@ -18,7 +18,6 @@
 	min_pq = 2
 	max_pq = null
 
-
 /datum/job/roguetown/manorguard/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
 	if(ishuman(L))
@@ -30,22 +29,22 @@
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
-			S.name = "guard's tabard ([index])"
-
+			S.name = "man-at-arms tabard ([index])"
 
 /datum/outfit/job/roguetown/manorguard/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/roguetown/helmet/kettle
+	head = /obj/item/clothing/head/roguetown/helmet
 	pants = /obj/item/clothing/under/roguetown/chainlegs
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/guard
-	neck = /obj/item/clothing/neck/roguetown/gorget
-	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/merc
+	gloves = /obj/item/clothing/gloves/roguetown/plate
+	neck = /obj/item/clothing/neck/roguetown/chaincoif
+	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/half
-	shoes = /obj/item/clothing/shoes/roguetown/boots
+	shoes = /obj/item/clothing/shoes/roguetown/boots/armor
 	beltl = /obj/item/keyring/guardcastle
-	belt = /obj/item/storage/belt/rogue/leather
+	belt = /obj/item/storage/belt/rogue/leather/black
 	beltr = /obj/item/rogueweapon/sword
-	backr = /obj/item/storage/backpack/rogue/satchel
+	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(/obj/item/rope/chain = 1)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,4), TRUE)

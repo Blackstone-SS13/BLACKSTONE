@@ -725,6 +725,7 @@
 
 /obj/item/clothing/cloak/cape/guard
 	color = CLOTHING_RED
+	
 /obj/item/clothing/cloak/cape/guard/Initialize()
 	. = ..()
 	if(GLOB.lordprimary)

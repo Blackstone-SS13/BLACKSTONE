@@ -27,12 +27,14 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	belt = /obj/item/storage/belt/rogue/leather/plaquegold
 	beltl = /obj/item/keyring/sheriff
-	beltr = /obj/item/rogueweapon/mace/steel
+	beltr = /obj/item/rogueweapon/mace
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/bailiff
 	gloves = /obj/item/clothing/gloves/roguetown/angle
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
 	backpack_contents = list(/obj/item/keyring/bailiff = 1)
 	if(H.mind)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)

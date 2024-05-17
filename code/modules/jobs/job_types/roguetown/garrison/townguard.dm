@@ -1,5 +1,5 @@
 /datum/job/roguetown/guardsman
-	title = "Town Guard"
+	title = "Watchman"
 	flag = GUARDSMAN
 	department_flag = GARRISON
 	faction = "Station"
@@ -12,7 +12,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	tutorial = "Responsible for the safety of the town and the enforcement of the King's law, you are the vanguard of the city faced with punishing those who defy his Royal Majesty. Though you've many lords to obey, as both the Church and the Sheriff have great sway over your life."
@@ -50,10 +50,10 @@
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
-			S.name = "guard's tabard ([index])"
+			S.name = "watchman tabard ([index])"
 
 /datum/outfit/job/roguetown/guardsman
-	name = "Town Guard"
+	name = "Watchman"
 	/// Whether or not we are a bowman
 	var/is_bowman = FALSE
 

@@ -63,7 +63,7 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	"King",
 	"Queen Consort",
 	"Prince",
-	"Sheriff",
+	"Captain of the Guard",
 	"Bailiff",
 	"Councillor",
 	"Steward",
@@ -72,14 +72,14 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	))
 
 GLOBAL_LIST_INIT(garrison_positions, list(
-	"Town Guard",
+	"Watchman",
 	"Bog Guard",
 	"Bog Master",
-	"Castle Guard",
+	"Man-at-arms",
 	"Veteran",
 	"Dungeoneer",
 	"Gatemaster",
-	"Village Elder"
+	"Bog Elder"
 	))
 
 GLOBAL_LIST_INIT(church_positions, list(

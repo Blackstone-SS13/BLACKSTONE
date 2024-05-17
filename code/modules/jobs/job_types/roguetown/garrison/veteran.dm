@@ -3,8 +3,8 @@
 	flag = GUARDSMAN
 	department_flag = GARRISON
 	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 0
+	spawn_positions = 0
 
 	allowed_sexes = list(MALE) //same as town guard
 	allowed_races = list(
@@ -26,15 +26,16 @@
 
 /datum/outfit/job/roguetown/veteran/pre_equip(mob/living/carbon/human/H)
 	..()
-	pants = /obj/item/clothing/under/roguetown/trou/leather
 	cloak = /obj/item/clothing/cloak/half/vet
-	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guardsecond
+	neck = /obj/item/clothing/neck/roguetown/bervor
 	armor = /obj/item/clothing/suit/roguetown/armor/plate/scale
-	neck = /obj/item/clothing/neck/roguetown/gorget
-	shoes = /obj/item/clothing/shoes/roguetown/boots
-	beltl = /obj/item/keyring/guardcastle
-	belt = /obj/item/storage/belt/rogue/leather
-	backr = /obj/item/storage/backpack/rogue/satchel
+	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail
+	pants = /obj/item/clothing/under/roguetown/chainlegs
+	shoes = /obj/item/clothing/shoes/roguetown/boots/armor
+	belt = /obj/item/storage/belt/rogue/leather/black
+	beltl = /obj/item/rogueweapon/sword/sabre
+	beltr = /obj/item/keyring/guardcastle
+	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
@@ -53,27 +54,9 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 		H.change_stat("strength", 2)
 		H.change_stat("perception", 1)
-		H.change_stat("intelligence", 3)
+		H.change_stat("intelligence", 4)
 		H.change_stat("endurance", 1)
 		H.change_stat("speed", 1)
-
-	if(H.charflaw)
-		if(H.charflaw.type != /datum/charflaw/noeyer)
-			if(H.charflaw.type != /datum/charflaw/noeyel)
-				var/obj/item/bodypart/O = H.get_bodypart(BODY_ZONE_R_ARM)
-				if(O)
-					O.drop_limb()
-					qdel(O)
-				O = H.get_bodypart(BODY_ZONE_L_ARM)
-				if(O)
-					O.drop_limb()
-					qdel(O)
-				H.regenerate_limb(BODY_ZONE_R_ARM)
-				H.regenerate_limb(BODY_ZONE_L_ARM)
-				H.charflaw = new /datum/charflaw/noeyer()
-				if(!istype(H.wear_mask, /obj/item/clothing/mask/rogue/eyepatch))
-					qdel(H.wear_mask)
-					mask = /obj/item/clothing/mask/rogue/eyepatch
-
 	H.verbs |= /mob/proc/haltyell
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
