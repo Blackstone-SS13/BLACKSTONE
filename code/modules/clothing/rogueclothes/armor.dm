@@ -331,6 +331,17 @@
 	sellprice = 25
 	armor_class = ARMOR_CLASS_LIGHT
 
+/obj/item/clothing/suit/roguetown/armor/leather/heavy
+	name = "heavy leather armor"
+	desc = "Thick leather armor made with furs, the best armor a rogue could ask for."
+	icon_state = "heavyleather"
+	body_parts_covered = CHEST|GROIN|VITALS|ARMS
+	armor = list("melee" = 40, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_CHOP)
+	max_integrity = 300
+	sellprice = 40
+	armor_class = ARMOR_CLASS_LIGHT
+
 /obj/item/clothing/suit/roguetown/armor/leather/vest
 	name = "leather vest"
 	desc = "A leather vest. Not very protective, but fashion."
