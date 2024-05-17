@@ -25,7 +25,7 @@
 
 /datum/job/roguetown/prince/after_spawn(mob/living/H, mob/M, latejoin)
 	. = ..()
-	if(GLOB.lordlastname && H)
+	if(GLOB.lordsurname && H)
 		give_lord_surname(H)
 
 /datum/outfit/job/roguetown/prince/pre_equip(mob/living/carbon/human/H)
