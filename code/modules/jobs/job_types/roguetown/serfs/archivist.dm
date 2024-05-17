@@ -20,6 +20,9 @@
 	min_pq = 0
 	max_pq = null
 
+/datum/outfit/job/roguetown/adventurer/archivist
+	allowed_patrons = list(/datum/patron/divine/noc)
+
 /datum/outfit/job/roguetown/archivist/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.gender == FEMALE)
@@ -36,7 +39,6 @@
 	beltl = /obj/item/keyring/archivist
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/mid
 	mask = /obj/item/clothing/mask/rogue/spectacles
-	allowed_patrons = list(/datum/patron/divine/noc)
 
 
 	if(H.mind)
