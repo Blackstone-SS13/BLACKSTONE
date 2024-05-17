@@ -681,7 +681,7 @@
 	movement_interrupt = FALSE
 	charge_max = 2 MINUTES
 	chargedloop = /datum/looping_sound/invokeholy
-	// sound = 'sound/magic/astrata.ogg'
+	sound = 'sound/misc/dun.ogg'
 	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
