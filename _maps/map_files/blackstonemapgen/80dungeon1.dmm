@@ -1,0 +1,111 @@
+"a" = (/turf/closed/wall/mineral/rogue/stone,/area/rogue/under/cave)
+"b" = (/turf/closed/mineral/random/rogue/high,/area/rogue/under/cave)
+"f" = (/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"h" = (/turf/closed/wall/mineral/rogue/stone,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"i" = (/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"j" = (/obj/structure/table/wood{dir = 10; icon_state = "tablewood2"},/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"l" = (/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"m" = (/obj/structure/portal,/turf/closed/wall/mineral/rogue/stone/window,/area/rogue/under/cave)
+"n" = (/turf/closed/wall/mineral/rogue/stone/window,/area/rogue/under/cave)
+"o" = (/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"q" = (/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"r" = (/turf/open/floor/rogue/blocks,/turf/open/floor/rogue/blocks,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"s" = (/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"v" = (/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"x" = (/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"B" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 10},/obj/item/paper/scroll,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"C" = (/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"H" = (/turf/open/floor/rogue/naturalstone,/area/rogue/under/cave)
+"J" = (/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"K" = (/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"M" = (/turf/open/floor/rogue/blocks,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"O" = (/obj/structure/chair/wood/rogue{dir = 4},/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"Q" = (/turf/open/floor/rogue/dirt/road,/area/rogue/under/cave)
+"R" = (/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"T" = (/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"W" = (/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"Y" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 9},/obj/item/natural/feather,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+"Z" = (/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave)
+
+(1,1,1) = {"
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbabbaabbbbaaaaaa
+bbbHHHHHbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbHHHHHHHHHHKKKKKaaa
+bbHHHHHHHbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbHHHbbbbbbHHHHHHHHHHHKKKKKKaa
+bHHHHHHHHbbbbbbbbbbbbbbbbbbbHHHHbbbbbbbbbbbbbbbbbbbHHbbHHbbbHHHHHHHHHHHHKKKKKKKa
+bHHHHHHHHHbbbbbbHHHHHbbbbbHHHbbHHHHbbbbbbbbbbbbbHHHHHbbbbHHHHHbbHHbbbHbaaaKKKKKa
+bHHHHHHHHHbbbbbHHbbbHHbbHHHbbbbbbbHHHHHHbbbbbbHHHHbbHHHHHHHHHbbbbbbbHHbbbaaKKKKa
+bHHHHHHHHHHbbHHHHHHHHHHHHbbbbbbbbHHHbbbHHbbbbHHHHbbHHbbbbHHbbbbbbbbHHbbbbbaaKKKa
+bHHHHHHHHHHHHHHHbbbbbHHHbbbbbbbHHHHHbbbbHbbbHHHHHHHHbbbbbbHHHbbbbHHbbbbbbbbaKKKa
+bHHHHHHHHHHHbHHbbHHHbbHHHbbbbbHHbbbHHbbbbHbHHHbHHHbbbbbbbbbbHHHHHHbbbbbbbbbaKKKa
+bbHHHHHHHHHbbHbbHHHHHbbHHbbbbHHbbbbbHHbbbHHHHbbbHbbbbbbbbbbbbbbbbbbbbbbbbbbaKKKa
+bbbbHHHHHHHbbHbHHHHHHHbbHHHHHHbbbbbbHHHHHHHHbbbbHbbbbbbbbbbbbbbbbbbbbbbbbbbaKKKa
+bbbbbbHHHHbbHHbHHHHHHHHbbbbHHbbaaaannnHHHHHbbbbbHbbbbbbbbbbbbbbbbbbbbbbbbbbaKKKa
+bbbbbbbbbHbbHHbHHHHHHHHbbbbHbbbaKKKKKnnKKaHbbbbHHbbbbbbbbbbbbbbbbbbbbbbbbbbaKKKa
+bbbbbbbbbHHbbHbHHHHHHHHbbbHHbbbaKKKKKKKKKaHHHbHHbbbbbbbbbbbbbbbbbbbbbbbbbbbaKKKa
+bQKHbbbbbbHbbHbHHHHHHHHbbbHbbbbaKKKKKKKKKabbHHHbbbbbbbbbbbbbbbbbbbbbbbbbbbbaKKKa
+aKKHQbbbbbHHbHbbHHHHHHbbbbHbbbbaKKKKKaaKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaKKKa
+bKHHHQbbbbbHHHHbbHHHHHHbbHbbbbbaaaaaaaKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaKKKa
+aQHKQHbbbbbbbHHHbbHHbbbHHbbbbbbbbbbaaKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaKKKa
+aHQKQQQbbbbbbHbHHbbbHbbbbbbbbbbbbbaaKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aHKHQHQbbbbbbHbbHbbbHbbbbbaaaaaaaaaKKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aQKQbHbHbbbbHHbbHbbbHbbbbbaKKKKKKKKKKKKKaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aQHQQbQHHbbHHbbbHbbbHbbbbbaKKKKKKKKKKKKaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+bHQHQQHbHbbHbbbbHbbHHbbbbbaKKaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+bKHHHbbHHHHHbbbbHbHHbbbbbbaKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+bHHQbbbbHQHbbbbHHHHbbbbbbbaKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aQKKbbbbbHHHHHHHbbbbaaaaaaaKKaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+bHQHabbbbHQbbbbbbbbbaKKKKKaKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+bKQHQbbbQHbbbbbbbbbbaKKKKKaKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aQHQQbbbQbbbbbbbbbaaaKKaaaaaaaKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aHQQabbHQbbbbbbbbbaKKKKKKaKKKaKKaKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKQKabQHHbbbbbbbbbaKKKKKKaKKKKKKaKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aQKKbbHHbbbbbbbbbbaKKKKKKKKKKaKKaKKbbbbbKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aHQQQQHbbbbbbbbbbbaKKKKKKaaaaaKKaKKbbbbbKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aHKQQHQbbbbbbbaaaaaKKKKKKaaaaaKKaKKbaaaaKKaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aQKKHHbbbbbbbbaKKKaKKKKKKKKKKaKKKKKhaKKKKKKKKaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKQKabbbbbbbbbKKKKaKKKKKKaKKKKKKKKKhKKKMMMKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKQabbbbbbbbKaKKKKKKKKKKaKKKaKKaaahKKKrrrKKKKaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aQKKaaabaaaaaKaaaaaaaaaaaaaaaaaaaaaKKKKKKKKKKKKaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKaaaKKKaKaaKaaKKKKKKKKKKKKKKKKKKKKnnnnKKKKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbba
+aKQKKKKaaKKKaKaKKaaKKKKKKKKKKKKKKaKKKKKnnnnKKKKKaKKKKKKbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKaaKKaKaKKaaKKKKKKKKKKKKKKKKKKKKmKKnKKKKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaKKKKaaKKKaKKaaKaaKKaaaaaaaaaaaKKKKKKKKKKKKaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaKKKKaaaaaKKaKKKaKKaaKKKaKKKKaaKKKKKKKKKKaaKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaaKKKKaaaaKKaKKKKKKKaaKKKKKKKKaKKKKKKKKKKaKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaaaKKKKaaKKKaKKKaKKKaaKKaaKKKKaaKKKKKKKKaaKKKaaaaabbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaaaaKKKKKKKKaaaaaKKaaKKKKaaaaaaaaaKKKKaaaKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaaaaaKKKKKKaaKKKKKKKKKKKKKKKaaaKKaaKKaaKKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaaaaaaKKKKaaKKKKKKKKKKKKKKKKKaKKKKaKKaKKKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKKKKKKKKKKKKaaKKaaaaaKKKKKKKKKKaKKaKKKKaKKabbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKKKKKKKKKKKKKKKKKKKKaaKKKKaKKKKaKKaKKKaaKKabbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaaaaKaajKKKKKKKKKKKKKKKKaKKKKaaKKaaKKaaKKaKKKaaaaabbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKKKaaaaaaaaaaaKKaaKKKaaKKaaaKKaKKKKaKKKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKKKafqCKaKKKaKKKKaaKKaKKKKKKKKKKKKKaKKKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaaKKKKaZRKKKKKKKKKKKKaKKaKKKKKKKKKKKKKaKKaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKaKKKKaTKKKaKKKaKKKKKKKKaKKaaaaaaaaaKKaKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKaaaaKaKKKKaaaaaaaaaaaKKaKKaKKKKKKKaKKaKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKaKKKKaKKKKKKKKKKKKKKKKKKKKaKKKKKKKaKKaKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKaKKKKasKKKKKKKKKKKKKKKKKKKKKaaaaaKKKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaaKaaaaxiKKKKCWaaKKaaaKKKKKaKKKKKKKaKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaKKKKKaavJsKKlooaaKKaaaKKaKKaKKKKKKKaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaKKKKKaaaaaaaaaaaaKKaaaKKaKKaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKKaKKKKKKKKKaaKKaaaKKaKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaKKKKKKKKKKKKKKKaaKKaaKKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaKKKKKaKKKKKKKKKaaKKaaKKKKKKabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaaaaaaKKKKKKKKKaaKKaaKKKaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaKKKjaaKKKKKKKKKaKKKKaKKKaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKaKKKaaaaaaaaKKKKaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaKKKKaKKaaaaaaaaKKKKKKaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaKKKKKKKaaaaaaKKKKKKKKKKaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKajKKKaKKaaaaKKKKKKKKKKKKKKaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKaaKaaaKKaaaKKKKKKKKKKKKKKKKaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKKKKKKKKKKKKKaaaaKKKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKKKKKKKKKKKaaaaaaaaKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKKKKKaaKaaKKKKaaKKKKKKaaKKKaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKaaKaaKKKaaaaaaKKKKKKKKaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aKKKKaKKKaKKKKaKKKKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aaKKYaKKKKKKKKKKKKKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aaaOBaKKKaKKKKaKKKKKKKKKKKKbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

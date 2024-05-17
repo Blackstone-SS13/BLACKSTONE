@@ -25,7 +25,7 @@
 		while(fibercount > 0)
 			if(fibercount == 1)
 				new /obj/item/natural/fibers(get_turf(user))
-					fibercount--
+				fibercount--
 			else if(fibercount >= 2)
 				var/obj/item/natural/bundle/fibers/B = new(get_turf(user))
 				B.amount = clamp(fibercount, 2, 6)
