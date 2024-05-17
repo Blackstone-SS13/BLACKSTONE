@@ -775,7 +775,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
+	allowed_sex = list(MALE, FEMALE)
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
 	nodismemsleeves = TRUE
 
@@ -802,7 +802,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
+	allowed_sex = list(MALE, FEMALE)
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
 	sellprice = 50
 	nodismemsleeves = TRUE
@@ -815,7 +815,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
+	allowed_sex = list(MALE, FEMALE)
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 	sellprice = 50
 	nodismemsleeves = TRUE
