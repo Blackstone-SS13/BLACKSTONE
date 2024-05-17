@@ -36,7 +36,7 @@
 	beltl = /obj/item/rogueweapon/huntingknife/idagger
 	beltr = /obj/item/keyring/servant
 	neck = /obj/item/clothing/neck/roguetown/psicross/pestra
-	pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
+	pants = /obj/item/clothing/under/roguetown/tights/random
 	r_hand = /obj/item/rogueweapon/woodstaff
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/needle,/obj/item/reagent_containers/glass/bottle/rogue/healthpot,/obj/item/reagent_containers/glass/bottle/rogue/healthpot)
