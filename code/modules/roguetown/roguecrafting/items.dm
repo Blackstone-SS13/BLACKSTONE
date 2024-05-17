@@ -40,7 +40,7 @@
 
 /datum/crafting_recipe/roguetown/bow
 	name = "wooden bow"
-	result = /obj/item/rope
+	result = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	reqs = list(/obj/item/natural/bowstring = 1, /obj/item/grown/log/tree/bowpartial = 1)
 	verbage = "carves"
 	craftdiff = 2
