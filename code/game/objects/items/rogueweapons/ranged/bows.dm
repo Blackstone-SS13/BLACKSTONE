@@ -19,6 +19,7 @@
 	cartridge_wording = "arrow"
 	load_sound = 'sound/foley/nockarrow.ogg'
 	associated_skill = /datum/skill/combat/bows
+	var/ damfactor = 1
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/getonmobprop(tag)
 	. = ..()
@@ -67,7 +68,7 @@
 		else
 			BB.damage = BB.damage
 			BB.embedchance = 100
-		BB.damage = BB.damage * (user.STAPER / 10)
+		BB.damage = BB.damage * (user.STAPER / 10) * damfactor
 	..()
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/update_icon()
@@ -172,6 +173,7 @@
 	cartridge_wording = "arrow"
 	load_sound = 'sound/foley/nockarrow.ogg'
 	associated_skill = /datum/skill/combat/bows
+	damfactor = 0.9
 
 
 /datum/intent/shoot/bow/recurve
