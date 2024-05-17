@@ -67,7 +67,8 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	"Bailiff",
 	"Councillor",
 	"Steward",
-	"Court Magician"
+	"Court Magician",
+	"Court Physician"
 	))
 
 GLOBAL_LIST_INIT(garrison_positions, list(
@@ -86,7 +87,7 @@ GLOBAL_LIST_INIT(church_positions, list(
 	"Cleric",
 	"Acolyte",
 	"Templar",
-	"Witch Hunter",
+	"Inquisitor",
 	"Confessor"
 	))
 

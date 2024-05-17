@@ -15,11 +15,11 @@
 		"Argonian",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
+	allowed_ages = ADULT_AGES_LIST
+	
 	tutorial = "Some say you're a strange individual, some say you're a cheat, while some claim you're a savant in the art of sausage making. Without your skilled hands and knifework, most of the livestock around the town would be wasted. "
-
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 
 	outfit = /datum/outfit/job/roguetown/beastmaster
 	display_order = JDO_BUTCHER

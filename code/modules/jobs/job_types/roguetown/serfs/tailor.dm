@@ -19,7 +19,7 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 
 /datum/outfit/job/roguetown/tailor

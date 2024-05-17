@@ -11,9 +11,10 @@
 		"Dwarf",
 		"Tiefling",
 		"Argonian",
-		"Dark Elf"
-	)
-	allowed_sexes = list(MALE, FEMALE)
+		"Dark Elf",
+		"Half Orc"
+	) //"evil" races only
+	allowed_sexes = list(MALE, FEMALE) //only allows females because muh dark elves
 
 	display_order = JDO_DUNGEONEER
 

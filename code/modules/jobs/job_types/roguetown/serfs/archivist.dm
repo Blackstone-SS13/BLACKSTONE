@@ -11,10 +11,10 @@
 		"Humen",
 		"Elf",
 		"Half-Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_patrons = list(/datum/patron/divine/noc)
-	allowed_ages = list(AGE_OLD, AGE_MIDDLEAGED)
+	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
 
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = 19
