@@ -1,8 +1,8 @@
 /obj/structure/roguemachine/bounty
 	name = "Excidium"
 	desc = "A machine that sets and collects bounties. Its bloodied maw could easily fit a human head."
-	icon = 'icons/roguetown/topadd/statue1.dmi'
-	icon_state = "baldguy"
+	icon = 'icons/roguetown/misc/machinesbig.dmi'
+	icon_state = "excidium"
 	density = FALSE
 	blade_dulling = DULLING_BASH
 	anchored = TRUE
