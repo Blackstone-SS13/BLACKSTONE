@@ -41,3 +41,37 @@
 	C.grant_language(/datum/language/orcish)
 
 	C.cmode_music = 'sound/music/combat_gronn.ogg'
+
+/datum/species/goblinp/get_skin_list()
+	return list(
+		"Palish" = "ffe0d1",
+		"Dim" = "fcccb3",
+		"Caveian" = "e8b59b",
+	)
+
+/datum/species/goblinp/random_name(gender,unique,lastname)
+
+	var/randname
+	if(unique)
+		if(gender == MALE)
+			for(var/i in 1 to 10)
+				randname = pick( world.file2list("strings/rt/names/other/halforcm.txt") )
+				if(!findname(randname))
+					break
+		if(gender == FEMALE)
+			for(var/i in 1 to 10)
+				randname = pick( world.file2list("strings/rt/names/other/halforcf.txt") )
+				if(!findname(randname))
+					break
+	else
+		if(gender == MALE)
+			randname = pick( world.file2list("strings/rt/names/other/halforcm.txt") )
+		if(gender == FEMALE)
+			randname = pick( world.file2list("strings/rt/names/other/halforcf.txt") )
+	return randname
+
+/datum/species/goblinp/random_surname()
+	return
+
+/datum/species/goblinp/get_accent(mob/living/carbon/human/H)
+	return strings("middlespeak.json", "middle")
