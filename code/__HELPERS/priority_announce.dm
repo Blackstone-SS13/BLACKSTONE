@@ -58,3 +58,22 @@
 					M.playsound_local(M, 'sound/misc/alert.ogg', 100)
 				else
 					M.playsound_local(M, 'sound/misc/alert.ogg', 100)
+
+/proc/priority_announcegob(text, title = "", sound)
+	if(!text)
+		return
+
+	var/announcementgob
+
+	if (title && length(title) > 0)
+		announcementgob += "<h1 class='alert'>[title]</h1>"
+
+	announcementgob += "<br><span class='alert'>[html_encode(text)]</span>"
+
+	var/s = sound(sound)
+	for(var/mob/M in GLOB.player_list)
+		if(M.can_hear() && M.job == "Goblin King" || "Goblin Cook" || "Goblin Guard" || "Goblin Smith")
+			to_chat(M, announcementgob)
+			if(M.client.prefs.toggles & SOUND_ANNOUNCEMENTS)
+				if(sound)
+					M.playsound_local(M, s, 100)
