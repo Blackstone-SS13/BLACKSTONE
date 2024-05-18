@@ -225,6 +225,10 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 			so if it was working a medium priority king would still get shunted into a bandit.
 			Along with that every person who has a restricted job set to HIGH would also just get rejected from it.
 
+			Also to note, we check the restricted jobs list on the mind in get_players_for_role() too
+			Except all these pick procs also set the list after the assignment/use of it too. 
+			And the get_players_for_role in pre_setup to put them into the allantags list to be sorted in the pick procs also has no restricted_jobs list on mind at that point also
+
 		*/
 		antag_candidates = get_players_for_role(ROLE_BANDIT)
 		if(antag_candidates.len)
