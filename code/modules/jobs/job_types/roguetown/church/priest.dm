@@ -21,7 +21,7 @@
 	min_pq = 2
 	max_pq = null
 
-/datum/outfit/job/roguetown/adventurer/priest
+/datum/outfit/job/roguetown/priest
 	allowed_patrons = list(/datum/patron/divine/astrata)
 
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
