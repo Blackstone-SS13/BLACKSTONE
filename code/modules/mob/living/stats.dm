@@ -23,7 +23,7 @@
 	set_patron(/datum/patron/godless)
 
 /mob/living/proc/set_patron(datum/patron/new_patron)
-	if(!new_faith)
+	if(!new_patron)
 		return
 	if(ispath(new_patron))
 		new_patron = GLOB.patronlist[new_patron]

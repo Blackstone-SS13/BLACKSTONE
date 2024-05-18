@@ -17,6 +17,7 @@
 	domain = "God of the Moon, Night, and Knowledge"
 	desc = "The Firstborn of Psydon, twin of Astrata, gifted man divine knowledge."
 	worshippers = "Wizards and Scholars"
+	mob_traits = list(RTRAIT_NASTY_EATER)
 	t1 = /obj/effect/proc_holder/spell/invoked/blindness
 	t2 = /obj/effect/proc_holder/spell/invoked/invisibility
 
