@@ -239,6 +239,8 @@ All foods are distributed among various categories. Use common sense.
 		return ..()
 	if(!eatverb)
 		eatverb = pick("bite","chew","nibble","gnaw","gobble","chomp")
+	if(name == "apple pie") && istype(M, /mob/living/carbon/human))
+		M.piecounter()
 	if(iscarbon(M))
 		if(!canconsume(M, user))
 			return FALSE
