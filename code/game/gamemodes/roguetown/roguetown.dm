@@ -213,7 +213,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		/*
 			Lets go over some things here to whomever sees this from my observations (which may be incorrect). 
 
-			The other modes choose antags in pre_setup() which makes the restricted_jobs list work as its checked in DivideOccupations()
+			The other modes (that aren't this) choose antags in pre_setup() which makes the restricted_jobs list work as its checked in DivideOccupations()
 			DivideOccupations() occurs and checks it right after the current mode pre_setup() call on SSticker
 			Then we call this brand new after_DO() proc AFTER the jobs have been assigned to the mind/checks occur on SSticker via DivideOccupations()
 			In after_DO() we go through all the mode/antag selection instructions linking into these pick_antag() procs
