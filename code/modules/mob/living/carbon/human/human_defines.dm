@@ -119,3 +119,5 @@
 	/datum/rmb_intent/weak)
 
 	rot_type = /datum/component/rot/corpse
+
+	var/datum/pieholder/pie_count
