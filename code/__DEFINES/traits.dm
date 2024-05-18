@@ -17,6 +17,7 @@
 #define RTRAIT_MANIAC_AWOKEN			"Awoken"
 #define RTRAIT_NOFATSTAM				"Indefatigable" //for ai
 #define RTRAIT_NUDIST					"Nudist" //you can't wear most clothes
+#define RTRAIT_KNEESTINGER_IMMUNITY		"Blessing of Dendor"
 #define RTRAIT_RETARD_ANATOMY			"Inhumen Anatomy" //can't wear hats and shoes
 #define RTRAIT_NASTY_EATER 				"Inhumen Digestion" //can drink murky water and eat organs
 
@@ -53,6 +54,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_MANIAC_AWOKEN = "<span class='warning'>I am <b>WAKING UP</b> and the sheeple know this. They will resist.</span>",
 	RTRAIT_NOFATSTAM = "I have boundless energy, I will never tire.",
 	RTRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
+	RTRAIT_KNEESTINGER_IMMUNITY = "I am immune to the shock of kneestingers.",
 	RTRAIT_RETARD_ANATOMY = "My anatomy is inhumen, preventing me from wearing hats and shoes.",
 	RTRAIT_NASTY_EATER = "I can eat bad food, and water that would be toxic to humen will not affect me.",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
