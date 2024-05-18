@@ -2206,8 +2206,6 @@
 #include "code\modules\jobs\job_types\roguetown\youngfolk\shophand.dm"
 #include "code\modules\jobs\job_types\roguetown\youngfolk\smith_apprentice.dm"
 #include "code\modules\jobs\job_types\roguetown\youngfolk\squire.dm"
-#include "code\modules\jobs\job_types\vampirecourt\thralls\vampire_manorguard.dm"
-#include "code\modules\jobs\job_types\vampirecourt\vampires\vampireking.dm"
 #include "code\modules\keybindings\bindings_atom.dm"
 #include "code\modules\keybindings\bindings_carbon.dm"
 #include "code\modules\keybindings\bindings_client.dm"
