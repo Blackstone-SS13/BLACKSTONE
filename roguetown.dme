@@ -8,6 +8,8 @@
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "_maps\_basemap.dm"
+#include "_maps\blackstone.dm"
+#include "_maps\rogueworld.dm"
 #include "_maps\templates\bog_shack_small.dm"
 #include "code\__byond_version_compat.dm"
 #include "code\_compile_options.dm"
@@ -1283,6 +1285,7 @@
 #include "code\game\objects\structures\roguetown\bell.dm"
 #include "code\game\objects\structures\roguetown\gate.dm"
 #include "code\game\objects\structures\roguetown\handcart.dm"
+#include "code\game\objects\structures\roguetown\loot.dm"
 #include "code\game\objects\structures\roguetown\musicbox.dm"
 #include "code\game\objects\structures\roguetown\newtree.dm"
 #include "code\game\objects\structures\roguetown\portal.dm"
@@ -2123,7 +2126,6 @@
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\vaquero.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelt.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelthand.dm"
-// #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\necromancer.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\sentinel.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\treasurehunter.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\witchhunter.dm"
