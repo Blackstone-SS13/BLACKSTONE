@@ -72,7 +72,7 @@
 		H.change_stat("endurance", 2)
 		H.change_stat("speed", 1)
 		H.change_stat("fortune", 2)
-	if(ishumannorthern(H))
+	if(H.dna?.species)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")

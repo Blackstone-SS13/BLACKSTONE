@@ -51,3 +51,4 @@
 	H.change_stat("intelligence", 2)
 	H.change_stat("endurance", 2)
 	H.change_stat("speed", 2)
+	H.cmode_music = 'sound/music/combat_vaquero.ogg'
