@@ -227,16 +227,18 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 
 		*/
 		antag_candidates = get_players_for_role(ROLE_BANDIT)
-		for(var/i = 0, i < num_bandits, ++i)
-			var/datum/mind/bandaids = pick_n_take(antag_candidates)
-			if(bandaids)
-				if(!(bandaids in allantags))
+		if(antag_candidates.len)
+			for(var/i = 0, i < num_bandits, ++i)
+				var/datum/mind/bandaids = pick_n_take(antag_candidates)
+				if(!bandaids) // no candidates left
 					break
-				if(bandaids.assigned_role in GLOB.noble_positions)
+				if(!(bandaids in allantags)) // We don't want to double dip... I guess? Two birds one stone tho, A already bandit check would check pre_bandits
 					continue
-				if(bandaids.assigned_role in GLOB.church_positions)
+				if(bandaids.assigned_role in GLOB.noble_positions) // Job cat string stoppers
 					continue
-				if(bandaids.assigned_role in GLOB.serf_positions) // I don't want some of thse guys to be sucked into bandit country bros....
+				if(bandaids.assigned_role in GLOB.church_positions) // Many of these guys vanishing would suck
+					continue
+				if(bandaids.assigned_role in GLOB.serf_positions) // Many of these guys vanishing would suck
 					continue
 
 				allantags -= bandaids
@@ -248,9 +250,9 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 				bandaids.restricted_roles = restricted_jobs.Copy() // For posterities sake
 				testing("[key_name(bandaids)] has been selected as a bandit")
 				log_game("[key_name(bandaids)] has been selected as a bandit")
-		for(var/antag in pre_bandits)
-			GLOB.pre_setup_antags |= antag
-		restricted_jobs = list()
+			for(var/antag in pre_bandits)
+				GLOB.pre_setup_antags |= antag
+			restricted_jobs = list() // We empty it here, but its also getting a new list on every relevant other pick proc rn so lol
 
 
 /datum/game_mode/chaosmode/proc/pick_aspirants()
