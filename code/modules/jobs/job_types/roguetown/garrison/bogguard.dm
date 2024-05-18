@@ -63,6 +63,8 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/gambeson
 	cloak = /obj/item/clothing/cloak/stabard/bog
 	neck = /obj/item/clothing/neck/roguetown/chaincoif
+	gloves = /obj/item/clothing/gloves/roguetown/leather
+	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/bog
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
@@ -85,11 +87,12 @@
 			H.hairstyle = pick(acceptable)
 			H.update_hair()
 	H.verbs |= /mob/proc/haltyell
+	H.cmode_music = 'sound/music/combat_bog.ogg'
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/bogguardsman/proc/assign_skills(mob/living/carbon/human/bogger)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE) 
+	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
@@ -99,11 +102,11 @@
 	bogger.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE) 
+	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	bogger.change_stat("strength", 2)
-	bogger.change_stat("perception", 2) 
+	bogger.change_stat("perception", 2)
 	bogger.change_stat("constitution", 1)
 	bogger.change_stat("endurance", 2)
 	bogger.change_stat("speed", 1)
@@ -120,7 +123,7 @@
 	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE) 
+	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
