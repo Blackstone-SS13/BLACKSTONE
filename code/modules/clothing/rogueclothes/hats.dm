@@ -168,6 +168,32 @@
 /obj/item/clothing/head/roguetown/menacing/bandit
 	icon_state = "bandithood"
 
+/obj/item/clothing/head/roguetown/sack
+	name = "sack"
+	icon_state = "sacked"
+	item_state = "sacked"
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	dynamic_hair_suffix = ""
+	//dropshrink = 0.75
+
+/obj/item/clothing/head/roguetown/sack/equipped(mob/living/carbon/human/user, slot)
+	. = ..()
+	if(slot == ITEM_SLOT_HEAD)
+		user.become_blind("blindfold_[REF(src)]")
+
+/obj/item/clothing/head/roguetown/sack/dropped(mob/living/carbon/human/user)
+	. = ..()
+	user.cure_blind("blindfold_[REF(src)]")
+
+/obj/item/clothing/head/roguetown/sack/attack(mob/living/target, mob/living/user)
+	if(target.get_item_by_slot(SLOT_HEAD))
+		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")
+		return
+	target.visible_message("<span class='warning'>[user] starts forcing a [src] onto [target]'s head!</span>", \
+	"<span class='danger'>[target] starts forcing [src] onto your head!</span>", "<i>I cant see anything.</i>")
+	user.dropItemToGround(src)
+	target.equip_to_slot_if_possible(src, SLOT_HEAD)
+
 /obj/item/clothing/head/roguetown/jester
 	name = "jester's hat"
 	icon_state = "jester"
