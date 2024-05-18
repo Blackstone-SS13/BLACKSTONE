@@ -207,29 +207,51 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	if(num_players() >= 10)
 		num_bandits = CLAMP(round(num_players() / 2), 15, 20)
 		banditgoal += (num_bandits * rand(200,400))
-#ifdef TESTSERVER
-	num_bandits = 999
-#endif
+
 	if(num_bandits)
-		antag_candidates = get_players_for_role(ROLE_BANDIT, pre_do=TRUE) //pre_do checks for their preferences since they don't have a job yet
+		//antag_candidates = get_players_for_role(ROLE_BANDIT, pre_do=TRUE) //pre_do checks for their preferences since they don't have a job yet
+		/*
+			Lets go over some things here to whomever sees this from my observations (which may be incorrect). 
+
+			The other modes choose antags in pre_setup() which makes the restricted_jobs list work as its checked in DivideOccupations()
+			DivideOccupations() occurs and checks it right after the current mode pre_setup() call on SSticker
+			Then we call this brand new after_DO() proc AFTER the jobs have been assigned to the mind/checks occur on SSticker via DivideOccupations()
+			In after_DO() we go through all the mode/antag selection instructions linking into these pick_antag() procs
+			All the characters are made and equipped in the instruction sets between now and post_setup()
+			Then the post_setup() proc which is called on SSticker doles out the antag datums from anything stuck into the pre_antag lists here 
+			Both pre_setup() and post_setup() get called within the Setup() proc in SSticker at earlier and later timings.
+
+			Also the pre_do param only checks to see if a job preference is set to HIGH, 
+			so if it was working a medium priority king would still get shunted into a bandit.
+			Along with that every person who has a restricted job set to HIGH would also just get rejected from it.
+
+		*/
+		antag_candidates = get_players_for_role(ROLE_BANDIT)
 		for(var/i = 0, i < num_bandits, ++i)
-			var/datum/mind/bandito = pick_n_take(antag_candidates)
-			var/found = FALSE
-			for(var/M in allantags)
-				if(M == bandito)
-					found = TRUE
-					allantags -= M
+			var/datum/mind/bandaids = pick_n_take(antag_candidates)
+			if(bandaids)
+				if(!(bandaids in allantags))
 					break
-			if(!found)
-				continue
-			pre_bandits += bandito
-			bandito.assigned_role = "Bandit"
-			bandito.special_role = ROLE_BANDIT
-			testing("[key_name(bandito)] has been selected as a bandit")
-			log_game("[key_name(bandito)] has been selected as a bandit")
-	for(var/antag in pre_bandits)
-		GLOB.pre_setup_antags |= antag
-	restricted_jobs = list()
+				if(bandaids.assigned_role in GLOB.noble_positions)
+					continue
+				if(bandaids.assigned_role in GLOB.church_positions)
+					continue
+				if(bandaids.assigned_role in GLOB.serf_positions) // I don't want some of thse guys to be sucked into bandit country bros....
+					continue
+
+				allantags -= bandaids
+				pre_bandits += bandaids
+
+				bandaids.assigned_role = "Bandit"
+				bandaids.special_role = ROLE_BANDIT
+
+				bandaids.restricted_roles = restricted_jobs.Copy() // For posterities sake
+				testing("[key_name(bandaids)] has been selected as a bandit")
+				log_game("[key_name(bandaids)] has been selected as a bandit")
+		for(var/antag in pre_bandits)
+			GLOB.pre_setup_antags |= antag
+		restricted_jobs = list()
+
 
 /datum/game_mode/chaosmode/proc/pick_aspirants()
 	var/list/possible_jobs_aspirants = list("Prince", "Princess", "Guard Captain", "Steward", "Hand", "Knight")
@@ -357,6 +379,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		var/blockme = FALSE
 		if(!(vampire in allantags))
 			blockme = TRUE
+		if(vampire.assigned_role in GLOB.noble_positions)
+			continue
 		if(vampire.assigned_role in GLOB.youngfolk_positions)
 			blockme = TRUE
 		if(blockme)
@@ -385,6 +409,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		var/datum/mind/werewolf = pick(antag_candidates)
 		var/blockme = FALSE
 		if(!(werewolf in allantags))
+			blockme = TRUE
+		if(werewolf.assigned_role in GLOB.noble_positions)
 			blockme = TRUE
 		if(werewolf.assigned_role in GLOB.youngfolk_positions)
 			blockme = TRUE
