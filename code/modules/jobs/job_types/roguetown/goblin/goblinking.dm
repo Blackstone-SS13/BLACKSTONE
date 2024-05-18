@@ -21,7 +21,7 @@
 /datum/outfit/job/roguetown/goblinking/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.verbs |= /mob/living/carbon/human/proc/goblinannouncement
-	//H.verbs |= /mob/living/carbon/human/proc/goblinopenslot
+	H.verbs |= /mob/living/carbon/human/proc/goblinopenslot
 	beltl = /obj/item/rogueweapon/huntingknife/idagger/steel/special
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
@@ -50,8 +50,19 @@
 		if(!istype(get_area(src), /area/rogue/indoors/shelter/mountains/decap))
 			to_chat(src, "<span class='warning'>I need to do this from the Goblin Kingdom.</span>")
 			return FALSE
-		priority_announce("[inputty]", title = "The Goblin King Squeals", sound = 'sound/misc/dun.ogg')
-/*
+		priority_announcegob("[inputty]", title = "The Goblin King Squeals", sound = 'sound/misc/dun.ogg')
+
+/datum/pieholder
+	var/bitecount = 0
+	var/biteholder = 0
+
+/mob/living/carbon/human/proc/piecounter()
+	pie_count.bitecount += 1
+	if(pie_count.bitecount >= 3)
+		pie_count.biteholder += 1
+		pie_count.bitecount = 0
+	to_chat(src, "<span class='warning'>I can hire new Goblin!</span>")
+
 /mob/living/carbon/human/proc/goblinopenslot()
 	set name = "Open Slot"
 	set category = "Goblin King"
@@ -65,18 +76,22 @@
 	if(!istype(get_area(src), /area/rogue/indoors/shelter/mountains/decap))
 		to_chat(src, "<span class='warning'>I need to do this from the Goblin Kingdom.</span>")
 		return FALSE
+	if(pie_count.biteholder > 0)
+		pie_count.biteholder -= 1
+	else
+		to_chat(src, "<span class='warning'>I need to eat more apple pies!</span>")
 	if(!pickedsoul)
 		return
 	switch(pickedsoul)
 		if("Goblin Cook")
 			cookjob.total_positions += 1
-			priority_announce("Goblin Cook shall join our Kingdom", title = "The Goblin King Hires", sound = 'sound/misc/dun.ogg')
+			priority_announcegob("Goblin Cook shall join our Kingdom", title = "The Goblin King Hires", sound = 'sound/misc/dun.ogg')
 		if("Goblin Guard")
 			guardjob.total_positions += 1
-			priority_announce("Goblin Guard shall join our Kingdom", title = "The Goblin King Hires", sound = 'sound/misc/dun.ogg')
+			priority_announcegob("Goblin Guard shall join our Kingdom", title = "The Goblin King Hires", sound = 'sound/misc/dun.ogg')
 		if("Goblin Smith")
 			smithjob.total_positions += 1
-			priority_announce("Goblin Smith shall join our Kingdom", title = "The Goblin King Hires", sound = 'sound/misc/dun.ogg')
-*/
+			priority_announcegob("Goblin Smith shall join our Kingdom", title = "The Goblin King Hires", sound = 'sound/misc/dun.ogg')
+
 
 
