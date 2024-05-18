@@ -59,8 +59,10 @@
 			else
 				if(J.advjob_examine)
 					used_title = advjob
-				if(islatejoin)
+				if(islatejoin && used_title != "Goblin King" || "Goblin Cook" || "Goblin Guard" || "Goblin Smith")
 					. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the returning [race_name] [used_title].")
+				if(used_title == "Goblin King" || "Goblin Cook" || "Goblin Guard" || "Goblin Smith")
+					. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the [used_title].")
 				else
 					. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the [race_name] [used_title].")
 		else
