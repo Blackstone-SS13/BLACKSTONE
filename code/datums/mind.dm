@@ -81,6 +81,8 @@
 
 	var/list/notes = list() //RTD add notes button
 
+	var/lastrecipe
+
 /datum/mind/New(key)
 	src.key = key
 	soulOwner = src
