@@ -29,7 +29,7 @@
 		new_patron = GLOB.patronlist[new_patron]
 	if(!istype(new_patron))
 		return
-	if(patron)
+	if(istype(patron))
 		patron.on_loss(src)
 	patron = new_patron
 	new_patron.on_gain(src)
