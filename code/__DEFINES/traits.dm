@@ -19,8 +19,9 @@
 #define RTRAIT_NUDIST					"Nudist" //you can't wear most clothes
 #define RTRAIT_KNEESTINGER_IMMUNITY		"Blessing of Dendor"
 #define RTRAIT_RETARD_ANATOMY			"Inhumen Anatomy" //can't wear hats and shoes
-#define RTRAIT_NASTY_EATER 				"Inhumen Digestion" //can drink murky water and eat organs
+#define RTRAIT_NASTY_EATER 				"Inhumen Digestion" //can eat rotten food, organs, poison berries, and drink murky water
 #define RTRAIT_ROT_EATER				"Blessing of Pestra" //can eat rotten food
+#define RTRAIT_ORGAN_EATER				"Blessing of Graggar"
 
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
 #define TRAIT_NOSLEEP				"Fatal Insomnia"
@@ -59,6 +60,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_RETARD_ANATOMY = "My anatomy is inhumen, preventing me from wearing hats and shoes.",
 	RTRAIT_NASTY_EATER = "<span class='deadsay'>I can eat bad food, and water that would be toxic to humen will not affect me.</span>",
 	RTRAIT_ROT_EATER = "<span class='deadsay'>I can eat rotten food.</span>",
+	RTRAIT_ORGAN_EATER = "<span class='deadsay'>I can eat organs.</span>",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "<span class='warning'>I can't sleep.</span>",
