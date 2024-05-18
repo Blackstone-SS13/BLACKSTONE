@@ -58,7 +58,7 @@
 
 /mob/living/carbon/human/proc/piecounter()
 	pie_count.bitecount += 1
-	if(pie_count.bitecount >= 3)
+	if(pie_count.bitecount >= 5)
 		pie_count.biteholder += 1
 		pie_count.bitecount = 0
 	to_chat(src, "<span class='warning'>I can hire new Goblin!</span>")
