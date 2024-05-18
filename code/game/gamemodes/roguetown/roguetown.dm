@@ -202,7 +202,11 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	"Queen Consort",
 	"Merchant",
 	"Priest",
-	"Knight")
+	"Knight",
+	"Goblin King",
+	"Goblin Cook",
+	"Goblin Smith",
+	"Goblin Guard")
 	var/num_bandits = 0
 	if(num_players() >= 10)
 		num_bandits = CLAMP(round(num_players() / 2), 15, 20)
@@ -306,7 +310,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_maniac()
-	restricted_jobs = list("King", "Queen Consort")
+	restricted_jobs = list("King", "Queen Consort", "Goblin King", "Goblin Cook", "Goblin Guard", "Goblin Smith")
 	antag_candidates = get_players_for_role(ROLE_MANIAC)
 	var/datum/mind/villain = pick_n_take(antag_candidates)
 	if(villain)
@@ -348,7 +352,11 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	"Templar",
 	"Bog Guard",
 	"Bog Master",
-	"Knight")
+	"Knight",
+	"Goblin King",
+	"Goblin Cook",
+	"Goblin Smith",
+	"Goblin Guard")
 	antag_candidates = get_players_for_role(ROLE_NBEAST)
 	antag_candidates = shuffle(antag_candidates)
 	for(var/datum/mind/vampire in antag_candidates)
