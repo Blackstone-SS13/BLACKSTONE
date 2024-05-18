@@ -38,6 +38,7 @@
 	description = "f"
 	reagent_state = LIQUID
 	color = "#00B4FF"
+	taste_description = "bitter"
 	metabolization_rate = 0.1
 
 /datum/reagent/berrypoison/on_mob_life(mob/living/carbon/M)

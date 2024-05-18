@@ -33,6 +33,11 @@
 	display_order = JDO_LADY
 	give_bank_account = TRUE
 
+/datum/job/roguetown/lady/after_spawn(mob/living/H, mob/M, latejoin)
+	. = ..()
+	if(GLOB.lordsurname && H)
+		give_lord_surname(H)
+
 /datum/outfit/job/roguetown/lady/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
@@ -40,7 +45,7 @@
 	beltl = /obj/item/roguekey/manor
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
-	if(!H.dna?.species || H.dna?.species.id == "dwarf")
+	if(isdwarf(H))
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress
 	else
 		if(prob(66))

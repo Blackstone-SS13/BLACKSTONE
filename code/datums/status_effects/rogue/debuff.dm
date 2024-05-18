@@ -111,6 +111,8 @@
 	duration = 1
 
 /datum/status_effect/debuff/rotfood/on_apply()
+	if(HAS_TRAIT(owner, RTRAIT_NASTY_EATER))
+		return ..()
 	owner.add_stress(/datum/stressevent/rotfood)
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
