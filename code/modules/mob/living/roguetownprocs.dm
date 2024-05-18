@@ -101,12 +101,10 @@
 			return FALSE
 
 	var/prob2defend = user.defprob
-	var/mob/living/carbon/human/H
-	var/mob/living/carbon/human/U
-	if(ishuman(src))
-		H = src
-	if(ishuman(user))
-		U = user
+	var/mob/living/H
+	var/mob/living/U
+	H = src
+	U = user
 
 	if(H && U)
 		prob2defend = 0
