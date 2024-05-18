@@ -1,3 +1,5 @@
+GLOBAL_VAR(lordsurname)
+
 /datum/job/roguetown/lord
 	title = "King"
 	f_title = "Queen"
@@ -29,6 +31,16 @@
 	spawn_positions = 0
 	display_order = JDO_LADY
 	give_bank_account = TRUE
+
+/datum/job/roguetown/lord/equip(mob/living/carbon/human/H, visualsOnly, announce, latejoin, datum/outfit/outfit_override, client/preference_source)
+	. = ..()
+	if(!GLOB.lordsurname && !visualsOnly)
+		var/list/chopped_name = splittext(H.real_name, " ")
+		if(length(chopped_name) > 1)
+			chopped_name -= chopped_name[1]
+			GLOB.lordsurname = jointext(chopped_name, " ")
+		else
+			GLOB.lordsurname = "of [H.real_name]"
 
 /datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -117,3 +129,12 @@
 	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 //	SSticker.rulermob = H
+
+/proc/give_lord_surname(mob/living/carbon/human/family_guy)
+	if(!GLOB.lordsurname)
+		return
+	var/list/chopped_name = splittext(family_guy.real_name, " ")
+	if(length(chopped_name) > 1)
+		family_guy.fully_replace_character_name(family_guy.real_name, chopped_name[1] + " " + GLOB.lordsurname)
+	else
+		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)

@@ -14,7 +14,8 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc",
 	)
 	allowed_ages = YOUNG_AGES_LIST
 

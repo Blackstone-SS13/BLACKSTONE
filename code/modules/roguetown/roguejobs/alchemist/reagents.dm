@@ -38,10 +38,25 @@
 	description = "f"
 	reagent_state = LIQUID
 	color = "#00B4FF"
+	taste_description = "bitter"
 	metabolization_rate = 0.1
 
 /datum/reagent/berrypoison/on_mob_life(mob/living/carbon/M)
 	if(!HAS_TRAIT(M, RTRAIT_NASTY_EATER))
+		M.add_nausea(9)
+		M.adjustToxLoss(3, 0)
+	return ..()
+
+/datum/reagent/organpoison
+	name = "Organ Poison"
+	description = "f"
+	reagent_state = LIQUID
+	color = "#ff2f00"
+	taste_description = "liver"
+	metabolization_rate = 0.1
+
+/datum/reagent/organpoison/on_mob_life(mob/living/carbon/M)
+	if(!HAS_TRAIT(M, RTRAIT_NASTY_EATER) && !HAS_TRAIT(M, RTRAIT_ORGAN_EATER))
 		M.add_nausea(9)
 		M.adjustToxLoss(3, 0)
 	return ..()

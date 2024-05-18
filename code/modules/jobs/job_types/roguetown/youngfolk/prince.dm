@@ -10,7 +10,7 @@
 		"Humen",
 		"Elf",
 		"Half-Elf",
-		"Aasimar"
+		"Aasimar",
 	) //Maybe a system to force-pick lineage based on king and queen should be implemented.
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = YOUNG_AGES_LIST
@@ -22,6 +22,11 @@
 	give_bank_account = TRUE
 	min_pq = -10
 	max_pq = null
+
+/datum/job/roguetown/prince/after_spawn(mob/living/H, mob/M, latejoin)
+	. = ..()
+	if(GLOB.lordsurname && H)
+		give_lord_surname(H)
 
 /datum/outfit/job/roguetown/prince/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -37,7 +42,7 @@
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)

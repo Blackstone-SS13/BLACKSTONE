@@ -12,7 +12,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Aasimar"
+		"Aasimar",
 	) //Picked for political value, could be anything. Make something up, or execute your wife if you're chudmaxxing that round.
 	tutorial = "Picked out of your political value rather than likely any form of love, you have become the King's most trusted confidant and likely friend throughout your marriage. Your loyalty and, perhaps, love; will be tested this day. For the daggers that threaten your beloved are as equally pointed at your own throat."
 
@@ -33,6 +33,11 @@
 	display_order = JDO_LADY
 	give_bank_account = TRUE
 
+/datum/job/roguetown/lady/after_spawn(mob/living/H, mob/M, latejoin)
+	. = ..()
+	if(GLOB.lordsurname && H)
+		give_lord_surname(H)
+
 /datum/outfit/job/roguetown/lady/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
@@ -40,7 +45,7 @@
 	beltl = /obj/item/roguekey/manor
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
-	if(!H.dna?.species || H.dna?.species.id == "dwarf")
+	if(isdwarf(H))
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress
 	else
 		if(prob(66))

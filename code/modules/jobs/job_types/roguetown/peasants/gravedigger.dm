@@ -15,7 +15,7 @@
 		"Argonian",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
 	tutorial = "The dead don't speak, least if you're doing your job right. You've a pilfers dream—for few have enough to pay for your services out-of-pocket. So you take it from the fallen. Your job isnt considered highly, but without you, who else would disgrace the sanctity of the dead?"
 

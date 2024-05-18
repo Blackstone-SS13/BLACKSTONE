@@ -15,7 +15,7 @@
 		"Argonian",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = YOUNG_AGES_LIST

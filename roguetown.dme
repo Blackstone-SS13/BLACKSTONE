@@ -8,7 +8,6 @@
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "_maps\_basemap.dm"
-#include "_maps\blackstone.dm"
 #include "_maps\templates\bog_shack_small.dm"
 #include "code\__byond_version_compat.dm"
 #include "code\_compile_options.dm"
@@ -1396,6 +1395,7 @@
 #include "code\modules\admin\verbs\pray.dm"
 #include "code\modules\admin\verbs\randomverbs.dm"
 #include "code\modules\admin\verbs\reestablish_db_connection.dm"
+#include "code\modules\admin\verbs\schizohelp.dm"
 #include "code\modules\admin\verbs\shuttlepanel.dm"
 #include "code\modules\admin\verbs\spawnobjasmob.dm"
 #include "code\modules\admin\verbs\tripAI.dm"
@@ -2123,7 +2123,7 @@
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\vaquero.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelt.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelthand.dm"
-#include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\necromancer.dm"
+// #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\necromancer.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\sentinel.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\treasurehunter.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\witchhunter.dm"
@@ -2171,6 +2171,7 @@
 #include "code\modules\jobs\job_types\roguetown\nobility\lady.dm"
 #include "code\modules\jobs\job_types\roguetown\nobility\lord.dm"
 #include "code\modules\jobs\job_types\roguetown\nobility\magician.dm"
+#include "code\modules\jobs\job_types\roguetown\nobility\physician.dm"
 #include "code\modules\jobs\job_types\roguetown\nobility\sheriff.dm"
 #include "code\modules\jobs\job_types\roguetown\nobility\steward.dm"
 #include "code\modules\jobs\job_types\roguetown\other\deathknight.dm"

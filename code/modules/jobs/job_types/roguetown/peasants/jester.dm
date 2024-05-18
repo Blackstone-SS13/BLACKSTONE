@@ -14,12 +14,13 @@
 		"Tiefling",
 		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc",
 	)
 
 	tutorial = "The Grenzelhofts were known for their Jesters, wisemen with a tongue just as sharp as their wit. You command a position of a fool, envious of the position your superiors have upon you. Your cheap tricks and illusions of intelligence will only work for so long, and someday youll find yourself at the end of something sharper than you."
 
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	allowed_ages = ADULT_AGES_LIST
 	spells = list(/obj/effect/proc_holder/spell/self/telljoke,/obj/effect/proc_holder/spell/self/telltragedy)
 	outfit = /datum/outfit/job/roguetown/jester
 	display_order = JDO_JESTER
@@ -51,7 +52,8 @@
 		H.STASTR = rand(1, 20)
 		H.STAINT = rand(1, 20)
 		H.STALUC = rand(1, 20)
-/*		
+		H.cmode_music = 'sound/music/combat_jester.ogg'
+/*
 		if(H.gender == MALE)
 			if(H.dna?.species)
 				if(iself(H) || ishalfelf(H))

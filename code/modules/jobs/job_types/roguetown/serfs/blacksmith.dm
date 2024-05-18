@@ -15,9 +15,8 @@
 		"Argonian",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
-
 	tutorial = "You studied for many decades under your master with a few other apprentices to become an Armorer, a trade that certainly has seen a boom in revenue in recent times with many a bannerlord seeing the importance in maintaining a well-equipped army."
 
 	outfit = /datum/outfit/job/roguetown/armorsmith
@@ -51,7 +50,7 @@
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/roguekey/blacksmith
-		cloak = /obj/item/clothing/cloak/apron/brown
+		cloak = /obj/item/clothing/cloak/apron/blacksmith
 	else
 		pants = /obj/item/clothing/under/roguetown/trou
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
@@ -59,7 +58,7 @@
 		backpack_contents = list(/obj/item/rogueweapon/hammer = 1, /obj/item/rogueweapon/tongs = 1)
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		belt = /obj/item/storage/belt/rogue/leather
-		cloak = /obj/item/clothing/cloak/apron/brown
+		cloak = /obj/item/clothing/cloak/apron/blacksmith
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/roguekey/blacksmith
 	H.change_stat("strength", 2)
@@ -75,10 +74,16 @@
 	total_positions = 1
 	spawn_positions = 1
 
-	allowed_races = list("Humen",
-	"Humen",
-	"Dwarf",
-	"Dwarf",
+	allowed_races = list(
+		"Humen",
+		"Elf",
+		"Half-Elf",
+		"Dwarf",
+		"Tiefling",
+		"Argonian",
+		"Dark Elf",
+		"Aasimar",
+		"Half Orc",
 	)
 
 	tutorial = "You studied for many decades under your master with a few other apprentices to become a Weaponsmith, a trade that is as ancient as the secrets of steel itself! You've repaired the blades of cooks, the cracked hoes of peasants and greased the spears of many soldiers into war."
@@ -114,7 +119,7 @@
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/roguekey/blacksmith
-		cloak = /obj/item/clothing/cloak/apron/brown
+		cloak = /obj/item/clothing/cloak/apron/blacksmith
 	else
 		pants = /obj/item/clothing/under/roguetown/trou
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
@@ -122,7 +127,7 @@
 		backpack_contents = list(/obj/item/rogueweapon/hammer = 1, /obj/item/rogueweapon/tongs = 1)
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		belt = /obj/item/storage/belt/rogue/leather
-		cloak = /obj/item/clothing/cloak/apron/brown
+		cloak = /obj/item/clothing/cloak/apron/blacksmith
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/roguekey/blacksmith
 	H.change_stat("strength", 2)

@@ -1,5 +1,5 @@
 /datum/antagonist/zombie
-	name = "Zombie"
+	name = "Zomble"
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "zombie"
 	show_in_roundend = FALSE

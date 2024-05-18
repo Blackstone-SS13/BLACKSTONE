@@ -3,21 +3,23 @@
 	flag = GOBLINSMITH
 	department_flag = GOBLIN
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
-	allowed_patrons = list("Graggar")
+	allowed_patrons = list(/datum/patron/inhumen/graggar)
 	tutorial = "Goblin rensposible for fresh iron and steel"
 	display_order = JDO_GOBLINSMITH
 	outfit = /datum/outfit/job/roguetown/goblinsmith
+	min_pq = 0
+	max_pq = null
 
 /datum/outfit/job/roguetown/goblinsmith/pre_equip(mob/living/carbon/human/H)
 	..()
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
 	belt = /obj/item/storage/belt/rogue/leather
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-	cloak = /obj/item/clothing/cloak/apron/brown
+	cloak = /obj/item/clothing/cloak/apron/blacksmith
 	backl = /obj/item/storage/backpack/rogue/satchel
 
 	if(H.mind)

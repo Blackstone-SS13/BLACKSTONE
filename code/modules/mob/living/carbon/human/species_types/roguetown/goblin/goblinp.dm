@@ -8,7 +8,7 @@
 	desc = "<b>Goblin</b><br>\
 	A vile, cursed race of green skinned fiends with brains as small as their hearts. Be not fooled by their appearance - What they lack in stature, they possess in sheer malice."
 	species_traits = list(NO_UNDERWEAR,NOEYESPRITES)
-	inherent_traits = list(RTRAIT_NOFATSTAM,TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE)
+	inherent_traits = list(RTRAIT_BREADY,TRAIT_STEELHEARTED,TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE)
 	no_equip = list(SLOT_SHIRT, SLOT_WEAR_MASK, SLOT_GLOVES, SLOT_SHOES, SLOT_PANTS, SLOT_S_STORE)
 	possible_ages = list(AGE_ADULT)
 	default_features = list("mcolor" = "FFF", "wings" = "None")
@@ -23,12 +23,12 @@
 	nojumpsuit = 1
 	mutanteyes = /obj/item/organ/eyes/goblin
 	offset_features = list(OFFSET_ID = list(0,0), OFFSET_WRISTS = list(0,0),\
-	OFFSET_CLOAK = list(0,0), \
+	OFFSET_CLOAK = list(0,-5), \
 	OFFSET_FACE = list(0,-4), OFFSET_BELT = list(0,-1), OFFSET_BACK = list(0,-4), \
 	OFFSET_NECK = list(0,-4), OFFSET_MOUTH = list(0,-3), \
 	OFFSET_ARMOR = list(0,0), OFFSET_HANDS = list(0,-4), \
 	OFFSET_ID_F = list(0,-4), OFFSET_WRISTS_F = list(0,-4), OFFSET_HANDS_F = list(0,-4), \
-	OFFSET_CLOAK_F = list(0,0), \
+	OFFSET_CLOAK_F = list(0,-5), \
 	OFFSET_FACE_F = list(0,-5), OFFSET_BELT_F = list(0,-1), OFFSET_BACK_F = list(0,-5), \
 	OFFSET_NECK_F = list(0,-5), OFFSET_MOUTH_F = list(0,-3), \
 	OFFSET_ARMOR_F = list(0,0), OFFSET_UNDIES = list(0,0), OFFSET_UNDIES_F = list(0,0))

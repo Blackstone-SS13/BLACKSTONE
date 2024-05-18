@@ -5,14 +5,13 @@
 	department_flag = CHURCHMEN
 	faction = "Station"
 	tutorial = "Templars are warriors who have forsaken wealth and title in lieu of service to the church, due to either zealotry or a past shame. They guard the church and its priest, while keeping a watchful eye against heresy and nite-creechers. Within troubled dreams, they wonder if the blood they shed makes them holy or stained."
-	allowed_sexes = list("male")
+	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
 		"Dwarf",
 		"Aasimar",
 		"Half-Elf",
-		"Half Orc"
 	)
 	allowed_patrons = ALL_CLERIC_PATRONS
 	outfit = /datum/outfit/job/roguetown/templar
@@ -30,6 +29,7 @@
 	..()
 	head = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
+	cloak = /obj/item/clothing/cloak/tabard/crusader/tief
 	switch(H.patron.name)
 		if("Astrata")
 			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
@@ -55,18 +55,17 @@
 	pants = /obj/item/clothing/under/roguetown/tights/black
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/roguekey/church = 1, /obj/item/clothing/neck/roguetown/chaincoif=1)
 	backr = /obj/item/rogueweapon/shield/tower/metal
 	belt = /obj/item/storage/belt/rogue/leather/black
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
 	beltr = /obj/item/rogueweapon/sword/long
 	id = /obj/item/clothing/ring/silver
-	cloak = /obj/item/clothing/cloak/tabard/crusader/tief
 	gloves = /obj/item/clothing/gloves/roguetown/chain
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
-	backpack_contents = list(/obj/item/roguekey/church = 1, /obj/item/clothing/neck/roguetown/chaincoif = 1)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)

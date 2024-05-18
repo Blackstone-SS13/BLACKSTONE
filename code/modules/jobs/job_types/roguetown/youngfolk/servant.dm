@@ -11,10 +11,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Tiefling",
-		"Argonian",
-		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_ages = YOUNG_AGES_LIST
 

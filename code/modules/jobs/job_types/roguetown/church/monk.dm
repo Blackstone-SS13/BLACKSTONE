@@ -6,12 +6,13 @@
 	total_positions = 3
 	spawn_positions = 4
 
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_patrons = ALL_CLERIC_PATRONS
 	outfit = /datum/outfit/job/roguetown/monk

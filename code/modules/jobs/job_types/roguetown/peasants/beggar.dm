@@ -15,9 +15,9 @@
 		"Argonian",
 		"Dark Elf",
 		"Aasimar",
-		"Half Orc"
+		"Half Orc",
 	)
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	allowed_ages = ADULT_AGES_LIST
 	outfit = /datum/outfit/job/roguetown/vagrant
 	bypass_lastclass = TRUE
 	bypass_jobban = FALSE
@@ -127,6 +127,8 @@
 	H.change_stat("intelligence", -4)
 	H.change_stat("constitution", -3)
 	H.change_stat("endurance", -3)
+	ADD_TRAIT(H, RTRAIT_NOSTINK, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_NASTY_EATER, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/vagrant
 	name = "Beggar"

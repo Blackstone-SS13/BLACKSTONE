@@ -1,22 +1,21 @@
 /datum/job/roguetown/guardsman
-	title = "Town Guard"
+	title = "Watchman"
 	flag = GUARDSMAN
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 10
 	spawn_positions = 10
 	selection_color = JCOLOR_SOLDIER
-	allowed_sexes = list(MALE, FEMALE)
+	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
 		"Aasimar",
-		"Half Orc"
 	)
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
-	tutorial = "Responsible for the safety of the town and the enforcement of the King's law, you are the vanguard of the city faced with punishing those who defy his Royal Majesty. Though you've many lords to obey, as both the Church and the Sheriff have great sway over your life."
+	tutorial = "Responsible for the safety of the town and the enforcement of the King's law, you are the vanguard of the city faced with punishing those who defy his Royal Majesty. Though you've many lords to obey, as both the Church and the Bailiff have great sway over your life."
 	display_order = JDO_TOWNGUARD
 	whitelist_req = TRUE
 
@@ -51,28 +50,28 @@
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
-			S.name = "guard's tabard ([index])"
-
+			S.name = "watchman tabard ([index])"
+			
 /datum/outfit/job/roguetown/guardsman
-	name = "Town Guard"
+	name = "Watchman"
 	/// Whether or not we are a bowman
 	var/is_bowman = FALSE
 
 /datum/outfit/job/roguetown/guardsman/pre_equip(mob/living/carbon/human/H)
 	. = ..()
-	head = /obj/item/clothing/head/roguetown/helmet/leather
-	pants = /obj/item/clothing/under/roguetown/trou/leather
+	head = /obj/item/clothing/head/roguetown/helmet
+	pants = /obj/item/clothing/under/roguetown/chainlegs
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt/merc
+	shirt = /obj/item/clothing/suit/roguetown/armor/gambeson
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail
-	neck = /obj/item/clothing/neck/roguetown/gorget
+	neck = /obj/item/clothing/neck/roguetown/chaincoif
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	beltl = /obj/item/keyring/guard
-	belt = /obj/item/storage/belt/rogue/leather
+	belt = /obj/item/storage/belt/rogue/leather/black
 	beltr = /obj/item/rogueweapon/mace/cudgel
-	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
-	backr = /obj/item/storage/backpack/rogue/satchel
-	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/rope/chain = 1)
+	wrists = /obj/item/clothing/wrists/roguetown/bracers
+	backr = /obj/item/storage/backpack/rogue/satchel/black
+	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel = 1, /obj/item/rope/chain = 1)
 	if(is_bowman)
 		backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
 		beltr = /obj/item/quiver/bolts //replaces mace
