@@ -230,7 +230,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 		if(antag_candidates.len)
 			for(var/i = 0, i < num_bandits, ++i)
 				var/datum/mind/bandaids = pick_n_take(antag_candidates)
-				if(!bandaids) // no candidates left
+				if(!bandaids) // no candidates left as it cuts the list and sends something back
 					break
 				if(!(bandaids in allantags)) // We don't want to double dip... I guess? Two birds one stone tho, A already bandit check would check pre_bandits
 					continue
