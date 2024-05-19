@@ -83,12 +83,15 @@
 	var/painpercent = (H.get_complex_pain() / (H.STAEND * 10)) * 100
 	if(H.add_stress(/datum/stressevent/tortured))
 		if(!H.stat)
-			say(pick("CONFESS!",
-					"TELL ME YOUR SECRETS!",
-					"SPEAK!",
-					"YOU WILL SPEAK!",
-					"TELL ME!",
-					"THE PAIN HAS ONLY BEGUN, CONFESS!"), spans = list("torture"))
+			var/static/list/torture_lines = list(
+				"CONFESS!",
+				"TELL ME YOUR SECRETS!",
+				"SPEAK!",
+				"YOU WILL SPEAK!",
+				"TELL ME!",
+				"THE PAIN HAS ONLY BEGUN, CONFESS!",
+			)
+			say(pick(torture_lines), spans = list("torture"))
 			if(painpercent >= 100)
 				H.emote("painscream")
 				H.confession_time("antag")
@@ -110,12 +113,13 @@
 	var/painpercent = (H.get_complex_pain() / (H.STAEND * 10)) * 100
 	if(H.add_stress(/datum/stressevent/tortured))
 		if(!H.stat)
-			say(pick("CONFESS!",
-					"TELL ME YOUR SECRETS!",
-					"SPEAK!",
-					"YOU WILL SPEAK!",
-					"TELL ME!",
-					"THE PAIN HAS ONLY BEGUN, CONFESS!"), spans = list("torture"))
+			var/static/list/faith_lines = list(
+				"DO YOU DENY THE NINE?",
+				"WHO IS YOUR GOD?",
+				"ARE YOU FAITHFUL?",
+				"WHO IS YOUR SHEPHERD?",
+			)
+			say(pick(faith_lines), spans = list("torture"))
 			if(painpercent >= 100)
 				H.emote("painscream")
 				H.confession_time("patron")
