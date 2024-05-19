@@ -558,16 +558,24 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/proc/equip_characters()
 //	var/captainless=1
-	for(var/i in GLOB.new_player_list)
-		var/mob/dead/new_player/N = i
+	var/list/priority_players = list()
+	var/list/nonpriority_players = list()
+	for(var/mob/dead/new_player/new_player as anything in GLOB.new_player_list)
 		var/mob/living/carbon/human/player = N.new_character
-		if(istype(player) && player.mind && player.mind.assigned_role)
+		if(istype(player) && player.mind?.assigned_role)
 //			if(player.mind.assigned_role == "Captain")
 //				captainless=0
 			if(player.mind.assigned_role != player.mind.special_role)
-				SSjob.EquipRank(N, player.mind.assigned_role, 0)
-				if(CONFIG_GET(flag/roundstart_traits) && ishuman(N.new_character))
-					SSquirks.AssignQuirks(N.new_character, N.client, TRUE)
+				if(player.mind.assigned_role in GLOB.priority_positions)
+					priority_players += player
+				else
+					nonpriority_players += player
+		CHECK_TICK
+	var/list/all_players = priority_players + nonpriority_players
+	for(var/mob/living/carbon/human/player as anything in all_players)
+		SSjob.EquipRank(N, player.mind.assigned_role, 0)
+		if(CONFIG_GET(flag/roundstart_traits) && ishuman(N.new_character))
+			SSquirks.AssignQuirks(N.new_character, N.client, TRUE)
 		CHECK_TICK
 //	if(captainless)
 //		for(var/i in GLOB.new_player_list)

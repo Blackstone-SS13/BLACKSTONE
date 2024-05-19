@@ -59,6 +59,10 @@ GLOBAL_LIST_INIT(nonhuman_positions, list(
 	"Cyborg",
 	ROLE_PAI))
 
+GLOBAL_LIST_INIT(priority_positions, list(
+	"King",
+))
+
 GLOBAL_LIST_INIT(noble_positions, list(
 	"King",
 	"Queen Consort",
