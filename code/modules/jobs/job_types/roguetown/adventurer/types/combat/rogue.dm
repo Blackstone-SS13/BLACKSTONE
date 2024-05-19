@@ -17,6 +17,28 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/rogue
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
+	given_skills = list(
+		"/datum/skill/combat/swords" = 3, \
+		"/datum/skill/combat/axesmaces" = 2, \
+		"/datum/skill/combat/crossbows" = "pick(,2,3,3,)", \
+		"/datum/skill/misc/athletics" = 4, \
+		"/datum/skill/combat/bows" = 3, \
+		"/datum/skill/combat/wrestling" = 3, \
+		"/datum/skill/combat/unarmed" = 3, \
+		"/datum/skill/combat/knives" = 4, \
+		"/datum/skill/combat/polearms" = 1, \
+		"/datum/skill/misc/swimming" = 3, \
+		"/datum/skill/misc/climbing" = "pick(,5,6,)", \
+		"/datum/skill/craft/crafting" = 1, \
+		"/datum/skill/misc/reading" = "pick(,0,1,1,)", \
+		"/datum/skill/craft/traps" = 2, \
+		"/datum/skill/misc/medicine" = "pick(,0,1,)", \
+		"/datum/skill/misc/sneaking" = 5, \
+		"/datum/skill/misc/stealing" = 5, \
+		"/datum/skill/misc/riding" = "pick(,1,2,)", \
+		"/datum/skill/craft/engineering" = 1
+	)
+
 /datum/outfit/job/roguetown/adventurer/rogue
 	allowed_patrons = list(/datum/patron/divine/xylix, /datum/patron/inhumen/matthios)
 
@@ -24,25 +46,29 @@
 	..()
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-	H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3), TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(5,6), TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(0,1,1), TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/traps, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/medicine, pick(0,1), TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/stealing, 5, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(1,2), TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
+	H.mind.assign_skills(/datum/advclass/rogue::given_skills, TRUE)
+	// i don't like this, but since we'll know what datum goes here i don't see a big issue?
+	
+	// temp removal
+	// H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3), TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/combat/knives, 4, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/misc/climbing, pick(5,6), TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/misc/reading, pick(0,1,1), TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/craft/traps, 2, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/misc/medicine, pick(0,1), TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/misc/stealing, 5, TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(1,2), TRUE)
+	// H.mind.adjust_skillrank(/datum/skill/craft/engineering, 1, TRUE)
 	pants = /obj/item/clothing/under/roguetown/trou/leather
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 	gloves = /obj/item/clothing/gloves/roguetown/leather

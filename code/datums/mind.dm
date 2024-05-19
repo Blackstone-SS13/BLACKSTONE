@@ -286,6 +286,28 @@
 	else
 		to_chat(current, "<span class='warning'>My [S.name] has weakened!</span>")
 
+// just scoot in right here
+/datum/mind/proc/assign_skills(list/Skills, silent)
+	// list(skill path = num)
+	for(var/path in Skills)
+		var/truePath = text2path(path)
+		var/numValue
+		if(istext(Skills[path])) // cant assign pick when defining
+			numValue = textList2nums(Skills[path])
+		else
+			numValue = Skills[path]
+		adjust_skillrank(truePath, numValue, TRUE)
+		
+/datum/mind/proc/textList2nums(text) // needs a better name
+	var/list/values = splittext(Skills[path], ",")
+	values.Remove("pick(", ")") // could do values[1] & values[length(values)] here
+	for(var/index in 1 to length(values))
+		if(isnull(values[index])) continue // not needed me thinks but just in case
+		values[index] = text2num(values[index])
+	//TODO: review? there's gotta b a better way to translate this text to numbers
+	return pick(values)
+
+
 /datum/mind/proc/adjust_skillrank(skill, amt, silent = FALSE)
 	var/datum/skill/S = GetSkillRef(skill)
 	var/amt2gain = 0

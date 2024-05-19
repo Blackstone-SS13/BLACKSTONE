@@ -25,6 +25,11 @@
 	var/vampcompat = TRUE
 	var/list/traits_applied
 
+
+	var/list/given_skills = list()
+
+	var/list/stat_changes = list()
+
 /datum/advclass/proc/equipme(mob/living/carbon/human/H)
 	if(!H)
 		return FALSE
