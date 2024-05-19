@@ -172,13 +172,6 @@
 	H.change_stat("constitution", 1)
 	H.change_stat("speed", 1)
 	H.change_stat("intelligence", -3)
-	var/datum/bounty/new_bounty = new /datum/bounty
-	new_bounty.amount = round(rand(66, 123))
-	new_bounty.target = H
-	new_bounty.banner += "The head of [new_bounty.target] is wanted by The Crown for [new_bounty.amount] mammons.<BR>"
-	new_bounty.banner += "For the crime of: 'Banditry'.<BR>"
-	new_bounty.banner += "--------------<BR>"
-	GLOB.head_bounties += new_bounty
 
 	H.ambushable = FALSE
 

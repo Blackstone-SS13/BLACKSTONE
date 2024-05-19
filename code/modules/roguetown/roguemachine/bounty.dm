@@ -61,19 +61,24 @@
 	sleep(2 SECONDS)
 
 	//give reward for every bounty that matches
+	var/reward_amount = 0
 	for(var/datum/bounty/b in GLOB.head_bounties)
 		if(b.target == stored_head.real_name)
 			correct_head = TRUE
 			say("A bounty has been sated.")
-			sleep(1 SECONDS)
-			playsound(src, 'sound/misc/coindispense.ogg', 100, FALSE, -1)
-			var/obj/item/roguecoin/copper/reward = new /obj/item/roguecoin/copper(machine_location)
-			reward.set_quantity(b.amount)
-
+			reward_amount += b.amount
 			GLOB.head_bounties -= b
 
-	// No valid bounty for this head?
-	if(correct_head == FALSE)
+	if(stored_head.original_owner.mind?.has_antag_datum(/datum/antagonist/bandit))
+		say("A bounty has been sated.")
+		reward_amount += 80
+
+	if(correct_head)
+		sleep(1 SECONDS)
+		playsound(src, 'sound/misc/coindispense.ogg', 100, FALSE, -1)
+		var/obj/item/roguecoin/copper/reward = new /obj/item/roguecoin/copper(machine_location)
+		reward.set_quantity(reward_amount)
+	else // No valid bounty for this head?
 		say("This skull carried no reward.")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 
@@ -109,6 +114,11 @@
 	var/consult_menu
 	consult_menu += "<center>BOUNTIES<BR>"
 	consult_menu += "--------------<BR>"
+	for(var/mob/living/banditcheck in GLOB.player_list)
+		if(banditcheck.mind?.has_antag_datum(/datum/antagonist/bandit))
+			consult_menu += "The head of each Bandit is wanted by The Crown for 80 mammons.<BR>"
+			consult_menu += "--------------<BR>"
+			break
 	for(var/datum/bounty/saved_bounty in GLOB.head_bounties)
 		consult_menu += saved_bounty.banner
 
