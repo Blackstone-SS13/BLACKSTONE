@@ -555,27 +555,22 @@ SUBSYSTEM_DEF(ticker)
 			SSticker.minds += P.new_character.mind
 		CHECK_TICK
 
-
 /datum/controller/subsystem/ticker/proc/equip_characters()
 //	var/captainless=1
-	var/list/priority_players = list()
-	var/list/nonpriority_players = list()
+	var/list/valid_characters = list()
 	for(var/mob/dead/new_player/new_player as anything in GLOB.new_player_list)
-		var/mob/living/carbon/human/player = N.new_character
+		var/mob/living/carbon/human/player = new_player.new_character
 		if(istype(player) && player.mind?.assigned_role)
 //			if(player.mind.assigned_role == "Captain")
 //				captainless=0
 			if(player.mind.assigned_role != player.mind.special_role)
-				if(player.mind.assigned_role in GLOB.priority_positions)
-					priority_players += player
-				else
-					nonpriority_players += player
-		CHECK_TICK
-	var/list/all_players = priority_players + nonpriority_players
-	for(var/mob/living/carbon/human/player as anything in all_players)
-		SSjob.EquipRank(N, player.mind.assigned_role, 0)
-		if(CONFIG_GET(flag/roundstart_traits) && ishuman(N.new_character))
-			SSquirks.AssignQuirks(N.new_character, N.client, TRUE)
+				valid_characters[player] = new_player
+	sortList(valid_characters, PROC_REF(cmp_assignedrole_dsc))
+	for(var/mob/character as anything in valid_characters)
+		var/mob/new_player = valid_characters[character]
+		SSjob.EquipRank(new_player, character.mind.assigned_role, joined_late = FALSE)
+		if(CONFIG_GET(flag/roundstart_traits) && ishuman(character))
+			SSquirks.AssignQuirks(character, new_player.client, TRUE)
 		CHECK_TICK
 //	if(captainless)
 //		for(var/i in GLOB.new_player_list)
