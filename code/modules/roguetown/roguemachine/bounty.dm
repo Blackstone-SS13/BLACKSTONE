@@ -9,7 +9,7 @@
 	pixel_x = -17
 
 /datum/bounty
-	var/mob/living/carbon/human/target
+	var/target
 	var/amount
 	var/reason
 	var/employer
@@ -62,7 +62,7 @@
 
 	//give reward for every bounty that matches
 	for(var/datum/bounty/b in GLOB.head_bounties)
-		if(b.target.real_name == stored_head.real_name)
+		if(b.target == stored_head.real_name)
 			correct_head = TRUE
 			say("A bounty has been sated.")
 			sleep(1 SECONDS)
@@ -110,11 +110,6 @@
 	consult_menu += "<center>BOUNTIES<BR>"
 	consult_menu += "--------------<BR>"
 	for(var/datum/bounty/saved_bounty in GLOB.head_bounties)
-		if(saved_bounty.target.mind?.has_antag_datum(/datum/antagonist/bandit))
-			consult_menu += "The head of each Bandit is wanted by The Crown for 80 mammons.<BR>"
-			consult_menu += "--------------<BR>"
-			break
-	for(var/datum/bounty/saved_bounty in GLOB.head_bounties)
 		consult_menu += saved_bounty.banner
 
 	var/datum/browser/popup = new(user, "BOUNTIES", "", 500, 300)
@@ -125,11 +120,12 @@
 ///@param user: The player setting the bounty.
 /obj/structure/roguemachine/bounty/proc/set_bounty(var/mob/living/carbon/human/user)
 	var/list/eligible_players = list()
-	for(var/mob/living/carbon/human/known in user.mind.known_people)
-		if(known != user)
-			eligible_players += known
+	for(var/mob/living/H in GLOB.player_list)
+		if(H.client)
+			if(H != user)
+				eligible_players += H.real_name
 		
-	var/mob/living/carbon/human/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in eligible_players
+	var/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in eligible_players
 	if(isnull(target))
 		say("No target selected.")
 		return
@@ -175,7 +171,7 @@
 	new_bounty.amount = round(amount)
 	new_bounty.target = target
 	new_bounty.reason = reason
-	new_bounty.employer = user
+	new_bounty.employer = user.real_name
 	compose_bounty(new_bounty)
 	GLOB.head_bounties += new_bounty
 
