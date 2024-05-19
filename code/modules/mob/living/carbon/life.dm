@@ -216,24 +216,15 @@
 
 /mob/living/carbon/proc/get_complex_pain()
 	var/amt = 0
-	for(var/I in bodyparts)
-		var/obj/item/bodypart/BP = I
-		if(BP.status == BODYPART_ROBOTIC)
+	for(var/obj/item/bodypart/limb as anything in bodyparts)
+		if(limb.status == BODYPART_ROBOTIC)
 			continue
-		var/BPinteg
-		//pain from base damage is amplified based on how much con you have
-		BPinteg = ((BP.brute_dam / BP.max_damage) * 100) + BPinteg
-		BPinteg = ((BP.burn_dam / BP.max_damage) * 100) + BPinteg
-		for(var/W in BP.wounds) //wound damage is added normally and stacks higher than 100
-			var/datum/wound/WO = W
-			if(WO.woundpain > 0)
-				BPinteg += WO.woundpain
-//		BPinteg = min(((totwound / BP.max_damage) * 100) + BPinteg, initial(BP.max_damage))
-//		if(BPinteg > amt) //this is here to ensure that pain doesn't add up, but is rather picked from the worst limb
+		var/bodypart_pain (((limb.brute_dam + limb.burn_dam) / limb.max_damage) * 100)
+		for(var/datum/wound/wound as anything in limb.wounds)
+			bodypart_pain += wound.woundpain
+		bodypart_pain = min(bodypart_pain, 100) //tops out at 100 per limb
 		amt += BPinteg
 	return amt
-
-
 
 ///////////////
 // BREATHING //
