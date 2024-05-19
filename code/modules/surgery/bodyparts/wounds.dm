@@ -442,7 +442,6 @@
 								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The eyes are gored!</span>"
 								my_eyes.forceMove(get_turf(owner))
 								my_eyes.Remove(owner)
-								qdel(my_eyes)
 							owner.update_fov_angles()
 						else
 							if(!brainkill)
