@@ -148,7 +148,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		qdel(species)
 	if(!GLOB.roundstart_races.len)
 		GLOB.roundstart_races += "Humen"
-	sortList(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_asc))
+	sortList(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_dsc))
 
 /datum/species/proc/check_roundstart_eligible()
 	if(name && id && (id in (CONFIG_GET(keyed_list/roundstart_races))))
