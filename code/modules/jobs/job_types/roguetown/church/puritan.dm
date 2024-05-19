@@ -151,15 +151,13 @@
 		var/list/confessions = list()
 		switch(confession_type)
 			if("patron")
-				for(var/datum/patron/patron in mind?.patron_datums)
-					if(!length(patron.confess_lines))
-						continue
+				if(length(patron?.confess_lines))
 					confessions += patron.confess_lines
 			if("antag")
-			for(var/datum/antagonist/antag in mind?.antag_datums)
-				if(!length(antag.confess_lines))
-					continue
-				confessions += antag.confess_lines
+				for(var/datum/antagonist/antag in mind?.antag_datums)
+					if(!length(antag.confess_lines))
+						continue
+					confessions += antag.confess_lines
 		if(length(confessions))
 			say(pick(confessions), spans = list("torture"))
 			return
