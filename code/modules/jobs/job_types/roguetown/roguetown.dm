@@ -1,6 +1,10 @@
 /datum/job/roguetown
 	display_order = JOB_DISPLAY_ORDER_CAPTAIN
 
+	// These dictate how many slots we are displaying of either category if a class select handler is brought up for us
+	var/free_slot_rolls_count = 0 
+	var/combat_slot_rolls_count = 0
+
 /datum/job/roguetown/New()
 	. = ..()
 	if(give_bank_account)
@@ -71,8 +75,7 @@
 			if(check_crownlist(H.ckey))
 				H.mind.special_items["Champion Circlet"] = /obj/item/clothing/head/roguetown/crown/sparrowcrown
 			give_special_items(H)
-//	if(H.islatejoin)
-//		var/obj/item/flashlight/flare/torch/T = new()
-//		T.spark_act()
-//		H.put_in_hands(T)
+	for(var/list_key in SStriumphs.post_equip_calls)
+		var/datum/triumph_buy/thing = SStriumphs.post_equip_calls[list_key]
+		thing.on_activate(H)
 	return

@@ -5,8 +5,10 @@
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Dwarf","Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dwarfwarrior
-	maxchosen = 2
+
 	traits_applied = list(RTRAIT_HEAVYARMOR)
+	maximum_possible_slots = 2
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/dwarfwarrior/pre_equip(mob/living/carbon/human/H)
 	..()

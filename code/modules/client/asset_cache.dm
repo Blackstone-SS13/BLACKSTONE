@@ -557,6 +557,15 @@ GLOBAL_LIST_EMPTY(asset_datums)
 		"v4shim.css"          = 'html/font-awesome/css/v4-shims.min.css'
 	)*/
 
+/datum/asset/simple/blackedstone_browser_slop_layout
+	verify = FALSE
+	assets = list(
+		"try4.png" = 'icons/roguetown/misc/try4.png',
+		"try4_border.png" = 'icons/roguetown/misc/try4_border.png',
+		"slop_menustyle2.css" = 'html/browser/slop_menustyle2.css',
+		"haha_skull.gif" = 'icons/roguetown/misc/haha_skull.gif'
+	)
+
 /datum/asset/simple/roguefonts
 	verify = TRUE
 	assets = list(

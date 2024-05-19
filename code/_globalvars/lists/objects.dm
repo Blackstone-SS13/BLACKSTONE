@@ -20,7 +20,6 @@ GLOBAL_LIST_EMPTY(materials_list)				//list of all /datum/material datums indexe
 GLOBAL_LIST_EMPTY(tech_list)					//list of all /datum/tech datums indexed by id.
 GLOBAL_LIST_EMPTY(surgeries_list)				//list of all surgeries by name, associated with their path.
 GLOBAL_LIST_EMPTY(crafting_recipes)				//list of all table craft recipes
-GLOBAL_LIST_EMPTY(adv_classes)				//list of all table craft recipes
 GLOBAL_LIST_EMPTY(anvil_recipes)				//list of all table craft recipes
 GLOBAL_LIST_EMPTY(rcd_list)					//list of Rapid Construction Devices.
 GLOBAL_LIST_EMPTY(apcs_list)					//list of all Area Power Controller machines, separate from machines for powernet speeeeeeed.

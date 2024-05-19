@@ -1,4 +1,4 @@
-/datum/job/roguetown/vagrant
+/datum/job/roguetown/beggar
 	title = "Beggar"
 	flag = APPRENTICE
 	department_flag = PEASANTS
@@ -37,11 +37,11 @@
 	/// Outfit to use when wise beggar triggers
 	var/wise_outfit = /datum/outfit/job/roguetown/vagrant/wise
 
-/datum/job/roguetown/vagrant/New()
+/datum/job/roguetown/beggar/New()
 	. = ..()
 	peopleknowme = list()
 
-/datum/job/roguetown/vagrant/get_outfit(mob/living/carbon/human/wearer, visualsOnly = FALSE, announce = TRUE, latejoin = FALSE, preference_source = null)
+/datum/job/roguetown/beggar/get_outfit(mob/living/carbon/human/wearer, visualsOnly = FALSE, announce = TRUE, latejoin = FALSE, preference_source = null)
 	if((wise_amount < wise_max) && prob(wise_chance))
 		wise_amount++
 		return wise_outfit

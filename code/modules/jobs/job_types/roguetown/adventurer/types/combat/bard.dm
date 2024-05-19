@@ -18,6 +18,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/bard
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/bard/pre_equip(mob/living/carbon/human/H)
 	..() // The entertaining jack of all trades, uniquely handy with crossbows and swords. They're incredibly well travelled, can sneak, steal and survive on their own. 

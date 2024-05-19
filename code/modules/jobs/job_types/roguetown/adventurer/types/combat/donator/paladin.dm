@@ -11,6 +11,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
 	traits_applied = list(RTRAIT_HEAVYARMOR)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/paladin
 	allowed_patrons = ALL_CLERIC_PATRONS

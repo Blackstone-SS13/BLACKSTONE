@@ -15,9 +15,7 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/peasant
-	isvillager = TRUE
-	ispilgrim = TRUE
-
+	category_flags = RT_TYPE_FREE_CLASS | RT_TYPE_VILLAGER_CLASS
 
 /datum/outfit/job/roguetown/adventurer/peasant/pre_equip(mob/living/carbon/human/H)
 	..()

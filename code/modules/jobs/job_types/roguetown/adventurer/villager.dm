@@ -1,4 +1,4 @@
-/datum/job/roguetown/adventurer/villager
+/datum/job/roguetown/villager
 	title = "Towner"
 	flag = ADVENTURER
 	department_flag = PEASANTS
@@ -12,12 +12,22 @@
 	outfit_female = null
 	bypass_jobban = FALSE
 	display_order = JDO_VILLAGER
-	isvillager = TRUE
 	give_bank_account = TRUE
 	min_pq = -15
 	max_pq = null
 	wanderer_examine = FALSE
 	advjob_examine = TRUE
+
+	free_slot_rolls_count = 20
+
+
+/datum/job/roguetown/villager/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
+	..()
+	if(L)
+		var/mob/living/carbon/human/H = L
+		H.advsetup = 1
+		H.invisibility = INVISIBILITY_MAXIMUM
+		H.become_blind("advsetup")
 
 /*
 /datum/job/roguetown/adventurer/villager/New()

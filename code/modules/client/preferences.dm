@@ -207,29 +207,65 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			used_title = "Character Sheet"
 
 			// Top-level menu table
-			dat += "<table width=100%>"
+			dat += "<table style='width: 100%; line-height: 20px;'>"
+			// FIRST ROW
 			dat += "<tr>"
-			dat += "<td width='33%' align='left'>"
+			dat += "<td style='width:33%;text-align:left'>"
 			dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=changeslot;'>Change Character</a>"
 			dat += "</td>"
-			dat += "<td width='33%' align='center'>"
-			dat += "<b>Be voice:</b> <a href='?_src_=prefs;preference=schizo_voice'>[(toggles & SCHIZO_VOICE) ? "Enabled":"Disabled"]</a><br>"
+
+	
+			dat += "<td style='width:33%;text-align:center'>"
+			dat += "<a style='white-space:nowrap;' href='?_src_=prefs;preference=triumph_buy_menu'>Triumph Buy</a>"
 			dat += "</td>"
-			dat += "<td width='33%' align='right'>"
+
+			dat += "<td style='width:33%;text-align:right'>"
 			dat += "<a href='?_src_=prefs;preference=keybinds;task=menu'>Keybinds</a>"
-			dat += "</table>"
+			dat += "</td>"
+			dat += "</tr>"
 
-			// Next top level class choices table
-			dat += "<table width=100%>"
+
+			// NEXT ROW
 			dat += "<tr>"
-			dat += "<td width='100%' align='center'>"
+			dat += "<td style='width:33%;text-align:left'>"
+			dat += "</td>"
 
-			dat += "<a href='?_src_=prefs;preference=job;task=menu'>Class Selection</a><br>"
-			dat += "<a href='?_src_=prefs;preference=antag;task=menu'>Villain Selection</a><br>"
+			dat += "<td style='width:33%;text-align:center'>"
+			dat += "<a href='?_src_=prefs;preference=job;task=menu'>Class Selection</a>"
+			dat += "</td>"
+
+			dat += "<td style='width:33%;text-align:right'>"
+			dat += "<a href='?_src_=prefs;preference=drifters;task=show_drifter_queue'><span style='color:aliceblue;font-weight: bold;'>Drifter Queue</span></a>"
+			dat += "</td>"
+			dat += "</tr>"
+
+			// ANOTHA ROW
+			dat += "<tr style='padding-top: 0px;padding-bottom:0px'>"
+			dat += "<td style='width:33%;text-align:left'>"
+			dat += "</td>"
+
+			dat += "<td style='width:33%;text-align:center'>"
+			dat += "<a href='?_src_=prefs;preference=antag;task=menu'>Villain Selection</a>"
+			dat += "</td>"
+
+			dat += "<td style='width:33%;text-align:right'>"
+			dat += "</td>"
+			dat += "</tr>"
+
+			// ANOTHER ROW HOLY SHIT WE FINALLY A GOD DAMN GRID NOW! WHOA!
+			dat += "<tr style='padding-top: 0px;padding-bottom:0px'>"
+			dat += "<td style='width:33%; text-align:left'>"
+			dat += "<a href='?_src_=prefs;preference=playerquality;task=menu'><b>PQ:</b></a> [get_playerquality(user.ckey, text = TRUE)]"
+			dat += "</td>"
+
+			dat += "<td style='width:33%;text-align:center'>"
+			dat += "<a href='?_src_=prefs;preference=triumphs;task=menu'><b>TRIUMPHS:</b></a> [user.get_triumphs() ? "\Roman [user.get_triumphs()]" : "None"]"
+			dat += "</td>"
+
+			dat += "<td style='width:33%;text-align:right'>"
+			dat += "</td>"
 
 			dat += "</table>"
-
-			dat += "<table width=100%><tr><td width=33%><div style='text-align:left'><a href='?_src_=prefs;preference=playerquality;task=menu'><b>PQ:</b></a> [get_playerquality(user.ckey, text = TRUE)]</div></td><td width=34%><center><a href='?_src_=prefs;preference=triumphs;task=menu'><b>TRIUMPHS:</b></a> [user.get_triumphs() ? "\Roman [user.get_triumphs()]" : "None"]</center></td><td width=33%></td></tr></table>"
 
 			if(CONFIG_GET(flag/roundstart_traits))
 				dat += "<center><h2>Quirk Setup</h2>"
@@ -853,11 +889,16 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<a href ='?_src_=prefs;preference=keybinds;task=keybindings_set'>\[Reset to default\]</a>"
 			dat += "</body>"
 
+		
 	if(!IsGuestKey(user.key))
 		dat += "<a href='?_src_=prefs;preference=save'>Save</a><br>"
 		dat += "<a href='?_src_=prefs;preference=load'>Undo</a><br>"
-	dat += "<center>"
 
+	// well.... one empty slot here for something I suppose lol
+	dat += "<table width='100%'>"
+	dat += "<tr>"
+	dat += "<td width='33%' align='left'></td>"
+	dat += "<td width='33%' align='center'>"
 	if(SSticker.current_state <= GAME_STATE_PREGAME)
 		switch(N.ready)
 			if(PLAYER_NOT_READY)
@@ -866,10 +907,15 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				dat += "<a href='byond://?src=[REF(N)];ready=[PLAYER_NOT_READY]'>UNREADY</a> <b>READY</b>"
 	else
 		dat += "<a href='byond://?src=[REF(N)];late_join=1'>JOINLATE</a>"
-
+	dat += "</td>"
+	dat += "<td width='33%' align='right'>"
+	dat += "<b>Be voice:</b> <a href='?_src_=prefs;preference=schizo_voice'>[(toggles & SCHIZO_VOICE) ? "Enabled":"Disabled"]</a><br>"
+	dat += "</td>"
+	dat += "</tr>"
+	dat += "</table>"
 //	dat += "<a href='?_src_=prefs;preference=reset_all'>Reset Setup</a>"
-	dat += "</center>"
 
+	
 	if(user.client.is_new_player())
 		dat = list("<center>REGISTER!</center>")
 
@@ -1419,6 +1465,7 @@ Slots: [job.spawn_positions]</span>
 				SetChoices(user)
 		return 1
 
+
 	else if(href_list["preference"] == "trait")
 		switch(href_list["task"])
 			if("close")
@@ -1476,9 +1523,24 @@ Slots: [job.spawn_positions]</span>
 
 	else if(href_list["preference"] == "triumphs")
 		user.show_triumphs_list()
+	
+	else if(href_list["preference"] == "drifters")
+		switch(href_list["task"])
+			if("close")
+				user << browse(null, "drifter_queue")
+				ShowChoices(user)
+			if("drifter_queue_join")
+				to_chat(world, "ENTER DRIFTER QUEUE")
+			if("show_drifter_queue")
+				Drifter_queue_popup(user)
 
 	else if(href_list["preference"] == "playerquality")
 		check_pq_menu(user.ckey)
+		var/amt = get_commends(user.ckey)
+		to_chat(user, "PlayerQuality represents the aggregate data collected automatically by the game to determine your reliability level as a RolePlayer. <font color='blue'>You have earned [amt] commendations from other players.</font>")
+
+	else if(href_list["preference"] == "triumph_buy_menu")
+		SStriumphs.startup_triumphs_menu(user.client)
 
 	else if(href_list["preference"] == "keybinds")
 		switch(href_list["task"])

@@ -12,10 +12,11 @@
 	"Elf"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/masterchef
-	isvillager = FALSE
-	ispilgrim = TRUE
-	maxchosen = 1
+
+	maximum_possible_slots = 1
 	pickprob = 5
+
+	category_flags = RT_TYPE_FREE_CLASS
 
 /datum/outfit/job/roguetown/adventurer/masterchef/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -16,6 +16,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
 	traits_applied = list(RTRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/barbarian
 	allowed_patrons = list(/datum/patron/divine/ravox, /datum/patron/inhumen/graggar)

@@ -12,9 +12,8 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/noble
 	traits_applied = list(RTRAIT_NOBLE)
-	isvillager = FALSE
-	ispilgrim = TRUE
 
+	category_flags = RT_TYPE_FREE_CLASS
 
 /datum/outfit/job/roguetown/adventurer/noble/pre_equip(mob/living/carbon/human/H)
 	..()

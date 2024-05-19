@@ -16,6 +16,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/rogue
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/rogue
 	allowed_patrons = list(/datum/patron/divine/xylix, /datum/patron/inhumen/matthios)

@@ -13,10 +13,11 @@
 		"Dark Elf",
 		"Aasimar"
 	)
-	ispilgrim = FALSE
+	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 	vampcompat = FALSE
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
 	traits_applied = list(RTRAIT_HEAVYARMOR)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/cleric
 	allowed_patrons = ALL_CLERIC_PATRONS

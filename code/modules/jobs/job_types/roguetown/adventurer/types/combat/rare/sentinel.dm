@@ -9,9 +9,11 @@
 		"Half-Elf",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/sentinal
-	maxchosen = 5
+	maximum_possible_slots = 5
 	pickprob = 50
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
+	category_flags = RT_TYPE_COMBAT_CLASS
+
 
 /datum/outfit/job/roguetown/adventurer/sentinal/pre_equip(mob/living/carbon/human/H)
 	..()

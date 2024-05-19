@@ -7,9 +7,10 @@
 	allowed_sexes = list("male")
 	allowed_races = list("Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/puritan
-	maxchosen = 2
+	maximum_possible_slots = 2
 	pickprob = 11
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
+	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/puritan
 	allowed_patrons = list(/datum/patron/old_god)
