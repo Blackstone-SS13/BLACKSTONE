@@ -86,29 +86,29 @@
 /obj/item/clothing/ring/emerald
     name = "emerald ring"
     icon_state = "g_ring_emerald"
-    sellprice = 70
+    sellprice = 195
 
 /obj/item/clothing/ring/ruby
     name = "ruby ring"
     icon_state = "g_ring_ruby"
-    sellprice = 70
+    sellprice = 255
 
 /obj/item/clothing/ring/topaz
     name = "topaz ring"
     icon_state = "g_ring_topaz"
-    sellprice = 70
+    sellprice = 180
 
 /obj/item/clothing/ring/emeralds
     name = "emerald ring"
     icon_state = "s_ring_emerald"
-    sellprice = 50
+    sellprice = 80
 
 /obj/item/clothing/ring/rubys
     name = "ruby ring"
     icon_state = "s_ring_ruby"
-    sellprice = 50
+    sellprice = 140
 
 /obj/item/clothing/ring/topazs
     name = "topaz ring"
     icon_state = "s_ring_topaz"
-    sellprice = 50
+    sellprice = 65
