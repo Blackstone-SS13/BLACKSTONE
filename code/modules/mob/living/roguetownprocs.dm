@@ -219,11 +219,12 @@
 					
 					//attacker skill gain
 					
-					if((U.mobility_flags & MOBILITY_STAND) && defender_skill && (attacker_skill < defender_skill - SKILL_LEVEL_NOVICE))
-						if(AB)
-							U.mind.adjust_experience(AB.associated_skill, max(round(U.STAINT/2), 0), FALSE)
-						else
-							U.mind.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
+					if(U.mind)
+						if((U.mobility_flags & MOBILITY_STAND) && defender_skill && (attacker_skill < defender_skill - SKILL_LEVEL_NOVICE))
+							if(AB)
+								U.mind.adjust_experience(AB.associated_skill, max(round(U.STAINT/2), 0), FALSE)
+							else
+								U.mind.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
 
 					if(prob(66) && AB)
 						if((used_weapon.flags_1 & CONDUCT_1) && (AB.flags_1 & CONDUCT_1))
