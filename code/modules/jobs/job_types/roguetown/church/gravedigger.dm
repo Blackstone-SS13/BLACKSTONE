@@ -1,5 +1,5 @@
 /datum/job/roguetown/undertaker
-	title = "Gravedigger"
+	title = "Mortician"
 	flag = GRAVEDIGGER
 	department_flag = CHURCHMEN
 	faction = "Station"
