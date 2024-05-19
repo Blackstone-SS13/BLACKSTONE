@@ -299,7 +299,7 @@
 		adjust_skillrank(truePath, numValue, TRUE)
 		
 /datum/mind/proc/textList2nums(text) // needs a better name
-	var/list/values = splittext(Skills[path], ",")
+	var/list/values = splittext(text, ",")
 	values.Remove("pick(", ")") // could do values[1] & values[length(values)] here
 	for(var/index in 1 to length(values))
 		if(isnull(values[index])) continue // not needed me thinks but just in case
