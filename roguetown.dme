@@ -8,8 +8,6 @@
 // END_PREFERENCES
 // BEGIN_INCLUDE
 #include "_maps\_basemap.dm"
-#include "_maps\blackstone.dm"
-#include "_maps\rogueworld.dm"
 #include "_maps\templates\bog_shack_small.dm"
 #include "code\__byond_version_compat.dm"
 #include "code\_compile_options.dm"
@@ -2125,6 +2123,7 @@
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\paladin.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\donator\vaquero.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelt.dm"
+// #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\necromancer.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\heartfelthand.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\sentinel.dm"
 #include "code\modules\jobs\job_types\roguetown\adventurer\types\combat\rare\treasurehunter.dm"
