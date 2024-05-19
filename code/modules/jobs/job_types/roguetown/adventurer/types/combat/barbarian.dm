@@ -88,7 +88,7 @@
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			beltr = /obj/item/rogueweapon/stoneaxe/woodcut
-			beltl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+			r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 			l_hand = /obj/item/quiver/arrows
 			belt = /obj/item/storage/belt/rogue/leather
 			neck = /obj/item/storage/belt/rogue/pouch/coins/poor

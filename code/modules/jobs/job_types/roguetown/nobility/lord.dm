@@ -34,7 +34,7 @@ GLOBAL_VAR(lordsurname)
 
 /datum/job/roguetown/lord/equip(mob/living/carbon/human/H, visualsOnly, announce, latejoin, datum/outfit/outfit_override, client/preference_source)
 	. = ..()
-	if(!GLOB.lordsurname)
+	if(!GLOB.lordsurname && !visualsOnly)
 		var/list/chopped_name = splittext(H.real_name, " ")
 		if(length(chopped_name) > 1)
 			chopped_name -= chopped_name[1]
