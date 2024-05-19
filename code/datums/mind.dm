@@ -300,12 +300,15 @@
 		
 /datum/mind/proc/textList2nums(text) // needs a better name
 	var/list/values = splittext(text, ",")
-	values.Remove("pick(", ")") // could do values[1] & values[length(values)] here
+	var/option = 0 // 0 = pick, 1 = rand
+	if(values[1] != "pick(") option = 1
+	values.Remove(values[1], values[length(values)]) // could do values[1] & values[length(values)] here
 	for(var/index in 1 to length(values))
 		if(isnull(values[index])) continue // not needed me thinks but just in case
 		values[index] = text2num(values[index])
 	//TODO: review? there's gotta b a better way to translate this text to numbers
-	return pick(values)
+	return option ? rand(values[1], values[2]) : pick(values)
+	// i dont like the list[index] in rand, n im p sure pick(1,2,3) = rand(1,3) so
 
 
 /datum/mind/proc/adjust_skillrank(skill, amt, silent = FALSE)

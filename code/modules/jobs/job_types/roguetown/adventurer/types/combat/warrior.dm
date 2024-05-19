@@ -18,6 +18,26 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/sfighter
 	traits_applied = list(RTRAIT_HEAVYARMOR)
 
+
+	given_skills = list(
+		"/datum/skill/misc/sneaking" = "pick(,1,1,2,)", \
+		"/datum/skill/combat/crossbows" = "pick(,1,2,)", \
+		"/datum/skill/combat/polearms" = 2, \
+		"/datum/skill/combat/axesmaces" = 2, \
+		"/datum/skill/combat/bows" = "pick(,1,2,)", \
+		"/datum/skill/combat/wrestling" = 2, \
+		"/datum/skill/combat/unarmed" = 2, \
+		"/datum/skill/misc/athletics" = 4, \
+		"/datum/skill/combat/swords" = 3, \
+		"/datum/skill/misc/swimming" = 1, \
+		"/datum/skill/misc/climbing" = 2, \
+		"/datum/skill/misc/riding" = "pick(,2,3,)", \
+		"/datum/skill/misc/medicine" = 1, \
+		"/datum/skill/combat/knives" = "rand(,1,3,)"
+	) 
+	// tempted to just change rand(1,2) to pick 1,2,3
+
+
 /datum/outfit/job/roguetown/adventurer/sfighter/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.adjust_blindness(-3)
@@ -29,20 +49,21 @@
 		if("Warrior")
 			H.set_blindness(0)
 			to_chat(H, "<span class='warning'>Warriors are well rounded fighters, experienced often in many theaters of warfare and battle they are capable of rising to any challenge that might greet them on the path.</span>")
-			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,2), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/bows, rand(1,2), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, rand(1,3), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,1,2), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(2,3), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+			H.mind.assign_skills(/datum/advclass/sfighter::given_skills, TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,2), TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/combat/bows, rand(1,2), TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/combat/knives, rand(1,3), TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,1,2), TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(2,3), TRUE)
+			// H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 			H.change_stat("strength", 2)
 			H.change_stat("endurance", 2) // 7 stat points total as a low-skill martial role without magic. Compared to Pally with 5 points.
 			H.change_stat("constitution", 2)
