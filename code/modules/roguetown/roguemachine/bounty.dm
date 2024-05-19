@@ -130,10 +130,8 @@
 ///@param user: The player setting the bounty.
 /obj/structure/roguemachine/bounty/proc/set_bounty(var/mob/living/carbon/human/user)
 	var/list/eligible_players = list()
-	for(var/mob/living/H in GLOB.player_list)
-		if(H.client)
-			if(H != user)
-				eligible_players += H.real_name
+	for(var/guys_name in user.mind.known_people)
+		eligible_players += guys_name
 		
 	var/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in eligible_players
 	if(isnull(target))
