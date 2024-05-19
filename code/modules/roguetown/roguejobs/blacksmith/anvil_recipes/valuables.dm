@@ -77,6 +77,12 @@
 	additional_items = list(/obj/item/roguegem/violet)	
 	created_item = /obj/item/clothing/ring/sapphire
 
+/datum/anvil_recipe/valuables/diamondg
+	name = "Gold Dorpel Ring (+ Dorpel)"
+	req_bar = /obj/item/ingot/gold
+	additional_items = list(/obj/item/roguegem/diamond)	
+	created_item = /obj/item/clothing/ring/diamond
+
 //steel rings
 /datum/anvil_recipe/valuables/emerings
 	name = "Steel Gemerald Ring (+ Gemerald)"
@@ -107,6 +113,12 @@
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/violet)	
 	created_item = /obj/item/clothing/ring/sapphires
+
+/datum/anvil_recipe/valuables/diamonds
+	name = "Steel Dorpel Ring (+ Dorpel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/roguegem/diamond)	
+	created_item = /obj/item/clothing/ring/diamonds
 
 /datum/anvil_recipe/valuables/terminus
 	name = "Terminus Est (+ 1 Gold Bar, + 1 Steel, + 1 Rontz)"

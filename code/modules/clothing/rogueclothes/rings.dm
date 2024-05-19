@@ -109,6 +109,11 @@
     icon_state = "g_ring_sapphire"
     sellprice = 200
 
+/obj/item/clothing/ring/diamond
+    name = "dorpel ring"
+    icon_state = "g_ring_diamond"
+    sellprice = 270
+
 //steel rings
 /obj/item/clothing/ring/emeralds
     name = "gemerald ring"
@@ -118,7 +123,7 @@
 /obj/item/clothing/ring/rubys
     name = "rontz ring"
     icon_state = "s_ring_ruby"
-    sellprice = 140
+    sellprice = 130
 
 /obj/item/clothing/ring/topazs
     name = "toper ring"
@@ -134,3 +139,8 @@
     name = "saffira ring"
     icon_state = "s_ring_sapphire"
     sellprice = 95
+
+/obj/item/clothing/ring/diamonds
+    name = "dorpel ring"
+    icon_state = "s_ring_diamond"
+    sellprice = 140
