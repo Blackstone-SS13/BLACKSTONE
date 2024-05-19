@@ -83,32 +83,54 @@
 	if(magcom)
 		magcom.RemoveComponent()
 
+//gold rings
 /obj/item/clothing/ring/emerald
-    name = "emerald ring"
+    name = "gemerald ring"
     icon_state = "g_ring_emerald"
     sellprice = 195
 
 /obj/item/clothing/ring/ruby
-    name = "ruby ring"
+    name = "rontz ring"
     icon_state = "g_ring_ruby"
     sellprice = 255
 
 /obj/item/clothing/ring/topaz
-    name = "topaz ring"
+    name = "toper ring"
     icon_state = "g_ring_topaz"
     sellprice = 180
 
+/obj/item/clothing/ring/quartz
+    name = "blortz ring"
+    icon_state = "g_ring_quartz"
+    sellprice = 245
+
+/obj/item/clothing/ring/sapphire
+    name = "saffira ring"
+    icon_state = "g_ring_sapphire"
+    sellprice = 200
+
+//steel rings
 /obj/item/clothing/ring/emeralds
-    name = "emerald ring"
+    name = "gemerald ring"
     icon_state = "s_ring_emerald"
     sellprice = 80
 
 /obj/item/clothing/ring/rubys
-    name = "ruby ring"
+    name = "rontz ring"
     icon_state = "s_ring_ruby"
     sellprice = 140
 
 /obj/item/clothing/ring/topazs
-    name = "topaz ring"
+    name = "toper ring"
     icon_state = "s_ring_topaz"
     sellprice = 65
+
+/obj/item/clothing/ring/quartzs
+    name = "blortz ring"
+    icon_state = "s_ring_quartz"
+    sellprice = 110
+
+/obj/item/clothing/ring/sapphires
+    name = "saffira ring"
+    icon_state = "s_ring_sapphire"
+    sellprice = 95
