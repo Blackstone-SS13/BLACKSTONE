@@ -43,19 +43,18 @@
 	shoes = /obj/item/clothing/shoes/roguetown/boots/armor
 	beltl = /obj/item/keyring/guardcastle
 	belt = /obj/item/storage/belt/rogue/leather/black
-	beltr = /obj/item/rogueweapon/sword
 	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1, /obj/item/rope/chain = 1)
 	r_hand = /obj/item/rogueweapon/spear
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(1,2,3,3), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)

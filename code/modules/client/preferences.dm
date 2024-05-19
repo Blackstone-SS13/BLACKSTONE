@@ -2397,7 +2397,7 @@ Slots: [job.spawn_positions]</span>
 //	character.accessory = accessory
 	character.detail = detail
 	character.socks = socks
-	character.patron = selected_patron
+	character.set_patron(selected_patron)
 	character.backpack = backpack
 
 	character.jumpsuit_style = jumpsuit_style
