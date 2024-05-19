@@ -1,5 +1,5 @@
 /datum/job/roguetown/manorguard
-	title = "Man At Arms"
+	title = "Man at Arms"
 	flag = GUARDSMAN
 	department_flag = GARRISON
 	faction = "Station"
