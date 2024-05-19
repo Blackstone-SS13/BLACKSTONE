@@ -278,7 +278,7 @@
 		if(user.goodluck(2))
 			dam += 10
 	if(bclass == BCLASS_TWIST)
-		if(zone_precise == "head")
+		if(zone_precise == BODY_ZONE_HEAD)
 			if(brute_dam < max_damage)
 				return FALSE
 			for(var/datum/wound/necksnap/S in wounds)
