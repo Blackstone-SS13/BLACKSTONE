@@ -1,6 +1,6 @@
 
-#define STATTOVAR list("strength" = "STR", "perception" = "PRE", "intelligence" = "INT", \
-						"constitution" = "CON", "endurance"= "END", "speed" = "SPD", "fortune" = "LUK")
+#define STATTOVAR list("strength" = "STR", "perception" = "PER", "intelligence" = "INT", \
+						"constitution" = "CON", "endurance"= "END", "speed" = "SPD", "fortune" = "LUC")
 /mob/living/proc/get_stat_var(stat)
 	return STATTOVAR[stat]
 
@@ -18,7 +18,7 @@
 	var/BUFINT = 0
 	var/BUFCON = 0
 	var/BUFEND = 0
-	var/BUFSPE = 0
+	var/BUFSPD = 0
 	var/BUFLUC = 0
 	var/statbuf = FALSE
 	var/list/statindex = list()
@@ -102,17 +102,15 @@
 /mob/living/proc/change_stat(stat, amt, index)
 	// i have the tism
 	if(!stat) return
-	if(!amt)
-		if(index)
-			change_stat(stat, -1*statindex[index])
+	if(amt == 0 && index)
+		if(statindex[index])
+			change_stat(stat, -1*statindex[index]["amt"])
 			stat[index] = null // leaving this here until i figure out what it actually does
 			return
 		return
-	
 	if(index)
 		if(statindex[index]) return
 		statindex[index] = list("stat" = stat, "amt" = amt)
-	
 	var/newamt = 0
 	var/normal_stat = vars["STA[get_stat_var(stat)]"]
 	var/buff_stat = vars["BUF[get_stat_var(stat)]"]
@@ -128,7 +126,8 @@
 	while(newamt > 20)
 		newamt--
 		buff_stat++
-	normal_stat = newamt
+	vars["BUF[get_stat_var(stat)]"] = buff_stat
+	vars["STA[get_stat_var(stat)]"] = newamt
 	update_fov_angles()
 
 

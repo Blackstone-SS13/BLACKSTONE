@@ -89,6 +89,7 @@
 	beltl = /obj/item/rogueweapon/huntingknife/idagger/steel
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	
 	H.mind.assign_experiences(/datum/advclass/rogue::stat_changes, TRUE, "Stats")
 
 	// temp removal

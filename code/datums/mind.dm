@@ -300,7 +300,7 @@
 			if("Skills")
 				adjust_experience(truePath, numValue, TRUE) // change this to what i think is a rewritten proc?
 			if("Stats")
-				current.change_stat(path, Skills[path])
+				current.change_stat(path, numValue)
 
 
 /datum/mind/proc/textList2nums(text) // needs a better name
