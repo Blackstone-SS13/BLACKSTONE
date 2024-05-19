@@ -287,7 +287,7 @@
 		to_chat(current, "<span class='warning'>My [S.name] has weakened!</span>")
 
 // just scoot in right here
-/datum/mind/proc/assign_skills(list/Skills, silent)
+/datum/mind/proc/assign_experiences(list/Skills, silent, option)
 	// list(skill path = num)
 	for(var/path in Skills)
 		var/truePath = text2path(path)
@@ -296,8 +296,13 @@
 			numValue = textList2nums(Skills[path])
 		else
 			numValue = Skills[path]
-		adjust_experience(truePath, numValue, TRUE) // change this to what i think is a rewritten proc?
-		
+		switch(option)
+			if("Skills")
+				adjust_experience(truePath, numValue, TRUE) // change this to what i think is a rewritten proc?
+			if("Stats")
+				current.change_stat(path, Skills[path])
+
+
 /datum/mind/proc/textList2nums(text) // needs a better name
 	var/list/values = splittext(text, ",")
 	var/option = 0 // 0 = pick, 1 = rand

@@ -36,7 +36,12 @@
 		"/datum/skill/combat/knives" = "rand(,1,3,)"
 	) 
 	// tempted to just change rand(1,2) to pick 1,2,3
-
+	stat_changes = list(
+		"strength" = 2,
+		"endurance" = 2,
+		"constitution" = 2,
+		"speed" = 1
+	)
 
 /datum/outfit/job/roguetown/adventurer/sfighter/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -49,7 +54,7 @@
 		if("Warrior")
 			H.set_blindness(0)
 			to_chat(H, "<span class='warning'>Warriors are well rounded fighters, experienced often in many theaters of warfare and battle they are capable of rising to any challenge that might greet them on the path.</span>")
-			H.mind.assign_skills(/datum/advclass/sfighter::given_skills, TRUE)
+			H.mind.assign_experiences(/datum/advclass/sfighter::given_skills, TRUE, "Skills")
 			// H.mind.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,2), TRUE)
 			// H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 			// H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
@@ -64,6 +69,9 @@
 			// H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 			// H.mind.adjust_skillrank(/datum/skill/misc/riding, pick(2,3), TRUE)
 			// H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+
+			H.mind.assign_experiences(/datum/advclass/sfighter::stat_changes, TRUE, "Stats")
+
 			H.change_stat("strength", 2)
 			H.change_stat("endurance", 2) // 7 stat points total as a low-skill martial role without magic. Compared to Pally with 5 points.
 			H.change_stat("constitution", 2)

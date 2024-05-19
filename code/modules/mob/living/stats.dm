@@ -1,4 +1,9 @@
 
+#define STATTOVAR list("strength" = "STR", "perception" = "PRE", "intelligence" = "INT", \
+						"constitution" = "CON", "endurance"= "END", "speed" = "SPD", "fortune" = "LUK")
+/mob/living/proc/get_stat_var(stat)
+	return STATTOVAR[stat]
+
 /mob/living
 	var/STASTR = 10
 	var/STAPER = 10
@@ -93,166 +98,204 @@
 				H.eye_color = "ff0000"
 				H.voice_color = "ff0000"
 
+
 /mob/living/proc/change_stat(stat, amt, index)
-	if(!stat)
-		return
-	if(amt == 0 && index)
-		if(statindex[index])
-			change_stat(statindex[index]["stat"], -1*statindex[index]["amt"])
-			statindex[index] = null
-			return
+	// i have the tism
+	if(!stat) return
 	if(!amt)
+		if(index)
+			change_stat(stat, -1*statindex[index])
+			stat[index] = null // leaving this here until i figure out what it actually does
+			return
 		return
+	
 	if(index)
-		if(statindex[index])
-			return //we cannot make a new index
-		else
-			statindex[index] = list("stat" = stat, "amt" = amt)
-//			statindex[index]["stat"] = stat
-//			statindex[index]["amt"] = amt
+		if(statindex[index]) return
+		statindex[index] = list("stat" = stat, "amt" = amt)
+	
 	var/newamt = 0
-	switch(stat)
-		if("strength")
-			newamt = STASTR + amt
-			if(BUFSTR < 0)
-				BUFSTR = BUFSTR + amt
-				if(BUFSTR > 0)
-					newamt = STASTR + BUFSTR
-					BUFSTR = 0
-			if(BUFSTR > 0)
-				BUFSTR = BUFSTR + amt
-				if(BUFSTR < 0)
-					newamt = STASTR + BUFSTR
-					BUFSTR = 0
-			while(newamt < 1)
-				newamt++
-				BUFSTR--
-			while(newamt > 20)
-				newamt--
-				BUFSTR++
-			STASTR = newamt
+	var/normal_stat = vars["STA[get_stat_var(stat)]"]
+	var/buff_stat = vars["BUF[get_stat_var(stat)]"]
+	newamt = normal_stat + amt
+	if(buff_stat != 0) // if it is above or below 0
+		buff_stat += amt 
+		if(buff_stat != 0) // im gonna kms 
+			newamt = normal_stat + buff_stat
+			buff_stat = 0
+	while(newamt < 1)
+		newamt++
+		buff_stat--
+	while(newamt > 20)
+		newamt--
+		buff_stat++
+	normal_stat = newamt
+	update_fov_angles()
 
-		if("perception")
-			newamt = STAPER + amt
-			if(BUFPER < 0)
-				BUFPER = BUFPER + amt
-				if(BUFPER > 0)
-					newamt = STAPER + BUFPER
-					BUFPER = 0
-			if(BUFPER > 0)
-				BUFPER = BUFPER + amt
-				if(BUFPER < 0)
-					newamt = STAPER + BUFPER
-					BUFPER = 0
-			while(newamt < 1)
-				newamt++
-				BUFPER--
-			while(newamt > 20)
-				newamt--
-				BUFPER++
-			STAPER = newamt
 
-			update_fov_angles()
+		
+	
+		
 
-		if("intelligence")
-			newamt = STAINT + amt
-			if(BUFINT < 0)
-				BUFINT = BUFINT + amt
-				if(BUFINT > 0)
-					newamt = STAINT + BUFINT
-					BUFINT = 0
-			if(BUFINT > 0)
-				BUFINT = BUFINT + amt
-				if(BUFINT < 0)
-					newamt = STAINT + BUFINT
-					BUFINT = 0
-			while(newamt < 1)
-				newamt++
-				BUFINT--
-			while(newamt > 20)
-				newamt--
-				BUFINT++
-			STAINT = newamt
+// /mob/living/proc/change_stat(stat, amt, index)
+// 	if(!stat)
+// 		return
+// 	if(amt == 0 && index)
+// 		if(statindex[index])
+// 			change_stat(statindex[index]["stat"], -1*statindex[index]["amt"]) // there is not a single instance where change_stat(stat) is not the string stat
+// 			statindex[index] = null
+// 			return
+// 	if(!amt)
+// 		return
+// 	if(index)
+// 		if(statindex[index])
+// 			return //we cannot make a new index
+// 		else
+// 			statindex[index] = list("stat" = stat, "amt" = amt)
+// //			statindex[index]["stat"] = stat
+// //			statindex[index]["amt"] = amt
+// 	var/newamt = 0
+// 	switch(stat)
+// 		if("strength")
+// 			newamt = STASTR + amt
+// 			if(BUFSTR < 0) 
+// 				BUFSTR = BUFSTR + amt
+// 				if(BUFSTR > 0)
+// 					newamt = STASTR + BUFSTR
+// 					BUFSTR = 0
+// 			if(BUFSTR > 0)
+// 				BUFSTR = BUFSTR + amt
+// 				if(BUFSTR < 0)
+// 					newamt = STASTR + BUFSTR
+// 					BUFSTR = 0
+// 			while(newamt < 1)
+// 				newamt++
+// 				BUFSTR--
+// 			while(newamt > 20)
+// 				newamt--
+// 				BUFSTR++
+// 			STASTR = newamt
 
-		if("constitution")
-			newamt = STACON + amt
-			if(BUFCON < 0)
-				BUFCON = BUFCON + amt
-				if(BUFCON > 0)
-					newamt = STACON + BUFCON
-					BUFCON = 0
-			if(BUFCON > 0)
-				BUFCON = BUFCON + amt
-				if(BUFCON < 0)
-					newamt = STACON + BUFCON
-					BUFCON = 0
-			while(newamt < 1)
-				newamt++
-				BUFCON--
-			while(newamt > 20)
-				newamt--
-				BUFCON++
-			STACON = newamt
+// 		if("perception")
+// 			newamt = STAPER + amt
+// 			if(BUFPER < 0)
+// 				BUFPER = BUFPER + amt
+// 				if(BUFPER > 0)
+// 					newamt = STAPER + BUFPER
+// 					BUFPER = 0
+// 			if(BUFPER > 0)
+// 				BUFPER = BUFPER + amt
+// 				if(BUFPER < 0)
+// 					newamt = STAPER + BUFPER
+// 					BUFPER = 0
+// 			while(newamt < 1)
+// 				newamt++
+// 				BUFPER--
+// 			while(newamt > 20)
+// 				newamt--
+// 				BUFPER++
+// 			STAPER = newamt
 
-		if("endurance")
-			newamt = STAEND + amt
-			if(BUFEND < 0)
-				BUFEND = BUFEND + amt
-				if(BUFEND > 0)
-					newamt = STAEND + BUFEND
-					BUFEND = 0
-			if(BUFEND > 0)
-				BUFEND = BUFEND + amt
-				if(BUFEND < 0)
-					newamt = STAEND + BUFEND
-					BUFEND = 0
-			while(newamt < 1)
-				newamt++
-				BUFEND--
-			while(newamt > 20)
-				newamt--
-				BUFEND++
-			STAEND = newamt
+// 			update_fov_angles()
 
-		if("speed")
-			newamt = STASPD + amt
-			if(BUFSPE < 0)
-				BUFSPE = BUFSPE + amt
-				if(BUFSPE > 0)
-					newamt = STASPD + BUFSPE
-					BUFSPE = 0
-			if(BUFSPE > 0)
-				BUFSPE = BUFSPE + amt
-				if(BUFSPE < 0)
-					newamt = STASPD + BUFSPE
-					BUFSPE = 0
-			while(newamt < 1)
-				newamt++
-				BUFSPE--
-			while(newamt > 20)
-				newamt--
-				BUFSPE++
-			STASPD = newamt
+// 		if("intelligence")
+// 			newamt = STAINT + amt
+// 			if(BUFINT < 0)
+// 				BUFINT = BUFINT + amt
+// 				if(BUFINT > 0)
+// 					newamt = STAINT + BUFINT
+// 					BUFINT = 0
+// 			if(BUFINT > 0)
+// 				BUFINT = BUFINT + amt
+// 				if(BUFINT < 0)
+// 					newamt = STAINT + BUFINT
+// 					BUFINT = 0
+// 			while(newamt < 1)
+// 				newamt++
+// 				BUFINT--
+// 			while(newamt > 20)
+// 				newamt--
+// 				BUFINT++
+// 			STAINT = newamt
 
-		if("fortune")
-			newamt = STALUC + amt
-			if(BUFLUC < 0)
-				BUFLUC = BUFLUC + amt
-				if(BUFLUC > 0)
-					newamt = STALUC + BUFLUC
-					BUFLUC = 0
-			if(BUFLUC > 0)
-				BUFLUC = BUFLUC + amt
-				if(BUFLUC < 0)
-					newamt = STALUC + BUFLUC
-					BUFLUC = 0
-			while(newamt < 1)
-				newamt++
-				BUFLUC--
-			while(newamt > 20)
-				newamt--
-				BUFLUC++
-			STALUC = newamt
+// 		if("constitution")
+// 			newamt = STACON + amt
+// 			if(BUFCON < 0)
+// 				BUFCON = BUFCON + amt
+// 				if(BUFCON > 0)
+// 					newamt = STACON + BUFCON
+// 					BUFCON = 0
+// 			if(BUFCON > 0)
+// 				BUFCON = BUFCON + amt
+// 				if(BUFCON < 0)
+// 					newamt = STACON + BUFCON
+// 					BUFCON = 0
+// 			while(newamt < 1)
+// 				newamt++
+// 				BUFCON--
+// 			while(newamt > 20)
+// 				newamt--
+// 				BUFCON++
+// 			STACON = newamt
+
+// 		if("endurance")
+// 			newamt = STAEND + amt
+// 			if(BUFEND < 0)
+// 				BUFEND = BUFEND + amt
+// 				if(BUFEND > 0)
+// 					newamt = STAEND + BUFEND
+// 					BUFEND = 0
+// 			if(BUFEND > 0)
+// 				BUFEND = BUFEND + amt
+// 				if(BUFEND < 0)
+// 					newamt = STAEND + BUFEND
+// 					BUFEND = 0
+// 			while(newamt < 1)
+// 				newamt++
+// 				BUFEND--
+// 			while(newamt > 20)
+// 				newamt--
+// 				BUFEND++
+// 			STAEND = newamt
+
+// 		if("speed")
+// 			newamt = STASPD + amt
+// 			if(BUFSPE < 0)
+// 				BUFSPE = BUFSPE + amt
+// 				if(BUFSPE > 0)
+// 					newamt = STASPD + BUFSPE
+// 					BUFSPE = 0
+// 			if(BUFSPE > 0)
+// 				BUFSPE = BUFSPE + amt
+// 				if(BUFSPE < 0)
+// 					newamt = STASPD + BUFSPE
+// 					BUFSPE = 0
+// 			while(newamt < 1)
+// 				newamt++
+// 				BUFSPE--
+// 			while(newamt > 20)
+// 				newamt--
+// 				BUFSPE++
+// 			STASPD = newamt
+
+// 		if("fortune")
+// 			newamt = STALUC + amt
+// 			if(BUFLUC < 0)
+// 				BUFLUC = BUFLUC + amt
+// 				if(BUFLUC > 0)
+// 					newamt = STALUC + BUFLUC
+// 					BUFLUC = 0
+// 			if(BUFLUC > 0)
+// 				BUFLUC = BUFLUC + amt
+// 				if(BUFLUC < 0)
+// 					newamt = STALUC + BUFLUC
+// 					BUFLUC = 0
+// 			while(newamt < 1)
+// 				newamt++
+// 				BUFLUC--
+// 			while(newamt > 20)
+// 				newamt--
+// 				BUFLUC++
+// 			STALUC = newamt
 
 /proc/generic_stat_comparison(userstat as num, targetstat as num)
 	var/difference = userstat - targetstat
