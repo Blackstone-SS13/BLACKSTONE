@@ -399,6 +399,7 @@
 									playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 								owner.death()
 								brainkill = TRUE
+							owner.update_fov_angles()
 						else if(zone_precise in tonguestab_zones)
 							var/obj/item/organ/tongue/tongue_up_my_asshole = owner.getorganslot(ORGAN_SLOT_TONGUE)
 							if(tongue_up_my_asshole)
@@ -442,6 +443,7 @@
 								my_eyes.forceMove(get_turf(owner))
 								my_eyes.Remove(owner)
 								qdel(my_eyes)
+							owner.update_fov_angles()
 						else
 							if(!brainkill)
 								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
