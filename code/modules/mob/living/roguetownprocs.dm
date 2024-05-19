@@ -160,20 +160,16 @@
 				if(mainhand.can_parry)
 					mainhand_defense += (H.mind.get_skill_level(mainhand.associated_skill) * 20)
 					mainhand_defense += (mainhand.wdefense * 10)
-					visible_message("<span class='info'>mainhand: [mainhand_defense]</span>")
 			if(offhand)
 				if(offhand.can_parry)
 					offhand_defense += (H.mind.get_skill_level(offhand.associated_skill) * 20)
 					offhand_defense += (offhand.wdefense * 10)
-					visible_message("<span class='info'>offhand: [offhand_defense]</span>")
 			
 			if(mainhand_defense >= offhand_defense)
 				highest_defense += mainhand_defense
-				visible_message("<span class='info'>prob2defend main: [highest_defense]</span>")
 			else
 				used_weapon = offhand
 				highest_defense += offhand_defense
-				visible_message("<span class='info'>prob2defend off: [highest_defense]</span>")
 
 			var/defender_skill = 0
 			var/attacker_skill = 0
@@ -182,21 +178,17 @@
 				defender_skill = H.mind.get_skill_level(/datum/skill/combat/unarmed)
 				prob2defend += (defender_skill * 20)
 				weapon_parry = FALSE
-				visible_message("<span class='info'>use unarmed</span>")
 			else
 				defender_skill = H.mind.get_skill_level(used_weapon.associated_skill)
 				prob2defend += highest_defense
 				weapon_parry = TRUE
-				visible_message("<span class='info'>use parry</span>")
 				
 			if(U.mind)
 				if(intenty.masteritem)
 					attacker_skill = U.mind.get_skill_level(intenty.masteritem.associated_skill)
 					prob2defend -= (attacker_skill * 20)
-					visible_message("<span class='info'>total prob: [prob2defend]</span>")
 					if((intenty.masteritem.wbalance > 0) && (user.STASPD > src.STASPD)) //enemy weapon is quick, so get a bonus based on spddiff
 						prob2defend -= ( intenty.masteritem.wbalance * ((user.STASPD - src.STASPD) * 10) )
-						visible_message("<span class='info'>high speed: [prob2defend]</span>")
 				else
 					attacker_skill = U.mind.get_skill_level(/datum/skill/combat/unarmed)
 					prob2defend -= (attacker_skill * 20)
@@ -207,13 +199,11 @@
 				to_chat(src, "<span class='info'>Roll to parry... [prob2defend]%</span>")
 
 			if(prob(prob2defend))
-				visible_message("<span class='info'>defended</span>")
 				if(intenty.masteritem)
 					if(intenty.masteritem.wbalance < 0 && user.STASTR > src.STASTR) //enemy weapon is heavy, so get a bonus scaling on strdiff
 						drained = drained + ( intenty.masteritem.wbalance * ((user.STASTR - src.STASTR) * -5) )
 
 			else
-				visible_message("<span class='info'>not defended</span>")
 				to_chat(src, "<span class='warning'>The enemy defeated my parry!</span>")
 				return FALSE
 
@@ -253,7 +243,6 @@
 						used_weapon.take_damage(max(dam2take,1), BRUTE, "melee")
 					return TRUE
 				else
-					visible_message("<span class='info'>fail</span>")
 					return FALSE
 
 			if(weapon_parry == FALSE)
@@ -264,7 +253,6 @@
 					return TRUE
 				else
 					testing("failparry")
-					visible_message("<span class='info'>fail2</span>")
 					return FALSE
 		if(INTENT_DODGE)
 			if(pulledby && pulledby.grab_state >= GRAB_AGGRESSIVE)
