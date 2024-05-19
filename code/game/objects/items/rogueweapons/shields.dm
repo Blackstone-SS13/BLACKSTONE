@@ -27,16 +27,16 @@
 	max_integrity = 150
 	blade_dulling = DULLING_BASHCHOP
 	anvilrepair = /datum/skill/craft/armorsmithing
-	COOLDOWN_DECLARE(baton_bang)
+	COOLDOWN_DECLARE(shield_bang)
 
 // Shield banging
 /obj/item/rogueweapon/shield/attackby(obj/item/attackby_item, mob/user, params)
 	if(istype(attackby_item, /obj/item/rogueweapon))
-		if(!COOLDOWN_FINISHED(src, baton_bang))
+		if(!COOLDOWN_FINISHED(src, shield_bang))
 			return
 		user.visible_message("<span class='danger'>[user] bangs [src] with [attackby_item]!</span>")
 		playsound(user.loc, 'sound/combat/shieldbang.ogg', 50, TRUE)
-		COOLDOWN_START(src, baton_bang, BATON_BANG_COOLDOWN)
+		COOLDOWN_START(src, shield_bang, BATON_BANG_COOLDOWN)
 		return
 
 	return ..()
