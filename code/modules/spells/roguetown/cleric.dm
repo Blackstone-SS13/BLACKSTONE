@@ -123,7 +123,7 @@
 			if("Matthios")
 				target.visible_message("<span class='info'>A wreath of strange light passes over [target]!</span>", "<span class='notice'>I'm bathed in strange holy light?</span>")
 			if("Science")
-				target.visible_message("<span class='info'>Without any particular cause of reason, [target] is healed!</span>", "<span class='notice'>My wounds close without cause.</span>")
+				target.visible_message("<span class='info'>Without any particular cause or reason, [target] is healed!</span>", "<span class='notice'>My wounds close without cause.</span>")
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
 			var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
