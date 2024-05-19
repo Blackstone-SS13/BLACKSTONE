@@ -1,6 +1,6 @@
 #define SHIELD_BASH		/datum/intent/shield/bash
 #define SHIELD_BLOCK		/datum/intent/shield/block
-#define BATON_BANG_COOLDOWN (3 SECONDS)
+#define SHIELD_BANG_COOLDOWN (3 SECONDS)
 
 /obj/item/rogueweapon/shield
 	name = ""
@@ -36,7 +36,7 @@
 			return
 		user.visible_message("<span class='danger'>[user] bangs [src] with [attackby_item]!</span>")
 		playsound(user.loc, 'sound/combat/shieldbang.ogg', 50, TRUE)
-		COOLDOWN_START(src, shield_bang, BATON_BANG_COOLDOWN)
+		COOLDOWN_START(src, shield_bang, SHIELD_BANG_COOLDOWN)
 		return
 
 	return ..()
@@ -209,4 +209,4 @@ obj/item/rogueweapon/shield/buckler/proc/bucklerskill(mob/living/user)
 			if("onback")
 				return list("shrink" = 0.6,"sx" = 1,"sy" = 4,"nx" = 1,"ny" = 2,"wx" = 3,"wy" = 3,"ex" = 0,"ey" = 2,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 
-#undef BATON_BANG_COOLDOWN
+#undef SHIELD_BANG_COOLDOWN
