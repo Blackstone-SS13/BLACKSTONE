@@ -296,7 +296,7 @@
 			numValue = textList2nums(Skills[path])
 		else
 			numValue = Skills[path]
-		adjust_skillrank(truePath, numValue, TRUE)
+		adjust_experience(truePath, numValue, TRUE) // change this to what i think is a rewritten proc?
 		
 /datum/mind/proc/textList2nums(text) // needs a better name
 	var/list/values = splittext(text, ",")
