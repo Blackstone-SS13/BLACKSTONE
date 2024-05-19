@@ -96,7 +96,7 @@
 		switch(user.patron.type)
 			if(/datum/patron/old_god)
 				target.visible_message("<span class='info'>A strange stirring feeling pours from [target]!</span>", "<span class='notice'>Sentimental thoughts drive away my pains!</span>")
-			if("/datum/patron/divine/astrata")
+			if(/datum/patron/divine/astrata)
 				target.visible_message("<span class='info'>A wreath of gentle light passes over [target]!</span>", "<span class='notice'>I'm bathed in holy light!</span>")
 			if(/datum/patron/divine/noc)
 				target.visible_message("<span class='info'>A shroud of soft moonlight falls upon [target]!</span>", "<span class='notice'>I'm shrouded in gentle moonlight!</span>")
@@ -122,8 +122,10 @@
 				target.visible_message("<span class='info'>Foul fumes billow outward as [target] is restored!</span>", "<span class='notice'>A noxious scent burns my nostrils, but I feel better!</span>")
 			if(/datum/patron/inhumen/matthios )
 				target.visible_message("<span class='info'>A wreath of strange light passes over [target]!</span>", "<span class='notice'>I'm bathed in strange holy light?</span>")
-			if("/datum/patron/godless")
+			if(/datum/patron/godless)
 				target.visible_message("<span class='info'>Without any particular cause or reason, [target] is healed!</span>", "<span class='notice'>My wounds close without cause.</span>")
+			else
+				target.visible_message("<span class='info'>A choral sound comes from above and [target] is healed!</span>", "<span class='notice'>I am bathed in healing choral hymns!</span>")
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
 			var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
