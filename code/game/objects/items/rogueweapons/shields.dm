@@ -1,6 +1,6 @@
 #define SHIELD_BASH		/datum/intent/shield/bash
 #define SHIELD_BLOCK		/datum/intent/shield/block
-#define BATON_BASH_COOLDOWN (3 SECONDS)
+#define BATON_BANG_COOLDOWN (3 SECONDS)
 
 /obj/item/rogueweapon/shield
 	name = ""
@@ -27,16 +27,16 @@
 	max_integrity = 150
 	blade_dulling = DULLING_BASHCHOP
 	anvilrepair = /datum/skill/craft/armorsmithing
-	COOLDOWN_DECLARE(baton_bash)
+	COOLDOWN_DECLARE(baton_bang)
 
-// Shield bashing
+// Shield banging
 /obj/item/rogueweapon/shield/attackby(obj/item/attackby_item, mob/user, params)
 	if(istype(attackby_item, /obj/item/rogueweapon))
-		if(!COOLDOWN_FINISHED(src, baton_bash))
+		if(!COOLDOWN_FINISHED(src, baton_bang))
 			return
-		user.visible_message("<span class='danger'>[user] bashes [src] with [attackby_item]!</span>")
-		playsound(user.loc, 'sound/combat/shieldbash.ogg', 50, TRUE)
-		COOLDOWN_START(src, baton_bash, BATON_BASH_COOLDOWN)
+		user.visible_message("<span class='danger'>[user] bangs [src] with [attackby_item]!</span>")
+		playsound(user.loc, 'sound/combat/shieldbang.ogg', 50, TRUE)
+		COOLDOWN_START(src, baton_bang, BATON_BANG_COOLDOWN)
 		return
 
 	return ..()
@@ -209,4 +209,4 @@ obj/item/rogueweapon/shield/buckler/proc/bucklerskill(mob/living/user)
 			if("onback")
 				return list("shrink" = 0.6,"sx" = 1,"sy" = 4,"nx" = 1,"ny" = 2,"wx" = 3,"wy" = 3,"ex" = 0,"ey" = 2,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 
-#undef BATON_BASH_COOLDOWN
+#undef BATON_BANG_COOLDOWN
