@@ -380,8 +380,8 @@
 							var/obj/item/organ/eyes/my_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
 							if(my_eyes)
 								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-								owner.Stun(10)
-								owner.blind_eyes(10)
+								owner.Stun(5)
+								owner.blind_eyes(5)
 								if(zone_precise == BODY_ZONE_PRECISE_R_EYE)
 									my_eyes.right_poked = TRUE
 									if(!my_eyes.left_poked)
@@ -428,8 +428,8 @@
 						var/obj/item/organ/eyes/my_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
 						if(my_eyes)
 							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-							owner.Stun(10)
-							owner.blind_eyes(10)
+							owner.Stun(5)
+							owner.blind_eyes(5)
 							if(zone_precise == BODY_ZONE_PRECISE_R_EYE)
 								my_eyes.right_poked = TRUE
 								if(!my_eyes.left_poked)
