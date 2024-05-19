@@ -134,7 +134,7 @@
 /datum/mind/proc/person_knows_me(person) //we are added to their lists
 	if(!person)
 		return
-	if(person == src)
+	if(person == src || person == src.current)
 		return
 	if(ishuman(person))
 		var/mob/living/carbon/human/guy = person
