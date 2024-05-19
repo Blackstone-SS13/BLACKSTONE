@@ -100,7 +100,7 @@ GLOBAL_LIST_EMPTY_TYPED(schizohelps, /datum/schizohelp)
 	for(var/client/admin in GLOB.admins)
 		if(!(admin.prefs.chat_toggles & CHAT_PRAYER))
 			continue
-		to_chat(admin, "<span class='info'>[voice] ([voice.key || "NO KEY"]) [ADMIN_FLW(owner)] [ADMIN_SM(owner)] answered [owner] ([owner.key || "NO KEY"])'s [ADMIN_FLW(owner)] [ADMIN_SM(owner)] meditation:\n[answer]</span>")
+		to_chat(admin, "<span class='info'><i>[voice] ([voice.key || "NO KEY"]) [ADMIN_FLW(owner)] [ADMIN_SM(owner)] answered [owner] ([owner.key || "NO KEY"])'s [ADMIN_FLW(owner)] [ADMIN_SM(owner)] meditation:</i>\n[answer]</span>")
 	answers[voice.key] = answer
 	if(length(answers) >= max_answers)
 		qdel(src)
