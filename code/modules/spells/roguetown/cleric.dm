@@ -94,6 +94,8 @@
 			target.fire_act(1,5)
 			return TRUE
 		switch(user.patron.name)
+			if("Psydon")
+				target.visible_message("<span class='info'>A strange stirring feeling pours from [target]!</span>", "<span class='notice'>Sentimental thoughts drive away my pains!</span>")
 			if("Astrata")
 				target.visible_message("<span class='info'>A wreath of gentle light passes over [target]!</span>", "<span class='notice'>I'm bathed in holy light!</span>")
 			if("Noc")
