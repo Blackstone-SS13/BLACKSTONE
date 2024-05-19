@@ -196,7 +196,7 @@
 			foundy= TRUE
 		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
 			if (prob(used+10))
-				if(!can_bloody_wound())
+				if(!can_bloody_wound() || resistance)
 					return FALSE
 				var/organ_spilled = FALSE
 				var/turf/T = get_turf(owner)
