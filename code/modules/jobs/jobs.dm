@@ -116,15 +116,15 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Fisher",
 	"Lumberjack",
 	"Butler",
-	"Adventurer",
 	"Towner",
-	"Pilgrim",
 	"Grabber",
 	"Nightmaster",
 	"Bath Wench",
 	"Docker",
 	"Prisoner",
-	"Beggar"
+	"Beggar",
+	"Adventurer",
+	"Pilgrim",
 	))
 
 GLOBAL_LIST_INIT(youngfolk_positions, list(
@@ -177,7 +177,6 @@ GLOBAL_LIST_EMPTY(job_assignment_order)
 	sorting_order += GLOB.serf_positions
 	sorting_order += GLOB.peasant_positions
 	sorting_order += GLOB.youngfolk_positions
-	sorting_order += GLOB.allmig_positions
 	return sorting_order
 
 GLOBAL_LIST_INIT(exp_jobsmap, list(
