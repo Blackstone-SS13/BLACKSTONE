@@ -18,6 +18,7 @@
 		"Aasimar",
 		"Half Orc",
 	)
+	allowed_patrons = ALL_DIVINE_PATRONS //gets set to necra on the outfit anyways lol
 	tutorial = "As an acolyte of Necra, you have been given the not-so-graceful task of putting the dead to rest instead of healing the living. It isn't a great job by any means, but surely Necra doesn't mind if you take a few trinkets from the dead, right?"
 
 	outfit = /datum/outfit/job/roguetown/undertaker
