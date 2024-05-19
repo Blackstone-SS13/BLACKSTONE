@@ -32,15 +32,16 @@
 
 /datum/outfit/job/roguetown/undertaker/pre_equip(mob/living/carbon/human/H)
 	..()
-	beltl = /obj/item/roguekey/graveyard
-	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
-	backr = /obj/item/rogueweapon/shovel
 	head = /obj/item/clothing/head/roguetown/necrahood
 	neck = /obj/item/clothing/neck/roguetown/psicross/necra
 	cloak = /obj/item/clothing/cloak/raincloak/mortus
-	shoes = /obj/item/clothing/shoes/roguetown/boots
-	pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra
+	pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
+	shoes = /obj/item/clothing/shoes/roguetown/boots
+	belt = /obj/item/storage/belt/rogue/leather/rope
+	beltl = /obj/item/roguekey/graveyard
+	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
+	backr = /obj/item/rogueweapon/shovel
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
