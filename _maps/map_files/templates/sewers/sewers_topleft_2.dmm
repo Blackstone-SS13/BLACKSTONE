@@ -1,32 +1,50 @@
 "a" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
 "d" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue)
+"e" = (/obj/structure/closet/crate/chest,/turf/open/floor/rogue/cobble,/area/rogue)
+"f" = (/obj/structure/fermenting_barrel,/turf/open/floor/rogue/cobble,/area/rogue)
+"h" = (/obj/effect/decal/cleanable/cobweb/cobweb2,/obj/effect/decal/remains/human,/turf/open/floor/rogue/cobble,/area/rogue)
+"i" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"j" = (/obj/machinery/light/rogue/torchholder/r,/turf/open/floor/rogue/cobble,/area/rogue)
+"k" = (/obj/machinery/light/rogue/torchholder/l,/turf/open/floor/rogue/cobble,/area/rogue)
+"m" = (/obj/machinery/light/rogue/firebowl,/turf/open/floor/rogue/cobble,/area/rogue)
+"o" = (/mob/living/carbon/human/species/skeleton/npc/ambush,/turf/open/floor/rogue/cobble,/area/rogue)
+"p" = (/obj/structure/bed/rogue/shit,/turf/open/floor/rogue/cobble,/area/rogue)
+"r" = (/obj/effect/decal/cleanable/blood/bubblegum,/obj/effect/decal/remains/human,/turf/open/floor/rogue/cobble,/area/rogue)
+"w" = (/obj/effect/decal/cleanable/blood/gibs/old,/turf/open/floor/rogue/cobble,/area/rogue)
 "B" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"D" = (/obj/structure/mineral_door/wood,/turf/open/floor/rogue/cobble,/area/rogue)
+"E" = (/obj/structure/fermenting_barrel/beer,/turf/open/floor/rogue/cobble,/area/rogue)
+"I" = (/obj/structure/fermenting_barrel/water,/turf/open/floor/rogue/cobble,/area/rogue)
+"J" = (/obj/structure/fermenting_barrel,/obj/effect/decal/cleanable/cobweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"K" = (/obj/structure/rack/rogue,/turf/open/floor/rogue/cobble,/area/rogue)
 "N" = (/turf/closed,/area/rogue)
 "P" = (/obj/effect/decal/cleanable/blood,/obj/effect/decal/cleanable/blood/tracks,/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue)
 "R" = (/turf/closed/mineral/rogue,/area/rogue)
+"U" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"X" = (/obj/effect/decal/cleanable/blood/footprints,/turf/open/floor/rogue/cobble,/area/rogue)
 "Y" = (/turf/open/floor/rogue/cobble,/area/rogue)
 
 (1,1,1) = {"
 RRRRRRRRRRRRPRRRRRRRRRRRRB
 RRRRRRRRRRRRdRRRRRRRRRRRRa
-RRRRRRRRRRRRdRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-aaaaaaaaaaaaaaaaaaaYaaaaaa
+RaaaaaaaaaaaUBaaaaaaaaaRRa
+RaJfEfeYiYiipYiiYiiiYhaRRa
+RarYYYYwaaaaaYaaaaaaYYaRRa
+RafEffYXKKKKKYKKKKKKYYaRRa
+RaYYYYYXYYYYYYYYoYiYYYaaaa
+RaffIYYXaaaaaYaaaaaakYDiii
+RaYYYYaXKKKKKYKKKKKKYYaaaa
+RaYoYYaXYYiYYYYYYYYYYYaRRa
+RaYYYYajaaaaaYaaaaaaYYaRRa
+RaYYYYaYKKKKKYKKKKKKYYaRRa
+RaYYYYaYYYYYYYYYYYiYYYaRRa
+RaYYYYaYaaaaaYaaaaaaYYaRRa
+RaYYYYaYKKKKKYKKKKKKYYaRRa
+RaYYemaYYiYYYYYiiYYYYmaRRa
+RaDaaaaaaaaaaaaaaaaaaaaRRa
+RaiaRRRRRRRRRRRRRRRRRRRRRa
+RaiaRRRRRRRRRRRRRRRRRRRRRa
+aaiaaaaaaaaaaaaaaaaaaaaaaa
 "}
 (1,1,2) = {"
 NNNNNNNNNNNNNNNNNNNNNNNNNN

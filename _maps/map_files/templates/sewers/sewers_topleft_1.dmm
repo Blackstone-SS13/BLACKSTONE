@@ -1,52 +1,70 @@
-"a" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
-"d" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue)
-"B" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
-"N" = (/turf/closed,/area/rogue)
-"P" = (/obj/effect/decal/cleanable/blood,/obj/effect/decal/cleanable/blood/tracks,/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue)
-"R" = (/turf/closed/mineral/rogue,/area/rogue)
-"Y" = (/turf/open/floor/rogue/cobble,/area/rogue)
+"a" = (/turf/closed/mineral/rogue,/area/rogue)
+"c" = (/obj/effect/decal/cleanable/blood,/obj/effect/decal/cleanable/blood/tracks,/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue)
+"e" = (/obj/item/reagent_containers/glass/cup/wooden,/obj/structure/table/wood{icon_state = "largetable"; dir = 1},/turf/open/floor/rogue/cobble,/area/rogue)
+"f" = (/obj/structure/mineral_door/wood{lockid = sewerdungeon; locked = 1},/turf/open/floor/rogue/cobble,/area/rogue)
+"g" = (/obj/structure/mineral_door/bars{lockid = sewercell3},/turf/open/floor/rogue/cobble,/area/rogue)
+"h" = (/obj/effect/decal/remains/bigrat,/turf/open/floor/rogue/cobble,/area/rogue)
+"i" = (/obj/structure/bed/rogue/shit,/turf/open/floor/rogue/cobble,/area/rogue)
+"j" = (/obj/structure/spider/stickyweb,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"k" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/cobble,/area/rogue)
+"l" = (/obj/structure/bed/rogue/shit,/obj/effect/decal/cleanable/cobweb/cobweb2,/turf/open/floor/rogue/cobble,/area/rogue)
+"m" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 1},/turf/open/floor/rogue/cobble,/area/rogue)
+"n" = (/obj/structure/mineral_door/bars{lockid = sewercell2},/turf/open/floor/rogue/cobble,/area/rogue)
+"o" = (/obj/structure/table/wood{icon_state = "largetable"},/obj/item/reagent_containers/glass/bowl,/turf/open/floor/rogue/cobble,/area/rogue)
+"p" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 5},/obj/item/reagent_containers/glass/cup/wooden,/turf/open/floor/rogue/cobble,/area/rogue)
+"q" = (/obj/item/reagent_containers/glass/bowl/mushroom_bowl,/obj/effect/decal/cleanable/blood/splatter,/turf/open/floor/rogue/cobble,/area/rogue)
+"r" = (/obj/structure/table/wood{icon_state = "largetable"},/obj/item/rope/chain,/turf/open/floor/rogue/cobble,/area/rogue)
+"s" = (/obj/structure/fluff/walldeco/chains,/turf/open/floor/rogue/cobble,/area/rogue)
+"t" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 9},/turf/open/floor/rogue/cobble,/area/rogue)
+"u" = (/obj/structure/mineral_door/wood{lockid = sewerdungeon},/turf/open/floor/rogue/cobble,/area/rogue)
+"v" = (/obj/structure/fluff/walldeco/stone,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"w" = (/obj/structure/mineral_door/bars{lockid = sewercell1},/turf/open/floor/rogue/cobble,/area/rogue)
+"x" = (/obj/structure/table/wood{icon_state = "largetable"},/obj/item/keyring,/turf/open/floor/rogue/cobble,/area/rogue)
+"z" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 10},/turf/open/floor/rogue/cobble,/area/rogue)
+"A" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"B" = (/obj/structure/bed/rogue/shit,/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/blood,/turf/open/floor/rogue/cobble,/area/rogue)
+"C" = (/obj/item/roguekey/custom{lockid = "sewercell2"; name = "sewer cell II key"},/turf/open/floor/rogue/cobble,/area/rogue)
+"D" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 1},/obj/item/reagent_containers/glass/bowl,/turf/open/floor/rogue/cobble,/area/rogue)
+"E" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"F" = (/obj/structure/bars,/turf/open/floor/rogue/cobble,/area/rogue)
+"G" = (/obj/structure/fluff/walldeco/chains,/obj/item/reagent_containers/glass/bowl,/obj/item/reagent_containers/food/snacks/deadmouse,/turf/open/floor/rogue/cobble,/area/rogue)
+"H" = (/obj/structure/table/wood{icon_state = "largetable"},/obj/item/reagent_containers/glass/cup/wooden,/turf/open/floor/rogue/cobble,/area/rogue)
+"J" = (/obj/structure/rack/rogue,/turf/open/floor/rogue/cobble,/area/rogue)
+"K" = (/obj/effect/decal/cleanable/blood,/turf/open/floor/rogue/cobble,/area/rogue)
+"L" = (/obj/machinery/light/rogue/torchholder/r,/turf/open/floor/rogue/cobble,/area/rogue)
+"M" = (/obj/item/roguekey/custom{lockid = "sewercell3"; name = "sewer cell III key"},/turf/open/floor/rogue/cobble,/area/rogue)
+"N" = (/obj/machinery/light/rogue/torchholder/l,/turf/open/floor/rogue/cobble,/area/rogue)
+"O" = (/obj/structure/fermenting_barrel/water,/turf/open/floor/rogue/cobble,/area/rogue)
+"P" = (/obj/effect/decal/cleanable/blood/tracks,/obj/effect/decal/cleanable/blood/splatter,/turf/open/floor/rogue/cobble,/area/rogue)
+"Q" = (/obj/item/roguekey/custom{lockid = "sewerdungeon"; name = "sewer dungeon key"},/turf/open/floor/rogue/cobble,/area/rogue)
+"R" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"S" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 6},/obj/item/rope/chain,/turf/open/floor/rogue/cobble,/area/rogue)
+"T" = (/obj/item/reagent_containers/glass/bowl,/turf/open/floor/rogue/cobble,/area/rogue)
+"U" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 1},/obj/item/rope/chain,/turf/open/floor/rogue/cobble,/area/rogue)
+"V" = (/obj/structure/closet/crate/chest,/turf/open/floor/rogue/cobble,/area/rogue)
+"W" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"X" = (/turf/open/floor/rogue/cobble,/area/rogue)
+"Z" = (/obj/item/roguekey/custom{lockid = "sewercell1"; name = "sewer cell I key"},/turf/open/floor/rogue/cobble,/area/rogue)
 
 (1,1,1) = {"
-RRRRRRRRRRRRPRRRRRRRRRRRRB
-RRRRRRRRRRRRdRRRRRRRRRRRRa
-RRRRRRRRRRRRdRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-RRRRRRRRRRRRRRRRRRRRRRRRRa
-aaaaaaaaaaaaaaaaaaaYaaaaaa
-"}
-(1,1,2) = {"
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
-NNNNNNNNNNNNNNNNNNNNNNNNNN
+aaaaaaaaaaaacaaaaaaaaaaaaE
+aWWWWWWWWWWWRvWWWvWWWvWWaW
+aWNXXXXXXXVWBXGWsXlWKTAWaW
+aWXtemDUpXXWKXXWXXqWiKsWaW
+aWXzxoHrSXOWXPXWXXXWXXXWaW
+aWXXXXXXXXLWFwFWFnFWFgFWaW
+aWXXXQXXXXXXXZXXXCXXXMXWaW
+aWWWWuWXXXXkXXXXXXXXXXLWWW
+aaaaWXWVVXXXXXXXXXXXXXXfAA
+aaaaWXWWWWWWWWEWWWWWWWWWWW
+aaaaWAWaaaaaaaaaaaaaaaaaaW
+aaaaWAWaaWWWWWWWWWWWWaaaaW
+aaaaWAWaaWOAAJhAkAAXWaaaaW
+aaaaWXWWWWXXXXXXXXXXWaaaaW
+aaaaWXXXXXXkXAAXjAAXWaaaaW
+aaaaWWWWWWAAXXXXAAXXWaaaaW
+aaaaaaaaaWWWWWWWWWWuWaaaaW
+aaaaaaaaaaaaaaaaaaWAWaaaaW
+aaaaaaaaaaaaaaaaaaWAWaaaaW
+WWWWWWWWWWWWWWWWWWWAWWWWWW
 "}
