@@ -174,7 +174,7 @@
 	item_state = "sacked"
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	dynamic_hair_suffix = ""
-	//dropshrink = 0.75
+	tint = TINT_BLIND
 
 /obj/item/clothing/head/roguetown/sack/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -189,8 +189,8 @@
 	if(target.get_item_by_slot(SLOT_HEAD))
 		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")
 		return
-	target.visible_message("<span class='warning'>[user] starts forcing a [src] onto [target]'s head!</span>", \
-	"<span class='danger'>[target] starts forcing [src] onto your head!</span>", "<i>I cant see anything.</i>")
+	target.visible_message("<span class='warning'>[user] forces a [src] onto [target]'s head!</span>", \
+	"<span class='danger'>[target] forces [src] onto your head!</span>", "<i>I cant see anything.</i>")
 	user.dropItemToGround(src)
 	target.equip_to_slot_if_possible(src, SLOT_HEAD)
 
