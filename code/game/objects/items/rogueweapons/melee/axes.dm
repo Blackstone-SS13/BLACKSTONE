@@ -14,6 +14,7 @@
 	swingsound = BLADEWOOSH_MED
 	associated_skill = /datum/skill/combat/axesmaces
 	max_blade_int = 100
+	minstr = 8
 	wdefense = 1
 	w_class = WEIGHT_CLASS_BULKY
 	wlength = WLENGTH_SHORT
@@ -94,14 +95,20 @@
 	penfactor = 10
 	swingdelay = 10
 
+/datum/intent/axe/chop/battle
+	penfactor = 20
+	damfactor = 1.1 //33 on battleaxe
+
 /obj/item/rogueweapon/stoneaxe/battle
-	force = 33
+	force = 24
+	force_wielded = 30
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "battle axe"
+	desx = "a heavy steel axe forged for combat."
 	icon_state = "battleaxe"
 	max_blade_int = 300
 	smeltresult = /obj/item/ingot/steel
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop/battle)
 	minstr = 12
 	wdefense = 4
 
@@ -117,10 +124,26 @@
 	return ..()
 
 /obj/item/rogueweapon/stoneaxe/woodcut
-	force = 23
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "axe"
+	desc = "an iron axe for chopping down trees"
+	force = 20
+	force_wielded = 26
+	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	icon_state = "axe"
+	max_blade_int = 400
+	smeltresult = /obj/item/ingot/iron
+	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	wdefense = 2
+
+/obj/item/rogueweapon/stoneaxe/handaxe
+	force = 18
+	force_wielded = 22
+	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	name = "hatchet"
+	desc = "an iron hand axe"
+	icon_state = "hatchet"
+	minstr = 6
+	dropshrink = 0.75
 	max_blade_int = 400
 	smeltresult = /obj/item/ingot/iron
 	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
@@ -128,7 +151,9 @@
 
 /obj/item/rogueweapon/stoneaxe/woodcut/steel
 	icon_state = "saxe"
-	force = 26
+	desc = "a cersatile steel axe for cleaving timber or flesh/"
+	force = 22
+	force_wielded = 28
 	max_blade_int = 500
 	smeltresult = /obj/item/ingot/steel
 	wdefense = 3
