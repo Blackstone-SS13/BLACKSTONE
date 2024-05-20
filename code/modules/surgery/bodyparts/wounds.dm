@@ -143,12 +143,12 @@
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
-	if(bclass == BCLASS_TWIST) //the ol dick twist
+/*	if(bclass == BCLASS_TWIST) //the ol dick twist
 		if(dam)
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 				owner.emote("groin")
 				owner.Stun(10)
-		return FALSE
+		return FALSE */
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
 		var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
 		if(zone_precise == BODY_ZONE_PRECISE_GROIN)
