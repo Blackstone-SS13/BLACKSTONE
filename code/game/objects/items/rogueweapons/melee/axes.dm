@@ -151,7 +151,7 @@
 
 /obj/item/rogueweapon/stoneaxe/woodcut/steel
 	icon_state = "saxe"
-	desc = "a cersatile steel axe for cleaving timber or flesh/"
+	desc = "a versatile steel axe for cleaving timber or flesh"
 	force = 22
 	force_wielded = 28
 	max_blade_int = 500
