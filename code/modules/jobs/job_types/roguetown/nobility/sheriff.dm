@@ -40,7 +40,7 @@
 	..()
 	head = /obj/item/clothing/head/roguetown/helmet/sallet/visored
 	neck = /obj/item/clothing/neck/roguetown/bervor
-	armor = /obj/item/clothing/suit/roguetown/armor/brigandine/sheriff
+	armor = /obj/item/clothing/suit/roguetown/armor/plate
 	shirt = /obj/item/clothing/suit/roguetown/armor/chainmail
 	pants = /obj/item/clothing/under/roguetown/chainlegs
 	gloves = /obj/item/clothing/gloves/roguetown/plate
@@ -49,7 +49,7 @@
 	belt = /obj/item/storage/belt/rogue/leather/plaquesilver
 	beltr = /obj/item/rogueweapon/mace/steel
 	beltl = /obj/item/rogueweapon/sword/sabre
-	cloak = /obj/item/clothing/cloak/cape/guard
+	cloak = /obj/item/clothing/cloak/stabard/guard/hood
 	backl = /obj/item/rogueweapon/shield/tower
 	backr = /obj/item/storage/backpack/rogue/satchel/black
 	backpack_contents = list(/obj/item/keyring/sheriff = 1, /obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
