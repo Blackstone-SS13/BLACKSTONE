@@ -97,11 +97,11 @@
 	swingdelay = 10
 
 /datum/intent/axe/chop/battle
-	penfactor = 20
+	penfactor = 70
 	damfactor = 1.1 //33 on battleaxe
 
-/datum/intent/axe/chop/battle
-	penfactor = 10
+/datum/intent/axe/cut/battle
+	penfactor = 30
 
 /obj/item/rogueweapon/stoneaxe/battle
 	force = 25
@@ -129,7 +129,7 @@
 
 /obj/item/rogueweapon/stoneaxe/woodcut
 	name = "axe"
-	desc = "an iron axe for chopping down trees"
+	desc = "an iron axe for chopping down trees."
 	force = 20
 	force_wielded = 26
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
@@ -143,7 +143,7 @@
 	force = 19
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "hatchet"
-	desc = "an iron hand axe"
+	desc = "an iron hand axe."
 	icon_state = "hatchet"
 	minstr = 1
 	dropshrink = 0.75
@@ -154,7 +154,7 @@
 
 /obj/item/rogueweapon/stoneaxe/woodcut/steel
 	icon_state = "saxe"
-	desc = "a versatile steel axe for cleaving timber or flesh"
+	desc = "a versatile steel axe for cleaving timber or flesh."
 	force = 22
 	force_wielded = 28
 	max_blade_int = 500
