@@ -372,7 +372,7 @@
 
 /obj/item/rogueweapon/sword/iron
 	name = "sword"
-	desc = "The most classical war weapon."
+	desc = "a simple iron sword."
 	icon_state = "isword"
 	minstr = 6
 	smeltresult = /obj/item/ingot/iron
@@ -385,7 +385,7 @@
 	icon_state = "iswordshort"
 	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
 	gripped_intents = null
-	minstr = 5
+	minstr = 4
 	wdefense = 3
 
 /obj/item/rogueweapon/sword/iron/short/chipped
@@ -401,6 +401,15 @@
 /datum/intent/sword/thrust/short
 	clickcd = 10
 	damfactor = 1.1
+
+/obj/item/rogueweapon/sword/iron/messer
+	name = "iron messer"
+	desc = "a single edged blade for chopping."
+	icon_state = "imesser"
+	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust, /datum/intent/axe/chop)
+	gripped_intents = null
+	minstr = 4
+	wdefense = 2
 
 /obj/item/rogueweapon/sword/sabre
 	name = "sabre"
