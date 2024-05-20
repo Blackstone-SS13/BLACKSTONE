@@ -104,7 +104,7 @@
 	force_wielded = 30
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "battle axe"
-	desx = "a heavy steel axe forged for combat."
+	desc = "a heavy steel axe forged for combat."
 	icon_state = "battleaxe"
 	max_blade_int = 300
 	smeltresult = /obj/item/ingot/steel
@@ -136,17 +136,16 @@
 	wdefense = 2
 
 /obj/item/rogueweapon/stoneaxe/handaxe
-	force = 18
-	force_wielded = 22
+	force = 19
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "hatchet"
 	desc = "an iron hand axe"
 	icon_state = "hatchet"
-	minstr = 6
+	minstr = 1
 	dropshrink = 0.75
 	max_blade_int = 400
 	smeltresult = /obj/item/ingot/iron
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	gripped_intents = null
 	wdefense = 2
 
 /obj/item/rogueweapon/stoneaxe/woodcut/steel
