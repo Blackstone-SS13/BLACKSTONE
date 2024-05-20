@@ -98,7 +98,7 @@
 
 /datum/intent/axe/chop/battle
 	penfactor = 70
-	damfactor = 1.1 //33 on battleaxe
+	damfactor = 1.2 //36 on battleaxe
 
 /datum/intent/axe/cut/battle
 	penfactor = 30
@@ -106,7 +106,7 @@
 /obj/item/rogueweapon/stoneaxe/battle
 	force = 25
 	force_wielded = 30
-	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	possible_item_intents = list(/datum/intent/axe/cut/battle, /datum/intent/axe/chop/battle)
 	name = "battle axe"
 	desc = "a heavy steel axe forged for combat."
 	icon_state = "battleaxe"
