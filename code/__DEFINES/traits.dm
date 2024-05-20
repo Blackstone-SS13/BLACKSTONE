@@ -60,7 +60,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_RETARD_ANATOMY = "My anatomy is inhumen, preventing me from wearing hats and shoes.",
 	RTRAIT_NASTY_EATER = "<span class='deadsay'>I can eat bad food, and water that would be toxic to humen will not affect me.</span>",
 	RTRAIT_ROT_EATER = "<span class='deadsay'>I can eat rotten food.</span>",
-	RTRAIT_ORGAN_EATER = "<span class='deadsay'>I can eat organs.</span>",
+	RTRAIT_ORGAN_EATER = "<span class='deadsay'>I can eat organs and raw flesh.</span>",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "<span class='warning'>I can't sleep.</span>",
