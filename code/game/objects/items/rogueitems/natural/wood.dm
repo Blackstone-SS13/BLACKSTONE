@@ -27,32 +27,6 @@
 	w_class = WEIGHT_CLASS_BULKY
 	smeltresult = /obj/item/rogueore/coal
 
-/obj/item/grown/log/tree/small/attackby(obj/item/I, mob/living/user, params)
-	user.changeNext_move(CLICK_CD_MELEE)
-	if(user.used_intent?.blade_class == BCLASS_CUT)
-		playsound(get_turf(src.loc), 'sound/items/wood_sharpen.ogg', 100)
-		if(do_after(user, 20))
-			user.visible_message("<span class='notice'>[user] carves [src].</span>")
-			var/obj/item/grown/log/tree/small/S = new /obj/item/grown/log/tree/bowpartial(get_turf(src.loc))
-			if(user.is_holding(src))
-				user.dropItemToGround(src)
-				user.put_in_hands(S)
-			qdel(src)
-		else
-			user.visible_message("<span class='warning'>[user] carves [src].</span>")
-		return
-
-/obj/item/grown/log/tree/bowpartial
-	name = "unstrung bow"
-	desc = "a partially completed bow, still waiting to be strung."
-	icon_state = "bowpartial"
-	max_integrity = 30
-	firefuel = 10 MINUTES
-	twohands_required = FALSE
-	gripped_intents = null
-	w_class = WEIGHT_CLASS_BULKY
-	smeltresult = /obj/item/rogueore/coal
-
 /obj/item/grown/log/tree/stick
 	seed = null
 	name = "stick"
