@@ -17,7 +17,6 @@
 	display_order = JDO_MERCHANT
 
 	outfit = /datum/outfit/job/roguetown/merchant
-	bypass_lastclass = TRUE
 	give_bank_account = 22
 	min_pq = 1
 	max_pq = null
