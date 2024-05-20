@@ -385,7 +385,7 @@
 	icon_state = "iswordshort"
 	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
 	gripped_intents = null
-	minstr = 5
+	minstr = 4
 	wdefense = 3
 
 /obj/item/rogueweapon/sword/iron/short/chipped
@@ -406,7 +406,7 @@
 	name = "iron messer"
 	desc = "a single edged blade for chopping."
 	icon_state = "imesser"
-	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust, /datum/intent/dagger/chop)
+	possible_item_intents = list(/datum/intent/sword/cut/sabre, /datum/intent/sword/thrust, /datum/intent/axe/chop)
 	gripped_intents = null
 	minstr = 4
 	wdefense = 2
