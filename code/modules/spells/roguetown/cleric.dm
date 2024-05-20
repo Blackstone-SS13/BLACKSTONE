@@ -35,9 +35,9 @@
 		return
 
 	var/datum/patron/A = H.patron
-	var/list/spelllist = list(A.t0, A.t1, A.t2, A.t3)
+	var/spelllist = list(A.t0, A.t1, A.t2, A.t3)
 	for(var/spell_type in spelllist)
-		if(!spell_type || H.mind.has_spell(spell_type))
+		if(H.mind.has_spell(spell_type))
 			continue
 		H.mind.AddSpell(new spell_type)
 	level = CLERIC_T3
@@ -48,24 +48,24 @@
 		return
 
 	var/datum/patron/A = H.patron
-	var/list/spelllist = list(A.t0, A.t1)
-	for(var/spell_type in spelllist)
-		if(!spell_type || H.mind.has_spell(spell_type))
-			continue
-		H.mind.AddSpell(new spell_type)
+	var/spelllist = list(A.t0, A.t1)
 	level = CLERIC_T1
+	for(var/spell in spelllist)
+		if(H.mind.has_spell(spell))
+			continue
+		H.mind.AddSpell(new spell)
 
 /datum/devotion/cleric_holder/proc/grant_spells_templar(mob/living/carbon/human/H)
 	if(!H || !H.mind)
 		return
 
 	var/datum/patron/A = H.patron
-	var/list/spelllist = list(/obj/effect/proc_holder/spell/targeted/churn, A.t0)
-	for(var/spell_type in spelllist)
-		if(!spell_type || H.mind.has_spell(spell_type))
-			continue
-		H.mind.AddSpell(new spell_type)
+	var/spelllist = list(/obj/effect/proc_holder/spell/targeted/churn, A.t0)
 	level = CLERIC_T0
+	for(var/spell in spelllist)
+		if(H.mind.has_spell(spell))
+			continue
+		H.mind.AddSpell(new spell)
 
 // General
 /obj/effect/proc_holder/spell/invoked/lesser_heal

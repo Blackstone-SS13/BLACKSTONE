@@ -196,7 +196,7 @@
 			foundy= TRUE
 		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
 			if (prob(used+10))
-				if(!can_bloody_wound() || resistance)
+				if(!can_bloody_wound())
 					return FALSE
 				var/organ_spilled = FALSE
 				var/turf/T = get_turf(owner)
@@ -270,15 +270,12 @@
 						return TRUE
 
 /obj/item/bodypart/head/try_crit(bclass,dam,mob/living/user,zone_precise)
-	var/static/list/eyestab_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
-	var/static/list/tonguestab_zones = list(BODY_ZONE_PRECISE_MOUTH)
-	var/static/list/do_nothing_zones = list(BODY_ZONE_PRECISE_NOSE)
 	var/resistance = HAS_TRAIT(owner, RTRAIT_CRITICAL_RESISTANCE)
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
 	if(bclass == BCLASS_TWIST)
-		if(zone_precise == BODY_ZONE_HEAD)
+		if(zone_precise == "head")
 			if(brute_dam < max_damage)
 				return FALSE
 			for(var/datum/wound/necksnap/S in wounds)
@@ -374,45 +371,8 @@
 			if(prob(used))
 				for(var/datum/wound/artery/A in wounds)
 					if(bclass == BCLASS_STAB)
-						if(resistance)
-							return TRUE
-						if(zone_precise in eyestab_zones)
-							var/obj/item/organ/eyes/my_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
-							if(my_eyes)
-								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-								owner.Stun(5)
-								owner.blind_eyes(5)
-								if(zone_precise == BODY_ZONE_PRECISE_R_EYE)
-									my_eyes.right_poked = TRUE
-									if(!my_eyes.left_poked)
-										owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The right eye is poked out!</span>"
-								else
-									my_eyes.left_poked = TRUE
-									if(!my_eyes.right_poked)
-										owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The left eye is poked out!</span>"
-								if(my_eyes.right_poked && my_eyes.left_poked)
-									owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The eyes are gored!</span>"
-									my_eyes.forceMove(get_turf(owner))
-									my_eyes.Remove(owner)
-							else
-								if(!brainkill)
-									playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-								owner.death()
-								brainkill = TRUE
-							owner.update_fov_angles()
-						else if(zone_precise in tonguestab_zones)
-							var/obj/item/organ/tongue/tongue_up_my_asshole = owner.getorganslot(ORGAN_SLOT_TONGUE)
-							if(tongue_up_my_asshole)
-								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The tongue flies off in an arc!</span>"
-								owner.Stun(10)
-								tongue_up_my_asshole.forceMove(get_turf(owner))
-								tongue_up_my_asshole.Remove(owner)
-						else if(!(zone_precise in do_nothing_zones))
-							if(!brainkill)
-								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
+						if(!resistance)
 							owner.death()
-							brainkill = TRUE
 						return TRUE
 					return FALSE
 				playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
@@ -422,43 +382,7 @@
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
 				if(bclass == BCLASS_STAB)
-					if(resistance)
-						return TRUE
-					if(zone_precise in eyestab_zones)
-						var/obj/item/organ/eyes/my_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
-						if(my_eyes)
-							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-							owner.Stun(5)
-							owner.blind_eyes(5)
-							if(zone_precise == BODY_ZONE_PRECISE_R_EYE)
-								my_eyes.right_poked = TRUE
-								if(!my_eyes.left_poked)
-									owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The right eye is poked out!</span>"
-							else
-								my_eyes.left_poked = TRUE
-								if(!my_eyes.right_poked)
-									owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The left eye is poked out!</span>"
-							if(my_eyes.right_poked && my_eyes.left_poked)
-								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The eyes are gored!</span>"
-								my_eyes.forceMove(get_turf(owner))
-								my_eyes.Remove(owner)
-							owner.update_fov_angles()
-						else
-							if(!brainkill)
-								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-							owner.death()
-							brainkill = TRUE
-					else if(zone_precise in tonguestab_zones)
-						var/obj/item/organ/tongue/tongue_up_my_asshole = owner.getorganslot(ORGAN_SLOT_TONGUE)
-						if(tongue_up_my_asshole)
-							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The tongue flies off in an arc!</span>"
-							owner.Stun(10)
-							tongue_up_my_asshole.forceMove(get_turf(owner))
-							tongue_up_my_asshole.Remove(owner)
-					else if(!(zone_precise in do_nothing_zones))
-						if(!brainkill)
-							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
+					if(!resistance)
 						owner.death()
 						brainkill = TRUE
 					return TRUE
