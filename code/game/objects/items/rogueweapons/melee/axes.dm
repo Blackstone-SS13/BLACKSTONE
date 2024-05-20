@@ -1,6 +1,7 @@
 /obj/item/rogueweapon/stoneaxe
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
-	force = 20
+	force = 18
+	force_wielded = 20
 	possible_item_intents = list(/datum/intent/axe/chop/stone)
 	name = "stone axe"
 	desc = "A rough stone axe. Badly balanced."
@@ -99,8 +100,11 @@
 	penfactor = 20
 	damfactor = 1.1 //33 on battleaxe
 
+/datum/intent/axe/chop/battle
+	penfactor = 10
+
 /obj/item/rogueweapon/stoneaxe/battle
-	force = 24
+	force = 25
 	force_wielded = 30
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "battle axe"
@@ -108,7 +112,7 @@
 	icon_state = "battleaxe"
 	max_blade_int = 300
 	smeltresult = /obj/item/ingot/steel
-	gripped_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop/battle)
+	gripped_intents = list(/datum/intent/axe/cut/battle ,/datum/intent/axe/chop/battle)
 	minstr = 12
 	wdefense = 4
 
