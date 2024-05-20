@@ -117,7 +117,7 @@
 							GLOB.confessors += "[C.signed]"
 				qdel(C)
 				visible_message("<span class='warning'>[user] sends something.</span>")
-				send_ooc_note("Confessions: [GLOB.confessors.len]/5", job = list("confessor", "puritan", "priest"))
+				send_ooc_note("Confessions: [GLOB.confessors.len]/5", job = list("confessor", "inquisitor", "priest"))
 				playsound(loc, 'sound/magic/hallelujah.ogg', 100, FALSE, -1)
 				playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 		return

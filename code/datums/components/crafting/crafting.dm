@@ -644,3 +644,4 @@
 			var/r = input(user, "What should I craft?") as null|anything in realdata
 			if(r)
 				construct_item(user, r)
+				user.mind.lastrecipe = r

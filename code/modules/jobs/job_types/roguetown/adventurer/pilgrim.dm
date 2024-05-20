@@ -10,6 +10,7 @@
 
 	outfit = null
 	outfit_female = null
+	bypass_lastclass = TRUE
 	bypass_jobban = FALSE
 	isvillager = FALSE
 	ispilgrim = TRUE

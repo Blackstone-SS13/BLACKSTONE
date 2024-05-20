@@ -17,7 +17,7 @@
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	pickprob = 13
 	maxchosen = 2
-	traits_applied = list(RTRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
+	traits_applied = list(RTRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
 
 /datum/outfit/job/roguetown/adventurer/amazon/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -36,6 +36,7 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/rogueweapon/whip/antique
 	beltl = /obj/item/keyring/dungeoneer
+	r_hand = /obj/item/rogueweapon/sword/long/exe/cloth
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
@@ -47,13 +48,12 @@
 		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/traps, 3, TRUE)
-		H.change_stat("strength", 3)
-		H.change_stat("intelligence", -2)
-		H.change_stat("endurance", 1)
-		H.change_stat("constituion", 2)
-	if(H.dna?.species)
-		if(H.dna.species.id == "humen")
-			H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
+	H.change_stat("strength", 3)
+	H.change_stat("intelligence", -2)
+	H.change_stat("endurance", 2)
+	H.change_stat("constituion", 2)
+	if(ishumannorthern(H))
+		H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
 	H.verbs |= /mob/living/carbon/human/proc/torture_victim
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)

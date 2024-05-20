@@ -564,6 +564,16 @@
 	boobed = TRUE
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 
+/obj/item/clothing/cloak/apron/blacksmith
+	name = "leather apron"
+	desc = "A leather apron used by those who temper metals and work forges."
+	color = null
+	icon_state = "leather_apron"
+	item_state = "leather_apron"
+	body_parts_covered = CHEST|GROIN
+	armor = list("melee" = 12, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 24, "acid" = 0)
+	boobed = TRUE
+
 /obj/item/clothing/cloak/apron/brown
 	color = CLOTHING_BROWN
 
@@ -725,6 +735,7 @@
 
 /obj/item/clothing/cloak/cape/guard
 	color = CLOTHING_RED
+	
 /obj/item/clothing/cloak/cape/guard/Initialize()
 	. = ..()
 	if(GLOB.lordprimary)
@@ -775,7 +786,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
+	allowed_sex = list(MALE, FEMALE)
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
 	nodismemsleeves = TRUE
 
@@ -802,7 +813,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
+	allowed_sex = list(MALE, FEMALE)
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
 	sellprice = 50
 	nodismemsleeves = TRUE
@@ -815,7 +826,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
+	allowed_sex = list(MALE, FEMALE)
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 	sellprice = 50
 	nodismemsleeves = TRUE
