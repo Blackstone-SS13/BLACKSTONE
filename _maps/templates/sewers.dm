@@ -1,10 +1,8 @@
 
 // TODO: Weight this thing so 90% of stuff is garbage
 /obj/effect/spawner/lootdrop/roguetown/sewers
-name = "sewer spawner"
+	name = "sewer spawner"
 	loot = list(
-
-
 		// Materials
 		/obj/item/natural/bundle/stick = 1,
 
@@ -15,7 +13,7 @@ name = "sewer spawner"
 		/obj/item/clothing/cloak/raincloak/mortus = 1,
 		/obj/item/clothing/head/roguetown/armingcap = 1,
 		/obj/item/clothing/cloak/apron/waist = 1,
-		/obj/item/storage/belt/rogue/leather/roped = 1,
+		/obj/item/storage/belt/rogue/leather/rope = 1,
 		/obj/item/clothing/under/roguetown/tights/vagrant = 1,
 
 		// Money
