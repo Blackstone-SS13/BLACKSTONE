@@ -71,7 +71,7 @@
 	bundletype = /obj/item/natural/bundle/cloth
 	var/wet = 0
 	/// Effectiveness when used as a bandage, how much bloodloss we can tampon
-	var/bandage_effectiveness = 2
+	var/bandage_effectiveness = 1
 
 /obj/item/natural/cloth/examine(mob/user)
 	. = ..()
