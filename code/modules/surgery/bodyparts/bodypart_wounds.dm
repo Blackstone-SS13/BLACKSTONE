@@ -507,7 +507,7 @@
 			return FALSE
 
 /// Called after a bodypart is attacked so that wounds and critical effects can be applied
-/obj/item/bodypart/attacked_by(bclass, dam, mob/living/user, zone_precise)
+/obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise)
 	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
 		return
 	if(ishuman(owner))

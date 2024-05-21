@@ -124,7 +124,7 @@
 				if(iscarbon(src))
 					var/obj/item/bodypart/affecting = get_bodypart(zone)
 					if(affecting)
-						affecting.attacked_by(I.thrown_bclass, I.throwforce)
+						affecting.bodypart_attacked_by(I.thrown_bclass, I.throwforce)
 				else
 					woundcritroll(I.thrown_bclass, I.throwforce, null, zone)
 					if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
