@@ -159,10 +159,9 @@
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
 		var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
 		if(zone_precise == BODY_ZONE_PRECISE_GROIN)
-			if(dam)
+			if(dam >= 10)
 				owner.emote("groin")
 				owner.Stun(5) //implement once targetting groin is harder
-				return FALSE
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 			used += 20
 		if(user)
