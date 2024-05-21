@@ -23,17 +23,17 @@
 	H.mind.adjust_skillrank(/datum/skill/craft/tanning, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
 	mouth = /obj/item/needle
-	belt = /obj/item/storage/belt/rogue/leather/cloth
+	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	armor = /obj/item/clothing/suit/roguetown/armor/armordress
-	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	backl = /obj/item/storage/backpack/rogue/satchel
 	neck = /obj/item/storage/belt/rogue/pouch/coins/mid
-	wrists = /obj/item/clothing/wrists/roguetown/wrappings
+	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 	beltr = /obj/item/rogueweapon/huntingknife/idagger
+	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	beltl = /obj/item/needle
-	backpack_contents = list(/obj/item/natural/cloth = 1,/obj/item/natural/bundle/fibers/full = 1)
+	backpack_contents = list(/obj/item/natural/cloth = 1, /obj/item/natural/cloth = 1, /obj/item/natural/bundle/fibers/full = 1)
 	H.change_stat("intelligence", 2)
 	H.change_stat("speed", 2)  
 	H.change_stat("perception", 1)
