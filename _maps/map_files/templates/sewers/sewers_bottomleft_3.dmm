@@ -1,5 +1,6 @@
 "a" = (/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
 "b" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"f" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
 "i" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
 "j" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/spawner/lootdrop/crate_spawner,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
 "o" = (/obj/structure/glowshroom,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
@@ -22,16 +23,16 @@
 (1,1,1) = {"
 FFFFFFFFKJMKFFFFFFFFFFFFFF
 aaaaaaaFbJMiFaaaaaaaaaaaaF
-aaaaaaaFKMMiFaaaaaaaaaaaaF
+aaaaaaaFKMMKFaaaaaaaaaaaaF
 aaaaaaaFKMMoFaaaaaaaaaaaaF
 aaaaaaaFKMMoFaaaaaaaaaaaaF
-aaaaaaaFiMMKFaaaaaaaaaaaaF
+aaaaaaaFKMMKFaaaaaaaaaaaaF
 aFFFFaaFKMMKFaaaaaaaaaaaaF
 aFjttFFFbMMKFFFFFFFFFFFFFF
 aFtppQQLJMMKKKKKKbbKKKKKKK
 aFFtHQyLMMMMMMMMJxMJMMMMMM
 aaFttpyQMMKKKKKKKKKKKKooKK
-aaFtvvQQQEEFFFFFFFFFFFFFFF
+aaFfvvQQQEEFFFFFFFFFFFFFFF
 aFFttvpQyyQFaaaaaaaaaaaaaF
 aFHtptttvQFFaaaaaaaaaaaaaF
 aFtHtpvHFFFaaaaaaaaaaaaaaF

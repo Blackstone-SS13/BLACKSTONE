@@ -35,7 +35,7 @@
 "P" = (/obj/effect/decal/cleanable/blood/tracks,/obj/effect/decal/cleanable/blood/splatter,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "R" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
 "S" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 6},/obj/item/rope/chain,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
-"T" = (/obj/item/reagent_containers/glass/bowl,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"T" = (/obj/item/reagent_containers/glass/bowl,/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "U" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 1},/obj/item/rope/chain,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "V" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "W" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
@@ -54,7 +54,7 @@ aaaaWCWVVCCCCCCCCCCCCCCfAA
 aaaaWCWWWWWWWWEWWWWWWWWWWW
 aaaaWAWaaaaaaaaaaaaaaaaaaW
 aaaaWAWaaWWWWWWWWWWWWaaaaW
-aaaaWAWaaWOAAJhAkAACWaaaaW
+aaaaWAWaaWOAAJhACAACWaaaaW
 aaaaWCWWWWCCCCCCCCCCWaaaaW
 aaaaWCCCCCCkCAACjAACWaaaaW
 aaaaWWWWWWZACCCCAZCCWaaaaW

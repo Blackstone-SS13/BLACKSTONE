@@ -32,14 +32,14 @@
 "Z" = (/obj/structure/table/wood,/obj/item/ingot/iron,/obj/item/ingot/iron,/obj/item/ingot/iron,/obj/item/ingot/iron,/obj/item/ingot/iron,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 
 (1,1,1) = {"
-EEEEEEEEEqIEEEEEEEEEEEEEEE
+EEEEEEEEEeIEEEEEEEEEEEEEEE
 aaaaaaaaEIIEaaaaaaaaaaaaaE
 aaaaaaaaEIqEaaaaaaaaaaaaaE
 aaaaaaaaEqIEaaaaaaaaaaaaaE
 aaaaaaaaEqIEaaaaaaaaaaaaaE
 aEEEEEEEEIqxEEEEEEEaaaEEEE
 aEqpIqqTEqqqqDuJJJEaaaEgIq
-aEqIqIqpEqqqeqqqqqEaaEEISI
+aEqIqIqpEqqqqqqqqqEaaEEISI
 aEqqqqqIEqqqqqqqqqEEEEpIIq
 aEzHEEEEEqqqqqqeqqIIIqqIII
 aEqqqXRDzqqqqqqqqqEEEEgqIq

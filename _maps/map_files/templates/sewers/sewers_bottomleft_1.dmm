@@ -1,9 +1,9 @@
 "a" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
 "b" = (/turf/open/water/swamp,/area/rogue/under/town/sewer)
-"d" = (/obj/structure/fluff/walldeco/chains,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"d" = (/obj/structure/fluff/walldeco/chains,/mob/living/carbon/human/species/skeleton/npc,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
 "f" = (/obj/structure/glowshroom,/turf/open/water/swamp,/area/rogue/under/town/sewer)
 "j" = (/obj/effect/decal/cleanable/cobweb,/obj/structure/fluff/walldeco/chains,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
-"l" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"l" = (/mob/living/carbon/human/species/skeleton/npc,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "v" = (/obj/structure/spider/stickyweb,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "w" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
 "x" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
@@ -30,11 +30,11 @@ yyyyyyyyyaavvbUTayyyaaafxx
 yyyyyyyyyyaxvxxvayyaazKKxz
 aaaaaaaaaaafbxbbayaaxxbbaa
 aAzLzRRBBzzzbzbbaaaRKfxaya
-azzbzbbbzlbbbzbbaajzbbxaya
+azzbzbbbzzbbbzbbaajzbbxaya
 azlbbfbbbabfbbbfLbbbzzzaya
-azbbbbbbbabbzzzbbbLalzaaya
-aSzaazzbbbbbblbbbbaSSSayya
-aOSTzzlzzzzbbabbbzSSSOayya
+azbbbbbbbabbzzzbbbLazzaaya
+aSzaazzbbbbbbzbbbbaSSSayya
+aOSTzzzzzzlbbabbbzSSSOayya
 aSSSSSSSSSSSOSSSSSSSSSayya
 aSSOSSOSSOSSSSSSSOOSSSayya
 aSSSSSSSSSSSSSSSGSSSSMaaya

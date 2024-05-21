@@ -56,7 +56,7 @@
 
 		//food
 	)
-	lootcount = 4
+	lootcount = 5
 
 
 ///////////////////////
@@ -108,7 +108,7 @@
 	mappath = "_maps/map_files/templates/sewers/sewers_bottomleft_1.dmm"
 
 ///  Metalworking area
-/datum/map_template/sewers_topleft_2
+/datum/map_template/sewers_bottomleft_2
 	name = "Sewers Bottom-Left Variant 2"
 	id = "sewers_bottomleft_2"
 	mappath = "_maps/map_files/templates/sewers/sewers_bottomleft_2.dmm"
@@ -157,7 +157,7 @@
 	mappath = "_maps/map_files/templates/sewers/sewers_bottom_1.dmm"
 
 /// Small side ruin
-/datum/map_template/sewers_bottom_1
+/datum/map_template/sewers_bottom_2
 	name = "Sewers Bottom Variant 2"
 	id = "sewers_bottom_2"
 	mappath = "_maps/map_files/templates/sewers/sewers_bottom_2.dmm"

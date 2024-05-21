@@ -9,6 +9,7 @@
 "R" = (/turf/open/water/sewer,/area/rogue/under/town/sewer)
 "S" = (/obj/structure/glowshroom,/turf/open/water/sewer,/area/rogue/under/town/sewer)
 "T" = (/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"X" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/water/sewer,/area/rogue/under/town/sewer)
 
 (1,1,1) = {"
 iiiiiiiiiiiiii
@@ -16,20 +17,20 @@ iaaaaaaaaaaaai
 iaaaaaaaaaaaai
 iaaaaaaaaaaaai
 iiiiiiiiiiiiii
-QQPQDQQTwQQQQQ
+PQQQDQQTwQQQQP
 RRRRRRRRRRRSSj
-QQQQPQSRQQQQQD
+QQQQQQSRQQQQQD
 iiiiiQRSQiiiii
 iaaaiQRRQiaaai
 iaaaiQjRQiaaai
-iaaaiQRjQiaaai
+iaaaiQXjQiaaai
 iaaaiQjRQiaaai
-iaaaiQRRPiaaai
+iaaaiQRRQiaaai
 iaaaiQSSQiaaai
 iaaaiQSjQiaaai
 iaaaiCjRQiaaai
 iaaaiQRRQiaaai
-iaaaiPRRQiaaai
 iaaaiQRRQiaaai
-iiiiiQRRQiiiii
+iaaaiQRRQiaaai
+iiiiiPRRQiiiii
 "}
