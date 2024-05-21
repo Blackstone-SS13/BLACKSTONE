@@ -48,7 +48,7 @@
 		if(levels >= 1)
 			if(!HAS_TRAIT_FROM(affecting, TRAIT_PARALYSIS, CRIT_TRAIT))
 				affecting.temporary_crit_paralysis(20 SECONDS)
-			else if(!(locate(/datum/wound/fracture) in affecting.wounds))
+			else if(!affecting.has_wound(/datum/wound/fracture))
 				var/static/list/adjectives = list(
 					"beautiful",
 					"lovely",
@@ -335,11 +335,10 @@
 					if(BP.bandage.return_blood_DNA())
 						usedclass = "'danger'"
 					msg += "<a href='?src=[REF(src)];bandage=[REF(BP.bandage)];bandaged_limb=[REF(BP)]' class=[usedclass]>Bandaged</a>\n"
-				else if(BP.wounds.len)
+				else if(length(BP.wounds))
 					msg += "<B>Wounds:</B>\n"
-					for(var/datum/wound/W in BP.wounds)
-						msg += "[W.name]\n"
-
+					for(var/datum/wound/wound as anything in BP.wounds)
+						msg += "[wound.get_visible_name()]\n"
 			else
 				msg += "Obscured by clothing.\n"
 			for(var/obj/item/I in BP.embedded_objects)

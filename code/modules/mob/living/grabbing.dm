@@ -7,17 +7,17 @@
 	possible_item_intents = list(/datum/intent/grab/obj/upgrade)
 	item_flags = ABSTRACT
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	grab_state = 0 //this is an atom/movable var i guess
+	no_effect = TRUE
+	force = 0
+	experimental_inhand = FALSE
 	var/grabbed				//ref to what atom we are grabbing
 	var/obj/item/bodypart/limb_grabbed		//ref to actual bodypart being grabbed if we're grabbing a carbo
 	var/sublimb_grabbed		//ref to what precise (sublimb) we are grabbing (if any) (text)
 	var/mob/living/carbon/grabbee
 	var/list/dependents = list()
 	var/handaction
-	var/bleed_suppressing = 2
-	grab_state = 0 //this is an atom/movable var i guess
-	no_effect = TRUE
-	force = 0
-	experimental_inhand = FALSE
+	var/bleed_suppressing = 0.5 //multiplier for how much we suppress bleeding, can accumulate so two grabs means 25% bleeding
 
 /atom/movable //reference to all obj/item/grabbing
 	var/list/grabbedby = list()
@@ -445,7 +445,7 @@
 		return
 	if(world.time < last_drink + 2 SECONDS)
 		return
-	if(!limb_grabbed.get_bleedrate())
+	if(!limb_grabbed.get_bleed_rate())
 		to_chat(user, "<span class='warning'>Sigh. It's not bleeding.</span>")
 		return
 	var/mob/living/carbon/C = grabbed

@@ -944,9 +944,8 @@
 	var/brutedamage = FB.brute_dam
 	var/burndamage = FB.burn_dam
 	var/wounddamage = 0
-	if(FB.wounds.len)
-		for(var/datum/wound/W in FB.wounds)
-			wounddamage = wounddamage + W.woundpain
+	for(var/datum/wound/W as anything in FB.wounds)
+		wounddamage = wounddamage + W.woundpain
 	if(hallucination)
 		if(prob(30))
 			brutedamage += rand(30,40)

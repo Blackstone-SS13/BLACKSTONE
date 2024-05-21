@@ -20,7 +20,7 @@
 			target.adjustFireLoss(-50)
 			target.adjustBruteLoss(-50)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(user.zone_selected))
-			if(affecting?.heal_wounds(30))
+			if(affecting?.heal_wounds(50))
 				target.update_damage_overlays()
 			target.visible_message("<span class='danger'>[target] reforms under the vile energy!</span>", "<span class='notice'>I'm remade by dark magic!</span>")
 			return TRUE

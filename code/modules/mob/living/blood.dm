@@ -15,26 +15,20 @@
 		to_chat(src, "<span class='warning'>The blood soaks through my bandage.</span>")
 
 /mob/living/carbon/monkey/handle_blood()
-	if(bodytemperature >= TCRYO && !(HAS_TRAIT(src, TRAIT_HUSK))) //cryosleep or husked people do not pump the blood.
-		//Blood regeneration if there is some space
-		if(blood_volume < BLOOD_VOLUME_NORMAL)
-			blood_volume += 0.1 // regenerate blood VERY slowly
-			if((blood_volume < BLOOD_VOLUME_OKAY) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
-				adjustOxyLoss(round((BLOOD_VOLUME_NORMAL - blood_volume) * 0.02, 1))
-
-/mob/living/proc/update_bleed_rate()
-	var/newbr = 0
-	for(var/datum/wound/W in simple_wounds)
-		newbr += W.bleed_rate
-	for(var/obj/item/I in simple_embedded_objects)
-		if(I.embedding)
-			newbr += I.embedding.embedded_bloodloss
-	return newbr
+	if((bodytemperature <= TCRYO) || HAS_TRAIT(src, TRAIT_HUSK)) //cryosleep or husked people do not pump the blood.
+		return
+	//Blood regeneration if there is some space
+	if(blood_volume < BLOOD_VOLUME_NORMAL)
+		blood_volume += 0.1 // regenerate blood VERY slowly
+		if((blood_volume < BLOOD_VOLUME_OKAY) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+			adjustOxyLoss(round((BLOOD_VOLUME_NORMAL - blood_volume) * 0.02, 1))
 
 /mob/living/proc/handle_blood()
+	if((bodytemperature <= TCRYO) || HAS_TRAIT(src, TRAIT_HUSK)) //cryosleep or husked people do not pump the blood.
+		return
 	blood_volume = min(blood_volume, BLOOD_VOLUME_MAXIMUM)
 
-	bleed_rate = min(update_bleed_rate(), 10)
+	bleed_rate = min(get_bleed_rate(), 10)
 
 	if(blood_volume < BLOOD_VOLUME_NORMAL && blood_volume && !bleed_rate)
 		blood_volume = min(blood_volume+0.5, BLOOD_VOLUME_MAXIMUM)
@@ -70,16 +64,21 @@
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/handle_blood()
+	if((bodytemperature <= TCRYO) || HAS_TRAIT(src, TRAIT_HUSK)) //cryosleep or husked people do not pump the blood.
+		return
 	blood_volume = min(blood_volume, BLOOD_VOLUME_MAXIMUM)
 	if(dna?.species)
 		if(NOBLOOD in dna.species.species_traits)
 			blood_volume = BLOOD_VOLUME_NORMAL
+			remove_stress(/datum/stressevent/bleeding)
+			remove_status_effect(/datum/status_effect/debuff/bleeding)
+			remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+			remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 			return
 
-	if(bodytemperature >= TCRYO && !(HAS_TRAIT(src, TRAIT_HUSK))) //cryosleep or husked people do not pump the blood.
-		//Blood regeneration if there is some space
-		if(blood_volume < BLOOD_VOLUME_NORMAL && blood_volume)
-			var/nutrition_ratio = 1
+	//Blood regeneration if there is some space
+	if(blood_volume < BLOOD_VOLUME_NORMAL && blood_volume)
+		var/nutrition_ratio = 1
 //			switch(nutrition)
 //				if(0 to NUTRITION_LEVEL_STARVING)
 //					nutrition_ratio = 0.2
@@ -94,58 +93,63 @@
 //			if(satiety > 80)
 //				nutrition_ratio *= 1.25
 //			adjust_hydration(-nutrition_ratio * HUNGER_FACTOR) //get thirsty twice as fast when regenning blood
-			blood_volume = min(BLOOD_VOLUME_NORMAL, blood_volume + 0.5 * nutrition_ratio)
+		blood_volume = min(BLOOD_VOLUME_NORMAL, blood_volume + 0.5 * nutrition_ratio)
 
-		//Effects of bloodloss
-		if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
-			switch(blood_volume)
-				if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-					remove_status_effect(/datum/status_effect/debuff/bleedingworse)
-					remove_status_effect(/datum/status_effect/debuff/bleedingworst)
-					apply_status_effect(/datum/status_effect/debuff/bleeding)
-				if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-					if(prob(3))
-						blur_eyes(6)
-						to_chat(src, "<span class='warning'>I feel faint.</span>")
-					remove_status_effect(/datum/status_effect/debuff/bleeding)
-					remove_status_effect(/datum/status_effect/debuff/bleedingworst)
-					apply_status_effect(/datum/status_effect/debuff/bleedingworse)
-				if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-					if(prob(3) && !IsUnconscious())
-						Unconscious(rand(5 SECONDS,10 SECONDS))
-						to_chat(src, "<span class='warning'>I feel drained.</span>")
-					remove_status_effect(/datum/status_effect/debuff/bleedingworse)
-					remove_status_effect(/datum/status_effect/debuff/bleeding)
-					apply_status_effect(/datum/status_effect/debuff/bleedingworst)
-			if(blood_volume <= BLOOD_VOLUME_BAD)
-				adjustOxyLoss(1)
-				if(blood_volume <= BLOOD_VOLUME_SURVIVE)
-					adjustOxyLoss(1.5)
+	//Effects of bloodloss
+	if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
+		switch(blood_volume)
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+				remove_status_effect(/datum/status_effect/debuff/bleedingworst)
+				apply_status_effect(/datum/status_effect/debuff/bleeding)
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				if(prob(3))
+					blur_eyes(6)
+					to_chat(src, "<span class='warning'>I feel faint.</span>")
+				remove_status_effect(/datum/status_effect/debuff/bleeding)
+				remove_status_effect(/datum/status_effect/debuff/bleedingworst)
+				apply_status_effect(/datum/status_effect/debuff/bleedingworse)
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				if(prob(3) && !IsUnconscious())
+					Unconscious(rand(5 SECONDS,10 SECONDS))
+					to_chat(src, "<span class='warning'>I feel drained.</span>")
+				remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+				remove_status_effect(/datum/status_effect/debuff/bleeding)
+				apply_status_effect(/datum/status_effect/debuff/bleedingworst)
+		if(blood_volume <= BLOOD_VOLUME_BAD)
+			adjustOxyLoss(1)
+			if(blood_volume <= BLOOD_VOLUME_SURVIVE)
+				adjustOxyLoss(1.5)
+	else
+		remove_status_effect(/datum/status_effect/debuff/bleeding)
+		remove_status_effect(/datum/status_effect/debuff/bleedingworse)
+		remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 
-//		var/temp_bleed = 0
-		//Bleeding out
-		bleed_rate = get_bleed_rate()
-//		bleed_rate = max(bleed_rate - 0.5, temp_bleed)//if no wounds, other bleed effects (heparin) naturally decreases
+	//Bleeding out
+	var/bleed_rate = get_bleed_rate()
+	if(bleed_rate)
+		for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+			bodypart.try_bandage_expire()
+		bleed(bleed_rate)
+		add_stress(/datum/stressevent/bleeding)
+	else
+		remove_stress(/datum/stressevent/bleeding)
 
-		if(bleed_rate)
-			add_stress(/datum/stressevent/bleeding)
-			bleed(bleed_rate)
-		else
-			remove_stress(/datum/stressevent/bleeding)
+/mob/living/proc/get_bleed_rate()
+	var/bleed_rate = 0
+	for(var/datum/wound/simple_wound as anything in get_wounds())
+		bleed_rate += simple_wound.bleed_rate
+	//I hate that I have to do this shit
+	listclearnulls(simple_embedded_objects)
+	for(var/obj/item/embedded as anything in simple_embedded_objects)
+		bleed_rate += embedded.embedding?.embedded_bloodloss
+	return bleed_rate
 
-/mob/living/carbon/proc/get_bleed_rate()
-	var/bleedrate = 0
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/BP = X
-		//We want an accurate reading of .len
-		listclearnulls(BP.embedded_objects)
-		bleedrate += BP.get_bleedrate()
-//			temp_bleed += 0.5*BP.embedded_objects.len
-		for(var/obj/item/I in BP.embedded_objects)
-			if(I.embedding && I.embedding.embedded_bloodloss)
-				bleedrate += I.embedding.embedded_bloodloss
-	if(bleedrate)
-		return bleedrate
+/mob/living/carbon/get_bleed_rate()
+	var/bleed_rate = 0
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		bleed_rate += bodypart.get_bleed_rate()
+	return bleed_rate
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/proc/bleed(amt)
@@ -173,7 +177,7 @@
 
 /mob/living/carbon/human/bleed(amt)
 	amt *= physiology.bleed_mod
-	if(!(NOBLOOD in dna.species.species_traits) && !mind?.has_antag_datum(/datum/antagonist/zombie))
+	if(!(NOBLOOD in dna.species.species_traits))
 		return ..()
 
 /mob/living/proc/restore_blood()
