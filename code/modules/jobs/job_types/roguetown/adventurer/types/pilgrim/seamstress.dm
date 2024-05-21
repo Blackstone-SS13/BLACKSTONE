@@ -21,6 +21,7 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/labor/farming, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/tanning, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
 	mouth = /obj/item/needle
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
