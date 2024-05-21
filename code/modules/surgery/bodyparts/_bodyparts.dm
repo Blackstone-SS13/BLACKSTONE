@@ -333,7 +333,7 @@
 	//yes this does mean vampires can use rotten limbs
 	if((rotted || skeletonized) && !(owner.mob_biotypes & MOB_UNDEAD))
 		return BODYPART_DISABLED_ROT
-	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
+	if(HAS_TRAIT(owner, TRAIT_PARALYSIS) || HAS_TRAIT(src, TRAIT_PARALYSIS))
 		return BODYPART_DISABLED_PARALYSIS
 	for(var/datum/wound/ouchie as anything in wounds)
 		if(ouchie.disabling)
@@ -638,6 +638,7 @@
 	grabtargets = list(BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM)
 	offset = OFFSET_GLOVES
 	offset_f = OFFSET_GLOVES_F
+	dismember_wound = /datum/wound/dismemberment/l_arm
 
 /obj/item/bodypart/l_arm/is_disabled()
 	. = ..()
@@ -703,6 +704,7 @@
 	grabtargets = list(BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_R_ARM)
 	offset = OFFSET_GLOVES
 	offset_f = OFFSET_GLOVES_F
+	dismember_wound = /datum/wound/dismemberment/r_arm
 
 /obj/item/bodypart/r_arm/is_disabled()
 	. = ..()
@@ -765,6 +767,7 @@
 	aux_layer = LEG_PART_LAYER
 	subtargets = list(BODY_ZONE_PRECISE_L_FOOT)
 	grabtargets = list(BODY_ZONE_PRECISE_L_FOOT, BODY_ZONE_L_LEG)
+	dismember_wound = /datum/wound/dismemberment/l_leg
 
 /obj/item/bodypart/l_leg/is_disabled()
 	. = ..()
@@ -823,6 +826,7 @@
 	aux_layer = LEG_PART_LAYER
 	subtargets = list(BODY_ZONE_PRECISE_R_FOOT)
 	grabtargets = list(BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_R_LEG)
+	dismember_wound = /datum/wound/dismemberment/r_leg
 
 /obj/item/bodypart/r_leg/is_disabled()
 	. = ..()

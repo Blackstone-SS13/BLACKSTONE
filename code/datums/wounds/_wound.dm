@@ -50,6 +50,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/sleep_heal = TRUE
 	/// Can be healed passively, without sleep even
 	var/passive_heal = FALSE
+	/// Whether this wound allows embedding an item when applied
+	var/embeddable = FALSE
 
 /datum/wound/Destroy(force)
 	. = ..()
@@ -75,6 +77,13 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		return FALSE
 	if(!affected.can_bloody_wound() && !isnull(bleed_rate))
 		return FALSE
+	for(var/datum/wound/other_wound as anything in affected.wounds)
+		if(!can_stack_with(other_wound))
+			return FALSE
+	return TRUE
+
+/// Returns whether or not this wound can be applied while this other wound is present
+/datum/wound/proc/can_stack_with(datum/wound/other)
 	return TRUE
 
 /// Adds this wound to a given bodypart

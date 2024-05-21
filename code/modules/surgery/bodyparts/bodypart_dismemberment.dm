@@ -6,6 +6,9 @@
 	return disableable
 
 /obj/item/bodypart
+	/// Wound we leave on the chest when violently dismembered
+	var/dismember_wound
+	/// Sound we make when violently dismembered
 	var/list/dismemsound = list(
 		'sound/combat/dismemberment/dismem (1).ogg',
 		'sound/combat/dismemberment/dismem (2).ogg',
@@ -29,7 +32,8 @@
 		return FALSE
 
 	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_CHEST)
-	affecting.add_wound(/datum/wound/dismemberment, skipcheck = TRUE)
+	if(affecting && dismember_wound)
+		affecting.add_wound(dismember_wound)
 	playsound(C, pick(dismemsound), 50, FALSE, -1)
 	if(body_zone == BODY_ZONE_HEAD)
 		C.visible_message("<span class='danger'><B>[C] is [pick("BRUTALLY","VIOLENTLY","BLOODILY","MESSILY")] DECAPITATED!</B></span>")

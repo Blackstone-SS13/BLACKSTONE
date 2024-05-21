@@ -148,7 +148,7 @@
 		if(user.goodluck(2))
 			dam += 10
 	if(bclass == BCLASS_TWIST) //the ol dick twist
-		if(dam)
+		if(dam && (dam >= 10))
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 				owner.emote("groin")
 				owner.Stun(10)
@@ -167,21 +167,47 @@
 				used += 10
 		var/foundf = has_wound(/datum/wound/fracture)
 		if(!foundf)
-			if(prob(used) && zone_precise != BODY_ZONE_PRECISE_STOMACH)
-				var/list/phrases = list("The ribs shatter in a splendid way!", "The ribs are smashed!", "The chest is mauled!", "The chest caves in!")
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-				add_wound(/datum/wound/fracture)
-				owner.emote("paincrit", TRUE)
-				if(prob(3))
-					playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-				else
-					playsound(owner, "wetbreak", 100, FALSE)
-				update_disabled()
-				owner.Slowdown(20)
-				shake_camera(owner, 2, 2)
-				if(bclass == BCLASS_CHOP)
-					return TRUE
-				return FALSE
+			if(prob(used))
+				if(zone_precise == BODY_ZONE_PRECISE_GROIN)
+					var/static/list/phrases = list(
+						"The pelvis shatters in a magnificent way!", 
+						"The pelvis is smashed!", 
+						"The groin is mauled!", 
+						"The pelvic floor caves in!",
+					)
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
+					add_wound(/datum/wound/fracture/groin)
+					owner.emote("paincrit", TRUE)
+					if(prob(3))
+						playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
+					else
+						playsound(owner, "wetbreak", 100, FALSE)
+					update_disabled()
+					owner.Slowdown(20)
+					shake_camera(owner, 2, 2)
+					if(bclass == BCLASS_CHOP)
+						return TRUE
+					return FALSE
+				else if(zone_precise != BODY_ZONE_PRECISE_STOMACH)
+					var/static/list/phrases = list(
+						"The ribs shatter in a splendid way!", 
+						"The ribs are smashed!", 
+						"The chest is mauled!", 
+						"The chest caves in!",
+					)
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
+					add_wound(/datum/wound/fracture)
+					owner.emote("paincrit", TRUE)
+					if(prob(3))
+						playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
+					else
+						playsound(owner, "wetbreak", 100, FALSE)
+					update_disabled()
+					owner.Slowdown(20)
+					shake_camera(owner, 2, 2)
+					if(bclass == BCLASS_CHOP)
+						return TRUE
+					return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		var/used = round((brute_dam / max_damage)*20 + (dam / 4), 1)
 		if(!can_bloody_wound())
@@ -411,7 +437,6 @@
 					return FALSE
 				playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 				owner.emote("paincrit", TRUE)
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 				add_wound(/datum/wound/artery)
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
@@ -451,11 +476,16 @@
 							tongue_up_my_asshole.forceMove(get_turf(owner))
 							tongue_up_my_asshole.Remove(owner)
 					else if(!(zone_precise in do_nothing_zones))
+						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 						if(!brainkill)
 							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 						owner.death()
 						brainkill = TRUE
+					else
+						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 					return TRUE
+				else
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 	if(bclass == BCLASS_PUNCH)
 		if(!can_bloody_wound())
 			return FALSE

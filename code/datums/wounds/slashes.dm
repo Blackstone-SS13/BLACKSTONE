@@ -12,6 +12,7 @@
 	sewn_woundpain = 0
 	mob_overlay = "cut"
 	can_sew = TRUE
+	embeddable = TRUE
 
 /datum/wound/slash/small
 	name = "small slash"

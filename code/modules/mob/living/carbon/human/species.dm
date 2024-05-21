@@ -2254,7 +2254,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(I)
 				I.take_damage(1, BRUTE, "melee")
 		if(!nodmg)
-			if(affecting.attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone))
+			var/datum/wound/crit_wound = affecting.attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone)
+			if((crit_wound && !istype(crit_wound)) || crit_wound.embeddable)
 				var/can_impale = TRUE
 				if(!affecting)
 					can_impale = FALSE

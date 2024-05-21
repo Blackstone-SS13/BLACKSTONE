@@ -8,6 +8,7 @@
 	woundpain = 5
 	can_sew = FALSE
 	passive_heal = TRUE
+	embeddable = TRUE
 
 /datum/wound/bite/bleeding
 	name = "bleeding bite"
