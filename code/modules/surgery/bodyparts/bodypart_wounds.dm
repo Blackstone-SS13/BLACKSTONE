@@ -305,7 +305,7 @@
 		if(zone_precise == BODY_ZONE_HEAD)
 			if(brute_dam < max_damage)
 				return FALSE
-			if(has_wound(/datum/wound/fracture/necksnap))
+			if(has_wound(/datum/wound/fracture/neck))
 				return FALSE
 			var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
 			if(owner == user)
@@ -313,7 +313,7 @@
 			if(prob(used))
 				playsound(owner, "fracturedry", 100, FALSE)
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The neck is broken!</span>"
-				add_wound(/datum/wound/fracture/necksnap)
+				add_wound(/datum/wound/fracture/neck)
 				shake_camera(owner, 2, 2)
 				if(!resistance)
 					owner.death()
