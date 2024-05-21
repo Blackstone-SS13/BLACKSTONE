@@ -12,6 +12,7 @@
 	sewn_overlay = "cut"
 	can_sew = TRUE
 	sleep_heal = FALSE
+	embeddable = TRUE
 
 /datum/wound/artery/throat
 	name = "sliced throat"
