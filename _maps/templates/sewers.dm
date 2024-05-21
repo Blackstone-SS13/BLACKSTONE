@@ -134,6 +134,7 @@
 	id = "sewers_centre_1"
 	mappath = "_maps/map_files/templates/sewers/sewers_centre_1.dmm"
 
+/// small rooms, some loot, some rats, some skellies
 /datum/map_template/sewers_centre_2
 	name = "Sewers Centre Variant 2"
 	id = "sewers_centre_2"

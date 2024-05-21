@@ -1,25 +1,47 @@
-"a" = (/area/rogue,/turf/closed)
+"a" = (/turf/closed/mineral/rogue,/area/rogue)
+"e" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/cobble,/area/rogue)
+"f" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"h" = (/obj/effect/decal/cleanable/blood/tracks{dir = 8},/turf/open/floor/rogue/cobble,/area/rogue)
+"i" = (/obj/effect/decal/cleanable/cobweb/cobweb2,/obj/structure/rack/rogue,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue)
+"j" = (/obj/structure/fermenting_barrel/random/water,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"k" = (/obj/machinery/light/rogue/torchholder/l,/turf/open/floor/rogue/cobble,/area/rogue)
+"l" = (/obj/effect/decal/cleanable/blood/tracks,/turf/open/floor/rogue/cobble,/area/rogue)
+"v" = (/mob/living/carbon/human/species/skeleton/npc,/turf/open/floor/rogue/cobble,/area/rogue)
+"y" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue)
+"z" = (/obj/structure/fermenting_barrel,/turf/open/floor/rogue/cobble,/area/rogue)
+"G" = (/obj/effect/decal/cleanable/cobweb,/obj/structure/rack/rogue,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue)
+"I" = (/obj/machinery/light/rogue/torchholder/r,/turf/open/floor/rogue/cobble,/area/rogue)
+"J" = (/obj/effect/decal/cleanable/cobweb,/obj/structure/fermenting_barrel/beer,/turf/open/floor/rogue/cobble,/area/rogue)
+"L" = (/obj/structure/fermenting_barrel/random/water,/turf/open/floor/rogue/cobble,/area/rogue)
+"M" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"N" = (/obj/effect/decal/cleanable/blood/gibs/up,/obj/effect/decal/cleanable/blood/gibs/limb,/obj/effect/decal/cleanable/blood/old,/obj/effect/decal/cleanable/blood/tracks,/turf/open/floor/rogue/cobble,/area/rogue)
+"R" = (/obj/effect/decal/cleanable/blood/tracks{dir = 6},/turf/open/floor/rogue/cobble,/area/rogue)
+"U" = (/obj/structure/fluff/walldeco/chains,/turf/open/floor/rogue/cobble,/area/rogue)
+"W" = (/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs/limb,/obj/effect/decal/cleanable/blood/old,/obj/effect/decal/cleanable/blood/tracks{dir = 9},/turf/open/floor/rogue/cobble,/area/rogue)
+"X" = (/obj/structure/spider/stickyweb,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"Y" = (/obj/structure/mineral_door/wood/red,/turf/open/floor/rogue/cobble,/area/rogue)
+"Z" = (/turf/open/floor/rogue/cobble,/area/rogue)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
-aaaaaaaaaaaaaa
+MMMfMMMMMMMMMM
+MaMXMaaaaaaaaM
+MaMZMaMMMMMMaM
+MaMfMMMJUziMaM
+MMMZYZZZZZZMMM
+ffZfMMMZZNZYff
+MMMMMaMZvlIMMM
+MaaaaaMZZRZMaM
+MaaaaaMZZZyMaM
+MaaaaaMMYMMMaM
+MaaaaaaMZMaaaM
+MaMMMMMMZMaaaM
+MaMGzzZUZMaaaM
+MMMZeZZZZMaaaM
+ffYZZWhRZMaaaM
+MMMkZZZZZMMMMM
+MaMZZZZeZYffff
+MaMyyZZZLjMMMM
+MaMMMMYMMMaaaM
+MaaaaMfMaaaaaM
+MMMMMMfMMMMMMM
 "}
