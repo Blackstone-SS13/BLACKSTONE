@@ -331,6 +331,8 @@
 							bodypart_message += "[BP] is skeletonized.\n"
 						else
 							bodypart_message += "[BP] is rotting.\n"
+					else
+						bodypart_message += "[BP] is functional.\n"
 				if(BP.bandage)
 					var/usedclass = "'notice'"
 					if(BP.bandage.return_blood_DNA())
