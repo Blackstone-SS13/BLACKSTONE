@@ -45,3 +45,16 @@
 		M.add_nausea(9)
 		M.adjustToxLoss(3, 0)
 	return ..()
+
+/datum/reagent/organpoison
+	name = "Organ Poison"
+	description = "f"
+	reagent_state = LIQUID
+	color = "#ff2f00"
+	metabolization_rate = 0.1
+
+/datum/reagent/organpoison/on_mob_life(mob/living/carbon/M)
+	if(!HAS_TRAIT(M, RTRAIT_NASTY_EATER) && !HAS_TRAIT(M, RTRAIT_ORGAN_EATER))
+		M.add_nausea(9)
+		M.adjustToxLoss(3, 0)
+	return ..()

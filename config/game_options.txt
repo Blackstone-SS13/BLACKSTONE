@@ -439,8 +439,8 @@ ROUNDSTART_RACES elfd
 ROUNDSTART_RACES halforc 
 ROUNDSTART_RACES aasimar
 
-
 ## Races that are a meme and should not be accessible in normal gameplay, unless you are insane
+#ROUNDSTART_RACES goblin
 #ROUNDSTART_RACES argonian
 #ROUNDSTART_RACES werewolf
 

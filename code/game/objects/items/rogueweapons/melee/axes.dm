@@ -98,6 +98,7 @@
 	force = 33
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "battle axe"
+	desc = "A steel battleaxe of war. Has a wicked edge."
 	icon_state = "battleaxe"
 	max_blade_int = 300
 	smeltresult = /obj/item/ingot/steel
@@ -120,6 +121,7 @@
 	force = 23
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
 	name = "axe"
+	desc = "A regular iron woodcutting axe."
 	icon_state = "axe"
 	max_blade_int = 400
 	smeltresult = /obj/item/ingot/iron
@@ -128,6 +130,7 @@
 
 /obj/item/rogueweapon/stoneaxe/woodcut/steel
 	icon_state = "saxe"
+	desc = "A steel woodcutting axe. Performs much better than its iron counterpart."
 	force = 26
 	max_blade_int = 500
 	smeltresult = /obj/item/ingot/steel
