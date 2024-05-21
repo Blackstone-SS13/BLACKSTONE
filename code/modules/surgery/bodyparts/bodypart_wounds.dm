@@ -151,7 +151,7 @@
 		if(user.goodluck(2))
 			dam += 10
 	if(bclass == BCLASS_TWIST) //the ol dick twist
-		if(dam && (dam >= 10))
+		if(dam >= 10)
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 				owner.emote("groin")
 				owner.Stun(10)
