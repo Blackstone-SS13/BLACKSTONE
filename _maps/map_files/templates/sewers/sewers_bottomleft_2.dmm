@@ -1,7 +1,6 @@
 "a" = (/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
 "d" = (/obj/item/roguestatue/iron,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "e" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
-"f" = (/obj/item/roguekey/custom{lockid = "sewersmith"},/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "g" = (/obj/effect/decal/remains/human,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "k" = (/obj/item/roguebin/water/gross,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "l" = (/obj/machinery/light/rogue/torchholder/l,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
@@ -29,7 +28,6 @@
 "S" = (/obj/structure/spider/stickyweb,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "T" = (/mob/living/carbon/human/species/skeleton/npc,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "U" = (/obj/machinery/light/rogue/forge,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
-"V" = (/obj/structure/mineral_door/wood{lockid = sewersmith},/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "X" = (/obj/structure/rack/rogue,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "Z" = (/obj/structure/table/wood,/obj/item/ingot/iron,/obj/item/ingot/iron,/obj/item/ingot/iron,/obj/item/ingot/iron,/obj/item/ingot/iron,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 
@@ -44,8 +42,8 @@ aEqpIqqTEqqqqDuJJJEaaaEgIq
 aEqIqIqpEqqqeqqqqqEaaEEISI
 aEqqqqqIEqqqqqqqqqEEEEpIIq
 aEzHEEEEEqqqqqqeqqIIIqqIII
-aEqqqXRDVqqqqqqqqqEEEEgqIq
-aEZqqqqfEttLEEEEEzEaaEqIII
+aEqqqXRDzqqqqqqqqqEEEEgqIq
+aEZqqqqqEttLEEEEEzEaaEqIII
 aEsqqqqqqqqqEdqqqqEaaEeIII
 aElqqBqqqqqqEIqIIqEaaEqIII
 aEqqqqqqqqqqEpqqqqEaaEEQII

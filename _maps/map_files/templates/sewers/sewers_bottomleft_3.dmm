@@ -1,41 +1,41 @@
-"a" = (/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
-"e" = (/obj/structure/spider/stickyweb,/turf/open/water/sewer,/area/rogue/under/town/sewer)
-"f" = (/obj/effect/spawner/lootdrop/crate_spawner,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
-"h" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/spawner/lootdrop/crate_spawner,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
-"k" = (/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
-"l" = (/obj/structure/spider/stickyweb,/turf/open/water/swamp,/area/rogue/under/town/sewer)
-"n" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/water/sewer,/area/rogue/under/town/sewer)
-"o" = (/obj/structure/glowshroom,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
-"t" = (/obj/effect/decal/cleanable/ash/large,/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
-"u" = (/obj/structure/bars,/turf/open/water/swamp,/area/rogue/under/town/sewer)
-"v" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
-"x" = (/obj/structure/spider/stickyweb,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
-"B" = (/obj/structure/bars,/turf/open/water/sewer,/area/rogue/under/town/sewer)
-"G" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
-"H" = (/obj/structure/glowshroom,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
-"I" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
-"K" = (/turf/open/water/sewer,/area/rogue/under/town/sewer)
-"O" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
-"Q" = (/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
-"U" = (/turf/open/water/swamp,/area/rogue/under/town/sewer)
+"a" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
+"d" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
+"e" = (/obj/structure/spider/stickyweb,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"j" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"l" = (/obj/effect/spawner/lootdrop/crate_spawner,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"m" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"o" = (/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"p" = (/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"q" = (/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
+"t" = (/turf/open/water/sewer,/area/rogue/under/town/sewer)
+"x" = (/obj/structure/bars,/turf/open/water/swamp,/area/rogue/under/town/sewer)
+"z" = (/obj/structure/spider/stickyweb,/turf/open/water/sewer,/area/rogue/under/town/sewer)
+"C" = (/obj/structure/glowshroom,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"D" = (/obj/structure/spider/stickyweb,/turf/open/water/swamp,/area/rogue/under/town/sewer)
+"E" = (/obj/structure/glowshroom,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"G" = (/turf/open/water/swamp,/area/rogue/under/town/sewer)
+"I" = (/obj/structure/bars,/turf/open/water/sewer,/area/rogue/under/town/sewer)
+"J" = (/obj/effect/decal/cleanable/ash/large,/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
+"R" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/spawner/lootdrop/crate_spawner,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"X" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/water/sewer,/area/rogue/under/town/sewer)
 
 (1,1,1) = {"
-IIIIIIIIQeKQIIIIIIIIIIIIII
-aaaaaaaIGeKvIaaaaaaaaaaaaI
-aaaaaaaIQKKvIaaaaaaaaaaaaI
-aaaaaaaIQKKoIaaaaaaaaaaaaI
-aaaaaaaIQKKoIaaaaaaaaaaaaI
-aaaaaaaIvKKQIaaaaaaaaaaaaI
-aIIIIaaIQKKQIaaaaaaaaaaaaI
-aIhkkIIIGKKQIIIIIIIIIIIIII
-aIkHHUUueKKQQQQQQGGQQQQQQQ
-aIIkfUluKKKKKKKKenKeKKKKKK
-aaIkkHlUKKQQQQQQQQQQQQooQQ
-aaIkxxUUUBBIIIIIIIIIIIIIII
-aIIkkxHUllUIaaaaaaaaaaaaaI
-aIfkHkkkxUIIaaaaaaaaaaaaaI
-aIkfkHxfIIIaaaaaaaaaaaaaaI
-aIIIkkkIIaaaaaaaaaaaataaaI
-aaaIIIIIaaaaaaaaaaaaaaaaaI
-aaaaaaaaaaaaaaaaaaaaaaaaaO
+aaaaaaaaoztoaaaaaaaaaaaaaa
+qqqqqqqamztjaqqqqqqqqqqqqa
+qqqqqqqaottjaqqqqqqqqqqqqa
+qqqqqqqaottEaqqqqqqqqqqqqa
+qqqqqqqaottEaqqqqqqqqqqqqa
+qqqqqqqajttoaqqqqqqqqqqqqa
+qaaaaqqaottoaqqqqqqqqqqqqa
+qaRppaaamttoaaaaaaaaaaaaaa
+qapCCGGxzttoooooommooooooo
+qaaplGDxttttttttzXtztttttt
+qqappCDGttooooooooooooEEoo
+qqapeeGGGIIaaaaaaaaaaaaaaa
+qaappeCGDDGaqqqqqqqqqqqqqa
+qalpCpppeGaaqqqqqqqqqqqqqa
+qaplpCelaaaqqqqqqqqqqqqqqa
+qaaapppaaqqqqqqqqqqqqJqqqa
+qqqaaaaaqqqqqqqqqqqqqqqqqa
+qqqqqqqqqqqqqqqqqqqqqqqqqd
 "}

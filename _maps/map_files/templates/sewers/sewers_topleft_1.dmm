@@ -21,9 +21,8 @@
 "w" = (/obj/structure/mineral_door/bars{lockid = sewercell1},/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "x" = (/obj/structure/table/wood{icon_state = "largetable"},/obj/item/keyring,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "z" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 10},/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
-"A" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"A" = (/obj/structure/spider/stickyweb,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "B" = (/obj/structure/bed/rogue/shit,/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/blood,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
-"C" = (/obj/item/roguekey/custom{lockid = "sewercell2"; name = "sewer cell II key"},/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "D" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 1},/obj/item/reagent_containers/glass/bowl,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "E" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
 "F" = (/obj/structure/bars,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
@@ -32,11 +31,10 @@
 "J" = (/obj/structure/rack/rogue,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "K" = (/obj/effect/decal/cleanable/blood,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "L" = (/obj/machinery/light/rogue/torchholder/r,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
-"M" = (/obj/item/roguekey/custom{lockid = "sewercell3"; name = "sewer cell III key"},/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "N" = (/obj/machinery/light/rogue/torchholder/l,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "O" = (/obj/structure/fermenting_barrel/water,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "P" = (/obj/effect/decal/cleanable/blood/tracks,/obj/effect/decal/cleanable/blood/splatter,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
-"Q" = (/obj/structure/spider/stickyweb,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"Q" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "R" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
 "S" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 6},/obj/item/rope/chain,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "T" = (/obj/item/reagent_containers/glass/bowl,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
@@ -44,27 +42,26 @@
 "V" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "W" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
 "X" = (/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
-"Z" = (/obj/item/roguekey/custom{lockid = "sewercell1"; name = "sewer cell I key"},/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 
 (1,1,1) = {"
 aaaaaaaaaaaacaaaaaaaaaaaaE
 aWWWWWWWWWWWRvWWWvWWWvWWaW
-aWNXXXXXXXVWBXGWsXlWKTAWaW
+aWNXXXXXXXVWBXGWsXlWKTQWaW
 aWXtemDUpXXWKXXWXXqWiKsWaW
 aWXzxoHrSXOWXPXWXXXWXXXWaW
 aWXXXXXXXXLWFwFWFnFWFgFWaW
-aWXXXXXXXXXXXZXXXCXXXMXWaW
+aWXXXXXXXXXXXXXXXXXXXXXWaW
 aWWWWuWXXXXkXXXXXXXXXXLWWW
-aaaaWXWVVXXXXXXXXXXXXXXfAA
+aaaaWXWVVXXXXXXXXXXXXXXfQQ
 aaaaWXWWWWWWWWEWWWWWWWWWWW
-aaaaWAWaaaaaaaaaaaaaaaaaaW
-aaaaWAWaaWWWWWWWWWWWWaaaaW
-aaaaWAWaaWOAAJhAkAAXWaaaaW
+aaaaWQWaaaaaaaaaaaaaaaaaaW
+aaaaWQWaaWWWWWWWWWWWWaaaaW
+aaaaWQWaaWOQQJhQkQQXWaaaaW
 aaaaWXWWWWXXXXXXXXXXWaaaaW
-aaaaWXXXXXXkXAAXjAAXWaaaaW
-aaaaWWWWWWQAXXXXAQXXWaaaaW
+aaaaWXXXXXXkXQQXjQQXWaaaaW
+aaaaWWWWWWAQXXXXQAXXWaaaaW
 aaaaaaaaaWWWWWWWWWWuWaaaaW
-aaaaaaaaaaaaaaaaaaWAWaaaaW
-aaaaaaaaaaaaaaaaaaWAWaaaaW
-WWWWWWWWWWWWWWWWWWWAWWWWWW
+aaaaaaaaaaaaaaaaaaWQWaaaaW
+aaaaaaaaaaaaaaaaaaWQWaaaaW
+WWWWWWWWWWWWWWWWWWWQWWWWWW
 "}
