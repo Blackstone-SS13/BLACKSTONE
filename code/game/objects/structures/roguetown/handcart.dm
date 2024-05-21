@@ -7,8 +7,13 @@
 	max_integrity = 600
 	anchored = FALSE
 	climbable = TRUE
+
 	var/list/stuff_shit = list()
-	var/total_capacity = 0
+
+	var/current_capacity = 0
+	var/maximum_capacity = 60 //arbitrary maximum amount of weight allowed in the cart before it says fuck off
+
+	var/arbitrary_living_creature_weight = 10 // The arbitrary weight for any thing of a mob and living variety
 	facepull = FALSE
 	throw_range = 1
 
@@ -24,7 +29,7 @@
 		if(AM == user)
 			AM.forceMove(L)
 			stuff_shit -= AM
-			total_capacity = max(total_capacity-10, 0)
+			current_capacity = max(current_capacity-arbitrary_living_creature_weight, 0)
 			update_icon()
 			break
 
@@ -33,7 +38,7 @@
 	for(var/atom/movable/AM in src)
 		AM.forceMove(L)
 	stuff_shit = list()
-	total_capacity = 0
+	current_capacity = 0
 
 /obj/structure/handcart/Destroy()
 	dump_contents()
@@ -87,18 +92,18 @@
 	var/weight = 0
 	if(isitem(O))
 		var/obj/item/I = O
-		if((total_capacity + I.w_class) > 60)
+		if((current_capacity + I.w_class) > maximum_capacity)
 			return FALSE
 		weight = I.w_class
 	if(isliving(O))
-		if((total_capacity + 10) > 60)
+		if((current_capacity + arbitrary_living_creature_weight) > maximum_capacity)
 			return FALSE
-		weight = 10
+		weight = arbitrary_living_creature_weight
 	if(user && !user.transferItemToLoc(O, src))
 		return FALSE
 	else
 		O.forceMove(src)
-	total_capacity += weight
+	current_capacity += weight
 	stuff_shit += O
 	update_icon()
 	return TRUE
