@@ -98,7 +98,7 @@
 
 	var/moveup = 10
 	if(doctor.mind)
-		moveup = ((doctor.mind.get_skill_level(/datum/skill/misc/medicine)) * 5)
+		moveup = ((doctor.mind.get_skill_level(/datum/skill/misc/medicine)+1) * 5)
 	while(!QDELETED(target_wound) && !QDELETED(src))
 		if(!do_after(doctor, 20, target = patient))
 			break

@@ -6,6 +6,7 @@
 	sewn_clotting_threshold = null
 	whp = 8
 	woundpain = 5
+	sew_threshold = 50
 	can_sew = FALSE
 	passive_heal = TRUE
 	embed_chance = 100

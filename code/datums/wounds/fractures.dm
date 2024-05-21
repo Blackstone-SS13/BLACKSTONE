@@ -11,6 +11,7 @@
 	if(istype(other, /datum/wound/fracture) && (type == other.type))
 		return FALSE
 	return TRUE
+
 /datum/wound/fracture/groin
 	name = "pelvic fracture"
 

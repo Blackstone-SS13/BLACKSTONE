@@ -5,12 +5,14 @@
 	clotting_threshold = null
 	sewn_clotting_threshold = null
 	woundpain = 10
+	sew_threshold = 50
 	can_sew = FALSE
 
 /datum/wound/bruise/small
 	name = "bruise"
 	bleed_rate = 0
 	woundpain = 5
+	sew_threshold = 25
 
 /datum/wound/bruise/large
 	name = "massive hematoma"

@@ -10,6 +10,7 @@
 	sewn_clotting_threshold = 0.1
 	woundpain = 0
 	sewn_woundpain = 0
+	sew_threshold = 50
 	mob_overlay = "cut"
 	can_sew = TRUE
 
@@ -23,6 +24,7 @@
 	sewn_clotting_rate = 0.02
 	clotting_threshold = 0.1
 	sewn_clotting_threshold = 0.05
+	sew_threshold = 25
 
 /datum/wound/slash/large
 	name = "gruesome slash"
@@ -34,3 +36,4 @@
 	sewn_clotting_rate = 0.02
 	clotting_threshold = 0.4
 	sewn_clotting_threshold = 0.1
+	sew_threshold = 75
