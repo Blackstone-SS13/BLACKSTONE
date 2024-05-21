@@ -69,7 +69,7 @@
 			BB.damage = BB.damage
 			BB.embedchance = 100
 		BB.damage = BB.damage * (user.STAPER / 10) * damfactor
-		..()
+	..()
 
 /obj/item/gun/ballistic/revolver/grenadelauncher/bow/update_icon()
 	. = ..()
@@ -169,12 +169,7 @@
 	randomspread = 1
 	spread = 1
 	force = 9
-	verbage = "nock"
-	cartridge_wording = "arrow"
-	load_sound = 'sound/foley/nockarrow.ogg'
-	associated_skill = /datum/skill/combat/bows
 	damfactor = 0.9
-
 
 /datum/intent/shoot/bow/recurve
 	chargetime = 0.75

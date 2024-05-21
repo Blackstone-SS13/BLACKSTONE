@@ -269,7 +269,7 @@
 
 /obj/item/natural/bowstring
 	name = "fibre bowstring"
-	desc = "a simple cord of bowstring"
+	desc = "A simple cord of bowstring."
 	icon_state = "fibers"
 	possible_item_intents = list(/datum/intent/use)
 	force = 0
