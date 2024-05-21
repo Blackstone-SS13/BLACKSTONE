@@ -571,7 +571,11 @@
 		bleed_rate += embedded.embedding.embedded_bloodloss
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
-	bleed_rate = round(bleed_rate, 0.1)
+	var/bandage_effectiveness = 1
+	if(istype(bandage, /obj/item/natural/cloth))
+		var/obj/item/natural/cloth/cloth = bandage
+		bandage_effectiveness = cloth.bandage_effectiveness
+	bleed_rate = max(round(bleed_rate, 0.1), 0)
 	return bleed_rate
 
 /obj/item/bodypart/proc/heal_wounds(heal_amount, sleep_heal = FALSE) //wounds that are large always have large hp, but they can be sewn to bleed less/be healed
