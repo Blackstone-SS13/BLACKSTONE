@@ -496,6 +496,11 @@
 			. |= BP.on_life(stam_regen)
 
 /mob/living/carbon/proc/canspeak()
+	if(mouth?.muteinmouth)
+		return FALSE
+	for(var/obj/item/grabbing/grab in grabbedby)
+		if(grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
+			return FALSE
 	if(has_wound(/datum/wound/artery/throat))
 		return FALSE
 	if(istype(loc, /turf/open/water) && lying)
