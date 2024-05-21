@@ -3,8 +3,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /proc/init_primordial_wounds()
 	var/list/primordial_wounds = list()
-	for(var/wound_type in typesof(wound))
-		primordial_wounds[type] = new wound_type()
+	for(var/wound_type in typesof(/datum/wound))
+		primordial_wounds[wound_type] = new wound_type()
 	return primordial_wounds
 
 /datum/wound
@@ -71,6 +71,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Returns whether or not this wound can be applied to a given bodypart
 /datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected)
+	if(QDELETED(affected) || QDELETED(affected.owner))
+		return FALSE
 	if(!affected.can_bloody_wound() && !isnull(bleed_rate))
 		return FALSE
 	return TRUE
