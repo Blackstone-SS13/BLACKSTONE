@@ -99,7 +99,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/remove_from_bodypart()
 	if(!bodypart_owner)
 		return FALSE
-	var/mob/was_owner = owner
+	var/mob/living/was_owner = owner
 	on_bodypart_loss(bodypart_owner)
 	LAZYREMOVE(bodypart_owner.wounds, src)
 	bodypart_owner = null
