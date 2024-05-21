@@ -1,0 +1,22 @@
+"a" = (/turf/closed/mineral/rogue,/area/rogue)
+"n" = (/obj/structure/glowshroom,/turf/open/floor/rogue/greenstone,/area/rogue)
+"x" = (/turf/open/floor/rogue/greenstone,/area/rogue)
+"J" = (/turf/open/water/sewer,/area/rogue)
+"O" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"S" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/greenstone,/area/rogue)
+"T" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"Y" = (/obj/structure/glowshroom,/turf/open/water/sewer,/area/rogue)
+
+(1,1,1) = {"
+Taaaaaaaaaaaa
+OOOOOOOOOOOOO
+xxxxxxxnxxxxO
+JJJJJJJJYJJxO
+xxxxxxxxxxJSO
+OOOOOOOOOxJxO
+OaaaaaaaOxJxO
+OaaaaaaaOxJxO
+OaaaaaaaOxJnO
+OaaaaaaaOxYxO
+OOOOOOOOOxJxO
+"}

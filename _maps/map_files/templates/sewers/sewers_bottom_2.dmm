@@ -1,0 +1,17 @@
+"a" = (/turf/closed/mineral/rogue,/area/rogue)
+"m" = (/obj/structure/rack/rogue,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue)
+"o" = (/obj/structure/fluff/walldeco/chains,/turf/open/floor/rogue/cobble,/area/rogue)
+"q" = (/obj/structure/spider/stickyweb,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"v" = (/turf/open/floor/rogue/cobble,/area/rogue)
+"D" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"F" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue)
+"R" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/cobble,/area/rogue)
+"W" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+
+(1,1,1) = {"
+WWDDDvvDDDvDDWW
+aWvRDDDvDDvDDWW
+aWWWvDvDDomWWWa
+aaaWFqvvRWWWaaa
+aaaWWWWWWWaaaaa
+"}

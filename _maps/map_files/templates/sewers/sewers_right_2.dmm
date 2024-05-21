@@ -1,0 +1,20 @@
+"a" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"c" = (/obj/structure/mineral_door/wood/red,/turf/open/floor/rogue/cobble,/area/rogue)
+"k" = (/obj/effect/decal/cleanable/cobweb/cobweb2,/turf/open/floor/rogue/cobble,/area/rogue)
+"p" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"x" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue)
+"B" = (/obj/effect/decal/remains/bigrat,/turf/open/floor/rogue/cobble,/area/rogue)
+"C" = (/turf/closed/mineral/rogue,/area/rogue)
+"L" = (/mob/living/carbon/human/species/skeleton/npc,/turf/open/floor/rogue/cobble,/area/rogue)
+"X" = (/turf/open/floor/rogue/cobble,/area/rogue)
+
+(1,1,1) = {"
+aaaaa
+aCCCC
+aaaaa
+pcXka
+aaXXa
+aXXLa
+axxBa
+aaaaa
+"}

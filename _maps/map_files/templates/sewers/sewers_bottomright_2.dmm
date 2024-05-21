@@ -1,0 +1,33 @@
+"a" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"b" = (/obj/structure/table/church/m,/turf/open/floor/rogue/cobble,/area/rogue)
+"f" = (/obj/structure/rack/rogue,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue)
+"j" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue)
+"m" = (/obj/structure/bars/tough,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"p" = (/obj/machinery/light/rogue/wallfire/candle,/turf/open/floor/rogue/cobble,/area/rogue)
+"q" = (/obj/structure/table/church,/obj/item/natural/bundle/cloth,/obj/item/clothing/wrists/roguetown/wrappings,/turf/open/floor/rogue/cobble,/area/rogue)
+"y" = (/obj/structure/table/church{dir = 1},/obj/item/candle/skull/lit,/turf/open/floor/rogue/cobble,/area/rogue)
+"z" = (/obj/structure/chair/wood/rogue/fancy,/turf/open/floor/rogue/cobble,/area/rogue)
+"A" = (/obj/structure/mineral_door/wood/red,/turf/open/floor/rogue/cobble,/area/rogue)
+"D" = (/turf/open/floor/rogue/cobble,/area/rogue)
+"H" = (/mob/living/carbon/human/species/skeleton/npc,/turf/open/floor/rogue/cobble,/area/rogue)
+"J" = (/turf/closed/mineral/rogue,/area/rogue)
+"K" = (/obj/structure/bars/tough,/turf/open/floor/rogue/cobble,/area/rogue)
+"M" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"O" = (/obj/structure/closet/crate/coffin,/turf/open/floor/rogue/cobble,/area/rogue)
+"P" = (/obj/machinery/light/rogue/wallfire/candle,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+"T" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/obj/effect/decal/cleanable/cobweb/cobweb2,/turf/open/floor/rogue/cobble,/area/rogue)
+"Z" = (/obj/structure/closet/crate/coffin,/obj/structure/fluff/walldeco/chains,/turf/open/floor/rogue/cobble,/area/rogue)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaa
+aJJJJJJJJJJJJJJJJJJ
+aaaaaaaaaaaaaaaaaaa
+MMMADDDpffDPMffpDTa
+aaaaDDDDDDDDDDDDDja
+aJJaaODDDDDzDDDHDOa
+aJJJaaODDDqbyDDDOaa
+JJJJJaaODDDDDDDOaaJ
+JJJJJJaaKmmKKmKaaJJ
+JJJJJJJaaOZOOZaaJJJ
+JJJJJJJJaaaaaaaJJJJ
+"}

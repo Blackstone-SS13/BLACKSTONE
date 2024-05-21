@@ -1,0 +1,36 @@
+"a" = (/turf/open/floor/rogue/concrete,/area/rogue)
+"b" = (/obj/structure/bars/pipe,/obj/effect/decal/cleanable/cobweb,/turf/open/floor/rogue/metal,/area/rogue)
+"e" = (/obj/structure/table/wood,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/concrete,/area/rogue)
+"f" = (/turf/closed/mineral/rogue,/area/rogue)
+"g" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"k" = (/obj/structure/table/wood,/obj/item/candle/yellow/lit,/turf/open/floor/rogue/concrete,/area/rogue)
+"l" = (/obj/structure/bars/pipe,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/metal,/area/rogue)
+"n" = (/obj/structure/table/wood,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/concrete,/area/rogue)
+"q" = (/obj/structure/bars/pipe{dir = 10},/turf/open/floor/rogue/metal,/area/rogue)
+"s" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue)
+"u" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
+"B" = (/obj/structure/chair/wood/rogue,/turf/open/floor/rogue/concrete,/area/rogue)
+"H" = (/obj/structure/table/wood,/obj/structure/fluff/walldeco/chains,/turf/open/floor/rogue/concrete,/area/rogue)
+"I" = (/obj/structure/bars/pipe,/obj/effect/decal/cleanable/cobweb/cobweb2,/turf/open/floor/rogue/metal,/area/rogue)
+"K" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/concrete,/area/rogue)
+"L" = (/obj/structure/table/wood,/obj/item/rogueweapon/hammer/claw,/turf/open/floor/rogue/concrete,/area/rogue)
+"P" = (/obj/structure/bars/pipe{dir = 9},/turf/open/floor/rogue/metal,/area/rogue)
+"Q" = (/obj/structure/bars/pipe,/turf/open/floor/rogue/metal,/area/rogue)
+"R" = (/turf/closed/wall/mineral/rogue/pipe{icon_state = "iron_line"; dir = 4},/area/rogue)
+"U" = (/obj/structure/mineral_door/bars,/turf/open/floor/rogue/cobble,/area/rogue)
+"V" = (/obj/structure/bars/pipe{dir = 8},/turf/open/floor/rogue/metal,/area/rogue)
+"W" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
+
+(1,1,1) = {"
+gffffffffffff
+ufuuuuuuuuuuu
+uuubQQQQllQIu
+WWUaaaKaaaasu
+uuuaaBaaaaasu
+ufuanLkaaKaPu
+ufuaHkeaaaaVu
+ufuaaaaaaaaqu
+ufuRRRRRuUuuu
+ufffffffuWuff
+uuuuuuuuuWuuu
+"}
