@@ -145,7 +145,10 @@
 	else if(!wound.can_apply_to_mob(src))
 		qdel(wound)
 		return
-	return wound.apply_to_mob(src)
+	if(!wound.apply_to_mob(src))
+		qdel(wound)
+		return
+	return wound
 
 /// Simple version for removing a wound - DO NOT CALL THIS ON CARBON MOBS!
 /mob/living/proc/simple_remove_wound(datum/wound/wound)
