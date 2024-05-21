@@ -404,7 +404,7 @@
 			next_attack_msg.Cut()
 			if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 				var/datum/wound/crit_wound  = woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
-				if((crit_wound && !istype(crit_wound)) || crit_wound.embeddable)
+				if(should_embed_weapon(crit_wound))
 					// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 					simple_embedded_objects |= I
 					I.add_mob_blood(src)

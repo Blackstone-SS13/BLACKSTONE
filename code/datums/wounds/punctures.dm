@@ -12,7 +12,6 @@
 	sewn_woundpain = 0
 	mob_overlay = "cut"
 	can_sew = TRUE
-	embeddable = TRUE
 
 /datum/wound/puncture/small
 	name = "small puncture"

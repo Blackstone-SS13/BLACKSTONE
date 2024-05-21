@@ -50,8 +50,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/sleep_heal = TRUE
 	/// Can be healed passively, without sleep even
 	var/passive_heal = FALSE
-	/// Whether this wound allows embedding an item when applied
-	var/embeddable = FALSE
+	/// Embed chance if this wound allows embedding
+	var/embed_chance = FALSE
 
 /datum/wound/Destroy(force)
 	. = ..()
@@ -184,3 +184,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	can_sew = FALSE
 	sleep_heal = TRUE
 	return TRUE
+
+/proc/should_embed_weapon(datum/wound/wound_or_boolean)
+	if(!istype(wound_or_boolean))
+		return wound_or_boolean
+	return prob(wound_or_boolean.embed_chance)

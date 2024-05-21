@@ -18,7 +18,10 @@
 	else if(!wound.can_apply_to_bodypart(src))
 		qdel(wound)
 		return
-	return wound.apply_to_bodypart(src)
+	if(!wound.apply_to_bodypart(src))
+		qdel(wound)
+		return
+	return wound
 
 /// Removes a wound from this bodypart, removing any associated effects
 /obj/item/bodypart/proc/remove_wound(datum/wound/wound)
@@ -513,7 +516,7 @@
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		if(H.checkcritarmor(zone_precise, bclass))
-			return FALSE
+			return
 	if(user)
 		if(user.goodluck(2))
 			dam += 10
