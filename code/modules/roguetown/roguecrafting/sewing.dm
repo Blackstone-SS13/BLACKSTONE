@@ -160,7 +160,7 @@
 	name = "armored dress"
 	result = list(/obj/item/clothing/suit/roguetown/armor/armordress)
 	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/fibers = 1)
+				/obj/item/natural/fibers = 1,
 				/obj/item/natural/hide = 1)
 	craftdiff = 3
 
