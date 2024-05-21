@@ -638,3 +638,47 @@
 	dynamic_hair_suffix = null
 	sellprice = 100
 	resistance_flags = FIRE_PROOF
+
+/obj/item/clothing/head/roguetown/helmet/heavy/racial/dwarfknight
+	name = "Dwarf Knight Helmet"
+	icon_state = "dwarfknighthelm"
+	desc = "Rock and stone!"
+	body_parts_covered = HEAD|HAIR|EARS|NOSE
+	allowed_race = list("dwarfm")
+	sellprice = 40
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/racial/dwarfoverseer
+	name = "Dwarf Overseer Helmet"
+	icon_state = "dwarfoverseerhelm"
+	desc = "To observe and guide"
+	body_parts_covered = HEAD|HAIR|EARS
+	allowed_race = list("dwarfm")
+	sellprice = 20
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/racial/dwarfpunisher
+	name = "Dwarf Punisher Helmet"
+	icon_state = "dwarfpunisherhelmet"
+	desc = "Be the terror, in small size"
+	body_parts_covered = HEAD|HAIR|EARS|NOSE
+	allowed_race = list("dwarfm")
+	sellprice = 30
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/racial/dwarfengineer
+	name = "Dwarf Engineer Helmet"
+	icon_state = "dwarfengineerhelm"
+	desc = "Time to work these mechanisms, aye?"
+	body_parts_covered = HEAD|HAIR|EARS|NOSE
+	allowed_race = list("dwarfm")
+	sellprice = 20
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/head/roguetown/helmet/heavy/wizardironcap
+	name = "Wizard Iron Cap"
+	icon_state = "wizardironcap"
+	desc = "For wizards who need protection!"
+	body_parts_covered = HEAD|HAIR|EARS
+	sellprice = 50
+	smeltresult = /obj/item/ingot/iron

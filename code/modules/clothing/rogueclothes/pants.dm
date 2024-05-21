@@ -123,6 +123,44 @@
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
 
+/obj/item/clothing/under/roguetown/racial/dwarfknightlegs
+	name = "Dwarf Knight Leggings"
+	desc = ""
+	gender = PLURAL
+	icon_state = "dwarfknightlegs"
+	item_state = "dwarfknightlegs"
+//	adjustable = CAN_CADJUST
+	sewrepair = FALSE
+	armor = list("melee" = 100, "bullet" = 50, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	allowed_race = list("dwarfm")
+	blocksound = PLATEHIT
+	var/do_sound = FALSE
+	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
+	r_sleeve_status = SLEEVE_NOMOD
+	l_sleeve_status = SLEEVE_NOMOD
+
+/obj/item/clothing/under/roguetown/racial/dwarfpunisherlegs
+	name = "Dwarf Punisher Leggings"
+	desc = ""
+	gender = PLURAL
+	icon_state = "dwarfpunisherlegs"
+	item_state = "dwarfpunisherlegs"
+//	adjustable = CAN_CADJUST
+	sewrepair = FALSE
+	armor = list("melee" = 100, "bullet" = 50, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	allowed_race = list("dwarfm")
+	blocksound = PLATEHIT
+	var/do_sound = FALSE
+	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
+	r_sleeve_status = SLEEVE_NOMOD
+	l_sleeve_status = SLEEVE_NOMOD
+
 /obj/item/clothing/under/roguetown/chainlegs/iron
 	icon_state = "ichain_legs"
 	anvilrepair = /datum/skill/craft/armorsmithing

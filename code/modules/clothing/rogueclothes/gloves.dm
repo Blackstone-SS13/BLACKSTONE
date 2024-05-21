@@ -91,3 +91,37 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
 
+/obj/item/clothing/gloves/roguetown/racial/dwarfknightgloves
+	name = "dwarf knight gauntlets"
+	desc = ""
+	icon_state = "dwarfknightgauntlets"
+	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CHOP, BCLASS_CUT, BCLASS_BLUNT)
+	allowed_race = list("dwarfm")
+	resistance_flags = null
+	blocksound = PLATEHIT
+
+	max_integrity = 300
+	blade_dulling = DULLING_BASH
+	break_sound = 'sound/foley/breaksound.ogg'
+	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/gloves/roguetown/racial/dwarfpunishergloves
+	name = "dwarf punisher gauntlets"
+	desc = ""
+	icon_state = "dwarfpunishergauntlets"
+	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CHOP, BCLASS_CUT, BCLASS_BLUNT)
+	allowed_race = list("dwarfm")
+	resistance_flags = null
+	blocksound = PLATEHIT
+
+	max_integrity = 300
+	blade_dulling = DULLING_BASH
+	break_sound = 'sound/foley/breaksound.ogg'
+	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel	
+
