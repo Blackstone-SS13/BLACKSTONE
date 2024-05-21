@@ -9,6 +9,15 @@
 		all_wounds += simple_wounds
 	return all_wounds
 
+/// Gets all sewable wounds in a mob
+/mob/living/proc/get_sewable_wounds()
+	var/list/woundies = list()
+	for(var/datum/wound/wound as anything in get_wounds())
+		if(!wound.can_sew)
+			continue
+		woundies += wound
+	return woundies
+	
 /// Loops through our list of wounds and returns the first wound that is of the type specified by the path
 /mob/living/proc/has_wound(path, specific = FALSE)
 	if(!path)
@@ -21,7 +30,7 @@
 /// Loops through our list of wounds and returns the first wound that is of the type specified by the path
 /mob/living/proc/heal_wounds(heal_amount, sleep_heal = FALSE)
 	var/healed_any = FALSE
-	for(var/datum/wound/wound in get_wounds())
+	for(var/datum/wound/wound as anything in get_wounds())
 		if((heal_amount <= 0) || (sleep_heal && !wound.sleep_heal))
 			continue
 		var/amount_healed = wound.heal_wound(heal_amount)
@@ -31,7 +40,7 @@
 
 /// Tries to do a critical hit on a mob that uses simple wounds - DO NOT CALL THIS ON CARBON MOBS, THEY HAVE BODYPARTS!
 /mob/living/proc/try_crit(bclass, dam, mob/living/user, zone_precise)
-	if(!dam || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+	if(!dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return
 	if(zone_precise == BODY_ZONE_HEAD)
 		if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_PICK)
@@ -123,12 +132,18 @@
 
 /// Simple version for adding a wound - DO NOT CALL THIS ON CARBON MOBS!
 /mob/living/proc/simple_add_wound(datum/wound/wound)
-	if(!wound || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+	if(!wound || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
-	if(ispath(wound))
+	if(ispath(wound, /datum/wound))
+		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]
+		if(!primordial_wound.can_apply_to_mob(src))
+			return
 		wound = new wound()
-	if(!istype(wound))
-		return FALSE
+	else if(!istype(wound))
+		return
+	else if(!wound.can_apply_to_mob(src))
+		qdel(wound)
+		return
 	return wound.apply_to_mob(src)
 
 /// Simple version for removing a wound - DO NOT CALL THIS ON CARBON MOBS!
@@ -142,12 +157,3 @@
 	. = wound.remove_from_mob()
 	if(.)
 		qdel(wound)
-
-/// Gets all sewable wounds in a mob
-/mob/living/proc/get_sewable_wounds()
-	var/list/woundies = list()
-	for(var/datum/wound/wound as anything in get_wounds())
-		if(!wound.can_sew)
-			continue
-		woundies += wound
-	return woundies

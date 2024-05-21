@@ -186,9 +186,9 @@
 	C.next_attack_msg.Cut()
 	C.apply_damage(damage, BRUTE, limb_grabbed, armor_block)
 	limb_grabbed.attacked_by(BCLASS_TWIST, damage, user, sublimb_grabbed)
-	C.visible_message("<span class='danger'>[user] twists [C]'s [sublimb_grabbed]![C.next_attack_msg.Join()]</span>", \
-					"<span class='userdanger'>[user] twists my [sublimb_grabbed]![C.next_attack_msg.Join()]</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
-	to_chat(user, "<span class='warning'>I twist [C]'s [sublimb_grabbed].[C.next_attack_msg.Join()]</span>")
+	C.visible_message("<span class='danger'>[user] twists [C]'s [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]</span>", \
+					"<span class='userdanger'>[user] twists my [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
+	to_chat(user, "<span class='warning'>I twist [C]'s [parse_zone(sublimb_grabbed)].[C.next_attack_msg.Join()]</span>")
 	C.next_attack_msg.Cut()
 	log_combat(user, C, "limbtwisted [sublimb_grabbed] ")
 
@@ -226,7 +226,7 @@
 			user.visible_message("<span class='notice'>[user] rips [I] out of [user.p_their()] [L.name]!</span>", "<span class='notice'>I rip [I] from my [L.name].</span>")
 		else
 			user.visible_message("<span class='notice'>[user] rips [I] out of [C]'s [L.name]!</span>", "<span class='notice'>I rip [I] from [C]'s [L.name].</span>")
-
+		sublimb_grabbed = user.zone_selected
 	else
 		var/obj/item/I = locate(sublimb_grabbed) in M.simple_embedded_objects
 		if(!I || I.loc != M)

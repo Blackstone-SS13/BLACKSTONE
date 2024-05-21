@@ -117,7 +117,7 @@
 				else
 					doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient].</span>")
 			log_combat(doctor, patient, "sew", "needle")
-			target_wound.sew()
+			target_wound.sew_wound()
 			return TRUE
 	return FALSE
 

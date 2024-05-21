@@ -5,11 +5,14 @@
 /obj/item/bodypart/proc/can_disable(obj/item/I)
 	return disableable
 
-/obj/item/bodypart/var/list/dismemsound = list('sound/combat/dismemberment/dismem (1).ogg',
-'sound/combat/dismemberment/dismem (2).ogg',
-'sound/combat/dismemberment/dismem (3).ogg',
-'sound/combat/dismemberment/dismem (5).ogg',
-'sound/combat/dismemberment/dismem (6).ogg')
+/obj/item/bodypart
+	var/list/dismemsound = list(
+		'sound/combat/dismemberment/dismem (1).ogg',
+		'sound/combat/dismemberment/dismem (2).ogg',
+		'sound/combat/dismemberment/dismem (3).ogg',
+		'sound/combat/dismemberment/dismem (5).ogg',
+		'sound/combat/dismemberment/dismem (6).ogg',
+	)
 
 //Dismember a limb
 /obj/item/bodypart/proc/dismember(dam_type = BRUTE, mob/living/user, zone_precise = src.body_zone)
@@ -136,7 +139,6 @@
 			C.surgeries -= S
 			qdel(S)
 			break
-
 	for(var/obj/item/I in embedded_objects)
 		embedded_objects -= I
 		var/turf/T = get_turf(C)
@@ -145,6 +147,8 @@
 		var/turf/T = get_turf(C)
 		bandage.forceMove(T)
 		bandage = null
+	for(var/datum/wound/wound as anything in wounds)
+		qdel(wound)
 	if(!C.has_embedded_objects())
 		C.clear_alert("embeddedobject")
 		SEND_SIGNAL(C, COMSIG_CLEAR_MOOD_EVENT, "embedded")

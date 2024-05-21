@@ -11,6 +11,6 @@
 	name = "broken neck"
 	bleed_rate = 0
 	can_sew = 0
-	whp = 60
+	whp = 100
 	woundpain = 100
 	sleep_heal = FALSE

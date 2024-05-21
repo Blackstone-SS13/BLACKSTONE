@@ -1,3 +1,12 @@
+/// List of "primordial" wounds so that we don't have to create new wound datums when running checks to see if a wound should be applied
+GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
+
+/proc/init_primordial_wounds()
+	var/list/primordial_wounds = list()
+	for(var/wound_type in typesof(wound))
+		primordial_wounds[type] = new wound_type()
+	return primordial_wounds
+
 /datum/wound
 	/// Name of the wound, visible to players when inspecting a limb and such
 	var/name = "wound"
@@ -10,7 +19,7 @@
 	/// How many "health points" this wound gets after being sewn
 	var/sewn_whp = 30
 	/// How much this wound bleeds
-	var/bleed_rate = 0.2
+	var/bleed_rate
 	/// Bleed rate when sewn
 	var/sewn_bleed_rate = 0.01
 	/// Some wounds clot over time, reducing bleeding - This is the rate at which they do so
@@ -40,7 +49,7 @@
 	/// If TRUE, this wound can be healed through sleep
 	var/sleep_heal = TRUE
 	/// Can be healed passively, without sleep even
-	var/passive_heal = TRUE
+	var/passive_heal = FALSE
 
 /datum/wound/Destroy(force)
 	. = ..()
@@ -60,6 +69,12 @@
 		visible_name += " <span class='green'>(sewn)</span>"
 	return visible_name
 
+/// Returns whether or not this wound can be applied to a given bodypart
+/datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected)
+	if(!affected.can_bloody_wound() && !isnull(bleed_rate))
+		return FALSE
+	return TRUE
+
 /// Adds this wound to a given bodypart
 /datum/wound/proc/apply_to_bodypart(obj/item/bodypart/affected)
 	if(QDELETED(affected))
@@ -72,6 +87,7 @@
 	bodypart_owner = affected
 	owner = bodypart_owner.owner
 	on_bodypart_gain(affected)
+	owner?.update_damage_overlays()
 	return TRUE
 
 /// Effects when a wound is gained on a bodypart
@@ -83,15 +99,23 @@
 /datum/wound/proc/remove_from_bodypart()
 	if(!bodypart_owner)
 		return FALSE
+	var/mob/was_owner = owner
 	on_bodypart_loss(bodypart_owner)
 	LAZYREMOVE(bodypart_owner.wounds, src)
 	bodypart_owner = null
 	owner = null
+	was_owner?.update_damage_overlays()
 	return TRUE
 
 /// Effects when a wound is lost on a bodypart
 /datum/wound/proc/on_bodypart_loss(obj/item/bodypart/old_bodypart)
 	return
+
+/// Returns whether or not this wound can be applied to a given mob
+/datum/wound/proc/can_apply_to_mob(mob/living/affected)
+	if(!affected || QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
+		return FALSE
+	return TRUE
 
 /// Adds this wound to a given mob, simpler than adding to a bodypart - No extra effects
 /datum/wound/proc/apply_to_mob(mob/living/affected)
@@ -122,6 +146,9 @@
 
 /// Heals this wound by the given amount, and deletes it if it's healed completely
 /datum/wound/proc/heal_wound(heal_amount)
+	// Wound cannot be healed normally, whp is null
+	if(isnull(whp))
+		return 0
 	var/amount_healed = min(whp, heal_amount)
 	whp -= amount_healed
 	if(whp <= 0)
@@ -134,7 +161,7 @@
 	return amount_healed
 
 /// Sews the wound up, changing its properties to the sewn ones
-/datum/wound/proc/sew()
+/datum/wound/proc/sew_wound()
 	if(!can_sew)
 		return FALSE
 	mob_overlay = sewn_overlay

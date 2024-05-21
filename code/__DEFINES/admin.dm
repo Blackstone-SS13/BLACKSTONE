@@ -76,6 +76,7 @@
 #define ADMIN_PUNISHMENT_SUPPLYPOD "Supply Pod"
 #define ADMIN_PUNISHMENT_MAZING "Puzzle"
 #define ADMIN_PUNISHMENT_BRAZIL "Send to Brazil"
+#define ADMIN_PUNISHMENT_CBT "CBT"
 
 #define AHELP_ACTIVE 1
 #define AHELP_CLOSED 2

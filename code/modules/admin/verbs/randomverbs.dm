@@ -1049,7 +1049,19 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!check_rights(R_ADMIN) || !check_rights(R_FUN))
 		return
 
-	var/list/punishment_list = list(ADMIN_PUNISHMENT_LIGHTNING, ADMIN_PUNISHMENT_BRAINDAMAGE, ADMIN_PUNISHMENT_GIB, ADMIN_PUNISHMENT_BSA, ADMIN_PUNISHMENT_FIREBALL, ADMIN_PUNISHMENT_ROD, ADMIN_PUNISHMENT_SUPPLYPOD_QUICK, ADMIN_PUNISHMENT_SUPPLYPOD, ADMIN_PUNISHMENT_MAZING, ADMIN_PUNISHMENT_BRAZIL)
+	var/list/punishment_list = list(
+		ADMIN_PUNISHMENT_LIGHTNING, 
+		ADMIN_PUNISHMENT_BRAINDAMAGE, 
+		ADMIN_PUNISHMENT_GIB, 
+		ADMIN_PUNISHMENT_BSA, 
+		ADMIN_PUNISHMENT_FIREBALL, 
+		ADMIN_PUNISHMENT_ROD, 
+		ADMIN_PUNISHMENT_SUPPLYPOD_QUICK, 
+		ADMIN_PUNISHMENT_SUPPLYPOD, 
+		ADMIN_PUNISHMENT_MAZING, 
+		ADMIN_PUNISHMENT_BRAZIL,
+		ADMIN_PUNISHMENT_CBT,
+	)
 
 	var/punishment = input("Choose a punishment", "DIVINE SMITING") as null|anything in sortList(punishment_list)
 
@@ -1128,6 +1140,16 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			ligga.fully_replace_character_name(ligga.real_name, old_name)
 			ligga.regenerate_icons()
 			to_chat(ligga, "<span class='userdanger'>I have been sent to <span class='green'>Brazil</span>!</span>")
+		if(ADMIN_PUNISHMENT_CBT)
+			if(!ishuman(target))
+				to_chat(usr,"<span class='warning'>Target must be human!</span>")
+				return
+			var/mob/living/carbon/human/humie = target
+			var/obj/item/bodypart/affecting = humie.get_bodypart(BODY_ZONE_CHEST)
+			if(!affecting)
+				to_chat(usr,"<span class='warning'>Target must have a chest!</span>")
+				return
+			affecting.add_wound(/datum/wound/cbt)
 
 	punish_log(target, punishment)
 

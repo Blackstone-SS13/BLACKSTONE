@@ -8,16 +8,17 @@
 /obj/item/bodypart/proc/add_wound(datum/wound/wound)
 	if(!wound || !owner || (owner.status_flags & GODMODE))
 		return
-	if(ispath(wound))
-		wound = new wound(src)
-	if(!can_bloody_wound())
-		if(wound.bleed_rate)
-			qdel(wound)
+	if(ispath(wound, /datum/wound))
+		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]
+		if(!primordial_wound.can_apply_to_bodypart(src))
 			return
-	var/apply_result = wound.apply_to_bodypart(src)
-	if(apply_result)
-		owner.update_damage_overlays()
-	return apply_result
+		wound = new wound()
+	else if(!istype(wound))
+		return
+	else if(!wound.can_apply_to_bodypart(src))
+		qdel(wound)
+		return
+	return wound.apply_to_bodypart(src)
 
 /// Removes a wound from this bodypart, removing any associated effects
 /obj/item/bodypart/proc/remove_wound(datum/wound/wound)

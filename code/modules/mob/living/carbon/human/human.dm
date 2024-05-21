@@ -315,30 +315,35 @@
 			return
 		var/mob/user = usr
 		var/obj/item/bodypart/BP = get_bodypart(check_zone(user.zone_selected))
-		msg += "<B>[parse_zone(check_zone(user.zone_selected))]:</B>\n"
+		msg += "<B>[capitalize(parse_zone(check_zone(user.zone_selected)))]:</B>\n"
 		if(BP)
 			if(get_location_accessible(src, check_zone(user.zone_selected)))
+				var/bodypart_message = list()
 				switch(BP.disabled)
 					if(BODYPART_DISABLED_FRACTURE)
-						msg += "[BP] is broken.\n"
+						bodypart_message += "[BP] is broken.\n"
 					if(BODYPART_DISABLED_DAMAGE)
-						msg += "[BP] is numb to touch.\n"
+						bodypart_message += "[BP] is numb to touch.\n"
 					if(BODYPART_DISABLED_PARALYSIS)
-						msg += "[BP] is limp.\n"
+						bodypart_message += "[BP] is limp.\n"
 					if(BODYPART_DISABLED_ROT)
 						if(BP.skeletonized)
-							msg += "[BP] is skeletonized.\n"
+							bodypart_message += "[BP] is skeletonized.\n"
 						else
-							msg += "[BP] is rotting.\n"
+							bodypart_message += "[BP] is rotting.\n"
 				if(BP.bandage)
 					var/usedclass = "'notice'"
 					if(BP.bandage.return_blood_DNA())
 						usedclass = "'danger'"
-					msg += "<a href='?src=[REF(src)];bandage=[REF(BP.bandage)];bandaged_limb=[REF(BP)]' class=[usedclass]>Bandaged</a>\n"
+					bodypart_message += "<a href='?src=[REF(src)];bandage=[REF(BP.bandage)];bandaged_limb=[REF(BP)]' class=[usedclass]>Bandaged</a>\n"
 				else if(length(BP.wounds))
-					msg += "<B>Wounds:</B>\n"
+					bodypart_message += "<B>Wounds:</B>\n"
 					for(var/datum/wound/wound as anything in BP.wounds)
-						msg += "[wound.get_visible_name()]\n"
+						bodypart_message += "[wound.get_visible_name()]\n"
+				if(length(bodypart_message))
+					msg += jointext(bodypart_message, "")
+				else
+					msg += "<B>Healthy.</B>\n"
 			else
 				msg += "Obscured by clothing.\n"
 			for(var/obj/item/I in BP.embedded_objects)

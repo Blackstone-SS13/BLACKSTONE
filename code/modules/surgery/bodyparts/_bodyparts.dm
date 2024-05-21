@@ -112,6 +112,8 @@
 		owner = null
 	if(bandage)
 		QDEL_NULL(bandage)
+	for(var/datum/wound/wound as anything in wounds)
+		qdel(wound)
 	return ..()
 
 
