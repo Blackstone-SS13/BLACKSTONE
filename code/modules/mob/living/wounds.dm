@@ -81,11 +81,12 @@
 			src.emote("death", forced =TRUE)
 			src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [src]!</span>"
 			simple_add_wound(/datum/wound/artery)
+			return TRUE
 //			if(bclass == BCLASS_STAB || bclass == BCLASS_PICK)
 //				death()
 //				return TRUE
 
-/mob/living/proc/woundcritroll(bclass, dam, mob/living/user, zone_precise)
+/mob/living/proc/simple_woundcritroll(bclass, dam, mob/living/user, zone_precise)
 	if(!bclass || !dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
 	if(user)

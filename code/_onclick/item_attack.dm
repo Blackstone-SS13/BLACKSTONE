@@ -403,7 +403,7 @@
 		if(I.damtype == BRUTE)
 			next_attack_msg.Cut()
 			if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-				var/datum/wound/crit_wound  = woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
+				var/datum/wound/crit_wound  = simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
 				if(should_embed_weapon(crit_wound))
 					// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 					simple_embedded_objects |= I

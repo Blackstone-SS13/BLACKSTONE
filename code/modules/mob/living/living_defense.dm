@@ -84,7 +84,7 @@
 	return 0
 
 /mob/living/proc/check_projectile_wounding(obj/projectile/P, def_zone)
-	woundcritroll(P.woundclass, P.damage, null, def_zone)
+	simple_woundcritroll(P.woundclass, P.damage, null, def_zone)
 	return
 
 /mob/living/proc/check_projectile_embed(obj/projectile/P, def_zone)
@@ -126,7 +126,7 @@
 					if(affecting)
 						affecting.bodypart_attacked_by(I.thrown_bclass, I.throwforce)
 				else
-					woundcritroll(I.thrown_bclass, I.throwforce, null, zone)
+					simple_woundcritroll(I.thrown_bclass, I.throwforce, null, zone)
 					if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
 						if(can_embed(I))
 							if(prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))

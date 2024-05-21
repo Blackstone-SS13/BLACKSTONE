@@ -51,7 +51,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Can be healed passively, without sleep even
 	var/passive_heal = FALSE
 	/// Embed chance if this wound allows embedding
-	var/embed_chance = FALSE
+	var/embed_chance = 0
 
 /datum/wound/Destroy(force)
 	. = ..()

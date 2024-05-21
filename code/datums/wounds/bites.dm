@@ -9,7 +9,6 @@
 	sew_threshold = 50
 	can_sew = FALSE
 	passive_heal = TRUE
-	embed_chance = 100
 
 /datum/wound/bite/bleeding
 	name = "bleeding bite"
