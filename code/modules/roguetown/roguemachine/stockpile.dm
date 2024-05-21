@@ -6,7 +6,7 @@
 	density = FALSE
 	blade_dulling = DULLING_BASH
 	pixel_y = 32
-	var/stockpile_index = -1
+	var/stockpile_index = 1
 	var/datum/withdraw_tab/withdraw_tab = null
 
 /obj/structure/roguemachine/stockpile/Initialize()
@@ -83,42 +83,65 @@
 	popup.set_content(contents)
 	popup.open()
 
+/obj/structure/roguemachine/stockpile/proc/attemptsell(obj/item/I, mob/H, message = TRUE, sound = TRUE)
+	for(var/datum/roguestock/R in SStreasury.stockpile_datums)
+		if(istype(I, /obj/item/natural/bundle))
+			var/obj/item/natural/bundle/B = I
+			if(B.stacktype == R.item_type)
+				R.held_items[stockpile_index] += B.amount
+				if(message == TRUE)
+					stock_announce("[B.amount] units of [R.name] has been stockpiled.")
+				qdel(B)
+				if(sound == TRUE)
+					playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+				var/amt = R.payout_price * B.amount
+				if(!SStreasury.give_money_account(amt, H, "+[amt] from [R.name] bounty") && message == TRUE)
+					say("No account found. Submit your fingers to a shylock for inspection.")
+			continue
+		else if(istype(I,R.item_type))
+			if(!R.check_item(I))
+				continue
+			var/amt = R.get_payout_price(I)
+			if(!R.transport_item)
+				R.held_items[stockpile_index] += 1 //stacked logs need to check for multiple
+				qdel(I)
+				if(message == TRUE)
+					stock_announce("[R.name] has been stockpiled.")
+				if(sound == TRUE)
+					playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+			else
+				var/area/A = GLOB.areas_by_type[R.transport_item]
+				if(!A && message == TRUE)
+					say("Couldn't find where to send the submission.")
+					return
+				I.submitted_to_stockpile = TRUE
+				var/list/turfs = list()
+				for(var/turf/T in A)
+					turfs += T
+				var/turf/T = pick(turfs)
+				I.forceMove(T)
+				if(sound == TRUE)
+					playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+					playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
+			if(amt)
+				if(!SStreasury.give_money_account(amt, H, "+[amt] from [R.name] bounty") && message == TRUE)
+					say("No account found. Submit your fingers to a shylock for inspection.")
+			return
+
 /obj/structure/roguemachine/stockpile/attackby(obj/item/P, mob/user, params)
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
 		if(istype(P, /obj/item/roguecoin))
 			withdraw_tab.insert_coins(P)
 			return attack_hand(user)
-		if(istype(P, /obj/item/natural/bundle))
-			say("Single item entries only. Please unstack.")
-			return
 		else
-			for(var/datum/roguestock/R in SStreasury.stockpile_datums)
-				if(istype(P,R.item_type))
-					if(!R.check_item(P))
-						continue
-					var/amt = R.get_payout_price(P)
-					if(!R.transport_item)
-						R.held_items[stockpile_index] += 1 //stacked logs need to check for multiple
-						qdel(P)
-						stock_announce("[R.name] has been stockpiled.")
-						playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
-					else
-						var/area/A = GLOB.areas_by_type[R.transport_item]
-						if(!A)
-							say("Couldn't find where to send the submission.")
-							return
-						P.submitted_to_stockpile = TRUE
-						var/list/turfs = list()
-						for(var/turf/T in A)
-							turfs += T
-						var/turf/T = pick(turfs)
-						P.forceMove(T)
-						playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
-						playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
-					if(amt)
-						if(!SStreasury.give_money_account(amt, H, "+[amt] from [R.name] bounty"))
-							say("No account found. Submit your fingers to a shylock for inspection.")
-					return
+			attemptsell(P, user, TRUE, TRUE)
+
+/obj/structure/roguemachine/stockpile/attack_right(mob/user)
+	if(ishuman(user))
+		for(var/obj/I in get_turf(src))
+			attemptsell(I, user, FALSE, FALSE)
+		say("Bulk selling in progress...")
+		playsound(loc, 'sound/misc/hiss.ogg', 100, FALSE, -1)
+		playsound(loc, 'sound/misc/disposalflush.ogg', 100, FALSE, -1)
 
 	
