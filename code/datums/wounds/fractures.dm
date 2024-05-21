@@ -20,7 +20,7 @@
 	ADD_TRAIT(owner, TRAIT_PARALYSIS_L_LEG, "[type]")
 	affected.owner?.update_disabled_bodyparts()
 
-/datum/wound/fracture/groin/on_bodypart_loss(obj/item/bodypart/old_bodypart)
+/datum/wound/fracture/groin/on_bodypart_loss(obj/item/bodypart/affected)
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_PARALYSIS_R_LEG, "[type]")
 	REMOVE_TRAIT(owner, TRAIT_PARALYSIS_L_LEG, "[type]")
@@ -36,7 +36,7 @@
 	ADD_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
 	affected.owner?.update_disabled_bodyparts()
 
-/datum/wound/fracture/necksnap/on_bodypart_loss(obj/item/bodypart/old_bodypart)
+/datum/wound/fracture/necksnap/on_bodypart_loss(obj/item/bodypart/affected)
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
 	affected.owner?.update_disabled_bodyparts()

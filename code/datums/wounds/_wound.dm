@@ -119,7 +119,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return TRUE
 
 /// Effects when a wound is lost on a bodypart
-/datum/wound/proc/on_bodypart_loss(obj/item/bodypart/old_bodypart)
+/datum/wound/proc/on_bodypart_loss(obj/item/bodypart/affected)
 	return
 
 /// Returns whether or not this wound can be applied to a given mob
