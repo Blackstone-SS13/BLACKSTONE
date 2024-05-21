@@ -66,7 +66,7 @@
 
 /obj/effect/landmark/map_load_mark/sewers_topleft
 	name = "Sewers Top-Left Section"
-	templates = list("sewers_topleft_1", "sewers_topleft_2", "sewers_topleft_3")
+	templates = list("sewers_topleft_1", "sewers_topleft_2", "sewers_topleft_3", "sewers_topleft_4")
 
 /// Little prison with some cells and rats
 /datum/map_template/sewers_topleft_1
@@ -86,7 +86,61 @@
 	id = "sewers_topleft_3"
 	mappath = "_maps/map_files/templates/sewers/sewers_topleft_3.dmm"
 
-//////////////
-///TOP-LEFT///
-//////////////
+/// More sewer tunnels, little loot, rats
+/datum/map_template/sewers_topleft_4
+	name = "Sewers Top-Left Variant 4"
+	id = "sewers_topleft_4"
+	mappath = "_maps/map_files/templates/sewers/sewers_topleft_4.dmm"
 
+///////////////////////
+///   BOTTOM-LEFT   ///
+/// Size: X:26 Y:18 ///
+///////////////////////
+
+/obj/effect/landmark/map_load_mark/sewers_bottomleft
+	name = "Sewers Bottom-Left Section"
+	templates = list("sewers_bottomleft_1", "sewers_bottomleft_2", "sewers_bottomleft_3")
+
+/// Flooded large room, murky water, lots of rats, loot, shrooms
+/datum/map_template/sewers_bottomleft_1
+	name = "Sewers Bottom-Left Variant 1"
+	id = "sewers_bottomleft_1"
+	mappath = "_maps/map_files/templates/sewers/sewers_bottomleft_1.dmm"
+
+///  Metalworking area, tools, some metal, some loot, skellies
+/datum/map_template/sewers_topleft_2
+	name = "Sewers Bottom-Left Variant 2"
+	id = "sewers_bottomleft_2"
+	mappath = "_maps/map_files/templates/sewers/sewers_bottomleft_2.dmm"
+
+/// More sewer tunnels, little loot, rats
+/datum/map_template/sewers_bottomleft_3
+	name = "Sewers Bottom-Left Variant 3"
+	id = "sewers_bottomleft_3"
+	mappath = "_maps/map_files/templates/sewers/sewers_bottomleft_3.dmm"
+
+///////////////////////
+///     CENTRE      ///
+/// Size: X:14 Y:21 ///
+///////////////////////
+
+/obj/effect/landmark/map_load_mark/sewers_centre
+	name = "Sewers Centre Section"
+	templates = list("sewers_centre_1", "sewers_centre_2")
+
+/// More sewer tunnels, little loot, rats
+/datum/map_template/sewers_centre_1
+	name = "Sewers Centre Variant 1"
+	id = "sewers_centre_1"
+	mappath = "_maps/map_files/templates/sewers/sewers_centre_1.dmm"
+
+/datum/map_template/sewers_centre_2
+	name = "Sewers Centre Variant 2"
+	id = "sewers_centre_2"
+	mappath = "_maps/map_files/templates/sewers/sewers_centre_2.dmm"
+
+
+///////////////////////
+///     BOTTOM      ///
+/// Size: X:15 Y:5  ///
+///////////////////////

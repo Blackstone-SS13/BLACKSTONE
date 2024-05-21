@@ -1,0 +1,41 @@
+"a" = (/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
+"e" = (/turf/open/water/sewer,/area/rogue/under/town/sewer)
+"h" = (/obj/structure/spider/stickyweb,/turf/open/water/swamp,/area/rogue/under/town/sewer)
+"i" = (/turf/open/water/swamp,/area/rogue/under/town/sewer)
+"j" = (/obj/effect/decal/cleanable/ash/large,/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
+"k" = (/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"o" = (/obj/structure/bars,/turf/open/water/swamp,/area/rogue/under/town/sewer)
+"r" = (/obj/structure/glowshroom,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"t" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
+"A" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"B" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/spawner/lootdrop/crate_spawner,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"D" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"F" = (/mob/living/simple_animal/hostile/retaliate/rogue/bigrat,/turf/open/water/sewer,/area/rogue/under/town/sewer)
+"G" = (/obj/structure/spider/stickyweb,/turf/open/water/sewer,/area/rogue/under/town/sewer)
+"H" = (/turf/open/floor/rogue/greenstone,/area/rogue/under/town/sewer)
+"M" = (/obj/structure/glowshroom,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"Q" = (/obj/structure/bars,/turf/open/water/sewer,/area/rogue/under/town/sewer)
+"S" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
+"V" = (/obj/effect/spawner/lootdrop/crate_spawner,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+"W" = (/obj/structure/spider/stickyweb,/turf/open/water/swamp/deep,/area/rogue/under/town/sewer)
+
+(1,1,1) = {"
+ttttttttHGeHtttttttttttttt
+aaaaaaatAGeDtaaaaaaaaaaaat
+aaaaaaatHeeDtaaaaaaaaaaaat
+aaaaaaatHeertaaaaaaaaaaaat
+aaaaaaatHeertaaaaaaaaaaaat
+aaaaaaatDeeHtaaaaaaaaaaaat
+attttaatHeeHtaaaaaaaaaaaat
+atBkktttAeeHtttttttttttttt
+atkMMiioGeeHHHHHHAAHHHHHHH
+attkVihoeeeeeeeeGFeGeeeeee
+aatkkMhieeHHHHHHHHHHHHrrHH
+aatkWWiiiQQttttttttttttttt
+attkkWMihhitaaaaaaaaaaaaat
+atVkMkkkWittaaaaaaaaaaaaat
+atkVkMWVtttaaaaaaaaaaaaaat
+atttkkkttaaaaaaaaaaaajaaat
+aaatttttaaaaaaaaaaaaaaaaat
+aaaaaaaaaaaaaaaaaaaaaaaaaS
+"}
