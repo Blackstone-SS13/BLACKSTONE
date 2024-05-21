@@ -571,7 +571,7 @@
 		bleed_rate += embedded.embedding.embedded_bloodloss
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
-	var/bandage_effectiveness = 1
+	var/bandage_effectiveness = 0.5
 	if(istype(bandage, /obj/item/natural/cloth))
 		var/obj/item/natural/cloth/cloth = bandage
 		bandage_effectiveness = cloth.bandage_effectiveness
@@ -608,7 +608,7 @@
 /obj/item/bodypart/proc/try_bandage_expire()
 	if(!bandage)
 		return FALSE
-	var/bandage_effectiveness = 1
+	var/bandage_effectiveness = 0.5
 	if(istype(bandage, /obj/item/natural/cloth))
 		var/obj/item/natural/cloth/cloth = bandage
 		bandage_effectiveness = cloth.bandage_effectiveness
