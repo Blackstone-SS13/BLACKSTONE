@@ -37,7 +37,7 @@
 	if(usr)
 		if (usr.client)
 			if(usr.client.holder)
-				to_chat(M, "<i>I hear a voice in my head... <b>[msg]</i></b>")
+				to_chat(M, "<i>I hear a voice in my head...\n<b>[msg]</i></b>")
 
 	log_admin("SubtlePM: [key_name(usr)] -> [key_name(M)] : [msg]")
 	msg = "<span class='adminnotice'><b> SubtleMessage: [key_name_admin(usr)] -> [key_name_admin(M)] :</b> [msg]</span>"
@@ -1120,7 +1120,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 				return
 			var/mob/living/carbon/human/ligga = target
 			ligga.emote("painscream")
-			ligga.patron = GLOB.patronlist[/datum/patron/divine/dendor] || GLOB.patronlist[/datum/patron/godless]
+			ligga.set_patron(GLOB.patronlist[/datum/patron/divine/dendor] || GLOB.patronlist[/datum/patron/godless])
 			var/old_name = ligga.real_name
 			var/datum/species/lizard/brazil/brazil = new /datum/species/lizard/brazil
 			ligga.set_species(brazil)

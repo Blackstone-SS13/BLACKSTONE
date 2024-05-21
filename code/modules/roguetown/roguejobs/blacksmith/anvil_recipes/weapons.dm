@@ -13,6 +13,11 @@
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/rogueweapon/sword/iron/short
 
+/datum/anvil_recipe/weapons/imesser
+	name = "iron messer"
+	req_bar = /obj/item/ingot/iron
+	created_item = /obj/item/rogueweapon/sword/iron/messer
+
 /datum/anvil_recipe/weapons/idagger
 	name = "iron dagger"
 	req_bar = /obj/item/ingot/iron

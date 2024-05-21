@@ -35,9 +35,9 @@
 		return
 
 	var/datum/patron/A = H.patron
-	var/spelllist = list(A.t0, A.t1, A.t2, A.t3)
+	var/list/spelllist = list(A.t0, A.t1, A.t2, A.t3)
 	for(var/spell_type in spelllist)
-		if(H.mind.has_spell(spell_type))
+		if(!spell_type || H.mind.has_spell(spell_type))
 			continue
 		H.mind.AddSpell(new spell_type)
 	level = CLERIC_T3
@@ -48,24 +48,24 @@
 		return
 
 	var/datum/patron/A = H.patron
-	var/spelllist = list(A.t0, A.t1)
-	level = CLERIC_T1
-	for(var/spell in spelllist)
-		if(H.mind.has_spell(spell))
+	var/list/spelllist = list(A.t0, A.t1)
+	for(var/spell_type in spelllist)
+		if(!spell_type || H.mind.has_spell(spell_type))
 			continue
-		H.mind.AddSpell(new spell)
+		H.mind.AddSpell(new spell_type)
+	level = CLERIC_T1
 
 /datum/devotion/cleric_holder/proc/grant_spells_templar(mob/living/carbon/human/H)
 	if(!H || !H.mind)
 		return
 
 	var/datum/patron/A = H.patron
-	var/spelllist = list(/obj/effect/proc_holder/spell/targeted/churn, A.t0)
-	level = CLERIC_T0
-	for(var/spell in spelllist)
-		if(H.mind.has_spell(spell))
+	var/list/spelllist = list(/obj/effect/proc_holder/spell/targeted/churn, A.t0)
+	for(var/spell_type in spelllist)
+		if(!spell_type || H.mind.has_spell(spell_type))
 			continue
-		H.mind.AddSpell(new spell)
+		H.mind.AddSpell(new spell_type)
+	level = CLERIC_T0
 
 // General
 /obj/effect/proc_holder/spell/invoked/lesser_heal
@@ -93,7 +93,39 @@
 			target.Paralyze(30)
 			target.fire_act(1,5)
 			return TRUE
-		target.visible_message("<span class='info'>A wreath of gentle light passes over [target]!</span>", "<span class='notice'>I'm bathed in holy light!</span>")
+		switch(user.patron.type)
+			if(/datum/patron/old_god)
+				target.visible_message("<span class='info'>A strange stirring feeling pours from [target]!</span>", "<span class='notice'>Sentimental thoughts drive away my pains!</span>")
+			if(/datum/patron/divine/astrata)
+				target.visible_message("<span class='info'>A wreath of gentle light passes over [target]!</span>", "<span class='notice'>I'm bathed in holy light!</span>")
+			if(/datum/patron/divine/noc)
+				target.visible_message("<span class='info'>A shroud of soft moonlight falls upon [target]!</span>", "<span class='notice'>I'm shrouded in gentle moonlight!</span>")
+			if(/datum/patron/divine/dendor)
+				target.visible_message("<span class='info'>A rush of primal energy spirals about [target]!</span>", "<span class='notice'>I'm infused with primal energies!</span>")
+			if(/datum/patron/divine/abyssor)
+				target.visible_message("<span class='info'>A mist of salt-scented vapour settles on [target]!</span>", "<span class='notice'>I'm invigorated by healing vapours!</span>")
+			if(/datum/patron/divine/ravox)
+				target.visible_message("<span class='info'>An air of righteous defiance rises near [target]!</span>", "<span class='notice'>I'm filled with an urge to fight on!</span>")
+			if(/datum/patron/divine/necra)
+				target.visible_message("<span class='info'>A sense of quiet respite radiates from [target]!</span>", "<span class='notice'>I feel the Undermaiden's gaze turn from me for now!</span>")
+			if(/datum/patron/divine/xylix)
+				target.visible_message("<span class='info'>A fugue seems to manifest briefly across [target]!</span>", "<span class='notice'>My wounds vanish as if they had never been there! </span>")
+			if(/datum/patron/divine/pestra)
+				target.visible_message("<span class='info'>A aura of clinical care encompasses [target]!</span>", "<span class='notice'>I'm sewn back together by sacred medicine!</span>")
+			if(/datum/patron/divine/malum)
+				target.visible_message("<span class='info'>A tempering heat is discharged out of [target]!</span>", "<span class='notice'>I feel the heat of a forge soothing my pains!</span>")
+			if(/datum/patron/inhumen/eora)
+				target.visible_message("<span class='info'>A lingering remanence of love diffuses through [target]!</span>", "<span class='notice'>My heart feels full, and my pains less severe!</span>")
+			if(/datum/patron/inhumen/zizo)
+				target.visible_message("<span class='info'>Vital energies are sapped towards [target]!</span>", "<span class='notice'>The life around me pales as I am restored!</span>")
+			if(/datum/patron/inhumen/graggar)
+				target.visible_message("<span class='info'>Foul fumes billow outward as [target] is restored!</span>", "<span class='notice'>A noxious scent burns my nostrils, but I feel better!</span>")
+			if(/datum/patron/inhumen/matthios )
+				target.visible_message("<span class='info'>A wreath of strange light passes over [target]!</span>", "<span class='notice'>I'm bathed in strange holy light?</span>")
+			if(/datum/patron/godless)
+				target.visible_message("<span class='info'>Without any particular cause or reason, [target] is healed!</span>", "<span class='notice'>My wounds close without cause.</span>")
+			else
+				target.visible_message("<span class='info'>A choral sound comes from above and [target] is healed!</span>", "<span class='notice'>I am bathed in healing choral hymns!</span>")
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
 			var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))

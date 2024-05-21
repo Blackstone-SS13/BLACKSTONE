@@ -4,7 +4,7 @@
 	confess_lines = list(
 		"PSYDON IS THE DEMIURGE!",
 		"THE NINE ARE WORTHLESS COWARDS!",
-		"THE NINE ARE DECEIVERS!"
+		"THE NINE ARE DECEIVERS!",
 	)
 
 /datum/patron/inhumen/zizo
@@ -23,6 +23,7 @@
 	domain = "God of Conquest, Murder and Pillaging"
 	desc = "The Heartless One, Graggar taught dark elves that might makes right and created goblins in his image."
 	worshippers = "Prisoners, Murderers and the Cruel"
+	mob_traits = list(RTRAIT_ORGAN_EATER)
 	confess_lines = list(
 		"GRAGGAR IS THE BEAST I WORSHIP!",
 		"GRAGGAR BRINGS UNHOLY DESTRUCTION!",
