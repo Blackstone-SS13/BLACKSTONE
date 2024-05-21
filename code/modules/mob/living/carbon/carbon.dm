@@ -1043,8 +1043,6 @@
 	if(CR)
 		CR.amount = 0
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-		for(var/datum/wound/wound in bodypart.wounds)
-			qdel(wound)
 		if(admin_revive) //reset rot when being healed by eating limbs
 			bodypart.rotted = FALSE
 			bodypart.skeletonized = FALSE

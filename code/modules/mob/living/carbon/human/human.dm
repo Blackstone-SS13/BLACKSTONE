@@ -320,7 +320,7 @@
 			if(get_location_accessible(src, check_zone(user.zone_selected)))
 				var/bodypart_message = list()
 				switch(BP.disabled)
-					if(BODYPART_DISABLED_FRACTURE)
+					if(BODYPART_DISABLED_WOUND)
 						bodypart_message += "[BP] is broken.\n"
 					if(BODYPART_DISABLED_DAMAGE)
 						bodypart_message += "[BP] is numb to touch.\n"

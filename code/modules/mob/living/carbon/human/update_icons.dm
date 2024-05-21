@@ -159,10 +159,10 @@ There are several things that need to be remembered:
 					armdam_overlay.color = BP.bandage.color
 					armdam_overlays += armdam_overlay
 			wound_overlays = list()
-			for(var/datum/wound/W as anything in BP.wounds)
-				if(!W.mob_overlay)
+			for(var/datum/wound/wound as anything in BP.wounds)
+				if(!wound.mob_overlay)
 					continue
-				wound_overlays |= W.mob_overlay
+				wound_overlays |= wound.mob_overlay
 			for(var/wound_overlay in wound_overlays)
 				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_[wound_overlay]", -DAMAGE_LAYER)
 				damage_overlays += damage_overlay

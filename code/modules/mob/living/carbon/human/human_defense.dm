@@ -944,8 +944,8 @@
 	var/brutedamage = FB.brute_dam
 	var/burndamage = FB.burn_dam
 	var/wounddamage = 0
-	for(var/datum/wound/W as anything in FB.wounds)
-		wounddamage = wounddamage + W.woundpain
+	for(var/datum/wound/wound as anything in FB.wounds)
+		wounddamage = wounddamage + wound.woundpain
 	if(hallucination)
 		if(prob(30))
 			brutedamage += rand(30,40)
@@ -991,7 +991,7 @@
 		no_damage = TRUE
 	var/isdisabled = ""
 	switch(FB.is_disabled())
-		if(BODYPART_DISABLED_FRACTURE)
+		if(BODYPART_DISABLED_WOUND)
 			isdisabled = "broken "
 		if(BODYPART_DISABLED_DAMAGE)
 			isdisabled = "numb "

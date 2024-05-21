@@ -72,7 +72,7 @@
 			if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 				if(brute_dam < max_damage)
 					return FALSE
-				for(var/datum/wound/fracture/W in wounds)
+				if(has_wound(/datum/wound/fracture))
 					return FALSE
 				var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
@@ -101,9 +101,7 @@
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
-		var/foundf 
-		for(var/datum/wound/fracture/W in wounds)
-			foundf= TRUE
+		var/foundf = has_wound(/datum/wound/fracture)
 		if(!foundf)
 			if(prob(used))
 				var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
@@ -130,7 +128,7 @@
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					used += 10
 		if(prob(used))
-			for(var/datum/wound/artery/A in wounds)
+			if(has_wound(/datum/wound/artery))
 				if(bclass == BCLASS_STAB)
 					return TRUE
 				return FALSE
@@ -167,9 +165,7 @@
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
-		var/foundf
-		for(var/datum/wound/fracture/W in wounds)
-			foundf= TRUE
+		var/foundf = has_wound(/datum/wound/fracture)
 		if(!foundf)
 			if(prob(used) && zone_precise != BODY_ZONE_PRECISE_STOMACH)
 				var/list/phrases = list("The ribs shatter in a splendid way!", "The ribs are smashed!", "The chest is mauled!", "The chest caves in!")
@@ -197,9 +193,7 @@
 			else
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					used += 10
-		var/foundy
-		for(var/datum/wound/artery/A in wounds)
-			foundy= TRUE
+		var/foundy = has_wound(/datum/wound/artery)
 		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
 			if (prob(used+10))
 				if(!can_bloody_wound() || resistance)
@@ -319,9 +313,7 @@
 						winset(owner.client, "outputwindow.output", "max-lines=1")
 						winset(owner.client, "outputwindow.output", "max-lines=100")
 				return FALSE
-		var/foundf 
-		for(var/datum/wound/fracture/W in wounds)
-			foundf= TRUE
+		var/foundf = has_wound(/datum/wound/fracture)
 		if(!foundf)
 			if(prob(used) && (brute_dam / max_damage >= 0.9))
 				var/list/phrases = list("The skull shatters in a gruesome way!", "The head is smashed!", "The skull is broken!", "The skull caves in!")
@@ -344,7 +336,7 @@
 		if(!can_bloody_wound())
 			return FALSE
 		if(zone_precise == BODY_ZONE_PRECISE_NECK)
-			for(var/datum/wound/artery/throat/A in wounds)
+			if(has_wound(/datum/wound/artery/throat))
 				return FALSE
 			if(user)
 				if(bclass == BCLASS_CHOP)
@@ -374,7 +366,7 @@
 					if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 						used += 10
 			if(prob(used))
-				for(var/datum/wound/artery/A in wounds)
+				if(has_wound(/datum/wound/artery))
 					if(bclass == BCLASS_STAB)
 						if(resistance)
 							return TRUE
@@ -554,7 +546,7 @@
 	if(!length(wounds))
 		return FALSE
 	var/healed_any = FALSE
-	for(var/datum/wound/wound in wounds)
+	for(var/datum/wound/wound as anything in wounds)
 		if((heal_amount <= 0) || (sleep_heal && !wound.sleep_heal))
 			continue
 		var/amount_healed = wound.heal_wound(heal_amount)

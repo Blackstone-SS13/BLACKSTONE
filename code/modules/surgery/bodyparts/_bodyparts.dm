@@ -337,7 +337,7 @@
 		return BODYPART_DISABLED_PARALYSIS
 	for(var/datum/wound/ouchie as anything in wounds)
 		if(ouchie.disabling)
-			return BODYPART_DISABLED_FRACTURE
+			return BODYPART_DISABLED_WOUND
 	var/total_dam = brute_dam + burn_dam
 	if((total_dam >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (total_dam >= (max_damage * 0.6))))
 		return BODYPART_DISABLED_DAMAGE
@@ -581,7 +581,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_FRACTURE)
+	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
 			to_chat(owner, "<span class='warning'>I feel a sharp pain in my back!</span>")
 
@@ -648,7 +648,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_FRACTURE)
+	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
 			to_chat(owner, "<span class='boldwarning'>I can no longer move my [name]!</span>")
 		if(held_index)
@@ -713,7 +713,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_FRACTURE)
+	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
 			to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
 		if(held_index)
@@ -775,7 +775,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_FRACTURE)
+	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
 			to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
@@ -833,7 +833,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_FRACTURE)
+	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
 			to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)

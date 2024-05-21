@@ -71,7 +71,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Returns whether or not this wound can be applied to a given bodypart
 /datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected)
-	if(QDELETED(affected) || QDELETED(affected.owner))
+	if(bodypart_owner || owner || QDELETED(affected) || QDELETED(affected.owner))
 		return FALSE
 	if(!affected.can_bloody_wound() && !isnull(bleed_rate))
 		return FALSE
@@ -115,7 +115,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Returns whether or not this wound can be applied to a given mob
 /datum/wound/proc/can_apply_to_mob(mob/living/affected)
-	if(!affected || QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
+	if(bodypart_owner || owner || QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
 	return TRUE
 
