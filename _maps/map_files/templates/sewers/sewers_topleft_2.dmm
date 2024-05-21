@@ -1,46 +1,50 @@
-"a" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
-"c" = (/obj/structure/fermenting_barrel/beer,/turf/open/floor/rogue/cobble,/area/rogue)
-"d" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue)
-"g" = (/obj/structure/fermenting_barrel,/obj/effect/decal/cleanable/cobweb,/turf/open/floor/rogue/cobble,/area/rogue)
-"h" = (/obj/effect/decal/cleanable/blood/gibs/old,/turf/open/floor/rogue/cobble,/area/rogue)
-"j" = (/mob/living/carbon/human/species/skeleton/npc,/turf/open/floor/rogue/cobble,/area/rogue)
-"l" = (/obj/machinery/light/rogue/torchholder/l,/turf/open/floor/rogue/cobble,/area/rogue)
-"r" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue)
-"t" = (/obj/structure/fermenting_barrel,/turf/open/floor/rogue/cobble,/area/rogue)
-"w" = (/obj/structure/mineral_door/wood,/turf/open/floor/rogue/cobble,/area/rogue)
-"y" = (/obj/effect/decal/cleanable/blood/footprints,/turf/open/floor/rogue/cobble,/area/rogue)
-"z" = (/obj/machinery/light/rogue/firebowl,/turf/open/floor/rogue/cobble,/area/rogue)
-"A" = (/obj/structure/bed/rogue/shit,/turf/open/floor/rogue/cobble,/area/rogue)
-"B" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
-"C" = (/obj/machinery/light/rogue/torchholder/r,/turf/open/floor/rogue/cobble,/area/rogue)
-"K" = (/obj/structure/rack/rogue,/turf/open/floor/rogue/cobble,/area/rogue)
-"M" = (/obj/structure/fermenting_barrel/water,/turf/open/floor/rogue/cobble,/area/rogue)
+"a" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
+"b" = (/obj/structure/closet/crate/chest,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"c" = (/obj/structure/fermenting_barrel/beer,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"d" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
+"f" = (/obj/structure/fermenting_barrel/beer,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"g" = (/obj/structure/fermenting_barrel,/obj/effect/decal/cleanable/cobweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"h" = (/obj/effect/decal/cleanable/blood/gibs/old,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"j" = (/mob/living/carbon/human/species/skeleton/npc,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"l" = (/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"r" = (/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"t" = (/obj/structure/fermenting_barrel,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"w" = (/obj/structure/mineral_door/wood,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"y" = (/obj/effect/decal/cleanable/blood/footprints,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"z" = (/obj/machinery/light/rogue/firebowl,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"A" = (/obj/structure/bed/rogue/shit,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"B" = (/obj/machinery/light/rogue/torchholder,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
+"C" = (/obj/structure/rack/rogue,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"J" = (/obj/structure/rack/rogue,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"K" = (/obj/structure/rack/rogue,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"M" = (/obj/structure/fermenting_barrel/water,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 "N" = (/turf/closed,/area/rogue)
-"O" = (/obj/effect/decal/cleanable/cobweb/cobweb2,/obj/effect/decal/remains/human,/turf/open/floor/rogue/cobble,/area/rogue)
-"P" = (/obj/effect/decal/cleanable/blood,/obj/effect/decal/cleanable/blood/tracks,/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue)
-"Q" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue)
-"R" = (/turf/closed/mineral/rogue,/area/rogue)
-"T" = (/obj/structure/closet/crate/chest,/turf/open/floor/rogue/cobble,/area/rogue)
-"X" = (/obj/effect/decal/cleanable/blood/bubblegum,/obj/effect/decal/remains/human,/turf/open/floor/rogue/cobble,/area/rogue)
-"Y" = (/turf/open/floor/rogue/cobble,/area/rogue)
+"O" = (/obj/effect/decal/cleanable/cobweb/cobweb2,/obj/effect/decal/remains/human,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"P" = (/obj/effect/decal/cleanable/blood,/obj/effect/decal/cleanable/blood/tracks,/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
+"Q" = (/obj/effect/decal/cleanable/blood/tracks,/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/under/town/sewer)
+"R" = (/turf/closed/mineral/rogue,/area/rogue/under/town/sewer)
+"S" = (/obj/structure/fermenting_barrel,/obj/structure/spider/stickyweb,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"T" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"X" = (/obj/effect/decal/cleanable/blood/bubblegum,/obj/effect/decal/remains/human,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
+"Y" = (/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/under/town/sewer)
 
 (1,1,1) = {"
 RRRRRRRRRRRRPRRRRRRRRRRRRB
 RRRRRRRRRRRRdRRRRRRRRRRRRa
 RaaaaaaaaaaaQaaaaaaaaaaRRa
-RagtctTYrYrrAYrrYrrrYOaRRa
-RaXYYYYhaaaaaYaaaaaaYYaRRa
-RatcttYyKKKKKYKKKKKKYYaRRa
-RaYYYYYyYYYYYYYYYYrYYYaaaa
-RattMYYyaaaaaYaaaaaalYwrrr
-RaYYYYayKKKKKYKKKKKKYYaaaa
-RaYjYYayYYrYYYYjYYYYYYaRRa
-RaYYYYaCaaaaaYaaaaaaYYaRRa
-RaYYYYaYKKKKKYKKKKKKYYaRRa
-RaYYYYaYYYYYYYYYYYrYYYaRRa
-RaYYYYaYaaaaaYaaaaaaYYaRRa
-RaYYYYaYKKKKKYKKKKKKYYaRRa
-RaYYTzaYYrYYYYYrrYYYYzaRRa
+RagtftTlrlrrAlrrlrrrlOaRRa
+RaXllllhaaaaalaaaaaallaRRa
+RatcttlyCJCKClJCCJCKllaRRa
+Ralllllyllllllllllrlllaaaa
+RaStMllyaaaaalaaaaaallwrrr
+RallllayCJCKClJCCKJCllaaaa
+RaljllayllrlllljllllllaRRa
+RallllalaaaaalaaaaaallaRRa
+RallllalCJCKClCJCKCJllaRRa
+RallllalllllllllllrlllaRRa
+RallllalaaaaalaaaaaallaRRa
+RallllalCKJCClJKCCJCllaRRa
+RallbzalYrljlllrrllllzaRRa
 RawaaaaaaaaaaaaaaaaaaaaRRa
 RaraRRRRRRRRRRRRRRRRRRRRRa
 RaraRRRRRRRRRRRRRRRRRRRRRa

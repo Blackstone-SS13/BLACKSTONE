@@ -1,5 +1,6 @@
 "a" = (/turf/closed/mineral/rogue,/area/rogue/outdoors/exposed/under/sewer)
 "c" = (/obj/effect/decal/cleanable/blood,/obj/effect/decal/cleanable/blood/tracks,/obj/effect/decal/cleanable/blood/tracks,/turf/closed/mineral/rogue,/area/rogue/outdoors/exposed/under/sewer)
+"d" = (/obj/structure/spider/stickyweb,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "e" = (/obj/item/reagent_containers/glass/cup/wooden,/obj/structure/table/wood{icon_state = "largetable"; dir = 1},/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "f" = (/obj/structure/mineral_door/wood{lockid = sewerdungeon; locked = 1},/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "g" = (/obj/structure/mineral_door/bars{lockid = sewercell3},/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
@@ -29,7 +30,7 @@
 "F" = (/obj/structure/bars,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "G" = (/obj/structure/fluff/walldeco/chains,/obj/item/reagent_containers/glass/bowl,/obj/item/reagent_containers/food/snacks/deadmouse,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "H" = (/obj/structure/table/wood{icon_state = "largetable"},/obj/item/reagent_containers/glass/cup/wooden,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
-"J" = (/obj/structure/rack/rogue,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
+"J" = (/obj/structure/rack/rogue,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "K" = (/obj/effect/decal/cleanable/blood,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "L" = (/obj/machinery/light/rogue/torchholder/r,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "M" = (/obj/item/roguekey/custom{lockid = "sewercell3"; name = "sewer cell III key"},/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
@@ -41,7 +42,7 @@
 "S" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 6},/obj/item/rope/chain,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "T" = (/obj/item/reagent_containers/glass/bowl,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "U" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 1},/obj/item/rope/chain,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
-"V" = (/obj/structure/closet/crate/chest,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
+"V" = (/obj/structure/closet/crate/chest,/obj/effect/spawner/lootdrop/roguetown/sewers,/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "W" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/outdoors/exposed/under/sewer)
 "X" = (/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
 "Z" = (/obj/item/roguekey/custom{lockid = "sewercell1"; name = "sewer cell I key"},/turf/open/floor/rogue/cobble,/area/rogue/outdoors/exposed/under/sewer)
@@ -62,7 +63,7 @@ aaaaWAWaaWWWWWWWWWWWWaaaaW
 aaaaWAWaaWOAAJhAkAAXWaaaaW
 aaaaWXWWWWXXXXXXXXXXWaaaaW
 aaaaWXXXXXXkXAAXjAAXWaaaaW
-aaaaWWWWWWAAXXXXAAXXWaaaaW
+aaaaWWWWWWdAXXXXAdXXWaaaaW
 aaaaaaaaaWWWWWWWWWWuWaaaaW
 aaaaaaaaaaaaaaaaaaWAWaaaaW
 aaaaaaaaaaaaaaaaaaWAWaaaaW

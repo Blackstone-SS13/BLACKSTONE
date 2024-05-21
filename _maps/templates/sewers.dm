@@ -66,9 +66,9 @@
 
 /obj/effect/landmark/map_load_mark/sewers_topleft
 	name = "Sewers Top-Left Section"
-	templates = list("sewers_topleft_2")
+	templates = list("sewers_topleft_1", "sewers_topleft_2", "sewers_topleft_3")
 
-/// little prison with some cells and rats
+/// Little prison with some cells and rats
 /datum/map_template/sewers_topleft_1
 	name = "Sewers Top-Left Variant 1"
 	id = "sewers_topleft_1"
@@ -80,6 +80,7 @@
 	id = "sewers_topleft_2"
 	mappath = "_maps/map_files/templates/sewers/sewers_topleft_2.dmm"
 
+/// Beggar base with lots of beds and some food, small kitchen
 /datum/map_template/sewers_topleft_3
 	name = "Sewers Top-Left Variant 3"
 	id = "sewers_topleft_3"
