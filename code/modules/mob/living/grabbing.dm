@@ -362,7 +362,7 @@
 	name = "bite"
 	icon_state = "bite"
 	slot_flags = ITEM_SLOT_MOUTH
-	bleed_suppressing = 0
+	bleed_suppressing = 1
 	var/last_drink
 
 /obj/item/grabbing/bite/Click(location, control, params)
@@ -449,7 +449,7 @@
 		to_chat(user, "<span class='warning'>Sigh. It's not bleeding.</span>")
 		return
 	var/mob/living/carbon/C = grabbed
-	if(C.dna && C.dna.species && (NOBLOOD in C.dna.species.species_traits))
+	if(C.dna?.species && (NOBLOOD in C.dna.species.species_traits))
 		to_chat(user, "<span class='warning'>Sigh. No blood.</span>")
 		return
 	if(C.blood_volume <= 0)
