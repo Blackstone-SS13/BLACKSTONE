@@ -1,4 +1,8 @@
 /mob/living/proc/handle_wounds()
+	if(stat >= DEAD)
+		for(var/datum/wound/wound as anything in get_wounds())
+			wound.on_death()
+		return
 	for(var/datum/wound/wound as anything in get_wounds())
 		wound.on_life()
 

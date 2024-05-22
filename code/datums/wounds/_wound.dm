@@ -155,6 +155,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(passive_healing)
 		heal_wound(1)
 
+/// Called on handle_wounds(), on the life() proc
+/datum/wound/proc/on_death()
+	return
+	
 /// Heals this wound by the given amount, and deletes it if it's healed completely
 /datum/wound/proc/heal_wound(heal_amount)
 	// Wound cannot be healed normally, whp is null
