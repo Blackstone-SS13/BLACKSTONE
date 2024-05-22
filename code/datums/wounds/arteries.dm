@@ -22,11 +22,11 @@
 	sewn_bleed_rate = 0.3
 	mob_overlay = "s1_throat"
 
-/datum/wound/artery/throat/on_bodypart_gain(obj/item/bodypart/affected)
+/datum/wound/artery/throat/on_mob_gain(mob/living/affected)
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_GARGLE_SPEECH, "[type]")
+	ADD_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 
-/datum/wound/artery/throat/on_bodypart_loss(obj/item/bodypart/affected)
+/datum/wound/artery/throat/on_mob_gain(mob/living/affected)
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_GARGLE_SPEECH, "[type]")
+	REMOVE_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 

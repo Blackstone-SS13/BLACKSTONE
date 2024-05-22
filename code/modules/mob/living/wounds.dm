@@ -42,22 +42,27 @@
 /mob/living/proc/try_crit(bclass, dam, mob/living/user, zone_precise)
 	if(!dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return
-	if(zone_precise == BODY_ZONE_HEAD)
+	if(check_zone(zone_precise) == BODY_ZONE_HEAD)
 		if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_PICK)
-			var/used = round((health / maxHealth)*20 + (dam / 3), 1)
+			var/used = round((health / maxHealth) * 20 + (dam / 3), 1)
 			if(user)
 				if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 					used += 10
 			if(prob(used))
-				if(has_wound(/datum/wound/fracture))
+				if(has_wound(/datum/wound/fracture/head))
 					return FALSE
-				var/list/phrases = list("The skull shatters in a gruesome way!", "The head is smashed!", "The skull is broken!", "The skull caves in!")
+				var/static/list/phrases = list(
+					"The skull shatters in a gruesome way!", 
+					"The head is smashed!", 
+					"The skull is broken!", 
+					"The skull caves in!",
+				)
 				src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-				simple_add_wound(/datum/wound/fracture)
+				simple_add_wound(/datum/wound/fracture/head)
 				if(prob(3))
 					playsound(src, 'sound/combat/tf2crit.ogg', 100, FALSE)
-				playsound(src, "headcrush", 100, FALSE)
-				death()
+				else
+					playsound(src, "headcrush", 100, FALSE)
 				return FALSE
 	if(bclass == BCLASS_STAB || bclass == BCLASS_PICK || bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_BITE)
 		if(bclass == BCLASS_CHOP || bclass == BCLASS_PICK)
@@ -80,8 +85,7 @@
 				playsound(src, pick('sound/combat/crit.ogg'), 100, FALSE)
 			src.emote("death", forced =TRUE)
 			src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [src]!</span>"
-			simple_add_wound(/datum/wound/artery)
-			return TRUE
+			return simple_add_wound(/datum/wound/artery)
 //			if(bclass == BCLASS_STAB || bclass == BCLASS_PICK)
 //				death()
 //				return TRUE

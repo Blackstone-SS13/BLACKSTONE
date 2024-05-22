@@ -13,17 +13,17 @@
 		return FALSE
 	return TRUE
 
-/datum/wound/cbt/on_bodypart_gain(obj/item/bodypart/affected)
+/datum/wound/cbt/on_mob_gain(mob/living/affected)
 	. = ..()
-	owner.emote("groin", forced = TRUE)
-	owner.Stun(20)
-	to_chat(owner, "<span class='userdanger'>Something twists inside my groin!</span>")
-	if(owner.gender != MALE)
+	affected.emote("groin", forced = TRUE)
+	affected.Stun(20)
+	to_chat(affected, "<span class='userdanger'>Something twists inside my groin!</span>")
+	if(affected.gender != MALE)
 		name = "ovarian torsion"
 	else
 		name = "testicular torsion"
-	if(HAS_TRAIT(owner, RTRAIT_CRITICAL_WEAKNESS))
-		owner.death()
+	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+		affected.death()
 
 /datum/wound/cbt/on_life()
 	. = ..()
@@ -37,9 +37,9 @@
 	name = "testicular evisceration"
 	whp = null
 
-/datum/wound/cbt/smite/on_bodypart_gain(obj/item/bodypart/affected)
+/datum/wound/cbt/smite/on_mob_gain(mob/living/affected)
 	. = ..()
-	if(owner.gender != MALE)
+	if(affected.gender != MALE)
 		name = "ovarian evisceration"
 	else
 		name = "testicular evisceration"
@@ -52,14 +52,14 @@
 	mob_overlay = "cut"
 	can_sew = FALSE
 
-/datum/wound/nose/on_bodypart_gain(obj/item/bodypart/affected)
+/datum/wound/nose/on_mob_gain(mob/living/affected)
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_MISSING_NOSE, "[type]")
-	ADD_TRAIT(owner, TRAIT_DISFIGURED, "[type]")
-	if(HAS_TRAIT(owner, RTRAIT_CRITICAL_WEAKNESS))
-		owner.death()
+	ADD_TRAIT(affected, TRAIT_MISSING_NOSE, "[type]")
+	ADD_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
+	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+		affected.death()
 
-/datum/wound/nose/on_bodypart_loss(obj/item/bodypart/affected)
+/datum/wound/nose/on_mob_loss(mob/living/affected)
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_MISSING_NOSE, "[type]")
-	REMOVE_TRAIT(owner, TRAIT_DISFIGURED, "[type]")
+	REMOVE_TRAIT(affected, TRAIT_MISSING_NOSE, "[type]")
+	REMOVE_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
