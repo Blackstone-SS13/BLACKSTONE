@@ -35,7 +35,7 @@
 		name = "testicular evisceration"
 
 /datum/wound/nose
-	name = "facial disfigurement"
+	name = "rhinotomy"
 	bleed_rate = 0
 	whp = null
 	woundpain = 20
