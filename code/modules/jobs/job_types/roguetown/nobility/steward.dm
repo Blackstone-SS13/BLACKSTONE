@@ -35,7 +35,7 @@
 	head = /obj/item/clothing/head/roguetown/chaperon/greyscale
 	belt = /obj/item/storage/belt/rogue/leather/plaquesilver
 	beltr = /obj/item/keyring/steward
-
+	id = /obj/item/scomstone
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)

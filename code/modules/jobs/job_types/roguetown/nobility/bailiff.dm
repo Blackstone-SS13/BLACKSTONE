@@ -31,6 +31,7 @@
 	cloak = /obj/item/clothing/cloak/stabard/surcoat/bailiff
 	gloves = /obj/item/clothing/gloves/roguetown/angle
 	wrists = /obj/item/clothing/wrists/roguetown/bracers
+	id = /obj/item/scomstone
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
