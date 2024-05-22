@@ -61,7 +61,7 @@
 	if(increase_votepwr)
 		forge_werewolf_objectives()
 	finalize_werewolf()
-	wolfname = "[pick_n_take(GLOB.wolf_prefixes)] [pick_n_take(GLOB.wolf_suffixes)]"
+	wolfname = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
 	return ..()
 
 /datum/antagonist/werewolf/on_removal()
