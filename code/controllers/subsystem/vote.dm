@@ -235,7 +235,7 @@ SUBSYSTEM_DEF(vote)
 						break
 					choices.Add(option)
 			if("endround")
-				initiator_key = pick("Zlod", "Sun King", "Gaia", "Aeon", "Gemini", "Aries")
+				initiator_key = pick("Zlod", "Sun King", "Gaia", "Aeon", "Gemini", "Aries", "Pyli", "Daemon", "Lady Valshorin", "House Mattanawi")
 				choices.Add("Continue Playing","End Round")
 			else
 				return 0
