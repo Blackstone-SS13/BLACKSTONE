@@ -65,7 +65,12 @@
 		/obj/item/natural/bundle/cloth = 3,
 
 		//weapons
+		/obj/item/rogueweapon/mace = 2,
+		/obj/item/rogueweapon/huntingknife/idagger/steel = 3,
+		/obj/item/gun/ballistic/revolver/grenadelauncher/bow = 2,
+		/obj/item/gun/ballistic/revolver/grenadelauncher/crossbow = 2,
 		/obj/item/ammo_casing/caseless/rogue/arrow = 4,
+		/obj/item/ammo_casing/caseless/rogue/bolt = 4,
 		/obj/item/rogueweapon/mace/woodclub/crafted = 3,
 		/obj/item/rogueweapon/mace/cudgel = 2,
 		/obj/item/rogueweapon/mace/wsword = 3,
@@ -87,11 +92,23 @@
 		/obj/item/rogueweapon/pick = 3,
 
 		//armor
+		/obj/item/clothing/suit/roguetown/armor/leather/studded = 2,
+		/obj/item/clothing/suit/roguetown/armor/gambeson = 2,
+		/obj/item/clothing/under/roguetown/chainlegs = 2,
+		/obj/item/clothing/gloves/roguetown/chain = 2,
+		/obj/item/clothing/suit/roguetown/armor/chainmail = 1,
+		/obj/item/clothing/suit/roguetown/armor/chainmail/iron = 2,
 		/obj/item/clothing/neck/roguetown/gorget = 1,
 		/obj/item/clothing/suit/roguetown/armor/plate/half/iron = 1,
 		/obj/item/clothing/head/roguetown/helmet/kettle = 1,
+		/obj/item/clothing/head/roguetown/helmet/leather = 2,
+		/obj/item/clothing/head/roguetown/helmet/horned = 1,
+		/obj/item/clothing/head/roguetown/helmet/skullcap = 1,
+		/obj/item/clothing/head/roguetown/helmet/winged = 1,
+
 
 		//food
+		/obj/item/reagent_containers/food/snacks/rogue/crackers = 3,
 		/obj/item/reagent_containers/food/snacks/butterslice = 3,
 		/obj/item/reagent_containers/powder/flour/salt = 3,
 		/obj/item/reagent_containers/food/snacks/egg = 3,
