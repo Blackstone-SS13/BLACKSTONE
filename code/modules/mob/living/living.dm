@@ -794,6 +794,11 @@
 	cure_husk()
 	hallucination = 0
 	heal_overall_damage(INFINITY, INFINITY, INFINITY, null, TRUE) //heal brute and burn dmg on both organic and robotic limbs, and update health right away.
+	for(var/datum/wound/wound as anything in get_wounds())
+		if(admin_revive)
+			qdel(wound)
+		else
+			wound.heal_wound(wound.whp)
 	ExtinguishMob()
 	fire_stacks = 0
 	confused = 0

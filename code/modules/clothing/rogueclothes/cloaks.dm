@@ -148,7 +148,7 @@
 
 /obj/item/clothing/cloak/tabard/crusader/necra
 	color = "#222223"
-	detail_color = "#CACBC5" 
+	detail_color = "#CACBC5"
 
 /obj/item/clothing/cloak/tabard/crusader/pestra
 	color = CLOTHING_WHITE
@@ -735,7 +735,7 @@
 
 /obj/item/clothing/cloak/cape/guard
 	color = CLOTHING_RED
-	
+
 /obj/item/clothing/cloak/cape/guard/Initialize()
 	. = ..()
 	if(GLOB.lordprimary)
@@ -940,3 +940,60 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+
+//Short hoods for guards
+
+/obj/item/clothing/cloak/stabard/guardhood
+	name = "guard hood"
+	desc = "A hood with the lord's heraldic colors."
+	color = CLOTHING_RED
+	detail_tag = "_spl"
+	detail_color = CLOTHING_PURPLE
+	icon_state = "guard_hood"
+	body_parts_covered = CHEST
+
+/obj/item/clothing/cloak/stabard/guardhood/attack_right(mob/user)
+	if(picked)
+		return
+	var/the_time = world.time
+	var/chosen = input(user, "Select a design.","Tabard Design") as null|anything in list("Split")
+	if(world.time > (the_time + 10 SECONDS))
+		return
+	if(!chosen)
+		return
+	picked = TRUE
+	switch(chosen)
+		if("Split")
+			detail_tag = "_spl"
+	update_icon()
+	if(ismob(loc))
+		var/mob/L = loc
+		L.update_inv_cloak()
+
+/obj/item/clothing/cloak/stabard/guardhood/Initialize()
+	..()
+	if(GLOB.lordprimary)
+		lordcolor(GLOB.lordprimary,GLOB.lordsecondary)
+	else
+		GLOB.lordcolor += src
+
+/obj/item/clothing/cloak/stabard/guardhood/update_icon()
+	cut_overlays()
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[icon_state][detail_tag]"))
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		add_overlay(pic)
+
+/obj/item/clothing/cloak/stabard/guardhood/lordcolor(primary,secondary)
+	color = primary
+	detail_color = secondary
+	update_icon()
+	if(ismob(loc))
+		var/mob/L = loc
+		L.update_inv_cloak()
+
+/obj/item/clothing/cloak/stabard/guardhood/Destroy()
+	GLOB.lordcolor -= src
+	return ..()

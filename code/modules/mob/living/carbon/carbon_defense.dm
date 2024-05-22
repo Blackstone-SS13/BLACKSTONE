@@ -74,7 +74,7 @@
 	if(BP)
 		testing("projwound")
 		var/newdam = P.damage * (100-blocked)/100
-		BP.attacked_by(P.woundclass, newdam, zone_precise = def_zone)
+		BP.bodypart_attacked_by(P.woundclass, newdam, zone_precise = def_zone)
 		return TRUE
 
 /mob/living/carbon/check_projectile_embed(obj/projectile/P, def_zone, blocked)
@@ -208,7 +208,7 @@
 	var/statforce = get_complex_damage(I, user)
 	if(statforce)
 		next_attack_msg.Cut()
-		affecting.attacked_by(user.used_intent.blade_class, statforce)
+		affecting.bodypart_attacked_by(user.used_intent.blade_class, statforce)
 		apply_damage(statforce, I.damtype, affecting)
 		if(I.damtype == BRUTE && affecting.status == BODYPART_ORGANIC)
 			if(prob(statforce))

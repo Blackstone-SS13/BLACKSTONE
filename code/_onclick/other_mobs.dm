@@ -191,7 +191,7 @@
 			next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 
 	if(!nodmg)
-		affecting.attacked_by(BCLASS_BITE, dam2do, user, user.zone_selected)
+		affecting.bodypart_attacked_by(BCLASS_BITE, dam2do, user, user.zone_selected)
 	visible_message("<span class='danger'>[user] bites [src]'s [parse_zone(user.zone_selected)]![next_attack_msg.Join()]</span>", \
 					"<span class='userdanger'>[user] bites my [parse_zone(user.zone_selected)]![next_attack_msg.Join()]</span>")
 
