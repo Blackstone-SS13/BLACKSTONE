@@ -1,41 +1,48 @@
 /obj/item/bodypart
-	var/list/wounds = list()
+	/// List of /datum/wound instances affecting this bodypart
+	var/list/wounds
+	/// Bandage
 	var/obj/item/bandage
 
+/// Adds a wound to this bodypart, applying any necessary effects
+/obj/item/bodypart/proc/add_wound(datum/wound/wound)
+	if(!wound || !owner || (owner.status_flags & GODMODE))
+		return
+	if(ispath(wound, /datum/wound))
+		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]
+		if(!primordial_wound.can_apply_to_bodypart(src))
+			return
+		wound = new wound()
+	else if(!istype(wound))
+		return
+	else if(!wound.can_apply_to_bodypart(src))
+		qdel(wound)
+		return
+	if(!wound.apply_to_bodypart(src))
+		qdel(wound)
+		return
+	return wound
+
+/// Removes a wound from this bodypart, removing any associated effects
+/obj/item/bodypart/proc/remove_wound(datum/wound/wound)
+	if(ispath(wound))
+		wound = has_wound(wound)
+	if(!istype(wound))
+		return FALSE
+	. = wound.remove_from_bodypart()
+	if(.)
+		qdel(wound)
+
+/// Check to see if we can apply a bleeding wound on this bodypart
 /obj/item/bodypart/proc/can_bloody_wound()
-	if(iscarbon(src))
-		var/mob/living/carbon/C = src
-		if(C.dna && C.dna.species)
-			if(NOBLOOD in C.dna.species.species_traits)
-				return FALSE
+	if(owner?.dna?.species)
+		if(NOBLOOD in owner.dna.species.species_traits)
+			return FALSE
 	if(!is_organic_limb())
 		return FALSE
 	if(skeletonized)
 		return FALSE
 	return TRUE
-
-/obj/item/bodypart/proc/add_wound(datum/wound/W, skipcheck = TRUE)
-	if(!W || !owner || (owner.status_flags & GODMODE))
-		return
-/*	for(var/datum/wound/D in wounds)
-		if(istype(D,W) || D.smaller_wound == W)
-			if(prob(15) && D.bigger_wound) //small chance to 'upgrade' the existing wound instead of making a new one
-				W = D.bigger_wound
-				wounds -= D
-				qdel(D)
-				skipcheck = TRUE
-				owner.next_attack_msg += " <span class='rose'>The wound gushes with blood!</span>"
-				break*/
-//	if(!wounds.len || (wounds.len < 5) || skipcheck)
-	var/datum/wound/NW = new W(src)
-	if(!can_bloody_wound())
-		if(NW.bleed_rate)
-			qdel(NW)
-			return
-	wounds += NW
-	if(bandage)//a fresh wound ruins our current bandage
-		bandage_expire()
-	owner.update_damage_overlays()
 
 /obj/item/bodypart/proc/temporary_crit_paralysis(duration = 60 SECONDS)
 	if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
@@ -48,11 +55,13 @@
 /obj/item/bodypart/proc/remove_crit_paralysis()
 	REMOVE_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
 	update_disabled()
+	return TRUE
 
-/obj/item/bodypart/proc/try_crit(bclass,dam,mob/living/user,zone_precise)
+/// Behemoth of a proc used to apply a wound after a bodypart is damaged in an attack
+/obj/item/bodypart/proc/try_crit(bclass, dam, mob/living/user, zone_precise)
 	if(!dam)
 		return
-	if(user && dam)
+	if(user)
 		if(user.goodluck(2))
 			dam += 10
 	if(bclass == BCLASS_TWIST)
@@ -66,7 +75,7 @@
 			if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 				if(brute_dam < max_damage)
 					return FALSE
-				for(var/datum/wound/fracture/W in wounds)
+				if(has_wound(/datum/wound/fracture))
 					return FALSE
 				var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
@@ -95,9 +104,7 @@
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
-		var/foundf 
-		for(var/datum/wound/fracture/W in wounds)
-			foundf= TRUE
+		var/foundf = has_wound(/datum/wound/fracture)
 		if(!foundf)
 			if(prob(used))
 				var/list/phrases = list("The bone shatters!", "The bone is broken!", "The [src.name] is mauled!", "The bone snaps through the skin!")
@@ -124,7 +131,7 @@
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					used += 10
 		if(prob(used))
-			for(var/datum/wound/artery/A in wounds)
+			if(has_wound(/datum/wound/artery))
 				if(bclass == BCLASS_STAB)
 					return TRUE
 				return FALSE
@@ -144,42 +151,75 @@
 		if(user.goodluck(2))
 			dam += 10
 	if(bclass == BCLASS_TWIST) //the ol dick twist
-		if(dam)
+		if(dam >= 10)
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
-				owner.emote("groin")
-				owner.Stun(10)
+				// TESTICULAR TORSION!
+				if(prob(1) && !has_wound(/datum/wound/cbt))
+					add_wound(/datum/wound/cbt)
+				else
+					owner.emote("groin", forced = TRUE)
+					owner.Stun(10)
 		return FALSE
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
-		var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
+		var/used = round((brute_dam / max_damage) * 20 + (dam / 3), 1)
 		if(zone_precise == BODY_ZONE_PRECISE_GROIN)
-			if(dam)
+			if(dam >= 10)
 				owner.emote("groin")
 				owner.Stun(5) //implement once targetting groin is harder
-				return FALSE
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 			used += 20
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
-		var/foundf
-		for(var/datum/wound/fracture/W in wounds)
-			foundf= TRUE
+		var/foundf = has_wound(/datum/wound/fracture)
 		if(!foundf)
-			if(prob(used) && zone_precise != BODY_ZONE_PRECISE_STOMACH)
-				var/list/phrases = list("The ribs shatter in a splendid way!", "The ribs are smashed!", "The chest is mauled!", "The chest caves in!")
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-				add_wound(/datum/wound/fracture)
-				owner.emote("paincrit", TRUE)
-				if(prob(3))
-					playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-				else
-					playsound(owner, "wetbreak", 100, FALSE)
-				update_disabled()
-				owner.Slowdown(20)
-				shake_camera(owner, 2, 2)
-				if(bclass == BCLASS_CHOP)
-					return TRUE
-				return FALSE
+			if(prob(used))
+				if(zone_precise == BODY_ZONE_PRECISE_GROIN)
+					var/static/list/phrases = list(
+						"The pelvis shatters in a magnificent way!", 
+						"The pelvis is smashed!", 
+						"The groin is mauled!", 
+						"The pelvic floor caves in!",
+					)
+					var/static/funny_phrase = "The buck is broken!"
+					var/phrase_chosen
+					if(prob(1))
+						phrase_chosen = funny_phrase
+					else
+						phrase_chosen = pick(phrases)
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [phrase_chosen]</span>"
+					add_wound(/datum/wound/fracture/groin)
+					owner.emote("groin", TRUE)
+					if((phrase_chosen == funny_phrase) || prob(3))
+						playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
+					else
+						playsound(owner, "wetbreak", 100, FALSE)
+					update_disabled()
+					owner.Slowdown(20)
+					shake_camera(owner, 2, 2)
+					if(bclass == BCLASS_CHOP)
+						return TRUE
+					return FALSE
+				else if(zone_precise != BODY_ZONE_PRECISE_STOMACH)
+					var/static/list/phrases = list(
+						"The ribs shatter in a splendid way!", 
+						"The ribs are smashed!", 
+						"The chest is mauled!", 
+						"The chest caves in!",
+					)
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
+					add_wound(/datum/wound/fracture)
+					owner.emote("paincrit", TRUE)
+					if(prob(3))
+						playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
+					else
+						playsound(owner, "wetbreak", 100, FALSE)
+					update_disabled()
+					owner.Slowdown(20)
+					shake_camera(owner, 2, 2)
+					if(bclass == BCLASS_CHOP)
+						return TRUE
+					return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		var/used = round((brute_dam / max_damage)*20 + (dam / 4), 1)
 		if(!can_bloody_wound())
@@ -191,9 +231,7 @@
 			else
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					used += 10
-		var/foundy
-		for(var/datum/wound/artery/A in wounds)
-			foundy= TRUE
+		var/foundy = has_wound(/datum/wound/artery)
 		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
 			if (prob(used+10))
 				if(!can_bloody_wound() || resistance)
@@ -250,8 +288,6 @@
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
-				if(owner.mind && owner.mind.has_antag_datum(/datum/antagonist/zombie))
-					return FALSE
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					if(zone_precise == BODY_ZONE_CHEST)
 						owner.vomit(blood = TRUE)
@@ -259,8 +295,6 @@
 							owner.death()
 					return TRUE
 			else
-				if(owner.mind && owner.mind.has_antag_datum(/datum/antagonist/zombie))
-					return FALSE
 				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 					if(zone_precise == BODY_ZONE_CHEST)
 						owner.vomit(blood = TRUE)
@@ -281,7 +315,7 @@
 		if(zone_precise == BODY_ZONE_HEAD)
 			if(brute_dam < max_damage)
 				return FALSE
-			for(var/datum/wound/necksnap/S in wounds)
+			if(has_wound(/datum/wound/fracture/neck))
 				return FALSE
 			var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
 			if(owner == user)
@@ -289,7 +323,7 @@
 			if(prob(used))
 				playsound(owner, "fracturedry", 100, FALSE)
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The neck is broken!</span>"
-				add_wound(/datum/wound/necksnap)
+				add_wound(/datum/wound/fracture/neck)
 				shake_camera(owner, 2, 2)
 				if(!resistance)
 					owner.death()
@@ -317,9 +351,7 @@
 						winset(owner.client, "outputwindow.output", "max-lines=1")
 						winset(owner.client, "outputwindow.output", "max-lines=100")
 				return FALSE
-		var/foundf 
-		for(var/datum/wound/fracture/W in wounds)
-			foundf= TRUE
+		var/foundf = has_wound(/datum/wound/fracture)
 		if(!foundf)
 			if(prob(used) && (brute_dam / max_damage >= 0.9))
 				var/list/phrases = list("The skull shatters in a gruesome way!", "The head is smashed!", "The skull is broken!", "The skull caves in!")
@@ -342,7 +374,7 @@
 		if(!can_bloody_wound())
 			return FALSE
 		if(zone_precise == BODY_ZONE_PRECISE_NECK)
-			for(var/datum/wound/artery/throat/A in wounds)
+			if(has_wound(/datum/wound/artery/throat))
 				return FALSE
 			if(user)
 				if(bclass == BCLASS_CHOP)
@@ -372,7 +404,7 @@
 					if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 						used += 10
 			if(prob(used))
-				for(var/datum/wound/artery/A in wounds)
+				if(has_wound(/datum/wound/artery))
 					if(bclass == BCLASS_STAB)
 						if(resistance)
 							return TRUE
@@ -417,7 +449,6 @@
 					return FALSE
 				playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 				owner.emote("paincrit", TRUE)
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 				add_wound(/datum/wound/artery)
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
@@ -457,11 +488,16 @@
 							tongue_up_my_asshole.forceMove(get_turf(owner))
 							tongue_up_my_asshole.Remove(owner)
 					else if(!(zone_precise in do_nothing_zones))
+						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 						if(!brainkill)
 							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 						owner.death()
 						brainkill = TRUE
+					else
+						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 					return TRUE
+				else
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 	if(bclass == BCLASS_PUNCH)
 		if(!can_bloody_wound())
 			return FALSE
@@ -482,118 +518,140 @@
 				owner.Unconscious(5 SECONDS + (from_behind * 10 SECONDS))
 			return FALSE
 
-/obj/item/bodypart/attacked_by(bclass, dam, mob/living/user, zone_precise)
-	if(!owner || (owner.status_flags & GODMODE))
-		return
-	if(!bclass)
-		return
-	if(!dam)
+/// Called after a bodypart is attacked so that wounds and critical effects can be applied
+/obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise)
+	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
 		return
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		if(H.checkcritarmor(zone_precise, bclass))
-			return FALSE
-	//try limbsmash here, return
-	//try dismember here, return
+			return
 	if(user)
 		if(user.goodluck(2))
 			dam += 10
 		if(!istype(user.rmb_intent, /datum/rmb_intent/weak))
-			if(try_crit(bclass, dam, user, zone_precise))
-				return TRUE
+			var/crit_attempt = try_crit(bclass, dam, user, zone_precise)
+			if(crit_attempt)
+				return crit_attempt
 	else
-		if(try_crit(bclass, dam, user, zone_precise))
-			return TRUE
+		var/crit_attempt = try_crit(bclass, dam, user, zone_precise)
+		if(crit_attempt)
+			return crit_attempt
 	testing("WOUNDADD DAM [dam]")
 	switch(bclass) //do stuff but only when we are a blade that adds wounds
 		if(BCLASS_SMASH, BCLASS_BLUNT)
 			switch(dam)
 				if(1 to 10)
-					add_wound(/datum/wound/bruise/small, skipcheck = FALSE)
+					return add_wound(/datum/wound/bruise/small)
 				if(11 to 20)
-					add_wound(/datum/wound/bruise, skipcheck = FALSE)
+					return add_wound(/datum/wound/bruise)
 				if(21 to INFINITY)
-					add_wound(/datum/wound/bruise/large, skipcheck = FALSE)
+					return add_wound(/datum/wound/bruise/large)
 		if(BCLASS_CUT, BCLASS_CHOP)
 			switch(dam)
 				if(1 to 10)
-					add_wound(/datum/wound/cut/small, skipcheck = FALSE)
+					return add_wound(/datum/wound/slash/small)
 				if(11 to 20)
-					add_wound(/datum/wound/cut, skipcheck = FALSE)
+					return add_wound(/datum/wound/slash)
 				if(21 to INFINITY)
-					add_wound(/datum/wound/cut/large, skipcheck = FALSE)
+					return add_wound(/datum/wound/slash/large)
 		if(BCLASS_STAB, BCLASS_PICK)
 			switch(dam)
 				if(1 to 10)
-					add_wound(/datum/wound/stab/small, skipcheck = FALSE)
+					return add_wound(/datum/wound/puncture/small)
 				if(11 to 20)
-					add_wound(/datum/wound/stab, skipcheck = FALSE)
+					return add_wound(/datum/wound/puncture)
 				if(21 to INFINITY)
-					add_wound(/datum/wound/stab/large, skipcheck = FALSE)
+					return add_wound(/datum/wound/puncture/large)
 		if(BCLASS_BITE)
 			if(dam > 8)
-				add_wound(/datum/wound/bite/bleeding, skipcheck = FALSE)
+				return add_wound(/datum/wound/bite/bleeding)
 			else
-				add_wound(/datum/wound/bite, skipcheck = FALSE)
+				return add_wound(/datum/wound/bite)
 
-/obj/item/bodypart/proc/get_bleedrate()
-	var/BR = 0
-	var/highest_BR = 0
-	for(var/datum/wound/W in wounds)
-		BR += W.bleed_rate
-		if(W.bleed_rate > highest_BR)
-			highest_BR = W.bleed_rate
+/obj/item/bodypart/proc/get_bleed_rate()
+	var/bleed_rate = 0
 	if(bandage)
-		if(!HAS_BLOOD_DNA(bandage))
-			if(highest_BR > 0.99)
-				bandage_expire()
-			else
-				BR = 0
-	for(var/obj/item/grabbing/G in grabbedby)
-		if(BR > 0)
-			BR = max(BR - G.bleed_suppressing,0.01)
-	return BR
-
-/obj/item/bodypart/proc/heal_wounds(amt, sleep_heal = FALSE) //wounds that are large always have large hp, but they can be sewn to bleed less/be healed
-	if(!wounds.len)
-		return TRUE
-	for(var/datum/wound/wound in wounds)
-		if(sleep_heal && !wound.sleep_heal)
+		return 0
+	for(var/datum/wound/wound as anything in wounds)
+		bleed_rate += wound.bleed_rate
+	//I hate that I have to do this shit
+	listclearnulls(embedded_objects)
+	for(var/obj/item/embedded as anything in embedded_objects)
+		if(!embedded.embedding.embedded_bloodloss)
 			continue
-		wound.whp = wound.whp - amt
-		if(wound.whp <= 0)
-			wounds -= wound
-			qdel(wound)
-	return TRUE
+		bleed_rate += embedded.embedding.embedded_bloodloss
+	for(var/obj/item/grabbing/grab in grabbedby)
+		bleed_rate *= grab.bleed_suppressing
+	bleed_rate = max(round(bleed_rate, 0.1), 0)
+	return bleed_rate
 
-/obj/item/bodypart/proc/has_wound(path)
+/obj/item/bodypart/proc/heal_wounds(heal_amount, sleep_heal = FALSE) //wounds that are large always have large hp, but they can be sewn to bleed less/be healed
+	if(!length(wounds))
+		return FALSE
+	var/healed_any = FALSE
+	for(var/datum/wound/wound as anything in wounds)
+		if((heal_amount <= 0) || (sleep_heal && !wound.sleep_healing))
+			continue
+		var/amount_healed = wound.heal_wound(heal_amount)
+		heal_amount -= amount_healed
+		healed_any = TRUE
+	return healed_any
+
+/obj/item/bodypart/proc/has_wound(path, specific = FALSE)
 	if(!path)
 		return
-	for(var/datum/wound/W in wounds)
-		if(istype(W,path))
-			return W
+	for(var/datum/wound/wound as anything in wounds)
+		if((specific && wound.type != path) || !istype(wound, path))
+			continue
+		return wound
 
-/obj/item/bodypart/proc/try_bandage(obj/item/I)
-	if(!I)
-		return
-	bandage = I
-	I.forceMove(src)
+/obj/item/bodypart/proc/try_bandage(obj/item/new_bandage)
+	if(!new_bandage)
+		return FALSE
+	bandage = new_bandage
+	new_bandage.forceMove(src)
+	return TRUE
+
+/obj/item/bodypart/proc/try_bandage_expire()
+	if(!bandage)
+		return FALSE
+	var/bandage_effectiveness = 0.5
+	if(istype(bandage, /obj/item/natural/cloth))
+		var/obj/item/natural/cloth/cloth = bandage
+		bandage_effectiveness = cloth.bandage_effectiveness
+	var/highest_bleed_rate = 0
+	for(var/datum/wound/wound as anything in wounds)
+		if(wound.bleed_rate < highest_bleed_rate)
+			continue
+		highest_bleed_rate = wound.bleed_rate
+	//I hate that I have to do this shit
+	listclearnulls(embedded_objects)
+	for(var/obj/item/embedded as anything in embedded_objects)
+		if(!embedded.embedding.embedded_bloodloss)
+			continue
+		if(embedded.embedding.embedded_bloodloss < highest_bleed_rate)
+			continue
+		highest_bleed_rate = embedded.embedding.embedded_bloodloss
+	highest_bleed_rate = round(highest_bleed_rate, 0.1)
+	if(bandage_effectiveness < highest_bleed_rate)
+		return bandage_expire()
+	return FALSE
 
 /obj/item/bodypart/proc/bandage_expire()
 	testing("expire bandage")
 	if(!owner)
-		return
+		return FALSE
 	if(!bandage)
-		return
+		return FALSE
 	if(owner.stat != DEAD)
 		to_chat(owner, "<span class='warning'>Blood soaks through the bandage on my [name].</span>")
-	bandage.add_mob_blood(owner)
-//	owner.update_damage_overlays()
+	return bandage.add_mob_blood(owner)
 
-/obj/item/bodypart/proc/get_sewable()
+/obj/item/bodypart/proc/get_sewable_wounds()
 	var/list/woundies = list()
-	for(var/X in wounds)
-		var/datum/wound/W = X
-		if(W.can_sew)
-			woundies += W
+	for(var/datum/wound/wound as anything in wounds)
+		if(!wound.can_sew)
+			continue
+		woundies += wound
 	return woundies

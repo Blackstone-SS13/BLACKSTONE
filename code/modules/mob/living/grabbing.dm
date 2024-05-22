@@ -7,17 +7,17 @@
 	possible_item_intents = list(/datum/intent/grab/obj/upgrade)
 	item_flags = ABSTRACT
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	grab_state = 0 //this is an atom/movable var i guess
+	no_effect = TRUE
+	force = 0
+	experimental_inhand = FALSE
 	var/grabbed				//ref to what atom we are grabbing
 	var/obj/item/bodypart/limb_grabbed		//ref to actual bodypart being grabbed if we're grabbing a carbo
 	var/sublimb_grabbed		//ref to what precise (sublimb) we are grabbing (if any) (text)
 	var/mob/living/carbon/grabbee
 	var/list/dependents = list()
 	var/handaction
-	var/bleed_suppressing = 2
-	grab_state = 0 //this is an atom/movable var i guess
-	no_effect = TRUE
-	force = 0
-	experimental_inhand = FALSE
+	var/bleed_suppressing = 0.5 //multiplier for how much we suppress bleeding, can accumulate so two grabs means 25% bleeding
 
 /atom/movable //reference to all obj/item/grabbing
 	var/list/grabbedby = list()
@@ -185,10 +185,10 @@
 	playsound(C.loc, "genblunt", 100, FALSE, -1)
 	C.next_attack_msg.Cut()
 	C.apply_damage(damage, BRUTE, limb_grabbed, armor_block)
-	limb_grabbed.attacked_by(BCLASS_TWIST, damage, user, sublimb_grabbed)
-	C.visible_message("<span class='danger'>[user] twists [C]'s [sublimb_grabbed]![C.next_attack_msg.Join()]</span>", \
-					"<span class='userdanger'>[user] twists my [sublimb_grabbed]![C.next_attack_msg.Join()]</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
-	to_chat(user, "<span class='warning'>I twist [C]'s [sublimb_grabbed].[C.next_attack_msg.Join()]</span>")
+	limb_grabbed.bodypart_attacked_by(BCLASS_TWIST, damage, user, sublimb_grabbed)
+	C.visible_message("<span class='danger'>[user] twists [C]'s [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]</span>", \
+					"<span class='userdanger'>[user] twists my [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]</span>", "<span class='hear'>I hear a sickening sound of pugilism!</span>", COMBAT_MESSAGE_RANGE, user)
+	to_chat(user, "<span class='warning'>I twist [C]'s [parse_zone(sublimb_grabbed)].[C.next_attack_msg.Join()]</span>")
 	C.next_attack_msg.Cut()
 	log_combat(user, C, "limbtwisted [sublimb_grabbed] ")
 
@@ -226,7 +226,7 @@
 			user.visible_message("<span class='notice'>[user] rips [I] out of [user.p_their()] [L.name]!</span>", "<span class='notice'>I rip [I] from my [L.name].</span>")
 		else
 			user.visible_message("<span class='notice'>[user] rips [I] out of [C]'s [L.name]!</span>", "<span class='notice'>I rip [I] from [C]'s [L.name].</span>")
-
+		sublimb_grabbed = user.zone_selected
 	else
 		var/obj/item/I = locate(sublimb_grabbed) in M.simple_embedded_objects
 		if(!I || I.loc != M)
@@ -298,7 +298,7 @@
 	var/damage = user.get_punch_dmg()
 	C.next_attack_msg.Cut()
 	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
-		limb_grabbed.attacked_by(BCLASS_BLUNT, damage, user, sublimb_grabbed)
+		limb_grabbed.bodypart_attacked_by(BCLASS_BLUNT, damage, user, sublimb_grabbed)
 		playsound(C.loc, "smashlimb", 100, FALSE, -1)
 	else
 		C.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
@@ -362,7 +362,7 @@
 	name = "bite"
 	icon_state = "bite"
 	slot_flags = ITEM_SLOT_MOUTH
-	bleed_suppressing = 0
+	bleed_suppressing = 1
 	var/last_drink
 
 /obj/item/grabbing/bite/Click(location, control, params)
@@ -403,7 +403,7 @@
 	C.next_attack_msg.Cut()
 	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
 		playsound(C.loc, "smallslash", 100, FALSE, -1)
-		limb_grabbed.attacked_by(BCLASS_BITE, damage, user, sublimb_grabbed)
+		limb_grabbed.bodypart_attacked_by(BCLASS_BITE, damage, user, sublimb_grabbed)
 		if(user.mind)
 			if(user.mind.has_antag_datum(/datum/antagonist/werewolf))
 				var/mob/living/carbon/human/H = C
@@ -445,11 +445,11 @@
 		return
 	if(world.time < last_drink + 2 SECONDS)
 		return
-	if(!limb_grabbed.get_bleedrate())
+	if(!limb_grabbed.get_bleed_rate())
 		to_chat(user, "<span class='warning'>Sigh. It's not bleeding.</span>")
 		return
 	var/mob/living/carbon/C = grabbed
-	if(C.dna && C.dna.species && (NOBLOOD in C.dna.species.species_traits))
+	if(C.dna?.species && (NOBLOOD in C.dna.species.species_traits))
 		to_chat(user, "<span class='warning'>Sigh. No blood.</span>")
 		return
 	if(C.blood_volume <= 0)
