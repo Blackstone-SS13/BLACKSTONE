@@ -10,6 +10,12 @@
 	reqs = list(/obj/item/natural/cloth = 1)
 	craftdiff = 0
 
+/datum/crafting_recipe/roguetown/sewing/rags
+	name = "rags"
+	result = list(/obj/item/clothing/suit/roguetown/shirt/rags)
+	reqs = list(/obj/item/natural/cloth = 2)
+	craftdiff = 0
+
 /datum/crafting_recipe/roguetown/sewing/loincloth
 	name = "loincloth"
 	result = list(/obj/item/clothing/under/roguetown/loincloth)
@@ -69,6 +75,18 @@
 
 /* craftdif of 2+ */
 
+/datum/crafting_recipe/roguetown/sewing/wrappings
+	name = "solar wrappings"
+	result = list(/obj/item/clothing/wrists/roguetown/wrappings)
+	reqs = list(/obj/item/natural/cloth = 2)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/nocwrappings
+	name = "moon wrappings"
+	result = list(/obj/item/clothing/wrists/roguetown/nocwrappings)
+	reqs = list(/obj/item/natural/cloth = 2)
+	craftdiff = 2
+
 /datum/crafting_recipe/roguetown/sewing/cape
 	name = "cape"
 	result = list(/obj/item/clothing/cloak/cape)
@@ -108,6 +126,34 @@
 /datum/crafting_recipe/roguetown/sewing/robe
 	name = "robes"
 	result = list(/obj/item/clothing/suit/roguetown/shirt/robe)
+	reqs = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/astratarobe
+	name = "astrata robes"
+	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/astrata)
+	reqs = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/nocrobe
+	name = "noc robes"
+	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/noc)
+	reqs = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/dendorrobe
+	name = "dendor robes"
+	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/dendor)
+	reqs = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/necrarobe
+	name = "necra robes"
+	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/necra)
 	reqs = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 2
@@ -167,7 +213,7 @@
 /datum/crafting_recipe/roguetown/sewing/lordcloak
 	name = "lordly cloak"
 	result = list(/obj/item/clothing/cloak/lordcloak)
-	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/hide = 5)
+	reqs = list(/obj/item/natural/fur = 2,
+				/obj/item/natural/hide = 4)
 	craftdiff = 3
 
