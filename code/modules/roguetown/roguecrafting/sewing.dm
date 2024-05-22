@@ -96,7 +96,7 @@
 /datum/crafting_recipe/roguetown/sewing/sack
 	name = "sack hood"
 	result = list(/obj/item/clothing/head/roguetown/menacing)
-	reqs = list(/obj/item/natural/cloth = 3,
+	reqs = list(/obj/item/natural/cloth = 3,)
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/sewing/basichood
