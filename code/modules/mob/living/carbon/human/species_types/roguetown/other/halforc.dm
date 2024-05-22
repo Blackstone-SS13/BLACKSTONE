@@ -23,7 +23,7 @@
 	liked_food = NONE
 	possible_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/fo.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mo.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fo.dmi'
 	dam_icon = 'icons/roguetown/mob/bodies/dam/dam_male.dmi'
 	dam_icon_f = 'icons/roguetown/mob/bodies/dam/dam_male.dmi'
