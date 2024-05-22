@@ -432,6 +432,12 @@
 	desc = "<span class='red'>I'm broken.</span>"
 	timer = 60 SECONDS
 
+/datum/stressevent/tickled
+	stressadd = -1
+	max_stacks = 1
+	desc = "<span class='red'>I'm cracking up!</span>"
+	timer = 60 SECONDS
+
 /datum/stressevent/confessed
 	stressadd = 3
 	desc = "<span class='red'>I've confessed to sin.</span>"
