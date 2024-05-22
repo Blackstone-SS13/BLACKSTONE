@@ -614,6 +614,7 @@
 	armor = list("melee" = 27, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_BLUNT, BCLASS_TWIST)
 	anvilrepair = null
+	smeltresult = null
 	sewrepair = TRUE
 	blocksound = SOFTHIT
 
