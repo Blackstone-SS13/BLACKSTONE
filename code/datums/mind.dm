@@ -261,35 +261,33 @@
 	var/datum/skill/S = GetSkillRef(skill)
 	skill_experience[S] = max(0, skill_experience[S] + amt) //Prevent going below 0
 	var/old_level = known_skills[S]
-	var/limit = 1
-	var/ratio = 1
 	switch(skill_experience[S])
 		if(SKILL_EXP_LEGENDARY to INFINITY)
 			known_skills[S] = SKILL_LEVEL_LEGENDARY
-			limit = 1
+			
 		if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY)
 			known_skills[S] = SKILL_LEVEL_MASTER
-			limit = SKILL_LEVEL_LEGENDARY
+			
 		if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER)
 			known_skills[S] = SKILL_LEVEL_EXPERT
-			limit = SKILL_EXP_MASTER
+			
 		if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT)
 			known_skills[S] = SKILL_LEVEL_JOURNEYMAN
-			limit = SKILL_EXP_EXPERT
+			
 		if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN)
 			known_skills[S] = SKILL_LEVEL_APPRENTICE
-			limit = SKILL_EXP_JOURNEYMAN
+			
 		if(SKILL_EXP_NOVICE to SKILL_EXP_APPRENTICE)
 			known_skills[S] = SKILL_LEVEL_NOVICE
-			limit = SKILL_EXP_APPRENTICE
+			
 		if(0 to SKILL_EXP_NOVICE)
 			known_skills[S] = SKILL_LEVEL_NONE
-			limit = SKILL_EXP_NOVICE
+			
 	if(isnull(old_level) || known_skills[S] == old_level)
 		return //same level or we just started earning xp towards the first level.
 	if(silent)
 		return
-	ratio = round(skill_experience[S]/limit,1) * 100
+	// ratio = round(skill_experience[S]/limit,1) * 100
 	// to_chat(current, "<span class='nicegreen'> My [S.name] is around [ratio]% of the way there.")
 	//TODO add some bar hud or something, i think i seen a request like that somewhere
 	if(known_skills[S] >= old_level)
