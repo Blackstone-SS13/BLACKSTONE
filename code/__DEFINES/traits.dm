@@ -137,6 +137,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLIND 			"blind"
 #define TRAIT_MUTE				"mute"
 #define TRAIT_ZOMBIE_SPEECH 	"zombie_speech"
+#define TRAIT_GARGLE_SPEECH		"gargle_speech"
 #define TRAIT_EMOTEMUTE			"emotemute"
 #define TRAIT_DEAF				"deaf"
 #define TRAIT_NEARSIGHT			"nearsighted"
@@ -234,9 +235,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLOODLOSS_IMMUNE "bloodloss_immune" // can bleed, but will never die from blood loss
 #define TRAIT_ROTMAN "rotman" //you are a rotman and need occasional maintenance
 #define TRAIT_ZOMBIE_IMMUNE "zombie_immune" //immune to zombie infection
-
-//non-mob traits
-#define TRAIT_PARALYSIS			"paralysis" //Used for limb-based paralysis, where replacing the limb will fix it
+#define TRAIT_PARALYSIS	"paralysis" //Used for limb-based paralysis and full body paralysis
 
 // item traits
 #define TRAIT_NODROP            "nodrop"

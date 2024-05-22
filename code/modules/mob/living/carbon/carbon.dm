@@ -1278,3 +1278,15 @@
 	if(mood)
 		if(mood.sanity < SANITY_UNSTABLE)
 			return TRUE
+
+/mob/living/carbon/can_speak_vocal()
+	. = ..()
+	if(!.)
+		return
+	if(mouth?.muteinmouth)
+		return FALSE
+	for(var/obj/item/grabbing/grab in grabbedby)
+		if(grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
+			return FALSE
+	if(istype(loc, /turf/open/water) && lying)
+		return FALSE

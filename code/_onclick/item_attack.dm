@@ -200,6 +200,8 @@
 		return 0
 	var/newforce = I.force
 	testing("startforce [newforce]")
+	if(!istype(user))
+		return newforce
 	var/cont = FALSE
 	var/used_str = user.STASTR
 	if(iscarbon(user))
