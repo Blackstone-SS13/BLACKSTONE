@@ -69,7 +69,7 @@
 	/// Most head fractures are serious enough to cause paralysis
 	var/paralysis = TRUE
 	/// Some head fractures are so serious they cause instant death
-	var/mortal = FALSE
+	var/mortal = TRUE
 	/// Funny easter egg
 	var/dents_brain = TRUE
 
@@ -100,21 +100,26 @@
 
 /datum/wound/fracture/head/brain
 	name = "depressed cranial fracture"
+	paralysis = TRUE
+	mortal = FALSE
 	dents_brain = TRUE
 
 /datum/wound/fracture/head/eyes
 	name = "orbital fracture"
+	paralysis = TRUE
 	mortal = TRUE
 	dents_brain = FALSE
 
 /datum/wound/fracture/head/ears
 	name = "temporal fracture"
+	paralysis = TRUE
 	mortal = TRUE
 	dents_brain = FALSE
 
 /datum/wound/fracture/head/nose
 	name = "nasal fracture"
 	paralysis = FALSE
+	mortal = FALSE
 	dents_brain = FALSE
 
 /datum/wound/fracture/mouth
