@@ -1,4 +1,3 @@
-
 //ROGUETRAITS (description when rmb skills button)
 #define RTRAIT_WEBWALK 					"Webwalker"
 #define RTRAIT_NOSTINK 					"Dead Nose"
