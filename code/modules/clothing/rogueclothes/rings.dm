@@ -144,3 +144,8 @@
     name = "dorpel ring"
     icon_state = "s_ring_diamond"
     sellprice = 140
+
+/obj/item/clothing/ring/dragon_ring
+	name = "Dragon Ring"
+	icon_state = "dragon_ring"
+	sellprice = 666
