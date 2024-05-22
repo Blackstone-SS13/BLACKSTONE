@@ -333,11 +333,12 @@
 	//yes this does mean vampires can use rotten limbs
 	if((rotted || skeletonized) && !(owner.mob_biotypes & MOB_UNDEAD))
 		return BODYPART_DISABLED_ROT
+	for(var/datum/wound/ouchie as anything in wounds)
+		if(!ouchie.disabling)
+			continue
+		return BODYPART_DISABLED_WOUND
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS) || HAS_TRAIT(src, TRAIT_PARALYSIS))
 		return BODYPART_DISABLED_PARALYSIS
-	for(var/datum/wound/ouchie as anything in wounds)
-		if(ouchie.disabling)
-			return BODYPART_DISABLED_WOUND
 	var/total_dam = brute_dam + burn_dam
 	if((total_dam >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (total_dam >= (max_damage * 0.6))))
 		return BODYPART_DISABLED_DAMAGE
