@@ -67,3 +67,103 @@
 		H.update_body_parts_head_only()
 */
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)
+	H.verbs |= /mob/living/carbon/human/proc/tickle_victim
+	H.verbs |= /mob/living/carbon/human/proc/tickle_test
+
+/mob/living/carbon/human/proc/tickle_victim()
+	set name = "Tickle Toes"
+	set category = "Japes"
+
+	var/obj/item/grabbing/I = get_active_held_item()
+	var/mob/living/carbon/human/H
+	if(!istype(I) || !ishuman(I.grabbed))
+		return
+	H = I.grabbed
+	if(H == src)
+		to_chat(src, "<span class='warning'>I am the tickler, not the ticklee!</span>")
+		return
+	if(H.add_stress(/datum/stressevent/tickled))
+		if(!H.stat)
+			var/static/list/toes_lines = list(
+				"Hehehe!",
+				"Oooh, you're a wriggler!",
+				"Tickle tickle!",
+				"Whoohohoho!",
+				"Inky winky pinky doops!",
+				"THE TICKLING HAS JUST BEGUN, CONFESS!",
+			)
+			say(pick(toes_lines), spans = list("tickle"))
+			H.emote("giggle")
+			H.confession_time("antag")
+			return
+	to_chat(src, "<span class='warning'>Not ready to spill yet!</span>")
+
+/* Seperating this shit for my own sanity as a divider. I'm sorry it's slop.*/
+
+/mob/living/carbon/human/proc/tickle_test()
+	set name = "Tickle Soles"
+	set category = "Japes"
+
+	var/obj/item/grabbing/I = get_active_held_item()
+	var/mob/living/carbon/human/H
+	if(!istype(I) || !ishuman(I.grabbed))
+		return
+	H = I.grabbed
+	if(H == src)
+		to_chat(src, "<span class='warning'>I am the tickler, not the ticklee!</span>")
+		return
+	if(H.add_stress(/datum/stressevent/tickled))
+		if(!H.stat)
+			var/static/list/faith_lines = list(
+				"Which God is the funniest!?",
+				"I'll tickle you harder if you don't spill!",
+				"The tickling doesn't stop until you pop!",
+				"My favourite is Xylix, who's yours!?",
+			)
+			say(pick(faith_lines), spans = list("tickle"))
+			H.emote("giggle")
+			H.confession_time("patron")
+			return
+	to_chat(src, "<span class='warning'>Not ready to spill yet!</span>")
+
+/mob/living/carbon/human/proc/ticklefession_time(confession_type = "antag")
+	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins)), 6 SECONDS, TIMER_STOPPABLE)
+	var/responsey = alert(src, "Resist tickling? (1 TRI)","Yes","No")
+	if(!responsey)
+		responsey = "No"
+	if(SStimer.timer_id_dict[timerid])
+		deltimer(timerid)
+	else
+		to_chat(src, "<span class='warning'>Too late...</span>")
+		return
+	if(responsey == "Yes")
+		adjust_triumphs(-1)
+		confess_sins(confession_type, resist = TRUE)
+	else
+		confess_sins(confession_type)
+
+/mob/living/carbon/human/proc/tickled_sins(confession_type = "antag", resist)
+	var/static/list/innocent_lines = list(
+		"Hehehehehee!!!",
+		"Ahahahahahaah!",
+		"Wheeeeeeeze!",
+		"Oh Gods, it tickles!!!",
+		"Ehehehehehehe!",
+		"The tickling!!!",
+	)
+	if(!resist)
+		var/list/confessions = list()
+		switch(confession_type)
+			if("patron")
+				if(length(patron?.confess_lines))
+					confessions += patron.confess_lines
+			if("antag")
+				for(var/datum/antagonist/antag in mind?.antag_datums)
+					if(!length(antag.confess_lines))
+						continue
+					confessions += antag.confess_lines
+		if(length(confessions))
+			say(pick(confessions), spans = list("torture"))
+			return
+	say(pick(innocent_lines), spans = list("torture"))
+
