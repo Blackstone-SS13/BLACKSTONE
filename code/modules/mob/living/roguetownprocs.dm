@@ -383,19 +383,19 @@
 			if(!H.check_armor_skill())
 				H.Knockdown(1)
 				return FALSE
-//			if(H.mind)
-//				drained = drained + max((H.checkwornweight() * 10)-(mind.get_skill_level(/datum/skill/misc/athletics) * 10),0)
-//			else
-//				drained = drained + (H.checkwornweight() * 10)
+			if(H.mind)
+				drained = drained + max((H.checkwornweight() * 10)-(mind.get_skill_level(/datum/skill/misc/athletics) * 10),0)
+			else
+				drained = drained + (H.checkwornweight() * 10)
 			if(I) //the enemy attacked us with a weapon
 				if(!I.associated_skill) //the enemy weapon doesn't have a skill because its improvised, so penalty to attack
 					prob2defend = prob2defend + 10
 				else
 					if(H.mind)
 						prob2defend = prob2defend + (H.mind.get_skill_level(I.associated_skill) * 10)
-//				var/thing = H.encumbrance
-//				if(thing > 0)
-//					drained = drained + (thing * 10)
+				var/thing = H.encumbrance
+				if(thing > 0)
+					drained = drained + (thing * 10)
 			else //the enemy attacked us unarmed or is nonhuman
 				if(UH)
 					if(UH.used_intent.unarmed)
@@ -424,15 +424,15 @@
 		else
 			src.visible_message("<span class='warning'><b>[src]</b> easily dodges [user]'s attack!</span>")
 		dodgecd = null
-//		if(H)
-//			if(H.IsOffBalanced())
-//				H.Knockdown(1)
-//				to_chat(H, "<span class='danger'>I tried to dodge off-balance!</span>")
+		if(H)
+			if(H.IsOffBalanced())
+				H.Knockdown(1)
+				to_chat(H, "<span class='danger'>I tried to dodge off-balance!</span>")
 		playsound(src, 'sound/combat/dodge.ogg', 100, FALSE)
-//		if(isturf(loc))
-//			var/turf/T = loc
-//			if(T.landsound)
-//				playsound(T, T.landsound, 100, FALSE)
+		if(isturf(loc))
+			var/turf/T = loc
+			if(T.landsound)
+				playsound(T, T.landsound, 100, FALSE)
 		return TRUE
 	else
 		return FALSE
