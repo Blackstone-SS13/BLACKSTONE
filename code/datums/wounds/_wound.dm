@@ -6,6 +6,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	for(var/wound_type in typesof(/datum/wound))
 		primordial_wounds[wound_type] = new wound_type()
 	return primordial_wounds
+
 /datum/wound
 	/// Name of the wound, visible to players when inspecting a limb and such
 	var/name = "wound"

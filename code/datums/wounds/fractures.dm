@@ -1,7 +1,7 @@
 /datum/wound/fracture
 	name = "fracture"
 	bleed_rate = 0
-	whp = 50
+	whp = 40
 	woundpain = 100
 	mob_overlay = "frac"
 	can_sew = FALSE
