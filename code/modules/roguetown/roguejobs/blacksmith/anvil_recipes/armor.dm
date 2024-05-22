@@ -173,7 +173,7 @@
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/pigface
 
 /datum/anvil_recipe/armor/bascinet
-	name = "bascinet helmet (+steel)"
+	name = "bascinet helmet"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/head/roguetown/helmet/bascinet
 
