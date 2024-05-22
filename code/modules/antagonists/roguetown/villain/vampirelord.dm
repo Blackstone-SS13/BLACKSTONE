@@ -17,6 +17,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		"I AM ANCIENT", 
 		"I AM THE LAND", 
 		"CHILD OF KAIN!",
+		"CREATURE OF NOC!",
 	)
 	var/isspawn = FALSE
 	var/disguised = FALSE
