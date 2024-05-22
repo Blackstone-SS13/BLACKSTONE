@@ -258,12 +258,12 @@
 /datum/anvil_recipe/armor/dwarflegs/punisher // Leggings
 	name = "Dwarf Punisher Leggings"
 	req_bar = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/under/roguetown/racial/dwarfpunisherlegs
+	created_item = /obj/item/clothing/shoes/roguetown/racial/dwarfpunisherboots
 
 /datum/anvil_recipe/armor/dwarflegs/knight
 	name = "Dwarf Knight Leggings"
 	req_bar = /obj/item/ingot/steel
-	created_item = /obj/item/clothing/under/roguetown/racial/dwarfknightlegs
+	created_item = /obj/item/clothing/shoes/roguetown/racial/dwarfknightboots
 
 /datum/anvil_recipe/armor/dwarfgloves/knight // Gloves
 	name = "Dwarf Knight Gauntlets"

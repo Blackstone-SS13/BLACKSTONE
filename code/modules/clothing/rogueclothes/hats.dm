@@ -659,7 +659,7 @@
 
 /obj/item/clothing/head/roguetown/helmet/heavy/racial/dwarfpunisher
 	name = "Dwarf Punisher Helmet"
-	icon_state = "dwarfpunisherhelmet"
+	icon_state = "dwarfpunisherhelm"
 	desc = "Be the terror, in small size"
 	body_parts_covered = HEAD|HAIR|EARS|NOSE
 	allowed_race = list("dwarfm")
