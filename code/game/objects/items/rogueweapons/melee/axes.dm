@@ -130,10 +130,10 @@
 
 /obj/item/rogueweapon/stoneaxe/woodcut
 	name = "axe"
-	desc =  "A regular iron woodcutting axe."
 	force = 20
 	force_wielded = 26
 	possible_item_intents = list(/datum/intent/axe/cut,/datum/intent/axe/chop)
+	desc = "A regular iron woodcutting axe."
 	icon_state = "axe"
 	max_blade_int = 400
 	smeltresult = /obj/item/ingot/iron
@@ -155,9 +155,10 @@
 
 /obj/item/rogueweapon/stoneaxe/woodcut/steel
 	icon_state = "saxe"
-	desc = desc = "A steel woodcutting axe. Performs much better than its iron counterpart."
 	force = 22
 	force_wielded = 28
+	desc = "A steel woodcutting axe. Performs much better than its iron counterpart."
+	force = 26
 	max_blade_int = 500
 	smeltresult = /obj/item/ingot/steel
 	wdefense = 3
