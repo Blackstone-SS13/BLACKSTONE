@@ -68,17 +68,19 @@
 			if(carbon_user.domhand)
 				used_str = carbon_user.get_str_arms(carbon_user.used_hand)
 			carbon_user.rogfat_add(max(30 - (used_str * 3), 0))
-		if(!hingot.currecipe.advance(user))
-			shake_camera(user, 1, 1)
-			playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
-		playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
-
 		if(prob(23)) //Small chance to flash
+		//TODO add better chance the higher the skill
 			user.flash_fullscreen("whiteflash")
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_turf(src)
 			S.set_up(1, 1, front)
 			S.start()
+			//TODO make this advance faster
+
+		if(!hingot.currecipe.advance(user))
+			shake_camera(user, 1, 1)
+			playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
+		playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 		for(var/mob/M in GLOB.player_list)
 			if(!is_in_zweb(M.z,src.z))

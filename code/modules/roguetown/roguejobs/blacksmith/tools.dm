@@ -51,6 +51,7 @@
 			user.visible_message("<span class='warning'>[user] damages [attacked_item]!</span>")
 			attacked_item.take_damage(5, BRUTE, "melee")
 			return
+		// here
 
 	if(isstructure(attacked_object))
 		var/obj/structure/attacked_structure = attacked_object
@@ -66,6 +67,7 @@
 		playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
 		user.visible_message("<span class='info'>[user] repairs [attacked_structure]!</span>")
 		return
+		// here
 
 	..()
 
