@@ -700,3 +700,38 @@
 		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob/living, update_sneak_invis), TRUE), 15 SECONDS)
 		addtimer(CALLBACK(target, TYPE_PROC_REF(/atom/movable, visible_message), "<span class='warning'>[target] fades back into view.</span>", "<span class='notice'>You become visible again.</span>"), 15 SECONDS)
 	return FALSE
+
+/obj/effect/proc_holder/spell/invoked/moonbeam
+	name = "Moonbeam"
+	overlay_state = "moonbeam"
+	releasedrain = 90
+	chargedrain = 0
+	chargetime = 50
+	range = 5
+	warnie = "sydwarning"
+	no_early_release = TRUE
+	movement_interrupt = FALSE
+	charge_max = 2 MINUTES
+	chargedloop = /datum/looping_sound/invokeholy
+	sound = 'sound/misc/dun.ogg'
+	invocation_type = "none"
+	associated_skill = /datum/skill/magic/holy
+	antimagic_allowed = TRUE
+	devotion_cost = -180
+
+/obj/effect/proc_holder/spell/invoked/moonbeam/cast(list/targets, mob/user = usr)
+	if(isliving(targets[1]))
+		var/mob/living/target = targets[1]
+		if(target.anti_magic_check(TRUE, TRUE))
+			return FALSE
+		target.Stun(50)
+		target.adjust_fire_stacks(5)
+		target.IgniteMob()
+		if(target.mob_biotypes & MOB_UNDEAD)
+			target.visible_message("<span class='warning'>[target] is destroyed by the moon beam!</span>", "<span class='notice'>I've been destroyed by a moon beam!</span>")
+			explosion(get_turf(target), light_impact_range = 1, flame_range = 1, smoke = FALSE)
+			target.gib()
+			return TRUE
+		target.visible_message("<span class='warning'>[target] is struck by a moon beam!</span>", "<span class='notice'>I'm struck by a moon beam!</span>")
+		for(var/obj/structure/fluff/psycross/S in oview(5, user))
+			S.AOE_flash(user, range = 8)
