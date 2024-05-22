@@ -182,7 +182,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	woundpain = sewn_woundpain
 	whp = min(whp, sewn_whp)
 	can_sew = FALSE
-	sleep_heal = max(sleep_heal, 1)
+	sleep_healing = max(sleep_healing, 1)
 	passive_healing = max(passive_healing, 1)
 	return TRUE
 
