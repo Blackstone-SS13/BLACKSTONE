@@ -35,7 +35,7 @@
 /datum/wound/fracture/neck
 	name = "cervical fracture"
 	whp = 100
-	sleep_heal = FALSE
+	sleep_healing = 0
 
 /datum/wound/fracture/neck/on_bodypart_gain(obj/item/bodypart/affected)
 	. = ..()

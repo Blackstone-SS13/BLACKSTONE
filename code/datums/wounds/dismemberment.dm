@@ -10,7 +10,7 @@
 	sewn_woundpain = 20
 	mob_overlay = "dis_head"
 	can_sew = TRUE
-	sleep_heal = FALSE
+	sleep_healing = 0
 
 /datum/wound/dismemberment/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/dismemberment) && (type == other.type))

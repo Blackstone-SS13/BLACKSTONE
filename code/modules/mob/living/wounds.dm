@@ -31,7 +31,7 @@
 /mob/living/proc/heal_wounds(heal_amount, sleep_heal = FALSE)
 	var/healed_any = FALSE
 	for(var/datum/wound/wound as anything in get_wounds())
-		if((heal_amount <= 0) || (sleep_heal && !wound.sleep_heal))
+		if((heal_amount <= 0) || (sleep_heal && !wound.sleep_healing))
 			continue
 		var/amount_healed = wound.heal_wound(heal_amount)
 		heal_amount -= amount_healed

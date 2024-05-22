@@ -7,6 +7,7 @@
 	woundpain = 10
 	sew_threshold = 50
 	can_sew = FALSE
+	passive_healing = 1
 
 /datum/wound/bruise/small
 	name = "bruise"

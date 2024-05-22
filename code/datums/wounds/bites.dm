@@ -8,7 +8,7 @@
 	woundpain = 5
 	sew_threshold = 50
 	can_sew = FALSE
-	passive_heal = TRUE
+	passive_healing = 1
 
 /datum/wound/bite/bleeding
 	name = "bleeding bite"
@@ -19,4 +19,4 @@
 	woundpain = 10
 	sewn_woundpain = 5
 	can_sew = TRUE
-	passive_heal = FALSE
+	passive_healing = 0

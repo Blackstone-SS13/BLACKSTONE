@@ -11,7 +11,7 @@
 	mob_overlay = "s1"
 	sewn_overlay = "cut"
 	can_sew = TRUE
-	sleep_heal = FALSE
+	sleep_healing = 0
 	embed_chance = 75
 
 /datum/wound/artery/throat
