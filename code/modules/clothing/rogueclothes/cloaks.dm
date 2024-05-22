@@ -350,15 +350,6 @@
 	GLOB.lordcolor -= src
 	return ..()
 
-/obj/item/clothing/cloak/stabard/guard/hood
-	name = "guard hood"
-	desc = "A hood with the lord's heraldic colors."
-	color = CLOTHING_RED
-	detail_tag = "_spl"
-	detail_color = CLOTHING_PURPLE
-	icon_state = "guard_hood"
-	body_parts_covered = CHEST
-
 /obj/item/clothing/cloak/stabard/bog
 	name = "bogman tabard"
 	desc = "A tabard colored in a glorius green of the mighty protectors of the BOG." // THE BOG DESERVES A BETTER DESCRIPTION!
