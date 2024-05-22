@@ -40,6 +40,7 @@
 	whp = null
 	woundpain = 20
 	mob_overlay = "cut"
+	can_sew = FALSE
 
 /datum/wound/nose/on_bodypart_gain(obj/item/bodypart/affected)
 	. = ..()
