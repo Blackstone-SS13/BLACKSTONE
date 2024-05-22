@@ -717,7 +717,7 @@
 	invocation_type = "none"
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
-	devotion_cost = -130
+	devotion_cost = -180
 
 /obj/effect/proc_holder/spell/invoked/moonbeam/cast(list/targets, mob/user = usr)
 	if(isliving(targets[1]))
