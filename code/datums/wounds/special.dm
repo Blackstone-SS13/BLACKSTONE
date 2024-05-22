@@ -22,7 +22,7 @@
 		name = "ovarian torsion"
 	else
 		name = "testicular torsion"
-	if(HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
+	if(HAS_TRAIT(owner, RTRAIT_CRITICAL_WEAKNESS))
 		owner.death()
 
 /datum/wound/cbt/on_life()
@@ -56,7 +56,7 @@
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_MISSING_NOSE, "[type]")
 	ADD_TRAIT(owner, TRAIT_DISFIGURED, "[type]")
-	if(HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
+	if(HAS_TRAIT(owner, RTRAIT_CRITICAL_WEAKNESS))
 		owner.death()
 
 /datum/wound/nose/on_bodypart_loss(obj/item/bodypart/affected)

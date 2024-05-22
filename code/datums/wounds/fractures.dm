@@ -54,7 +54,7 @@
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
 	affected.owner.update_disabled_bodyparts()
-	if(HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
+	if(HAS_TRAIT(owner, RTRAIT_CRITICAL_WEAKNESS))
 		owner.death()
 
 /datum/wound/fracture/neck/on_bodypart_loss(obj/item/bodypart/affected)
@@ -84,7 +84,7 @@
 	if(paralysis)
 		ADD_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
 		affected.owner.update_disabled_bodyparts()
-	if(mortal || HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
+	if(mortal || HAS_TRAIT(owner, RTRAIT_CRITICAL_WEAKNESS))
 		owner.death()
 
 /datum/wound/fracture/head/on_bodypart_loss(obj/item/bodypart/affected)
