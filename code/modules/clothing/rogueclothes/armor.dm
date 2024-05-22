@@ -415,3 +415,39 @@
 /obj/item/clothing/suit/roguetown/armor/workervest/Initialize()
 	color = pick("#94b4b6", "#ba8f9e", "#bd978c", "#92bd8c", "#c7c981")
 	..()
+
+/obj/item/clothing/suit/roguetown/armor/racial/dwarfknightchestplate
+	slot_flags = ITEM_SLOT_ARMOR
+	name = "Dwarf Knight Chestplate"
+	desc = "A dwarven plate chestplate, intricated with linens of gold."
+	icon_state = "dwarfknightchestplate"
+	blocksound = PLATEHIT
+	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
+	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	allowed_sex = list(MALE, FEMALE)
+	allowed_race = list("dwarfm")
+	nodismemsleeves = TRUE
+	max_integrity = 350
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
+	equip_delay_self = 40
+	armor_class = ARMOR_CLASS_HEAVY
+
+/obj/item/clothing/suit/roguetown/armor/racial/dwarfpunisherchestplate
+	slot_flags = ITEM_SLOT_ARMOR
+	name = "Dwarf Punisher Chestplate"
+	desc = "A dwarven plate chestplate, spiky and reeking of old dwarven blood, cursed?"
+	icon_state = "dwarfpunisherchestplate"
+	blocksound = PLATEHIT
+	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
+	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	allowed_sex = list(MALE, FEMALE)
+	allowed_race = list("dwarfm")
+	nodismemsleeves = TRUE
+	max_integrity = 350
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
+	equip_delay_self = 40
+	armor_class = ARMOR_CLASS_HEAVY

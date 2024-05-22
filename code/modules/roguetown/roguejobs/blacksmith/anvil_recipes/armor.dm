@@ -60,6 +60,11 @@
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/half/iron/goblin
 
+/datum/anvil_recipe/armor/wizardironcap
+	name = "Wizard Iron Cap"
+	req_bar = /obj/item/ingot/iron
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/wizardironcap
+
 // --------- STEEL -----------
 
 /datum/anvil_recipe/armor/haubergeon
@@ -216,3 +221,61 @@
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm
+
+// ------------- RACIAL ---------------------
+
+// Dwarf Punisher & Knights Armors
+
+/datum/anvil_recipe/armor/dwarfhelm/knight
+	name = "Dwarf Knight Helmet (+ Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/racial/dwarfknight
+
+/datum/anvil_recipe/armor/dwarfhelm/punisher
+	name = "Dwarf Punisher Helmet (+ Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/racial/dwarfpunisher
+
+/datum/anvil_recipe/armor/dwarfhelm/overseer
+	name = "Dwarf Overseer Helmet"
+	req_bar = /obj/item/ingot/steel
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/racial/dwarfoverseer
+
+/datum/anvil_recipe/armor/dwarfhelm/engineer
+	name = "Dwarf Engineer Helmet"
+	req_bar = /obj/item/ingot/steel
+	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/racial/dwarfengineer
+
+/datum/anvil_recipe/armor/dwarfchest/punisher // Chestplate
+	name = "Dwarf Punisher Chestplate (+ Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/suit/roguetown/armor/racial/dwarfpunisherchestplate
+
+/datum/anvil_recipe/armor/dwarfchest/knight
+	name = "Dwarf Knight Chestplate (+ Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/suit/roguetown/armor/racial/dwarfknightchestplate
+
+/datum/anvil_recipe/armor/dwarflegs/punisher // Leggings
+	name = "Dwarf Punisher Leggings"
+	req_bar = /obj/item/ingot/steel
+	created_item = /obj/item/clothing/shoes/roguetown/racial/dwarfpunisherboots
+
+/datum/anvil_recipe/armor/dwarflegs/knight
+	name = "Dwarf Knight Leggings"
+	req_bar = /obj/item/ingot/steel
+	created_item = /obj/item/clothing/shoes/roguetown/racial/dwarfknightboots
+
+/datum/anvil_recipe/armor/dwarfgloves/knight // Gloves
+	name = "Dwarf Knight Gauntlets"
+	req_bar = /obj/item/ingot/steel
+	created_item = /obj/item/clothing/gloves/roguetown/racial/dwarfknightgloves
+
+/datum/anvil_recipe/armor/dwarfpunisher/gloves
+	name = "Dwarf Punisher Gauntlets"
+	req_bar = /obj/item/ingot/steel
+	created_item = /obj/item/clothing/gloves/roguetown/racial/dwarfpunishergloves

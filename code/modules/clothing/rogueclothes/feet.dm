@@ -111,7 +111,7 @@
 	blocksound = PLATEHIT
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/shoes/roguetown/boots/leather
 	name = "leather boots"
@@ -126,3 +126,35 @@
 	name = "funny shoes"
 	icon_state = "jestershoes"
 	resistance_flags = null
+
+/obj/item/clothing/shoes/roguetown/racial/dwarfknightboots
+	name = "Dwarf Knight Boots"
+	desc = ""
+	gender = PLURAL
+	icon_state = "dwarfknightboots"
+	item_state = "dwarfknightboots"
+	body_parts_covered = FEET
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	allowed_race = list("dwarfm")
+	color = null
+	blocksound = PLATEHIT
+	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
+	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
+
+/obj/item/clothing/shoes/roguetown/racial/dwarfpunisherboots
+	name = "Dwarf Punisher Boots"
+	desc = ""
+	gender = PLURAL
+	icon_state = "dwarfpunisherboots"
+	item_state = "dwarfpunisherboots"
+	body_parts_covered = FEET
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	allowed_race = list("dwarfm")
+	color = null
+	blocksound = PLATEHIT
+	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
+	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	anvilrepair = /datum/skill/craft/armorsmithing
+	smeltresult = /obj/item/ingot/steel
