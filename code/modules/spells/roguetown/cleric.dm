@@ -191,9 +191,9 @@
 		return TRUE
 	return FALSE
 
-// Limb attachment
-/obj/effect/proc_holder/spell/invoked/attach_limb
-	name = "Limb Miracle"
+// Limb or organ attachment
+/obj/effect/proc_holder/spell/invoked/attach_bodypart
+	name = "Bodypart Miracle"
 	overlay_state = "limb_attach"
 	releasedrain = 30
 	chargedrain = 0
@@ -209,7 +209,7 @@
 	miracle = TRUE
 	devotion_cost = -45
 
-/obj/effect/proc_holder/spell/invoked/attach_limb/proc/get_limb(mob/living/target, mob/living/user)
+/obj/effect/proc_holder/spell/invoked/attach_bodypart/proc/get_limb(mob/living/target, mob/living/user)
 	var/list/missing_limbs = target.get_missing_limbs()
 	if(!length(missing_limbs))
 		return
@@ -233,7 +233,7 @@
 			limb = dismembered
 	return limb
 
-/obj/effect/proc_holder/spell/invoked/attach_limb/cast(list/targets, mob/living/user)
+/obj/effect/proc_holder/spell/invoked/attach_bodypart/cast(list/targets, mob/living/user)
 	if(ishuman(targets[1]))
 		var/mob/living/carbon/human/target = targets[1]
 		var/obj/item/bodypart/limb = get_limb(target, user)

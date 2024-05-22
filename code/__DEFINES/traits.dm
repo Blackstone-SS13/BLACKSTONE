@@ -15,7 +15,7 @@
 #define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
 #define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
 #define RTRAIT_MANIAC_AWOKEN			"Awoken"
-#define RTRAIT_NOFATSTAM				"Indefatigable" //for ai
+#define RTRAIT_NOROGSTAM				"Indefatigable" //for ai
 #define RTRAIT_NUDIST					"Nudist" //you can't wear most clothes
 #define RTRAIT_KNEESTINGER_IMMUNITY		"Blessing of Dendor"
 #define RTRAIT_RETARD_ANATOMY			"Inhumen Anatomy" //can't wear hats and shoes
@@ -23,16 +23,17 @@
 #define RTRAIT_ROT_EATER				"Blessing of Pestra" //can eat rotten food
 #define RTRAIT_ORGAN_EATER				"Blessing of Graggar"
 
+#define TRAIT_MISSING_NOSE "Missing Nose" //halved stamina regeneration
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
-#define TRAIT_NOSLEEP				"Fatal Insomnia"
-#define TRAIT_BASHDOORS				"bashdoors"
-#define TRAIT_NOMOOD 			"no_mood"
-#define TRAIT_SIMPLE_WOUNDS		"simple_wounds"
-#define TRAIT_BANDITCAMP 				"banditcamp"
-#define TRAIT_VAMPMANSION			"vampiremansion"
-#define TRAIT_LIMPDICK 				"limp_dick"
-#define TRAIT_SEXPASS				"sexpass"
-#define TRAIT_STEELHEARTED 			"steelhearted" //no bad mood from dismembering or seeing this
+#define TRAIT_NOSLEEP "Fatal Insomnia"
+#define TRAIT_BASHDOORS "bashdoors"
+#define TRAIT_NOMOOD "no_mood"
+#define TRAIT_SIMPLE_WOUNDS "simple_wounds"
+#define TRAIT_BANDITCAMP "banditcamp"
+#define TRAIT_VAMPMANSION "vampiremansion"
+#define TRAIT_LIMPDICK "limp_dick"
+#define TRAIT_SEXPASS "sexpass"
+#define TRAIT_STEELHEARTED "steelhearted" //no bad mood from dismembering or seeing this
 #define TRAIT_IWASREVIVED "iwasrevived" //prevents PQ gain from reviving the same person twice
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
 #define TRAIT_SCHIZO_AMBIENCE "schizo_ambience" //replaces all ambience with creepy shit
@@ -54,13 +55,14 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
 	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
 	RTRAIT_MANIAC_AWOKEN = "<span class='warning'>I am <b>WAKING UP</b> and the sheeple know this. They will resist.</span>",
-	RTRAIT_NOFATSTAM = "I have boundless energy, I will never tire.",
+	RTRAIT_NOROGSTAM = "I have boundless energy, I will never tire.",
 	RTRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
 	RTRAIT_KNEESTINGER_IMMUNITY = "I am immune to the shock of kneestingers.",
 	RTRAIT_RETARD_ANATOMY = "My anatomy is inhumen, preventing me from wearing hats and shoes.",
 	RTRAIT_NASTY_EATER = "<span class='deadsay'>I can eat bad food, and water that would be toxic to humen will not affect me.</span>",
 	RTRAIT_ROT_EATER = "<span class='deadsay'>I can eat rotten food.</span>",
 	RTRAIT_ORGAN_EATER = "<span class='deadsay'>I can eat organs and raw flesh.</span>",
+	TRAIT_MISSING_NOSE = "<span class='warning'>I struggle to breathe.</span>",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "<span class='warning'>I can't sleep.</span>",

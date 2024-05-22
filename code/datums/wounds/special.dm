@@ -43,8 +43,10 @@
 
 /datum/wound/nose/on_bodypart_gain(obj/item/bodypart/affected)
 	. = ..()
+	ADD_TRAIT(owner, TRAIT_MISSING_NOSE, "[type]")
 	ADD_TRAIT(owner, TRAIT_DISFIGURED, "[type]")
 
 /datum/wound/nose/on_bodypart_loss(obj/item/bodypart/affected)
 	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_MISSING_NOSE, "[type]")
 	REMOVE_TRAIT(owner, TRAIT_DISFIGURED, "[type]")
