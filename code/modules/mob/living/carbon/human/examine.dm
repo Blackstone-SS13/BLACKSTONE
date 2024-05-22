@@ -391,7 +391,7 @@
 				. += "<span class='warning'>[t_He] look[p_s()] weaker.</span>"
 		else
 			. += "[t_He] look[p_s()] about as strong as I."
-		if(user.mmb_intent.type == INTENT_STEAL && user.STAPER >= STAPER) // to make it less meta i suppose
+		if(user.mmb_intent.type == INTENT_STEAL && L.STAPER >= STAPER) // to make it less meta i suppose
 			var/pickpocket = user.mind.get_skill_level(/datum/skill/misc/stealing)
 			var/pickpocket_chance = pickpocket*6 < STAPER ? 0 : 1
 			// this is simply to tell people if its impossible or not. a 1 pickpocket skiller will never pickpocket somebody with 6 perc for example
