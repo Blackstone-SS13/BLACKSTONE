@@ -1,6 +1,6 @@
 /datum/wound/artery
 	name = "severed artery"
-	whp = 100
+	whp = 50
 	sewn_whp = 20
 	bleed_rate = 25
 	sewn_bleed_rate = 0.15
@@ -15,7 +15,7 @@
 	embed_chance = 75
 
 /datum/wound/artery/throat
-	name = "sliced throat"
+	name = "severed carotid"
 	whp = 100
 	sewn_whp = 20
 	bleed_rate = 50

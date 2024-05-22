@@ -50,8 +50,12 @@
 					for(var/obj/item/bodypart/affecting as anything in bodyparts)
 						//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
 						if(affecting.get_bleed_rate() < 1)
-							if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, null, BODYPART_ORGANIC) || affecting.heal_wounds(3, sleep_heal = TRUE))
+							if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, required_status = BODYPART_ORGANIC))
 								src.update_damage_overlays()
+							for(var/datum/wound/wound as anything in affecting.wounds)
+								if(!wound.sleep_healing)
+									continue
+								wound.heal_wound(wound.sleep_healing * buckled.sleepy)
 					adjustToxLoss(-buckled.sleepy)
 					if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 						Sleeping(300)
@@ -88,8 +92,12 @@
 						for(var/obj/item/bodypart/affecting as anything in bodyparts)
 							//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
 							if(affecting.get_bleed_rate() < 1)
-								if(affecting.heal_damage(0.5, 0.5, null, BODYPART_ORGANIC) || affecting.heal_wounds(1, sleep_heal = TRUE))
+								if(affecting.heal_damage(0.5, 0.5, required_status = BODYPART_ORGANIC))
 									src.update_damage_overlays()
+								for(var/datum/wound/wound as anything in affecting.wounds)
+									if(!wound.sleep_healing)
+										continue
+									wound.heal_wound(wound.sleep_healing)
 						adjustToxLoss(-0.1)
 
 			else if(fallingas)

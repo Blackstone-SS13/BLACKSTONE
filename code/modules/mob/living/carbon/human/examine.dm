@@ -304,7 +304,7 @@
 	if(eyesclosed)
 		msg += "[capitalize(m2)] eyes are closed.\n"
 
-	if(bleed_rate)
+	if(get_bleed_rate())
 		msg += "<B>[m1] bleeding!</B>\n"
 
 	if(has_status_effect(/datum/status_effect/debuff/sleepytime))

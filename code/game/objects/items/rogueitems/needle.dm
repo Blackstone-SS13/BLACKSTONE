@@ -36,6 +36,8 @@
 	..()
 
 /obj/item/needle/use(used)
+	if(infinite)
+		return TRUE
 	stringamt = stringamt - used
 	if(stringamt <= 0)
 		qdel(src)

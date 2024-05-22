@@ -1048,8 +1048,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Fun"
 	if(!check_rights(R_ADMIN) || !check_rights(R_FUN))
 		return
-
-	var/list/punishment_list = list(
+	var/static/list/punishment_list = list(
 		ADMIN_PUNISHMENT_LIGHTNING, 
 		ADMIN_PUNISHMENT_BRAINDAMAGE, 
 		ADMIN_PUNISHMENT_GIB, 
@@ -1149,8 +1148,17 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			if(!affecting)
 				to_chat(usr,"<span class='warning'>Target must have a chest!</span>")
 				return
-			affecting.add_wound(/datum/wound/cbt)
-
+			affecting.add_wound(/datum/wound/cbt/smite)
+		if(ADMIN_PUNISHMENT_NECKSNAP)
+			if(!ishuman(target))
+				to_chat(usr,"<span class='warning'>Target must be human!</span>")
+				return
+			var/mob/living/carbon/human/humie = target
+			var/obj/item/bodypart/affecting = humie.get_bodypart(BODY_ZONE_HEAD)
+			if(!affecting)
+				to_chat(usr,"<span class='warning'>Target must have a head!</span>")
+				return
+			affecting.add_wound(/datum/wound/fracture/neck)
 	punish_log(target, punishment)
 
 /client/proc/punish_log(whom, punishment)

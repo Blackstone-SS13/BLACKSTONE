@@ -153,11 +153,15 @@
 	if(bclass == BCLASS_TWIST) //the ol dick twist
 		if(dam >= 10)
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
-				owner.emote("groin")
-				owner.Stun(10)
+				// TESTICULAR TORSION!
+				if(prob(1) && !has_wound(/datum/wound/cbt))
+					add_wound(/datum/wound/cbt)
+				else
+					owner.emote("groin", forced = TRUE)
+					owner.Stun(10)
 		return FALSE
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
-		var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
+		var/used = round((brute_dam / max_damage) * 20 + (dam / 3), 1)
 		if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 			if(dam >= 10)
 				owner.emote("groin")
@@ -177,10 +181,16 @@
 						"The groin is mauled!", 
 						"The pelvic floor caves in!",
 					)
-					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
+					var/static/funny_phrase = "The buck is broken!"
+					var/phrase_chosen
+					if(prob(1))
+						phrase_chosen = funny_phrase
+					else
+						phrase_chosen = pick(phrases)
+					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [phrase_chosen]</span>"
 					add_wound(/datum/wound/fracture/groin)
-					owner.emote("paincrit", TRUE)
-					if(prob(3))
+					owner.emote("groin", TRUE)
+					if((phrase_chosen == funny_phrase) || prob(3))
 						playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
 					else
 						playsound(owner, "wetbreak", 100, FALSE)
@@ -561,6 +571,8 @@
 
 /obj/item/bodypart/proc/get_bleed_rate()
 	var/bleed_rate = 0
+	if(bandage)
+		return 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += wound.bleed_rate
 	//I hate that I have to do this shit
@@ -571,10 +583,6 @@
 		bleed_rate += embedded.embedding.embedded_bloodloss
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
-	var/bandage_effectiveness = 0.5
-	if(istype(bandage, /obj/item/natural/cloth))
-		var/obj/item/natural/cloth/cloth = bandage
-		bandage_effectiveness = cloth.bandage_effectiveness
 	bleed_rate = max(round(bleed_rate, 0.1), 0)
 	return bleed_rate
 

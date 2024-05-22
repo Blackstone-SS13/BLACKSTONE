@@ -6,7 +6,6 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	for(var/wound_type in typesof(/datum/wound))
 		primordial_wounds[wound_type] = new wound_type()
 	return primordial_wounds
-
 /datum/wound
 	/// Name of the wound, visible to players when inspecting a limb and such
 	var/name = "wound"
@@ -46,10 +45,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/can_sew = TRUE
 	/// If TRUE, this disables limbs
 	var/disabling = FALSE
-	/// If TRUE, this wound can be healed through sleep
-	var/sleep_heal = TRUE
-	/// Can be healed passively, without sleep even
-	var/passive_heal = FALSE
+	/// Amount we heal passively while sleeping
+	var/sleep_healing = 1
+	/// Amount we heal passively, always
+	var/passive_healing = 0
 	/// Embed chance if this wound allows embedding
 	var/embed_chance = 0
 
@@ -152,7 +151,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/on_life()
 	if(!isnull(clotting_threshold) && clotting_rate && (bleed_rate > clotting_threshold))
 		bleed_rate = max(clotting_threshold, bleed_rate - clotting_rate)
-	if(passive_heal)
+	if(passive_healing)
 		heal_wound(1)
 
 /// Heals this wound by the given amount, and deletes it if it's healed completely
@@ -182,7 +181,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	woundpain = sewn_woundpain
 	whp = min(whp, sewn_whp)
 	can_sew = FALSE
-	sleep_heal = TRUE
+	sleep_heal = max(sleep_heal, 1)
+	passive_healing = max(passive_healing, 1)
 	return TRUE
 
 /proc/should_embed_weapon(datum/wound/wound_or_boolean)
