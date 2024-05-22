@@ -290,7 +290,7 @@
 	if(silent)
 		return
 	ratio = round(skill_experience[S]/limit,1) * 100
-	to_chat(current, "<span class='nicegreen'> My [S.name] is around [ratio]% of the way there.")
+	// to_chat(current, "<span class='nicegreen'> My [S.name] is around [ratio]% of the way there.")
 	//TODO add some bar hud or something, i think i seen a request like that somewhere
 	if(known_skills[S] >= old_level)
 		if(known_skills[S] > old_level)
