@@ -13,6 +13,7 @@
 #define RTRAIT_HEAVYARMOR				"Plate Training"
 #define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
 #define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
+#define RTRAIT_CRITICAL_WEAKNESS		"Critical Weakness"
 #define RTRAIT_MANIAC_AWOKEN			"Awoken"
 #define RTRAIT_NOROGSTAM				"Indefatigable" //for ai
 #define RTRAIT_NUDIST					"Nudist" //you can't wear most clothes
@@ -53,7 +54,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
 	RTRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
 	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
-	RTRAIT_MANIAC_AWOKEN = "<span class='warning'>I am <b>WAKING UP</b> and the sheeple know this. They will resist.</span>",
+	RTRAIT_CRITICAL_WEAKNESS = "<span class='danger'>I am weak to wounds that others could survive.</span>",
+	RTRAIT_MANIAC_AWOKEN = "<span class='danger'>I am <b>WAKING UP</b> and the sheeple know this. They will resist.</span>",
 	RTRAIT_NOROGSTAM = "I have boundless energy, I will never tire.",
 	RTRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
 	RTRAIT_KNEESTINGER_IMMUNITY = "I am immune to the shock of kneestingers.",

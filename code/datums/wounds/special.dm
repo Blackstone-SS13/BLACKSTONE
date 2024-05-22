@@ -22,6 +22,16 @@
 		name = "ovarian torsion"
 	else
 		name = "testicular torsion"
+	if(HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
+		owner.death()
+
+/datum/wound/cbt/on_life()
+	. = ..()
+	if(!iscarbon(owner))
+		return
+	var/mob/living/carbon/carbon_owner = owner
+	if(!carbon_owner.stat && prob(7))
+		carbon_owner.vomit(1, blood = TRUE)
 
 /datum/wound/cbt/smite
 	name = "testicular evisceration"
@@ -46,6 +56,8 @@
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_MISSING_NOSE, "[type]")
 	ADD_TRAIT(owner, TRAIT_DISFIGURED, "[type]")
+	if(HAS_TRAIT(owner, TRAIT_CRITICAL_WEAKNESS))
+		owner.death()
 
 /datum/wound/nose/on_bodypart_loss(obj/item/bodypart/affected)
 	. = ..()
