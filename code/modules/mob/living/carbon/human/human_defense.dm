@@ -407,7 +407,7 @@
 			nodmg = TRUE
 			next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
-			affecting.attacked_by(M.a_intent.blade_class, damage - armor, M, dam_zone)
+			affecting.bodypart_attacked_by(M.a_intent.blade_class, damage - armor, M, dam_zone)
 		visible_message("<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] [src]![next_attack_msg.Join()]</span>", \
 					"<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] me![next_attack_msg.Join()]</span>", null, COMBAT_MESSAGE_RANGE)
 		next_attack_msg.Cut()
@@ -944,9 +944,8 @@
 	var/brutedamage = FB.brute_dam
 	var/burndamage = FB.burn_dam
 	var/wounddamage = 0
-	if(FB.wounds.len)
-		for(var/datum/wound/W in FB.wounds)
-			wounddamage = wounddamage + W.woundpain
+	for(var/datum/wound/wound as anything in FB.wounds)
+		wounddamage = wounddamage + wound.woundpain
 	if(hallucination)
 		if(prob(30))
 			brutedamage += rand(30,40)
@@ -992,7 +991,7 @@
 		no_damage = TRUE
 	var/isdisabled = ""
 	switch(FB.is_disabled())
-		if(BODYPART_DISABLED_FRACTURE)
+		if(BODYPART_DISABLED_WOUND)
 			isdisabled = "broken "
 		if(BODYPART_DISABLED_DAMAGE)
 			isdisabled = "numb "

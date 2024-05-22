@@ -116,7 +116,7 @@
 
 /atom/movable/screen/fullscreen/love
 	icon_state = "lovehud"
-	layer = 20.509
+	layer = CRIT_LAYER
 	plane = FULLSCREEN_PLANE
 	alpha = 0
 
@@ -126,20 +126,19 @@
 
 /atom/movable/screen/fullscreen/crit
 	icon_state = "passage"
-	layer = 20.51
+	layer = CRIT_LAYER
 	plane = FULLSCREEN_PLANE
 
 /atom/movable/screen/fullscreen/crit/uncon
 	icon_state = "uncon"
-	layer = 20.511
+	layer = CRIT_LAYER
 	plane = FULLSCREEN_PLANE
 
 /atom/movable/screen/fullscreen/crit/zeth
 	icon = 'icons/mob/z.dmi'
 	icon_state = "zeth"
 	name = "NECRA"
-//	layer = 20.09
-	layer = 20.512
+	layer = CRIT_LAYER
 	plane = FULLSCREEN_PLANE
 	mouse_opacity = 1
 	nomouseover = FALSE
@@ -157,7 +156,7 @@
 
 /atom/movable/screen/fullscreen/crit/death
 	icon_state = "DD"
-	layer = 20.511
+	layer = CRIT_LAYER
 	plane = FULLSCREEN_PLANE
 
 /atom/movable/screen/fullscreen/crit/cmode

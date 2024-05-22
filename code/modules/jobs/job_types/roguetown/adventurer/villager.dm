@@ -10,6 +10,7 @@
 
 	outfit = null
 	outfit_female = null
+	bypass_lastclass = TRUE
 	bypass_jobban = FALSE
 	display_order = JDO_VILLAGER
 	give_bank_account = TRUE

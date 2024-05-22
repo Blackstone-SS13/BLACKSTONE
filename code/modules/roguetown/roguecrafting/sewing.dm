@@ -124,7 +124,7 @@
 /datum/crafting_recipe/roguetown/sewing/gambeson
 	name = "gambeson"
 	result = /obj/item/clothing/suit/roguetown/armor/gambeson
-	reqs = list(/obj/item/natural/fibers = 18)
+	reqs = list(/obj/item/natural/fibers = 9)
 	tools = list(/obj/item/needle)
 	craftdiff = 3
 
@@ -155,3 +155,19 @@
 	reqs = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/sewing/armordress
+	name = "armored dress"
+	result = list(/obj/item/clothing/suit/roguetown/armor/armordress)
+	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1,
+				/obj/item/natural/hide = 1)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/sewing/lordcloak
+	name = "lordly cloak"
+	result = list(/obj/item/clothing/cloak/lordcloak)
+	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/hide = 5)
+	craftdiff = 3
+
