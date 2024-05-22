@@ -39,6 +39,7 @@
 	bleed_rate = 0
 	whp = null
 	woundpain = 20
+	mob_overlay = "cut"
 
 /datum/wound/nose/on_bodypart_gain(obj/item/bodypart/affected)
 	. = ..()

@@ -64,25 +64,54 @@
 	name = "cranial fracture"
 	whp = 150
 	sleep_healing = 0
+	/// Most head fractures are serious enough to cause paralysis
+	var/paralysis = TRUE
+	/// Some head fractures are so serious they cause instant death
+	var/mortal = FALSE
+	/// Funny easter egg
+	var/dents_brain = TRUE
 
 /datum/wound/fracture/head/New()
 	. = ..()
-	if(prob(1))
+	if(dents_brain && prob(1))
 		name = "dentbrain"
 
 /datum/wound/fracture/head/on_bodypart_gain(obj/item/bodypart/affected)
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
-	affected.owner.update_disabled_bodyparts()
+	if(paralysis)
+		ADD_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
+		affected.owner.update_disabled_bodyparts()
+	if(mortal)
+		owner.death()
 
 /datum/wound/fracture/head/on_bodypart_loss(obj/item/bodypart/affected)
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
-	affected.owner.update_disabled_bodyparts()
+	if(paralysis)
+		REMOVE_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
+		affected.owner.update_disabled_bodyparts()
 
 /datum/wound/fracture/head/on_life()
 	. = ..()
 	owner.slurring = max(owner.slurring, 5)
+
+/datum/wound/fracture/head/brain
+	name = "depressed cranial fracture"
+	dents_brain = TRUE
+
+/datum/wound/fracture/head/eyes
+	name = "orbital fracture"
+	mortal = TRUE
+	dents_brain = FALSE
+
+/datum/wound/fracture/head/ears
+	name = "temporal fracture"
+	mortal = TRUE
+	dents_brain = FALSE
+
+/datum/wound/fracture/head/nose
+	name = "nasal fracture"
+	paralysis = FALSE
+	dents_brain = FALSE
 
 /datum/wound/fracture/mouth
 	name = "mandibular fracture"

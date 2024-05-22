@@ -464,12 +464,10 @@
 									owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The eyes are gored!</span>"
 									my_eyes.forceMove(get_turf(owner))
 									my_eyes.Remove(owner)
-							else if(!has_wound(/datum/wound/fracture/head))
+							else if(!has_wound(/datum/wound/fracture/head/eyes))
 								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The orbital bone is punctured!</span>"
 								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-								add_wound(/datum/wound/fracture/head)
-								owner.death() //one of the few remaining instakills...
-								brainkill = TRUE
+								add_wound(/datum/wound/fracture/head/eyes)
 							owner.update_fov_angles()
 						else if(zone_precise in tonguestab_zones)
 							var/obj/item/organ/tongue/tongue_up_my_asshole = owner.getorganslot(ORGAN_SLOT_TONGUE)
@@ -488,6 +486,10 @@
 								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The nose is mangled beyond recognition!</span>"
 								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 								add_wound(/datum/wound/nose)
+							else if(!has_wound(/datum/wound/fracture/head/nose))
+								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The nasal bone is punctured!</span>"
+								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
+								add_wound(/datum/wound/fracture/head/nose)
 						else if(zone_precise in earstab_zones)
 							var/obj/item/organ/ears/my_ears = owner.getorganslot(ORGAN_SLOT_EARS)
 							if(my_ears)
@@ -496,16 +498,14 @@
 								owner.Stun(10)
 								my_ears.forceMove(get_turf(owner))
 								my_ears.Remove(owner)
-							else if(!has_wound(/datum/wound/fracture/head))
+							else if(!has_wound(/datum/wound/fracture/head/ears))
 								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The temporal bone is punctured!</span>"
 								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-								add_wound(/datum/wound/fracture/head)
-								owner.death() //one of the few remaining instakills...
-								brainkill = TRUE
-						else if(!has_wound(/datum/wound/fracture/head))
+								add_wound(/datum/wound/fracture/head/ears)
+						else if(!has_wound(/datum/wound/fracture/head/brain))
 							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The brain is maimed!</span>"
 							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-							add_wound(/datum/wound/fracture/head)
+							add_wound(/datum/wound/fracture/head/brain)
 						else
 							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 						return TRUE
@@ -536,13 +536,11 @@
 								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The eyes are gored!</span>"
 								my_eyes.forceMove(get_turf(owner))
 								my_eyes.Remove(owner)
-							owner.update_fov_angles()
-						else if(!has_wound(/datum/wound/fracture/head))
+						else if(!has_wound(/datum/wound/fracture/head/eyes))
 							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The orbital bone is punctured!</span>"
 							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-							add_wound(/datum/wound/fracture/head)
-							owner.death() //one of the few remaining instakills...
-							brainkill = TRUE
+							add_wound(/datum/wound/fracture/head/eyes)
+						owner.update_fov_angles()
 					else if(zone_precise in tonguestab_zones)
 						var/obj/item/organ/tongue/tongue_up_my_asshole = owner.getorganslot(ORGAN_SLOT_TONGUE)
 						if(tongue_up_my_asshole)
@@ -560,6 +558,10 @@
 							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The nose is mangled beyond recognition!</span>"
 							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 							add_wound(/datum/wound/nose)
+						else if(!has_wound(/datum/wound/fracture/head/nose))
+							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The nasal bone is punctured!</span>"
+							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
+							add_wound(/datum/wound/fracture/head/nose)
 					else if(zone_precise in earstab_zones)
 						var/obj/item/organ/ears/my_ears = owner.getorganslot(ORGAN_SLOT_EARS)
 						if(my_ears)
@@ -568,16 +570,14 @@
 							owner.Stun(10)
 							my_ears.forceMove(get_turf(owner))
 							my_ears.Remove(owner)
-						else if(!has_wound(/datum/wound/fracture/head))
+						else if(!has_wound(/datum/wound/fracture/head/ears))
 							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The temporal bone is punctured!</span>"
 							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-							add_wound(/datum/wound/fracture/head)
-							owner.death() //one of the few remaining instakills...
-							brainkill = TRUE
-					else if(!has_wound(/datum/wound/fracture/head))
+							add_wound(/datum/wound/fracture/head/ears)
+					else if(!has_wound(/datum/wound/fracture/head/brain))
 						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The brain is maimed!</span>"
 						playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-						add_wound(/datum/wound/fracture/head)
+						add_wound(/datum/wound/fracture/head/brain)
 					else
 						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
 					return TRUE
