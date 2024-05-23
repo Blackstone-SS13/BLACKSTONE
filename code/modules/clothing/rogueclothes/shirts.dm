@@ -189,7 +189,7 @@
 
 /obj/item/clothing/suit/roguetown/undershirt/webs
 	name = "webbed shirt"
-	desc = "Exotic silk finely woven into.. this? Might as well be wearing a proper spiderweb"
+	desc = "Exotic silk finely woven into.. this? Might as well be wearing a spiderweb"
 	icon_state = "webs"
 	item_state = "webs"
 	r_sleeve_status = SLEEVE_NORMAL
