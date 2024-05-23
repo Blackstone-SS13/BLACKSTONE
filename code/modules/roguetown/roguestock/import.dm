@@ -43,8 +43,8 @@
 	new /obj/item/rope/chain(src)
 	
 /datum/roguestock/import/townguard
-	name = "Town Guard Equipment Crate"
-	desc = "Starting kit for a new Town Guard."
+	name = "Watchman Equipment Crate"
+	desc = "Starting kit for a new Watchman."
 	item_type = /obj/structure/closet/crate/chest/steward/townguard
 	export_price = 50
 	importexport_amt = 1
