@@ -140,8 +140,8 @@
 
 /obj/structure/closet/crate/chest/steward/saiga/Initialize()
 	. = ..()
-	new /mob/living/simple_animal/rogue/game/saiga(src)
-	new /mob/living/simple_animal/rogue/game/saiga(src)
+	new /mob/living/simple_animal/hostile/retaliate/rogue/saiga(src)
+	new /mob/living/simple_animal/hostile/retaliate/rogue/saiga(src)
 	new /obj/item/natural/saddle(src)
 	new /obj/item/natural/saddle(src)
 
