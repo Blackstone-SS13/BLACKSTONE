@@ -162,7 +162,7 @@
 
 /datum/roguestock/import/blacksmith
 	name = "Smith Crate"
-	desc = "Stone, coal and iron ingot with hammer and tongs."
+	desc = "Stone, coal , iron ingot, wood bin, bucket with hammer and tongs."
 	item_type = /obj/structure/closet/crate/chest/steward/blacksmith
 	export_price = 100
 	importexport_amt = 1
@@ -171,7 +171,6 @@
 	. = ..()
 	new /obj/item/rogueweapon/hammer(src)
 	new /obj/item/rogueweapon/tongs(src)
-	new /obj/item/rogueweapon/sickle(src)
 	new /obj/item/natural/stone(src)
 	new /obj/item/natural/stone(src)
 	new /obj/item/natural/stone(src)
