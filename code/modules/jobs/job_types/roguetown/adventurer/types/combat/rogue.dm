@@ -18,31 +18,32 @@
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
 	given_skills = list(
-		"/datum/skill/combat/swords" = 3, \
-		"/datum/skill/combat/axesmaces" = 2, \
-		"/datum/skill/combat/crossbows" = "pick(,2,3,3,)", \
-		"/datum/skill/misc/athletics" = 4, \
-		"/datum/skill/combat/bows" = 3, \
-		"/datum/skill/combat/wrestling" = 3, \
-		"/datum/skill/combat/unarmed" = 3, \
-		"/datum/skill/combat/knives" = 4, \
-		"/datum/skill/combat/polearms" = 1, \
-		"/datum/skill/misc/swimming" = 3, \
-		"/datum/skill/misc/climbing" = "pick(,5,6,)", \
-		"/datum/skill/craft/crafting" = 1, \
-		"/datum/skill/misc/reading" = "pick(,0,1,1,)", \
-		"/datum/skill/craft/traps" = 2, \
-		"/datum/skill/misc/medicine" = "pick(,0,1,)", \
-		"/datum/skill/misc/sneaking" = 5, \
-		"/datum/skill/misc/stealing" = 5, \
-		"/datum/skill/misc/riding" = "pick(,1,2,)", \
-		"/datum/skill/craft/engineering" = 1
+		/datum/skill/combat/swords = 3, \
+		/datum/skill/combat/axesmaces = 2, \
+		/datum/skill/combat/crossbows = list(2,3,3), \
+		/datum/skill/misc/athletics = 4, \
+		/datum/skill/combat/bows = 3, \
+		/datum/skill/combat/wrestling = 3, \
+		/datum/skill/combat/unarmed = 3, \
+		/datum/skill/combat/knives = 4, \
+		/datum/skill/combat/polearms = 1, \
+		/datum/skill/misc/swimming = 3, \
+		/datum/skill/misc/climbing = list(5,6), \
+		/datum/skill/craft/crafting = 1, \
+		/datum/skill/misc/reading = list(0,1,1,1), \
+		/datum/skill/craft/traps = 2, \
+		/datum/skill/misc/medicine = list(0,1), \
+		/datum/skill/misc/sneaking = 5, \
+		/datum/skill/misc/stealing = 5, \
+		/datum/skill/misc/riding = list(1,2), \
+		/datum/skill/craft/engineering = 1
+
 	)
 
 	stat_changes = list(
 		"strength" = -1, 
 		"perception" = 2,
-		"speed" = "pick(,3,4,)",
+		"speed" = list(3,4),
 		"intelligence" =2,
 	)
 

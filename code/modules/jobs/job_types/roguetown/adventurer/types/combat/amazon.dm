@@ -21,18 +21,19 @@
 
 
 	given_skills = list(
-		"/datum/skill/combat/polearms" = 3, \
-		"/datum/skill/combat/swords" = 1, \
-		"/datum/skill/combat/knives" = 1, \
-		"/datum/skill/combat/bows" = 3, \
-		"/datum/skill/combat/wrestling" = 3, \
-		"/datum/skill/combat/unarmed" = 2, \
-		"/datum/skill/craft/crafting" = 1, \
-		"/datum/skill/misc/swimming" = 2, \
-		"/datum/skill/misc/climbing" = 2, \
-		"/datum/skill/misc/riding" = 2, \
-		"/datum/skill/misc/athletics" = 2, \
-		"/datum/skill/misc/medicine" = 1
+		/datum/skill/combat/polearms = 3, \
+		/datum/skill/combat/swords = 1, \
+		/datum/skill/combat/knives = 1, \
+		/datum/skill/combat/bows = 3, \
+		/datum/skill/combat/wrestling = 3, \
+		/datum/skill/combat/unarmed = 2, \
+		/datum/skill/craft/crafting = 1, \
+		/datum/skill/misc/swimming = 2, \
+		/datum/skill/misc/climbing = 2, \
+		/datum/skill/misc/riding = 2, \
+		/datum/skill/misc/athletics = 2, \
+		/datum/skill/misc/medicine = 1
+
 	)
 /datum/outfit/job/roguetown/adventurer/amazon/pre_equip(mob/living/carbon/human/H)
 	..()

@@ -20,20 +20,21 @@
 
 
 	given_skills = list(
-		"/datum/skill/misc/sneaking" = "pick(,1,1,2,)", \
-		"/datum/skill/combat/crossbows" = "pick(,1,2,)", \
-		"/datum/skill/combat/polearms" = 2, \
-		"/datum/skill/combat/axesmaces" = 2, \
-		"/datum/skill/combat/bows" = "pick(,1,2,)", \
-		"/datum/skill/combat/wrestling" = 2, \
-		"/datum/skill/combat/unarmed" = 2, \
-		"/datum/skill/misc/athletics" = 4, \
-		"/datum/skill/combat/swords" = 3, \
-		"/datum/skill/misc/swimming" = 1, \
-		"/datum/skill/misc/climbing" = 2, \
-		"/datum/skill/misc/riding" = "pick(,2,3,)", \
-		"/datum/skill/misc/medicine" = 1, \
-		"/datum/skill/combat/knives" = "rand(,1,3,)"
+		/datum/skill/misc/sneaking = list(1,1,2), \
+		/datum/skill/combat/crossbows = list(1,2), \
+		/datum/skill/combat/polearms = 2, \
+		/datum/skill/combat/axesmaces = 2, \
+		/datum/skill/combat/bows = list(1,2), \
+		/datum/skill/combat/wrestling = 2, \
+		/datum/skill/combat/unarmed = 2, \
+		/datum/skill/misc/athletics = 4, \
+		/datum/skill/combat/swords = 3, \
+		/datum/skill/misc/swimming = 1, \
+		/datum/skill/misc/climbing = 2, \
+		/datum/skill/misc/riding = list(2,3), \
+		/datum/skill/misc/medicine = 1, \
+		/datum/skill/combat/knives = list(1,3)
+
 	) 
 	// tempted to just change rand(1,2) to pick 1,2,3
 	stat_changes = list(

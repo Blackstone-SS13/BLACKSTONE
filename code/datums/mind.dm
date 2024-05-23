@@ -287,15 +287,15 @@
 		to_chat(current, "<span class='warning'>My [S.name] has weakened!</span>")
 
 // just scoot in right here
-/datum/mind/proc/assign_experiences(list/Skills, silent, option)
+/datum/mind/proc/assign_experiences(list/skills, silent, option)
 	// list(skill path = num)
-	for(var/path in Skills)
+	for(var/path in skills)
 		var/truePath = text2path(path)
 		var/numValue
-		if(istext(Skills[path])) // cant assign pick when defining
-			numValue = textList2nums(Skills[path])
+		if(istext(skills[path])) // cant assign pick when defining
+			numValue = textList2nums(skills[path])
 		else
-			numValue = Skills[path]
+			numValue = skills[path]
 		switch(option)
 			if("Skills")
 				adjust_experience(truePath, numValue, TRUE) // change this to what i think is a rewritten proc?

@@ -1,7 +1,8 @@
 
-#define STATTOVAR list("strength" = "STR", "perception" = "PER", "intelligence" = "INT", \
-						"constitution" = "CON", "endurance"= "END", "speed" = "SPD", "fortune" = "LUC")
+
 /mob/living/proc/get_stat_var(stat)
+	var/static/list/STATTOVAR= list("strength" = "STR", "perception" = "PER", "intelligence" = "INT", \
+						"constitution" = "CON", "endurance"= "END", "speed" = "SPD", "fortune" = "LUC")
 	return STATTOVAR[stat]
 
 /mob/living
@@ -101,7 +102,8 @@
 
 /mob/living/proc/change_stat(stat, amt, index)
 	// i have the tism
-	if(!stat) return
+	if(!stat)
+		return
 	if(amt == 0 && index)
 		if(statindex[index])
 			change_stat(stat, -1*statindex[index]["amt"])
