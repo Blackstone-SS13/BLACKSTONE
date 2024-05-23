@@ -79,7 +79,7 @@
 	export_price = 500
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/redpotion/Initialize()
+/obj/structure/closet/crate/chest/steward/knight/Initialize()
 	. = ..()
 	new /obj/item/clothing/head/roguetown/helmet/heavy/knight(src)
 	new /obj/item/clothing/gloves/roguetown/plate(src)
