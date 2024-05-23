@@ -71,3 +71,25 @@
 	new /obj/item/reagent_containers/glass/bottle/rogue/healthpot(src)
 	new /obj/item/reagent_containers/glass/bottle/rogue/healthpot(src)
 	new /obj/item/reagent_containers/glass/bottle/rogue/healthpot(src)
+
+/datum/roguestock/import/knight
+	name = "Knight Equipment Crate"
+	desc = "Kit for a Knight."
+	item_type = /obj/structure/closet/crate/chest/steward/redpotion
+	export_price = 500
+	importexport_amt = 1
+
+/obj/structure/closet/crate/chest/steward/redpotion/Initialize()
+	. = ..()
+	new /obj/item/clothing/head/roguetown/helmet/heavy/knight(src)
+	new /obj/item/clothing/gloves/roguetown/plate(src)
+	new /obj/item/clothing/under/roguetown/platelegs(src)
+	new /obj/item/clothing/cloak/tabard/knight/guard(src)
+	new /obj/item/clothing/neck/roguetown/bervor(src)
+	new /obj/item/clothing/suit/roguetown/armor/chainmail(src)
+	new /obj/item/clothing/suit/roguetown/armor/plate/full(src)
+	new /obj/item/clothing/shoes/roguetown/boots/armor(src)
+	new /obj/item/keyring/guardcastle(src)
+	new /obj/item/storage/belt/rogue/leather/hand(src)
+
+
