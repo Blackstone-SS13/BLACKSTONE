@@ -76,7 +76,7 @@
 	name = "Knight Equipment Crate"
 	desc = "Kit for a Knight."
 	item_type = /obj/structure/closet/crate/chest/steward/knight
-	export_price = 500
+	export_price = 450
 	importexport_amt = 1
 
 /obj/structure/closet/crate/chest/steward/knight/Initialize()
@@ -98,7 +98,7 @@
 	name = "Man at Arms Equipment Crate"
 	desc = "Kit for a Man at Arms."
 	item_type = /obj/structure/closet/crate/chest/steward/manatarms
-	export_price = 300
+	export_price = 250
 	importexport_amt = 1
 
 /obj/structure/closet/crate/chest/steward/manatarms/Initialize()
@@ -119,7 +119,7 @@
 	name = "Crossbows Crate"
 	desc = "A crate with 3 crossbows with 3 full quivers."
 	item_type = /obj/structure/closet/crate/chest/steward/crossbow
-	export_price = 400
+	export_price = 300
 	importexport_amt = 1
 
 /obj/structure/closet/crate/chest/steward/crossbow/Initialize()
@@ -131,19 +131,18 @@
 	new /obj/item/quiver/bolts(src)
 	new /obj/item/quiver/bolts(src)
 
-/datum/roguestock/import/saiga
-	name = "Saiga Crate"
-	desc = "A crate with 2 saigas and 2 saddles."
-	item_type = /obj/structure/closet/crate/chest/steward/saiga
+/datum/roguestock/import/saigabuck
+	name = "Saigabuck Crate"
+	desc = "A crate with 2 tamed Saigabuck with saddles."
+	item_type = /obj/structure/closet/crate/chest/steward/saigabuck
 	export_price = 200
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/saiga/Initialize()
+/obj/structure/closet/crate/chest/steward/saigabuck/Initialize()
 	. = ..()
-	new /mob/living/simple_animal/hostile/retaliate/rogue/saiga(src)
-	new /mob/living/simple_animal/hostile/retaliate/rogue/saiga(src)
-	new /obj/item/natural/saddle(src)
-	new /obj/item/natural/saddle(src)
+	new /mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame/saddled(src)
+	new /mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame/saddled(src)
+
 
 /datum/roguestock/import/farmequip
 	name = "Farm equipament Crate"
@@ -162,7 +161,7 @@
 	new /obj/item/seeds/berryrogue(src)
 
 /datum/roguestock/import/blacksmith
-	name = "Items to make a small smith"
+	name = "Smith Crate"
 	desc = "Stone, coal and iron ingot with hammer and tongs."
 	item_type = /obj/structure/closet/crate/chest/steward/blacksmith
 	export_price = 100
