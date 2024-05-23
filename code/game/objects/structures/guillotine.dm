@@ -36,7 +36,7 @@
 	. = ..()
 
 /obj/structure/guillotine/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/ingot/iron))
+	if(istype(I, /obj/item/stack/sheet/plasteel))
 		to_chat(user, "<span class='notice'>I start repairing the guillotine with the plasteel...</span>")
 		if(blade_sharpness<10)
 			if(do_after(user,100,target=user))
