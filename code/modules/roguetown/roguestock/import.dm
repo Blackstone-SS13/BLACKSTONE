@@ -76,7 +76,7 @@
 	name = "Knight Equipment Crate"
 	desc = "Kit for a Knight."
 	item_type = /obj/structure/closet/crate/chest/steward/knight
-	export_price = 450
+	export_price = 490
 	importexport_amt = 1
 
 /obj/structure/closet/crate/chest/steward/knight/Initialize()
