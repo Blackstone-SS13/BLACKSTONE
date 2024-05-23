@@ -52,13 +52,6 @@
 				/obj/item/natural/fibers = 2)
 	craftdiff = 1
 
-/datum/crafting_recipe/roguetown/sewing/shepardmask
-	name = "half-mask"
-	result = list(/obj/item/clothing/mask/rogue/shepherd)
-	reqs = list(/obj/item/natural/cloth = 1,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 1
-
 /datum/crafting_recipe/roguetown/sewing/Reyepatch
 	name = "right eye patch"
 	result = list(/obj/item/clothing/mask/rogue/eyepatch)
@@ -176,55 +169,6 @@
 	reqs = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
-
-/datum/crafting_recipe/roguetown/sewing/astratarobe
-	name = "astrata robes"
-	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/astrata)
-	reqs = list(/obj/item/natural/cloth = 3,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-
-/datum/crafting_recipe/roguetown/sewing/astratahood
-	name = "solar hood"
-	result = list(/obj/item/clothing/head/roguetown/roguehood/astrata)
-	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 3
-
-/datum/crafting_recipe/roguetown/sewing/nocrobe
-	name = "noc robes"
-	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/noc)
-	reqs = list(/obj/item/natural/cloth = 3,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-
-/datum/crafting_recipe/roguetown/sewing/nochood
-	name = "moon hood"
-	result = list(/obj/item/clothing/head/roguetown/roguehood/nochood)
-	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 3
-
-/datum/crafting_recipe/roguetown/sewing/dendorrobe
-	name = "dendor robes"
-	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/dendor)
-	reqs = list(/obj/item/natural/cloth = 3,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-
-/datum/crafting_recipe/roguetown/sewing/necrarobe
-	name = "necra robes"
-	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/necra)
-	reqs = list(/obj/item/natural/cloth = 3,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-
-/datum/crafting_recipe/roguetown/sewing/necrahood
-	name = "necra hood"
-	result = list(/obj/item/clothing/head/roguetown/necrahood)
-	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/sewing/fancyhat
 	name = "fancy hat"
