@@ -18,13 +18,6 @@
 
 /* craftdif of 1 */
 
-/datum/crafting_recipe/roguetown/sewing/halfcloak
-	name = "cloth half cloak"
-	result = list(/obj/item/clothing/cloak/half)
-	reqs = list(/obj/item/natural/cloth = 1,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 1
-
 /datum/crafting_recipe/roguetown/sewing/clothgloves
 	name = "cloth gloves"
 	result = list(/obj/item/clothing/gloves/roguetown/fingerless)
