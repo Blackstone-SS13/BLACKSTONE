@@ -61,13 +61,15 @@
 	var/dmg_overlay_type //the type of damage overlay (if any) to use when this bodypart is bruised/burned.
 
 	//Damage messages used by help_shake_act()
-	var/light_brute_msg = "is a little bruised"
-	var/medium_brute_msg = "is bruised"
-	var/heavy_brute_msg = "is heavily bruised"
+	var/heavy_brute_msg = "MANGLED"
+	var/medium_brute_msg = "battered"
+	var/light_brute_msg = "bruised"
+	var/no_bruise_msg = "unbruised"
 
-	var/light_burn_msg = "is blistered"
-	var/medium_burn_msg = "is burned"
-	var/heavy_burn_msg = "is peeling away"
+	var/heavy_burn_msg = "CHARRED"
+	var/medium_burn_msg = "blistered"
+	var/light_burn_msg = "numb"
+	var/no_burn_msg = "unburned"
 
 	var/add_extra = FALSE
 	var/offset
@@ -92,16 +94,9 @@
 /obj/item/bodypart/chest/grabbedintents(mob/living/user, precise)
 	if(precise)
 		switch(precise)
-			if("groin")
+			if(BODY_ZONE_PRECISE_GROIN)
 				return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist)
 	return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/shove)
-
-/obj/item/bodypart/examine(mob/user)
-	. = ..()
-	if(brute_dam > DAMAGE_PRECISION)
-		. += "<span class='warning'>This limb has [brute_dam > 30 ? "severe" : "minor"] bruising.</span>"
-	if(burn_dam > DAMAGE_PRECISION)
-		. += "<span class='warning'>This limb has [burn_dam > 30 ? "severe" : "minor"] burns.</span>"
 
 /obj/item/bodypart/blob_act()
 	take_damage(max_damage)

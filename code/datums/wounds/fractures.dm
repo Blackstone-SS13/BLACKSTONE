@@ -1,5 +1,6 @@
 /datum/wound/fracture
 	name = "fracture"
+	check_name = "<span class='danger'>FRACTURE</span>"
 	bleed_rate = 0
 	whp = 40
 	woundpain = 100

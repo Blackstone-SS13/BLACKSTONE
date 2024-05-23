@@ -1,5 +1,6 @@
 /datum/wound/cbt
 	name = "testicular torsion"
+	check_name = "<span class='danger'><b>CBT</b></span>"
 	bleed_rate = 0
 	whp = 50
 	woundpain = 100
@@ -46,6 +47,7 @@
 
 /datum/wound/nose
 	name = "rhinotomy"
+	check_name = "<span class='warning'>RHINOTOMY</span>"
 	bleed_rate = 0
 	whp = null
 	woundpain = 20

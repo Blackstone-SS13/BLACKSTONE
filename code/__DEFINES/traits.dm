@@ -48,7 +48,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... <i>Kind of</i>.",
 	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
 	RTRAIT_NOBLE = "<span class='blue'>I'm of noble blood.</span>",
-	RTRAIT_EMPATH = "I can notice stress levels in detail.",
+	RTRAIT_EMPATH = "I can notice when people are in pain.",
 	RTRAIT_BREADY = "Defensive stance does not passively fatigue me.",
 	RTRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
 	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor.",

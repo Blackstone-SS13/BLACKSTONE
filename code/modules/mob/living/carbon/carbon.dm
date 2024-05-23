@@ -1046,7 +1046,6 @@
 		for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 			bodypart.rotted = FALSE
 			bodypart.skeletonized = FALSE
-	update_disabled_bodyparts()
 	if(mind?.has_antag_datum(/datum/antagonist/zombie))
 		mind.remove_antag_datum(/datum/antagonist/zombie)
 	if(admin_revive)
@@ -1064,6 +1063,7 @@
 	// heal ears after healing traits, since ears check TRAIT_DEAF trait
 	// when healing.
 	restoreEars()
+	update_disabled_bodyparts()
 
 /mob/living/carbon/can_be_revived()
 	. = ..()

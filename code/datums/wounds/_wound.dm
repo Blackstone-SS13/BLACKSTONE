@@ -10,6 +10,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound
 	/// Name of the wound, visible to players when inspecting a limb and such
 	var/name = "wound"
+	/// Name that appears on check_for_injuries()
+	var/check_name
 	/// Bodypart that owns this wound, in case it is not a simple one
 	var/obj/item/bodypart/bodypart_owner
 	/// Mob that owns this wound
@@ -70,6 +72,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(sew_progress >= sew_threshold)
 		visible_name += " <span class='green'>(sewn)</span>"
 	return visible_name
+
+/// Description of this wound returned to the player when the bodypart is checked with check_for_injuries()
+/datum/wound/proc/get_check_name()
+	return check_name
 
 /// Returns whether or not this wound can be applied to a given bodypart
 /datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected)
@@ -200,6 +206,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	can_sew = FALSE
 	sleep_healing = max(sleep_healing, 1)
 	passive_healing = max(passive_healing, 1)
+	owner?.update_damage_overlays()
 	return TRUE
 
 /proc/should_embed_weapon(datum/wound/wound_or_boolean)

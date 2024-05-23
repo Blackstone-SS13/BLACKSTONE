@@ -1,5 +1,6 @@
 /datum/wound/artery
 	name = "severed artery"
+	check_name = "<span class='danger'><B>ARTERY</B></span>"
 	whp = 50
 	sewn_whp = 20
 	bleed_rate = 25
@@ -16,6 +17,7 @@
 
 /datum/wound/artery/throat
 	name = "severed carotid"
+	check_name = "<span class='danger'><B>CAROTID</B></span>"
 	whp = 100
 	sewn_whp = 20
 	bleed_rate = 50

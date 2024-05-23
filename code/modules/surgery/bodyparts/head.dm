@@ -110,36 +110,6 @@
 		return
 	return ..()
 
-/obj/item/bodypart/head/examine(mob/user)
-	. = ..()
-
-	if(status == BODYPART_ORGANIC)
-		if(!brain)
-			. += "<span class='info'>The brain is missing.</span>"
-/*		else if(brain.suicided || brainmob?.suiciding)
-			. += "<span class='info'>There's a pretty dumb expression on [real_name]'s face; they must have really hated life. There is no hope of recovery.</span>"
-		else if(brain.brain_death || brainmob?.health <= HEALTH_THRESHOLD_DEAD)
-			. += "<span class='info'></span>"
-		else if(brainmob)
-			if(brainmob.get_ghost(FALSE, TRUE))
-				. += "<span class='info'>Its muscles are still twitching slightly... It still seems to have a bit of life left to it.</span>"
-			else
-				. += "<span class='info'>It seems seems particularly lifeless. Perhaps there'll be a chance for them later.</span>"
-		else if(brain?.decoy_override)
-			. += "<span class='info'>It seems particularly lifeless. Perhaps there'll be a chance for them later.</span>"
-		else
-			. += "<span class='info'>It seems completely devoid of life.</span>"*/
-
-		if(!eyes)
-			. += "<span class='info'>[real_name]'s eyes appear to have been removed.</span>"
-
-		if(!ears)
-			. += "<span class='info'>[real_name]'s ears appear to have been removed.</span>"
-
-		if(!tongue)
-			. += "<span class='info'>[real_name]'s tongue appears to have been removed.</span>"
-
-
 /obj/item/bodypart/head/can_dismember(obj/item/I)
 //	if(!((owner.stat == DEAD) || owner.InFullCritical()))
 //		return FALSE

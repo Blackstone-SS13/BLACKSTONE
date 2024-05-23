@@ -59,12 +59,9 @@
 			else
 				if(J.advjob_examine)
 					used_title = advjob
-				if(islatejoin)
-					. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the returning [race_name] [used_title].")
-				else
-					. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the [race_name] [used_title].")
+				. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the [islatejoin ? "returning " : ""][race_name] [used_title].")
 		else
-			. = list("<span class='info'>ø ------------ ø\nThis is the [race_name], <EM>[used_name]</EM>.")
+			. = list("<span class='info'>ø ------------ ø\nThis is the <EM>[used_name]</EM>, the [race_name].")
 		
 		if(dna.species.use_skintones)
 			var/skin_tone_wording = dna.species.skin_tone_wording ? lowertext(dna.species.skin_tone_wording) : "skin tone"
@@ -121,8 +118,8 @@
 					var/shit = bD.examine_friendorfoe(aD,user,src)
 					if(shit)
 						. += shit
-		if(user.mind.special_role == "Vampire Lord" || user.mind.special_role == "Vampire Spawn")
-			. += "<span class='userdanger'>Blood Volume: [blood_volume]</span>"
+			if(user.mind.has_antag_datum(/datum/antagonist/vampirelord) || user.mind.has_antag_datum(/datum/antagonist/vampire))
+				. += "<span class='userdanger'>Blood Volume: [blood_volume]</span>"
 
 	var/list/obscured = check_obscured_slots()
 	var/skipface = (wear_mask && (wear_mask.flags_inv & HIDEFACE)) || (head && (head.flags_inv & HIDEFACE))
@@ -225,154 +222,175 @@
 
 	if(legcuffed)
 		. += "<A href='?src=[REF(src)];item=[SLOT_LEGCUFFED]'><span class='warning'>[m3] \a [legcuffed] around [m2] legs!</span></A>"
-
-
+	
 	//Status effects
 	var/list/status_examines = status_effect_examines()
 	if (length(status_examines))
 		. += status_examines
 
+	//Gets encapsulated with a warning span
+	var/list/msg = list()
+
 	//Jitters
 	switch(jitteriness)
 		if(300 to INFINITY)
-			. += "<span class='warning'><B>[m1] convulsing violently!</B></span>"
+			msg += "<B>[m1] convulsing violently!</B>"
 		if(200 to 300)
-			. += "<span class='warning'>[m1] extremely jittery.</span>"
+			msg += "[m1] extremely jittery."
 		if(100 to 200)
-			. += "<span class='warning'>[m1] twitching ever so slightly.</span>"
+			msg += "[m1] twitching ever so slightly."
 
-	var/appears_dead = 0
+	var/appears_dead = FALSE
 	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
-		appears_dead = 1
+		appears_dead = TRUE
 		if(suiciding)
-			. += "<span class='warning'>[t_He] appear[p_s()] to have committed suicide... there is no hope of recovery.</span>"
+			msg += "[t_He] appear[p_s()] to have committed suicide... there is no hope of recovery."
 		if(hellbound)
-			. += "<span class='warning'>[capitalize(m2)] soul seems to have been ripped out of [m2] body. Revival is impossible.</span>"
-		. += ""
+			msg += "[capitalize(m2)] soul seems to have been ripped out of [m2] body. Revival is impossible."
 //		if(getorgan(/obj/item/organ/brain) && !key && !get_ghost(FALSE, TRUE))
-//			. += "<span class='deadsay'>[m1] limp and unresponsive; there are no signs of life and [m2] soul has departed...</span>"
+//			msg += "<span class='deadsay'>[m1] limp and unresponsive; there are no signs of life and [m2] soul has departed...</span>"
 //		else
-//			. += "<span class='deadsay'>[m1] limp and unresponsive; there are no signs of life...</span>"
-
-	var/list/msg = list()
+//			msg += "<span class='deadsay'>[m1] limp and unresponsive; there are no signs of life...</span>"
 
 	var/temp = getBruteLoss() + getFireLoss() //no need to calculate each of these twice
 
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
-		if(temp)
-			if (temp < 25)
-				msg += "[m1] a little wounded.\n"
-			else if (temp < 50)
-				msg += "[m1] wounded.\n"
-			else
-				msg += "[m1] gravely wounded.\n"
+		switch(temp)
+			if(5 to 25)
+				msg += "[m1] a little wounded."
+			if(25 to 50)
+				msg += "[m1] wounded."
+			if(50 to 100)
+				msg += "<B>[m1] severely wounded.</B>"
+			if(100 to INFINITY)
+				msg += "<span class='danger'>[m1] gravely wounded.</span>"
 
 	if(fire_stacks > 0)
-		msg += "[m1] covered in something flammable.\n"
-	if(fire_stacks < 0)
-		msg += "[t_He] look[p_s()] a little soaked.\n"
-
+		msg += "[m1] covered in something flammable."
+	else if(fire_stacks < 0)
+		msg += "[m1] soaked."
 
 	var/list/missing = get_missing_limbs()
 	for(var/t in missing)
-		if(t==BODY_ZONE_HEAD)
-			msg += "<B>[capitalize(m2)] [parse_zone(t)] is gone.</B>\n"
+		if(t == BODY_ZONE_HEAD)
+			msg += "<span class='deadsay'><B>[capitalize(m2)] [parse_zone(t)] is gone.</B></span>"
 			continue
-		msg += "<B>[capitalize(m2)] [parse_zone(t)] is gone.</B>\n"
+		msg += "<B>[capitalize(m2)] [parse_zone(t)] is gone.</B>"
 
 	if(pulledby && pulledby.grab_state)
-		msg += "[m1] being grabbed by [pulledby].\n"
+		msg += "[m1] being grabbed by [pulledby]."
 
 	if(nutrition < (NUTRITION_LEVEL_STARVING - 50))
-		msg += "[m1] looking very hungry.\n"
+		msg += "[m1] looking starved."
 //	else if(nutrition >= NUTRITION_LEVEL_FAT)
 //		if(user.nutrition < NUTRITION_LEVEL_STARVING - 50)
-//			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy.\n"
+//			msg += "[t_He] [t_is] plump and delicious looking - Like a fat little piggy. A tasty piggy."
 //		else
-//			msg += "[t_He] [t_is] quite chubby.\n"
-	switch(disgust)
-		if(DISGUST_LEVEL_GROSS to DISGUST_LEVEL_VERYGROSS)
-			msg += "[t_He] look[p_s()] a bit disgusted.\n"
-		if(DISGUST_LEVEL_VERYGROSS to DISGUST_LEVEL_DISGUSTED)
-			msg += "[t_He] look[p_s()] really disgusted.\n"
-		if(DISGUST_LEVEL_DISGUSTED to INFINITY)
-			msg += "[t_He] look[p_s()] extremely disgusted.\n"
+//			msg += "[t_He] [t_is] quite chubby."
 
-	if(blood_volume < BLOOD_VOLUME_SAFE || skin_tone == "albino")
-		msg += "[m3] pale skin.\n"
+	switch(disgust)
+		if(DISGUST_LEVEL_SLIGHTLYGROSS to DISGUST_LEVEL_GROSS)
+			msg += "[m1] a little disgusted."
+		if(DISGUST_LEVEL_GROSS to DISGUST_LEVEL_VERYGROSS)
+			msg += "[m1] disgusted."
+		if(DISGUST_LEVEL_VERYGROSS to DISGUST_LEVEL_DISGUSTED)
+			msg += "[m1] really disgusted."
+		if(DISGUST_LEVEL_DISGUSTED to INFINITY)
+			msg += "<B>[m1] extremely disgusted.</B>"
+
+	switch(blood_volume)
+		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+			msg += "<span class='danger'>[m1] extremely pale and sickly.</span>"
+		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+			msg += "<B>[m1] very pale.</B>"
+		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+			msg += "[m1] pale."
+		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+			msg += "[m1] a little pale."
 
 	if(eyesclosed)
-		msg += "[capitalize(m2)] eyes are closed.\n"
-
-	if(get_bleed_rate())
-		msg += "<B>[m1] bleeding!</B>\n"
+		msg += "[capitalize(m2)] eyes are closed."
+	
+	var/bleed_rate = get_bleed_rate()
+	if(bleed_rate)
+		switch(bleed_rate)
+			if(0 to 3)
+				msg += "[m1] bleeding!"
+			if(3 to 6)
+				msg += "<B>[m1] bleeding a lot!</B>"
+			if(6 to INFINITY)
+				msg += "<span class='danger'>[m1] bleeding profusely!</span>"
+		var/list/bleeding_limbs = list()
+		for(var/obj/item/bodypart/bleeder in bodyparts)
+			if(!get_location_accessible(src, bleeder.body_zone) || !bleeder.get_bleed_rate())
+				continue
+			bleeding_limbs += parse_zone(bleeder.body_zone)
+		if(length(bleeding_limbs))
+			msg += "<B>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] bleeding!</B>"
 
 	if(has_status_effect(/datum/status_effect/debuff/sleepytime))
-		msg += "[m1] looking a little tired.\n"
+		msg += "[m1] looking a little tired."
 
 	if(!obscure_name)
 		if(HAS_TRAIT(user, RTRAIT_EMPATH))
 			switch(stress)
 				if(20 to INFINITY)
-					msg += "[m1] extremely stressed.\n"
+					msg += "[m1] extremely stressed."
 				if(10 to 19)
-					msg += "[m1] very stressed.\n"
+					msg += "[m1] very stressed."
 				if(1 to 9)
-					msg += "[m1] a little stressed.\n"
+					msg += "[m1] a little stressed."
 				if(-9 to 0)
-					msg += "[m1] not stressed.\n"
+					msg += "[m1] not stressed."
 				if(-19 to -10)
-					msg += "[m1] somewhat at peace.\n"
+					msg += "[m1] somewhat at peace."
 				if(-20 to INFINITY)
-					msg += "[m1] at peace inside.\n"
+					msg += "[m1] at peace inside."
 		else
 			if(stress > 10)
-				msg += "[m3] stress all over [m2] face.\n"
+				msg += "[m3] stress all over [m2] face."
 
 	if(islist(stun_absorption))
 		for(var/i in stun_absorption)
 			if(stun_absorption[i]["end_time"] > world.time && stun_absorption[i]["examine_message"])
-				msg += "[m1][stun_absorption[i]["examine_message"]]\n"
+				msg += "[m1][stun_absorption[i]["examine_message"]]"
 
 	if(!appears_dead)
-		if(drunkenness && !skipface) //Drunkenness
+		if(!skipface) //Drunkenness
 			switch(drunkenness)
 				if(11 to 21)
-					msg += "[m1] slightly flushed.\n"
+					msg += "[m1] slightly flushed."
 				if(21.01 to 41) //.01s are used in case drunkenness ends up to be a small decimal
-					msg += "[m1] flushed.\n"
+					msg += "[m1] flushed."
 				if(41.01 to 51)
-					msg += "[m1] quite flushed and [m2] breath smells of alcohol.\n"
+					msg += "[m1] quite flushed and [m2] breath smells of alcohol."
 				if(51.01 to 61)
-					msg += "[m1] very flushed, with breath reeking of alcohol.\n"
+					msg += "[m1] very flushed, with breath reeking of alcohol."
 				if(61.01 to 91)
-					msg += "[t_He] look[p_s()] like a drunken mess.\n"
+					msg += "[m1] looking like a drunken mess."
 				if(91.01 to INFINITY)
-					msg += "[m1] a shitfaced, slobbering wreck.\n"
-
-			msg += ""
+					msg += "[m1] a shitfaced, slobbering wreck."
 
 		if(InCritical())
-			. += "[m1] barely conscious.</span>"
+			msg += "[m1] barely conscious.</span>"
 		else
-			if(stat == UNCONSCIOUS)
-				. += "<span class='warning'>[m1] unconscious.</span>"
-
+			if(stat >= UNCONSCIOUS)
+				msg += "<span class='warning'>[m1] unconscious.</span>"
 	else
-		. += "<span class='warning'>[m1] unconscious.</span>"
+		msg += "<span class='warning'>[m1] unconscious.</span>"
 //		else
 //			if(HAS_TRAIT(src, TRAIT_DUMB))
-//				msg += "[m3] a stupid expression on [m2] face.\n"
+//				msg += "[m3] a stupid expression on [m2] face."
 //			if(InCritical())
-//				msg += "[m1] barely conscious.\n"
+//				msg += "[m1] barely conscious."
 //		if(getorgan(/obj/item/organ/brain))
 //			if(!key)
-//				msg += "<span class='deadsay'>[m1] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.</span>\n"
+//				msg += "<span class='deadsay'>[m1] totally catatonic. The stresses of life in deep-space must have been too much for [t_him]. Any recovery is unlikely.</span>"
 //			else if(!client)
-//				msg += "[m3] a blank, absent-minded stare and appears completely unresponsive to anything. [t_He] may snap out of it soon.\n"
+//				msg += "[m3] a blank, absent-minded stare and appears completely unresponsive to anything. [t_He] may snap out of it soon."
 
-	if (length(msg))
-		. += "<span class='warning'>[msg.Join("")]</span>"
+	if(length(msg))
+		. += "<span class='warning'>[msg.Join("\n")]</span>"
 
 	if((user != src) && isliving(user))
 		var/mob/living/L = user
@@ -380,12 +398,12 @@
 		if(HAS_TRAIT(src, RTRAIT_DECEIVING_MEEKNESS))
 			final_str = 10
 		if((final_str - L.STASTR) > 1)
-			if((final_str - L.STASTR) > 6)
+			if((final_str - L.STASTR) >= 5)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much stronger than I.</B></span>"
 			else
 				. += "<span class='warning'>[t_He] look[p_s()] stronger than I.</span>"
 		else if((L.STASTR - final_str) > 1)
-			if((L.STASTR - final_str) > 6)
+			if((L.STASTR - final_str) >= 5)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker.</B></span>"
 			else
 				. += "<span class='warning'>[t_He] look[p_s()] weaker.</span>"
@@ -399,14 +417,11 @@
 
 	if(Adjacent(user))
 		. += "<a href='?src=[REF(src)];inspect_limb=1'>Inspect [parse_zone(check_zone(user.zone_selected))]</a>"
-
-		if(lying && user != src)
-			if(user.zone_selected == "chest")
-				if(!wear_armor)
-					. += "<a href='?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
+		if(!(mobility_flags & MOBILITY_STAND) && user != src && (user.zone_selected == BODY_ZONE_CHEST))
+			. += "<a href='?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
 
 	var/trait_exam = common_trait_examine()
-	if (!isnull(trait_exam))
+	if(!isnull(trait_exam))
 		. += trait_exam
 
 	var/traitstring = get_trait_string()

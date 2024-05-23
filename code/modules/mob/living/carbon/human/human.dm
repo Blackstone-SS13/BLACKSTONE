@@ -337,22 +337,24 @@
 					var/usedclass = "'notice'"
 					if(BP.bandage.return_blood_DNA())
 						usedclass = "'danger'"
-					bodypart_message += "<a href='?src=[REF(src)];bandage=[REF(BP.bandage)];bandaged_limb=[REF(BP)]' class=[usedclass]>Bandaged</a>\n"
+					bodypart_message += "<a href='?src=[REF(src)];bandage=[REF(BP.bandage)];bandaged_limb=[REF(BP)]' class=[usedclass]>Bandaged</a>"
 				else if(length(BP.wounds))
-					bodypart_message += "<B>Wounds:</B>\n"
+					bodypart_message += "<B>Wounds:</B>"
 					for(var/datum/wound/wound as anything in BP.wounds)
-						bodypart_message += "[wound.get_visible_name()]\n"
+						bodypart_message += "[wound.get_visible_name()]"
 				if(length(bodypart_message))
 					msg += jointext(bodypart_message, "")
 				else
-					msg += "<B>Healthy.</B>\n"
+					msg += "<B>Healthy.</B>"
 			else
-				msg += "Obscured by clothing.\n"
-			for(var/obj/item/I in BP.embedded_objects)
-				msg += "<a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(BP)]'>[I.name]</a>\n"
+				msg += "Obscured by clothing."
+			if(length(BP.embedded_objects))
+				msg += "<B>Embedded objects:</B>"
+				for(var/obj/item/I in BP.embedded_objects)
+					msg += "<a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(BP)]'>[I.name]</a>"
 		else
-			msg += "<B>Limb is missing!</B>\n"
-		to_chat(usr, "[msg.Join("")]")
+			msg += "<B>Limb is missing!</B>"
+		to_chat(usr, "[msg.Join("\n")]")
 
 	if(href_list["check_hb"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 		if(Adjacent(usr))
