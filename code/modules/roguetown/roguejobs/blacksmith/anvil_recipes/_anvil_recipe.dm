@@ -4,7 +4,7 @@
 	var/appro_skill = /datum/skill/craft/blacksmithing
 	var/req_bar
 	var/created_item
-
+	var/craftdiff = 0
 	var/needed_item
 	var/needed_item_text
 	var/quality_mod = 0
@@ -16,7 +16,7 @@
 	parent = P
 	. = ..()
 
-/datum/anvil_recipe/proc/advance(mob/user)
+/datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE)
 	if(progress == 100)
 		to_chat(user, "<span class='info'>It's ready.</span>")
 		user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
@@ -28,7 +28,9 @@
 	var/moveup = 1
 	var/proab = 3
 	if(user.mind)
-		moveup = moveup + (user.mind.get_skill_level(appro_skill) * 6)
+		moveup += (user.mind.get_skill_level(appro_skill) * 6) 
+		moveup -= 6 * craftdiff
+		moveup *= breakthrough == 1 ? 2 : 1
 		if(!user.mind.get_skill_level(appro_skill))
 			proab = 23
 	if(prob(proab))
