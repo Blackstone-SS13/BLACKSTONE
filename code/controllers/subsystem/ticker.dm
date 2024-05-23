@@ -323,6 +323,7 @@ SUBSYSTEM_DEF(ticker)
 	message_admins("<span class='boldannounce'>Starting game...</span>")
 	var/init_start = world.timeofday
 		//Create and announce mode
+	/** 
 	var/list/datum/game_mode/runnable_modes
 	if(GLOB.master_mode == "random" || GLOB.master_mode == "secret")
 		runnable_modes = config.get_runnable_modes()
@@ -352,6 +353,8 @@ SUBSYSTEM_DEF(ticker)
 			mode = null
 			SSjob.ResetOccupations()
 			return 0
+	*/
+	mode = new /datum/game_mode/chaosmode/
 
 //	if(failedstarts >= 13)
 //		qdel(mode)

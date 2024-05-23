@@ -69,7 +69,7 @@
 			reward_amount += b.amount
 			GLOB.head_bounties -= b
 
-	if(stored_head.original_owner.mind?.has_antag_datum(/datum/antagonist/bandit))
+	if(stored_head.owner.mind?.has_antag_datum(/datum/antagonist/bandit))
 		say("A bounty has been sated.")
 		reward_amount += 80
 
@@ -106,11 +106,7 @@
 
 ///Shows all active bounties to the user.
 /obj/structure/roguemachine/bounty/proc/consult_bounties(var/mob/living/carbon/human/user)
-
-	if(GLOB.head_bounties.len == 0)
-		say("No bounties are currently active.")
-		return
-
+	var/bounty_found = FALSE
 	var/consult_menu
 	consult_menu += "<center>BOUNTIES<BR>"
 	consult_menu += "--------------<BR>"
@@ -119,12 +115,16 @@
 			consult_menu += "The head of each Bandit is wanted by The Crown for 80 mammons.<BR>"
 			consult_menu += "--------------<BR>"
 			break
+		bounty_found = TRUE
 	for(var/datum/bounty/saved_bounty in GLOB.head_bounties)
 		consult_menu += saved_bounty.banner
 
-	var/datum/browser/popup = new(user, "BOUNTIES", "", 500, 300)
-	popup.set_content(consult_menu)
-	popup.open()
+	if(bounty_found)
+		var/datum/browser/popup = new(user, "BOUNTIES", "", 500, 300)
+		popup.set_content(consult_menu)
+		popup.open()
+	else
+		say("No bounties are currently active.")
 
 ///Sets a bounty on a target player through user input.
 ///@param user: The player setting the bounty.
