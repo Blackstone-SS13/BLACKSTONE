@@ -145,7 +145,7 @@
 
 
 /datum/roguestock/import/farmequip
-	name = "Farm equipament Crate"
+	name = "Farm Equipment Crate"
 	desc = "A crate with a pitchfork, sickle , hoe and some seeds."
 	item_type = /obj/structure/closet/crate/chest/steward/farmequip
 	export_price = 100
