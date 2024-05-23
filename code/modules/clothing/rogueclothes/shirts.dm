@@ -187,13 +187,15 @@
 	color = pick("#a90707", "#16239a", "#d68fbd", CLOTHING_BLACK)
 	..()
 
-/obj/item/clothing/suit/roguetown/undershirt/webs
+/obj/item/clothing/suit/roguetown/shirt/undershirt/webs
 	name = "webbed shirt"
 	desc = "Exotic silk finely woven into.. this? Might as well be wearing a spiderweb"
 	icon_state = "webs"
 	item_state = "webs"
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
+	body_parts_covered = CHEST|ARMS|VITALS
+	color = null
 
 /obj/item/clothing/suit/roguetown/shirt/robe
 	slot_flags = ITEM_SLOT_ARMOR
