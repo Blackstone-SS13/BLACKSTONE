@@ -1,3 +1,4 @@
+
 #ifdef TESTSERVER
 /mob/living/carbon/human/verb/become_werewolf()
 	set category = "DEBUGTEST"
@@ -24,7 +25,6 @@
 	var/transforming
 	var/transform_cooldown
 	var/wolfname = "Werevolf"
-	var/last_howl = 0
 	var/pre_transform
 	var/next_idle_sound
 /datum/antagonist/werewolf/apply_innate_effects(mob/living/mob_override)
@@ -147,40 +147,38 @@
 				to_chat(H, "<span class='warning'>The curse begins to fade...</span>")
 				transforming = world.time
 
-/mob/living/carbon/human/proc/howl_button()
-	set name = "Howl"
-	set category = "WEREWOLF"
 
-	if(stat)
-		return
-	var/datum/antagonist/werewolf/WD = mind.has_antag_datum(/datum/antagonist/werewolf)
-	if(WD && WD.transformed)
-		if(world.time > WD.last_howl + 10 SECONDS)
-			var/message = stripped_input(src, "Howl at the hidden moon", "WEREWOLF")
-			if(!message)
-				return
-			if(world.time < WD.last_howl + 10 SECONDS)
-				return
-			WD.last_howl = world.time
-			playsound(src, pick('sound/vo/mobs/wwolf/howl (1).ogg','sound/vo/mobs/wwolf/howl (2).ogg'), 100, TRUE)
-			for(var/mob/player in GLOB.player_list)
-				if(player.mind)
-					if(player.stat == DEAD)
-						continue
-					if(isbrain(player)) //also technically dead
-						continue
-					if(player.mind.has_antag_datum(/datum/antagonist/werewolf))
-						to_chat(player, "<span class='boldannounce'>[WD.wolfname] howls: [message]</span>")
-				if(player == src)
-					continue
-				if(get_dist(player, src) > 7)
-					player.playsound_local(get_turf(player), pick('sound/vo/mobs/wwolf/howldist (1).ogg','sound/vo/mobs/wwolf/howldist (2).ogg'), 100, FALSE, pressure_affected = FALSE)
-			playsound(src, pick('sound/vo/mobs/wwolf/howl (1).ogg','sound/vo/mobs/wwolf/howl (2).ogg'), 100, TRUE)
-		else
-			to_chat(src, "<span class='warning'>I must wait.</span>")
-			return
+/obj/effect/proc_holder/spell/self/howl
+	name = "HOWL"
+	desc = "!"
+	antimagic_allowed = TRUE
+	charge_max = 150 //15 seconds
 
+/obj/effect/proc_holder/spell/self/howl/cast(mob/user = usr)
+	..()
+	var/message = input("Howl at the hidden moon", "WEREWOLF") as text|null
+	if(!message) return
 
+	var/datum/antagonist/werewolf/werewolf_player = user.mind.has_antag_datum(/datum/antagonist/werewolf)
+
+	// sound played for owner
+	playsound(src, pick('sound/vo/mobs/wwolf/howl (1).ogg','sound/vo/mobs/wwolf/howl (2).ogg'), 100, TRUE)
+	
+	for(var/mob/player in GLOB.player_list)
+
+		if(!player.mind) continue
+		if(player.stat == DEAD) continue
+		if(isbrain(player)) continue
+
+		// Announcement to other werewolves
+		if(player.mind.has_antag_datum(/datum/antagonist/werewolf))
+			to_chat(player, "<span class='boldannounce'>[werewolf_player.wolfname] howls: [message]</span>")
+
+		//sound played for other players
+		if(player == src) continue
+		if(get_dist(player, src) > 7)
+			player.playsound_local(get_turf(player), pick('sound/vo/mobs/wwolf/howldist (1).ogg','sound/vo/mobs/wwolf/howldist (2).ogg'), 100, FALSE, pressure_affected = FALSE)
+	
 /mob/living/carbon/human/proc/werewolf_infect()
 	if(!mind)
 		return

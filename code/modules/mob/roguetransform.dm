@@ -68,7 +68,9 @@
 	W.mind.adjust_skillrank(/datum/skill/combat/unarmed, 6, TRUE)
 	W.mind.adjust_skillrank(/datum/skill/misc/climbing, 6, TRUE)
 
-	W.verbs |= /mob/living/carbon/human/proc/howl_button
+	W.AddSpell(new /obj/effect/proc_holder/spell/self/howl)
+
+	//W.verbs |= /mob/living/carbon/human/proc/howl_button
 
 	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_GENERIC)
 
@@ -121,6 +123,9 @@
 	W.copy_known_languages_from(WA.stored_language)
 	W.mind.known_skills = WA.stored_skills.Copy()
 	W.mind.skill_experience = WA.stored_experience.Copy()
+
+	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/howl)
+	
 
 	W.regenerate_icons()
 
