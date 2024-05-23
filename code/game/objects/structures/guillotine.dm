@@ -1,5 +1,5 @@
 #define GUILLOTINE_BLADE_MAX_SHARP  10 // This is maxiumum sharpness and will decapitate without failure
-#define GUILLOTINE_DECAP_MIN_SHARP  7  // Minimum amount of sharpness for decapitation. Any less and it will just do severe brute damage
+#define GUILLOTINE_DECAP_MIN_SHARP  5  // Minimum amount of sharpness for decapitation. Any less and it will just do severe brute damage
 #define GUILLOTINE_ANIMATION_LENGTH 5 // How many deciseconds the animation is
 #define GUILLOTINE_ANIMATION_RAISE_LENGTH 36
 #define GUILLOTINE_BLADE_RAISED     1
@@ -36,7 +36,7 @@
 	. = ..()
 
 /obj/structure/guillotine/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/stack/sheet/plasteel))
+	if(istype(I, /obj/item/ingot/iron))
 		to_chat(user, "<span class='notice'>I start repairing the guillotine with the plasteel...</span>")
 		if(blade_sharpness<10)
 			if(do_after(user,100,target=user))
