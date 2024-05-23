@@ -81,6 +81,13 @@
 	name = "pants"
 	icon_state = "sailorpants"
 
+/obj/item/clothing/under/roguetown/webs
+	name = "silken webbing"
+	desc = "a fine webbing made from spidersilk, popular fashion within the underdark"
+	gender = PLURAL
+	icon_state = "webs"
+	item_state = "webs"
+
 /obj/item/clothing/under/roguetown/trou
 	name = "work trousers"
 	desc = ""
