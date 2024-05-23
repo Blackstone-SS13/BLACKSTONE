@@ -3,6 +3,7 @@
 #define RTRAIT_WEBWALK 					"Webwalker"
 #define RTRAIT_NOSTINK 					"Dead Nose"
 #define RTRAIT_ZJUMP 					"High Jumping"
+#define RTRAIT_FUNNYMAN 				"Funny Entity"
 #define RTRAIT_NOSEGRAB 				"Intimidating"
 #define RTRAIT_SEEPRICES				"Giza Blooded"
 #define RTRAIT_SEEPRICES_SHITTY			"Giza-in-training"
@@ -42,6 +43,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_WEBWALK = "I can move freely between webs.",
 	RTRAIT_NOSTINK = "<span class='deadsay'>My nose is numb to the smell of decay.</span>",
 	RTRAIT_ZJUMP = "Who needs to climb when you can make great leaps?",
+	RTRAIT_FUNNYMAN = "Perhaps some form of benevolence from the Mad-God?",
 	RTRAIT_NOSEGRAB = "I love to grab idiots by their noses!",
 	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	RTRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... <i>Kind of</i>.",
