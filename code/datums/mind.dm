@@ -290,30 +290,17 @@
 /datum/mind/proc/assign_experiences(list/skills, silent, option)
 	// list(skill path = num)
 	for(var/path in skills)
-		var/truePath = text2path(path)
 		var/numValue
-		if(istext(skills[path])) // cant assign pick when defining
-			numValue = textList2nums(skills[path])
+		if(islist(skills[path])) // cant assign pick when defining
+			numValue = pick(skills[path])
 		else
 			numValue = skills[path]
 		switch(option)
 			if("Skills")
-				adjust_experience(truePath, numValue, TRUE) // change this to what i think is a rewritten proc?
+				adjust_experience(path, numValue, TRUE) // change this to what i think is a rewritten proc?
 			if("Stats")
 				current.change_stat(path, numValue)
 
-
-/datum/mind/proc/textList2nums(text) // needs a better name
-	var/list/values = splittext(text, ",")
-	var/option = 0 // 0 = pick, 1 = rand
-	if(values[1] != "pick(") option = 1
-	values.Remove(values[1], values[length(values)]) // could do values[1] & values[length(values)] here
-	for(var/index in 1 to length(values))
-		if(isnull(values[index])) continue // not needed me thinks but just in case
-		values[index] = text2num(values[index])
-	//TODO: review? there's gotta b a better way to translate this text to numbers
-	return option ? rand(values[1], values[2]) : pick(values)
-	// i dont like the list[index] in rand, n im p sure pick(1,2,3) = rand(1,3) so
 
 
 /datum/mind/proc/adjust_skillrank(skill, amt, silent = FALSE)

@@ -11,21 +11,22 @@
 	traits_applied = list(RTRAIT_NOBLE, RTRAIT_NOSEGRAB, RTRAIT_HEAVYARMOR)
 
 	given_skills = list(
-		"/datum/skill/combat/crossbows" = 3, \
-		"/datum/skill/combat/polearms" = 2, \
-		"/datum/skill/combat/axesmaces" = 3, \
-		"/datum/skill/combat/bows" = 3, \
-		"/datum/skill/combat/wrestling" = 2, \
-		"/datum/skill/combat/unarmed" = 2, \
-		"/datum/skill/misc/swimming" = 1, \
-		"/datum/skill/misc/climbing" = 2, \
-		"/datum/skill/misc/athletics" = 3, \
-		"/datum/skill/combat/swords" = 4, \
-		"/datum/skill/combat/knives" = 2, \
-		"/datum/skill/misc/reading" = 4, \
-		"/datum/skill/misc/sneaking" = 2, \
-		"/datum/skill/misc/medicine" = 1, \
-		"/datum/skill/misc/riding" = 3
+		/datum/skill/combat/crossbows = 3, \
+		/datum/skill/combat/polearms = 2, \
+		/datum/skill/combat/axesmaces = 3, \
+		/datum/skill/combat/bows = 3, \
+		/datum/skill/combat/wrestling = 2, \
+		/datum/skill/combat/unarmed = 2, \
+		/datum/skill/misc/swimming = 1, \
+		/datum/skill/misc/climbing = 2, \
+		/datum/skill/misc/athletics = 3, \
+		/datum/skill/combat/swords = 4, \
+		/datum/skill/combat/knives = 2, \
+		/datum/skill/misc/reading = 4, \
+		/datum/skill/misc/sneaking = 2, \
+		/datum/skill/misc/medicine = 1, \
+		/datum/skill/misc/riding = 3
+
 	)
 
 

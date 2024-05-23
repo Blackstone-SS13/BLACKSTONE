@@ -25,13 +25,14 @@
 	min_pq = 1
 	max_pq = null
 	skills = list(
-		"/datum/skill/combat/axesmaces" = 3, \
-		"/datum/skill/combat/unarmed" = 2, \
-		"/datum/skill/craft/crafting" = 3, \
-		"/datum/skill/combat/wrestling" = 3, \
-		"/datum/skill/craft/blacksmithing" = "pick(,3,4,)", \
-		"/datum/skill/craft/armorsmithing" = "pick(,3,4,)", \
-		"/datum/skill/misc/reading" = 2, )
+		/datum/skill/combat/axesmaces = 3, \
+		/datum/skill/combat/unarmed = 2, \
+		/datum/skill/craft/crafting = 3, \
+		/datum/skill/combat/wrestling = 3, \
+		/datum/skill/craft/blacksmithing = list(3,4), \
+		/datum/skill/craft/armorsmithing = list(3,4), \
+		/datum/skill/misc/reading = 2
+ )
 
 /datum/outfit/job/roguetown/armorsmith/pre_equip(mob/living/carbon/human/H)
 	..()

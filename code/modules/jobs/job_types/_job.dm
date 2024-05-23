@@ -130,8 +130,6 @@
 	if(roundstart_experience)
 		var/mob/living/carbon/human/experiencer = H
 		for(var/i in roundstart_experience)
-			if(istext(roundstart_experience[i]))
-				roundstart_experience[i] = experiencer.mind.textList2nums(roundstart_experience[i])
 			experiencer.mind.adjust_experience(i, roundstart_experience[i], TRUE)
 
 	if(spells)		
