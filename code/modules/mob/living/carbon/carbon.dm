@@ -1042,14 +1042,11 @@
 	var/datum/component/rot/corpse/CR = GetComponent(/datum/component/rot/corpse)
 	if(CR)
 		CR.amount = 0
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/BP = X
-		for(var/datum/wound/D in BP.wounds)
-			BP.wounds -= D
-			qdel(D)
-		if(BP.rotted && !BP.skeletonized) //reset rot when being healed by eating limbs
-			BP.rotted = FALSE
-			change_stat("constitution", 0, "rottenlimbs")
+	if(admin_revive) //reset rot on admin revives
+		for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+			bodypart.rotted = FALSE
+			bodypart.skeletonized = FALSE
+	update_disabled_bodyparts()
 	if(mind?.has_antag_datum(/datum/antagonist/zombie))
 		mind.remove_antag_datum(/datum/antagonist/zombie)
 	if(admin_revive)

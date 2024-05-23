@@ -64,12 +64,14 @@
 	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP
 	body_parts_covered = null
 	experimental_onhip = TRUE
-	var/wet = 0
 	max_integrity = 20
 	muteinmouth = TRUE
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/cloth
+	var/wet = 0
+	/// Effectiveness when used as a bandage, how much bloodloss we can tampon
+	var/bandage_effectiveness = 0.9
 
 /obj/item/natural/cloth/examine(mob/user)
 	. = ..()
@@ -267,3 +269,19 @@
 	icon2step = 7
 	icon3 = "stickbundle3"
 
+/obj/item/natural/bowstring
+	name = "fibre bowstring"
+	desc = "A simple cord of bowstring."
+	icon_state = "fibers"
+	possible_item_intents = list(/datum/intent/use)
+	force = 0
+	throwforce = 0
+	obj_flags = null
+	color = COLOR_BEIGE
+	firefuel = 5 MINUTES
+	resistance_flags = FLAMMABLE
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
