@@ -87,6 +87,9 @@
 	gender = PLURAL
 	icon_state = "webs"
 	item_state = "webs"
+	r_sleeve_status = SLEEVE_NOMOD
+	l_sleeve_status = SLEEVE_NOMOD
+	
 
 /obj/item/clothing/under/roguetown/trou
 	name = "work trousers"
