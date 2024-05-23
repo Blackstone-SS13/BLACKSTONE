@@ -243,19 +243,15 @@
 /datum/crafting_recipe/roguetown/sewing/gambeson
 	name = "gambeson"
 	result = /obj/item/clothing/suit/roguetown/armor/gambeson
-<<<<<<< HEAD
-	reqs = list(/obj/item/natural/cloth = 8,
-				/obj/item/natural/fibers = 2)
-=======
-	reqs = list(/obj/item/natural/fibers = 9)
->>>>>>> eb98651f421504422382ed635166e1e1d8fae1ba
+	reqs = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 1)
 	tools = list(/obj/item/needle)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/sewing/armordress
 	name = "padded dress"
 	result = /obj/item/clothing/suit/roguetown/armor/armordress
-	reqs = list(/obj/item/natural/cloth = 10,
+	reqs = list(/obj/item/natural/cloth = 5,
 				/obj/item/natural/fibers = 2)
 	craftdiff = 3
 
