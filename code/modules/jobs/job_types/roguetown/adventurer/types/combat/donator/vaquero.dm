@@ -42,7 +42,7 @@
 	cloak = /obj/item/clothing/cloak/half/red
 	if(prob(33))
 		cloak = /obj/item/clothing/cloak/half
-	else(prob(33))
+	if else(prob(33))
 		cloak = /obj/item/clothing/cloak/half/orange
 	backl = /obj/item/storage/backpack/rogue/satchel
 	beltl = /obj/item/rogueweapon/sword/rapier
