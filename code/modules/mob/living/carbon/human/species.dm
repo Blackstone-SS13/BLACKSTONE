@@ -35,7 +35,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/hairyness = null
 
 	var/custom_clothes = FALSE //append species id to clothing sprite name
-	var/use_f = FALSE //males use female clothes. for elves
+	var/use_f = FALSE //males use female clothes. for elves DO NOT TURN BOTH ON EVER
+	var/use_m = FALSE //females use male clothes. for half orcs DO NOT TURN BOTH ON
 
 	var/datum/voicepack/soundpack_m = /datum/voicepack/male
 	var/datum/voicepack/soundpack_f = /datum/voicepack/female
@@ -1872,7 +1873,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			nodmg = TRUE
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
-			affecting.attacked_by(user.used_intent.blade_class, damage, user, selzone)
+			affecting.bodypart_attacked_by(user.used_intent.blade_class, damage, user, selzone)
 		log_combat(user, target, "punched")
 
 		if(!nodmg)
@@ -2075,7 +2076,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 			else
 				if(affecting)
-					affecting.attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected)
+					affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected)
 			target.visible_message("<span class='danger'>[user] stomps [target]![target.next_attack_msg.Join()]</span>", \
 							"<span class='danger'>I'm stomped by [user]![target.next_attack_msg.Join()]</span>", "<span class='hear'>I hear a sickening kick!</span>", COMBAT_MESSAGE_RANGE, user)
 			to_chat(user, "<span class='danger'>I stomp on [target]![target.next_attack_msg.Join()]</span>")
@@ -2164,7 +2165,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
-			affecting.attacked_by(BCLASS_BLUNT, damage, user, selzone)
+			affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, selzone)
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
@@ -2254,7 +2255,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(I)
 				I.take_damage(1, BRUTE, "melee")
 		if(!nodmg)
-			if(affecting.attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone))
+			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone)
+			if(should_embed_weapon(crit_wound))
 				var/can_impale = TRUE
 				if(!affecting)
 					can_impale = FALSE

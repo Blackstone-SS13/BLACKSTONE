@@ -98,10 +98,10 @@ There are several things that need to be remembered:
 	var/list/limb_overlaysb = list()
 	var/list/limb_overlaysc = list()
 
-	if(gender == FEMALE || dna.species.use_f)
+	if((gender == FEMALE && !dna.species.use_m)|| dna.species.use_f)
 		limb_icon = dna.species.dam_icon_f
 
-		if(gender == MALE)
+		if(gender == MALE || dna.species.use_m)
 			hidechest = TRUE
 
 		var/obj/item/bodypart/CH = get_bodypart(BODY_ZONE_CHEST)
@@ -146,7 +146,7 @@ There are several things that need to be remembered:
 				legdam_overlays += legdam_overlay
 				var/mutable_appearance/armdam_overlay = mutable_appearance(limb_icon, "armdam_[BP.body_zone]_0[BP.burnstate]", -ARM_DAMAGE_LAYER)
 				armdam_overlays += armdam_overlay
-			if(BP.get_bleedrate())
+			if(BP.get_bleed_rate())
 				bleed_checker = TRUE
 				if(BP.bandage)
 					var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_b", -DAMAGE_LAYER)
@@ -159,10 +159,10 @@ There are several things that need to be remembered:
 					armdam_overlay.color = BP.bandage.color
 					armdam_overlays += armdam_overlay
 			wound_overlays = list()
-			for(var/datum/wound/W in BP.wounds)
-				if(!W.mob_overlay)
+			for(var/datum/wound/wound as anything in BP.wounds)
+				if(!wound.mob_overlay)
 					continue
-				wound_overlays |= W.mob_overlay
+				wound_overlays |= wound.mob_overlay
 			for(var/wound_overlay in wound_overlays)
 				var/mutable_appearance/damage_overlay = mutable_appearance(limb_icon, "[BP.body_zone]_[wound_overlay]", -DAMAGE_LAYER)
 				damage_overlays += damage_overlay
@@ -404,7 +404,7 @@ There are several things that need to be remembered:
 		update_observer_view(wear_ring)
 		if(dna && dna.species.sexes)
 			var/G = (gender == FEMALE) ? "f" : "m"
-			if(G == "f" || dna.species.use_f)
+			if((G == "f" && !dna.species.use_m) || dna.species.use_f)
 				id_overlay = wear_ring.build_worn_icon(default_layer = RING_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = TRUE)
 			else
 				id_overlay = wear_ring.build_worn_icon(default_layer = RING_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE)
@@ -457,7 +457,7 @@ There are several things that need to be remembered:
 				racecustom = dna.species.clothes_id
 			var/G = (gender == FEMALE) ? "f" : "m"
 			var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
-			if(G == "f" || dna.species.use_f)
+			if((G == "f" && !dna.species.use_m) || dna.species.use_f)
 				gloves_overlay = gloves.build_worn_icon(default_layer = GLOVES_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = TRUE, sleeveindex = armsindex)
 			else
 				gloves_overlay = gloves.build_worn_icon(default_layer = GLOVES_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, sleeveindex = armsindex, customi = racecustom)
@@ -515,7 +515,7 @@ There are several things that need to be remembered:
 			var/G = (gender == FEMALE) ? "f" : "m"
 			var/armsindex = get_limbloss_index(ARM_RIGHT, ARM_LEFT)
 			var/mutable_appearance/wrists_overlay
-			if(G == "f" || dna.species.use_f)
+			if((G == "f" && !dna.species.use_m) || dna.species.use_f)
 				wrists_overlay = wear_wrists.build_worn_icon(default_layer = WRISTS_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = TRUE, sleeveindex = armsindex)
 			else
 				wrists_overlay = wear_wrists.build_worn_icon(default_layer = WRISTS_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, sleeveindex = armsindex, customi = racecustom)
@@ -628,7 +628,7 @@ There are several things that need to be remembered:
 			var/mutable_appearance/shoes_overlay
 			if(dna.species.custom_clothes)
 				racecustom = dna.species.clothes_id
-			if(G == "f" || dna.species.use_f)
+			if((G == "f" && !dna.species.use_m) || dna.species.use_f)
 				shoes_overlay = shoes.build_worn_icon(default_layer = SHOES_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom, sleeveindex = footindex)
 			else
 				shoes_overlay = shoes.build_worn_icon(default_layer = SHOES_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, customi = racecustom, sleeveindex = footindex)
@@ -845,7 +845,7 @@ There are several things that need to be remembered:
 				var/mutable_appearance/mbeltoverlay
 				if(dna.species.custom_clothes)
 					racecustom = dna.species.clothes_id
-				if(G == "f" || dna.species.use_f)
+				if((G == "f" && !dna.species.use_m) || dna.species.use_f)
 					mbeltoverlay = belt.build_worn_icon(default_layer = BELT_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/belts.dmi', coom = "f", customi = racecustom)
 				else
 					mbeltoverlay = belt.build_worn_icon(default_layer = BELT_LAYER, default_icon_file = 'icons/roguetown/clothing/onmob/belts.dmi', coom = FALSE, customi = racecustom)
@@ -1090,7 +1090,7 @@ There are several things that need to be remembered:
 			var/mutable_appearance/cloak_overlay
 			if(dna.species.custom_clothes)
 				racecustom = dna.species.clothes_id
-			if(G == "f")
+			if(G == "f" && !dna.species.use_m)
 				cloak_overlay = cloak.build_worn_icon(default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom)
 			else
 				if(dna.species.use_f)
@@ -1138,7 +1138,7 @@ There are several things that need to be remembered:
 			var/mutable_appearance/cloak_overlay
 			if(dna.species.custom_clothes)
 				racecustom = dna.species.clothes_id
-			if(G == "f")
+			if(G == "f" && !dna.species.use_m)
 				cloak_overlay = backr.build_worn_icon(default_layer = CLOAK_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom)
 			else
 				if(dna.species.use_f)
@@ -1215,10 +1215,10 @@ There are several things that need to be remembered:
 				var/obj/item/I = cloak
 				if(I.flags_inv & HIDEBOOB)
 					hideboob = TRUE
-			if(G == "f" && !hideboob)
+			if(G == "f" && !hideboob && !dna.species.use_m)
 				shirt_overlay = wear_shirt.build_worn_icon(default_layer = SHIRT_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom, sleeveindex = armsindex)
 			else
-				if(dna.species.use_f || G == "f")
+				if(dna.species.use_f || (G == "f" && !dna.species.use_m))
 					shirt_overlay = wear_shirt.build_worn_icon(default_layer = SHIRT_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "e", customi = racecustom, sleeveindex = armsindex)
 				else
 					shirt_overlay = wear_shirt.build_worn_icon(default_layer = SHIRT_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = FALSE, customi = racecustom, sleeveindex = armsindex)
@@ -1286,7 +1286,7 @@ There are several things that need to be remembered:
 					hideboob = TRUE
 			if(dna.species.custom_clothes)
 				racecustom = dna.species.clothes_id
-			if(G == "f" && !hideboob || G == "f")
+			if((G == "f" && !hideboob && !dna.species.use_m)|| (G == "f" && !dna.species.use_m))
 				armor_overlay = wear_armor.build_worn_icon(default_layer = ARMOR_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom, sleeveindex = armsindex)
 			else
 				if(dna.species.use_f)
@@ -1353,7 +1353,7 @@ There are several things that need to be remembered:
 			var/mutable_appearance/pants_overlay
 			if(dna.species.custom_clothes)
 				racecustom = dna.species.clothes_id
-			if(G == "f")
+			if(G == "f" && !dna.species.use_m)
 				pants_overlay = wear_pants.build_worn_icon(default_layer = PANTS_LAYER, default_icon_file = 'icons/mob/clothing/feet.dmi', coom = "f", customi = racecustom, sleeveindex = legsindex)
 			else
 				if(dna.species.use_f)
@@ -1373,7 +1373,7 @@ There are several things that need to be remembered:
 
 			//add sleeve overlays, then offset
 			var/list/sleeves = list()
-			var/femw = (gender == FEMALE || dna.species.use_f) ? "_f" : ""
+			var/femw = ((gender == FEMALE && !dna.species.use_m) || dna.species.use_f) ? "_f" : ""
 			if(wear_pants.sleeved && legsindex > 0 && wear_pants.adjustable != CADJUSTED)
 				sleeves = get_sleeves_layer(wear_pants,legsindex,LEGSLEEVE_LAYER)
 			if(wear_pants.adjustable == CADJUSTED)
@@ -1671,7 +1671,7 @@ generate/load female uniform sprites matching all previously decided variables
 	var/racecustom
 	if(dna.species.custom_clothes)
 		racecustom = dna.species.clothes_id
-	var/index = "[I.icon_state][(gender == FEMALE || dna.species.use_f) ? "_f" : ""][racecustom ? "_[racecustom]" : ""]"
+	var/index = "[I.icon_state][((gender == FEMALE && !dna.species.use_m)|| dna.species.use_f) ? "_f" : ""][racecustom ? "_[racecustom]" : ""]"
 	var/static/list/bloody_r = list()
 	var/static/list/bloody_l = list()
 	if(I.nodismemsleeves && sleeveindex) //armor pauldrons that show up above arms but don't get dismembered

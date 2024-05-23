@@ -611,7 +611,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
   *
   * If the area has ambience, then it plays some ambience music to the ambience channel
   */
-/area/Entered(atom/movable/M, OldLoc)
+/area/Entered(atom/movable/M, atom/OldLoc)
 	set waitfor = FALSE
 	SEND_SIGNAL(src, COMSIG_AREA_ENTERED, M)
 	SEND_SIGNAL(M, COMSIG_ENTER_AREA, src) //The atom that enters the area
@@ -629,6 +629,18 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 
 	if(first_time_text)
 		L.intro_area(src)
+
+	var/mob/living/living_arrived = M
+
+	if(istype(living_arrived) && living_arrived.client && !living_arrived.cmode)
+		//Ambience if combat mode is off
+		SSdroning.area_entered(src, living_arrived.client)
+		SSdroning.play_loop(src, living_arrived.client)
+		var/found = FALSE
+		for(var/datum/weather/rain/R in SSweather.curweathers)
+			found = TRUE
+		if(found)
+			SSdroning.play_rain(src, living_arrived.client)
 
 //	L.play_ambience(src)
 
@@ -747,18 +759,6 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 /// A hook so areas can modify the incoming args (of what??)
 /area/proc/PlaceOnTopReact(list/new_baseturfs, turf/fake_turf_type, flags)
 	return flags
-
-/area/Entered(atom/movable/arrived, area/old_area)
-	var/mob/living/living_arrived = arrived
-	if(istype(living_arrived) && living_arrived.client && !living_arrived.cmode)
-		//Ambience if combat mode is off
-		SSdroning.area_entered(src, living_arrived.client)
-		SSdroning.play_loop(src, living_arrived.client)
-		var/found = FALSE
-		for(var/datum/weather/rain/R in SSweather.curweathers)
-			found = TRUE
-		if(found)
-			SSdroning.play_rain(src, living_arrived.client)
 
 /area/proc/on_joining_game(mob/living/boarder)
 	return
