@@ -406,12 +406,12 @@ Works together with spawning an observer, noted above.
 
 /mob/living/carbon/human/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip = FALSE, admin = FALSE)
 	if(mind)
-		if(mind.has_antag_datum(/datum/antagonist/zombie))
+		var/datum/antagonist/zombie/zomble = mind.has_antag_datum(/datum/antagonist/zombie)
+		if(zomble)
 			if(force_respawn)
 				mind.remove_antag_datum(/datum/antagonist/zombie)
 				return ..()
-			var/datum/antagonist/zombie/Z = mind.has_antag_datum(/datum/antagonist/zombie)
-			if(!Z.revived)
+			else if(!zomble.revived)
 				if(!(world.time % 5))
 					to_chat(src, "<span class='warning'>I'm preparing to walk again.</span>")
 				return

@@ -39,7 +39,7 @@
 	offset = OFFSET_HEAD
 	offset_f = OFFSET_HEAD_F
 	//subtargets for crits
-	subtargets = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_NECK)
+	subtargets = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
 	//grabtargets for grabs
 	grabtargets = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_NECK)
 	resistance_flags = FLAMMABLE
@@ -55,21 +55,21 @@
 	var/used_limb = precise
 	switch(used_limb)
 		if(BODY_ZONE_HEAD)
-			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+			return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 		if(BODY_ZONE_PRECISE_EARS)
-			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+			return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 		if(BODY_ZONE_PRECISE_NOSE)
-			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+			return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 		if(BODY_ZONE_PRECISE_SKULL)
-			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/smash)
+			return list(/datum/intent/grab/move, /datum/intent/grab/smash)
 		if(BODY_ZONE_PRECISE_L_EYE)
-			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/smash)
+			return list(/datum/intent/grab/move, /datum/intent/grab/smash)
 		if(BODY_ZONE_PRECISE_R_EYE)
-			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/smash)
+			return list(/datum/intent/grab/move, /datum/intent/grab/smash)
 		if(BODY_ZONE_PRECISE_MOUTH)
-			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+			return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 		if(BODY_ZONE_PRECISE_NECK)
-			return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/choke)
+			return list(/datum/intent/grab/move, /datum/intent/grab/choke)
 
 /obj/item/bodypart/head/Destroy()
 	QDEL_NULL(brainmob) //order is sensitive, see warning in handle_atom_del() below

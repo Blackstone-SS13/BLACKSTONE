@@ -89,14 +89,14 @@
 	resistance_flags = FLAMMABLE
 
 /obj/item/bodypart/grabbedintents(mob/living/user, precise)
-	return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+	return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 
 /obj/item/bodypart/chest/grabbedintents(mob/living/user, precise)
 	if(precise)
 		switch(precise)
 			if(BODY_ZONE_PRECISE_GROIN)
-				return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist)
-	return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/shove)
+				return list(/datum/intent/grab/move, /datum/intent/grab/twist)
+	return list(/datum/intent/grab/move, /datum/intent/grab/shove)
 
 /obj/item/bodypart/blob_act()
 	take_damage(max_damage)
@@ -113,10 +113,10 @@
 
 
 /obj/item/bodypart/onbite(mob/living/carbon/human/user)
-	if((user.mind && user.mind.has_antag_datum(/datum/species/zombie)) || istype(user.dna.species, /datum/species/werewolf))
+	if((user.mind && user.mind.has_antag_datum(/datum/antagonist/zombie)) || istype(user.dna.species, /datum/species/werewolf))
 		if(do_after(user, 50, target = src))
 			user.visible_message("<span class='warning'>[user] consumes [src]!</span>",\
-			"<span class='notice'>I consume [src]!</span>")
+							"<span class='notice'>I consume [src]!</span>")
 			playsound(get_turf(user), pick(dismemsound), 100, FALSE, -1)
 			new /obj/effect/gibspawner/generic(get_turf(src), user)
 			user.fully_heal()

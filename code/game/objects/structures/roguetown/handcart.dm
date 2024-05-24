@@ -56,7 +56,7 @@
 	if(!insertion_allowed(O))
 		return
 	//only these intents should be able to move objects into handcarts
-	if(user.used_intent.type == INTENT_HELP || user.used_intent.type == /datum/intent/grab/obj/move)
+	if(user.used_intent.type == INTENT_HELP || user.used_intent.type == /datum/intent/grab/move)
 		if(put_in(O))
 			playsound(loc, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
 		return TRUE

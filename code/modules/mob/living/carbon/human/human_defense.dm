@@ -793,23 +793,26 @@
 	if(stat < DEAD)
 		examination += "[m1] still alive."
 		if(stat >= UNCONSCIOUS)
-			var/sleepy = eyesclosed || IsSleeping()
+			var/sleepy = IsSleeping()
 			examination += "[m1] [sleepy ? "asleep" : "unconscious"]."
 	else
-		examination += "<span class='deadsay'>[m1] dead.</span>"
+		examination += "<span class='dead'>[m1] dead.</span>"
 
 	switch(blood_volume)
 		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-			examination += "<span class='danger'>[m1] extremely anemic.</span>"
+			examination += "<span class='artery'><B>[m1] extremely anemic.</B></span>"
 		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			examination += "<span class='warning'><B>[m1] very anemic.</B></span>"
+			examination += "<span class='artery'><B>[m1] very anemic.</B></span>"
 		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			examination += "<span class='warning'>[m1] anemic.</span>"
+			examination += "<span class='artery'>[m1] anemic.</span>"
 		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			examination += "<span class='warning'>[m1] a little anemic.</span>"
+			examination += "<span class='artery'>[m1] a little anemic.</span>"
 
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
-		examination += "<span class='danger'>[m1] TETRAPLEGIC!</span>"
+		if(HAS_TRAIT(src, TRAIT_NO_BITE))
+			examination += "<span class='danger'>[m1] TETRAPLEGIC!</span>"
+		else
+			examination += "<span class='danger'>[m1] QUADRIPLEGIC!</span>"
 	else if(HAS_TRAIT(src, TRAIT_PARALYSIS_R_LEG) && HAS_TRAIT(src, TRAIT_PARALYSIS_L_LEG))
 		examination += "<span class='warning'>[m1] PARAPLEGIC!</span>"
 

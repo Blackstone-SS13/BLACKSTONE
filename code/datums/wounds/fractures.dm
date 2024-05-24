@@ -1,6 +1,6 @@
 /datum/wound/fracture
 	name = "fracture"
-	check_name = "<span class='danger'>FRACTURE</span>"
+	check_name = "<span class='bone'>FRACTURE</span>"
 	bleed_rate = 0
 	whp = 40
 	woundpain = 100
@@ -21,64 +21,15 @@
 	. = ..()
 	affected.update_disabled()
 
-/datum/wound/fracture/chest
-	name = "rib fracture"
-	whp = 50
-
-/datum/wound/fracture/groin
-	name = "pelvic fracture"
-	whp = 50
-
-/datum/wound/fracture/groin/New()
-	. = ..()
-	if(prob(1))
-		name = "broken buck"
-	
-/datum/wound/fracture/groin/on_mob_gain(mob/living/affected)
-	. = ..()
-	ADD_TRAIT(affected, TRAIT_PARALYSIS_R_LEG, "[type]")
-	ADD_TRAIT(affected, TRAIT_PARALYSIS_L_LEG, "[type]")
-	if(iscarbon(affected))
-		var/mob/living/carbon/carbon_affected = affected
-		carbon_affected.update_disabled_bodyparts()
-
-/datum/wound/fracture/groin/on_mob_loss(mob/living/affected)
-	. = ..()
-	REMOVE_TRAIT(affected, TRAIT_PARALYSIS_R_LEG, "[type]")
-	REMOVE_TRAIT(affected, TRAIT_PARALYSIS_L_LEG, "[type]")
-	if(iscarbon(affected))
-		var/mob/living/carbon/carbon_affected = affected
-		carbon_affected.update_disabled_bodyparts()
-
-/datum/wound/fracture/neck
-	name = "cervical fracture"
-	whp = 100
-	sleep_healing = 0
-
-/datum/wound/fracture/neck/on_mob_gain(mob/living/affected)
-	. = ..()
-	ADD_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
-	if(iscarbon(affected))
-		var/mob/living/carbon/carbon_affected = affected
-		carbon_affected.update_disabled_bodyparts()
-	if(HAS_TRAIT(owner, RTRAIT_CRITICAL_WEAKNESS))
-		owner.death()
-
-/datum/wound/fracture/neck/on_mob_loss(mob/living/affected)
-	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
-	if(iscarbon(affected))
-		var/mob/living/carbon/carbon_affected = affected
-		carbon_affected.update_disabled_bodyparts()
-
 /datum/wound/fracture/head
 	name = "cranial fracture"
+	check_name = "<span class='dead'><B>SKULLCRACK</B></span>"
 	whp = 150
 	sleep_healing = 0
 	/// Most head fractures are serious enough to cause paralysis
 	var/paralysis = TRUE
 	/// Some head fractures are so serious they cause instant death
-	var/mortal = TRUE
+	var/mortal = FALSE
 	/// Funny easter egg
 	var/dents_brain = TRUE
 
@@ -86,11 +37,13 @@
 	. = ..()
 	if(dents_brain && prob(1))
 		name = "dentbrain"
+		check_name = "<span class='dead'><B>DENTBRAIN</B></span>"
 
 /datum/wound/fracture/head/on_mob_gain(mob/living/affected)
 	. = ..()
 	ADD_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
 	if(paralysis)
+		ADD_TRAIT(affected, TRAIT_NO_BITE, "[type]")
 		ADD_TRAIT(affected, TRAIT_PARALYSIS, "[type]")
 		if(iscarbon(affected))
 			var/mob/living/carbon/carbon_affected = affected
@@ -102,6 +55,7 @@
 	. = ..()
 	REMOVE_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
 	if(paralysis)
+		REMOVE_TRAIT(affected, TRAIT_NO_BITE, "[type]")
 		REMOVE_TRAIT(affected, TRAIT_PARALYSIS, "[type]")
 		if(iscarbon(affected))
 			var/mob/living/carbon/carbon_affected = affected
@@ -137,13 +91,70 @@
 
 /datum/wound/fracture/mouth
 	name = "mandibular fracture"
+	check_name = "<span class='bone'>JAW FRACTURE</span>"
 	whp = 100
 	sleep_healing = 0
 
 /datum/wound/fracture/mouth/on_mob_gain(mob/living/affected)
 	. = ..()
+	ADD_TRAIT(affected, TRAIT_NO_BITE, "[type]")
 	ADD_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 
 /datum/wound/fracture/mouth/on_mob_gain(mob/living/affected)
 	. = ..()
+	REMOVE_TRAIT(affected, TRAIT_NO_BITE, "[type]")
 	REMOVE_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
+
+/datum/wound/fracture/neck
+	name = "cervical fracture"
+	check_name = "<span class='dead'><B>CERVICAL FRACTURE</B></span>"
+	whp = 100
+	sleep_healing = 0
+
+/datum/wound/fracture/neck/on_mob_gain(mob/living/affected)
+	. = ..()
+	ADD_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
+	if(iscarbon(affected))
+		var/mob/living/carbon/carbon_affected = affected
+		carbon_affected.update_disabled_bodyparts()
+	if(HAS_TRAIT(owner, RTRAIT_CRITICAL_WEAKNESS))
+		owner.death()
+
+/datum/wound/fracture/neck/on_mob_loss(mob/living/affected)
+	. = ..()
+	REMOVE_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
+	if(iscarbon(affected))
+		var/mob/living/carbon/carbon_affected = affected
+		carbon_affected.update_disabled_bodyparts()
+
+/datum/wound/fracture/chest
+	name = "rib fracture"
+	check_name = "<span class='bone'>RIB FRACTURE</span>"
+	whp = 50
+
+/datum/wound/fracture/groin
+	name = "pelvic fracture"
+	check_name = "<span class='bone'>PELVIC FRACTURE</span>"
+	whp = 50
+
+/datum/wound/fracture/groin/New()
+	. = ..()
+	if(prob(1))
+		name = "broken buck"
+		check_name = "<span class='bone'>BUCKBROKEN</span>"
+	
+/datum/wound/fracture/groin/on_mob_gain(mob/living/affected)
+	. = ..()
+	ADD_TRAIT(affected, TRAIT_PARALYSIS_R_LEG, "[type]")
+	ADD_TRAIT(affected, TRAIT_PARALYSIS_L_LEG, "[type]")
+	if(iscarbon(affected))
+		var/mob/living/carbon/carbon_affected = affected
+		carbon_affected.update_disabled_bodyparts()
+
+/datum/wound/fracture/groin/on_mob_loss(mob/living/affected)
+	. = ..()
+	REMOVE_TRAIT(affected, TRAIT_PARALYSIS_R_LEG, "[type]")
+	REMOVE_TRAIT(affected, TRAIT_PARALYSIS_L_LEG, "[type]")
+	if(iscarbon(affected))
+		var/mob/living/carbon/carbon_affected = affected
+		carbon_affected.update_disabled_bodyparts()

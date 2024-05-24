@@ -84,34 +84,39 @@
 			status += "<span class='danger'>[medium_burn_msg]</span>"
 		else if(burn > 0)
 			status += "<span class='warning'>[light_burn_msg]</span>"
+	
 	var/bleed_rate = get_bleed_rate()
 	if(bleed_rate)
 		if(bleed_rate > 1) //Totally arbitrary value
-			status += "<span class='warning'><B>BLEEDING</B></span>"
+			status += "<span class='bloody'><B>BLEEDING</B></span>"
 		else
-			status += "<span class='warning'>BLEEDING</span>"
+			status += "<span class='bloody'>BLEEDING</span>"
+	
 	var/list/wound_strings = list()
 	for(var/datum/wound/wound as anything in wounds)
 		if(!wound.check_name)
 			continue
 		wound_strings |= wound.get_check_name()
 	status += wound_strings
+
 	for(var/obj/item/embedded as anything in embedded_objects)
 		if(embedded.embedding?.embedded_bloodloss)
 			status += "<a href='?src=[REF(owner)];embedded_limb=[REF(src)];embedded_object=[REF(embedded)];' class='danger'>[uppertext(embedded.name)]</a>"
 		else
 			status += "<a href='?src=[REF(owner)];embedded_limb=[REF(src)];embedded_object=[REF(embedded)];' class='info'>[uppertext(embedded.name)]</a>"
+	
 	if(skeletonized)
-		status += "<span class='deadsay'>SKELETONIZED</span>"
+		status += "<span class='bone'>SKELETONIZED</span>"
 	else if(rotted)
-		status += "<span class='deadsay'>NECROSIS</span>"
+		status += "<span class='dead'>NECROSIS</span>"
+		
 	if(bandage)
 		if(HAS_BLOOD_DNA(bandage))
-			status += "<a href='?src=[REF(owner)];bandage=[REF(bandage)] class='warning'>[uppertext(bandage.name)]</a>"
+			status += "<a href='?src=[REF(owner)];bandaged_limb=[REF(src)];bandage=[REF(bandage)]' class='bloody'>[uppertext(bandage.name)]</a>"
 		else
-			status += "<a href='?src=[REF(owner)];bandage=[REF(bandage)]>[uppertext(bandage.name)]</a>"
+			status += "<a href='?src=[REF(owner)];bandaged_limb=[REF(src)];bandage=[REF(bandage)]' class='info'>[uppertext(bandage.name)]</a>"
 	if(disabled)
-		status += "<span class='danger'><b>CRIPPLED</b></span>"
+		status += "<span class='deadsay'><b>CRIPPLED</b></span>"
 
 	return status
 

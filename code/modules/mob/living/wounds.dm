@@ -41,7 +41,7 @@
 /// Tries to do a critical hit on a mob that uses simple wounds - DO NOT CALL THIS ON CARBON MOBS, THEY HAVE BODYPARTS!
 /mob/living/proc/try_crit(bclass, dam, mob/living/user, zone_precise)
 	if(!dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-		return
+		return FALSE
 	if(check_zone(zone_precise) == BODY_ZONE_HEAD)
 		if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_PICK)
 			var/used = round((health / maxHealth) * 20 + (dam / 3), 1)
@@ -58,12 +58,11 @@
 					"The skull caves in!",
 				)
 				src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-				simple_add_wound(/datum/wound/fracture/head)
 				if(prob(3))
 					playsound(src, 'sound/combat/tf2crit.ogg', 100, FALSE)
 				else
 					playsound(src, "headcrush", 100, FALSE)
-				return FALSE
+				return simple_add_wound(/datum/wound/fracture/head)
 	if(bclass == BCLASS_STAB || bclass == BCLASS_PICK || bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_BITE)
 		if(bclass == BCLASS_CHOP || bclass == BCLASS_PICK)
 			if(user)
@@ -132,8 +131,7 @@
 		if(BCLASS_BITE)
 			if(dam > 8)
 				return simple_add_wound(/datum/wound/bite/bleeding)
-			else
-				return simple_add_wound(/datum/wound/bite)
+			return simple_add_wound(/datum/wound/bite)
 
 /// Simple version for adding a wound - DO NOT CALL THIS ON CARBON MOBS!
 /mob/living/proc/simple_add_wound(datum/wound/wound)

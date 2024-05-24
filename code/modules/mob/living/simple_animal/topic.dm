@@ -6,13 +6,15 @@
 		if(!ismob(usr))
 			return
 
-		if(simple_wounds.len)
+		if(length(simple_wounds))
 			msg += "<B>Wounds:</B>\n"
 			for(var/datum/wound/wound as anything in simple_wounds)
 				msg += "[wound.get_visible_name()]\n"
 
-		for(var/obj/item/I in simple_embedded_objects)
-			msg += "<a href='?src=[REF(src)];embedded_object=[REF(I)]'>[I.name]</a>\n"
+		if(length(simple_embedded_objects))
+			msg += "<B>Embedded objects:</B>\n"
+			for(var/obj/item/I in simple_embedded_objects)
+				msg += "<a href='?src=[REF(src)];embedded_object=[REF(I)]'>[I.name]</a>\n"
 
 		to_chat(usr, "[msg.Join("")]")
 

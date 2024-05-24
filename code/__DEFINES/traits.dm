@@ -60,9 +60,9 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
 	RTRAIT_KNEESTINGER_IMMUNITY = "I am immune to the shock of kneestingers.",
 	RTRAIT_RETARD_ANATOMY = "My anatomy is inhumen, preventing me from wearing hats and shoes.",
-	RTRAIT_NASTY_EATER = "<span class='deadsay'>I can eat bad food, and water that would be toxic to humen will not affect me.</span>",
-	RTRAIT_ROT_EATER = "<span class='deadsay'>I can eat rotten food.</span>",
-	RTRAIT_ORGAN_EATER = "<span class='deadsay'>I can eat organs and raw flesh.</span>",
+	RTRAIT_NASTY_EATER = "<span class='dead'>I can eat bad food, and water that would be toxic to humen will not affect me.</span>",
+	RTRAIT_ROT_EATER = "<span class='necrosis'>I can eat rotten food.</span>",
+	RTRAIT_ORGAN_EATER = "<span class='bloody'>I can eat organs and raw flesh.</span>",
 	TRAIT_MISSING_NOSE = "<span class='warning'>I struggle to breathe.</span>",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
@@ -239,6 +239,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_ROTMAN "rotman" //you are a rotman and need occasional maintenance
 #define TRAIT_ZOMBIE_IMMUNE "zombie_immune" //immune to zombie infection
 #define TRAIT_PARALYSIS	"paralysis" //Used for limb-based paralysis and full body paralysis
+#define TRAIT_NO_BITE "no_bite" //prevents biting
 
 // item traits
 #define TRAIT_NODROP            "nodrop"

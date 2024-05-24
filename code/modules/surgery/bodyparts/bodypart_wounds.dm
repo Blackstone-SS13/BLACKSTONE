@@ -605,11 +605,11 @@
 /// Called after a bodypart is attacked so that wounds and critical effects can be applied
 /obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise)
 	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
-		return
+		return FALSE
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		if(H.checkcritarmor(zone_precise, bclass))
-			return
+			return FALSE
 	if(user)
 		if(user.goodluck(2))
 			dam += 10
@@ -650,8 +650,7 @@
 		if(BCLASS_BITE)
 			if(dam > 8)
 				return add_wound(/datum/wound/bite/bleeding)
-			else
-				return add_wound(/datum/wound/bite)
+			return add_wound(/datum/wound/bite)
 
 /obj/item/bodypart/proc/get_bleed_rate()
 	var/bleed_rate = 0

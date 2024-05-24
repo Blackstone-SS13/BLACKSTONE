@@ -108,7 +108,7 @@
 			. += "<span class='userdanger'>MANIAC!</span>"
 
 	if(leprosy == 1)
-		. += "<span class='deadsay'>A LEPER...</span>"
+		. += "<span class='necrosis'>A LEPER...</span>"
 
 	if(user != src)
 		var/datum/mind/Umind = user.mind
@@ -172,7 +172,7 @@
 	else if(FR && length(FR.blood_DNA))
 		var/hand_number = get_num_arms(FALSE)
 		if(hand_number)
-			. += "<span class='warning'>[m3] [hand_number > 1 ? "" : "a"] blood-stained hand[hand_number > 1 ? "s" : ""]!</span>"
+			. += "[m3] [hand_number > 1 ? "" : "a"] <span class='bloody'>blood-stained</span> hand[hand_number > 1 ? "s" : ""]!"
 
 	//belt
 	if(belt && !(SLOT_BELT in obscured))
@@ -231,15 +231,6 @@
 	//Gets encapsulated with a warning span
 	var/list/msg = list()
 
-	//Jitters
-	switch(jitteriness)
-		if(300 to INFINITY)
-			msg += "<B>[m1] convulsing violently!</B>"
-		if(200 to 300)
-			msg += "[m1] extremely jittery."
-		if(100 to 200)
-			msg += "[m1] twitching ever so slightly."
-
 	var/appears_dead = FALSE
 	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
 		appears_dead = TRUE
@@ -255,6 +246,7 @@
 	var/temp = getBruteLoss() + getFireLoss() //no need to calculate each of these twice
 
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
+		// Damage
 		switch(temp)
 			if(5 to 25)
 				msg += "[m1] a little wounded."
@@ -264,21 +256,51 @@
 				msg += "<B>[m1] severely wounded.</B>"
 			if(100 to INFINITY)
 				msg += "<span class='danger'>[m1] gravely wounded.</span>"
+		
+		// Blood volume
+		switch(blood_volume)
+			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+				msg += "<span class='artery'><B>[m1] extremely pale and sickly.</B></span>"
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				msg += "<span class='artery'><B>[m1] very pale.</B></span>"
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				msg += "<span class='artery'>[m1] pale.</span>"
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				msg += "<span class='artery'>[m1] a little pale.</span>"
+
+		// Bleeding
+		var/bleed_rate = get_bleed_rate()
+		if(bleed_rate)
+			switch(bleed_rate)
+				if(0 to 3)
+					msg += "<span class='bloody'>[m1] bleeding!</span>"
+				if(3 to 6)
+					msg += "<span class='bloody'><B>[m1] bleeding a lot!</B></span>"
+				if(6 to INFINITY)
+					msg += "<span class='bloody'><B>[m1] bleeding profusely!</B></span>"
+			var/list/bleeding_limbs = list()
+			for(var/obj/item/bodypart/bleeder in bodyparts)
+				if(!get_location_accessible(src, bleeder.body_zone) || !bleeder.get_bleed_rate())
+					continue
+				bleeding_limbs += parse_zone(bleeder.body_zone)
+			if(length(bleeding_limbs))
+				msg += "<span class='bloody'>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] bleeding!</span>"
+
+	var/list/missing = get_missing_limbs()
+	for(var/missing_zone in missing)
+		if(missing_zone == BODY_ZONE_HEAD)
+			msg += "<span class='dead'><B>[capitalize(m2)] [parse_zone(missing_zone)] is gone.</B></span>"
+			continue
+		msg += "<B>[capitalize(m2)] [parse_zone(missing_zone)] is gone.</B>"
+	
+	//Grabbing
+	if(pulledby && pulledby.grab_state)
+		msg += "[m1] being grabbed by [pulledby]."
 
 	if(fire_stacks > 0)
 		msg += "[m1] covered in something flammable."
 	else if(fire_stacks < 0)
 		msg += "[m1] soaked."
-
-	var/list/missing = get_missing_limbs()
-	for(var/t in missing)
-		if(t == BODY_ZONE_HEAD)
-			msg += "<span class='deadsay'><B>[capitalize(m2)] [parse_zone(t)] is gone.</B></span>"
-			continue
-		msg += "<B>[capitalize(m2)] [parse_zone(t)] is gone.</B>"
-
-	if(pulledby && pulledby.grab_state)
-		msg += "[m1] being grabbed by [pulledby]."
 
 	if(nutrition < (NUTRITION_LEVEL_STARVING - 50))
 		msg += "[m1] looking starved."
@@ -288,75 +310,25 @@
 //		else
 //			msg += "[t_He] [t_is] quite chubby."
 
-	switch(disgust)
-		if(DISGUST_LEVEL_SLIGHTLYGROSS to DISGUST_LEVEL_GROSS)
-			msg += "[m1] a little disgusted."
-		if(DISGUST_LEVEL_GROSS to DISGUST_LEVEL_VERYGROSS)
-			msg += "[m1] disgusted."
-		if(DISGUST_LEVEL_VERYGROSS to DISGUST_LEVEL_DISGUSTED)
-			msg += "[m1] really disgusted."
-		if(DISGUST_LEVEL_DISGUSTED to INFINITY)
-			msg += "<B>[m1] extremely disgusted.</B>"
-
-	switch(blood_volume)
-		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-			msg += "<span class='danger'>[m1] extremely pale and sickly.</span>"
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			msg += "<B>[m1] very pale.</B>"
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			msg += "[m1] pale."
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			msg += "[m1] a little pale."
-
-	if(eyesclosed)
-		msg += "[capitalize(m2)] eyes are closed."
-	
-	var/bleed_rate = get_bleed_rate()
-	if(bleed_rate)
-		switch(bleed_rate)
-			if(0 to 3)
-				msg += "[m1] bleeding!"
-			if(3 to 6)
-				msg += "<B>[m1] bleeding a lot!</B>"
-			if(6 to INFINITY)
-				msg += "<span class='danger'>[m1] bleeding profusely!</span>"
-		var/list/bleeding_limbs = list()
-		for(var/obj/item/bodypart/bleeder in bodyparts)
-			if(!get_location_accessible(src, bleeder.body_zone) || !bleeder.get_bleed_rate())
-				continue
-			bleeding_limbs += parse_zone(bleeder.body_zone)
-		if(length(bleeding_limbs))
-			msg += "<B>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] bleeding!</B>"
-
-	if(has_status_effect(/datum/status_effect/debuff/sleepytime))
-		msg += "[m1] looking a little tired."
-
-	if(!obscure_name)
-		if(HAS_TRAIT(user, RTRAIT_EMPATH))
-			switch(stress)
-				if(20 to INFINITY)
-					msg += "[m1] extremely stressed."
-				if(10 to 19)
-					msg += "[m1] very stressed."
-				if(1 to 9)
-					msg += "[m1] a little stressed."
-				if(-9 to 0)
-					msg += "[m1] not stressed."
-				if(-19 to -10)
-					msg += "[m1] somewhat at peace."
-				if(-20 to INFINITY)
-					msg += "[m1] at peace inside."
-		else
-			if(stress > 10)
-				msg += "[m3] stress all over [m2] face."
-
 	if(islist(stun_absorption))
 		for(var/i in stun_absorption)
 			if(stun_absorption[i]["end_time"] > world.time && stun_absorption[i]["examine_message"])
 				msg += "[m1][stun_absorption[i]["examine_message"]]"
 
 	if(!appears_dead)
-		if(!skipface) //Drunkenness
+		if(!skipface)
+			//Disgust
+			switch(disgust)
+				if(DISGUST_LEVEL_SLIGHTLYGROSS to DISGUST_LEVEL_GROSS)
+					msg += "[m1] a little disgusted."
+				if(DISGUST_LEVEL_GROSS to DISGUST_LEVEL_VERYGROSS)
+					msg += "[m1] disgusted."
+				if(DISGUST_LEVEL_VERYGROSS to DISGUST_LEVEL_DISGUSTED)
+					msg += "[m1] really disgusted."
+				if(DISGUST_LEVEL_DISGUSTED to INFINITY)
+					msg += "<B>[m1] extremely disgusted.</B>"
+
+			//Drunkenness
 			switch(drunkenness)
 				if(11 to 21)
 					msg += "[m1] slightly flushed."
@@ -370,12 +342,43 @@
 					msg += "[m1] looking like a drunken mess."
 				if(91.01 to INFINITY)
 					msg += "[m1] a shitfaced, slobbering wreck."
+			
+			//Stress
+			if(HAS_TRAIT(user, RTRAIT_EMPATH))
+				switch(stress)
+					if(20 to INFINITY)
+						msg += "[m1] extremely stressed."
+					if(10 to 19)
+						msg += "[m1] very stressed."
+					if(1 to 9)
+						msg += "[m1] a little stressed."
+					if(-9 to 0)
+						msg += "[m1] not stressed."
+					if(-19 to -10)
+						msg += "[m1] somewhat at peace."
+					if(-20 to INFINITY)
+						msg += "[m1] at peace inside."
+			else if(stress > 10)
+				msg += "[m3] stress all over [m2] face."
 
+		//Jitters
+		switch(jitteriness)
+			if(300 to INFINITY)
+				msg += "<B>[m1] convulsing violently!</B>"
+			if(200 to 300)
+				msg += "[m1] extremely jittery."
+			if(100 to 200)
+				msg += "[m1] twitching ever so slightly."
+		
 		if(InCritical())
-			msg += "[m1] barely conscious.</span>"
+			msg += "<span class='warning'>[m1] barely conscious.</span>"
 		else
 			if(stat >= UNCONSCIOUS)
 				msg += "<span class='warning'>[m1] unconscious.</span>"
+			else if(eyesclosed)
+				msg += "[capitalize(m2)] eyes are closed."
+			else if(has_status_effect(/datum/status_effect/debuff/sleepytime))
+				msg += "[m1] looking a little tired."
 	else
 		msg += "<span class='warning'>[m1] unconscious.</span>"
 //		else

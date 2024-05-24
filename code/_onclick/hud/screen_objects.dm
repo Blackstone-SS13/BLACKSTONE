@@ -1464,11 +1464,12 @@
 		if(modifiers["left"])
 			H.check_for_injuries(H)
 		if(modifiers["right"])
-			if(H.mind)
-				if(length(H.mind.known_people))
-					H.mind.display_known_people(H)
-				else
-					to_chat(H, "<span class='warning'>I don't know anyone.</span>")
+			if(!H.mind)
+				return
+			if(length(H.mind.known_people))
+				H.mind.display_known_people(H)
+			else
+				to_chat(H, "<span class='warning'>I don't know anyone.</span>")
 
 /atom/movable/screen/splash
 	icon = 'icons/blank_title.png'
