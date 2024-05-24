@@ -112,11 +112,11 @@
 	SSticker.rulermob = src
 	var/dispjob = mind.assigned_role
 	removeomen("nolord")
-  if(coronater)
-	  priority_announce("[giver.real_name] the [dispjob] has named [real_name] the inheritor of ROGUETOWN!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
-  else
-    priority_announce("[real_name] the [dispjob] has named themself the inheritor of ROGUETOWN!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
-	return TRUE
+	if(giver)
+		priority_announce("[giver.real_name] the [dispjob] has named [real_name] the inheritor of ROGUETOWN!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
+	else
+		priority_announce("[real_name] the [dispjob] has named themself the inheritor of ROGUETOWN!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
+		return TRUE
 
 /mob/living/carbon/human/proc/churchexcommunicate()
 	set name = "Curse"
