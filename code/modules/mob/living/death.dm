@@ -16,7 +16,7 @@
 
 	for(var/obj/item/I in simple_embedded_objects)
 		simple_embedded_objects -= I
-		I.forceMove(get_turf(src))
+		I.forceMove(drop_location())
 
 	spawn_gibs(no_bodyparts)
 	qdel(src)

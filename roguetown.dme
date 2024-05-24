@@ -9,6 +9,7 @@
 // BEGIN_INCLUDE
 #include "_maps\_basemap.dm"
 #include "_maps\templates\bog_shack_small.dm"
+#include "_maps\templates\sewers.dm"
 #include "code\__byond_version_compat.dm"
 #include "code\_compile_options.dm"
 #include "code\rt.dm"
@@ -2431,6 +2432,7 @@
 #include "code\modules\mob\living\carbon\human\say.dm"
 #include "code\modules\mob\living\carbon\human\species.dm"
 #include "code\modules\mob\living\carbon\human\status_procs.dm"
+#include "code\modules\mob\living\carbon\human\topic.dm"
 #include "code\modules\mob\living\carbon\human\update_icons.dm"
 #include "code\modules\mob\living\carbon\human\voicepack.dm"
 #include "code\modules\mob\living\carbon\human\npc\_npc.dm"
@@ -3296,6 +3298,7 @@
 #include "code\modules\surgery\advanced\bioware\vein_threading.dm"
 #include "code\modules\surgery\bodyparts\_bodyparts.dm"
 #include "code\modules\surgery\bodyparts\bodypart_dismemberment.dm"
+#include "code\modules\surgery\bodyparts\bodypart_examine.dm"
 #include "code\modules\surgery\bodyparts\bodypart_wounds.dm"
 #include "code\modules\surgery\bodyparts\head.dm"
 #include "code\modules\surgery\bodyparts\helpers.dm"
