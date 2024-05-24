@@ -29,8 +29,8 @@
 	var/proab = 3
 	if(user.mind)
 		moveup += (user.mind.get_skill_level(appro_skill) * 6) 
-		moveup -= 6 * craftdiff
 		moveup *= breakthrough == 1 ? 2 : 1
+		moveup -= 3 * craftdiff
 		if(!user.mind.get_skill_level(appro_skill))
 			proab = 23
 	if(prob(proab))
