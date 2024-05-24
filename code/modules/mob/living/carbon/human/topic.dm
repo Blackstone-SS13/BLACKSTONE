@@ -5,7 +5,7 @@
 		var/obj/item/bodypart/BP = get_bodypart(check_zone(user.zone_selected))
 		msg += "<B>[capitalize(parse_zone(check_zone(user.zone_selected)))]:</B>"
 		if(BP)
-			if(get_location_accessible(src, check_zone(user.zone_selected)))
+			if(isobserver(user) || get_location_accessible(src, check_zone(user.zone_selected)))
 				var/bodypart_status = list()
 				switch(BP.disabled)
 					if(BODYPART_DISABLED_WOUND)
@@ -29,7 +29,7 @@
 				else if(length(BP.wounds))
 					bodypart_status += "<B>Wounds:</B>"
 					for(var/datum/wound/wound as anything in BP.wounds)
-						bodypart_status += "[wound.get_visible_name()]"
+						bodypart_status += wound.get_visible_name()
 				if(length(bodypart_status))
 					msg += bodypart_status
 				else

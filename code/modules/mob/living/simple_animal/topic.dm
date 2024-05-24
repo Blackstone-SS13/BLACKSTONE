@@ -6,7 +6,7 @@
 		if(length(simple_wounds))
 			msg += "<B>Wounds:</B>"
 			for(var/datum/wound/wound as anything in simple_wounds)
-				msg += "[wound.get_visible_name()]"
+				msg += wound.get_visible_name()
 
 		if(length(simple_embedded_objects))
 			msg += "<B>Embedded objects:</B>"
