@@ -106,17 +106,18 @@
 	REMOVE_TRAIT(W, TRAIT_NOSLEEP, TRAIT_GENERIC)
 	if(dead)
 		W.death(gibbed)
-//	W.key = key
+
 	W.forceMove(get_turf(src))
 	W.remove_status_effect(STATUS_EFFECT_STASIS)
 
 	REMOVE_TRAIT(W, TRAIT_NOMOOD, TRAIT_GENERIC)
 	stress = W.stress
 
-//	var/datum/antagonist/werewolf/WW = mind.has_antag_datum(/datum/antagonist/werewolf)
-//	if(WW)
-//		W.mind.add_antag_datum(WW)
 	mind.transfer_to(W)
+	//M.fully_heal(FALSE)
+
+	fully_heal(FALSE)
+	message_admins("WEREWOLF UNTRANSFORMED: [src]")
 
 	var/mob/living/carbon/human/species/werewolf/WA = src
 	W.remove_all_languages()
@@ -144,7 +145,7 @@
 	desc = ""
 	icon_state = null
 	body_parts_covered = FULL_BODY
-	armor = list("blunt" = 30, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("blunt" = 50, "slash" = 40, "stab" = 30, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP

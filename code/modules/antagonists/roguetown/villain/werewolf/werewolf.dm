@@ -62,6 +62,10 @@
 		forge_werewolf_objectives()
 	finalize_werewolf()
 	wolfname = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
+
+	// SPELL TESTING
+	owner.AddSpell(new /obj/effect/proc_holder/spell/self/howl)
+
 	return ..()
 
 /datum/antagonist/werewolf/on_removal()
@@ -146,38 +150,6 @@
 				H.flash_fullscreen("redflash1")
 				to_chat(H, "<span class='warning'>The curse begins to fade...</span>")
 				transforming = world.time
-
-
-/obj/effect/proc_holder/spell/self/howl
-	name = "HOWL"
-	desc = "!"
-	antimagic_allowed = TRUE
-	charge_max = 150 //15 seconds
-
-/obj/effect/proc_holder/spell/self/howl/cast(mob/user = usr)
-	..()
-	var/message = input("Howl at the hidden moon", "WEREWOLF") as text|null
-	if(!message) return
-
-	var/datum/antagonist/werewolf/werewolf_player = user.mind.has_antag_datum(/datum/antagonist/werewolf)
-
-	// sound played for owner
-	playsound(src, pick('sound/vo/mobs/wwolf/howl (1).ogg','sound/vo/mobs/wwolf/howl (2).ogg'), 100, TRUE)
-	
-	for(var/mob/player in GLOB.player_list)
-
-		if(!player.mind) continue
-		if(player.stat == DEAD) continue
-		if(isbrain(player)) continue
-
-		// Announcement to other werewolves
-		if(player.mind.has_antag_datum(/datum/antagonist/werewolf))
-			to_chat(player, "<span class='boldannounce'>[werewolf_player.wolfname] howls: [message]</span>")
-
-		//sound played for other players
-		if(player == src) continue
-		if(get_dist(player, src) > 7)
-			player.playsound_local(get_turf(player), pick('sound/vo/mobs/wwolf/howldist (1).ogg','sound/vo/mobs/wwolf/howldist (2).ogg'), 100, FALSE, pressure_affected = FALSE)
 	
 /mob/living/carbon/human/proc/werewolf_infect()
 	if(!mind)
