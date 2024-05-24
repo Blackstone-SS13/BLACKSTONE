@@ -30,13 +30,13 @@
 			H.set_blindness(0)
 			to_chat(H, "<span class='warning'>Warriors are well rounded fighters, experienced often in many theaters of warfare and battle they are capable of rising to any challenge that might greet them on the path.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,2), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(2,2,3,3,4), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,2,3,3,4), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, rand(1,2), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(2,2,3,3,4), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, rand(1,3), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,1,2), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
@@ -76,8 +76,8 @@
 		if("Monster Hunter")
 			H.set_blindness(0)
 			to_chat(H, "<span class='warning'>Monsters Hunters are typically contracted champions of the common folk dedicated to the slaying of both lesser vermin and greater beasts of the wilds.</span>")
-			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,2), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/bows, rand(1,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, rand(1,2,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/bows, rand(1,2,2), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE)
@@ -99,21 +99,21 @@
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/random
 			if(prob(40))
 				armor = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
-				H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+				H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 				backr = /obj/item/rogueweapon/sword/long
 			else if(prob(60))
 				armor = /obj/item/clothing/suit/roguetown/armor/plate/half/iron
 				H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-				H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
+				H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
 				r_hand = /obj/item/rogueweapon/spear/billhook
 			else
 				armor = /obj/item/clothing/suit/roguetown/armor/plate/scale // No helms for monster hunters.
 				H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-				H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+				H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
 				backr = /obj/item/rogueweapon/stoneaxe/battle
 			backl = /obj/item/storage/backpack/rogue/satchel
 			beltl = /obj/item/rogueweapon/huntingknife
