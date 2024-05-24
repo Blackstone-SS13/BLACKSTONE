@@ -23,7 +23,7 @@
 
 /datum/wound/fracture/head
 	name = "cranial fracture"
-	check_name = "<span class='dead'><B>SKULLCRACK</B></span>"
+	check_name = "<span class='bone'><B>SKULLCRACK</B></span>"
 	whp = 150
 	sleep_healing = 0
 	/// Most head fractures are serious enough to cause paralysis
@@ -37,7 +37,7 @@
 	. = ..()
 	if(dents_brain && prob(1))
 		name = "dentbrain"
-		check_name = "<span class='dead'><B>DENTBRAIN</B></span>"
+		check_name = "<span class='bone'><B>DENTBRAIN</B></span>"
 
 /datum/wound/fracture/head/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -100,14 +100,14 @@
 	ADD_TRAIT(affected, TRAIT_NO_BITE, "[type]")
 	ADD_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 
-/datum/wound/fracture/mouth/on_mob_gain(mob/living/affected)
+/datum/wound/fracture/mouth/on_mob_loss(mob/living/affected)
 	. = ..()
 	REMOVE_TRAIT(affected, TRAIT_NO_BITE, "[type]")
 	REMOVE_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 
 /datum/wound/fracture/neck
 	name = "cervical fracture"
-	check_name = "<span class='dead'><B>CERVICAL FRACTURE</B></span>"
+	check_name = "<span class='bone'><B>CERVICAL FRACTURE</B></span>"
 	whp = 100
 	sleep_healing = 0
 

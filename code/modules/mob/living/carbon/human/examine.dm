@@ -271,20 +271,31 @@
 		// Bleeding
 		var/bleed_rate = get_bleed_rate()
 		if(bleed_rate)
+			var/bleed_wording = "bleeding"
 			switch(bleed_rate)
-				if(0 to 3)
-					msg += "<span class='bloody'>[m1] bleeding!</span>"
-				if(3 to 6)
-					msg += "<span class='bloody'><B>[m1] bleeding a lot!</B></span>"
-				if(6 to INFINITY)
-					msg += "<span class='bloody'><B>[m1] bleeding profusely!</B></span>"
+				if(0 to 1)
+					bleed_wording = "bleeding slightly"
+				if(1 to 5)
+					bleed_wording = "bleeding"
+				if(5 to 10)
+					bleed_wording = "bleeding a lot"
+				if(10 to INFINITY)
+					bleed_wording = "bleeding profusely"
 			var/list/bleeding_limbs = list()
 			for(var/obj/item/bodypart/bleeder in bodyparts)
 				if(!get_location_accessible(src, bleeder.body_zone) || !bleeder.get_bleed_rate())
 					continue
 				bleeding_limbs += parse_zone(bleeder.body_zone)
 			if(length(bleeding_limbs))
-				msg += "<span class='bloody'>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] bleeding!</span>"
+				if(bleed_rate >= 5)
+					msg += "<span class='bloody'><B>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] [bleed_wording]!</B></span>"
+				else
+					msg += "<span class='bloody'>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] [bleed_wording]!</span>"
+			else
+				if(bleed_rate >= 5)
+					msg += "<span class='bloody'><B>[m1] [bleed_wording]</B>!</span>"
+				else
+					msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
 
 	var/list/missing = get_missing_limbs()
 	for(var/missing_zone in missing)
