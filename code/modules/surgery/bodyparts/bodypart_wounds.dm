@@ -160,6 +160,8 @@
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
+	if(bclass == BCLASS_TWIST) //the ol dick twist
+		if(dam >= 10)
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 				// TESTICULAR TORSION!
 				if(!has_wound(/datum/wound/cbt))
