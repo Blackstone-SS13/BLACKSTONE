@@ -150,15 +150,20 @@
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
-	if(bclass == BCLASS_TWIST) //the ol dick twist
-		if(dam >= 10)
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 				// TESTICULAR TORSION!
-				if(prob(1) && !has_wound(/datum/wound/cbt))
-					add_wound(/datum/wound/cbt)
-				else
-					owner.emote("groin", forced = TRUE)
-					owner.Stun(10)
+				if(!has_wound(/datum/wound/cbt))
+					if(HAS_TRAIT(src, RTRAIT_NUTCRACKER)) //JESTICULAR TORSION!
+						if(prob(5))
+							add_wound(/datum/wound/cbt)
+						else
+							owner.emote("groin", forced = TRUE)
+							owner.Stun(10)
+					else if (prob(1))
+						add_wound(/datum/wound/cbt)
+					else
+						owner.emote("groin", forced = TRUE)
+						owner.Stun(10)		
 		return FALSE
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
 		var/used = round((brute_dam / max_damage) * 20 + (dam / 3), 1)
