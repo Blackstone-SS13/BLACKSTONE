@@ -6,9 +6,8 @@
 	total_positions = 0
 	spawn_positions = 0
 	min_pq = null //no pq
+	max_pq = null
 
-	allowed_sexes = list("male", "female")
-	allowed_races = list("Humen","Humen", "Half-Elf","Dark Elf","Elf","Elf", "Dwarf","Dwarf")
 	tutorial = ""
 
 	outfit = /datum/outfit/job/roguetown/deathknight
@@ -63,7 +62,7 @@
 		H.name = "Death Knight"
 		H.real_name = "Death Knight"
 		ADD_TRAIT(H, TRAIT_NOMOOD, TRAIT_GENERIC)
-		ADD_TRAIT(H, RTRAIT_NOFATSTAM, TRAIT_GENERIC)
+		ADD_TRAIT(H, RTRAIT_NOROGSTAM, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOHUNGER, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOBREATH, TRAIT_GENERIC)

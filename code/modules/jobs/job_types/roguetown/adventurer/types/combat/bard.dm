@@ -12,6 +12,7 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
+		"Argonian",
 		"Dark Elf",
 		"Aasimar"
 	)
@@ -47,7 +48,7 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/medicine, pick(0,1), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/music, rand(3,5), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/music, pick(4,5), TRUE)
 			head = /obj/item/clothing/head/roguetown/bardhat
 			shoes = /obj/item/clothing/shoes/roguetown/boots
 			pants = /obj/item/clothing/under/roguetown/tights/random
@@ -59,10 +60,8 @@
 			if(prob(50))
 				cloak = /obj/item/clothing/cloak/raincloak/red
 			backl = /obj/item/storage/backpack/rogue/satchel
-			l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel
 			beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
-			l_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
-			beltr = /obj/item/quiver/bolts
+			beltr = /obj/item/rogueweapon/huntingknife/idagger/steel
 			H.change_stat("intelligence", 1)
 			H.change_stat("perception", 2)
 			H.change_stat("endurance", 1)
@@ -108,13 +107,13 @@
 			H.change_stat("speed", 1)
 
 	if(H.dna?.species)
-		if(H.dna.species.id == "human")
-			backr = /obj/item/rogue/instrument/lute
-		if(H.dna.species.id == "dwarf")
-			backr = /obj/item/rogue/instrument/accord
-		if(H.dna.species.id == "elf")
+		if(iself(H) || ishalfelf(H))
 			backr = /obj/item/rogue/instrument/harp
-		if(H.dna.species.id == "tiefling")
+		else if(ishumannorthern(H))
+			backr = /obj/item/rogue/instrument/lute
+		else if(isdwarf(H))
+			backr = /obj/item/rogue/instrument/accord
+		else if(istiefling(H) || isargonian(H))
 			backr = /obj/item/rogue/instrument/guitar
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)

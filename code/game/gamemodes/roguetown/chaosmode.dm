@@ -278,14 +278,14 @@
 	"Queen",
 	"Prisoner",
 	"Dungeoneer",
-	"Witch Hunter",
+	"Inquisitor",
 	"Confessor",
-	"Town Guard",
-	"Castle Guard",
+	"Watchman",
+	"Man at Arms",
 	"Veteran",
 	"Acolyte",
 	"Cleric",
-	"Sheriff")
+	"Guard Captain")
 	antag_candidates = get_players_for_role(ROLE_NBEAST)
 	var/datum/mind/villain = pick_n_take(antag_candidates)
 	if(villain)
@@ -310,7 +310,7 @@
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_vampires()
-	restricted_jobs = list("Acolyte","Priest","Adventurer","Confessor","Town Guard","Veteran","Castle Guard","Sheriff")
+	restricted_jobs = list("Acolyte","Priest","Adventurer","Confessor","Watchman","Veteran","Man at Arms","Guard Captain")
 /*	var/num_vampires = rand(1,3)
 #ifdef TESTSERVER
 	num_vampires = 100
@@ -337,7 +337,7 @@
 	restricted_jobs = list()
 
 /datum/game_mode/chaosmode/proc/pick_werewolves()
-	restricted_jobs = list("Acolyte","Priest","Adventurer","Confessor","Town Guard","Veteran","Castle Guard","Sheriff")
+	restricted_jobs = list("Acolyte","Priest","Adventurer","Confessor","Watchman","Veteran","Man at Arms","Guard Captain")
 /*	var/num_werewolves = rand(1,3)
 #ifdef TESTSERVER
 	num_werewolves = 100

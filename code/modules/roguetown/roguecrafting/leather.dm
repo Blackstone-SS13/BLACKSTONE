@@ -29,9 +29,16 @@
 /datum/crafting_recipe/roguetown/leather/waterskin
 	name = "waterskin"
 	result = /obj/item/reagent_containers/glass/bottle/waterskin
-	reqs = list(/obj/item/natural/hide = 3,
+	reqs = list(/obj/item/natural/hide = 1,
 				/obj/item/natural/fibers = 2)
 	sellprice = 45
+
+/datum/crafting_recipe/roguetown/leather/quiver
+	name = "quiver"
+	result = /obj/item/quiver
+	reqs = list(/obj/item/natural/hide = 2,
+				/obj/item/natural/fibers = 2)
+	sellprice = 30
 
 /datum/crafting_recipe/roguetown/leather/gloves
 	name = "leather gloves"
@@ -79,6 +86,11 @@
 	reqs = list(/obj/item/natural/hide = 1)
 	sellprice = 26
 
+/datum/crafting_recipe/roguetown/leather/vest
+	name = "leather vest"
+	result = /obj/item/clothing/suit/roguetown/armor/leather/vest
+	reqs = list(/obj/item/natural/hide = 2)
+
 /datum/crafting_recipe/roguetown/leather/armor
 	name = "leather armor"
 	result = /obj/item/clothing/suit/roguetown/armor/leather
@@ -98,6 +110,12 @@
 	reqs = list(/obj/item/natural/hide = 2)
 
 
+/datum/crafting_recipe/roguetown/leather/apron/blacksmith
+	name = "leather apron"
+	result = /obj/item/clothing/cloak/apron/blacksmith
+	reqs = list(/obj/item/natural/hide = 2,
+				/obj/item/natural/fibers = 1)
+
 /obj/item/clothing/cloak/raincloak/brown
 	sellprice = 20
 
@@ -105,7 +123,6 @@
 	name = "fur cloak"
 	result = /obj/item/clothing/cloak/raincloak/furcloak/crafted
 	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/fur = 1)
-
 
 /obj/item/clothing/cloak/raincloak/furcloak/crafted
 	sellprice = 55
@@ -115,3 +132,12 @@
 	result = /obj/item/natural/saddle
 	reqs = list(/obj/item/natural/hide = 2)
 
+/datum/crafting_recipe/roguetown/leather/whip
+	name = "leather whip"
+	result = /obj/item/rogueweapon/whip
+	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/stone = 1)
+
+/datum/crafting_recipe/roguetown/leather/drum
+	name = "Drum"
+	result = /obj/item/rogue/instrument/drum
+	reqs = list(/obj/item/natural/hide = 1,/obj/item/grown/log/tree/small = 1)

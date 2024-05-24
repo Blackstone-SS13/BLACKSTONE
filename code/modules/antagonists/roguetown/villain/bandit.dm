@@ -6,9 +6,13 @@
 	job_rank = ROLE_BANDIT
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "bandit"
+	confess_lines = list(
+		"FREEDOM!!!", 
+		"I WILL NOT LIVE IN YOUR WALLS!",
+		"I WILL NOT FOLLOW YOUR RULES!",
+	)
 	var/tri_amt
 	var/contrib
-	confess_lines = list("FREEDOM!!!", "I WILL NOT LIVE IN YOUR WALLS!", "I WILL NOT FOLLOW YOUR RULES!")
 
 /datum/antagonist/bandit/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
 	if(istype(examined_datum, /datum/antagonist/bandit))
@@ -31,6 +35,7 @@
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	H.set_patron(/datum/patron/inhumen/matthios)
 
 /datum/antagonist/bandit/greet()
 	to_chat(owner.current, "<span class='alertsyndie'>I am a BANDIT!</span>")
@@ -69,12 +74,12 @@
 	if(H.mobid in GLOB.character_list)
 		GLOB.character_list[H.mobid] = null
 	GLOB.chosen_names -= H.real_name
-	if((H.dna.species?.id != "human"))
+	if((H.dna.species?.id != "humen"))
 		H.age = AGE_ADULT
 		H.set_species(/datum/species/human/northern) //setspecies randomizes body
 		H.after_creation()
 //		H.real_name = H.client.prefs.pref_species.random_name(MALE,1) //set_species randomizes name
-	H.cmode_music = 'sound/music/combat_bandit.ogg'
+	H.cmode_music = 'sound/music/combat_bandit2.ogg'
 
 	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "BANDIT"), 5 SECONDS)
 //	H.job = "Bandit"
@@ -92,8 +97,8 @@
 	H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)

@@ -45,13 +45,13 @@
 	icon_state = "chaincoif"
 	item_state = "chaincoif"
 	flags_inv = HIDEEARS|HIDEHAIR
-	armor = list("melee" = 15, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("melee" = 35, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
 	max_integrity = 200
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HEAD
 	body_parts_covered = NECK|HAIR|EARS|HEAD
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
@@ -98,7 +98,7 @@
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK
 	body_parts_covered = NECK|EARS|MOUTH|NOSE
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = PLATEHIT
 
 /obj/item/clothing/neck/roguetown/gorget
@@ -111,7 +111,7 @@
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK
 	body_parts_covered = NECK
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = PLATEHIT
 
 /obj/item/clothing/neck/roguetown/psicross
@@ -147,6 +147,10 @@
 /obj/item/clothing/neck/roguetown/psicross/pestra 
 	name = "amulet of Pestra"
 	desc = ""
+
+/obj/item/clothing/neck/roguetown/psicross/wood
+	name = "wooden psycross"
+	icon_state = "psicrossw"
 
 /obj/item/clothing/neck/roguetown/psicross/silver
 	name = "silver psycross"
@@ -192,6 +196,7 @@
 	item_state = "talkstone"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
+	allowed_race = list("human", "dwarf", "elf", "tiefling", "aasimar", "goblinp", "halforc")
 	sellprice = 98
 
 /obj/item/clothing/neck/roguetown/horus

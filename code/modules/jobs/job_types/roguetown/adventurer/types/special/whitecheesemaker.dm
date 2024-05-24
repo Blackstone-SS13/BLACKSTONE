@@ -20,7 +20,7 @@
 	..()
 	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
@@ -46,7 +46,7 @@
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/rich
 
 	if(H.dna?.species)
-		if(H.dna.species.id == "human")
+		if(H.dna.species.id == "humen")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/evil/blkknight()
 
 	H.change_stat("intelligence", 3)

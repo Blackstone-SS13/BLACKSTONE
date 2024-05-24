@@ -3,7 +3,7 @@
 
 /datum/species/dwarf/mountain
 	name = "Dwarf"
-	id = "dwarf"
+	id = "dwarfm"
 	desc = "<b>Dwarf</b><br>\
 	A proud and robust race of short mountain folk, \
 	the dwarves are known for their pride in martial strength \
@@ -39,6 +39,7 @@
 	soundpack_m = /datum/voicepack/male/dwarf
 	soundpack_f = /datum/voicepack/female/dwarf
 	custom_clothes = TRUE
+	clothes_id = "dwarf"
 	offset_features = list(OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0), OFFSET_WRISTS = list(0,0),\
 	OFFSET_CLOAK = list(0,0), OFFSET_FACEMASK = list(0,-4), OFFSET_HEAD = list(0,-4), \
 	OFFSET_FACE = list(0,-4), OFFSET_BELT = list(0,-5), OFFSET_BACK = list(0,-4), \
@@ -52,10 +53,6 @@
 	specstats = list("strength" = 1, "perception" = -2, "intelligence" = 0, "constitution" = 2, "endurance" = 2, "speed" = -3, "fortune" = 0)
 	specstats_f = list("strength" = 1, "perception" = -2, "intelligence" = 0, "constitution" = 2, "endurance" = 1, "speed" = -2, "fortune" = 0)
 	enflamed_icon = "widefire"
-	possible_faiths = list(FAITH_PSYDON, FAITH_DWARF)
-
-/datum/species/dwarf/mountain/check_roundstart_eligible()
-	return TRUE
 
 /datum/species/dwarf/mountain/get_span_language(datum/language/message_language)
 	if(!message_language)

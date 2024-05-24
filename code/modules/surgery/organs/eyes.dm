@@ -31,6 +31,9 @@
 	var/no_glasses
 	var/damaged	= FALSE	//damaged indicates that our eyes are undergoing some level of negative effect
 
+	var/left_poked = FALSE
+	var/right_poked = FALSE
+
 /obj/item/organ/eyes/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE, initialising)
 	. = ..()
 	if(ishuman(owner))
@@ -106,6 +109,11 @@
 			sight_flags &= ~SEE_BLACKNESS
 	owner.update_sight()
 
+
+/obj/item/organ/eyes/night_vision/argonian
+	name = "lizard eyes"
+	desc = ""
+
 /obj/item/organ/eyes/night_vision/alien
 	name = "alien eyes"
 	desc = ""
@@ -139,6 +147,12 @@
 	desc = ""
 	see_in_dark = 3
 	lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
+
+/obj/item/organ/eyes/goblin
+	name = "goblin eyes"
+	desc = ""
+	see_in_dark = 15
+	lighting_alpha = 200
 
 ///Robotic
 

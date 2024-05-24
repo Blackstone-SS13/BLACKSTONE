@@ -32,6 +32,28 @@
 	reqs = list(/obj/item/natural/fibers = 3)
 	verbage = "braids"
 
+/datum/crafting_recipe/roguetown/bowstring
+	name = "fiber bowstring"
+	result = /obj/item/natural/bowstring
+	reqs = list(/obj/item/natural/fibers = 2)
+	verbage = "twists"
+
+/datum/crafting_recipe/roguetown/bowpartial
+	name = "unstrung bow"
+	result = /obj/item/grown/log/tree/bowpartial
+	reqs = list(/obj/item/grown/log/tree/small = 1)
+	tools = /obj/item/rogueweapon/huntingknife
+	verbage = "carves"
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/bow
+	name = "wooden bow"
+	result = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	reqs = list(/obj/item/natural/bowstring = 1, /obj/item/grown/log/tree/bowpartial = 1)
+	skillcraft = /datum/skill/combat/bows
+	verbage = "strings together"
+	craftdiff = 2
+
 /datum/crafting_recipe/roguetown/torch
 	name = "torch"
 	result = /obj/item/flashlight/flare/torch
@@ -238,3 +260,9 @@
 			/obj/item/natural/cloth = 1)
 	tools = list(/obj/item/needle = 1)
 	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/woodcross
+	name = "wooden amulet"
+	result = /obj/item/clothing/neck/roguetown/psicross/wood
+	reqs = list(/obj/item/natural/fibers = 2,
+				/obj/item/grown/log/tree/stick = 2)

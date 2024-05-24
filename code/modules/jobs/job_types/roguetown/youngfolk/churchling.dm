@@ -12,11 +12,12 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
+		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
 	)
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_ages = list(AGE_YOUNG)
+	allowed_ages = YOUNG_AGES_LIST
 
 	tutorial = "Your family were zealots, they scolded you with a studded belt and prayed like sinners every waking hour of the day they weren’t toiling in the fields. You escaped them by becoming a churchling, and a guaranteed education isnt so bad"
 
@@ -24,6 +25,7 @@
 	display_order = JDO_CHURCHLING
 	give_bank_account = TRUE
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/churchling/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -31,8 +33,8 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, round(rand(3,5)), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, round(rand(3,5)), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 	if(H.gender == MALE)
 		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
@@ -51,4 +53,4 @@
 		head = /obj/item/clothing/head/roguetown/armingcap
 
 	H.change_stat("perception", 1)
-	H.change_stat("speed", 2)
+	H.change_stat("speed", pick(1,2))

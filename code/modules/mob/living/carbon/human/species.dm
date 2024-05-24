@@ -5,6 +5,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 /datum/species
 	var/id	// if the game needs to manually check my race to do something not included in a proc here, it will use this
 	var/limbs_id		//this is used if you want to use a different species limb sprites. Mainly used for angels as they look like humans.
+	var/clothes_id //id for clothes
 	var/name	// this is the fluff name. these will be left generic (such as 'Lizardperson' for the lizard race) so servers can change them to whatever
 	var/desc
 	var/default_color = "#FFF"	// if alien colors are disabled, this is the color that will be used by that race
@@ -15,7 +16,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/icon_override_f
 	var/list/possible_ages = list(AGE_YOUNG, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	var/sexes = 1		// whether or not the race has sexual characteristics. at the moment this is only 0 for skeletons and shadows
-	var/patreon_req
+	var/patreon_req = 0
 	var/max_age = 75
 	var/list/offset_features = list(OFFSET_ID = list(0,0), OFFSET_GLOVES = list(0,0),\
 	OFFSET_CLOAK = list(0,0), OFFSET_FACEMASK = list(0,0), OFFSET_HEAD = list(0,0), \
@@ -34,7 +35,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/hairyness = null
 
 	var/custom_clothes = FALSE //append species id to clothing sprite name
-	var/use_f = FALSE //males use female clothes. for elves
+	var/use_f = FALSE //males use female clothes. for elves DO NOT TURN BOTH ON EVER
+	var/use_m = FALSE //females use male clothes. for half orcs DO NOT TURN BOTH ON
 
 	var/datum/voicepack/soundpack_m = /datum/voicepack/male
 	var/datum/voicepack/soundpack_f = /datum/voicepack/female
@@ -114,8 +116,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	//in __DEFINES/mobs.dm, defaults to NONE, so people actually have to think about it
 	var/changesource_flags = NONE
 
-	var/possible_faiths
-
 	//Wording for skin tone on examine and on character setup
 	var/skin_tone_wording = "Skin Tone"
 
@@ -126,28 +126,35 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 /datum/species/New()
 
-	if(!limbs_id)	//if we havent set a limbs id to use, just use our own id
-		limbs_id = name
+	if(!limbs_id) //if we havent set a limbs id to use, just use our own id
+		limbs_id = id
+	if(!clothes_id)
+		clothes_id = id
 	..()
 
 /datum/species/proc/after_creation(mob/living/carbon/human/H)
 	return TRUE
 
 
-/proc/generate_selectable_species()
-	for(var/I in subtypesof(/datum/species))
-		var/datum/species/S = new I
-		if(S.check_roundstart_eligible())
-			GLOB.roundstart_races += S.name
-			qdel(S)
+/proc/get_selectable_species()
 	if(!GLOB.roundstart_races.len)
-		GLOB.roundstart_races += "human"
+		generate_selectable_species()
+	return GLOB.roundstart_races
+
+/proc/generate_selectable_species()
+	for(var/species_type in subtypesof(/datum/species))
+		var/datum/species/species = new species_type
+		if(species.check_roundstart_eligible())
+			GLOB.roundstart_races += species.name
+		qdel(species)
+	if(!GLOB.roundstart_races.len)
+		GLOB.roundstart_races += "Humen"
+	sortList(GLOB.roundstart_races, GLOBAL_PROC_REF(cmp_text_dsc))
 
 /datum/species/proc/check_roundstart_eligible()
+	if(name && id && (id in (CONFIG_GET(keyed_list/roundstart_races))))
+		return TRUE
 	return FALSE
-//	if(id in (CONFIG_GET(keyed_list/roundstart_races)))
-//		return TRUE
-//	return FALSE
 
 /datum/species/proc/random_name(gender,unique,lastname)
 	for(var/i in 1 to 5)
@@ -529,9 +536,6 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		species_traits += DIGITIGRADE
 	if(DIGITIGRADE in species_traits)
 		C.Digitigrade_Leg_Swap(FALSE)
-
-	if(ishuman(C))
-		random_character(C)
 
 	C.mob_biotypes = inherent_biotypes
 
@@ -1242,6 +1246,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return FALSE
 
 	var/is_nudist = HAS_TRAIT(H, RTRAIT_NUDIST)
+	var/is_retarded = HAS_TRAIT(H, RTRAIT_RETARD_ANATOMY)
 	var/num_arms = H.get_num_arms(FALSE)
 	var/num_legs = H.get_num_legs(FALSE)
 
@@ -1252,6 +1257,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return FALSE
 		if(SLOT_WEAR_MASK)
 			if(H.wear_mask)
+				return FALSE
+			if(is_retarded)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_MASK))
 				return FALSE
@@ -1328,7 +1335,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(SLOT_SHOES)
 			if(H.shoes)
 				return FALSE
-			if(is_nudist)
+			if(is_nudist || is_retarded)
 				return FALSE
 			if( !(I.slot_flags & ITEM_SLOT_SHOES) )
 				return FALSE
@@ -1363,6 +1370,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			return equip_delay_self_check(I, H, bypass_equip_delay_self)
 		if(SLOT_HEAD)
 			if(H.head)
+				return FALSE
+			if(is_retarded)
 				return FALSE
 			if(!(I.slot_flags & ITEM_SLOT_HEAD))
 				return FALSE
@@ -1864,7 +1873,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			nodmg = TRUE
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
-			affecting.attacked_by(user.used_intent.blade_class, damage, user, selzone)
+			affecting.bodypart_attacked_by(user.used_intent.blade_class, damage, user, selzone)
 		log_combat(user, target, "punched")
 
 		if(!nodmg)
@@ -2067,7 +2076,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 			else
 				if(affecting)
-					affecting.attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected)
+					affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected)
 			target.visible_message("<span class='danger'>[user] stomps [target]![target.next_attack_msg.Join()]</span>", \
 							"<span class='danger'>I'm stomped by [user]![target.next_attack_msg.Join()]</span>", "<span class='hear'>I hear a sickening kick!</span>", COMBAT_MESSAGE_RANGE, user)
 			to_chat(user, "<span class='danger'>I stomp on [target]![target.next_attack_msg.Join()]</span>")
@@ -2156,7 +2165,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
-			affecting.attacked_by(BCLASS_BLUNT, damage, user, selzone)
+			affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, selzone)
 		playsound(target, 'sound/combat/hits/kick/kick.ogg', 100, TRUE, -1)
 		target.lastattacker = user.real_name
 		target.lastattackerckey = user.ckey
@@ -2246,7 +2255,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			if(I)
 				I.take_damage(1, BRUTE, "melee")
 		if(!nodmg)
-			if(affecting.attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone))
+			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone)
+			if(should_embed_weapon(crit_wound))
 				var/can_impale = TRUE
 				if(!affecting)
 					can_impale = FALSE
@@ -2448,7 +2458,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(/obj/projectile/energy/florayield)
 			H.show_message("<span class='notice'>The radiation beam dissipates harmlessly through my body.</span>")
 
-/datum/species/proc/bullet_act(obj/projectile/P, mob/living/carbon/human/H, def_zone)
+/datum/species/proc/bullet_act(obj/projectile/P, mob/living/carbon/human/H, def_zone = BODY_ZONE_CHEST)
 	// called before a projectile hit
 	if(def_zone == "head")
 		if(H.head)

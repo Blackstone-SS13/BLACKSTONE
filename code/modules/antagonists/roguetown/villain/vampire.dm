@@ -14,7 +14,11 @@
 	job_rank = ROLE_VAMPIRE
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "vampire"
-	confess_lines = list("I WANT YOUR BLOOD!", "DRINK THE BLOOD!", "CHILD OF KAIN!")
+	confess_lines = list(
+		"I WANT YOUR BLOOD!", 
+		"DRINK THE BLOOD!", 
+		"CHILD OF KAIN!",
+	)
 	var/disguised = TRUE
 	var/vitae = 1000
 	var/last_transform
@@ -56,14 +60,14 @@
 		ADD_TRAIT(owner.current, RTRAIT_NOBLE, TRAIT_GENERIC)
 	owner.special_role = name
 	ADD_TRAIT(owner.current, RTRAIT_STRONGBITE, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, RTRAIT_NOFATSTAM, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, RTRAIT_NOROGSTAM, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOBREATH, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_NOPAIN, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(owner.current, TRAIT_LIMPDICK, TRAIT_GENERIC)
-	owner.current.cmode_music = 'sound/music/combat_vamp.ogg'
+	owner.current.cmode_music = 'sound/music/combat_vamp2.ogg'
 	var/obj/item/organ/eyes/eyes = owner.current.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
 		eyes.Remove(owner.current,1)
@@ -339,7 +343,7 @@
 	icon_state = null
 	body_parts_covered = FULL_BODY
 	armor = list("melee" = 100, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT,BCLASS_STAB,BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	sewrepair = TRUE

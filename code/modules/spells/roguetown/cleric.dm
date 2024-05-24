@@ -34,10 +34,10 @@
 	if(!H || !H.mind)
 		return
 
-	var/datum/patrongods/A = H.PATRON
-	var/spelllist = list(A.t0, A.t1, A.t2, A.t3)
+	var/datum/patron/A = H.patron
+	var/list/spelllist = list(A.t0, A.t1, A.t2, A.t3)
 	for(var/spell_type in spelllist)
-		if(H.mind.has_spell(spell_type))
+		if(!spell_type || H.mind.has_spell(spell_type))
 			continue
 		H.mind.AddSpell(new spell_type)
 	level = CLERIC_T3
@@ -47,25 +47,25 @@
 	if(!H || !H.mind)
 		return
 
-	var/datum/patrongods/A = H.PATRON
-	var/spelllist = list(A.t0, A.t1)
-	level = CLERIC_T1
-	for(var/spell in spelllist)
-		if(H.mind.has_spell(spell))
+	var/datum/patron/A = H.patron
+	var/list/spelllist = list(A.t0, A.t1)
+	for(var/spell_type in spelllist)
+		if(!spell_type || H.mind.has_spell(spell_type))
 			continue
-		H.mind.AddSpell(new spell)
+		H.mind.AddSpell(new spell_type)
+	level = CLERIC_T1
 
 /datum/devotion/cleric_holder/proc/grant_spells_templar(mob/living/carbon/human/H)
 	if(!H || !H.mind)
 		return
 
-	var/datum/patrongods/A = H.PATRON
-	var/spelllist = list(/obj/effect/proc_holder/spell/targeted/churn, A.t0)
-	level = CLERIC_T0
-	for(var/spell in spelllist)
-		if(H.mind.has_spell(spell))
+	var/datum/patron/A = H.patron
+	var/list/spelllist = list(/obj/effect/proc_holder/spell/targeted/churn, A.t0)
+	for(var/spell_type in spelllist)
+		if(!spell_type || H.mind.has_spell(spell_type))
 			continue
-		H.mind.AddSpell(new spell)
+		H.mind.AddSpell(new spell_type)
+	level = CLERIC_T0
 
 // General
 /obj/effect/proc_holder/spell/invoked/lesser_heal
@@ -93,14 +93,46 @@
 			target.Paralyze(30)
 			target.fire_act(1,5)
 			return TRUE
-		target.visible_message("<span class='info'>A wreath of gentle light passes over [target]!</span>", "<span class='notice'>I'm bathed in holy light!</span>")
+		switch(user.patron.type)
+			if(/datum/patron/old_god)
+				target.visible_message("<span class='info'>A strange stirring feeling pours from [target]!</span>", "<span class='notice'>Sentimental thoughts drive away my pains!</span>")
+			if(/datum/patron/divine/astrata)
+				target.visible_message("<span class='info'>A wreath of gentle light passes over [target]!</span>", "<span class='notice'>I'm bathed in holy light!</span>")
+			if(/datum/patron/divine/noc)
+				target.visible_message("<span class='info'>A shroud of soft moonlight falls upon [target]!</span>", "<span class='notice'>I'm shrouded in gentle moonlight!</span>")
+			if(/datum/patron/divine/dendor)
+				target.visible_message("<span class='info'>A rush of primal energy spirals about [target]!</span>", "<span class='notice'>I'm infused with primal energies!</span>")
+			if(/datum/patron/divine/abyssor)
+				target.visible_message("<span class='info'>A mist of salt-scented vapour settles on [target]!</span>", "<span class='notice'>I'm invigorated by healing vapours!</span>")
+			if(/datum/patron/divine/ravox)
+				target.visible_message("<span class='info'>An air of righteous defiance rises near [target]!</span>", "<span class='notice'>I'm filled with an urge to fight on!</span>")
+			if(/datum/patron/divine/necra)
+				target.visible_message("<span class='info'>A sense of quiet respite radiates from [target]!</span>", "<span class='notice'>I feel the Undermaiden's gaze turn from me for now!</span>")
+			if(/datum/patron/divine/xylix)
+				target.visible_message("<span class='info'>A fugue seems to manifest briefly across [target]!</span>", "<span class='notice'>My wounds vanish as if they had never been there! </span>")
+			if(/datum/patron/divine/pestra)
+				target.visible_message("<span class='info'>A aura of clinical care encompasses [target]!</span>", "<span class='notice'>I'm sewn back together by sacred medicine!</span>")
+			if(/datum/patron/divine/malum)
+				target.visible_message("<span class='info'>A tempering heat is discharged out of [target]!</span>", "<span class='notice'>I feel the heat of a forge soothing my pains!</span>")
+			if(/datum/patron/inhumen/eora)
+				target.visible_message("<span class='info'>A lingering remanence of love diffuses through [target]!</span>", "<span class='notice'>My heart feels full, and my pains less severe!</span>")
+			if(/datum/patron/inhumen/zizo)
+				target.visible_message("<span class='info'>Vital energies are sapped towards [target]!</span>", "<span class='notice'>The life around me pales as I am restored!</span>")
+			if(/datum/patron/inhumen/graggar)
+				target.visible_message("<span class='info'>Foul fumes billow outward as [target] is restored!</span>", "<span class='notice'>A noxious scent burns my nostrils, but I feel better!</span>")
+			if(/datum/patron/inhumen/matthios )
+				target.visible_message("<span class='info'>A wreath of strange light passes over [target]!</span>", "<span class='notice'>I'm bathed in strange holy light?</span>")
+			if(/datum/patron/godless)
+				target.visible_message("<span class='info'>Without any particular cause or reason, [target] is healed!</span>", "<span class='notice'>My wounds close without cause.</span>")
+			else
+				target.visible_message("<span class='info'>A choral sound comes from above and [target] is healed!</span>", "<span class='notice'>I am bathed in healing choral hymns!</span>")
 		if(iscarbon(target))
 			var/mob/living/carbon/C = target
 			var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
 			if(affecting)
-				if(affecting.heal_damage(20, 20, 0, null, FALSE))
+				if(affecting.heal_damage(20, 20))
 					C.update_damage_overlays()
-				if(affecting.heal_wounds(30))
+				if(affecting.heal_wounds(20))
 					C.update_damage_overlays()
 		else
 			target.adjustBruteLoss(-5)
@@ -146,9 +178,9 @@
 			var/mob/living/carbon/C = target
 			var/obj/item/bodypart/affecting = C.get_bodypart(check_zone(user.zone_selected))
 			if(affecting)
-				if(affecting.heal_damage(50, 50, 0, null, FALSE))
+				if(affecting.heal_damage(50, 50))
 					C.update_damage_overlays()
-				if(affecting.heal_wounds(40))
+				if(affecting.heal_wounds(50))
 					C.update_damage_overlays()
 		else
 			target.adjustBruteLoss(-50)
@@ -159,9 +191,9 @@
 		return TRUE
 	return FALSE
 
-// Limb attachment
-/obj/effect/proc_holder/spell/invoked/attach_limb
-	name = "Limb Miracle"
+// Limb or organ attachment
+/obj/effect/proc_holder/spell/invoked/attach_bodypart
+	name = "Bodypart Miracle"
 	overlay_state = "limb_attach"
 	releasedrain = 30
 	chargedrain = 0
@@ -177,7 +209,7 @@
 	miracle = TRUE
 	devotion_cost = -45
 
-/obj/effect/proc_holder/spell/invoked/attach_limb/proc/get_limb(mob/living/target, mob/living/user)
+/obj/effect/proc_holder/spell/invoked/attach_bodypart/proc/get_limb(mob/living/target, mob/living/user)
 	var/list/missing_limbs = target.get_missing_limbs()
 	if(!length(missing_limbs))
 		return
@@ -201,12 +233,49 @@
 			limb = dismembered
 	return limb
 
-/obj/effect/proc_holder/spell/invoked/attach_limb/cast(list/targets, mob/living/user)
+/obj/effect/proc_holder/spell/invoked/attach_bodypart/proc/get_organ(mob/living/target, mob/living/user)
+	var/list/missing_organs = list(
+		ORGAN_SLOT_EARS,
+		ORGAN_SLOT_EYES,
+		ORGAN_SLOT_TONGUE,
+	)
+	for(var/missing_organ_slot in missing_organs)
+		if(!target.getorganslot(missing_organ_slot))
+			continue
+		missing_organs -= missing_organ_slot
+	if(!length(missing_organs))
+		return
+	var/obj/item/organ/organ
+	//try to get from user's hands first
+	for(var/obj/item/organ/potential_organ in user?.held_items)
+		if(potential_organ.owner || !(potential_organ.slot in missing_organs))
+			continue
+		organ = potential_organ
+	//then target's hands
+	if(!organ)
+		for(var/obj/item/organ/dismembered in target.held_items)
+			if(dismembered.owner || !(dismembered.slot in missing_organs))
+				continue
+			organ = dismembered
+	//then finally, 1 tile range around target
+	if(!organ)
+		for(var/obj/item/organ/dismembered in range(1, target))
+			if(dismembered.owner || !(dismembered.slot in missing_organs))
+				continue
+			organ = dismembered
+	return organ
+
+/obj/effect/proc_holder/spell/invoked/attach_bodypart/cast(list/targets, mob/living/user)
 	if(ishuman(targets[1]))
 		var/mob/living/carbon/human/target = targets[1]
 		var/obj/item/bodypart/limb = get_limb(target, user)
 		if(!limb?.attach_limb(target))
-			return FALSE
+			var/obj/item/organ/organ = get_organ(target, user)
+			if(!organ?.Insert(target))
+				return FALSE
+			target.visible_message("<span class='info'>\The [organ] attaches itself to [target]!</span>", \
+							"<span class='notice'>\The [organ] attaches itself to me!</span>")
+			return TRUE
 		target.visible_message("<span class='info'>\The [limb] attaches itself to [target]!</span>", \
 							"<span class='notice'>\The [limb] attaches itself to me!</span>")
 		return TRUE
@@ -300,7 +369,7 @@
 		if(underworld_spirit)
 			var/mob/dead/observer/ghost = underworld_spirit.ghostize()
 			qdel(underworld_spirit)
-			ghost.mind?.current = target
+			ghost.mind.transfer_to(target, TRUE)
 		target.grab_ghost(force = TRUE) // even suicides
 		target.emote("breathgasp")
 		target.Jitter(100)

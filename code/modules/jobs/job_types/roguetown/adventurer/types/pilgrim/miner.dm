@@ -1,5 +1,7 @@
 /datum/advclass/miner
 	name = "Miner"
+	tutorial = "You are a Miner, you mine for the local blacksmith, gathering rare ores. \
+	there are tales of ambitious dwarf miners building great forts in the lavalands, to harvest all of it's hardly touched ores"
 	allowed_sexes = list("male")
 	allowed_races = list(
 		"Humen",
@@ -7,8 +9,10 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
+		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/miner
 	isvillager = TRUE

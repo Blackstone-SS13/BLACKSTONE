@@ -1,15 +1,18 @@
 
 /datum/job/roguetown/priest
 	title = "Priest"
-	f_title = "Priestess"
 	flag = PRIEST
 	department_flag = CHURCHMEN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = JCOLOR_CHURCH
-	allowed_races = list("Humen", "Aasimar")
-	allowed_patrons = list("Astrata")
+	allowed_sexes = list(MALE, FEMALE)
+	allowed_races = list(
+		"Humen", 
+		"Aasimar",
+	)
+	allowed_patrons = ALL_DIVINE_PATRONS
 	tutorial = "The Divine is all that matters in a world of the immoral. The Weeping God left his children to rule over us mortals and you will preach their wisdom to any who still heed their will. The faithless are growing in number, it is up to you to shepard them to a Gods-fearing future."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/priest
@@ -17,12 +20,13 @@
 	display_order = JDO_PRIEST
 	give_bank_account = 115
 	min_pq = 2
+	max_pq = null
+
+/datum/outfit/job/roguetown/priest
+	allowed_patrons = list(/datum/patron/divine/astrata)
 
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
-	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
-	H.verbs |= /mob/living/carbon/human/proc/churchannouncement
 	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 	head = /obj/item/clothing/head/roguetown/priestmask
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/priest
@@ -33,6 +37,8 @@
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 	id = /obj/item/clothing/ring/active/nomag
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/priest
+	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/needle/pestra = 1)
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/templar)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/monk)
@@ -47,11 +53,14 @@
 		H.change_stat("constitution", -1)
 		H.change_stat("endurance", 1)
 		H.change_stat("speed", -1)
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.PATRON) // This creates the cleric holder used for devotion spells
+	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron) // This creates the cleric holder used for devotion spells
 	C.holder_mob = H
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 	C.grant_spells_priest(H)
 
+	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
+	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
+	H.verbs |= /mob/living/carbon/human/proc/churchannouncement
 //	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 //		H.underwear = "Femleotard"
 //		H.underwear_color = CLOTHING_BLACK
@@ -67,11 +76,11 @@
 		to_chat(src, "<span class='warning'>I need to do this in the chapel.</span>")
 		return FALSE
 	for(var/mob/living/carbon/human/HU in get_step(src, src.dir))
-		if(HU.attempt_coronate())
+		if(HU.attempt_coronate(src))
 			say("By the authority of the gods, I pronounce you Ruler of all Rockhill!")
 			return
 
-/mob/living/carbon/human/proc/attempt_coronate()
+/mob/living/carbon/human/proc/attempt_coronate(mov/living/carbon/human/giver)
 	if(!mind)
 		return FALSE
 	if(mind.assigned_role == "King")
@@ -102,8 +111,11 @@
 			SSticker.rulertype = "Queen"
 	SSticker.rulermob = src
 	var/dispjob = mind.assigned_role
-	GLOB.badomens -= "nolord"
-	priority_announce("[real_name] the [dispjob] has named [real_name] the inheritor of ROGUETOWN!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
+	removeomen("nolord")
+  if(coronater)
+	  priority_announce("[giver.real_name] the [dispjob] has named [real_name] the inheritor of ROGUETOWN!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
+  else
+    priority_announce("[real_name] the [dispjob] has named themself the inheritor of ROGUETOWN!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
 	return TRUE
 
 /mob/living/carbon/human/proc/churchexcommunicate()
@@ -118,7 +130,7 @@
 			return FALSE
 		if(inputty in GLOB.excommunicated_players)
 			GLOB.excommunicated_players -= inputty
-			priority_announce("[real_name] has forgiven [inputty]. Once more walk in the light!", title = "Hail the Ten!", sound = 'sound/misc/bell.ogg')
+			priority_announce("[real_name] has forgiven [inputty]. Once more walk in the light!", title = "Hail the Nine!", sound = 'sound/misc/bell.ogg')
 			for(var/mob/living/carbon/human/H in GLOB.player_list)
 				if(H.real_name == inputty)
 					H.remove_stress(/datum/stressevent/psycurse)
@@ -151,8 +163,8 @@
 	name = "Recruit Templar"
 	new_role = "Templar"
 	recruitment_faction = "Templars"
-	recruitment_message = "Serve the ten, %RECRUIT!"
-	accept_message = "FOR PSYDON!"
+	recruitment_message = "Serve the nine, %RECRUIT!"
+	accept_message = "FOR THE NINE!"
 	refuse_message = "I refuse."
 	charge_max = 200 //templars get cool spells, so higher cooldown
 
@@ -161,7 +173,7 @@
 	if(!.)
 		return
 	if(!recruit.cleric)
-		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
+		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.patron)
 		holder.holder_mob = recruit
 		//Max devotion limit - Templars are stronger but cannot pray to gain more abilities beyond t1
 		holder.max_devotion = 250
@@ -174,8 +186,8 @@
 	name = "Recruit Acolyte"
 	new_role = "Acolyte"
 	recruitment_faction = "Church"
-	recruitment_message = "Serve the ten, %RECRUIT!"
-	accept_message = "FOR PSYDON!"
+	recruitment_message = "Serve the nine, %RECRUIT!"
+	accept_message = "FOR THE NINE!"
 	refuse_message = "I refuse."
 
 /obj/effect/proc_holder/spell/self/convertrole/monk/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
@@ -183,7 +195,7 @@
 	if(!.)
 		return
 	if(!recruit.cleric)
-		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.PATRON)
+		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.patron)
 		holder.holder_mob = recruit
 		holder.update_devotion(50, 50)
 		holder.grant_spells(recruit)

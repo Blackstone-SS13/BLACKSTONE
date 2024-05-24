@@ -11,14 +11,17 @@
 		"Humen",
 		"Elf",
 		"Half-Elf",
-		"Aasimar"
+		"Aasimar",
 	)
-	allowed_patrons = list("Noc")
-	allowed_ages = list(AGE_OLD, AGE_MIDDLEAGED)
+	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
 
 	outfit = /datum/outfit/job/roguetown/archivist
 	display_order = 19
 	min_pq = 0
+	max_pq = null
+
+/datum/outfit/job/roguetown/archivist
+	allowed_patrons = list(/datum/patron/divine/noc)
 
 /datum/outfit/job/roguetown/archivist/pre_equip(mob/living/carbon/human/H)
 	..()

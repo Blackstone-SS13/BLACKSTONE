@@ -102,6 +102,9 @@
 		if(istype(I, /obj/item/stack))
 			var/obj/item/stack/S = I
 			.["other"][I.type] += S.amount
+		else if(istype(I, /obj/item/natural/bundle))
+			var/obj/item/natural/bundle/B = I
+			.["other"][B.stacktype] += B.amount
 		else if(I.tool_behaviour)
 			.["tool_behaviour"] += I.tool_behaviour
 			.["other"][I.type] += 1
@@ -276,11 +279,12 @@
 					if(user.mind && R.skillcraft)
 						if(isliving(user))
 							var/mob/living/L = user
-							var/amt2raise = L.STAINT
+							var/boon = user.mind.get_learning_boon(R.skillcraft)
+							var/amt2raise = L.STAINT// its different over here
 							if(R.craftdiff > 0) //difficult recipe
-								amt2raise += (R.craftdiff * 6)
+								amt2raise += (R.craftdiff * 6) // also gets more
 							if(amt2raise > 0)
-								user.mind.adjust_experience(R.skillcraft, amt2raise, FALSE)
+								user.mind.adjust_experience(R.skillcraft, amt2raise * boon, FALSE)
 					return
 //				if(isitem(I))
 //					user.put_in_hands(I)
@@ -379,6 +383,32 @@
 							S = locate(S.type) in Deletion
 							S.add(data)
 						surroundings -= S
+			else if(ispath(A, /obj/item/natural) || A == /obj/item/grown/log/tree/stick)
+				while(amt > 0)
+					for(var/obj/item/natural/bundle/B in get_environment(user))
+						if(B.stacktype == A)
+							if(B.amount > amt)
+								B.amount -= amt
+								B.update_bundle()
+								switch(B.amount)
+									if(1)
+										new B.stacktype(B.loc)
+										qdel(B)
+									if(0)
+										qdel(B)
+								amt = 0
+								continue main_loop
+							else
+								qdel(B)
+								amt -= B.amount
+						else
+							continue
+					var/atom/movable/I
+					while(amt > 0)
+						I = locate(A) in surroundings
+						Deletion += I
+						surroundings -= I
+						amt--
 			else
 				var/atom/movable/I
 				while(amt > 0)
@@ -615,3 +645,4 @@
 			var/r = input(user, "What should I craft?") as null|anything in realdata
 			if(r)
 				construct_item(user, r)
+				user.mind.lastrecipe = r

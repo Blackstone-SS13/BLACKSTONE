@@ -354,3 +354,56 @@
 	baseturfs = list(/turf/open/floor/rogue/concrete)
 	climbdiff = 1
 	damage_deflection = 20
+
+/turf/closed/wall/mineral/rogue/stone/blue_moss
+	icon = 'icons/turf/walls/blue_mossy.dmi'
+
+/turf/closed/wall/mineral/rogue/stone/window/blue_moss
+	icon = 'icons/turf/walls/blue_mossy.dmi'
+
+/turf/closed/wall/mineral/rogue/stone/red_moss
+    icon = 'icons/turf/walls/red_mossy.dmi'
+
+/turf/closed/wall/mineral/rogue/stone/red_moss
+    icon = 'icons/turf/walls/red_mossy.dmi'
+/turf/closed/wall/mineral/rogue/decostone/mossy
+    name = "decorated mossy stone wall"
+    desc = "The mason did some good work here, a long time ago."
+    icon = 'icons/turf/Rougewall_mossy.dmi'
+    icon_state = "decostone-b-green"
+    climbdiff = 4
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/long
+    icon_state = "decostone-l-green"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/end
+    icon_state = "decostone-e-green"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/cand
+    icon_state = "decostone-cand-green"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/blue
+    name = "decorated mossy stonewall"
+    icon_state = "decostone-b-blue"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/blue/long
+    icon_state = "decostone-l-blue"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/blue/end
+    icon_state = "decostone-e-blue"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/blue/cand
+    icon_state = "decostone-cand-blue"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/red
+    name = "decorated mossy stonewall"
+    icon_state = "decostone-b-red"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/red/long
+    icon_state = "decostone-l-red"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/red/end
+    icon_state = "decostone-e-red"
+
+/turf/closed/wall/mineral/rogue/decostone/mossy/red/cand
+    icon_state = "decostone-cand-red"

@@ -20,6 +20,10 @@
 	whitelist_req = TRUE
 	give_bank_account = 47
 	min_pq = 2
+	max_pq = null
+
+/datum/outfit/job/roguetown/magician
+	allowed_patrons = list(/datum/patron/divine/noc)
 
 /datum/outfit/job/roguetown/magician/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -34,7 +38,7 @@
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	r_hand = /obj/item/rogueweapon/woodstaff
 	backl = /obj/item/storage/backpack/rogue/satchel
-	backpack_contents = list(/obj/item/slimepotion/lovepotion,/datum/reagent/berrypoison,/datum/reagent/medicine/healthpot)
+	backpack_contents = list(/obj/item/slimepotion/lovepotion,/obj/item/reagent_containers/glass/bottle/rogue/poison,/obj/item/reagent_containers/glass/bottle/rogue/healthpot)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/magic/arcane, pick(6,5), TRUE)
@@ -57,7 +61,7 @@
 			H.change_stat("speed", -1)
 			H.change_stat("intelligence", 1)
 			H.change_stat("perception", 1)
-			if(H.dna.species.id == "human")
+			if(H.dna.species.id == "humen")
 				belt = /obj/item/storage/belt/rogue/leather/plaquegold
 				cloak = null
 				head = /obj/item/clothing/head/roguetown/wizhat

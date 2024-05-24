@@ -12,14 +12,17 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
+		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc",
 	)
-	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	allowed_ages = ADULT_AGES_LIST
 	outfit = /datum/outfit/job/roguetown/vagrant
 	bypass_lastclass = TRUE
 	bypass_jobban = FALSE
 	min_pq = -30
+	max_pq = null
 
 	tutorial = "The stench of your piss-laden clothes dont bug you anymore, the glances of disgust and loathing others give you is just a friendly greeting; the only reason you've not been killed already is because Volfs are known to be repelled by decaying flesh. You're going to be a solemn reminder what happens when something unwanted is born into this world."
 	display_order = JDO_VAGRANT
@@ -62,7 +65,7 @@
 		l_hand = /obj/item/rogueweapon/huntingknife/idagger/steel/special // dog butchering knife
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(2,5), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/stealing, rand(2,5), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/stealing, 5, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(2,5), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE) //very good reading he is wise
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, rand(2,5), TRUE) // dog beating staff
@@ -109,7 +112,7 @@
 			shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/vagrant/l
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(1,5), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, rand(1,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(1,5), TRUE)
 		H.STALUC = rand(1, 20)
 	if(prob(5))
@@ -124,6 +127,8 @@
 	H.change_stat("intelligence", -4)
 	H.change_stat("constitution", -3)
 	H.change_stat("endurance", -3)
+	ADD_TRAIT(H, RTRAIT_NOSTINK, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_NASTY_EATER, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/vagrant
 	name = "Beggar"

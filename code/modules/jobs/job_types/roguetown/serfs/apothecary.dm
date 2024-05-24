@@ -12,14 +12,17 @@
 		"Half-Elf",
 		"Dwarf",
 		"Tiefling",
+		"Argonian",
 		"Dark Elf",
-		"Aasimar"
+		"Aasimar",
+		"Half Orc"
 	)
 	
 	outfit = /datum/outfit/job/roguetown/apothecary
 	outfit_female = /datum/outfit/job/roguetown/apothecary/female
 	display_order = 6
 	min_pq = -10
+	max_pq = null
 
 /datum/outfit/job/roguetown/apothecary
 	name = "Apothecary"

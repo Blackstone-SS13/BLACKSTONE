@@ -8,13 +8,10 @@
 
 	allowed_races = list(
 		"Humen",
-		"Elf",
 		"Half-Elf",
 		"Dwarf",
-		"Tiefling",
-		"Dark Elf",
-		"Aasimar"
-	)
+		"Half Orc",
+	) //only "tough" races
 	allowed_sexes = list(MALE, FEMALE)
 
 	tutorial = "There are ancient secrets within stone, something your creed has known since man built upon dirt. You've pride in your work, youre the only reason this place doesnt fall apart. The King could replace you in a heartbeat, prove to them why youre the Master Mason."
@@ -23,6 +20,7 @@
 	display_order = JDO_MASON
 	give_bank_account = 8
 	min_pq = 0
+	max_pq = null
 
 /datum/outfit/job/roguetown/mason/pre_equip(mob/living/carbon/human/H)
 	..()
