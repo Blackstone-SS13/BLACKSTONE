@@ -12,6 +12,7 @@
 	throwforce = 0
 	var/list/keys = list()
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_NECK|ITEM_SLOT_MOUTH|ITEM_SLOT_WRISTS
+	anvilrepair = /datum/skill/craft/blacksmithing
 
 /obj/item/keyring/Initialize()
 	. = ..()

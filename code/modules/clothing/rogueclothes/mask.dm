@@ -14,6 +14,7 @@
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
+	anvilrepair = /datum/skill/craft/armorsmithing
 //	block2add = FOV_BEHIND
 
 /obj/item/clothing/mask/rogue/spectacles/golden
@@ -25,6 +26,7 @@
 	integrity_failure = 0.5
 	resistance_flags = FIRE_PROOF
 	body_parts_covered = EYES
+	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/mask/rogue/spectacles/Initialize()
 	. = ..()
@@ -50,6 +52,7 @@
 	max_integrity = 20
 	integrity_failure = 0.5
 	block2add = FOV_RIGHT
+	sewrepair = TRUE
 
 /obj/item/clothing/mask/rogue/eyepatch/left
 	desc = "An eyepatch, fitted for the left eye."
@@ -61,6 +64,7 @@
 	desc = "Half of your face turned gold."
 	icon_state = "lmask"
 	sellprice = 50
+	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/mask/rogue/lordmask/l
 	icon_state = "lmask_l"
@@ -109,6 +113,7 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	experimental_onhip = TRUE
+	sewrepair = TRUE
 
 /obj/item/clothing/mask/rogue/shepherd/AdjustClothes(mob/user)
 	if(loc == user)
