@@ -10,6 +10,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound
 	/// Name of the wound, visible to players when inspecting a limb and such
 	var/name = "wound"
+	/// Name that appears on check_for_injuries()
+	var/check_name
 	/// Bodypart that owns this wound, in case it is not a simple one
 	var/obj/item/bodypart/bodypart_owner
 	/// Mob that owns this wound
@@ -71,6 +73,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		visible_name += " <span class='green'>(sewn)</span>"
 	return visible_name
 
+/// Description of this wound returned to the player when the bodypart is checked with check_for_injuries()
+/datum/wound/proc/get_check_name()
+	return check_name
+
 /// Returns whether or not this wound can be applied to a given bodypart
 /datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected)
 	if(bodypart_owner || owner || QDELETED(affected) || QDELETED(affected.owner))
@@ -98,6 +104,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	bodypart_owner = affected
 	owner = bodypart_owner.owner
 	on_bodypart_gain(affected)
+	on_mob_gain(affected.owner)
 	owner?.update_damage_overlays()
 	return TRUE
 
@@ -112,6 +119,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		return FALSE
 	var/mob/living/was_owner = owner
 	on_bodypart_loss(bodypart_owner)
+	on_mob_loss(bodypart_owner.owner)
 	LAZYREMOVE(bodypart_owner.wounds, src)
 	bodypart_owner = null
 	owner = null
@@ -128,7 +136,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		return FALSE
 	return TRUE
 
-/// Adds this wound to a given mob, simpler than adding to a bodypart - No extra effects
+/// Adds this wound to a given mob
 /datum/wound/proc/apply_to_mob(mob/living/affected)
 	if(QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
 		return
@@ -138,15 +146,25 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		remove_from_mob()
 	LAZYADD(affected.simple_wounds, src)
 	owner = affected
+	on_mob_gain(affected)
 	return TRUE
+
+/// Effects when this wound is applied to a given mob
+/datum/wound/proc/on_mob_gain(mob/living/affected)
+	return
 
 /// Removes this wound from a given, simpler than adding to a bodypart - No extra effects
 /datum/wound/proc/remove_from_mob()
 	if(!owner)
 		return FALSE
+	on_mob_loss(owner)
 	LAZYREMOVE(owner.simple_wounds, src)
 	owner = null
 	return TRUE
+
+/// Effects when this wound is removed from a given mob
+/datum/wound/proc/on_mob_loss(mob/living/affected)
+	return
 
 /// Called on handle_wounds(), on the life() proc
 /datum/wound/proc/on_life()
@@ -155,6 +173,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(passive_healing)
 		heal_wound(1)
 
+/// Called on handle_wounds(), on the life() proc
+/datum/wound/proc/on_death()
+	return
+	
 /// Heals this wound by the given amount, and deletes it if it's healed completely
 /datum/wound/proc/heal_wound(heal_amount)
 	// Wound cannot be healed normally, whp is null
@@ -184,6 +206,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	can_sew = FALSE
 	sleep_healing = max(sleep_healing, 1)
 	passive_healing = max(passive_healing, 1)
+	owner?.update_damage_overlays()
 	return TRUE
 
 /proc/should_embed_weapon(datum/wound/wound_or_boolean)

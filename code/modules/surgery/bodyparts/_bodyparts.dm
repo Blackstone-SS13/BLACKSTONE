@@ -61,13 +61,15 @@
 	var/dmg_overlay_type //the type of damage overlay (if any) to use when this bodypart is bruised/burned.
 
 	//Damage messages used by help_shake_act()
-	var/light_brute_msg = "is a little bruised"
-	var/medium_brute_msg = "is bruised"
-	var/heavy_brute_msg = "is heavily bruised"
+	var/heavy_brute_msg = "MANGLED"
+	var/medium_brute_msg = "battered"
+	var/light_brute_msg = "bruised"
+	var/no_bruise_msg = "unbruised"
 
-	var/light_burn_msg = "is blistered"
-	var/medium_burn_msg = "is burned"
-	var/heavy_burn_msg = "is peeling away"
+	var/heavy_burn_msg = "CHARRED"
+	var/medium_burn_msg = "blistered"
+	var/light_burn_msg = "numb"
+	var/no_burn_msg = "unburned"
 
 	var/add_extra = FALSE
 	var/offset
@@ -87,21 +89,14 @@
 	resistance_flags = FLAMMABLE
 
 /obj/item/bodypart/grabbedintents(mob/living/user, precise)
-	return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist, /datum/intent/grab/obj/smash)
+	return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 
 /obj/item/bodypart/chest/grabbedintents(mob/living/user, precise)
 	if(precise)
 		switch(precise)
-			if("groin")
-				return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/twist)
-	return list(/datum/intent/grab/obj/move, /datum/intent/grab/obj/shove)
-
-/obj/item/bodypart/examine(mob/user)
-	. = ..()
-	if(brute_dam > DAMAGE_PRECISION)
-		. += "<span class='warning'>This limb has [brute_dam > 30 ? "severe" : "minor"] bruising.</span>"
-	if(burn_dam > DAMAGE_PRECISION)
-		. += "<span class='warning'>This limb has [burn_dam > 30 ? "severe" : "minor"] burns.</span>"
+			if(BODY_ZONE_PRECISE_GROIN)
+				return list(/datum/intent/grab/move, /datum/intent/grab/twist)
+	return list(/datum/intent/grab/move, /datum/intent/grab/shove)
 
 /obj/item/bodypart/blob_act()
 	take_damage(max_damage)
@@ -118,10 +113,10 @@
 
 
 /obj/item/bodypart/onbite(mob/living/carbon/human/user)
-	if((user.mind && user.mind.has_antag_datum(/datum/species/zombie)) || istype(user.dna.species, /datum/species/werewolf))
+	if((user.mind && user.mind.has_antag_datum(/datum/antagonist/zombie)) || istype(user.dna.species, /datum/species/werewolf))
 		if(do_after(user, 50, target = src))
 			user.visible_message("<span class='warning'>[user] consumes [src]!</span>",\
-			"<span class='notice'>I consume [src]!</span>")
+							"<span class='notice'>I consume [src]!</span>")
 			playsound(get_turf(user), pick(dismemsound), 100, FALSE, -1)
 			new /obj/effect/gibspawner/generic(get_turf(src), user)
 			user.fully_heal()
@@ -333,11 +328,12 @@
 	//yes this does mean vampires can use rotten limbs
 	if((rotted || skeletonized) && !(owner.mob_biotypes & MOB_UNDEAD))
 		return BODYPART_DISABLED_ROT
+	for(var/datum/wound/ouchie as anything in wounds)
+		if(!ouchie.disabling)
+			continue
+		return BODYPART_DISABLED_WOUND
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS) || HAS_TRAIT(src, TRAIT_PARALYSIS))
 		return BODYPART_DISABLED_PARALYSIS
-	for(var/datum/wound/ouchie as anything in wounds)
-		if(ouchie.disabling)
-			return BODYPART_DISABLED_WOUND
 	var/total_dam = brute_dam + burn_dam
 	if((total_dam >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (total_dam >= (max_damage * 0.6))))
 		return BODYPART_DISABLED_DAMAGE
