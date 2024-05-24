@@ -84,8 +84,7 @@
 		dna.species.on_hit(P, src)
 
 
-/mob/living/carbon/human/bullet_act(obj/projectile/P, def_zone)
-
+/mob/living/carbon/human/bullet_act(obj/projectile/P, def_zone = BODY_ZONE_CHEST)
 	if(istype(P, /obj/projectile/beam)||istype(P, /obj/projectile/bullet))
 		if((P.damage_type == BURN) || (P.damage_type == BRUTE))
 			if(!P.nodamage && P.damage < src.health && isliving(P.firer))
