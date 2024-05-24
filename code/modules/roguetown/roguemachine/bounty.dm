@@ -74,7 +74,7 @@
 			correct_head = TRUE
 			say("A bounty has been sated.")
 			reward_amount += 80
-
+			break
 
 	if(correct_head)
 		budget2change(reward_amount, user)
