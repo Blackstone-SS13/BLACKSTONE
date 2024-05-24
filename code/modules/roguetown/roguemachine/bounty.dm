@@ -69,9 +69,12 @@
 			reward_amount += b.amount
 			GLOB.head_bounties -= b
 
-	if(stored_head.owner.mind?.has_antag_datum(/datum/antagonist/bandit))
-		say("A bounty has been sated.")
-		reward_amount += 80
+	for(var/mob/living/banditcheck in GLOB.mob_list)
+		if(banditcheck.mind?.has_antag_datum(/datum/antagonist/bandit) && banditcheck.real_name == stored_head.real_name)
+			correct_head = TRUE
+			say("A bounty has been sated.")
+			reward_amount += 80
+
 
 	if(correct_head)
 		sleep(1 SECONDS)
