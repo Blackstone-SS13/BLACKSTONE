@@ -668,11 +668,11 @@
 		return
 	if(resting)
 		if(!IsKnockdown() && !IsStun() && !IsParalyzed())
-			src.visible_message("<span class='info'>[src] stands up.</span>")
+			src.visible_message("<span class='info'>[src] begins to stand up.</span>")
 			if(move_after(src, 20, target = src))
 				set_resting(FALSE, FALSE)
 		else
-			src.visible_message("<span class='warning'>[src] tries to stand up.</span>")
+			src.visible_message("<span class='warning'>[src] struggles to stand up.</span>")
 	else
 		set_resting(TRUE, FALSE)
 

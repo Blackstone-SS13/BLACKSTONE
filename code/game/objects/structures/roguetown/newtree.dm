@@ -67,7 +67,7 @@
 /obj/structure/flora/newtree/attack_hand(mob/user)
 	if(isliving(user))
 		var/mob/living/L = user
-		if(L.stat != CONSCIOUS)
+		if(L.stat != CONSCIOUS || L.incapacitated() || !(L.mobility_flags & MOBILITY_STAND))
 			return
 		var/turf/target = get_step_multiz(user, UP)
 		if(!istype(target, /turf/open/transparent/openspace))
