@@ -9,6 +9,9 @@
 		var/obj/item/bodypart/L = X
 		if(L.body_zone == zone)
 			return L
+		for(var/iteminlist in L.subtargets)
+			if(iteminlist == zone)
+				return iteminlist
 
 /mob/living/carbon/proc/get_bodypart_complex(zones)
 	var/list/targets = list()
@@ -16,6 +19,9 @@
 		var/obj/item/bodypart/L = X
 		if(L.body_zone in zones)
 			targets += L
+		for(var/iteminlist in L.subtargets)
+			if(iteminlist in zones)
+				targets += iteminlist
 	if(targets.len)
 		return pick(targets)
 
