@@ -379,7 +379,9 @@
 					var/targetperception = (V.STAPER)
 					var/list/stealablezones = list("chest", "neck", "groin", "r_hand", "l_hand")
 					var/list/stealpos = list()
+					var/exp_to_gain = STAINT
 					if(stealroll > targetperception)
+					//TODO add exp here
 						if(U.get_active_held_item())
 							to_chat(src, "<span class='warning'>I can't pickpocket while my hand is full!</span>")
 							return
@@ -410,7 +412,9 @@
 							to_chat(src, "<span class='green'>I stole [picked]!</span>")
 							V.log_message("has had \the [picked] stolen by [key_name(U)]", LOG_ATTACK, color="black")
 							U.log_message("has stolen \the [picked] from [key_name(V)]", LOG_ATTACK, color="black")
+							exp_to_gain *= src.mind.get_learning_boon(thiefskill)
 						else
+							exp_to_gain /= 2 // these can be removed or changed on reviewer's discretion
 							to_chat(src, "<span class='warning'>I didn't find anything there. Perhaps I should look elsewhere.</span>")
 					if(stealroll <= 4)
 						V.log_message("has had an attempted pickpocket by [key_name(U)]", LOG_ATTACK, color="black")
@@ -420,6 +424,8 @@
 						V.log_message("has had an attempted pickpocket by [key_name(U)]", LOG_ATTACK, color="black")
 						U.log_message("has attempted to pickpocket [key_name(V)]", LOG_ATTACK, color="black")
 						to_chat(src, "<span class='danger'>I failed to pick the pocket!</span>")
+						exp_to_gain /= 5 // these can be removed or changed on reviewer's discretion
+					src.mind.adjust_experience(/datum/skill/misc/stealing, exp_to_gain, FALSE)
 					changeNext_move(mmb_intent.clickcd)
 				return
 			if(INTENT_SPELL)
