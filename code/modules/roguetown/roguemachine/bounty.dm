@@ -137,9 +137,9 @@
 
 	if(user.mind.known_people.len)
 		for(var/guys_name in user.mind.known_people)
-		eligible_players += guys_name
+			eligible_players += guys_name
 	else
-		to_chat(H, "<span class='warning'>I don't know anyone.</span>")
+		to_chat(user, "<span class='warning'>I don't know anyone.</span>")
 		return
 	var/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in eligible_players
 	if(isnull(target))
