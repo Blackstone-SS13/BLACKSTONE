@@ -37,7 +37,7 @@
 	)
 /datum/outfit/job/roguetown/adventurer/amazon/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.mind.assign_experiences(/datum/advclass/amazon::given_skills, TRUE, "Skills")
+	H.mind.assign_experiences(/datum/advclass/amazon::given_skills, TRUE, "skills")
 	// H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 	// H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 	// H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)

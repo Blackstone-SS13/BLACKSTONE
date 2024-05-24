@@ -296,9 +296,9 @@
 		else
 			numValue = skills[path]
 		switch(option)
-			if("Skills")
+			if("skills")
 				adjust_skillrank(path, numValue, TRUE) // change this to what i think is a rewritten proc?
-			if("Stats")
+			if("stats")
 				current.change_stat(path, numValue)
 
 

@@ -37,7 +37,6 @@
 		/datum/skill/misc/stealing = 5, \
 		/datum/skill/misc/riding = list(1,2), \
 		/datum/skill/craft/engineering = 1
-
 	)
 
 	stat_changes = list(
@@ -54,7 +53,7 @@
 	..()
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-	H.mind.assign_experiences(/datum/advclass/rogue::given_skills, TRUE, "Skills")
+	H.mind.assign_experiences(/datum/advclass/rogue::given_skills, TRUE, "skills")
 	// i don't like this, but since we'll know what datum goes here i don't see a big issue?
 	
 	// temp removal
@@ -91,7 +90,7 @@
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	
-	H.mind.assign_experiences(/datum/advclass/rogue::stat_changes, TRUE, "Stats")
+	H.mind.assign_experiences(/datum/advclass/rogue::stat_changes, TRUE, "stats")
 
 	// temp removal
 	// H.change_stat("strength", -1)
