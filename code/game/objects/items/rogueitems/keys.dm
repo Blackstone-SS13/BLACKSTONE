@@ -288,13 +288,6 @@
 	icon_state = "ekey"
 	lockid = "archive"
 //grenchensnacker
-
-/obj/item/roguekey/physician
-	name = "Physician key"
-	desc = "The key smells of herbs, feeling soothing to the touch."
-	icon_state = "greenkey"
-	lockid = "physician"
-
 /obj/item/roguekey/porta
 	name = "strange key"
 	desc = "Was this key enchanted by a wizard locksmith..?"//what is grenchensnacker.
