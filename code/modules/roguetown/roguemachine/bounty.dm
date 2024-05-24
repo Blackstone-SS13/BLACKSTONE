@@ -77,10 +77,7 @@
 
 
 	if(correct_head)
-		sleep(1 SECONDS)
-		playsound(src, 'sound/misc/coindispense.ogg', 100, FALSE, -1)
-		var/obj/item/roguecoin/copper/reward = new /obj/item/roguecoin/copper(machine_location)
-		reward.set_quantity(reward_amount)
+		budget2change(reward_amount, user)
 	else // No valid bounty for this head?
 		say("This skull carried no reward.")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
