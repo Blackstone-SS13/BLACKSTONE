@@ -292,7 +292,9 @@
 				return
 			if(INTENT_JUMP)
 				if(istype(src.loc, /turf/open/water))
-					to_chat(src, "<span class='warning'>I'm floating.</span>")
+					to_chat(src, "<span class='warning'>I'm floating in [get_turf(src)].</span>")
+					return
+				if(!A || QDELETED(A) || !A.loc)
 					return
 				if(A == src || A == src.loc)
 					return
@@ -306,8 +308,6 @@
 					return
 				if(lying)
 					to_chat(src, "<span class='warning'>I should stand up first.</span>")
-					return
-				if(!ismob(A) && !isturf(A))
 					return
 				if(A.z != src.z)
 					if(!HAS_TRAIT(src, RTRAIT_ZJUMP))
