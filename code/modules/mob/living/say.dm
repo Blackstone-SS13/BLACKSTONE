@@ -345,29 +345,30 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 
 /mob/living/can_speak(message) //For use outside of Say()
 	if(can_speak_basic(message) && can_speak_vocal(message))
-		return 1
+		return TRUE
+	return FALSE
 
 /mob/living/proc/can_speak_basic(message, ignore_spam = FALSE, forced = FALSE) //Check BEFORE handling of xeno and ling channels
 	if(client)
 		if(client.prefs.muted & MUTE_IC)
 			to_chat(src, "<span class='danger'>I cannot speak in IC (muted).</span>")
-			return 0
+			return FALSE
 		if(!(ignore_spam || forced) && client.handle_spam_prevention(message,MUTE_IC))
-			return 0
+			return FALSE
 
-	return 1
+	return TRUE
 
 /mob/living/proc/can_speak_vocal(message) //Check AFTER handling of xeno and ling channels
 	if(HAS_TRAIT(src, TRAIT_MUTE))
-		return 0
+		return FALSE
 
 	if(is_muzzled())
-		return 0
+		return FALSE
 
 	if(!IsVocal())
-		return 0
+		return FALSE
 
-	return 1
+	return TRUE
 
 /mob/living/proc/get_key(message)
 	var/key = copytext(message, 1, 2)
@@ -386,6 +387,9 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 /mob/living/proc/treat_message(message)
 	if(HAS_TRAIT(src, TRAIT_ZOMBIE_SPEECH))
 		message = "[repeat_string(rand(1, 3), "U")][repeat_string(rand(1, 6), "H")]..."
+	else if(HAS_TRAIT(src, TRAIT_GARGLE_SPEECH))
+		message = vocal_cord_torn(message)
+
 	if(HAS_TRAIT(src, TRAIT_UNINTELLIGIBLE_SPEECH))
 		message = unintelligize(message)
 

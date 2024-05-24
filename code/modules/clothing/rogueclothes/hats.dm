@@ -562,8 +562,8 @@
 	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/head/roguetown/helmet/heavy/pigface
-	name = "Pigface Bascinet"
-	desc = "A steel bascinet helmet with a pigface visor protecting the head, ears, nose, mouth and eyes."
+	name = "pigface bascinet"
+	desc = "A steel bascinet helmet with a pigface visor protecting the head, ears, nose, mouth, and eyes."
 	icon_state = "hounskull"
 	item_state = "hounskull"
 	adjustable = CAN_CADJUST
@@ -595,7 +595,7 @@
 		user.update_fov_angles()
 
 /obj/item/clothing/head/roguetown/helmet/bascinet
-	name = "Bascinet"
+	name = "bascinet"
 	desc = "A steel bascinet helmet without a visor protecting the the head and ears."
 	icon_state = "bascinet_novisor"
 	item_state = "bascinet_novisor"
