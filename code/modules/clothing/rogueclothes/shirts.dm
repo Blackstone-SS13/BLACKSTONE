@@ -140,6 +140,33 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
+/obj/item/clothing/suit/roguetown/shirt/tunic
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	name = "tunic"
+	desc = ""
+	body_parts_covered = CHEST|GROIN|VITALS
+	boobed = FALSE
+	icon_state = "tunic"
+	item_state = "undershirt"
+	sleevetype = "tunic"
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/green
+	color = CLOTHING_GREEN
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/blue
+	color = CLOTHING_BLUE
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/red
+	color = CLOTHING_RED
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/purple
+	color = CLOTHING_PURPLE
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/random/Initialize()
+	color = pick(CLOTHING_PURPLE, CLOTHING_RED, CLOTHING_BLUE, CLOTHING_GREEN)
+	..()
 /obj/item/clothing/suit/roguetown/shirt/dress
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "dress"
