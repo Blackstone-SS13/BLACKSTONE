@@ -114,7 +114,7 @@
 	var/lastgibto
 
 /mob/living/ongive(mob/user, params)
-	if(!ishuman(user))
+	if(!ishuman(user) || src == user)
 		return
 	var/mob/living/carbon/human/H = user
 	if(givingto == H && !H.get_active_held_item()) //take item being offered
