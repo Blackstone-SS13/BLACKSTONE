@@ -63,7 +63,7 @@
 
 /datum/supply_pack/rogue/luxury/listenst
 	name = "Emerald Choker"
-	cost = 110
+	cost = 250
 	contains = list(/obj/item/listenstone)
 
 /datum/supply_pack/rogue/luxury/riddleofsteel
