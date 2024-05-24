@@ -110,14 +110,15 @@
 	var/consult_menu
 	consult_menu += "<center>BOUNTIES<BR>"
 	consult_menu += "--------------<BR>"
-	for(var/mob/living/banditcheck in GLOB.player_list)
+	for(var/mob/living/banditcheck in GLOB.mob_list)
 		if(banditcheck.mind?.has_antag_datum(/datum/antagonist/bandit))
 			consult_menu += "The head of each Bandit is wanted by The Crown for 80 mammons.<BR>"
 			consult_menu += "--------------<BR>"
+			bounty_found = TRUE
 			break
-		bounty_found = TRUE
 	for(var/datum/bounty/saved_bounty in GLOB.head_bounties)
 		consult_menu += saved_bounty.banner
+		bounty_found = TRUE
 
 	if(bounty_found)
 		var/datum/browser/popup = new(user, "BOUNTIES", "", 500, 300)
