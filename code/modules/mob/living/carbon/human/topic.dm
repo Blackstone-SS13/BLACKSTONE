@@ -1,8 +1,6 @@
 /mob/living/carbon/human/Topic(href, href_list)
-	if(href_list["inspect_limb"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+	if(href_list["inspect_limb"] && (isobserver(usr) || usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)))
 		var/list/msg = list()
-		if(!ismob(usr))
-			return
 		var/mob/user = usr
 		var/obj/item/bodypart/BP = get_bodypart(check_zone(user.zone_selected))
 		msg += "<B>[capitalize(parse_zone(check_zone(user.zone_selected)))]:</B>"
@@ -46,8 +44,13 @@
 			msg += "<B>Limb is missing!</B>"
 		to_chat(usr, msg.Join("\n"))
 
-	if(href_list["check_hb"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
-		if(Adjacent(usr))
+	if(href_list["check_hb"])
+		if(isobserver(usr))
+			if(stat == DEAD)
+				to_chat(usr, "<B>No heartbeat...</B>")
+			else
+				to_chat(usr, "<B>The heart is still beating.</B>")
+		else if(Adjacent(usr) && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 			usr.visible_message("<span class='info'>[usr] tries to hear [src]'s heartbeat.</span>")
 			if(do_after(usr, 30, needhand = 1, target = src))
 				if(stat == DEAD)
