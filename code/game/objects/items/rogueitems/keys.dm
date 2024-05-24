@@ -258,12 +258,6 @@
 	icon_state = "greenkey"
 	lockid = "merc"
 
-/obj/item/roguekey/physician
-	name = "physician key"
-	desc = "The key smells of herbs, feeling soothing to the touch."
-	icon_state = "greenkey"
-	lockid = "physician"
-
 /obj/item/roguekey/puritan
 	name = "puritan's key"
 	desc = "This is an intricate key." // i have no idea what is this key about
