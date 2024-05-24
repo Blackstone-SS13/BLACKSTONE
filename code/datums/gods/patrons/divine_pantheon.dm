@@ -46,7 +46,7 @@
 	name = "Necra"
 	domain = "Goddess of Death and the Afterlife"
 	desc = "The Veiled Lady, a feared but respected God who leads the dead."
-	worshippers = " Necromancers, The Dead, Gravekeepers"
+	worshippers = "The Dead, Gravekeepers"
 	mob_traits = list(RTRAIT_NOSTINK)
 	t1 = /obj/effect/proc_holder/spell/targeted/burialrite
 	t2 = /obj/effect/proc_holder/spell/targeted/churn
@@ -64,7 +64,7 @@
 	desc = "The Loving Daughter of Psydon, gifted man medicine."
 	worshippers = "The Sick, Phyicians, Apothecaries"
 	mob_traits = list(RTRAIT_ROT_EATER)
-	t1 = /obj/effect/proc_holder/spell/invoked/attach_limb
+	t1 = /obj/effect/proc_holder/spell/invoked/attach_bodypart
 	t2 = /obj/effect/proc_holder/spell/invoked/heal
 	t3 = /obj/effect/proc_holder/spell/invoked/cure_rot
 

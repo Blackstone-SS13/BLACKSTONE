@@ -425,7 +425,10 @@
 			O.name = "[M.name]"
 			O.grabbed = M
 			O.grabbee = src
-			O.sublimb_grabbed = M.simple_limb_hit(zone_selected)
+			if(item_override)
+				O.sublimb_grabbed = item_override
+			else
+				O.sublimb_grabbed = M.simple_limb_hit(zone_selected)
 			put_in_hands(O)
 			O.update_hands(src)
 			if(HAS_TRAIT(src, TRAIT_STRONG_GRABBER) || item_override)
@@ -668,11 +671,11 @@
 		return
 	if(resting)
 		if(!IsKnockdown() && !IsStun() && !IsParalyzed())
-			src.visible_message("<span class='info'>[src] stands up.</span>")
+			src.visible_message("<span class='info'>[src] begins to stand up.</span>")
 			if(move_after(src, 20, target = src))
 				set_resting(FALSE, FALSE)
 		else
-			src.visible_message("<span class='warning'>[src] tries to stand up.</span>")
+			src.visible_message("<span class='warning'>[src] struggles to stand up.</span>")
 	else
 		set_resting(TRUE, FALSE)
 
@@ -753,8 +756,8 @@
 			for(var/S in mind.spell_list)
 				var/obj/effect/proc_holder/spell/spell = S
 				spell.updateButtonIcon()
-			if(mind.has_antag_datum(/datum/antagonist/zombie))
-				mind.remove_antag_datum(/datum/antagonist/zombie)
+			mind.remove_antag_datum(/datum/antagonist/zombie)
+
 /mob/living/proc/remove_CC(should_update_mobility = TRUE)
 	SetStun(0, FALSE)
 	SetKnockdown(0, FALSE)
@@ -875,7 +878,7 @@
 
 	. = ..()
 
-	update_sneak_invis(TRUE)
+	update_sneak_invis()
 
 	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1 && (pulledby != moving_from_pull))//separated from our puller and not in the middle of a diagonal move.
 		pulledby.stop_pulling()
@@ -1113,7 +1116,7 @@
 											"<span class='warning'>I struggle against [pulledby]'s grip!</span>", null, null, pulledby)
 							to_chat(pulledby, "<span class='warning'>[src] struggles against my grip!</span>")
 							return FALSE
-		if(HAS_TRAIT(H, RTRAIT_NOSEGRAB))
+		if(HAS_TRAIT(H, RTRAIT_NOSEGRAB) && !HAS_TRAIT(src, TRAIT_MISSING_NOSE))
 			var/obj/item/bodypart/head = get_bodypart(BODY_ZONE_HEAD)
 			for(var/obj/item/grabbing/G in grabbedby)
 				if(G.limb_grabbed == head)
@@ -1805,10 +1808,9 @@
 		return
 	changeNext_move(CLICK_CD_EXHAUSTED)
 	if(m_intent != MOVE_INTENT_SNEAK)
-		visible_message("<span class='info'>[src] looks around.</span>")
+		visible_message("<span class='info'>[src] begins looking around.</span>")
 	var/looktime = 50 - (STAPER * 2)
 	if(do_after(src, looktime, target = src))
-		var/huhsneak
 		for(var/mob/living/M in view(7,src))
 			if(M == src)
 				continue
@@ -1823,7 +1825,7 @@
 			if(prob(probby))
 				found_ping(get_turf(M), client, "hidden")
 				if(M.m_intent == MOVE_INTENT_SNEAK)
-					huhsneak = TRUE
+					emote("huh")
 					to_chat(M, "<span class='danger'>[src] sees me! I'm found!</span>")
 					M.mob_timers[MT_FOUNDSNEAK] = world.time
 			else
@@ -1834,8 +1836,6 @@
 						to_chat(M, "<span class='warning'>[src] didn't find me.</span>")
 				else
 					found_ping(get_turf(M), client, "hidden")
-		if(huhsneak)
-			emote("huh")
 
 		for(var/obj/O in view(7,src))
 			if(istype(O, /obj/item/restraints/legcuffs/beartrap))
