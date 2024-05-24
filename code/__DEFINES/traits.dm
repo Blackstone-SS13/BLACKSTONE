@@ -5,6 +5,7 @@
 #define RTRAIT_ZJUMP 					"High Jumping"
 #define RTRAIT_FUNNYMAN 				"Funny Entity"
 #define RTRAIT_NOSEGRAB 				"Intimidating"
+#define RTRAIT_NUTCRACKER 				"Domineering"
 #define RTRAIT_SEEPRICES				"Giza Blooded"
 #define RTRAIT_SEEPRICES_SHITTY			"Giza-in-training"
 #define RTRAIT_STRONGBITE				"Strong Bite"
@@ -45,6 +46,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_ZJUMP = "Who needs to climb when you can make great leaps?",
 	RTRAIT_FUNNYMAN = "Perhaps some form of benevolence from the Mad-God?",
 	RTRAIT_NOSEGRAB = "I love to grab idiots by their noses!",
+	RTRAIT_NUTCRACKER = "You know how to get their attention, grab them where it hurts.",
 	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	RTRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... <i>Kind of</i>.",
 	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
