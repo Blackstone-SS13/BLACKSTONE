@@ -287,8 +287,10 @@
 		to_chat(current, "<span class='warning'>My [S.name] has weakened!</span>")
 
 // just scoot in right here
-/datum/mind/proc/assign_experiences(list/skills, silent, option)
+/datum/mind/proc/assign_experiences(list/skills, silent, option, subclass = null)
 	// list(skill path = num)
+	if(subclass)
+		skills = skills[subclass]
 	for(var/path in skills)
 		var/numValue
 		if(islist(skills[path])) // cant assign pick when defining
