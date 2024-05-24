@@ -7,12 +7,14 @@
 	result = list(/obj/item/clothing/suit/roguetown/shirt/undershirt/webs)
 	reqs = list(/obj/item/natural/silk = 1)
 	craftdiff = 1
+	sellprice = 6
 
 /datum/crafting_recipe/roguetown/weaving/webbing
 	name = "webbed leggings"
 	result = list(/obj/item/clothing/under/roguetown/webs)
 	reqs = list(/obj/item/natural/silk = 2)
 	craftdiff = 1
+	sellprice = 9
 
 /datum/crafting_recipe/roguetown/weaving/cloak
 	name = "silk half cloak"
@@ -20,12 +22,14 @@
 	reqs = list(/obj/item/natural/cloth = 1,
 				/obj/item/natural/silk = 1)
 	craftdiff = 3
+	sellprice = 19
 
 /datum/crafting_recipe/roguetown/weaving/shirt
 	name = "formal silks"
 	result = list(/obj/item/clothing/suit/roguetown/shirt/undershirt/puritan)
 	reqs = list(/obj/item/natural/silk = 5)
 	craftdiff = 3
+	sellprice = 35
 
 /datum/crafting_recipe/roguetown/weaving/shepardmask
 	name = "half-mask"
@@ -33,6 +37,7 @@
 	reqs = list(/obj/item/natural/cloth = 1,
 				/obj/item/natural/silk = 1)
 	craftdiff = 1
+	sellprice = 30
 
 /datum/crafting_recipe/roguetown/weaving/astratarobe
 	name = "astrata robes"
@@ -40,6 +45,7 @@
 	reqs = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/silk = 1)
 	craftdiff = 4
+	sellprice = 25
 
 /datum/crafting_recipe/roguetown/weaving/astratahood
 	name = "solar hood"
@@ -47,6 +53,7 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/silk = 1)
 	craftdiff = 3
+	sellprice = 25
 
 /datum/crafting_recipe/roguetown/weaving/nocrobe
 	name = "noc robes"
@@ -54,6 +61,7 @@
 	reqs = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/silk = 1)
 	craftdiff = 4
+	sellprice = 25
 
 /datum/crafting_recipe/roguetown/weaving/nochood
 	name = "moon hood"
@@ -61,6 +69,7 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/silk = 1)
 	craftdiff = 3
+	sellprice = 25
 
 /datum/crafting_recipe/roguetown/weaving/dendorrobe
 	name = "dendor robes"
@@ -68,6 +77,7 @@
 	reqs = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/silk = 1)
 	craftdiff = 4
+	sellprice = 25
 
 /datum/crafting_recipe/roguetown/weaving/necrarobe
 	name = "necra robes"
@@ -75,6 +85,7 @@
 	reqs = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/silk = 1)
 	craftdiff = 4
+	sellprice = 25
 
 /datum/crafting_recipe/roguetown/weaving/necrahood
 	name = "necra hood"
@@ -82,3 +93,4 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/silk = 1)
 	craftdiff = 3
+	sellprice = 25

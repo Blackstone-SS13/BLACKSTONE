@@ -136,6 +136,7 @@
 	name = "leather whip"
 	result = /obj/item/rogueweapon/whip
 	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/stone = 1)
+	sellprice = 39
 
 /datum/crafting_recipe/roguetown/leather/drum
 	name = "Drum"
