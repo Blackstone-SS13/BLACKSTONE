@@ -80,7 +80,7 @@
 			say("By the authority of the gods, I pronounce you Ruler of all Rockhill!")
 			return
 
-/mob/living/carbon/human/proc/attempt_coronate(mov/living/carbon/human/giver)
+/mob/living/carbon/human/proc/attempt_coronate(mob/living/carbon/human/giver)
 	if(!mind)
 		return FALSE
 	if(mind.assigned_role == "King")
