@@ -380,29 +380,30 @@ Works together with spawning an observer, noted above.
 */
 
 /mob/proc/ghostize(can_reenter_corpse = TRUE, force_respawn = FALSE, drawskip = FALSE, admin = FALSE)
-	if(key)
-		stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
-//		stop_all_loops()
-		if(client)
-			SSdroning.kill_rain(client)
-			SSdroning.kill_loop(client)
-			SSdroning.kill_droning(client)
-//			var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.musicvol, channel = CHANNEL_MUSIC)
-//			play_priomusic(S)
-		var/mob/dead/observer/ghost	// Transfer safety to observer spawning proc.
-		if(admin && check_rights(R_WATCH, show_msg = FALSE))
-			ghost = new /mob/dead/observer/admin(src)
-		else if(drawskip)
-			ghost = new /mob/dead/observer/rogue/nodraw(src)
-		else
-			ghost = new /mob/dead/observer/rogue(src)
-		if(!admin)
-			ghost.add_client_colour(/datum/client_colour/monochrome)
-		ghost.ghostize_time = world.time
-		SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
-		ghost.can_reenter_corpse = can_reenter_corpse
-		ghost.key = key
-		return ghost
+	if(!key)
+		return
+	stop_sound_channel(CHANNEL_HEARTBEAT) //Stop heartbeat sounds because You Are A Ghost Now
+//	stop_all_loops()
+	if(client)
+		SSdroning.kill_rain(client)
+		SSdroning.kill_loop(client)
+		SSdroning.kill_droning(client)
+//		var/S = sound('sound/ambience/creepywind.ogg', repeat = 1, wait = 0, volume = client.prefs.musicvol, channel = CHANNEL_MUSIC)
+//		play_priomusic(S)
+	var/mob/dead/observer/ghost	// Transfer safety to observer spawning proc.
+	if(admin)
+		ghost = new /mob/dead/observer/admin(src)
+	else if(drawskip)
+		ghost = new /mob/dead/observer/rogue/nodraw(src)
+	else
+		ghost = new /mob/dead/observer/rogue(src)
+	if(!admin)
+		ghost.add_client_colour(/datum/client_colour/monochrome)
+	ghost.ghostize_time = world.time
+	SStgui.on_transfer(src, ghost) // Transfer NanoUIs.
+	ghost.can_reenter_corpse = can_reenter_corpse
+	ghost.key = key
+	return ghost
 
 /mob/living/carbon/human/ghostize(can_reenter_corpse = 1, force_respawn = FALSE, drawskip = FALSE, admin = FALSE)
 	if(mind)

@@ -34,7 +34,7 @@
 		return
 	var/mob/living/carbon/carbon_owner = owner
 	if(!carbon_owner.stat && prob(7))
-		carbon_owner.vomit(1, blood = TRUE)
+		carbon_owner.vomit(1)
 
 /datum/wound/cbt/smite
 	name = "testicular evisceration"
