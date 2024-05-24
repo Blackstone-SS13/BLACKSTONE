@@ -64,12 +64,14 @@
 	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP
 	body_parts_covered = null
 	experimental_onhip = TRUE
-	var/wet = 0
 	max_integrity = 20
 	muteinmouth = TRUE
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/cloth
+	var/wet = 0
+	/// Effectiveness when used as a bandage, how much bloodloss we can tampon
+	var/bandage_effectiveness = 0.9
 
 /obj/item/natural/cloth/examine(mob/user)
 	. = ..()

@@ -372,7 +372,7 @@
 	sleevetype = null
 	sleeved = null
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	dynamic_hair_suffix = "+generic"
 	bloody_icon_state = "helmetblood"
 	anvilrepair = /datum/skill/craft/armorsmithing
@@ -459,7 +459,7 @@
 	flags_inv = HIDEEARS|HIDEFACE
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/steel
 
@@ -563,15 +563,14 @@
 
 /obj/item/clothing/head/roguetown/helmet/heavy/pigface
 	name = "pigface bascinet"
-	desc = "a steel bascinet helmet with a pigface styled visor protecting the ears, nose and eyes."
+	desc = "A steel bascinet helmet with a pigface visor protecting the head, ears, nose, mouth, and eyes."
 	icon_state = "hounskull"
 	item_state = "hounskull"
 	adjustable = CAN_CADJUST
 	emote_environment = 3
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
-	flags_cover = HEADCOVERSEYES
-	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES
-	block2add = FOV_BEHIND
+	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
+	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/head/roguetown/helmet/heavy/pigface/AdjustClothes(mob/user)
@@ -597,12 +596,13 @@
 
 /obj/item/clothing/head/roguetown/helmet/bascinet
 	name = "bascinet"
-	desc = "a steel bascinet helmet without a visor protecting the the head and ears."
+	desc = "A steel bascinet helmet without a visor protecting the the head and ears."
 	icon_state = "bascinet_novisor"
 	item_state = "bascinet_novisor"
 	emote_environment = 3
 	body_parts_covered = HEAD|HAIR|EARS
 	flags_inv = HIDEEARS|HIDEHAIR
+	block2add = FOV_BEHIND
 	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/head/roguetown/helmet/leather
@@ -612,8 +612,9 @@
 	body_parts_covered = HEAD|HAIR|EARS|NOSE
 	icon_state = "leatherhelm"
 	armor = list("melee" = 27, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_BLUNT, BCLASS_TWIST)
 	anvilrepair = null
+	smeltresult = null
 	sewrepair = TRUE
 	blocksound = SOFTHIT
 
@@ -625,7 +626,7 @@
 	icon_state = "volfhead"
 	item_state = "volfhead"
 	armor = list("melee" = 27, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_BLUNT, BCLASS_TWIST)
 	anvilrepair = null
 	sewrepair = TRUE
 	blocksound = SOFTHIT

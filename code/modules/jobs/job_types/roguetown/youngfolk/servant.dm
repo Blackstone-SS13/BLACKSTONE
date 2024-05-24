@@ -30,6 +30,8 @@
 		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt

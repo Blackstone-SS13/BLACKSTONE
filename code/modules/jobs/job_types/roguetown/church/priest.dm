@@ -27,9 +27,6 @@
 
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
-	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
-	H.verbs |= /mob/living/carbon/human/proc/churchannouncement
 	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 	head = /obj/item/clothing/head/roguetown/priestmask
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/priest
@@ -40,6 +37,8 @@
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 	id = /obj/item/clothing/ring/active/nomag
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/priest
+	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/needle/pestra = 1)
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/templar)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/monk)
@@ -59,6 +58,9 @@
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 	C.grant_spells_priest(H)
 
+	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
+	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
+	H.verbs |= /mob/living/carbon/human/proc/churchannouncement
 //	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 //		H.underwear = "Femleotard"
 //		H.underwear_color = CLOTHING_BLACK

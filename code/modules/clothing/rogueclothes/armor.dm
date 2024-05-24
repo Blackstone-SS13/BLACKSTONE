@@ -33,7 +33,6 @@
 	icon_state = "haubergeon"
 	armor = list("melee" = 100, "bullet" = 20, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
-
 	blocksound = CHAINHIT
 	var/do_sound = FALSE
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
@@ -89,7 +88,7 @@
 	icon_state = "halfplate"
 	item_state = "halfplate"
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	nodismemsleeves = TRUE
 	max_integrity = 500
 	allowed_sex = list(MALE, FEMALE)
@@ -190,7 +189,7 @@
 	blocksound = SOFTHIT
 	body_parts_covered = CHEST|GROIN|VITALS|LEGS|ARMS
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	allowed_sex = list(MALE, FEMALE)
 	nodismemsleeves = TRUE
 	max_integrity = 350
@@ -241,7 +240,7 @@
 	blocksound = PLATEHIT
 	body_parts_covered = CHEST|GROIN|VITALS|ARMS
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	max_integrity = 250
 	armor_class = ARMOR_CLASS_HEAVY
 
@@ -253,6 +252,8 @@
 	icon_state = "armordress"
 	armor = list("melee" = 50, "bullet" = 10, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
+	armor = list("melee" = 50, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
 	allowed_sex = list("female")
 	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "aasimar", "halforc")
@@ -324,7 +325,7 @@
 	icon_state = "studleather"
 	item_state = "studleather"
 	blocksound = SOFTHIT
-	prevent_crits = list(BCLASS_CUT,BCLASS_BLUNT,BCLASS_CHOP)
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_CHOP)
 	nodismemsleeves = TRUE
 	body_parts_covered = CHEST|GROIN|VITALS
 	max_integrity = 300

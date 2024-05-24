@@ -425,7 +425,10 @@
 			O.name = "[M.name]"
 			O.grabbed = M
 			O.grabbee = src
-			O.sublimb_grabbed = M.simple_limb_hit(zone_selected)
+			if(item_override)
+				O.sublimb_grabbed = item_override
+			else
+				O.sublimb_grabbed = M.simple_limb_hit(zone_selected)
 			put_in_hands(O)
 			O.update_hands(src)
 			if(HAS_TRAIT(src, TRAIT_STRONG_GRABBER) || item_override)
@@ -668,11 +671,11 @@
 		return
 	if(resting)
 		if(!IsKnockdown() && !IsStun() && !IsParalyzed())
-			src.visible_message("<span class='info'>[src] stands up.</span>")
+			src.visible_message("<span class='info'>[src] begins to stand up.</span>")
 			if(move_after(src, 20, target = src))
 				set_resting(FALSE, FALSE)
 		else
-			src.visible_message("<span class='warning'>[src] tries to stand up.</span>")
+			src.visible_message("<span class='warning'>[src] struggles to stand up.</span>")
 	else
 		set_resting(TRUE, FALSE)
 
@@ -753,8 +756,8 @@
 			for(var/S in mind.spell_list)
 				var/obj/effect/proc_holder/spell/spell = S
 				spell.updateButtonIcon()
-			if(mind.has_antag_datum(/datum/antagonist/zombie))
-				mind.remove_antag_datum(/datum/antagonist/zombie)
+			mind.remove_antag_datum(/datum/antagonist/zombie)
+
 /mob/living/proc/remove_CC(should_update_mobility = TRUE)
 	SetStun(0, FALSE)
 	SetKnockdown(0, FALSE)
@@ -794,6 +797,11 @@
 	cure_husk()
 	hallucination = 0
 	heal_overall_damage(INFINITY, INFINITY, INFINITY, null, TRUE) //heal brute and burn dmg on both organic and robotic limbs, and update health right away.
+	for(var/datum/wound/wound as anything in get_wounds())
+		if(admin_revive)
+			qdel(wound)
+		else
+			wound.heal_wound(wound.whp)
 	ExtinguishMob()
 	fire_stacks = 0
 	confused = 0
@@ -1108,7 +1116,7 @@
 											"<span class='warning'>I struggle against [pulledby]'s grip!</span>", null, null, pulledby)
 							to_chat(pulledby, "<span class='warning'>[src] struggles against my grip!</span>")
 							return FALSE
-		if(HAS_TRAIT(H, RTRAIT_NOSEGRAB))
+		if(HAS_TRAIT(H, RTRAIT_NOSEGRAB) && !HAS_TRAIT(src, TRAIT_MISSING_NOSE))
 			var/obj/item/bodypart/head = get_bodypart(BODY_ZONE_HEAD)
 			for(var/obj/item/grabbing/G in grabbedby)
 				if(G.limb_grabbed == head)
@@ -1800,7 +1808,7 @@
 		return
 	changeNext_move(CLICK_CD_EXHAUSTED)
 	if(m_intent != MOVE_INTENT_SNEAK)
-		visible_message("<span class='info'>[src] looks around.</span>")
+		visible_message("<span class='info'>[src] begins looking around.</span>")
 	var/looktime = 50 - (STAPER * 2)
 	if(do_after(src, looktime, target = src))
 		for(var/mob/living/M in view(7,src))

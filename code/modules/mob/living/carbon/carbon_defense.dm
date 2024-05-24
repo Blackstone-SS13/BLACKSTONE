@@ -74,7 +74,7 @@
 	if(BP)
 		testing("projwound")
 		var/newdam = P.damage * (100-blocked)/100
-		BP.attacked_by(P.woundclass, newdam, zone_precise = def_zone)
+		BP.bodypart_attacked_by(P.woundclass, newdam, zone_precise = def_zone)
 		return TRUE
 
 /mob/living/carbon/check_projectile_embed(obj/projectile/P, def_zone, blocked)
@@ -91,7 +91,7 @@
 				return TRUE
 
 /mob/living/carbon/send_pull_message(mob/living/target)
-	var/used_limb = "chest"
+	var/used_limb = parse_zone(BODY_ZONE_CHEST)
 	var/obj/item/grabbing/I
 	if(active_hand_index == 1)
 		I = r_grab
@@ -136,12 +136,15 @@
 
 /mob/living/carbon/proc/find_used_grab_limb(mob/living/user) //for finding the exact limb or inhand to grab
 	var/used_limb = BODY_ZONE_CHEST
+	var/missing_nose = HAS_TRAIT(src, TRAIT_MISSING_NOSE)
 	var/obj/item/bodypart/affecting
 	affecting = get_bodypart(check_zone(user.zone_selected))
 	if(user.zone_selected && affecting)
 		if(user.zone_selected in affecting.grabtargets)
-			//used_limb = parse_zone(user.zone_selected, src)
-			used_limb = user.zone_selected
+			if(missing_nose && user.zone_selected == BODY_ZONE_PRECISE_NOSE)
+				used_limb = BODY_ZONE_HEAD
+			else
+				used_limb = user.zone_selected
 		else
 			used_limb = affecting.body_zone
 	return used_limb
@@ -208,7 +211,7 @@
 	var/statforce = get_complex_damage(I, user)
 	if(statforce)
 		next_attack_msg.Cut()
-		affecting.attacked_by(user.used_intent.blade_class, statforce)
+		affecting.bodypart_attacked_by(user.used_intent.blade_class, statforce)
 		apply_damage(statforce, I.damtype, affecting)
 		if(I.damtype == BRUTE && affecting.status == BODYPART_ORGANIC)
 			if(prob(statforce))
