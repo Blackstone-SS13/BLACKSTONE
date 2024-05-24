@@ -6,6 +6,24 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/dbomb
 	traits_applied = list(RTRAIT_HEAVYARMOR)
 
+	stat_changes = list(
+		"strength" = 1,
+		"endurance" = 1
+		)
+
+	given_skills = list(
+		/datum/skill/combat/axesmaces = 3,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/combat/wrestling = 2,
+		/datum/skill/craft/crafting = 4,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 1,
+		/datum/skill/misc/sewing = 1,
+		/datum/skill/misc/athletics = 1,
+		/datum/skill/misc/medicine = 1
+	)
+
+
 /datum/outfit/job/roguetown/adventurer/dbomb/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/armingcap/dwarf
@@ -26,14 +44,7 @@
 		beltr = /obj/item/rogueweapon/hammer
 	if(prob(50))
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
-	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-	H.change_stat("strength", 1)
-	H.change_stat("endurance", 1)
+
+	H.mind.assign_experiences(/datum/advclass/dbomb::given_skills, TRUE, "skills")
+	H.mind.assign_experiences(/datum/advclass/dbomb::stat_changes, TRUE, "stats")
+

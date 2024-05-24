@@ -18,6 +18,22 @@
 	pickprob = 11
 	traits_applied = list(RTRAIT_NOSTINK)
 
+	given_skills = list(
+        /datum/skill/combat/axesmaces = 1, 
+        /datum/skill/combat/wrestling = 1, 
+        /datum/skill/combat/knives = 2, 
+        /datum/skill/combat/unarmed = 1, 
+        /datum/skill/craft/crafting = 1, 
+        /datum/skill/misc/reading = 2, 
+        /datum/skill/misc/swimming = 2, 
+        /datum/skill/misc/climbing = 4
+)
+	stat_changes = list(
+        "strength" = 1, 
+        "perception" = 1, 
+        "intelligence" = -2
+)
+
 /datum/outfit/job/roguetown/adventurer/gravedigger/pre_equip(mob/living/carbon/human/H)
 	..()
 	pants = /obj/item/clothing/under/roguetown/tights/black
@@ -35,14 +51,6 @@
 	backr = /obj/item/rogueweapon/shovel
 	head = /obj/item/clothing/head/roguetown/puritan
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 4, TRUE)
-		H.change_stat("strength", 1)
-		H.change_stat("perception", 1)
-		H.change_stat("intelligence", -2)
+		H.mind.assign_experiences(/datum/advclass/gravedigger::given_skills, TRUE, "skills")
+		H.mind.assign_experiences(/datum/advclass/gravedigger::stat_changes, TRUE, "stats")
+

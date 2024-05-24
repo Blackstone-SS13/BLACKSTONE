@@ -29,6 +29,14 @@
 
 	)
 
+	stat_changes = list(
+		"strength" = 2, \
+		"intelligence" = 2, \
+		"endurance" = 2, \
+		"speed" = 1, \
+		"perception" = 2, \
+		"fortune" = 5
+	)
 
 /datum/outfit/job/roguetown/adventurer/heartfeltlord/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -45,27 +53,8 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	id = /obj/item/scomstone
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-		H.change_stat("strength", 2)
-		H.change_stat("intelligence", 2)
-		H.change_stat("endurance", 2)
-		H.change_stat("speed", 1)
-		H.change_stat("perception", 2)
-		H.change_stat("fortune", 5)
+		H.mind.assign_experiences(/datum/advclass/heartfeltlord::given_skills, TRUE, "skills")
+		H.mind.assign_experiences(/datum/advclass/heartfeltlord::stat_changes, TRUE, "skills")
 
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
