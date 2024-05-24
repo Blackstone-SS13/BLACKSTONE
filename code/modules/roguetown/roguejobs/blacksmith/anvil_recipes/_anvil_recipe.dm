@@ -28,8 +28,7 @@
 	var/moveup = 1
 	var/proab = 3
 	if(user.mind)
-		moveup += (user.mind.get_skill_level(appro_skill) * 6) 
-		moveup *= breakthrough == 1 ? 2 : 1
+		moveup += round((user.mind.get_skill_level(appro_skill) * 6) * (breakthrough == 1 ? 1.5 : 1))
 		moveup -= 3 * craftdiff
 		if(!user.mind.get_skill_level(appro_skill))
 			proab = 23
@@ -51,7 +50,7 @@
 				qdel(P)
 			return FALSE
 		else
-			user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
+			user.visible_message("<span class='warning'>[user] fumbles with the bar!</span>")
 			return FALSE
 	else
 		if(user.mind)
@@ -62,7 +61,10 @@
 				//i feel like leveling up takes forever regardless, this would just make it faster
 				if(amt2raise > 0)
 					user.mind.adjust_experience(appro_skill, amt2raise * boon, FALSE)
-		user.visible_message("<span class='info'>[user] strikes the bar!</span>")
+		if(breakthrough)
+			user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
+		else
+			user.visible_message("<span class='info'>[user] strikes the bar!</span>")
 		return TRUE
 
 /datum/anvil_recipe/proc/item_added(mob/user)
