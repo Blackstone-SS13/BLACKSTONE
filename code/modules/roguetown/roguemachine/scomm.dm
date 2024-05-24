@@ -284,7 +284,7 @@
 	muteinmouth = TRUE
 	var/listening = TRUE
 	var/speaking = TRUE
-	sellprice = 100
+	sellprice = 200
 
 
 /obj/item/listenstone/MiddleClick(mob/user)
