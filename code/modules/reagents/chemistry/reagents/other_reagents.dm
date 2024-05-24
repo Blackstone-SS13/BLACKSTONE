@@ -162,7 +162,7 @@
 	if(!HAS_TRAIT(M, RTRAIT_NASTY_EATER))
 		M.adjustToxLoss(1)
 		M.add_nausea(50)
-	..()
+	return ..()
 
 /*
  *	Water reaction to turf

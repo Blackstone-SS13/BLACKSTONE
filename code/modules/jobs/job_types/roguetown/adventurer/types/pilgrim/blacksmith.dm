@@ -1,5 +1,7 @@
 /datum/advclass/blacksmith
 	name = "Blacksmith"
+	tutorial = "A skilled blacksmith, able to forge capable weapons for warriors in the bog, \
+	only after building a forge for themselves ofourse"
 	allowed_sexes = list("male", "female")
 	allowed_races = list(
 		"Humen",
@@ -25,7 +27,7 @@
 
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	gloves = /obj/item/clothing/gloves/roguetown/leather
-	cloak = /obj/item/clothing/cloak/apron/brown
+	cloak = /obj/item/clothing/cloak/apron/blacksmith
 	mouth = /obj/item/rogueweapon/huntingknife
 	pants = /obj/item/clothing/under/roguetown/trou
 
@@ -41,7 +43,7 @@
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(1,2,3), TRUE) // If you can make a sword you can swing one.
 			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(2,2,3), TRUE) 
-			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(0,1), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE) 
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)

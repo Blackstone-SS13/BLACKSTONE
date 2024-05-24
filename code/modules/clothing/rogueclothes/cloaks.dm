@@ -148,7 +148,7 @@
 
 /obj/item/clothing/cloak/tabard/crusader/necra
 	color = "#222223"
-	detail_color = "#CACBC5" 
+	detail_color = "#CACBC5"
 
 /obj/item/clothing/cloak/tabard/crusader/pestra
 	color = CLOTHING_WHITE
@@ -564,6 +564,16 @@
 	boobed = TRUE
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 
+/obj/item/clothing/cloak/apron/blacksmith
+	name = "leather apron"
+	desc = "A leather apron used by those who temper metals and work forges."
+	color = null
+	icon_state = "leather_apron"
+	item_state = "leather_apron"
+	body_parts_covered = CHEST|GROIN
+	armor = list("melee" = 12, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 24, "acid" = 0)
+	boobed = TRUE
+
 /obj/item/clothing/cloak/apron/brown
 	color = CLOTHING_BROWN
 
@@ -725,6 +735,7 @@
 
 /obj/item/clothing/cloak/cape/guard
 	color = CLOTHING_RED
+
 /obj/item/clothing/cloak/cape/guard/Initialize()
 	. = ..()
 	if(GLOB.lordprimary)
@@ -775,7 +786,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
+	allowed_sex = list(MALE, FEMALE)
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
 	nodismemsleeves = TRUE
 
@@ -802,7 +813,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
+	allowed_sex = list(MALE, FEMALE)
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc")
 	sellprice = 50
 	nodismemsleeves = TRUE
@@ -815,7 +826,7 @@
 	sleeved = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
-	allowed_sex = list(MALE)
+	allowed_sex = list(MALE, FEMALE)
 	allowed_race = list("humen", "tiefling", "argonian", "aasimar", "halforc", "goblinp")
 	sellprice = 50
 	nodismemsleeves = TRUE
@@ -929,3 +940,60 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+
+//Short hoods for guards
+
+/obj/item/clothing/cloak/stabard/guardhood
+	name = "guard hood"
+	desc = "A hood with the lord's heraldic colors."
+	color = CLOTHING_RED
+	detail_tag = "_spl"
+	detail_color = CLOTHING_PURPLE
+	icon_state = "guard_hood"
+	body_parts_covered = CHEST
+
+/obj/item/clothing/cloak/stabard/guardhood/attack_right(mob/user)
+	if(picked)
+		return
+	var/the_time = world.time
+	var/chosen = input(user, "Select a design.","Tabard Design") as null|anything in list("Split")
+	if(world.time > (the_time + 10 SECONDS))
+		return
+	if(!chosen)
+		return
+	picked = TRUE
+	switch(chosen)
+		if("Split")
+			detail_tag = "_spl"
+	update_icon()
+	if(ismob(loc))
+		var/mob/L = loc
+		L.update_inv_cloak()
+
+/obj/item/clothing/cloak/stabard/guardhood/Initialize()
+	..()
+	if(GLOB.lordprimary)
+		lordcolor(GLOB.lordprimary,GLOB.lordsecondary)
+	else
+		GLOB.lordcolor += src
+
+/obj/item/clothing/cloak/stabard/guardhood/update_icon()
+	cut_overlays()
+	if(get_detail_tag())
+		var/mutable_appearance/pic = mutable_appearance(icon(icon, "[icon_state][detail_tag]"))
+		pic.appearance_flags = RESET_COLOR
+		if(get_detail_color())
+			pic.color = get_detail_color()
+		add_overlay(pic)
+
+/obj/item/clothing/cloak/stabard/guardhood/lordcolor(primary,secondary)
+	color = primary
+	detail_color = secondary
+	update_icon()
+	if(ismob(loc))
+		var/mob/L = loc
+		L.update_inv_cloak()
+
+/obj/item/clothing/cloak/stabard/guardhood/Destroy()
+	GLOB.lordcolor -= src
+	return ..()

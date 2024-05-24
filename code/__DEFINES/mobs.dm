@@ -71,7 +71,7 @@
 #define BODYPART_NOT_DISABLED 0
 #define BODYPART_DISABLED_DAMAGE 1
 #define BODYPART_DISABLED_PARALYSIS 2 //either a fall or twisting the limb
-#define BODYPART_DISABLED_FRACTURE 3 //bone fracture
+#define BODYPART_DISABLED_WOUND 3 //bone fracture
 #define BODYPART_DISABLED_ROT 4 //limb is rotten oh nooo
 
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
@@ -194,6 +194,7 @@
 #define DISGUST_LEVEL_DISGUSTED 75
 #define DISGUST_LEVEL_VERYGROSS 50
 #define DISGUST_LEVEL_GROSS 25
+#define DISGUST_LEVEL_SLIGHTLYGROSS 10
 
 //Used as an upper limit for species that continuously gain nutriment
 #define NUTRITION_LEVEL_ALMOST_FULL 995

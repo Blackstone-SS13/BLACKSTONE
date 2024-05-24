@@ -376,10 +376,9 @@
 	..()
 	//Puke if toxloss is too high
 	if(!stat)
-		if(prob(33))
-			if(getToxLoss() >= 75)
-				mob_timers["puke"] = world.time
-				vomit(1, blood = TRUE)
+		if(prob(33) && getToxLoss() >= 75)
+			mob_timers["puke"] = world.time
+			vomit(1, blood = TRUE)
 
 /mob/living/carbon/human/has_smoke_protection()
 	if(wear_mask)

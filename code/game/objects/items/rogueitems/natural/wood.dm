@@ -27,6 +27,17 @@
 	w_class = WEIGHT_CLASS_BULKY
 	smeltresult = /obj/item/rogueore/coal
 
+/obj/item/grown/log/tree/bowpartial
+	name = "unstrung bow"
+	desc = "A partially completed bow, still waiting to be strung."
+	icon_state = "bowpartial"
+	max_integrity = 30
+	firefuel = 10 MINUTES
+	twohands_required = FALSE
+	gripped_intents = null
+	w_class = WEIGHT_CLASS_BULKY
+	smeltresult = /obj/item/rogueore/coal
+
 /obj/item/grown/log/tree/stick
 	seed = null
 	name = "stick"

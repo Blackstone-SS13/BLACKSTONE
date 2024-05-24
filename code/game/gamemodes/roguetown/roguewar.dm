@@ -120,10 +120,10 @@
 	"Knight",
 	"Merchant",
 	"Gatemaster",
-	"Sheriff",
+	"Guard Captain",
 	"Inquisitor",
-	"Village Elder",
-	"Town Guard")
+	"Bog Elder",
+	"Watchman")
 	var/num_bandits = 0
 	if(num_players() >= 10)
 		num_bandits = CLAMP(round(num_players() / 10), 1, 4)
@@ -237,7 +237,7 @@
 	"Shepherd",
 	"Monk",
 	"Cleric",
-	"Sheriff")
+	"Guard Captain")
 	var/proab
 #ifdef TESTSERVER
 	proab = 100

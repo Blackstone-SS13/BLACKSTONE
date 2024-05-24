@@ -129,7 +129,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/sheriff
-	name = "Sheriff"
+	name = "Guard Captain"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/barkeep
@@ -148,12 +148,16 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Court Magician"
 	icon_state = "arrow"
 
+/obj/effect/landmark/start/physician
+	name = "Court Physician"
+	icon_state = "arrow"
+
 /obj/effect/landmark/start/guardsman
-	name = "Town Guard"
+	name = "Watchman"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/manorguardsman
-	name = "Castle Guard"
+	name = "Man at Arms"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/bogmaster
@@ -189,7 +193,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/woodsman
-	name = "Village Elder"
+	name = "Bog Elder"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/priest
@@ -282,7 +286,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/gravedigger
-	name = "Gravedigger"
+	name = "Mortician"
 	icon_state = "arrow"
 
 /obj/effect/landmark/start/vagrant
