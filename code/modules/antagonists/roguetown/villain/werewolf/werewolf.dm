@@ -61,6 +61,7 @@
 	if(increase_votepwr)
 		forge_werewolf_objectives()
 	finalize_werewolf()
+
 	wolfname = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
 
 	// SPELL TESTING
@@ -97,60 +98,54 @@
 	
 
 /datum/antagonist/werewolf/on_life(mob/user)
-	if(!user)
-		return
+
+	if(!user) return
 	var/mob/living/carbon/human/H = user
-	if(H.stat == DEAD)
-		return
-	if(H.advsetup)
-		return
+	if(H.stat == DEAD) return
+	if(H.advsetup) return
 
-	if(transformed)
-		H.real_name = wolfname
-		H.name = "WEREVOLF"
-
-	if(!transforming && !transformed)
-		if(world.time % 5)
-			if(GLOB.tod == "night")
-				if(isturf(H.loc))
-					var/turf/T = H.loc
-					if(T.can_see_sky())
-						transforming = world.time
-						to_chat(H, "<span class='userdanger'>THE MOONLIGHT SCORNS ME... THE LUPINE MARK!</span>")
-						H.flash_fullscreen("redflash3")
-
-	if(transforming)
-		if(world.time >= transforming + 40 SECONDS)
-			H.flash_fullscreen("redflash3")
-			transforming = FALSE
-			pre_transform = FALSE
-			if(transformed)
-				transformed = FALSE
-				H.werewolf_untransform()
-			else
-				transformed = TRUE
-				H.werewolf_transform()
-		else if(world.time >= transforming + 35 SECONDS)
-			if(!pre_transform)
-				pre_transform = TRUE
-				if(transformed)
-					H.emote("rage", forced = TRUE)
-				else
-					H.emote("agony", forced = TRUE)
-				H.flash_fullscreen("redflash3")
-				H.Stun(30)
-				to_chat(H, "<span class='userdanger'>THE PAIN!</span>")
-	else
-		if(transformed)
-			if(H.m_intent != MOVE_INTENT_SNEAK)
-				if(world.time > next_idle_sound + 8 SECONDS)
-					next_idle_sound = world.time
-					H.emote("idle")
-			if(GLOB.tod != "night")
-				H.flash_fullscreen("redflash1")
-				to_chat(H, "<span class='warning'>The curse begins to fade...</span>")
-				transforming = world.time
+	// Werewolf transforms at night AND under the sky
+	if(!transformed && !transforming)
+		if(GLOB.tod == "night")
+			if(isturf(H.loc))
+				var/turf/loc = H.loc
+				if(loc.can_see_sky())
+					to_chat(H, "<span class='userdanger'>The moonlight scorns me... It is too late.</span>")
+					owner.current.playsound_local(get_turf(owner.current), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
+					H.flash_fullscreen("redflash3")
+					transforming = world.time // timer
 	
+	// Begin transformation
+	else if(transforming)
+		if (world.time >= transforming + 35 SECONDS) // Stage 3
+			H.werewolf_transform()
+			H.real_name = wolfname
+			H.name = wolfname
+			transforming = FALSE
+			transformed = world.time // Timer
+			
+		else if (world.time >= transforming + 25 SECONDS) // Stage 2
+			H.flash_fullscreen("redflash3")
+			H.emote("agony", forced = TRUE)
+			to_chat(H, "<span class='userdanger'>UNIMAGINABLE PAIN!</span>")
+			H.Stun(30)
+			H.Knockdown(30)
+
+		else if (world.time >= transforming + 10 SECONDS) // Stage 1
+			H.emote("")
+			to_chat(H, "<span class='warning'>I can feel my muscles aching, it feels HORRIBLE...</span>")
+		
+
+	// Werewolf reverts to human form during the day
+	else if(transformed)
+		if(GLOB.tod != "night")
+			if (world.time >= transformed + 25 SECONDS) // Untransform
+				H.werewolf_untransform()
+				transformed = FALSE
+
+			else if (world.time >= transformed + 10 SECONDS) // Alert player
+				to_chat(H, "<span class='warning'>Daylight shines around me... the curse begins to fade.</span>")
+
 /mob/living/carbon/human/proc/werewolf_infect()
 	if(!mind)
 		return
@@ -162,7 +157,6 @@
 		return
 	var/datum/antagonist/werewolf/new_antag = new /datum/antagonist/werewolf/lesser()
 	mind.add_antag_datum(new_antag)
-	new_antag.transforming = world.time
-	to_chat(src, "<span class='danger'>I feel horrible...</span>")
-	src.playsound_local(get_turf(src), 'sound/music/horror.ogg', 80, FALSE, pressure_affected = FALSE)
+	//new_antag.transforming = world.time
+	//src.playsound_local(get_turf(src), 'sound/music/horror.ogg', 80, FALSE, pressure_affected = FALSE)
 	flash_fullscreen("redflash3")

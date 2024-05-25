@@ -70,8 +70,6 @@
 
 	W.AddSpell(new /obj/effect/proc_holder/spell/self/howl)
 
-	//W.verbs |= /mob/living/carbon/human/proc/howl_button
-
 	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_GENERIC)
 
 	ADD_TRAIT(W, TRAIT_STRONGBITE, TRAIT_GENERIC)
