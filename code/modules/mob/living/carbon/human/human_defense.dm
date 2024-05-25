@@ -792,8 +792,7 @@
 	if(stat < DEAD)
 		examination += "[m1] still alive."
 		if(stat >= UNCONSCIOUS)
-			var/sleepy = IsSleeping()
-			examination += "[m1] [sleepy ? "asleep" : "unconscious"]."
+			examination += "[m1] [IsSleeping() ? "asleep" : "unconscious"]."
 	else
 		examination += "<span class='dead'>[m1] dead.</span>"
 
@@ -814,9 +813,6 @@
 			examination += "<span class='danger'>[m1] TETRAPLEGIC!</span>"
 	else if(HAS_TRAIT(src, TRAIT_PARALYSIS_R_LEG) && HAS_TRAIT(src, TRAIT_PARALYSIS_L_LEG))
 		examination += "<span class='warning'>[m1] PARAPLEGIC!</span>"
-
-	if(roundstart_quirks.len)
-		examination += "I have these quirks: [get_trait_string()]."
 	
 	var/static/list/body_zones = list(
 		BODY_ZONE_HEAD,
