@@ -177,7 +177,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!isnull(clotting_threshold) && clotting_rate && (bleed_rate > clotting_threshold))
 		bleed_rate = max(clotting_threshold, bleed_rate - clotting_rate)
 	if(passive_healing)
-		heal_wound(1)
+		heal_wound(passive_healing)
 
 /// Called on handle_wounds(), on the life() proc
 /datum/wound/proc/on_death()
