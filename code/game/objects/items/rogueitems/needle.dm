@@ -69,16 +69,16 @@
 				user.visible_message("<span class='info'>[user] repairs [I]!</span>")
 				I.obj_integrity = I.max_integrity
 				//Vrell - Part of storage item repair fix
-				if(target_storage) {
+				if(target_storage)
 					target_storage.being_repaired = FALSE
-				}
+				
 				return
-			else {
+			else 
 				//Vrell - Part of storage item repair fix
-				if(target_storage) {
+				if(target_storage)
 					target_storage.being_repaired = FALSE
-				}
-			}
+
+
 		return
 	return ..()
 
