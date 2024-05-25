@@ -155,24 +155,26 @@
 	return FALSE
 
 /obj/item/bodypart/chest/try_crit(bclass,dam,mob/living/user,zone_precise)
+	var/static/list/cbt_classes = list(
+		BCLASS_BLUNT,
+		BCLASS_SMASH,
+		BCLASS_PUNCH,
+	)
 	var/can_bloody = can_bloody_wound()
 	var/resistance = HAS_TRAIT(owner, RTRAIT_CRITICAL_RESISTANCE)
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
-	if(bclass == BCLASS_TWIST) //the ol dick twist
-		if(dam >= 10)
-			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
-				// TESTICULAR TORSION!
-				var/cbt_multiplier = 1
-				if(user && HAS_TRAIT(user, RTRAIT_NUTCRACKER))
-					cbt_multiplier = 3
-				if(prob(round(dam/10) * cbt_multiplier) && !has_wound(/datum/wound/cbt))
-					add_wound(/datum/wound/cbt)
-				else if(prob(dam * 2 * cbt_multiplier))
-					owner.emote("groin", forced = TRUE)
-					owner.Stun(10)
-		return FALSE
+	// TESTICULAR TORSION!
+	if((zone_precise == BODY_ZONE_PRECISE_GROIN) && (bclass in cbt_classes))
+		var/cbt_multiplier = 1
+		if(user && HAS_TRAIT(user, RTRAIT_NUTCRACKER))
+			cbt_multiplier = 2
+		if(!resistance && prob(round(dam/10) * cbt_multiplier) && !has_wound(/datum/wound/cbt))
+			add_wound(/datum/wound/cbt)
+		else if(prob(dam * cbt_multiplier))
+			owner.emote("groin", forced = TRUE)
+			owner.Stun(10)
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
 		var/used = round((brute_dam / max_damage) * 20 + (dam / 3), 1)
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
