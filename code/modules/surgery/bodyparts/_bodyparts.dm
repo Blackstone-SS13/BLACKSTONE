@@ -92,10 +92,6 @@
 	return list(/datum/intent/grab/move, /datum/intent/grab/twist, /datum/intent/grab/smash)
 
 /obj/item/bodypart/chest/grabbedintents(mob/living/user, precise)
-	if(precise)
-		switch(precise)
-			if(BODY_ZONE_PRECISE_GROIN)
-				return list(/datum/intent/grab/move, /datum/intent/grab/twist)
 	return list(/datum/intent/grab/move, /datum/intent/grab/shove)
 
 /obj/item/bodypart/blob_act()
