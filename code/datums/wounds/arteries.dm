@@ -15,6 +15,16 @@
 	sleep_healing = 0
 	embed_chance = 75
 
+/datum/wound/artery/on_mob_gain(mob/living/affected)
+	. = ..()
+	affected.emote("paincrit", TRUE)
+	affected.Slowdown(20)
+	shake_camera(affected, 2, 2)
+
+/datum/wound/artery/on_bodypart_gain(obj/item/bodypart/affected)
+	. = ..()
+	affected.temporary_crit_paralysis()
+
 /datum/wound/artery/chest
 	name = "aortic dissection"
 	check_name = "<span class='artery'><B>AORTA</B></span>"
@@ -27,12 +37,9 @@
 
 /datum/wound/artery/chest/on_mob_gain(mob/living/affected)
 	. = ..()
-	affected.emote("paincrit", TRUE)
 	if(iscarbon(affected))
 		var/mob/living/carbon/carbon_affected = affected
 		carbon_affected.vomit(blood = TRUE)
-	affected.Slowdown(20)
-	shake_camera(affected, 2, 2)
 	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 

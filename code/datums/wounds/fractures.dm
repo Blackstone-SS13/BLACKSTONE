@@ -6,6 +6,8 @@
 	mob_overlay = "frac"
 	can_sew = FALSE
 	disabling = TRUE
+	/// Emote we use when applied
+	var/gain_emote = "paincrit"
 
 /datum/wound/fracture/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/fracture) && (type == other.type))
@@ -19,6 +21,14 @@
 /datum/wound/fracture/on_bodypart_loss(obj/item/bodypart/affected)
 	. = ..()
 	affected.update_disabled()
+
+/datum/wound/fracture/on_mob_gain(mob/living/affected)
+	. = ..()
+	if(gain_emote)
+		affected.emote(gain_emote, TRUE)
+	affected.Slowdown(20)
+	shake_camera(affected, 2, 2)
+	update_disabled()
 
 /datum/wound/fracture/head
 	name = "cranial fracture"
@@ -131,10 +141,15 @@
 	check_name = "<span class='bone'>RIBS</span>"
 	whp = 50
 
+/datum/wound/fracture/chest/on_mob_gain(mob/living/affected)
+	. = ..()
+	affected.Stun(20)
+
 /datum/wound/fracture/groin
 	name = "pelvic fracture"
 	check_name = "<span class='bone'>PELVIS</span>"
 	whp = 50
+	gain_emote = "groin"
 
 /datum/wound/fracture/groin/New()
 	. = ..()
@@ -144,6 +159,7 @@
 	
 /datum/wound/fracture/groin/on_mob_gain(mob/living/affected)
 	. = ..()
+	affected.Stun(20)
 	ADD_TRAIT(affected, TRAIT_PARALYSIS_R_LEG, "[type]")
 	ADD_TRAIT(affected, TRAIT_PARALYSIS_L_LEG, "[type]")
 	if(iscarbon(affected))
