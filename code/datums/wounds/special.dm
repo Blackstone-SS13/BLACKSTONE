@@ -1,7 +1,6 @@
 /datum/wound/cbt
 	name = "testicular torsion"
 	check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
-	bleed_rate = 0
 	whp = 50
 	woundpain = 100
 	mob_overlay = ""
@@ -52,7 +51,6 @@
 /datum/wound/nose
 	name = "rhinotomy"
 	check_name = "<span class='warning'>NOSE</span>"
-	bleed_rate = 0
 	whp = null
 	woundpain = 20
 	mob_overlay = "cut"
