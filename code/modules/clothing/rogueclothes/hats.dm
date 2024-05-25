@@ -355,7 +355,7 @@
 	sleeved = null
 	body_parts_covered = HEAD|HAIR|EARS
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_NECK|ITEM_SLOT_HEAD
-	armor = list("melee" = 15, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("melee" = 15, "bullet" = 1, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT)
 	blocksound = SOFTHIT
 	max_integrity = 75
@@ -656,7 +656,7 @@
 	if(slot == SLOT_HEAD)
 		wise.change_stat("intelligence", 2)
 		to_chat(wise, "<span class='green'>I gain wisdom.</span>")
-	
+
 /obj/item/clothing/head/roguetown/wizhat/gen/wise/dropped(mob/user)
 	. = ..()
 	if(!ishuman(user))
