@@ -15,7 +15,7 @@
 	sleep_healing = 0
 	embed_chance = 75
 
-/datum/wound/artery/throat
+/datum/wound/artery/neck
 	name = "severed carotid"
 	check_name = "<span class='artery'><B>CAROTID</B></span>"
 	whp = 100
@@ -24,11 +24,11 @@
 	sewn_bleed_rate = 0.3
 	mob_overlay = "s1_throat"
 
-/datum/wound/artery/throat/on_mob_gain(mob/living/affected)
+/datum/wound/artery/neck/on_mob_gain(mob/living/affected)
 	. = ..()
 	ADD_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 
-/datum/wound/artery/throat/on_mob_gain(mob/living/affected)
+/datum/wound/artery/neck/on_mob_gain(mob/living/affected)
 	. = ..()
 	REMOVE_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 

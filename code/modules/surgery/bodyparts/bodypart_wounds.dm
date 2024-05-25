@@ -415,7 +415,7 @@
 		if(!can_bloody)
 			return FALSE
 		if(zone_precise == BODY_ZONE_PRECISE_NECK)
-			if(has_wound(/datum/wound/artery/throat))
+			if(has_wound(/datum/wound/artery/neck))
 				return FALSE
 			if(user)
 				if(bclass == BCLASS_CHOP)
@@ -431,7 +431,7 @@
 				if(owner.stat != DEAD)
 					playsound(owner, pick('sound/vo/throat.ogg','sound/vo/throat2.ogg','sound/vo/throat3.ogg'), 100, FALSE)
 				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s throat!</span>"
-				add_wound(/datum/wound/artery/throat)
+				add_wound(/datum/wound/artery/neck)
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
 				if(bclass == BCLASS_STAB)
