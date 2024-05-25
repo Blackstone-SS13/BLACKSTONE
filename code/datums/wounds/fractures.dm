@@ -128,12 +128,11 @@
 
 /datum/wound/fracture/chest
 	name = "rib fracture"
-	check_name = "<span class='bone'>RIB FRACTURE</span>"
 	whp = 50
 
 /datum/wound/fracture/groin
 	name = "pelvic fracture"
-	check_name = "<span class='bone'>PELVIC FRACTURE</span>"
+	check_name = "<span class='bone'>PELVIS</span>"
 	whp = 50
 
 /datum/wound/fracture/groin/New()

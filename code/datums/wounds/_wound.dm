@@ -107,30 +107,32 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	owner = bodypart_owner.owner
 	on_bodypart_gain(affected)
 	on_mob_gain(affected.owner)
-	owner?.update_damage_overlays()
 	return TRUE
 
 /// Effects when a wound is gained on a bodypart
 /datum/wound/proc/on_bodypart_gain(obj/item/bodypart/affected)
 	if(bleed_rate && affected.bandage)
 		affected.try_bandage_expire()
+	if(disabling)
+		affected.update_disabled()
 
 /// Removes this wound from a given bodypart
 /datum/wound/proc/remove_from_bodypart()
 	if(!bodypart_owner)
 		return FALSE
+	var/obj/item/bodypart/was_bodypart = bodypart_owner
 	var/mob/living/was_owner = owner
-	on_bodypart_loss(bodypart_owner)
-	on_mob_loss(bodypart_owner.owner)
 	LAZYREMOVE(bodypart_owner.wounds, src)
 	bodypart_owner = null
 	owner = null
-	was_owner?.update_damage_overlays()
+	on_bodypart_loss(was_bodypart)
+	on_mob_loss(was_owner)
 	return TRUE
 
 /// Effects when a wound is lost on a bodypart
 /datum/wound/proc/on_bodypart_loss(obj/item/bodypart/affected)
-	return
+	if(disabling)
+		affected.update_disabled()
 
 /// Returns whether or not this wound can be applied to a given mob
 /datum/wound/proc/can_apply_to_mob(mob/living/affected)
@@ -153,7 +155,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Effects when this wound is applied to a given mob
 /datum/wound/proc/on_mob_gain(mob/living/affected)
-	return
+	if(mob_overlay)
+		affected.update_damage_overlays()
 
 /// Removes this wound from a given, simpler than adding to a bodypart - No extra effects
 /datum/wound/proc/remove_from_mob()
@@ -166,7 +169,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Effects when this wound is removed from a given mob
 /datum/wound/proc/on_mob_loss(mob/living/affected)
-	return
+	if(mob_overlay)
+		affected.update_damage_overlays()
 
 /// Called on handle_wounds(), on the life() proc
 /datum/wound/proc/on_life()
@@ -199,6 +203,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/sew_wound()
 	if(!can_sew)
 		return FALSE
+	var/old_overlay = mob_overlay
 	mob_overlay = sewn_overlay
 	bleed_rate = sewn_bleed_rate
 	clotting_rate = sewn_clotting_rate
@@ -208,9 +213,11 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	can_sew = FALSE
 	sleep_healing = max(sleep_healing, 1)
 	passive_healing = max(passive_healing, 1)
-	owner?.update_damage_overlays()
+	if(mob_overlay != old_overlay)
+		owner?.update_damage_overlays()
 	return TRUE
 
+/// Returns whether or not this wound should embed a weapon
 /proc/should_embed_weapon(datum/wound/wound_or_boolean)
 	if(!istype(wound_or_boolean))
 		return wound_or_boolean
