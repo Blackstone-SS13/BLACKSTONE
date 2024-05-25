@@ -30,7 +30,7 @@
 		"perception" = 5, \
 		"endurance" = 2
 )
-
+	traits_applied = list(RTRAIT_MEDIUMARMOR, RTRAIT_DODGEEXPERT)
 
 /datum/outfit/job/roguetown/adventurer/sentinal/pre_equip(mob/living/carbon/human/H)
 	..()

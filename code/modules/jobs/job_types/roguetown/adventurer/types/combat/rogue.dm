@@ -15,7 +15,7 @@
 		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/rogue
-	traits_applied = list(RTRAIT_MEDIUMARMOR)
+	traits_applied = list(RTRAIT_MEDIUMARMOR, RTRAIT_DODGEEXPERT)
 
 	given_skills = list(
 		/datum/skill/combat/swords = 3, \
@@ -67,4 +67,8 @@
 	beltl = /obj/item/rogueweapon/huntingknife/idagger/steel
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+
 	H.mind.assign_experiences(/datum/advclass/rogue::stat_changes, TRUE, "stats")
+
+	ADD_TRAIT(H, RTRAIT_DODGEEXPERT, TRAIT_GENERIC)
+

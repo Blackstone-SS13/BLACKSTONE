@@ -76,6 +76,7 @@
         )
 	)
 
+	traits_applied = list(RTRAIT_MEDIUMARMOR, RTRAIT_DODGEEXPERT)
 
 
 /datum/outfit/job/roguetown/adventurer/bard/pre_equip(mob/living/carbon/human/H)
@@ -135,3 +136,4 @@
 			backr = /obj/item/rogue/instrument/guitar
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_DODGEEXPERT, TRAIT_GENERIC)

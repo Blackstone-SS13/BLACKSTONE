@@ -35,12 +35,11 @@
 
 /// Check to see if we can apply a bleeding wound on this bodypart
 /obj/item/bodypart/proc/can_bloody_wound()
-	if(owner?.dna?.species)
-		if(NOBLOOD in owner.dna.species.species_traits)
-			return FALSE
+	if(skeletonized)
+		return FALSE
 	if(!is_organic_limb())
 		return FALSE
-	if(skeletonized)
+	if(NOBLOOD in owner?.dna?.species?.species_traits)
 		return FALSE
 	return TRUE
 
@@ -164,6 +163,18 @@
 		if(dam >= 10)
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 				// TESTICULAR TORSION!
+				if(!has_wound(/datum/wound/cbt))
+					if(HAS_TRAIT(src, RTRAIT_NUTCRACKER)) //JESTICULAR TORSION!
+						if(prob(5))
+							add_wound(/datum/wound/cbt)
+						else
+							owner.emote("groin", forced = TRUE)
+							owner.Stun(10)
+					else if (prob(1))
+						add_wound(/datum/wound/cbt)
+					else
+						owner.emote("groin", forced = TRUE)
+						owner.Stun(10)		
 				if(prob(round(dam/10)) && !has_wound(/datum/wound/cbt))
 					add_wound(/datum/wound/cbt)
 				else if(prob(dam * 2.5))
