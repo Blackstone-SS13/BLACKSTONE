@@ -271,10 +271,12 @@ client/
 		if(H.wear_mask)
 			if(H.wear_mask.block2add)
 				fovangle |= H.wear_mask.block2add
-		if(has_flaw(/datum/charflaw/noeyer))
-			fovangle |= FOV_RIGHT
-		if(has_flaw(/datum/charflaw/noeyel))
-			fovangle |= FOV_LEFT
+		var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
+		if(eyes)
+			if(eyes.left_poked)
+				fovangle |= FOV_LEFT
+			if(eyes.right_poked)
+				fovangle |= FOV_RIGHT
 		if(H.STAPER < 5)
 			fovangle |= FOV_LEFT
 			fovangle |= FOV_RIGHT

@@ -1,11 +1,9 @@
-
-
 /proc/accuracy_check(zone, mob/living/user, mob/living/target, associated_skill, datum/intent/used_intent, obj/item/I)
 	if(!zone)
 		return
 	if(user == target)
 		return zone
-	if(zone == "chest")
+	if(zone == BODY_ZONE_CHEST)
 		return zone
 	if(target.grabbedby == user)
 		if(user.grab_state >= GRAB_AGGRESSIVE)
@@ -59,9 +57,7 @@
 		else
 			if(user.client?.prefs.showrolls)
 				to_chat(user, "<span class='warning'>Ultra accuracy fail! [chance2hit]%</span>")
-			return "chest"
-
-
+			return BODY_ZONE_CHEST
 
 /mob/proc/get_generic_parry_drain()
 	return 30

@@ -264,22 +264,32 @@
 	switch(skill_experience[S])
 		if(SKILL_EXP_LEGENDARY to INFINITY)
 			known_skills[S] = SKILL_LEVEL_LEGENDARY
+			
 		if(SKILL_EXP_MASTER to SKILL_EXP_LEGENDARY)
 			known_skills[S] = SKILL_LEVEL_MASTER
+			
 		if(SKILL_EXP_EXPERT to SKILL_EXP_MASTER)
 			known_skills[S] = SKILL_LEVEL_EXPERT
+			
 		if(SKILL_EXP_JOURNEYMAN to SKILL_EXP_EXPERT)
 			known_skills[S] = SKILL_LEVEL_JOURNEYMAN
+			
 		if(SKILL_EXP_APPRENTICE to SKILL_EXP_JOURNEYMAN)
 			known_skills[S] = SKILL_LEVEL_APPRENTICE
+			
 		if(SKILL_EXP_NOVICE to SKILL_EXP_APPRENTICE)
 			known_skills[S] = SKILL_LEVEL_NOVICE
+			
 		if(0 to SKILL_EXP_NOVICE)
 			known_skills[S] = SKILL_LEVEL_NONE
+			
 	if(isnull(old_level) || known_skills[S] == old_level)
 		return //same level or we just started earning xp towards the first level.
 	if(silent)
 		return
+	// ratio = round(skill_experience[S]/limit,1) * 100
+	// to_chat(current, "<span class='nicegreen'> My [S.name] is around [ratio]% of the way there.")
+	//TODO add some bar hud or something, i think i seen a request like that somewhere
 	if(known_skills[S] >= old_level)
 		if(known_skills[S] > old_level)
 			to_chat(current, "<span class='nicegreen'>My [S.name] grows!</span>")
@@ -1009,3 +1019,11 @@
 	..()
 	mind.assigned_role = ROLE_PAI
 	mind.special_role = ""
+
+
+
+/datum/mind/proc/get_learning_boon(skill)
+	var/mob/living/carbon/human/H = current
+	var/boon = H.age == AGE_YOUNG ? 1.2 : 1 // optional
+	boon += get_skill_level(skill) / 10
+	return boon 

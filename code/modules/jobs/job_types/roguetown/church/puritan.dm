@@ -10,6 +10,18 @@
 		"Humen",
 		"Aasimar",
 	)
+	allowed_patrons = list(
+		/datum/patron/old_god,
+		/datum/patron/divine/astrata, 
+		/datum/patron/divine/noc, 
+		/datum/patron/divine/dendor, 
+		/datum/patron/divine/abyssor, 
+		/datum/patron/divine/ravox, 
+		/datum/patron/divine/necra, 
+		/datum/patron/divine/xylix, 
+		/datum/patron/divine/pestra, 
+		/datum/patron/divine/malum,
+	) //gets set to old god anyways
 	tutorial = "As an Inquisitor, the Queen has emboldened your radical sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
 	whitelist_req = TRUE
 
@@ -128,7 +140,7 @@
 
 /mob/living/carbon/human/proc/confession_time(confession_type = "antag")
 	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins)), 6 SECONDS, TIMER_STOPPABLE)
-	var/responsey = alert("Resist torture? (1 TRI)","Yes","No")
+	var/responsey = alert(src, "Resist torture? (1 TRI)","Yes","No")
 	if(!responsey)
 		responsey = "No"
 	if(SStimer.timer_id_dict[timerid])
