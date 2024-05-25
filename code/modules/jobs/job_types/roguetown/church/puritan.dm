@@ -10,8 +10,19 @@
 		"Humen",
 		"Aasimar",
 	)
-
-	tutorial = "As a Inquisitor, the Queen has emboldened your radical sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
+	allowed_patrons = list(
+		/datum/patron/old_god,
+		/datum/patron/divine/astrata, 
+		/datum/patron/divine/noc, 
+		/datum/patron/divine/dendor, 
+		/datum/patron/divine/abyssor, 
+		/datum/patron/divine/ravox, 
+		/datum/patron/divine/necra, 
+		/datum/patron/divine/xylix, 
+		/datum/patron/divine/pestra, 
+		/datum/patron/divine/malum,
+	) //gets set to old god anyways
+	tutorial = "As an Inquisitor, the Queen has emboldened your radical sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
 	whitelist_req = TRUE
 
 	outfit = /datum/outfit/job/roguetown/puritan
@@ -32,7 +43,7 @@
 /datum/outfit/job/roguetown/puritan
 	name = "Inquisitor"
 	jobtype = /datum/job/roguetown/puritan
-	allowed_patrons = list(/datum/patron/old_god)	
+	allowed_patrons = list(/datum/patron/old_god)
 
 /datum/outfit/job/roguetown/puritan/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -47,62 +58,89 @@
 	gloves = /obj/item/clothing/gloves/roguetown/leather
 	beltl = /obj/item/rogueweapon/sword/rapier
 	backpack_contents = list(/obj/item/keyring/puritan = 1, /obj/item/rogueweapon/huntingknife/idagger/silver)
-
 	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
-		H.change_stat("intelligence", 3)
 		H.change_stat("strength", 2)
+		H.change_stat("endurance", 2)
+		H.change_stat("constitution", 3)
 		H.change_stat("perception", 3)
-//		if(H.mind.has_antag_datum(/datum/antagonist))
-//			return
-//		var/datum/antagonist/new_antag = new /datum/antagonist/purishep()
-//		H.mind.add_antag_datum(new_antag)
-//	ADD_TRAIT(H, RTRAIT_TORTURER, TRAIT_GENERIC)
+		H.change_stat("intelligence", 3)
 	H.verbs |= /mob/living/carbon/human/proc/faith_test
 	H.verbs |= /mob/living/carbon/human/proc/torture_victim
 	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 
 /mob/living/carbon/human/proc/torture_victim()
-	set name = "ExtractConfession"
+	set name = "Extract Confession"
 	set category = "Inquisition"
 
 	var/obj/item/grabbing/I = get_active_held_item()
 	var/mob/living/carbon/human/H
-	if(istype(I))
-		if(ishuman(I.grabbed))
-			H = I.grabbed
-			if(H == src)
-				to_chat(src, "<span class='warning'>I already torture myself.</span>")
+	if(!istype(I) || !ishuman(I.grabbed))
+		return
+	H = I.grabbed
+	if(H == src)
+		to_chat(src, "<span class='warning'>I already torture myself.</span>")
+		return
+	var/painpercent = (H.get_complex_pain() / (H.STAEND * 10)) * 100
+	if(H.add_stress(/datum/stressevent/tortured))
+		if(!H.stat)
+			var/static/list/torture_lines = list(
+				"CONFESS!",
+				"TELL ME YOUR SECRETS!",
+				"SPEAK!",
+				"YOU WILL SPEAK!",
+				"TELL ME!",
+				"THE PAIN HAS ONLY BEGUN, CONFESS!",
+			)
+			say(pick(torture_lines), spans = list("torture"))
+			if(painpercent >= 100)
+				H.emote("painscream")
+				H.confession_time("antag")
 				return
-			var/painpercent = H.get_complex_pain() / (H.STAEND * 10)
-			painpercent = painpercent * 100
-			if(H.add_stress(/datum/stressevent/tortured))
-				if(!H.stat)
-					say(pick("CONFESS!",
-								"TELL ME YOUR SECRETS!",
-								"SPEAK!",
-								"YOU WILL SPEAK!",
-								"TELL ME!",
-								"THE PAIN HAS ONLY BEGUN, CONFESS!"), spans = list("torture"))
-					if((painpercent > 90) || (!H.cmode))
-						H.emote("painscream")
-						H.confession_time()
-						return
-			to_chat(src, "<span class='warning'>Not ready to speak yet.</span>")
+	to_chat(src, "<span class='warning'>Not ready to speak yet.</span>")
 
-/mob/living/carbon/human/proc/confession_time()
+/mob/living/carbon/human/proc/faith_test()
+	set name = "Test Faith"
+	set category = "Inquisition"
+
+	var/obj/item/grabbing/I = get_active_held_item()
+	var/mob/living/carbon/human/H
+	if(!istype(I) || !ishuman(I.grabbed))
+		return
+	H = I.grabbed
+	if(H == src)
+		to_chat(src, "<span class='warning'>I already torture myself.</span>")
+		return
+	var/painpercent = (H.get_complex_pain() / (H.STAEND * 10)) * 100
+	if(H.add_stress(/datum/stressevent/tortured))
+		if(!H.stat)
+			var/static/list/faith_lines = list(
+				"DO YOU DENY THE NINE?",
+				"WHO IS YOUR GOD?",
+				"ARE YOU FAITHFUL?",
+				"WHO IS YOUR SHEPHERD?",
+			)
+			say(pick(faith_lines), spans = list("torture"))
+			if(painpercent >= 100)
+				H.emote("painscream")
+				H.confession_time("patron")
+				return
+	to_chat(src, "<span class='warning'>Not ready to speak yet.</span>")
+
+/mob/living/carbon/human/proc/confession_time(confession_type = "antag")
 	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins)), 6 SECONDS, TIMER_STOPPABLE)
-	var/responsey = alert("Resist torture? (1 TRI)","Yes","No")
+	var/responsey = alert(src, "Resist torture? (1 TRI)","Yes","No")
 	if(!responsey)
 		responsey = "No"
 	if(SStimer.timer_id_dict[timerid])
@@ -112,21 +150,11 @@
 		return
 	if(responsey == "Yes")
 		adjust_triumphs(-1)
-		confess_sins(TRUE)
+		confess_sins(confession_type, resist = TRUE)
 	else
-		confess_sins()
+		confess_sins(confession_type)
 
-/mob/living/carbon/human/proc/confess_sins(resist)
-	if(!resist)
-		var/list/confessions = list()
-		for(var/datum/antagonist/antag in mind?.antag_datums)
-			if(length(antag.confess_lines))
-				confessions += antag.confess_lines
-		if(length(patron.confess_lines))
-			confessions += patron.confess_lines
-		if(length(confessions))
-			say(pick(confessions), spans = list("torture"))
-			return
+/mob/living/carbon/human/proc/confess_sins(confession_type = "antag", resist)
 	var/static/list/innocent_lines = list(
 		"I DON'T KNOW!",
 		"STOP THE PAIN!!",
@@ -135,10 +163,18 @@
 		"I HAVE NOTHING TO SAY...!",
 		"WHY ME?!",
 	)
+	if(!resist)
+		var/list/confessions = list()
+		switch(confession_type)
+			if("patron")
+				if(length(patron?.confess_lines))
+					confessions += patron.confess_lines
+			if("antag")
+				for(var/datum/antagonist/antag in mind?.antag_datums)
+					if(!length(antag.confess_lines))
+						continue
+					confessions += antag.confess_lines
+		if(length(confessions))
+			say(pick(confessions), spans = list("torture"))
+			return
 	say(pick(innocent_lines), spans = list("torture"))
-
-/mob/living/carbon/human/proc/faith_test()
-	set name = "FaithTest"
-	set category = "Inquisition"
-	set hidden = 1
-	//same as above, but CRY TO YOUR GOD! BEG TO YOUR CREATOR! WHO DO YOU WORSHIP? WHO IS YOUR MASTER?

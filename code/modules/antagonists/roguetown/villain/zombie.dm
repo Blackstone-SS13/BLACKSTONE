@@ -1,5 +1,5 @@
 /datum/antagonist/zombie
-	name = "Zombie"
+	name = "Zomble"
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "zombie"
 	show_in_roundend = FALSE
@@ -26,7 +26,8 @@
 	var/last_bite
 	/// Traits applied to the owner mob when we turn into a zombie
 	var/static/list/traits_zombie = list(
-		RTRAIT_NOFATSTAM,
+		RTRAIT_CRITICAL_WEAKNESS,
+		RTRAIT_NOROGSTAM,
 		TRAIT_NOMOOD,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,

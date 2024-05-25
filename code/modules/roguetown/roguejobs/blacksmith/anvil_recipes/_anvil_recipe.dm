@@ -55,9 +55,11 @@
 		if(user.mind)
 			if(isliving(user))
 				var/mob/living/L = user
-				var/amt2raise = L.STAINT/2
+				var/boon = user.mind.get_learning_boon(appro_skill)
+				var/amt2raise = L.STAINT/2 // (L.STAINT+L.STASTR)/4 optional: add another stat that isn't int
+				//i feel like leveling up takes forever regardless, this would just make it faster
 				if(amt2raise > 0)
-					user.mind.adjust_experience(appro_skill, amt2raise, FALSE)
+					user.mind.adjust_experience(appro_skill, amt2raise * boon, FALSE)
 		user.visible_message("<span class='info'>[user] strikes the bar!</span>")
 		return TRUE
 

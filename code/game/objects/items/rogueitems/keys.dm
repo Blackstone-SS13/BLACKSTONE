@@ -70,13 +70,14 @@
 	lockid = "vault"
 
 /obj/item/roguekey/sheriff
-	name = "sheriff's key"
+	name = "guard captain's key"
+	desc = "This key belongs to the captain of the guard."
 	icon_state = "cheesekey"
 	lockid = "sheriff"
 
 /obj/item/roguekey/bailiff
 	name = "bailiff's key"
-	desc = "This key belongs to the town sheriff."
+	desc = "This key belongs to the bailiff."
 	icon_state = "cheesekey"
 	lockid = "sheriff"
 
@@ -256,6 +257,12 @@
 	desc = "Why, a mercenary would not kick doors down."
 	icon_state = "greenkey"
 	lockid = "merc"
+
+/obj/item/roguekey/physician
+	name = "physician key"
+	desc = "The key smells of herbs, feeling soothing to the touch."
+	icon_state = "greenkey"
+	lockid = "physician"
 
 /obj/item/roguekey/puritan
 	name = "puritan's key"

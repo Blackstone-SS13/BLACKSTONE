@@ -667,9 +667,9 @@ Turf and target are separate in case you want to teleport some distance from a t
 	else if (zone == BODY_ZONE_PRECISE_EARS)	//we want the chatlog to say 'grabbed his ear' not 'grabbed his ears' etc
 		return "ear"
 	else if (zone == BODY_ZONE_PRECISE_R_EYE)
-		return "eyes"
+		return "right eye"
 	else if (zone == BODY_ZONE_PRECISE_L_EYE)
-		return "eyes"
+		return "left eye"
 	else if (zone == BODY_ZONE_PRECISE_NOSE)
 		return "nose"
 	else if (zone == BODY_ZONE_R_INHAND)
