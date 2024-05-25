@@ -120,14 +120,24 @@
 	return list()
 
 /mob/living/carbon/get_missing_limbs()
-	var/list/full = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
+	var/list/full = list(
+		BODY_ZONE_HEAD, 
+		BODY_ZONE_CHEST, 
+		BODY_ZONE_R_ARM, 
+		BODY_ZONE_L_ARM, 
+		BODY_ZONE_R_LEG, 
+		BODY_ZONE_L_LEG,
+	)
 	for(var/zone in full)
 		if(get_bodypart(zone))
 			full -= zone
 	return full
 
 /mob/living/carbon/alien/larva/get_missing_limbs()
-	var/list/full = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
+	var/list/full = list(
+		BODY_ZONE_HEAD, 
+		BODY_ZONE_CHEST,
+	)
 	for(var/zone in full)
 		if(get_bodypart(zone))
 			full -= zone
@@ -137,7 +147,14 @@
 	return list()
 
 /mob/living/carbon/get_disabled_limbs()
-	var/list/full = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG)
+	var/list/full = list(
+		BODY_ZONE_HEAD, 
+		BODY_ZONE_CHEST, 
+		BODY_ZONE_R_ARM, 
+		BODY_ZONE_L_ARM, 
+		BODY_ZONE_R_LEG, 
+		BODY_ZONE_L_LEG,
+	)
 	var/list/disabled = list()
 	for(var/zone in full)
 		var/obj/item/bodypart/affecting = get_bodypart(zone)
@@ -146,7 +163,10 @@
 	return disabled
 
 /mob/living/carbon/alien/larva/get_disabled_limbs()
-	var/list/full = list(BODY_ZONE_HEAD, BODY_ZONE_CHEST)
+	var/list/full = list(
+		BODY_ZONE_HEAD, 
+		BODY_ZONE_CHEST,
+	)
 	var/list/disabled = list()
 	for(var/zone in full)
 		var/obj/item/bodypart/affecting = get_bodypart(zone)

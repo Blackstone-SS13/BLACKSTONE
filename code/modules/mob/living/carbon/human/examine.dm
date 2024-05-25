@@ -282,8 +282,17 @@
 				if(10 to INFINITY)
 					bleed_wording = "bleeding profusely"
 			var/list/bleeding_limbs = list()
-			for(var/obj/item/bodypart/bleeder in bodyparts)
-				if(!get_location_accessible(src, bleeder.body_zone) || !bleeder.get_bleed_rate())
+			var/static/list/bleed_zones = list(
+				BODY_ZONE_HEAD,
+				BODY_ZONE_CHEST,
+				BODY_ZONE_R_ARM,
+				BODY_ZONE_L_ARM,
+				BODY_ZONE_R_LEG,
+				BODY_ZONE_L_LEG,
+			)
+			for(var/bleed_zone in bleed_zones)
+				var/obj/item/bodypart/bleeder = get_bodypart(bleed_zone)
+				if(!bleeder?.get_bleed_rate() || !get_location_accessible(src, bleeder.body_zone))
 					continue
 				bleeding_limbs += parse_zone(bleeder.body_zone)
 			if(length(bleeding_limbs))
