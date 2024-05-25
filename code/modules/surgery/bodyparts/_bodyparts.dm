@@ -539,11 +539,8 @@
 				. += aux
 		return
 
-
 	if(should_draw_greyscale && !skeletonized)
-		var/draw_color = mutation_color || species_color || (skin_tone)
-		if(draw_color && rotted)
-			draw_color = "878f79"
+		var/draw_color = (rotted && SKIN_COLOR_ROT) || mutation_color || species_color || skin_tone
 		if(draw_color)
 			limb.color = "#[draw_color]"
 			if(aux_zone && !hideaux)
