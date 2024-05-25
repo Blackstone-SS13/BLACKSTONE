@@ -106,7 +106,7 @@
 			status += "<a href='?src=[REF(owner)];embedded_limb=[REF(src)];embedded_object=[REF(embedded)];' class='info'>[uppertext(embedded.name)]</a>"
 	
 	if(skeletonized)
-		status += "<span class='bone'>SKELETON</span>"
+		status += "<span class='dead'>SKELETON</span>"
 	else if(rotted)
 		status += "<span class='necrosis'>NECROSIS</span>"
 
