@@ -1,6 +1,6 @@
 /datum/wound/cbt
 	name = "testicular torsion"
-	check_name = "<span class='danger'><B>TESTICLES</B></span>"
+	check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
 	bleed_rate = 0
 	whp = 50
 	woundpain = 100
@@ -21,10 +21,10 @@
 	to_chat(affected, "<span class='userdanger'>Something twists inside my groin!</span>")
 	if(affected.gender != MALE)
 		name = "ovarian torsion"
-		check_name = "<span class='danger'><B>TESTICLES</B></span>"
+		check_name = "<span class='userdanger'><B>EGGCRACK</B></span>"
 	else
 		name = "testicular torsion"
-		check_name = "<span class='danger'><B>OVARIES</B></span>"
+		check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
 	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
@@ -44,10 +44,10 @@
 	. = ..()
 	if(affected.gender != MALE)
 		name = "ovarian evisceration"
-		check_name = "<span class='danger'><B>TESTICLES</B></span>"
+		check_name = "<span class='userdanger'><B>EGGCRACK</B></span>"
 	else
 		name = "testicular evisceration"
-		check_name = "<span class='danger'><B>OVARIES</B></span>"
+		check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
 
 /datum/wound/nose
 	name = "rhinotomy"
