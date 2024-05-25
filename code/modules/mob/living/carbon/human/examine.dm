@@ -255,7 +255,7 @@
 	// Blood volume
 	switch(blood_volume)
 		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-			msg += "<span class='artery'><B>[m1] extremely pale.</B></span>"
+			msg += "<span class='artery'><B>[m1] extremely pale and sickly.</B></span>"
 		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
 			msg += "<span class='artery'><B>[m1] very pale.</B></span>"
 		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
