@@ -2292,7 +2292,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(HAS_TRAIT(H, TRAIT_HARDDISMEMBER) && !easy_dismember)
 		probability = min(probability, 5)
 	if(affecting.brute_dam && prob(probability))
-		if(affecting.dismember(I.damtype, user, selzone))
+		if(affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone))
 			bloody = 1
 			I.add_mob_blood(H)
 			user.update_inv_hands()
@@ -2458,7 +2458,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(/obj/projectile/energy/florayield)
 			H.show_message("<span class='notice'>The radiation beam dissipates harmlessly through my body.</span>")
 
-/datum/species/proc/bullet_act(obj/projectile/P, mob/living/carbon/human/H, def_zone)
+/datum/species/proc/bullet_act(obj/projectile/P, mob/living/carbon/human/H, def_zone = BODY_ZONE_CHEST)
 	// called before a projectile hit
 	if(def_zone == "head")
 		if(H.head)

@@ -6,6 +6,8 @@
 	if(world.time > last_fatigued + 50) //regen fatigue
 		var/added = rogstam / maxrogstam
 		added = round(-10+ (added*-40))
+		if(HAS_TRAIT(src, TRAIT_MISSING_NOSE))
+			added = round(added * 0.5, 1)
 		if(rogfat >= 1)
 			rogfat_add(added)
 		else
@@ -14,7 +16,7 @@
 	update_health_hud()
 
 /mob/living/proc/update_rogstam()
-	maxrogstam = STAEND*100
+	maxrogstam = STAEND * 100
 	if(cmode)
 		if(!HAS_TRAIT(src, RTRAIT_BREADY))
 			rogstam_add(-2)
@@ -23,7 +25,7 @@
 	return
 
 /mob/living/rogstam_add(added as num)
-	if(HAS_TRAIT(src, RTRAIT_NOFATSTAM))
+	if(HAS_TRAIT(src, RTRAIT_NOROGSTAM))
 		return TRUE
 	rogstam += added
 	if(rogstam > maxrogstam)
@@ -42,7 +44,7 @@
 	return TRUE
 
 /mob/living/rogfat_add(added as num, emote_override, force_emote = TRUE) //call update_rogfat here and set last_fatigued, return false when not enough fatigue left
-	if(HAS_TRAIT(src, RTRAIT_NOFATSTAM))
+	if(HAS_TRAIT(src, RTRAIT_NOROGSTAM))
 		return TRUE
 	rogfat = CLAMP(rogfat+added, 0, maxrogfat)
 	if(added > 0)
@@ -91,7 +93,7 @@
 	var/heart_attacking = FALSE
 
 /mob/living/carbon/proc/heart_attack()
-	if(HAS_TRAIT(src, RTRAIT_NOFATSTAM))
+	if(HAS_TRAIT(src, RTRAIT_NOROGSTAM))
 		return
 	if(!heart_attacking)
 		heart_attacking = TRUE

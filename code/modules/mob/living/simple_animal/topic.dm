@@ -1,21 +1,19 @@
 
 /mob/living/simple_animal/Topic(href, href_list)
-	..()
-	if(href_list["inspect_animal"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
+	. = ..()
+	if(href_list["inspect_animal"] && (isobserver(usr) || usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)))
 		var/list/msg = list()
-		if(!ismob(usr))
-			return
-
-		if(simple_wounds.len)
-			msg += "<B>Wounds:</B>\n"
+		if(length(simple_wounds))
+			msg += "<B>Wounds:</B>"
 			for(var/datum/wound/wound as anything in simple_wounds)
-				msg += "[wound.get_visible_name()]\n"
+				msg += wound.get_visible_name()
 
-		for(var/obj/item/I in simple_embedded_objects)
-			msg += "<a href='?src=[REF(src)];embedded_object=[REF(I)]'>[I.name]</a>\n"
+		if(length(simple_embedded_objects))
+			msg += "<B>Embedded objects:</B>"
+			for(var/obj/item/I in simple_embedded_objects)
+				msg += "<a href='?src=[REF(src)];embedded_object=[REF(I)]'>[I.name]</a>"
 
-		to_chat(usr, "[msg.Join("")]")
-
+		to_chat(usr, msg.Join("\n"))
 
 	if(href_list["embedded_object"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 		var/obj/item/I = locate(href_list["embedded_object"]) in simple_embedded_objects

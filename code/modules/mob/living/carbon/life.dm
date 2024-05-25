@@ -1,4 +1,8 @@
 /mob/living/proc/handle_wounds()
+	if(stat >= DEAD)
+		for(var/datum/wound/wound as anything in get_wounds())
+			wound.on_death()
+		return
 	for(var/datum/wound/wound as anything in get_wounds())
 		wound.on_life()
 
@@ -502,18 +506,6 @@
 		var/obj/item/bodypart/BP = I
 		if(BP.needs_processing)
 			. |= BP.on_life(stam_regen)
-
-/mob/living/carbon/proc/canspeak()
-	if(mouth?.muteinmouth)
-		return FALSE
-	for(var/obj/item/grabbing/grab in grabbedby)
-		if(grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
-			return FALSE
-	if(has_wound(/datum/wound/artery/throat))
-		return FALSE
-	if(istype(loc, /turf/open/water) && lying)
-		return FALSE
-	return TRUE
 
 /mob/living/carbon/proc/handle_organs()
 	if(stat != DEAD)

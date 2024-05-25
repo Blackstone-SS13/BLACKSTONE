@@ -17,6 +17,7 @@
 	var/infinite = FALSE
 	/// If this needle can be used to repair items
 	var/can_repair = TRUE
+	anvilrepair = /datum/skill/craft/blacksmithing
 
 /obj/item/needle/examine()
 	. = ..()
@@ -25,15 +26,15 @@
 	else
 		. += "Can be used indefinitely."
 
-/obj/item/needle/New()
-	..()
+/obj/item/needle/Initialize()
+	. = ..()
 	update_icon()
 
-/obj/item/needle/update_icon()
-	cut_overlays()
-	if(stringamt)
-		add_overlay("[icon_state]string")
-	..()
+/obj/item/needle/update_overlays()
+	. = ..()
+	if(stringamt <= 0)
+		return
+	. += "[icon_state]string"
 
 /obj/item/needle/use(used)
 	if(infinite)
@@ -62,11 +63,19 @@
 			var/sewtime = 70
 			if(user.mind)
 				sewtime = (70 - ((user.mind.get_skill_level(/datum/skill/misc/sewing)) * 10))
+			var/datum/component/storage/target_storage = I.GetComponent(/datum/component/storage) //Vrell - Part of storage item repair fix
 			if(do_after(user, sewtime, target = I))
 				playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
 				user.visible_message("<span class='info'>[user] repairs [I]!</span>")
 				I.obj_integrity = I.max_integrity
+				//Vrell - Part of storage item repair fix
+				if(target_storage)
+					target_storage.being_repaired = FALSE
 				return
+			else 
+				//Vrell - Part of storage item repair fix
+				if(target_storage)
+					target_storage.being_repaired = FALSE
 		return
 	return ..()
 
@@ -101,26 +110,28 @@
 	var/moveup = 10
 	if(doctor.mind)
 		moveup = ((doctor.mind.get_skill_level(/datum/skill/misc/medicine)+1) * 5)
-	while(!QDELETED(target_wound) && !QDELETED(src))
+	while(!QDELETED(target_wound) && !QDELETED(src) && \
+		!QDELETED(user) && (target_wound.sew_progress < target_wound.sew_threshold) && \
+		stringamt >= 1)
 		if(!do_after(doctor, 20, target = patient))
 			break
 		playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
 		target_wound.sew_progress = min(target_wound.sew_progress + moveup, target_wound.sew_threshold)
-		if(target_wound.sew_progress >= target_wound.sew_threshold)
-			if(doctor.mind)
-				doctor.mind.adjust_experience(/datum/skill/misc/medicine, doctor.STAINT * 5)
-			use(1)
-			patient.update_damage_overlays()
-			if(patient == doctor)
-				doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [doctor.p_them()]self.</span>", "<span class='notice'>I stitch \a [target_wound.name] on my [affecting].</span>")
+		if(target_wound.sew_progress < target_wound.sew_threshold)
+			continue
+		if(doctor.mind)
+			doctor.mind.adjust_experience(/datum/skill/misc/medicine, doctor.STAINT * 5)
+		use(1)
+		target_wound.sew_wound()
+		if(patient == doctor)
+			doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [doctor.p_them()]self.</span>", "<span class='notice'>I stitch \a [target_wound.name] on my [affecting].</span>")
+		else
+			if(affecting)
+				doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient]'s [affecting].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient]'s [affecting].</span>")
 			else
-				if(affecting)
-					doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient]'s [affecting].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient]'s [affecting].</span>")
-				else
-					doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient].</span>")
-			log_combat(doctor, patient, "sew", "needle")
-			target_wound.sew_wound()
-			return TRUE
+				doctor.visible_message("<span class='notice'>[doctor] sews \a [target_wound.name] on [patient].</span>", "<span class='notice'>I stitch \a [target_wound.name] on [patient].</span>")
+		log_combat(doctor, patient, "sew", "needle")
+		return TRUE
 	return FALSE
 
 /obj/item/needle/thorn
@@ -128,9 +139,10 @@
 	icon_state = "thornneedle"
 	desc = "This rough needle can be used to sew cloth and wounds."
 	stringamt = 3
+	anvilrepair = null
 
 /obj/item/needle/pestra
 	name = "needle of pestra"
-	desc = "<span class='green'>This needle has been blessed by the goddess of healing herself!</span>"
+	desc = "<span class='green'>This needle has been blessed by the goddess of medicine herself!</span>"
 	infinite = TRUE
 	can_repair = FALSE

@@ -1,5 +1,5 @@
 /*/datum/round_event_control/rogue/skellyinvade
-	name = "Skeleton Invasion"
+	name = "Skelelon Invasion"
 	typepath = /datum/round_event/rogue/skellyinvade
 	weight = 10
 	max_occurrences = 999

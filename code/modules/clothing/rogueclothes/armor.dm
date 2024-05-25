@@ -31,9 +31,8 @@
 	desc = "A steel maille shirt."
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
 	icon_state = "haubergeon"
-	armor = list("melee" = 100, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
-
+	armor = list("melee" = 100, "bullet" = 20, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
 	blocksound = CHAINHIT
 	var/do_sound = FALSE
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
@@ -64,7 +63,7 @@
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	icon_state = "hauberk"
 	item_state = "hauberk"
-	armor = list("melee" = 100, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("melee" = 100, "bullet" = 20, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
 	do_sound = TRUE
@@ -251,6 +250,8 @@
 	desc = "This dress has been padded with leather for extra protection."
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	icon_state = "armordress"
+	armor = list("melee" = 50, "bullet" = 10, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	armor = list("melee" = 50, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = SOFTHIT
@@ -273,8 +274,8 @@
 	desc = "A large shirt meant to be used below armor."
 	icon_state = "gambeson"
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
-	armor = list("melee" = 40, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	armor = list("melee" = 40, "bullet" = 25, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT,BCLASS_BLUNT)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	break_sound = 'sound/foley/cloth_rip.ogg'
@@ -299,8 +300,8 @@
 	icon_state = "leather"
 //	color = "#514339"
 	body_parts_covered = CHEST|GROIN|VITALS
-	armor = list("melee" = 25, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	armor = list("melee" = 25, "bullet" = 10, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT,BCLASS_BLUNT)
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	break_sound = 'sound/foley/cloth_rip.ogg'
@@ -337,7 +338,7 @@
 	icon_state = "vest"
 	item_state = "vest"
 	color = "#514339"
-	armor = list("melee" = 10, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("melee" = 10, "bullet" = 5, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT)
 	blocksound = SOFTHIT
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
