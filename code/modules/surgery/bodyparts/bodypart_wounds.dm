@@ -505,7 +505,7 @@
 								playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 								add_wound(/datum/wound/fracture/head/ears)
 						else if(!has_wound(/datum/wound/fracture/head/brain))
-							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The brain is maimed!</span>"
+							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The cranium is punctured!</span>"
 							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 							add_wound(/datum/wound/fracture/head/brain)
 						else
@@ -577,7 +577,7 @@
 							playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 							add_wound(/datum/wound/fracture/head/ears)
 					else if(!has_wound(/datum/wound/fracture/head/brain))
-						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The brain is maimed!</span>"
+						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The cranium is punctured!</span>"
 						playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
 						add_wound(/datum/wound/fracture/head/brain)
 					else
