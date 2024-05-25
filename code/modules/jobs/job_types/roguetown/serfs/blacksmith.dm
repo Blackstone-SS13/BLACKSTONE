@@ -104,19 +104,28 @@
 	min_pq = 1
 	max_pq = null
 
+	skills = list(
+		/datum/skill/combat/axesmaces = 3, \
+		/datum/skill/combat/unarmed = 2, \
+		/datum/skill/craft/crafting = 3, \
+		/datum/skill/combat/wrestling = 3, \
+		/datum/skill/craft/blacksmithing = list(3,4), \
+		/datum/skill/craft/armorsmithing = list(3,4), \
+		/datum/skill/misc/reading = 2
+ )
 /datum/outfit/job/roguetown/weaponsmith/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/hatfur
 	if(prob(50))
 		head = /obj/item/clothing/head/roguetown/hatblu
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
+		// H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+		// H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+		// H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
+		// H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
+		// H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(3,4), TRUE)
+		// H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(3,4), TRUE)
+		// H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		if(H.age == AGE_OLD)
 			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1,2), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(1,2), TRUE)
