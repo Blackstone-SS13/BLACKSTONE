@@ -5,24 +5,28 @@
 /mob/living/carbon/get_bodypart(zone)
 	if(!zone)
 		zone = BODY_ZONE_CHEST
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/L = X
-		if(L.body_zone == zone)
-			return L
-		for(var/iteminlist in L.subtargets)
-			if(iteminlist == zone)
-				return iteminlist
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		if(bodypart.body_zone == zone)
+			return bodypart
+		for(var/subzone in bodypart.subtargets)
+			if(subzone != zone)
+				continue
+			return bodypart
 
-/mob/living/carbon/proc/get_bodypart_complex(zones)
+/mob/living/carbon/proc/get_bodypart_complex(list/zones)
+	if(!length(zones))
+		zones = list(BODY_ZONE_CHEST)
 	var/list/targets = list()
-	for(var/X in bodyparts)
-		var/obj/item/bodypart/L = X
-		if(L.body_zone in zones)
-			targets += L
-		for(var/iteminlist in L.subtargets)
-			if(iteminlist in zones)
-				targets += iteminlist
-	if(targets.len)
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		if(bodypart.body_zone in zones)
+			targets += bodypart
+		else
+			for(var/subzone in bodypart.subtargets)
+				if(!(subzone in zones))
+					continue
+				targets += bodypart
+				break
+	if(length(targets))
 		return pick(targets)
 
 /mob/living/carbon/has_hand_for_held_index(i, extra_checks)
