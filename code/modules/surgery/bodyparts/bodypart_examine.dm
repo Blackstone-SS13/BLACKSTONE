@@ -106,10 +106,10 @@
 			status += "<a href='?src=[REF(owner)];embedded_limb=[REF(src)];embedded_object=[REF(embedded)];' class='info'>[uppertext(embedded.name)]</a>"
 	
 	if(skeletonized)
-		status += "<span class='bone'>SKELETONIZED</span>"
+		status += "<span class='bone'>SKELETON</span>"
 	else if(rotted)
 		status += "<span class='necrosis'>NECROSIS</span>"
-		
+
 	if(bandage)
 		if(HAS_BLOOD_DNA(bandage))
 			status += "<a href='?src=[REF(owner)];bandaged_limb=[REF(src)];bandage=[REF(bandage)]' class='bloody'>[uppertext(bandage.name)]</a>"
@@ -117,7 +117,7 @@
 			status += "<a href='?src=[REF(owner)];bandaged_limb=[REF(src)];bandage=[REF(bandage)]' class='info'>[uppertext(bandage.name)]</a>"
 
 	if(disabled)
-		status += "<span class='deadsay'><B>CRIPPLED</B></span>"
+		status += "<span class='deadsay'>CRIPPLED</span>"
 
 	return status
 
