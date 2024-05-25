@@ -301,7 +301,6 @@
 			owner.get_item_by_slot(SLOT_HEAD),
 			owner.get_item_by_slot(SLOT_GLASSES),
 			owner.get_item_by_slot(SLOT_NECK),
-			owner.get_item_by_slot(SLOT_EARS),
 			owner.get_item_by_slot(SLOT_WEAR_MASK),
 			owner.get_item_by_slot(SLOT_MOUTH),
 		)
@@ -384,6 +383,10 @@
 	for(var/datum/wound/wound as anything in wounds)
 		wounds -= wound
 		wound.apply_to_bodypart(src)
+	
+	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_CHEST)
+	if(affecting && dismember_wound)
+		affecting.remove_wound(dismember_wound)
 
 	update_bodypart_damage_state()
 

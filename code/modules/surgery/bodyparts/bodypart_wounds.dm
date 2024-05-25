@@ -342,6 +342,9 @@
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_PICK || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
 		if(dam < 5)
 			return FALSE
+		//no skull fractures while aiming for neck!
+		if(zone_precise == BODY_ZONE_PRECISE_NECK)
+			return FALSE
 		var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 			used += 20
