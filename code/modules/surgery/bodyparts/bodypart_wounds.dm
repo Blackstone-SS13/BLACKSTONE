@@ -35,12 +35,11 @@
 
 /// Check to see if we can apply a bleeding wound on this bodypart
 /obj/item/bodypart/proc/can_bloody_wound()
-	if(owner?.dna?.species)
-		if(NOBLOOD in owner.dna.species.species_traits)
-			return FALSE
+	if(skeletonized)
+		return FALSE
 	if(!is_organic_limb())
 		return FALSE
-	if(skeletonized)
+	if(NOBLOOD in owner?.dna?.species?.species_traits)
 		return FALSE
 	return TRUE
 
