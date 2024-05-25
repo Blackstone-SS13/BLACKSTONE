@@ -342,6 +342,9 @@
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_PICK || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
 		if(dam < 5)
 			return FALSE
+		//no skull fractures while aiming for neck!
+		if(zone_precise == BODY_ZONE_PRECISE_NECK)
+			return FALSE
 		var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
 			used += 20
@@ -654,7 +657,7 @@
 
 /obj/item/bodypart/proc/get_bleed_rate()
 	var/bleed_rate = 0
-	if(bandage)
+	if(bandage && !HAS_BLOOD_DNA(bandage))
 		return 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += wound.bleed_rate
