@@ -1,6 +1,7 @@
 /obj/effect/proc_holder/spell/self/howl
-	name = "HOWL"
+	name = "Howl"
 	desc = "!"
+	overlay_state = "howl"
 	antimagic_allowed = TRUE
 	charge_max = 600 //1 minute
 

@@ -1,13 +1,3 @@
-
-#ifdef TESTSERVER
-/mob/living/carbon/human/verb/become_werewolf()
-	set category = "DEBUGTEST"
-	set name = "WEREWOLFTEST"
-	if(mind)
-		var/datum/antagonist/werewolf/new_antag = new /datum/antagonist/werewolf()
-		mind.add_antag_datum(new_antag)
-#endif
-
 /datum/antagonist/werewolf
 	name = "Werewolf"
 	roundend_category = "Werewolves"
@@ -60,7 +50,6 @@
 	owner.special_role = name
 	if(increase_votepwr)
 		forge_werewolf_objectives()
-	finalize_werewolf()
 
 	wolfname = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
 
@@ -92,11 +81,7 @@
 	to_chat(owner.current, "<span class='userdanger'>Ever since that bite, I have been a [owner.special_role].</span>")
 	owner.announce_objectives()
 	..()
-
-/datum/antagonist/werewolf/proc/finalize_werewolf()
-	owner.current.playsound_local(get_turf(owner.current), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
 	
-
 /datum/antagonist/werewolf/on_life(mob/user)
 
 	if(!user) return
@@ -119,8 +104,6 @@
 	else if(transforming)
 		if (world.time >= transforming + 35 SECONDS) // Stage 3
 			H.werewolf_transform()
-			H.real_name = wolfname
-			H.name = wolfname
 			transforming = FALSE
 			transformed = world.time // Timer
 			
@@ -138,12 +121,17 @@
 
 	// Werewolf reverts to human form during the day
 	else if(transformed)
+		H.real_name = wolfname
+		H.name = wolfname
+
 		if(GLOB.tod != "night")
 			if (world.time >= transformed + 25 SECONDS) // Untransform
+				//H.emote("rage", forced = TRUE)
 				H.werewolf_untransform()
 				transformed = FALSE
 
 			else if (world.time >= transformed + 10 SECONDS) // Alert player
+				//H.flash_fullscreen("redflash1")
 				to_chat(H, "<span class='warning'>Daylight shines around me... the curse begins to fade.</span>")
 
 /mob/living/carbon/human/proc/werewolf_infect()

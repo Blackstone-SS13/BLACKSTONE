@@ -47,17 +47,8 @@
 	W.remove_all_languages()
 	W.grant_language(/datum/language/beast)
 
-//	var/datum/antagonist/werewolf/WW = mind.has_antag_datum(/datum/antagonist/werewolf)
-//	if(!W.mind)
-//		W.mind_initialize()
-//	if(WW)
-//		W.mind.add_antag_datum(WW)
-
 	W.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/wwolf)
 	W.update_a_intents()
-	W.name = "WEREWOLF"
-	W.real_name = "WEREWOLF"
-
 
 	to_chat(W, "<span class='userdanger'>I transform into a horrible beast!</span>")
 	W.emote("rage")
@@ -110,11 +101,10 @@
 
 	REMOVE_TRAIT(W, TRAIT_NOMOOD, TRAIT_GENERIC)
 	stress = W.stress
+	W.fully_heal(FALSE)
 
 	mind.transfer_to(W)
-	//M.fully_heal(FALSE)
 
-	fully_heal(FALSE)
 	message_admins("WEREWOLF UNTRANSFORMED: [src]")
 
 	var/mob/living/carbon/human/species/werewolf/WA = src
@@ -124,7 +114,6 @@
 	W.mind.skill_experience = WA.stored_experience.Copy()
 
 	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/howl)
-	
 
 	W.regenerate_icons()
 
@@ -135,7 +124,6 @@
 	W.Stun(30)
 
 	qdel(src)
-
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/werewolf_skin
 	slot_flags = null
