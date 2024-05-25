@@ -84,7 +84,7 @@
 				playsound(src, pick('sound/combat/crit.ogg'), 100, FALSE)
 			src.emote("death", forced =TRUE)
 			src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [src]!</span>"
-			return simple_add_wound(/datum/wound/artery)
+			return simple_add_wound(/datum/wound/artery/chest)
 //			if(bclass == BCLASS_STAB || bclass == BCLASS_PICK)
 //				death()
 //				return TRUE

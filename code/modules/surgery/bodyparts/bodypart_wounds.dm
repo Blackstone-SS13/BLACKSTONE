@@ -152,6 +152,7 @@
 			shake_camera(owner, 2, 2)
 			if(bclass == BCLASS_STAB)
 				return TRUE
+	return FALSE
 
 /obj/item/bodypart/chest/try_crit(bclass,dam,mob/living/user,zone_precise)
 	var/can_bloody = can_bloody_wound()
@@ -177,58 +178,57 @@
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
 		var/foundf
+		var/fracture_type = /datum/wound/fracture/chest
 		if(zone_precise == BODY_ZONE_PRECISE_GROIN)
-			foundf = has_wound(/datum/wound/fracture/groin)
-		else
-			foundf = has_wound(/datum/wound/fracture/chest)
-		if(!foundf)
-			if(prob(used))
-				if(zone_precise == BODY_ZONE_PRECISE_GROIN)
-					var/static/list/phrases = list(
-						"The pelvis shatters in a magnificent way!", 
-						"The pelvis is smashed!", 
-						"The groin is mauled!", 
-						"The pelvic floor caves in!",
-					)
-					var/static/funny_phrase = "The buck is broken!"
-					var/phrase_chosen
-					if(prob(1))
-						phrase_chosen = funny_phrase
-					else
-						phrase_chosen = pick(phrases)
-					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [phrase_chosen]</span>"
-					add_wound(/datum/wound/fracture/groin)
-					owner.emote("groin", TRUE)
-					if((phrase_chosen == funny_phrase) || prob(3))
-						playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-					else
-						playsound(owner, "wetbreak", 100, FALSE)
-					update_disabled()
-					owner.Slowdown(20)
-					shake_camera(owner, 2, 2)
-					if(bclass == BCLASS_CHOP)
-						return TRUE
-					return FALSE
-				else if(zone_precise != BODY_ZONE_PRECISE_STOMACH)
-					var/static/list/phrases = list(
-						"The ribs shatter in a splendid way!", 
-						"The ribs are smashed!", 
-						"The chest is mauled!", 
-						"The chest caves in!",
-					)
-					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-					add_wound(/datum/wound/fracture/chest)
-					owner.emote("paincrit", TRUE)
-					if(prob(3))
-						playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-					else
-						playsound(owner, "wetbreak", 100, FALSE)
-					update_disabled()
-					owner.Slowdown(20)
-					shake_camera(owner, 2, 2)
-					if(bclass == BCLASS_CHOP)
-						return TRUE
-					return FALSE
+			fracture_type = /datum/wound/fracture/groin
+		foundf = has_wound(fracture_type)
+		if(!foundf && prob(used))
+			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
+				var/static/list/phrases = list(
+					"The pelvis shatters in a magnificent way!", 
+					"The pelvis is smashed!", 
+					"The groin is mauled!", 
+					"The pelvic floor caves in!",
+				)
+				var/static/funny_phrase = "The buck is broken!"
+				var/phrase_chosen
+				if(prob(1))
+					phrase_chosen = funny_phrase
+				else
+					phrase_chosen = pick(phrases)
+				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [phrase_chosen]</span>"
+				add_wound(/datum/wound/fracture/groin)
+				owner.emote("groin", TRUE)
+				if((phrase_chosen == funny_phrase) || prob(3))
+					playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
+				else
+					playsound(owner, "wetbreak", 100, FALSE)
+				update_disabled()
+				owner.Slowdown(20)
+				shake_camera(owner, 2, 2)
+				if(bclass == BCLASS_CHOP)
+					return TRUE
+				return FALSE
+			else if(zone_precise != BODY_ZONE_PRECISE_STOMACH)
+				var/static/list/phrases = list(
+					"The ribs shatter in a splendid way!", 
+					"The ribs are smashed!", 
+					"The chest is mauled!", 
+					"The chest caves in!",
+				)
+				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
+				add_wound(/datum/wound/fracture/chest)
+				owner.emote("paincrit", TRUE)
+				if(prob(3))
+					playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
+				else
+					playsound(owner, "wetbreak", 100, FALSE)
+				update_disabled()
+				owner.Slowdown(20)
+				shake_camera(owner, 2, 2)
+				if(bclass == BCLASS_CHOP)
+					return TRUE
+				return FALSE
 	if(bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_STAB || bclass == BCLASS_BITE)
 		var/used = round((brute_dam / max_damage) * 20 + (dam / 4), 1)
 		if(!can_bloody)
@@ -240,78 +240,36 @@
 			else
 				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
 					used += 10
-		var/foundy = has_wound(/datum/wound/artery)
-		if(zone_precise == BODY_ZONE_PRECISE_STOMACH)
-			if(prob(used))
-				if(!can_bloody_wound() || resistance)
-					return FALSE
-				var/organ_spilled = FALSE
-				var/turf/T = get_turf(owner)
-				owner.add_splatter_floor(T)
-				playsound(owner, 'sound/combat/crit2.ogg', 100, FALSE, 5)
-				owner.emote("paincrit", TRUE)
-				. = list()
-				var/static/list/spillable_slots = list(
-					ORGAN_SLOT_STOMACH = 100,
-					ORGAN_SLOT_LIVER = 50,
-				)
-				var/list/spilled_organs = list()
-				for(var/obj/item/organ/organ as anything in owner.internal_organs)
-					var/org_zone = check_zone(organ.zone)
-					if(org_zone != BODY_ZONE_CHEST)
-						continue
-					if(!(organ.slot in spillable_slots))
-						continue
-					var/spill_prob = spillable_slots[organ.slot]
-					if(prob(spill_prob))
-						spilled_organs += organ
-				for(var/obj/item/organ/spilled as anything in spilled_organs)
-					spilled.Remove(owner)
-					spilled.forceMove(T)
-					spilled.add_mob_blood(owner)
-					organ_spilled = TRUE
-				if(cavity_item)
-					cavity_item.forceMove(T)
-					. += cavity_item
-					cavity_item = null
-					organ_spilled = TRUE
-				if(organ_spilled)
-					shake_camera(owner, 2, 2)
-					owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] spills [owner.p_their()] organs!</span>"
-					if(!foundy)
-						add_wound(/datum/wound/artery)
-						owner.emote("paincrit", TRUE)
-						owner.Slowdown(20)
-						shake_camera(owner, 2, 2)
-				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
-					return TRUE
+		if(!prob(used))
+			return FALSE
+		if((zone_precise == BODY_ZONE_PRECISE_STOMACH) && !has_wound(/datum/wound/slash/disembowel))
+			if(!can_bloody || resistance)
 				return FALSE
-		if(prob(used))
-			if(!foundy)
-				if(prob(3))
-					playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
-				else
-					playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
-				add_wound(/datum/wound/artery)
+			playsound(owner, 'sound/combat/crit2.ogg', 100, FALSE, 5)
+			add_wound(/datum/wound/slash/disembowel)
+			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [owner] spills [owner.p_their()] organs!</span>"
+			if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
+				return TRUE
+			return FALSE
+		var/artery = has_wound(/datum/wound/artery/chest)
+		if(!artery)
+			if(prob(3))
+				playsound(owner, 'sound/combat/tf2crit.ogg', 100, FALSE)
+			else
+				playsound(owner, pick('sound/combat/crit.ogg'), 100, FALSE)
+			add_wound(/datum/wound/artery/chest)
+			owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
+			if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
+				return TRUE
+		else
+			if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
 				owner.emote("paincrit", TRUE)
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
+				owner.vomit(blood = TRUE)
 				owner.Slowdown(20)
 				shake_camera(owner, 2, 2)
-				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
-					if(zone_precise == BODY_ZONE_CHEST)
-						owner.vomit(blood = TRUE)
-						if(!resistance)
-							owner.death()
-					return TRUE
-			else
-				if(bclass == BCLASS_CHOP || bclass == BCLASS_STAB)
-					if(zone_precise == BODY_ZONE_CHEST)
-						owner.vomit(blood = TRUE)
-						owner.emote("paincrit", TRUE)
-						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
-						if(!resistance)
-							owner.death()
-						return TRUE
+				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [owner]'s [src.name]!</span>"
+				return TRUE
+	return FALSE
 
 /obj/item/bodypart/head/try_crit(bclass,dam,mob/living/user,zone_precise)
 	var/static/list/eyestab_zones = list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
@@ -603,6 +561,7 @@
 				owner.flash_fullscreen("whiteflash3")
 				owner.Unconscious(5 SECONDS + (from_behind * 10 SECONDS))
 				return FALSE
+	return FALSE
 
 /// Called after a bodypart is attacked so that wounds and critical effects can be applied
 /obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise)
@@ -653,6 +612,7 @@
 			if(dam > 8)
 				return add_wound(/datum/wound/bite/bleeding)
 			return add_wound(/datum/wound/bite)
+	return FALSE
 
 /obj/item/bodypart/proc/get_bleed_rate()
 	var/bleed_rate = 0

@@ -18,5 +18,6 @@
 	sewn_bleed_rate = 0.04
 	woundpain = 10
 	sewn_woundpain = 5
+	sew_threshold = 100
 	can_sew = TRUE
 	passive_healing = 0

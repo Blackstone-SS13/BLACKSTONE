@@ -69,10 +69,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!name)
 		return
 	var/visible_name = name
-	if(!isnull(clotting_threshold) && clotting_rate && (bleed_rate <= clotting_threshold))
-		visible_name += " <span class='danger'>(clotted)</span>"
-	if(sew_progress >= sew_threshold)
+	if(is_sewn())
 		visible_name += " <span class='green'>(sewn)</span>"
+	if(is_clotted())
+		visible_name += " <span class='danger'>(clotted)</span>"
 	return visible_name
 
 /// Description of this wound returned to the player when the bodypart is checked with check_for_injuries()
@@ -216,6 +216,14 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(mob_overlay != old_overlay)
 		owner?.update_damage_overlays()
 	return TRUE
+
+/// Checks if this wound is sewn
+/datum/wound/proc/is_sewn()
+	return can_sew && (sew_progress >= sew_threshold)
+
+/// Checks if this wound is clotted
+/datum/wound/proc/is_clotted()
+	return !isnull(clotting_threshold) && (bleed_rate <= clotting_threshold)
 
 /// Returns whether or not this wound should embed a weapon
 /proc/should_embed_weapon(datum/wound/wound_or_boolean)

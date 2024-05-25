@@ -112,22 +112,23 @@
 
 /datum/wound/fracture/neck/on_mob_gain(mob/living/affected)
 	. = ..()
-	ADD_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
+	ADD_TRAIT(affected, TRAIT_PARALYSIS, "[type]")
 	if(iscarbon(affected))
 		var/mob/living/carbon/carbon_affected = affected
 		carbon_affected.update_disabled_bodyparts()
-	if(HAS_TRAIT(owner, RTRAIT_CRITICAL_WEAKNESS))
-		owner.death()
+	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+		affected.death()
 
 /datum/wound/fracture/neck/on_mob_loss(mob/living/affected)
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_PARALYSIS, "[type]")
+	REMOVE_TRAIT(affected, TRAIT_PARALYSIS, "[type]")
 	if(iscarbon(affected))
 		var/mob/living/carbon/carbon_affected = affected
 		carbon_affected.update_disabled_bodyparts()
 
 /datum/wound/fracture/chest
 	name = "rib fracture"
+	check_name = "<span class='bone'>RIBS</span>"
 	whp = 50
 
 /datum/wound/fracture/groin

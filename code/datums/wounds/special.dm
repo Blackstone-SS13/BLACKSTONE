@@ -1,3 +1,23 @@
+/datum/wound/nose
+	name = "rhinotomy"
+	check_name = "<span class='warning'>NOSE</span>"
+	whp = null
+	woundpain = 20
+	mob_overlay = "cut"
+	can_sew = FALSE
+
+/datum/wound/nose/on_mob_gain(mob/living/affected)
+	. = ..()
+	ADD_TRAIT(affected, TRAIT_MISSING_NOSE, "[type]")
+	ADD_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
+	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+		affected.death()
+
+/datum/wound/nose/on_mob_loss(mob/living/affected)
+	. = ..()
+	REMOVE_TRAIT(affected, TRAIT_MISSING_NOSE, "[type]")
+	REMOVE_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
+	
 /datum/wound/cbt
 	name = "testicular torsion"
 	check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
@@ -47,23 +67,3 @@
 	else
 		name = "testicular evisceration"
 		check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
-
-/datum/wound/nose
-	name = "rhinotomy"
-	check_name = "<span class='warning'>NOSE</span>"
-	whp = null
-	woundpain = 20
-	mob_overlay = "cut"
-	can_sew = FALSE
-
-/datum/wound/nose/on_mob_gain(mob/living/affected)
-	. = ..()
-	ADD_TRAIT(affected, TRAIT_MISSING_NOSE, "[type]")
-	ADD_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
-	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
-		affected.death()
-
-/datum/wound/nose/on_mob_loss(mob/living/affected)
-	. = ..()
-	REMOVE_TRAIT(affected, TRAIT_MISSING_NOSE, "[type]")
-	REMOVE_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
