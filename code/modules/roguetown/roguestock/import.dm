@@ -132,15 +132,14 @@
 	new /obj/item/quiver/bolts(src)
 
 /datum/roguestock/import/saigabuck
-	name = "Saigabuck Crate"
-	desc = "A crate with 2 tamed Saigabuck with saddles."
-	item_type = /obj/structure/closet/crate/chest/steward/saigabuck
-	export_price = 200
+	name = "Saigabuck"
+	desc = "One Saigabuck tamed with a saddle from a far away land"
+	item_type = /mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame/saddled/saigabuck
+	export_price = 100
 	importexport_amt = 1
 
-/obj/structure/closet/crate/chest/steward/saigabuck/Initialize()
+/mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame/saddled/saigabuck/Initialize()
 	. = ..()
-	new /mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame/saddled(src)
 	new /mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame/saddled(src)
 
 
