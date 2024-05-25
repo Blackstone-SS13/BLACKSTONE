@@ -40,7 +40,7 @@
 /mob/living/carbon/check_projectile_dismemberment(obj/projectile/P, def_zone)
 	var/obj/item/bodypart/affecting = get_bodypart(check_zone(def_zone))
 	if(affecting && affecting.dismemberable && affecting.get_damage() >= (affecting.max_damage - P.dismemberment))
-		affecting.dismember(P.damtype)
+		affecting.dismember(P.damtype, P.woundclass)
 
 /mob/living/carbon/proc/can_catch_item(skip_throw_mode_check)
 	. = FALSE
@@ -242,7 +242,7 @@
 	if(statforce)
 		var/probability = I.get_dismemberment_chance(affecting)
 		if(prob(probability))
-			if(affecting.dismember(I.damtype, user, user.zone_selected))
+			if(affecting.dismember(I.damtype, user.used_intent.blade_class, user, user.zone_selected))
 				I.add_mob_blood(src)
 				playsound(get_turf(src), I.get_dismember_sound(), 80, TRUE)
 		return TRUE //successful attack
@@ -341,7 +341,7 @@
 	if(affecting)
 		dam_zone = affecting.body_zone
 		if(affecting.get_damage() >= affecting.max_damage)
-			affecting.dismember(BRUTE, attacker, attacker.zone_selected)
+			affecting.dismember(BRUTE, attacker.a_intent.blade_class, attacker, attacker.zone_selected)
 			return null
 		return affecting.body_zone
 	return dam_zone

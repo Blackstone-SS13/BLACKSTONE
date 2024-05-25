@@ -18,7 +18,7 @@
 	)
 
 //Dismember a limb
-/obj/item/bodypart/proc/dismember(dam_type = BRUTE, mob/living/user, zone_precise = src.body_zone)
+/obj/item/bodypart/proc/dismember(dam_type = BRUTE, bclass = BCLASS_CUT, mob/living/user, zone_precise = src.body_zone)
 	if(!owner)
 		return FALSE
 	var/mob/living/carbon/C = owner
@@ -66,7 +66,8 @@
 
 	if(dam_type == BURN)
 		burn()
-		return 1
+		return TRUE
+	
 	var/turf/location = C.loc
 	if(istype(location))
 		C.add_splatter_floor(location)
@@ -81,10 +82,9 @@
 		if(new_turf.density)
 			break
 	throw_at(target_turf, throw_range, throw_speed)
-	return 1
+	return TRUE
 
-
-/obj/item/bodypart/chest/dismember(dam_type = BRUTE, mob/living/user, zone_precise = src.body_zone)
+/obj/item/bodypart/chest/dismember(dam_type = BRUTE, bclass = BCLASS_CUT, mob/living/user, zone_precise = src.body_zone)
 	if(!owner)
 		return FALSE
 	var/mob/living/carbon/C = owner
@@ -95,7 +95,6 @@
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
 		return FALSE
 	. = list()
-	dismemberable = FALSE
 	var/organ_spilled = 0
 	var/turf/T = get_turf(C)
 	C.add_splatter_floor(T)
@@ -130,11 +129,16 @@
 	var/mob/living/carbon/was_owner = owner
 	update_limb(dropping_limb = TRUE)
 
+	if(length(wounds))
+		var/list/stored_wounds = list()
+		for(var/datum/wound/wound as anything in wounds)
+			wound.remove_from_bodypart()
+			stored_wounds += wound //store for later when the limb is reattached
+		wounds = stored_wounds
 	for(var/datum/surgery/surgery as anything in was_owner.surgeries) //if we had an ongoing surgery on that limb, we stop it.
 		if(surgery.operated_bodypart == src)
 			was_owner.surgeries -= surgery
 			qdel(surgery)
-			break
 	for(var/obj/item/embedded in embedded_objects)
 		embedded_objects -= embedded
 		if(drop_location)
@@ -166,7 +170,7 @@
 			organ.transfer_to_limb(src, was_owner)
 
 	if(held_index)
-		was_owner.dropItemToGround(owner.get_item_for_held_index(held_index), forced = TRUE)
+		was_owner.dropItemToGround(owner.get_item_for_held_index(held_index), force = TRUE)
 		was_owner.hand_bodyparts[held_index] = null
 	was_owner.bodyparts -= src
 	owner = null
@@ -223,10 +227,11 @@
 /obj/item/bodypart/chest/drop_limb(special)
 	if(special)
 		return ..()
+	return FALSE
 
 /obj/item/bodypart/r_arm/drop_limb(special)
 	var/mob/living/carbon/C = owner
-	..()
+	. = ..()
 	if(C && !special)
 		if(C.handcuffed)
 			C.handcuffed.forceMove(drop_location())
@@ -238,14 +243,14 @@
 			if(R)
 				R.update_icon()
 		if(C.gloves && (C.get_num_arms(FALSE) < 1))
-			C.dropItemToGround(C.gloves, TRUE)
+			C.dropItemToGround(C.gloves, force = TRUE)
 		C.update_inv_gloves() //to remove the bloody hands overlay
 		C.update_inv_armor()
 
 
 /obj/item/bodypart/l_arm/drop_limb(special)
 	var/mob/living/carbon/C = owner
-	..()
+	. = ..()
 	if(C && !special)
 		if(C.handcuffed)
 			C.handcuffed.forceMove(drop_location())
@@ -257,13 +262,13 @@
 			if(L)
 				L.update_icon()
 		if(C.gloves && (C.get_num_arms(FALSE) < 1))
-			C.dropItemToGround(C.gloves, TRUE)
+			C.dropItemToGround(C.gloves, force = TRUE)
 		C.update_inv_gloves() //to remove the bloody hands overlay
 		C.update_inv_armor()
 
 /obj/item/bodypart/r_leg/drop_limb(special)
 	var/mob/living/carbon/C = owner
-	..()
+	. = ..()
 	if(C && !special)
 		if(C.legcuffed)
 			C.legcuffed.forceMove(C.drop_location()) //At this point bodypart is still in nullspace
@@ -271,13 +276,13 @@
 			C.legcuffed = null
 			C.update_inv_legcuffed()
 		if(C.shoes && (C.get_num_legs(FALSE) < 1))
-			C.dropItemToGround(C.shoes, TRUE)
+			C.dropItemToGround(C.shoes, force = TRUE)
 		C.update_inv_shoes()
 		C.update_inv_pants()
 
 /obj/item/bodypart/l_leg/drop_limb(special) //copypasta
 	var/mob/living/carbon/C = owner
-	..()
+	. = ..()
 	if(C && !special)
 		if(C.legcuffed)
 			C.legcuffed.forceMove(C.drop_location())
@@ -285,16 +290,23 @@
 			C.legcuffed = null
 			C.update_inv_legcuffed()
 		if(C.shoes && (C.get_num_legs(FALSE) < 1))
-			C.dropItemToGround(C.shoes, TRUE)
+			C.dropItemToGround(C.shoes, force = TRUE)
 		C.update_inv_shoes()
 		C.update_inv_pants()
 
 /obj/item/bodypart/head/drop_limb(special)
 	if(!special)
 		//Drop all worn head items
-		for(var/X in list(owner.glasses, owner.wear_neck, owner.ears, owner.wear_mask, owner.head))
-			var/obj/item/I = X
-			owner.dropItemToGround(I, TRUE)
+		var/list/worn_items = list(
+			owner.get_item_by_slot(SLOT_HEAD),
+			owner.get_item_by_slot(SLOT_GLASSES),
+			owner.get_item_by_slot(SLOT_NECK),
+			owner.get_item_by_slot(SLOT_EARS),
+			owner.get_item_by_slot(SLOT_WEAR_MASK),
+			owner.get_item_by_slot(SLOT_MOUTH),
+		)
+		for(var/obj/item/worn_item in worn_items)
+			owner.dropItemToGround(worn_item, force = TRUE)
 
 //	owner.ghostize(0)
 //	if(brainmob)
@@ -315,8 +327,7 @@
 		ooze.transfer_to_limb(src, owner)
 
 	name = "[owner.real_name]'s head"
-	..()
-
+	. = ..()
 	if(brainmob)
 		QDEL_NULL(brainmob)
 	var/obj/item/organ/brain/BR = locate(/obj/item/organ/brain) in contents
@@ -361,16 +372,18 @@
 		C.update_inv_gloves()
 
 	if(special) //non conventional limb attachment
-		for(var/X in C.surgeries) //if we had an ongoing surgery to attach a new limb, we stop it.
-			var/datum/surgery/S = X
-			var/surgery_zone = check_zone(S.location)
+		for(var/datum/surgery/surgery as anything in C.surgeries) //if we had an ongoing surgery to attach a new limb, we stop it.
+			var/surgery_zone = check_zone(surgery.location)
 			if(surgery_zone == body_zone)
-				C.surgeries -= S
-				qdel(S)
-				break
+				C.surgeries -= surgery
+				qdel(surgery)
 
-	for(var/obj/item/organ/O in contents)
-		O.Insert(C)
+	for(var/obj/item/organ/stored_organ in src)
+		stored_organ.Insert(C)
+
+	for(var/datum/wound/wound as anything in wounds)
+		wounds -= wound
+		wound.apply_to_bodypart(src)
 
 	update_bodypart_damage_state()
 
