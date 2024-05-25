@@ -83,7 +83,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected)
 	if(bodypart_owner || owner || QDELETED(affected) || QDELETED(affected.owner))
 		return FALSE
-	if(!affected.can_bloody_wound() && !isnull(bleed_rate))
+	if(!isnull(bleed_rate) && !affected.can_bloody_wound())
 		return FALSE
 	for(var/datum/wound/other_wound as anything in affected.wounds)
 		if(!can_stack_with(other_wound))
