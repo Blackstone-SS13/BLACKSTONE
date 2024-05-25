@@ -8,11 +8,9 @@
 
 	var/m1 = "[t_He] [t_is]"
 	var/m2 = "[t_his]"
-	var/m3 = "[t_He] [t_has]"
 	if(user == src)
 		m1 = "I am"
 		m2 = "my"
-		m3 = "I have"
 
 	for(var/obj/item/held_item in held_items)
 		if(held_item.item_flags & ABSTRACT)
