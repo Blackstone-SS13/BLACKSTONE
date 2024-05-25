@@ -320,7 +320,7 @@
 			isdisabled = "limp "
 		if(BODYPART_DISABLED_ROT)
 			if(FB.skeletonized)
-				isdisabled = "skeletonized "
+				isdisabled = "skelelonized "
 			else
 				isdisabled = "rotting "
 	to_chat(src, "\t <span class='[no_damage ? "notice" : "warning"]'>My [isdisabled][FB.name] [status].</span>")
