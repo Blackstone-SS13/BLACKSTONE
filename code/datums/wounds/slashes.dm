@@ -71,9 +71,9 @@
 		var/org_zone = check_zone(organ.zone)
 		if(org_zone != BODY_ZONE_CHEST)
 			continue
-		if(!(organ.slot in spillable_slots))
+		if(!(organ.slot in affected_organs))
 			continue
-		var/spill_prob = spillable_slots[organ.slot]
+		var/spill_prob = affected_organs[organ.slot]
 		if(prob(spill_prob))
 			spilled_organs += organ
 	for(var/obj/item/organ/spilled as anything in spilled_organs)

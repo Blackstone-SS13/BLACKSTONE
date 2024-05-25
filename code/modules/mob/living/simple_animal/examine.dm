@@ -1,7 +1,6 @@
 /mob/living/simple_animal/examine(mob/user)
 	var/t_He = p_they(TRUE)
 	var/t_his = p_their()
-	var/t_has = p_have()
 	var/t_is = p_are()
 
 	. = list("<span class='info'>✠ ------------ ✠\nThis is \a <EM>[src]</EM>.")
