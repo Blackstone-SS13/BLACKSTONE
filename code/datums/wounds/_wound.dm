@@ -66,6 +66,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Description of this wound returned to the player when a bodypart is examined and such
 /datum/wound/proc/get_visible_name()
+	if(!name)
+		return
 	var/visible_name = name
 	if(!isnull(clotting_threshold) && clotting_rate && (bleed_rate <= clotting_threshold))
 		visible_name += " <span class='danger'>(clotted)</span>"

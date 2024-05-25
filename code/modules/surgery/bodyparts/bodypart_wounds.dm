@@ -654,7 +654,7 @@
 
 /obj/item/bodypart/proc/get_bleed_rate()
 	var/bleed_rate = 0
-	if(bandage)
+	if(bandage && !HAS_BLOOD_DNA(bandage))
 		return 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += wound.bleed_rate

@@ -126,100 +126,103 @@
 	if(!owner)
 		return
 	testing("begin drop limb")
-	var/atom/Tsec = owner.drop_location()
-	var/mob/living/carbon/C = owner
-	update_limb(1)
-	C.bodyparts -= src
+	var/atom/drop_location = owner.drop_location()
+	var/mob/living/carbon/was_owner = owner
+	update_limb(dropping_limb = TRUE)
 
-	if(held_index)
-		C.dropItemToGround(owner.get_item_for_held_index(held_index), 1)
-		C.hand_bodyparts[held_index] = null
-
-	owner = null
-
-	for(var/X in C.surgeries) //if we had an ongoing surgery on that limb, we stop it.
-		var/datum/surgery/S = X
-		if(S.operated_bodypart == src)
-			C.surgeries -= S
-			qdel(S)
+	for(var/datum/surgery/surgery as anything in was_owner.surgeries) //if we had an ongoing surgery on that limb, we stop it.
+		if(surgery.operated_bodypart == src)
+			was_owner.surgeries -= surgery
+			qdel(surgery)
 			break
-	for(var/obj/item/I in embedded_objects)
-		embedded_objects -= I
-		var/turf/T = get_turf(C)
-		I.forceMove(T)
+	for(var/obj/item/embedded in embedded_objects)
+		embedded_objects -= embedded
+		if(drop_location)
+			embedded.forceMove(drop_location)
+		else
+			qdel(embedded)
 	if(bandage)
-		var/turf/T = get_turf(C)
-		bandage.forceMove(T)
+		if(drop_location)
+			bandage.forceMove(drop_location)
+		else
+			qdel(bandage)
 		bandage = null
-	for(var/datum/wound/wound as anything in wounds)
-		qdel(wound)
-	if(!C.has_embedded_objects())
-		C.clear_alert("embeddedobject")
-		SEND_SIGNAL(C, COMSIG_CLEAR_MOOD_EVENT, "embedded")
+	if(!was_owner.has_embedded_objects())
+		was_owner.clear_alert("embeddedobject")
+		SEND_SIGNAL(was_owner, COMSIG_CLEAR_MOOD_EVENT, "embedded")
 
 	if(!special)
-		if(C.dna)
-			for(var/X in C.dna.mutations) //some mutations require having specific limbs to be kept.
-				var/datum/mutation/human/MT = X
-				if(MT.limb_req && MT.limb_req == body_zone)
-					C.dna.force_lose(MT)
+		if(was_owner.dna)
+			//some mutations require having specific limbs to be kept.
+			for(var/datum/mutation/human/mutation as anything in was_owner.dna.mutations)
+				if(mutation.limb_req != body_zone)
+					continue
+				was_owner.dna.force_lose(mutation)
 
-		for(var/X in C.internal_organs) //internal organs inside the dismembered limb are dropped.
-			var/obj/item/organ/O = X
-			var/org_zone = check_zone(O.zone)
+		for(var/obj/item/organ/organ as anything in was_owner.internal_organs) //internal organs inside the dismembered limb are dropped.
+			var/org_zone = check_zone(organ.zone)
 			if(org_zone != body_zone)
 				continue
-			O.transfer_to_limb(src, C)
+			organ.transfer_to_limb(src, was_owner)
+
+	if(held_index)
+		was_owner.dropItemToGround(owner.get_item_for_held_index(held_index), forced = TRUE)
+		was_owner.hand_bodyparts[held_index] = null
+	was_owner.bodyparts -= src
+	owner = null
 
 	update_icon_dropped()
-	C.update_health_hud() //update the healthdoll
-	C.update_body()
-	C.update_hair()
-	C.update_mobility()
+	was_owner.update_health_hud() //update the healthdoll
+	was_owner.update_body()
+	was_owner.update_hair()
+	was_owner.update_mobility()
 
-	if(!Tsec)	// Tsec = null happens when a "dummy human" used for rendering icons on prefs screen gets its limbs replaced.
+	// drop_location = null happens when a "dummy human" used for rendering icons on prefs screen gets its limbs replaced.
+	if(!drop_location)
 		qdel(src)
-		return
+		return TRUE
 
+	// pseudoparts shouldn't have organs, but just in case
 	if(is_pseudopart)
-		drop_organs(C)	//Psuedoparts shouldn't have organs, but just in case
+		drop_organs(was_owner)
 		qdel(src)
-		return
+		return TRUE
 
-	forceMove(Tsec)
-
-
+	forceMove(drop_location)
+	return TRUE
 
 //when a limb is dropped, the internal organs are removed from the mob and put into the limb
 /obj/item/organ/proc/transfer_to_limb(obj/item/bodypart/LB, mob/living/carbon/C)
 	Remove(C)
 	forceMove(LB)
+	return TRUE
 
 /obj/item/organ/brain/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
-	Remove(C)	//Changeling brain concerns are now handled in Remove
+	Remove(C) //Changeling brain concerns are now handled in Remove
 	forceMove(LB)
 	LB.brain = src
 	if(brainmob)
 		LB.brainmob = brainmob
-		brainmob = null
 		LB.brainmob.forceMove(LB)
 		LB.brainmob.stat = DEAD
+	brainmob = null
+	return TRUE
 
 /obj/item/organ/eyes/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
 	LB.eyes = src
-	..()
+	return ..()
 
 /obj/item/organ/ears/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
 	LB.ears = src
-	..()
+	return ..()
 
 /obj/item/organ/tongue/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
 	LB.tongue = src
-	..()
+	return ..()
 
 /obj/item/bodypart/chest/drop_limb(special)
 	if(special)
-		..()
+		return ..()
 
 /obj/item/bodypart/r_arm/drop_limb(special)
 	var/mob/living/carbon/C = owner
