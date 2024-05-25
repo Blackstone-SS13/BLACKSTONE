@@ -2,9 +2,9 @@
 #define RTRAIT_WEBWALK 					"Webwalker"
 #define RTRAIT_NOSTINK 					"Dead Nose"
 #define RTRAIT_ZJUMP 					"High Jumping"
-#define RTRAIT_FUNNYMAN 				"Funny Entity"
+#define RTRAIT_LEAPER 					"Leaper"
 #define RTRAIT_NOSEGRAB 				"Intimidating"
-#define RTRAIT_NUTCRACKER 				"Domineering"
+#define RTRAIT_NUTCRACKER 				"Nutcracker"
 #define RTRAIT_SEEPRICES				"Giza Blooded"
 #define RTRAIT_SEEPRICES_SHITTY			"Giza-in-training"
 #define RTRAIT_STRONGBITE				"Strong Bite"
@@ -44,10 +44,10 @@
 GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_WEBWALK = "I can move freely between webs.",
 	RTRAIT_NOSTINK = "<span class='deadsay'>My nose is numb to the smell of decay.</span>",
-	RTRAIT_ZJUMP = "Who needs to climb when you can make great leaps?",
-	RTRAIT_FUNNYMAN = "Perhaps some form of benevolence from the Mad-God?",
+	RTRAIT_ZJUMP = "Time to reach a new high.",
+	RTRAIT_LEAPER = "I can leap like a frog.",
 	RTRAIT_NOSEGRAB = "I love to grab idiots by their noses!",
-	RTRAIT_NUTCRACKER = "You know how to get their attention, grab them where it hurts.",
+	RTRAIT_NUTCRACKER = "I love twisting the nuts of idiots!",
 	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	RTRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... <i>Kind of</i>.",
 	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
@@ -72,11 +72,6 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "<span class='warning'>I can't sleep.</span>",
 ))
-
-
-
-
-
 
 // trait accessor defines
 #define ADD_TRAIT(target, trait, source) \

@@ -164,21 +164,12 @@
 		if(dam >= 10)
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 				// TESTICULAR TORSION!
-				if(!has_wound(/datum/wound/cbt))
-					if(HAS_TRAIT(src, RTRAIT_NUTCRACKER)) //JESTICULAR TORSION!
-						if(prob(5))
-							add_wound(/datum/wound/cbt)
-						else
-							owner.emote("groin", forced = TRUE)
-							owner.Stun(10)
-					else if (prob(1))
-						add_wound(/datum/wound/cbt)
-					else
-						owner.emote("groin", forced = TRUE)
-						owner.Stun(10)		
-				if(prob(round(dam/10)) && !has_wound(/datum/wound/cbt))
+				var/cbt_multiplier = 1
+				if(user && HAS_TRAIT(user, RTRAIT_NUTCRACKER))
+					cbt_multiplier = 3
+				if(prob(round(dam/10) * cbt_multiplier) && !has_wound(/datum/wound/cbt))
 					add_wound(/datum/wound/cbt)
-				else if(prob(dam * 2.5))
+				else if(prob(dam * 2 * cbt_multiplier))
 					owner.emote("groin", forced = TRUE)
 					owner.Stun(10)
 		return FALSE
