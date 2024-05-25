@@ -306,6 +306,9 @@
 					to_chat(src, "<span class='warning'>I haven't regained my balance yet.</span>")
 					return
 				if(lying)
+					if(!HAS_TRAIT(src, RTRAIT_FUNNYMAN))// The Jester cares not for such social convention.
+						to_chat(src, "<span class='warning'>I should stand up first.</span>")
+				if(!ismob(A) && !isturf(A))
 					to_chat(src, "<span class='warning'>I should stand up first.</span>")
 					return
 				if(A.z != src.z)
@@ -324,7 +327,8 @@
 					OffBalance(30)
 					jadded = 15
 					jrange = 3
-					jextra = TRUE
+					if(!HAS_TRAIT(src, RTRAIT_FUNNYMAN))// The Jester lands where the Jester wants.
+						jextra = TRUE
 				else
 					OffBalance(20)
 					jadded = 10
