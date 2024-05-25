@@ -365,7 +365,10 @@
 		if(L.rogfat >= L.maxrogfat)
 			return FALSE
 		if(L)
-			prob2defend = prob2defend + (L.STASPD * 10)
+			if(H.check_dodge_skill())
+				prob2defend = prob2defend + (L.STASPD * 15)
+			else
+				prob2defend = prob2defend + (L.STASPD * 10)
 		if(U)
 			prob2defend = prob2defend - (U.STASPD * 10)
 		if(I)
@@ -379,6 +382,8 @@
 			if(!H.check_armor_skill())
 				H.Knockdown(1)
 				return FALSE
+			if(H.check_dodge_skill())
+				drained = drained - 5
 //			if(H.mind)
 //				drained = drained + max((H.checkwornweight() * 10)-(mind.get_skill_level(/datum/skill/misc/athletics) * 10),0)
 //			else

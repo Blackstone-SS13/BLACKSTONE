@@ -662,6 +662,26 @@
 					return FALSE
 	return TRUE
 
+/mob/living/proc/check_dodge_skill()
+	return TRUE
+
+/mob/living/carbon/human/check_dodge_skill()
+	if(istype(src.wear_armor, /obj/item/clothing))
+		var/obj/item/clothing/CL = src.wear_armor
+		if(CL.armor_class == ARMOR_CLASS_HEAVY)
+			return FALSE
+		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
+			return FALSE
+	if(istype(src.wear_shirt, /obj/item/clothing))
+		var/obj/item/clothing/CL = src.wear_shirt
+		if(CL.armor_class == ARMOR_CLASS_HEAVY)
+			return FALSE
+		if(CL.armor_class == ARMOR_CLASS_MEDIUM)
+			return FALSE
+	if(!HAS_TRAIT(src, RTRAIT_DODGEEXPERT))
+		return FALSE
+	return TRUE
+
 /mob/proc/toggle_eye_intent(mob/user) //clicking the fixeye button either makes you fixeye or clears your target
 	if(fixedeye)
 		fixedeye = 0
