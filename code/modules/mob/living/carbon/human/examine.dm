@@ -429,18 +429,18 @@
 		var/final_str = STASTR
 		if(HAS_TRAIT(src, RTRAIT_DECEIVING_MEEKNESS))
 			final_str = 10
-		if((final_str - L.STASTR) > 1)
-			if((final_str - L.STASTR) >= 5)
+		var/strength_diff = final_str - L.STASTR
+		switch(strength_diff)
+			if(5 to INFINITY)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much stronger than I.</B></span>"
-			else
+			if(1 to 5)
 				. += "<span class='warning'>[t_He] look[p_s()] stronger than I.</span>"
-		else if((L.STASTR - final_str) > 1)
-			if((L.STASTR - final_str) >= 5)
-				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker.</B></span>"
-			else
-				. += "<span class='warning'>[t_He] look[p_s()] weaker.</span>"
-		else
-			. += "[t_He] look[p_s()] about as strong as I."
+			if(0)
+				. += "[t_He] look[p_s()] about as strong as I."
+			if(-5 to -1)
+				. += "<span class='warning'>[t_He] look[p_s()] weaker than I.</span>"
+			if(-INFINITY to -5)
+				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker than I.</B></span>"
 
 	if(maniac)
 		var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
@@ -448,9 +448,26 @@
 			. += "<span class='danger'>[t_He] know[p_s()] [heart.inscryption_key], I AM SURE OF IT!</span>"
 
 	if(Adjacent(user))
-		. += "<a href='?src=[REF(src)];inspect_limb=1'>Inspect [parse_zone(check_zone(user.zone_selected))]</a>"
-		if(!(mobility_flags & MOBILITY_STAND) && user != src && (user.zone_selected == BODY_ZONE_CHEST))
-			. += "<a href='?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
+		if(isobserver(user))
+			var/static/list/check_zones = list(
+				BODY_ZONE_HEAD,
+				BODY_ZONE_CHEST,
+				BODY_ZONE_R_ARM,
+				BODY_ZONE_L_ARM,
+				BODY_ZONE_R_LEG,
+				BODY_ZONE_L_LEG,
+			)
+			for(var/zone in check_zones)
+				var/obj/item/bodypart/bodypart = get_bodypart(zone)
+				if(!bodypart)
+					continue
+				. += "<a href='?src=[REF(src)];inspect_limb=[zone]'>Inspect [parse_zone(zone)]</a>"
+			. += "<a href='?src=[REF(src)];check_hb=1'>Check Heartbeat</a>"
+		else
+			var/checked_zone = check_zone(user.zone_selected)
+			. += "<a href='?src=[REF(src)];inspect_limb=[checked_zone]'>Inspect [parse_zone(checked_zone)]</a>"
+			if(!(mobility_flags & MOBILITY_STAND) && user != src && (user.zone_selected == BODY_ZONE_CHEST))
+				. += "<a href='?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
 
 	var/trait_exam = common_trait_examine()
 	if(!isnull(trait_exam))

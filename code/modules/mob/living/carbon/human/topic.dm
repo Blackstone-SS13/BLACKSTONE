@@ -2,10 +2,11 @@
 	if(href_list["inspect_limb"] && (isobserver(usr) || usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)))
 		var/list/msg = list()
 		var/mob/user = usr
-		var/obj/item/bodypart/BP = get_bodypart(check_zone(user.zone_selected))
-		msg += "<B>[capitalize(parse_zone(check_zone(user.zone_selected)))]:</B>"
+		var/checked_zone = check_zone(href_list["inspect_limb"])
+		var/obj/item/bodypart/BP = get_bodypart(checked_zone)
+		msg += "<B>[capitalize(parse_zone(checked_zone))]:</B>"
 		if(BP)
-			if(isobserver(user) || get_location_accessible(src, check_zone(user.zone_selected)))
+			if(isobserver(user) || get_location_accessible(src, checked_zone))
 				var/bodypart_status = list()
 				switch(BP.disabled)
 					if(BODYPART_DISABLED_WOUND)
@@ -38,25 +39,25 @@
 				msg += "Obscured by clothing."
 			if(length(BP.embedded_objects))
 				msg += "<B>Embedded objects:</B>"
-				for(var/obj/item/I in BP.embedded_objects)
-					msg += "<a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(BP)]'>[I.name]</a>"
+				for(var/obj/item/embedded in BP.embedded_objects)
+					msg += "<a href='?src=[REF(src)];embedded_object=[REF(embedded)];embedded_limb=[REF(BP)]'>[embedded.name]</a>"
 		else
 			msg += "<B>Limb is missing!</B>"
-		to_chat(usr, msg.Join("\n"))
+		to_chat(usr, "<span class='info'>[msg.Join("\n")]</span>")
 
 	if(href_list["check_hb"])
 		if(isobserver(usr))
 			if(stat == DEAD)
-				to_chat(usr, "<B>No heartbeat...</B>")
+				to_chat(usr, "<span class='info'><B>No heartbeat...</B></span>")
 			else
-				to_chat(usr, "<B>The heart is still beating.</B>")
+				to_chat(usr, "<span class='info'><B>The heart is still beating.</B></span>")
 		else if(Adjacent(usr) && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 			usr.visible_message("<span class='info'>[usr] tries to hear [src]'s heartbeat.</span>")
 			if(do_after(usr, 30, needhand = 1, target = src))
 				if(stat == DEAD)
-					to_chat(usr, "<B>No heartbeat...</B>")
+					to_chat(usr, "<span class='info'><B>No heartbeat...</B>")
 				else
-					to_chat(usr, "<B>The heart is still beating.</B>")
+					to_chat(usr, "<span class='info'><B>The heart is still beating.</B></span>")
 
 	if(href_list["embedded_object"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 		var/obj/item/bodypart/L = locate(href_list["embedded_limb"]) in bodyparts
