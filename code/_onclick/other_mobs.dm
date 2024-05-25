@@ -214,8 +214,8 @@
 	user.equip_to_slot_or_del(B, SLOT_MOUTH)
 	if(user.mouth == B)
 		var/used_limb = src.find_used_grab_limb(user)
-		B.name = "[src]'s [used_limb]"
-		var/obj/item/bodypart/BP = get_bodypart(check_zone(user.zone_selected))
+		B.name = "[src]'s [parse_zone(used_limb)]"
+		var/obj/item/bodypart/BP = get_bodypart(check_zone(used_limb))
 		BP.grabbedby += B
 		B.grabbed = src
 		B.grabbee = user

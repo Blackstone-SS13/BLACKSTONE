@@ -68,7 +68,7 @@
 			status += "<span class='[burn >= 10 ? "danger" : "warning"]'>[burn] BURN</span>"
 	else
 		if(brute >= max_damage * 0.75)
-			status += "<span class='userdanger'><b>[heavy_brute_msg]</b></span>"
+			status += "<span class='userdanger'><B>[heavy_brute_msg]</B></span>"
 		else if(brute >= max_damage * 0.5)
 			status += "<span class='userdanger'>[heavy_brute_msg]</span>"
 		else if(brute >= max_damage * 0.25)
@@ -77,7 +77,7 @@
 			status += "<span class='warning'>[light_brute_msg]</span>"
 
 		if(burn >= max_damage * 0.75)
-			status += "<span class='userdanger'><b>[heavy_burn_msg]</b></span>"
+			status += "<span class='userdanger'><B>[heavy_burn_msg]</B></span>"
 		else if(burn >= max_damage * 0.5)
 			status += "<span class='userdanger'>[medium_burn_msg]</span>"
 		else if(burn >= max_damage * 0.25)
@@ -108,15 +108,16 @@
 	if(skeletonized)
 		status += "<span class='bone'>SKELETONIZED</span>"
 	else if(rotted)
-		status += "<span class='dead'>NECROSIS</span>"
+		status += "<span class='necrosis'>NECROSIS</span>"
 		
 	if(bandage)
 		if(HAS_BLOOD_DNA(bandage))
 			status += "<a href='?src=[REF(owner)];bandaged_limb=[REF(src)];bandage=[REF(bandage)]' class='bloody'>[uppertext(bandage.name)]</a>"
 		else
 			status += "<a href='?src=[REF(owner)];bandaged_limb=[REF(src)];bandage=[REF(bandage)]' class='info'>[uppertext(bandage.name)]</a>"
+
 	if(disabled)
-		status += "<span class='deadsay'><b>CRIPPLED</b></span>"
+		status += "<span class='dead'><B>CRIPPLED</B></span>"
 
 	return status
 

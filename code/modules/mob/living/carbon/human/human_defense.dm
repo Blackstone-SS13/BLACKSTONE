@@ -859,7 +859,7 @@
 	if(examined_part)
 		examination += examined_part.check_for_injuries(user, advanced)
 	else
-		examination += "<span class='info'>☼ [capitalize(parse_zone(choice))]: <span class='deadsay'><b>MISSING</b></span></span>"
+		examination += "<span class='info'>☼ [capitalize(parse_zone(choice))]: <span class='deadsay'><B>MISSING</B></span></span>"
 	examination += "ø ------------ ø</span>"
 	if(!silent)
 		to_chat(user, examination.Join("\n"))
