@@ -362,20 +362,20 @@
 
 /obj/item/clothing/head/roguetown/headdress/alt
 	icon_state = "headdressalt"
-	sewrepair
+	sewrepair = TRUE
 
 /obj/item/clothing/head/roguetown/nun
 	name = "nun's habit"
 	icon_state = "nun"
 	sellprice = 5
-	sewrepair
+	sewrepair = TRUE
 
 /obj/item/clothing/head/roguetown/hennin
 	name = "hennin"
 	icon_state = "hennin"
 	sellprice = 19
 	dynamic_hair_suffix = "+generic"
-	sewrepair
+	sewrepair = TRUE
 
 /obj/item/clothing/head/roguetown/paddedcap
 	name = "padded cap"
