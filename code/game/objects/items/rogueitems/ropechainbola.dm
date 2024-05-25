@@ -18,6 +18,7 @@
 	possible_item_intents = list(/datum/intent/tie)
 	firefuel = 5 MINUTES
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sewrepair = TRUE
 
 /datum/intent/tie
 	name = "tie"
@@ -141,3 +142,5 @@
 	firefuel = null
 	smeltresult = /obj/item/ingot/iron
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
+	sewrepair = FALSE
+	anvilrepair = /datum/skill/craft/blacksmithing

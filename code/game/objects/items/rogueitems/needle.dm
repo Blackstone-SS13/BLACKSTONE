@@ -17,6 +17,7 @@
 	var/infinite = FALSE
 	/// If this needle can be used to repair items
 	var/can_repair = TRUE
+	anvilrepair = /datum/skill/craft/blacksmithing
 
 /obj/item/needle/examine()
 	. = ..()
@@ -62,11 +63,19 @@
 			var/sewtime = 70
 			if(user.mind)
 				sewtime = (70 - ((user.mind.get_skill_level(/datum/skill/misc/sewing)) * 10))
+			var/datum/component/storage/target_storage = I.GetComponent(/datum/component/storage) //Vrell - Part of storage item repair fix
 			if(do_after(user, sewtime, target = I))
 				playsound(loc, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)
 				user.visible_message("<span class='info'>[user] repairs [I]!</span>")
 				I.obj_integrity = I.max_integrity
+				//Vrell - Part of storage item repair fix
+				if(target_storage)
+					target_storage.being_repaired = FALSE
 				return
+			else 
+				//Vrell - Part of storage item repair fix
+				if(target_storage)
+					target_storage.being_repaired = FALSE
 		return
 	return ..()
 
@@ -130,6 +139,7 @@
 	icon_state = "thornneedle"
 	desc = "This rough needle can be used to sew cloth and wounds."
 	stringamt = 3
+	anvilrepair = null
 
 /obj/item/needle/pestra
 	name = "needle of pestra"
