@@ -222,11 +222,6 @@
 
 	if(legcuffed)
 		. += "<A href='?src=[REF(src)];item=[SLOT_LEGCUFFED]'><span class='warning'>[m3] \a [legcuffed] around [m2] legs!</span></A>"
-	
-	//Status effects
-	var/list/status_examines = status_effect_examines()
-	if (length(status_examines))
-		. += status_examines
 
 	//Gets encapsulated with a warning span
 	var/list/msg = list()
@@ -323,11 +318,7 @@
 	if(pulledby && pulledby.grab_state)
 		msg += "[m1] being grabbed by [pulledby]."
 
-	if(fire_stacks > 0)
-		msg += "[m1] covered in something flammable."
-	else if(fire_stacks < 0)
-		msg += "[m1] soaked."
-
+	//Nutrition
 	if(nutrition < (NUTRITION_LEVEL_STARVING - 50))
 		msg += "[m1] looking starved."
 //	else if(nutrition >= NUTRITION_LEVEL_FAT)
@@ -336,6 +327,18 @@
 //		else
 //			msg += "[t_He] [t_is] quite chubby."
 
+	//Fire/water stacks
+	if(fire_stacks > 0)
+		msg += "[m1] covered in something flammable."
+	else if(fire_stacks < 0)
+		msg += "[m1] soaked."
+
+	//Status effects
+	var/list/status_examines = status_effect_examines()
+	if(length(status_examines))
+		msg += status_examines
+
+	//Disgusting behemoth of stun absorption
 	if(islist(stun_absorption))
 		for(var/i in stun_absorption)
 			if(stun_absorption[i]["end_time"] > world.time && stun_absorption[i]["examine_message"])
@@ -400,13 +403,13 @@
 			msg += "<span class='warning'>[m1] barely conscious.</span>"
 		else
 			if(stat >= UNCONSCIOUS)
-				msg += "<span class='warning'>[m1] unconscious.</span>"
+				msg += "[m1] unconscious."
 			else if(eyesclosed)
 				msg += "[capitalize(m2)] eyes are closed."
 			else if(has_status_effect(/datum/status_effect/debuff/sleepytime))
 				msg += "[m1] looking a little tired."
 	else
-		msg += "<span class='warning'>[m1] unconscious.</span>"
+		msg += "[m1] unconscious."
 //		else
 //			if(HAS_TRAIT(src, TRAIT_DUMB))
 //				msg += "[m3] a stupid expression on [m2] face."
