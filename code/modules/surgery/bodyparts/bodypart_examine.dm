@@ -117,7 +117,7 @@
 			status += "<a href='?src=[REF(owner)];bandaged_limb=[REF(src)];bandage=[REF(bandage)]' class='info'>[uppertext(bandage.name)]</a>"
 
 	if(disabled)
-		status += "<span class='dead'><B>CRIPPLED</B></span>"
+		status += "<span class='deadsay'><B>CRIPPLED</B></span>"
 
 	return status
 
