@@ -47,7 +47,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_ZJUMP = "Time to reach a new high.",
 	RTRAIT_LEAPER = "I can leap like a frog.",
 	RTRAIT_NOSEGRAB = "I love to grab idiots by their noses!",
-	RTRAIT_NUTCRACKER = "I love kicking the nuts of idiots!",
+	RTRAIT_NUTCRACKER = "I love kicking idiots on the nuts!",
 	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	RTRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... <i>Kind of</i>.",
 	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
