@@ -71,14 +71,11 @@
 				//Vrell - Part of storage item repair fix
 				if(target_storage)
 					target_storage.being_repaired = FALSE
-				
 				return
 			else 
 				//Vrell - Part of storage item repair fix
 				if(target_storage)
 					target_storage.being_repaired = FALSE
-
-
 		return
 	return ..()
 
