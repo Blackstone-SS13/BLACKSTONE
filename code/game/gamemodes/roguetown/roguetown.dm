@@ -96,6 +96,9 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 
 	check_for_lord()
 
+	if(ttime > 180 MINUTES) //3 hour cutoff
+		return TRUE
+
 /datum/game_mode/chaosmode/proc/check_for_lord()
 	if(world.time < next_check_lord)
 		return
