@@ -19,21 +19,6 @@
 	icon_state = "chest3"
 	base_icon_state = "chest3"
 
-/obj/structure/closet/crate/chest/gold/medium
-	icon_state = "chest2"
-	base_icon_state = "chest2"
-
-/obj/structure/closet/crate/chest/gold/ligth
-	icon_state = "chest1"
-	base_icon_state = "chest1"
-
-/obj/structure/closet/crate/chest/medium
-	icon_state = "chest2s"
-	base_icon_state = "chest2s"
-/obj/structure/closet/crate/chest/ligth
-	icon_state = "chest1s"
-	base_icon_state = "chest1s"
-
 //obj/structure/closet/crate/chest/Initialize(mapload)
 //	. = ..()
 //	base_icon_state = "chestweird2"
