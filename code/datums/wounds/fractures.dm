@@ -28,7 +28,6 @@
 		affected.emote(gain_emote, TRUE)
 	affected.Slowdown(20)
 	shake_camera(affected, 2, 2)
-	update_disabled()
 
 /datum/wound/fracture/head
 	name = "cranial fracture"
