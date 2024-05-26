@@ -128,7 +128,7 @@
 	name = "3x steel goblets"
 	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel)
-	i_type = "Tools"
+	i_type = "General"
 
 
 /datum/anvil_recipe/tools/cogstee
