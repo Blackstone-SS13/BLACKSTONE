@@ -1,7 +1,7 @@
 /datum/wound/dismemberment
 	name = "bleeding stump"
 	check_name = "<span class='danger'><B>STUMP</B></span>"
-	whp = 100
+	whp = 75
 	sewn_whp = 25
 	bleed_rate = 50
 	sewn_bleed_rate = 0.2
@@ -9,8 +9,10 @@
 	sewn_clotting_threshold = null
 	woundpain = 100
 	sewn_woundpain = 20
+	sew_threshold = 100
 	mob_overlay = "dis_head"
 	can_sew = TRUE
+	critical = TRUE
 	sleep_healing = 0
 
 /datum/wound/dismemberment/can_stack_with(datum/wound/other)

@@ -33,7 +33,6 @@
 		return
 
 	if(!IS_IN_STASIS(src))
-
 		//Mutations and radiation
 		handle_mutations_and_radiation()
 		//Breathing, if applicable
@@ -42,7 +41,9 @@
 			handle_wounds()
 			handle_blood()
 			handle_embedded_objects()
-			heal_wounds(1)
+			//passively heal even wounds with no passive healing
+			for(var/datum/wound/wound as anything in get_wounds())
+				wound.heal_wound(1)
 
 		handle_diseases()// DEAD check is in the proc itself; we want it to spread even if the mob is dead, but to handle its disease-y properties only if you're not.
 
