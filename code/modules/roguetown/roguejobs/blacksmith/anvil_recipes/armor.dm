@@ -166,7 +166,6 @@
 	name = "scalemail"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/scale
-	metal = "steel"
 	type = "armor"
 
 /datum/anvil_recipe/armor/platebracer
@@ -207,7 +206,6 @@
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
 	craftdiff = 2
-	metal = "steel"
 	type = "armor"
 
 /datum/anvil_recipe/armor/helmetpig
