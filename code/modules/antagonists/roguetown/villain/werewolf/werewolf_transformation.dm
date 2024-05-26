@@ -1,6 +1,60 @@
 /mob/living/carbon/human
 	var/mob/stored_mob = null
 
+/datum/antagonist/werewolf/on_life(mob/user)
+
+	if(!user) return
+	var/mob/living/carbon/human/H = user
+	if(H.stat == DEAD) return
+	if(H.advsetup) return
+
+	// Werewolf transforms at night AND under the sky
+	if(!transformed && !transforming)
+		if(GLOB.tod == "night")
+			if(isturf(H.loc))
+				var/turf/loc = H.loc
+				if(loc.can_see_sky())
+					to_chat(H, "<span class='userdanger'>The moonlight scorns me... It is too late.</span>")
+					owner.current.playsound_local(get_turf(owner.current), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
+					H.flash_fullscreen("redflash3")
+					transforming = world.time // timer
+	
+	// Begin transformation
+	else if(transforming)
+		if (world.time >= transforming + 35 SECONDS) // Stage 3
+			H.werewolf_transform()
+			transforming = FALSE
+			transformed = world.time // Timer
+			
+		else if (world.time >= transforming + 25 SECONDS) // Stage 2
+			H.flash_fullscreen("redflash3")
+			H.emote("agony", forced = TRUE)
+			to_chat(H, "<span class='userdanger'>UNIMAGINABLE PAIN!</span>")
+			H.Stun(30)
+			H.Knockdown(30)
+
+		else if (world.time >= transforming + 10 SECONDS) // Stage 1
+			H.emote("")
+			to_chat(H, "<span class='warning'>I can feel my muscles aching, it feels HORRIBLE...</span>")
+		
+
+	// Werewolf reverts to human form during the day
+	else if(transformed)
+		H.real_name = wolfname
+		H.name = wolfname
+
+		if(GLOB.tod != "night")
+			if (world.time >= transformed + 25 SECONDS) // Untransform
+				H.emote("rage", forced = TRUE)
+				H.werewolf_untransform()
+				transformed = FALSE
+
+			/*
+			else if (world.time >= transformed + 10 SECONDS) // Alert player
+				H.flash_fullscreen("redflash1")
+				to_chat(H, "<span class='warning'>Daylight shines around me... the curse begins to fade.</span>")
+			*/
+
 /mob/living/carbon/human/species/werewolf/death(gibbed)
 	werewolf_untransform(TRUE, gibbed)
 
@@ -47,7 +101,7 @@
 	W.remove_all_languages()
 	W.grant_language(/datum/language/beast)
 
-	W.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/wwolf)
+	W.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB)
 	W.update_a_intents()
 
 	to_chat(W, "<span class='userdanger'>I transform into a horrible beast!</span>")
@@ -101,9 +155,10 @@
 
 	REMOVE_TRAIT(W, TRAIT_NOMOOD, TRAIT_GENERIC)
 	stress = W.stress
-	W.fully_heal(FALSE)
 
 	mind.transfer_to(W)
+
+	W.fully_heal(FALSE)
 
 	message_admins("WEREWOLF UNTRANSFORMED: [src]")
 
@@ -123,23 +178,4 @@
 	W.Knockdown(30)
 	W.Stun(30)
 
-	qdel(src)
-
-/obj/item/clothing/suit/roguetown/armor/skin_armor/werewolf_skin
-	slot_flags = null
-	name = "werewolf's skin"
-	desc = ""
-	icon_state = null
-	body_parts_covered = FULL_BODY
-	armor = list("blunt" = 50, "slash" = 40, "stab" = 30, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
-	blocksound = SOFTHIT
-	blade_dulling = DULLING_BASHCHOP
-	sewrepair = FALSE
-	max_integrity = 100
-
-/obj/item/clothing/suit/roguetown/armor/skin_armor/dropped(mob/living/user, show_message = TRUE)
-	. = ..()
-	if(QDELETED(src))
-		return
 	qdel(src)

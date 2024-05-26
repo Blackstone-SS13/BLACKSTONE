@@ -13,7 +13,6 @@
 	var/special_role = ROLE_WEREWOLF
 	var/transformed
 	var/transforming
-	var/transform_cooldown
 	var/wolfname = "Werevolf"
 	var/pre_transform
 	var/next_idle_sound
@@ -46,7 +45,6 @@
 				return "<span class='boldwarning'>An Ancient Vampire. I must be careful!</span>"
 
 /datum/antagonist/werewolf/on_gain()
-	transform_cooldown = SSticker.round_start_time
 	owner.special_role = name
 	if(increase_votepwr)
 		forge_werewolf_objectives()
@@ -55,6 +53,7 @@
 
 	// SPELL TESTING
 	owner.AddSpell(new /obj/effect/proc_holder/spell/self/howl)
+	owner.AddSpell(new /obj/effect/proc_holder/spell/self/claws)
 
 	return ..()
 
@@ -81,58 +80,6 @@
 	to_chat(owner.current, "<span class='userdanger'>Ever since that bite, I have been a [owner.special_role].</span>")
 	owner.announce_objectives()
 	..()
-	
-/datum/antagonist/werewolf/on_life(mob/user)
-
-	if(!user) return
-	var/mob/living/carbon/human/H = user
-	if(H.stat == DEAD) return
-	if(H.advsetup) return
-
-	// Werewolf transforms at night AND under the sky
-	if(!transformed && !transforming)
-		if(GLOB.tod == "night")
-			if(isturf(H.loc))
-				var/turf/loc = H.loc
-				if(loc.can_see_sky())
-					to_chat(H, "<span class='userdanger'>The moonlight scorns me... It is too late.</span>")
-					owner.current.playsound_local(get_turf(owner.current), 'sound/music/wolfintro.ogg', 80, FALSE, pressure_affected = FALSE)
-					H.flash_fullscreen("redflash3")
-					transforming = world.time // timer
-	
-	// Begin transformation
-	else if(transforming)
-		if (world.time >= transforming + 35 SECONDS) // Stage 3
-			H.werewolf_transform()
-			transforming = FALSE
-			transformed = world.time // Timer
-			
-		else if (world.time >= transforming + 25 SECONDS) // Stage 2
-			H.flash_fullscreen("redflash3")
-			H.emote("agony", forced = TRUE)
-			to_chat(H, "<span class='userdanger'>UNIMAGINABLE PAIN!</span>")
-			H.Stun(30)
-			H.Knockdown(30)
-
-		else if (world.time >= transforming + 10 SECONDS) // Stage 1
-			H.emote("")
-			to_chat(H, "<span class='warning'>I can feel my muscles aching, it feels HORRIBLE...</span>")
-		
-
-	// Werewolf reverts to human form during the day
-	else if(transformed)
-		H.real_name = wolfname
-		H.name = wolfname
-
-		if(GLOB.tod != "night")
-			if (world.time >= transformed + 25 SECONDS) // Untransform
-				//H.emote("rage", forced = TRUE)
-				H.werewolf_untransform()
-				transformed = FALSE
-
-			else if (world.time >= transformed + 10 SECONDS) // Alert player
-				//H.flash_fullscreen("redflash1")
-				to_chat(H, "<span class='warning'>Daylight shines around me... the curse begins to fade.</span>")
 
 /mob/living/carbon/human/proc/werewolf_infect()
 	if(!mind)
@@ -147,4 +94,64 @@
 	mind.add_antag_datum(new_antag)
 	//new_antag.transforming = world.time
 	//src.playsound_local(get_turf(src), 'sound/music/horror.ogg', 80, FALSE, pressure_affected = FALSE)
-	flash_fullscreen("redflash3")
+	//flash_fullscreen("redflash3")
+
+/obj/item/clothing/suit/roguetown/armor/skin_armor/werewolf_skin
+	slot_flags = null
+	name = "werewolf's skin"
+	desc = ""
+	icon_state = null
+	body_parts_covered = FULL_BODY
+	armor = list("blunt" = 50, "slash" = 40, "stab" = 30, "bullet" = 35, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_STAB, BCLASS_BLUNT, BCLASS_TWIST)
+	blocksound = SOFTHIT
+	blade_dulling = DULLING_BASHCHOP
+	sewrepair = FALSE
+	max_integrity = 200
+
+/obj/item/clothing/suit/roguetown/armor/skin_armor/dropped(mob/living/user, show_message = TRUE)
+	. = ..()
+	if(QDELETED(src))
+		return
+	qdel(src)
+
+/datum/intent/simple/werewolf
+	name = "claw"
+	icon_state = "inchop"
+	blade_class = BCLASS_CHOP
+	attack_verb = list("claws", "mauls", "eviscerates")
+	animname = "chop"
+	hitsound = "genslash"
+	penfactor = 70
+	candodge = TRUE
+	canparry = TRUE
+	miss_text = "slashes the air!"
+	miss_sound = "bluntwooshlarge"
+	item_d_type = "slash"
+
+/obj/item/rogueweapon/werewolf_claw
+	name = "Werevolf's Claw"
+	desc = ""
+	icon_state = "sword1"
+	icon = 'icons/roguetown/weapons/32.dmi'
+	max_blade_int = 900
+	max_integrity = 900
+	force = 18
+	block_chance = 0
+	wdefense = 4
+	armor_penetration = 15
+	associated_skill = /datum/skill/combat/unarmed
+	wlength = WLENGTH_NORMAL
+	w_class = WEIGHT_CLASS_BULKY
+	can_parry = TRUE
+	sharpness = IS_SHARP
+	parrysound = "bladedmedium"
+	swingsound = BLADEWOOSH_MED
+	possible_item_intents = list(/datum/intent/simple/werewolf, INTENT_GRAB)
+	parrysound = list('sound/combat/parry/parrygen.ogg')
+	//slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
+
+
+/obj/item/rogueweapon/werewolf_claw/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NODROP, WEREWOLF_TRAIT)
