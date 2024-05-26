@@ -305,12 +305,10 @@
 				if(IsOffBalanced())
 					to_chat(src, "<span class='warning'>I haven't regained my balance yet.</span>")
 					return
-				if(lying)
+				if(!(mobility_flags & MOBILITY_STAND))
 					if(!HAS_TRAIT(src, RTRAIT_FUNNYMAN))// The Jester cares not for such social convention.
 						to_chat(src, "<span class='warning'>I should stand up first.</span>")
-				if(!ismob(A) && !isturf(A))
-					to_chat(src, "<span class='warning'>I should stand up first.</span>")
-					return
+						return
 				if(A.z != src.z)
 					if(!HAS_TRAIT(src, RTRAIT_ZJUMP))
 						return
