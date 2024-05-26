@@ -59,6 +59,11 @@
 		ORGAN_SLOT_LIVER = 50,
 	)
 
+/datum/wound/slash/disembowel/can_stack_with(datum/wound/other)
+	if(istype(other, /datum/wound/slash/disembowel) && (type == other.type))
+		return FALSE
+	return TRUE
+
 /datum/wound/slash/disembowel/on_mob_gain(mob/living/affected)
 	. = ..()
 	affected.emote("paincrit", TRUE)

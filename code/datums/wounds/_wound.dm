@@ -97,13 +97,13 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		return
 	var/final_message = pick(crit_message)
 	if(affected)
-		final_message = replacetext(final_message, "%VICTIM", "[affected]")
+		final_message = replacetext(final_message, "%VICTIM", "[affected.name]")
 		final_message = replacetext(final_message, "%P_THEIR", "[affected.p_their()]")
 	else
 		final_message = replacetext(final_message, "%VICTIM", "victim")
 		final_message = replacetext(final_message, "%P_THEIR", "their")
 	if(affected_bodypart)
-		final_message = replacetext(final_message, "%BODYPART", "[affected_bodypart]")
+		final_message = replacetext(final_message, "%BODYPART", "[affected_bodypart.name]")
 	else
 		final_message = replacetext(final_message, "%BODYPART", parse_zone(BODY_ZONE_CHEST))
 	if(critical)

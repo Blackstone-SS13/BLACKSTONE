@@ -1,7 +1,7 @@
 /datum/wound/artery
 	name = "severed artery"
 	check_name = "<span class='artery'><B>ARTERY</B></span>"
-	crit_message = "<span class='crit'><b>Critical hit!</b> Blood sprays from %VICTIM's %BODYPART!</span>"
+	crit_message = "Blood sprays from %VICTIM's %BODYPART!"
 	sound_effect = 'sound/combat/crit.ogg'
 	whp = 50
 	sewn_whp = 20
@@ -18,6 +18,11 @@
 	sleep_healing = 0
 	embed_chance = 75
 
+/datum/wound/artery/can_stack_with(datum/wound/other)
+	if(istype(other, /datum/wound/artery) && (type == other.type))
+		return FALSE
+	return TRUE
+
 /datum/wound/artery/on_mob_gain(mob/living/affected)
 	. = ..()
 	affected.emote("paincrit", TRUE)
@@ -27,6 +32,26 @@
 /datum/wound/artery/on_bodypart_gain(obj/item/bodypart/affected)
 	. = ..()
 	affected.temporary_crit_paralysis()
+
+/datum/wound/artery/neck
+	name = "torn carotid"
+	check_name = "<span class='artery'><B>CAROTID</B></span>"
+	crit_message = "Blood sprays from %VICTIM's throat!"
+	whp = 100
+	sewn_whp = 25
+	bleed_rate = 50
+	sewn_bleed_rate = 0.5
+	woundpain = 60
+	sewn_woundpain = 30
+	mob_overlay = "s1_throat"
+
+/datum/wound/artery/neck/on_mob_gain(mob/living/affected)
+	. = ..()
+	ADD_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
+
+/datum/wound/artery/neck/on_mob_gain(mob/living/affected)
+	. = ..()
+	REMOVE_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 
 /datum/wound/artery/chest
 	name = "aortic dissection"
@@ -53,22 +78,3 @@
 	var/mob/living/carbon/carbon_owner = owner
 	if(!carbon_owner.stat && prob(10))
 		carbon_owner.vomit(1, blood = TRUE, stun = TRUE)
-
-/datum/wound/artery/neck
-	name = "severed carotid"
-	check_name = "<span class='artery'><B>CAROTID</B></span>"
-	whp = 100
-	sewn_whp = 25
-	bleed_rate = 50
-	sewn_bleed_rate = 0.5
-	woundpain = 60
-	sewn_woundpain = 30
-	mob_overlay = "s1_throat"
-
-/datum/wound/artery/neck/on_mob_gain(mob/living/affected)
-	. = ..()
-	ADD_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
-
-/datum/wound/artery/neck/on_mob_gain(mob/living/affected)
-	. = ..()
-	REMOVE_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
