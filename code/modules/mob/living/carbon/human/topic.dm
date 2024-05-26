@@ -6,18 +6,20 @@
 		var/obj/item/bodypart/BP = get_bodypart(checked_zone)
 		msg += "<B>[capitalize(parse_zone(checked_zone))]:</B>"
 		if(BP)
+			var/bodypart_status = list()
+			if(BP.disabled)
+				switch(BP.disabled)
+					if(BODYPART_DISABLED_DAMAGE)
+						bodypart_status += "[BP] is numb to touch."
+					if(BODYPART_DISABLED_PARALYSIS)
+						bodypart_status += "[BP] is limp."
+					else
+						bodypart_status += "[BP] is crippled."
+			if(BP.has_wound(/datum/wound/fracture))
+				bodypart_status += "[BP] is fractured."
+			if(BP.has_wound(/datum/wound/dislocation))
+				bodypart_status += "[BP] is dislocated."
 			if(isobserver(user) || get_location_accessible(src, checked_zone))
-				var/bodypart_status = list()
-				if(BP.disabled)
-					switch(BP.disabled)
-						if(BODYPART_DISABLED_DAMAGE)
-							bodypart_status += "[BP] is numb to touch."
-						if(BODYPART_DISABLED_PARALYSIS)
-							bodypart_status += "[BP] is limp."
-						else
-							bodypart_status += "[BP] is crippled."
-				if(BP.has_wound(/datum/wound/fracture))
-					bodypart_status += "[BP] is fractured."
 				if(BP.skeletonized)
 					bodypart_status += "[BP] is skeletonized."
 				else if(BP.rotted)
@@ -58,12 +60,12 @@
 					else
 						for(var/datum/wound/wound as anything in BP.wounds)
 							bodypart_status += wound.get_visible_name()
-				if(length(bodypart_status))
-					msg += bodypart_status
-				else
-					msg += "[BP] is healthy."
 			else
-				msg += "Obscured by clothing."
+				bodypart_status += "Obscured by clothing."
+			if(length(bodypart_status))
+				msg += bodypart_status
+			else
+				msg += "[BP] is healthy."
 			if(length(BP.embedded_objects))
 				msg += "<B>Embedded objects:</B>"
 				for(var/obj/item/embedded in BP.embedded_objects)

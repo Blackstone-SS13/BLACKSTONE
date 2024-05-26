@@ -165,25 +165,16 @@
 		if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
 			used += 10
 		if(prob(used))
-			if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
+			if(HAS_TRAIT(src, TRAIT_BRITTLE))
 				attempted_wounds += /datum/wound/fracture
 			else
-				var/list/phrases = list("The [src] jolts painfully!", "The [src] is disabled!")
-				owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-				owner.emote("paincrit", TRUE)
-				owner.Slowdown(20)
-				shake_camera(owner, 2, 2)
-				temporary_crit_paralysis()
-				if(prob(3))
-					playsound(owner, pick('sound/combat/tf2crit.ogg'), 100, FALSE)
-				else
-					playsound(owner, "drybreak", 100, FALSE)
+				attempted_wounds += /datum/wound/dislocation
 	if(bclass in GLOB.fracture_bclasses)
 		used = round(damage_dividend * 20 + (dam / 3), 1)
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
 				used += 10
-		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
+		if(HAS_TRAIT(src, TRAIT_BRITTLE))
 			used += 10
 		if(prob(used))
 			attempted_wounds += /datum/wound/fracture
@@ -227,7 +218,7 @@
 		used = round(damage_dividend * 20 + (dam / 3), 1)
 		if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
 			used += 10
-		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
+		if(HAS_TRAIT(src, TRAIT_BRITTLE))
 			used += 10
 		var/fracture_type = /datum/wound/fracture/chest
 		if(zone_precise == BODY_ZONE_PRECISE_GROIN)
@@ -272,10 +263,13 @@
 	if((bclass in GLOB.dislocation_bclasses) && (total_dam >= max_damage))
 		used = round(damage_dividend * 20 + (dam / 3), 1)
 		if(prob(used))
-			attempted_wounds += /datum/wound/fracture/neck
+			if(HAS_TRAIT(src, TRAIT_BRITTLE))
+				attempted_wounds += /datum/wound/fracture/neck
+			else
+				attempted_wounds += /datum/wound/dislocation/neck
 	if(bclass in GLOB.fracture_bclasses)
 		used = round(damage_dividend * 20 + (dam / 3), 1)
-		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
+		if(HAS_TRAIT(src, TRAIT_BRITTLE))
 			used += 20
 		if(user)
 			if(istype(user.rmb_intent, /datum/rmb_intent/strong))
@@ -373,10 +367,12 @@
 	return FALSE
 
 /// Applies a temporary paralysis effect to this bodypart
-/obj/item/bodypart/proc/temporary_crit_paralysis(duration = 60 SECONDS)
-	if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
+/obj/item/bodypart/proc/temporary_crit_paralysis(duration = 60 SECONDS, brittle = TRUE)
+	if(HAS_TRAIT(src, TRAIT_BRITTLE))
 		return FALSE
 	ADD_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
+	if(brittle)
+		ADD_TRAIT(src, TRAIT_BRITTLE, CRIT_TRAIT)
 	addtimer(CALLBACK(src, PROC_REF(remove_crit_paralysis)), duration)
 	if(owner)
 		update_disabled()
@@ -385,6 +381,7 @@
 /// Removes the temporary paralysis effect from this bodypart
 /obj/item/bodypart/proc/remove_crit_paralysis()
 	REMOVE_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_BRITTLE, CRIT_TRAIT)
 	if(owner)
 		update_disabled()
 	return TRUE

@@ -77,6 +77,8 @@
 #define SOFTCRIT_ADD_SLOWDOWN 1
 //slowdown when crawling
 #define CRAWLING_ADD_SLOWDOWN 7
+//slowdown for dislocated limbs
+#define DISLOCATED_ADD_SLOWDOWN 2
 
 //Attack types for checking shields/hit reactions
 #define MELEE_ATTACK 1

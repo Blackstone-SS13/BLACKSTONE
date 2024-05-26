@@ -34,7 +34,7 @@
 		var/obj/item/bodypart/L = hand_bodyparts[i]
 		if(L && !L.disabled)
 			if(extra_checks)
-				if(!L.fingers)
+				if(!L.fingers || HAS_TRAIT(L, TRAIT_FINGERLESS))
 					return FALSE
 			return L
 	return FALSE

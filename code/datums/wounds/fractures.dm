@@ -22,14 +22,6 @@
 		return FALSE
 	return TRUE
 
-/datum/wound/fracture/on_bodypart_gain(obj/item/bodypart/affected)
-	. = ..()
-	affected.update_disabled()
-
-/datum/wound/fracture/on_bodypart_loss(obj/item/bodypart/affected)
-	. = ..()
-	affected.update_disabled()
-
 /datum/wound/fracture/on_mob_gain(mob/living/affected)
 	. = ..()
 	if(gain_emote)
@@ -146,7 +138,7 @@
 		"The jaw is shattered!", 
 		"The jaw caves in!",
 	)
-	whp = 100
+	whp = 80
 	sleep_healing = 0
 
 /datum/wound/fracture/mouth/on_mob_gain(mob/living/affected)

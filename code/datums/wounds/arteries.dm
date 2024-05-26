@@ -31,7 +31,7 @@
 
 /datum/wound/artery/on_bodypart_gain(obj/item/bodypart/affected)
 	. = ..()
-	affected.temporary_crit_paralysis()
+	affected.temporary_crit_paralysis(10 SECONDS)
 
 /datum/wound/artery/neck
 	name = "torn carotid"
