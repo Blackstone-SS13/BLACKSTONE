@@ -270,7 +270,9 @@
 /datum/crafting_recipe/roguetown/mantrap
 	name = "mantrap"
 	result = /obj/item/restraints/legcuffs/beartrap
-	reqs = list(/obj/item/grown/log/tree/small = 1)
+	reqs = list(/obj/item/grown/log/tree/small = 2,
+				/obj/item/rope = 1)
+	req_table = TRUE
 	skillcraft = /datum/skill/craft/traps
 	craftdiff = 1
 	verbage = "put together"
