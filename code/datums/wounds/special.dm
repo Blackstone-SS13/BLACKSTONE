@@ -27,6 +27,10 @@
 /datum/wound/cbt
 	name = "testicular torsion"
 	check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
+	crit_message = list(
+		"The testicles are twisted!",
+		"The testicles are torsioned!",
+	)
 	whp = 50
 	woundpain = 100
 	mob_overlay = ""
@@ -48,9 +52,17 @@
 	if(affected.gender != MALE)
 		name = "ovarian torsion"
 		check_name = "<span class='userdanger'><B>EGGCRACK</B></span>"
+		crit_message = list(
+			"The ovaries are twisted!",
+			"The ovaries are torsioned!",
+		)
 	else
 		name = "testicular torsion"
 		check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
+		crit_message = list(
+			"The testicles are twisted!",
+			"The testicles are torsioned!",
+		)
 	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
@@ -64,6 +76,10 @@
 
 /datum/wound/cbt/smite
 	name = "testicular evisceration"
+	crit_message = list(
+		"The testicles are destroyed!",
+		"The testicles are eviscerated!",
+	)
 	whp = null
 
 /datum/wound/cbt/smite/on_mob_gain(mob/living/affected)
@@ -71,6 +87,14 @@
 	if(affected.gender != MALE)
 		name = "ovarian evisceration"
 		check_name = "<span class='userdanger'><B>EGGCRACK</B></span>"
+		crit_message = list(
+			"The ovaries are destroyed!",
+			"The ovaries are eviscerated!",
+		)
 	else
 		name = "testicular evisceration"
 		check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
+		crit_message = list(
+			"The testicles are destroyed!",
+			"The testicles are eviscerated!",
+		)
