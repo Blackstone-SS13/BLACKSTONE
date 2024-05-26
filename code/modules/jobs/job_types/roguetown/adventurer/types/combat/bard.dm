@@ -17,7 +17,7 @@
 		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/bard
-	traits_applied = list(RTRAIT_MEDIUMARMOR)
+	traits_applied = list(RTRAIT_MEDIUMARMOR, RTRAIT_DODGEEXPERT)
 
 /datum/outfit/job/roguetown/adventurer/bard/pre_equip(mob/living/carbon/human/H)
 	..() // The entertaining jack of all trades, uniquely handy with crossbows and swords. They're incredibly well travelled, can sneak, steal and survive on their own. 
@@ -117,3 +117,4 @@
 			backr = /obj/item/rogue/instrument/guitar
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_DODGEEXPERT, TRAIT_GENERIC)

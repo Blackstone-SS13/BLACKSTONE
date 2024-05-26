@@ -15,7 +15,7 @@
 		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/rogue
-	traits_applied = list(RTRAIT_MEDIUMARMOR)
+	traits_applied = list(RTRAIT_MEDIUMARMOR, RTRAIT_DODGEEXPERT)
 
 /datum/outfit/job/roguetown/adventurer/rogue
 	allowed_patrons = list(/datum/patron/divine/xylix, /datum/patron/inhumen/matthios)
@@ -56,7 +56,8 @@
 	beltl = /obj/item/rogueweapon/huntingknife/idagger/steel
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	H.change_stat("strength", -1)
 	H.change_stat("perception", 2)
-	H.change_stat("speed", pick(3,4), TRUE)
+	H.change_stat("speed", pick(3,4))
 	H.change_stat("intelligence", 2)
