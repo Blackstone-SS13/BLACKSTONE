@@ -334,7 +334,7 @@
 		return BODYPART_DISABLED_WOUND
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS) || HAS_TRAIT(src, TRAIT_PARALYSIS))
 		return BODYPART_DISABLED_PARALYSIS
-	var/total_dam = brute_dam + burn_dam
+	var/total_dam = get_damage()
 	if((total_dam >= max_damage) || (HAS_TRAIT(owner, TRAIT_EASYLIMBDISABLE) && (total_dam >= (max_damage * 0.6))))
 		return BODYPART_DISABLED_DAMAGE
 	return BODYPART_NOT_DISABLED

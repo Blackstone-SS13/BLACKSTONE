@@ -2,7 +2,9 @@
 #define RTRAIT_WEBWALK 					"Webwalker"
 #define RTRAIT_NOSTINK 					"Dead Nose"
 #define RTRAIT_ZJUMP 					"High Jumping"
+#define RTRAIT_FUNNYMAN 				"Funny Entity"
 #define RTRAIT_NOSEGRAB 				"Intimidating"
+#define RTRAIT_NUTCRACKER 				"Domineering"
 #define RTRAIT_SEEPRICES				"Giza Blooded"
 #define RTRAIT_SEEPRICES_SHITTY			"Giza-in-training"
 #define RTRAIT_STRONGBITE				"Strong Bite"
@@ -11,6 +13,7 @@
 #define RTRAIT_BREADY					"Battleready"
 #define RTRAIT_MEDIUMARMOR				"Maille Training"
 #define RTRAIT_HEAVYARMOR				"Plate Training"
+#define RTRAIT_DODGEEXPERT              "Fast Reflexes"
 #define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
 #define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
 #define RTRAIT_CRITICAL_WEAKNESS		"Critical Weakness"
@@ -43,7 +46,9 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_WEBWALK = "I can move freely between webs.",
 	RTRAIT_NOSTINK = "<span class='deadsay'>My nose is numb to the smell of decay.</span>",
 	RTRAIT_ZJUMP = "Who needs to climb when you can make great leaps?",
+	RTRAIT_FUNNYMAN = "Perhaps some form of benevolence from the Mad-God?",
 	RTRAIT_NOSEGRAB = "I love to grab idiots by their noses!",
+	RTRAIT_NUTCRACKER = "You know how to get their attention, grab them where it hurts.",
 	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	RTRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... <i>Kind of</i>.",
 	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
@@ -52,6 +57,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_BREADY = "Defensive stance does not passively fatigue me.",
 	RTRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
 	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
+	RTRAIT_DODGEEXPERT = "I can dodge easly while only wearing light armor.",
 	RTRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
 	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
 	RTRAIT_CRITICAL_WEAKNESS = "<span class='danger'>I am weak to wounds that others could survive.</span>",

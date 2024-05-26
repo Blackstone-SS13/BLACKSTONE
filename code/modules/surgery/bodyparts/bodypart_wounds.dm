@@ -35,12 +35,11 @@
 
 /// Check to see if we can apply a bleeding wound on this bodypart
 /obj/item/bodypart/proc/can_bloody_wound()
-	if(owner?.dna?.species)
-		if(NOBLOOD in owner.dna.species.species_traits)
-			return FALSE
+	if(skeletonized)
+		return FALSE
 	if(!is_organic_limb())
 		return FALSE
-	if(skeletonized)
+	if(NOBLOOD in owner?.dna?.species?.species_traits)
 		return FALSE
 	return TRUE
 
@@ -164,6 +163,18 @@
 		if(dam >= 10)
 			if(zone_precise == BODY_ZONE_PRECISE_GROIN)
 				// TESTICULAR TORSION!
+				if(!has_wound(/datum/wound/cbt))
+					if(HAS_TRAIT(src, RTRAIT_NUTCRACKER)) //JESTICULAR TORSION!
+						if(prob(5))
+							add_wound(/datum/wound/cbt)
+						else
+							owner.emote("groin", forced = TRUE)
+							owner.Stun(10)
+					else if (prob(1))
+						add_wound(/datum/wound/cbt)
+					else
+						owner.emote("groin", forced = TRUE)
+						owner.Stun(10)		
 				if(prob(round(dam/10)) && !has_wound(/datum/wound/cbt))
 					add_wound(/datum/wound/cbt)
 				else if(prob(dam * 2.5))
@@ -341,6 +352,9 @@
 		return FALSE
 	if(bclass == BCLASS_BLUNT || bclass == BCLASS_PICK || bclass == BCLASS_SMASH || bclass == BCLASS_CHOP)
 		if(dam < 5)
+			return FALSE
+		//no skull fractures while aiming for neck!
+		if(zone_precise == BODY_ZONE_PRECISE_NECK)
 			return FALSE
 		var/used = round((brute_dam / max_damage)*20 + (dam / 3), 1)
 		if(HAS_TRAIT_FROM(src, TRAIT_PARALYSIS, CRIT_TRAIT))
@@ -654,7 +668,7 @@
 
 /obj/item/bodypart/proc/get_bleed_rate()
 	var/bleed_rate = 0
-	if(bandage)
+	if(bandage && !HAS_BLOOD_DNA(bandage))
 		return 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += wound.bleed_rate

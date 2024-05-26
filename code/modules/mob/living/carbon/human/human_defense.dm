@@ -809,9 +809,9 @@
 
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
 		if(HAS_TRAIT(src, TRAIT_NO_BITE))
-			examination += "<span class='danger'>[m1] TETRAPLEGIC!</span>"
+			examination += "<span class='danger'>[m1] PARALYZED!</span>"
 		else
-			examination += "<span class='danger'>[m1] QUADRIPLEGIC!</span>"
+			examination += "<span class='danger'>[m1] TETRAPLEGIC!</span>"
 	else if(HAS_TRAIT(src, TRAIT_PARALYSIS_R_LEG) && HAS_TRAIT(src, TRAIT_PARALYSIS_L_LEG))
 		examination += "<span class='warning'>[m1] PARAPLEGIC!</span>"
 

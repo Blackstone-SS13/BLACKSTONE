@@ -209,7 +209,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 			return
 		newtax = CLAMP(newtax, 1, 99)
 		SStreasury.tax_value = newtax / 100
-		priority_announce("The new tax in Rockhill shall be [newtax] percent.", "The Generous Lord Decrees", 'sound/misc/alert.ogg', "Captain")
+		priority_announce("The new tax in Rockhill shall be [newtax] percent.", "The Generous Lord Decrees", pick('sound/misc/royal_decree.ogg', 'sound/misc/royal_decree2.ogg'), "Captain")
 
 
 /obj/structure/roguemachine/titan/proc/make_announcement(mob/living/user, raw_message)
@@ -263,7 +263,7 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 /proc/make_outlaw(raw_message)
 	if(raw_message in GLOB.outlawed_players)
 		GLOB.outlawed_players -= raw_message
-		priority_announce("[raw_message] is no longer an outlaw in Rockhill lands.", "The King Decrees", 'sound/misc/alert.ogg', "Captain")
+		priority_announce("[raw_message] is no longer an outlaw in Rockhill lands.", "The King Decrees", 'sound/misc/royal_decree.ogg', "Captain")
 		return FALSE
 	var/found = FALSE
 	for(var/mob/living/carbon/human/H in GLOB.player_list)
@@ -272,19 +272,19 @@ GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 	if(!found)
 		return FALSE
 	GLOB.outlawed_players += raw_message
-	priority_announce("[raw_message] has been declared an outlaw and must be captured or slain.", "The King Decrees", 'sound/misc/alert.ogg', "Captain")
+	priority_announce("[raw_message] has been declared an outlaw and must be captured or slain.", "The King Decrees", 'sound/misc/royal_decree2.ogg', "Captain")
 	return TRUE
 
 /proc/make_law(raw_message)
 	GLOB.laws_of_the_land += raw_message
-	priority_announce("[length(GLOB.laws_of_the_land)]. [raw_message]", "A LAW IS DECLARED", 'sound/misc/lawdeclaration.ogg', "Captain")
+	priority_announce("[length(GLOB.laws_of_the_land)]. [raw_message]", "A LAW IS DECLARED", pick('sound/misc/new_law.ogg', 'sound/misc/new_law2.ogg'), "Captain")
 
 /proc/remove_law(law_index)
 	if(!GLOB.laws_of_the_land[law_index])
 		return
 	var/law_text = GLOB.laws_of_the_land[law_index]
 	GLOB.laws_of_the_land -= law_text
-	priority_announce("[law_index]. [law_text]", "A LAW IS ABOLISHED", 'sound/misc/lawdeclaration.ogg', "Captain")
+	priority_announce("[law_index]. [law_text]", "A LAW IS ABOLISHED", pick('sound/misc/new_law.ogg', 'sound/misc/new_law2.ogg'), "Captain")
 
 /proc/purge_laws()
 	GLOB.laws_of_the_land = list()
