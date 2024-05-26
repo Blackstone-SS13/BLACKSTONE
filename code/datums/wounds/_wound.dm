@@ -145,11 +145,11 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	on_bodypart_gain(affected)
 	on_mob_gain(affected.owner)
 	if(crit_message)
-		var/message = get_crit_message(affected, affected.owner)
+		var/message = get_crit_message(affected.owner, affected)
 		if(message)
 			affected.owner.next_attack_msg += " [message]"
 	if(!silent)
-		var/sounding = get_sound_effect(affected, affected.owner)
+		var/sounding = get_sound_effect(affected.owner, affected)
 		if(sounding)
 			playsound(affected.owner, sounding, 100, vary = FALSE)
 	return TRUE

@@ -180,6 +180,7 @@
 #define BCLASS_TWIST		"twist"
 #define BCLASS_PUNCH		"punch"
 #define BCLASS_BITE			"bite"
+#define BCLASS_BURN			"charring"
 
 //Material class (what material is striking)
 #define MCLASS_GENERIC		1

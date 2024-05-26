@@ -35,3 +35,7 @@ GLOBAL_LIST_INIT(stab_bclasses, list(
 	BCLASS_STAB,
 	BCLASS_PICK,
 ))
+
+GLOBAL_LIST_INIT(charring_bclasses, list(
+	BCLASS_BURN,
+))

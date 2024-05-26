@@ -107,7 +107,6 @@
 		qdel(wound)
 	return ..()
 
-
 /obj/item/bodypart/onbite(mob/living/carbon/human/user)
 	if((user.mind && user.mind.has_antag_datum(/datum/antagonist/zombie)) || istype(user.dna.species, /datum/species/werewolf))
 		if(do_after(user, 50, target = src))
@@ -134,22 +133,21 @@
 				user.temporarilyRemoveItemFromInventory(src, TRUE)
 				attach_limb(C)
 				return
-	..()
-/*
-/obj/item/bodypart/attackby(obj/item/W, mob/user, params)
-	if(W.get_sharpness())
+	return ..()
+
+/obj/item/bodypart/head/attackby(obj/item/I, mob/user, params)
+	if(length(contents) && I.get_sharpness() && !user.cmode)
 		add_fingerprint(user)
-		if(!contents.len)
-//			to_chat(user, "<span class='warning'>There is nothing left inside [src]!</span>")
-			return
-		playsound(loc, 'sound/blank.ogg', 50, TRUE, -1)
+		playsound(loc, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
 		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
-			"<span class='notice'>I begin to cut open [src]...</span>")
-		if(do_after(user, 54, target = src))
-			drop_organs(user, TRUE)
-	else
-		return ..()
-*/
+			"<span class='notice'>You begin to cut open [src]...</span>")
+		if(do_after(user, 5 SECONDS, target = src))
+			drop_organs(user)
+			user.visible_message("<span class='danger'>[user] cuts [src] open!</span>",\
+				"<span class='notice'>You finish cutting [src] open.</span>")
+		return
+	return ..()
+
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	..()
 	if(status != BODYPART_ROBOTIC)

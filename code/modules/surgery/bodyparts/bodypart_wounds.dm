@@ -378,13 +378,15 @@
 		return FALSE
 	ADD_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
 	addtimer(CALLBACK(src, PROC_REF(remove_crit_paralysis)), duration)
-	update_disabled()
+	if(owner)
+		update_disabled()
 	return TRUE
 
 /// Removes the temporary paralysis effect from this bodypart
 /obj/item/bodypart/proc/remove_crit_paralysis()
 	REMOVE_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
-	update_disabled()
+	if(owner)
+		update_disabled()
 	return TRUE
 
 /obj/item/bodypart/proc/try_bandage(obj/item/new_bandage)

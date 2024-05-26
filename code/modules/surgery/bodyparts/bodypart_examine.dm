@@ -67,23 +67,27 @@
 		if(burn)
 			status += "<span class='[burn >= 10 ? "danger" : "warning"]'>[burn] BURN</span>"
 	else
-		if(brute >= max_damage * 0.75)
-			status += "<span class='userdanger'><B>[heavy_brute_msg]</B></span>"
-		else if(brute >= max_damage * 0.5)
-			status += "<span class='userdanger'>[heavy_brute_msg]</span>"
-		else if(brute >= max_damage * 0.25)
-			status += "<span class='danger'>[medium_brute_msg]</span>"
-		else if(brute > 0)
-			status += "<span class='warning'>[light_brute_msg]</span>"
-
-		if(burn >= max_damage * 0.75)
-			status += "<span class='userdanger'><B>[heavy_burn_msg]</B></span>"
-		else if(burn >= max_damage * 0.5)
-			status += "<span class='userdanger'>[medium_burn_msg]</span>"
-		else if(burn >= max_damage * 0.25)
-			status += "<span class='danger'>[medium_burn_msg]</span>"
-		else if(burn > 0)
-			status += "<span class='warning'>[light_burn_msg]</span>"
+		if(brute >= DAMAGE_PRECISION)
+			switch(brute/max_damage)
+				if(0.75 to INFINITY)
+					status += "<span class='userdanger'><B>[heavy_brute_msg]</B></span>"
+				if(0.5 to 0.75)
+					status += "<span class='userdanger'>[heavy_brute_msg]</span>"
+				if(0.25 to 0.5)
+					status += "<span class='danger'>[medium_brute_msg]</span>"
+				else
+					status += "<span class='warning'>[light_brute_msg]</span>"
+		
+		if(burn >= DAMAGE_PRECISION)
+			switch(burn/max_damage)
+				if(0.75 to INFINITY)
+					status += "<span class='userdanger'><B>[heavy_burn_msg]</B></span>"
+				if(0.5 to 0.75)
+					status += "<span class='userdanger'>[medium_burn_msg]</span>"
+				if(0.25 to 0.5)
+					status += "<span class='danger'>[medium_burn_msg]</span>"
+				else
+					status += "<span class='warning'>[light_burn_msg]</span>"
 	
 	var/bleed_rate = get_bleed_rate()
 	if(bleed_rate)
