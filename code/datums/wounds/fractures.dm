@@ -91,7 +91,9 @@
 /datum/wound/fracture/head/brain
 	name = "depressed cranial fracture"
 	crit_message = list(
-		
+		"The cranium is punctured!",
+		"The cranium is pierced!",
+		"The cranium is torn!",
 	)
 	embed_chance = 100
 	paralysis = TRUE
