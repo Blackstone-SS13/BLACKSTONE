@@ -234,7 +234,7 @@ All foods are distributed among various categories. Use common sense.
 	return
 
 
-/obj/item/reagent_containers/food/snacks/attack(mob/living/M, mob/living/user, def_zone)
+/obj/item/reagent_containers/food/snacks/attack(mob/living/carbon/human/M, mob/living/user, def_zone)
 	if(user.used_intent.type == INTENT_HARM)
 		return ..()
 	if(!eatverb)
