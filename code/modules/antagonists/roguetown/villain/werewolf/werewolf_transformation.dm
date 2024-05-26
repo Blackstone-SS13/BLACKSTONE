@@ -169,6 +169,7 @@
 	W.mind.skill_experience = WA.stored_experience.Copy()
 
 	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/howl)
+	W.RemoveSpell(new /obj/effect/proc_holder/spell/self/claws)
 
 	W.regenerate_icons()
 

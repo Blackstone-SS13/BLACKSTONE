@@ -92,9 +92,6 @@
 		return
 	var/datum/antagonist/werewolf/new_antag = new /datum/antagonist/werewolf/lesser()
 	mind.add_antag_datum(new_antag)
-	//new_antag.transforming = world.time
-	//src.playsound_local(get_turf(src), 'sound/music/horror.ogg', 80, FALSE, pressure_affected = FALSE)
-	//flash_fullscreen("redflash3")
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/werewolf_skin
 	slot_flags = null
@@ -149,7 +146,6 @@
 	swingsound = BLADEWOOSH_MED
 	possible_item_intents = list(/datum/intent/simple/werewolf, INTENT_GRAB)
 	parrysound = list('sound/combat/parry/parrygen.ogg')
-	//slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
 
 
 /obj/item/rogueweapon/werewolf_claw/Initialize()
