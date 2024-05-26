@@ -67,8 +67,8 @@
 	var/no_bruise_msg = "unbruised"
 
 	var/heavy_burn_msg = "CHARRED"
-	var/medium_burn_msg = "blistered"
-	var/light_burn_msg = "numb"
+	var/medium_burn_msg = "peeling"
+	var/light_burn_msg = "blistered"
 	var/no_burn_msg = "unburned"
 
 	var/add_extra = FALSE
