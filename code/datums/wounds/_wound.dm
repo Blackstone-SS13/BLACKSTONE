@@ -151,7 +151,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!silent)
 		var/sounding = get_sound_effect(affected, affected.owner)
 		if(sounding)
-			playsound(affected, sounding, 100, vary = FALSE)
+			playsound(affected.owner, sounding, 100, vary = FALSE)
 	return TRUE
 
 /// Effects when a wound is gained on a bodypart

@@ -1036,7 +1036,6 @@
 		for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 			bodypart.rotted = FALSE
 			bodypart.skeletonized = FALSE
-	mind.remove_antag_datum(/datum/antagonist/zombie)
 	if(admin_revive)
 		suiciding = FALSE
 		regenerate_limbs()

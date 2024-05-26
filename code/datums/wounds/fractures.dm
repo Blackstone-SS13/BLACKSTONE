@@ -93,6 +93,7 @@
 	crit_message = list(
 		
 	)
+	embed_chance = 100
 	paralysis = TRUE
 	mortal = FALSE
 	dents_brain = TRUE
@@ -105,6 +106,7 @@
 		"The eye socket is punctured!",
 		"The eye socket is pierced!",
 	)
+	embed_chance = 100
 	paralysis = TRUE
 	mortal = TRUE
 	dents_brain = FALSE
@@ -117,6 +119,7 @@
 		"The ear canal is punctured!",
 		"The ear canal is pierced!",
 	)
+	embed_chance = 100
 	paralysis = TRUE
 	mortal = TRUE
 	dents_brain = FALSE
@@ -127,6 +130,7 @@
 		"The nasal bone is punctured!",
 		"The nasal bone is pierced!",
 	)
+	embed_chance = 100
 	paralysis = FALSE
 	mortal = FALSE
 	dents_brain = FALSE
