@@ -197,7 +197,7 @@
 		if(prob(used))
 			attempted_wounds += /datum/wound/artery
 
-	for(var/wound_type in attempted_wounds)
+	for(var/wound_type in shuffle(attempted_wounds))
 		var/datum/wound/applied = add_wound(wound_type, silent, crit_message)
 		if(applied)
 			return applied
@@ -246,7 +246,7 @@
 				attempted_wounds += /datum/wound/slash/disembowel
 			attempted_wounds += /datum/wound/artery/chest
 
-	for(var/wound_type in attempted_wounds)
+	for(var/wound_type in shuffle(attempted_wounds))
 		var/datum/wound/applied = add_wound(wound_type, silent, crit_message)
 		if(applied)
 			return applied
@@ -366,7 +366,7 @@
 				else
 					attempted_wounds += /datum/wound/fracture/head/brain
 
-	for(var/wound_type in attempted_wounds)
+	for(var/wound_type in shuffle(attempted_wounds))
 		var/datum/wound/applied = add_wound(wound_type, silent, crit_message)
 		if(applied)
 			return applied
