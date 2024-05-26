@@ -52,7 +52,8 @@
 		H.STASTR = rand(1, 20)
 		H.STAINT = rand(1, 20)
 		H.STALUC = rand(1, 20)
-/*		
+		H.cmode_music = 'sound/music/combat_jester.ogg'
+/*
 		if(H.gender == MALE)
 			if(H.dna?.species)
 				if(iself(H) || ishalfelf(H))
@@ -66,3 +67,6 @@
 		H.update_body_parts_head_only()
 */
 	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_ZJUMP, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_FUNNYMAN, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_NUTCRACKER, TRAIT_GENERIC)

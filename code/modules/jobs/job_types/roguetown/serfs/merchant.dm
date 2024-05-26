@@ -17,7 +17,6 @@
 	display_order = JDO_MERCHANT
 
 	outfit = /datum/outfit/job/roguetown/merchant
-	bypass_lastclass = TRUE
 	give_bank_account = 22
 	min_pq = 1
 	max_pq = null
@@ -28,7 +27,7 @@
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,4,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)

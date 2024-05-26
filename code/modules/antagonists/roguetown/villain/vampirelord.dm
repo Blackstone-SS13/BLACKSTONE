@@ -49,16 +49,17 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	C.vampires |= owner
 	. = ..()
 	owner.special_role = name
-	ADD_TRAIT(owner.current, RTRAIT_STRONGBITE, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, RTRAIT_NOFATSTAM, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_NOBREATH, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_NOPAIN, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_NOSLEEP, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_LIMPDICK, TRAIT_GENERIC)
-	ADD_TRAIT(owner.current, TRAIT_VAMPMANSION, TRAIT_GENERIC)
+	ADD_TRAIT(owner.current, RTRAIT_CRITICAL_WEAKNESS, "[type]") //half assed but necessary otherwise these guys be invincible
+	ADD_TRAIT(owner.current, RTRAIT_STRONGBITE, "[type]")
+	ADD_TRAIT(owner.current, RTRAIT_NOROGSTAM, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_NOHUNGER, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_NOBREATH, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_NOPAIN, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_TOXIMMUNE, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_STEELHEARTED, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_NOSLEEP, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_LIMPDICK, "[type]")
+	ADD_TRAIT(owner.current, TRAIT_VAMPMANSION, "[type]")
 	owner.current.cmode_music = 'sound/music/combat_vamp.ogg'
 	var/obj/item/organ/eyes/eyes = owner.current.getorganslot(ORGAN_SLOT_EYES)
 	if(eyes)
@@ -121,7 +122,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	eyes = new /obj/item/organ/eyes/night_vision/zombie
 	eyes.Insert(owner.current)
 	H.equipOutfit(/datum/outfit/job/roguetown/vamplord)
-	H.patron = GLOB.patronlist[/datum/patron/inhumen/zizo]
+	H.set_patron(/datum/patron/inhumen/zizo)
 
 	return TRUE
 
@@ -188,7 +189,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	item_state = "vpants"
 	sewrepair = FALSE
 	armor = list("melee" = 100, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	blocksound = PLATEHIT
 	do_sound = FALSE
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
@@ -231,7 +232,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	icon_state = "vplate"
 	item_state = "vplate"
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	nodismemsleeves = TRUE
 	max_integrity = 500
 	allowed_sex = list(MALE, FEMALE)
@@ -248,7 +249,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	body_parts_covered = FEET
 	icon_state = "vboots"
 	item_state = "vboots"
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	color = null
 	blocksound = PLATEHIT
 	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
@@ -762,9 +763,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 /obj/structure/vampire/necromanticbook/attack_hand(mob/living/carbon/human/user)
 	var/datum/antagonist/vampirelord/lord = user.mind.has_antag_datum(/datum/antagonist/vampirelord)
+	var/datum/game_mode/chaosmode/C = SSticker.mode
 	if(user.mind.special_role == "Vampire Lord")
 		if(!unlocked)
 			to_chat(user, "I have yet to regain this aspect of my power!")
+			return
+		if(C.deathknights.len >= 3)
+			to_chat(user, "You cannot summon any more death knights.")
 			return
 		var/choice = input(user,"What to do?", "ROGUETOWN") as anything in useoptions|null
 		switch(choice)
@@ -775,7 +780,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 						return
 					if(do_after(user, 100))
 						to_chat(user, "I have summoned a knight from the underworld. I need only wait for them to materialize.")
-						var/datum/game_mode/chaosmode/C = SSticker.mode
 						C.deathknightspawn = TRUE
 						for(var/mob/dead/observer/D in GLOB.player_list)
 							D.death_knight_spawn()

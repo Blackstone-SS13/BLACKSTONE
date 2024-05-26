@@ -1,5 +1,7 @@
 /datum/advclass/monk
 	name = "Monk"
+	tutorial = "Masters of hand-to-hand combat, Monks are trained in the arts of morality, \
+	and try to remain nuetral to the conflict around them unless it interferes with their personal and religious beliefs"
 	allowed_sexes = list("male", "female")
 	allowed_races = list(
 		"Humen",
@@ -13,6 +15,7 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/monk
+	traits_applied = list(RTRAIT_DODGEEXPERT)
 	isvillager = FALSE
 	ispilgrim = FALSE
 	vampcompat = FALSE
@@ -40,10 +43,11 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(0,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.change_stat("strength", 3)
 		H.change_stat("constitution", 1)
 		H.change_stat("speed", 2)
 		H.change_stat("perception", -1)
+		ADD_TRAIT(H, RTRAIT_DODGEEXPERT, TRAIT_GENERIC)

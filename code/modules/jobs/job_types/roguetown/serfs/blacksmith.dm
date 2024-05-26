@@ -35,12 +35,12 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, pick(3,4), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(4), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, pick(4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		if(H.age == AGE_OLD)
-			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1,2), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, pick(1,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, pick(1), TRUE)
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/trou
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
@@ -50,7 +50,7 @@
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/roguekey/blacksmith
-		cloak = /obj/item/clothing/cloak/apron/brown
+		cloak = /obj/item/clothing/cloak/apron/blacksmith
 	else
 		pants = /obj/item/clothing/under/roguetown/trou
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
@@ -58,7 +58,7 @@
 		backpack_contents = list(/obj/item/rogueweapon/hammer = 1, /obj/item/rogueweapon/tongs = 1)
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		belt = /obj/item/storage/belt/rogue/leather
-		cloak = /obj/item/clothing/cloak/apron/brown
+		cloak = /obj/item/clothing/cloak/apron/blacksmith
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/roguekey/blacksmith
 	H.change_stat("strength", 2)
@@ -104,12 +104,12 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(3,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(3,4), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(4), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		if(H.age == AGE_OLD)
-			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1,2), TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(1,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, pick(1), TRUE)
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/trou
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
@@ -119,7 +119,7 @@
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/roguekey/blacksmith
-		cloak = /obj/item/clothing/cloak/apron/brown
+		cloak = /obj/item/clothing/cloak/apron/blacksmith
 	else
 		pants = /obj/item/clothing/under/roguetown/trou
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
@@ -127,7 +127,7 @@
 		backpack_contents = list(/obj/item/rogueweapon/hammer = 1, /obj/item/rogueweapon/tongs = 1)
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		belt = /obj/item/storage/belt/rogue/leather
-		cloak = /obj/item/clothing/cloak/apron/brown
+		cloak = /obj/item/clothing/cloak/apron/blacksmith
 		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/roguekey/blacksmith
 	H.change_stat("strength", 2)

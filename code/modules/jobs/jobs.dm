@@ -63,31 +63,33 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	"King",
 	"Queen Consort",
 	"Prince",
-	"Sheriff",
+	"Guard Captain",
 	"Bailiff",
 	"Councillor",
 	"Steward",
-	"Court Magician"
+	"Court Magician",
+	"Court Physician",
+	"Knight"
 	))
 
 GLOBAL_LIST_INIT(garrison_positions, list(
-	"Town Guard",
+	"Watchman",
 	"Bog Guard",
 	"Bog Master",
-	"Castle Guard",
+	"Man at Arms",
 	"Veteran",
 	"Dungeoneer",
 	"Gatemaster",
-	"Village Elder"
+	"Bog Elder"
 	))
 
 GLOBAL_LIST_INIT(church_positions, list(
 	"Priest",
-	"Cleric",
-	"Acolyte",
-	"Templar",
 	"Inquisitor",
-	"Confessor"
+	"Confessor",
+	"Acolyte",
+	"Mortician",
+	"Templar",
 	))
 
 GLOBAL_LIST_INIT(serf_positions, list(
@@ -106,7 +108,6 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Soilson",
 	"Butcher",
 	"Cook",
-	"Gravedigger",
 	"Jester",
 	"Lunatic",
 	"Miner",
@@ -114,15 +115,15 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Fisher",
 	"Lumberjack",
 	"Butler",
-	"Adventurer",
 	"Towner",
-	"Pilgrim",
 	"Grabber",
 	"Nightmaster",
 	"Bath Wench",
 	"Docker",
 	"Prisoner",
-	"Beggar"
+	"Beggar",
+	"Adventurer",
+	"Pilgrim",
 	))
 
 GLOBAL_LIST_INIT(youngfolk_positions, list(
@@ -171,6 +172,18 @@ GLOBAL_LIST_INIT(goblin_positions, list(
 GLOBAL_LIST_INIT(test_positions, list(
 	"Tester"
 	))
+
+GLOBAL_LIST_EMPTY(job_assignment_order)
+
+/proc/get_job_assignment_order()
+	var/list/sorting_order = list()
+	sorting_order += GLOB.noble_positions
+	sorting_order += GLOB.garrison_positions
+	sorting_order += GLOB.church_positions
+	sorting_order += GLOB.serf_positions
+	sorting_order += GLOB.peasant_positions
+	sorting_order += GLOB.youngfolk_positions
+	return sorting_order
 
 GLOBAL_LIST_INIT(exp_jobsmap, list(
 	EXP_TYPE_CREW = list("titles" = peasant_positions | command_positions | engineering_positions | medical_positions | science_positions | supply_positions | security_positions | civilian_positions | list("AI","Cyborg")), // crew positions

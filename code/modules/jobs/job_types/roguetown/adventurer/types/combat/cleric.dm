@@ -23,17 +23,17 @@
 
 /datum/outfit/job/roguetown/adventurer/cleric/pre_equip(mob/living/carbon/human/H)
 	..()
-	switch(H.patron?.name)
-		if("Astrata")
+	switch(H.patron?.type)
+		if(/datum/patron/divine/astrata)
 			neck = /obj/item/clothing/neck/roguetown/psicross/astrata
-		if("Dendor")
-			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
-		if("Necra")
-			neck = /obj/item/clothing/neck/roguetown/psicross/necra
-		if("Pestra")
-			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
-		if("Noc")
+		if(/datum/patron/divine/noc)
 			neck = /obj/item/clothing/neck/roguetown/psicross/noc
+		if(/datum/patron/divine/dendor)
+			neck = /obj/item/clothing/neck/roguetown/psicross/dendor
+		if(/datum/patron/divine/necra)
+			neck = /obj/item/clothing/neck/roguetown/psicross/necra
+		if(/datum/patron/divine/pestra)
+			neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 
 	// CLASS ARCHETYPES
 	H.adjust_blindness(-3)
@@ -57,6 +57,7 @@
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/weaving, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)

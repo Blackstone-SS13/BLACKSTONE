@@ -7,12 +7,12 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = JCOLOR_CHURCH
-	allowed_sexes = list(MALE)
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen", 
 		"Aasimar",
 	)
-	allowed_patrons = list(/datum/patron/divine/astrata)
+	allowed_patrons = ALL_DIVINE_PATRONS
 	tutorial = "The Divine is all that matters in a world of the immoral. The Weeping God left his children to rule over us mortals and you will preach their wisdom to any who still heed their will. The faithless are growing in number, it is up to you to shepard them to a Gods-fearing future."
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/priest
@@ -22,11 +22,11 @@
 	min_pq = 2
 	max_pq = null
 
+/datum/outfit/job/roguetown/priest
+	allowed_patrons = list(/datum/patron/divine/astrata)
+
 /datum/outfit/job/roguetown/priest/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
-	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
-	H.verbs |= /mob/living/carbon/human/proc/churchannouncement
 	neck = /obj/item/clothing/neck/roguetown/psicross/astrata
 	head = /obj/item/clothing/head/roguetown/priestmask
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/priest
@@ -37,6 +37,8 @@
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 	id = /obj/item/clothing/ring/active/nomag
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/priest
+	backl = /obj/item/storage/backpack/rogue/satchel
+	backpack_contents = list(/obj/item/needle/pestra = 1)
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/templar)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/monk)
@@ -56,6 +58,9 @@
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 	C.grant_spells_priest(H)
 
+	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
+	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
+	H.verbs |= /mob/living/carbon/human/proc/churchannouncement
 //	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 //		H.underwear = "Femleotard"
 //		H.underwear_color = CLOTHING_BLACK
@@ -101,9 +106,9 @@
 				SSticker.rulertype = "Queen"
 		SSticker.rulermob = HU
 		var/dispjob = mind.assigned_role
-		GLOB.badomens -= "nolord"
+		removeomen("nolord")
 		say("By the authority of the gods, I pronounce you Ruler of all Rockhill!")
-		priority_announce("[real_name] the [dispjob] has named [HU.real_name] the inheritor of ROGUETOWN!", title = "Long Live [HU.real_name]!", sound = 'sound/misc/bell.ogg')
+		priority_announce("[real_name] the [dispjob] has named [HU.real_name] the inheritor of ROCKHILL!", title = "Long Live [HU.real_name]!", sound = 'sound/misc/bell.ogg')
 
 /mob/living/carbon/human/proc/churchexcommunicate()
 	set name = "Curse"

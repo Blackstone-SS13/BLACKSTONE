@@ -22,6 +22,9 @@
 	min_pq = 2
 	max_pq = null
 
+/datum/outfit/job/roguetown/magician
+	allowed_patrons = list(/datum/patron/divine/noc)
+
 /datum/outfit/job/roguetown/magician/pre_equip(mob/living/carbon/human/H)
 	..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)

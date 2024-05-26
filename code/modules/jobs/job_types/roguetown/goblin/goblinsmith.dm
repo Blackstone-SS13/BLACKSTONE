@@ -3,8 +3,8 @@
 	flag = GOBLINSMITH
 	department_flag = GOBLIN
 	faction = "Station"
-	total_positions = 3
-	spawn_positions = 2
+	total_positions = 0
+	spawn_positions = 0
 	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
 	allowed_patrons = list(/datum/patron/inhumen/graggar)
@@ -19,7 +19,7 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/leather/hide/goblin
 	belt = /obj/item/storage/belt/rogue/leather
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
-	cloak = /obj/item/clothing/cloak/apron/brown
+	cloak = /obj/item/clothing/cloak/apron/blacksmith
 	backl = /obj/item/storage/backpack/rogue/satchel
 
 	if(H.mind)

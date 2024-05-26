@@ -130,11 +130,11 @@
 		if(based)
 			if(isliving(AM))
 				var/mob/living/L = AM
-//				var/pulling = L.pulling
-//				if(pulling)
-//					L.pulling.forceMove(newtarg)
+				var/pulling = L.pulling
+				if(pulling)
+					L.pulling.forceMove(newtarg)
 				L.forceMove(newtarg)
-//				L.start_pulling(pulling)
+				L.start_pulling(pulling)
 			else
 				AM.forceMove(newtarg)
 			return TRUE

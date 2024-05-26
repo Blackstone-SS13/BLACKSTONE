@@ -38,10 +38,12 @@
 	var/yea = pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")
 	destroy_message = "<span class='warning'>[yea]</span>"
 
-/obj/item/rogueweapon/get_dismemberment_chance(obj/item/bodypart/affecting)
+/obj/item/rogueweapon/get_dismemberment_chance(obj/item/bodypart/affecting, input)
 	if(!affecting.can_dismember(src))
-		return
+		return 0
 	var/mob/living/L = loc
+	if(!istype(L))
+		return 0
 	var/nuforce = get_complex_damage(src, L)
 	if(istype(L.rmb_intent, /datum/rmb_intent/strong))
 		nuforce = nuforce * 1.1

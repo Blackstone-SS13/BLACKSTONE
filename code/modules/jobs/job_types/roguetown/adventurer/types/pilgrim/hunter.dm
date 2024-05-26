@@ -1,5 +1,7 @@
 /datum/advclass/hunter
 	name = "Hunter"
+	tutorial = "You are a hunter, with your bow you hunt the fauna in the bog, skinning what you kill to use in skincrafting \
+	cooking any meat left over, your role is one that is not done by many, but important in the circulation of clothing and light armor"
 	allowed_sexes = list("male", "female")
 	allowed_races = list(
 		"Humen",
@@ -24,7 +26,7 @@
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/brown
 	backr = /obj/item/storage/backpack/rogue/satchel
-	backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+	r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow/recurve
 	belt = /obj/item/storage/belt/rogue/leather
 	beltr = /obj/item/quiver/arrows
 	beltl = /obj/item/flashlight/flare/torch/lantern
@@ -33,7 +35,7 @@
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(0,1,1), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(0,1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(3,3,4), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
