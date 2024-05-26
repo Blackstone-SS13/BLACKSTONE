@@ -15,7 +15,7 @@
 	can_sew = FALSE
 	disabling = FALSE
 	critical = TRUE
-	passive_healing = 1
+	passive_healing = 0.25
 
 /datum/wound/dislocation/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/dislocation) && (type == other.type))

@@ -241,7 +241,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	// Wound cannot be healed normally, whp is null
 	if(isnull(whp))
 		return 0
-	var/amount_healed = min(whp, heal_amount)
+	var/amount_healed = min(whp, round(heal_amount, DAMAGE_PRECISION))
 	whp -= amount_healed
 	if(whp <= 0)
 		if(bodypart_owner)

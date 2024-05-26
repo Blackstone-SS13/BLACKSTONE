@@ -9,7 +9,7 @@
 	sew_threshold = 50
 	mob_overlay = "cut"
 	can_sew = FALSE
-	passive_healing = 1
+	passive_healing = 0.5
 
 /datum/wound/bite/small
 	name = "nip"
