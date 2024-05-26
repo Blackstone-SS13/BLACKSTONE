@@ -12,6 +12,7 @@
 	sew_threshold = 100
 	mob_overlay = "dis_head"
 	can_sew = TRUE
+	critical = TRUE
 	sleep_healing = 0
 
 /datum/wound/dismemberment/can_stack_with(datum/wound/other)

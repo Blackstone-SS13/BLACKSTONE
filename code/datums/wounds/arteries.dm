@@ -1,6 +1,8 @@
 /datum/wound/artery
 	name = "severed artery"
 	check_name = "<span class='artery'><B>ARTERY</B></span>"
+	crit_message = "<span class='crit'><b>Critical hit!</b> Blood sprays from %VICTIM's %BODYPART!</span>"
+	sound_effect = 'sound/combat/crit.ogg'
 	whp = 50
 	sewn_whp = 20
 	bleed_rate = 20
@@ -12,6 +14,7 @@
 	mob_overlay = "s1"
 	sewn_overlay = "cut"
 	can_sew = TRUE
+	critical = TRUE
 	sleep_healing = 0
 	embed_chance = 75
 

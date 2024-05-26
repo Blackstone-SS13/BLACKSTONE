@@ -1,10 +1,16 @@
 /datum/wound/nose
 	name = "rhinotomy"
 	check_name = "<span class='warning'>NOSE</span>"
+	crit_message = list(
+		"The nose is mangled beyond recognition!",
+		"The nose is destroyed!",
+	)
+	sound_effect = 'sound/combat/crit.ogg'
 	whp = null
 	woundpain = 20
 	mob_overlay = "cut"
 	can_sew = FALSE
+	critical = TRUE
 
 /datum/wound/nose/on_mob_gain(mob/living/affected)
 	. = ..()
@@ -27,6 +33,7 @@
 	sewn_overlay = ""
 	can_sew = FALSE
 	disabling = TRUE
+	critical = TRUE
 
 /datum/wound/cbt/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/cbt))

@@ -12,10 +12,22 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/name = "wound"
 	/// Name that appears on check_for_injuries()
 	var/check_name
+
+	/// Overlay to use when this wound is applied to a carbon mob
+	var/mob_overlay = "w1"
+	/// Overlay to use when this wound is sewn, and is on a carbon mob
+	var/sewn_overlay = ""
+
+	/// Crit message(s) to append when this wound is applied in combat
+	var/crit_message
+	/// Sound effect(s) to play when this wound is applied
+	var/sound_effect
+
 	/// Bodypart that owns this wound, in case it is not a simple one
 	var/obj/item/bodypart/bodypart_owner
 	/// Mob that owns this wound
 	var/mob/living/owner
+
 	/// How many "health points" this wound has, AKA how hard it is to heal
 	var/whp = 60
 	/// How many "health points" this wound gets after being sewn
@@ -40,14 +52,14 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/sew_progress = 0
 	/// When sew_progress reaches this, the wound is sewn
 	var/sew_threshold = 100
-	/// Overlay to use when this wound is applied to a carbon mob
-	var/mob_overlay = "w1"
-	/// Overlay to use when this wound is sewn, and is on a carbon mob
-	var/sewn_overlay = ""
+
 	/// If TRUE, this wound can be sewn
-	var/can_sew = TRUE
+	var/can_sew = FALSE
 	/// If TRUE, this disables limbs
 	var/disabling = FALSE
+	/// If TRUE, this is a crit wound
+	var/critical = FALSE
+
 	/// Amount we heal passively while sleeping
 	var/sleep_healing = 1
 	/// Amount we heal passively, always
@@ -65,7 +77,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	owner = null
 
 /// Description of this wound returned to the player when a bodypart is examined and such
-/datum/wound/proc/get_visible_name()
+/datum/wound/proc/get_visible_name(mob/user)
 	if(!name)
 		return
 	var/visible_name = name
@@ -76,8 +88,33 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return visible_name
 
 /// Description of this wound returned to the player when the bodypart is checked with check_for_injuries()
-/datum/wound/proc/get_check_name()
+/datum/wound/proc/get_check_name(mob/user)
 	return check_name
+
+/// Crit message that should be appended when this wound is applied in combat
+/datum/wound/proc/get_crit_message(mob/living/affected, obj/item/bodypart/affected_bodypart)
+	if(!length(crit_message))
+		return
+	var/final_message = pick(crit_message)
+	if(affected)
+		final_message = replacetext(final_message, "%VICTIM", "[affected]")
+		final_message = replacetext(final_message, "%P_THEIR", "[affected.p_their()]")
+	else
+		final_message = replacetext(final_message, "%VICTIM", "victim")
+		final_message = replacetext(final_message, "%P_THEIR", "their")
+	if(affected_bodypart)
+		final_message = replacetext(final_message, "%BODYPART", "[affected_bodypart]")
+	else
+		final_message = replacetext(final_message, "%BODYPART", parse_zone(BODY_ZONE_CHEST))
+	if(critical)
+		final_message = "<span class='crit'><b>Critical hit!</b> [final_message]</span>"
+	return final_message
+
+/// Sound that plays when this wound is applied to a mob
+/datum/wound/proc/get_sound_effect(mob/living/affected, obj/item/bodypart/affected_bodypart)
+	if(critical && prob(3))
+		return 'sound/combat/tf2crit.ogg'
+	return pick(sound_effect)
 
 /// Returns whether or not this wound can be applied to a given bodypart
 /datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected)
@@ -95,8 +132,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return TRUE
 
 /// Adds this wound to a given bodypart
-/datum/wound/proc/apply_to_bodypart(obj/item/bodypart/affected)
-	if(QDELETED(affected))
+/datum/wound/proc/apply_to_bodypart(obj/item/bodypart/affected, silent = FALSE, crit_message = FALSE)
+	if(QDELETED(affected) || QDELETED(affected.owner))
 		return FALSE
 	if(bodypart_owner)
 		remove_from_bodypart()
@@ -107,6 +144,14 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	owner = bodypart_owner.owner
 	on_bodypart_gain(affected)
 	on_mob_gain(affected.owner)
+	if(crit_message)
+		var/message = get_crit_message(affected, affected.owner)
+		if(message)
+			affected.owner.next_attack_msg += " [message]"
+	if(!silent)
+		var/sounding = get_sound_effect(affected, affected.owner)
+		if(sounding)
+			playsound(affected, sounding, 100, vary = FALSE)
 	return TRUE
 
 /// Effects when a wound is gained on a bodypart
@@ -141,9 +186,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return TRUE
 
 /// Adds this wound to a given mob
-/datum/wound/proc/apply_to_mob(mob/living/affected)
+/datum/wound/proc/apply_to_mob(mob/living/affected, silent = FALSE, crit_message = FALSE)
 	if(QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
-		return
+		return FALSE
 	if(bodypart_owner)
 		remove_from_bodypart()
 	else if(owner)
@@ -151,6 +196,14 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	LAZYADD(affected.simple_wounds, src)
 	owner = affected
 	on_mob_gain(affected)
+	if(crit_message)
+		var/message = get_crit_message(affected)
+		if(message)
+			affected.next_attack_msg += " [message]"
+	if(!silent)
+		var/sounding = get_sound_effect(affected)
+		if(sounding)
+			playsound(affected, sounding, 100, vary = FALSE)
 	return TRUE
 
 /// Effects when this wound is applied to a given mob
@@ -210,6 +263,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	clotting_threshold = sewn_clotting_threshold
 	woundpain = sewn_woundpain
 	whp = min(whp, sewn_whp)
+	disabling = FALSE
 	can_sew = FALSE
 	sleep_healing = max(sleep_healing, 1)
 	passive_healing = max(passive_healing, 1)
@@ -219,7 +273,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Checks if this wound is sewn
 /datum/wound/proc/is_sewn()
-	return can_sew && (sew_progress >= sew_threshold)
+	return (sew_progress >= sew_threshold)
 
 /// Checks if this wound is clotted
 /datum/wound/proc/is_clotted()

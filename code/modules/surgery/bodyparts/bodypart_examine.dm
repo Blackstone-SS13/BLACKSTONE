@@ -96,7 +96,7 @@
 	for(var/datum/wound/wound as anything in wounds)
 		if(!wound.check_name)
 			continue
-		wound_strings |= wound.get_check_name()
+		wound_strings |= wound.get_check_name(user)
 	status += wound_strings
 
 	for(var/obj/item/embedded as anything in embedded_objects)

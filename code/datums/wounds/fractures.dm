@@ -1,11 +1,19 @@
 /datum/wound/fracture
 	name = "fracture"
 	check_name = "<span class='bone'>FRACTURE</span>"
+	crit_message = list(
+		"The bone shatters!", 
+		"The bone is broken!", 
+		"The %BODYPART is mauled!", 
+		"The bone snaps through the skin!",
+	)
+	sound_effect = "wetbreak"
 	whp = 40
 	woundpain = 100
 	mob_overlay = "frac"
 	can_sew = FALSE
 	disabling = TRUE
+	critical = TRUE
 	/// Emote we use when applied
 	var/gain_emote = "paincrit"
 
@@ -32,6 +40,13 @@
 /datum/wound/fracture/head
 	name = "cranial fracture"
 	check_name = "<span class='bone'><B>SKULLCRACK</B></span>"
+	crit_message = list(
+		"The skull shatters in a gruesome way!", 
+		"The head is smashed!", 
+		"The skull is broken!", 
+		"The skull caves in!",
+	)
+	sound_effect = "headcrush"
 	whp = 150
 	sleep_healing = 0
 	/// Most head fractures are serious enough to cause paralysis
@@ -71,28 +86,47 @@
 
 /datum/wound/fracture/head/on_life()
 	. = ..()
-	owner.slurring = max(owner.slurring, 5)
+	owner.stuttering = max(owner.stuttering, 5)
 
 /datum/wound/fracture/head/brain
 	name = "depressed cranial fracture"
+	crit_message = list(
+		
+	)
 	paralysis = TRUE
 	mortal = FALSE
 	dents_brain = TRUE
 
 /datum/wound/fracture/head/eyes
 	name = "orbital fracture"
+	crit_message = list(
+		"The orbital bone is punctured!",
+		"The orbital bone is pierced!",
+		"The eye socket is punctured!",
+		"The eye socket is pierced!",
+	)
 	paralysis = TRUE
 	mortal = TRUE
 	dents_brain = FALSE
 
 /datum/wound/fracture/head/ears
 	name = "temporal fracture"
+	crit_message = list(
+		"The orbital bone is punctured!",
+		"The temporal bone is pierced!",
+		"The ear canal is punctured!",
+		"The ear canal is pierced!",
+	)
 	paralysis = TRUE
 	mortal = TRUE
 	dents_brain = FALSE
 
 /datum/wound/fracture/head/nose
 	name = "nasal fracture"
+	crit_message = list(
+		"The nasal bone is punctured!",
+		"The nasal bone is pierced!",
+	)
 	paralysis = FALSE
 	mortal = FALSE
 	dents_brain = FALSE
@@ -100,6 +134,12 @@
 /datum/wound/fracture/mouth
 	name = "mandibular fracture"
 	check_name = "<span class='bone'>JAW FRACTURE</span>"
+	crit_message = list(
+		"The mandible comes apart beautifully!", 
+		"The jaw is smashed!", 
+		"The jaw is shattered!", 
+		"The jaw caves in!",
+	)
 	whp = 100
 	sleep_healing = 0
 
@@ -116,6 +156,13 @@
 /datum/wound/fracture/neck
 	name = "cervical fracture"
 	check_name = "<span class='bone'><B>CERVICAL FRACTURE</B></span>"
+	crit_message = list(
+		"The spine shatters in a spectacular way!", 
+		"The spine snaps!",
+		"The spine cracks!",
+		"The spine is broken!",
+	)
+	sound_effect = "fracturedry"
 	whp = 100
 	sleep_healing = 0
 
@@ -138,6 +185,12 @@
 /datum/wound/fracture/chest
 	name = "rib fracture"
 	check_name = "<span class='bone'>RIBS</span>"
+	crit_message = list(
+		"The ribs shatter in a splendid way!",
+		"The ribs are smashed!",
+		"The ribs are mauled!",
+		"The ribcage caves in!",
+	)
 	whp = 50
 
 /datum/wound/fracture/chest/on_mob_gain(mob/living/affected)
@@ -147,6 +200,12 @@
 /datum/wound/fracture/groin
 	name = "pelvic fracture"
 	check_name = "<span class='bone'>PELVIS</span>"
+	crit_message = list(
+		"The pelvis shatters in a magnificent way!", 
+		"The pelvis is smashed!", 
+		"The pelvis is mauled!", 
+		"The pelvic floor caves in!",
+	)
 	whp = 50
 	gain_emote = "groin"
 
@@ -155,6 +214,7 @@
 	if(prob(1))
 		name = "broken buck"
 		check_name = "<span class='bone'>BUCKBROKEN</span>"
+		crit_message = "The buck is broken expertly!"
 	
 /datum/wound/fracture/groin/on_mob_gain(mob/living/affected)
 	. = ..()
