@@ -80,12 +80,12 @@
 		qdel(wound)
 
 /// Heals wounds on this bodypart by the specified amount
-/obj/item/bodypart/proc/heal_wounds(heal_amount, sleep_heal = FALSE)
+/obj/item/bodypart/proc/heal_wounds(heal_amount)
 	if(!length(wounds))
 		return FALSE
 	var/healed_any = FALSE
 	for(var/datum/wound/wound as anything in wounds)
-		if((heal_amount <= 0) || (sleep_heal && !wound.sleep_healing))
+		if(heal_amount <= 0)
 			continue
 		var/amount_healed = wound.heal_wound(heal_amount)
 		heal_amount -= amount_healed
