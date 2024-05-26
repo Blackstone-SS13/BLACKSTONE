@@ -111,18 +111,18 @@
     if(!hingot || !hott)
         return
     
-    var/list/types = list()
+    var/list/i_type = list()
     for(var/datum/anvil_recipe/R in GLOB.anvil_recipes)
-        if(!types.Find(R.type))
-            types += R.type
+        if(!i_type.Find(R.i_type))
+            i_type += R.i_type
     
-    var/type_choice = input(user, "Choose a type", "Anvil") as null|anything in types
-    if(!type_choice)
+    var/i_type_choice = input(user, "Choose a type", "Anvil") as null|anything in i_type
+    if(!i_type_choice)
         return
     
     var/list/appro_recipe = list()
     for(var/datum/anvil_recipe/R in GLOB.anvil_recipes)
-        if(R.type == type_choice)
+        if(R.i_type == i_type_choice)
             appro_recipe += R
     
     for(var/I in appro_recipe)
