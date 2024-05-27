@@ -36,6 +36,7 @@
 	neck = /obj/item/clothing/neck/roguetown/psicross/necra
 	cloak = /obj/item/clothing/cloak/raincloak/mortus
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra
+	shirt = /obj/item/clothing/suit/roguetown/armor/leather/vest/black
 	pants = /obj/item/clothing/under/roguetown/trou/leather/mourning
 	shoes = /obj/item/clothing/shoes/roguetown/boots
 	belt = /obj/item/storage/belt/rogue/leather/rope
