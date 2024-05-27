@@ -369,11 +369,11 @@
 	bookfile = "tales14.json"
 
 /obj/item/book/rogue/playerbook
-	var/player_book_text = "moisture in the air or water leaks have rendered the carefully written caligraphy of this book unreadable"
-	var/player_book_title = "unknown title"
-	var/player_book_author = "unknown author"
-	var/player_book_icon = "basic_book"
-	var/player_book_author_ckey = "unknown"
+	var/player_book_text
+	var/player_book_title
+	var/player_book_author
+	var/player_book_icon
+	var/player_book_author_ckey
 	var/is_in_round_player_generated
 	var/list/player_book_titles
 	var/list/player_book_content
@@ -397,11 +397,13 @@
 	. = ..()
 	is_in_round_player_generated = in_round_player_generated
 	if(is_in_round_player_generated)
-		player_book_author_ckey = in_round_player_mob.ckey
-		player_book_title = dd_limittext(capitalize(sanitize_hear_message(input(in_round_player_mob, "What title do you want to give the book? (max 42 characters)", "Title", "Unknown"))), MAX_NAME_LEN)
-		player_book_author = "[dd_limittext(sanitize_hear_message(input(in_round_player_mob, "Do you want to preface your author name with an author title? (max 42 characters)", "Author Title", "")), MAX_NAME_LEN)] [in_round_player_mob.real_name]"
-		player_book_icon = book_icons[input(in_round_player_mob, "Choose a book style", "Book Style") as anything in book_icons]
 		player_book_text = text
+		while(!player_book_author_ckey) // doesn't have to be this, but better than defining a bool.
+			player_book_title = dd_limittext(capitalize(sanitize_hear_message(input(in_round_player_mob, "What title do you want to give the book? (max 42 characters)", "Title", "Unknown"))), MAX_NAME_LEN)	
+			player_book_author = "[dd_limittext(sanitize_hear_message(input(in_round_player_mob, "Do you want to preface your author name with an author title? (max 42 characters)", "Author Title", "")), MAX_NAME_LEN)] [in_round_player_mob.real_name]"
+			player_book_icon = book_icons[input(in_round_player_mob, "Choose a book style", "Book Style") as anything in book_icons]
+			if(alert("Confirm?:\nTitle: [player_book_title]\nAuthor: [player_book_author]\nBook Cover: [player_book_icon]", "", "Yes", "No") == "Yes")
+				player_book_author_ckey = in_round_player_mob.ckey
 		message_admins("[player_book_author_ckey]([in_round_player_mob.real_name]) has generated the player book: [player_book_title]")
 	else
 		player_book_titles = SSlibrarian.pull_player_book_titles()
@@ -411,12 +413,14 @@
 		player_book_author_ckey = player_book_content["author_ckey"]
 		player_book_icon = player_book_content["icon"]
 		player_book_text = player_book_content["text"]
+		// no longer required.
+		player_book_titles = null
+		player_book_content = null
 
 	name = "[player_book_title]"
 	desc = "By [player_book_author]"
 	icon_state = "[player_book_icon]_0"
 	base_icon_state = "[player_book_icon]"
-
 	pages = list("<b3><h3>Title: [player_book_title]<br>Author: [player_book_author]</b><h3>[player_book_text]")
 
 /obj/item/manuscript
