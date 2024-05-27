@@ -6,6 +6,7 @@
 	anchored = TRUE
 	density = FALSE
 	max_integrity = 15
+	debris = list(/obj/item/natural/silk = 1)
 
 
 
