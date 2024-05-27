@@ -67,10 +67,15 @@ GLOBAL_LIST_INIT(noble_positions, list(
 	"Bailiff",
 	"Councillor",
 	"Steward",
+	"Knight",
+))
+
+GLOBAL_LIST_INIT(courtier_positions, list(
 	"Court Magician",
 	"Court Physician",
-	"Knight"
-	))
+	"Jester",
+	"Butler",
+))
 
 GLOBAL_LIST_INIT(garrison_positions, list(
 	"Watchman",
@@ -80,8 +85,8 @@ GLOBAL_LIST_INIT(garrison_positions, list(
 	"Veteran",
 	"Dungeoneer",
 	"Gatemaster",
-	"Bog Elder"
-	))
+	"Village Elder",
+))
 
 GLOBAL_LIST_INIT(church_positions, list(
 	"Priest",
@@ -90,9 +95,9 @@ GLOBAL_LIST_INIT(church_positions, list(
 	"Acolyte",
 	"Mortician",
 	"Templar",
-	))
+))
 
-GLOBAL_LIST_INIT(serf_positions, list(
+GLOBAL_LIST_INIT(yeoman_positions, list(
 	"Merchant",
 	"Barkeep",
 	"Archivist",
@@ -101,20 +106,18 @@ GLOBAL_LIST_INIT(serf_positions, list(
 	"Tailor",
 	"Alchemist",
 	"Mason",
-	"Scribe"
-	))
+	"Scribe",
+))
 
 GLOBAL_LIST_INIT(peasant_positions, list(
 	"Soilson",
 	"Butcher",
 	"Cook",
-	"Jester",
 	"Lunatic",
 	"Miner",
 	"Hunter",
 	"Fisher",
 	"Lumberjack",
-	"Butler",
 	"Towner",
 	"Grabber",
 	"Nightmaster",
@@ -124,7 +127,12 @@ GLOBAL_LIST_INIT(peasant_positions, list(
 	"Beggar",
 	"Adventurer",
 	"Pilgrim",
-	))
+))
+
+GLOBAL_LIST_INIT(mercenary_positions, list(
+	"Grenzelhoft Mercenary",
+	"Desert Rider Mercenary",
+))
 
 GLOBAL_LIST_INIT(youngfolk_positions, list(
 	"Squire",
@@ -134,22 +142,17 @@ GLOBAL_LIST_INIT(youngfolk_positions, list(
 	"Churchling",
 	"Servant",
 	"Shophand",
-	"Orphan"
-	))
+	"Orphan",
+))
 
 GLOBAL_LIST_INIT(allmig_positions, list(
 	"Adventurer",
-	"Pilgrim"
-	))
-
-GLOBAL_LIST_INIT(mercenary_positions, list(
-	"Grenzelhoft Mercenary",
-	"Desert Rider Mercenary"
-	))
+	"Pilgrim",
+))
 
 GLOBAL_LIST_INIT(roguewar_positions, list(
-	"Adventurer"
-	))
+	"Adventurer",
+))
 
 GLOBAL_LIST_INIT(roguefight_positions, list(
 	"Red Captain",
@@ -159,8 +162,8 @@ GLOBAL_LIST_INIT(roguefight_positions, list(
 	"Green Captain",
 	"Green Caster",
 	"Green Ranger",
-	"Green Fighter"
-	))
+	"Green Fighter",
+))
 
 GLOBAL_LIST_INIT(goblin_positions, list(
 	"Goblin King",
@@ -170,17 +173,18 @@ GLOBAL_LIST_INIT(goblin_positions, list(
 	))
 
 GLOBAL_LIST_INIT(test_positions, list(
-	"Tester"
-	))
+	"Tester",
+))
 
-GLOBAL_LIST_EMPTY(job_assignment_order)
+GLOBAL_LIST_INIT(job_assignment_order, get_job_assignment_order())
 
 /proc/get_job_assignment_order()
 	var/list/sorting_order = list()
 	sorting_order += GLOB.noble_positions
+	sorting_order += GLOB.courtier_positions
 	sorting_order += GLOB.garrison_positions
 	sorting_order += GLOB.church_positions
-	sorting_order += GLOB.serf_positions
+	sorting_order += GLOB.yeoman_positions
 	sorting_order += GLOB.peasant_positions
 	sorting_order += GLOB.youngfolk_positions
 	return sorting_order

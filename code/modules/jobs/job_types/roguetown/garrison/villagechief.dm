@@ -1,6 +1,6 @@
 /datum/job/roguetown/woodsman
-	title = "Bog Elder"
-	flag = WOODSMAN
+	title = "Village Elder"
+	flag = ELDER
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 0
@@ -38,10 +38,10 @@
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
-			S.name = "bog elder cloak ([index])"
+			S.name = "Village Elder cloak ([index])"
 
 /datum/outfit/job/roguetown/woodsman
-	name = "Bog Elder"
+	name = "Village Elder"
 	jobtype = /datum/job/roguetown/woodsman
 
 /datum/outfit/job/roguetown/woodsman/pre_equip(mob/living/carbon/human/H)

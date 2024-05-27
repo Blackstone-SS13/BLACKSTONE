@@ -17,7 +17,6 @@
 	var/STASTR
 	var/STASPD
 	var/STAINT
-	var/skin_tone
 	var/cmode_music
 	var/list/base_intents
 	/// Whether or not we have been turned
@@ -31,28 +30,32 @@
 		TRAIT_NOMOOD,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
-		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
+		TRAIT_NOPAINSTUN,
+		TRAIT_NOBREATH,
+		TRAIT_NOBREATH,
 		TRAIT_TOXIMMUNE,
 		TRAIT_CHUNKYFINGERS,
 		TRAIT_NOSLEEP,
 		TRAIT_BASHDOORS,
-		TRAIT_LIMPDICK,
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLCOCKBLOCK,
+		TRAIT_BLOODLOSS_IMMUNE,
+		TRAIT_LIMPDICK,
 		TRAIT_ZOMBIE_SPEECH,
 		TRAIT_ZOMBIE_IMMUNE,
-		TRAIT_BLOODLOSS_IMMUNE,
+		TRAIT_ROTMAN,
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
-		TRAIT_ROTMAN,
 		TRAIT_EASYDISMEMBER,
-		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
+		TRAIT_NOPAINSTUN,
+		TRAIT_NOBREATH,
 		TRAIT_TOXIMMUNE,
 		TRAIT_LIMPDICK,
 		TRAIT_ZOMBIE_IMMUNE,
+		TRAIT_ROTMAN,
 	)
 
 /datum/antagonist/zombie/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
@@ -84,7 +87,6 @@
 	STASTR = zombie.STASTR
 	STASPD = zombie.STASPD
 	STAINT = zombie.STAINT
-	skin_tone = zombie.skin_tone
 	cmode_music = zombie.cmode_music
 	return ..()
 
@@ -123,8 +125,8 @@
 				zombie.mob_biotypes &= ~MOB_UNDEAD
 			zombie.faction -= "undead"
 			zombie.regenerate_organs()
-			zombie.skin_tone = skin_tone
-			to_chat(zombie, "<span class='green'>I no longer crave for flesh...</span>")
+			if(has_turned)
+				to_chat(zombie, "<span class='green'>I no longer crave for flesh...</span>")
 		for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 			zombie_part.rotted = FALSE
 			zombie_part.update_disabled()
@@ -143,6 +145,8 @@
 	if(!head)
 		qdel(src)
 		return
+	revived = TRUE //so we can die for real later
+	zombie.add_client_colour(/datum/client_colour/monochrome)
 	for(var/trait_applied in traits_zombie)
 		ADD_TRAIT(zombie, trait_applied, "[type]")
 	if(zombie.mind)
@@ -156,7 +160,6 @@
 	base_intents = zombie.base_intents
 	zombie.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
 	zombie.update_a_intents()
-	zombie.setToxLoss(0, 0)
 	zombie.aggressive = TRUE
 	zombie.mode = AI_IDLE
 	zombie.handle_ai()
@@ -175,9 +178,7 @@
 		if(!zombie_part.rotted && !zombie_part.skeletonized)
 			zombie_part.rotted = TRUE
 		zombie_part.update_disabled()
-	zombie.skin_tone = SKIN_COLOR_ROT
 	zombie.update_body()
-
 
 	// Now you get what you had in life + the debuff from rotting limbs aka -8
 	// Outside of one 2% chance remaining for zombie era strength
@@ -235,15 +236,18 @@
 		qdel(src)
 		return
 
-	zombie.stat = null //the mob starts unconscious,
-	zombie.blood_volume = BLOOD_VOLUME_MAXIMUM
-	zombie.updatehealth() //then we check if the mob should wake up.
+	zombie.blood_volume = BLOOD_VOLUME_NORMAL
+	zombie.setOxyLoss(0, updating_health = FALSE, forced = TRUE) //zombles dont breathe
+	zombie.setToxLoss(0, updating_health = FALSE, forced = TRUE) //zombles are immune to poison
+	if(!infected_wake) //if we died, heal all of this too
+		zombie.adjustBruteLoss(-INFINITY, updating_health = FALSE, forced = TRUE)
+		zombie.adjustFireLoss(-INFINITY, updating_health = FALSE, forced = TRUE)
+		zombie.heal_wounds(INFINITY) //Heal every wound that is not permanent
+	zombie.stat = UNCONSCIOUS //Start unconscious
+	zombie.updatehealth() //then we check if the mob should wake up
 	zombie.update_mobility()
 	zombie.update_sight()
-	zombie.clear_alert("not_enough_oxy")
 	zombie.reload_fullscreen()
-	zombie.add_client_colour(/datum/client_colour/monochrome)
-	revived = TRUE //so we can die for real later
 	transform_zombie()
 	if(zombie.stat >= DEAD)
 		//could not revive

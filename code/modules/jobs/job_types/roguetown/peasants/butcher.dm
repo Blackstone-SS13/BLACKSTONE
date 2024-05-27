@@ -1,6 +1,6 @@
 /datum/job/roguetown/butcher
 	title = "Butcher"
-	flag = BEASTMASTER
+	flag = BUTCHER
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = 1

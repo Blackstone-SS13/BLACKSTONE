@@ -67,23 +67,27 @@
 		if(burn)
 			status += "<span class='[burn >= 10 ? "danger" : "warning"]'>[burn] BURN</span>"
 	else
-		if(brute >= max_damage * 0.75)
-			status += "<span class='userdanger'><b>[heavy_brute_msg]</b></span>"
-		else if(brute >= max_damage * 0.5)
-			status += "<span class='userdanger'>[heavy_brute_msg]</span>"
-		else if(brute >= max_damage * 0.25)
-			status += "<span class='danger'>[medium_brute_msg]</span>"
-		else if(brute > 0)
-			status += "<span class='warning'>[light_brute_msg]</span>"
-
-		if(burn >= max_damage * 0.75)
-			status += "<span class='userdanger'><b>[heavy_burn_msg]</b></span>"
-		else if(burn >= max_damage * 0.5)
-			status += "<span class='userdanger'>[medium_burn_msg]</span>"
-		else if(burn >= max_damage * 0.25)
-			status += "<span class='danger'>[medium_burn_msg]</span>"
-		else if(burn > 0)
-			status += "<span class='warning'>[light_burn_msg]</span>"
+		if(brute >= DAMAGE_PRECISION)
+			switch(brute/max_damage)
+				if(0.75 to INFINITY)
+					status += "<span class='userdanger'><B>[heavy_brute_msg]</B></span>"
+				if(0.5 to 0.75)
+					status += "<span class='userdanger'>[heavy_brute_msg]</span>"
+				if(0.25 to 0.5)
+					status += "<span class='danger'>[medium_brute_msg]</span>"
+				else
+					status += "<span class='warning'>[light_brute_msg]</span>"
+		
+		if(burn >= DAMAGE_PRECISION)
+			switch(burn/max_damage)
+				if(0.75 to INFINITY)
+					status += "<span class='userdanger'><B>[heavy_burn_msg]</B></span>"
+				if(0.5 to 0.75)
+					status += "<span class='userdanger'>[medium_burn_msg]</span>"
+				if(0.25 to 0.5)
+					status += "<span class='danger'>[medium_burn_msg]</span>"
+				else
+					status += "<span class='warning'>[light_burn_msg]</span>"
 	
 	var/bleed_rate = get_bleed_rate()
 	if(bleed_rate)
@@ -96,7 +100,7 @@
 	for(var/datum/wound/wound as anything in wounds)
 		if(!wound.check_name)
 			continue
-		wound_strings |= wound.get_check_name()
+		wound_strings |= wound.get_check_name(user)
 	status += wound_strings
 
 	for(var/obj/item/embedded as anything in embedded_objects)
@@ -106,17 +110,18 @@
 			status += "<a href='?src=[REF(owner)];embedded_limb=[REF(src)];embedded_object=[REF(embedded)];' class='info'>[uppertext(embedded.name)]</a>"
 	
 	if(skeletonized)
-		status += "<span class='bone'>SKELETONIZED</span>"
+		status += "<span class='dead'>SKELETON</span>"
 	else if(rotted)
-		status += "<span class='dead'>NECROSIS</span>"
-		
+		status += "<span class='necrosis'>NECROSIS</span>"
+
 	if(bandage)
 		if(HAS_BLOOD_DNA(bandage))
 			status += "<a href='?src=[REF(owner)];bandaged_limb=[REF(src)];bandage=[REF(bandage)]' class='bloody'>[uppertext(bandage.name)]</a>"
 		else
 			status += "<a href='?src=[REF(owner)];bandaged_limb=[REF(src)];bandage=[REF(bandage)]' class='info'>[uppertext(bandage.name)]</a>"
+
 	if(disabled)
-		status += "<span class='deadsay'><b>CRIPPLED</b></span>"
+		status += "<span class='deadsay'>CRIPPLED</span>"
 
 	return status
 

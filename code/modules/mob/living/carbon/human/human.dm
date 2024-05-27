@@ -47,28 +47,8 @@
 	if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "melee", damage = dam)))
 		update_damage_overlays()
 		if(levels >= 1)
-			if(!HAS_TRAIT_FROM(affecting, TRAIT_PARALYSIS, CRIT_TRAIT))
-				affecting.temporary_crit_paralysis(20 SECONDS)
-			else if(!affecting.has_wound(/datum/wound/fracture))
-				var/static/list/adjectives = list(
-					"beautiful",
-					"lovely",
-					"crunchy",
-					"disgusting",
-					"marvelous",
-					"wonderful",
-					"sickening",
-					"disturbing",
-					"horrifying",
-					"twisted",
-				)
-				chat_message += " <span class='crit'>The bone shatters in a [pick(adjectives)] way!</span>"
-				if(prob(3))
-					playsound(src, pick('sound/combat/tf2crit.ogg'), 100, FALSE)
-				else
-					playsound(src, "wetbreak", 100, FALSE)
-				affecting.add_wound(/datum/wound/fracture)
-				affecting.update_disabled()
+			//absurd damage to guarantee a crit
+			affecting.try_crit(BCLASS_TWIST, 300)
 
 	if(chat_message)
 		to_chat(src, chat_message)

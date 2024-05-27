@@ -25,7 +25,7 @@
 
 /datum/job/roguetown/exlady //just used to change the ladys title
 	title = "Queen Dowager"
-	flag = ADVENTURER
+	flag = LADY
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 0
@@ -42,6 +42,7 @@
 	. = ..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_NUTCRACKER, TRAIT_GENERIC)
 	beltl = /obj/item/roguekey/manor
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
@@ -72,7 +73,6 @@
 		H.change_stat("speed", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("fortune", 5)
-
 
 /obj/effect/proc_holder/spell/self/convertrole/servant
 	name = "Recruit Servant"

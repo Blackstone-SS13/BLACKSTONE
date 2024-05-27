@@ -382,7 +382,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 			H.fully_heal()
 
 	if(vitae > 0)
-		H.blood_volume = BLOOD_VOLUME_MAXIMUM
+		H.blood_volume = BLOOD_VOLUME_NORMAL
 		if(vitae < 200)
 			if(disguised)
 				to_chat(H, "<span class='warning'>My disguise fails!</span>")
