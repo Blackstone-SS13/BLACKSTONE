@@ -505,3 +505,6 @@
 /mob/living/proc/ignore_slowdown(source)
 	ADD_TRAIT(src, TRAIT_IGNORESLOWDOWN, source)
 	update_movespeed(FALSE)
+
+/mob/living/proc/cure_holdbreath(source)
+	REMOVE_TRAIT(src, TRAIT_HOLDBREATH, source)

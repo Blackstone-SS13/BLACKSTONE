@@ -181,7 +181,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_crossarms()
-	set name = "Crossarms"
+	set name = "Cross Arms"
 	set category = "Emotes"
 
 	emote("crossarms", intentional = TRUE)
@@ -238,7 +238,7 @@
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_clearthroat()
-	set name = "Clearthroat"
+	set name = "Clear Throat"
 	set category = "Noises"
 
 	emote("clearthroat", intentional = TRUE)
@@ -524,9 +524,6 @@
 
 	emote("kiss", intentional = TRUE, targetted = TRUE)
 
-
-
-
 /datum/emote/living/kiss/adjacentaction(mob/user, mob/target)
 	. = ..()
 	message_param = initial(message_param) // re
@@ -612,6 +609,37 @@
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		H.add_stress(/datum/stressevent/hug)
+
+/datum/emote/living/holdbreath
+	key = "hold"
+	key_third_person = "holds"
+	message = "begins to hold their breath."
+	stat_allowed = SOFT_CRIT
+
+/mob/living/carbon/human/verb/emote_hold()
+	set name = "Hold Breath"
+	set category = "Emotes"
+
+	emote("hold", intentional = TRUE)
+
+/datum/emote/living/holdbreath/can_run_emote(mob/living/user, status_check = TRUE, intentional)
+	. = ..()
+	if(. && !HAS_TRAIT(user, TRAIT_HOLDBREATH) && !HAS_TRAIT(user, TRAIT_PARALYSIS))
+		to_chat(user, "<span class='warning'>I'm not desperate enough to do that.</span>")
+		return FALSE
+
+/datum/emote/living/holdbreath/run_emote(mob/user, params, type_override, intentional)
+	. = ..()
+	if(.)
+		if(HAS_TRAIT(user, TRAIT_HOLDBREATH))
+			REMOVE_TRAIT(user, TRAIT_HOLDBREATH, TRAIT_GENERIC)
+		else
+			ADD_TRAIT(user, TRAIT_HOLDBREATH, TRAIT_GENERIC)
+
+/datum/emote/living/holdbreath/select_message_type(mob/user, intentional)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_HOLDBREATH))
+		. = "stops holding their breath."
 
 /datum/emote/living/slap
 	key = "slap"
@@ -901,7 +929,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_shakehead()
-	set name = "Shakehead"
+	set name = "Shake Head"
 	set category = "Emotes"
 
 	emote("shakehead", intentional = TRUE)
