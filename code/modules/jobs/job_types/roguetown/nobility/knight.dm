@@ -56,7 +56,7 @@
 		r_hand = /obj/item/rogueweapon/mace/goden/steel
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 6, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/swords, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
