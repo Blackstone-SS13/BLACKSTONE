@@ -32,15 +32,16 @@
 			msg += "<span class='danger'>[m1] gravely wounded.</span>"
 
 	// Blood volume
-	switch(blood_volume)
-		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-			msg += "<span class='artery'><B>[m1] extremely pale and sickly.</B></span>"
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			msg += "<span class='artery'><B>[m1] very pale.</B></span>"
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			msg += "<span class='artery'>[m1] pale.</span>"
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			msg += "<span class='artery'>[m1] a little pale.</span>"
+	if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		switch(blood_volume)
+			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+				msg += "<span class='artery'><B>[m1] extremely pale and sickly.</B></span>"
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				msg += "<span class='artery'><B>[m1] very pale.</B></span>"
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				msg += "<span class='artery'>[m1] pale.</span>"
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				msg += "<span class='artery'>[m1] a little pale.</span>"
 	
 	// Bleeding
 	var/bleed_rate = get_bleed_rate()
