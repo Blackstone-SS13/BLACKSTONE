@@ -66,8 +66,8 @@
 	bleed_rate = get_bleed_rate()
 	if(bleed_rate)
 		bleed(bleed_rate)
-	else
-		blood_volume = min(blood_volume + 1, BLOOD_VOLUME_MAXIMUM)
+	else if(blood_volume < BLOOD_VOLUME_NORMAL)
+		blood_volume = min(blood_volume + 1, BLOOD_VOLUME_NORMAL)
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/handle_blood()
