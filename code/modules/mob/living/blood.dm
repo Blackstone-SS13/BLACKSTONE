@@ -26,13 +26,8 @@
 /mob/living/proc/handle_blood()
 	if((bodytemperature <= TCRYO) || HAS_TRAIT(src, TRAIT_HUSK)) //cryosleep or husked people do not pump the blood.
 		return
+	
 	blood_volume = min(blood_volume, BLOOD_VOLUME_MAXIMUM)
-
-	bleed_rate = min(get_bleed_rate(), 10)
-
-	if(blood_volume < BLOOD_VOLUME_NORMAL && blood_volume && !bleed_rate)
-		blood_volume = min(blood_volume+0.5, BLOOD_VOLUME_MAXIMUM)
-
 	//Effects of bloodloss
 	if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
 		switch(blood_volume)
@@ -67,14 +62,18 @@
 		remove_status_effect(/datum/status_effect/debuff/bleeding)
 		remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 		remove_status_effect(/datum/status_effect/debuff/bleedingworst)
-		
+
+	bleed_rate = get_bleed_rate()
 	if(bleed_rate)
 		bleed(bleed_rate)
+	else if(blood_volume < BLOOD_VOLUME_NORMAL)
+		blood_volume = min(blood_volume + 1, BLOOD_VOLUME_NORMAL)
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/handle_blood()
 	if((bodytemperature <= TCRYO) || HAS_TRAIT(src, TRAIT_HUSK)) //cryosleep or husked people do not pump the blood.
 		return
+	
 	blood_volume = min(blood_volume, BLOOD_VOLUME_MAXIMUM)
 	if(dna?.species)
 		if(NOBLOOD in dna.species.species_traits)
@@ -140,7 +139,7 @@
 		remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 
 	//Bleeding out
-	var/bleed_rate = get_bleed_rate()
+	bleed_rate = get_bleed_rate()
 	if(bleed_rate)
 		for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 			bodypart.try_bandage_expire()
@@ -167,35 +166,39 @@
 
 //Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/proc/bleed(amt)
-	if(!iscarbon(src))
-		if(!HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-			return
-	if(blood_volume)
-		blood_volume = max(blood_volume - amt, 0)
-		SSticker.blood_lost += amt
-		if(isturf(src.loc)) //Blood loss still happens in locker, floor stays clean
-			add_drip_floor(src.loc, amt)
-		var/vol2use
-		if(amt > 1)
-			vol2use = 'sound/misc/bleed (1).ogg'
-		if(amt > 2)
-			vol2use = 'sound/misc/bleed (2).ogg'
-		if(amt > 3)
-			vol2use = 'sound/misc/bleed (3).ogg'
-		if(lying || stat)
-			vol2use = null
-		if(vol2use)
-			playsound(get_turf(src), vol2use, 100, FALSE)
+	if(!iscarbon(src) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		return FALSE
+	if(blood_volume <= 0)
+		return FALSE
+	
+	blood_volume = max(blood_volume - amt, 0)
+	SSticker.blood_lost += amt
+	if(isturf(src.loc)) //Blood loss still happens in locker, floor stays clean
+		add_drip_floor(src.loc, amt)
+	var/vol2use
+	if(amt > 1)
+		vol2use = 'sound/misc/bleed (1).ogg'
+	if(amt > 2)
+		vol2use = 'sound/misc/bleed (2).ogg'
+	if(amt > 3)
+		vol2use = 'sound/misc/bleed (3).ogg'
+	if(lying || stat)
+		vol2use = null
+	if(vol2use)
+		playsound(get_turf(src), vol2use, 100, FALSE)
 
 	updatehealth()
+	return TRUE
 
 /mob/living/carbon/human/bleed(amt)
 	amt *= physiology.bleed_mod
 	if(!(NOBLOOD in dna.species.species_traits))
 		return ..()
+	return FALSE
 
 /mob/living/proc/restore_blood()
 	blood_volume = initial(blood_volume)
+	bleed_rate = 0
 
 /mob/living/carbon/human/restore_blood()
 	blood_volume = BLOOD_VOLUME_NORMAL

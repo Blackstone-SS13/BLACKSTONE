@@ -43,26 +43,25 @@
 					heart_attacking = FALSE
 
 		//Healing while sleeping in a bed
-		if(stat)
-			if(buckled?.sleepy)
-				var/yess = HAS_TRAIT(src, TRAIT_NOHUNGER)
-				if(nutrition > 0 || yess)
-					rogstam_add(buckled.sleepy * 15)
-				if(hydration > 0 || yess)
-					if(!bleed_rate)
-						blood_volume = min(blood_volume + 10, BLOOD_VOLUME_MAXIMUM)
-					for(var/obj/item/bodypart/affecting as anything in bodyparts)
-						//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
-						if(affecting.get_bleed_rate() < 1)
-							if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, required_status = BODYPART_ORGANIC))
-								src.update_damage_overlays()
-							for(var/datum/wound/wound as anything in affecting.wounds)
-								if(!wound.sleep_healing)
-									continue
-								wound.heal_wound(wound.sleep_healing * buckled.sleepy)
-					adjustToxLoss(-buckled.sleepy)
-					if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
-						Sleeping(300)
+		if(stat && buckled?.sleepy)
+			var/yess = HAS_TRAIT(src, TRAIT_NOHUNGER)
+			if(nutrition > 0 || yess)
+				rogstam_add(buckled.sleepy * 15)
+			if(hydration > 0 || yess)
+				if(!bleed_rate)
+					blood_volume = min(blood_volume + 10, BLOOD_VOLUME_NORMAL)
+				for(var/obj/item/bodypart/affecting as anything in bodyparts)
+					//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
+					if(affecting.get_bleed_rate() < 1)
+						if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, required_status = BODYPART_ORGANIC))
+							src.update_damage_overlays()
+						for(var/datum/wound/wound as anything in affecting.wounds)
+							if(!wound.sleep_healing)
+								continue
+							wound.heal_wound(wound.sleep_healing * buckled.sleepy)
+				adjustToxLoss(-buckled.sleepy)
+				if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+					Sleeping(300)
 		if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_NOSLEEP))
 			if(buckled?.sleepy)
 				if(eyesclosed)
@@ -92,7 +91,7 @@
 						rogstam_add(25)
 					if(hydration > 0 || yess)
 						if(!bleed_rate)
-							blood_volume = min(blood_volume + 10, BLOOD_VOLUME_MAXIMUM)
+							blood_volume = min(blood_volume + 10, BLOOD_VOLUME_NORMAL)
 						for(var/obj/item/bodypart/affecting as anything in bodyparts)
 							//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
 							if(affecting.get_bleed_rate() < 1)
@@ -101,7 +100,7 @@
 								for(var/datum/wound/wound as anything in affecting.wounds)
 									if(!wound.sleep_healing)
 										continue
-									wound.heal_wound(wound.sleep_healing)
+									wound.heal_wound(wound.sleep_healing * 0.5)
 						adjustToxLoss(-0.1)
 
 			else if(fallingas)

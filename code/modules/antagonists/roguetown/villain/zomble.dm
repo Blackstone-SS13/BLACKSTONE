@@ -236,7 +236,7 @@
 		qdel(src)
 		return
 
-	zombie.blood_volume = BLOOD_VOLUME_MAXIMUM
+	zombie.blood_volume = BLOOD_VOLUME_NORMAL
 	zombie.setOxyLoss(0, updating_health = FALSE, forced = TRUE) //zombles dont breathe
 	zombie.setToxLoss(0, updating_health = FALSE, forced = TRUE) //zombles are immune to poison
 	if(!infected_wake) //if we died, heal all of this too
