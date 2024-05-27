@@ -2,22 +2,22 @@
 	appro_skill = /datum/skill/craft/blacksmithing
 	craftdiff = 2
 /datum/anvil_recipe/valuables/gold
-	name = "gold statue"
+	name = "Statue"
 	req_bar = /obj/item/ingot/gold
 	created_item = /obj/item/roguestatue/gold
 
 /datum/anvil_recipe/valuables/silver
-	name = "silver statue"
+	name = "Statue"
 	req_bar = /obj/item/ingot/silver
 	created_item = /obj/item/roguestatue/silver
 
 /datum/anvil_recipe/valuables/iron
-	name = "iron statue"
+	name = "Statue"
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/roguestatue/iron
 
 /datum/anvil_recipe/valuables/steel
-	name = "steel statue"
+	name = "Statue"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/roguestatue/steel
 
@@ -37,85 +37,85 @@
 						/obj/item/rogueacc/earsilver)*/
 
 /datum/anvil_recipe/valuables/ringg
-	name = "3x gold rings"
+	name = "Rings 3x"
 	req_bar = /obj/item/ingot/gold
 	created_item = list(/obj/item/clothing/ring/gold, /obj/item/clothing/ring/gold, /obj/item/clothing/ring/gold)
 
 /datum/anvil_recipe/valuables/rings
-	name = "3x silver rings"
+	name = "Rings 3x"
 	req_bar = /obj/item/ingot/silver
 	created_item = list(/obj/item/clothing/ring/silver, /obj/item/clothing/ring/silver, /obj/item/clothing/ring/silver)
 
 //gold rings
 /datum/anvil_recipe/valuables/emeringg
-	name = "Gold Gemerald Ring (+ Gemerald)"
+	name = "Gemerald ring (+ Gemerald)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/green)	
 	created_item = /obj/item/clothing/ring/emerald
 
 /datum/anvil_recipe/valuables/rubyg
-	name = "Gold Rontz Ring (+ Rontz)"
+	name = "Rontz ring (+ Rontz)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem)	
 	created_item = /obj/item/clothing/ring/ruby
 
 /datum/anvil_recipe/valuables/topazg
-	name = "Gold Toper Ring (+ Toper)"
+	name = "Toper ring (+ Toper)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/yellow)	
 	created_item = /obj/item/clothing/ring/topaz
 
 /datum/anvil_recipe/valuables/quartzg
-	name = "Gold Blortz Ring (+ Blortz)"
+	name = "Blortz ring (+ Blortz)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/blue)	
 	created_item = /obj/item/clothing/ring/quartz
 
 /datum/anvil_recipe/valuables/sapphireg
-	name = "Gold Saffira Ring (+ Saffira)"
+	name = "Saffira ring (+ Saffira)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/violet)	
 	created_item = /obj/item/clothing/ring/sapphire
 
 /datum/anvil_recipe/valuables/diamondg
-	name = "Gold Dorpel Ring (+ Dorpel)"
+	name = "Dorpel ring (+ Dorpel)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/diamond)	
 	created_item = /obj/item/clothing/ring/diamond
 
 //steel rings
 /datum/anvil_recipe/valuables/emerings
-	name = "Steel Gemerald Ring (+ Gemerald)"
+	name = "Gemerald ring (+ Gemerald)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/green)	
 	created_item = /obj/item/clothing/ring/emeralds
 
 /datum/anvil_recipe/valuables/rubys
-	name = "Steel Rontz Ring (+ Rontz)"
+	name = "Rontz ring (+ Rontz)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem)	
 	created_item = /obj/item/clothing/ring/rubys
 
 /datum/anvil_recipe/valuables/topazs
-	name = "Steel Toper Ring (+ Toper)"
+	name = "Toper ring (+ Toper)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/yellow)	
 	created_item = /obj/item/clothing/ring/topazs
 
 /datum/anvil_recipe/valuables/quartzs
-	name = "Steel Blortz Ring (+ Blortz)"
+	name = "Blortz ring (+ Blortz)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/blue)	
 	created_item = /obj/item/clothing/ring/quartzs
 
 /datum/anvil_recipe/valuables/sapphires
-	name = "Steel Saffira Ring (+ Saffira)"
+	name = "Saffira ring (+ Saffira)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/violet)	
 	created_item = /obj/item/clothing/ring/sapphires
 
 /datum/anvil_recipe/valuables/diamonds
-	name = "Steel Dorpel Ring (+ Dorpel)"
+	name = "Dorpel ring (+ Dorpel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/diamond)	
 	created_item = /obj/item/clothing/ring/diamonds
