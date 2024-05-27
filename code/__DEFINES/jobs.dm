@@ -118,6 +118,7 @@
 #define CLERIC		(1<<1)
 #define PURITAN		(1<<2)
 #define MONK		(1<<3)
+#define GRAVEDIGGER	(1<<4)
 
 #define SERFS			(1<<3)
 
@@ -135,16 +136,15 @@
 #define HUNTER		(1<<0)
 #define FARMER		(1<<1)
 #define BEASTMASTER	(1<<2)
-#define FISHER		(1<<4)
-#define LUMBERJACK	(1<<5)
-#define GRAVEDIGGER	(1<<6)
-#define MINER		(1<<7)
-#define BUTLER		(1<<8)
-#define JESTER		(1<<8)
-#define ADVENTURER	(1<<9)
-#define COOK		(1<<10)
-#define GRABBER		(1<<11)
-#define LUNATIC		(1<<12)
+#define FISHER		(1<<3)
+#define LUMBERJACK	(1<<4)
+#define MINER		(1<<5)
+#define BUTLER		(1<<6)
+#define JESTER		(1<<7)
+#define ADVENTURER	(1<<8)
+#define COOK		(1<<9)
+#define GRABBER		(1<<10)
+#define LUNATIC		(1<<11)
 
 #define YOUNGFOLK		(1<<5)
 
@@ -206,6 +206,7 @@
 #define JDO_CLERIC 13
 #define JDO_MONK 14
 #define JDO_TEMPLAR 14.1
+#define JDO_GRAVEMAN 14.2
 #define JDO_CHURCHLING 15
 
 #define JDO_PURITAN 16
@@ -230,10 +231,8 @@
 #define JDO_BUTCHER 27.1
 #define JDO_SOILSON 27.2
 
-#define JDO_GRAVEMAN 28
-
-#define JDO_NIGHTMAN 28.1
-#define JDO_NIGHTMAIDEN 28.2
+#define JDO_NIGHTMAN 28
+#define JDO_NIGHTMAIDEN 28.1
 
 #define JDO_JESTER 29
 #define JDO_LUNATIC 29.1
