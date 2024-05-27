@@ -2,61 +2,91 @@
 	if(href_list["inspect_limb"] && (isobserver(usr) || usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)))
 		var/list/msg = list()
 		var/mob/user = usr
-		var/obj/item/bodypart/BP = get_bodypart(check_zone(user.zone_selected))
-		msg += "<B>[capitalize(parse_zone(check_zone(user.zone_selected)))]:</B>"
+		var/checked_zone = check_zone(href_list["inspect_limb"])
+		var/obj/item/bodypart/BP = get_bodypart(checked_zone)
+		msg += "<B>[capitalize(parse_zone(checked_zone))]:</B>"
 		if(BP)
-			if(isobserver(user) || get_location_accessible(src, check_zone(user.zone_selected)))
-				var/bodypart_status = list()
+			var/bodypart_status = list()
+			if(BP.disabled)
 				switch(BP.disabled)
-					if(BODYPART_DISABLED_WOUND)
-						bodypart_status += "[BP] is broken."
 					if(BODYPART_DISABLED_DAMAGE)
 						bodypart_status += "[BP] is numb to touch."
 					if(BODYPART_DISABLED_PARALYSIS)
 						bodypart_status += "[BP] is limp."
-					if(BODYPART_DISABLED_ROT)
-						if(BP.skeletonized)
-							bodypart_status += "[BP] is skeletonized."
-						else
-							bodypart_status += "[BP] is rotting."
 					else
-						bodypart_status += "[BP] is functional."
-				if(BP.bandage)
-					var/usedclass = "notice"
-					if(BP.bandage.return_blood_DNA())
-						usedclass = "bloody"
-					bodypart_status += "<a href='?src=[REF(src)];bandage=[REF(BP.bandage)];bandaged_limb=[REF(BP)]' class='[usedclass]'>Bandaged</a>"
-				else if(length(BP.wounds))
+						bodypart_status += "[BP] is crippled."
+			if(BP.has_wound(/datum/wound/fracture))
+				bodypart_status += "[BP] is fractured."
+			if(BP.has_wound(/datum/wound/dislocation))
+				bodypart_status += "[BP] is dislocated."
+			if(isobserver(user) || get_location_accessible(src, checked_zone))
+				if(BP.skeletonized)
+					bodypart_status += "[BP] is skeletonized."
+				else if(BP.rotted)
+					bodypart_status += "[BP] is necrotic."
+				
+				var/brute = BP.brute_dam
+				var/burn = BP.burn_dam
+				if(user.hallucinating())
+					if(prob(30))
+						brute += rand(20,40)
+					if(prob(30))
+						burn += rand(20,40)
+
+				if(brute >= DAMAGE_PRECISION)
+					switch(brute/BP.max_damage)
+						if(0.75 to INFINITY)
+							bodypart_status += "[BP] is [BP.heavy_brute_msg]."
+						if(0.25 to 0.75)
+							bodypart_status += "[BP] is [BP.medium_brute_msg]."
+						else
+							bodypart_status += "[BP] is [BP.light_brute_msg]."
+				if(burn >= DAMAGE_PRECISION)
+					switch(burn/BP.max_damage)
+						if(0.75 to INFINITY)
+							bodypart_status += "[BP] is [BP.heavy_burn_msg]."
+						if(0.25 to 0.75)
+							bodypart_status += "[BP] is [BP.medium_burn_msg]."
+						else
+							bodypart_status += "[BP] is [BP.light_burn_msg]."
+
+				if(BP.bandage || length(BP.wounds))
 					bodypart_status += "<B>Wounds:</B>"
-					for(var/datum/wound/wound as anything in BP.wounds)
-						bodypart_status += wound.get_visible_name()
-				if(length(bodypart_status))
-					msg += bodypart_status
-				else
-					msg += "<B>Healthy.</B>"
+					if(BP.bandage)
+						var/usedclass = "notice"
+						if(BP.bandage.return_blood_DNA())
+							usedclass = "bloody"
+						bodypart_status += "<a href='?src=[REF(src)];bandage=[REF(BP.bandage)];bandaged_limb=[REF(BP)]' class='[usedclass]'>Bandaged</a>"
+					else
+						for(var/datum/wound/wound as anything in BP.wounds)
+							bodypart_status += wound.get_visible_name()
 			else
-				msg += "Obscured by clothing."
+				bodypart_status += "Obscured by clothing."
+			if(length(bodypart_status))
+				msg += bodypart_status
+			else
+				msg += "[BP] is healthy."
 			if(length(BP.embedded_objects))
 				msg += "<B>Embedded objects:</B>"
-				for(var/obj/item/I in BP.embedded_objects)
-					msg += "<a href='?src=[REF(src)];embedded_object=[REF(I)];embedded_limb=[REF(BP)]'>[I.name]</a>"
+				for(var/obj/item/embedded in BP.embedded_objects)
+					msg += "<a href='?src=[REF(src)];embedded_object=[REF(embedded)];embedded_limb=[REF(BP)]'>[embedded.name]</a>"
 		else
-			msg += "<B>Limb is missing!</B>"
-		to_chat(usr, msg.Join("\n"))
+			msg += "<span class='dead'>Limb is missing!</span>"
+		to_chat(usr, "<span class='info'>[msg.Join("\n")]</span>")
 
 	if(href_list["check_hb"])
 		if(isobserver(usr))
 			if(stat == DEAD)
-				to_chat(usr, "<B>No heartbeat...</B>")
+				to_chat(usr, "<span class='info'><B>No heartbeat...</B></span>")
 			else
-				to_chat(usr, "<B>The heart is still beating.</B>")
+				to_chat(usr, "<span class='info'><B>The heart is still beating.</B></span>")
 		else if(Adjacent(usr) && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 			usr.visible_message("<span class='info'>[usr] tries to hear [src]'s heartbeat.</span>")
 			if(do_after(usr, 30, needhand = 1, target = src))
 				if(stat == DEAD)
-					to_chat(usr, "<B>No heartbeat...</B>")
+					to_chat(usr, "<span class='info'><B>No heartbeat...</B>")
 				else
-					to_chat(usr, "<B>The heart is still beating.</B>")
+					to_chat(usr, "<span class='info'><B>The heart is still beating.</B></span>")
 
 	if(href_list["embedded_object"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 		var/obj/item/bodypart/L = locate(href_list["embedded_limb"]) in bodyparts

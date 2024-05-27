@@ -382,7 +382,7 @@
 
 	for(var/datum/wound/wound as anything in wounds)
 		wounds -= wound
-		wound.apply_to_bodypart(src)
+		wound.apply_to_bodypart(src, silent = TRUE, crit_message = FALSE)
 	
 	var/obj/item/bodypart/affecting = C.get_bodypart(BODY_ZONE_CHEST)
 	if(affecting && dismember_wound)

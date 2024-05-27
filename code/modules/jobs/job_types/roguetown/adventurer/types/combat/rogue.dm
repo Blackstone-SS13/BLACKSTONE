@@ -71,4 +71,3 @@
 	H.mind.assign_experiences(/datum/advclass/rogue::stat_changes, TRUE, "stats")
 
 	ADD_TRAIT(H, RTRAIT_DODGEEXPERT, TRAIT_GENERIC)
-
