@@ -246,7 +246,6 @@
 	zombie.updatehealth() //then we check if the mob should wake up
 	zombie.update_mobility()
 	zombie.update_sight()
-	zombie.clear_alert("not_enough_oxy")
 	zombie.reload_fullscreen()
 	revived = TRUE //so we can die for real later
 	transform_zombie()
