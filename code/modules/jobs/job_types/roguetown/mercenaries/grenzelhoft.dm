@@ -7,7 +7,7 @@
 	allowed_races = list("Humen", "Half-Elf")
 	outfit = /datum/outfit/job/roguetown/mercenary/grenzelhoft
 	display_order = JDO_GRENZELHOFT
-	selection_color = JCOLOR_MERCENARIES
+	selection_color = JCOLOR_MERCENARY
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5

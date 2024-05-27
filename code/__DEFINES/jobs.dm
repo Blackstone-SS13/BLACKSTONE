@@ -192,12 +192,12 @@
 #define SKELETON	(1<<2)
 
 #define JCOLOR_NOBLE "#aa83b9"
-#define JCOLOR_COURTIER "#8bb5cf"
+#define JCOLOR_COURTIER "#81adc8"
 #define JCOLOR_CHURCH "#c0ba8d"
 #define JCOLOR_SOLDIER "#b18484"
-#define JCOLOR_SERF "#819e82"
-#define JCOLOR_PEASANT "#b6a68c"
-#define JCOLOR_MERCENARIES "#c86e3a"
+#define JCOLOR_YEOMAN "#819e82"
+#define JCOLOR_PEASANT "#b09262"
+#define JCOLOR_MERCENARY "#c86e3a"
 
 
 // job display orders //
