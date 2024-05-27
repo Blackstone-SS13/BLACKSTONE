@@ -34,6 +34,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/weaving, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, round(rand(3,5)), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, round(rand(3,5)), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
