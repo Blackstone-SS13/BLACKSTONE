@@ -161,10 +161,10 @@
 	allowed_sex = list(MALE)
 	nodismemsleeves = TRUE
 	blocking_behavior = null
-	max_integrity = 300
+	max_integrity = 400
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
-	armor_class = ARMOR_CLASS_MEDIUM
+	armor_class = ARMOR_CLASS_HEAVY
 
 /obj/item/clothing/suit/roguetown/armor/heartfelt/hand
 	slot_flags = ITEM_SLOT_ARMOR
@@ -178,10 +178,10 @@
 	allowed_sex = list(MALE)
 	nodismemsleeves = TRUE
 	blocking_behavior = null
-	max_integrity = 300
+	max_integrity = 400
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
-	armor_class = ARMOR_CLASS_MEDIUM
+	armor_class = ARMOR_CLASS_HEAVY
 
 /obj/item/clothing/suit/roguetown/armor/brigandine
 	slot_flags = ITEM_SLOT_ARMOR
