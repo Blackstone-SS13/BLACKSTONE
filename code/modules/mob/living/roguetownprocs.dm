@@ -8,7 +8,7 @@
 	if(target.grabbedby == user)
 		if(user.grab_state >= GRAB_AGGRESSIVE)
 			return zone
-	if(target.lying)
+	if(!(target.mobility_flags & MOBILITY_STAND))
 		return zone
 	if( (target.dir == turn(get_dir(target,user), 180)))
 		return zone
@@ -67,7 +67,7 @@
 		return FALSE
 	if(stat)
 		return FALSE
-	if(lying)
+	if(!(mobility_flags & MOBILITY_STAND))
 		return FALSE
 	if(user.badluck(4))
 		var/list/usedp = list("Critical miss!", "Damn! Critical miss!", "No! Critical miss!", "It can't be! Critical miss!", "Betrayed by lady luck! Critical miss!", "Bad luck! Critical miss!", "Curse creation! Critical miss!", "What?! Critical miss!")

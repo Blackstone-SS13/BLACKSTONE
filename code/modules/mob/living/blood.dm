@@ -182,7 +182,7 @@
 		vol2use = 'sound/misc/bleed (2).ogg'
 	if(amt > 3)
 		vol2use = 'sound/misc/bleed (3).ogg'
-	if(lying || stat)
+	if(!(mobility_flags & MOBILITY_STAND))
 		vol2use = null
 	if(vol2use)
 		playsound(get_turf(src), vol2use, 100, FALSE)

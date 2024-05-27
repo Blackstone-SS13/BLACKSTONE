@@ -249,9 +249,9 @@
 					return
 				if(A == src)
 					return
-				if(ismob(A))
-					var/mob/M = A
-					if(lying && M.pulling != src)
+				if(isliving(A))
+					var/mob/living/L = A
+					if(!(L.mobility_flags & MOBILITY_STAND) && L.pulling != src)
 						return
 				if(IsOffBalanced())
 					to_chat(src, "<span class='warning'>I haven't regained my balance yet.</span>")
