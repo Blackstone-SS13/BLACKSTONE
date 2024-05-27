@@ -222,11 +222,6 @@
 
 	if(legcuffed)
 		. += "<A href='?src=[REF(src)];item=[SLOT_LEGCUFFED]'><span class='warning'>[m3] \a [legcuffed] around [m2] legs!</span></A>"
-	
-	//Status effects
-	var/list/status_examines = status_effect_examines()
-	if (length(status_examines))
-		. += status_examines
 
 	//Gets encapsulated with a warning span
 	var/list/msg = list()
@@ -257,62 +252,73 @@
 			if(100 to INFINITY)
 				msg += "<span class='danger'>[m1] gravely wounded.</span>"
 		
-		// Blood volume
-		switch(blood_volume)
-			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-				msg += "<span class='artery'><B>[m1] extremely pale and sickly.</B></span>"
-			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-				msg += "<span class='artery'><B>[m1] very pale.</B></span>"
-			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-				msg += "<span class='artery'>[m1] pale.</span>"
-			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-				msg += "<span class='artery'>[m1] a little pale.</span>"
+	// Blood volume
+	switch(blood_volume)
+		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+			msg += "<span class='artery'><B>[m1] extremely pale and sickly.</B></span>"
+		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+			msg += "<span class='artery'><B>[m1] very pale.</B></span>"
+		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+			msg += "<span class='artery'>[m1] pale.</span>"
+		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+			msg += "<span class='artery'>[m1] a little pale.</span>"
 
-		// Bleeding
-		var/bleed_rate = get_bleed_rate()
-		if(bleed_rate)
-			var/bleed_wording = "bleeding"
-			switch(bleed_rate)
-				if(0 to 1)
-					bleed_wording = "bleeding slightly"
-				if(1 to 5)
-					bleed_wording = "bleeding"
-				if(5 to 10)
-					bleed_wording = "bleeding a lot"
-				if(10 to INFINITY)
-					bleed_wording = "bleeding profusely"
-			var/list/bleeding_limbs = list()
-			for(var/obj/item/bodypart/bleeder in bodyparts)
-				if(!get_location_accessible(src, bleeder.body_zone) || !bleeder.get_bleed_rate())
-					continue
-				bleeding_limbs += parse_zone(bleeder.body_zone)
-			if(length(bleeding_limbs))
-				if(bleed_rate >= 5)
-					msg += "<span class='bloody'><B>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] [bleed_wording]!</B></span>"
-				else
-					msg += "<span class='bloody'>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] [bleed_wording]!</span>"
+	// Bleeding
+	var/bleed_rate = get_bleed_rate()
+	if(bleed_rate)
+		var/bleed_wording = "bleeding"
+		switch(bleed_rate)
+			if(0 to 1)
+				bleed_wording = "bleeding slightly"
+			if(1 to 5)
+				bleed_wording = "bleeding"
+			if(5 to 10)
+				bleed_wording = "bleeding a lot"
+			if(10 to INFINITY)
+				bleed_wording = "bleeding profusely"
+		var/list/bleeding_limbs = list()
+		var/static/list/bleed_zones = list(
+			BODY_ZONE_HEAD,
+			BODY_ZONE_CHEST,
+			BODY_ZONE_R_ARM,
+			BODY_ZONE_L_ARM,
+			BODY_ZONE_R_LEG,
+			BODY_ZONE_L_LEG,
+		)
+		for(var/bleed_zone in bleed_zones)
+			var/obj/item/bodypart/bleeder = get_bodypart(bleed_zone)
+			if(!bleeder?.get_bleed_rate() || !get_location_accessible(src, bleeder.body_zone))
+				continue
+			bleeding_limbs += parse_zone(bleeder.body_zone)
+		if(length(bleeding_limbs))
+			if(bleed_rate >= 5)
+				msg += "<span class='bloody'><B>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] [bleed_wording]!</B></span>"
 			else
-				if(bleed_rate >= 5)
-					msg += "<span class='bloody'><B>[m1] [bleed_wording]</B>!</span>"
-				else
-					msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
+				msg += "<span class='bloody'>[capitalize(m2)] [english_list(bleeding_limbs)] [bleeding_limbs.len > 1 ? "are" : "is"] [bleed_wording]!</span>"
+		else
+			if(bleed_rate >= 5)
+				msg += "<span class='bloody'><B>[m1] [bleed_wording]</B>!</span>"
+			else
+				msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
 
-	var/list/missing = get_missing_limbs()
-	for(var/missing_zone in missing)
+	var/missing_head = FALSE
+	var/list/missing_limbs = list()
+	for(var/missing_zone in get_missing_limbs())
 		if(missing_zone == BODY_ZONE_HEAD)
-			msg += "<span class='dead'><B>[capitalize(m2)] [parse_zone(missing_zone)] is gone.</B></span>"
-			continue
-		msg += "<B>[capitalize(m2)] [parse_zone(missing_zone)] is gone.</B>"
+			missing_head = TRUE
+		missing_limbs += parse_zone(missing_zone)
 	
+	if(length(missing_limbs))
+		var/missing_limb_message = "<B>[capitalize(m2)] [english_list(missing_limbs)] [missing_limbs.len > 1 ? "are" : "is"] gone.</B>"
+		if(missing_head)
+			missing_limb_message = "<span class='dead'>[missing_limb_message]</span>"
+		msg += missing_limb_message
+
 	//Grabbing
 	if(pulledby && pulledby.grab_state)
 		msg += "[m1] being grabbed by [pulledby]."
 
-	if(fire_stacks > 0)
-		msg += "[m1] covered in something flammable."
-	else if(fire_stacks < 0)
-		msg += "[m1] soaked."
-
+	//Nutrition
 	if(nutrition < (NUTRITION_LEVEL_STARVING - 50))
 		msg += "[m1] looking starved."
 //	else if(nutrition >= NUTRITION_LEVEL_FAT)
@@ -321,6 +327,18 @@
 //		else
 //			msg += "[t_He] [t_is] quite chubby."
 
+	//Fire/water stacks
+	if(fire_stacks > 0)
+		msg += "[m1] covered in something flammable."
+	else if(fire_stacks < 0)
+		msg += "[m1] soaked."
+
+	//Status effects
+	var/list/status_examines = status_effect_examines()
+	if(length(status_examines))
+		msg += status_examines
+
+	//Disgusting behemoth of stun absorption
 	if(islist(stun_absorption))
 		for(var/i in stun_absorption)
 			if(stun_absorption[i]["end_time"] > world.time && stun_absorption[i]["examine_message"])
@@ -385,13 +403,13 @@
 			msg += "<span class='warning'>[m1] barely conscious.</span>"
 		else
 			if(stat >= UNCONSCIOUS)
-				msg += "<span class='warning'>[m1] unconscious.</span>"
+				msg += "[m1] unconscious."
 			else if(eyesclosed)
 				msg += "[capitalize(m2)] eyes are closed."
 			else if(has_status_effect(/datum/status_effect/debuff/sleepytime))
 				msg += "[m1] looking a little tired."
 	else
-		msg += "<span class='warning'>[m1] unconscious.</span>"
+		msg += "[m1] unconscious."
 //		else
 //			if(HAS_TRAIT(src, TRAIT_DUMB))
 //				msg += "[m3] a stupid expression on [m2] face."
@@ -411,18 +429,18 @@
 		var/final_str = STASTR
 		if(HAS_TRAIT(src, RTRAIT_DECEIVING_MEEKNESS))
 			final_str = 10
-		if((final_str - L.STASTR) > 1)
-			if((final_str - L.STASTR) >= 5)
+		var/strength_diff = final_str - L.STASTR
+		switch(strength_diff)
+			if(5 to INFINITY)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much stronger than I.</B></span>"
-			else
+			if(1 to 5)
 				. += "<span class='warning'>[t_He] look[p_s()] stronger than I.</span>"
-		else if((L.STASTR - final_str) > 1)
-			if((L.STASTR - final_str) >= 5)
-				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker.</B></span>"
-			else
-				. += "<span class='warning'>[t_He] look[p_s()] weaker.</span>"
-		else
-			. += "[t_He] look[p_s()] about as strong as I."
+			if(0)
+				. += "[t_He] look[p_s()] about as strong as I."
+			if(-5 to -1)
+				. += "<span class='warning'>[t_He] look[p_s()] weaker than I.</span>"
+			if(-INFINITY to -5)
+				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker than I.</B></span>"
 
 	if(maniac)
 		var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
@@ -430,9 +448,26 @@
 			. += "<span class='danger'>[t_He] know[p_s()] [heart.inscryption_key], I AM SURE OF IT!</span>"
 
 	if(Adjacent(user))
-		. += "<a href='?src=[REF(src)];inspect_limb=1'>Inspect [parse_zone(check_zone(user.zone_selected))]</a>"
-		if(!(mobility_flags & MOBILITY_STAND) && user != src && (user.zone_selected == BODY_ZONE_CHEST))
-			. += "<a href='?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
+		if(isobserver(user))
+			var/static/list/check_zones = list(
+				BODY_ZONE_HEAD,
+				BODY_ZONE_CHEST,
+				BODY_ZONE_R_ARM,
+				BODY_ZONE_L_ARM,
+				BODY_ZONE_R_LEG,
+				BODY_ZONE_L_LEG,
+			)
+			for(var/zone in check_zones)
+				var/obj/item/bodypart/bodypart = get_bodypart(zone)
+				if(!bodypart)
+					continue
+				. += "<a href='?src=[REF(src)];inspect_limb=[zone]'>Inspect [parse_zone(zone)]</a>"
+			. += "<a href='?src=[REF(src)];check_hb=1'>Check Heartbeat</a>"
+		else
+			var/checked_zone = check_zone(user.zone_selected)
+			. += "<a href='?src=[REF(src)];inspect_limb=[checked_zone]'>Inspect [parse_zone(checked_zone)]</a>"
+			if(!(mobility_flags & MOBILITY_STAND) && user != src && (user.zone_selected == BODY_ZONE_CHEST))
+				. += "<a href='?src=[REF(src)];check_hb=1'>Listen to Heartbeat</a>"
 
 	var/trait_exam = common_trait_examine()
 	if(!isnull(trait_exam))

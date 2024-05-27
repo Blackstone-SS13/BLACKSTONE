@@ -4,6 +4,7 @@
 #define CLERIC_T2 2
 #define CLERIC_T3 3
 
+#define CLERIC_REQ_0 0
 #define CLERIC_REQ_1 100
 #define CLERIC_REQ_2 250
 #define CLERIC_REQ_3 500
