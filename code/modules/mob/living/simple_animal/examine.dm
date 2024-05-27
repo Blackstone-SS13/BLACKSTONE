@@ -31,8 +31,8 @@
 		if(100 to INFINITY)
 			msg += "<span class='danger'>[m1] gravely wounded.</span>"
 
-	// Blood volume
 	if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		// Blood volume
 		switch(blood_volume)
 			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
 				msg += "<span class='artery'><B>[m1] extremely pale and sickly.</B></span>"
@@ -43,23 +43,22 @@
 			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
 				msg += "<span class='artery'>[m1] a little pale.</span>"
 	
-	// Bleeding
-	var/bleed_rate = get_bleed_rate()
-	if(bleed_rate)
-		var/bleed_wording = "bleeding"
-		switch(bleed_rate)
-			if(0 to 1)
-				bleed_wording = "bleeding slightly"
-			if(1 to 5)
-				bleed_wording = "bleeding"
-			if(5 to 10)
-				bleed_wording = "bleeding a lot"
-			if(10 to INFINITY)
-				bleed_wording = "bleeding profusely"
-		if(bleed_rate >= 5)
-			msg += "<span class='bloody'><B>[m1] [bleed_wording]</B>!</span>"
-		else
-			msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
+		// Bleeding
+		if(bleed_rate)
+			var/bleed_wording = "bleeding"
+			switch(bleed_rate)
+				if(0 to 1)
+					bleed_wording = "bleeding slightly"
+				if(1 to 5)
+					bleed_wording = "bleeding"
+				if(5 to 10)
+					bleed_wording = "bleeding a lot"
+				if(10 to INFINITY)
+					bleed_wording = "bleeding profusely"
+			if(bleed_rate >= 5)
+				msg += "<span class='bloody'><B>[m1] [bleed_wording]</B>!</span>"
+			else
+				msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
 
 	//Fire/water stacks
 	if(fire_stacks > 0)
