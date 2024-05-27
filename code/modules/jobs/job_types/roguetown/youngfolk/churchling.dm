@@ -1,6 +1,6 @@
 /datum/job/roguetown/churchling
 	title = "Churchling"
-	flag = APPRENTICE
+	flag = CHURCHLING
 	department_flag = YOUNGFOLK
 	faction = "Station"
 	total_positions = 1

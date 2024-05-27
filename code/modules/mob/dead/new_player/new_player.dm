@@ -563,7 +563,15 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	dat += "<table><tr><td valign='top'>"
 	var/column_counter = 0
 
-	var/list/omegalist = list(GLOB.noble_positions) + list(GLOB.garrison_positions) + list(GLOB.church_positions) + list(GLOB.serf_positions) + list(GLOB.peasant_positions) + list(GLOB.youngfolk_positions) + list(GLOB.mercenary_positions)
+	var/list/omegalist = list()
+	omegalist += list(GLOB.noble_positions)
+	omegalist += list(GLOB.courtier_positions)
+	omegalist += list(GLOB.garrison_positions)
+	omegalist += list(GLOB.church_positions)
+	omegalist += list(GLOB.yeoman_positions)
+	omegalist += list(GLOB.peasant_positions)
+	omegalist += list(GLOB.mercenary_positions)
+	omegalist += list(GLOB.youngfolk_positions)
 
 	if(istype(SSticker.mode, /datum/game_mode/chaosmode))
 		var/datum/game_mode/chaosmode/C = SSticker.mode
@@ -590,12 +598,14 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 			switch (SSjob.name_occupations[category[1]].department_flag)
 				if (NOBLEMEN)
 					cat_name = "Nobles"
+				if (COURTIERS)
+					cat_name = "Courtiers"
 				if (GARRISON)
 					cat_name = "Garrison"
 				if (CHURCHMEN)
 					cat_name = "Churchmen"
-				if (SERFS)
-					cat_name = "Serfs"
+				if (YEOMEN)
+					cat_name = "Yeomen"
 				if (PEASANTS)
 					cat_name = "Peasants"
 				if (YOUNGFOLK)
