@@ -71,7 +71,7 @@
 	if(!iscarbon(owner))
 		return
 	var/mob/living/carbon/carbon_owner = owner
-	if(!carbon_owner.stat && prob(7))
+	if(!carbon_owner.stat && prob(5))
 		carbon_owner.vomit(1, stun = TRUE)
 
 /datum/wound/cbt/smite

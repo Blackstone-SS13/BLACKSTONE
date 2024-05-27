@@ -195,6 +195,14 @@
 	. = ..()
 	affected.Stun(20)
 
+/datum/wound/fracture/chest/on_life()
+	. = ..()
+	if(!iscarbon(owner))
+		return
+	var/mob/living/carbon/carbon_owner = owner
+	if(!carbon_owner.stat && prob(5))
+		carbon_owner.vomit(1, blood = TRUE, stun = TRUE)
+
 /datum/wound/fracture/groin
 	name = "pelvic fracture"
 	check_name = "<span class='bone'>PELVIS</span>"
