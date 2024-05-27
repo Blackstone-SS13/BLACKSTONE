@@ -1,5 +1,6 @@
 /mob/living/carbon/human/Topic(href, href_list)
-	if(href_list["inspect_limb"] && (isobserver(usr) || usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)))
+	var/observer_privilege = isobserver(usr)
+	if(href_list["inspect_limb"] && (observer_privilege || usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY)))
 		var/list/msg = list()
 		var/mob/user = usr
 		var/checked_zone = check_zone(href_list["inspect_limb"])
@@ -19,7 +20,10 @@
 				bodypart_status += "[BP] is fractured."
 			if(BP.has_wound(/datum/wound/dislocation))
 				bodypart_status += "[BP] is dislocated."
-			if(isobserver(user) || get_location_accessible(src, checked_zone))
+			var/location_accessible = get_location_accessible(src, checked_zone)
+			if(!location_accessible)
+				bodypart_status += "Obscured by clothing."
+			if(observer_privilege || location_accessible)
 				if(BP.skeletonized)
 					bodypart_status += "[BP] is skeletonized."
 				else if(BP.rotted)
@@ -57,11 +61,9 @@
 						if(BP.bandage.return_blood_DNA())
 							usedclass = "bloody"
 						bodypart_status += "<a href='?src=[REF(src)];bandage=[REF(BP.bandage)];bandaged_limb=[REF(BP)]' class='[usedclass]'>Bandaged</a>"
-					else
+					if(!BP.bandage || observer_privilege)
 						for(var/datum/wound/wound as anything in BP.wounds)
 							bodypart_status += wound.get_visible_name()
-			else
-				bodypart_status += "Obscured by clothing."
 			if(length(bodypart_status))
 				msg += bodypart_status
 			else
