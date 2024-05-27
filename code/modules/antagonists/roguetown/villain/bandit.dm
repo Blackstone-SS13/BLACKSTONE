@@ -36,12 +36,14 @@
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	H.set_patron(/datum/patron/inhumen/matthios)
+	to_chat(H, "<span class='alertsyndie'>I am a BANDIT!</span>")
+	to_chat(H, "<span class='warning'>Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn. I must feed the idol money and valuable metals to satisfy my greed!</span>")
 
-/datum/antagonist/bandit/greet()
+/* /datum/antagonist/bandit/greet()
 	to_chat(owner.current, "<span class='alertsyndie'>I am a BANDIT!</span>")
 	to_chat(owner.current, "<span class='info'>Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn. I must feed the idol money and valuable metals to satisfy my greed!</span>")
 	owner.announce_objectives()
-	..()
+	..() */ //commenting out until they get a proper objective implementation or whatever.
 
 /datum/antagonist/bandit/proc/forge_objectives()
 	return
