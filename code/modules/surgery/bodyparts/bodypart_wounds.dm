@@ -357,7 +357,7 @@
 						my_ears.Remove(owner)
 					else 
 						attempted_wounds += /datum/wound/fracture/head/ears
-				else if(zone_precise != BODY_ZONE_PRECISE_NECK)
+				else if(zone_precise in GLOB.knockout_zones)
 					attempted_wounds += /datum/wound/fracture/head/brain
 
 	for(var/wound_type in shuffle(attempted_wounds))
