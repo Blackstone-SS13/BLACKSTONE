@@ -1,6 +1,6 @@
 /datum/job/roguetown/shepherd
 	title = "Confessor"
-	flag = MONK
+	flag = CONFESSOR
 	department_flag = CHURCHMEN
 	faction = "Station"
 	total_positions = 0

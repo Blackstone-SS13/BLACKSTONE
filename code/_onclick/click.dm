@@ -838,7 +838,7 @@
 		if(T == loc)
 			look_up()
 		else
-			if(lying && istransparentturf(T))
+			if(istransparentturf(T))
 				look_down(T)
 			else
 				look_further(T)

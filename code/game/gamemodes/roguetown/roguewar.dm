@@ -122,7 +122,7 @@
 	"Gatemaster",
 	"Guard Captain",
 	"Inquisitor",
-	"Bog Elder",
+	"Village Elder",
 	"Watchman")
 	var/num_bandits = 0
 	if(num_players() >= 10)
@@ -216,7 +216,7 @@
 						found = FALSE
 					if(rebelguy.assigned_role in GLOB.church_positions)
 						found = FALSE
-					if(rebelguy.assigned_role in GLOB.serf_positions)
+					if(rebelguy.assigned_role in GLOB.yeoman_positions)
 						found = FALSE
 					if(!found)
 						continue

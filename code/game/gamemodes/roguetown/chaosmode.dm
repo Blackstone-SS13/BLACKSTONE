@@ -220,7 +220,7 @@
 					blockme = TRUE
 				if(rebelguy.assigned_role in GLOB.church_positions)
 					blockme = TRUE
-				if(rebelguy.assigned_role in GLOB.serf_positions)
+				if(rebelguy.assigned_role in GLOB.yeoman_positions)
 					blockme = TRUE
 				if(blockme)
 					continue

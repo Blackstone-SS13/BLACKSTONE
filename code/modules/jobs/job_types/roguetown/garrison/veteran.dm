@@ -1,6 +1,6 @@
 /datum/job/roguetown/veteran
 	title = "Veteran"
-	flag = GUARDSMAN
+	flag = VETERAN
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 0

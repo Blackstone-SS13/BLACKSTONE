@@ -188,6 +188,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EASYLIMBDISABLE	"easy_limb_disable"
 #define TRAIT_TOXINLOVER		"toxinlover"
 #define TRAIT_NOBREATH			"no_breath"
+#define TRAIT_HOLDBREATH		"hold_breath"
 #define TRAIT_ANTIMAGIC			"Anti-Magic"
 #define TRAIT_HOLY				"holy"
 #define TRAIT_DEPRESSION		"depression"

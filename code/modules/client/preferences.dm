@@ -909,7 +909,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 	popup.open(FALSE)
 	onclose(user, "capturekeypress", src)
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 14, list/splitJobs = list("Guard Captain", "Priest", "Merchant", "Butler", "Bog Elder", "Goblin King"), widthPerColumn = 295, height = 620) //295 620
+/datum/preferences/proc/SetChoices(mob/user, limit = 14, list/splitJobs = list("Court Magician", "Guard Captain", "Priest", "Merchant", "Archivist", "Towner", "Grenzelhoft Mercenary", "Beggar", "Prisoner", "Goblin King"), widthPerColumn = 295, height = 620) //295 620
 	if(!SSjob)
 		return
 
@@ -940,10 +940,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 		//The job before the current job. I only use this to get the previous jobs color when I'm filling in blank rows.
 		var/datum/job/lastJob
 		for(var/datum/job/job in sortList(SSjob.occupations, GLOBAL_PROC_REF(cmp_job_display_asc)))
-			if(!job.total_positions && !job.spawn_positions)
-				continue
-
-			if(job.spawn_positions <= 0)
+			if(!job.spawn_positions)
 				continue
 
 			index += 1

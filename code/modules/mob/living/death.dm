@@ -79,6 +79,7 @@
 
 	set_drugginess(0)
 	set_disgust(0)
+	cure_holdbreath()
 	SetSleeping(0, 0)
 	reset_perspective(null)
 	reload_fullscreen()

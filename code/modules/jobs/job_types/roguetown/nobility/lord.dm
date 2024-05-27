@@ -23,7 +23,7 @@ GLOBAL_VAR(lordsurname)
 /datum/job/roguetown/exlord //just used to change the lords title
 	title = "King Emeritus"
 	f_title = "Queen Emeritus"
-	flag = ADVENTURER
+	flag = LORD
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 0
