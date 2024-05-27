@@ -113,9 +113,9 @@
 	var/dispjob = mind.assigned_role
 	removeomen("nolord")
 	if(giver)
-		priority_announce("[giver.real_name] the [dispjob] has named [real_name] the inheritor of BLACKHILL!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
+		priority_announce("[giver.real_name] the [dispjob] has named [real_name] the inheritor of ROCKHILL!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
 	else
-		priority_announce("[real_name] the [dispjob] has named themself the inheritor of BLACKHILL!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
+		priority_announce("[real_name] the [dispjob] has named themself the inheritor of ROCKHILL!", title = "Long Live [real_name]!", sound = 'sound/misc/bell.ogg')
 		return TRUE
 
 /mob/living/carbon/human/proc/churchexcommunicate()
@@ -152,7 +152,7 @@
 	set category = "Priest"
 	if(stat)
 		return
-	var/inputty = input("Make an announcement", "BLACKHILL") as text|null
+	var/inputty = input("Make an announcement", "ROCKHILL") as text|null
 	if(inputty)
 		if(!istype(get_area(src), /area/rogue/indoors/town/church/chapel))
 			to_chat(src, "<span class='warning'>I need to do this from the chapel.</span>")
