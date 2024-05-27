@@ -93,4 +93,29 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/silk = 1)
 	craftdiff = 3
-	sellprice = 25
+	sellprice = 20
+
+/datum/crafting_recipe/roguetown/weaving/barkeep
+	name = "bar dress"
+	result = list (/obj/item/clothing/suit/roguetown/shirt/dress)
+	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/silk = 2)
+	craftdiff = 5
+	sellprice = 27
+
+/datum/crafting_recipe/roguetown/weaving/silkdress
+	name = "chemise"
+	result = list (/obj/item/clothing/suit/roguetown/shirt/dress/silkdress/random)
+	reqs = list(/obj/item/natural/fibers = 2,
+				/obj/item/natural/silk = 3)
+	craftdiff = 5
+	sellprice = 30
+
+/datum/crafting_recipe/roguetown/weaving/silkcoat
+	name = "silk coat"
+	result = list (/obj/item/clothing/suit/roguetown/armor/leather/silkcoat)
+	reqs = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/silk = 3,
+				/obj/item/natural/fur = 2)
+	craftdiff = 5
+	sellprice = 60
