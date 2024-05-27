@@ -90,18 +90,15 @@
 	if(user == src)
 		return FALSE
 	if(!(mobility_flags & MOBILITY_MOVE))
-		return
+		return FALSE
 
 	if(client && used_intent)
 		if(client.charging && used_intent.tranged && !used_intent.tshield)
 			return FALSE
 
 	var/prob2defend = user.defprob
-	var/mob/living/H
-	var/mob/living/U
-	H = src
-	U = user
-
+	var/mob/living/H = src
+	var/mob/living/U = user
 	if(H && U)
 		prob2defend = 0
 
@@ -133,9 +130,8 @@
 			if(has_status_effect(/datum/status_effect/debuff/riposted))
 				return FALSE
 			last_parry = world.time
-			if(intenty)
-				if(!intenty.canparry)
-					return FALSE
+			if(intenty && !intenty.canparry)
+				return FALSE
 			var/drained = user.defdrain
 			var/weapon_parry = FALSE
 			var/offhand_defense = 0
@@ -154,11 +150,11 @@
 
 			if(mainhand)
 				if(mainhand.can_parry)
-					mainhand_defense += (H.mind.get_skill_level(mainhand.associated_skill) * 20)
+					mainhand_defense += (H.mind ? (H.mind.get_skill_level(mainhand.associated_skill) * 20) : 20)
 					mainhand_defense += (mainhand.wdefense * 10)
 			if(offhand)
 				if(offhand.can_parry)
-					offhand_defense += (H.mind.get_skill_level(offhand.associated_skill) * 20)
+					offhand_defense += (H.mind ? (H.mind.get_skill_level(offhand.associated_skill) * 20) : 20)
 					offhand_defense += (offhand.wdefense * 10)
 			
 			if(mainhand_defense >= offhand_defense)
@@ -170,15 +166,15 @@
 			var/defender_skill = 0
 			var/attacker_skill = 0
 			
-			if(highest_defense <= (H.mind.get_skill_level(/datum/skill/combat/unarmed) * 20))
-				defender_skill = H.mind.get_skill_level(/datum/skill/combat/unarmed)
+			if(highest_defense <= (H.mind ? (H.mind.get_skill_level(/datum/skill/combat/unarmed) * 20) : 20))
+				defender_skill = H.mind?.get_skill_level(/datum/skill/combat/unarmed)
 				prob2defend += (defender_skill * 20)
 				weapon_parry = FALSE
 			else
-				defender_skill = H.mind.get_skill_level(used_weapon.associated_skill)
+				defender_skill = H.mind?.get_skill_level(used_weapon.associated_skill)
 				prob2defend += highest_defense
 				weapon_parry = TRUE
-				
+
 			if(U.mind)
 				if(intenty.masteritem)
 					attacker_skill = U.mind.get_skill_level(intenty.masteritem.associated_skill)
@@ -189,7 +185,6 @@
 					attacker_skill = U.mind.get_skill_level(/datum/skill/combat/unarmed)
 					prob2defend -= (attacker_skill * 20)
 
-
 			prob2defend = clamp(prob2defend, 5, 99)
 			if(src.client?.prefs.showrolls)
 				to_chat(src, "<span class='info'>Roll to parry... [prob2defend]%</span>")
@@ -198,7 +193,6 @@
 				if(intenty.masteritem)
 					if(intenty.masteritem.wbalance < 0 && user.STASTR > src.STASTR) //enemy weapon is heavy, so get a bonus scaling on strdiff
 						drained = drained + ( intenty.masteritem.wbalance * ((user.STASTR - src.STASTR) * -5) )
-
 			else
 				to_chat(src, "<span class='warning'>The enemy defeated my parry!</span>")
 				return FALSE
@@ -245,7 +239,7 @@
 			if(weapon_parry == FALSE)
 				if(do_unarmed_parry(drained, user))
 					if((mobility_flags & MOBILITY_STAND) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
-						H.mind.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
+						H.mind?.adjust_experience(/datum/skill/combat/unarmed, max(round(STAINT/2), 0), FALSE)
 					flash_fullscreen("blackflash2")
 					return TRUE
 				else
@@ -365,7 +359,10 @@
 		if(L.rogfat >= L.maxrogfat)
 			return FALSE
 		if(L)
-			prob2defend = prob2defend + (L.STASPD * 10)
+			if(H?.check_dodge_skill())
+				prob2defend = prob2defend + (L.STASPD * 15)
+			else
+				prob2defend = prob2defend + (L.STASPD * 10)
 		if(U)
 			prob2defend = prob2defend - (U.STASPD * 10)
 		if(I)
@@ -376,9 +373,11 @@
 			if(UH?.mind)
 				prob2defend = prob2defend - (UH.mind.get_skill_level(I.associated_skill) * 10)
 		if(H)
-			if(!H.check_armor_skill())
+			if(!H?.check_armor_skill())
 				H.Knockdown(1)
 				return FALSE
+			if(H?.check_dodge_skill())
+				drained = drained - 5
 //			if(H.mind)
 //				drained = drained + max((H.checkwornweight() * 10)-(mind.get_skill_level(/datum/skill/misc/athletics) * 10),0)
 //			else

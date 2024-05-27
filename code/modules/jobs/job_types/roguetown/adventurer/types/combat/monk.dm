@@ -15,6 +15,7 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/monk
+	traits_applied = list(RTRAIT_DODGEEXPERT)
 	isvillager = FALSE
 	ispilgrim = FALSE
 	vampcompat = FALSE
@@ -58,3 +59,6 @@
 		to_chat(src, "<span class='warning'>Monks are pilgrims of powerful belief who empart the teachings of their Temple or God by their interactions with the people of the world. A good monk would seek to help travellers on the road, feed the hungry and teach the weak to become strong. A bad one however...</span>")
 		H.mind.assign_experiences(/datum/advclass/monk::given_skills, TRUE, "skills")
 		H.mind.assign_experiences(/datum/advclass/monk::stat_changes, TRUE, "stats")
+
+		ADD_TRAIT(H, RTRAIT_DODGEEXPERT, TRAIT_GENERIC)
+

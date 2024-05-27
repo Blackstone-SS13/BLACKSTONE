@@ -402,8 +402,8 @@
 			var/mob/living/carbon/C = M
 			var/obj/item/grabbing/O = new()
 			var/used_limb = C.find_used_grab_limb(src)
-			O.name = "[C]'s [used_limb]"
-			var/obj/item/bodypart/BP = C.get_bodypart(check_zone(zone_selected))
+			O.name = "[C]'s [parse_zone(used_limb)]"
+			var/obj/item/bodypart/BP = C.get_bodypart(check_zone(used_limb))
 			C.grabbedby += O
 			O.grabbed = C
 			O.grabbee = src

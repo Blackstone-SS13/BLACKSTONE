@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(ticker)
 	//376000 day
 	var/gametime_offset = 288001		//Deciseconds to add to world.time for station time.
 	var/station_time_rate_multiplier = 50		//factor of station time progressal vs real time.
-	var/time_until_vote = 120 MINUTES
+	var/time_until_vote = 150 MINUTES
 	var/last_vote_time = null
 	var/autovote = TRUE
 	var/firstvote = TRUE
@@ -244,7 +244,7 @@ SUBSYSTEM_DEF(ticker)
 			if(firstvote)
 				if(world.time > round_start_time + time_until_vote && autovote)
 					SSvote.initiate_vote("restart", "The Gods")
-					time_until_vote = 20 MINUTES
+					time_until_vote = 30 MINUTES
 					last_vote_time = world.time
 					firstvote = FALSE
 			else

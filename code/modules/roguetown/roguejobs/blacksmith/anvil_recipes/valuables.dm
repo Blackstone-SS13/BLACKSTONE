@@ -1,6 +1,6 @@
 /datum/anvil_recipe/valuables
 	appro_skill = /datum/skill/craft/blacksmithing
-
+	craftdiff = 2
 /datum/anvil_recipe/valuables/gold
 	name = "gold statue"
 	req_bar = /obj/item/ingot/gold
@@ -125,4 +125,5 @@
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/steel, /obj/item/roguegem)	
 	created_item = /obj/item/rogueweapon/sword/long/exe/cloth
+	craftdiff = 3
 

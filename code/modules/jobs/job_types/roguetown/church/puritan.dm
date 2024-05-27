@@ -79,6 +79,7 @@
 	H.verbs |= /mob/living/carbon/human/proc/torture_victim
 	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /mob/living/carbon/human/proc/torture_victim()
 	set name = "Extract Confession"
@@ -140,7 +141,7 @@
 
 /mob/living/carbon/human/proc/confession_time(confession_type = "antag")
 	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins)), 6 SECONDS, TIMER_STOPPABLE)
-	var/responsey = alert(src, "Resist torture? (1 TRI)","Yes","No")
+	var/responsey = alert(src, "Resist torture? (1 TRI)", "TORTURE", "Yes","No")
 	if(!responsey)
 		responsey = "No"
 	if(SStimer.timer_id_dict[timerid])

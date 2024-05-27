@@ -42,6 +42,7 @@
 	. = ..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_NUTCRACKER, TRAIT_GENERIC)
 	beltl = /obj/item/roguekey/manor
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich
 	belt = /obj/item/storage/belt/rogue/leather/cloth/lady
