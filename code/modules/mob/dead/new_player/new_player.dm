@@ -588,8 +588,13 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		var/list/available_jobs = list()
 		for(var/job in category)
 			var/datum/job/job_datum = SSjob.name_occupations[job]
+			if(!job_datum)
+				continue
 			// Make sure adventurer jobs always appear on list, even if unavailable
-			if(job_datum && (IsJobUnavailable(job_datum.title, TRUE) == JOB_AVAILABLE || job_datum.title == "Adventurer"))
+			var/is_job_available = (IsJobUnavailable(job_datum.title, TRUE) == JOB_AVAILABLE)
+			if(job_datum.title == "Towner" || job_datum.title == "Adventurer" || job_datum.title == "Pilgrim")
+				is_job_available = TRUE
+			if(is_job_available)
 				available_jobs += job
 
 		if (length(available_jobs))

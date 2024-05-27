@@ -192,6 +192,7 @@
 #define SKELETON	(1<<2)
 
 #define JCOLOR_NOBLE "#aa83b9"
+#define JCOLOR_COURTIER "#8bb5cf"
 #define JCOLOR_CHURCH "#c0ba8d"
 #define JCOLOR_SOLDIER "#b18484"
 #define JCOLOR_SERF "#819e82"
