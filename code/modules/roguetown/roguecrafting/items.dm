@@ -269,9 +269,11 @@
 
 /datum/crafting_recipe/roguetown/mantrap
 	name = "mantrap"
-	result = /obj/item/restraints/legcuffs/beartrap
-	reqs = list(/obj/item/grown/log/tree/small = 2,
-				/obj/item/rope = 1)
+	result = list(/obj/item/restraints/legcuffs/beartrap,
+				/obj/item/restraints/legcuffs/beartrap)
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/natural/fibers = 2,
+				/obj/item/ingot/iron = 1)
 	req_table = TRUE
 	skillcraft = /datum/skill/craft/traps
 	craftdiff = 1
