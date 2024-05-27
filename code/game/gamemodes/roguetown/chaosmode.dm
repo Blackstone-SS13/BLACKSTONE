@@ -23,18 +23,6 @@
 
 	var/datum/team/roguecultists
 
-	var/list/datum/mind/villains = list()
-	var/list/datum/mind/vampires = list()
-	var/list/datum/mind/werewolves = list()
-	var/list/datum/mind/bandits = list()
-
-	var/list/datum/mind/pre_villains = list()
-	var/list/datum/mind/pre_werewolves = list()
-	var/list/datum/mind/pre_vampires = list()
-	var/list/datum/mind/pre_bandits = list()
-	var/list/datum/mind/pre_delfs = list()
-	var/list/datum/mind/pre_rebels = list()
-
 	var/banditcontrib = 0
 	var/banditgoal = 1
 	var/delfcontrib = 0
