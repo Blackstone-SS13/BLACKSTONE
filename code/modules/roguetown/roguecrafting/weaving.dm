@@ -113,7 +113,7 @@
 
 /datum/crafting_recipe/roguetown/weaving/silkcoat
 	name = "silk coat"
-	result = list (/obj/item/clothing/suit/roguetown/armor/leather/silkcoat)
+	result = list (/obj/item/clothing/suit/roguetown/armor/silkcoat)
 	reqs = list(/obj/item/natural/cloth = 1,
 				/obj/item/natural/silk = 3,
 				/obj/item/natural/fur = 2)
