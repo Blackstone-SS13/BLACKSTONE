@@ -44,8 +44,10 @@
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backr = /obj/item/rogueweapon/shovel
 	if(H.mind)
+		H.mind.adjust_skillrank(/datum/skill/magic/holy, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
@@ -54,6 +56,8 @@
 		H.change_stat("intelligence", -2)
 		H.change_stat("endurance", 1)
 		H.change_stat("speed", 1)
+		if(H.age == AGE_OLD)
+			H.mind.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 	ADD_TRAIT(H, RTRAIT_NOSTINK, TRAIT_GENERIC)
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
 	C.holder_mob = H
