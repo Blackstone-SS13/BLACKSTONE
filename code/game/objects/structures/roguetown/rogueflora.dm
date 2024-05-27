@@ -284,7 +284,7 @@
 	..()
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(L.m_intent == MOVE_INTENT_RUN && !L.lying)
+		if(L.m_intent == MOVE_INTENT_RUN && (L.mobility_flags & MOBILITY_STAND))
 			if(!ishuman(L))
 				to_chat(L, "<span class='warning'>I'm cut on a thorn!</span>")
 				L.apply_damage(5, BRUTE)

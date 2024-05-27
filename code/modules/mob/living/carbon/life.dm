@@ -177,7 +177,7 @@
 	if(HAS_TRAIT(src, TRAIT_NOBREATH))
 		return TRUE
 	if(HAS_TRAIT(src, TRAIT_HOLDBREATH))
-		adjustOxyLoss(5)		
+		adjustOxyLoss(5)
 	if(istype(loc, /obj/structure/closet/dirthole))
 		adjustOxyLoss(5)
 	if(istype(loc, /obj/structure/closet/burial_shroud))
@@ -198,7 +198,7 @@
 
 /mob/living/carbon/handle_inwater()
 	..()
-	if(lying)
+	if(!(mobility_flags & MOBILITY_STAND))
 		if(HAS_TRAIT(src, TRAIT_NOBREATH))
 			return TRUE
 		adjustOxyLoss(5)
@@ -206,7 +206,7 @@
 
 /mob/living/carbon/human/handle_inwater()
 	. = ..()
-	if(!lying)
+	if(!(mobility_flags & MOBILITY_STAND))
 		if(istype(loc, /turf/open/water/bath))
 			if(!wear_armor && !wear_shirt && !wear_pants)
 				add_stress(/datum/stressevent/bathwater)

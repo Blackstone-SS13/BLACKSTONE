@@ -508,3 +508,6 @@
 
 /mob/living/proc/cure_holdbreath(source)
 	REMOVE_TRAIT(src, TRAIT_HOLDBREATH, source)
+
+/mob/living/proc/cure_paralysis(source)
+	REMOVE_TRAIT(src, TRAIT_PARALYSIS, source)
