@@ -71,11 +71,10 @@
 /datum/outfit/job/roguetown/adventurer/sfighter/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.adjust_blindness(-3)
-	var/classes = list("Warrior","Monster Hunter",) // To Do - knight errant unique archetype(5 percent chance)
+	var/classes = list("Warrior","Monster Hunter") // To Do - knight errant unique archetype(5 percent chance)
 	var/classchoice = input("Choose your archetypes", "Available archetypes") as anything in classes
-	classchoice = lowertext(classchoice)
-	H.mind.assign_experiences(/datum/advclass/sfighter::given_skills, TRUE, "skills", classchoice)
-	H.mind.assign_experiences(/datum/advclass/sfighter::stat_changes, TRUE, "stats", classchoice)
+	H.mind.assign_experiences(/datum/advclass/sfighter::given_skills, TRUE, "skills", lowertext(classchoice))
+	H.mind.assign_experiences(/datum/advclass/sfighter::stat_changes, TRUE, "stats", lowertext(classchoice))
 	switch(classchoice)
 	
 		if("Warrior")

@@ -105,7 +105,7 @@
 		return
 	if(amt == 0 && index)
 		if(statindex[index])
-			change_stat(stat, -1*statindex[index]["amt"])
+			change_stat(statindex[index]["stat"], -1*statindex[index]["amt"]) // reverted back to what was before
 			stat[index] = null // leaving this here until i figure out what it actually does
 			return
 		return

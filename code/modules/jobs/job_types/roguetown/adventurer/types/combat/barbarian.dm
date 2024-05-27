@@ -86,9 +86,8 @@
 	H.adjust_blindness(-3)
 	var/classes = list("Warrior","Hunter Killer",)
 	var/classchoice = input("Choose your archetypes", "Available archetypes") as anything in classes
-	classchoice = lowertext(classchoice)
-	H.mind.assign_experiences(/datum/advclass/barbarian::given_skills, TRUE, "skills", classchoice)
-	H.mind.assign_experiences(/datum/advclass/barbarian::stat_changes, TRUE, "stats", classchoice)	
+	H.mind.assign_experiences(/datum/advclass/barbarian::given_skills, TRUE, "skills", lowertext(classchoice))
+	H.mind.assign_experiences(/datum/advclass/barbarian::stat_changes, TRUE, "stats", lowertext(classchoice))	
 	switch(classchoice)
 		if("Warrior")
 			H.set_blindness(0)

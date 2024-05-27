@@ -58,14 +58,14 @@
 		)
 	)
 	stat_changes = list(
-		"life_cleric" = list(
+		"life cleric" = list(
 			"intelligence" = 2, 
 			"perception" = 1, 
 			"strength" = 1, 
 			"constitution" = 2, 
 			"endurance" = 2
 		),
-		"war_cleric" = list(
+		"war cleric" = list(
 			"intelligence" = 1, 
 			"strength" = 2, 
 			"constitution" = 2, 
@@ -95,9 +95,8 @@
 	H.adjust_blindness(-3)
 	var/classes = list("Life Cleric","War Cleric",)
 	var/classchoice = input("Choose your archetypes", "Available archetypes") as anything in classes
-	classchoice = lowertext(classchoice)
-	H.mind.assign_experiences(/datum/advclass/cleric::given_skills, TRUE, "skills", classchoice)
-	H.mind.assign_experiences(/datum/advclass/cleric::stat_changes, TRUE, "stats", classchoice)
+	H.mind.assign_experiences(/datum/advclass/cleric::given_skills, TRUE, "skills", lowertext(classchoice))
+	H.mind.assign_experiences(/datum/advclass/cleric::stat_changes, TRUE, "stats", lowertext(classchoice))
 	switch(classchoice)
 	
 		if("Life Cleric")
