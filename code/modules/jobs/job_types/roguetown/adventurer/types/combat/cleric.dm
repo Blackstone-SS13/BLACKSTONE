@@ -18,7 +18,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
 	traits_applied = list(RTRAIT_HEAVYARMOR)
 	given_skills = list(
-		"life_cleric" = list(
+		"life cleric" = list(
 			/datum/skill/combat/crossbows = 2, 
 			/datum/skill/combat/polearms = 1, 
 			/datum/skill/combat/bows = 1, 
@@ -37,7 +37,7 @@
 			/datum/skill/combat/axesmaces = 2,
 			/datum/skill/magic/holy = 4
     	),
-   		"war_cleric" = list(
+   		"war cleric" = list(
 			/datum/skill/combat/crossbows = 3, 
 			/datum/skill/combat/polearms = 2, 
 			/datum/skill/combat/bows = 1, 
