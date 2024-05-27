@@ -34,8 +34,8 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 5, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, round(rand(3,5)), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, round(rand(3,5)), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
 	if(H.gender == MALE)
 		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
@@ -58,8 +58,8 @@
 
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
 	//Max devotion limit - Churchlings can only call upon lesser miracles until their education is complete.
-	C.max_devotion = 99
-	C.max_progression = CLERIC_REQ_1
+	C.max_devotion = 100
+	C.max_progression = CLERIC_REQ_0
 	C.update_devotion(50, 50)
 	C.holder_mob = H
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
