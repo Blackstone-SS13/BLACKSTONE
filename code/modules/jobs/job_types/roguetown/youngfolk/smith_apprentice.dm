@@ -22,7 +22,7 @@
 	tutorial = "Long hours and back-breaking work wouldnt even describe a quarter of what you do in a day for your Master. Its exhausting, filthy and you dont get much freetime: but someday youll get your own smithy, and youll have TWICE as many apprentices as your master does."
 
 	outfit = /datum/outfit/job/roguetown/bapprentice
-	display_order = JDO_BAPP
+	display_order = JDO_APPRENTICE
 	give_bank_account = TRUE
 	min_pq = -10
 	max_pq = null

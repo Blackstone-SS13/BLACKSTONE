@@ -1,7 +1,7 @@
 /datum/job/roguetown/armorsmith
 	title = "Armorer"
-	flag = BLACKSMITH
-	department_flag = SERFS
+	flag = ARMORSMITH
+	department_flag = YEOMEN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -68,8 +68,8 @@
 
 /datum/job/roguetown/weaponsmith
 	title = "Weaponsmith"
-	flag = BLACKSMITH
-	department_flag = SERFS
+	flag = WEAPONSMITH
+	department_flag = YEOMEN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -89,7 +89,7 @@
 	tutorial = "You studied for many decades under your master with a few other apprentices to become a Weaponsmith, a trade that is as ancient as the secrets of steel itself! You've repaired the blades of cooks, the cracked hoes of peasants and greased the spears of many soldiers into war."
 
 	outfit = /datum/outfit/job/roguetown/weaponsmith
-	display_order = JDO_WSMITH
+	display_order = JDO_WEAPONSMITH
 	give_bank_account = 11
 	min_pq = 1
 	max_pq = null

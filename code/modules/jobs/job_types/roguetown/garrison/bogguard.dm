@@ -1,6 +1,6 @@
 /datum/job/roguetown/bogguardsman
 	title = "Bog Guard"
-	flag = GUARDSMAN
+	flag = BOGGUARD
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 10

@@ -25,7 +25,7 @@
 
 /datum/job/roguetown/exlady //just used to change the ladys title
 	title = "Queen Dowager"
-	flag = ADVENTURER
+	flag = LADY
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 0
@@ -73,7 +73,6 @@
 		H.change_stat("speed", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("fortune", 5)
-
 
 /obj/effect/proc_holder/spell/self/convertrole/servant
 	name = "Recruit Servant"
