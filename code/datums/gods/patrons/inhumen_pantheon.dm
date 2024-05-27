@@ -4,7 +4,7 @@
 	confess_lines = list(
 		"PSYDON IS THE DEMIURGE!",
 		"THE NINE ARE WORTHLESS COWARDS!",
-		"THE NINE ARE DECEIVERS!"
+		"THE NINE ARE DECEIVERS!",
 	)
 
 /datum/patron/inhumen/zizo

@@ -82,7 +82,7 @@
 	..()
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/puritan
-	name = "archivists silks"
+	name = "formal silks"
 	icon_state = "puritan_shirt"
 	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarfm", "aasimar", "halforc")
 
@@ -140,6 +140,37 @@
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 
+/obj/item/clothing/suit/roguetown/shirt/tunic
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT
+	name = "tunic"
+	desc = ""
+	body_parts_covered = CHEST|GROIN|VITALS
+	boobed = FALSE
+	icon_state = "tunic"
+	item_state = "undershirt"
+	sleevetype = "tunic"
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/green
+	color = CLOTHING_GREEN
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/blue
+	color = CLOTHING_BLUE
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/red
+	color = CLOTHING_RED
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/purple
+	color = CLOTHING_PURPLE
+
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/ucolored
+	color = COLOR_GRAY
+
+/obj/item/clothing/suit/roguetown/shirt/tunic/random/Initialize()
+	color = pick(CLOTHING_PURPLE, CLOTHING_RED, CLOTHING_BLUE, CLOTHING_GREEN)
+	..()
 /obj/item/clothing/suit/roguetown/shirt/dress
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "dress"
@@ -186,6 +217,16 @@
 /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy/Initialize()
 	color = pick("#a90707", "#16239a", "#d68fbd", CLOTHING_BLACK)
 	..()
+
+/obj/item/clothing/suit/roguetown/shirt/undershirt/webs
+	name = "webbed shirt"
+	desc = "Exotic silk finely woven into.. this? Might as well be wearing a spiderweb"
+	icon_state = "webs"
+	item_state = "webs"
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+	body_parts_covered = CHEST|ARMS|VITALS
+	color = null
 
 /obj/item/clothing/suit/roguetown/shirt/robe
 	slot_flags = ITEM_SLOT_ARMOR
@@ -315,6 +356,7 @@
 	color = null
 	icon_state = "nun"
 	item_state = "nun"
+	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "dwarfm", "aasimar")
 	allowed_sex = list(FEMALE)
 
 /obj/item/clothing/suit/roguetown/shirt/robe/wizard

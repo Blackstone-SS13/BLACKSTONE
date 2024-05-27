@@ -739,6 +739,7 @@
 	else
 		user.toggle_rogmove_intent(MOVE_INTENT_SNEAK)
 	update_icon_state()
+	user.update_sneak_invis()
 
 /atom/movable/screen/rogmove/update_icon_state()
 	if(hud?.mymob?.m_intent == MOVE_INTENT_SNEAK)
@@ -1010,7 +1011,7 @@
 
 	if(PL["right"] && ishuman(hud.mymob))
 		var/mob/living/carbon/human/H = hud.mymob
-		return H.check_limb_for_injuries(check_zone(choice))
+		return H.check_limb_for_injuries(H, choice = check_zone(choice))
 	else
 		return set_selected_zone(choice, usr)
 
@@ -1334,9 +1335,6 @@
 				. += limby
 				continue
 			var/damage = BP.burn_dam + BP.brute_dam
-			if(BP.wounds.len)
-				for(var/datum/wound/W in BP.wounds)
-					damage = damage + W.woundpain
 			if(damage > BP.max_damage)
 				damage = BP.max_damage
 			var/comparison = (damage/BP.max_damage)
@@ -1344,7 +1342,7 @@
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]w-[BP.body_zone]") //apply wounded overlay
 			limby.alpha = (comparison*255)*2
 			. += limby
-			if(BP.get_bleedrate())
+			if(BP.get_bleed_rate())
 				. += mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[BP.body_zone]-bleed") //apply healthy limb
 		for(var/X in H.get_missing_limbs())
 			var/mutable_appearance/limby = mutable_appearance('icons/mob/roguehud64.dmi', "[H.gender == "male" ? "m" : "f"]-[X]") //missing limb
@@ -1447,7 +1445,7 @@
 /atom/movable/screen/healthdoll/Click(location, control, params)
 	if (ishuman(usr))
 		var/mob/living/carbon/human/H = usr
-		H.check_self_for_injuries()
+		H.check_for_injuries(H)
 
 /atom/movable/screen/mood
 	name = "mood"
@@ -1465,49 +1463,14 @@
 	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		if(modifiers["left"])
-			var/headpercent	= 0
-			var/burnspercent	= 0
-			var/toxpercent = H.getToxLoss()
-			var/oxpercent = H.getOxyLoss()
-			var/bloodpercent = (H.blood_volume / BLOOD_VOLUME_NORMAL) * 100
-			var/rotted = FALSE
-			var/skeletonized = FALSE
-			for(var/X in H.bodyparts)	//hardcoded to streamline things a bit
-				var/obj/item/bodypart/BP = X
-				if(BP.body_zone == BODY_ZONE_HEAD)
-					headpercent	+= (BP.brute_dam / BP.max_damage) * 100
-					if(burnspercent < BP.burn_dam)
-						burnspercent = (BP.burn_dam / BP.max_damage) * 100
-				if(BP.body_zone == BODY_ZONE_CHEST)
-					if(burnspercent < BP.burn_dam)
-						burnspercent = (BP.burn_dam / BP.max_damage) * 100
-				if(BP.rotted)
-					rotted = TRUE
-				if(BP.skeletonized)
-					skeletonized = TRUE
-
-			if(headpercent)
-				to_chat(H, "<span class='purple'>Mortal Wounds</span>")
-			if(burnspercent)
-				to_chat(H, "<span class='orange'>Mortal Burns</span>")
-			if(bloodpercent < 90)
-				to_chat(H, "<span class='red'>Bloodloss</span>")
-			if(toxpercent)
-				to_chat(H, "<span class='green'>Poisoned</span>")
-			if(rotted)
-				to_chat(H, "<span class='green'>Rotted</span>")
-			if(skeletonized)
-				to_chat(H, "<span class='grey'>Skeletonized</span>")
-			if(oxpercent)
-				to_chat(H, "<span class='grey'>Suffocation</span>")
-			if(H.nutrition < 0)
-				to_chat(H, "<span class='red'>Starving</span>")
+			H.check_for_injuries(H)
 		if(modifiers["right"])
-			if(H.mind)
-				if(H.mind.known_people.len)
-					H.mind.display_known_people(H)
-				else
-					to_chat(H, "<span class='warning'>I don't know anyone.</span>")
+			if(!H.mind)
+				return
+			if(length(H.mind.known_people))
+				H.mind.display_known_people(H)
+			else
+				to_chat(H, "<span class='warning'>I don't know anyone.</span>")
 
 /atom/movable/screen/splash
 	icon = 'icons/blank_title.png'

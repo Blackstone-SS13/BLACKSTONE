@@ -26,7 +26,8 @@
 	var/last_bite
 	/// Traits applied to the owner mob when we turn into a zombie
 	var/static/list/traits_zombie = list(
-		RTRAIT_NOFATSTAM,
+		RTRAIT_CRITICAL_WEAKNESS,
+		RTRAIT_NOROGSTAM,
 		TRAIT_NOMOOD,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
@@ -142,6 +143,7 @@
 	if(!head)
 		qdel(src)
 		return
+	zombie.add_client_colour(/datum/client_colour/monochrome)
 	for(var/trait_applied in traits_zombie)
 		ADD_TRAIT(zombie, trait_applied, "[type]")
 	if(zombie.mind)
@@ -176,7 +178,6 @@
 		zombie_part.update_disabled()
 	zombie.skin_tone = SKIN_COLOR_ROT
 	zombie.update_body()
-
 
 	// Now you get what you had in life + the debuff from rotting limbs aka -8
 	// Outside of one 2% chance remaining for zombie era strength
@@ -234,14 +235,14 @@
 		qdel(src)
 		return
 
-	zombie.stat = null //the mob starts unconscious,
+	zombie.stat = UNCONSCIOUS //the mob starts unconscious
 	zombie.blood_volume = BLOOD_VOLUME_MAXIMUM
+	zombie.heal_wounds(INFINITY) //Heal every wound that is not permanent
 	zombie.updatehealth() //then we check if the mob should wake up.
 	zombie.update_mobility()
 	zombie.update_sight()
 	zombie.clear_alert("not_enough_oxy")
 	zombie.reload_fullscreen()
-	zombie.add_client_colour(/datum/client_colour/monochrome)
 	revived = TRUE //so we can die for real later
 	transform_zombie()
 	if(zombie.stat >= DEAD)

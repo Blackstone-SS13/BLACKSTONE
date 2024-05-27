@@ -17,7 +17,6 @@
 	domain = "God of the Moon, Night, and Knowledge"
 	desc = "The Firstborn of Psydon, twin of Astrata, gifted man divine knowledge."
 	worshippers = "Wizards and Scholars"
-	mob_traits = list(RTRAIT_NASTY_EATER)
 	t1 = /obj/effect/proc_holder/spell/invoked/blindness
 	t2 = /obj/effect/proc_holder/spell/invoked/invisibility
 
@@ -47,7 +46,8 @@
 	name = "Necra"
 	domain = "Goddess of Death and the Afterlife"
 	desc = "The Veiled Lady, a feared but respected God who leads the dead."
-	worshippers = " Necromancers, The Dead, Gravekeepers"
+	worshippers = "The Dead, Gravekeepers"
+	mob_traits = list(RTRAIT_NOSTINK)
 	t1 = /obj/effect/proc_holder/spell/targeted/burialrite
 	t2 = /obj/effect/proc_holder/spell/targeted/churn
 	t3 = /obj/effect/proc_holder/spell/targeted/soulspeak
@@ -63,8 +63,8 @@
 	domain = "Goddess of Decay, Disease and Medicine"
 	desc = "The Loving Daughter of Psydon, gifted man medicine."
 	worshippers = "The Sick, Phyicians, Apothecaries"
-	mob_traits = list(RTRAIT_KNEESTINGER_IMMUNITY)
-	t1 = /obj/effect/proc_holder/spell/invoked/attach_limb
+	mob_traits = list(RTRAIT_ROT_EATER)
+	t1 = /obj/effect/proc_holder/spell/invoked/attach_bodypart
 	t2 = /obj/effect/proc_holder/spell/invoked/heal
 	t3 = /obj/effect/proc_holder/spell/invoked/cure_rot
 

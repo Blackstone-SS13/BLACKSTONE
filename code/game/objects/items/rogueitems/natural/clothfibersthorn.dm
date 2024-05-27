@@ -34,6 +34,42 @@
 		for(var/obj/item/natural/fibers/F in get_turf(src))
 			qdel(F)
 
+/obj/item/natural/silk
+	name = "silk"
+	icon_state = "fibers"
+	possible_item_intents = list(/datum/intent/use)
+	desc = "Silken strands. Their usage in clothing is exotic in all places save the underdark"
+	force = 0
+	throwforce = 0
+	obj_flags = null
+	color = "#e6e3db"
+	firefuel = 5 MINUTES
+	resistance_flags = FLAMMABLE
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
+	bundletype = /obj/item/natural/bundle/silk
+
+/obj/item/natural/silk/attack_right(mob/user)
+	to_chat(user, "<span class='warning'>I start to collect [src]...</span>")
+	if(move_after(user, 5 SECONDS, target = src))
+		var/silkcount = 0
+		for(var/obj/item/natural/silk/F in get_turf(src))
+			silkcount++
+		while(silkcount > 0)
+			if(silkcount == 1)
+				new /obj/item/natural/silk(get_turf(user))
+				silkcount--
+			else if(silkcount >= 2)
+				var/obj/item/natural/bundle/silk/B = new(get_turf(user))
+				B.amount = clamp(silkcount, 2, 6)
+				B.update_bundle()
+				silkcount -= clamp(silkcount, 2, 6)
+		for(var/obj/item/natural/silk/F in get_turf(src))
+			qdel(F)
+
 #ifdef TESTSERVER
 
 /client/verb/bloodnda()
@@ -64,12 +100,14 @@
 	slot_flags = ITEM_SLOT_MOUTH|ITEM_SLOT_HIP
 	body_parts_covered = null
 	experimental_onhip = TRUE
-	var/wet = 0
 	max_integrity = 20
 	muteinmouth = TRUE
 	w_class = WEIGHT_CLASS_TINY
 	spitoutmouth = FALSE
 	bundletype = /obj/item/natural/bundle/cloth
+	var/wet = 0
+	/// Effectiveness when used as a bandage, how much bloodloss we can tampon
+	var/bandage_effectiveness = 0.9
 
 /obj/item/natural/cloth/examine(mob/user)
 	. = ..()
@@ -226,6 +264,27 @@
 	amount = 6
 	firefuel = 30 MINUTES
 
+/obj/item/natural/bundle/silk
+	name = "silken weave"
+	icon_state = "fibersroll1"
+	possible_item_intents = list(/datum/intent/use)
+	desc = "Silk neatly woven together."
+	force = 0
+	throwforce = 0
+	maxamount = 6
+	obj_flags = null
+	color = "#e6e3db"
+	firefuel = 5 MINUTES
+	resistance_flags = FLAMMABLE
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE
+	stacktype = /obj/item/natural/silk
+	icon1step = 3
+	icon2step = 6
+
 /obj/item/natural/bundle/cloth
 	name = "bundle of cloth"
 	icon_state = "clothroll1"
@@ -267,3 +326,19 @@
 	icon2step = 7
 	icon3 = "stickbundle3"
 
+/obj/item/natural/bowstring
+	name = "fibre bowstring"
+	desc = "A simple cord of bowstring."
+	icon_state = "fibers"
+	possible_item_intents = list(/datum/intent/use)
+	force = 0
+	throwforce = 0
+	obj_flags = null
+	color = COLOR_BEIGE
+	firefuel = 5 MINUTES
+	resistance_flags = FLAMMABLE
+	slot_flags = ITEM_SLOT_MOUTH
+	max_integrity = 20
+	muteinmouth = TRUE
+	w_class = WEIGHT_CLASS_TINY
+	spitoutmouth = FALSE

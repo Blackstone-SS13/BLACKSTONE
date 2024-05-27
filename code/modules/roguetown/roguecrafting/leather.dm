@@ -29,7 +29,7 @@
 /datum/crafting_recipe/roguetown/leather/waterskin
 	name = "waterskin"
 	result = /obj/item/reagent_containers/glass/bottle/waterskin
-	reqs = list(/obj/item/natural/hide = 3,
+	reqs = list(/obj/item/natural/hide = 1,
 				/obj/item/natural/fibers = 2)
 	sellprice = 45
 
@@ -46,6 +46,12 @@
 	/obj/item/clothing/gloves/roguetown/leather)
 	reqs = list(/obj/item/natural/hide = 1)
 	sellprice = 10
+
+/datum/crafting_recipe/roguetown/leather/heavygloves
+	name = "heavy leather gloves"
+	result = /obj/item/clothing/gloves/roguetown/angle
+	reqs = list(/obj/item/natural/fur = 1)
+	sellprice = 20
 
 /datum/crafting_recipe/roguetown/leather/bracers
 	name = "leather bracers"
@@ -132,27 +138,13 @@
 	result = /obj/item/natural/saddle
 	reqs = list(/obj/item/natural/hide = 2)
 
-/datum/crafting_recipe/roguetown/leather/vest
-	name = "leather vest"
-	result = /obj/item/clothing/suit/roguetown/armor/leather/vest
-	reqs = list(/obj/item/natural/hide = 2)
-
 /datum/crafting_recipe/roguetown/leather/whip
 	name = "leather whip"
 	result = /obj/item/rogueweapon/whip
 	reqs = list(/obj/item/natural/hide = 2,/obj/item/natural/stone = 1)
+	sellprice = 39
 
 /datum/crafting_recipe/roguetown/leather/drum
 	name = "Drum"
 	result = /obj/item/rogue/instrument/drum
 	reqs = list(/obj/item/natural/hide = 1,/obj/item/grown/log/tree/small = 1)
-
-/datum/crafting_recipe/roguetown/leather/goblinhelmet
-	name = "goblin helmet"
-	result = /obj/item/clothing/head/roguetown/helmet/leather/goblin
-	reqs = list(/obj/item/natural/hide = 1)
-
-/datum/crafting_recipe/roguetown/leather/goblinarmor
-	name = "goblin armor"
-	result = /obj/item/clothing/suit/roguetown/armor/leather/goblin
-	reqs = list(/obj/item/natural/hide = 2)

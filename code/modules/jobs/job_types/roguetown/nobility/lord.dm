@@ -14,7 +14,6 @@ GLOBAL_VAR(lordsurname)
 	outfit = /datum/outfit/job/roguetown/lord
 	display_order = JDO_LORD
 	tutorial = "Elevated upon your throne through a web of intrigue and political upheaval, you are the absolute authority of these lands and at the center of every plot within it. Every man, woman and child is envious of your position and would replace you in less than a heartbeat: Show them the error in their ways."
-	bypass_lastclass = FALSE
 	whitelist_req = FALSE
 	min_pq = 5
 	max_pq = null
@@ -130,11 +129,15 @@ GLOBAL_VAR(lordsurname)
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 //	SSticker.rulermob = H
 
-/proc/give_lord_surname(mob/living/carbon/human/family_guy)
+/proc/give_lord_surname(mob/living/carbon/human/family_guy, preserve_original = FALSE)
 	if(!GLOB.lordsurname)
 		return
+	if(preserve_original)
+		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
+		return family_guy.real_name
 	var/list/chopped_name = splittext(family_guy.real_name, " ")
 	if(length(chopped_name) > 1)
 		family_guy.fully_replace_character_name(family_guy.real_name, chopped_name[1] + " " + GLOB.lordsurname)
 	else
 		family_guy.fully_replace_character_name(family_guy.real_name, family_guy.real_name + " " + GLOB.lordsurname)
+	return family_guy.real_name

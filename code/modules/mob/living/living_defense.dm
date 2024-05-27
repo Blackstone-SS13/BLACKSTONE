@@ -43,7 +43,7 @@
 /mob/living/proc/on_hit(obj/projectile/P)
 	return BULLET_ACT_HIT
 
-/mob/living/bullet_act(obj/projectile/P, def_zone)
+/mob/living/bullet_act(obj/projectile/P, def_zone = BODY_ZONE_CHEST)
 	var/armor = run_armor_check(def_zone, P.flag, "", "",P.armor_penetration, damage = P.damage)
 
 	next_attack_msg.Cut()
@@ -84,7 +84,7 @@
 	return 0
 
 /mob/living/proc/check_projectile_wounding(obj/projectile/P, def_zone)
-	woundcritroll(P.woundclass, P.damage, null, def_zone)
+	simple_woundcritroll(P.woundclass, P.damage, null, def_zone)
 	return
 
 /mob/living/proc/check_projectile_embed(obj/projectile/P, def_zone)
@@ -124,9 +124,9 @@
 				if(iscarbon(src))
 					var/obj/item/bodypart/affecting = get_bodypart(zone)
 					if(affecting)
-						affecting.attacked_by(I.thrown_bclass, I.throwforce)
+						affecting.bodypart_attacked_by(I.thrown_bclass, I.throwforce, isliving(throwingdatum.thrower) ? throwingdatum.thrower : null, affecting.body_zone, crit_message = TRUE)
 				else
-					woundcritroll(I.thrown_bclass, I.throwforce, null, zone)
+					simple_woundcritroll(I.thrown_bclass, I.throwforce, null, zone)
 					if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
 						if(can_embed(I))
 							if(prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
@@ -300,16 +300,16 @@
 
 /turf/proc/grabbedintents(mob/living/user)
 	//RTD up and down
-	return list(/datum/intent/grab/obj/move)
+	return list(/datum/intent/grab/move)
 
 /obj/proc/grabbedintents(mob/living/user, precise)
-	return list(/datum/intent/grab/obj/move)
+	return list(/datum/intent/grab/move)
 
 /obj/item/grabbedintents(mob/living/user, precise)
-	return list(/datum/intent/grab/obj/remove, /datum/intent/grab/obj/twistitem)
+	return list(/datum/intent/grab/remove, /datum/intent/grab/twistitem)
 
 /mob/proc/grabbedintents(mob/living/user, precise)
-	return list(/datum/intent/grab/obj/move)
+	return list(/datum/intent/grab/move)
 
 /mob/living/proc/send_grabbed_message(mob/living/carbon/user)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))

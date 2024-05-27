@@ -44,7 +44,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 				var/mob/living/carbon/spirit/O = new /mob/living/carbon/spirit(A.loc)
 				O.livingname = mob.name
 				O.ckey = ckey
-				O.patron = prefs.selected_patron
+				O.set_patron(prefs.selected_patron)
 				SSdroning.area_entered(get_area(O), O.client)
 				break
 			verbs -= GLOB.ghost_verbs

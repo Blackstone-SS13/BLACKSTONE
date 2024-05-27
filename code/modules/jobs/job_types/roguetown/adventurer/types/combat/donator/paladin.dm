@@ -115,6 +115,17 @@
 			beltr = /obj/item/rogueweapon/huntingknife
 			id = /obj/item/clothing/ring/silver
 			cloak = /obj/item/clothing/cloak/tabard/crusader
+			switch(H.patron.name)	
+				if("Astrata")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/astrata
+				if("Dendor")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/dendor
+				if("Necra")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/necra
+				if("Pestra")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/pestra
+				if("Noc")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/noc
 			backr = /obj/item/rogueweapon/flail
 			if(prob(50))
 				l_hand = /obj/item/rogueweapon/shield/wood
