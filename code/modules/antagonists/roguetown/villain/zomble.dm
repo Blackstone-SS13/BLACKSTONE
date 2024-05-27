@@ -145,6 +145,7 @@
 	if(!head)
 		qdel(src)
 		return
+	revived = TRUE //so we can die for real later
 	zombie.add_client_colour(/datum/client_colour/monochrome)
 	for(var/trait_applied in traits_zombie)
 		ADD_TRAIT(zombie, trait_applied, "[type]")
@@ -247,7 +248,6 @@
 	zombie.update_mobility()
 	zombie.update_sight()
 	zombie.reload_fullscreen()
-	revived = TRUE //so we can die for real later
 	transform_zombie()
 	if(zombie.stat >= DEAD)
 		//could not revive
