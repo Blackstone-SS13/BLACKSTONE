@@ -624,7 +624,7 @@
 
 /datum/emote/living/holdbreath/can_run_emote(mob/living/user, status_check = TRUE, intentional)
 	. = ..()
-	if(. && !HAS_TRAIT(user, TRAIT_HOLDBREATH) && !HAS_TRAIT(user, TRAIT_PARALYSIS))
+	if(. && intentional && !HAS_TRAIT(user, TRAIT_HOLDBREATH) && !HAS_TRAIT(user, TRAIT_PARALYSIS))
 		to_chat(user, "<span class='warning'>I'm not desperate enough to do that.</span>")
 		return FALSE
 
@@ -632,9 +632,9 @@
 	. = ..()
 	if(.)
 		if(HAS_TRAIT(user, TRAIT_HOLDBREATH))
-			REMOVE_TRAIT(user, TRAIT_HOLDBREATH, TRAIT_GENERIC)
+			REMOVE_TRAIT(user, TRAIT_HOLDBREATH, "[type]")
 		else
-			ADD_TRAIT(user, TRAIT_HOLDBREATH, TRAIT_GENERIC)
+			ADD_TRAIT(user, TRAIT_HOLDBREATH, "[type]")
 
 /datum/emote/living/holdbreath/select_message_type(mob/user, intentional)
 	. = ..()
