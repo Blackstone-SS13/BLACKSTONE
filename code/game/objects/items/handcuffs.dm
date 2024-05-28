@@ -352,7 +352,7 @@
 				update_icon()
 				to_chat(user, "<span class='notice'>[src] is now [armed ? "armed" : "disarmed"]</span>")
 			else
-				user.visible_message("<span class='warning'>You couldn't get the shoddy [src.name] to open up!</span>")
+				user.visible_message("<span class='warning'>You couldn't get the shoddy [src.name] [armed ? "shut close!" : "to open up!"]</span>")
 /obj/item/restraints/legcuffs/beartrap/proc/close_trap()
 	armed = FALSE
 	alpha = 255
