@@ -180,6 +180,70 @@
 
 	req_table = TRUE
 
+/datum/crafting_recipe/roguetown/poisonarrow
+	name = "dip an arrow in poison"
+	result = /obj/item/ammo_casing/caseless/rogue/arrow/poison
+	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow = 1,
+				/datum/reagent/berrypoison = 5)
+
+	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/poisonarrowstone
+	name = "dip a stone arrow in poison"
+	result = /obj/item/ammo_casing/caseless/rogue/arrow/stone/poison
+	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow/stone = 1,
+				/datum/reagent/berrypoison = 5)
+
+	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/poisonbolt
+	name = "dip a bolt in poison"
+	result = /obj/item/ammo_casing/caseless/rogue/bolt/poison
+	reqs = list(/obj/item/ammo_casing/caseless/rogue/bolt = 1,
+				/datum/reagent/berrypoison = 5)
+
+	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/poisonarrowfive //Arrows and bolts can be smithed in batches of five. Makes sense for them to be dipped in batches of five, too
+	name = "dip five arrows in poison"
+	result = /obj/item/ammo_casing/caseless/rogue/arrow/poison
+	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow = 5,
+				/datum/reagent/berrypoison = 25)
+
+	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/poisonboltfive
+	name = "dip five bolts in poison"
+	result = /obj/item/ammo_casing/caseless/rogue/bolt/poison
+	reqs = list(/obj/item/ammo_casing/caseless/rogue/bolt = 5,
+				/datum/reagent/berrypoison = 25)
+
+	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/poisonarrowstone
+	name = "dip five stone arrows in poison"
+	result = /obj/item/ammo_casing/caseless/rogue/arrow/stone/poison
+	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow/stone = 5,
+				/datum/reagent/berrypoison = 25)
+
+	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/mortar
+	name = "stone mortar"
+	result = /obj/item/reagent_containers/glass/mortar = 1
+	reqs = list(/obj/item/natural/stone = 1)
+	tools = list(/obj/item/rogueweapon/huntingknife) // Intended to be either stone knife or steel hunting knife
+	craftdiff = 1
+	subtype_reqs = TRUE //Unsure if needed for stone knife to work, feel free to remove this if not.
+
+/datum/crafting_recipe/roguetown/pestle
+	name = "stone pestle"
+	result = /obj/item/pestle = 1
+	reqs = list(/obj/item/natural/stone = 1)
+	tools = list(/obj/item/rogueweapon/huntingknife) // Intended to be either stone knife or steel hunting knife
+	craftdiff = 1
+	subtype_reqs = TRUE //Unsure if needed for stone knife to work, feel free to remove this if not.
+
 /datum/crafting_recipe/roguetown/bag
 	name = "bag"
 	result = /obj/item/storage/roguebag/crafted

@@ -73,13 +73,19 @@
 	desc = "A wooden shaft with a jagged rock on the end."
 	icon_state = "stonearrow"
 	max_integrity = 5
-/*
+
 /obj/item/ammo_casing/caseless/rogue/arrow/poison
 	name = "poisoned arrow"
-	desc = "A wooden shaft with a pointy iron end. This one is coated in a clear liquid."
+	desc = "A wooden shaft with a pointy iron end. This one is stained green with floral toxins."
 	projectile_type = /obj/projectile/bullet/reusable/arrow/poison
 	icon_state = "arrow_poison"
-	max_integrity = 10
+	max_integrity = 20 // same as normal arrow; usually breaks on impact with a mob anyway
+
+/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison
+	name = "poisoned stone arrow"
+	desc = "A wooden shaft with a jagged rock on the end. This one is stained green with floral toxins."
+	projectile_type = /obj/projectile/bullet/reusable/arrow/poison
+	icon_state = "stonearrow_poison"
 
 /obj/projectile/bullet/reusable/arrow/poison
 	name = "arrow"
@@ -96,8 +102,8 @@
 	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/M = target
-		M.reagents.add_reagent(/datum/reagent/toxin/drow, 5) //a REALLY slow burn for this arrow, and its lasting
-*/
+		M.reagents.add_reagent(/datum/reagent/berrypoison, 5) //a fast-acting and dangerous toxin that induces nausea. King may naturally declare them illegal except for use by hunters.
+
 /obj/projectile/bullet/reusable/bullet
 	name = "lead ball"
 	damage = 50
