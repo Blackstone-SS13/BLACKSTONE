@@ -114,7 +114,7 @@
 				armor = /obj/item/clothing/suit/roguetown/armor/plate/scale // No helms for monster hunters.
 				H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-				H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
+				H.mind.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
 				backr = /obj/item/rogueweapon/stoneaxe/battle
 			backl = /obj/item/storage/backpack/rogue/satchel
 			beltl = /obj/item/rogueweapon/huntingknife
