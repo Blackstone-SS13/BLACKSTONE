@@ -11,8 +11,11 @@
 		"MY LUPINE MARK!",
 	)
 	var/special_role = ROLE_WEREWOLF
+
 	var/transformed
 	var/transforming
+	var/untransforming
+
 	var/wolfname = "Werevolf"
 	var/pre_transform
 	var/next_idle_sound
@@ -52,8 +55,8 @@
 	wolfname = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
 
 	// SPELL TESTING
-	owner.AddSpell(new /obj/effect/proc_holder/spell/self/howl)
-	owner.AddSpell(new /obj/effect/proc_holder/spell/self/claws)
+	//owner.AddSpell(new /obj/effect/proc_holder/spell/self/howl)
+	//owner.AddSpell(new /obj/effect/proc_holder/spell/self/claws)
 
 	return ..()
 
@@ -119,7 +122,7 @@
 	attack_verb = list("claws", "mauls", "eviscerates")
 	animname = "chop"
 	hitsound = "genslash"
-	penfactor = 70
+	penfactor = 50
 	candodge = TRUE
 	canparry = TRUE
 	miss_text = "slashes the air!"
@@ -129,11 +132,13 @@
 /obj/item/rogueweapon/werewolf_claw
 	name = "Werevolf's Claw"
 	desc = ""
+	lefthand_file = null
+	righthand_file = null
 	icon_state = "sword1"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	max_blade_int = 900
 	max_integrity = 900
-	force = 18
+	force = 25
 	block_chance = 0
 	wdefense = 4
 	armor_penetration = 15
@@ -144,8 +149,9 @@
 	sharpness = IS_SHARP
 	parrysound = "bladedmedium"
 	swingsound = BLADEWOOSH_MED
-	possible_item_intents = list(/datum/intent/simple/werewolf, INTENT_GRAB)
+	possible_item_intents = list(/datum/intent/simple/werewolf)
 	parrysound = list('sound/combat/parry/parrygen.ogg')
+	embedding = list("embedded_pain_multiplier" = 0, "embed_chance" = 0, "embedded_fall_chance" = 0)
 
 
 /obj/item/rogueweapon/werewolf_claw/Initialize()

@@ -32,7 +32,7 @@
 			player.playsound_local(get_turf(player), pick('sound/vo/mobs/wwolf/howldist (1).ogg','sound/vo/mobs/wwolf/howldist (2).ogg'), 100, FALSE, pressure_affected = FALSE)
 
 /obj/effect/proc_holder/spell/self/claws
-	name = "Extend claws"
+	name = "Lupine Claws"
 	desc = "!"
 	overlay_state = "claws"
 	antimagic_allowed = TRUE
@@ -52,13 +52,13 @@
 			user.dropItemToGround(claw2, TRUE)
 			qdel(claw1)
 			qdel(claw2)
-			user.visible_message("Your claws retract.", "Your claws retract.", "You hear a sound of claws retracting.")
+			user.visible_message("Your claws retract.", "You feel your claws retracting.", "You hear a sound of claws retracting.")
 			extended = FALSE
 	else
 		claw1 = new(user,1)
 		claw2 = new(user,2)
 		user.put_in_hands(claw1, TRUE, FALSE, TRUE)
 		user.put_in_hands(claw2, TRUE, FALSE, TRUE)
-		user.visible_message("Your claws extend.", "Your claws extend.", "You hear a sound of claws extending.")
+		user.visible_message("Your claws extend.", "You feel your claws extending.", "You hear a sound of claws extending.")
 		extended = TRUE
 	
