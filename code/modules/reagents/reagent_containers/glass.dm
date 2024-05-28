@@ -596,7 +596,7 @@
 	if(istype(I ,/obj/item/reagent_containers/glass))
 		if(user.used_intent.type == INTENT_POUR) //Something like a glass. Player probably wants to transfer TO it.
 			testing("attackobj2")
-			if(!reagents.total_volume)
+			if(!I.reagents.total_volume)
 				to_chat(user, "<span class='warning'>[I] is empty!</span>")
 				return
 
