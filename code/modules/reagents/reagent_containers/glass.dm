@@ -539,19 +539,21 @@
 
 /obj/item/pestle
 	name = "pestle"
-	desc = ""
+	desc = "A small, round-end stone tool oft used by physicians to crush and mix medicine."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "pestle"
 	force = 7
 
 /obj/item/reagent_containers/glass/mortar
 	name = "mortar"
-	desc = ""
+	desc = "A small, thick-walled stone bowl made for grinding things up inside."
 	icon_state = "mortar"
+	dropshrink = 0.75
 	amount_per_transfer_from_this = 10
 	possible_transfer_amounts = list(5, 10, 15, 20, 25, 30, 50, 100)
 	volume = 100
-	reagent_flags = OPENCONTAINER
+	reagent_flags = OPENCONTAINER|REFILLABLE|DRAINABLE
+	possible_item_intents = list(INTENT_GENERIC, /datum/intent/fill, INTENT_POUR, INTENT_SPLASH)
 	spillable = TRUE
 	var/obj/item/grinded
 
