@@ -78,6 +78,16 @@
 	chargetime = 0
 	swingdelay = 0
 
+/obj/item/rogueweapon/sword/short
+	name = "short sword"
+	desc = "An archaic steel sword made for stabbing."
+	force = 19
+	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
+	icon_state = "swordshort"
+	gripped_intents = null
+	minstr = 4
+	wdefense = 4
+
 /obj/item/rogueweapon/sword/long
 	force = 25
 	force_wielded = 30
