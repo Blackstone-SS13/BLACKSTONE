@@ -24,7 +24,7 @@
 	mask = /obj/item/clothing/mask/rogue/spectacles/golden
 	id = /obj/item/scomstone
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
