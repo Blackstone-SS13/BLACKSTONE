@@ -593,56 +593,57 @@
 	if(grinded)
 		to_chat(user, "<span class='warning'>There is something inside already!</span>")
 		return
-	if(istype(I ,obj/item/reagent_containers/glass))
-		if(target.is_refillable() && (user.used_intent.type == INTENT_POUR)) //Something like a glass. Player probably wants to transfer TO it.
-		testing("attackobj2")
-		if(!reagents.total_volume)
-			to_chat(user, "<span class='warning'>[src] is empty!</span>")
-			return
-
-		if(target.reagents.holder_full())
-			to_chat(user, "<span class='warning'>[target] is full.</span>")
-			return
-		user.visible_message("<span class='notice'>[user] pours [src] into [target].</span>", \
-						"<span class='notice'>I pour [src] into [target].</span>")
-		if(user.m_intent != MOVE_INTENT_SNEAK)
-			if(poursounds)
-				playsound(user.loc,pick(poursounds), 100, TRUE)
-		for(var/i in 1 to 10)
-			if(do_after(user, 8, target = target))
-				if(!reagents.total_volume)
-					break
-				if(target.reagents.holder_full())
-					break
-				if(!reagents.trans_to(target, amount_per_transfer_from_this, transfered_by = user))
-					reagents.reaction(target, TOUCH, amount_per_transfer_from_this)
-			else
-				break
-		return
-
-		if(target.is_drainable() && (user.used_intent.type == /datum/intent/fill)) //A dispenser. Transfer FROM it TO us.
-			testing("attackobj3")
-			if(!target.reagents.total_volume)
-				to_chat(user, "<span class='warning'>[target] is empty!</span>")
+	if(istype(I ,/obj/item/reagent_containers/glass))
+		if(user.used_intent.type == INTENT_POUR) //Something like a glass. Player probably wants to transfer TO it.
+			testing("attackobj2")
+			if(!reagents.total_volume)
+				to_chat(user, "<span class='warning'>[I] is empty!</span>")
 				return
 
 			if(reagents.holder_full())
 				to_chat(user, "<span class='warning'>[src] is full.</span>")
 				return
+			user.visible_message("<span class='notice'>[user] pours [I] into [src].</span>", \
+							"<span class='notice'>I pour I] into [src].</span>")
+			if(user.m_intent != MOVE_INTENT_SNEAK)
+				if(poursounds)
+					playsound(user.loc,pick(poursounds), 100, TRUE)
+			for(var/i in 1 to 10)
+				if(do_after(user, 8, target = src))
+					if(!I.reagents.total_volume)
+						break
+					if(reagents.holder_full())
+						break
+					if(!I.reagents.trans_to(src, amount_per_transfer_from_this, transfered_by = user))
+						reagents.reaction(src, TOUCH, amount_per_transfer_from_this)
+				else
+					break
+			return
+
+		if(is_drainable() && (user.used_intent.type == /datum/intent/fill)) //A dispenser. Transfer FROM it TO us.
+			testing("attackobj3")
+			if(!reagents.total_volume)
+				to_chat(user, "<span class='warning'>[src] is empty!</span>")
+				return
+
+			if(I.reagents.holder_full())
+				to_chat(user, "<span class='warning'>[I] is full.</span>")
+				return
 			if(user.m_intent != MOVE_INTENT_SNEAK)
 				if(fillsounds)
 					playsound(user.loc,pick(fillsounds), 100, TRUE)
-			user.visible_message("<span class='notice'>[user] fills [src] with [target].</span>", \
-								"<span class='notice'>I fill [src] with [target].</span>")
+			user.visible_message("<span class='notice'>[user] fills [I] with [src].</span>", \
+								"<span class='notice'>I fill [I] with [src].</span>")
 			for(var/i in 1 to 10)
-				if(do_after(user, 8, target = target))
-					if(reagents.holder_full())
+				if(do_after(user, 8, target = src))
+					if(I.reagents.holder_full())
 						break
-					if(!target.reagents.total_volume)
+					if(!reagents.total_volume)
 						break
-					target.reagents.trans_to(src, amount_per_transfer_from_this, transfered_by = user)
+					reagents.trans_to(I, amount_per_transfer_from_this, transfered_by = user)
 				else
 					break
+
 			return
 	if(I.juice_results || I.grind_results)
 		I.forceMove(src)
