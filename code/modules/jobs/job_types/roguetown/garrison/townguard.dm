@@ -89,7 +89,7 @@
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/guardsman/proc/assign_skills(mob/living/carbon/human/guard)
-	guard.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(3,4), TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/maces, pick(3,4), TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE) 
 	guard.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
@@ -120,7 +120,7 @@
 	guard.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
