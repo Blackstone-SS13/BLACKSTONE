@@ -150,7 +150,6 @@
 	item_state = null
 	lefthand_file = null
 	righthand_file = null
-	icon_state = "sword1"
 	icon = 'icons/roguetown/weapons/32.dmi'
 	max_blade_int = 900
 	max_integrity = 900
@@ -169,8 +168,13 @@
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	embedding = list("embedded_pain_multiplier" = 0, "embed_chance" = 0, "embedded_fall_chance" = 0)
 
+/obj/item/rogueweapon/werewolf_claw/right
+	icon_state = "claw_r"
+
+/obj/item/rogueweapon/werewolf_claw/left
+	icon_state = "claw_l"
 
 /obj/item/rogueweapon/werewolf_claw/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, TRAIT_GENERIC)
-	ADD_TRAIT(src, RTRAIT_NOEMBED, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_NOEMBED, TRAIT_GENERIC)
