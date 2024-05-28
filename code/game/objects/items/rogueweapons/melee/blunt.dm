@@ -265,7 +265,7 @@
 	//dropshrink = 0.75
 	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/skill/combat/maces
 	smeltresult = /obj/item/ash
 	parrysound = "parrywood"
 	swingsound = BLUNTWOOSH_MED
