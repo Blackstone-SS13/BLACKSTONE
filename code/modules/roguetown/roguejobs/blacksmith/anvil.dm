@@ -108,21 +108,42 @@
 	..()
 
 /obj/machinery/anvil/proc/choose_recipe(user)
-	if(!hingot || !hott)
-		return
-	var/list/appro_recipe = GLOB.anvil_recipes.Copy()
-	for(var/I in appro_recipe)
-		var/datum/anvil_recipe/R = I
-		if(!R.req_bar)
-			appro_recipe -= R
-		if(!istype(hingot, R.req_bar))
-			appro_recipe -= R
-	if(appro_recipe.len)
-		var/datum/chosen_recipe = input(user, "Choose A Creation", "Anvil") as null|anything in sortNames(appro_recipe.Copy())
-		if(!hingot.currecipe && chosen_recipe)
-			hingot.currecipe = new chosen_recipe.type(hingot)
-			return TRUE
-	return FALSE
+    if(!hingot || !hott)
+        return
+    
+    var/list/valid_types = list()
+    
+    for(var/datum/anvil_recipe/R in GLOB.anvil_recipes)
+        if(istype(hingot, R.req_bar))
+            if(!valid_types.Find(R.i_type))
+                valid_types += R.i_type
+    
+    if(!valid_types.len)
+        return
+    
+    var/i_type_choice = input(user, "Choose a type", "Anvil") as null|anything in valid_types
+    if(!i_type_choice)
+        return
+    
+    var/list/appro_recipe = list()
+    for(var/datum/anvil_recipe/R in GLOB.anvil_recipes)
+        if(R.i_type == i_type_choice && istype(hingot, R.req_bar))
+            appro_recipe += R
+    
+    for(var/I in appro_recipe)
+        var/datum/anvil_recipe/R = I
+        if(!R.req_bar)
+            appro_recipe -= R
+        if(!istype(hingot, R.req_bar))
+            appro_recipe -= R
+    
+    if(appro_recipe.len)
+        var/datum/chosen_recipe = input(user, "Choose A Creation", "Anvil") as null|anything in sortNames(appro_recipe.Copy())
+        if(!hingot.currecipe && chosen_recipe)
+            hingot.currecipe = new chosen_recipe.type(hingot)
+            return TRUE
+    
+    return FALSE
 
 /obj/machinery/anvil/attack_hand(mob/user, params)
 	if(hingot)
