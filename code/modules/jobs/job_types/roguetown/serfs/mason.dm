@@ -25,7 +25,7 @@
 /datum/outfit/job/roguetown/mason/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, rand(1,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axes, rand(1,3), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, rand(1,3), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, rand(1,3), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, rand(4,5), TRUE)
