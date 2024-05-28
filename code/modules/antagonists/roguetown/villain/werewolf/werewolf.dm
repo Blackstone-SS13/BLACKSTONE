@@ -104,7 +104,7 @@
 		return
 
 	to_chat(src, "<span class='warning'>I feed on succulent flesh. I feel reinvigorated.</span>")
-	src.reagents.add_reagent(/datum/reagent/medicine/healthpot, 2)
+	src.reagents.add_reagent(/datum/reagent/medicine/healthpot, 3)
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/werewolf_skin
 	slot_flags = null
