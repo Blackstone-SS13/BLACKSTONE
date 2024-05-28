@@ -15,7 +15,7 @@
 	wlength = WLENGTH_NORMAL
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/skill/combat/maces
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/iron
 	gripped_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
