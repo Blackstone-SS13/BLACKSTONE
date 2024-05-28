@@ -53,11 +53,6 @@
 		forge_werewolf_objectives()
 
 	wolfname = "[pick(GLOB.wolf_prefixes)] [pick(GLOB.wolf_suffixes)]"
-
-	// SPELL TESTING
-	//owner.AddSpell(new /obj/effect/proc_holder/spell/self/howl)
-	//owner.AddSpell(new /obj/effect/proc_holder/spell/self/claws)
-
 	return ..()
 
 /datum/antagonist/werewolf/on_removal()
