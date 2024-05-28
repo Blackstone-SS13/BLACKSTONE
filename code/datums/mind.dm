@@ -296,6 +296,25 @@
 	else
 		to_chat(current, "<span class='warning'>My [S.name] has weakened!</span>")
 
+// just scoot in right here
+/datum/mind/proc/assign_experiences(list/skills, silent, option, subclass = null)
+	// list(skill path = num)
+	if(subclass)
+		skills = skills[subclass]
+	for(var/path in skills)
+		var/numValue
+		if(islist(skills[path])) // cant assign pick when defining
+			numValue = pick(skills[path])
+		else
+			numValue = skills[path]
+		switch(option)
+			if("skills")
+				adjust_skillrank(path, numValue, TRUE) // change this to what i think is a rewritten proc?
+			if("stats")
+				current.change_stat(path, numValue)
+
+
+
 /datum/mind/proc/adjust_skillrank(skill, amt, silent = FALSE)
 	var/datum/skill/S = GetSkillRef(skill)
 	var/amt2gain = 0

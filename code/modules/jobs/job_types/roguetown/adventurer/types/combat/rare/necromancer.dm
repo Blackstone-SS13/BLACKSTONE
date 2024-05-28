@@ -13,6 +13,18 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/necromancer
 	pickprob = 30
 	traits_applied = list(TRAIT_ZOMBIE_IMMUNE)
+	given_skills = list(
+		/datum/skill/misc/reading = 4, \
+		/datum/skill/magic/arcane = 5
+	)
+	stat_changes = list(
+		"strength" = -1, \
+		"intelligence" = 3, \
+		"constitution" = -2, \
+		"endurance" = -1, \
+		"speed" = -1 
+	)
+
 
 /datum/outfit/job/roguetown/adventurer/necromancer
 	allowed_patrons = list(/datum/patron/inhumen/zizo)
@@ -29,13 +41,9 @@
 	beltr = /obj/item/reagent_containers/glass/bottle/rogue/manapot
 	beltl = /obj/item/rogueweapon/huntingknife
 	r_hand = /obj/item/rogueweapon/woodstaff
-	H.mind.adjust_skillrank(/datum/skill/misc/reading, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/magic/arcane, 5, TRUE)	
-	H.change_stat("strength", -1)
-	H.change_stat("intelligence", 3)
-	H.change_stat("constitution", -2)
-	H.change_stat("endurance", -1)
-	H.change_stat("speed", -1)
+	H.mind.assign_experiences(/datum/advclass/necromancer::given_skills, TRUE, "skills")
+	H.mind.assign_experiences(/datum/advclass/necromancer::stat_changes, TRUE, "stats")
+
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/bonechill)
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/raise_undead)
 	H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/projectile/sickness)

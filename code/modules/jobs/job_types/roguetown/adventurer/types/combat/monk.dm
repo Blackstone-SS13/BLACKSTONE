@@ -20,6 +20,30 @@
 	ispilgrim = FALSE
 	vampcompat = FALSE
 
+	given_skills = list(
+		/datum/skill/combat/swords = list(0, 1),
+		/datum/skill/misc/athletics = 3,
+		/datum/skill/combat/bows = list(0, 1),
+		/datum/skill/combat/wrestling = 4,
+		/datum/skill/combat/unarmed = 5,
+		/datum/skill/combat/knives = 2,
+		/datum/skill/combat/polearms = list(1, 2),
+		/datum/skill/misc/swimming = 2,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/misc/reading = 2,
+		/datum/skill/misc/sneaking = list(1, 2),
+		/datum/skill/craft/cooking = 1,
+		/datum/skill/misc/medicine = 2
+	)
+
+	stat_changes = list(
+		"strength" = 3,
+		"constitution" = 1,
+		"speed" = 2,
+		"perception" = -1
+	)
+
+
 /datum/outfit/job/roguetown/adventurer/monk/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/roguehood
@@ -33,21 +57,8 @@
 	r_hand = /obj/item/rogueweapon/woodstaff
 	if(H.mind)
 		to_chat(src, "<span class='warning'>Monks are pilgrims of powerful belief who empart the teachings of their Temple or God by their interactions with the people of the world. A good monk would seek to help travellers on the road, feed the hungry and teach the weak to become strong. A bad one however...</span>")
-		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE) 
-		H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(0,1), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/polearms, pick(1,2), TRUE) 
-		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-		H.change_stat("strength", 3)
-		H.change_stat("constitution", 1)
-		H.change_stat("speed", 2)
-		H.change_stat("perception", -1)
+		H.mind.assign_experiences(/datum/advclass/monk::given_skills, TRUE, "skills")
+		H.mind.assign_experiences(/datum/advclass/monk::stat_changes, TRUE, "stats")
+
 		ADD_TRAIT(H, RTRAIT_DODGEEXPERT, TRAIT_GENERIC)
+

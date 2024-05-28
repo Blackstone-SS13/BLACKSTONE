@@ -8,6 +8,24 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/dranger
 	traits_applied = list(RTRAIT_MEDIUMARMOR)
 
+	given_skills = list(
+		/datum/skill/combat/axesmaces = 2,
+		/datum/skill/combat/unarmed = 2,
+		/datum/skill/craft/crafting = 2,
+		/datum/skill/misc/swimming = 1,
+		/datum/skill/misc/climbing = 3,
+		/datum/skill/combat/crossbows = 3,
+		/datum/skill/craft/tanning = 2,
+		/datum/skill/misc/riding = 3,
+		/datum/skill/misc/sewing = 3,
+		/datum/skill/misc/medicine = 2
+	)
+
+	stat_changes = list(
+		"perception" = 3
+	)
+
+
 /datum/outfit/job/roguetown/adventurer/dranger/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/roguehood
@@ -28,14 +46,6 @@
 	if(prob(23))
 		shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	cloak = /obj/item/clothing/cloak/raincloak/brown
-	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/tanning, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)	
-	H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-	H.change_stat("perception", 3)
+	H.mind.assign_experiences(/datum/advclass/dranger::given_skills, TRUE, "skills")
+	H.mind.assign_experiences(/datum/advclass/dranger::stat_changes, TRUE, "stats")
+

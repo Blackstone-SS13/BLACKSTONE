@@ -17,6 +17,62 @@
 	vampcompat = FALSE
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
 	traits_applied = list(RTRAIT_HEAVYARMOR)
+	given_skills = list(
+		"life cleric" = list(
+			/datum/skill/combat/crossbows = 2, 
+			/datum/skill/combat/polearms = 1, 
+			/datum/skill/combat/bows = 1, 
+			/datum/skill/combat/wrestling = 3, 
+			/datum/skill/combat/unarmed = 1, 
+			/datum/skill/misc/swimming = 1, 
+			/datum/skill/misc/climbing = 2, 
+			/datum/skill/misc/athletics = 2, 
+			/datum/skill/combat/swords = 1, 
+			/datum/skill/combat/knives = 3, 
+			/datum/skill/misc/reading = 3, 
+			/datum/skill/misc/sewing = 2, 
+			/datum/skill/misc/medicine = 4, 
+			/datum/skill/craft/cooking = 1, 
+			/datum/skill/misc/riding = 1, 
+			/datum/skill/combat/axesmaces = 2,
+			/datum/skill/magic/holy = 4
+    	),
+   		"war cleric" = list(
+			/datum/skill/combat/crossbows = 3, 
+			/datum/skill/combat/polearms = 2, 
+			/datum/skill/combat/bows = 1, 
+			/datum/skill/combat/wrestling = 3, 
+			/datum/skill/combat/unarmed = 2, 
+			/datum/skill/misc/swimming = 1, 
+			/datum/skill/misc/climbing = 2, 
+			/datum/skill/misc/athletics = 2, 
+			/datum/skill/combat/swords = 2, 
+			/datum/skill/combat/knives = 3, 
+			/datum/skill/misc/reading = 3, 
+			/datum/skill/misc/sewing = 2, 
+			/datum/skill/misc/medicine = 2, 
+			/datum/skill/craft/cooking = 1, 
+			/datum/skill/misc/riding = 1, 
+			/datum/skill/combat/axesmaces = 3, 
+			/datum/skill/magic/holy = 2
+		)
+	)
+	stat_changes = list(
+		"life cleric" = list(
+			"intelligence" = 2, 
+			"perception" = 1, 
+			"strength" = 1, 
+			"constitution" = 2, 
+			"endurance" = 2
+		),
+		"war cleric" = list(
+			"intelligence" = 1, 
+			"strength" = 2, 
+			"constitution" = 2, 
+			"endurance" = 2, 
+			"speed" = -1
+		)
+	)
 
 /datum/outfit/job/roguetown/adventurer/cleric
 	allowed_patrons = ALL_CLERIC_PATRONS
@@ -39,35 +95,13 @@
 	H.adjust_blindness(-3)
 	var/classes = list("Life Cleric","War Cleric",)
 	var/classchoice = input("Choose your archetypes", "Available archetypes") as anything in classes
-
+	H.mind.assign_experiences(/datum/advclass/cleric::given_skills, TRUE, "skills", lowertext(classchoice))
+	H.mind.assign_experiences(/datum/advclass/cleric::stat_changes, TRUE, "stats", lowertext(classchoice))
 	switch(classchoice)
 	
 		if("Life Cleric")
 			H.set_blindness(0)
 			to_chat(H, "<span class='warning'>You are a cleric of the life domain. Well versed in the arts of healing and magic.</span>")
-			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/weaving, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE) 
-			H.mind.adjust_skillrank(/datum/skill/magic/holy, 4, TRUE)
-			H.change_stat("intelligence", 2)
-			H.change_stat("perception", 1) // More intelligence and no speed penalty for Life Clerics.
-			H.change_stat("strength", 1)
-			H.change_stat("constitution", 2)
-			H.change_stat("endurance", 2) 
 			if(prob(50))
 				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/churn)
 			else if(prob(50))
@@ -78,28 +112,6 @@
 		if("War Cleric")
 			H.set_blindness(0)
 			to_chat(H, "<span class='warning'>You are a cleric of the war domain. Experienced in both the granting of life and the taking of it. Unfortunately your study of warcraft has weakened your divine abilities...</span>")
-			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE) 
-			H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
-			H.change_stat("intelligence", 1)
-			H.change_stat("strength", 2)
-			H.change_stat("constitution", 2)
-			H.change_stat("endurance", 2) // Stronger but less intelligent/quick compared to life clerics.
-			H.change_stat("speed", -1)
 
 	armor = /obj/item/clothing/suit/roguetown/armor/plate
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
