@@ -42,7 +42,8 @@
 			beltl = /obj/item/quiver/arrows
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(4,5,5,6), TRUE)
