@@ -206,7 +206,7 @@
 */
 /datum/crafting_recipe/roguetown/poisonarrowfive //Arrows and bolts can be smithed in batches of five. Makes sense for them to be dipped in batches of five, too
 	name = "dip five arrows in poison"
-	result = /obj/item/ammo_casing/caseless/rogue/arrow/poison
+	result = list(/obj/item/ammo_casing/caseless/rogue/arrow/poison = 5)
 	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow = 5,
 				/datum/reagent/berrypoison = 25)
 
@@ -214,7 +214,7 @@
 /*
 /datum/crafting_recipe/roguetown/poisonboltfive //Coded, but commented out pending balance discussion.
 	name = "dip five bolts in poison"
-	result = /obj/item/ammo_casing/caseless/rogue/bolt/poison
+	result = list(/obj/item/ammo_casing/caseless/rogue/bolt/poison = 5)
 	reqs = list(/obj/item/ammo_casing/caseless/rogue/bolt = 5,
 				/datum/reagent/berrypoison = 25)
 
@@ -222,7 +222,7 @@
 */
 /datum/crafting_recipe/roguetown/poisonarrowstone
 	name = "dip five stone arrows in poison"
-	result = /obj/item/ammo_casing/caseless/rogue/arrow/stone/poison
+	result = list(/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison = 5)
 	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow/stone = 5,
 				/datum/reagent/berrypoison = 25)
 
@@ -230,7 +230,7 @@
 
 /datum/crafting_recipe/roguetown/mortar
 	name = "stone mortar"
-	result = /obj/item/reagent_containers/glass/mortar = 1
+	result = /obj/item/reagent_containers/glass/mortar
 	reqs = list(/obj/item/natural/stone = 1)
 	tools = list(/obj/item/rogueweapon/huntingknife) // Intended to be either stone knife or steel hunting knife
 	craftdiff = 1
@@ -238,7 +238,7 @@
 
 /datum/crafting_recipe/roguetown/pestle
 	name = "stone pestle"
-	result = /obj/item/pestle = 1
+	result = /obj/item/pestle
 	reqs = list(/obj/item/natural/stone = 1)
 	tools = list(/obj/item/rogueweapon/huntingknife) // Intended to be either stone knife or steel hunting knife
 	craftdiff = 1
