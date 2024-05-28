@@ -49,6 +49,16 @@
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/rogueweapon/sword
 
+/obj/item/rogueweapon/sword/short
+	name = "short sword"
+	desc = "An archaic steel sword made for stabbing."
+	force = 19
+	possible_item_intents = list(/datum/intent/sword/cut/short, /datum/intent/sword/thrust/short)
+	icon_state = "swordshort"
+	gripped_intents = null
+	minstr = 4
+	wdefense = 4
+
 /datum/anvil_recipe/weapons/ssaber
 	name = "steel sabre"
 	req_bar = /obj/item/ingot/steel
