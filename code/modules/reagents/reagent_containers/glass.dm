@@ -542,6 +542,7 @@
 	desc = "A small, round-end stone tool oft used by physicians to crush and mix medicine."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "pestle"
+	dropshrink = 0.65
 	force = 7
 
 /obj/item/reagent_containers/glass/mortar

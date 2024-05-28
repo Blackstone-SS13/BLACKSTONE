@@ -181,18 +181,22 @@
 	req_table = TRUE
 
 /datum/crafting_recipe/roguetown/poisonarrow
-	name = "dip an arrow in poison"
+	name = "poisoned arrow"
 	result = /obj/item/ammo_casing/caseless/rogue/arrow/poison
-	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow = 1,
-				/datum/reagent/berrypoison = 5)
+	reqs = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow = 1,
+				/datum/reagent/berrypoison = 5
+				)
 
 	req_table = TRUE
 
-/datum/crafting_recipe/roguetown/poisonarrowstone
-	name = "dip a stone arrow in poison"
+/datum/crafting_recipe/roguetown/poisonarrow_stone
+	name = "poisoned stone arrow"
 	result = /obj/item/ammo_casing/caseless/rogue/arrow/stone/poison
-	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow/stone = 1,
-				/datum/reagent/berrypoison = 5)
+	reqs = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone = 1,
+				/datum/reagent/berrypoison = 5
+				)
 
 	req_table = TRUE
 /*
@@ -204,15 +208,17 @@
 
 	req_table = TRUE
 */
-/datum/crafting_recipe/roguetown/poisonarrowfive //Arrows and bolts can be smithed in batches of five. Makes sense for them to be dipped in batches of five, too
+/datum/crafting_recipe/roguetown/poisonarrow_five //Arrows and bolts can be smithed in batches of five. Makes sense for them to be dipped in batches of five, too
 	name = "dip five arrows in poison"
 	result = list(/obj/item/ammo_casing/caseless/rogue/arrow/poison = 5)
-	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow = 5,
-				/datum/reagent/berrypoison = 25)
+	reqs = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow = 5,
+				/datum/reagent/berrypoison = 25
+				)
 
 	req_table = TRUE
 /*
-/datum/crafting_recipe/roguetown/poisonboltfive //Coded, but commented out pending balance discussion.
+/datum/crafting_recipe/roguetown/poisonbolt_five //Coded, but commented out pending balance discussion.
 	name = "dip five bolts in poison"
 	result = list(/obj/item/ammo_casing/caseless/rogue/bolt/poison = 5)
 	reqs = list(/obj/item/ammo_casing/caseless/rogue/bolt = 5,
@@ -220,11 +226,13 @@
 
 	req_table = TRUE
 */
-/datum/crafting_recipe/roguetown/poisonarrowstone
+/datum/crafting_recipe/roguetown/poisonarrow_five_stone
 	name = "dip five stone arrows in poison"
 	result = list(/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison = 5)
-	reqs = list(/obj/item/ammo_casing/caseless/rogue/arrow/stone = 5,
-				/datum/reagent/berrypoison = 25)
+	reqs = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone = 5,
+				/datum/reagent/berrypoison = 25
+				)
 
 	req_table = TRUE
 

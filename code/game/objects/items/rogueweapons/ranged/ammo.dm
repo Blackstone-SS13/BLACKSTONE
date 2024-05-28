@@ -102,7 +102,11 @@
 	. = ..()
 	if(iscarbon(target))
 		var/mob/living/carbon/M = target
-		M.reagents.add_reagent(/datum/reagent/berrypoison, 5) //a fast-acting and dangerous toxin that induces nausea. King may naturally declare them illegal except for use by hunters.
+		M.reagents.add_reagent(/datum/reagent/berrypoison, 5) //a fast-acting and dangerous toxin that induces nausea, vomiting of blood, and eventually sends the body into shock. King may naturally declare them illegal except for use by hunters.
+	if(istype(target, /mob/living/simple_animal))
+		var/mob/living/simple_animal/M = target
+		sleep(10 SECONDS)
+		M.adjustToxLoss(150)
 
 /obj/projectile/bullet/reusable/bullet
 	name = "lead ball"
