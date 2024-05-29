@@ -5,6 +5,7 @@
 	icon_state = "headpike"
 	density = FALSE
 	anchored = TRUE
+	max_integrity = 50
 
 	//var/obj/item/grown/log/tree/small/pike
 	//var/obj/item/bodypart/head/stored_head
@@ -23,10 +24,7 @@
 	pike = locate(/obj/item/grown/log/tree/small) in parts_list
 */
 	var/list/pikedhead = list() // contain the head/s that will be on the pike
-	var/current_heads = 0 // start with no heads
 	var/maximum_heads = 3 // you can stack up to 3 heads on the pike
-
-	
 
 /obj/structure/headpike/Initialize()
 	. = ..()
@@ -61,15 +59,19 @@
 		//overlays += /obj/item/bodyparts/head
 		pixel_y += 14
 
+/*
 /obj/structure/headpike/examine(mob/user)
+	. = ..()
 	if(pikedhead.len == 1)
-		desc = "1 person's head is on this pike."
+		. += "1 person's head is on this pike."
 	if(pikedhead.len == 2)
-		desc = "There are 2 heads on this pike."
+		. = "There are 2 heads on this pike."
 	if(pikedhead.len == 3)
-		desc = "There are 3 heads on this pike!"
+		. = "There are 3 heads on this pike!"
 	if(pikedhead.len == 0)
-		desc = "This pike has no heads. That can be fixed."
+		. = "This pike has no heads. That can be fixed."
+		*/
+// examine proc, will edit back in once i figure out collecting head ids
 	
 
 /obj/structure/headpike/attackby(obj/item/I, mob/user, params)
@@ -81,3 +83,14 @@
 			to_chat(user, "<span class='notice'>There's no room on this pike for another head!</span>")
 	return
 	qdel(src)
+/*
+/obj/structure/headpike/dump_contents()
+	var/atom/L = drop_location()
+	for(var/atom/movable/AM in src)
+		AM.forceMove(L)
+	pikedhead = list()
+
+/obj/structure/headpike/Destroy()
+	dump_contents()
+	return ..()
+	*/
