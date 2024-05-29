@@ -116,7 +116,7 @@
 	created_item = /obj/item/reagent_containers/glass/pot //weird how it's a child of glass but whatevs
 	i_type = "Tools"
 
-// --------- + Steel -----------
+// --------- Steel -----------
 
 /datum/anvil_recipe/tools/steelpick
 	name = "Pickaxe (+1 Stick)"
