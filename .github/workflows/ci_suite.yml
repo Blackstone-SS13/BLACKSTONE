@@ -1,13 +1,12 @@
 name: BYOND Build
 
-on:
+on: workflow_dispatch
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
-  workflow_dispatch
 env:
   BYOND_MAJOR: 515
   BYOND_MINOR: 1636
