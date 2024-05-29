@@ -580,9 +580,6 @@
 				bodypart.receive_damage(embedded.w_class*embedded.embedding.embedded_fall_pain_multiplier)
 				bodypart.remove_embedded_object(embedded)
 				to_chat(src,"<span class='danger'>[embedded] falls out of my [bodypart.name]!</span>")
-				if(!has_embedded_objects())
-					clear_alert("embeddedobject")
-					SEND_SIGNAL(src, COMSIG_CLEAR_MOOD_EVENT, "embedded")
 
 /*
 Alcohol Poisoning Chart

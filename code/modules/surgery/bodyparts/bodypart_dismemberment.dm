@@ -147,9 +147,6 @@
 		else
 			qdel(bandage)
 		bandage = null
-	if(!was_owner.has_embedded_objects())
-		was_owner.clear_alert("embeddedobject")
-		SEND_SIGNAL(was_owner, COMSIG_CLEAR_MOOD_EVENT, "embedded")
 
 	if(!special)
 		if(was_owner.dna)

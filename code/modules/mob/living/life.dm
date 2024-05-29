@@ -171,8 +171,6 @@
 //			BP.receive_damage(I.w_class*I.embedding.embedded_fall_pain_multiplier)
 			simple_remove_embedded_object(embedded)
 			to_chat(src,"<span class='danger'>[embedded] falls out of me!</span>")
-			if(!has_embedded_objects())
-				clear_alert("embeddedobject")
 
 //this updates all special effects: knockdown, druggy, stuttering, etc..
 /mob/living/proc/handle_status_effects()

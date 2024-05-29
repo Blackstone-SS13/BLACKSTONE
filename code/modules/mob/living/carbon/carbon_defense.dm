@@ -85,9 +85,7 @@
 	if(newdam <= 8)
 		return FALSE
 	if(prob(P.embedchance) && P.dropped)
-		BP.add_embedded_object(P.dropped, silent = FALSE, crit_message = FALSE)
-		to_chat(src, "<span class='danger'>[P.dropped] sticks in my [BP.name]!</span>")
-		emote("embed")
+		BP.add_embedded_object(P.dropped, silent = FALSE, crit_message = TRUE)
 		return TRUE
 	return FALSE
 

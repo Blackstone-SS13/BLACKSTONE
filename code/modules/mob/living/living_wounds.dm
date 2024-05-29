@@ -205,7 +205,7 @@
 		return FALSE
 	if(ispath(embedder))
 		embedder = has_embedded_object(embedder)
-	if(!istype(embedder))
+	if(!istype(embedder) || !is_object_embedded(embedder))
 		return FALSE
 	LAZYREMOVE(simple_embedded_objects, embedder)
 	embedder.is_embedded = FALSE
