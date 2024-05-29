@@ -35,13 +35,12 @@ GLOBAL_VAR(lordsurname)
 /datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
 	if(L)
-		if(!GLOB.lordsurname && !visualsOnly)
-			var/list/chopped_name = splittext(L.real_name, " ")
-			if(length(chopped_name) > 1)
-				chopped_name -= chopped_name[1]
-				GLOB.lordsurname = jointext(chopped_name, " ")
-			else
-				GLOB.lordsurname = "of [L.real_name]"
+		var/list/chopped_name = splittext(L.real_name, " ")
+		if(length(chopped_name) > 1)
+			chopped_name -= chopped_name[1]
+			GLOB.lordsurname = jointext(chopped_name, " ")
+		else
+			GLOB.lordsurname = "of [L.real_name]"
 		SSticker.select_ruler()
 		if(SSticker.rulertype == "King")
 			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is King of Rockhill.</span></span></b>")
