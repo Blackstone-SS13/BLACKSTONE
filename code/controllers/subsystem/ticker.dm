@@ -322,9 +322,7 @@ SUBSYSTEM_DEF(ticker)
 /datum/controller/subsystem/ticker/proc/setup()
 	message_admins("<span class='boldannounce'>Starting game...</span>")
 	var/init_start = world.timeofday
-	
 		//Create and announce mode
-	/** 
 	var/list/datum/game_mode/runnable_modes
 	if(GLOB.master_mode == "random" || GLOB.master_mode == "secret")
 		runnable_modes = config.get_runnable_modes()
@@ -347,7 +345,6 @@ SUBSYSTEM_DEF(ticker)
 				mode = pick(runnable_modes)
 
 	else
-		message_admins("mode picked")
 		mode = config.pick_mode(GLOB.master_mode)
 		if(!mode.can_start())
 			message_admins("<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players and [mode.required_enemies] eligible antagonists needed. Reverting to pre-game lobby.")
@@ -355,8 +352,7 @@ SUBSYSTEM_DEF(ticker)
 			mode = null
 			SSjob.ResetOccupations()
 			return 0
-	*/
-	mode = new /datum/game_mode/chaosmode/
+
 //	if(failedstarts >= 13)
 //		qdel(mode)
 //		mode = new /datum/game_mode/roguewar
