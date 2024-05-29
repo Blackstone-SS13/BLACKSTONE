@@ -200,7 +200,6 @@
 	hair_color = VD.cache_hair
 	eye_color = VD.cache_eyes
 	facial_hair_color = VD.cache_hair
-	mob_biotypes = MOB_ORGANIC
 	update_body()
 	update_hair()
 	update_body_parts(redraw = TRUE)
@@ -212,7 +211,6 @@
 //	VD.cache_skin = skin_tone
 //	VD.cache_eyes = eye_color
 //	VD.cache_hair = hair_color
-	mob_biotypes = MOB_UNDEAD
 	skin_tone = "c9d3de"
 	hair_color = "181a1d"
 	facial_hair_color = "181a1d"
