@@ -59,12 +59,6 @@
 	created_item = /obj/item/rogueweapon/pick
 	i_type = "Tools"
 
-/datum/anvil_recipe/tools/+ Steelpick
-	name = "Pickaxe (+1 Stick)"
-	req_bar = /obj/item/ingot/+ Steel
-	additional_items = list(/obj/item/grown/log/tree/stick)
-	created_item = /obj/item/rogueweapon/pick/+ Steel
-
 /datum/anvil_recipe/tools/hoe
 	name = "Hoe (+2 Sticks)"
 	req_bar = /obj/item/ingot/iron
@@ -124,7 +118,7 @@
 
 // --------- + Steel -----------
 
-/datum/anvil_recipe/tools/+ Steelpick
+/datum/anvil_recipe/tools/steelpick
 	name = "Pickaxe (+1 Stick)"
 	req_bar = /obj/item/ingot/+ Steel
 	additional_items = list(/obj/item/grown/log/tree/stick)
