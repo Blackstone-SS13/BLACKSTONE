@@ -795,6 +795,8 @@ GLOBAL_LIST_INIT(can_embed_types, typecacheof(list(
 )))
 
 /proc/can_embed(obj/item/W)
+	if(HAS_TRAIT(W, TRAIT_NODROP) || HAS_TRAIT(W, TRAIT_NOEMBED))
+		return FALSE
 	if(W.get_sharpness())
 		return TRUE
 	if(is_pointed(W))
