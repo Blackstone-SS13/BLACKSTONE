@@ -1036,7 +1036,6 @@
 		for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 			bodypart.rotted = FALSE
 			bodypart.skeletonized = FALSE
-	mind.remove_antag_datum(/datum/antagonist/zombie)
 	if(admin_revive)
 		suiciding = FALSE
 		regenerate_limbs()
@@ -1277,5 +1276,5 @@
 	for(var/obj/item/grabbing/grab in grabbedby)
 		if(grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
 			return FALSE
-	if(istype(loc, /turf/open/water) && lying)
+	if(istype(loc, /turf/open/water) && !(mobility_flags & MOBILITY_STAND))
 		return FALSE

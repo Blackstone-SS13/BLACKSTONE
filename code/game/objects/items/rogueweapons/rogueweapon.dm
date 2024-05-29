@@ -38,7 +38,7 @@
 	var/yea = pick("[src] is broken!", "[src] is useless!", "[src] is destroyed!")
 	destroy_message = "<span class='warning'>[yea]</span>"
 
-/obj/item/rogueweapon/get_dismemberment_chance(obj/item/bodypart/affecting)
+/obj/item/rogueweapon/get_dismemberment_chance(obj/item/bodypart/affecting, input)
 	if(!affecting.can_dismember(src))
 		return 0
 	var/mob/living/L = loc

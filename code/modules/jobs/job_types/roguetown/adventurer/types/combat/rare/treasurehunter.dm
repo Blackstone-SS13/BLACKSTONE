@@ -35,7 +35,8 @@
 	backr = /obj/item/rogueweapon/shovel
 	head = /obj/item/clothing/head/roguetown/puritan
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axes, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)

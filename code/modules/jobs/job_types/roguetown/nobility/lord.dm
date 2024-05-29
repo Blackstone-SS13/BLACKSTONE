@@ -23,7 +23,7 @@ GLOBAL_VAR(lordsurname)
 /datum/job/roguetown/exlord //just used to change the lords title
 	title = "King Emeritus"
 	f_title = "Queen Emeritus"
-	flag = ADVENTURER
+	flag = LORD
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 0
@@ -71,7 +71,7 @@ GLOBAL_VAR(lordsurname)
 			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
 			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)

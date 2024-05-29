@@ -1,6 +1,6 @@
 /datum/job/roguetown/manorguard
 	title = "Man at Arms"
-	flag = GUARDSMAN
+	flag = MANATARMS
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 8
@@ -51,7 +51,7 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, pick(2,3,3), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, pick(1,2,3,3), TRUE)

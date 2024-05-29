@@ -32,7 +32,7 @@
 	backl = /obj/item/storage/backpack/rogue/backpack
 	backpack_contents = list(/obj/item/flint = 1)
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 4, TRUE) // Tough. Well fed. The strongest of the strong.
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)

@@ -1,6 +1,6 @@
 /datum/job/roguetown/bogguardsman
 	title = "Bog Guard"
-	flag = GUARDSMAN
+	flag = BOGGUARD
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 10
@@ -93,7 +93,7 @@
 /datum/outfit/job/roguetown/bogguardsman/proc/assign_skills(mob/living/carbon/human/bogger)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
@@ -122,7 +122,7 @@
 	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)

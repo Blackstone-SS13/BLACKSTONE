@@ -1,7 +1,7 @@
 /datum/job/roguetown/skeleton
-	title = "skeleton"
-	flag = GRAVEDIGGER
-	department_flag = PEASANTS
+	title = "Skeleton"
+	flag = SKELETON
+	department_flag = SLOP
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
@@ -56,8 +56,8 @@
 		H.update_body()
 		H.mob_biotypes = MOB_UNDEAD
 		H.faction = list("undead")
-		H.name = "skeleton"
-		H.real_name = "skeleton"
+		H.name = "skelelon"
+		H.real_name = "skelelon"
 		ADD_TRAIT(H, TRAIT_NOMOOD, TRAIT_GENERIC)
 		ADD_TRAIT(H, RTRAIT_NOROGSTAM, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)

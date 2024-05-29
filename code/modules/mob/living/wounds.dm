@@ -27,114 +27,8 @@
 			continue
 		return wound
 
-/// Loops through our list of wounds and returns the first wound that is of the type specified by the path
-/mob/living/proc/heal_wounds(heal_amount, sleep_heal = FALSE)
-	var/healed_any = FALSE
-	for(var/datum/wound/wound as anything in get_wounds())
-		if((heal_amount <= 0) || (sleep_heal && !wound.sleep_healing))
-			continue
-		var/amount_healed = wound.heal_wound(heal_amount)
-		heal_amount -= amount_healed
-		healed_any = TRUE
-	return healed_any
-
-/// Tries to do a critical hit on a mob that uses simple wounds - DO NOT CALL THIS ON CARBON MOBS, THEY HAVE BODYPARTS!
-/mob/living/proc/try_crit(bclass, dam, mob/living/user, zone_precise)
-	if(!dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-		return FALSE
-	if(check_zone(zone_precise) == BODY_ZONE_HEAD)
-		if(bclass == BCLASS_BLUNT || bclass == BCLASS_SMASH || bclass == BCLASS_PICK)
-			var/used = round((health / maxHealth) * 20 + (dam / 3), 1)
-			if(user)
-				if(istype(user.rmb_intent, /datum/rmb_intent/strong))
-					used += 10
-			if(prob(used))
-				if(has_wound(/datum/wound/fracture/head))
-					return FALSE
-				var/static/list/phrases = list(
-					"The skull shatters in a gruesome way!", 
-					"The head is smashed!", 
-					"The skull is broken!", 
-					"The skull caves in!",
-				)
-				src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> [pick(phrases)]</span>"
-				if(prob(3))
-					playsound(src, 'sound/combat/tf2crit.ogg', 100, FALSE)
-				else
-					playsound(src, "headcrush", 100, FALSE)
-				return simple_add_wound(/datum/wound/fracture/head)
-	if(bclass == BCLASS_STAB || bclass == BCLASS_PICK || bclass == BCLASS_CUT || bclass == BCLASS_CHOP || bclass == BCLASS_BITE)
-		if(bclass == BCLASS_CHOP || bclass == BCLASS_PICK)
-			if(user)
-				if(istype(user.rmb_intent, /datum/rmb_intent/strong))
-					dam += 30
-		else
-			if(user)
-				if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
-					dam += 30
-		if(prob(round(max(dam / 3, 1), 1)))
-			if(has_wound(/datum/wound/artery))
-//				if(bclass == BCLASS_STAB || bclass == BCLASS_PICK)
-//					death()
-//					return TRUE
-				return FALSE
-			if(prob(3))
-				playsound(src, 'sound/combat/tf2crit.ogg', 100, FALSE)
-			else
-				playsound(src, pick('sound/combat/crit.ogg'), 100, FALSE)
-			src.emote("death", forced =TRUE)
-			src.next_attack_msg += " <span class='crit'><b>Critical hit!</b> Blood sprays from [src]!</span>"
-			return simple_add_wound(/datum/wound/artery)
-//			if(bclass == BCLASS_STAB || bclass == BCLASS_PICK)
-//				death()
-//				return TRUE
-
-/mob/living/proc/simple_woundcritroll(bclass, dam, mob/living/user, zone_precise)
-	if(!bclass || !dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-		return FALSE
-	if(user)
-		if(user.goodluck(2))
-			dam += 10
-		if(!istype(user.rmb_intent, /datum/rmb_intent/weak))
-			var/crit_attempt = try_crit(bclass, dam, user, zone_precise)
-			if(crit_attempt)
-				return crit_attempt
-	else
-		var/crit_attempt = try_crit(bclass, dam, user, zone_precise)
-		if(crit_attempt)
-			return crit_attempt
-	switch(bclass) //do stuff but only when we are a blade that adds wounds
-		if(BCLASS_SMASH, BCLASS_BLUNT)
-			switch(dam)
-				if(1 to 10)
-					return simple_add_wound(/datum/wound/bruise/small)
-				if(11 to 20)
-					return simple_add_wound(/datum/wound/bruise)
-				if(21 to INFINITY)
-					return simple_add_wound(/datum/wound/bruise/large)
-		if(BCLASS_CUT, BCLASS_CHOP)
-			switch(dam)
-				if(1 to 10)
-					return simple_add_wound(/datum/wound/slash/small)
-				if(11 to 20)
-					return simple_add_wound(/datum/wound/slash)
-				if(21 to INFINITY)
-					return simple_add_wound(/datum/wound/slash/large)
-		if(BCLASS_STAB, BCLASS_PICK)
-			switch(dam)
-				if(1 to 10)
-					return simple_add_wound(/datum/wound/puncture/small)
-				if(11 to 20)
-					return simple_add_wound(/datum/wound/puncture)
-				if(21 to INFINITY)
-					return simple_add_wound(/datum/wound/puncture/large)
-		if(BCLASS_BITE)
-			if(dam > 8)
-				return simple_add_wound(/datum/wound/bite/bleeding)
-			return simple_add_wound(/datum/wound/bite)
-
 /// Simple version for adding a wound - DO NOT CALL THIS ON CARBON MOBS!
-/mob/living/proc/simple_add_wound(datum/wound/wound)
+/mob/living/proc/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)
 	if(!wound || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
 	if(ispath(wound, /datum/wound))
@@ -147,7 +41,7 @@
 	else if(!wound.can_apply_to_mob(src))
 		qdel(wound)
 		return
-	if(!wound.apply_to_mob(src))
+	if(!wound.apply_to_mob(src, silent, crit_message))
 		qdel(wound)
 		return
 	return wound
@@ -163,3 +57,101 @@
 	. = wound.remove_from_mob()
 	if(.)
 		qdel(wound)
+
+/// Loops through our list of wounds and returns the first wound that is of the type specified by the path
+/mob/living/proc/heal_wounds(heal_amount)
+	var/healed_any = FALSE
+	for(var/datum/wound/wound as anything in get_wounds())
+		if(heal_amount <= 0)
+			continue
+		var/amount_healed = wound.heal_wound(heal_amount)
+		if(amount_healed)
+			heal_amount -= amount_healed
+			healed_any = TRUE
+	return healed_any
+
+/mob/living/proc/simple_woundcritroll(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE)
+	if(!bclass || !dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		return FALSE
+	var/do_crit = TRUE
+	if(user)
+		if(user.goodluck(2))
+			dam += 10
+		if(istype(user.rmb_intent, /datum/rmb_intent/weak))
+			do_crit = FALSE
+	testing("simple_woundcritroll() dam [dam]")
+	var/added_wound
+	switch(bclass) //do stuff but only when we are a blade that adds wounds
+		if(BCLASS_SMASH, BCLASS_BLUNT)
+			switch(dam)
+				if(20 to INFINITY)
+					added_wound = /datum/wound/bruise/large
+				if(10 to 20)
+					added_wound = /datum/wound/bruise
+				if(1 to 10)
+					added_wound = /datum/wound/bruise/small
+		if(BCLASS_CUT, BCLASS_CHOP)
+			switch(dam)
+				if(20 to INFINITY)
+					added_wound = /datum/wound/slash/large
+				if(10 to 20)
+					added_wound = /datum/wound/slash
+				if(1 to 10)
+					added_wound = /datum/wound/slash/small
+		if(BCLASS_STAB, BCLASS_PICK)
+			switch(dam)
+				if(20 to INFINITY)
+					added_wound = /datum/wound/puncture/large
+				if(10 to 20)
+					added_wound = /datum/wound/puncture
+				if(1 to 10)
+					added_wound = /datum/wound/puncture/small
+		if(BCLASS_BITE)
+			switch(dam)
+				if(20 to INFINITY)
+					added_wound = /datum/wound/bite/large
+				if(10 to 20)
+					added_wound = /datum/wound/bite
+				if(1 to 10)
+					added_wound = /datum/wound/bite/small
+	if(added_wound)
+		added_wound = simple_add_wound(added_wound, silent, crit_message)
+	if(do_crit)
+		var/crit_attempt = simple_try_crit(bclass, dam, user, zone_precise, silent, crit_message)
+		if(crit_attempt)
+			return crit_attempt
+	return added_wound
+
+/// Tries to do a critical hit on a mob that uses simple wounds - DO NOT CALL THIS ON CARBON MOBS, THEY HAVE BODYPARTS!
+/mob/living/proc/simple_try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE)
+	if(!bclass || !dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+		return FALSE
+	var/list/attempted_wounds = list()
+	var/used
+	if(user)
+		if(user.goodluck(2))
+			dam += 10
+	if(bclass in GLOB.fracture_bclasses)
+		var/fracture_type = /datum/wound/fracture/chest
+		if(check_zone(zone_precise) == BODY_ZONE_HEAD)
+			fracture_type = /datum/wound/fracture/head
+		used = round((health / maxHealth) * 20 + (dam / 3), 1)
+		if(user && istype(user.rmb_intent, /datum/rmb_intent/strong))
+			used += 10
+		if(prob(used))
+			attempted_wounds += fracture_type
+	if(bclass in GLOB.artery_bclasses)
+		if(user)
+			if((bclass in GLOB.artery_strong_bclasses) && istype(user.rmb_intent, /datum/rmb_intent/strong))
+				dam += 30
+			else if(istype(user.rmb_intent, /datum/rmb_intent/aimed))
+				dam += 30
+		used = round(max(dam / 3, 1), 1)
+		if(prob(used))
+			attempted_wounds += /datum/wound/artery/chest
+		
+	for(var/wound_type in shuffle(attempted_wounds))
+		var/datum/wound/applied = simple_add_wound(wound_type, silent, crit_message)
+		if(applied)
+			return applied
+	return FALSE

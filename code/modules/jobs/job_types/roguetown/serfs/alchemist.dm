@@ -1,7 +1,7 @@
 /datum/job/roguetown/alchemist
 	title = "Alchemist"
 	flag = ALCHEMIST
-	department_flag = SERFS
+	department_flag = YEOMEN
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0

@@ -1,6 +1,6 @@
 /datum/job/roguetown/veteran
 	title = "Veteran"
-	flag = GUARDSMAN
+	flag = VETERAN
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 0
@@ -52,7 +52,8 @@
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger/steel/special = 1)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axes, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)

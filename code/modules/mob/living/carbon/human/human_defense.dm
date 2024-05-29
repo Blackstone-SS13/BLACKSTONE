@@ -406,7 +406,7 @@
 			nodmg = TRUE
 			next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
-			affecting.bodypart_attacked_by(M.a_intent.blade_class, damage - armor, M, dam_zone)
+			affecting.bodypart_attacked_by(M.a_intent.blade_class, damage - armor, M, dam_zone, crit_message = TRUE)
 		visible_message("<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] [src]![next_attack_msg.Join()]</span>", \
 					"<span class='danger'>\The [M] [pick(M.a_intent.attack_verb)] me![next_attack_msg.Join()]</span>", null, COMBAT_MESSAGE_RANGE)
 		next_attack_msg.Cut()
@@ -792,8 +792,7 @@
 	if(stat < DEAD)
 		examination += "[m1] still alive."
 		if(stat >= UNCONSCIOUS)
-			var/sleepy = IsSleeping()
-			examination += "[m1] [sleepy ? "asleep" : "unconscious"]."
+			examination += "[m1] [IsSleeping() ? "asleep" : "unconscious"]."
 	else
 		examination += "<span class='dead'>[m1] dead.</span>"
 
@@ -809,14 +808,11 @@
 
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
 		if(HAS_TRAIT(src, TRAIT_NO_BITE))
-			examination += "<span class='danger'>[m1] TETRAPLEGIC!</span>"
+			examination += "<span class='danger'>[m1] PARALYZED!</span>"
 		else
-			examination += "<span class='danger'>[m1] QUADRIPLEGIC!</span>"
+			examination += "<span class='danger'>[m1] TETRAPLEGIC!</span>"
 	else if(HAS_TRAIT(src, TRAIT_PARALYSIS_R_LEG) && HAS_TRAIT(src, TRAIT_PARALYSIS_L_LEG))
 		examination += "<span class='warning'>[m1] PARAPLEGIC!</span>"
-
-	if(roundstart_quirks.len)
-		examination += "I have these quirks: [get_trait_string()]."
 	
 	var/static/list/body_zones = list(
 		BODY_ZONE_HEAD,
@@ -859,7 +855,7 @@
 	if(examined_part)
 		examination += examined_part.check_for_injuries(user, advanced)
 	else
-		examination += "<span class='info'>☼ [capitalize(parse_zone(choice))]: <span class='deadsay'><b>MISSING</b></span></span>"
+		examination += "<span class='info'>☼ [capitalize(parse_zone(choice))]: <span class='deadsay'><B>MISSING</B></span></span>"
 	examination += "ø ------------ ø</span>"
 	if(!silent)
 		to_chat(user, examination.Join("\n"))

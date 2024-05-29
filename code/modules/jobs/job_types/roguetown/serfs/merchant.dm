@@ -1,11 +1,11 @@
 /datum/job/roguetown/merchant
 	title = "Merchant"
 	flag = MERCHANT
-	department_flag = SERFS
+	department_flag = YEOMEN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	selection_color = JCOLOR_SERF
+	selection_color = JCOLOR_YEOMAN
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -26,7 +26,7 @@
 	..()
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,4,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)

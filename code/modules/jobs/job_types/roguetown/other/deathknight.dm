@@ -1,7 +1,7 @@
 /datum/job/roguetown/deathknight
 	title = "Death Knight"
-	flag = GRAVEDIGGER
-	department_flag = PEASANTS
+	flag = DEATHKNIGHT
+	department_flag = SLOP
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
@@ -75,7 +75,7 @@
 /datum/outfit/job/roguetown/deathknight/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)

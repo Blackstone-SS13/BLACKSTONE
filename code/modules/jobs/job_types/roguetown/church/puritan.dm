@@ -65,7 +65,7 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
@@ -79,6 +79,7 @@
 	H.verbs |= /mob/living/carbon/human/proc/torture_victim
 	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
+	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /mob/living/carbon/human/proc/torture_victim()
 	set name = "Extract Confession"
@@ -140,7 +141,7 @@
 
 /mob/living/carbon/human/proc/confession_time(confession_type = "antag")
 	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins)), 6 SECONDS, TIMER_STOPPABLE)
-	var/responsey = alert(src, "Resist torture? (1 TRI)","Yes","No")
+	var/responsey = alert(src, "Resist torture? (1 TRI)", "TORTURE", "Yes","No")
 	if(!responsey)
 		responsey = "No"
 	if(SStimer.timer_id_dict[timerid])

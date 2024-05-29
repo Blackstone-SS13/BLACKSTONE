@@ -2,7 +2,9 @@
 #define RTRAIT_WEBWALK 					"Webwalker"
 #define RTRAIT_NOSTINK 					"Dead Nose"
 #define RTRAIT_ZJUMP 					"High Jumping"
+#define RTRAIT_LEAPER 					"Leaper"
 #define RTRAIT_NOSEGRAB 				"Intimidating"
+#define RTRAIT_NUTCRACKER 				"Nutcracker"
 #define RTRAIT_SEEPRICES				"Giza Blooded"
 #define RTRAIT_SEEPRICES_SHITTY			"Giza-in-training"
 #define RTRAIT_STRONGBITE				"Strong Bite"
@@ -11,6 +13,7 @@
 #define RTRAIT_BREADY					"Battleready"
 #define RTRAIT_MEDIUMARMOR				"Maille Training"
 #define RTRAIT_HEAVYARMOR				"Plate Training"
+#define RTRAIT_DODGEEXPERT              "Fast Reflexes"
 #define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
 #define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
 #define RTRAIT_CRITICAL_WEAKNESS		"Critical Weakness"
@@ -42,8 +45,10 @@
 GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_WEBWALK = "I can move freely between webs.",
 	RTRAIT_NOSTINK = "<span class='deadsay'>My nose is numb to the smell of decay.</span>",
-	RTRAIT_ZJUMP = "Who needs to climb when you can make great leaps?",
+	RTRAIT_ZJUMP = "Time to reach a new high.",
+	RTRAIT_LEAPER = "I can leap like a frog.",
 	RTRAIT_NOSEGRAB = "I love to grab idiots by their noses!",
+	RTRAIT_NUTCRACKER = "I love kicking idiots on the nuts!",
 	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
 	RTRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... <i>Kind of</i>.",
 	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
@@ -52,6 +57,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	RTRAIT_BREADY = "Defensive stance does not passively fatigue me.",
 	RTRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
 	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
+	RTRAIT_DODGEEXPERT = "I can dodge easly while only wearing light armor.",
 	RTRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
 	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
 	RTRAIT_CRITICAL_WEAKNESS = "<span class='danger'>I am weak to wounds that others could survive.</span>",
@@ -68,11 +74,6 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "<span class='warning'>I can't sleep.</span>",
 ))
-
-
-
-
-
 
 // trait accessor defines
 #define ADD_TRAIT(target, trait, source) \
@@ -187,6 +188,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EASYLIMBDISABLE	"easy_limb_disable"
 #define TRAIT_TOXINLOVER		"toxinlover"
 #define TRAIT_NOBREATH			"no_breath"
+#define TRAIT_HOLDBREATH		"hold_breath"
 #define TRAIT_ANTIMAGIC			"Anti-Magic"
 #define TRAIT_HOLY				"holy"
 #define TRAIT_DEPRESSION		"depression"
@@ -238,10 +240,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLOODLOSS_IMMUNE "bloodloss_immune" // can bleed, but will never die from blood loss
 #define TRAIT_ROTMAN "rotman" //you are a rotman and need occasional maintenance
 #define TRAIT_ZOMBIE_IMMUNE "zombie_immune" //immune to zombie infection
-#define TRAIT_PARALYSIS	"paralysis" //Used for limb-based paralysis and full body paralysis
 #define TRAIT_NO_BITE "no_bite" //prevents biting
 
-// item traits
+//bodypart traits
+#define TRAIT_PARALYSIS	"paralysis" //Used for limb-based paralysis and full body paralysis
+#define TRAIT_BRITTLE "brittle" //The limb is more susceptible to fractures
+#define TRAIT_FINGERLESS "fingerless" //The limb has no fingies
+
+//item traits
 #define TRAIT_NODROP            "nodrop"
 #define TRAIT_T_RAY_VISIBLE     "t-ray-visible" // Visible on t-ray scanners if the atom/var/level == 1
 #define TRAIT_NO_TELEPORT		"no-teleport" //you just can't

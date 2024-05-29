@@ -1,7 +1,8 @@
 /datum/job/roguetown/magician
 	title = "Court Magician"
 	flag = WIZARD
-	department_flag = NOBLEMEN
+	department_flag = COURTIERS
+	selection_color = JCOLOR_COURTIER
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
@@ -67,4 +68,3 @@
 				head = /obj/item/clothing/head/roguetown/wizhat
 				armor = /obj/item/clothing/suit/roguetown/shirt/robe/wizard
 				H.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)

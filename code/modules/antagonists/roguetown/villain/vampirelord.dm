@@ -11,8 +11,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	roundend_category = "Vampires"
 	antagpanel_category = "Vampire"
 	job_rank = ROLE_VAMPIRE
-	antag_hud_type = ANTAG_HUD_TRAITOR
-	antag_hud_name = "vampire"
+	antag_hud_type = ANTAG_HUD_VAMPIRE
+	antag_hud_name = "Vlord"
 	confess_lines = list(
 		"I AM ANCIENT", 
 		"I AM THE LAND", 
@@ -44,8 +44,16 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	if(istype(examined_datum, /datum/antagonist/skeleton))
 		return "<span class='boldnotice'>Another deadite.</span>"
 
+/datum/antagonist/vampirelord/apply_innate_effects(mob/living/mob_override)
+	var/mob/living/M = mob_override || owner.current
+	add_antag_hud(antag_hud_type, antag_hud_name, M)
+
+/datum/antagonist/vampirelord/remove_innate_effects(mob/living/mob_override)
+	var/mob/living/M = mob_override || owner.current
+	remove_antag_hud(antag_hud_type, M)
+
 /datum/antagonist/vampirelord/on_gain()
-	var/datum/game_mode/chaosmode/C = SSticker.mode
+	var/datum/game_mode/C = SSticker.mode
 	C.vampires |= owner
 	. = ..()
 	owner.special_role = name
@@ -165,7 +173,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
@@ -382,7 +390,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 			H.fully_heal()
 
 	if(vitae > 0)
-		H.blood_volume = BLOOD_VOLUME_MAXIMUM
+		H.blood_volume = BLOOD_VOLUME_NORMAL
 		if(vitae < 200)
 			if(disguised)
 				to_chat(H, "<span class='warning'>My disguise fails!</span>")
@@ -477,6 +485,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 // SPAWN
 /datum/antagonist/vampirelord/lesser
 	name = "Vampire Spawn"
+	antag_hud_name = "Vspawn"
 	confess_lines = list(
 		"THE CRIMSON CALLS!", 
 		"MY MASTER COMMANDS", 

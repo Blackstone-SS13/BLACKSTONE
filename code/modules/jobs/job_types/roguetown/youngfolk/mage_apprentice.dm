@@ -1,6 +1,6 @@
 /*/datum/job/roguetown/wapprentice
 	title = "Magician's Apprentice"
-	flag = APPRENTICE
+	flag = MAGEAPPRENTICE
 	department_flag = YOUNGFOLK
 	faction = "Station"
 	total_positions = 0
@@ -21,7 +21,7 @@
 	tutorial = "Your master once saw potential in you, something you are uncertain if they still do with your recent studies. The path to using magic is something treacherous and untamed, and you are still decades away from calling yourself even a journeyman in the field. Listen and serve, and someday you will earn your hat."
 
 	outfit = /datum/outfit/job/roguetown/wapprentice
-	display_order = JDO_WAPP
+	display_order = JDO_MAGEAPPRENTICE
 	give_bank_account = TRUE
 
 /datum/outfit/job/roguetown/wapprentice/pre_equip(mob/living/carbon/human/H)

@@ -563,7 +563,15 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	dat += "<table><tr><td valign='top'>"
 	var/column_counter = 0
 
-	var/list/omegalist = list(GLOB.noble_positions) + list(GLOB.garrison_positions) + list(GLOB.church_positions) + list(GLOB.serf_positions) + list(GLOB.peasant_positions) + list(GLOB.youngfolk_positions) + list(GLOB.mercenary_positions)
+	var/list/omegalist = list()
+	omegalist += list(GLOB.noble_positions)
+	omegalist += list(GLOB.courtier_positions)
+	omegalist += list(GLOB.garrison_positions)
+	omegalist += list(GLOB.church_positions)
+	omegalist += list(GLOB.yeoman_positions)
+	omegalist += list(GLOB.peasant_positions)
+	omegalist += list(GLOB.mercenary_positions)
+	omegalist += list(GLOB.youngfolk_positions)
 
 	if(istype(SSticker.mode, /datum/game_mode/chaosmode))
 		var/datum/game_mode/chaosmode/C = SSticker.mode
@@ -580,8 +588,13 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		var/list/available_jobs = list()
 		for(var/job in category)
 			var/datum/job/job_datum = SSjob.name_occupations[job]
+			if(!job_datum)
+				continue
 			// Make sure adventurer jobs always appear on list, even if unavailable
-			if(job_datum && (IsJobUnavailable(job_datum.title, TRUE) == JOB_AVAILABLE || job_datum.title == "Adventurer"))
+			var/is_job_available = (IsJobUnavailable(job_datum.title, TRUE) == JOB_AVAILABLE)
+			if(job_datum.title == "Towner" || job_datum.title == "Adventurer" || job_datum.title == "Pilgrim")
+				is_job_available = TRUE
+			if(is_job_available)
 				available_jobs += job
 
 		if (length(available_jobs))
@@ -590,12 +603,14 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 			switch (SSjob.name_occupations[category[1]].department_flag)
 				if (NOBLEMEN)
 					cat_name = "Nobles"
+				if (COURTIERS)
+					cat_name = "Courtiers"
 				if (GARRISON)
 					cat_name = "Garrison"
 				if (CHURCHMEN)
 					cat_name = "Churchmen"
-				if (SERFS)
-					cat_name = "Serfs"
+				if (YEOMEN)
+					cat_name = "Yeomen"
 				if (PEASANTS)
 					cat_name = "Peasants"
 				if (YOUNGFOLK)
