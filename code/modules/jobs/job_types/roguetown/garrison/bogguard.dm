@@ -24,6 +24,8 @@
 	give_bank_account = 16
 	min_pq = 1
 	max_pq = null
+	
+	cmode_music = 'sound/music/combat_bog.ogg'
 
 	/// Chance to be spawned as a crossbowman instead
 	var/crossbowman_chance = 35
@@ -87,7 +89,6 @@
 			H.hairstyle = pick(acceptable)
 			H.update_hair()
 	H.verbs |= /mob/proc/haltyell
-	H.cmode_music = 'sound/music/combat_bog.ogg'
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/bogguardsman/proc/assign_skills(mob/living/carbon/human/bogger)

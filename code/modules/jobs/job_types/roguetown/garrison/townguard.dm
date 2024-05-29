@@ -24,6 +24,8 @@
 	min_pq = 1
 	max_pq = null
 
+	cmode_music = 'sound/music/combat_guard.ogg'
+
 	/// Chance to be spawned as a bowman instead
 	var/bowman_chance = 35
 	/// Amount of bowmen spawned so far

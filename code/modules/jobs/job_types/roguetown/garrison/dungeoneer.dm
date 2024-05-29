@@ -25,6 +25,7 @@
 	min_pq = 2
 	max_pq = null
 
+	cmode_music = 'sound/music/combat_weird.ogg'
 
 /datum/outfit/job/roguetown/dungeoneer/pre_equip(mob/living/carbon/human/H)
 	..()

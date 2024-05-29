@@ -18,6 +18,7 @@
 	pickprob = 13
 	maxchosen = 2
 	traits_applied = list(RTRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
+	cmode_music = 'sound/music/combat_gronn.ogg'
 
 /datum/outfit/job/roguetown/adventurer/amazon/pre_equip(mob/living/carbon/human/H)
 	..()

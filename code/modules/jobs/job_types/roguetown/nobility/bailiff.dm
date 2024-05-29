@@ -16,6 +16,8 @@
 	min_pq = 4
 	max_pq = null
 
+	cmode_music = 'sound/music/combat_guard.ogg'
+
 /datum/outfit/job/roguetown/bailiff/pre_equip(mob/living/carbon/human/H)
 	..()
 	neck = /obj/item/storage/belt/rogue/pouch/coins/rich

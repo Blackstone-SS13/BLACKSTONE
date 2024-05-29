@@ -15,6 +15,8 @@
 	give_bank_account = 3
 	min_pq = 4
 	max_pq = null
+	
+	cmode_music = 'sound/music/combat_guard.ogg'
 
 /datum/job/roguetown/gatemaster/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()

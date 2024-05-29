@@ -22,6 +22,8 @@
 	max_pq = null
 	required = TRUE
 
+	cmode_music = 'sound/music/combat_giza.ogg'
+
 /datum/outfit/job/roguetown/merchant/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
@@ -75,4 +77,3 @@
 		H.change_stat("intelligence", 2)
 		H.change_stat("perception", 3)
 		H.change_stat("strength", -1)
-	H.cmode_music = 'sound/music/combat_merchant.ogg'

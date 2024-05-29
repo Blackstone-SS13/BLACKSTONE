@@ -6,6 +6,7 @@
 	allowed_races = list("Tiefling")
 	outfit = /datum/outfit/job/roguetown/adventurer/vaquero
 	horse = /mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame/saddled
+	cmode_music = 'sound/music/combat_vaquero.ogg'
 
 /datum/advclass/vaquero/equipme(mob/living/carbon/human/H)
 	if(H.gender == FEMALE)
@@ -51,4 +52,3 @@
 	H.change_stat("intelligence", 2)
 	H.change_stat("endurance", 2)
 	H.change_stat("speed", 2)
-	H.cmode_music = 'sound/music/combat_vaquero.ogg'
