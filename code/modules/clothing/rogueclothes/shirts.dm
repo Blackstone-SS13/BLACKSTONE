@@ -217,7 +217,7 @@
 	color = CLOTHING_WHITE
 	
 /obj/item/clothing/suit/roguetown/shirt/dress/silkdress/princess/Initialize()
-	..()
+	. = ..()
 	if(GLOB.lordprimary)
 		lordcolor(GLOB.lordprimary,GLOB.lordsecondary)
 	else
@@ -234,8 +234,8 @@
 	color = CLOTHING_DARK_GREEN
 	
 /obj/item/clothing/suit/roguetown/shirt/dress/silkdress/random/Initialize()
+	. = ..()
 	color = pick("#e6e5e5", "#52BE80", "#C39BD3", "#EC7063","#5DADE2")
-	..()
 
 /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy
 	slot_flags = ITEM_SLOT_ARMOR
@@ -248,8 +248,8 @@
 	color = "#a90707"
 
 /obj/item/clothing/suit/roguetown/shirt/dress/gen/sexy/Initialize()
+	. = ..()
 	color = pick("#a90707", "#16239a", "#d68fbd", CLOTHING_BLACK)
-	..()
 
 /obj/item/clothing/suit/roguetown/shirt/undershirt/webs
 	name = "webbed shirt"
