@@ -5,12 +5,14 @@
 	name = "Half Orc"
 	id = "halforc"
 	desc = "<b>Half Orcs</b><br>\
-	Born through a union between one of the Maurading Orcs and one of the civilized races, \
-	Half Orcs are known for their strength and lineage derived from their orcish heritage. \
-	They mostly take cosmetics characteristics from their human side. \
-	Every civilized society treats Half Orcs with distain and hate \
-	The only known nation to completely integrate half orcs are the tribes of gronn."
-
+	With the Gronn clan on a centuries-long warpath to consolidate all orcs within their banner, \
+	crushed orc tribes have lost their menfolk and war-widows have been scattered to the hinterlands. \
+	Between human civilization and orc savagery, orc-women opting for exile over dishonor have become \
+	more common visitors to fur trading posts and prospecting camps, eventually leading to half-orcs \
+	being born in these rough places otherwise devoid of a fairer sex. Your mother’s tribe is in \
+	thrall to Gronn, true orcs would kill you as a mongrel dog and your father’s people cannot decide \
+	between mere distrust and disgust. Yet somehow your wandering feet came to Rockhill, where half-orcs \
+	ply muscle and their hardiness in the rough underbelly or outer reaches of society."
 
 	skin_tone_wording = "Clan"
 
