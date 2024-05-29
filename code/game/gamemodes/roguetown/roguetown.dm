@@ -24,27 +24,6 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	var/datum/team/roguecultists
 // DEBUG
 	var/list/forcedmodes = list()
-
-// MAJOR ANTAGS
-	var/list/datum/mind/pre_vampires = list()
-	var/list/datum/mind/vampires = list()
-	var/list/datum/mind/pre_rebels = list()
-	var/mob/living/carbon/human/vlord = null
-	var/list/datum/mind/siegers = list()
-	var/list/datum/mind/pre_siegers = list()
-  
-// MINOR ANTAGS
-	var/list/datum/mind/pre_werewolves = list()
-	var/list/datum/mind/werewolves = list()
-	var/list/datum/mind/pre_bandits = list()
-	var/list/datum/mind/bandits = list()
-	var/list/datum/mind/pre_delfs = list()
-	var/list/datum/mind/pre_aspirants = list()
-	var/list/datum/mind/aspirants = list()
-
-// DEFUNCT
-	var/list/datum/mind/pre_villains = list()
-	var/list/datum/mind/villains = list()
 	var/mob/living/carbon/human/vlord = null	
   
 // GAMEMODE SPECIFIC
