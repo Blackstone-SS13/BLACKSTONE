@@ -115,7 +115,7 @@
 			if(/datum/patron/divine/malum)
 				target.visible_message("<span class='info'>A tempering heat is discharged out of [target]!</span>", "<span class='notice'>I feel the heat of a forge soothing my pains!</span>")
 			if(/datum/patron/inhumen/eora)
-				target.visible_message("<span class='info'>A lingering remanence of love diffuses through [target]!</span>", "<span class='notice'>My heart feels full, and my pains less severe!</span>")
+				target.visible_message("<span class='info'>A heady heat flushes the flesh of [target] and potent scents hit you!</span>", "<span class='notice'>My ills drift away in a rush of narcotic pleasure!</span>")
 			if(/datum/patron/inhumen/zizo)
 				target.visible_message("<span class='info'>Vital energies are sapped towards [target]!</span>", "<span class='notice'>The life around me pales as I am restored!</span>")
 			if(/datum/patron/inhumen/graggar)
@@ -198,6 +198,7 @@
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	range = 2
 	warnie = "sydwarning"
 	movement_interrupt = FALSE
@@ -334,6 +335,7 @@
 	no_early_release = TRUE
 	movement_interrupt = TRUE
 	chargedloop = /datum/looping_sound/invokeholy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/revive.ogg'
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
@@ -404,6 +406,7 @@
 	no_early_release = TRUE
 	movement_interrupt = TRUE
 	chargedloop = /datum/looping_sound/invokeholy
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/revive.ogg'
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
@@ -481,6 +484,7 @@
 	overlay_state = "consecrateburial"
 	releasedrain = 30
 	charge_max = 30 SECONDS
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
@@ -513,6 +517,7 @@
 	charge_max = 30 SECONDS
 	max_targets = 0
 	cast_without_targets = TRUE
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	sound = 'sound/magic/churn.ogg'
 	associated_skill = /datum/skill/magic/holy
 	invocation = "The Undermaiden rebukes!"
@@ -563,6 +568,7 @@
 	overlay_state = "speakwithdead"
 	releasedrain = 30
 	charge_max = 30 SECONDS
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
@@ -624,6 +630,7 @@
 	overlay_state = "blesscrop"
 	releasedrain = 30
 	charge_max = 30 SECONDS
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
@@ -639,12 +646,14 @@
 		C.growth += 40
 		C.update_seed_icon()
 
+//At some point, this spell should Awaken beasts, allowing a ghost to possess them. Not for this PR though.
 /obj/effect/proc_holder/spell/targeted/beasttame
 	name = "Tame Beast"
 	range = 5
 	overlay_state = "tamebeast"
 	releasedrain = 30
 	charge_max = 30 SECONDS
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/magic/churn.ogg'
@@ -665,6 +674,7 @@
 	overlay_state = "blesscrop"
 	releasedrain = 30
 	charge_max = 30 SECONDS
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	max_targets = 0
 	cast_without_targets = TRUE
 	sound = 'sound/items/dig_shovel.ogg'
@@ -689,6 +699,7 @@
     releasedrain = 30
     chargedrain = 0
     chargetime = 0
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
     range = 7
     warnie = "sydwarning"
     movement_interrupt = FALSE
@@ -715,6 +726,7 @@
 	releasedrain = 30
 	chargedrain = 0
 	chargetime = 0
+	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	charge_max = 30 SECONDS
 	range = 3
 	warnie = "sydwarning"
