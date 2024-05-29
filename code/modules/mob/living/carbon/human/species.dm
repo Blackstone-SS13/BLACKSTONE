@@ -2256,20 +2256,17 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				I.take_damage(1, BRUTE, "melee")
 		if(!nodmg)
 			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone, crit_message = TRUE)
-			if(should_embed_weapon(crit_wound))
+			if(should_embed_weapon(crit_wound, I))
 				var/can_impale = TRUE
 				if(!affecting)
 					can_impale = FALSE
-				else
-					if(I.wlength > WLENGTH_SHORT)
-						if(affecting.body_zone != BODY_ZONE_CHEST)
-							can_impale = FALSE
-				if(can_impale)
-					if(user.Adjacent(H))
-						affecting.add_embedded_object(I)
-						H.emote("embed")
-						playsound(H, 'sound/combat/newstuck.ogg', 100, TRUE)
-						H.grabbedby(user, 1, item_override = I)
+				else if(I.wlength > WLENGTH_SHORT && (affecting.body_zone != BODY_ZONE_CHEST))
+					can_impale = FALSE
+				if(can_impale && user.Adjacent(H))
+					affecting.add_embedded_object(I)
+					H.emote("embed")
+					playsound(H, 'sound/combat/newstuck.ogg', 100, TRUE)
+					H.grabbedby(user, 1, item_override = I)
 //		if(H.used_intent.blade_class == BCLASS_BLUNT && I.force >= 15 && affecting.body_zone == "chest")
 //			var/turf/target_shove_turf = get_step(H.loc, get_dir(user.loc,H.loc))
 //			H.throw_at(target_shove_turf, 1, 1, H, spin = FALSE)
