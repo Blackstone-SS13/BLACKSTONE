@@ -26,7 +26,7 @@
 	var/list/message = list()
 	if(stat >= DEAD)
 		if(suiciding)
-			mesage += "<span class='deadsay'>[p_they(TRUE)] commited suicide... Nothing can be done..."
+			message += "<span class='deadsay'>[p_they(TRUE)] commited suicide... Nothing can be done..."
 		if(isobserver(user) || HAS_TRAIT(user, TRAIT_SOUL_EXAMINE))
 			if(!key && !get_ghost(FALSE, TRUE))
 				message += "<span class='deadsay'>[p_their(TRUE)] soul has departed...</span>"
