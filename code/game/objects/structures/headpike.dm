@@ -1,27 +1,26 @@
 /obj/structure/headpike
-	name = "spooky head on a spear"
-	desc = ""
+	name = "[victim.name]'s head on a pike"
+	desc = "oh yike, head on a pike"
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "headpike"
 	density = FALSE
 	anchored = TRUE
-	var/bonespear = FALSE
-	var/obj/item/twohanded/spear/spear
+	var/obj/item/log/stake
 	var/obj/item/bodypart/head/victim
 
-/obj/structure/headpike/bone //for bone spears
-	icon_state = "headpike-bone"
-	bonespear = TRUE
+/obj/structure/headpike/log //needs a log, right?
+	icon_state = "" // not sure what goes here
+	log_stake = TRUE
 
 /obj/structure/headpike/CheckParts(list/parts_list)
 	..()
 	victim = locate(/obj/item/bodypart/head) in parts_list
-	name = "[victim.name] on a spear"
+	name = "[victim.name]'s head"
 	update_icon()
-	if(bonespear)
-		spear = locate(/obj/item/twohanded/spear/bonespear) in parts_list
+	if(log_stake)
+		stake = locate(/obj/item/log/log_stake) in parts_list
 	else
-		spear = locate(/obj/item/twohanded/spear) in parts_list
+		stake = locate(/obj/item/log/stake) in parts_list
 
 /obj/structure/headpike/Initialize()
 	. = ..()
@@ -43,6 +42,6 @@
 	to_chat(user, "<span class='notice'>I take down [src].</span>")
 	victim.forceMove(drop_location())
 	victim = null
-	spear.forceMove(drop_location())
-	spear = null
+	stake.forceMove(drop_location())
+	stake = null
 	qdel(src)
