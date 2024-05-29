@@ -88,8 +88,6 @@
 		owner.current.forceMove(pick(GLOB.soldier_starts))
 	else if(owner.current && length(GLOB.bandit_starts))
 		owner.current.forceMove(pick(GLOB.bandit_starts))
-	else
-		message_admins("NO SOLDIER SPAWNS REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
 
 /datum/antagonist/siege/proc/equip_soldier()
 	var/mob/living/carbon/human/H = owner.current
