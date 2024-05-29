@@ -125,10 +125,10 @@
 	created_item = /obj/item/rogueweapon/pick/+ Steel
 	i_type = "Tools"
 
-/datum/anvil_recipe/tools/cups+ Steel
+/datum/anvil_recipe/tools/cupssteel
 	name = "Goblets 3x"
 	req_bar = /obj/item/ingot/+ Steel
-	created_item = list(/obj/item/reagent_containers/glass/cup/+ Steel, /obj/item/reagent_containers/glass/cup/+ Steel, /obj/item/reagent_containers/glass/cup/+ Steel)
+	created_item = list(/obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel)
 	i_type = "General"
 
 /datum/anvil_recipe/tools/cogstee
