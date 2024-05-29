@@ -1,26 +1,25 @@
+
+
 /obj/structure/headpike
-	name = "[victim.name]'s head on a pike"
+	var/obj/item/grown/log/tree/small/pike
+	var/obj/item/bodypart/head/stored_head
+	name = "[stored_head.name]'s head on a pike"
 	desc = "oh yike, head on a pike"
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "headpike"
 	density = FALSE
 	anchored = TRUE
-	var/obj/item/log/stake
-	var/obj/item/bodypart/head/victim
 
 /obj/structure/headpike/log //needs a log, right?
 	icon_state = "" // not sure what goes here
-	log_stake = TRUE
+	pike = TRUE
 
 /obj/structure/headpike/CheckParts(list/parts_list)
 	..()
-	victim = locate(/obj/item/bodypart/head) in parts_list
-	name = "[victim.name]'s head"
+	stored_head = locate(/obj/item/bodypart/head) in parts_list
+	name = "[stored_head.name]'s head"
 	update_icon()
-	if(log_stake)
-		stake = locate(/obj/item/log/log_stake) in parts_list
-	else
-		stake = locate(/obj/item/log/stake) in parts_list
+	pike = locate(/obj/item/grown/log/tree/small) in parts_list
 
 /obj/structure/headpike/Initialize()
 	. = ..()
@@ -40,8 +39,8 @@
 	if(.)
 		return
 	to_chat(user, "<span class='notice'>I take down [src].</span>")
-	victim.forceMove(drop_location())
-	victim = null
-	stake.forceMove(drop_location())
-	stake = null
+	stored_head.forceMove(drop_location())
+	stored_head = null
+	pike.forceMove(drop_location())
+	pike = null
 	qdel(src)

@@ -641,7 +641,7 @@
 	result = /obj/structure/headpike
 	category = CAT_NONE
 
-/datum/crafting_recipe/headpikebone
+/* /datum/crafting_recipe/headpikebone
 	name = "Spike Head (Bone Spear)"
 	time = 65
 	reqs = list(/obj/item/twohanded/spear/bonespear = 1,
@@ -649,7 +649,7 @@
 	parts = list(/obj/item/bodypart/head = 1,
 			/obj/item/twohanded/spear/bonespear = 1)
 	result = /obj/structure/headpike/bone
-	category = CAT_NONE
+	category = CAT_NONE */
 
 /datum/crafting_recipe/pressureplate
 	name = "Pressure Plate"
