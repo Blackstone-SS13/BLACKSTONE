@@ -41,7 +41,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
+	ADD_TRAIT(H, TRAIT_SEEPRICES, type)
 	//50% chance to be raceswapped to Giza because slop lore
 	if(ishumannorthern(H) && prob(50))
 		H.skin_tone = SKIN_COLOR_GIZA

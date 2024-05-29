@@ -11,7 +11,7 @@
 		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/noble
-	traits_applied = list(RTRAIT_NOBLE)
+	traits_applied = list(TRAIT_NOBLE)
 	isvillager = FALSE
 	ispilgrim = TRUE
 

@@ -16,7 +16,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/gravedigger
 	pickprob = 11
-	traits_applied = list(RTRAIT_NOSTINK)
+	traits_applied = list(TRAIT_NOSTINK)
 
 /datum/outfit/job/roguetown/adventurer/gravedigger/pre_equip(mob/living/carbon/human/H)
 	..()

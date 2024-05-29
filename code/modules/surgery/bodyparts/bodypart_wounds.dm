@@ -221,13 +221,13 @@
 	var/used
 	var/total_dam = get_damage()
 	var/damage_dividend = (total_dam / max_damage)
-	var/resistance = HAS_TRAIT(owner, RTRAIT_CRITICAL_RESISTANCE)
+	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
 	if(user && dam)
 		if(user.goodluck(2))
 			dam += 10
 	if((bclass in GLOB.cbt_classes) && (zone_precise == BODY_ZONE_PRECISE_GROIN))
 		var/cbt_multiplier = 1
-		if(user && HAS_TRAIT(user, RTRAIT_NUTCRACKER))
+		if(user && HAS_TRAIT(user, TRAIT_NUTCRACKER))
 			cbt_multiplier = 2
 		if(!resistance && prob(round(dam/5) * cbt_multiplier))
 			attempted_wounds += /datum/wound/cbt
@@ -273,7 +273,7 @@
 	var/used
 	var/total_dam = get_damage()
 	var/damage_dividend = (total_dam / max_damage)
-	var/resistance = HAS_TRAIT(owner, RTRAIT_CRITICAL_RESISTANCE)
+	var/resistance = HAS_TRAIT(owner, TRAIT_CRITICAL_RESISTANCE)
 	var/from_behind = FALSE
 	if(user && (owner.dir == turn(get_dir(owner,user), 180)))
 		from_behind = TRUE

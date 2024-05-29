@@ -11,7 +11,7 @@
 	skin_tone_wording = "Bog"
 
 	species_traits = list(EYECOLOR,LIPS)
-	inherent_traits = list(TRAIT_NOMOBSWAP,RTRAIT_RETARD_ANATOMY,RTRAIT_NASTY_EATER)
+	inherent_traits = list(TRAIT_NOMOBSWAP,TRAIT_RETARD_ANATOMY,TRAIT_NASTY_EATER)
 	use_skintones = TRUE
 	disliked_food = NONE
 	liked_food = NONE

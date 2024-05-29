@@ -124,9 +124,9 @@ GLOBAL_VAR(lordsurname)
 			H.change_stat("perception", 2)
 			H.change_stat("fortune", 5)
 
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 //	SSticker.rulermob = H
 
 /proc/give_lord_surname(mob/living/carbon/human/family_guy, preserve_original = FALSE)
