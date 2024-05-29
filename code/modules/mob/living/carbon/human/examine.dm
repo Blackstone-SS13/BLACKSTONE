@@ -281,7 +281,7 @@
 		)
 		for(var/bleed_zone in bleed_zones)
 			var/obj/item/bodypart/bleeder = get_bodypart(bleed_zone)
-			if(!bleeder?.get_bleed_rate() || !get_location_accessible(src, bleeder.body_zone))
+			if(!bleeder?.get_bleed_rate() || (!observer_privilege && !get_location_accessible(src, bleeder.body_zone)))
 				continue
 			bleeding_limbs += parse_zone(bleeder.body_zone)
 		if(length(bleeding_limbs))
