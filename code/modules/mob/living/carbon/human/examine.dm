@@ -231,11 +231,7 @@
 	var/appears_dead = FALSE
 	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
 		appears_dead = TRUE
-		if(suiciding)
-			msg += "[t_He] appear[p_s()] to have committed suicide... there is no hope of recovery."
-		if(hellbound)
-			msg += "[capitalize(m2)] soul seems to have been ripped out of [m2] body. Revival is impossible."
-
+	
 	var/temp = getBruteLoss() + getFireLoss() //no need to calculate each of these twice
 
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy

@@ -23,7 +23,7 @@
 
 /mob/living/carbon/soul_examine(mob/user)
 	var/list/message = list()
-	if((stat >= DEAD) && (isobserver(user) || HAS_TRAIT(user, TRAIT_OUIJA)))
+	if((stat >= DEAD) && (isobserver(user) || HAS_TRAIT(user, TRAIT_SOUL_EXAMINE)))
 		if(getorganslot(ORGAN_SLOT_BRAIN) && !key && !get_ghost(FALSE, TRUE))
 			message += "<span class='deadsay'>[p_their(TRUE)] soul has departed...</span>"
 		else

@@ -25,7 +25,7 @@
 #define TRAIT_NASTY_EATER 				"Inhumen Digestion" //can eat rotten food, organs, poison berries, and drink murky water
 #define TRAIT_ROT_EATER				"Blessing of Pestra" //can eat rotten food
 #define TRAIT_ORGAN_EATER				"Blessing of Graggar" //can eat organs
-#define TRAIT_OUIJA					"Blessing of Necra" //can check bodies to see if they have departed
+#define TRAIT_SOUL_EXAMINE					"Blessing of Necra" //can check bodies to see if they have departed
 
 #define TRAIT_MISSING_NOSE "Missing Nose" //halved stamina regeneration
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
@@ -70,7 +70,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_NASTY_EATER = "<span class='dead'>I can eat bad food, and water that would be toxic to humen will not affect me.</span>",
 	TRAIT_ROT_EATER = "<span class='necrosis'>I can eat rotten food.</span>",
 	TRAIT_ORGAN_EATER = "<span class='bloody'>I can eat organs and raw flesh.</span>",
-	TRAIT_OUIJA = "<span class='deadsay'>I know when someone's soul has departed.</span>",
+	TRAIT_SOUL_EXAMINE = "<span class='deadsay'>I know when someone's soul has departed.</span>",
 	TRAIT_MISSING_NOSE = "<span class='warning'>I struggle to breathe.</span>",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",

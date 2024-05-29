@@ -24,9 +24,12 @@
 
 /mob/living/proc/soul_examine(mob/user)
 	var/list/message = list()
-	if((stat >= DEAD) && (isobserver(user) || HAS_TRAIT(user, TRAIT_OUIJA)))
-		if(!key && !get_ghost(FALSE, TRUE))
-			message += "<span class='deadsay'>[p_their(TRUE)] soul has departed...</span>"
-		else
-			message += "<span class='deadsay'>[p_they(TRUE)] [p_are()] still earthbound.</span>"
+	if(stat >= DEAD)
+		if(suiciding)
+			mesage += "<span class='deadsay'>[p_they(TRUE)] commited suicide... Nothing can be done..."
+		if(isobserver(user) || HAS_TRAIT(user, TRAIT_SOUL_EXAMINE))
+			if(!key && !get_ghost(FALSE, TRUE))
+				message += "<span class='deadsay'>[p_their(TRUE)] soul has departed...</span>"
+			else
+				message += "<span class='deadsay'>[p_they(TRUE)] [p_are()] still earthbound.</span>"
 	return message
