@@ -24,7 +24,7 @@
 	..()
 	if(H.gender == FEMALE)
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
-		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/blue
+		armor = /obj/item/clothing/suit/roguetown/shirt/dress/silkdress/green
 		cloak = /obj/item/clothing/cloak/tabard/knight
 	else
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
