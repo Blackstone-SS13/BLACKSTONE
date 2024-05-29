@@ -201,10 +201,9 @@
 			if(can_embed(I) && prob(I.embedding.embed_chance) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
 				//throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 				var/obj/item/bodypart/L = pick(bodyparts)
-				L.add_embedded_object(I)
+				L.add_embedded_object(I, silent = FALSE, crit_message = TRUE)
 				emote("embed")
 				L.receive_damage(I.w_class*I.embedding.embedded_impact_pain_multiplier)
-				next_attack_msg += " <span class='danger'>[I] embeds itself in [src]'s [L.name]!</span>"
 //					visible_message("<span class='danger'>[I] embeds itself in [src]'s [L.name]!</span>","<span class='danger'>[I] embeds itself in my [L.name]!</span>")
 				SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "embedded", /datum/mood_event/embedded)
 				hitpush = FALSE

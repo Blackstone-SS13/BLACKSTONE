@@ -88,7 +88,7 @@
 /mob/living/proc/check_projectile_embed(obj/projectile/P, def_zone)
 	if(!prob(P.embedchance) || !P.dropped)
 		return FALSE
-	simple_add_embedded_object(P.dropped)
+	simple_add_embedded_object(P.dropped, silent = TRUE, crit_message = FALSE)
 	to_chat(src, "<span class='danger'>[P.dropped] sticks in me!</span>")
 	emote("embed")
 	return TRUE
@@ -124,7 +124,7 @@
 					simple_woundcritroll(I.thrown_bclass, I.throwforce, null, zone)
 					if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
 						if(can_embed(I) && prob(I.embedding.embed_chance) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
-							simple_add_embedded_object(I)
+							simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
 			visible_message("<span class='danger'>[src] is hit by [I]![next_attack_msg.Join()]</span>", \
 							"<span class='danger'>I'm hit by [I]![next_attack_msg.Join()]</span>")
 			next_attack_msg.Cut()

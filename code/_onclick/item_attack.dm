@@ -408,7 +408,7 @@
 				var/datum/wound/crit_wound  = simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
 				if(should_embed_weapon(crit_wound, I))
 					// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
-					simple_add_embedded_object(I, crit_message = TRUE)
+					simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
 					src.grabbedby(user, 1, item_override = I)
 			var/haha = user.used_intent.blade_class
 			if(newforce > 5)

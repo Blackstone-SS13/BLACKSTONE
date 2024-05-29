@@ -54,7 +54,7 @@
 			return
 		user.dropItemToGround(src)
 		src.forceMove(H)
-		affecting.add_embedded_object(src)
+		affecting.add_embedded_object(src, silent = TRUE, crit_message = FALSE)
 		if(M == user)
 			user.visible_message("<span class='notice'>[user] places a leech on [user.p_their()] [affecting].</span>", "<span class='notice'>I place a leech on my [affecting].</span>")
 		else
