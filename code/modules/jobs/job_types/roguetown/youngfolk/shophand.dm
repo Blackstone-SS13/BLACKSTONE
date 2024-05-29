@@ -28,6 +28,8 @@
 	min_pq = -10
 	max_pq = null
 
+	cmode_music = 'sound/music/combat_giza.ogg'
+
 /datum/outfit/job/roguetown/shophand/pre_equip(mob/living/carbon/human/H)
 	..()
 	ADD_TRAIT(H, RTRAIT_SEEPRICES_SHITTY, "[type]")
@@ -60,4 +62,3 @@
 		H.change_stat("intelligence", 1)
 		H.change_stat("perception", 1)
 		H.change_stat("fortune", 2)
-	H.cmode_music = 'sound/music/combat_merchant.ogg'

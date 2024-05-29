@@ -16,6 +16,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
 	traits_applied = list(RTRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
+	cmode_music = 'sound/music/combat_gronn.ogg'
 
 /datum/outfit/job/roguetown/adventurer/barbarian
 	allowed_patrons = list(/datum/patron/divine/ravox, /datum/patron/inhumen/graggar)
@@ -228,9 +229,7 @@
 		H.update_body()
 	if(H.dna?.species)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
-	H.cmode_music = 'sound/music/combat_gronn.ogg'
 /* 
-
 	var/randy = rand(1,5)
 	switch(randy) // Pick wep. Choose skill.
 		if(1 to 2)

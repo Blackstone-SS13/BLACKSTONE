@@ -18,6 +18,8 @@
 	min_pq = 2
 	max_pq = null
 
+	cmode_music = 'sound/music/combat_guard.ogg'
+
 /datum/job/roguetown/manorguard/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
 	if(ishuman(L))

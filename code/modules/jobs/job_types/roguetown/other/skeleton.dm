@@ -14,6 +14,8 @@
 	show_in_credits = FALSE
 	give_bank_account = FALSE
 
+	cmode_music = 'sound/music/combat_weird.ogg'
+
 /datum/job/roguetown/skeleton/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
 	if(L)
@@ -41,7 +43,6 @@
 		H.remove_all_languages()
 		H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/simple/claw)
 		H.update_a_intents()
-		H.cmode_music = 'sound/music/combat_weird.ogg'
 
 		var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
 		if(eyes)

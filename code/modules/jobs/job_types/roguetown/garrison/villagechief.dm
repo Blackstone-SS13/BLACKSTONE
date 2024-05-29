@@ -27,6 +27,8 @@
 	max_pq = null
 	give_bank_account = 16
 
+	cmode_music = 'sound/music/combat_bog.ogg'
+
 /datum/job/roguetown/woodsman/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
 	if(ishuman(L))

@@ -26,6 +26,7 @@
 	give_bank_account = 35
 	min_pq = 4
 	max_pq = null
+	cmode_music = 'sound/music/combat_bog.ogg'
 
 /datum/job/roguetown/bogmaster/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
@@ -79,7 +80,6 @@
 		H.change_stat("speed", 1)
 	if(H.dna?.species)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-	H.cmode_music = 'sound/music/combat_bog.ogg'
 	H.verbs |= /mob/proc/haltyell
 	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)

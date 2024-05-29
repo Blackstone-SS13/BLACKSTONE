@@ -13,6 +13,7 @@
 	spawn_positions = 5
 	min_pq = 2 //good fragger role
 	max_pq = null
+	cmode_music = 'sound/music/combat_grenzelhoft.ogg'
 
 /datum/outfit/job/roguetown/mercenary/grenzelhoft/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -67,4 +68,3 @@
 		H.change_stat("perception", 1)
 		H.change_stat("speed", 1)
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	H.cmode_music = 'sound/music/combat_grenzelhoft.ogg'
