@@ -183,6 +183,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/can_apply_to_mob(mob/living/affected)
 	if(bodypart_owner || owner || QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
+	for(var/datum/wound/other_wound as anything in affected.simple_wounds)
+		if(!can_stack_with(other_wound))
+			return FALSE
 	return TRUE
 
 /// Adds this wound to a given mob
