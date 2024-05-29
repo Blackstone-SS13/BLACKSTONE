@@ -1,5 +1,7 @@
+
+// --------- IRON -----------
 /datum/anvil_recipe/tools/torch
-	name = "Iron Torches 5x (+ coal)"
+	name = "Torches 5x (+1 Coal)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/rogueore/coal)
 	created_item = list(/obj/item/flashlight/flare/torch/metal, /obj/item/flashlight/flare/torch/metal, /obj/item/flashlight/flare/torch/metal, /obj/item/flashlight/flare/torch/metal, /obj/item/flashlight/flare/torch/metal)
@@ -24,14 +26,14 @@
 	i_type = "General"
 
 /datum/anvil_recipe/tools/shovel
-	name = "Shovel (+2 sticks)"
+	name = "Shovel (+2 Sticks)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/shovel
 	i_type = "Tools"
 
 /datum/anvil_recipe/tools/hammer
-	name = "Hammer (+ stick)"
+	name = "Hammer (+1 Stick)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/hammer
@@ -44,34 +46,34 @@
 	i_type = "Tools"
 
 /datum/anvil_recipe/tools/sickle
-	name = "Sickle (+ stick)"
+	name = "Sickle (+1 Stick)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/sickle
 	i_type = "Tools"
 
 /datum/anvil_recipe/tools/pick
-	name = "Pickaxe (+ stick)"
+	name = "Pickaxe (+1 Stick)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/pick
 	i_type = "Tools"
 
-/datum/anvil_recipe/tools/steelpick
-	name = "Pickaxe (+ stick)"
-	req_bar = /obj/item/ingot/steel
+/datum/anvil_recipe/tools/+ Steelpick
+	name = "Pickaxe (+1 Stick)"
+	req_bar = /obj/item/ingot/+ Steel
 	additional_items = list(/obj/item/grown/log/tree/stick)
-	created_item = /obj/item/rogueweapon/pick/steel
+	created_item = /obj/item/rogueweapon/pick/+ Steel
 
 /datum/anvil_recipe/tools/hoe
-	name = "Hoe (+2 sticks)"
+	name = "Hoe (+2 Sticks)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/hoe
 	i_type = "Tools"
 
 /datum/anvil_recipe/tools/pitchfork
-	name = "Pitchfork (+2 sticks)"
+	name = "Pitchfork (+2 Sticks)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/pitchfork
@@ -87,30 +89,6 @@
 	name = "Cups 3x"
 	req_bar = /obj/item/ingot/iron
 	created_item = list(/obj/item/reagent_containers/glass/cup,/obj/item/reagent_containers/glass/cup,/obj/item/reagent_containers/glass/cup)
-	i_type = "General"
-
-/datum/anvil_recipe/tools/cupssteel
-	name = "Goblets 3x"
-	req_bar = /obj/item/ingot/steel
-	created_item = list(/obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel)
-	i_type = "General"
-
-/datum/anvil_recipe/tools/cupssil
-	name = "Goblets 3x"
-	req_bar = /obj/item/ingot/silver
-	created_item = list(/obj/item/reagent_containers/glass/cup/silver, /obj/item/reagent_containers/glass/cup/silver, /obj/item/reagent_containers/glass/cup/silver)
-	i_type = "General"
-
-/datum/anvil_recipe/tools/cupsgold
-	name = "Goblets 3x"
-	req_bar = /obj/item/ingot/gold
-	created_item = list(/obj/item/reagent_containers/glass/cup/golden, /obj/item/reagent_containers/glass/cup/golden, /obj/item/reagent_containers/glass/cup/golden)
-	i_type = "General"
-
-/datum/anvil_recipe/tools/cogstee
-	name = "Cogs 3x"
-	req_bar = /obj/item/ingot/steel
-	created_item = list(/obj/item/roguegear, /obj/item/roguegear, /obj/item/roguegear)
 	i_type = "General"
 
 /datum/anvil_recipe/tools/cogiron
@@ -132,7 +110,7 @@
 	i_type = "General"
 
 /datum/anvil_recipe/tools/thresher
-	name = "Thresher (+stick)"
+	name = "Thresher (+1 Stick)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/rogueweapon/thresher
@@ -144,33 +122,31 @@
 	created_item = /obj/item/reagent_containers/glass/pot //weird how it's a child of glass but whatevs
 	i_type = "Tools"
 
-// --------- STEEL -----------
+// --------- + Steel -----------
 
-/datum/anvil_recipe/tools/steelpick
-	name = "steel pick (+ stick)"
-	req_bar = /obj/item/ingot/steel
+/datum/anvil_recipe/tools/+ Steelpick
+	name = "Pickaxe (+1 Stick)"
+	req_bar = /obj/item/ingot/+ Steel
 	additional_items = list(/obj/item/grown/log/tree/stick)
-	created_item = /obj/item/rogueweapon/pick/steel
+	created_item = /obj/item/rogueweapon/pick/+ Steel
 	i_type = "Tools"
 
-/datum/anvil_recipe/tools/cupssteel
-	name = "3x steel goblets"
-	req_bar = /obj/item/ingot/steel
-	created_item = list(/obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel)
+/datum/anvil_recipe/tools/cups+ Steel
+	name = "Goblets 3x"
+	req_bar = /obj/item/ingot/+ Steel
+	created_item = list(/obj/item/reagent_containers/glass/cup/+ Steel, /obj/item/reagent_containers/glass/cup/+ Steel, /obj/item/reagent_containers/glass/cup/+ Steel)
 	i_type = "General"
-
 
 /datum/anvil_recipe/tools/cogstee
-	name = "3x cogs"
-	req_bar = /obj/item/ingot/steel
+	name = "Cogs 3x"
+	req_bar = /obj/item/ingot/+ Steel
 	created_item = list(/obj/item/roguegear, /obj/item/roguegear, /obj/item/roguegear)
 	i_type = "General"
-
 
 // --------- SILVER -----------
 
 /datum/anvil_recipe/tools/cupssil
-	name = "3x silver goblets"
+	name = "Goblets 3x"
 	req_bar = /obj/item/ingot/silver
 	created_item = list(/obj/item/reagent_containers/glass/cup/silver, /obj/item/reagent_containers/glass/cup/silver, /obj/item/reagent_containers/glass/cup/silver)
 	i_type = "General"
@@ -178,7 +154,7 @@
 // --------- GOLD -----------
 
 /datum/anvil_recipe/tools/cupsgold
-	name = "3x golden goblets"
+	name = "Goblets 3x"
 	req_bar = /obj/item/ingot/gold
 	created_item = list(/obj/item/reagent_containers/glass/cup/golden, /obj/item/reagent_containers/glass/cup/golden, /obj/item/reagent_containers/glass/cup/golden)
 	i_type = "General"

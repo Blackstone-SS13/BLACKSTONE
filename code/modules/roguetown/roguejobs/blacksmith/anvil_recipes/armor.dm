@@ -9,32 +9,32 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/ichaincoif
-	name = "Chain coif"
+	name = "Chain Coif"
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/neck/roguetown/chaincoif/iron
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/gorget
-	name = "gorget"
+	name = "Gorget"
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/neck/roguetown/gorget
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/ibreastplate
-	name = "Breastplate (+iron)"
+	name = "Breastplate (+1 Iron)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/half/iron
 	i_type = "armor"
 
 /datum/anvil_recipe/armor/ichainglove
-	name = "Chain gauntlets"
+	name = "Chain Gauntlets"
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/gloves/roguetown/chain/iron
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/ichainleg
-	name = "Chain chausses"
+	name = "Chain Chausses"
 	req_bar = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/under/roguetown/chainlegs/iron
 	i_type = "Armor"
@@ -52,14 +52,14 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/studded
-	name = "Studded leather armor (+leather armor)"
+	name = "Studded Leather Armor (+Leather Armor)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/clothing/suit/roguetown/armor/leather)
 	created_item = /obj/item/clothing/suit/roguetown/armor/leather/studded
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/helmetgoblin
-	name = "Goblin helmet (+iron)"
+	name = "Goblin Helmet (+1 Iron)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/clothing/head/roguetown/helmet/goblin
@@ -67,7 +67,7 @@
 	i_type = "Armor"
 	
 /datum/anvil_recipe/armor/plategoblin
-	name = "Goblin mail (+iron)"
+	name = "Goblin Mail (+1 Iron)"
 	req_bar = /obj/item/ingot/iron
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/half/iron/goblin
@@ -83,7 +83,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/hauberk
-	name = "Hauberk (+steel)"
+	name = "Hauberk (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/suit/roguetown/armor/chainmail/hauberk
@@ -91,7 +91,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/plate
-	name = "Half-plate armour (+2 steel)"
+	name = "Half-Plate Armour (+2 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel,/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate
@@ -99,7 +99,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/platefull
-	name = "Full-plate armour (+3 steel)"
+	name = "Full-Plate Armour (+3 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/full
@@ -107,7 +107,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/coatplates
-	name = "Coat of plates (+cloth)"
+	name = "Coat Of Plates (+1 Cloth)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/natural/cloth)
 	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine/coatplates
@@ -115,7 +115,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/brigandine
-	name = "Brigandine (+steel +2 cloth)"
+	name = "Brigandine (+1 Steel +2 Cloth)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel, /obj/item/natural/cloth, /obj/item/natural/cloth)
 	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine
@@ -123,31 +123,31 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/chaincoif
-	name = "Chain coif"
+	name = "Chain Coif"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/neck/roguetown/chaincoif
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/chainglove
-	name = "Chain gauntlets"
+	name = "Chain Gauntlets"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/gloves/roguetown/chain
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/plateglove
-	name = "Plate gauntlets"
+	name = "Plate Gauntlets"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/gloves/roguetown/plate
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/chainleg
-	name = "Chain chausses"
+	name = "Chain Chausses"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/under/roguetown/chainlegs
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/platelegs
-	name = "Plated chausses (+steel)"
+	name = "Plated Chausses (+1 Steel)"
 	req_bar = /obj/item/ingot/steel 
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/under/roguetown/platelegs
@@ -155,7 +155,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/hplate
-	name = "Cuirass (+steel)"
+	name = "Cuirass (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/suit/roguetown/armor/plate/half
@@ -169,7 +169,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/platebracer
-	name = "Plate bracers"
+	name = "Plate Bracers"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/wrists/roguetown/bracers
 	i_type = "Armor"
@@ -193,7 +193,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/helmetsallv
-	name = "Sallet visored (+steel)"
+	name = "Sallet Visored (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/sallet/visored
@@ -201,7 +201,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/helmetbuc
-	name = "Bucket helmet (+steel)"
+	name = "Bucket Helmet (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/bucket
@@ -209,7 +209,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/helmetpig
-	name = "Pigface helmet (+steel)"
+	name = "Pigface Helmet (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/pigface
@@ -217,14 +217,14 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/bascinet
-	name = "Bascinet helmet"
+	name = "Bascinet Helmet"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/head/roguetown/helmet/bascinet
 	craftdiff = 2
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/helmetknight
-	name = "Knight's helmet (+steel)"
+	name = "Knight's Helmet (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/knight
@@ -232,7 +232,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/plateboot
-	name = "Plated boots"
+	name = "Plated Boots"
 	req_bar = /obj/item/ingot/steel
 	created_item = /obj/item/clothing/shoes/roguetown/boots/armor
 	i_type = "Armor"
@@ -244,7 +244,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/astratahelm
-	name = "Astrata helmet (+steel)"
+	name = "Astrata Helmet (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/astratahelm
@@ -252,7 +252,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/necrahelm
-	name = "Necra helmet (+steel)"
+	name = "Necra Helmet (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/necrahelm
@@ -260,7 +260,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/nochelm
-	name = "Noc helmet (+steel)"
+	name = "Noc Helmet (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/nochelm
@@ -268,7 +268,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/dendorhelm
-	name = "Dendor helmet (+steel)"
+	name = "Dendor Helmet (+1 Steel)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/roguetown/helmet/heavy/dendorhelm

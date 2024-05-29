@@ -20,10 +20,10 @@
 	created_item = /obj/item/roguestatue/iron
 	i_type = "Valuables"
 
-/datum/anvil_recipe/valuables/steel
+/datum/anvil_recipe/valuables/+ Steel
 	name = "Statue"
-	req_bar = /obj/item/ingot/steel
-	created_item = /obj/item/roguestatue/steel
+	req_bar = /obj/item/ingot/+ Steel
+	created_item = /obj/item/roguestatue/+ Steel
 	i_type = "Valuables"
 
 /*
@@ -57,94 +57,94 @@
 
 //gold rings
 /datum/anvil_recipe/valuables/emeringg
-	name = "Gemerald ring (+ Gemerald)"
+	name = "Gemerald Ring (+1 Gemerald)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/green)	
 	created_item = /obj/item/clothing/ring/emerald
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/rubyg
-	name = "Rontz ring (+ Rontz)"
+	name = "Rontz Ring (+1 Rontz)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem)	
 	created_item = /obj/item/clothing/ring/ruby
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/topazg
-	name = "Toper ring (+ Toper)"
+	name = "Toper Ring (+1 Toper)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/yellow)	
 	created_item = /obj/item/clothing/ring/topaz
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/quartzg
-	name = "Blortz ring (+ Blortz)"
+	name = "Blortz Ring (+1 Blortz)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/blue)	
 	created_item = /obj/item/clothing/ring/quartz
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/sapphireg
-	name = "Saffira ring (+ Saffira)"
+	name = "Saffira Ring (+1 Saffira)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/violet)	
 	created_item = /obj/item/clothing/ring/sapphire
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/diamondg
-	name = "Dorpel ring (+ Dorpel)"
+	name = "Dorpel Ring (+1 Dorpel)"
 	req_bar = /obj/item/ingot/gold
 	additional_items = list(/obj/item/roguegem/diamond)	
 	created_item = /obj/item/clothing/ring/diamond
 	i_type = "Valuables"
 
-//steel rings
+//+ Steel rings
 /datum/anvil_recipe/valuables/emerings
-	name = "Gemerald ring (+ Gemerald)"
-	req_bar = /obj/item/ingot/steel
+	name = "Gemerald Ring (+1 Gemerald)"
+	req_bar = /obj/item/ingot/+ Steel
 	additional_items = list(/obj/item/roguegem/green)	
 	created_item = /obj/item/clothing/ring/emeralds
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/rubys
-	name = "Rontz ring (+ Rontz)"
-	req_bar = /obj/item/ingot/steel
+	name = "Rontz Ring (+1 Rontz)"
+	req_bar = /obj/item/ingot/+ Steel
 	additional_items = list(/obj/item/roguegem)	
 	created_item = /obj/item/clothing/ring/rubys
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/topazs
-	name = "Toper ring (+ Toper)"
-	req_bar = /obj/item/ingot/steel
+	name = "Toper Ring (+1 Toper)"
+	req_bar = /obj/item/ingot/+ Steel
 	additional_items = list(/obj/item/roguegem/yellow)	
 	created_item = /obj/item/clothing/ring/topazs
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/quartzs
-	name = "Blortz ring (+ Blortz)"
-	req_bar = /obj/item/ingot/steel
+	name = "Blortz Ring (+1 Blortz)"
+	req_bar = /obj/item/ingot/+ Steel
 	additional_items = list(/obj/item/roguegem/blue)	
 	created_item = /obj/item/clothing/ring/quartzs
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/sapphires
-	name = "Saffira ring (+ Saffira)"
-	req_bar = /obj/item/ingot/steel
+	name = "Saffira Ring (+1 Saffira)"
+	req_bar = /obj/item/ingot/+ Steel
 	additional_items = list(/obj/item/roguegem/violet)	
 	created_item = /obj/item/clothing/ring/sapphires
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/diamonds
-	name = "Dorpel ring (+ Dorpel)"
-	req_bar = /obj/item/ingot/steel
+	name = "Dorpel Ring (+1 Dorpel)"
+	req_bar = /obj/item/ingot/+ Steel
 	additional_items = list(/obj/item/roguegem/diamond)	
 	created_item = /obj/item/clothing/ring/diamonds
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/terminus
-	name = "Terminus Est (+ 1 Gold Bar, + 1 Steel, + 1 Rontz)"
+	name = "Terminus Est (+1 Gold Bar, +1 Steel, +1 Rontz)"
 	req_bar = /obj/item/ingot/gold
-	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/steel, /obj/item/roguegem)	
+	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/+ Steel, /obj/item/roguegem)	
 	created_item = /obj/item/rogueweapon/sword/long/exe/cloth
 	craftdiff = 3
 	i_type = "Weapons"
