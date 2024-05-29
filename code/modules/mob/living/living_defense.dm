@@ -63,6 +63,11 @@
 					P.handle_drop()
 			if(P.woundclass)
 				check_projectile_wounding(P, def_zone)
+			if(istype(P, /obj/projectile/bullet/reusable/arrow/poison))// Moved here because I didn't like that poison was applied by the on_hit proc during testing even if armor stopped all damage. That just don't make sense.
+				if(iscarbon(src))
+					var/mob/living/carbon/M = src
+					M.reagents.add_reagent(/datum/reagent/berrypoison, 3) //a fast-acting and dangerous (~81-84 damage) toxin that induces nausea, vomiting of blood, and in slightly higher doses, sends the body into shock. King could declare them illegal except for use by hunters.
+					M.show_message("<span class='danger'>You feel an intense burning sensation spreading swiftly from the area!</span>") //A warning seems only fair, this poison can potentially down someone in a single arrow, though the poison will not kill on its own.
 		else
 			P.handle_drop()
 
@@ -226,12 +231,12 @@
 	var/probby =  20 - ((user.STASTR - STASTR) * 10)
 	if(src.pulling == user && !instant)
 		probby += 30
-	
+
 	if(src.dir == turn(get_dir(src,user), 180))
 		probby = (probby - 30)
-	
+
 	probby = clamp(probby, 5, 95)
-	
+
 	if(prob(probby) && !instant && !stat && cmode)
 		visible_message("<span class='warning'>[user] struggles with [src]!</span>",
 						"<span class='warning'>[user] struggles to restrain me!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)

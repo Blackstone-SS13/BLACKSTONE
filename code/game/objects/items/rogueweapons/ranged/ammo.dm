@@ -84,7 +84,7 @@
 /obj/item/ammo_casing/caseless/rogue/arrow/stone/poison
 	name = "poisoned stone arrow"
 	desc = "A wooden shaft with a jagged rock on the end. This one is stained green with floral toxins."
-	projectile_type = /obj/projectile/bullet/reusable/arrow/poison
+	projectile_type = /obj/projectile/bullet/reusable/arrow/poison/stone
 	icon_state = "stonearrow_poison"
 
 /obj/projectile/bullet/reusable/arrow/poison
@@ -97,16 +97,18 @@
 	range = 15
 	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
 
+/obj/projectile/bullet/reusable/arrow/poison/stone
+	name = "stone arrow"
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow/stone
+
 
 /obj/projectile/bullet/reusable/arrow/poison/on_hit(atom/target, blocked = FALSE)
 	. = ..()
-	if(iscarbon(target) && blocked != 100)
-		var/mob/living/carbon/M = target
-		M.reagents.add_reagent(/datum/reagent/berrypoison, 5) //a fast-acting and dangerous toxin that induces nausea, vomiting of blood, and eventually sends the body into shock. King may naturally declare them illegal except for use by hunters.
-	if(istype(target, /mob/living/simple_animal))
+	if(istype(target, /mob/living/simple_animal)) //On-hit for carbon mobs has been moved to projectile act in living_defense.dm, to ensure poison is not applied if armor prevents damage.
 		var/mob/living/simple_animal/M = target
+		M.show_message("<span class='danger'>You feel an intense burning sensation spreading swiftly from the puncture!</span>") //In case a player is in control of the mob.
 		sleep(10 SECONDS)
-		M.adjustToxLoss(150)
+		M.adjustToxLoss(100) //Very useful for hunters who want to conserve ammo
 
 /obj/projectile/bullet/reusable/bullet
 	name = "lead ball"

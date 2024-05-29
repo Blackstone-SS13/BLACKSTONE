@@ -201,7 +201,7 @@
 	req_table = TRUE
 /*
 /datum/crafting_recipe/roguetown/poisonbolt //Coded, but commented out pending balance discussion.
-	name = "dip a bolt in poison"
+	name = "poisoned bolt"
 	result = /obj/item/ammo_casing/caseless/rogue/bolt/poison
 	reqs = list(/obj/item/ammo_casing/caseless/rogue/bolt = 1,
 				/datum/reagent/berrypoison = 5)
@@ -209,8 +209,14 @@
 	req_table = TRUE
 */
 /datum/crafting_recipe/roguetown/poisonarrow_five //Arrows and bolts can be smithed in batches of five. Makes sense for them to be dipped in batches of five, too
-	name = "dip five arrows in poison"
-	result = list(/obj/item/ammo_casing/caseless/rogue/arrow/poison = 5)
+	name = "poisoned arrow (x5)"
+	result = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison
+				)
 	reqs = list(
 				/obj/item/ammo_casing/caseless/rogue/arrow = 5,
 				/datum/reagent/berrypoison = 25
@@ -219,7 +225,7 @@
 	req_table = TRUE
 /*
 /datum/crafting_recipe/roguetown/poisonbolt_five //Coded, but commented out pending balance discussion.
-	name = "dip five bolts in poison"
+	name = "poisoned bolts (x5)"
 	result = list(/obj/item/ammo_casing/caseless/rogue/bolt/poison = 5)
 	reqs = list(/obj/item/ammo_casing/caseless/rogue/bolt = 5,
 				/datum/reagent/berrypoison = 25)
@@ -227,8 +233,14 @@
 	req_table = TRUE
 */
 /datum/crafting_recipe/roguetown/poisonarrow_five_stone
-	name = "dip five stone arrows in poison"
-	result = list(/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison = 5)
+	name = "poisoned stone arrow (x5)"
+	result = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison
+				)
 	reqs = list(
 				/obj/item/ammo_casing/caseless/rogue/arrow/stone = 5,
 				/datum/reagent/berrypoison = 25
