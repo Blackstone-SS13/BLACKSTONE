@@ -174,7 +174,7 @@
 	else if(FR && length(FR.blood_DNA))
 		var/hand_number = get_num_arms(FALSE)
 		if(hand_number)
-			. += "[m3] [hand_number > 1 ? "" : "a"] <span class='bloody'>blood-stained</span> hand[hand_number > 1 ? "s" : ""]!"
+			. += "[m3][hand_number > 1 ? "" : " a"] <span class='bloody'>blood-stained</span> hand[hand_number > 1 ? "s" : ""]!"
 
 	//belt
 	if(belt && !(SLOT_BELT in obscured))
