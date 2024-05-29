@@ -153,6 +153,7 @@
 /obj/item/clothing/neck/roguetown/psicross/wood
 	name = "wooden psycross"
 	icon_state = "psicrossw"
+	sellprice = 0
 
 /obj/item/clothing/neck/roguetown/psicross/silver
 	name = "silver psycross"

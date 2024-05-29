@@ -176,6 +176,7 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
+	sellprice = 14
 
 /datum/crafting_recipe/roguetown/sewing/gambeson
 	name = "gambeson"
@@ -184,6 +185,7 @@
 				/obj/item/natural/fibers = 1)
 	tools = list(/obj/item/needle)
 	craftdiff = 3
+	sellprice = 20
 
 /datum/crafting_recipe/roguetown/sewing/armordress
 	name = "padded dress"
@@ -205,6 +207,7 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
+	sellprice = 14
 
 /datum/crafting_recipe/roguetown/sewing/chaperon
 	name = "chaperon hat"
@@ -212,6 +215,7 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
+	sellprice = 14
 
 /datum/crafting_recipe/roguetown/sewing/jupon
 	name = "jupon"
@@ -227,6 +231,7 @@
 				/obj/item/natural/fibers = 1,
 				/obj/item/natural/hide = 1)
 	craftdiff = 3
+	sellprice = 30
 
 /datum/crafting_recipe/roguetown/sewing/cape
 	name = "cape"
@@ -234,6 +239,7 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3
+	sellprice = 12
 
 /datum/crafting_recipe/roguetown/sewing/lordcloak
 	name = "lordly cloak"
@@ -241,6 +247,7 @@
 	reqs = list(/obj/item/natural/fur = 2,
 				/obj/item/natural/hide = 4)
 	craftdiff = 5
+	sellprice = 80
 
 /datum/crafting_recipe/roguetown/sewing/sexydress
 	name = "sexy dress of legendary sewers"
@@ -248,3 +255,4 @@
 	reqs = list(/obj/item/natural/cloth = 6,
 				/obj/item/natural/fibers = 3)
 	craftdiff = 6
+	sellprice = 25

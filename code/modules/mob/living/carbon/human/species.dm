@@ -1245,8 +1245,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!I.species_exception || !is_type_in_list(src, I.species_exception))
 			return FALSE
 
-	var/is_nudist = HAS_TRAIT(H, RTRAIT_NUDIST)
-	var/is_retarded = HAS_TRAIT(H, RTRAIT_RETARD_ANATOMY)
+	var/is_nudist = HAS_TRAIT(H, TRAIT_NUDIST)
+	var/is_retarded = HAS_TRAIT(H, TRAIT_RETARD_ANATOMY)
 	var/num_arms = H.get_num_arms(FALSE)
 	var/num_legs = H.get_num_legs(FALSE)
 
