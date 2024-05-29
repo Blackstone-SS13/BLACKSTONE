@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - main
-
+on: workflow_dispatch
 env:
   BYOND_MAJOR: 515
   BYOND_MINOR: 1636
