@@ -266,3 +266,15 @@
 	result = /obj/item/clothing/neck/roguetown/psicross/wood
 	reqs = list(/obj/item/natural/fibers = 2,
 				/obj/item/grown/log/tree/stick = 2)
+
+/datum/crafting_recipe/roguetown/mantrap
+	name = "mantrap"
+	result = list(/obj/item/restraints/legcuffs/beartrap,
+				/obj/item/restraints/legcuffs/beartrap)
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/natural/fibers = 2,
+				/obj/item/ingot/iron = 1)
+	req_table = TRUE
+	skillcraft = /datum/skill/craft/traps
+	craftdiff = 1
+	verbage = "put together"
