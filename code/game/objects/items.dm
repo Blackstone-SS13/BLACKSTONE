@@ -93,6 +93,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER //the icon to indicate this object is being dragged
 
 	var/datum/embedding_behavior/embedding
+	var/is_embedded = FALSE
 
 	var/flags_cover = 0 //for flags such as GLASSESCOVERSEYES
 	var/heat = 0
@@ -199,8 +200,8 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	///played when an item that is equipped blocks a hit
 	var/list/blocksound 
 
-/obj/item/New()
-	..()
+/obj/item/Initialize()
+	. = ..()
 	if(!pixel_x && !pixel_y && !bigboy)
 		pixel_x = rand(-5,5)
 		pixel_y = rand(-5,5)
@@ -317,6 +318,13 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 		m.temporarilyRemoveItemFromInventory(src, TRUE)
 	for(var/X in actions)
 		qdel(X)
+	if(is_embedded)
+		if(isbodypart(loc))
+			var/obj/item/bodypart/embedded_part = loc
+			embedded_part.remove_embedded_object(src)
+		else if(isliving(loc))
+			var/mob/living/embedded_mob = loc
+			embedded_mob.simple_remove_embedded_object(src)
 	return ..()
 
 /obj/item/proc/check_allowed_items(atom/target, not_inside, target_self)

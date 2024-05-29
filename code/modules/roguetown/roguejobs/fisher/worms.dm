@@ -54,45 +54,24 @@
 			return
 		user.dropItemToGround(src)
 		src.forceMove(H)
-		affecting.embedded_objects |= src
+		affecting.add_embedded_object(src)
 		if(M == user)
 			user.visible_message("<span class='notice'>[user] places a leech on [user.p_their()] [affecting].</span>", "<span class='notice'>I place a leech on my [affecting].</span>")
 		else
 			user.visible_message("<span class='notice'>[user] places a leech on [M]'s [affecting].</span>", "<span class='notice'>I place a leech on [M]'s [affecting].</span>")
 
-/obj/item/natural/worms/leeches/on_embed_life(mob/living/user)
+/obj/item/natural/worms/leeches/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
 	if(!user)
 		return
-//	testing("onembedlife")
-	if(ismob(user))
-		if(user.blood_volume <= 0)
-			user.simple_embedded_objects -= src
-			var/turf/T = get_turf(src)
-			if(T)
-				forceMove(T)
-			else
-				qdel(src)
-			return TRUE
+	user.blood_volume = max(user.blood_volume - 1, 0)
+	user.adjustToxLoss(-2)
+	if(user.blood_volume <= 0)
+		if(bodypart)
+			bodypart.remove_embedded_object(src)
 		else
-			user.adjustToxLoss(-2)
-			user.blood_volume = max(user.blood_volume - 1, 0)
-	else
-		var/obj/item/bodypart/BP = user
-		if(BP.owner)
-			if(BP.owner.blood_volume <= 0)
-				BP.receive_damage(w_class*embedding.embedded_fall_pain_multiplier)
-				BP.embedded_objects -= src
-				var/turf/T = get_turf(src)
-				if(T)
-					forceMove(T)
-				else
-					qdel(src)
-				return TRUE
-			else
-				BP.owner.adjustToxLoss(-2)
-				BP.owner.blood_volume = max(BP.owner.blood_volume - 1, 0)
-	return
-
+			user.simple_remove_embedded_object(src)
+		return TRUE
+	return FALSE
 
 /obj/item/natural/worms/grubs
 	name = "grub"

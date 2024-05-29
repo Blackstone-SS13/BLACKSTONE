@@ -19,9 +19,7 @@
 		var/obj/item/I = locate(href_list["embedded_object"]) in simple_embedded_objects
 		if(!I || I.loc != src)
 			return
-		simple_embedded_objects -= I
-		emote("pain", TRUE)
-		I.forceMove(get_turf(src))
+		simple_remove_embedded_object(I)
 		usr.put_in_hands(I)
 		playsound(loc, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
 		if(usr == src)

@@ -213,7 +213,7 @@
 		if(!I || !L || I.loc != C)
 			user.stop_pulling()
 			return
-		L.embedded_objects -= I
+		L.remove_embedded_object(I)
 		C.emote("paincrit", TRUE)
 		L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
 		I.forceMove(get_turf(C))
@@ -227,13 +227,12 @@
 		else
 			user.visible_message("<span class='notice'>[user] rips [I] out of [C]'s [L.name]!</span>", "<span class='notice'>I rip [I] from [C]'s [L.name].</span>")
 		sublimb_grabbed = limb_grabbed.body_zone
-	else
+	else if(HAS_TRAIT(M, TRAIT_SIMPLE_WOUNDS))
 		var/obj/item/I = locate(sublimb_grabbed) in M.simple_embedded_objects
 		if(!I || I.loc != M)
 			user.stop_pulling()
 			return
-		M.simple_embedded_objects -= I
-		M.emote("pain", TRUE)
+		M.simple_remove_embedded_object(I)
 		M.apply_damage(rand(5,10), BRUTE)
 		I.forceMove(get_turf(M))
 		user.dropItemToGround(src)

@@ -2266,13 +2266,9 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 							can_impale = FALSE
 				if(can_impale)
 					if(user.Adjacent(H))
-						//H.throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
-						affecting.embedded_objects |= I
-						I.add_mob_blood(H)
-						I.forceMove(H)
-						H.emote("embed", forced = TRUE)
+						affecting.add_embedded_object(I)
+						H.emote("embed")
 						playsound(H, 'sound/combat/newstuck.ogg', 100, TRUE)
-						H.next_attack_msg += " <span class='userdanger'>[I] is stuck in [H]!</span>"
 						H.grabbedby(user, 1, item_override = I)
 //		if(H.used_intent.blade_class == BCLASS_BLUNT && I.force >= 15 && affecting.body_zone == "chest")
 //			var/turf/target_shove_turf = get_step(H.loc, get_dir(user.loc,H.loc))

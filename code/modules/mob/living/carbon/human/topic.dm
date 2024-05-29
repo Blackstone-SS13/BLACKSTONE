@@ -105,7 +105,7 @@
 		if(do_after(usr, time_taken, needhand = 1, target = src))
 			if(!I || !L || I.loc != src || !(I in L.embedded_objects))
 				return
-			L.embedded_objects -= I
+			L.remove_embedded_object(I)
 			emote("pain", TRUE)
 			L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
 			I.forceMove(get_turf(src))
@@ -134,8 +134,7 @@
 		if(do_after(usr, 50, needhand = 1, target = src))
 			if(!I || !L || !(L.bandage == I))
 				return
-			I.forceMove(get_turf(src))
-			L.bandage = null
+			L.remove_bandage()
 			usr.put_in_hands(I)
 			src.update_damage_overlays()
 		return
