@@ -68,7 +68,7 @@
 				if(iscarbon(src))
 					var/mob/living/carbon/M = src
 					M.reagents.add_reagent(A.poisontype, A.poisonamount)
-					M.show_message("<span class='danger'>You feel an intense [P.poisonfeel] sensation spreading swiftly from the area!</span>") //A warning seems only fair, this poison can potentially down someone in a single arrow, though the poison will not kill on its own.
+					M.show_message("<span class='danger'>You feel an intense [A.poisonfeel] sensation spreading swiftly from the area!</span>") //A warning seems only fair, this poison can potentially down someone in a single arrow, though the poison will not kill on its own.
 		else
 			P.handle_drop()
 
