@@ -20,8 +20,7 @@
 /datum/crafting_recipe/roguetown/structure/headpike
 	name = "headpike"
 	result = /obj/structure/headpike
-	reqs = list(/obj/item/grown/log/tree/small = 1,
-				/obj/item/bodypart/head = 1)
+	reqs = list(/obj/item/grown/log/tree/small = 1)
 	verbage = "crafts"
 	craftsound = 'sound/foley/sewflesh.ogg'
 
