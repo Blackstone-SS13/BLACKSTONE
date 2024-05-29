@@ -11,14 +11,11 @@
 		"MY LUPINE MARK!",
 	)
 	var/special_role = ROLE_WEREWOLF
-
 	var/transformed
 	var/transforming
 	var/untransforming
-
 	var/wolfname = "Werevolf"
-	var/pre_transform
-	var/next_idle_sound
+
 /datum/antagonist/werewolf/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/M = mob_override || owner.current
 	add_antag_hud(antag_hud_type, antag_hud_name, M)
@@ -85,7 +82,7 @@
 	if(mind.has_antag_datum(/datum/antagonist/zombie)) return
 	if(mind.has_antag_datum(/datum/antagonist/werewolf)) return
 
-	message_admins("[src] has been infected")
+	//message_admins("[src] has been infected")
 
 	var/datum/antagonist/werewolf/new_antag = new /datum/antagonist/werewolf/lesser()
 	mind.add_antag_datum(new_antag)
