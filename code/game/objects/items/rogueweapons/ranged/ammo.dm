@@ -115,6 +115,7 @@
 		var/mob/living/simple_animal/M = target
 		M.show_message("<span class='danger'>You feel an intense burning sensation spreading swiftly from the puncture!</span>") //In case a player is in control of the mob.
 		addtimer(CALLBACK(M, TYPE_PROC_REF(/mob/living, adjustToxLoss), 100), 10 SECONDS)
+		addtimer(CALLBACK(M, TYPE_PROC_REF(/atom, visible_message), "<span class='danger'>[M] appears greatly weakened by the poison!</span>"), 10 SECONDS)
 
 /obj/projectile/bullet/reusable/bullet
 	name = "lead ball"
