@@ -6,6 +6,7 @@
 	/// ONLY FOR MAPPING: Sets flags from a string list, handled in Initialize. Usage: set_obj_flags = "EMAGGED;!CAN_BE_HIT" to set EMAGGED and clear CAN_BE_HIT.
 	var/set_obj_flags 
 
+	var/melee_type = "blunt"
 	var/damtype = BRUTE
 	var/force = 0
 
@@ -263,17 +264,19 @@
 		if (islist(result))
 			if (result["button"] != 2) // If the user pressed the cancel button
 				// text2num conveniently returns a null on invalid values
-				armor = armor.setRating(melee = text2num(result["values"]["melee"]),\
-			                  bullet = text2num(result["values"]["bullet"]),\
-			                  laser = text2num(result["values"]["laser"]),\
-			                  energy = text2num(result["values"]["energy"]),\
-			                  bomb = text2num(result["values"]["bomb"]),\
-			                  bio = text2num(result["values"]["bio"]),\
-			                  rad = text2num(result["values"]["rad"]),\
-			                  fire = text2num(result["values"]["fire"]),\
-			                  acid = text2num(result["values"]["acid"]))
-				log_admin("[key_name(usr)] modified the armor on [src] ([type]) to melee: [armor.melee], bullet: [armor.bullet], laser: [armor.laser], energy: [armor.energy], bomb: [armor.bomb], bio: [armor.bio], rad: [armor.rad], fire: [armor.fire], acid: [armor.acid]")
-				message_admins("<span class='notice'>[key_name_admin(usr)] modified the armor on [src] ([type]) to melee: [armor.melee], bullet: [armor.bullet], laser: [armor.laser], energy: [armor.energy], bomb: [armor.bomb], bio: [armor.bio], rad: [armor.rad], fire: [armor.fire], acid: [armor.acid]</span>")
+				armor = armor.setRating(blunt = text2num(result["values"]["blunt"]),\
+								slash = text2num(result["values"]["slash"]),\
+								stab = text2num(result["values"]["stab"]),\
+								bullet = text2num(result["values"]["bullet"]),\
+								laser = text2num(result["values"]["laser"]),\
+								energy = text2num(result["values"]["energy"]),\
+								bomb = text2num(result["values"]["bomb"]),\
+								bio = text2num(result["values"]["bio"]),\
+								rad = text2num(result["values"]["rad"]),\
+								fire = text2num(result["values"]["fire"]),\
+								acid = text2num(result["values"]["acid"]))
+				log_admin("[key_name(usr)] modified the armor on [src] ([type]) to blunt: [armor.blunt], slash: [armor.slash], stab:[armor.stab], bullet: [armor.bullet], laser: [armor.laser], energy: [armor.energy], bomb: [armor.bomb], bio: [armor.bio], rad: [armor.rad], fire: [armor.fire], acid: [armor.acid]")
+				message_admins("<span class='notice'>[key_name_admin(usr)] modified the armor on [src] ([type]) to blunt: [armor.blunt], slash: [armor.slash], stab:[armor.stab], bullet: [armor.bullet], laser: [armor.laser], energy: [armor.energy], bomb: [armor.bomb], bio: [armor.bio], rad: [armor.rad], fire: [armor.fire], acid: [armor.acid]</span>")
 	if(href_list[VV_HK_MASS_DEL_TYPE])
 		if(check_rights(R_DEBUG|R_SERVER))
 			var/action_type = alert("Strict type ([type]) or type and all subtypes?",,"Strict type","Type and subtypes","Cancel")
