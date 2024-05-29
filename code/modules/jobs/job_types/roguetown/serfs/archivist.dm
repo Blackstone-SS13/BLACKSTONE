@@ -39,23 +39,12 @@
 	beltl = /obj/item/keyring/archivist
 	beltr = /obj/item/storage/belt/rogue/pouch/coins/mid
 	mask = /obj/item/clothing/mask/rogue/spectacles
-	neck = /obj/item/clothing/neck/roguetown/psicross/noc
+
+
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/arcane, 2, TRUE) //For the future.
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE) //Libarians are quiet.
 		H.change_stat("strength", -2)
 		H.change_stat("intelligence", 8)
 		H.change_stat("constitution", -2)
 		H.change_stat("speed", -2)
-	if(H.age == AGE_OLD)
-		H.mind.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/arcane, 1, TRUE)
-
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
-	C.holder_mob = H
-	C.update_devotion(50, 50)
-	C.grant_spells(H)
-	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
