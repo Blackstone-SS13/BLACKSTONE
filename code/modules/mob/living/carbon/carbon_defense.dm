@@ -241,11 +241,10 @@
 		send_item_attack_message(I, user, affecting.name)
 
 	if(statforce)
-		var/probability = I.get_dismemberment_chance(affecting)
-		if(prob(probability))
-			if(affecting.dismember(I.damtype, user.used_intent?.blade_class, user, user.zone_selected))
-				I.add_mob_blood(src)
-				playsound(get_turf(src), I.get_dismember_sound(), 80, TRUE)
+		var/probability = I.get_dismemberment_chance(affecting, user)
+		if(prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, user.zone_selected))
+			I.add_mob_blood(src)
+			playsound(get_turf(src), I.get_dismember_sound(), 80, TRUE)
 		return TRUE //successful attack
 
 /mob/living/carbon/attack_drone(mob/living/simple_animal/drone/user)

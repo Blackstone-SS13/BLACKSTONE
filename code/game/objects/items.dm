@@ -308,8 +308,13 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	if(sharpness) //give sharp objects butchering functionality, for consistency
 		AddComponent(/datum/component/butchering, 80 * toolspeed)
 
-	if(max_blade_int && !blade_int) //set blade integrity to randomized 60% to 100% if not already set
-		blade_int = max_blade_int + rand(-(max_blade_int * 0.4), 0)
+	if(max_blade_int) 
+		//set blade integrity to randomized 60% to 100% if not already set
+		if(!blade_int)
+			blade_int = max_blade_int + rand(-(max_blade_int * 0.4), 0)
+		//set dismemberment integrity to max_blade_int if not already set
+		if(!dismember_blade_int)
+			dismember_blade_int = max_blade_int
 
 /obj/item/Destroy()
 	item_flags &= ~DROPDEL	//prevent reqdels
@@ -912,13 +917,17 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 
 ///Returns the sharpness of src. If you want to get the sharpness of an item use this.
 /obj/item/proc/get_sharpness()
+	//Oh no, we are dulled out
+	if(max_blade_int && (blade_int <= 0))
+		return FALSE
+	var/max_sharp = sharpness
 	for(var/X in possible_item_intents)
 		var/datum/intent/D = new X()
 		if(D.blade_class == BCLASS_CUT)
-			return TRUE
+			max_sharp = max(max_sharp, IS_SHARP)
 		if(D.blade_class == BCLASS_CHOP)
-			return TRUE
-	return sharpness
+			max_sharp = max(max_sharp, IS_SHARP)
+	return max_sharp
 
 /obj/item/proc/get_dismemberment_chance(obj/item/bodypart/affecting, input)
 	if(!affecting.can_dismember(src))
