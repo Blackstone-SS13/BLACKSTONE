@@ -160,7 +160,6 @@
 		"The spine cracks!",
 		"The spine is broken!",
 	)
-	sound_effect = "fracturedry"
 	whp = 100
 	sleep_healing = 0
 
