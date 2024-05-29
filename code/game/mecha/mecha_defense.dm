@@ -35,7 +35,7 @@
 				booster_deflection_modifier = B.deflect_coeff
 				booster_damage_modifier = B.damage_coeff
 				break
-	else if(damage_flag == "blunt" || damage_flag == "slash" || damage_flag = "stab")
+	else if(damage_flag == "blunt" || damage_flag == "slash" || damage_flag == "stab")
 		for(var/obj/item/mecha_parts/mecha_equipment/anticcw_armor_booster/B in equipment)
 			if(B.attack_react())
 				booster_deflection_modifier *= B.deflect_coeff
