@@ -66,8 +66,8 @@
 			if(istype(P, /obj/projectile/bullet/reusable/arrow/poison))// Moved here because I didn't like that poison was applied by the on_hit proc during testing even if armor stopped all damage. That just don't make sense.
 				if(iscarbon(src))
 					var/mob/living/carbon/M = src
-					M.reagents.add_reagent(/datum/reagent/berrypoison, 3) //a fast-acting and dangerous (~81-84 damage) toxin that induces nausea, vomiting of blood, and in slightly higher doses, sends the body into shock. King could declare them illegal except for use by hunters.
-					M.show_message("<span class='danger'>You feel an intense burning sensation spreading swiftly from the area!</span>") //A warning seems only fair, this poison can potentially down someone in a single arrow, though the poison will not kill on its own.
+					M.reagents.add_reagent(P.poisontype, P.poisonamount)
+					M.show_message("<span class='danger'>You feel an intense [P.poisonfeel] sensation spreading swiftly from the area!</span>") //A warning seems only fair, this poison can potentially down someone in a single arrow, though the poison will not kill on its own.
 		else
 			P.handle_drop()
 

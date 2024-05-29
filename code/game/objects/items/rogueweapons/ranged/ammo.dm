@@ -68,11 +68,16 @@
 	flag = "bullet"
 	speed = 0.4
 
+/obj/projectile/bullet/reusable/arrow/stone
+	name = "stone arrow"
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow/stone
+
 /obj/item/ammo_casing/caseless/rogue/arrow/stone
 	name = "stone arrow"
 	desc = "A wooden shaft with a jagged rock on the end."
 	icon_state = "stonearrow"
 	max_integrity = 5
+	projectile_type = /obj/projectile/bullet/reusable/arrow/stone
 
 /obj/item/ammo_casing/caseless/rogue/arrow/poison
 	name = "poisoned arrow"
@@ -96,11 +101,13 @@
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow
 	range = 15
 	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
+	var/poisontype = /datum/reagent/berrypoison //Support for future variations of poison for arrow-crafting
+	var/poisonfeel = "burning" //Ditto
+	var/poisonamount = 5 //Support and balance for bodkins, which will hold less poison due to how
 
 /obj/projectile/bullet/reusable/arrow/poison/stone
 	name = "stone arrow"
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow/stone
-
 
 /obj/projectile/bullet/reusable/arrow/poison/on_hit(atom/target, blocked = FALSE)
 	. = ..()
