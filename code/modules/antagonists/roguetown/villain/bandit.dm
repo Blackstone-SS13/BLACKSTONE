@@ -175,9 +175,6 @@
 	H.change_stat("constitution", 1)
 	H.change_stat("speed", 1)
 	H.change_stat("intelligence", -3)
-	var/obj/item/bodypart/B = H.get_bodypart("head")
-	if(B)
-		B.sellprice = rand(66, 123)
 
 	H.ambushable = FALSE
 

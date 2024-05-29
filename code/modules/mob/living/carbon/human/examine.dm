@@ -1,6 +1,8 @@
 /mob/living/carbon/human/proc/on_examine_face(mob/living/carbon/human/user)
 	if(!istype(user))
 		return
+	if(user.mind)
+		user.mind.i_know_person(src)
 	if(!isdarkelf(user) && isdarkelf(src))
 		user.add_stress(/datum/stressevent/delf)
 	if(!istiefling(user) && istiefling(src))
