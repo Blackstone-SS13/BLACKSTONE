@@ -63,12 +63,14 @@
 					P.handle_drop()
 			if(P.woundclass)
 				check_projectile_wounding(P, def_zone)
-			if(istype(P, /obj/projectile/bullet/reusable/arrow/poison))// Moved here because I didn't like that poison was applied by the on_hit proc during testing even if armor stopped all damage. That just don't make sense.
-				var/obj/projectile/bullet/reusable/arrow/poison/A = P
+			if(P.poisontype)// New proc for poisoning that respects if armor stopped damage from the projectile, by blocking or through reduction. Only called if poison type is defined.
+				if(!P.poisonamount)
+					CRASH("Projectile attempted to add poison with undefined amount.")
 				if(iscarbon(src))
 					var/mob/living/carbon/M = src
-					M.reagents.add_reagent(A.poisontype, A.poisonamount)
-					M.show_message("<span class='danger'>You feel an intense [A.poisonfeel] sensation spreading swiftly from the area!</span>") //A warning seems only fair, this poison can potentially down someone in a single arrow, though the poison will not kill on its own.
+					M.reagents.add_reagent(P.poisontype, P.poisonamount)
+					if(P.poisonfeel)
+						M.show_message("<span class='danger'>You feel an intense [P.poisonfeel] sensation spreading swiftly from the area!</span>")
 		else
 			P.handle_drop()
 

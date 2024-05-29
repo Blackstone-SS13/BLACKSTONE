@@ -101,9 +101,9 @@
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow
 	range = 15
 	hitsound = 'sound/combat/hits/hi_arrow2.ogg'
-	var/poisontype = /datum/reagent/berrypoison //Support for future variations of poison for arrow-crafting
-	var/poisonfeel = "burning" //Ditto
-	var/poisonamount = 5 //Support and balance for bodkins, which will hold less poison due to how
+	poisontype = /datum/reagent/berrypoison //Support for future variations of poison for arrow-crafting
+	poisonfeel = "burning" //Ditto
+	poisonamount = 5 //Support and balance for bodkins, which will hold less poison due to how
 
 /obj/projectile/bullet/reusable/arrow/poison/stone
 	name = "stone arrow"
@@ -114,8 +114,7 @@
 	if(istype(target, /mob/living/simple_animal)) //On-hit for carbon mobs has been moved to projectile act in living_defense.dm, to ensure poison is not applied if armor prevents damage.
 		var/mob/living/simple_animal/M = target
 		M.show_message("<span class='danger'>You feel an intense burning sensation spreading swiftly from the puncture!</span>") //In case a player is in control of the mob.
-		sleep(10 SECONDS)
-		M.adjustToxLoss(100) //Very useful for hunters who want to conserve ammo
+		addtimer(CALLBACK(M, TYPE_PROC_REF(/mob/living, adjustToxLoss), 100), 10 SECONDS)
 
 /obj/projectile/bullet/reusable/bullet
 	name = "lead ball"
