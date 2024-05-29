@@ -5,14 +5,14 @@
 	name = "Half Orc"
 	id = "halforc"
 	desc = "<b>Half Orcs</b><br>\
-	With the Gronn clan on a centuries-long warpath to consolidate all orcs within their banner, \
+	With the Ironmask clan on a centuries-long warpath to consolidate all orcs within their banner, \
 	crushed orc tribes have lost their menfolk and war-widows have been scattered to the hinterlands. \
 	Between human civilization and orc savagery, orc-women opting for exile over dishonor have become \
 	more common visitors to fur trading posts and prospecting camps, eventually leading to half-orcs \
-	being born in these rough places otherwise devoid of a fairer sex. Your mother’s tribe is in \
-	thrall to Gronn, true orcs would kill you as a mongrel dog and your father’s people cannot decide \
-	between mere distrust and disgust. Yet somehow your wandering feet came to Rockhill, where half-orcs \
-	ply muscle and their hardiness in the rough underbelly or outer reaches of society."
+	being born in these rough places otherwise devoid of a fairer sex. Your mother-clan is in thrall \
+	to the Ironmask, true orcs would kill you as a mongrel dog and your father’s people cannot decide \
+	between mere distrust and disgust. Yet somehow your wandering feet came to Rockhill, where \
+	half-orcs ply muscle and their hardiness in the rough underbelly or outer reaches of society."
 
 	skin_tone_wording = "Clan"
 
@@ -91,9 +91,9 @@
 /datum/species/halforc/get_skin_list()
 	return list(
 		"Shellcrest" = SKIN_COLOR_SHELLCREST,
-		"Bloodaxe"	   =  SKIN_COLOR_BLOOD_AXE,
-		"Gronn" = SKIN_COLOR_GROONN, //gronns are the dominant ones with orks
-		"Black Hammer" = SKIN_COLOR_BLACK_HAMMER,
+		"Bloodaxe" = SKIN_COLOR_BLOOD_AXE,
+		"Splitjaw" = SKIN_COLOR_GROONN, //Changed name from Gronn, which no longer aligned with lore here or elsewhere.
+		"Blackhammer" = SKIN_COLOR_BLACK_HAMMER,
 		"Skullseeker" = SKIN_COLOR_SKULL_SEEKER
 	)
 
