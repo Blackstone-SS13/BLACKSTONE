@@ -30,13 +30,18 @@
 	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 5,
 					/obj/item/reagent_containers/food/snacks/fish/eel = 5,
 					/obj/item/reagent_containers/food/snacks/fish/angler = 1)
-	embedding = list("embedded_unsafe_removal_time" = 0, "embedded_pain_chance" = 0, "embedded_pain_multiplier" = 1, "embed_chance" = 0, "embedded_fall_chance" = 0,"embedded_bloodloss"=0)
+	embedding = list(
+		"embed_chance" = 100,
+		"embedded_unsafe_removal_time" = 0, 
+		"embedded_pain_chance" = 0,
+		"embedded_fall_chance" = 0,
+		"embedded_bloodloss"= 0,
+	)
 
 /obj/item/natural/worms/leeches/update_icon()
-	..()
+	. = ..()
 	if(amt > 1)
 		name = "[initial(name)]es"
-
 
 /obj/item/natural/worms/leeches/attack(mob/living/M, mob/user)
 	if(ishuman(M))
@@ -77,6 +82,8 @@
 	name = "grub"
 	baitchance = 100
 	color = null
-	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 5,
-					/obj/item/reagent_containers/food/snacks/fish/angler = 1,
-					/obj/item/reagent_containers/food/snacks/fish/clownfish = 1)
+	fishloot = list(
+		/obj/item/reagent_containers/food/snacks/fish/carp = 5,
+		/obj/item/reagent_containers/food/snacks/fish/angler = 1,
+		/obj/item/reagent_containers/food/snacks/fish/clownfish = 1,
+	)

@@ -16,7 +16,6 @@
 	custom_materials = null
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST)
 	can_parry = TRUE
-	var/initial_sl
 	wlength = 45
 	sellprice = 1
 	has_inspect_verb = TRUE
@@ -26,11 +25,16 @@
 	blade_dulling = DULLING_BASH
 	max_integrity = 200
 	wdefense = 3
-	var/list/possible_enhancements
-	var/renamed_name
 	experimental_onhip = TRUE
 	experimental_onback = TRUE
-	embedding = list("embedded_pain_multiplier" = 1, "embed_chance" = 20, "embedded_fall_chance" = 0)
+	embedding = list(
+		"embed_chance" = 20, 
+		"embedded_pain_multiplier" = 1, 
+		"embedded_fall_chance" = 0,
+	)
+	var/initial_sl
+	var/list/possible_enhancements
+	var/renamed_name
 
 /obj/item/rogueweapon/Initialize()
 	. = ..()
