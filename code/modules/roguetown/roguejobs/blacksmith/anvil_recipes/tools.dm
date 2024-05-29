@@ -120,20 +120,20 @@
 
 /datum/anvil_recipe/tools/steelpick
 	name = "Pickaxe (+1 Stick)"
-	req_bar = /obj/item/ingot/+ Steel
+	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/grown/log/tree/stick)
-	created_item = /obj/item/rogueweapon/pick/+ Steel
+	created_item = /obj/item/rogueweapon/pick/steel
 	i_type = "Tools"
 
 /datum/anvil_recipe/tools/cupssteel
 	name = "Goblets 3x"
-	req_bar = /obj/item/ingot/+ Steel
+	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel, /obj/item/reagent_containers/glass/cup/steel)
 	i_type = "General"
 
-/datum/anvil_recipe/tools/cogstee
+/datum/anvil_recipe/tools/cogsteel
 	name = "Cogs 3x"
-	req_bar = /obj/item/ingot/+ Steel
+	req_bar = /obj/item/ingot/steel
 	created_item = list(/obj/item/roguegear, /obj/item/roguegear, /obj/item/roguegear)
 	i_type = "General"
 

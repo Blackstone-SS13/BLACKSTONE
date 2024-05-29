@@ -20,10 +20,10 @@
 	created_item = /obj/item/roguestatue/iron
 	i_type = "Valuables"
 
-/datum/anvil_recipe/valuables/+ Steel
+/datum/anvil_recipe/valuables/steel
 	name = "Statue"
-	req_bar = /obj/item/ingot/+ Steel
-	created_item = /obj/item/roguestatue/+ Steel
+	req_bar = /obj/item/ingot/steel
+	created_item = /obj/item/roguestatue/steel
 	i_type = "Valuables"
 
 /*
@@ -98,45 +98,45 @@
 	created_item = /obj/item/clothing/ring/diamond
 	i_type = "Valuables"
 
-//+ Steel rings
+//steel rings
 /datum/anvil_recipe/valuables/emerings
 	name = "Gemerald Ring (+1 Gemerald)"
-	req_bar = /obj/item/ingot/+ Steel
+	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/green)	
 	created_item = /obj/item/clothing/ring/emeralds
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/rubys
 	name = "Rontz Ring (+1 Rontz)"
-	req_bar = /obj/item/ingot/+ Steel
+	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem)	
 	created_item = /obj/item/clothing/ring/rubys
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/topazs
 	name = "Toper Ring (+1 Toper)"
-	req_bar = /obj/item/ingot/+ Steel
+	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/yellow)	
 	created_item = /obj/item/clothing/ring/topazs
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/quartzs
 	name = "Blortz Ring (+1 Blortz)"
-	req_bar = /obj/item/ingot/+ Steel
+	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/blue)	
 	created_item = /obj/item/clothing/ring/quartzs
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/sapphires
 	name = "Saffira Ring (+1 Saffira)"
-	req_bar = /obj/item/ingot/+ Steel
+	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/violet)	
 	created_item = /obj/item/clothing/ring/sapphires
 	i_type = "Valuables"
 
 /datum/anvil_recipe/valuables/diamonds
 	name = "Dorpel Ring (+1 Dorpel)"
-	req_bar = /obj/item/ingot/+ Steel
+	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/roguegem/diamond)	
 	created_item = /obj/item/clothing/ring/diamonds
 	i_type = "Valuables"
@@ -144,7 +144,7 @@
 /datum/anvil_recipe/valuables/terminus
 	name = "Terminus Est (+1 Gold Bar, +1 Steel, +1 Rontz)"
 	req_bar = /obj/item/ingot/gold
-	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/+ Steel, /obj/item/roguegem)	
+	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/steel, /obj/item/roguegem)	
 	created_item = /obj/item/rogueweapon/sword/long/exe/cloth
 	craftdiff = 3
 	i_type = "Weapons"
