@@ -157,6 +157,14 @@
 	craftdiff = 2
 	i_type = "Weapons"
 
+/datum/anvil_recipe/weapons/decsword
+	name = "Decorated Sword (+1 Steel Sword)"
+	req_bar = /obj/item/ingot/gold
+	additional_items = list(/obj/item/rogueweapon/sword)
+	created_item = /obj/item/rogueweapon/sword/decorated
+	craftdiff = 2
+	i_type = "Weapons"
+
 /datum/anvil_recipe/weapons/decsaber
 	name = "Decorated Sabre (+1 Gold)"
 	req_bar = /obj/item/ingot/steel
@@ -165,10 +173,26 @@
 	craftdiff = 2
 	i_type = "Weapons"
 
+/datum/anvil_recipe/weapons/decsaber
+	name = "Decorated Sabre (+1 Steel Sabre)"
+	req_bar = /obj/item/ingot/gold
+	additional_items = list(/obj/item/rogueweapon/sword/sabre)
+	created_item = /obj/item/rogueweapon/sword/sabre/dec
+	craftdiff = 2
+	i_type = "Weapons"
+
 /datum/anvil_recipe/weapons/decrapier
 	name = "Decorated Rapier (+1 Gold)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/gold)
+	created_item = /obj/item/rogueweapon/sword/rapier/dec
+	craftdiff = 2
+	i_type = "Weapons"
+
+/datum/anvil_recipe/weapons/decrapier
+	name = "Decorated Rapier (+1 Steel Rapier)"
+	req_bar = /obj/item/ingot/gold
+	additional_items = list(/obj/item/rogueweapon/sword/rapier)
 	created_item = /obj/item/rogueweapon/sword/rapier/dec
 	craftdiff = 2
 	i_type = "Weapons"
