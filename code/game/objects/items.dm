@@ -375,7 +375,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 			inspec += "\n<b>MIN.STR:</b> [minstr]"
 
 		if(wbalance)
-			inspec += "\n<b>BALANCE:</b>"
+			inspec += "\n<b>BALANCE: </b>"
 			if(wbalance < 0)
 				inspec += "Heavy"
 			if(wbalance > 0)
