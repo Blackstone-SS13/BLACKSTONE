@@ -441,5 +441,5 @@
 	allowed_race = list("humen", "tiefling", "dwarfm","argonian", "elfd", "elfw", "helf", "aasimar")
 	
 /obj/item/clothing/suit/roguetown/armor/silkcoat/Initialize()
+	. = ..()
 	color = pick(CLOTHING_PURPLE, null,CLOTHING_GREEN, CLOTHING_RED)
-	..()
