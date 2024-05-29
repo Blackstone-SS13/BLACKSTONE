@@ -63,6 +63,14 @@
 					P.handle_drop()
 			if(P.woundclass)
 				check_projectile_wounding(P, def_zone)
+			if(P.poisontype)// New proc for poisoning that respects if armor stopped damage from the projectile, by blocking or through reduction. Only called if poison type is defined.
+				if(!P.poisonamount)
+					CRASH("Projectile attempted to add poison with undefined amount.")
+				if(iscarbon(src))
+					var/mob/living/carbon/M = src
+					M.reagents.add_reagent(P.poisontype, P.poisonamount)
+					if(P.poisonfeel)
+						M.show_message("<span class='danger'>You feel an intense [P.poisonfeel] sensation spreading swiftly from the area!</span>")
 		else
 			P.handle_drop()
 
@@ -226,12 +234,12 @@
 	var/probby =  20 - ((user.STASTR - STASTR) * 10)
 	if(src.pulling == user && !instant)
 		probby += 30
-	
+
 	if(src.dir == turn(get_dir(src,user), 180))
 		probby = (probby - 30)
-	
+
 	probby = clamp(probby, 5, 95)
-	
+
 	if(prob(probby) && !instant && !stat && cmode)
 		visible_message("<span class='warning'>[user] struggles with [src]!</span>",
 						"<span class='warning'>[user] struggles to restrain me!</span>", "<span class='hear'>I hear aggressive shuffling!</span>", null, user)
