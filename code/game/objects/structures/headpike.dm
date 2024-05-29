@@ -1,14 +1,13 @@
-
-
 /obj/structure/headpike
-	var/obj/item/grown/log/tree/small/pike
-	var/obj/item/bodypart/head/stored_head
-	name = "[stored_head.name]'s head on a pike"
-	desc = "oh yike, head on a pike"
+	name = "head on a pike"
+	desc = ""
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "headpike"
 	density = FALSE
 	anchored = TRUE
+
+	var/obj/item/grown/log/tree/small/pike
+	var/obj/item/bodypart/head/stored_head
 
 /obj/structure/headpike/log //needs a log, right?
 	icon_state = "" // not sure what goes here
