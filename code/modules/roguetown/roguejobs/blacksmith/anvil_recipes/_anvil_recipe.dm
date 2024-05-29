@@ -9,6 +9,7 @@
 	var/needed_item_text
 	var/quality_mod = 0
 	var/progress
+	var/i_type
 
 	var/datum/parent
 

@@ -7,9 +7,6 @@
 	blade_dulling = DULLING_BASH
 	anchored = TRUE
 	pixel_x = -17
- 
-	/// List of all created and non-completed bounties
-	var/list/bounties = list()
 
 /datum/bounty
 	var/target
@@ -52,46 +49,36 @@
 
 	qdel(P)
 
-	var/random_say = rand(1, 3)
-	if(random_say == 1)
-		say("Commencing cephalic dissection...")
-	else if(random_say == 2)
-		say("Analyzing skull structure...")
-	else
-		say("Performing intra-cranial inspection...")
+	say(pick(list("Performing intra-cranial inspection...", "Analyzing skull structure...", "Commencing cephalic dissection...")))
 
 	sleep(1 SECONDS)
 
-	var/random_sound = rand(1, 3)
-	if(random_sound == 1)
-		playsound(src, 'sound/combat/fracture/headcrush (4).ogg', 100, FALSE, -1)
-		sleep(1 SECONDS)
-		playsound(src, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
-	else if(random_sound == 2)
-		playsound(src, 'sound/combat/fracture/headcrush (3).ogg', 100, FALSE, -1)
-		sleep(1 SECONDS)
-		playsound(src, 'sound/combat/fracture/headcrush (4).ogg', 100, FALSE, -1)
-	else
-		playsound(src, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
-		sleep(1 SECONDS)
-		playsound(src, 'sound/combat/fracture/headcrush (3).ogg', 100, FALSE, -1)
+	var/list/headcrush = list('sound/combat/fracture/headcrush (2).ogg', 'sound/combat/fracture/headcrush (3).ogg', 'sound/combat/fracture/headcrush (4).ogg')
+	playsound(src, pick_n_take(headcrush), 100, FALSE, -1)
+	sleep(1 SECONDS)
+	playsound(src, pick(headcrush), 100, FALSE, -1)
 
 	sleep(2 SECONDS)
 
 	//give reward for every bounty that matches
-	for(var/datum/bounty/b in bounties)
+	var/reward_amount = 0
+	for(var/datum/bounty/b in GLOB.head_bounties)
 		if(b.target == stored_head.real_name)
 			correct_head = TRUE
 			say("A bounty has been sated.")
-			sleep(1 SECONDS)
-			playsound(src, 'sound/misc/coindispense.ogg', 100, FALSE, -1)
-			var/obj/item/roguecoin/copper/reward = new /obj/item/roguecoin/copper(machine_location)
-			reward.set_quantity(b.amount)
+			reward_amount += b.amount
+			GLOB.head_bounties -= b
 
-			bounties -= b
+	for(var/mob/living/banditcheck in GLOB.mob_list)
+		if(banditcheck.mind?.has_antag_datum(/datum/antagonist/bandit) && banditcheck.real_name == stored_head.real_name)
+			correct_head = TRUE
+			say("A bounty has been sated.")
+			reward_amount += 80
+			break
 
-	// No valid bounty for this head?
-	if(correct_head == FALSE)
+	if(correct_head)
+		budget2change(reward_amount, user)
+	else // No valid bounty for this head?
 		say("This skull carried no reward.")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 
@@ -105,44 +92,52 @@
 ///Composes a random bounty banner based on the given bounty info.
 ///@param new_bounty:  The bounty datum.
 /obj/structure/roguemachine/bounty/proc/compose_bounty(var/datum/bounty/new_bounty)
-	var/random_phrasing = rand(1, 3)
-	if(random_phrasing == 1)
-		new_bounty.banner += "A dire bounty hangs upon the head of [new_bounty.target], for '[new_bounty.reason]'.<BR>"
-		new_bounty.banner += "The patron, [new_bounty.employer], offers [new_bounty.amount] mammons for the task.<BR>"	
-	else if(random_phrasing == 2)
-		new_bounty.banner += "The head of [new_bounty.target] is wanted for '[new_bounty.reason]''.<BR>"
-		new_bounty.banner += "The employer, [new_bounty.employer], offers [new_bounty.amount] mammons for the deed.<BR>"
-	else
-		new_bounty.banner += "[new_bounty.employer] hath offered to pay [new_bounty.amount] mammons for the head of [new_bounty.target].<BR>"
-		new_bounty.banner += "By reason of the following: '[new_bounty.reason]'.<BR>"
+	switch(rand(1, 3))
+		if(1)
+			new_bounty.banner += "A dire bounty hangs upon the head of [new_bounty.target], for '[new_bounty.reason]'.<BR>"
+			new_bounty.banner += "The patron, [new_bounty.employer], offers [new_bounty.amount] mammons for the task.<BR>"	
+		if(2)
+			new_bounty.banner += "The head of [new_bounty.target] is wanted for '[new_bounty.reason]''.<BR>"
+			new_bounty.banner += "The employer, [new_bounty.employer], offers [new_bounty.amount] mammons for the deed.<BR>"
+		if(3)
+			new_bounty.banner += "[new_bounty.employer] hath offered to pay [new_bounty.amount] mammons for the head of [new_bounty.target].<BR>"
+			new_bounty.banner += "By reason of the following: '[new_bounty.reason]'.<BR>"
 	new_bounty.banner += "--------------<BR>"
 
 ///Shows all active bounties to the user.
 /obj/structure/roguemachine/bounty/proc/consult_bounties(var/mob/living/carbon/human/user)
-
-	if(bounties.len == 0)
-		say("No bounties are currently active.")
-		return
-
+	var/bounty_found = FALSE
 	var/consult_menu
 	consult_menu += "<center>BOUNTIES<BR>"
 	consult_menu += "--------------<BR>"
-	for(var/datum/bounty/saved_bounty in bounties)
+	for(var/mob/living/banditcheck in GLOB.mob_list)
+		if(banditcheck.mind?.has_antag_datum(/datum/antagonist/bandit))
+			consult_menu += "The head of each Bandit is wanted by The Crown for 80 mammons.<BR>"
+			consult_menu += "--------------<BR>"
+			bounty_found = TRUE
+			break
+	for(var/datum/bounty/saved_bounty in GLOB.head_bounties)
 		consult_menu += saved_bounty.banner
+		bounty_found = TRUE
 
-	var/datum/browser/popup = new(user, "BOUNTIES", "", 500, 300)
-	popup.set_content(consult_menu)
-	popup.open()
+	if(bounty_found)
+		var/datum/browser/popup = new(user, "BOUNTIES", "", 500, 300)
+		popup.set_content(consult_menu)
+		popup.open()
+	else
+		say("No bounties are currently active.")
 
 ///Sets a bounty on a target player through user input.
 ///@param user: The player setting the bounty.
 /obj/structure/roguemachine/bounty/proc/set_bounty(var/mob/living/carbon/human/user)
 	var/list/eligible_players = list()
-	for(var/mob/living/H in GLOB.player_list)
-		if(H.client)
-			if(H != user)
-				eligible_players += H.real_name
-		
+
+	if(user.mind.known_people.len)
+		for(var/guys_name in user.mind.known_people)
+			eligible_players += guys_name
+	else
+		to_chat(user, "<span class='warning'>I don't know anyone.</span>")
+		return
 	var/target = input(user, "Whose name shall be etched on the wanted list?", src) as null|anything in eligible_players
 	if(isnull(target))
 		say("No target selected.")
@@ -191,7 +186,7 @@
 	new_bounty.reason = reason
 	new_bounty.employer = user.real_name
 	compose_bounty(new_bounty)
-	bounties += new_bounty
+	GLOB.head_bounties += new_bounty
 
 	//Announce it locally and on scomm
 	playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
@@ -199,3 +194,4 @@
 	say(bounty_announcement)
 	scom_announce(bounty_announcement)
 
+	message_admins("[ADMIN_LOOKUPFLW(user)] has set a bounty on [ADMIN_LOOKUPFLW(target)] with the reason of: '[reason]'")

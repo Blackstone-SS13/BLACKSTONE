@@ -26,6 +26,7 @@
 	give_bank_account = 35
 	min_pq = 4
 	max_pq = null
+	cmode_music = 'sound/music/combat_bog.ogg'
 
 /datum/job/roguetown/bogmaster/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
@@ -60,7 +61,7 @@
 	if(H.mind)
 		H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 6, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 6, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 4, TRUE)
@@ -79,10 +80,9 @@
 		H.change_stat("speed", 1)
 	if(H.dna?.species)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/knight()
-	H.cmode_music = 'sound/music/combat_bog.ogg'
 	H.verbs |= /mob/proc/haltyell
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 
 /obj/effect/proc_holder/spell/self/convertrole/bog

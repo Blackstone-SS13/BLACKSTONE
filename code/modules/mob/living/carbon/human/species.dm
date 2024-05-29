@@ -1245,8 +1245,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!I.species_exception || !is_type_in_list(src, I.species_exception))
 			return FALSE
 
-	var/is_nudist = HAS_TRAIT(H, RTRAIT_NUDIST)
-	var/is_retarded = HAS_TRAIT(H, RTRAIT_RETARD_ANATOMY)
+	var/is_nudist = HAS_TRAIT(H, TRAIT_NUDIST)
+	var/is_retarded = HAS_TRAIT(H, TRAIT_RETARD_ANATOMY)
 	var/num_arms = H.get_num_arms(FALSE)
 	var/num_legs = H.get_num_legs(FALSE)
 
@@ -1882,10 +1882,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				var/probability = damage / (2 - easy_dismember)
 				if(HAS_TRAIT(target, TRAIT_HARDDISMEMBER) && !easy_dismember)
 					probability = min(probability, 5)
-				if(prob(probability))
-					if(affecting.brute_dam > 0)
-						if(affecting.dismember())
-							playsound(get_turf(target), "desceration", 80, TRUE)
+				if(prob(probability) && affecting.dismember())
+					playsound(get_turf(target), "desecration", 80, TRUE)
 
 /*		if(user == target)
 			target.visible_message("<span class='danger'>[user] [atk_verb]ed themself![target.next_attack_msg.Join()]</span>", COMBAT_MESSAGE_RANGE, user)
@@ -2287,16 +2285,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	//dismemberment
 	var/bloody = 0
-	var/easy_dismember = HAS_TRAIT(H, TRAIT_EASYDISMEMBER) || affecting.rotted
-	var/probability = I.get_dismemberment_chance(affecting)
-	if(HAS_TRAIT(H, TRAIT_HARDDISMEMBER) && !easy_dismember)
-		probability = min(probability, 5)
-	if(affecting.brute_dam && prob(probability))
-		if(affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone))
-			bloody = 1
-			I.add_mob_blood(H)
-			user.update_inv_hands()
-			playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
+	var/probability = I.get_dismemberment_chance(affecting, user)
+	if(affecting.brute_dam && prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone))
+		bloody = 1
+		I.add_mob_blood(H)
+		user.update_inv_hands()
+		playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
 
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == BODYPART_ORGANIC)

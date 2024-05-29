@@ -63,7 +63,7 @@
 		if(iscarbon(affected))
 			var/mob/living/carbon/carbon_affected = affected
 			carbon_affected.update_disabled_bodyparts()
-	if(mortal || HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+	if(mortal || HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
 /datum/wound/fracture/head/on_mob_loss(mob/living/affected)
@@ -170,7 +170,7 @@
 	if(iscarbon(affected))
 		var/mob/living/carbon/carbon_affected = affected
 		carbon_affected.update_disabled_bodyparts()
-	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+	if(HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
 /datum/wound/fracture/neck/on_mob_loss(mob/living/affected)

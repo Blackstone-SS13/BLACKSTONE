@@ -6,7 +6,7 @@
 		"Tiefling",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/crusader
-	traits_applied = list(RTRAIT_HEAVYARMOR)
+	traits_applied = list(TRAIT_HEAVYARMOR)
 	special_req = TRUE
 	maxchosen = 0
 	isvillager = FALSE

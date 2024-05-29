@@ -91,7 +91,7 @@
 /datum/crafting_recipe/roguetown/billhook
 	name = "Improvised Billhook"
 	result = /obj/item/rogueweapon/spear/improvisedbillhook
-	reqs = list(/obj/item/rogueweapon/sickle,
+	reqs = list(/obj/item/rogueweapon/sickle = 1,
 				/obj/item/grown/log/tree/small = 1)
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
@@ -100,7 +100,7 @@
 	name = "Goedendag"
 	result = /obj/item/rogueweapon/mace/goden
 	reqs = list(/obj/item/grown/log/tree/small = 1,
-				/obj/item/rogueweapon/hoe)
+				/obj/item/rogueweapon/hoe = 1)
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
@@ -108,7 +108,7 @@
 	name = "Peasant War Flail"
 	result = /obj/item/rogueweapon/flail/peasantwarflail
 	reqs = list(/obj/item/grown/log/tree/small = 1,
-				/obj/item/rogueweapon/thresher)
+				/obj/item/rogueweapon/thresher = 1)
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
@@ -266,3 +266,15 @@
 	result = /obj/item/clothing/neck/roguetown/psicross/wood
 	reqs = list(/obj/item/natural/fibers = 2,
 				/obj/item/grown/log/tree/stick = 2)
+
+/datum/crafting_recipe/roguetown/mantrap
+	name = "mantrap"
+	result = list(/obj/item/restraints/legcuffs/beartrap,
+				/obj/item/restraints/legcuffs/beartrap)
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/natural/fibers = 2,
+				/obj/item/ingot/iron = 1)
+	req_table = TRUE
+	skillcraft = /datum/skill/craft/traps
+	craftdiff = 1
+	verbage = "put together"
