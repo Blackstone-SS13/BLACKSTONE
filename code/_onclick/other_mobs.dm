@@ -179,9 +179,9 @@
 
 	var/nodmg = FALSE
 	var/dam2do = 10*(user.STASTR/20)
-	if(HAS_TRAIT(user, RTRAIT_STRONGBITE))
+	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		dam2do *= 2
-	if(!HAS_TRAIT(user, RTRAIT_STRONGBITE))
+	if(!HAS_TRAIT(user, TRAIT_STRONGBITE))
 		if(!affecting.has_wound(/datum/wound/bite))
 			nodmg = TRUE
 	if(!nodmg)
@@ -306,11 +306,11 @@
 					to_chat(src, "<span class='warning'>I haven't regained my balance yet.</span>")
 					return
 				if(!(mobility_flags & MOBILITY_STAND))
-					if(!HAS_TRAIT(src, RTRAIT_LEAPER))// The Jester cares not for such social convention.
+					if(!HAS_TRAIT(src, TRAIT_LEAPER))// The Jester cares not for such social convention.
 						to_chat(src, "<span class='warning'>I should stand up first.</span>")
 						return
 				if(A.z != src.z)
-					if(!HAS_TRAIT(src, RTRAIT_ZJUMP))
+					if(!HAS_TRAIT(src, TRAIT_ZJUMP))
 						return
 				changeNext_move(mmb_intent.clickcd)
 				face_atom(A)
@@ -325,7 +325,7 @@
 					OffBalance(30)
 					jadded = 15
 					jrange = 3
-					if(!HAS_TRAIT(src, RTRAIT_LEAPER))// The Jester lands where the Jester wants.
+					if(!HAS_TRAIT(src, TRAIT_LEAPER))// The Jester lands where the Jester wants.
 						jextra = TRUE
 				else
 					OffBalance(20)

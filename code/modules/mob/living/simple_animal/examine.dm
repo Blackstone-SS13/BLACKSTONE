@@ -31,7 +31,8 @@
 		if(100 to INFINITY)
 			msg += "<span class='danger'>[m1] gravely wounded.</span>"
 
-	if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+	var/has_simple_wounds = HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS)
+	if(has_simple_wounds)
 		// Blood volume
 		switch(blood_volume)
 			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
@@ -79,7 +80,7 @@
 	if((user != src) && isliving(user))
 		var/mob/living/L = user
 		var/final_str = STASTR
-		if(HAS_TRAIT(src, RTRAIT_DECEIVING_MEEKNESS))
+		if(HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
 			final_str = 10
 		var/strength_diff = final_str - L.STASTR
 		switch(strength_diff)
@@ -94,7 +95,10 @@
 			if(-INFINITY to -5)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker than I.</B></span>"
 
-	if(Adjacent(user) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-		. += "<a href='?src=[REF(src)];inspect_animal=1'>Inspect Wounds</a>"
+	if(Adjacent(user))
+		if(has_simple_wounds)
+			. += "<a href='?src=[REF(src)];inspect_animal=1'>Inspect Wounds</a>"
+		if(user != src)
+			. += "<a href='?src=[REF(src)];check_hb=1'>Check Heartbeat</a>"
 
 	. += "✠ ------------ ✠</span>"

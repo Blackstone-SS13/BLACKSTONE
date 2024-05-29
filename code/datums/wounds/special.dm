@@ -16,7 +16,7 @@
 	. = ..()
 	ADD_TRAIT(affected, TRAIT_MISSING_NOSE, "[type]")
 	ADD_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
-	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+	if(HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
 /datum/wound/nose/on_mob_loss(mob/living/affected)
@@ -63,7 +63,7 @@
 			"The testicles are twisted!",
 			"The testicles are torsioned!",
 		)
-	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+	if(HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
 /datum/wound/cbt/on_life()
