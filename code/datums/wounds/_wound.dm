@@ -283,7 +283,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return !isnull(clotting_threshold) && (bleed_rate <= clotting_threshold)
 
 /// Returns whether or not this wound should embed a weapon
-/proc/should_embed_weapon(datum/wound/wound_or_boolean, obj/item/weapon/weapon)
+/proc/should_embed_weapon(datum/wound/wound_or_boolean, obj/item/weapon)
 	if(!istype(wound_or_boolean))
 		return FALSE
 	if(weapon && !can_embed(weapon))
