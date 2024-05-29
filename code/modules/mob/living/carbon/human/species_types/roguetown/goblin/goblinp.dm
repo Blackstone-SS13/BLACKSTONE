@@ -8,7 +8,7 @@
 	desc = "<b>Goblin</b><br>\
 	A vile, cursed race of green skinned fiends with brains as small as their hearts. Be not fooled by their appearance - What they lack in stature, they possess in sheer malice."
 	species_traits = list(NO_UNDERWEAR,NOEYESPRITES)
-	inherent_traits = list(RTRAIT_BREADY,TRAIT_STEELHEARTED,TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE)
+	inherent_traits = list(TRAIT_BREADY,TRAIT_STEELHEARTED,TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE)
 	no_equip = list(SLOT_SHIRT, SLOT_WEAR_MASK, SLOT_GLOVES, SLOT_SHOES, SLOT_PANTS, SLOT_S_STORE)
 	possible_ages = list(AGE_ADULT)
 	default_features = list("mcolor" = "FFF", "wings" = "None")
