@@ -279,9 +279,10 @@
 				if(BCLASS_BLUNT)
 					cont = TRUE
 				if(BCLASS_PICK)
-					dullfactor = 1.5
+					var/mob/living/miner = user
+					var/mineskill = miner.mind.get_skill_level(/datum/skill/labor/mining)
+					dullfactor = 1.5 (mineskill*0.1)
 					cont = TRUE
-					world.log << "PICK BASHCHOP [newforce]"
 			if(!cont)
 				return 0
 		if(DULLING_PICK) //cannot deal damage if not a pick item. aka rock walls
