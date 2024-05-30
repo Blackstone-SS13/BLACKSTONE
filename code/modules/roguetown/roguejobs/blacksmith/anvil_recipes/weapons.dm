@@ -275,7 +275,7 @@
 
 //Rarity
 /datum/anvil_recipe/valuables/execution
-	name = "Execution Sword" "(+ 1 Steel, + 1 Iron)"
+	name = "Execution Sword (+ 1 Steel, + 1 Iron)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/iron, /obj/item/ingot/steel)	
 	created_item = /obj/item/rogueweapon/sword/long/exe
