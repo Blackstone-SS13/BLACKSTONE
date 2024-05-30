@@ -99,6 +99,8 @@
 	i_type = "Valuables"
 
 //steel rings
+//Please modify it to silver once it's in -- Sarkness
+
 /datum/anvil_recipe/valuables/emerings
 	name = "Gemerald Ring (+1 Gemerald)"
 	req_bar = /obj/item/ingot/steel

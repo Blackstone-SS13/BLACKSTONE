@@ -917,12 +917,39 @@
 	name = "dragonscale necklace"
 	desc = ""
 	icon_state = "bktrinket"
+	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
 	sellprice = 666
 	static_price = TRUE
+
+/obj/item/clothing/neck/roguetown/blkknight/equipped(mob/living/user)
+	. = ..()
+	if(user.mind.special_role == "Bandit")
+		to_chat(user, "<span class='notice'>I feel bolstered by Matthios Power!...</span>")
+		user.change_stat("strength", 2)
+		user.change_stat("perception", 2)
+		user.change_stat("intelligence", 2)
+		user.change_stat("constitution", 2)
+		user.change_stat("endurance", 2)
+		user.change_stat("speed", 2)
+	else
+		to_chat(user, "<span class='notice'>I feel an evil power about that necklace..</span>")
+
+/obj/item/clothing/neck/roguetown/blkknight/dropped(mob/living/user)
+	if(user.mind.special_role == "Bandit")
+		to_chat(user, "<span class='notice'>I've removed the necklace of Matthios...</span>")
+		user.change_stat("strength", -2)
+		user.change_stat("perception", -2)
+		user.change_stat("intelligence", -2)
+		user.change_stat("constitution", -2)
+		user.change_stat("endurance", -2)
+		user.change_stat("speed", -2)
+	else
+		to_chat(user, "<span class='notice'>Strange, I don't feel that power anymore..</span>")
+
 
 /obj/item/clothing/suit/roguetown/armor/plate/blkknight
 	slot_flags = ITEM_SLOT_ARMOR

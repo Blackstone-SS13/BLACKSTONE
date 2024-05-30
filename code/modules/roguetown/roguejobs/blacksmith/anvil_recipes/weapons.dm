@@ -337,3 +337,10 @@
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = list(/obj/item/ammo_casing/caseless/rogue/arrow,/obj/item/ammo_casing/caseless/rogue/arrow,/obj/item/ammo_casing/caseless/rogue/arrow, /obj/item/ammo_casing/caseless/rogue/arrow, /obj/item/ammo_casing/caseless/rogue/arrow)
 	i_type = "Ammo"
+
+//RARITY
+/datum/anvil_recipe/weapons/execution
+	name = "Execution Sword (+1 Iron, +1 Steel)"
+	req_bar = /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/iron, /obj/item/ingot/steel)
+	created_item = /obj/item/rogueweapon/sword/long/exe/cloth
