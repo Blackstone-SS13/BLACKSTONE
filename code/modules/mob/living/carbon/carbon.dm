@@ -671,7 +671,7 @@
 		if(!(BP.body_zone in lethal_zones))
 			continue
 		var/my_burn = abs((BP.burn_dam / BP.max_damage) * HEALTH_THRESHOLD_DEAD)
-		total_bunr = max(total_burn, my_burn)
+		total_burn = max(total_burn, my_burn)
 		used_damage = max(used_damage, my_burn)
 	if(used_damage < total_tox)
 		used_damage = total_tox
