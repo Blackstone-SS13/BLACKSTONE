@@ -20,6 +20,22 @@
 	var/middle_click_step = FALSE
 	/// Random surgery flags that mostly indicate additional requirements
 	var/surgery_flags = SURGERY_INCISED
+	/// Intents that can be used to perform this surgery step
+	var/list/possible_intents
+	/// Body zones this surgery can be performed on, set to null for everywhere
+	var/list/possible_locs
+	/// Does this step require a non-missing bodypart? Incompatible with requires_missing_bodypart
+	var/requires_bodypart = TRUE
+	/// Does this step require the bodypart to be missing? (Limb attachment)
+	var/requires_missing_bodypart = FALSE
+	/// If true, this surgery step cannot be done on pseudo limbs (like chainsaw arms)
+	var/requires_real_bodypart = TRUE
+	/// What type of bodypart we require, in case requires_bodypart
+	var/requires_bodypart_type = BODYPART_ORGANIC
+	/// This surgery ignores clothes on the targeted bodypart
+	var/ignore_clothes = FALSE
+	/// Some surgeries require specific organs to be present in the patient
+	var/list/required_organs
 	/**
 	 * list of chems needed to complete the step. 
 	 * Even on success, the step will have no effect if there aren't the chems required in the mob.
@@ -27,28 +43,36 @@
 	var/list/chems_needed
 	/// Any chem on the list required, or all of them?
 	var/require_all_chems = TRUE
-	/// This surgery ignores clothes
-	var/ignore_clothes = FALSE
-	/// Does this step require a non-missing bodypart? Incompatible with requires_missing_bodypart
-	var/requires_bodypart = TRUE
-	/// Does this step require the bodypart to be missing? (Limb attachment)
-	var/requires_missing_bodypart = TRUE
-	/// If true, this surgery step cannot be done on pseudo limbs (like chainsaw arms)
-	var/requires_real_bodypart = FALSE
-	/// What type of bodypart we require, in case requires_bodypart
-	var/requires_bodypart_type = BODYPART_ORGANIC
 	/// Does the patient need to be lying down?
 	var/lying_required = FALSE
 	/// Does this step allow self surgery?
 	var/self_operable = TRUE
-	/// Body zones this surgery can be performed on, set to null for everywhere
-	var/list/possible_locs
 	/// Acceptable mob types for this surgery
 	var/list/target_mobtypes = list(/mob/living/carbon)
+
 	/// Skill used to perform this surgery step
 	var/skill_used = /datum/skill/misc/medicine
 	/// Necessary skill MINIMUM to perform this surgery step, of skill_used
-	var/skill_min = SKILL_LEVEL_EXPERT
+	var/skill_min = SKILL_LEVEL_NOVICE
+	/// Skill median used to apply success and speed bonuses
+	var/skill_median = SKILL_LEVEL_JOURNEYMAN
+	/// Modifiers to success chance when you're above the median
+	var/list/skill_bonuses = list(
+		1 = 0.2,
+		2 = 0.4,
+		3 = 0.6,
+		4 = 0.8,
+		5 = 1,
+	)
+	/// Modifiers to success chance when you're below the median
+	var/list/skill_maluses = list(
+		1 = -0.2,
+		2 = -0.4,
+		3 = -0.6,
+		4 = -0.8,
+		5 = -1,
+	)
+
 	/// Handles techweb-oriented surgeries
 	var/requires_tech = FALSE
 	/**
@@ -56,6 +80,8 @@
 	 * Set to /datum/surgery_step if you want to hide a "base" surgery  (useful for typing parents IE healing.dm just make sure to null it out again)
 	 */
 	var/replaced_by
+	/// Repeatable surgery steps will repeat until failure
+	var/repeating = FALSE
 
 /datum/surgery_step/proc/can_do_step(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail = FALSE)
 	if(!user || !target)
@@ -64,16 +90,17 @@
 		return FALSE
 	if(!tool_check(user, tool))
 		return FALSE
-	if(!validate_tech(user, target, target_zone))
+	if(!validate_tech(user, target, target_zone, intent))
 		return FALSE
-	if(!validate_user(user, target, target_zone))
+	if(!validate_user(user, target, target_zone, intent))
 		return FALSE
-	if(!validate_target(user, target, target_zone))
+	if(!validate_target(user, target, target_zone, intent))
 		return FALSE
 
 	return TRUE
 
-/datum/surgery_step/proc/validate_tech(mob/user, mob/living/target, target_zone)
+/datum/surgery_step/proc/validate_tech(mob/user, mob/living/target, target_zone, datum/intent/intent)
+	SHOULD_CALL_PARENT(TRUE)
 	// Always return false in this case
 	if(replaced_by == /datum/surgery_step)
 		return FALSE
@@ -120,15 +147,23 @@
 		return TRUE
 	return FALSE
 
-/datum/surgery_step/proc/validate_user(mob/user, mob/living/target, target_zone)
+/datum/surgery_step/proc/validate_user(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	SHOULD_CALL_PARENT(TRUE)
 	if(possible_locs && !(target_zone in possible_locs))
 		return FALSE
+	if(possible_intents)
+		var/found_intent = FALSE
+		for(var/possible_intent in possible_intents)
+			if(istype(intent, possible_intent))
+				found_intent = TRUE
+				break
+		if(!found_intent)
+			return FALSE
 	if(skill_used && skill_min && (user.mind?.get_skill_level(skill_used) < skill_min))
 		return FALSE
 	return TRUE
 
-/datum/surgery_step/proc/validate_target(mob/user, mob/living/target, target_zone)
+/datum/surgery_step/proc/validate_target(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	SHOULD_CALL_PARENT(TRUE)
 	if(!self_operable && (user == target))
 		return FALSE
@@ -150,6 +185,10 @@
 		var/obj/item/bodypart/bodypart = carbon_target.get_bodypart(check_zone(target_zone))
 		if(!validate_bodypart(user, target, bodypart, target_zone))
 			return FALSE
+		for(var/required_organ in required_organs)
+			var/obj/item/organ/organ = carbon_target.getorganslot(required_organ)
+			if(!organ)
+				return FALSE
 	
 	//no surgeries in the same body zone
 	if(target.surgeries[target_zone])
@@ -158,6 +197,7 @@
 	return TRUE
 
 /datum/surgery_step/proc/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
+	SHOULD_CALL_PARENT(TRUE)
 	if(requires_bodypart && !bodypart)
 		return FALSE
 	else if(!requires_bodypart)
@@ -210,7 +250,10 @@
 			if(ispath(key) && istype(tool, key))
 				implement_type = key
 				break
-			else if(tool.tool_behaviour == key)
+			if(tool.tool_behaviour == key)
+				implement_type = key
+				break
+			if((key == TOOL_SHARP) && tool.get_sharpness())
 				implement_type = key
 				break
 		if(!implement_type && accept_any_item)
@@ -254,66 +297,29 @@
 	initiate(user, target, target_zone, tool, intent, try_to_fail)
 	return TRUE	//returns TRUE so we don't stab the guy in the dick or wherever.
 
-#define SURGERY_SLOWDOWN_CAP_MULTIPLIER 2 //increase to make surgery slower but fail less, and decrease to make surgery faster but fail more
-
 /datum/surgery_step/proc/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail = FALSE)
 	target.surgeries[target_zone] = src
-	if(preop(user, target, target_zone, tool, intent) == SURGERY_FAILURE)
+	if(!preop(user, target, target_zone, tool, intent))
 		target.surgeries -= target_zone
-		return SURGERY_FAILURE
+		return FALSE
 
-	var/speed_mod = get_speed_modifier(user, target, target_zone, tool, intent, try_to_fail)
-	var/success_prob = get_success_probability(user, target, target_zone, tool, intent, try_to_fail)
+	var/speed_mod = get_speed_modifier(user, target, target_zone, tool, intent)
+	var/success_prob = get_success_probability(user, target, target_zone, tool, intent)
 
 	var/modded_time = round(time * speed_mod, 1)
 	if(do_after(user, modded_time, target = target))
 		var/success = !try_to_fail && ((iscyborg(user) && !silicons_obey_prob) || prob(success_prob)) && chem_check(target)
 		if(success && success(user, target, target_zone, tool, intent))
-			return SURGERY_SUCCESS
+			if(repeating)
+				initiate(user, target, target_zone, tool, intent, try_to_fail)
+			. = TRUE
 		else if(failure(user, target, target_zone, tool, intent, success_prob))
-			return SURGERY_FAILURE
+			if(user.client?.prefs.showrolls)
+				to_chat(user, "<span class='warning'>Surgery fail! ([success_prob])</span>")
+			. = FALSE
 
-	return SURGERY_FAILURE
-
-/datum/surgery_step/proc/get_speed_modifier(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail = FALSE)
-	var/speed_mod = 1
-	if(tool)
-		speed_mod *= tool.toolspeed
-	if(implements_speed)
-		var/implement_type = tool_check(user, tool)
-		if(implement_type)
-			speed_mod *= implements_speed[implement_type] || 1
-	speed_mod *= get_location_modifier(target)
-
-	return speed_mod
-
-/datum/surgery_step/proc/get_success_probability(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	var/success_prob = 100
-	if(implements)
-		var/implement_type = tool_check(user, tool)
-		if(implement_type)
-			success_prob *= implements[implement_type] || 1
-	success_prob *= get_location_modifier(target)
-
-	return success_prob
-
-/datum/surgery_step/proc/get_skill_modifier(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	if(!skill_used)
-		return 1
-	var/modifier = 1
-	return modifier
-
-/datum/surgery_step/proc/get_location_modifier(mob/living/target)
-	var/turf/patient_turf = get_turf(target)
-	if(locate(/obj/structure/table/optable) in patient_turf)
-		return 1
-	else if(locate(/obj/machinery/stasis) in patient_turf)
-		return 0.9
-	else if(locate(/obj/structure/table) in patient_turf)
-		return 0.8
-	else if(locate(/obj/structure/bed) in patient_turf)
-		return 0.7
-	return 0.5
+	target.surgeries -= target_zone
+	return .
 
 /datum/surgery_step/proc/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to perform surgery on [target]...</span>",
@@ -339,7 +345,7 @@
 	display_results(user, target, "<span class='warning'>I screw up![screwedmessage]</span>",
 		"<span class='warning'>[user] screws up!</span>",
 		"<span class='notice'>[user] finishes.</span>", TRUE) //By default the patient will notice if the wrong thing has been cut
-	return FALSE
+	return TRUE
 
 /// Replaces visible_message during operations so only people looking over the surgeon can tell what they're doing, allowing for shenanigans.
 /datum/surgery_step/proc/display_results(mob/user, mob/living/carbon/target, self_message, detailed_message, vague_message, target_detailed = FALSE)
@@ -349,3 +355,52 @@
 	user.visible_message(detailed_message, self_message, vision_distance = 1, ignored_mobs = target_detailed ? null : target)
 	user.visible_message(vague_message, "", ignored_mobs = detailed_mobs)
 	return TRUE
+
+/datum/surgery_step/proc/get_speed_modifier(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	var/speed_mod = 1
+	if(tool)
+		speed_mod *= tool.toolspeed
+	if(implements_speed)
+		var/implement_type = tool_check(user, tool)
+		if(implement_type)
+			speed_mod *= implements_speed[implement_type] || 1
+	speed_mod *= get_location_modifier(target)
+
+	return speed_mod
+
+/datum/surgery_step/proc/get_success_probability(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	var/success_prob = 100
+	if(implements)
+		var/implement_type = tool_check(user, tool)
+		if(implement_type)
+			success_prob *= implements[implement_type] || 1
+	success_prob *= get_location_modifier(target)
+	success_prob *= get_skill_modifier(user, target, target_zone, tool, intent)
+
+	return success_prob
+
+/datum/surgery_step/proc/get_skill_modifier(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	if(!skill_used)
+		return 1
+	var/modifier = 1
+	var/skill_level = user.mind?.get_skill_level(skill_used) || 0
+	var/skill_difference = skill_level - skill_median
+	if((skill_difference > 0) && length(skill_bonuses))
+		skill_difference = clamp(abs(skill_difference), 0, skill_bonuses.len)
+		modifier += skill_bonuses[skill_difference]
+	else if((skill_difference < 0) && length(skill_maluses))
+		skill_difference = clamp(abs(skill_difference), 0, skill_maluses.len)
+		modifier += skill_maluses[skill_difference]
+	return max(modifier, 0)
+
+/datum/surgery_step/proc/get_location_modifier(mob/living/target)
+	var/turf/patient_turf = get_turf(target)
+	if(locate(/obj/structure/table/optable) in patient_turf)
+		return 1
+	else if(locate(/obj/machinery/stasis) in patient_turf)
+		return 0.9
+	else if(locate(/obj/structure/table) in patient_turf)
+		return 0.8
+	else if(locate(/obj/structure/bed) in patient_turf)
+		return 0.7
+	return 0.5

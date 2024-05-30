@@ -1,28 +1,9 @@
-
-/////AUGMENTATION SURGERIES//////
-
-
-//SURGERY STEPS
-
-/datum/surgery_step/replace
-	name = "sever muscles"
-	implements = list(TOOL_SCALPEL = 100, TOOL_WIRECUTTER = 55)
-	time = 32
-
-
-/datum/surgery_step/replace/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
-	display_results(user, target, "<span class='notice'>I begin to sever the muscles on [target]'s [parse_zone(user.zone_selected)]...</span>",
-		"<span class='notice'>[user] begins to sever the muscles on [target]'s [parse_zone(user.zone_selected)].</span>",
-		"<span class='notice'>[user] begins an incision on [target]'s [parse_zone(user.zone_selected)].</span>")
-
 /datum/surgery_step/replace_limb
 	name = "replace limb"
 	implements = list(/obj/item/bodypart = 100, /obj/item/organ_storage = 100)
-	time = 32
-	var/obj/item/bodypart/L = null // L because "limb"
+	time = 3.2 SECONDS
 
-
-/datum/surgery_step/replace_limb/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
+/datum/surgery_step/replace_limb/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	if(istype(tool, /obj/item/organ_storage) && istype(tool.contents[1], /obj/item/bodypart))
 		tool = tool.contents[1]
 	var/obj/item/bodypart/aug = tool
@@ -39,18 +20,6 @@
 			"<span class='notice'>[user] begins to augment [target]'s [parse_zone(user.zone_selected)].</span>")
 	else
 		user.visible_message("<span class='notice'>[user] looks for [target]'s [parse_zone(user.zone_selected)].</span>", "<span class='notice'>I look for [target]'s [parse_zone(user.zone_selected)]...</span>")
-
-
-//ACTUAL SURGERIES
-
-/datum/surgery/augmentation
-	name = "Augmentation"
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/replace, /datum/surgery_step/saw, /datum/surgery_step/replace_limb)
-	target_mobtypes = list(/mob/living/carbon/human)
-	possible_locs = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_R_LEG,BODY_ZONE_L_LEG,BODY_ZONE_CHEST,BODY_ZONE_HEAD)
-	requires_real_bodypart = TRUE
-
-//SURGERY STEP SUCCESSES
 
 /datum/surgery_step/replace_limb/success(mob/user, mob/living/carbon/target, target_zone, obj/item/bodypart/tool, datum/surgery/surgery)
 	if(L)

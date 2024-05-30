@@ -1,0 +1,160 @@
+/datum/surgery/healing
+	steps = list(
+		/datum/surgery_step/incise,
+		/datum/surgery_step/retract_skin,
+		/datum/surgery_step/clamp_bleeders,
+		/datum/surgery_step/heal,
+		/datum/surgery_step/close,
+	)
+	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
+	possible_locs = list(BODY_ZONE_CHEST)
+	requires_bodypart = TRUE
+	requires_bodypart_type = BODYPART_ORGANIC
+
+/datum/surgery_step/heal
+	name = "Repair body"
+	implements = list(
+		TOOL_HEMOSTAT = 100, 
+		TOOL_SCREWDRIVER = 65,
+	)
+	time = 2.5 SECONDS
+	requires_tech = TRUE
+	replaced_by = /datum/surgery_step
+	repeating = TRUE
+	requires_bodypart = TRUE
+	requires_bodypart_type = BODYPART_ORGANIC
+	var/brutehealing = 0
+	var/burnhealing = 0
+	var/missinghpbonus = 0 //heals an extra point of damager per X missing damage of type (burn damage for burn healing, brute for brute). Smaller Number = More Healing!
+
+/datum/surgery_step/heal/validate_tech(mob/user, mob/living/target, target_zone, datum/intent/intent)
+	if(!brutehealing && !burnhealing)
+		return FALSE
+	return ..()
+
+/datum/surgery_step/heal/validate_target(mob/user, mob/living/target, target_zone, datum/intent/intent)
+	. = ..()
+	if(!.)
+		return
+	if(!(brutehealing && target.getBruteLoss()) && !(burnhealing && target.getFireLoss()))
+		return FALSE
+
+/datum/surgery_step/heal/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	var/woundtype
+	if(brutehealing && burnhealing)
+		woundtype = "wounds"
+	else if(brutehealing)
+		woundtype = "bruises"
+	else //why are you trying to 0,0...?
+		woundtype = "burns"
+	display_results(user, target, "<span class='notice'>I attempt to patch some of [target]'s [woundtype].</span>",
+			"<span class='notice'>[user] attempts to patch some of [target]'s [woundtype].</span>",
+			"<span class='notice'>[user] attempts to patch some of [target]'s [woundtype].</span>")
+	return TRUE
+
+/datum/surgery_step/heal/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
+	var/umsg = "You succeed in fixing some of [target]'s wounds" //no period, add initial space to "addons"
+	var/tmsg = "[user] fixes some of [target]'s wounds" //see above
+	var/urhealedamt_brute = brutehealing
+	var/urhealedamt_burn = burnhealing
+	if(missinghpbonus)
+		if(target.stat != DEAD)
+			urhealedamt_brute += round((target.getBruteLoss()/ missinghpbonus),0.1)
+			urhealedamt_burn += round((target.getFireLoss()/ missinghpbonus),0.1)
+		else //less healing bonus for the dead since they're expected to have lots of damage to begin with (to make TW into defib not TOO simple)
+			urhealedamt_brute += round((target.getBruteLoss()/ (missinghpbonus*5)),0.1)
+			urhealedamt_burn += round((target.getFireLoss()/ (missinghpbonus*5)),0.1)
+	if(!get_location_accessible(target, target_zone))
+		urhealedamt_brute *= 0.55
+		urhealedamt_burn *= 0.55
+		umsg += " as best as you can while they have clothing on"
+		tmsg += " as best as they can while [target] has clothing on"
+	target.heal_bodypart_damage(urhealedamt_brute,urhealedamt_burn)
+	display_results(user, target, "<span class='notice'>[umsg].</span>",
+		"[tmsg].",
+		"[tmsg].")
+	return TRUE
+
+/datum/surgery_step/heal/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
+	display_results(user, target, "<span class='warning'>I screwed up!</span>",
+		"<span class='warning'>[user] screws up!</span>",
+		"<span class='notice'>[user] fixes some of [target]'s wounds.</span>", TRUE)
+	var/urdamageamt_burn = brutehealing * 0.8
+	var/urdamageamt_brute = burnhealing * 0.8
+	if(missinghpbonus)
+		urdamageamt_brute += round((target.getBruteLoss()/ (missinghpbonus*2)),0.1)
+		urdamageamt_burn += round((target.getFireLoss()/ (missinghpbonus*2)),0.1)
+
+	target.take_bodypart_damage(urdamageamt_brute, urdamageamt_burn)
+	return TRUE
+
+/********************BRUTE STEPS********************/
+/datum/surgery_step/heal/brute/basic
+	name = "Tend bruises"
+	brutehealing = 5
+	missinghpbonus = 15
+	requires_tech = FALSE
+	replaced_by = /datum/surgery_step/heal/brute/upgraded
+
+/datum/surgery_step/heal/brute/upgraded
+	name = "Tend bruises (Adv.)"
+	brutehealing = 5
+	missinghpbonus = 10
+	replaced_by = /datum/surgery_step/heal/brute/upgraded/femto
+
+/datum/surgery_step/heal/brute/upgraded/femto
+	name = "Tend bruises (Exp.)"
+	brutehealing = 5
+	missinghpbonus = 5
+	replaced_by = null
+
+/********************BURN STEPS********************/
+/datum/surgery_step/heal/burn/basic
+	name = "Tend burns"
+	burnhealing = 5
+	missinghpbonus = 15
+	requires_tech = FALSE
+	replaced_by = /datum/surgery_step/heal/burn/upgraded
+
+/datum/surgery_step/heal/burn/upgraded
+	name = "Tend burns (Adv.)"
+	burnhealing = 5
+	missinghpbonus = 10
+	replaced_by = /datum/surgery_step/heal/burn/upgraded/femto
+
+/datum/surgery_step/heal/burn/upgraded/femto
+	name = "Tend burns (Exp.)"
+	burnhealing = 5
+	missinghpbonus = 5
+	replaced_by = null
+
+/********************COMBO STEPS********************/
+/datum/surgery_step/heal/combo
+	name = "Tend damage"
+	brutehealing = 3
+	burnhealing = 3
+	missinghpbonus = 15
+	time = 1 SECONDS
+	requires_tech = FALSE
+	replaced_by = /datum/surgery_step/heal/combo/upgraded
+
+/datum/surgery_step/heal/combo/upgraded
+	name = "Tend damage (Adv.)"
+	brutehealing = 3
+	burnhealing = 3
+	missinghpbonus = 10
+	replaced_by = /datum/surgery_step/heal/combo/upgraded/femto
+
+/datum/surgery_step/heal/combo/upgraded/femto
+	name = "Tend damage (Exp.)"
+	brutehealing = 3
+	burnhealing = 3
+	missinghpbonus = 5
+	replaced_by = null
+
+/datum/surgery_step/heal/combo/upgraded/femto/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
+	display_results(user, target, "<span class='warning'>I screwed up!</span>",
+		"<span class='warning'>[user] screws up!</span>",
+		"<span class='notice'>[user] fixes some of [target]'s wounds.</span>", TRUE)
+	target.take_bodypart_damage(5,5)
+	return TRUE
