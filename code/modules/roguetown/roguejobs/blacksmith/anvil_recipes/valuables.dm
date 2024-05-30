@@ -1,6 +1,7 @@
 /datum/anvil_recipe/valuables
 	appro_skill = /datum/skill/craft/blacksmithing
 	craftdiff = 2
+
 /datum/anvil_recipe/valuables/gold
 	name = "gold statue"
 	req_bar = /obj/item/ingot/gold
@@ -84,6 +85,8 @@
 	created_item = /obj/item/clothing/ring/diamond
 
 //steel rings
+//BE AWARE THOSE RINGS SHOULD BE TURNED TO SILVER ONCE SILVER INGOTS ARE IN PLAY - Sarkness
+
 /datum/anvil_recipe/valuables/emerings
 	name = "Steel Gemerald Ring (+ Gemerald)"
 	req_bar = /obj/item/ingot/steel
@@ -127,3 +130,8 @@
 	created_item = /obj/item/rogueweapon/sword/long/exe/cloth
 	craftdiff = 3
 
+/datum/anvil_recipe/valuables/dragon
+	name = "Dragon Ring (+ Secrets)"
+	req_bar =  /obj/item/ingot/steel
+	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/steel, /obj/item/roguegem/blue, /obj/item/roguegem/violet, /obj/item/clothing/neck/roguetown/psicross)	
+	created_item = /obj/item/clothing/ring/dragon_ring
