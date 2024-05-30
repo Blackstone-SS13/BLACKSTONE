@@ -925,7 +925,7 @@
 	sellprice = 666
 	static_price = TRUE
 
-/obj/item/clothing/neck/roguetown/blkknight/equipped(mob/user, slot)
+/obj/item/clothing/neck/roguetown/blkknight/equipped(mob/living/user)
 	. = ..()
 	if(user.mind.special_role == "Bandit")
 		to_chat(user, "<span class='notice'>I feel bolstered by Matthios Power!...</span>")

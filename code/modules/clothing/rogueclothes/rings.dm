@@ -11,7 +11,6 @@
 	icon_state = ""
 	slot_flags = ITEM_SLOT_RING
 	resistance_flags = FIRE_PROOF | ACID_PROOF
-	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/ring/silver
 	name = "silver ring"
@@ -151,7 +150,7 @@
 	icon_state = "dragonring"
 	sellprice = 666
 
-/obj/item/clothing/ring/dragon_ring/equipped(mob/user, slot)
+/obj/item/clothing/ring/dragon_ring/equipped(mob/living/user, Ring)
 	. = ..()
 	to_chat(user, "<span class='notice'>Here be dragons</span>")
 	user.change_stat("strength", 2)
