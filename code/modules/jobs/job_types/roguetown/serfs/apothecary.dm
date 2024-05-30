@@ -20,7 +20,7 @@
 	display_order = JDO_APOTHECARY
 	outfit = /datum/outfit/job/roguetown/apothecary
 	whitelist_req = TRUE
-	tutorial = "blablabla"
+	tutorial = "From herbs to hard drugs, you know it all. Years of experince in taking them made you keen in knowing wich are best to help and wich best to cause ailments."
 	give_bank_account = 25
 	min_pq = 2
 	max_pq = null
