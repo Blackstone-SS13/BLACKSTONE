@@ -924,9 +924,12 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 666
 	static_price = TRUE
+	var/active_item
 
 /obj/item/clothing/neck/roguetown/blkknight/equipped(mob/living/user)
 	. = ..()
+	if(active_item == TRUE)
+		return
 	if(user.mind.special_role == "Bandit")
 		to_chat(user, "<span class='notice'>I feel bolstered by Matthios Power!...</span>")
 		user.change_stat("strength", 2)
@@ -935,20 +938,31 @@
 		user.change_stat("constitution", 2)
 		user.change_stat("endurance", 2)
 		user.change_stat("speed", 2)
+		active_item = TRUE
+		return
 	else
 		to_chat(user, "<span class='notice'>I feel an evil power about that necklace..</span>")
+		active_item = TRUE
+		return
 
 /obj/item/clothing/neck/roguetown/blkknight/dropped(mob/living/user)
-	if(user.mind.special_role == "Bandit")
-		to_chat(user, "<span class='notice'>I've removed the necklace of Matthios...</span>")
-		user.change_stat("strength", -2)
-		user.change_stat("perception", -2)
-		user.change_stat("intelligence", -2)
-		user.change_stat("constitution", -2)
-		user.change_stat("endurance", -2)
-		user.change_stat("speed", -2)
+	if(active_item == TRUE)
+		if(user.mind.special_role == "Bandit")
+			to_chat(user, "<span class='notice'>I've removed the necklace of Matthios...</span>")
+			user.change_stat("strength", -2)
+			user.change_stat("perception", -2)
+			user.change_stat("intelligence", -2)
+			user.change_stat("constitution", -2)
+			user.change_stat("endurance", -2)
+			user.change_stat("speed", -2)
+			active_item = FALSE
+			return
+		else
+			to_chat(user, "<span class='notice'>Strange, I don't feel that power anymore..</span>")
+			active_item = FALSE
+			return
 	else
-		to_chat(user, "<span class='notice'>Strange, I don't feel that power anymore..</span>")
+		return
 
 
 /obj/item/clothing/suit/roguetown/armor/plate/blkknight
