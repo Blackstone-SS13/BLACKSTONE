@@ -24,6 +24,7 @@
 	var/horse = FALSE
 	var/vampcompat = TRUE
 	var/list/traits_applied
+	var/cmode_music
 
 /datum/advclass/proc/equipme(mob/living/carbon/human/H)
 	if(!H)
@@ -59,5 +60,6 @@
 
 /datum/advclass/proc/post_equip(mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,TYPE_PROC_REF(/mob/living/carbon/human, add_credit)), 20)
-	return
+	if(cmode_music)
+		H.cmode_music = cmode_music
 

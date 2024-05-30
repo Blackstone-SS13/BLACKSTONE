@@ -24,13 +24,6 @@
 
 /* craftdif of 1 */
 
-/datum/crafting_recipe/roguetown/sewing/halfcloak
-	name = "cloth half cloak"
-	result = list(/obj/item/clothing/cloak/half)
-	reqs = list(/obj/item/natural/cloth = 1,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 1
-
 /datum/crafting_recipe/roguetown/sewing/clothgloves
 	name = "cloth gloves"
 	result = list(/obj/item/clothing/gloves/roguetown/fingerless)
@@ -57,13 +50,6 @@
 	result = list(/obj/item/clothing/suit/roguetown/armor/workervest)
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 2)
-	craftdiff = 1
-
-/datum/crafting_recipe/roguetown/sewing/shepardmask
-	name = "half-mask"
-	result = list(/obj/item/clothing/mask/rogue/shepherd)
-	reqs = list(/obj/item/natural/cloth = 1,
-				/obj/item/natural/fibers = 1)
 	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/sewing/Reyepatch
@@ -184,67 +170,28 @@
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
 
-/datum/crafting_recipe/roguetown/sewing/astratarobe
-	name = "astrata robes"
-	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/astrata)
-	reqs = list(/obj/item/natural/cloth = 3,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-
-/datum/crafting_recipe/roguetown/sewing/astratahood
-	name = "solar hood"
-	result = list(/obj/item/clothing/head/roguetown/roguehood/astrata)
-	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 3
-
-/datum/crafting_recipe/roguetown/sewing/nocrobe
-	name = "noc robes"
-	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/noc)
-	reqs = list(/obj/item/natural/cloth = 3,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-
-/datum/crafting_recipe/roguetown/sewing/nochood
-	name = "moon hood"
-	result = list(/obj/item/clothing/head/roguetown/roguehood/nochood)
-	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 3
-
-/datum/crafting_recipe/roguetown/sewing/dendorrobe
-	name = "dendor robes"
-	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/dendor)
-	reqs = list(/obj/item/natural/cloth = 3,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-
-/datum/crafting_recipe/roguetown/sewing/necrarobe
-	name = "necra robes"
-	result = list(/obj/item/clothing/suit/roguetown/shirt/robe/necra)
-	reqs = list(/obj/item/natural/cloth = 3,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-
-/datum/crafting_recipe/roguetown/sewing/necrahood
-	name = "necra hood"
-	result = list(/obj/item/clothing/head/roguetown/necrahood)
-	reqs = list(/obj/item/natural/cloth = 2,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 3
-
 /datum/crafting_recipe/roguetown/sewing/fancyhat
 	name = "fancy hat"
 	result = list(/obj/item/clothing/head/roguetown/fancyhat)
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
+	sellprice = 14
 
 /datum/crafting_recipe/roguetown/sewing/gambeson
 	name = "gambeson"
 	result = /obj/item/clothing/suit/roguetown/armor/gambeson
-	reqs = list(/obj/item/natural/fibers = 9)
+	reqs = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/fibers = 1)
 	tools = list(/obj/item/needle)
+	craftdiff = 3
+	sellprice = 20
+
+/datum/crafting_recipe/roguetown/sewing/armordress
+	name = "padded dress"
+	result = /obj/item/clothing/suit/roguetown/armor/armordress
+	reqs = list(/obj/item/natural/cloth = 5,
+				/obj/item/natural/fibers = 2)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/sewing/paddedcap
@@ -260,6 +207,7 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
+	sellprice = 14
 
 /datum/crafting_recipe/roguetown/sewing/chaperon
 	name = "chaperon hat"
@@ -267,6 +215,7 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
+	sellprice = 14
 
 /datum/crafting_recipe/roguetown/sewing/jupon
 	name = "jupon"
@@ -282,6 +231,7 @@
 				/obj/item/natural/fibers = 1,
 				/obj/item/natural/hide = 1)
 	craftdiff = 3
+	sellprice = 30
 
 /datum/crafting_recipe/roguetown/sewing/cape
 	name = "cape"
@@ -289,6 +239,7 @@
 	reqs = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3
+	sellprice = 12
 
 /datum/crafting_recipe/roguetown/sewing/lordcloak
 	name = "lordly cloak"
@@ -296,6 +247,7 @@
 	reqs = list(/obj/item/natural/fur = 2,
 				/obj/item/natural/hide = 4)
 	craftdiff = 5
+	sellprice = 80
 
 /datum/crafting_recipe/roguetown/sewing/sexydress
 	name = "sexy dress of legendary sewers"
@@ -303,3 +255,4 @@
 	reqs = list(/obj/item/natural/cloth = 6,
 				/obj/item/natural/fibers = 3)
 	craftdiff = 6
+	sellprice = 25

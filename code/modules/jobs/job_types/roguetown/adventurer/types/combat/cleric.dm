@@ -16,7 +16,7 @@
 	ispilgrim = FALSE
 	vampcompat = FALSE
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
-	traits_applied = list(RTRAIT_HEAVYARMOR)
+	traits_applied = list(TRAIT_HEAVYARMOR)
 
 /datum/outfit/job/roguetown/adventurer/cleric
 	allowed_patrons = ALL_CLERIC_PATRONS
@@ -57,10 +57,11 @@
 			H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/weaving, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE) 
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE) 
 			H.mind.adjust_skillrank(/datum/skill/magic/holy, 4, TRUE)
 			H.change_stat("intelligence", 2)
 			H.change_stat("perception", 1) // More intelligence and no speed penalty for Life Clerics.
@@ -92,7 +93,7 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE) 
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE) 
 			H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
 			H.change_stat("intelligence", 1)
 			H.change_stat("strength", 2)
@@ -112,8 +113,8 @@
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife)
 
 
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
 	C.update_devotion(50, 50)
 	C.holder_mob = H

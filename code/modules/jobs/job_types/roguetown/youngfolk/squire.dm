@@ -31,7 +31,7 @@
 		beltr = /obj/item/storage/belt/rogue/pouch
 		backr = /obj/item/storage/backpack/rogue/satchel
 		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
@@ -55,7 +55,7 @@
 		beltr = /obj/item/storage/belt/rogue/pouch
 		backr = /obj/item/storage/backpack/rogue/satchel
 		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)

@@ -1,6 +1,6 @@
 /datum/job/roguetown/woodsman
-	title = "Bog Elder"
-	flag = WOODSMAN
+	title = "Village Elder"
+	flag = ELDER
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 0
@@ -27,6 +27,8 @@
 	max_pq = null
 	give_bank_account = 16
 
+	cmode_music = 'sound/music/combat_bog.ogg'
+
 /datum/job/roguetown/woodsman/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
 	if(ishuman(L))
@@ -38,10 +40,10 @@
 				index = copytext(H.real_name, 1,index)
 			if(!index)
 				index = H.real_name
-			S.name = "bog elder cloak ([index])"
+			S.name = "Village Elder cloak ([index])"
 
 /datum/outfit/job/roguetown/woodsman
-	name = "Bog Elder"
+	name = "Village Elder"
 	jobtype = /datum/job/roguetown/woodsman
 
 /datum/outfit/job/roguetown/woodsman/pre_equip(mob/living/carbon/human/H)
@@ -61,7 +63,8 @@
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 6, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 5, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 5, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
@@ -74,11 +77,12 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
 		H.change_stat("strength", 5)
 		H.change_stat("perception", 4)
 		H.change_stat("endurance", 4)
 		H.change_stat("speed", -3)
 		H.change_stat("intelligence", 5)
 	H.verbs |= /mob/proc/haltyell
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)

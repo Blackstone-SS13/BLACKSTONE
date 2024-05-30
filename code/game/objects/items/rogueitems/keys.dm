@@ -12,6 +12,7 @@
 	var/lockhash = 0
 	var/lockid = null
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH|ITEM_SLOT_NECK
+	anvilrepair = /datum/skill/craft/blacksmithing
 
 /obj/item/roguekey/Initialize()
 	. = ..()
@@ -257,6 +258,12 @@
 	desc = "Why, a mercenary would not kick doors down."
 	icon_state = "greenkey"
 	lockid = "merc"
+
+/obj/item/roguekey/physician
+	name = "physician key"
+	desc = "The key smells of herbs, feeling soothing to the touch."
+	icon_state = "greenkey"
+	lockid = "physician"
 
 /obj/item/roguekey/puritan
 	name = "puritan's key"

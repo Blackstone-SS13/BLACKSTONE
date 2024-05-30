@@ -28,9 +28,11 @@
 	min_pq = -10
 	max_pq = null
 
+	cmode_music = 'sound/music/combat_giza.ogg'
+
 /datum/outfit/job/roguetown/shophand/pre_equip(mob/living/carbon/human/H)
 	..()
-	ADD_TRAIT(H, RTRAIT_SEEPRICES_SHITTY, "[type]")
+	ADD_TRAIT(H, TRAIT_SEEPRICES_SHITTY, "[type]")
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
@@ -60,4 +62,3 @@
 		H.change_stat("intelligence", 1)
 		H.change_stat("perception", 1)
 		H.change_stat("fortune", 2)
-	H.cmode_music = 'sound/music/combat_merchant.ogg'

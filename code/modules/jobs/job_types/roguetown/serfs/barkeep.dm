@@ -1,7 +1,7 @@
 /datum/job/roguetown/barkeep
 	title = "Barkeep"
 	flag = BARKEEP
-	department_flag = SERFS
+	department_flag = YEOMEN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1

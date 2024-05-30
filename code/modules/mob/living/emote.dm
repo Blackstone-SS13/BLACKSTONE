@@ -157,7 +157,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/choke
@@ -181,7 +181,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_crossarms()
-	set name = "Crossarms"
+	set name = "Cross Arms"
 	set category = "Emotes"
 
 	emote("crossarms", intentional = TRUE)
@@ -228,7 +228,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/clearthroat
@@ -238,7 +238,7 @@
 	emote_type = EMOTE_AUDIBLE
 
 /mob/living/carbon/human/verb/emote_clearthroat()
-	set name = "Clearthroat"
+	set name = "Clear Throat"
 	set category = "Noises"
 
 	emote("clearthroat", intentional = TRUE)
@@ -247,7 +247,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/dance
@@ -396,7 +396,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/breathgasp
@@ -422,7 +422,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled laugh."
 
 /datum/emote/living/chuckle
@@ -441,7 +441,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled laugh."
 
 /datum/emote/living/glare
@@ -484,7 +484,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled groan."
 
 /datum/emote/living/grimace
@@ -523,9 +523,6 @@
 	set category = "Emotes"
 
 	emote("kiss", intentional = TRUE, targetted = TRUE)
-
-
-
 
 /datum/emote/living/kiss/adjacentaction(mob/user, mob/target)
 	. = ..()
@@ -613,6 +610,37 @@
 		var/mob/living/carbon/human/H = target
 		H.add_stress(/datum/stressevent/hug)
 
+/datum/emote/living/holdbreath
+	key = "hold"
+	key_third_person = "holds"
+	message = "begins to hold their breath."
+	stat_allowed = SOFT_CRIT
+
+/mob/living/carbon/human/verb/emote_hold()
+	set name = "Hold Breath"
+	set category = "Emotes"
+
+	emote("hold", intentional = TRUE)
+
+/datum/emote/living/holdbreath/can_run_emote(mob/living/user, status_check = TRUE, intentional)
+	. = ..()
+	if(. && intentional && !HAS_TRAIT(user, TRAIT_HOLDBREATH) && !HAS_TRAIT(user, TRAIT_PARALYSIS))
+		to_chat(user, "<span class='warning'>I'm not desperate enough to do that.</span>")
+		return FALSE
+
+/datum/emote/living/holdbreath/run_emote(mob/user, params, type_override, intentional)
+	. = ..()
+	if(.)
+		if(HAS_TRAIT(user, TRAIT_HOLDBREATH))
+			REMOVE_TRAIT(user, TRAIT_HOLDBREATH, "[type]")
+		else
+			ADD_TRAIT(user, TRAIT_HOLDBREATH, "[type]")
+
+/datum/emote/living/holdbreath/select_message_type(mob/user, intentional)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_HOLDBREATH))
+		. = "stops holding their breath."
+
 /datum/emote/living/slap
 	key = "slap"
 	key_third_person = "slaps"
@@ -689,7 +717,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled laugh."
 
 /datum/emote/living/look
@@ -753,7 +781,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled scream!"
 		if(intentional)
 			if(!C.rogfat_add(10))
@@ -879,7 +907,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/choke
@@ -901,7 +929,7 @@
 	emote_type = EMOTE_VISIBLE
 
 /mob/living/carbon/human/verb/emote_shakehead()
-	set name = "Shakehead"
+	set name = "Shake Head"
 	set category = "Emotes"
 
 	emote("shakehead", intentional = TRUE)
@@ -936,7 +964,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled sigh."
 
 /datum/emote/living/whistle
@@ -955,7 +983,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/hmm
@@ -974,7 +1002,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled hmm."
 
 /datum/emote/living/huh
@@ -993,7 +1021,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled noise."
 
 /datum/emote/living/hum
@@ -1012,7 +1040,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled hum."
 
 /datum/emote/living/smile
@@ -1042,7 +1070,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled sneeze."
 
 /datum/emote/living/shh
@@ -1061,7 +1089,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled shh."
 
 /datum/emote/living/smug
@@ -1142,7 +1170,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled whimper."
 
 /datum/emote/living/wsmile
@@ -1166,7 +1194,7 @@
 	. = ..()
 	if(. && iscarbon(user))
 		var/mob/living/carbon/C = user
-		if(C.silent || !C.canspeak())
+		if(C.silent || !C.can_speak_vocal())
 			message = "makes a muffled yawn."
 
 

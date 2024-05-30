@@ -5,12 +5,14 @@
 	name = "Half Orc"
 	id = "halforc"
 	desc = "<b>Half Orcs</b><br>\
-	Born through a union between one of the Maurading Orcs and one of the civilized races, \
-	Half Orcs are known for their strength and lineage derived from their orcish heritage. \
-	They mostly take cosmetics characteristics from their human side. \
-	Every civilized society treats Half Orcs with distain and hate \
-	The only known nation to completely integrate half orcs are the tribes of gronn."
-
+	With the Ironmask clan on a centuries-long warpath to consolidate all orcs within their banner, \
+	crushed orc tribes have lost their menfolk and war-widows have been scattered to the hinterlands. \
+	Between human civilization and orc savagery, orc-women opting for exile over dishonor have become \
+	more common visitors to fur trading posts and prospecting camps, eventually leading to half-orcs \
+	being born in these rough places otherwise devoid of a fairer sex. Your mother-clan is in thrall \
+	to the Ironmask, true orcs would kill you as a mongrel dog and your father’s people cannot decide \
+	between mere distrust and disgust. Yet somehow your wandering feet came to Rockhill, where \
+	half-orcs ply muscle and their hardiness in the rough underbelly or outer reaches of society."
 
 	skin_tone_wording = "Clan"
 
@@ -21,7 +23,7 @@
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	disliked_food = NONE
 	liked_food = NONE
-	possible_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	possible_ages = list(AGE_YOUNG, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	changesource_flags = MIRROR_BADMIN | WABBAJACK | MIRROR_MAGIC | MIRROR_PRIDE | ERT_SPAWN | RACE_SWAP | SLIME_EXTRACT
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mo.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/fo.dmi'
@@ -49,6 +51,30 @@
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 
+	var/mob/living/carbon/human/species/halforc/H = C
+	if(H.age == AGE_YOUNG)
+		offset_features = list(OFFSET_ID = list(0,-1), OFFSET_GLOVES = list(0,-1), OFFSET_WRISTS = list(0,-1),\
+		OFFSET_CLOAK = list(0,-1), OFFSET_FACEMASK = list(0,-1), OFFSET_HEAD = list(0,-1), \
+		OFFSET_FACE = list(0,-1), OFFSET_BELT = list(0,-1), OFFSET_BACK = list(0,-1), \
+		OFFSET_NECK = list(0,-1), OFFSET_MOUTH = list(0,-1), OFFSET_PANTS = list(0,-1), \
+		OFFSET_SHIRT = list(0,-1), OFFSET_ARMOR = list(0,-1), OFFSET_HANDS = list(0,-1), OFFSET_UNDIES = list(0,-1), \
+		OFFSET_ID_F = list(0,-1), OFFSET_GLOVES_F = list(0,-1), OFFSET_WRISTS_F = list(0,-1), OFFSET_HANDS_F = list(0,-2), \
+		OFFSET_CLOAK_F = list(0,-1), OFFSET_FACEMASK_F = list(0,-2), OFFSET_HEAD_F = list(0,-2), \
+		OFFSET_FACE_F = list(0,-2), OFFSET_BELT_F = list(0,-1), OFFSET_BACK_F = list(0,-2), \
+		OFFSET_NECK_F = list(0,-2), OFFSET_MOUTH_F = list(0,-2), OFFSET_PANTS_F = list(0,-1), \
+		OFFSET_SHIRT_F = list(0,-1), OFFSET_ARMOR_F = list(0,-1), OFFSET_UNDIES_F = list(0,-1))
+
+		limbs_icon_m = 'icons/roguetown/mob/bodies/m/mos.dmi'
+		limbs_icon_f = 'icons/roguetown/mob/bodies/f/fos.dmi'
+
+		hairyness = null
+
+//		soundpack_m = new /datum/voicepack/male/young()
+		H.has_stubble = FALSE
+		H.facial_hairstyle = "None"
+		H.update_hair()
+		H.update_body()
+
 /datum/species/halforc/after_creation(mob/living/carbon/C)
 	..()
 	C.grant_language(/datum/language/orcish)
@@ -65,9 +91,9 @@
 /datum/species/halforc/get_skin_list()
 	return list(
 		"Shellcrest" = SKIN_COLOR_SHELLCREST,
-		"Bloodaxe"	   =  SKIN_COLOR_BLOOD_AXE,
-		"Gronn" = SKIN_COLOR_GROONN, //gronns are the dominant ones with orks
-		"Black Hammer" = SKIN_COLOR_BLACK_HAMMER,
+		"Bloodaxe" = SKIN_COLOR_BLOOD_AXE,
+		"Splitjaw" = SKIN_COLOR_GROONN, //Changed name from Gronn, which no longer aligned with lore here or elsewhere.
+		"Blackhammer" = SKIN_COLOR_BLACK_HAMMER,
 		"Skullseeker" = SKIN_COLOR_SKULL_SEEKER
 	)
 

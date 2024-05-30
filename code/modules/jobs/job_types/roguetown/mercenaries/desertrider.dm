@@ -1,19 +1,20 @@
 /datum/job/roguetown/mercenary/desert_rider
 	title = "Desert Rider Mercenary"
 	flag = DESERT_RIDER
+	department_flag = MERCENARIES
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_races = list("Humen", "Half-Elf", "Tiefling", "Elf", "Dark Elf")
+	allowed_races = list("Humen", "Half-Elf", "Tiefling", "Dark Elf", "Elf")
 	tutorial = "Blood, like the desert sand, stains your hands, a crimson testament to the gold you covet. A desert rider, renowned mercenary of the far east, your scimitar whispers tales of centuries-old tradition. Your loyalty, a fleeting mirage in the shifting sands, will yield to the allure of fortune."
 	outfit = /datum/outfit/job/roguetown/mercenary/desert_rider
 	display_order = JDO_DESERT_RIDER
-	department_flag = MERCENARIES
-	selection_color = JCOLOR_MERCENARIES
+	selection_color = JCOLOR_MERCENARY
 	faction = "Station"
 	total_positions = 5
 	spawn_positions = 5
 	give_bank_account = 3
 	min_pq = 2 //good fragger role
 	max_pq = null
+	cmode_music = 'sound/music/combat_desertrider.ogg' //GREATEST COMBAT TRACK IN THE GAME SO FAR BESIDES MAYBE MANIAC2.OGG
 
 /datum/outfit/job/roguetown/mercenary/desert_rider/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -53,7 +54,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
@@ -68,5 +69,4 @@
 		H.change_stat("constitution", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("speed", 3)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
-	H.cmode_music = 'sound/music/combat_desertrider.ogg' //GREATEST COMBAT TRACK IN THE GAME SO FAR BESIDES MAYBE MANIAC2.OGG
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)

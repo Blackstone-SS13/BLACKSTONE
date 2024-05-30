@@ -27,6 +27,8 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/deadmin,				/*destroys our own admin datum so we can play as a regular player*/
 	/client/proc/set_context_menu_enabled,
 	/client/proc/delete_player_book,
+	/client/proc/amend_player_book,
+	/client/proc/pull_book_file_names,
 	/client/proc/adminwho
 	)
 GLOBAL_LIST_INIT(admin_verbs_admin, world.AVerbsAdmin())
@@ -814,11 +816,41 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 /client/proc/delete_player_book()
 	set name = "Database Delete Player Book"
-	set category = "Admin"
+	set category = "Debug"
 	set desc = ""
 	if(!holder)
 		return
-	if(SSlibrarian.del_player_book(input(src, "What is the book file you want to delete? (spaces and other characters are their url encode versions for the file name, so for example spaces are +)")))
-		to_chat(src, "<span class='notice'>Book has been successfully deleted</span>")
+	var/player_book = input(src, "What is the book file you want to delete? (spaces and other characters are their url encode versions for the file name, so for example spaces are +)")
+	if(player_book)	
+		SSlibrarian.del_player_book(player_book)
+		message_admins("[src] has deleted the player book: [player_book]")
 	else
-		to_chat(src, "<span class='notice'> Either the book file doesn't exist or you have failed to type it in properly (remember characters have been url encoded for the file name)</span>")
+		to_chat(src, "<span class='notice'>Either the book file doesn't exist or you have failed to type it in properly (you can look up the file name by the verb 'database book file names'</span>")
+
+/client/proc/pull_book_file_names()
+	set name = "Database Book File Names"
+	set category = "Debug"
+	set desc = ""
+	if(!holder)
+		return
+	var/list/book_titles = SSlibrarian.pull_player_book_titles()
+	if(!book_titles)
+		return
+	var/dat = ""
+	for(var/I in book_titles)
+		dat += "[I]<br>"
+	src << browse(dat, "window=reading;size=250x500;can_close=1;can_minimize=1;can_maximize=1;can_resize=1;titlebar=1")
+
+/client/proc/amend_player_book()
+	set name = "Database Amend Player Book"
+	set category = "Debug"
+	set desc = ""
+	if(!holder)
+		return
+	var/book_title = input(src, "What is the book file name?")
+	var/amend_type = alert(src, "What type of text do you want to amend?", "", "book_title", "author", "icon")
+	var/amend_text = input(src, "What do you want to amend it to? (you don't have to make it in the file name format, use normal spaces)")
+	if(SSlibrarian.amend_player_book(book_title, amend_type, amend_text))
+		message_admins("[src] has amended [book_title]'s [amend_type] to [amend_text]")
+	else
+		to_chat(src, "<span class='notice'>Either the book file doesn't exist or you have failed to type something in properly (you can look up the file name by the verb 'database book file names'</span>")

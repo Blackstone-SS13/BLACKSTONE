@@ -7,7 +7,7 @@
 		for(var/X in GLOB.peasant_positions)
 			peopleiknow += X
 			peopleknowme += X
-		for(var/X in GLOB.serf_positions)
+		for(var/X in GLOB.yeoman_positions)
 			peopleiknow += X
 			peopleknowme += X
 		for(var/X in GLOB.church_positions)
@@ -17,6 +17,9 @@
 			peopleiknow += X
 			peopleknowme += X
 		for(var/X in GLOB.noble_positions)
+			peopleiknow += X
+			peopleknowme += X
+		for(var/X in GLOB.courtier_positions)
 			peopleiknow += X
 			peopleknowme += X
 		for(var/X in GLOB.youngfolk_positions)

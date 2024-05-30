@@ -34,7 +34,7 @@
 	var/list/datum/mind/pre_bandits = list()
 	var/list/datum/mind/pre_delfs = list()
 	var/list/datum/mind/pre_rebels = list()
-
+	
 	var/banditcontrib = 0
 	var/banditgoal = 1
 	var/delfcontrib = 0
@@ -220,7 +220,7 @@
 					blockme = TRUE
 				if(rebelguy.assigned_role in GLOB.church_positions)
 					blockme = TRUE
-				if(rebelguy.assigned_role in GLOB.serf_positions)
+				if(rebelguy.assigned_role in GLOB.yeoman_positions)
 					blockme = TRUE
 				if(blockme)
 					continue

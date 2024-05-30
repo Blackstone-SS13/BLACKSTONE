@@ -69,7 +69,7 @@
 				change_stat("strength", -2)
 				change_stat("constitution", -2)
 				change_stat("perception", 1)
-				change_stat("speed", 2)
+				change_stat("speed", round(rand(-1,2)))
 			if(AGE_MIDDLEAGED)
 				change_stat("speed", -1)
 				change_stat("endurance", 1)
