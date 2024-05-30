@@ -291,7 +291,6 @@
 			if(show_message)
 				to_chat(M, "<span class='warning'>My stomach feels empty and cramps!</span>")
 		else
-			var/mob/living/carbon/C = M
 			if(show_message)
 				to_chat(M, "<span class='danger'>I feel my wounds fade away to nothing!</span>" )
 	..()

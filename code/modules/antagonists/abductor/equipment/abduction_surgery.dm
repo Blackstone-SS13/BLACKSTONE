@@ -1,20 +1,3 @@
-/datum/surgery/organ_extraction
-	name = "Experimental organ replacement"
-	steps = list(/datum/surgery_step/incise, /datum/surgery_step/clamp_bleeders, /datum/surgery_step/retract_skin, /datum/surgery_step/incise, /datum/surgery_step/extract_organ, /datum/surgery_step/gland_insert)
-	possible_locs = list(BODY_ZONE_CHEST)
-	ignore_clothes = 1
-
-/datum/surgery/organ_extraction/can_start(mob/user, mob/living/carbon/target)
-	if(!ishuman(user))
-		return 0
-	var/mob/living/carbon/human/H = user
-	if(H.dna.species.id == "abductor")
-		return 1
-	for(var/obj/item/implant/abductor/A in H.implants)
-		return 1
-	return 0
-
-
 /datum/surgery_step/extract_organ
 	name = "remove heart"
 	accept_hand = 1

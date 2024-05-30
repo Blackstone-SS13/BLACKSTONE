@@ -10,7 +10,6 @@
 	name = "implant item"
 	accept_hand = 1
 	implements = list(/obj/item = 100)
-	repeatable = TRUE
 	time = 32
 	var/obj/item/IC = null
 

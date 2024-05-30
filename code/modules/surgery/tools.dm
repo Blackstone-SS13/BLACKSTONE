@@ -167,10 +167,6 @@
 	w_class = WEIGHT_CLASS_TINY
 	attack_verb = list("slapped")
 
-/obj/item/surgical_drapes/attack(mob/living/M, mob/user)
-	if(!attempt_initiate_surgery(src, M, user))
-		..()
-
 /obj/item/organ_storage //allows medical cyborgs to manipulate organs without hands
 	name = "organ storage bag"
 	desc = ""
@@ -223,7 +219,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "spectrometer"
 	item_flags = NOBLUDGEON
-	var/list/advanced_surgeries = list()
+	var/list/advanced_surgery_steps = list()
 
 /obj/item/surgical_processor/afterattack(obj/item/O, mob/user, proximity)
 	. = ..()
@@ -233,13 +229,13 @@
 		to_chat(user, "<span class='notice'>I load the surgery protocol from [O] into [src].</span>")
 		var/obj/item/disk/surgery/D = O
 		if(do_after(user, 10, target = O))
-			advanced_surgeries |= D.surgeries
+			advanced_surgery_steps |= D.surgery_steps
 		return TRUE
 	if(istype(O, /obj/machinery/computer/operating))
 		to_chat(user, "<span class='notice'>I copy surgery protocols from [O] into [src].</span>")
 		var/obj/machinery/computer/operating/OC = O
 		if(do_after(user, 10, target = O))
-			advanced_surgeries |= OC.advanced_surgeries
+			advanced_surgery_steps |= OC.advanced_surgery_steps
 		return TRUE
 	return
 

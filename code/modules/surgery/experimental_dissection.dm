@@ -2,35 +2,11 @@
 #define EXPDIS_FAIL_MSG "<span class='notice'>I dissect [target], but do not find anything particularly interesting.</span>"
 #define PUBLIC_TECHWEB_GAIN 0.6 //how many research points go directly into the main pool
 #define PRIVATE_TECHWEB_GAIN (1 - PUBLIC_TECHWEB_GAIN) //how many research points go directly into the main pool
-
-/datum/surgery/advanced/experimental_dissection
-	name = "Dissection"
-	desc = ""
-	steps = list(/datum/surgery_step/incise,
-				/datum/surgery_step/retract_skin,
-				/datum/surgery_step/clamp_bleeders,
-				/datum/surgery_step/dissection,
-				/datum/surgery_step/clamp_bleeders,
-				/datum/surgery_step/close)
-	possible_locs = list(BODY_ZONE_CHEST)
-	target_mobtypes = list(/mob/living) //Feel free to dissect devils but they're magic.
-	replaced_by = /datum/surgery/advanced/experimental_dissection/adv
-	requires_tech = FALSE
-	var/value_multiplier = 1
-
-/datum/surgery/advanced/experimental_dissection/can_start(mob/user, mob/living/target)
-	. = ..()
-	if(HAS_TRAIT_FROM(target, TRAIT_DISSECTED,"[name]"))
-		return FALSE
-	if(target.stat != DEAD)
-		return FALSE
-
 /datum/surgery_step/dissection
 	name = "dissection"
 	implements = list(/obj/item/scalpel/augment = 75, /obj/item/scalpel/advanced = 60, TOOL_SCALPEL = 45, /obj/item/kitchen/knife = 20, /obj/item/shard = 10)// special tools not only cut down time but also improve probability
 	time = 125
 	silicons_obey_prob = TRUE
-	repeatable = TRUE
 
 /datum/surgery_step/dissection/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	user.visible_message("<span class='notice'>[user] starts dissecting [target].</span>", "<span class='notice'>I start dissecting [target].</span>")

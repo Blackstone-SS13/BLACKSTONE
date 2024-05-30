@@ -5,6 +5,8 @@
 	var/list/obj/item/embedded_objects = list()
 	/// Bandage, if this ever hard dels thats fucking retarded lol
 	var/obj/item/bandage
+	/// Whether the bone encases the organs, for the sake of surgery
+	var/encasing_bone = FALSE
 
 /// Checks if we have any embedded objects whatsoever
 /obj/item/bodypart/proc/has_embedded_objects()
@@ -499,3 +501,26 @@
 	if(owner)
 		update_disabled()
 	return TRUE
+
+/// Returns surgery flags applicable to this bodypart
+/obj/item/bodypart/proc/get_surgery_flags()
+	var/returned_flags = NONE
+	for(var/datum/wound/slash/incision/incision in wounds)
+		if(incision.is_sewn())
+			continue
+		returned_flags |= SURGERY_INCISED
+	for(var/obj/item/embedded as anything in embedded_objects)
+		if(embedded.tool_behaviour != TOOL_RETRACTOR)
+			continue
+		returned_flags |= SURGERY_RETRACTED
+	if(has_wound(/datum/wound/dislocation))
+		returned_flags |= SURGERY_DISLOCATED
+	if(has_wound(/datum/wound/fracture))
+		returned_flags |= SURGERY_BROKEN
+	for(var/datum/wound/puncture/drilling/drilling in wounds)
+		if(drilling.is_sewn())
+			continue
+		returned_flags |= SURGERY_DRILLED
+	if(encasing_bone)
+		returned_flags |= SURGERY_ENCASED
+	return returned_flags

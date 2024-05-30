@@ -93,9 +93,9 @@
 		var/obj/item/surgical_processor/surgical_processor = locate() in robot.module?.modules
 		// No early return for !surgical_processor since we want to check optable should this not exist.
 		if(surgical_processor)
-			if(replaced_by in surgical_processor.advanced_surgeries)
+			if(replaced_by in surgical_processor.advanced_surgery_steps)
 				return FALSE
-			if(type in surgical_processor.advanced_surgeries)
+			if(type in surgical_processor.advanced_surgery_steps)
 				return TRUE
 
 	var/turf/target_turf = get_turf(target)
@@ -114,9 +114,9 @@
 		return FALSE
 	if(opcomputer.stat & (NOPOWER|BROKEN))
 		return FALSE
-	if(replaced_by in opcomputer.advanced_surgeries)
+	if(replaced_by in opcomputer.advanced_surgery_steps)
 		return FALSE
-	if(type in opcomputer.advanced_surgeries)
+	if(type in opcomputer.advanced_surgery_steps)
 		return TRUE
 	return FALSE
 
@@ -148,7 +148,7 @@
 	if(iscarbon(target))
 		var/mob/living/carbon/carbon_target = target
 		var/obj/item/bodypart/bodypart = carbon_target.get_bodypart(check_zone(target_zone))
-		if(!validate_bodypart(user, target, bodypart))
+		if(!validate_bodypart(user, target, bodypart, target_zone))
 			return FALSE
 	
 	//no surgeries in the same body zone
@@ -157,7 +157,7 @@
 
 	return TRUE
 
-/datum/surgery_step/proc/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart)
+/datum/surgery_step/proc/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
 	if(requires_bodypart && !bodypart)
 		return FALSE
 	else if(!requires_bodypart)
@@ -169,19 +169,20 @@
 		return FALSE
 	
 	var/bodypart_flags = bodypart.get_surgery_flags()
-	if((surgery_flags & SURGERY_ENCASED) && !(bodypart_flags & SURGERY_ENCASED))
+	if((surgery_flags & SURGERY_NOT_INCISED) && (bodypart_flags & SURGERY_INCISED))
 		return FALSE
 	if((surgery_flags & SURGERY_INCISED) && !(bodypart_flags & SURGERY_INCISED))
 		return FALSE
-	if((surgery_flags & SURGERY_NOT_INCISED) && (bodypart_flags & SURGERY_INCISED))
-		return FALSE
 	if((surgery_flags & SURGERY_RETRACTED) && !(bodypart_flags & SURGERY_RETRACTED))
-		return FALSE
-	if((surgery_flags & SURGERY_DRILLED) && !(bodypart_flags & SURGERY_DRILLED))
 		return FALSE
 	if((surgery_flags & SURGERY_BROKEN) && !(bodypart_flags & SURGERY_BROKEN))
 		return FALSE
-	
+	if((surgery_flags & SURGERY_DRILLED) && !(bodypart_flags & SURGERY_DRILLED))
+		return FALSE
+	if((surgery_flags & SURGERY_ENCASED) && !(bodypart_flags & SURGERY_ENCASED))
+		return FALSE
+
+	/*
 	if(user == target)
 		var/obj/item/bodypart/active_hand = user.get_active_hand()
 		if(active_hand)
@@ -191,8 +192,9 @@
 				return FALSE
 			if((active_hand?.body_zone in l_hand_zones) && (bodypart.body_zone in l_hand_zones))
 				return FALSE
-	
-	if(!ignore_clothes && !get_location_accessible(target, target_zone))
+	*/
+
+	if(!ignore_clothes && !get_location_accessible(target, target_zone || bodypart.body_zone))
 		return FALSE
 	
 	return TRUE
@@ -205,7 +207,6 @@
 
 	if(tool)
 		for(var/key in implements)
-			var/match = FALSE
 			if(ispath(key) && istype(tool, key))
 				implement_type = key
 				break
@@ -257,38 +258,28 @@
 
 /datum/surgery_step/proc/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail = FALSE)
 	target.surgeries[target_zone] = src
-	if(preop(user, target, target_zone, tool, surgery) == SURGERY_FAILURE)
+	if(preop(user, target, target_zone, tool, intent) == SURGERY_FAILURE)
 		target.surgeries -= target_zone
 		return SURGERY_FAILURE
 
 	var/speed_mod = get_speed_modifier(user, target, target_zone, tool, intent, try_to_fail)
 	var/success_prob = get_success_probability(user, target, target_zone, tool, intent, try_to_fail)
-	var/advance = FALSE
 
 	var/modded_time = round(time * speed_mod, 1)
-	if(do_after(user, time, target = target))
-		var/success = prob(success_prob) && chem_check(target)
-		if((prob(100-fail_prob) || (iscyborg(user) && !silicons_obey_prob)) && chem_check_result && !try_to_fail)
-			if(success(user, target, target_zone, tool, surgery))
-				advance = TRUE
-		else
-			if(failure(user, target, target_zone, tool, surgery, fail_prob))
-				advance = TRUE
-			if(chem_check_result)
-				if(.(user, target, target_zone, tool, surgery, try_to_fail)) //automatically re-attempt if failed for reason other than lack of required chemical
-					advance = TRUE
-		if(advance && !repeatable)
-			surgery.status++
-			if(surgery.status > surgery.steps.len)
-				surgery.complete()
+	if(do_after(user, modded_time, target = target))
+		var/success = !try_to_fail && ((iscyborg(user) && !silicons_obey_prob) || prob(success_prob)) && chem_check(target)
+		if(success && success(user, target, target_zone, tool, intent))
+			return SURGERY_SUCCESS
+		else if(failure(user, target, target_zone, tool, intent, success_prob))
+			return SURGERY_FAILURE
 
-	return advance
+	return SURGERY_FAILURE
 
 /datum/surgery_step/proc/get_speed_modifier(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail = FALSE)
 	var/speed_mod = 1
 	if(tool)
 		speed_mod *= tool.toolspeed
-	if(implement_speeds)
+	if(implements_speed)
 		var/implement_type = tool_check(user, tool)
 		if(implement_type)
 			speed_mod *= implements_speed[implement_type] || 1
@@ -335,15 +326,15 @@
 		"<span class='notice'>[user] finishes.</span>")
 	return TRUE
 
-/datum/surgery_step/proc/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, fail_prob = 0)
+/datum/surgery_step/proc/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
 	var/screwedmessage = ""
-	switch(fail_prob)
-		if(0 to 24)
+	switch(success_prob)
+		if(0 to 25)
+			screwedmessage = " <b>This is practically hopeless.</b>"
+		if(50 to 75) //25 to 49 = no extra text
+			screwedmessage = " This is hard to get right."
+		if(75 to 100)
 			screwedmessage = " <i>I almost had it.</i>"
-		if(50 to 74)//25 to 49 = no extra text
-			screwedmessage = " This is hard to get right in these conditions..."
-		if(75 to 99)
-			screwedmessage = " <b>This is practically impossible in these conditions...</b>"
 
 	display_results(user, target, "<span class='warning'>I screw up![screwedmessage]</span>",
 		"<span class='warning'>[user] screws up!</span>",

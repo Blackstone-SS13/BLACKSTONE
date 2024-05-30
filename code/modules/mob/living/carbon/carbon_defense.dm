@@ -272,7 +272,7 @@
 		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
 			if(!surgery_step.name)
 				continue
-			if(surgery_step.can_do_step(user, src, target_zone, null, user.used_intent))
+			if(surgery_step.can_do_step(user, src, user.zone_selected, null, user.used_intent))
 				possible_steps[surgery_step.name] = surgery_step
 		var/datum/surgery_step/done_step
 		if(length(possible_steps) > 1)
@@ -281,7 +281,7 @@
 				done_step = possible_steps[input]
 		else
 			done_step = possible_steps[possible_steps[1]]
-		if(done_step?.try_op(user, src, target_zone, null, user.used_intent))
+		if(done_step?.try_op(user, src, user.zone_selected, null, user.used_intent))
 			return TRUE
 
 	/*

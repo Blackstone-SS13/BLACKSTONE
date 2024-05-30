@@ -547,6 +547,7 @@
 	offset = OFFSET_ARMOR
 	offset_f = OFFSET_ARMOR_F
 	dismemberable = FALSE
+	encasing_bone = TRUE
 
 /obj/item/bodypart/chest/set_disabled(new_disabled)
 	. = ..()

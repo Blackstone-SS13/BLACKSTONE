@@ -1,29 +1,7 @@
 /obj/item/disk/surgery/brainwashing
 	name = "Brainwashing Surgery Disk"
 	desc = ""
-	surgeries = list(/datum/surgery/advanced/brainwashing)
-
-/datum/surgery/advanced/brainwashing
-	name = "Brainwashing"
-	desc = ""
-	steps = list(
-	/datum/surgery_step/incise,
-	/datum/surgery_step/retract_skin,
-	/datum/surgery_step/saw,
-	/datum/surgery_step/clamp_bleeders,
-	/datum/surgery_step/brainwash,
-	/datum/surgery_step/close)
-
-	target_mobtypes = list(/mob/living/carbon/human)
-	possible_locs = list(BODY_ZONE_HEAD)
-
-/datum/surgery/advanced/brainwashing/can_start(mob/user, mob/living/carbon/target)
-	if(!..())
-		return FALSE
-	var/obj/item/organ/brain/B = target.getorganslot(ORGAN_SLOT_BRAIN)
-	if(!B)
-		return FALSE
-	return TRUE
+	surgery_steps = list(/datum/surgery_step/brainwash)
 
 /datum/surgery_step/brainwash
 	name = "brainwash"

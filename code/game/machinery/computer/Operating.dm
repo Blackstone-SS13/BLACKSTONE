@@ -12,7 +12,7 @@
 
 	var/mob/living/carbon/human/patient
 	var/obj/structure/table/optable/table
-	var/list/advanced_surgeries = list()
+	var/list/advanced_surgery_steps = list()
 	var/datum/techweb/linked_techweb
 	light_color = LIGHT_COLOR_BLUE
 	var/list/linked_stasisbeds
@@ -35,7 +35,7 @@
 			"<span class='hear'>I hear the chatter of a floppy drive.</span>")
 		var/obj/item/disk/surgery/D = O
 		if(do_after(user, 10, target = src))
-			advanced_surgeries |= D.surgeries
+			advanced_surgery_steps |= D.surgery_steps
 		return TRUE
 	return ..()
 
@@ -44,7 +44,7 @@
 		var/datum/design/surgery/D = SSresearch.techweb_design_by_id(i)
 		if(!istype(D))
 			continue
-		advanced_surgeries |= D.surgery
+		advanced_surgery_steps |= D.surgery
 
 /obj/machinery/computer/operating/proc/find_table()
 	for(var/direction in GLOB.cardinals)
@@ -72,7 +72,7 @@
 	data["table"] = table
 
 	var/list/surgeries = list()
-	for(var/X in advanced_surgeries)
+	for(var/X in advanced_surgery_steps)
 		var/datum/surgery/S = X
 		var/list/surgery = list()
 		surgery["name"] = initial(S.name)

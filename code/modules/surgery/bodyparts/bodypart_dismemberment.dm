@@ -135,10 +135,11 @@
 			wound.remove_from_bodypart()
 			stored_wounds += wound //store for later when the limb is reattached
 		wounds = stored_wounds
-	for(var/datum/surgery/surgery as anything in was_owner.surgeries) //if we had an ongoing surgery on that limb, we stop it.
-		if(surgery.operated_bodypart == src)
-			was_owner.surgeries -= surgery
-			qdel(surgery)
+	//if we had an ongoing surgery on this limb, we stop it
+	for(var/body_zone in was_owner.surgeries)
+		if(check_zone(body_zone) != body_zone)
+			continue
+		was_owner.surgeries -= body_zone
 	for(var/obj/item/embedded in embedded_objects)
 		remove_embedded_object(embedded)
 	if(bandage)
@@ -364,11 +365,11 @@
 		C.update_inv_gloves()
 
 	if(special) //non conventional limb attachment
-		for(var/datum/surgery/surgery as anything in C.surgeries) //if we had an ongoing surgery to attach a new limb, we stop it.
-			var/surgery_zone = check_zone(surgery.location)
-			if(surgery_zone == body_zone)
-				C.surgeries -= surgery
-				qdel(surgery)
+		//if we had an ongoing surgery to attach a new limb, we stop it.
+		for(var/body_zone in C.surgeries)
+			if(check_zone(body_zone) != body_zone)
+				continue
+			C.surgeries -= body_zone
 
 	for(var/obj/item/organ/stored_organ in src)
 		stored_organ.Insert(C)
