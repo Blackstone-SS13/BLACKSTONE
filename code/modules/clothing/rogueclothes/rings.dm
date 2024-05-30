@@ -172,5 +172,4 @@
 		user.change_stat("endurance", -2)
 		active_item = FALSE
 		return
-	else
-		return
+

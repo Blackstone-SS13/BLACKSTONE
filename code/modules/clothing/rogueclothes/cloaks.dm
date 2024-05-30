@@ -924,10 +924,10 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 666
 	static_price = TRUE
+	var/active_item
 
 /obj/item/clothing/neck/roguetown/blkknight/equipped(mob/living/user)
 	. = ..()
-	if(active_item)
 	if(user.mind.special_role == "Bandit")
 		to_chat(user, "<span class='notice'>I feel bolstered by Matthios Power!...</span>")
 		user.change_stat("strength", 2)
