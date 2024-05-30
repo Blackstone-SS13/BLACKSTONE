@@ -11,6 +11,7 @@
 	icon_state = ""
 	slot_flags = ITEM_SLOT_RING
 	resistance_flags = FIRE_PROOF | ACID_PROOF
+	anvilrepair = /datum/skill/craft/armorsmithing
 
 /obj/item/clothing/ring/silver
 	name = "silver ring"
@@ -147,18 +148,29 @@
 
 /obj/item/clothing/ring/dragon_ring
 	name = "Dragon Ring"
-	icon_state = "dragonring"
+	icon_state = "dragon_ring"
 	sellprice = 666
+	var/active_item
 
-/obj/item/clothing/ring/dragon_ring/equipped(mob/living/user, Ring)
+/obj/item/clothing/ring/dragon_ring/equipped(mob/living/user)
 	. = ..()
-	to_chat(user, "<span class='notice'>Here be dragons</span>")
-	user.change_stat("strength", 2)
-	user.change_stat("constitution", 2)
-	user.change_stat("endurance", 2)
+	if(active_item)
+		return
+	else
+		active_item = TRUE
+		to_chat(user, "<span class='notice'>Here be dragons</span>")
+		user.change_stat("strength", 2)
+		user.change_stat("constitution", 2)
+		user.change_stat("endurance", 2)
+		return
 
 /obj/item/clothing/ring/dragon_ring/dropped(mob/living/user)
-	to_chat(user, "<span class='notice'>Gone is thy hoard</span>")
-	user.change_stat("strength", -2)
-	user.change_stat("constitution", -2)
-	user.change_stat("endurance", -2)
+	if(active_item)
+		to_chat(user, "<span class='notice'>Gone is thy hoard</span>")
+		user.change_stat("strength", -2)
+		user.change_stat("constitution", -2)
+		user.change_stat("endurance", -2)
+		active_item = FALSE
+		return
+	else
+		return
