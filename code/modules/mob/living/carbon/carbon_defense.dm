@@ -276,7 +276,7 @@
 				possible_steps[surgery_step.name] = surgery_step
 		var/datum/surgery_step/done_step
 		if(length(possible_steps) > 1)
-			var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
+			var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as anything|null in possible_steps
 			if(input)
 				done_step = possible_steps[input]
 		else
