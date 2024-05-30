@@ -151,7 +151,7 @@
 	icon_state = "dragonring"
 	sellprice = 666
 
-/obj/item/clothing/ring/dragon_ring/equipped(mob/living/user, Ring)
+/obj/item/clothing/ring/dragon_ring/equipped(mob/living/user)
 	. = ..()
 	to_chat(user, "<span class='notice'>Here be dragons</span>")
 	user.change_stat("strength", 2)
