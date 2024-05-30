@@ -152,8 +152,6 @@
 	var/bleed_rate = 0
 	for(var/datum/wound/wound as anything in get_wounds())
 		bleed_rate += wound.bleed_rate
-	//I hate that I have to do this shit
-	listclearnulls(simple_embedded_objects)
 	for(var/obj/item/embedded as anything in simple_embedded_objects)
 		bleed_rate += embedded.embedding?.embedded_bloodloss
 	return bleed_rate

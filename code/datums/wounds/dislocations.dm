@@ -7,7 +7,7 @@
 		"The %BODYPART is wrenched out of it's socket!",
 		"The %BODYPART is dislocated!",
 	)
-	sound_effect = "drybreak"
+	sound_effect = "fracturedry"
 	whp = 40
 	woundpain = 40
 	mob_overlay = ""
@@ -58,7 +58,6 @@
 		"The spine twists!",
 		"The %BODYPART is wrenched out of it's socket!",
 	)
-	sound_effect = "fracturedry"
 	whp = 80
 	woundpain = 100
 

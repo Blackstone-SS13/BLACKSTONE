@@ -64,10 +64,12 @@
 					if(!BP.bandage || observer_privilege)
 						for(var/datum/wound/wound as anything in BP.wounds)
 							bodypart_status += wound.get_visible_name()
+				
 			if(length(bodypart_status))
 				msg += bodypart_status
 			else
 				msg += "[BP] is healthy."
+
 			if(length(BP.embedded_objects))
 				msg += "<B>Embedded objects:</B>"
 				for(var/obj/item/embedded in BP.embedded_objects)
@@ -76,49 +78,29 @@
 			msg += "<span class='dead'>Limb is missing!</span>"
 		to_chat(usr, "<span class='info'>[msg.Join("\n")]</span>")
 
-	if(href_list["check_hb"])
-		if(isobserver(usr))
-			if(stat == DEAD)
-				to_chat(usr, "<span class='info'><B>No heartbeat...</B></span>")
-			else
-				to_chat(usr, "<span class='info'><B>The heart is still beating.</B></span>")
-		else if(Adjacent(usr) && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
-			usr.visible_message("<span class='info'>[usr] tries to hear [src]'s heartbeat.</span>")
-			if(do_after(usr, 30, needhand = 1, target = src))
-				if(stat == DEAD)
-					to_chat(usr, "<span class='info'><B>No heartbeat...</B>")
-				else
-					to_chat(usr, "<span class='info'><B>The heart is still beating.</B></span>")
-
 	if(href_list["embedded_object"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 		var/obj/item/bodypart/L = locate(href_list["embedded_limb"]) in bodyparts
 		if(!L)
 			return
 		var/obj/item/I = locate(href_list["embedded_object"]) in L.embedded_objects
-		if(!I || I.loc != src) //no item, no limb, or item is not in limb or in the person anymore
+		if(!I) //no item, no limb, or item is not in limb or in the person anymore
 			return
 		var/time_taken = I.embedding.embedded_unsafe_removal_time*I.w_class
 		if(usr == src)
 			usr.visible_message("<span class='warning'>[usr] attempts to remove [I] from [usr.p_their()] [L.name].</span>","<span class='warning'>I attempt to remove [I] from my [L.name]...</span>")
 		else
 			usr.visible_message("<span class='warning'>[usr] attempts to remove [I] from [src]'s [L.name].</span>","<span class='warning'>I attempt to remove [I] from [src]'s [L.name]...</span>")
-		if(do_after(usr, time_taken, needhand = 1, target = src))
-			if(!I || !L || I.loc != src || !(I in L.embedded_objects))
+		if(do_after(usr, time_taken, needhand = TRUE, target = src))
+			if(QDELETED(I) || QDELETED(L) || !L.remove_embedded_object(I))
 				return
-			L.embedded_objects -= I
-			emote("pain", TRUE)
 			L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
-			I.forceMove(get_turf(src))
 			usr.put_in_hands(I)
+			emote("pain", TRUE)
 			playsound(loc, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
 			if(usr == src)
 				usr.visible_message("<span class='notice'>[usr] rips [I] out of [usr.p_their()] [L.name]!</span>", "<span class='notice'>I successfully remove [I] from my [L.name].</span>")
 			else
 				usr.visible_message("<span class='notice'>[usr] rips [I] out of [src]'s [L.name]!</span>", "<span class='notice'>I successfully remove [I] from [src]'s [L.name].</span>")
-			if(!has_embedded_objects())
-				clear_alert("embeddedobject")
-				SEND_SIGNAL(usr, COMSIG_CLEAR_MOOD_EVENT, "embedded")
-		return
 
 	if(href_list["bandage"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
 		var/obj/item/bodypart/L = locate(href_list["bandaged_limb"]) in bodyparts
@@ -131,14 +113,11 @@
 			usr.visible_message("<span class='warning'>[usr] starts unbandaging [usr.p_their()] [L.name].</span>","<span class='warning'>I start unbandaging [L.name]...</span>")
 		else
 			usr.visible_message("<span class='warning'>[usr] starts unbandaging [src]'s [L.name].</span>","<span class='warning'>I start unbandaging [src]'s [L.name]...</span>")
-		if(do_after(usr, 50, needhand = 1, target = src))
-			if(!I || !L || !(L.bandage == I))
+		if(do_after(usr, 50, needhand = TRUE, target = src))
+			if(QDELETED(I) || QDELETED(L) || (L.bandage != I))
 				return
-			I.forceMove(get_turf(src))
-			L.bandage = null
+			L.remove_bandage()
 			usr.put_in_hands(I)
-			src.update_damage_overlays()
-		return
 
 	if(href_list["item"]) //canUseTopic check for this is handled by mob/Topic()
 		var/slot = text2num(href_list["item"])

@@ -3,13 +3,13 @@
 	check_name = "<span class='danger'><B>STUMP</B></span>"
 	whp = 75
 	sewn_whp = 25
-	bleed_rate = 50
+	bleed_rate = 20
 	sewn_bleed_rate = 0.2
 	clotting_threshold = null
 	sewn_clotting_threshold = null
 	woundpain = 100
 	sewn_woundpain = 20
-	sew_threshold = 100
+	sew_threshold = 100 //absolutely awful to sew up
 	mob_overlay = "dis_head"
 	can_sew = TRUE
 	critical = TRUE

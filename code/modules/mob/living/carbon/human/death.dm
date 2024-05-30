@@ -105,7 +105,7 @@
 				if(HU.marriedto == src)
 					HU.adjust_triumphs(-1)
 //				if(HU != src && !HAS_TRAIT(HU, TRAIT_BLIND))
-//					if(!HAS_TRAIT(HU, RTRAIT_ANTAG))
+//					if(!HAS_TRAIT(HU, TRAIT_ANTAG))
 //						if(HU.dna?.species && dna?.species)
 //							if(HU.dna.species.id == dna.species.id)
 //								HU.add_stress(/datum/stressevent/viewdeath)

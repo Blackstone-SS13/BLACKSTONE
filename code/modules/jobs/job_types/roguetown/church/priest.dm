@@ -61,7 +61,7 @@
 	H.verbs |= /mob/living/carbon/human/proc/coronate_lord
 	H.verbs |= /mob/living/carbon/human/proc/churchexcommunicate
 	H.verbs |= /mob/living/carbon/human/proc/churchannouncement
-//	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
+//	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 //		H.underwear = "Femleotard"
 //		H.underwear_color = CLOTHING_BLACK
 //		H.update_body()
@@ -158,21 +158,6 @@
 	recruitment_message = "Serve the nine, %RECRUIT!"
 	accept_message = "FOR THE NINE!"
 	refuse_message = "I refuse."
-	charge_max = 200 //templars get cool spells, so higher cooldown
-
-/obj/effect/proc_holder/spell/self/convertrole/templar/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
-	. = ..()
-	if(!.)
-		return
-	if(!recruit.cleric)
-		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.patron)
-		holder.holder_mob = recruit
-		//Max devotion limit - Templars are stronger but cannot pray to gain more abilities beyond t1
-		holder.max_devotion = 250
-		holder.max_progression = CLERIC_REQ_1
-		holder.update_devotion(50, 0)
-		holder.grant_spells_templar(recruit)
-	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 
 /obj/effect/proc_holder/spell/self/convertrole/monk
 	name = "Recruit Acolyte"
@@ -181,14 +166,3 @@
 	recruitment_message = "Serve the nine, %RECRUIT!"
 	accept_message = "FOR THE NINE!"
 	refuse_message = "I refuse."
-
-/obj/effect/proc_holder/spell/self/convertrole/monk/convert(mob/living/carbon/human/recruit, mob/living/carbon/human/recruiter)
-	. = ..()
-	if(!.)
-		return
-	if(!recruit.cleric)
-		var/datum/devotion/cleric_holder/holder = new /datum/devotion/cleric_holder(recruit, recruit.patron)
-		holder.holder_mob = recruit
-		holder.update_devotion(50, 50)
-		holder.grant_spells(recruit)
-	recruit.verbs |= list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)

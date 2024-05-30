@@ -25,8 +25,8 @@
 	var/last_bite
 	/// Traits applied to the owner mob when we turn into a zombie
 	var/static/list/traits_zombie = list(
-		RTRAIT_CRITICAL_WEAKNESS,
-		RTRAIT_NOROGSTAM,
+		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_NOROGSTAM,
 		TRAIT_NOMOOD,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
@@ -179,8 +179,8 @@
 			zombie_part.rotted = TRUE
 		zombie_part.update_disabled()
 	zombie.update_body()
+	zombie.cmode_music = 'sound/music/combat_weird.ogg'
 
-	// Now you get what you had in life + the debuff from rotting limbs aka -8
 	// Outside of one 2% chance remaining for zombie era strength
 	if(prob(2))
 		zombie.STASTR = 18
