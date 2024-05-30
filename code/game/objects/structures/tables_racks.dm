@@ -330,6 +330,11 @@
 	smooth = 0
 	climb_offset = 10
 
+/obj/structure/table/church/OnCrafted(dirin, user)
+	if(dirin == NORTH || dirin == SOUTH)
+		icon_state = "churchtable_mid"
+	. = ..()
+
 /obj/structure/table/church/m
 	icon = 'icons/roguetown/misc/tables.dmi'
 	icon_state = "churchtable_mid"

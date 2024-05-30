@@ -521,10 +521,9 @@
 	. = ..()
 
 /obj/machinery/light/rogue/torchholder/OnCrafted(dirin, user)
-	if(dirin == SOUTH)
+	if(dirin == NORTH)
 		pixel_y = 32
-	else
-		dirin = angle2dir(dir2angle(dirin) + 180)
+	dirin = angle2dir(dir2angle(dirin) + 180)
 	QDEL_NULL(torchy)
 	on = FALSE
 	set_light(0)
