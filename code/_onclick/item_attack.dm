@@ -243,12 +243,8 @@
 					var/lumberskill = lumberjacker.mind.get_skill_level(/datum/skill/labor/lumberjacking)
 					if(!I.remove_bintegrity(1))
 						dullfactor = 0.2
-						world.log << "New force before LUMBERJACKING! skill: [newforce]"
 					else
 						dullfactor = 1.2 + (lumberskill * 0.15)
-						
-						world.log << "New force after DULLFACTOR! : [dullfactor]"
-						world.log << "New force after lumberjacksking skill: [lumberskill]"
 						lumberjacker.mind.adjust_experience(/datum/skill/labor/lumberjacking, (lumberjacker.STAINT*0.2))
 					cont = TRUE
 			if(!cont)
@@ -263,7 +259,6 @@
 				if(BCLASS_PICK)
 					dullfactor = 1.5
 					cont = TRUE
-					world.log << "PICK BASH [newforce]"
 			if(!cont)
 				return 0
 		if(DULLING_BASHCHOP) //structures that can be attacked by clubs also (doors fences etc)
@@ -297,7 +292,6 @@
 			var/mineskill = miner.mind.get_skill_level(/datum/skill/labor/mining)
 			newforce = newforce * (8+(mineskill*1.5))
 			shake_camera(user, 1, 1)
-			world.log << "New force after mining skill: [newforce]"
 			miner.mind.adjust_experience(/datum/skill/labor/mining, (miner.STAINT*0.2))
 	
 	newforce = (newforce * user.used_intent.damfactor) * dullfactor
@@ -306,7 +300,6 @@
 	newforce = round(newforce,1)
 	newforce = max(newforce, 1)
 	testing("endforce [newforce]")
-	world.log << "New force after skill: [newforce]"
 	return newforce
 
 /obj/attacked_by(obj/item/I, mob/living/user)
