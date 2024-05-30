@@ -270,9 +270,8 @@
 			return FALSE
 		if(C.badluck(5))
 			add_mob_blood(C)
-			if(!locate(/obj/item/restraints/legcuffs/beartrap) in BP.embedded_objects)
-				BP.embedded_objects |= src
-				forceMove(C)
+			if(!BP.is_object_embedded(src))
+				BP.add_embedded_object(src)
 			close_trap()
 			C.visible_message("<span class='boldwarning'>[C] triggers \the [src].</span>", \
 					"<span class='userdanger'>I trigger \the [src]!</span>")
@@ -296,9 +295,8 @@
 				return FALSE
 			else
 				add_mob_blood(C)
-				if(!locate(/obj/item/restraints/legcuffs/beartrap) in BP.embedded_objects)
-					BP.embedded_objects |= src
-					forceMove(C)
+				if(!BP.is_object_embedded(src))
+					BP.add_embedded_object(src)
 				close_trap()
 				C.visible_message("<span class='boldwarning'>[C] triggers \the [src].</span>", \
 						"<span class='userdanger'>I trigger \the [src]!</span>")
@@ -384,9 +382,8 @@
 					var/obj/item/bodypart/BP = C.get_bodypart(def_zone)
 					if(BP)
 						add_mob_blood(C)
-						if(!locate(/obj/item/restraints/legcuffs/beartrap) in BP.embedded_objects)
-							BP.embedded_objects |= src
-							forceMove(C)
+						if(!BP.is_object_embedded(src))
+							BP.add_embedded_object(src)
 						C.emote("agony")
 						//BP.set_disabled(BODYPART_DISABLED_WOUND)
 						//BP.add_wound(/datum/wound/fracture)

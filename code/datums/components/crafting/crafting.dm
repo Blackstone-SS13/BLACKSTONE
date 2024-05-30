@@ -148,6 +148,7 @@
 	return TRUE
 
 /atom/proc/OnCrafted(dirin, user)
+	dir = dirin
 	return
 
 /obj/item/OnCrafted(dirin)
@@ -215,7 +216,7 @@
 			return
 	if(R.structurecraft)
 		if(!(locate(R.structurecraft) in T))
-			to_chat(user, "<span class='warning'>I'm missing something.</span>")
+			to_chat(user, "<span class='warning'>I'm missing a structure I need.</span>")
 			return
 	if(check_contents(R, contents))
 		if(check_tools(user, R, contents))
@@ -249,14 +250,14 @@
 						if(L.STAINT > 10)
 							prob2craft += ((10-L.STAINT)*-1)*2
 					prob2craft = CLAMP(prob2craft, 0, 99)
-					if(prob(prob2fail))
-						to_chat(user, "<span class='danger'>MISTAKE! I've failed to craft [R.name]!</span>")
-						continue
+					if(prob(prob2fail)) //critical fail
+						to_chat(user, "<span class='danger'>MISTAKE! I fumbled the crafting of \the [R.name]!</span>")
+						return
 					if(!prob(prob2craft))
 						if(user.client?.prefs.showrolls)
-							to_chat(user, "<span class='danger'>I've failed to craft [R.name]... [prob2craft]%</span>")
+							to_chat(user, "<span class='danger'>I've failed to craft \the [R.name]... [prob2craft]%</span>")
 							continue
-						to_chat(user, "<span class='danger'>I've failed to craft [R.name].</span>")
+						to_chat(user, "<span class='danger'>I've failed to craft \the [R.name].</span>")
 						continue
 					var/list/parts = del_reqs(R, user)
 					if(islist(R.result))
@@ -275,7 +276,7 @@
 							I.CheckParts(parts, R)
 							I.OnCrafted(user.dir, user)
 					user.visible_message("<span class='notice'>[user] [R.verbage] \a [R.name]!</span>", \
-										"<span class='notice'>I [R.verbage] \a [R.name]!</span>")
+										"<span class='notice'>I [R.verbage_simple] \a [R.name]!</span>")
 					if(user.mind && R.skillcraft)
 						if(isliving(user))
 							var/mob/living/L = user

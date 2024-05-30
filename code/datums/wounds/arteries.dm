@@ -49,7 +49,7 @@
 	. = ..()
 	ADD_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 
-/datum/wound/artery/neck/on_mob_gain(mob/living/affected)
+/datum/wound/artery/neck/on_mob_loss(mob/living/affected)
 	. = ..()
 	REMOVE_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 

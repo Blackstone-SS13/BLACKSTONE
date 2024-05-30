@@ -1,8 +1,29 @@
 /obj/item/bodypart
 	/// List of /datum/wound instances affecting this bodypart
-	var/list/wounds
-	/// Bandage
+	var/list/datum/wound/wounds
+	/// List of items embedded in this bodypart
+	var/list/obj/item/embedded_objects = list()
+	/// Bandage, if this ever hard dels thats fucking retarded lol
 	var/obj/item/bandage
+
+/// Checks if we have any embedded objects whatsoever
+/obj/item/bodypart/proc/has_embedded_objects()
+	return length(embedded_objects)
+
+/// Checks if we have an embedded object of a specific type
+/obj/item/bodypart/proc/has_embedded_object(path, specific = FALSE)
+	if(!path)
+		return
+	for(var/obj/item/embedder as anything in embedded_objects)
+		if((specific && embedder.type != path) || !istype(embedder, path))
+			continue
+		return embedder
+
+/// Checks if an object is embedded in us
+/obj/item/bodypart/proc/is_object_embedded(obj/item/embedder)
+	if(!embedder)
+		return FALSE
+	return (embedder in embedded_objects)
 
 /// Returns all wounds on this limb that can be sewn
 /obj/item/bodypart/proc/get_sewable_wounds()
@@ -13,34 +34,6 @@
 		woundies += wound
 	return woundies
 
-/// Check to see if we can apply a bleeding wound on this bodypart
-/obj/item/bodypart/proc/can_bloody_wound()
-	if(skeletonized)
-		return FALSE
-	if(!is_organic_limb())
-		return FALSE
-	if(NOBLOOD in owner?.dna?.species?.species_traits)
-		return FALSE
-	return TRUE
-
-/// Returns the total bleed rate on this bodypart
-/obj/item/bodypart/proc/get_bleed_rate()
-	var/bleed_rate = 0
-	if(bandage && !HAS_BLOOD_DNA(bandage))
-		return 0
-	for(var/datum/wound/wound as anything in wounds)
-		bleed_rate += wound.bleed_rate
-	//I hate that I have to do this shit
-	listclearnulls(embedded_objects)
-	for(var/obj/item/embedded as anything in embedded_objects)
-		if(!embedded.embedding.embedded_bloodloss)
-			continue
-		bleed_rate += embedded.embedding.embedded_bloodloss
-	for(var/obj/item/grabbing/grab in grabbedby)
-		bleed_rate *= grab.bleed_suppressing
-	bleed_rate = max(round(bleed_rate, 0.1), 0)
-	return bleed_rate
-
 /// Returns the first wound of the specified type on this bodypart
 /obj/item/bodypart/proc/has_wound(path, specific = FALSE)
 	if(!path)
@@ -49,6 +42,19 @@
 		if((specific && wound.type != path) || !istype(wound, path))
 			continue
 		return wound
+
+/// Heals wounds on this bodypart by the specified amount
+/obj/item/bodypart/proc/heal_wounds(heal_amount)
+	if(!length(wounds))
+		return FALSE
+	var/healed_any = FALSE
+	for(var/datum/wound/wound as anything in wounds)
+		if(heal_amount <= 0)
+			continue
+		var/amount_healed = wound.heal_wound(heal_amount)
+		heal_amount -= amount_healed
+		healed_any = TRUE
+	return healed_any
 
 /// Adds a wound to this bodypart, applying any necessary effects
 /obj/item/bodypart/proc/add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)
@@ -79,18 +85,31 @@
 	if(.)
 		qdel(wound)
 
-/// Heals wounds on this bodypart by the specified amount
-/obj/item/bodypart/proc/heal_wounds(heal_amount)
-	if(!length(wounds))
+/// Check to see if we can apply a bleeding wound on this bodypart
+/obj/item/bodypart/proc/can_bloody_wound()
+	if(skeletonized)
 		return FALSE
-	var/healed_any = FALSE
+	if(!is_organic_limb())
+		return FALSE
+	if(NOBLOOD in owner?.dna?.species?.species_traits)
+		return FALSE
+	return TRUE
+
+/// Returns the total bleed rate on this bodypart
+/obj/item/bodypart/proc/get_bleed_rate()
+	var/bleed_rate = 0
+	if(bandage && !HAS_BLOOD_DNA(bandage))
+		return 0
 	for(var/datum/wound/wound as anything in wounds)
-		if(heal_amount <= 0)
+		bleed_rate += wound.bleed_rate
+	for(var/obj/item/embedded as anything in embedded_objects)
+		if(!embedded.embedding.embedded_bloodloss)
 			continue
-		var/amount_healed = wound.heal_wound(heal_amount)
-		heal_amount -= amount_healed
-		healed_any = TRUE
-	return healed_any
+		bleed_rate += embedded.embedding.embedded_bloodloss
+	for(var/obj/item/grabbing/grab in grabbedby)
+		bleed_rate *= grab.bleed_suppressing
+	bleed_rate = max(round(bleed_rate, 0.1), 0)
+	return bleed_rate
 
 /// Called after a bodypart is attacked so that wounds and critical effects can be applied
 /obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE)
@@ -177,6 +196,7 @@
 		if(HAS_TRAIT(src, TRAIT_BRITTLE))
 			used += 10
 		if(prob(used))
+			attempted_wounds += /datum/wound/dislocation
 			attempted_wounds += /datum/wound/fracture
 	if(bclass in GLOB.artery_bclasses)
 		used = round(damage_dividend * 20 + (dam / 3), 1)
@@ -281,6 +301,7 @@
 			if(owner.client)
 				winset(owner.client, "outputwindow.output", "max-lines=1")
 				winset(owner.client, "outputwindow.output", "max-lines=100")
+		var/dislocation_type
 		var/fracture_type = /datum/wound/fracture/head
 		var/necessary_damage = 0.9
 		if(resistance)
@@ -293,8 +314,11 @@
 			necessary_damage = 0.6
 		else if(zone_precise == BODY_ZONE_PRECISE_NECK)
 			fracture_type = /datum/wound/fracture/neck
+			dislocation_type = /datum/wound/dislocation/neck
 			necessary_damage = 0.9
 		if(prob(used) && (damage_dividend >= necessary_damage))
+			if(dislocation_type)
+				attempted_wounds += dislocation_type
 			attempted_wounds += fracture_type
 	if(bclass in GLOB.artery_bclasses)
 		used = round(damage_dividend * 20 + (dam / 3), 1)
@@ -317,11 +341,11 @@
 						playsound(owner, 'sound/combat/crit.ogg', 100, FALSE)
 						owner.Stun(5)
 						owner.blind_eyes(5)
-						if(zone_precise == BODY_ZONE_PRECISE_R_EYE)
+						if((zone_precise == BODY_ZONE_PRECISE_R_EYE) && !my_eyes.right_poked)
 							my_eyes.right_poked = TRUE
 							if(!my_eyes.left_poked)
 								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The right eye is poked out!</span>"
-						else
+						else if((zone_precise == BODY_ZONE_PRECISE_L_EYE) && !my_eyes.left_poked)
 							my_eyes.left_poked = TRUE
 							if(!my_eyes.right_poked)
 								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The left eye is poked out!</span>"
@@ -366,24 +390,42 @@
 			return applied
 	return FALSE
 
-/// Applies a temporary paralysis effect to this bodypart
-/obj/item/bodypart/proc/temporary_crit_paralysis(duration = 60 SECONDS, brittle = TRUE)
-	if(HAS_TRAIT(src, TRAIT_BRITTLE))
+/// Embeds an object in this bodypart
+/obj/item/bodypart/proc/add_embedded_object(obj/item/embedder, silent = FALSE, crit_message = FALSE)
+	if(!embedder || !can_embed(embedder))
 		return FALSE
-	ADD_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
-	if(brittle)
-		ADD_TRAIT(src, TRAIT_BRITTLE, CRIT_TRAIT)
-	addtimer(CALLBACK(src, PROC_REF(remove_crit_paralysis)), duration)
+	if(owner && ((owner.status_flags & GODMODE) || HAS_TRAIT(owner, TRAIT_PIERCEIMMUNE)))
+		return FALSE 
+	LAZYADD(embedded_objects, embedder)
+	embedder.is_embedded = TRUE
+	embedder.forceMove(src)
 	if(owner)
-		update_disabled()
+		embedder.add_mob_blood(owner)
+		if(!silent)
+			owner.emote("embed")
+			playsound(owner, 'sound/combat/newstuck.ogg', 100, vary = TRUE)
+		if(crit_message)
+			owner.next_attack_msg += " <span class='userdanger'>[embedder] is stuck in [owner]'s [src]!</span>"
 	return TRUE
 
-/// Removes the temporary paralysis effect from this bodypart
-/obj/item/bodypart/proc/remove_crit_paralysis()
-	REMOVE_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
-	REMOVE_TRAIT(src, TRAIT_BRITTLE, CRIT_TRAIT)
-	if(owner)
-		update_disabled()
+/// Removes an embedded object from this bodypart
+/obj/item/bodypart/proc/remove_embedded_object(obj/item/embedder)
+	if(!embedder)
+		return FALSE
+	if(ispath(embedder))
+		embedder = has_embedded_object(embedder)
+	if(!istype(embedder) || !is_object_embedded(embedder))
+		return FALSE
+	LAZYREMOVE(embedded_objects, embedder)
+	embedder.is_embedded = FALSE
+	var/drop_location = owner?.drop_location() || drop_location()
+	if(drop_location)
+		embedder.forceMove(drop_location)
+	else
+		qdel(embedder)
+	if(owner && !owner?.has_embedded_objects())
+		owner.clear_alert("embeddedobject")
+		SEND_SIGNAL(owner, COMSIG_CLEAR_MOOD_EVENT, "embedded")
 	return TRUE
 
 /obj/item/bodypart/proc/try_bandage(obj/item/new_bandage)
@@ -405,8 +447,6 @@
 		if(wound.bleed_rate < highest_bleed_rate)
 			continue
 		highest_bleed_rate = wound.bleed_rate
-	//I hate that I have to do this shit
-	listclearnulls(embedded_objects)
 	for(var/obj/item/embedded as anything in embedded_objects)
 		if(!embedded.embedding.embedded_bloodloss)
 			continue
@@ -427,3 +467,35 @@
 	if(owner.stat != DEAD)
 		to_chat(owner, "<span class='warning'>Blood soaks through the bandage on my [name].</span>")
 	return bandage.add_mob_blood(owner)
+
+/obj/item/bodypart/proc/remove_bandage()
+	if(!bandage)
+		return FALSE
+	var/drop_location = owner?.drop_location() || drop_location()
+	if(drop_location)
+		bandage.forceMove(drop_location)
+	else
+		qdel(bandage)
+	bandage = null
+	owner?.update_damage_overlays()
+	return TRUE
+
+/// Applies a temporary paralysis effect to this bodypart
+/obj/item/bodypart/proc/temporary_crit_paralysis(duration = 60 SECONDS, brittle = TRUE)
+	if(HAS_TRAIT(src, TRAIT_BRITTLE))
+		return FALSE
+	ADD_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
+	if(brittle)
+		ADD_TRAIT(src, TRAIT_BRITTLE, CRIT_TRAIT)
+	addtimer(CALLBACK(src, PROC_REF(remove_crit_paralysis)), duration)
+	if(owner)
+		update_disabled()
+	return TRUE
+
+/// Removes the temporary paralysis effect from this bodypart
+/obj/item/bodypart/proc/remove_crit_paralysis()
+	REMOVE_TRAIT(src, TRAIT_PARALYSIS, CRIT_TRAIT)
+	REMOVE_TRAIT(src, TRAIT_BRITTLE, CRIT_TRAIT)
+	if(owner)
+		update_disabled()
+	return TRUE
