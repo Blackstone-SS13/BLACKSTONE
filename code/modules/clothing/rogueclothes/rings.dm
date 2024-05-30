@@ -148,6 +148,18 @@
 
 /obj/item/clothing/ring/dragon_ring
 	name = "Dragon Ring"
-	icon_state = "dragon_ring"
-	sellprice = 500
-	
+	icon_state = "dragonring"
+	sellprice = 666
+
+/obj/item/clothing/ring/dragon_ring/equipped(mob/living/user, Ring)
+	. = ..()
+	to_chat(user, "<span class='notice'>Here be dragons</span>")
+	user.change_stat("strength", 2)
+	user.change_stat("constitution", 2)
+	user.change_stat("endurance", 2)
+
+/obj/item/clothing/ring/dragon_ring/dropped(mob/living/user)
+	to_chat(user, "<span class='notice'>Gone is thy hoard</span>")
+	user.change_stat("strength", -2)
+	user.change_stat("constitution", -2)
+	user.change_stat("endurance", -2)
