@@ -92,3 +92,14 @@
 		if(cavity.cavity_item)
 			cavity.cavity_item.forceMove(drop_location)
 			cavity.cavity_item = null
+
+/datum/wound/slash/incision
+	name = "incision"
+	check_name = "<span class='bloody'><B>INCISION</B></span>"
+	whp = 15
+	sewn_whp = 5
+	bleed_rate = 0.2
+	sewn_bleed_rate = 0.01
+	clotting_threshold = null
+	sewn_clotting_threshold = null
+	sew_threshold = 10

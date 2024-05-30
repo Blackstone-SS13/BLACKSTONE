@@ -1,4 +1,6 @@
 // Tool types
+#define TOOL_NONE			"none" //exclusively used for surgery
+#define TOOL_HAND			"hand" //exclusively used for surgery
 #define TOOL_CROWBAR 		"crowbar"
 #define TOOL_MULTITOOL 		"multitool"
 #define TOOL_SCREWDRIVER 	"screwdriver"

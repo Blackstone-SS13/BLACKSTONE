@@ -352,11 +352,22 @@
 
 				discipline_slime(M)
 	else
-		if(stat == DEAD && surgeries.len)
-			if(M.used_intent.type == INTENT_HELP || M.used_intent.type == INTENT_DISARM)
-				for(var/datum/surgery/S in surgeries)
-					if(S.next_step(M,M.a_intent))
-						return 1
+		if(stat == DEAD && !M.cmode)
+			var/list/possible_steps = list()
+			for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
+				if(!surgery_step.name)
+					continue
+				if(surgery_step.can_do_step(M, src, target_zone, null, M.used_intent))
+					possible_steps[surgery_step.name] = surgery_step
+			var/datum/surgery_step/done_step
+			if(length(possible_steps) > 1)
+				var/input = input(M, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
+				if(input)
+					done_step = possible_steps[input]
+			else
+				done_step = possible_steps[possible_steps[1]]
+			if(done_step?.try_op(M, src, target_zone, null, M.used_intent))
+				return TRUE
 		if(..()) //successful attack
 			attacked += 10
 
@@ -367,11 +378,22 @@
 
 
 /mob/living/simple_animal/slime/attackby(obj/item/W, mob/living/user, params)
-	if(stat == DEAD && surgeries.len)
-		if(user.used_intent.type == INTENT_HELP || user.used_intent.type == INTENT_DISARM)
-			for(var/datum/surgery/S in surgeries)
-				if(S.next_step(user,user.a_intent))
-					return 1
+	if(stat == DEAD && !user.cmode)
+		var/list/possible_steps = list()
+		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
+			if(!surgery_step.name)
+				continue
+			if(surgery_step.can_do_step(user, src, target_zone, I, user.used_intent))
+				possible_steps[surgery_step.name] = surgery_step
+		var/datum/surgery_step/done_step
+		if(length(possible_steps) > 1)
+			var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
+			if(input)
+				done_step = possible_steps[input]
+		else
+			done_step = possible_steps[possible_steps[1]]
+		if(done_step?.try_op(user, src, target_zone, W, user.used_intent))
+			return TRUE
 	if(istype(W, /obj/item/stack/sheet/mineral/plasma) && !stat) //Let's you feed slimes plasma.
 		if (user in Friends)
 			++Friends[user]

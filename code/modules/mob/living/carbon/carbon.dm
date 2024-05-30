@@ -100,11 +100,29 @@
 		mode() // Activate held item
 
 /mob/living/carbon/attackby(obj/item/I, mob/user, params)
+	if(!user.cmode)
+		var/list/possible_steps = list()
+		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
+			if(!surgery_step.name)
+				continue
+			if(surgery_step.can_do_step(user, src, target_zone, I, user.used_intent))
+				possible_steps[surgery_step.name] = surgery_step
+		var/datum/surgery_step/done_step
+		if(length(possible_steps) > 1)
+			var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
+			if(input)
+				done_step = possible_steps[input]
+		else
+			done_step = possible_steps[possible_steps[1]]
+		if(done_step?.try_op(user, src, target_zone, I, user.used_intent))
+			return TRUE
+	/*
 	for(var/datum/surgery/S in surgeries)
 		if(!(mobility_flags & MOBILITY_STAND) || !S.lying_required)
 			if(S.self_operable || user != src)
 				if(S.next_step(user, user.used_intent))
 					return 1
+	*/
 	return ..()
 
 /mob/living/carbon/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
