@@ -1245,8 +1245,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!I.species_exception || !is_type_in_list(src, I.species_exception))
 			return FALSE
 
-	var/is_nudist = HAS_TRAIT(H, RTRAIT_NUDIST)
-	var/is_retarded = HAS_TRAIT(H, RTRAIT_RETARD_ANATOMY)
+	var/is_nudist = HAS_TRAIT(H, TRAIT_NUDIST)
+	var/is_retarded = HAS_TRAIT(H, TRAIT_RETARD_ANATOMY)
 	var/num_arms = H.get_num_arms(FALSE)
 	var/num_legs = H.get_num_legs(FALSE)
 
@@ -1882,10 +1882,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				var/probability = damage / (2 - easy_dismember)
 				if(HAS_TRAIT(target, TRAIT_HARDDISMEMBER) && !easy_dismember)
 					probability = min(probability, 5)
-				if(prob(probability))
-					if(affecting.brute_dam > 0)
-						if(affecting.dismember())
-							playsound(get_turf(target), "desceration", 80, TRUE)
+				if(prob(probability) && affecting.dismember())
+					playsound(get_turf(target), "desecration", 80, TRUE)
 
 /*		if(user == target)
 			target.visible_message("<span class='danger'>[user] [atk_verb]ed themself![target.next_attack_msg.Join()]</span>", COMBAT_MESSAGE_RANGE, user)
@@ -2256,24 +2254,16 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				I.take_damage(1, BRUTE, "melee")
 		if(!nodmg)
 			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone, crit_message = TRUE)
-			if(should_embed_weapon(crit_wound))
+			if(should_embed_weapon(crit_wound, I))
 				var/can_impale = TRUE
 				if(!affecting)
 					can_impale = FALSE
-				else
-					if(I.wlength > WLENGTH_SHORT)
-						if(affecting.body_zone != BODY_ZONE_CHEST)
-							can_impale = FALSE
-				if(can_impale)
-					if(user.Adjacent(H))
-						//H.throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
-						affecting.embedded_objects |= I
-						I.add_mob_blood(H)
-						I.forceMove(H)
-						H.emote("embed", forced = TRUE)
-						playsound(H, 'sound/combat/newstuck.ogg', 100, TRUE)
-						H.next_attack_msg += " <span class='userdanger'>[I] is stuck in [H]!</span>"
-						H.grabbedby(user, 1, item_override = I)
+				else if(I.wlength > WLENGTH_SHORT && (affecting.body_zone != BODY_ZONE_CHEST))
+					can_impale = FALSE
+				if(can_impale && user.Adjacent(H))
+					affecting.add_embedded_object(I, silent = FALSE, crit_message = TRUE)
+					H.emote("embed")
+					H.grabbedby(user, 1, item_override = I)
 //		if(H.used_intent.blade_class == BCLASS_BLUNT && I.force >= 15 && affecting.body_zone == "chest")
 //			var/turf/target_shove_turf = get_step(H.loc, get_dir(user.loc,H.loc))
 //			H.throw_at(target_shove_turf, 1, 1, H, spin = FALSE)
@@ -2287,16 +2277,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	//dismemberment
 	var/bloody = 0
-	var/easy_dismember = HAS_TRAIT(H, TRAIT_EASYDISMEMBER) || affecting.rotted
-	var/probability = I.get_dismemberment_chance(affecting)
-	if(HAS_TRAIT(H, TRAIT_HARDDISMEMBER) && !easy_dismember)
-		probability = min(probability, 5)
-	if(affecting.brute_dam && prob(probability))
-		if(affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone))
-			bloody = 1
-			I.add_mob_blood(H)
-			user.update_inv_hands()
-			playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
+	var/probability = I.get_dismemberment_chance(affecting, user)
+	if(affecting.brute_dam && prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone))
+		bloody = 1
+		I.add_mob_blood(H)
+		user.update_inv_hands()
+		playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
 
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == BODYPART_ORGANIC)

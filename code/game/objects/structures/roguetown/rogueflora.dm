@@ -296,12 +296,9 @@
 //						H.throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
 						var/obj/item/bodypart/BP = pick(H.bodyparts)
 						var/obj/item/natural/thorn/TH = new(src.loc)
-						BP.embedded_objects |= TH
-						TH.add_mob_blood(H)//it embedded itself in you, of course it's bloody!
-						TH.forceMove(H)
+						BP.add_embedded_object(TH, silent = TRUE)
 						BP.receive_damage(10)
 						to_chat(H, "<span class='danger'>\A [TH] impales my [BP.name]!</span>")
-						SEND_SIGNAL(src, COMSIG_ADD_MOOD_EVENT, "embedded", /datum/mood_event/embedded)
 				else
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
 					to_chat(H, "<span class='warning'>A thorn [pick("slices","cuts","nicks")] my [BP.name].</span>")

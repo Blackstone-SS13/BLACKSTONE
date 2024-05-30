@@ -22,11 +22,13 @@
 	max_pq = null
 	required = TRUE
 
+	cmode_music = 'sound/music/combat_giza.ogg'
+
 /datum/outfit/job/roguetown/merchant/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(3,4,4), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 1, TRUE)
@@ -39,7 +41,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
+	ADD_TRAIT(H, TRAIT_SEEPRICES, type)
 	//50% chance to be raceswapped to Giza because slop lore
 	if(ishumannorthern(H) && prob(50))
 		H.skin_tone = SKIN_COLOR_GIZA
@@ -75,4 +77,3 @@
 		H.change_stat("intelligence", 2)
 		H.change_stat("perception", 3)
 		H.change_stat("strength", -1)
-	H.cmode_music = 'sound/music/combat_merchant.ogg'

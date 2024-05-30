@@ -1,5 +1,5 @@
 /obj/item/rogueweapon/flail
-	force = 12
+	force = 15
 	possible_item_intents = list(/datum/intent/flail/strike, /datum/intent/flail/strike/smash)
 	name = "flail"
 	desc = "This is a swift, iron flail. Strikes hard and far."
@@ -80,7 +80,7 @@
 
 
 /obj/item/rogueweapon/flail/sflail
-	force = 40
+	force = 30
 	icon_state = "flail"
 	desc = "This is a swift, steel flail. Strikes hard and far."
 	smeltresult = /obj/item/ingot/steel

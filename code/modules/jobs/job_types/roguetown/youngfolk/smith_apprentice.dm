@@ -31,7 +31,8 @@
 	..()
 	if(H.mind)
 		if(pick(50))
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, pick(1,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, pick(1,2), TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axes, pick(1,2), TRUE)
 		else
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, pick(1,2), TRUE)
