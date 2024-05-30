@@ -247,7 +247,7 @@
 	if(enemies[L])
 		return TRUE
 
-	if(aggressive && !faction_check_mob(L))
+	if(aggressive && !faction_check_mob(L) && !mind?.has_antag_datum(/datum/antagonist/zombie))
 		return TRUE
 
 	return FALSE
