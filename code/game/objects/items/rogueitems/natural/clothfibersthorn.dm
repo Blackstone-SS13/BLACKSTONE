@@ -365,7 +365,7 @@
 		while(wormcount > 0)
 			if(wormcount == 1)
 				new /obj/item/natural/worms(get_turf(user))
-					wormcount--
+				wormcount--
 			else if(wormcount >= 2)
 				var/obj/item/natural/bundle/worms/B = new(get_turf(user))
 				B.amount = clamp(wormcount, 2, 12)
