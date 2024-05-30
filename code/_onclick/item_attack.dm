@@ -279,6 +279,15 @@
 		if(DULLING_PICK) //cannot deal damage if not a pick item. aka rock walls
 			if(user.used_intent.blade_class != BCLASS_PICK)
 				return 0
+			if(istype(target_turf, /turf/closed/mineral/rogue))
+				var 
+   				var/mob/living/miner = user
+   				var mineskill = miner.mind.get_skill_level(/datum/skill/labor/mining)
+				newforce = newforce * (10+mineskill)
+				shake_camera(user, 1, 1)
+			else
+				newforce = newforce * 10
+
 			newforce = newforce * 10
 			shake_camera(user, 1, 1)
 	newforce = (newforce * user.used_intent.damfactor) * dullfactor
@@ -406,10 +415,13 @@
 			next_attack_msg.Cut()
 			if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 				var/datum/wound/crit_wound  = simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
-				if(should_embed_weapon(crit_wound, I))
+				if(should_embed_weapon(crit_wound))
 					// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
-					simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
+					simple_embedded_objects |= I
+					I.add_mob_blood(src)
+					I.forceMove(src)
 					src.grabbedby(user, 1, item_override = I)
+					next_attack_msg += " <span class='userdanger'>[I] is stuck in [src]!</span>"
 			var/haha = user.used_intent.blade_class
 			if(newforce > 5)
 				if(haha != BCLASS_BLUNT)
