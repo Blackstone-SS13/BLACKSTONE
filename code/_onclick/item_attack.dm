@@ -280,7 +280,6 @@
 			if(user.used_intent.blade_class != BCLASS_PICK)
 				return 0
 			if(istype(target_turf, /turf/closed/mineral/rogue))
-				var 
    				var/mob/living/miner = user
    				var mineskill = miner.mind.get_skill_level(/datum/skill/labor/mining)
 				newforce = newforce * (10+mineskill)
