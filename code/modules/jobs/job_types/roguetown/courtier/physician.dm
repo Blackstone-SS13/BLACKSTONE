@@ -20,6 +20,7 @@
 	give_bank_account = 25
 	min_pq = 2
 	max_pq = null
+	cmode_music = 'sound/music/combat_giza.ogg'
 
 /datum/outfit/job/roguetown/physician
 	name = "Physician"
