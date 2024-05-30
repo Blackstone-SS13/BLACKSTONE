@@ -137,10 +137,11 @@
 #define ARMORSMITH	(1<<2)
 #define WEAPONSMITH (1<<3)
 #define ALCHEMIST	(1<<4)
-#define MASON		(1<<5)
-#define TAILOR		(1<<6)
-#define MERCHANT	(1<<7)
-#define SCRIBE		(1<<8)
+#define APOTHECARY  (1<<5)
+#define MASON		(1<<6)
+#define TAILOR		(1<<7)
+#define MERCHANT	(1<<8)
+#define SCRIBE		(1<<9)
 
 #define PEASANTS	(1<<5)
 
@@ -251,6 +252,8 @@
 #define JDO_APPRENTICE 21
 
 #define JDO_MASON 22
+
+#define JDO_APOTHECARY 23
 
 #define JDO_BARKEEP 26
 #define JDO_COOK 27
