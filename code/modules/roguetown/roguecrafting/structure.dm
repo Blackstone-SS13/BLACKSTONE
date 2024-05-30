@@ -16,13 +16,13 @@
 	craftsound = 'sound/foley/Building-01.ogg'
 
 
-// HEAD PIKE NEW CRAFTING HERE!!!
+// HEADPIKE NEW CRAFTING HERE!!!
 /datum/crafting_recipe/roguetown/structure/headpike
 	name = "headpike"
 	result = /obj/structure/headpike
 	reqs = list(/obj/item/grown/log/tree/small = 1)
 	verbage = "crafts"
-	craftsound = 'sound/foley/sewflesh.ogg'
+	craftsound = 'sound/foley/Building-01.ogg'
 
 /datum/crafting_recipe/roguetown/structure/psycrss
 	name = "wooden cross"
