@@ -928,7 +928,7 @@
 
 /obj/item/clothing/neck/roguetown/blkknight/equipped(mob/living/user)
 	. = ..()
-	if(active_item == TRUE)
+	if(active_item)
 		return
 	if(user.mind.special_role == "Bandit")
 		to_chat(user, "<span class='notice'>I feel bolstered by Matthios Power!...</span>")
@@ -946,7 +946,7 @@
 		return
 
 /obj/item/clothing/neck/roguetown/blkknight/dropped(mob/living/user)
-	if(active_item == TRUE)
+	if(active_item)
 		if(user.mind.special_role == "Bandit")
 			to_chat(user, "<span class='notice'>I've removed the necklace of Matthios...</span>")
 			user.change_stat("strength", -2)
