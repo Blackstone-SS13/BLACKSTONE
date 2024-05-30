@@ -75,7 +75,7 @@
 	return ..()
 
 /datum/intent/axe/chop/stone
-	penfactor = 5
+	penfactor = 0 //5
 
 /datum/intent/axe/cut
 	name = "cut"
@@ -84,8 +84,9 @@
 	attack_verb = list("cuts", "slashes")
 	hitsound = list('sound/combat/hits/bladed/smallslash (1).ogg', 'sound/combat/hits/bladed/smallslash (2).ogg', 'sound/combat/hits/bladed/smallslash (3).ogg')
 	animname = "cut"
-	penfactor = 10
+	penfactor = 0 //10
 	chargetime = 0
+	item_d_type = "slash"
 
 /datum/intent/axe/chop
 	name = "chop"
@@ -94,15 +95,16 @@
 	attack_verb = list("chops", "hacks")
 	animname = "chop"
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
-	penfactor = 20
+	penfactor = 0 //20
 	swingdelay = 10
+	item_d_type = "slash"
 
 /datum/intent/axe/chop/battle
-	penfactor = 70
+	penfactor = 0 //70
 	damfactor = 1.2 //36 on battleaxe
 
 /datum/intent/axe/cut/battle
-	penfactor = 30
+	penfactor = 0 //30
 
 /obj/item/rogueweapon/stoneaxe/battle
 	force = 25

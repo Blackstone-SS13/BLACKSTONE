@@ -25,8 +25,9 @@
 	attack_verb = list("strikes", "hits")
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 0
-	penfactor = 5
+	penfactor = 0 //5
 	icon_state = "instrike"
+	item_d_type = "slash"
 
 /datum/intent/flail/strikerange
 	name = "ranged strike"
@@ -35,15 +36,16 @@
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 5
 	recovery = 15
-	penfactor = 5
+	penfactor = 0 //5
 	reach = 2
 	icon_state = "instrike"
+	item_d_type = "slash"
 
 /datum/intent/flail/strike/smash
 	name = "smash"
 	chargetime = 5
 	no_early_release = TRUE
-	penfactor = 80
+	penfactor = 0 //80
 	recovery = 10
 	damfactor = 1.5
 	chargedloop = /datum/looping_sound/flailswing
@@ -52,12 +54,13 @@
 	blade_class = BCLASS_SMASH
 	attack_verb = list("smashes")
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
+	item_d_type = "blunt"
 
 /datum/intent/flail/strike/smashrange
 	name = "ranged smash"
 	chargetime = 25
 	no_early_release = TRUE
-	penfactor = 50
+	penfactor = 0 //50
 	recovery = 30
 	damfactor = 1.5
 	reach = 2
@@ -68,6 +71,7 @@
 	blade_class = BCLASS_SMASH
 	attack_verb = list("smashes")
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
+	item_d_type = "blunt"
 
 /obj/item/rogueweapon/flail/getonmobprop(tag)
 	. = ..()
@@ -94,9 +98,10 @@
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 0
 	recovery = 7
-	penfactor = 10
+	penfactor = 0 //10
 	reach = 2
 	icon_state = "inlash"
+	item_d_type = "slash"
 
 /datum/intent/whip/crack
 	name = "crack"
@@ -105,9 +110,10 @@
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 0
 	recovery = 10
-	penfactor = 40
+	penfactor = 0 //40
 	reach = 3
 	icon_state = "incrack"
+	item_d_type = "slash"
 
 /obj/item/rogueweapon/whip
 	force = 21

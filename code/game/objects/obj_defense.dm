@@ -29,7 +29,7 @@
 
 ///returns the damage value of the attack after processing the obj's various armor protections
 /obj/proc/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir, armor_penetration = 0)
-	if(damage_flag == "blunt" || damage_flag == "slash" || damage_flag == "stab" && damage_amount < damage_deflection)
+	if((damage_flag == "blunt" || damage_flag == "slash" || damage_flag == "stab") && damage_amount < damage_deflection)
 		testing("damtest55")
 		return 1
 	if(damage_type != BRUTE && damage_type != BURN)
@@ -59,10 +59,10 @@
 		if(BURN)
 			playsound(src.loc, "burn", 100, FALSE, -1)
 
-/obj/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, melee_type)
+/obj/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, d_type = "blunt")
 	..()
 	if(AM.throwforce > 5)
-		take_damage(AM.throwforce*0.1, BRUTE, melee_type, 1, get_dir(src, AM))
+		take_damage(AM.throwforce*0.1, BRUTE, d_type, 1, get_dir(src, AM))
 
 /obj/ex_act(severity, target)
 	if(resistance_flags & INDESTRUCTIBLE)
@@ -125,9 +125,9 @@
 		if(M.environment_smash)
 			play_soundeffect = 0
 		if(M.obj_damage)
-			. = attack_generic(M, M.obj_damage, M.melee_damage_type, M.melee_type, play_soundeffect, M.armor_penetration)
+			. = attack_generic(M, M.obj_damage, M.melee_damage_type, M.d_type, play_soundeffect, M.armor_penetration)
 		else
-			. = attack_generic(M, rand(M.melee_damage_lower,M.melee_damage_upper), M.melee_damage_type, M.melee_type, play_soundeffect, M.armor_penetration)
+			. = attack_generic(M, rand(M.melee_damage_lower,M.melee_damage_upper), M.melee_damage_type, M.d_type, play_soundeffect, M.armor_penetration)
 		if(. && !play_soundeffect)
 			playsound(src, 'sound/blank.ogg', 100, TRUE)
 

@@ -809,7 +809,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 
 		else
 			playsound(src, drop_sound, YEET_SOUND_VOLUME, TRUE, ignore_walls = FALSE)
-		return hit_atom.hitby(src, 0, itempush, throwingdatum=throwingdatum, melee_type=melee_type)
+		return hit_atom.hitby(src, 0, itempush, throwingdatum=throwingdatum, d_type=d_type)
 
 /obj/item/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force)
 	thrownby = thrower
@@ -945,7 +945,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	else
 		. = ""
 
-/obj/item/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, melee_type)
+/obj/item/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, d_type = "blunt")
 	return
 
 /obj/item/attack_hulk(mob/living/carbon/human/user)

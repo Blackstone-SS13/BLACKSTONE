@@ -9,15 +9,17 @@
 	chargetime = 1
 	warnie = "mobwarning"
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 50
+	penfactor = 0 //50
+	item_d_type = "stab"
 
 /datum/intent/spear/bash
 	name = "bash"
 	blade_class = BCLASS_BLUNT
 	icon_state = "inbash"
 	attack_verb = list("bashes", "strikes")
-	penfactor = 10
+	penfactor = 0 //10
 	damfactor = 0.8
+	item_d_type = "blunt"
 
 /datum/intent/spear/cut
 	name = "cut"
@@ -27,6 +29,7 @@
 	damfactor = 0.8
 	hitsound = list('sound/combat/hits/bladed/genslash (1).ogg', 'sound/combat/hits/bladed/genslash (2).ogg', 'sound/combat/hits/bladed/genslash (3).ogg')
 	reach = 2
+	item_d_type = "slash"
 
 /obj/item/rogueweapon/woodstaff
 	force = 10
@@ -272,7 +275,7 @@
 	max_blade_int = 200
 
 /datum/intent/spear/thrust/eaglebeak
-	penfactor = 20
+	penfactor = 0 //20
 	damfactor = 0.9
 
 /datum/intent/mace/smash/eaglebeak

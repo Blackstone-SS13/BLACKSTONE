@@ -86,7 +86,7 @@
 			animal_damage = user.obj_damage
 		animal_damage = min(animal_damage, 20*user.environment_smash)
 		log_combat(user, src, "attacked")
-		attack_generic(user, animal_damage, user.melee_damage_type, user.melee_type, play_soundeffect)
+		attack_generic(user, animal_damage, user.melee_damage_type, user.d_type, play_soundeffect)
 		return 1
 
 

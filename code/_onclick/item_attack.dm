@@ -311,9 +311,9 @@
 			newforce = 1
 	else
 		user.visible_message("<span class='warning'>[user] [verbu] [src] with [I]!</span>")
-	take_damage(newforce, I.damtype, I.melee_type, 1)
+	take_damage(newforce, I.damtype, I.d_type, 1)
 	if(newforce > 1)
-		I.take_damage(1, BRUTE, melee_type)
+		I.take_damage(1, BRUTE, I.d_type)
 	return TRUE
 
 /turf/proc/attacked_by(obj/item/I, mob/living/user)
@@ -339,9 +339,9 @@
 	else
 		user.visible_message("<span class='warning'>[user] [verbu] [src] with [I]!</span>")
 
-	take_damage(newforce, I.damtype, I.melee_type, 1)
+	take_damage(newforce, I.damtype, I.d_type, 1)
 	if(newforce > 1)
-		I.take_damage(1, BRUTE, "blunt")
+		I.take_damage(1, BRUTE, I.d_type)
 	return TRUE
 
 /mob/living/proc/simple_limb_hit(zone)

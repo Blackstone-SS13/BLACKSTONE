@@ -106,7 +106,7 @@
 		else
 				return 0
 
-/mob/living/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum, melee_type = "blunt")
+/mob/living/hitby(atom/movable/AM, skipcatch, hitpush = TRUE, blocked = FALSE, datum/thrownthing/throwingdatum, d_type = "blunt")
 	if(istype(AM, /obj/item))
 		var/obj/item/I = AM
 		var/dtype = BRUTE
@@ -114,7 +114,7 @@
 		SEND_SIGNAL(I, COMSIG_MOVABLE_IMPACT_ZONE, src, zone)
 		dtype = I.damtype
 		if(!blocked)
-			var/armor = run_armor_check(zone, melee_type, "", "",I.armor_penetration, damage = I.throwforce)
+			var/armor = run_armor_check(zone, d_type, "", "",I.armor_penetration, damage = I.throwforce)
 			next_attack_msg.Cut()
 			var/nodmg = FALSE
 			if(!apply_damage(I.throwforce, dtype, zone, armor))

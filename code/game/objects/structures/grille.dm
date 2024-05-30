@@ -255,7 +255,7 @@
 			take_damage(1, BURN, 0, 0)
 	..()
 
-/obj/structure/grille/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, melee_type)
+/obj/structure/grille/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, d_type = "blunt")
 	if(isobj(AM))
 		if(prob(50) && anchored && !broken)
 			var/obj/O = AM
