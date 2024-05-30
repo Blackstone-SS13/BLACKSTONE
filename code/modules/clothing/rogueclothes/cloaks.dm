@@ -925,8 +925,9 @@
 	sellprice = 666
 	static_price = TRUE
 
-/obj/item/clothing/neck/roguetown/blkknight/proc/dragonite(mob/living/carbon/human/user)
-	if(owner.special_role == "Bandit")
+/obj/item/clothing/neck/roguetown/blkknight/equipped(mob/user, slot)
+	. = ..()
+	if(user.mind.special_role == "Bandit")
 		to_chat(user, "<span class='notice'>I feel bolstered by Matthios Power!...</span>")
 		user.change_stat("strength", 2)
 		user.change_stat("perception", 2)
@@ -937,8 +938,8 @@
 	else
 		to_chat(user, "<span class='notice'>I feel an evil power about that necklace..</span>")
 
-/obj/item/clothing/neck/roguetown/blkknight/dropped(mob/living/carbon/human/user)
-	if(owner.special_role == "Bandit")
+/obj/item/clothing/neck/roguetown/blkknight/dropped(mob/living/user)
+	if(user.mind.special_role == "Bandit")
 		to_chat(user, "<span class='notice'>I've removed the necklace of Matthios...</span>")
 		user.change_stat("strength", -2)
 		user.change_stat("perception", -2)
