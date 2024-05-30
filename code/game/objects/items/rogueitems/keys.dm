@@ -46,6 +46,12 @@
 			lockhash = D.lockhash
 
 
+/obj/item/roguekey/royal
+	name = "Royal Key"
+	desc = "The Key to the royal chambers. It even feels pretentious."
+	icon_state = "ekey"
+	lockid = "royal"
+
 /obj/item/roguekey/manor
 	name = "manor key"
 	desc = "This key will open any manor doors."
@@ -264,6 +270,12 @@
 	desc = "The key smells of herbs, feeling soothing to the touch."
 	icon_state = "greenkey"
 	lockid = "physician"
+
+/obj/item/roguekey/apothecary
+	name = "Apothecary key"
+	desc = "The key to the Apothecary shop, commonly known as the drug den"
+	icon_state = "hornkey"
+	lockid = "apothecary"
 
 /obj/item/roguekey/puritan
 	name = "puritan's key"

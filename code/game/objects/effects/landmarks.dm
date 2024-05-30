@@ -228,6 +228,9 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Bath Wench"
 	icon_state = "arrow"
 
+/obj/effect/landmark/start/apothecary
+	name = "Apothecary"
+	icon_state = "arrow"
 /obj/effect/landmark/start/merchant
 	name = "Merchant"
 	icon_state = "arrow"

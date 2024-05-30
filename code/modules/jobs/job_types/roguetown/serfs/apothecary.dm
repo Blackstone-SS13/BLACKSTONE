@@ -20,23 +20,25 @@
 	display_order = JDO_APOTHECARY
 	outfit = /datum/outfit/job/roguetown/apothecary
 	whitelist_req = TRUE
-	tutorial = 
+	tutorial = "blablabla"
 	give_bank_account = 25
 	min_pq = 2
 	max_pq = null
+
+/datum/outfit/job/roguetown/apothecary
+	name = "Physician"
+	jobtype = /datum/job/roguetown/apothecary
+	allowed_patrons = list(/datum/patron/divine/pestra)
 
 /datum/outfit/job/roguetown/apothecary/pre_equip(mob/living/carbon/human/H)
 	..()
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/black
-	cloak = /obj/item/clothing/cloak/black_cloak
-	id = /obj/item/clothing/ring/gold
 	belt = /obj/item/storage/belt/rogue/leather/plaquesilver
 	beltl = /obj/item/rogueweapon/huntingknife/idagger
-	beltr = /obj/item/keyring/servant
+	beltr = /obj/item/roguekey/apothecary
 	neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 	pants = /obj/item/clothing/under/roguetown/tights/random
-	r_hand = /obj/item/rogueweapon/woodstaff
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/needle = 1, /obj/item/reagent_containers/glass/bottle/rogue/healthpot = 2)
 	if(H.mind)
