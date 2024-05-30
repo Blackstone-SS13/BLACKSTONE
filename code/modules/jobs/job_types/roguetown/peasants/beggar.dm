@@ -1,6 +1,6 @@
-/datum/job/roguetown/vagrant
+/datum/job/roguetown/beggar
 	title = "Beggar"
-	flag = APPRENTICE
+	flag = BEGGAR
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = -1
@@ -37,11 +37,11 @@
 	/// Outfit to use when wise beggar triggers
 	var/wise_outfit = /datum/outfit/job/roguetown/vagrant/wise
 
-/datum/job/roguetown/vagrant/New()
+/datum/job/roguetown/beggar/New()
 	. = ..()
 	peopleknowme = list()
 
-/datum/job/roguetown/vagrant/get_outfit(mob/living/carbon/human/wearer, visualsOnly = FALSE, announce = TRUE, latejoin = FALSE, preference_source = null)
+/datum/job/roguetown/beggar/get_outfit(mob/living/carbon/human/wearer, visualsOnly = FALSE, announce = TRUE, latejoin = FALSE, preference_source = null)
 	if((wise_amount < wise_max) && prob(wise_chance))
 		wise_amount++
 		return wise_outfit
@@ -127,8 +127,8 @@
 	H.change_stat("intelligence", -4)
 	H.change_stat("constitution", -3)
 	H.change_stat("endurance", -3)
-	ADD_TRAIT(H, RTRAIT_NOSTINK, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_NASTY_EATER, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOSTINK, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NASTY_EATER, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/vagrant
 	name = "Beggar"

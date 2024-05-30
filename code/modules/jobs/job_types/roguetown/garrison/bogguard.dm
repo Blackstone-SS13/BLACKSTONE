@@ -1,6 +1,6 @@
 /datum/job/roguetown/bogguardsman
 	title = "Bog Guard"
-	flag = GUARDSMAN
+	flag = BOGGUARD
 	department_flag = GARRISON
 	faction = "Station"
 	total_positions = 10
@@ -24,6 +24,8 @@
 	give_bank_account = 16
 	min_pq = 1
 	max_pq = null
+	
+	cmode_music = 'sound/music/combat_bog.ogg'
 
 	/// Chance to be spawned as a crossbowman instead
 	var/crossbowman_chance = 35
@@ -87,13 +89,12 @@
 			H.hairstyle = pick(acceptable)
 			H.update_hair()
 	H.verbs |= /mob/proc/haltyell
-	H.cmode_music = 'sound/music/combat_bog.ogg'
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/bogguardsman/proc/assign_skills(mob/living/carbon/human/bogger)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
@@ -105,6 +106,7 @@
 	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
 	bogger.change_stat("strength", 2)
 	bogger.change_stat("perception", 2)
 	bogger.change_stat("constitution", 1)
@@ -122,7 +124,7 @@
 	bogger.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-	bogger.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 1, TRUE)
+	bogger.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 	bogger.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)

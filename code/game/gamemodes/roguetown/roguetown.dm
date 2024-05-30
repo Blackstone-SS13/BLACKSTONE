@@ -24,24 +24,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 	var/datum/team/roguecultists
 // DEBUG
 	var/list/forcedmodes = list()
-
-// MAJOR ANTAGS
-	var/list/datum/mind/pre_vampires = list()
-	var/list/datum/mind/vampires = list()
-	var/list/datum/mind/pre_rebels = list()
-	var/mob/living/carbon/human/vlord = null
-// MINOR ANTAGS
-	var/list/datum/mind/pre_werewolves = list()
-	var/list/datum/mind/werewolves = list()
-	var/list/datum/mind/pre_bandits = list()
-	var/list/datum/mind/bandits = list()
-	var/list/datum/mind/pre_delfs = list()
-	var/list/datum/mind/pre_aspirants = list()
-	var/list/datum/mind/aspirants = list()
-
-// DEFUNCT
-	var/list/datum/mind/pre_villains = list()
-	var/list/datum/mind/villains = list()
+	var/mob/living/carbon/human/vlord = null	
 // GAMEMODE SPECIFIC
 	var/banditcontrib = 0
 	var/banditgoal = 1
@@ -242,7 +225,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 					continue
 				if(bandaids.assigned_role in GLOB.church_positions) // Many of these guys vanishing would suck
 					continue
-				if(bandaids.assigned_role in GLOB.serf_positions) // Many of these guys vanishing would suck
+				if(bandaids.assigned_role in GLOB.yeoman_positions) // Many of these guys vanishing would suck
 					continue
 
 				allantags -= bandaids
@@ -320,7 +303,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampire Lord", "Extended", "
 					blockme = TRUE
 				if(rebelguy.assigned_role in GLOB.church_positions)
 					blockme = TRUE
-				if(rebelguy.assigned_role in GLOB.serf_positions)
+				if(rebelguy.assigned_role in GLOB.yeoman_positions)
 					blockme = TRUE
 				if(blockme)
 					continue

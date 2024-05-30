@@ -63,7 +63,7 @@
 		if(iscarbon(affected))
 			var/mob/living/carbon/carbon_affected = affected
 			carbon_affected.update_disabled_bodyparts()
-	if(mortal || HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+	if(mortal || HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
 /datum/wound/fracture/head/on_mob_loss(mob/living/affected)
@@ -160,7 +160,6 @@
 		"The spine cracks!",
 		"The spine is broken!",
 	)
-	sound_effect = "fracturedry"
 	whp = 100
 	sleep_healing = 0
 
@@ -170,7 +169,7 @@
 	if(iscarbon(affected))
 		var/mob/living/carbon/carbon_affected = affected
 		carbon_affected.update_disabled_bodyparts()
-	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+	if(HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
 /datum/wound/fracture/neck/on_mob_loss(mob/living/affected)
@@ -194,6 +193,14 @@
 /datum/wound/fracture/chest/on_mob_gain(mob/living/affected)
 	. = ..()
 	affected.Stun(20)
+
+/datum/wound/fracture/chest/on_life()
+	. = ..()
+	if(!iscarbon(owner))
+		return
+	var/mob/living/carbon/carbon_owner = owner
+	if(!carbon_owner.stat && prob(5))
+		carbon_owner.vomit(1, blood = TRUE, stun = TRUE)
 
 /datum/wound/fracture/groin
 	name = "pelvic fracture"

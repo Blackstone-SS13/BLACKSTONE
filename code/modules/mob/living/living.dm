@@ -795,6 +795,8 @@
 	cure_nearsighted()
 	cure_blind()
 	cure_husk()
+	cure_holdbreath()
+	cure_paralysis()
 	hallucination = 0
 	heal_overall_damage(INFINITY, INFINITY, INFINITY, null, TRUE) //heal brute and burn dmg on both organic and robotic limbs, and update health right away.
 	for(var/datum/wound/wound as anything in get_wounds())
@@ -1116,7 +1118,7 @@
 											"<span class='warning'>I struggle against [pulledby]'s grip!</span>", null, null, pulledby)
 							to_chat(pulledby, "<span class='warning'>[src] struggles against my grip!</span>")
 							return FALSE
-		if(HAS_TRAIT(H, RTRAIT_NOSEGRAB) && !HAS_TRAIT(src, TRAIT_MISSING_NOSE))
+		if(HAS_TRAIT(H, TRAIT_NOSEGRAB) && !HAS_TRAIT(src, TRAIT_MISSING_NOSE))
 			var/obj/item/bodypart/head = get_bodypart(BODY_ZONE_HEAD)
 			for(var/obj/item/grabbing/G in grabbedby)
 				if(G.limb_grabbed == head)

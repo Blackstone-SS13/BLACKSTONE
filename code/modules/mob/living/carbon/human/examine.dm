@@ -1,6 +1,8 @@
 /mob/living/carbon/human/proc/on_examine_face(mob/living/carbon/human/user)
 	if(!istype(user))
 		return
+	if(user.mind)
+		user.mind.i_know_person(src)
 	if(!isdarkelf(user) && isdarkelf(src))
 		user.add_stress(/datum/stressevent/delf)
 	if(!istiefling(user) && istiefling(src))
@@ -11,7 +13,7 @@
 		user.add_stress(/datum/stressevent/parastr)
 
 /mob/living/carbon/human/examine(mob/user)
-//this is very slightly better than it was because you can use it more places. still can't do \his[src] though.
+	var/observer_privilege = isobserver(user)
 	var/t_He = p_they(TRUE)
 	var/t_his = p_their()
 //	var/t_him = p_them()
@@ -39,7 +41,7 @@
 	if(name == "Unknown" || name == "Unknown Man" || name == "Unknown Woman")
 		obscure_name = TRUE
 
-	if(isobserver(user))
+	if(observer_privilege)
 		obscure_name = FALSE
 
 	if(obscure_name)
@@ -47,7 +49,7 @@
 	else
 		on_examine_face(user)
 		var/used_name = name
-		if(isobserver(user))
+		if(observer_privilege)
 			used_name = real_name
 		if(job)
 			var/datum/job/J = SSjob.GetJob(job)
@@ -104,7 +106,7 @@
 				. += "<span class='userdanger'>A MONSTER!</span>"
 			if(mind.assigned_role == "Lunatic")
 				. += "<span class='userdanger'>LUNATIC!</span>"
-		if(HAS_TRAIT(src, RTRAIT_MANIAC_AWOKEN))
+		if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
 			. += "<span class='userdanger'>MANIAC!</span>"
 
 	if(leprosy == 1)
@@ -172,7 +174,7 @@
 	else if(FR && length(FR.blood_DNA))
 		var/hand_number = get_num_arms(FALSE)
 		if(hand_number)
-			. += "[m3] [hand_number > 1 ? "" : "a"] <span class='bloody'>blood-stained</span> hand[hand_number > 1 ? "s" : ""]!"
+			. += "[m3][hand_number > 1 ? "" : " a"] <span class='bloody'>blood-stained</span> hand[hand_number > 1 ? "s" : ""]!"
 
 	//belt
 	if(belt && !(SLOT_BELT in obscured))
@@ -229,15 +231,7 @@
 	var/appears_dead = FALSE
 	if(stat == DEAD || (HAS_TRAIT(src, TRAIT_FAKEDEATH)))
 		appears_dead = TRUE
-		if(suiciding)
-			msg += "[t_He] appear[p_s()] to have committed suicide... there is no hope of recovery."
-		if(hellbound)
-			msg += "[capitalize(m2)] soul seems to have been ripped out of [m2] body. Revival is impossible."
-//		if(getorgan(/obj/item/organ/brain) && !key && !get_ghost(FALSE, TRUE))
-//			msg += "<span class='deadsay'>[m1] limp and unresponsive; there are no signs of life and [m2] soul has departed...</span>"
-//		else
-//			msg += "<span class='deadsay'>[m1] limp and unresponsive; there are no signs of life...</span>"
-
+	
 	var/temp = getBruteLoss() + getFireLoss() //no need to calculate each of these twice
 
 	if(!(user == src && src.hal_screwyhud == SCREWYHUD_HEALTHY)) //fake healthy
@@ -287,7 +281,7 @@
 		)
 		for(var/bleed_zone in bleed_zones)
 			var/obj/item/bodypart/bleeder = get_bodypart(bleed_zone)
-			if(!bleeder?.get_bleed_rate() || !get_location_accessible(src, bleeder.body_zone))
+			if(!bleeder?.get_bleed_rate() || (!observer_privilege && !get_location_accessible(src, bleeder.body_zone)))
 				continue
 			bleeding_limbs += parse_zone(bleeder.body_zone)
 		if(length(bleeding_limbs))
@@ -373,7 +367,7 @@
 					msg += "[m1] a shitfaced, slobbering wreck."
 			
 			//Stress
-			if(HAS_TRAIT(user, RTRAIT_EMPATH))
+			if(HAS_TRAIT(user, TRAIT_EMPATH))
 				switch(stress)
 					if(20 to INFINITY)
 						msg += "[m1] extremely stressed."
@@ -427,7 +421,7 @@
 	if((user != src) && isliving(user))
 		var/mob/living/L = user
 		var/final_str = STASTR
-		if(HAS_TRAIT(src, RTRAIT_DECEIVING_MEEKNESS))
+		if(HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
 			final_str = 10
 		var/strength_diff = final_str - L.STASTR
 		switch(strength_diff)
@@ -448,7 +442,7 @@
 			. += "<span class='danger'>[t_He] know[p_s()] [heart.inscryption_key], I AM SURE OF IT!</span>"
 
 	if(Adjacent(user))
-		if(isobserver(user))
+		if(observer_privilege)
 			var/static/list/check_zones = list(
 				BODY_ZONE_HEAD,
 				BODY_ZONE_CHEST,
@@ -513,8 +507,6 @@
 					"<a href='?src=[REF(src)];hud=s;add_crime=1'>\[Add crime\]</a>",
 					"<a href='?src=[REF(src)];hud=s;view_comment=1'>\[View comment log\]</a>",
 					"<a href='?src=[REF(src)];hud=s;add_comment=1'>\[Add comment\]</a>"), "")
-//	else if(isobserver(user) && traitstring)
-//		. += "<span class='info'><b>Traits:</b> [traitstring]</span>"
 	. += "ø ------------ ø</span>"
 
 /mob/living/proc/status_effect_examines(pronoun_replacement) //You can include this in any mob's examine() to show the examine texts of status effects!

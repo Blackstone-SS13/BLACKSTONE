@@ -31,34 +31,35 @@
 		if(100 to INFINITY)
 			msg += "<span class='danger'>[m1] gravely wounded.</span>"
 
-	// Blood volume
-	switch(blood_volume)
-		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-			msg += "<span class='artery'><B>[m1] extremely pale and sickly.</B></span>"
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			msg += "<span class='artery'><B>[m1] very pale.</B></span>"
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			msg += "<span class='artery'>[m1] pale.</span>"
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			msg += "<span class='artery'>[m1] a little pale.</span>"
+	var/has_simple_wounds = HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS)
+	if(has_simple_wounds)
+		// Blood volume
+		switch(blood_volume)
+			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+				msg += "<span class='artery'><B>[m1] extremely pale and sickly.</B></span>"
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				msg += "<span class='artery'><B>[m1] very pale.</B></span>"
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				msg += "<span class='artery'>[m1] pale.</span>"
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				msg += "<span class='artery'>[m1] a little pale.</span>"
 	
-	// Bleeding
-	var/bleed_rate = get_bleed_rate()
-	if(bleed_rate)
-		var/bleed_wording = "bleeding"
-		switch(bleed_rate)
-			if(0 to 1)
-				bleed_wording = "bleeding slightly"
-			if(1 to 5)
-				bleed_wording = "bleeding"
-			if(5 to 10)
-				bleed_wording = "bleeding a lot"
-			if(10 to INFINITY)
-				bleed_wording = "bleeding profusely"
-		if(bleed_rate >= 5)
-			msg += "<span class='bloody'><B>[m1] [bleed_wording]</B>!</span>"
-		else
-			msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
+		// Bleeding
+		if(bleed_rate)
+			var/bleed_wording = "bleeding"
+			switch(bleed_rate)
+				if(0 to 1)
+					bleed_wording = "bleeding slightly"
+				if(1 to 5)
+					bleed_wording = "bleeding"
+				if(5 to 10)
+					bleed_wording = "bleeding a lot"
+				if(10 to INFINITY)
+					bleed_wording = "bleeding profusely"
+			if(bleed_rate >= 5)
+				msg += "<span class='bloody'><B>[m1] [bleed_wording]</B>!</span>"
+			else
+				msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
 
 	//Fire/water stacks
 	if(fire_stacks > 0)
@@ -79,7 +80,7 @@
 	if((user != src) && isliving(user))
 		var/mob/living/L = user
 		var/final_str = STASTR
-		if(HAS_TRAIT(src, RTRAIT_DECEIVING_MEEKNESS))
+		if(HAS_TRAIT(src, TRAIT_DECEIVING_MEEKNESS))
 			final_str = 10
 		var/strength_diff = final_str - L.STASTR
 		switch(strength_diff)
@@ -94,7 +95,10 @@
 			if(-INFINITY to -5)
 				. += "<span class='warning'><B>[t_He] look[p_s()] much weaker than I.</B></span>"
 
-	if(Adjacent(user) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-		. += "<a href='?src=[REF(src)];inspect_animal=1'>Inspect Wounds</a>"
+	if(Adjacent(user))
+		if(has_simple_wounds)
+			. += "<a href='?src=[REF(src)];inspect_animal=1'>Inspect Wounds</a>"
+		if(user != src)
+			. += "<a href='?src=[REF(src)];check_hb=1'>Check Heartbeat</a>"
 
 	. += "✠ ------------ ✠</span>"

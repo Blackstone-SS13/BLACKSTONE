@@ -49,7 +49,7 @@
 	. = ..()
 	ADD_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 
-/datum/wound/artery/neck/on_mob_gain(mob/living/affected)
+/datum/wound/artery/neck/on_mob_loss(mob/living/affected)
 	. = ..()
 	REMOVE_TRAIT(affected, TRAIT_GARGLE_SPEECH, "[type]")
 
@@ -68,7 +68,7 @@
 	if(iscarbon(affected))
 		var/mob/living/carbon/carbon_affected = affected
 		carbon_affected.vomit(blood = TRUE)
-	if(HAS_TRAIT(affected, RTRAIT_CRITICAL_WEAKNESS))
+	if(HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
 /datum/wound/artery/chest/on_life()
@@ -76,5 +76,5 @@
 	if(!iscarbon(owner))
 		return
 	var/mob/living/carbon/carbon_owner = owner
-	if(!carbon_owner.stat && prob(10))
+	if(!carbon_owner.stat && prob(5))
 		carbon_owner.vomit(1, blood = TRUE, stun = TRUE)

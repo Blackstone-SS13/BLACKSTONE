@@ -12,7 +12,7 @@
 	wlength = WLENGTH_NORMAL
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/skill/combat/maces
 	smeltresult = /obj/item/ingot/iron
 	swingsound = BLUNTWOOSH_MED
 	minstr = 5

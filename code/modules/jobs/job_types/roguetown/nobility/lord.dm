@@ -23,7 +23,7 @@ GLOBAL_VAR(lordsurname)
 /datum/job/roguetown/exlord //just used to change the lords title
 	title = "King Emeritus"
 	f_title = "Queen Emeritus"
-	flag = ADVENTURER
+	flag = LORD
 	department_flag = NOBLEMEN
 	faction = "Station"
 	total_positions = 0
@@ -31,19 +31,16 @@ GLOBAL_VAR(lordsurname)
 	display_order = JDO_LADY
 	give_bank_account = TRUE
 
-/datum/job/roguetown/lord/equip(mob/living/carbon/human/H, visualsOnly, announce, latejoin, datum/outfit/outfit_override, client/preference_source)
-	. = ..()
-	if(!GLOB.lordsurname && !visualsOnly)
-		var/list/chopped_name = splittext(H.real_name, " ")
-		if(length(chopped_name) > 1)
-			chopped_name -= chopped_name[1]
-			GLOB.lordsurname = jointext(chopped_name, " ")
-		else
-			GLOB.lordsurname = "of [H.real_name]"
 
 /datum/job/roguetown/lord/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
 	if(L)
+		var/list/chopped_name = splittext(L.real_name, " ")
+		if(length(chopped_name) > 1)
+			chopped_name -= chopped_name[1]
+			GLOB.lordsurname = jointext(chopped_name, " ")
+		else
+			GLOB.lordsurname = "of [L.real_name]"
 		SSticker.select_ruler()
 		if(SSticker.rulertype == "King")
 			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is King of Rockhill.</span></span></b>")
@@ -71,7 +68,7 @@ GLOBAL_VAR(lordsurname)
 			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/bog)
 			H.mind.AddSpell(new /obj/effect/proc_holder/spell/self/convertrole/guard)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
@@ -124,9 +121,9 @@ GLOBAL_VAR(lordsurname)
 			H.change_stat("perception", 2)
 			H.change_stat("fortune", 5)
 
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_NOSEGRAB, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
 //	SSticker.rulermob = H
 
 /proc/give_lord_surname(mob/living/carbon/human/family_guy, preserve_original = FALSE)

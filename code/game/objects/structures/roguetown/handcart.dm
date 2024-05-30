@@ -47,16 +47,26 @@
 /obj/structure/handcart/MouseDrop_T(atom/movable/O, mob/living/user)
 	if(!istype(O) || !isturf(O.loc) || istype(O, /atom/movable/screen))
 		return
-	if(!istype(user) || user.incapacitated() || !(user.mobility_flags & MOBILITY_STAND))
+	if(!istype(user) || user.incapacitated())
 		return
 	if(!Adjacent(user) || !user.Adjacent(O))
 		return
-	if(user == O) //try to climb onto it
+	if(user == O) //try to climb into or onto it
+		if(!(user.mobility_flags & MOBILITY_STAND))
+			if(!do_after(user, 40, target = src))
+				return FALSE
+			if(put_in(O))
+				playsound(loc, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
+			return TRUE
 		return ..()
 	if(!insertion_allowed(O))
 		return
 	//only these intents should be able to move objects into handcarts
 	if(user.used_intent.type == INTENT_HELP || user.used_intent.type == /datum/intent/grab/move)
+		if(isliving(O))
+			var/list/targets = list(O, src)
+			if(!do_after_mob(user, targets, 40))
+				return FALSE
 		if(put_in(O))
 			playsound(loc, 'sound/foley/cartadd.ogg', 100, FALSE, -1)
 		return TRUE

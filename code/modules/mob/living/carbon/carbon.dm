@@ -284,29 +284,6 @@
 	user << browse(dat, "window=mob[REF(src)];size=325x500")
 	onclose(user, "mob[REF(src)]")
 
-/mob/living/carbon/Topic(href, href_list)
-	..()
-	//strip panel
-	if(href_list["internal"] && usr.canUseTopic(src, BE_CLOSE, NO_DEXTERITY))
-		var/slot = text2num(href_list["internal"])
-		var/obj/item/ITEM = get_item_by_slot(slot)
-		if(ITEM && istype(ITEM, /obj/item/tank) && wear_mask && (wear_mask.clothing_flags & MASKINTERNALS))
-			visible_message("<span class='danger'>[usr] tries to [internal ? "close" : "open"] the valve on [src]'s [ITEM.name].</span>", \
-							"<span class='danger'>[usr] tries to [internal ? "close" : "open"] the valve on your [ITEM.name].</span>", null, null, usr)
-			to_chat(usr, "<span class='notice'>I try to [internal ? "close" : "open"] the valve on [src]'s [ITEM.name]...</span>")
-			if(do_mob(usr, src, POCKET_STRIP_DELAY))
-				if(internal)
-					internal = null
-					update_internals_hud_icon(0)
-				else if(ITEM && istype(ITEM, /obj/item/tank))
-					if((wear_mask && (wear_mask.clothing_flags & MASKINTERNALS)) || getorganslot(ORGAN_SLOT_BREATHING_TUBE))
-						internal = ITEM
-						update_internals_hud_icon(1)
-
-				visible_message("<span class='danger'>[usr] [internal ? "opens" : "closes"] the valve on [src]'s [ITEM.name].</span>", \
-								"<span class='danger'>[usr] [internal ? "opens" : "closes"] the valve on your [ITEM.name].</span>", null, null, usr)
-				to_chat(usr, "<span class='notice'>I [internal ? "open" : "close"] the valve on [src]'s [ITEM.name].</span>")
-
 /mob/living/carbon/fall(forced)
     loc.handle_fall(src, forced)//it's loc so it doesn't call the mob's handle_fall which does nothing
 
@@ -1276,5 +1253,5 @@
 	for(var/obj/item/grabbing/grab in grabbedby)
 		if(grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
 			return FALSE
-	if(istype(loc, /turf/open/water) && lying)
+	if(istype(loc, /turf/open/water) && !(mobility_flags & MOBILITY_STAND))
 		return FALSE

@@ -13,7 +13,7 @@
 	//dropshrink = 0.75
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	swingsound = BLADEWOOSH_MED
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/skill/combat/axes
 	max_blade_int = 100
 	minstr = 8
 	wdefense = 1

@@ -9,14 +9,12 @@
 	if(!prev_lying)
 		gib_animation()
 
+	spill_embedded_objects()
+	
 	spill_organs(no_brain, no_organs, no_bodyparts)
 
 	if(!no_bodyparts)
 		spread_bodyparts(no_brain, no_organs)
-
-	for(var/obj/item/I in simple_embedded_objects)
-		simple_embedded_objects -= I
-		I.forceMove(drop_location())
 
 	spawn_gibs(no_bodyparts)
 	qdel(src)
@@ -27,6 +25,10 @@
 /mob/living/proc/spawn_gibs()
 	new /obj/effect/gibspawner/generic(drop_location(), src, get_static_viruses())
 
+/mob/living/proc/spill_embedded_objects()
+	for(var/obj/item/embedded_item as anything in simple_embedded_objects)
+		simple_remove_embedded_object(embedded_item)
+
 /mob/living/proc/spill_organs()
 	return
 
@@ -36,9 +38,11 @@
 /mob/living/dust(just_ash, drop_items, force)
 	death(TRUE)
 
+	spill_embedded_objects()
+
 	if(drop_items)
 		unequip_everything()
-
+	
 	if(buckled)
 		buckled.unbuckle_mob(src, force = TRUE)
 
@@ -79,6 +83,7 @@
 
 	set_drugginess(0)
 	set_disgust(0)
+	cure_holdbreath()
 	SetSleeping(0, 0)
 	reset_perspective(null)
 	reload_fullscreen()

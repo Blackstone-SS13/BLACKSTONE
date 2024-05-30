@@ -104,6 +104,9 @@
 	//is the job required for game progression
 	var/required = FALSE
 
+	/// Some jobs have unique combat mode music, because why not?
+	var/cmode_music
+
 	/// This job is a "wanderer" on examine
 	var/wanderer_examine = FALSE
 
@@ -169,6 +172,9 @@
 
 	if(show_in_credits)
 		SScrediticons.processing += H
+	
+	if(cmode_music)
+		H.cmode_music = cmode_music
 
 /mob/living/carbon/human/proc/add_credit()
 	if(!mind || !client)

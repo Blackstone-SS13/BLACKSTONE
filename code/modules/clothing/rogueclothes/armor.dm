@@ -157,13 +157,14 @@
 	icon_state = "heartfelt"
 	item_state = "heartfelt"
 	armor = list("blunt" = 90, "slash" = 90, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	allowed_sex = list(MALE)
 	nodismemsleeves = TRUE
 	blocking_behavior = null
-	max_integrity = 150
+	max_integrity = 400
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
-	armor_class = ARMOR_CLASS_MEDIUM
+	armor_class = ARMOR_CLASS_HEAVY
 
 /obj/item/clothing/suit/roguetown/armor/heartfelt/hand
 	slot_flags = ITEM_SLOT_ARMOR
@@ -173,13 +174,14 @@
 	icon_state = "heartfelt_hand"
 	item_state = "heartfelt_hand"
 	armor = list("blunt" = 90, "slash" = 90, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	allowed_sex = list(MALE)
 	nodismemsleeves = TRUE
 	blocking_behavior = null
-	max_integrity = 120
+	max_integrity = 400
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
-	armor_class = ARMOR_CLASS_MEDIUM
+	armor_class = ARMOR_CLASS_HEAVY
 
 /obj/item/clothing/suit/roguetown/armor/brigandine
 	slot_flags = ITEM_SLOT_ARMOR
@@ -251,7 +253,7 @@
 	body_parts_covered = CHEST|GROIN|LEGS|ARMS|VITALS
 	icon_state = "armordress"
 	armor = list("blunt" = 60, "slash" = 40, "stab" = 50, "bullet" = 10, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	blocksound = SOFTHIT
 	allowed_sex = list("female")
 	allowed_race = list("humen", "tiefling", "argonian", "elfd", "elfw", "helf", "aasimar", "halforc")
@@ -323,6 +325,7 @@
 	icon_state = "studleather"
 	item_state = "studleather"
 	blocksound = SOFTHIT
+	armor = list("melee" = 50, "bullet" = 15, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_CHOP)
 	nodismemsleeves = TRUE
 	body_parts_covered = CHEST|GROIN|VITALS
@@ -414,3 +417,29 @@
 /obj/item/clothing/suit/roguetown/armor/workervest/Initialize()
 	color = pick("#94b4b6", "#ba8f9e", "#bd978c", "#92bd8c", "#c7c981")
 	..()
+
+/obj/item/clothing/suit/roguetown/armor/silkcoat
+	name = "silk coat"
+	desc = "A padded dressing made from the finest silks."
+	icon_state = "bliaut"
+	color = null
+	armor = list("melee" = 40, "bullet" = 7, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_TWIST)
+	blocksound = SOFTHIT
+	slot_flags = ITEM_SLOT_ARMOR
+	blade_dulling = DULLING_BASHCHOP
+	body_parts_covered = CHEST|LEGS|VITALS|GROIN
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	sewrepair = TRUE
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
+	sleevetype = "shirt"
+	max_integrity = 100
+	sellprice = 50
+	armor_class = ARMOR_CLASS_LIGHT
+	allowed_sex = list(FEMALE)
+	allowed_race = list("humen", "tiefling", "dwarfm","argonian", "elfd", "elfw", "helf", "aasimar")
+	
+/obj/item/clothing/suit/roguetown/armor/silkcoat/Initialize()
+	. = ..()
+	color = pick(CLOTHING_PURPLE, null,CLOTHING_GREEN, CLOTHING_RED)

@@ -19,7 +19,6 @@
 	var/aux_layer
 	var/body_part = null //bitflag used to check which clothes cover this bodypart
 	var/use_digitigrade = NOT_DIGITIGRADE //Used for alternate legs, useless elsewhere
-	var/list/embedded_objects = list()
 	var/held_index = 0 //are we a hand? if so, which one!
 	var/is_pseudopart = FALSE //For limbs that don't really exist, eg chainsaws
 
@@ -166,39 +165,23 @@
 		I.forceMove(T)
 
 /obj/item/bodypart/proc/skeletonize()
-	var/turf/T = get_turf(src)
-	if(T)
-		for(var/obj/item/I in embedded_objects)
-			embedded_objects -= I
-			I.forceMove(T)
-		for(var/obj/item/organ/I in src) //dust organs
-			qdel(I)
-		for(var/obj/item/I in src) //everything else gets dumped
-			if(I != bandage)
-				I.forceMove(T)
-	else
-		for(var/obj/item/I in embedded_objects)
-			embedded_objects -= I
-			qdel(I)
-		for(var/obj/item/I in src) //dust organs
-			qdel(I)
+	if(bandage)
+		remove_bandage()
+	for(var/obj/item/I in embedded_objects)
+		remove_embedded_object(I)
+	for(var/obj/item/I in src) //dust organs
+		qdel(I)
 	skeletonized = TRUE
 
 /obj/item/bodypart/chest/skeletonize()
 	. = ..()
-	if(owner)
-		if(iscarbon(owner))
-			var/mob/living/carbon/C = owner
-			if(!(C.dna && C.dna.species && (NOBLOOD in C.dna.species.species_traits)))
-				owner.death()
+	if(owner && (NOBLOOD in owner.dna?.species?.species_traits))
+		owner.death()
 
 /obj/item/bodypart/head/skeletonize()
 	. = ..()
-	if(owner)
-		if(iscarbon(owner))
-			var/mob/living/carbon/C = owner
-			if(!(C.dna && C.dna.species && (NOBLOOD in C.dna.species.species_traits)))
-				owner.death()
+	if(owner && (NOBLOOD in owner.dna?.species?.species_traits))
+		owner.death()
 
 /obj/item/bodypart/proc/consider_processing()
 	if(stamina_dam > DAMAGE_PRECISION)
@@ -534,7 +517,9 @@
 		return
 
 	if(should_draw_greyscale && !skeletonized)
-		var/draw_color = (rotted && SKIN_COLOR_ROT) || mutation_color || species_color || skin_tone
+		var/draw_color =  mutation_color || species_color || skin_tone
+		if(rotted || (owner && HAS_TRAIT(owner, TRAIT_ROTMAN)))
+			draw_color = SKIN_COLOR_ROT
 		if(draw_color)
 			limb.color = "#[draw_color]"
 			if(aux_zone && !hideaux)
@@ -542,8 +527,7 @@
 
 /obj/item/bodypart/deconstruct(disassembled = TRUE)
 	drop_organs()
-	qdel(src)
-
+	return ..()
 /obj/item/bodypart/chest
 	name = BODY_ZONE_CHEST
 	desc = ""

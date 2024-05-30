@@ -1,6 +1,6 @@
 /datum/job/roguetown/nightmaiden
 	title = "Bath Wench"
-	flag = JESTER
+	flag = WENCH
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = 0 // Disabled due to ERP removal, originally 2
@@ -22,7 +22,7 @@
 	tutorial = "Nobody would envy your lot in life, for the role of the bathwench is not something so idly taken. It comes from a place of desperation, least usually: for any with true compassion or skill would seek position with a nunnery or the medical trade. Launder clothes and soothe wounds, that is your loathsome creed."
 
 	outfit = /datum/outfit/job/roguetown/nightmaiden
-	display_order = JDO_NIGHTMAIDEN
+	display_order = JDO_WENCH
 	give_bank_account = TRUE
 	can_random = FALSE
 	min_pq = -10

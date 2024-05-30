@@ -406,13 +406,10 @@
 			next_attack_msg.Cut()
 			if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 				var/datum/wound/crit_wound  = simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
-				if(should_embed_weapon(crit_wound))
+				if(should_embed_weapon(crit_wound, I))
 					// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
-					simple_embedded_objects |= I
-					I.add_mob_blood(src)
-					I.forceMove(src)
+					simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
 					src.grabbedby(user, 1, item_override = I)
-					next_attack_msg += " <span class='userdanger'>[I] is stuck in [src]!</span>"
 			var/haha = user.used_intent.blade_class
 			if(newforce > 5)
 				if(haha != BCLASS_BLUNT)

@@ -80,3 +80,7 @@
 	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
 	if(B)
 		. = B.cure_all_traumas(resilience)
+
+/mob/living/carbon/cure_paralysis(source)
+	. = ..()
+	update_disabled_bodyparts()
