@@ -153,7 +153,6 @@
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
 			H.adjust_hydration(hydration)
 		M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_MAXIMUM)
-		M.adjustToxLoss(-1)
 	..()
 
 /datum/reagent/water/gross
