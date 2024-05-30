@@ -230,11 +230,11 @@
 		if(DULLING_CUT) //wooden that can't be attacked by clubs (trees, bushes, grass)
 			switch(user.used_intent.blade_class)
 				if(BCLASS_CUT)
+					var/mob/living/lumberjacker = user
+					var/lumberskill = lumberjacker.mind.get_skill_level(/datum/skill/labor/lumberjacking)
 					if(!I.remove_bintegrity(1))
 						dullfactor = 0.2
 					else
-						var/mob/living/lumberjacker = user
-						var/lumberskill = lumberjacker.mind.get_skill_level(/datum/skill/labor/lumberjacking)
 						dullfactor = 0.45 + (lumberskill * 0.15)
 						lumberjacker.mind.adjust_experience(/datum/skill/labor/lumberjacking, (lumberjacker.STAINT*0.2))
 					cont = TRUE
