@@ -79,16 +79,15 @@
 
 /mob/living/carbon/check_projectile_embed(obj/projectile/P, def_zone, blocked)
 	var/obj/item/bodypart/BP = get_bodypart(check_zone(def_zone))
-	if(BP)
-		var/newdam = P.damage * (100-blocked)/100
-		if(newdam > 8)
-			if(prob(P.embedchance) && P.dropped)
-				BP.embedded_objects |= P.dropped
-				P.dropped.add_mob_blood(src)//it embedded itself in you, of course it's bloody!
-				P.dropped.forceMove(src)
-				to_chat(src, "<span class='danger'>[P.dropped] sticks in my [BP.name]!</span>")
-				emote("embed", forced = TRUE)
-				return TRUE
+	if(!BP)
+		return FALSE
+	var/newdam = P.damage * (100-blocked)/100
+	if(newdam <= 8)
+		return FALSE
+	if(prob(P.embedchance) && P.dropped)
+		BP.add_embedded_object(P.dropped, silent = FALSE, crit_message = TRUE)
+		return TRUE
+	return FALSE
 
 /mob/living/carbon/send_pull_message(mob/living/target)
 	var/used_limb = parse_zone(BODY_ZONE_CHEST)

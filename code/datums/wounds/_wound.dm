@@ -183,6 +183,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/can_apply_to_mob(mob/living/affected)
 	if(bodypart_owner || owner || QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
+	for(var/datum/wound/other_wound as anything in affected.simple_wounds)
+		if(!can_stack_with(other_wound))
+			return FALSE
 	return TRUE
 
 /// Adds this wound to a given mob
@@ -280,7 +283,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	return !isnull(clotting_threshold) && (bleed_rate <= clotting_threshold)
 
 /// Returns whether or not this wound should embed a weapon
-/proc/should_embed_weapon(datum/wound/wound_or_boolean)
+/proc/should_embed_weapon(datum/wound/wound_or_boolean, obj/item/weapon)
 	if(!istype(wound_or_boolean))
-		return wound_or_boolean
+		return FALSE
+	if(weapon && !can_embed(weapon))
+		return FALSE
 	return prob(wound_or_boolean.embed_chance)

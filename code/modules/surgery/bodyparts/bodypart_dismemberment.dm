@@ -123,7 +123,7 @@
 //limb removal. The "special" argument is used for swapping a limb with a new one without the effects of losing a limb kicking in.
 /obj/item/bodypart/proc/drop_limb(special)
 	if(!owner)
-		return
+		return FALSE
 	testing("begin drop limb")
 	var/atom/drop_location = owner.drop_location()
 	var/mob/living/carbon/was_owner = owner
@@ -140,20 +140,13 @@
 			was_owner.surgeries -= surgery
 			qdel(surgery)
 	for(var/obj/item/embedded in embedded_objects)
-		embedded_objects -= embedded
-		if(drop_location)
-			embedded.forceMove(drop_location)
-		else
-			qdel(embedded)
+		remove_embedded_object(embedded)
 	if(bandage)
 		if(drop_location)
 			bandage.forceMove(drop_location)
 		else
 			qdel(bandage)
 		bandage = null
-	if(!was_owner.has_embedded_objects())
-		was_owner.clear_alert("embeddedobject")
-		SEND_SIGNAL(was_owner, COMSIG_CLEAR_MOOD_EVENT, "embedded")
 
 	if(!special)
 		if(was_owner.dna)
