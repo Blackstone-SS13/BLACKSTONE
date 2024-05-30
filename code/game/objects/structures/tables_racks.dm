@@ -311,7 +311,6 @@
 	resistance_flags = FLAMMABLE
 	max_integrity = 70
 	smooth = 0
-	debris = list(/obj/item/grown/log/tree/small = 1)
 	climb_offset = 10
 
 /obj/structure/table/wood/crafted/Initialize()
@@ -321,17 +320,6 @@
 /obj/structure/table/wood/narsie_act(total_override = TRUE)
 	if(!total_override)
 		..()
-
-/obj/structure/table/wood
-	name = "wooden table"
-	desc = ""
-	icon = 'icons/roguetown/misc/tables.dmi'
-	icon_state = "tablewood"
-	resistance_flags = FLAMMABLE
-	max_integrity = 70
-	smooth = 0
-	debris = list(/obj/item/grown/log/tree/small = 1)
-	climb_offset = 10
 
 /obj/structure/table/church
 	name = "stone table"
@@ -613,6 +601,7 @@
 				W.pixel_x = initial(W.pixel_x) += CLAMP(text2num(click_params["icon-x"]) - 16, -(world.icon_size/2), world.icon_size/2)
 				W.pixel_y = initial(W.pixel_y) += CLAMP(text2num(click_params["icon-y"]) - 16, -(world.icon_size/2), world.icon_size/2)
 				return 1
+	. = ..()
 
 /obj/structure/rack/attack_paw(mob/living/user)
 	attack_hand(user)
@@ -645,6 +634,11 @@
 	icon_state = "rack"
 	climbable = TRUE
 	climb_offset = 10
+	obj_flags = NONE
+
+/obj/structure/rack/rogue/OnCrafted(dirin, user)
+	. = ..()
+	obj_flags |= CAN_BE_HIT
 
 /obj/structure/rack/rogue/deconstruct(disassembled = TRUE)
 	qdel(src)
