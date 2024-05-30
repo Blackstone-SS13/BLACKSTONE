@@ -36,32 +36,6 @@
 		/datum/surgery_step/close
 		)
 
-/datum/surgery/organ_manipulation/mechanic
-	name = "Prosthesis organ manipulation"
-	possible_locs = list(BODY_ZONE_CHEST, BODY_ZONE_HEAD)
-	requires_bodypart_type = BODYPART_ROBOTIC
-	lying_required = FALSE
-	self_operable = TRUE
-	steps = list(
-		/datum/surgery_step/mechanic_open,
-		/datum/surgery_step/open_hatch,
-		/datum/surgery_step/mechanic_unwrench,
-		/datum/surgery_step/prepare_electronics,
-		/datum/surgery_step/manipulate_organs,
-		/datum/surgery_step/mechanic_wrench,
-		/datum/surgery_step/mechanic_close
-		)
-
-/datum/surgery/organ_manipulation/mechanic/soft
-	possible_locs = list(BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-	steps = list(
-		/datum/surgery_step/mechanic_open,
-		/datum/surgery_step/open_hatch,
-		/datum/surgery_step/prepare_electronics,
-		/datum/surgery_step/manipulate_organs,
-		/datum/surgery_step/mechanic_close
-		)
-
 /datum/surgery_step/manipulate_organs
 	time = 64
 	name = "manipulate organs"

@@ -5,7 +5,7 @@
 	throw_speed = 1
 	throw_range = 5
 	layer = ABOVE_MOB_LAYER
-	zone = BODY_ZONE_HEAD
+	zone = BODY_ZONE_PRECISE_SKULL
 	slot = ORGAN_SLOT_BRAIN
 	organ_flags = ORGAN_VITAL
 	attack_verb = list("attacked", "slapped", "whacked")

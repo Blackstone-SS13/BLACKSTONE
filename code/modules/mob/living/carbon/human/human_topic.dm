@@ -21,7 +21,7 @@
 			if(BP.has_wound(/datum/wound/dislocation))
 				bodypart_status += "[BP] is dislocated."
 			var/location_accessible = get_location_accessible(src, checked_zone)
-			if(!location_accessible)
+			if(!observer_privilege && !location_accessible)
 				bodypart_status += "Obscured by clothing."
 			if(observer_privilege || location_accessible)
 				if(BP.skeletonized)
@@ -53,6 +53,9 @@
 							bodypart_status += "[BP] is [BP.medium_burn_msg]."
 						else
 							bodypart_status += "[BP] is [BP.light_burn_msg]."
+
+				if(!location_accessible)
+					bodypart_status += "Obscured by clothing."
 
 				if(BP.bandage || length(BP.wounds))
 					bodypart_status += "<B>Wounds:</B>"

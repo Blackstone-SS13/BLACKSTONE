@@ -117,9 +117,6 @@
 			brain = null
 			update_icon_dropped()
 		else
-			if(istype(I, /obj/item/reagent_containers/pill))
-				for(var/datum/action/item_action/hands_free/activate_pill/AP in I.actions)
-					qdel(AP)
 			I.forceMove(T)
 	eyes = null
 	ears = null

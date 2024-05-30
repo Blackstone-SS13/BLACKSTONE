@@ -663,14 +663,16 @@
 	var/total_tox = getToxLoss()
 	var/total_oxy = getOxyLoss()
 	var/used_damage = 0
-	for(var/X in bodyparts)	//hardcoded to streamline things a bit
-		var/obj/item/bodypart/BP = X
-		if(BP.name == "head")
-			total_burn = ((BP.burn_dam / BP.max_damage) * 100)
-		if(BP.name == "chest")
-			total_burn = ((BP.burn_dam / BP.max_damage) * 100)
-		if(used_damage < total_burn)
-			used_damage = total_burn
+	var/static/list/lethal_zones = list(
+		BODY_ZONE_HEAD,
+		BODY_ZONE_CHEST,
+	)
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts) //hardcoded to streamline things a bit
+		if(!(BP.body_zone in lethal_zones))
+			continue
+		var/my_burn = abs((BP.burn_dam / BP.max_damage) * HEALTH_THRESHOLD_DEAD)
+		total_bunr = max(total_burn, my_burn)
+		used_damage = max(used_damage, my_burn)
 	if(used_damage < total_tox)
 		used_damage = total_tox
 	if(used_damage < total_oxy)

@@ -307,13 +307,6 @@
 
 	qdel(owner.GetComponent(/datum/component/creamed)) //clean creampie overlay
 
-	//Handle dental implants
-	for(var/datum/action/item_action/hands_free/activate_pill/AP in owner.actions)
-		AP.Remove(owner)
-		var/obj/pill = AP.target
-		if(pill)
-			pill.forceMove(src)
-
 	//Make sure de-zombification happens before organ removal instead of during it
 	var/obj/item/organ/zombie_infection/ooze = owner.getorganslot(ORGAN_SLOT_ZOMBIE)
 	if(istype(ooze))
