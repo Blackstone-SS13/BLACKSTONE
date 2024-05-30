@@ -398,7 +398,7 @@
 	craftsound = 'sound/foley/Building-01.ogg'
 	skillcraft = /datum/skill/craft/carpentry
 
-/datum/crafting_recipe/roguetown/structure/table
+/datum/crafting_recipe/roguetown/structure/stonetable
 	name = "stone table"
 	result = /obj/structure/table/church
 	reqs = list(/obj/item/natural/stone = 1)
