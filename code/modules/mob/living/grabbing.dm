@@ -399,7 +399,7 @@
 		if(user.mind)
 			if(user.mind.has_antag_datum(/datum/antagonist/werewolf))
 				var/mob/living/carbon/human/H = C
-				if(prob(25))
+				if(prob(10))
 					//H.werewolf_infect()
 					addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human/, werewolf_infect)), 30 SECONDS)
 				if(prob(30))

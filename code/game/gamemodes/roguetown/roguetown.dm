@@ -415,7 +415,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 	"Grenzelhoft Mercenary"
 	)
 	
-	var/num_werewolves = rand(2,3)
+	var/num_werewolves = rand(1,2)
 	antag_candidates = get_players_for_role(ROLE_WEREWOLF)
 	antag_candidates = shuffle(antag_candidates)
 
