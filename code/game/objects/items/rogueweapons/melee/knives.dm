@@ -53,7 +53,7 @@
 	animname = "stab"
 	blade_class = BCLASS_STAB
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 0 //40
+	penfactor = 40
 	chargetime = 0
 	clickcd = 8
 	item_d_type = "stab"
@@ -63,7 +63,7 @@
 	icon_state = "inpick"
 	attack_verb = list("stabs", "impales")
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 0 //80
+	penfactor = 80
 	clickcd = 14
 	swingdelay = 12
 	damfactor = 1.1
@@ -85,7 +85,7 @@
 	animname = "chop"
 	blade_class = BCLASS_CHOP
 	hitsound = list('sound/combat/hits/bladed/smallslash (1).ogg', 'sound/combat/hits/bladed/smallslash (2).ogg', 'sound/combat/hits/bladed/smallslash (3).ogg')
-	penfactor = 0 //10
+	penfactor = 10
 	damfactor = 1.5
 	swingdelay = 5
 	clickcd = 10
@@ -153,7 +153,7 @@
 
 /datum/intent/dagger/chop/cleaver
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
-	penfactor = 0 //30
+	penfactor = 30
 
 /obj/item/rogueweapon/huntingknife/idagger
 	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut, /datum/intent/dagger/thrust/pick)

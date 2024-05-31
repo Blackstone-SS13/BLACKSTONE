@@ -25,7 +25,7 @@
 	attack_verb = list("strikes", "hits")
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 0
-	penfactor = 0 //5
+	penfactor = 5
 	icon_state = "instrike"
 	item_d_type = "slash"
 
@@ -36,7 +36,7 @@
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 5
 	recovery = 15
-	penfactor = 0 //5
+	penfactor = 5
 	reach = 2
 	icon_state = "instrike"
 	item_d_type = "slash"
@@ -45,7 +45,7 @@
 	name = "smash"
 	chargetime = 5
 	no_early_release = TRUE
-	penfactor = 0 //80
+	penfactor = 80
 	recovery = 10
 	damfactor = 1.5
 	chargedloop = /datum/looping_sound/flailswing
@@ -60,7 +60,7 @@
 	name = "ranged smash"
 	chargetime = 25
 	no_early_release = TRUE
-	penfactor = 0 //50
+	penfactor = 50
 	recovery = 30
 	damfactor = 1.5
 	reach = 2
@@ -98,7 +98,7 @@
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 0
 	recovery = 7
-	penfactor = 0 //10
+	penfactor = 10
 	reach = 2
 	icon_state = "inlash"
 	item_d_type = "slash"
@@ -110,7 +110,7 @@
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
 	chargetime = 0
 	recovery = 10
-	penfactor = 0 //40
+	penfactor = 40
 	reach = 3
 	icon_state = "incrack"
 	item_d_type = "slash"

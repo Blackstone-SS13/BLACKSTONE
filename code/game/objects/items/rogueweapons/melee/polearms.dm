@@ -9,7 +9,7 @@
 	chargetime = 1
 	warnie = "mobwarning"
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
-	penfactor = 0 //50
+	penfactor = 50
 	item_d_type = "stab"
 
 /datum/intent/spear/bash
@@ -17,7 +17,7 @@
 	blade_class = BCLASS_BLUNT
 	icon_state = "inbash"
 	attack_verb = list("bashes", "strikes")
-	penfactor = 0 //10
+	penfactor = 10
 	damfactor = 0.8
 	item_d_type = "blunt"
 
@@ -275,7 +275,7 @@
 	max_blade_int = 200
 
 /datum/intent/spear/thrust/eaglebeak
-	penfactor = 0 //20
+	penfactor = 20
 	damfactor = 0.9
 
 /datum/intent/mace/smash/eaglebeak

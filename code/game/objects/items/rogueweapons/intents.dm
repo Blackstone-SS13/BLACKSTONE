@@ -439,7 +439,7 @@
 	blade_class = BCLASS_BLUNT
 	hitsound = "punch_hard"
 	chargetime = 0
-	penfactor = 0 // 10
+	penfactor = 10
 	swingdelay = 0
 	candodge = TRUE
 	canparry = TRUE
@@ -495,7 +495,7 @@
 	animname = "cut"
 	blade_class = BCLASS_CHOP
 	hitsound = "genslash"
-	penfactor = 0 //30
+	penfactor = 30
 	candodge = TRUE
 	canparry = TRUE
 	miss_text = "slashes the air!"
