@@ -19,7 +19,7 @@
 	/// Is this step realized via middle click instead of normal click?
 	var/middle_click_step = FALSE
 	/// Random surgery flags that mostly indicate additional requirements
-	var/surgery_flags = SURGERY_INCISED
+	var/surgery_flags = SURGERY_BLOODY | SURGERY_INCISED
 	/// Intents that can be used to perform this surgery step
 	var/list/possible_intents
 	/// Body zones this surgery can be performed on, set to null for everywhere
@@ -209,6 +209,8 @@
 		return FALSE
 	
 	var/bodypart_flags = bodypart.get_surgery_flags()
+	if((surgery_flags & SURGERY_BLOODY) && !(bodypart_flags & SURGERY_BLOODY))
+		return FALSE
 	if((surgery_flags & SURGERY_NOT_INCISED) && (bodypart_flags & SURGERY_INCISED))
 		return FALSE
 	if((surgery_flags & SURGERY_INCISED) && !(bodypart_flags & SURGERY_INCISED))
@@ -218,8 +220,6 @@
 	if((surgery_flags & SURGERY_BROKEN) && !(bodypart_flags & SURGERY_BROKEN))
 		return FALSE
 	if((surgery_flags & SURGERY_DRILLED) && !(bodypart_flags & SURGERY_DRILLED))
-		return FALSE
-	if((surgery_flags & SURGERY_ENCASED) && !(bodypart_flags & SURGERY_ENCASED))
 		return FALSE
 
 	/*
@@ -256,6 +256,10 @@
 			if((key == TOOL_SHARP) && tool.get_sharpness())
 				implement_type = key
 				break
+			if((key == TOOL_HOT) && (tool.get_temperature() >= FIRE_MINIMUM_TEMPERATURE_TO_EXIST))
+				implement_type = key
+				break
+		
 		if(!implement_type && accept_any_item)
 			implement_type = TOOL_NONE
 
@@ -290,8 +294,7 @@
 	return english_list(chems, and_text = require_all_chems ? " and " : " or ")
 
 /datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail = FALSE)
-	var/success = can_do_step(user, target, target_zone, tool, intent, try_to_fail)
-	if(!success)
+	if(!can_do_step(user, target, target_zone, tool, intent, try_to_fail))
 		return FALSE
 
 	initiate(user, target, target_zone, tool, intent, try_to_fail)
@@ -302,7 +305,8 @@
 	if(!preop(user, target, target_zone, tool, intent))
 		target.surgeries -= target_zone
 		return FALSE
-
+	
+	. = FALSE
 	var/speed_mod = get_speed_modifier(user, target, target_zone, tool, intent)
 	var/success_prob = get_success_probability(user, target, target_zone, tool, intent)
 
@@ -325,6 +329,7 @@
 	display_results(user, target, "<span class='notice'>I begin to perform surgery on [target]...</span>",
 		"<span class='notice'>[user] begins to perform surgery on [target].</span>",
 		"<span class='notice'>[user] begins to perform surgery on [target].</span>")
+	return TRUE
 
 /datum/surgery_step/proc/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I succeed.</span>",
@@ -333,16 +338,7 @@
 	return TRUE
 
 /datum/surgery_step/proc/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
-	var/screwedmessage = ""
-	switch(success_prob)
-		if(0 to 25)
-			screwedmessage = " <b>This is practically hopeless.</b>"
-		if(50 to 75) //25 to 49 = no extra text
-			screwedmessage = " This is hard to get right."
-		if(75 to 100)
-			screwedmessage = " <i>I almost had it.</i>"
-
-	display_results(user, target, "<span class='warning'>I screw up![screwedmessage]</span>",
+	display_results(user, target, "<span class='warning'>I screw up!</span>",
 		"<span class='warning'>[user] screws up!</span>",
 		"<span class='notice'>[user] finishes.</span>", TRUE) //By default the patient will notice if the wrong thing has been cut
 	return TRUE

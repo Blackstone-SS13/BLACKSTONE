@@ -14,6 +14,7 @@
 	mob_overlay = "s1"
 	sewn_overlay = "cut"
 	can_sew = TRUE
+	can_cauterize = TRUE
 	critical = TRUE
 	sleep_healing = 0
 	embed_chance = 75

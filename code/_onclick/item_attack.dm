@@ -139,7 +139,7 @@
 				user.do_attack_animation(M, visual_effect_icon = user.used_intent.animname)
 		return
 
-	if(user.zone_selected == BODY_ZONE_R_INHAND)
+	if(user.zone_selected == BODY_ZONE_PRECISE_R_INHAND)
 		var/offh = 0
 		var/obj/item/W = M.held_items[1]
 		if(W)
@@ -151,7 +151,7 @@
 							"<span class='boldwarning'>I'm disarmed by [user]!</span>")
 			return
 
-	if(user.zone_selected == BODY_ZONE_L_INHAND)
+	if(user.zone_selected == BODY_ZONE_PRECISE_L_INHAND)
 		var/offh = 0
 		var/obj/item/W = M.held_items[2]
 		if(W)
@@ -386,9 +386,9 @@
 			return "body"
 		if(BODY_ZONE_PRECISE_GROIN)
 			return "body"
-		if(BODY_ZONE_R_INHAND)
+		if(BODY_ZONE_PRECISE_R_INHAND)
 			return "body"
-		if(BODY_ZONE_L_INHAND)
+		if(BODY_ZONE_PRECISE_L_INHAND)
 			return "body"
 	return "body"
 

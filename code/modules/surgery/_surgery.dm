@@ -7,16 +7,16 @@
 	var/list/steps = list()
 	/// Acceptable mob types
 	var/list/target_mobtypes = list(/mob/living/carbon/human)
-	/// Acceptable limb statuses
-	var/requires_bodypart_type = BODYPART_ORGANIC
 	/// Acceptable body zones
 	var/list/possible_locs = list()
 	/// Surgery available only when a bodypart is present
 	var/requires_bodypart = TRUE
 	/// Surgery available only when a bodypart is missing
-	var/requires_missing_bodypart = TRUE
+	var/requires_missing_bodypart = FALSE
 	/// Surgery not available on pseudoparts
 	var/requires_real_bodypart = FALSE
+	/// Acceptable limb statuses
+	var/requires_bodypart_type = BODYPART_ORGANIC
 
 /datum/surgery/advanced
 	name = "advanced surgery"

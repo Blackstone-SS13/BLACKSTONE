@@ -13,9 +13,11 @@
 	mob_overlay = ""
 	sewn_overlay = ""
 	can_sew = FALSE
+	can_cauterize = FALSE
 	disabling = FALSE
 	critical = TRUE
 	passive_healing = 0.25
+	qdel_on_droplimb = TRUE
 
 /datum/wound/dislocation/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/dislocation) && (type == other.type))

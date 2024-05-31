@@ -101,11 +101,12 @@
 
 /mob/living/carbon/attackby(obj/item/I, mob/user, params)
 	if(!user.cmode)
+		var/try_to_fail = istype(user.rmb_intent, /datum/rmb_intent/weak)
 		var/list/possible_steps = list()
 		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
 			if(!surgery_step.name)
 				continue
-			if(surgery_step.can_do_step(user, src, target_zone, I, user.used_intent))
+			if(surgery_step.can_do_step(user, src, user.zone_selected, I, user.used_intent))
 				possible_steps[surgery_step.name] = surgery_step
 		var/datum/surgery_step/done_step
 		if(length(possible_steps) > 1)
@@ -114,7 +115,7 @@
 				done_step = possible_steps[input]
 		else
 			done_step = possible_steps[possible_steps[1]]
-		if(done_step?.try_op(user, src, target_zone, I, user.used_intent))
+		if(done_step?.try_op(user, src, user.zone_selected, I, user.used_intent, try_to_fail))
 			return TRUE
 	/*
 	for(var/datum/surgery/S in surgeries)
@@ -668,9 +669,9 @@
 		BODY_ZONE_CHEST,
 	)
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts) //hardcoded to streamline things a bit
-		if(!(BP.body_zone in lethal_zones))
+		if(!(bodypart.body_zone in lethal_zones))
 			continue
-		var/my_burn = abs((BP.burn_dam / BP.max_damage) * HEALTH_THRESHOLD_DEAD)
+		var/my_burn = abs((bodypart.burn_dam / bodypart.max_damage) * DAMAGE_THRESHOLD_DEATH)
 		total_burn = max(total_burn, my_burn)
 		used_damage = max(used_damage, my_burn)
 	if(used_damage < total_tox)

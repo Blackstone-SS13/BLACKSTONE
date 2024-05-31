@@ -28,7 +28,7 @@
 	var/list/datum/brain_trauma/traumas = list()
 
 /obj/item/organ/brain/Insert(mob/living/carbon/C, special = 0,no_id_transfer = FALSE)
-	..()
+	. = ..()
 
 	name = "brain"
 
@@ -60,7 +60,7 @@
 	C.update_hair()
 
 /obj/item/organ/brain/Remove(mob/living/carbon/C, special = 0, no_id_transfer = FALSE)
-	..()
+	. = ..()
 	for(var/X in traumas)
 		var/datum/brain_trauma/BT = X
 		BT.on_lose(TRUE)
@@ -71,11 +71,11 @@
 	C.update_hair()
 
 /obj/item/organ/brain/prepare_eat(mob/living/carbon/human/H)
-	if(iszombie(H))//braaaaaains... otherwise, too important to eat.
-		..()
+	if(iszombie(H) || HAS_TRAIT(H, TRAIT_ROTMAN))//braaaaaains... otherwise, too important to eat.
+		return ..()
+	return FALSE
 
 /obj/item/organ/brain/proc/transfer_identity(mob/living/L)
-//	name = "[L.name]'s brain"
 	if(brainmob || decoy_override)
 		return
 	if(!L.mind)
@@ -95,8 +95,8 @@
 		var/obj/item/organ/zombie_infection/ZI = L.getorganslot(ORGAN_SLOT_ZOMBIE)
 		if(ZI)
 			brainmob.set_species(ZI.old_species)	//For if the brain is cloned
-//	if(L.mind && L.mind.current)
-//		L.mind.transfer_to(brainmob)
+	if(L.mind?.current)
+		L.mind.transfer_to(brainmob)
 //	to_chat(brainmob, "<span class='notice'>I feel slightly disoriented. That's normal when you're just a brain.</span>")
 
 /obj/item/organ/brain/attackby(obj/item/O, mob/user, params)

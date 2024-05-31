@@ -13,6 +13,7 @@
 	sew_threshold = 50
 	mob_overlay = "cut"
 	can_sew = TRUE
+	can_cauterize = TRUE
 
 /datum/wound/slash/small
 	name = "small slash"
@@ -96,10 +97,12 @@
 /datum/wound/slash/incision
 	name = "incision"
 	check_name = "<span class='bloody'><B>INCISION</B></span>"
-	whp = 15
-	sewn_whp = 5
-	bleed_rate = 0.2
-	sewn_bleed_rate = 0.01
-	clotting_threshold = null
-	sewn_clotting_threshold = null
-	sew_threshold = 10
+	whp = 40
+	sewn_whp = 12
+	bleed_rate = 1
+	sewn_bleed_rate = 0.05
+	clotting_rate = 0.02
+	sewn_clotting_rate = 0.02
+	clotting_threshold = 0.4
+	sewn_clotting_threshold = 0.1
+	sew_threshold = 75

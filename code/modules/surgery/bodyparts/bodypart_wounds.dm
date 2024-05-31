@@ -5,8 +5,6 @@
 	var/list/obj/item/embedded_objects = list()
 	/// Bandage, if this ever hard dels thats fucking retarded lol
 	var/obj/item/bandage
-	/// Whether the bone encases the organs, for the sake of surgery
-	var/encasing_bone = FALSE
 
 /// Checks if we have any embedded objects whatsoever
 /obj/item/bodypart/proc/has_embedded_objects()
@@ -111,6 +109,9 @@
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_rate *= grab.bleed_suppressing
 	bleed_rate = max(round(bleed_rate, 0.1), 0)
+	var/surgery_flags = get_surgery_flags()
+	if(surgery_flags & SURGERY_CLAMPED)
+		return min(bleed_rate, 0.5)
 	return bleed_rate
 
 /// Called after a bodypart is attacked so that wounds and critical effects can be applied
@@ -369,8 +370,8 @@
 					else
 						attempted_wounds += /datum/wound/fracture/mouth
 				else if(zone_precise in nosestab_zones)
-					if(!has_wound(/datum/wound/nose))
-						attempted_wounds += /datum/wound/nose
+					if(!has_wound(/datum/wound/disfigurement/nose))
+						attempted_wounds += /datum/wound/disfigurement/nose
 					else if(!has_wound(/datum/wound/fracture/head/nose))
 						attempted_wounds +=/datum/wound/fracture/head/nose
 				else if(zone_precise in earstab_zones)
@@ -505,14 +506,25 @@
 /// Returns surgery flags applicable to this bodypart
 /obj/item/bodypart/proc/get_surgery_flags()
 	var/returned_flags = NONE
+	if(can_bloody_wound())
+		returned_flags |= SURGERY_BLOODY
 	for(var/datum/wound/slash/incision/incision in wounds)
 		if(incision.is_sewn())
 			continue
 		returned_flags |= SURGERY_INCISED
+	var/static/list/retracting_behaviors = list(
+		TOOL_RETRACTOR, 
+		TOOL_CROWBAR,
+	)
+	var/static/list/clamping_behaviors = list(
+		TOOL_HEMOSTAT,
+		TOOL_WIRECUTTER,
+	)
 	for(var/obj/item/embedded as anything in embedded_objects)
-		if(embedded.tool_behaviour != TOOL_RETRACTOR)
-			continue
-		returned_flags |= SURGERY_RETRACTED
+		if((embedded.tool_behaviour in retracting_behaviors) || embedded.embedding?.retract_limbs)
+			returned_flags |= SURGERY_RETRACTED
+		if((embedded.tool_behaviour in clamping_behaviors) || embedded.embedding?.clamp_limbs)
+			returned_flags |= SURGERY_CLAMPED
 	if(has_wound(/datum/wound/dislocation))
 		returned_flags |= SURGERY_DISLOCATED
 	if(has_wound(/datum/wound/fracture))
@@ -521,6 +533,6 @@
 		if(drilling.is_sewn())
 			continue
 		returned_flags |= SURGERY_DRILLED
-	if(encasing_bone)
-		returned_flags |= SURGERY_ENCASED
+	if(skeletonized)
+		returned_flags |= SURGERY_INCISED | SURGERY_RETRACTED | SURGERY_DRILLED //ehh... we have access to whatever organ is there
 	return returned_flags

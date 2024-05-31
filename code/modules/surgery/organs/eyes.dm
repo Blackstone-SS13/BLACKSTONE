@@ -1,6 +1,6 @@
 /obj/item/organ/eyes
-	name = "eye"
-	icon_state = "eye1"
+	name = "eyes"
+	icon_state = "eyeball"
 	desc = ""
 	zone = BODY_ZONE_PRECISE_R_EYE
 	slot = ORGAN_SLOT_EYES
@@ -34,6 +34,13 @@
 	var/left_poked = FALSE
 	var/right_poked = FALSE
 
+/obj/item/organ/eyes/update_overlays()
+	. = ..()
+	if(old_eye_color && (icon_state == "eyeball"))
+		var/mutable_appearance/iris_overlay = mutable_appearance(src.icon, "eyeball-iris")
+		iris_overlay.color = old_eye_color
+		. += iris_overlay
+
 /obj/item/organ/eyes/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE, initialising)
 	. = ..()
 	if(ishuman(owner))
@@ -52,7 +59,7 @@
 		M.dna.species.handle_body(M) //updates eye icon
 
 /obj/item/organ/eyes/Remove(mob/living/carbon/M, special = 0)
-	..()
+	. = ..()
 	if(ishuman(M) && eye_color)
 		var/mob/living/carbon/human/HMN = M
 		HMN.eye_color = old_eye_color
@@ -62,7 +69,6 @@
 	M.set_blindness(0)
 	M.set_blurriness(0)
 	M.update_sight()
-
 
 /obj/item/organ/eyes/on_life()
 	..()

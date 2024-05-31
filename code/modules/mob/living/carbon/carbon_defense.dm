@@ -148,20 +148,6 @@
 			used_limb = affecting.body_zone
 	return used_limb
 
-/mob/living/carbon/proc/parse_inhand(zone, mob/living/target)
-	if (zone == BODY_ZONE_R_INHAND)
-		var/obj/item/I = target.get_item_for_held_index(2)
-		if(I.can_parry)
-			return I.name
-		else
-			return "right hand"
-	else if (zone == BODY_ZONE_L_INHAND)
-		var/obj/item/I = target.get_item_for_held_index(1)
-		if(I.can_parry)
-			return I.name
-		else
-			return "left hand"
-
 /mob/proc/check_arm_grabbed()
 	return
 
@@ -268,6 +254,7 @@
 			ContactContractDisease(D)
 	
 	if(!user.cmode)
+		var/try_to_fail = istype(user.rmb_intent, /datum/rmb_intent/weak)
 		var/list/possible_steps = list()
 		for(var/datum/surgery_step/surgery_step as anything in GLOB.surgery_steps)
 			if(!surgery_step.name)
@@ -281,7 +268,7 @@
 				done_step = possible_steps[input]
 		else
 			done_step = possible_steps[possible_steps[1]]
-		if(done_step?.try_op(user, src, user.zone_selected, null, user.used_intent))
+		if(done_step?.try_op(user, src, user.zone_selected, null, user.used_intent, try_to_fail))
 			return TRUE
 
 	/*
@@ -295,7 +282,6 @@
 
 
 /mob/living/carbon/attack_paw(mob/living/carbon/monkey/M)
-
 	if(can_inject(M, TRUE))
 		for(var/thing in diseases)
 			var/datum/disease/D = thing

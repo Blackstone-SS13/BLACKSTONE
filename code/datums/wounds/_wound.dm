@@ -55,6 +55,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 	/// If TRUE, this wound can be sewn
 	var/can_sew = FALSE
+	/// If TRUE, this wound can be cauterized
+	var/can_cauterize = FALSE
 	/// If TRUE, this disables limbs
 	var/disabling = FALSE
 	/// If TRUE, this is a crit wound
@@ -66,6 +68,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/passive_healing = 0
 	/// Embed chance if this wound allows embedding
 	var/embed_chance = 0
+
+	/// Some wounds make no sense on a dismembered limb and need to go
+	var/qdel_on_droplimb = FALSE
 
 /datum/wound/Destroy(force)
 	. = ..()
@@ -272,6 +277,15 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	passive_healing = max(passive_healing, 1)
 	if(mob_overlay != old_overlay)
 		owner?.update_damage_overlays()
+	return TRUE
+
+/// Cauterizes the wound
+/datum/wound/proc/cauterize_wound()
+	if(!can_cauterize)
+		return FALSE
+	if(!isnull(clotting_threshold) && bleed_rate > clotting_threshold)
+		bleed_rate = clotting_threshold
+	heal_wound(40)
 	return TRUE
 
 /// Checks if this wound is sewn

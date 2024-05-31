@@ -1,15 +1,13 @@
 /datum/surgery/healing
 	steps = list(
 		/datum/surgery_step/incise,
-		/datum/surgery_step/retract_skin,
-		/datum/surgery_step/clamp_bleeders,
+		/datum/surgery_step/retract,
+		/datum/surgery_step/clamp,
 		/datum/surgery_step/heal,
-		/datum/surgery_step/close,
+		/datum/surgery_step/cauterize,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = list(BODY_ZONE_CHEST)
-	requires_bodypart = TRUE
-	requires_bodypart_type = BODYPART_ORGANIC
 
 /datum/surgery_step/heal
 	name = "Repair body"
@@ -17,15 +15,20 @@
 		TOOL_HEMOSTAT = 100, 
 		TOOL_SCREWDRIVER = 65,
 	)
+	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	time = 2.5 SECONDS
 	requires_tech = TRUE
 	replaced_by = /datum/surgery_step
 	repeating = TRUE
-	requires_bodypart = TRUE
-	requires_bodypart_type = BODYPART_ORGANIC
+	/// How much brute damage we heal per completion
 	var/brutehealing = 0
+	/// How much burn damage we heal per completion
 	var/burnhealing = 0
-	var/missinghpbonus = 0 //heals an extra point of damager per X missing damage of type (burn damage for burn healing, brute for brute). Smaller Number = More Healing!
+	/** 
+	 * Heals an extra point of damager per X missing damage of type (burn damage for burn healing, brute for brute) 
+	 * Smaller Number = More Healing!
+	 */
+	var/missinghpbonus = 0
 
 /datum/surgery_step/heal/validate_tech(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	if(!brutehealing && !burnhealing)

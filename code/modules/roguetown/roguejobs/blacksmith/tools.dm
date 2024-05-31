@@ -137,7 +137,19 @@
 	var/hott = FALSE
 	smeltresult = /obj/item/ingot/iron
 
+/obj/item/rogueweapon/tongs/get_temperature()
+	if(hott)
+		return FIRE_MINIMUM_TEMPERATURE_TO_SPREAD
+	return ..()
+
+/obj/item/rogueweapon/tongs/fire_act(added, maxstacks)
+	. = ..()
+	hott = world.time
+	update_icon()
+	addtimer(CALLBACK(src, PROC_REF(make_unhot), world.time), 10 SECONDS)
+
 /obj/item/rogueweapon/tongs/update_icon()
+	. = ..()
 	if(!hingot)
 		icon_state = "tongs"
 	else
@@ -159,7 +171,7 @@
 			update_icon()
 
 /obj/item/rogueweapon/tongs/dropped()
-	..()
+	. = ..()
 	if(hingot)
 		hingot.forceMove(get_turf(src))
 		hingot = null

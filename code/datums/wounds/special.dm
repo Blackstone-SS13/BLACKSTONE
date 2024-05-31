@@ -1,4 +1,28 @@
-/datum/wound/nose
+/datum/wound/disfigurement
+	name = "disfigurement"
+	check_name = "<span class='warning'>FACE</span>"
+	crit_message = "The face is mangled beyond recognition!"
+	whp = null
+	woundpain = 20
+	mob_overlay = "cut"
+	can_sew = FALSE
+	can_cauterize = FALSE
+	critical = TRUE
+
+/datum/wound/disfigurement/can_stack_with(datum/wound/other)
+	if(istype(other, /datum/wound/disfigurement) && (type == other.type))
+		return FALSE
+	return TRUE
+
+/datum/wound/disfigurement/on_mob_gain(mob/living/affected)
+	. = ..()
+	ADD_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
+
+/datum/wound/disfigurement/on_mob_loss(mob/living/affected)
+	. = ..()
+	REMOVE_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
+	
+/datum/wound/disfigurement/nose
 	name = "rhinotomy"
 	check_name = "<span class='warning'>NOSE</span>"
 	crit_message = list(
@@ -6,24 +30,17 @@
 		"The nose is destroyed!",
 	)
 	sound_effect = 'sound/combat/crit.ogg'
-	whp = null
-	woundpain = 20
-	mob_overlay = "cut"
-	can_sew = FALSE
-	critical = TRUE
 
-/datum/wound/nose/on_mob_gain(mob/living/affected)
+/datum/wound/disfigurement/nose/on_mob_gain(mob/living/affected)
 	. = ..()
 	ADD_TRAIT(affected, TRAIT_MISSING_NOSE, "[type]")
-	ADD_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
 	if(HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 
-/datum/wound/nose/on_mob_loss(mob/living/affected)
+/datum/wound/disfigurement/nose/on_mob_loss(mob/living/affected)
 	. = ..()
 	REMOVE_TRAIT(affected, TRAIT_MISSING_NOSE, "[type]")
-	REMOVE_TRAIT(affected, TRAIT_DISFIGURED, "[type]")
-	
+
 /datum/wound/cbt
 	name = "testicular torsion"
 	check_name = "<span class='userdanger'><B>NUTCRACK</B></span>"
@@ -36,6 +53,7 @@
 	mob_overlay = ""
 	sewn_overlay = ""
 	can_sew = FALSE
+	can_cauterize = FALSE
 	disabling = TRUE
 	critical = TRUE
 

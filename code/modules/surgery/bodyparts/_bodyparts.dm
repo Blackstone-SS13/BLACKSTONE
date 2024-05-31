@@ -63,7 +63,7 @@
 	var/heavy_brute_msg = "MANGLED"
 	var/medium_brute_msg = "battered"
 	var/light_brute_msg = "bruised"
-	var/no_bruise_msg = "unbruised"
+	var/no_brute_msg = "unbruised"
 
 	var/heavy_burn_msg = "CHARRED"
 	var/medium_burn_msg = "peeling"
@@ -148,7 +148,7 @@
 	return ..()
 
 /obj/item/bodypart/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
-	..()
+	. = ..()
 	if(status != BODYPART_ROBOTIC)
 		playsound(get_turf(src), 'sound/blank.ogg', 50, TRUE, -1)
 	pixel_x = rand(-3, 3)
@@ -175,12 +175,12 @@
 
 /obj/item/bodypart/chest/skeletonize()
 	. = ..()
-	if(owner && (NOBLOOD in owner.dna?.species?.species_traits))
+	if(owner && !(NOBLOOD in owner.dna?.species?.species_traits))
 		owner.death()
 
 /obj/item/bodypart/head/skeletonize()
 	. = ..()
-	if(owner && (NOBLOOD in owner.dna?.species?.species_traits))
+	if(owner && !(NOBLOOD in owner.dna?.species?.species_traits))
 		owner.death()
 
 /obj/item/bodypart/proc/consider_processing()
@@ -547,7 +547,6 @@
 	offset = OFFSET_ARMOR
 	offset_f = OFFSET_ARMOR_F
 	dismemberable = FALSE
-	encasing_bone = TRUE
 
 /obj/item/bodypart/chest/set_disabled(new_disabled)
 	. = ..()

@@ -6,6 +6,8 @@
 	return disableable
 
 /obj/item/bodypart
+	/// Wound we get when surgically reattached
+	var/attach_wound = /datum/wound/slash/large
 	/// Wound we leave on the chest when violently dismembered
 	var/dismember_wound
 	/// Sound we make when violently dismembered
@@ -133,7 +135,10 @@
 		var/list/stored_wounds = list()
 		for(var/datum/wound/wound as anything in wounds)
 			wound.remove_from_bodypart()
-			stored_wounds += wound //store for later when the limb is reattached
+			if(wound.qdel_on_droplimb)
+				qdel(wound)
+			else
+				stored_wounds += wound //store for later when the limb is reattached
 		wounds = stored_wounds
 	//if we had an ongoing surgery on this limb, we stop it
 	for(var/body_zone in was_owner.surgeries)
@@ -328,7 +333,7 @@
 	var/obj/item/bodypart/O = C.get_bodypart(body_zone)
 	if(O)
 		O.drop_limb(1)
-	attach_limb(C, special)
+	return attach_limb(C, special)
 
 /obj/item/bodypart/head/replace_limb(mob/living/carbon/C, special)
 	if(!istype(C))
@@ -339,7 +344,7 @@
 			return
 		else
 			O.drop_limb(1)
-	attach_limb(C, special)
+	return attach_limb(C, special)
 
 /obj/item/bodypart/proc/attach_limb(mob/living/carbon/C, special)
 	moveToNullspace()
@@ -414,13 +419,6 @@
 		C.real_name = real_name
 	real_name = ""
 	name = initial(name)
-
-	//Handle dental implants
-	for(var/obj/item/reagent_containers/pill/P in src)
-		for(var/datum/action/item_action/hands_free/activate_pill/AP in P.actions)
-			P.forceMove(C)
-			AP.Grant(C)
-			break
 
 	return ..()
 

@@ -12,6 +12,7 @@
 	sew_threshold = 100 //absolutely awful to sew up
 	mob_overlay = "dis_head"
 	can_sew = TRUE
+	can_cauterize = TRUE
 	critical = TRUE
 	sleep_healing = 0
 

@@ -12,6 +12,7 @@
 	woundpain = 100
 	mob_overlay = "frac"
 	can_sew = FALSE
+	can_cauterize = FALSE
 	disabling = TRUE
 	critical = TRUE
 	/// Emote we use when applied

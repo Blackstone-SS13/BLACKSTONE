@@ -1,8 +1,9 @@
 /obj/item/organ/ears
 	name = "ears"
-	icon_state = "ears"
+	icon = 'icons/roguetown/items/surgery.dmi'
+	icon_state = "ear"
 	desc = ""
-	zone = BODY_ZONE_HEAD
+	zone = BODY_ZONE_PRECISE_EARS
 	slot = ORGAN_SLOT_EARS
 	gender = PLURAL
 
