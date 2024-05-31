@@ -135,9 +135,10 @@
 	)
 	var/list/adjectives = list()
 	var/list/descs = list()
-	var/evilness_rating = rand(0, 10)
+	var/maximal_evilness = 10
+	var/evilness_rating = rand(0, maximal_evilness)
 	switch(evilness_rating)
-		if(10 to INFINITY) //maximized evilness holy shit
+		if(maximal_evilness to INFINITY) //maximized evilness holy shit
 			color = "#ff0000"
 			adjectives += pick("evil", "malevolent", "misanthropic")
 			descs += "<span class='danger'>This one is bursting with hatred!</span>"
@@ -157,7 +158,7 @@
 			for(var/i in 1 to adjective_amount)
 				adjectives += pickweight(possible_adjectives)
 				descs += pickweight(possible_descs)
-	blood_sucking = max(round(evilness_rating/3, 0.1), 1)
+	blood_sucking = max(round(evilness_rating/maximal_evilness * 2 * initial(blood_sucking), 0.1), 1)
 	if(evilness_rating < 10)
 		color = pickweight(possible_colors)
 	if(length(adjectives))
