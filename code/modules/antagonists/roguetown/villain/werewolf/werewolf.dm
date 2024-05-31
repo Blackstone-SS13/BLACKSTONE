@@ -82,8 +82,6 @@
 	if(mind.has_antag_datum(/datum/antagonist/zombie)) return
 	if(mind.has_antag_datum(/datum/antagonist/werewolf)) return
 
-	message_admins("WW TM: [src] has been infected")
-
 	var/datum/antagonist/werewolf/new_antag = new /datum/antagonist/werewolf/lesser()
 	mind.add_antag_datum(new_antag)
 
