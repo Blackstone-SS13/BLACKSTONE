@@ -106,7 +106,7 @@
 				for(var/datum/wound/wound as anything in wounds)
 					bodypart_status += wound.get_visible_name(user)
 		
-	if(!length(bodypart_status))
+	if(length(bodypart_status) <= 1)
 		bodypart_status += "[src] is healthy."
 
 	if(length(embedded_objects))
