@@ -917,7 +917,7 @@
 	name = "dragonscale necklace"
 	desc = ""
 	icon_state = "bktrinket"
-	max_integrity = 10000
+	max_integrity = 100000
 	armor = list("blunt" = 100, "slash" = 100, "stab" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT,BCLASS_BLUNT)
 	blocksound = PLATEHIT
@@ -939,6 +939,7 @@
 		user.change_stat("constitution", 2)
 		user.change_stat("endurance", 2)
 		user.change_stat("speed", 2)
+		getArmor("blunt" = 100, "slash" = 100, "stab" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 0)
 		active_item = TRUE
 	else
 		to_chat(user, "<span class='notice'>I feel an evil power about that necklace..</span>")
