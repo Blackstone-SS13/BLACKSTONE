@@ -174,9 +174,8 @@
 	blood_storage = BLOOD_VOLUME_SURVIVE
 	blood_maximum = BLOOD_VOLUME_BAD
 
-/obj/item/natural/worms/leech/cheele/attack_right(mob/user)
+/obj/item/natural/worms/leech/cheele/attack_self(mob/user)
 	. = ..()
-	giving = !giving
 	if(giving)
 		user.visible_message("<span class='notice'>[user] squeezes [src].</span>",\
 							"<span class='notice'>I squeeze [src]. It will now infuse blood.</span>")
