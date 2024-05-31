@@ -43,7 +43,7 @@
 			. += "<span class='warning'>[p_they(TRUE)] want[p_s()] a meal.</span>"
 		if(0 to 0.1)
 			. += "<span class='dead'>[p_theyre(TRUE)] starved.</span>"
-	if(giving)
+	if(!giving)
 		. += "<span class='warning'>[p_theyre(TRUE)] slurping.</span>"
 	else
 		. += "<span class='notice'>[p_theyre(TRUE)] gorfing.</span>"
@@ -103,9 +103,10 @@
 	if(consistent)
 		return FALSE
 	var/static/list/possible_colors = list(
-		"#472783" = 10,
-		"#276c83" = 2,
-		"#368327" = 2,
+		"#9860ff" = 8,
+		"#bcff49" = 4,
+		"#ffce49" = 2,
+		"#79ddff" = 2,
 		"#ff7878" = 1,
 		"#ff31e4" = 1,
 	)
@@ -137,7 +138,7 @@
 	switch(evilness_rating)
 		if(10 to INFINITY) //maximized evilness holy shit
 			adjectives += pick("evil", "malevolent", "misanthropic")
-			descs += "<span class='warning'>This one is bursting with hatred!</span>"
+			descs += "<span class='danger'>This one is bursting with hatred!</span>"
 		if(5) //this leech is painfully average, it gets no adjectives
 			if(prob(3))
 				adjectives += pick("average", "ordinary", "boring")

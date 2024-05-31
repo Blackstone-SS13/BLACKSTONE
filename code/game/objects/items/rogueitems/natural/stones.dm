@@ -158,10 +158,10 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	var/list/blunt_intents = list(/datum/intent/mace/strike/wood, /datum/intent/mace/smash/wood)
 	var/list/sharp_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/thrust, /datum/intent/dagger/chop)
 
-	var/bluntness_rating = rand(1,10)
-	var/sharpness_rating = rand(1,10)
+	var/bluntness_rating = rand(0,10)
+	var/sharpness_rating = rand(0,10)
 
-	var/stone_personality_rating = rand(1,25)
+	var/stone_personality_rating = rand(0,25)
 
 	//This is so sharpness and bluntness's name and descs come in randomly before or after each other
 	//Magic will always be in front for now, and personality will be after magic.
@@ -169,7 +169,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	var/list/desc_jumbler = list()
 
 	switch(bluntness_rating)
-		if(1 to 8)
+		if(2 to 8)
 			extra_intent_list += pick(blunt_intents) // Add one
 		if(9 to 10)
 			for(var/muhdik in blunt_intents) // add all intent to possible things
@@ -179,7 +179,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 			desc_jumbler += pick(GLOB.stone_bluntness_descs)
 
 	switch(sharpness_rating)
-		if(1 to 8)
+		if(2 to 8)
 			extra_intent_list += pick(sharp_intents) // Add one
 		if(9 to 10)
 			for(var/mofugga in sharp_intents) // add all intent to possible things
@@ -215,7 +215,7 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	var/max_force_range = sharpness_rating + bluntness_rating // Add them together
 	//max_force_range = round(max_force_range/2) // Divide by 2 and round jus incase
 
-	bonus_force = rand(1, max_force_range) // Your total bonus force is now between 1 and your sharpness/bluntness totals
+	bonus_force = rand(0, max_force_range) // Your total bonus force is now between 1 and your sharpness/bluntness totals
 
 	if(prob(5)) // We hit the jackpot, a magical stone! JUST FOR ME!
 		filters += filter(type="drop_shadow", x=0, y=0, size=1, offset=2, color=rgb(rand(1,255),rand(1,255),rand(1,255)))
@@ -225,8 +225,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		bonus_force += magic_force // Add on the magic force modifier
 
 	if(extra_intent_list.len)
-		for(var/i in 1 to extra_intent_list.len)
-			if((given_intent_list.len >= 4) || !(extra_intent_list.len)) // No more than 4 bro, and if we are empty on intents just stop here
+		for(var/i in 1 to min(4, extra_intent_list.len))
+			// No more than 4 bro, and if we are empty on intents just stop here
+			if(!length(extra_intent_list))
 				break
 			var/cock = pick(extra_intent_list) // We pick one
 			given_intent_list += cock // Add it to the list
@@ -238,9 +239,6 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	force += bonus_force // This will result in a stone that has only 40 max at a extremely low chance damage at this time of this PR.
 	throwforce += bonus_force // It gets added to throw damage too
 	possible_item_intents = given_intent_list // And heres ur new extra intents too
-
-
-
 
 /obj/item/natural/stone/attackby(obj/item/W, mob/user, params)
 	user.changeNext_move(CLICK_CD_MELEE)
