@@ -118,10 +118,10 @@
 	. = ..()
 	giving = !giving
 	if(giving)
-		user.visible_message("<span class='notice'>[user] squeezes [src].</span>"
+		user.visible_message("<span class='notice'>[user] squeezes [src].</span>",\
 							"<span class='notice'>I squeeze [src]. It will now infuse blood.</span>")
 	else
-		user.visible_message("<span class='notice'>[user] squeezes [src].</span>"
+		user.visible_message("<span class='notice'>[user] squeezes [src].</span>",\
 							"<span class='notice'>I squeeze [src]. It will now extract blood.</span>")
 
 // Cheeles never have any color
