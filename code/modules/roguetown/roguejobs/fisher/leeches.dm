@@ -35,13 +35,13 @@
 /obj/item/natural/worms/leech/examine(mob/user)
 	. = ..()
 	switch(blood_storage/blood_maximum)
-		if(0.8 to 1)
+		if(0.8 to INFINITY)
 			. += "<span class='bloody'><B>[p_theyre(TRUE)] fat and engorged with blood.</B></span>"
 		if(0.5 to 0.8)
 			. += "<span class='bloody'>[p_theyre(TRUE)] well fed.</span>"
 		if(0.1 to 0.5)
 			. += "<span class='warning'>[p_they(TRUE)] want[p_s()] a meal.</span>"
-		if(0 to 0.1)
+		if(-INFINITY to 0.1)
 			. += "<span class='dead'>[p_theyre(TRUE)] starved.</span>"
 	if(!giving)
 		. += "<span class='warning'>[p_theyre(TRUE)] [pick("slurping", "sucking", "inhaling")].</span>"
@@ -171,7 +171,7 @@
 	desc = "A beautiful, blood-infusing altruistic organism made by Pestra herself."
 	icon_state = "cheele"
 	consistent = TRUE
-	blood_storage = BLOOD_VOLUME_SAFE
+	blood_storage = BLOOD_VOLUME_SURVIVE
 	blood_maximum = BLOOD_VOLUME_BAD
 
 /obj/item/natural/worms/leech/cheele/attack_right(mob/user)
