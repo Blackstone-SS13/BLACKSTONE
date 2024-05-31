@@ -196,7 +196,7 @@
 
 /proc/get_complex_damage(obj/item/I, mob/living/user, blade_dulling)
 	var/dullfactor = 1
-	if(!I.force)
+	if(!I?.force)
 		return 0
 	var/newforce = I.force
 	testing("startforce [newforce]")

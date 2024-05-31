@@ -300,7 +300,7 @@
 	set_disabled(is_disabled())
 
 /obj/item/bodypart/proc/is_disabled()
-	if(!can_disable() || HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
+	if(!can_disable() || !owner || HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
 		return BODYPART_NOT_DISABLED
 	//yes this does mean vampires can use rotten limbs
 	if((rotted || skeletonized) && !(owner.mob_biotypes & MOB_UNDEAD))
@@ -324,9 +324,10 @@
 		return
 	disabled = new_disabled
 	last_disable = world.time
-	owner.update_health_hud() //update the healthdoll
-	owner.update_body()
-	owner.update_mobility()
+	if(owner)
+		owner.update_health_hud() //update the healthdoll
+		owner.update_body()
+		owner.update_mobility()
 	return TRUE //if there was a change.
 
 //Updates an organ's brute/burn states for use by update_damage_overlays()

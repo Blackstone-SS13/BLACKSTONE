@@ -515,8 +515,9 @@
 		if(incision.is_sewn())
 			continue
 		returned_flags |= SURGERY_INCISED
+		break
 	var/static/list/retracting_behaviors = list(
-		TOOL_RETRACTOR, 
+		TOOL_RETRACTOR,
 		TOOL_CROWBAR,
 	)
 	var/static/list/clamping_behaviors = list(
