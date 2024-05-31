@@ -16,7 +16,7 @@
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/sheriff
 	give_bank_account = 26
-	min_pq = 4
+	min_pq = 23
 	max_pq = null
 
 	cmode_music = 'sound/music/combat_guard.ogg'

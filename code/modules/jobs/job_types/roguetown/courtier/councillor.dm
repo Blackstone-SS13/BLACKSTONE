@@ -19,7 +19,7 @@
 	whitelist_req = FALSE
 	outfit = /datum/outfit/job/roguetown/councillor
 	give_bank_account = 40
-	min_pq = 2
+	min_pq = 5 // Councillor's don't hold a lot of power so it's a great role for new players to learn the ways of court without actually having much to fuck up ergo low pq requirement.
 	max_pq = null
 
 /datum/outfit/job/roguetown/councillor/pre_equip(mob/living/carbon/human/H)
