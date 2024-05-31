@@ -82,7 +82,7 @@
 
 /datum/wound/artery/reattachment
 	name = "replantation"
-	checkname = "<span class='artery'><B>UNSEWN</B></span>"
+	check_name = "<span class='artery'><B>UNSEWN</B></span>"
 	whp = 100
 	sewn_whp = 25
 	bleed_rate = 50
