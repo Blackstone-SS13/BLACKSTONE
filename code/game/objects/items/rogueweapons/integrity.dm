@@ -36,12 +36,12 @@
 
 /obj/structure/attackby(obj/item/I, mob/user, params)
 	user.changeNext_move(user.used_intent.clickcd)
-	..()
+	. = ..()
 
 
 /obj/machinery/attackby(obj/item/I, mob/user, params)
 	user.changeNext_move(user.used_intent.clickcd)
-	..()
+	. = ..()
 
 /obj/item/attackby(obj/item/I, mob/user, params)
 	user.changeNext_move(user.used_intent.clickcd)

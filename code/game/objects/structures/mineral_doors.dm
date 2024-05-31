@@ -12,7 +12,7 @@
 	icon_state = "metal"
 	max_integrity = 1000
 	integrity_failure = 0.5
-	armor = list("melee" = 10, "bullet" = 0, "laser" = 0, "energy" = 100, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 50, "acid" = 50)
+	armor = list("blunt" = 10, "slash" = 5, "stab" = 7, "bullet" = 0, "laser" = 0, "energy" = 100, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 50, "acid" = 50)
 	CanAtmosPass = ATMOS_PASS_DENSITY
 	rad_flags = RAD_PROTECT_CONTENTS | RAD_NO_CONTAMINATE
 	rad_insulation = RAD_MEDIUM_INSULATION
@@ -144,7 +144,7 @@
 		if(HAS_TRAIT(user, TRAIT_BASHDOORS))
 			if(locked)
 				user.visible_message("<span class='warning'>[user] bashes into [src]!</span>")
-				take_damage(200, "brute", "melee", 1)
+				take_damage(200, "brute", "blunt", 1)
 			else
 				playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
 				force_open()
@@ -611,7 +611,7 @@
 	closeSound = 'sound/foley/doors/shut.ogg'
 	sheetType = null
 	resistance_flags = FLAMMABLE
-	max_integrity = 1000
+	max_integrity = 500
 	damage_deflection = 12
 	layer = ABOVE_MOB_LAYER
 	opacity = FALSE
@@ -636,12 +636,12 @@
 	over_state = "fancy_woodopen"
 
 /obj/structure/mineral_door/wood/deadbolt
-	desc = ""
+	desc = "This door comes with a deadbolt."
 	icon_state = "wooddir"
 	base_state = "wood"
 	var/lockdir
 	keylock = FALSE
-	max_integrity = 500
+	max_integrity = 1000
 	over_state = "woodopen"
 	kickthresh = 10
 	openSound = 'sound/foley/doors/shittyopen.ogg'
