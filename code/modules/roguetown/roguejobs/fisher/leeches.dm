@@ -28,7 +28,7 @@
 /obj/item/natural/worms/leech/Initialize()
 	. = ..()
 	//leech lore
-	color = get_color()
+	leech_lore()
 
 /obj/item/natural/worms/leech/examine(mob/user)
 	. = ..()
@@ -97,15 +97,30 @@
 	return FALSE
 
 /// LEECH LORE... Collect em all!
-/obj/item/natural/worms/leech/proc/get_color()
-	var/static/list/leech_lore = list(
+/obj/item/natural/worms/leech/proc/leech_lore()
+	var/static/list/adjectives = list(
+		"blood-sucking" = 20,
+		"disgusting" = 10,
+		"vile" = 8,
+		"repugnant" = 4,
+		"revolting" = 4,
+		"grotesque" = 4,
+		"hideous" = 4,
+		"sad" = 2,
+		"pathetic" = 2,
+		"graggoid" = 1,
+		"zizoid" = 1,
+	)
+	var/static/list/colors = list(
 		"#472783" = 10,
 		"#276c83" = 2,
 		"#368327" = 2,
 		"#ff7878" = 1,
 		"#ff31e4" = 1,
 	)
-	return pickweight(leech_lore)
+	color = pickweight(colors)
+	name = "[pickweight(adjectives)] [name]"
+	return TRUE
 
 /obj/item/natural/worms/leech/cheele
 	name = "cheele"
@@ -124,6 +139,6 @@
 		user.visible_message("<span class='notice'>[user] squeezes [src].</span>",\
 							"<span class='notice'>I squeeze [src]. It will now extract blood.</span>")
 
-// Cheeles never have any color
-/obj/item/natural/worms/leech/get_color()
-	return null
+// Cheeles don't need lore they're already special
+/obj/item/natural/worms/leech/leech_lore()
+	return FALSE
