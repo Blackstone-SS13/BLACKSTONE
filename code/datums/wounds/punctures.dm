@@ -48,7 +48,7 @@
 	sewn_bleed_rate = 0.1
 	clotting_rate = 0.01
 	sewn_clotting_rate = 0.01
-	clotting_threshold = 0.5
+	clotting_threshold = null
 	sewn_clotting_threshold = 0.25
 	sew_threshold = 100
 

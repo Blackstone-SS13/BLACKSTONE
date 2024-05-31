@@ -38,6 +38,12 @@
 	skill_min = SKILL_LEVEL_JOURNEYMAN
 	skill_median = SKILL_LEVEL_JOURNEYMAN
 
+/datum/surgery_step/clamp/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
+	. = ..()
+	if(!.)
+		return
+	return !(bodypart.get_surgery_flags() & SURGERY_CLAMPED)
+
 /datum/surgery_step/clamp/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to clamp bleeders in [target]'s [parse_zone(target_zone)]...</span>",
 		"<span class='notice'>[user] begins to clamp bleeders in [target]'s [parse_zone(target_zone)].</span>",
@@ -63,6 +69,12 @@
 	time = 2.4 SECONDS
 	skill_min = SKILL_LEVEL_JOURNEYMAN
 	skill_median = SKILL_LEVEL_JOURNEYMAN
+
+/datum/surgery_step/retract/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
+	. = ..()
+	if(!.)
+		return
+	return !(bodypart.get_surgery_flags() & SURGERY_RETRACTED)
 
 /datum/surgery_step/retract/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to retract [target]'s [parse_zone(target_zone)]...</span>",

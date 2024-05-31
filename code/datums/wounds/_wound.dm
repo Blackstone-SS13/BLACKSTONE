@@ -235,6 +235,10 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Called on handle_wounds(), on the life() proc
 /datum/wound/proc/on_life()
+	var/surgery_flags = bodypart_owner?.get_surgery_flags()
+	// No clotting or healing while the bodypart is being operated on
+	if(surgery_flags & SURGERY_RETRACTED | SURGERY_CLAMPED)
+		return
 	if(!isnull(clotting_threshold) && clotting_rate && (bleed_rate > clotting_threshold))
 		bleed_rate = max(clotting_threshold, bleed_rate - clotting_rate)
 	if(passive_healing)

@@ -156,6 +156,7 @@
 	new /obj/item/rogueweapon/surgery/scalpel(src)
 	new /obj/item/rogueweapon/surgery/saw(src)
 	new /obj/item/rogueweapon/surgery/hemostat(src)
+	new /obj/item/rogueweapon/surgery/hemostat(src) //2 forceps so you can clamp bleeders AND manipulate organs
 	new /obj/item/rogueweapon/surgery/retractor(src)
 	new /obj/item/rogueweapon/surgery/bonesetter(src)
 	new /obj/item/rogueweapon/surgery/cautery(src)

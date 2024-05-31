@@ -45,7 +45,7 @@
 					blood_volume = min(blood_volume + (4 * buckled.sleepy), BLOOD_VOLUME_NORMAL)
 				for(var/obj/item/bodypart/affecting as anything in bodyparts)
 					//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
-					if(affecting.get_bleed_rate() < 1)
+					if((affecting.get_bleed_rate() < 1) && !(affecting.get_surgery_flags() & SURGERY_RETRACTED | SURGERY_CLAMPED))
 						if(affecting.heal_damage(buckled.sleepy, buckled.sleepy, required_status = BODYPART_ORGANIC))
 							src.update_damage_overlays()
 						for(var/datum/wound/wound as anything in affecting.wounds)
@@ -87,7 +87,7 @@
 							blood_volume = min(blood_volume + 2, BLOOD_VOLUME_NORMAL)
 						for(var/obj/item/bodypart/affecting as anything in bodyparts)
 							//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
-							if(affecting.get_bleed_rate() < 1)
+							if((affecting.get_bleed_rate() < 1) && !(affecting.get_surgery_flags() & SURGERY_RETRACTED | SURGERY_CLAMPED))
 								if(affecting.heal_damage(0.5, 0.5, required_status = BODYPART_ORGANIC))
 									src.update_damage_overlays()
 								for(var/datum/wound/wound as anything in affecting.wounds)

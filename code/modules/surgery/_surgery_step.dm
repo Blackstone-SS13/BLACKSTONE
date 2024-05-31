@@ -313,7 +313,7 @@
 	if(do_after(user, modded_time, target = target))
 		var/success = !try_to_fail && ((iscyborg(user) && !silicons_obey_prob) || prob(success_prob)) && chem_check(target)
 		if(success && success(user, target, target_zone, tool, intent))
-			if(repeating)
+			if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
 				initiate(user, target, target_zone, tool, intent, try_to_fail)
 			. = TRUE
 		else if(failure(user, target, target_zone, tool, intent, success_prob))

@@ -17,7 +17,7 @@
 		TOOL_SCREWDRIVER = 50,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	time = 2.5 SECONDS
+	time = 6 SECONDS
 	requires_tech = TRUE
 	replaced_by = /datum/surgery_step
 	repeating = TRUE
@@ -98,65 +98,65 @@
 /********************BRUTE STEPS********************/
 /datum/surgery_step/heal/brute/basic
 	name = "Tend bruises"
-	brutehealing = 5
-	missinghpbonus = 15
+	brutehealing = 10
+	missinghpbonus = 7.5
 	requires_tech = FALSE
 	replaced_by = /datum/surgery_step/heal/brute/upgraded
 
 /datum/surgery_step/heal/brute/upgraded
 	name = "Tend bruises (Adv.)"
-	brutehealing = 5
-	missinghpbonus = 10
+	brutehealing = 10
+	missinghpbonus = 5
 	replaced_by = /datum/surgery_step/heal/brute/upgraded/femto
 
 /datum/surgery_step/heal/brute/upgraded/femto
 	name = "Tend bruises (Exp.)"
-	brutehealing = 5
-	missinghpbonus = 5
+	brutehealing = 10
+	missinghpbonus = 2.5
 	replaced_by = null
 
 /********************BURN STEPS********************/
 /datum/surgery_step/heal/burn/basic
 	name = "Tend burns"
-	burnhealing = 5
-	missinghpbonus = 15
+	burnhealing = 10
+	missinghpbonus = 7.5
 	requires_tech = FALSE
 	replaced_by = /datum/surgery_step/heal/burn/upgraded
 
 /datum/surgery_step/heal/burn/upgraded
 	name = "Tend burns (Adv.)"
-	burnhealing = 5
-	missinghpbonus = 10
+	burnhealing = 10
+	missinghpbonus = 5
 	replaced_by = /datum/surgery_step/heal/burn/upgraded/femto
 
 /datum/surgery_step/heal/burn/upgraded/femto
 	name = "Tend burns (Exp.)"
-	burnhealing = 5
-	missinghpbonus = 5
+	burnhealing = 10
+	missinghpbonus = 2.5
 	replaced_by = null
 
 /********************COMBO STEPS********************/
 /datum/surgery_step/heal/combo
 	name = "Tend damage"
-	brutehealing = 3
-	burnhealing = 3
-	missinghpbonus = 15
+	brutehealing = 6
+	burnhealing = 6
+	missinghpbonus = 7.5
 	time = 1 SECONDS
 	requires_tech = FALSE
 	replaced_by = /datum/surgery_step/heal/combo/upgraded
 
 /datum/surgery_step/heal/combo/upgraded
 	name = "Tend damage (Adv.)"
-	brutehealing = 3
-	burnhealing = 3
-	missinghpbonus = 10
+	brutehealing = 6
+	burnhealing = 6
+	missinghpbonus = 5
 	replaced_by = /datum/surgery_step/heal/combo/upgraded/femto
 
 /datum/surgery_step/heal/combo/upgraded/femto
 	name = "Tend damage (Exp.)"
-	brutehealing = 3
-	burnhealing = 3
-	missinghpbonus = 5
+	brutehealing = 6
+	burnhealing = 6
+	missinghpbonus = 2.5
 	replaced_by = null
 
 /datum/surgery_step/heal/combo/upgraded/femto/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)
