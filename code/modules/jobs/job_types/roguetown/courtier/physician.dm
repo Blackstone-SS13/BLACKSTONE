@@ -48,6 +48,7 @@
 		/obj/item/rogueweapon/surgery/retractor = 1,
 		/obj/item/rogueweapon/surgery/bonesetter = 1,
 		/obj/item/rogueweapon/surgery/cautery = 1,
+		/obj/item/natural/worms/leech/cheele = 1, //little buddy
 	)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)

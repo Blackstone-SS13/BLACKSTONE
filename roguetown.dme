@@ -3156,6 +3156,7 @@
 #include "code\modules\roguetown\roguejobs\farmer\plantedcrops.dm"
 #include "code\modules\roguetown\roguejobs\farmer\tools.dm"
 #include "code\modules\roguetown\roguejobs\fisher\fish.dm"
+#include "code\modules\roguetown\roguejobs\fisher\leeches.dm"
 #include "code\modules\roguetown\roguejobs\fisher\rod.dm"
 #include "code\modules\roguetown\roguejobs\fisher\worms.dm"
 #include "code\modules\roguetown\roguejobs\gravedigger\gravemarker.dm"
