@@ -41,6 +41,10 @@
 			. += "<span class='warning'>[p_they(TRUE)] want[p_s()] a meal.</span>"
 		if(0 to 0.1)
 			. += "<span class='dead'>[p_theyre(TRUE)] starved.</span>"
+	if(giving)
+		. += "<span class='warning'>[p_theyre(TRUE)] slurping.</span>"
+	else
+		. += "<span class='notice'>[p_theyre(TRUE)] gorfing.</span>"
 
 /obj/item/natural/worms/leech/attack(mob/living/M, mob/user)
 	if(ishuman(M))
@@ -109,13 +113,6 @@
 	icon_state = "cheele"
 	blood_storage = BLOOD_VOLUME_SAFE
 	blood_maximum = BLOOD_VOLUME_BAD
-
-/obj/item/natural/worms/leech/cheele/examine(mob/user)
-	. = ..()
-	if(giving)
-		. += "<span class='warning'>[p_theyre(TRUE)] slurping.</span>"
-	else
-		. += "<span class='notice'>[p_theyre(TRUE)] gorfing.</span>"
 
 /obj/item/natural/worms/leech/cheele/attack_right(mob/user)
 	. = ..()
