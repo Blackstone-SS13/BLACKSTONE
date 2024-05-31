@@ -159,7 +159,7 @@
 			for(var/i in 1 to adjective_amount)
 				adjectives += pickweight(possible_adjectives)
 				descs += pickweight(possible_descs)
-	blood_sucking = max(round(evilness_rating/maximal_evilness * 2 * initial(blood_sucking), 0.1), 1)
+	blood_sucking = max(round(evilness_rating/MAX_LEECH_EVILNESS * 2 * initial(blood_sucking), 0.1), 1)
 	if(evilness_rating < 10)
 		color = pickweight(possible_colors)
 	if(length(adjectives))
