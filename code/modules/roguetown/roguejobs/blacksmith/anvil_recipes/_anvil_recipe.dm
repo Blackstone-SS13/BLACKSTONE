@@ -1,6 +1,9 @@
 /datum/anvil_recipe
 	var/name
 	var/list/additional_items = list()
+	var/material_quality = 0 // accumulated per added ingot (decided by quality of smelting per ingot)
+	var/num_of_materials = 1 // why are additional_items and req_bar 2 different things?! THE SLOP!
+	var/skill_quality = 0 // accumulated per hit, variant on the skill of the smith.
 	var/appro_skill = /datum/skill/craft/blacksmithing
 	var/req_bar
 	var/created_item
@@ -15,6 +18,7 @@
 
 /datum/anvil_recipe/New(datum/P, ...)
 	parent = P
+	num_of_materials += additional_items.len
 	. = ..()
 
 /datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE)
@@ -28,8 +32,10 @@
 		return FALSE
 	var/moveup = 1
 	var/proab = 3
+	var/skill_level
 	if(user.mind)
-		moveup += round((user.mind.get_skill_level(appro_skill) * 6) * (breakthrough == 1 ? 1.5 : 1))
+		skill_level = user.mind.get_skill_level(appro_skill)
+		moveup += round((skill_level * 6) * (breakthrough == 1 ? 1.5 : 1))
 		moveup -= 3 * craftdiff
 		if(!user.mind.get_skill_level(appro_skill))
 			proab = 23
@@ -54,14 +60,14 @@
 			user.visible_message("<span class='warning'>[user] fumbles with the bar!</span>")
 			return FALSE
 	else
-		if(user.mind)
-			if(isliving(user))
-				var/mob/living/L = user
-				var/boon = user.mind.get_learning_boon(appro_skill)
-				var/amt2raise = L.STAINT/2 // (L.STAINT+L.STASTR)/4 optional: add another stat that isn't int
-				//i feel like leveling up takes forever regardless, this would just make it faster
-				if(amt2raise > 0)
-					user.mind.adjust_experience(appro_skill, amt2raise * boon, FALSE)
+		if(user.mind && isliving(user))
+			skill_quality += rand(skill_level*8, skill_level*17)*skill_level*(breakthrough == 1 ? 1.5 : 1)
+			var/mob/living/L = user
+			var/boon = user.mind.get_learning_boon(appro_skill)
+			var/amt2raise = L.STAINT/2 // (L.STAINT+L.STASTR)/4 optional: add another stat that isn't int
+			//i feel like leveling up takes forever regardless, this would just make it faster
+			if(amt2raise > 0)
+				user.mind.adjust_experience(appro_skill, amt2raise * boon, FALSE)
 		if(breakthrough)
 			user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
 		else
@@ -72,3 +78,5 @@
 	needed_item = null
 	user.visible_message("<span class='info'>[user] adds [needed_item_text]</span>")
 	needed_item_text = null
+
+/datum/anvil_recipe/proc/handle_creation(/obj/item/I)

@@ -17,3 +17,17 @@
 
 // Gets the reference for the skill type that was given
 #define GetSkillRef(A) (SSskills.all_skills[A])
+
+//Blacksmith resultant skills
+#define BLACKSMITH_LEVEL_CRUDE 0
+#define BLACKSMITH_LEVEL_POOR 1
+#define BLACKSMITH_LEVEL_COMPETENT 2
+#define BLACKSMITH_LEVEL_ATTENTIVE 3
+#define BLACKSMITH_LEVEL_MASTERFUL 4
+#define BLACKSMITH_LEVEL_FLAWLESS 5
+
+//Forging resultant skills
+#define SMELTERY_LEVEL_SPOIL 0
+#define SMELTERY_LEVEL_POOR 1
+#define SMELTERY_LEVEL_NORMAL 2
+#define SMELTERY_LEVEL_GOOD 3
