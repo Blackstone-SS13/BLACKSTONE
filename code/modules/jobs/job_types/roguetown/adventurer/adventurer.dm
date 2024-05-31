@@ -19,7 +19,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 
 	display_order = JDO_ADVENTURER
 	show_in_credits = FALSE
-	min_pq = 0
+	min_pq = 6
 	max_pq = null
 	
 	wanderer_examine = TRUE
