@@ -114,7 +114,7 @@
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	sewrepair = FALSE
-	max_integrity = 200
+	max_integrity = 250
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/dropped(mob/living/user, show_message = TRUE)
 	. = ..()
