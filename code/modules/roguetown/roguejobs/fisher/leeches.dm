@@ -20,6 +20,8 @@
 	var/consistent = FALSE
 	/// Are we giving or receiving blood?
 	var/giving = FALSE
+	/// How much blood we waste away on process()
+	var/drainage = 1
 	/// How much blood we suck on on_embed_life()
 	var/blood_sucking = 2
 	/// How much toxin damage we heal on on_embed_life()
@@ -33,6 +35,11 @@
 	. = ..()
 	//leech lore
 	leech_lore()
+
+/obj/item/natural/worms/leech/process()
+	if(!drainage)
+		return PROCESS_KILL
+	blood_storage = max(blood_storage - drainage, 0)
 
 /obj/item/natural/worms/leech/examine(mob/user)
 	. = ..()
@@ -49,6 +56,8 @@
 		. += "<span class='warning'>[p_theyre(TRUE)] [pick("slurping", "sucking", "inhaling")].</span>"
 	else
 		. += "<span class='notice'>[p_theyre(TRUE)] [pick("vomiting", "gorfing", "exhaling")].</span>"
+	if(drainage)
+		START_PROCESSING(SSobj, src)
 
 /obj/item/natural/worms/leech/attack(mob/living/M, mob/user)
 	if(ishuman(M))
@@ -174,6 +183,7 @@
 	icon_state = "cheele"
 	color = null
 	consistent = TRUE
+	drainage = 0
 	blood_storage = BLOOD_VOLUME_SURVIVE
 	blood_maximum = BLOOD_VOLUME_BAD
 
