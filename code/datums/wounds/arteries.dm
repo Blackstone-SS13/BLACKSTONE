@@ -79,3 +79,14 @@
 	var/mob/living/carbon/carbon_owner = owner
 	if(!carbon_owner.stat && prob(5))
 		carbon_owner.vomit(1, blood = TRUE, stun = TRUE)
+
+/datum/wound/artery/reattachment
+	name = "replantation"
+	checkname = "<span class='artery'><B>UNSEWN</B></span>"
+	whp = 100
+	sewn_whp = 25
+	bleed_rate = 50
+	sewn_bleed_rate = 0.5
+	woundpain = 60
+	sewn_woundpain = 30
+	disabling = TRUE

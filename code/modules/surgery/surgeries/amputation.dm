@@ -32,7 +32,7 @@
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	time = 6.4 SECONDS
-	surgery_flags = SURGERY_BROKEN
+	surgery_flags = SURGERY_INCISION | SURGERY_BROKEN
 	requires_bodypart_type = NONE
 	skill_min = SKILL_LEVEL_APPRENTICE
 	skill_median = SKILL_LEVEL_JOURNEYMAN
