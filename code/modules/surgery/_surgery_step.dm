@@ -321,7 +321,7 @@
 			. = TRUE
 		else if(failure(user, target, target_zone, tool, intent, success_prob))
 			if(user.client?.prefs.showrolls)
-				to_chat(user, "<span class='warning'>Surgery fail! ([success_prob])</span>")
+				to_chat(user, "<span class='warning'>Surgery fail! [success_prob]%</span>")
 			. = FALSE
 
 	return .
