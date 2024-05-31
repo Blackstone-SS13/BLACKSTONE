@@ -107,12 +107,14 @@
 	name = "Tend bruises (Adv.)"
 	brutehealing = 10
 	missinghpbonus = 5
+	requires_tech = TRUE
 	replaced_by = /datum/surgery_step/heal/brute/upgraded/femto
 
 /datum/surgery_step/heal/brute/upgraded/femto
 	name = "Tend bruises (Exp.)"
 	brutehealing = 10
 	missinghpbonus = 2.5
+	requires_tech = TRUE
 	replaced_by = null
 
 /********************BURN STEPS********************/
@@ -127,12 +129,14 @@
 	name = "Tend burns (Adv.)"
 	burnhealing = 10
 	missinghpbonus = 5
+	requires_tech = TRUE
 	replaced_by = /datum/surgery_step/heal/burn/upgraded/femto
 
 /datum/surgery_step/heal/burn/upgraded/femto
 	name = "Tend burns (Exp.)"
 	burnhealing = 10
 	missinghpbonus = 2.5
+	requires_tech = TRUE
 	replaced_by = null
 
 /********************COMBO STEPS********************/
@@ -150,6 +154,7 @@
 	brutehealing = 6
 	burnhealing = 6
 	missinghpbonus = 5
+	requires_tech = TRUE
 	replaced_by = /datum/surgery_step/heal/combo/upgraded/femto
 
 /datum/surgery_step/heal/combo/upgraded/femto
@@ -157,6 +162,7 @@
 	brutehealing = 6
 	burnhealing = 6
 	missinghpbonus = 2.5
+	requires_tech = TRUE
 	replaced_by = null
 
 /datum/surgery_step/heal/combo/upgraded/femto/failure(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, success_prob)

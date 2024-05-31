@@ -311,6 +311,7 @@
 
 	var/modded_time = round(time * speed_mod, 1)
 	if(do_after(user, modded_time, target = target))
+		LAZYREMOVE(target.surgeries, target_zone)
 		var/success = !try_to_fail && ((iscyborg(user) && !silicons_obey_prob) || prob(success_prob)) && chem_check(target)
 		if(success && success(user, target, target_zone, tool, intent))
 			if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
@@ -321,7 +322,6 @@
 				to_chat(user, "<span class='warning'>Surgery fail! ([success_prob])</span>")
 			. = FALSE
 
-	LAZYREMOVE(target.surgeries, target_zone)
 	return .
 
 /datum/surgery_step/proc/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
