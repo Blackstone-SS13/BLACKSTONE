@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_ROT_EATER = "<span class='necrosis'>I can eat rotten food.</span>",
 	TRAIT_ORGAN_EATER = "<span class='bloody'>I can eat organs and raw flesh.</span>",
 	TRAIT_SOUL_EXAMINE = "<span class='deadsay'>I know when someone's soul has departed.</span>",
-	TRAIT_CRACKHEAD = "<span class='love'>I can use drugs as much as I want!</span>"
+	TRAIT_CRACKHEAD = "<span class='love'>I can use drugs as much as I want!</span>",
 	TRAIT_MISSING_NOSE = "<span class='warning'>I struggle to breathe.</span>",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
