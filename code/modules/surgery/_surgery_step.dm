@@ -137,13 +137,13 @@
 		if(the_stasis_bed?.op_computer)
 			opcomputer = the_stasis_bed.op_computer
 
-	if(!opcomputer)
-		return FALSE
-	if(opcomputer.stat & (NOPOWER | BROKEN))
+	if(!opcomputer || (opcomputer.stat & (NOPOWER | BROKEN)))
+		if(!requires_tech)
+			return TRUE
 		return FALSE
 	if(replaced_by in opcomputer.advanced_surgery_steps)
 		return FALSE
-	if(requires_tech && !(type in opcomputer.advanced_surgery_steps))
+	if(!(type in opcomputer.advanced_surgery_steps))
 		return FALSE
 	return TRUE
 
@@ -307,24 +307,26 @@
 		LAZYREMOVE(target.surgeries, target_zone)
 		return FALSE
 	
-	. = FALSE
 	var/speed_mod = get_speed_modifier(user, target, target_zone, tool, intent)
 	var/success_prob = max(get_success_probability(user, target, target_zone, tool, intent), 0)
 
 	var/modded_time = round(time * speed_mod, 1)
-	if(do_after(user, modded_time, target = target))
+	if(!do_after(user, modded_time, target = target))
 		LAZYREMOVE(target.surgeries, target_zone)
-		var/success = !try_to_fail && ((iscyborg(user) && !silicons_obey_prob) || prob(success_prob)) && chem_check(target)
-		if(success && success(user, target, target_zone, tool, intent))
-			if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
-				initiate(user, target, target_zone, tool, intent, try_to_fail)
-			. = TRUE
-		else if(failure(user, target, target_zone, tool, intent, success_prob))
-			if(user.client?.prefs.showrolls)
-				to_chat(user, "<span class='warning'>Surgery fail! [success_prob]%</span>")
-			. = FALSE
+		return FALSE
 
-	return .
+	LAZYREMOVE(target.surgeries, target_zone)
+	var/success = !try_to_fail && ((iscyborg(user) && !silicons_obey_prob) || prob(success_prob)) && chem_check(target)
+	if(success && success(user, target, target_zone, tool, intent))
+		if(repeating && can_do_step(user, target, target_zone, tool, intent, try_to_fail))
+			initiate(user, target, target_zone, tool, intent, try_to_fail)
+		return TRUE
+	else if(failure(user, target, target_zone, tool, intent, success_prob))
+		if(user.client?.prefs.showrolls)
+			to_chat(user, "<span class='warning'>Surgery fail! [success_prob]%</span>")
+		return FALSE
+		
+	return FALSE
 
 /datum/surgery_step/proc/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to perform surgery on [target]...</span>",

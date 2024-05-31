@@ -69,6 +69,14 @@
 	if(iscarbon(affected))
 		var/mob/living/carbon/carbon_affected = affected
 		carbon_affected.vomit(blood = TRUE)
+	var/static/list/heartaches = list(
+		"OOHHHH MY HEART!",
+		"MY HEART! IT HURTS!",
+		"I AM DYING!",
+		"MY HEART IS TORN!",
+		"MY HEART IS BLEEDING!",
+	)
+	to_chat(affected, "<span class='userdanger'>[pick(heartaches)]</span>")
 	if(HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 

@@ -89,8 +89,8 @@
 	var/urdamageamt_burn = brutehealing * 0.8
 	var/urdamageamt_brute = burnhealing * 0.8
 	if(missinghpbonus)
-		urdamageamt_brute += round((target.getBruteLoss()/ (missinghpbonus*2)),0.1)
-		urdamageamt_burn += round((target.getFireLoss()/ (missinghpbonus*2)),0.1)
+		urdamageamt_brute += round((target.getBruteLoss()/(missinghpbonus*2)),0.1)
+		urdamageamt_burn += round((target.getFireLoss()/(missinghpbonus*2)),0.1)
 
 	target.take_bodypart_damage(urdamageamt_brute, urdamageamt_burn)
 	return TRUE

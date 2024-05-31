@@ -19,7 +19,7 @@
 #define TOOL_SCALPEL		"scalpel"
 #define TOOL_SAW			"saw"
 #define TOOL_BONESETTER		"bonesetter"
-#define TOOL_SUTURE			"needle"
+#define TOOL_SUTURE			"suture"
 
 // If delay between the start and the end of tool operation is less than MIN_TOOL_SOUND_DELAY,
 // tool sound is only played when op is started. If not, it's played twice.
