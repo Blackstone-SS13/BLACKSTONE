@@ -38,8 +38,16 @@
 	neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	r_hand = /obj/item/rogueweapon/woodstaff
-	backl = /obj/item/storage/backpack/rogue/satchel
-	backpack_contents = list(/obj/item/needle/pestra = 1, /obj/item/reagent_containers/glass/bottle/rogue/healthpot = 2)
+	backl = /obj/item/storage/backpack/rogue/backpack
+	backpack_contents = list(
+		/obj/item/needle/pestra = 1,
+		/obj/item/rogueweapon/surgery/scalpel = 1,
+		/obj/item/rogueweapon/surgery/hemostat = 1,
+		/obj/item/rogueweapon/surgery/retractor = 1,
+		/obj/item/rogueweapon/surgery/saw = 1,
+		/obj/item/rogueweapon/surgery/cautery = 1,
+		/obj/item/reagent_containers/glass/bottle/rogue/healthpot = 2,
+	)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
@@ -59,9 +67,3 @@
 			H.change_stat("speed", -1)
 			H.change_stat("intelligence", 1)
 			H.change_stat("perception", 1)
-
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
-	C.holder_mob = H
-	C.update_devotion(50, 50)
-	C.grant_spells(H)
-	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)

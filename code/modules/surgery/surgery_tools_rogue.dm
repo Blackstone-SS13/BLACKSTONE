@@ -76,13 +76,13 @@
 /obj/item/rogueweapon/surgery/cautery
 	name = "cautery iron"
 	desc = "A tool used to cauterize wounds. Heat it up before use."
-	icon_state = "scalpel"
+	icon_state = "cauteryiron"
 	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash, /datum/intent/use)
 	slot_flags = ITEM_SLOT_HIP
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
-	force = 15
-	throwforce = 15
+	force = 18
+	throwforce = 18
 	wdefense = 3
 	wbalance = -1
 	associated_skill = /datum/skill/combat/maces
@@ -93,6 +93,12 @@
 	var/cool_timer
 	/// Whether or not we are heated up
 	var/heated = FALSE
+
+/obj/item/rogueweapon/surgery/cautery/update_icon_state()
+	. = ..()
+	icon_state = initial(icon_state)
+	if(heated)
+		icon_state = "[initial(icon_state)]_hot"
 
 /obj/item/rogueweapon/surgery/cautery/pre_attack(atom/A, mob/living/user, params)
 	if(!istype(user.a_intent, /datum/intent/use))
