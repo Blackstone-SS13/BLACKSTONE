@@ -917,15 +917,14 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 
 ///Returns the sharpness of src. If you want to get the sharpness of an item use this.
 /obj/item/proc/get_sharpness()
-	//Oh no, we are dulled out
+	//Oh no, we are dulled out!
 	if(max_blade_int && (blade_int <= 0))
 		return FALSE
 	var/max_sharp = sharpness
-	for(var/X in possible_item_intents)
-		var/datum/intent/D = new X()
-		if(D.blade_class == BCLASS_CUT)
+	for(var/datum/intent/intent as anything in possible_item_intents)
+		if(initial(intent.blade_class) == BCLASS_CUT)
 			max_sharp = max(max_sharp, IS_SHARP)
-		if(D.blade_class == BCLASS_CHOP)
+		if(initial(intent.blade_class) == BCLASS_CHOP)
 			max_sharp = max(max_sharp, IS_SHARP)
 	return max_sharp
 
