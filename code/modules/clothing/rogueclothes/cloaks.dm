@@ -942,6 +942,7 @@
 		active_item = TRUE
 	else
 		to_chat(user, "<span class='notice'>I feel an evil power about that necklace..</span>")
+		armor = list("melee" = 0, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 		active_item = TRUE
 
 /obj/item/clothing/neck/roguetown/blkknight/dropped(mob/living/user)
@@ -957,6 +958,7 @@
 			active_item = FALSE
 		else
 			to_chat(user, "<span class='notice'>Strange, I don't feel that power anymore..</span>")
+			armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 0)
 			active_item = FALSE
 			
 
