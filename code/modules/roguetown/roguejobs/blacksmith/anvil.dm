@@ -98,6 +98,9 @@
 
 	if(hingot && hingot.currecipe && hingot.currecipe.needed_item && istype(W, hingot.currecipe.needed_item))
 		hingot.currecipe.item_added(user)
+		if(istype(W, /obj/item/ingot))
+			var/obj/item/ingot/I = W
+			hingot.currecipe.material_quality += I.quality
 		qdel(W)
 		return
 
@@ -141,6 +144,7 @@
         var/datum/chosen_recipe = input(user, "Choose A Creation", "Anvil") as null|anything in sortNames(appro_recipe.Copy())
         if(!hingot.currecipe && chosen_recipe)
             hingot.currecipe = new chosen_recipe.type(hingot)
+			hingot.currecipe.material_quality += hingot.quality
             return TRUE
     
     return FALSE
