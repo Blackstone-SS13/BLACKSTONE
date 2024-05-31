@@ -172,6 +172,7 @@
 	name = "cheele"
 	desc = "A beautiful, blood-infusing altruistic organism made by Pestra herself."
 	icon_state = "cheele"
+	color = null
 	consistent = TRUE
 	blood_storage = BLOOD_VOLUME_SURVIVE
 	blood_maximum = BLOOD_VOLUME_BAD
