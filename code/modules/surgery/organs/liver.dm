@@ -102,3 +102,7 @@
 	if(. & EMP_PROTECT_SELF)
 		return
 	damage += 100/severity
+
+/obj/item/organ/liver/dwarf
+	name = "dwarf liver"
+	desc = ""
