@@ -16,8 +16,6 @@
 
 	/// How long does the step take for someone with average skill and an average tool?
 	var/time = 1 SECONDS
-	/// Is this step realized via middle click instead of normal click?
-	var/middle_click_step = FALSE
 	/// Random surgery flags that mostly indicate additional requirements
 	var/surgery_flags = SURGERY_BLOODY | SURGERY_INCISED
 	/// Intents that can be used to perform this surgery step
@@ -302,14 +300,14 @@
 	return TRUE	//returns TRUE so we don't stab the guy in the dick or wherever.
 
 /datum/surgery_step/proc/initiate(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail = FALSE)
-	target.surgeries[target_zone] = src
+	LAZYSET(target.surgeries, target_zone, src)
 	if(!preop(user, target, target_zone, tool, intent))
-		target.surgeries -= target_zone
+		LAZYREMOVE(target.surgeries, target_zone)
 		return FALSE
 	
 	. = FALSE
 	var/speed_mod = get_speed_modifier(user, target, target_zone, tool, intent)
-	var/success_prob = get_success_probability(user, target, target_zone, tool, intent)
+	var/success_prob = max(get_success_probability(user, target, target_zone, tool, intent), 0)
 
 	var/modded_time = round(time * speed_mod, 1)
 	if(do_after(user, modded_time, target = target))
@@ -323,7 +321,7 @@
 				to_chat(user, "<span class='warning'>Surgery fail! ([success_prob])</span>")
 			. = FALSE
 
-	target.surgeries -= target_zone
+	LAZYREMOVE(target.surgeries, target_zone)
 	return .
 
 /datum/surgery_step/proc/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
@@ -373,6 +371,9 @@
 			success_prob *= implements[implement_type] || 1
 	success_prob *= get_location_modifier(target)
 	success_prob *= get_skill_modifier(user, target, target_zone, tool, intent)
+	//even if lying is not required, not lying down does you no good
+	if(target.mobility_flags & MOBILITY_STAND)
+		success_prob *= 0.8
 
 	return success_prob
 

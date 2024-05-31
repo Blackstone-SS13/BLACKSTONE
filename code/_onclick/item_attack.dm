@@ -122,9 +122,9 @@
 		if(M.d_intent == INTENT_PARRY)
 			if(!M.get_active_held_item() && !M.get_inactive_held_item()) //we parried with a bracer, redirect damage
 				if(M.active_hand_index == 1)
-					user.tempatarget = "l_arm"
+					user.tempatarget = BODY_ZONE_L_ARM
 				else
-					user.tempatarget = "r_arm"
+					user.tempatarget = BODY_ZONE_R_ARM
 				if(M.attacked_by(src, user)) //we change intents when attacking sometimes so don't play if we do (embedding items)
 					if(user.used_intent == cached_intent)
 						var/tempsound = user.used_intent.hitsound

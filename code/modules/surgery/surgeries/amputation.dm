@@ -19,8 +19,9 @@
 /datum/surgery_step/amputate
 	name = "Amputation"
 	implements = list(
-		TOOL_SCALPEL = 100, 
-		TOOL_SAW = 100,
+		TOOL_SCALPEL = 75, 
+		TOOL_SAW = 60,
+		TOOL_SHARP = 40,
 	)
 	possible_locs = list(
 		BODY_ZONE_HEAD,
@@ -33,6 +34,8 @@
 	time = 6.4 SECONDS
 	surgery_flags = SURGERY_BROKEN
 	requires_bodypart_type = NONE
+	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 
 /datum/surgery_step/amputate/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to sever [target]'s [parse_zone(target_zone)]...</span>",

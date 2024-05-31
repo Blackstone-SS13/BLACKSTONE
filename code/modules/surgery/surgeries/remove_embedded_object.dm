@@ -8,12 +8,14 @@
 /datum/surgery_step/remove_object
 	name = "Remove embedded objects"
 	implements = list(
-		TOOL_HEMOSTAT = 100,
-		TOOL_HAND = 70,
+		TOOL_HEMOSTAT = 80,
+		TOOL_HAND = 50,
 	)
 	time = 3.2 SECONDS
 	accept_hand = TRUE
 	surgery_flags = SURGERY_INCISED
+	skill_min = SKILL_LEVEL_NOVICE
+	skill_median = SKILL_LEVEL_NOVICE
 
 /datum/surgery_step/remove_object/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
 	. = ..()

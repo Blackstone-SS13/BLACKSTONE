@@ -1,3 +1,4 @@
+/* RETARDED
 /datum/surgery_step/extract_organ
 	name = "remove heart"
 	accept_hand = 1
@@ -36,3 +37,4 @@
 	var/obj/item/organ/heart/gland/gland = tool
 	gland.Insert(target, 2)
 	return 1
+*/

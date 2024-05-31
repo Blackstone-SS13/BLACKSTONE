@@ -3308,6 +3308,7 @@
 #include "code\modules\surgery\surgeries\plastic_surgery.dm"
 #include "code\modules\surgery\surgeries\prosthetic_replacement.dm"
 #include "code\modules\surgery\surgeries\remove_embedded_object.dm"
+#include "code\modules\surgery\surgeries\wounds.dm"
 #include "code\modules\tgs\includes.dm"
 #include "code\modules\tgui\external.dm"
 #include "code\modules\tgui\states.dm"

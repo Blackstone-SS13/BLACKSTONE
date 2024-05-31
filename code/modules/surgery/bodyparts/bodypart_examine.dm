@@ -47,6 +47,8 @@
 				bodypart_status += "[src] is numb to touch."
 			if(BODYPART_DISABLED_PARALYSIS)
 				bodypart_status += "[src] is limp."
+			if(BODYPART_DISABLED_CLAMPED)
+				bodypart_status += "[src] is clamped."
 			else
 				bodypart_status += "[src] is crippled."
 	if(has_wound(/datum/wound/fracture))

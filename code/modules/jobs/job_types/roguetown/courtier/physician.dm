@@ -43,9 +43,10 @@
 		/obj/item/reagent_containers/glass/bottle/rogue/healthpot = 2,
 		/obj/item/needle/pestra = 1,
 		/obj/item/rogueweapon/surgery/scalpel = 1,
+		/obj/item/rogueweapon/surgery/saw = 1,
 		/obj/item/rogueweapon/surgery/hemostat = 1,
 		/obj/item/rogueweapon/surgery/retractor = 1,
-		/obj/item/rogueweapon/surgery/saw = 1,
+		/obj/item/rogueweapon/surgery/bonesetter = 1,
 		/obj/item/rogueweapon/surgery/cautery = 1,
 	)
 	if(H.mind)

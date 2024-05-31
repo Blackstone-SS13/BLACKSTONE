@@ -48,18 +48,20 @@
 	time = 6.4 SECONDS
 	accept_hand = TRUE
 	implements = list(
-		/obj/item/organ = 100, 
-		/obj/item/organ_storage = 100,
+		/obj/item/organ = 80, 
+		/obj/item/organ_storage = 80,
 		/obj/item/reagent_containers/food/snacks/organ = 0,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED
 	/// Implements used to extract an organ - This really should be split into two steps...
 	var/list/implements_extract = list(
-		TOOL_HEMOSTAT = 100,
-		TOOL_HAND = 75,
-		TOOL_CROWBAR = 55,
+		TOOL_HEMOSTAT = 80,
+		TOOL_CROWBAR = 65,
+		TOOL_HAND = 60,
 	)
+	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_median = SKILL_LEVEL_EXPERT
 
 /datum/surgery_step/manipulate_organs/New()
 	. = ..()

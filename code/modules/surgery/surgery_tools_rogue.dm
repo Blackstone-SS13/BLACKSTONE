@@ -30,9 +30,26 @@
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	tool_behaviour = TOOL_SCALPEL
 
+/obj/item/rogueweapon/surgery/saw
+	name = "saw"
+	desc = "A tool used to carve through bone."
+	icon_state = "bonesaw"
+	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
+	slot_flags = ITEM_SLOT_HIP
+	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
+	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
+	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
+	force = 16
+	throwforce = 16
+	wdefense = 3
+	wbalance = 1
+	w_class = WEIGHT_CLASS_NORMAL
+	thrown_bclass = BCLASS_CHOP
+	tool_behaviour = TOOL_SAW
+
 /obj/item/rogueweapon/surgery/hemostat
 	name = "forceps"
-	desc = "A tool used to clamp down on tissue."
+	desc = "A tool used to clamp down on soft tissue."
 	icon_state = "forceps"
 	possible_item_intents = list(/datum/intent/use)
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
@@ -54,24 +71,18 @@
 	wbalance = 1
 	w_class = WEIGHT_CLASS_NORMAL
 	thrown_bclass = BCLASS_BLUNT
-	tool_behaviour = TOOL_HEMOSTAT
+	tool_behaviour = TOOL_RETRACTOR
 
-/obj/item/rogueweapon/surgery/saw
-	name = "saw"
-	desc = "A tool used to carve through bone."
-	icon_state = "bonesaw"
-	possible_item_intents = list(/datum/intent/dagger/cut, /datum/intent/dagger/chop/cleaver)
-	slot_flags = ITEM_SLOT_HIP
-	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
-	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
+/obj/item/rogueweapon/surgery/bonesetter
+	name = "bone forceps"
+	desc = "A tool used to clamp down on hard tissue."
+	icon_state = "bonesetter"
+	possible_item_intents = list(/datum/intent/use)
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
+	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
+	swingsound = list('sound/combat/wooshes/bladed/wooshsmall (1).ogg','sound/combat/wooshes/bladed/wooshsmall (2).ogg','sound/combat/wooshes/bladed/wooshsmall (3).ogg')
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
-	force = 16
-	throwforce = 16
-	wdefense = 3
-	wbalance = 1
-	w_class = WEIGHT_CLASS_NORMAL
-	thrown_bclass = BCLASS_CHOP
-	tool_behaviour = TOOL_SAW
+	tool_behaviour = TOOL_BONESETTER
 
 /obj/item/rogueweapon/surgery/cautery
 	name = "cautery iron"
@@ -93,6 +104,11 @@
 	var/cool_timer
 	/// Whether or not we are heated up
 	var/heated = FALSE
+
+/obj/item/rogueweapon/surgery/cautery/examine(mob/user)
+	. = ..()
+	if(heated)
+		. += "<span class='warning'>The tip is hot to the touch.</span>"
 
 /obj/item/rogueweapon/surgery/cautery/update_icon_state()
 	. = ..()
@@ -138,7 +154,8 @@
 
 /obj/item/storage/backpack/rogue/backpack/surgery/PopulateContents()
 	new /obj/item/rogueweapon/surgery/scalpel(src)
+	new /obj/item/rogueweapon/surgery/saw(src)
 	new /obj/item/rogueweapon/surgery/hemostat(src)
 	new /obj/item/rogueweapon/surgery/retractor(src)
-	new /obj/item/rogueweapon/surgery/saw(src)
+	new /obj/item/rogueweapon/surgery/bonesetter(src)
 	new /obj/item/rogueweapon/surgery/cautery(src)

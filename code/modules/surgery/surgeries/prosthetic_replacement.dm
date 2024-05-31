@@ -18,8 +18,8 @@
 /datum/surgery_step/add_prosthetic
 	name = "Implant limb"
 	implements = list(
-		/obj/item/bodypart = 100,
-		/obj/item/organ_storage = 100,
+		/obj/item/bodypart = 80,
+		/obj/item/organ_storage = 80,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	possible_locs = list(
@@ -33,6 +33,8 @@
 	requires_bodypart = FALSE //need a missing limb
 	requires_missing_bodypart = TRUE
 	requires_bodypart_type = NONE
+	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 
 /datum/surgery_step/add_prosthetic/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	if(istype(tool, /obj/item/organ_storage))

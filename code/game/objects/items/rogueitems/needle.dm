@@ -11,13 +11,14 @@
 	resistance_flags = FLAMMABLE
 	slot_flags = ITEM_SLOT_MOUTH
 	max_integrity = 20
+	anvilrepair = /datum/skill/craft/blacksmithing
+	tool_behaviour = TOOL_SUTURE
 	/// Amount of uses left
 	var/stringamt = 10
 	/// If this needle is infinite
 	var/infinite = FALSE
 	/// If this needle can be used to repair items
 	var/can_repair = TRUE
-	anvilrepair = /datum/skill/craft/blacksmithing
 
 /obj/item/needle/examine()
 	. = ..()

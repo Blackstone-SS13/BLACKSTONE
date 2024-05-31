@@ -12,14 +12,17 @@
 /datum/surgery_step/heal
 	name = "Repair body"
 	implements = list(
-		TOOL_HEMOSTAT = 100, 
-		TOOL_SCREWDRIVER = 65,
+		TOOL_SUTURE = 80,
+		TOOL_HEMOSTAT = 60,
+		TOOL_SCREWDRIVER = 50,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	time = 2.5 SECONDS
 	requires_tech = TRUE
 	replaced_by = /datum/surgery_step
 	repeating = TRUE
+	skill_min = SKILL_LEVEL_APPRENTICE
+	skill_median = SKILL_LEVEL_APPRENTICE
 	/// How much brute damage we heal per completion
 	var/brutehealing = 0
 	/// How much burn damage we heal per completion

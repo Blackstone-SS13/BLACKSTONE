@@ -12,12 +12,15 @@
 /datum/surgery_step/reshape_face
 	name = "Reshape face"
 	implements = list(
-		TOOL_SCALPEL = 100,
+		TOOL_SCALPEL = 70,
 		TOOL_WIRECUTTER = 50,
 		TOOL_SHARP = 35,
 	)
 	possible_locs = list(BODY_ZONE_HEAD)
 	time = 6.4 SECONDS
+	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_CLAMPED | SURGERY_RETRACTED
+	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_median = SKILL_LEVEL_EXPERT
 
 /datum/surgery_step/reshape_face/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	user.visible_message("<span class='notice'>[user] begins to alter [target]'s appearance.</span>", "<span class='notice'>I begin to alter [target]'s appearance...</span>")

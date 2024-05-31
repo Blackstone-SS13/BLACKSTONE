@@ -137,6 +137,11 @@
 	var/hott = FALSE
 	smeltresult = /obj/item/ingot/iron
 
+/obj/item/rogueweapon/tongs/examine(mob/user)
+	. = ..()
+	if(hott)
+		. += "<span class='warning'>The tip is hot to the touch.</span>"
+
 /obj/item/rogueweapon/tongs/get_temperature()
 	if(hott)
 		return FIRE_MINIMUM_TEMPERATURE_TO_SPREAD

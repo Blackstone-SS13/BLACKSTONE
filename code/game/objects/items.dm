@@ -1154,6 +1154,7 @@ GLOBAL_VAR_INIT(rpg_loot_items, FALSE)
 	return owner.dropItemToGround(src)
 
 /obj/item/update_icon()
+	. = ..()
 	update_transform()
 
 /obj/item/proc/ungrip(mob/living/carbon/user, show_message = TRUE)

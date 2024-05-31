@@ -51,3 +51,11 @@
 	clotting_threshold = 0.5
 	sewn_clotting_threshold = 0.25
 	sew_threshold = 100
+
+/datum/wound/puncture/drilling/sew_wound()
+	qdel(src)
+	return TRUE
+
+/datum/wound/puncture/drilling/cauterize_wound()
+	qdel(src)
+	return TRUE

@@ -4,12 +4,14 @@
 /datum/surgery_step/incise
 	name = "Incise"
 	implements = list(
-		TOOL_SCALPEL = 100,
-		TOOL_SHARP = 65,
-	) // 65% success with any sharp item.
+		TOOL_SCALPEL = 80,
+		TOOL_SHARP = 60,
+	) // 60% success with any sharp item.
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	time = 1.6 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_NOT_INCISED
+	skill_min = SKILL_LEVEL_NOVICE
+	skill_median = SKILL_LEVEL_APPRENTICE
 
 /datum/surgery_step/incise/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to make an incision in [target]'s [parse_zone(target_zone)]...</span>",
@@ -29,10 +31,12 @@
 /datum/surgery_step/clamp
 	name = "Clamp bleeders"
 	implements = list(
-		TOOL_HEMOSTAT = 100,
+		TOOL_HEMOSTAT = 75,
 		TOOL_WIRECUTTER = 60,
 	)
 	time = 2.4 SECONDS
+	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 
 /datum/surgery_step/clamp/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to clamp bleeders in [target]'s [parse_zone(target_zone)]...</span>",
@@ -41,7 +45,7 @@
 	return TRUE
 
 /datum/surgery_step/clamp/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	display_results(user, target, "<span class='notice'>I clamp the bleeders in [target]'s [parse_zone(target_zone)]...</span>",
+	display_results(user, target, "<span class='notice'>I clamp the bleeders in [target]'s [parse_zone(target_zone)].</span>",
 		"<span class='notice'>[user] clamps the bleeders in [target]'s [parse_zone(target_zone)].</span>",
 		"<span class='notice'>[user] clamps the bleeders in [target]'s [parse_zone(target_zone)].</span>")
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
@@ -52,11 +56,13 @@
 /datum/surgery_step/retract
 	name = "Retract incision"
 	implements = list(
-		TOOL_RETRACTOR = 100,
-		TOOL_SCREWDRIVER = 45,
+		TOOL_RETRACTOR = 75,
+		TOOL_SCREWDRIVER = 50,
 		TOOL_WIRECUTTER = 35,
 	)
 	time = 2.4 SECONDS
+	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_median = SKILL_LEVEL_JOURNEYMAN
 
 /datum/surgery_step/retract/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to retract [target]'s [parse_zone(target_zone)]...</span>",
@@ -65,7 +71,7 @@
 	return TRUE
 
 /datum/surgery_step/retract/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	display_results(user, target, "<span class='notice'>I retract [target]'s [parse_zone(target_zone)]...</span>",
+	display_results(user, target, "<span class='notice'>I retract [target]'s [parse_zone(target_zone)].</span>",
 		"<span class='notice'>[user] retract [target]'s [parse_zone(target_zone)].</span>",
 		"<span class='notice'>[user] retract [target]'s [parse_zone(target_zone)].</span>")
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
@@ -82,6 +88,8 @@
 	)
 	time = 2.4 SECONDS
 	surgery_flags = SURGERY_BLOODY
+	skill_min = SKILL_LEVEL_NOVICE
+	skill_median = SKILL_LEVEL_APPRENTICE
 
 /datum/surgery_step/cauterize/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
 	. = ..()
@@ -90,19 +98,17 @@
 	return length(bodypart.wounds)
 
 /datum/surgery_step/cauterize/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	display_results(user, target, "<span class='notice'>I begin to cauterize [target]'s [parse_zone(target_zone)]...</span>",
-		"<span class='notice'>[user] begins to cauterize [target]'s [parse_zone(target_zone)].</span>",
-		"<span class='notice'>[user] begins to cauterize [target]'s [parse_zone(target_zone)].</span>")
+	display_results(user, target, "<span class='notice'>I begin to cauterize the wounds on [target]'s [parse_zone(target_zone)]...</span>",
+		"<span class='notice'>[user] begins to cauterize the wounds on [target]'s [parse_zone(target_zone)].</span>",
+		"<span class='notice'>[user] begins to cauterize the wounds on [target]'s [parse_zone(target_zone)].</span>")
 	return TRUE
 
 /datum/surgery_step/cauterize/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
-	display_results(user, target, "<span class='notice'>I cauterize [target]'s [parse_zone(target_zone)]...</span>",
-		"<span class='notice'>[user] cauterizes [target]'s [parse_zone(target_zone)].</span>",
-		"<span class='notice'>[user] cauterizes [target]'s [parse_zone(target_zone)].</span>")
+	display_results(user, target, "<span class='notice'>I cauterize the wounds on [target]'s [parse_zone(target_zone)].</span>",
+		"<span class='notice'>[user] cauterizes the wounds on [target]'s [parse_zone(target_zone)].</span>",
+		"<span class='notice'>[user] cauterizes the wounds on [target]'s [parse_zone(target_zone)].</span>")
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
 	if(bodypart)
-		bodypart.remove_wound(/datum/wound/slash/incision)
-		bodypart.remove_wound(/datum/wound/puncture/drilling)
 		for(var/datum/wound/bleeder in bodypart.wounds)
 			bleeder.cauterize_wound()
 		bodypart.receive_damage(burn = 35) //painful, but the wounds go away eh?
@@ -113,12 +119,14 @@
 /datum/surgery_step/saw
 	name = "Saw bone"
 	implements = list(
-		TOOL_SAW = 100,
+		TOOL_SAW = 80,
 		TOOL_SHOVEL = 50,
 		TOOL_SHARP = 25,
 	)
 	time = 5 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED
+	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_median = SKILL_LEVEL_EXPERT
 
 /datum/surgery_step/saw/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
 	. = ..()
@@ -153,11 +161,13 @@
 /datum/surgery_step/drill
 	name = "Drill bone"
 	implements = list(
-		TOOL_DRILL = 100, 
-		TOOL_SCREWDRIVER = 20,
+		TOOL_DRILL = 80, 
+		TOOL_SCREWDRIVER = 25,
 	)
 	time = 3 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_RETRACTED
+	skill_min = SKILL_LEVEL_JOURNEYMAN
+	skill_median = SKILL_LEVEL_EXPERT
 
 /datum/surgery_step/drill/preop(mob/user, mob/living/carbon/target, target_zone, obj/item/tool, datum/surgery/surgery)
 	display_results(user, target, "<span class='notice'>I begin to drill into [target]'s [parse_zone(target_zone)]...</span>",

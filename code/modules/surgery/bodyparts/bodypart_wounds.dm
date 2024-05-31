@@ -409,6 +409,7 @@
 			playsound(owner, 'sound/combat/newstuck.ogg', 100, vary = TRUE)
 		if(crit_message)
 			owner.next_attack_msg += " <span class='userdanger'>[embedder] is stuck in [owner]'s [src]!</span>"
+		update_disabled()
 	return TRUE
 
 /// Removes an embedded object from this bodypart
@@ -426,9 +427,11 @@
 		embedder.forceMove(drop_location)
 	else
 		qdel(embedder)
-	if(owner && !owner?.has_embedded_objects())
-		owner.clear_alert("embeddedobject")
-		SEND_SIGNAL(owner, COMSIG_CLEAR_MOOD_EVENT, "embedded")
+	if(owner)
+		if(!owner.has_embedded_objects())
+			owner.clear_alert("embeddedobject")
+			SEND_SIGNAL(owner, COMSIG_CLEAR_MOOD_EVENT, "embedded")
+		update_disabled()
 	return TRUE
 
 /obj/item/bodypart/proc/try_bandage(obj/item/new_bandage)
