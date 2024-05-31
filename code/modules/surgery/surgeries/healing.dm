@@ -43,7 +43,7 @@
 	. = ..()
 	if(!.)
 		return
-	if(!(brutehealing && target.getBruteLoss()) && !(burnhealing && target.getFireLoss()))
+	if(!((brutehealing && target.getBruteLoss()) || (burnhealing && target.getFireLoss())))
 		return FALSE
 
 /datum/surgery_step/heal/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)

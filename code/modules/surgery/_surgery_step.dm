@@ -139,13 +139,13 @@
 
 	if(!opcomputer)
 		return FALSE
-	if(opcomputer.stat & (NOPOWER|BROKEN))
+	if(opcomputer.stat & (NOPOWER | BROKEN))
 		return FALSE
 	if(replaced_by in opcomputer.advanced_surgery_steps)
 		return FALSE
-	if(type in opcomputer.advanced_surgery_steps)
-		return TRUE
-	return FALSE
+	if(requires_tech && !(type in opcomputer.advanced_surgery_steps))
+		return FALSE
+	return TRUE
 
 /datum/surgery_step/proc/validate_user(mob/user, mob/living/target, target_zone, datum/intent/intent)
 	SHOULD_CALL_PARENT(TRUE)
