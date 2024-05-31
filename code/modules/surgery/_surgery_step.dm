@@ -61,6 +61,7 @@
 		3 = 0.6,
 		4 = 0.8,
 		5 = 1,
+		6 = 2,
 	)
 	/// Modifiers to success chance when you're below the median
 	var/list/skill_maluses = list(
@@ -69,6 +70,7 @@
 		3 = -0.6,
 		4 = -0.8,
 		5 = -1,
+		6 = -2,
 	)
 
 	/// Handles techweb-oriented surgeries
