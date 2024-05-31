@@ -37,7 +37,7 @@
 	cloak = /obj/item/clothing/cloak/black_cloak
 	id = /obj/item/clothing/ring/gold
 	belt = /obj/item/storage/belt/rogue/leather/plaquesilver
-	beltl = /obj/item/rogueweapon/huntingknife/idagger
+	beltl = /obj/item/reagent_containers/glass/bottle/waterskin
 	beltr = /obj/item/keyring/servant
 	neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 	pants = /obj/item/clothing/under/roguetown/tights/random
