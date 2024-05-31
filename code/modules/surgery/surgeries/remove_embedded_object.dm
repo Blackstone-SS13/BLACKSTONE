@@ -46,10 +46,11 @@
 		objects++
 		target.simple_remove_embedded_object(embedded)
 
+	var/s = (objects > 1 ? "s" : "")
 	if(objects > 0)
-		display_results(user, target, "<span class='notice'>I successfully remove [objects] objects from [target]'s [bodypart].</span>",
-			"<span class='notice'>[user] successfully removes [objects] objects from [target]'s [bodypart]!</span>",
-			"<span class='notice'>[user] successfully removes [objects] objects from [target]'s [bodypart]!</span>")
+		display_results(user, target, "<span class='notice'>I successfully remove [objects] object[s] from [target]'s [bodypart].</span>",
+			"<span class='notice'>[user] successfully removes [objects] object[s] from [target]'s [bodypart]!</span>",
+			"<span class='notice'>[user] successfully removes [objects] object[s] from [target]'s [bodypart]!</span>")
 	else if(bodypart)
 		to_chat(user, "<span class='warning'>I find no objects embedded in [target]'s [bodypart]!</span>")
 	else

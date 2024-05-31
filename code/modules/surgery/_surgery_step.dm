@@ -18,6 +18,8 @@
 	var/time = 1 SECONDS
 	/// Random surgery flags that mostly indicate additional requirements
 	var/surgery_flags = SURGERY_BLOODY | SURGERY_INCISED
+	/// Random surgery flags blocking certain flags
+	var/surgery_flags_blocked = NONE
 	/// Intents that can be used to perform this surgery step
 	var/list/possible_intents
 	/// Body zones this surgery can be performed on, set to null for everywhere
@@ -209,13 +211,15 @@
 		return FALSE
 	
 	var/bodypart_flags = bodypart.get_surgery_flags()
-	if((surgery_flags & SURGERY_BLOODY) && !(bodypart_flags & SURGERY_BLOODY))
+	if((surgery_flags & bodypart_flags) != surgery_flags)
 		return FALSE
-	if((surgery_flags & SURGERY_NOT_INCISED) && (bodypart_flags & SURGERY_INCISED))
+	if((surgery_flags_blocked & bodypart_flags))
 		return FALSE
 	if((surgery_flags & SURGERY_INCISED) && !(bodypart_flags & SURGERY_INCISED))
 		return FALSE
 	if((surgery_flags & SURGERY_RETRACTED) && !(bodypart_flags & SURGERY_RETRACTED))
+		return FALSE
+	if((surgery_flags & SURGERY_CLAMPED) && !(bodypart_flags & SURGERY_CLAMPED))
 		return FALSE
 	if((surgery_flags & SURGERY_BROKEN) && !(bodypart_flags & SURGERY_BROKEN))
 		return FALSE

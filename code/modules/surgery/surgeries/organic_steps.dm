@@ -9,7 +9,8 @@
 	) // 60% success with any sharp item.
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 	time = 1.6 SECONDS
-	surgery_flags = SURGERY_BLOODY | SURGERY_NOT_INCISED
+	surgery_flags = SURGERY_BLOODY
+	surgery_flags_blocked = SURGERY_INCISED
 	skill_min = SKILL_LEVEL_NOVICE
 	skill_median = SKILL_LEVEL_APPRENTICE
 
@@ -35,14 +36,9 @@
 		TOOL_WIRECUTTER = 60,
 	)
 	time = 2.4 SECONDS
+	surgery_flags_blocked = SURGERY_CLAMPED
 	skill_min = SKILL_LEVEL_JOURNEYMAN
 	skill_median = SKILL_LEVEL_JOURNEYMAN
-
-/datum/surgery_step/clamp/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
-	. = ..()
-	if(!.)
-		return
-	return !(bodypart.get_surgery_flags() & SURGERY_CLAMPED)
 
 /datum/surgery_step/clamp/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to clamp bleeders in [target]'s [parse_zone(target_zone)]...</span>",
@@ -67,6 +63,7 @@
 		TOOL_WIRECUTTER = 35,
 	)
 	time = 2.4 SECONDS
+	surgery_flags_blocked = SURGERY_RETRACTED
 	skill_min = SKILL_LEVEL_JOURNEYMAN
 	skill_median = SKILL_LEVEL_JOURNEYMAN
 
@@ -137,14 +134,9 @@
 	)
 	time = 5 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED
+	surgery_flags_blocked = SURGERY_BROKEN
 	skill_min = SKILL_LEVEL_JOURNEYMAN
 	skill_median = SKILL_LEVEL_EXPERT
-
-/datum/surgery_step/saw/validate_bodypart(mob/user, mob/living/carbon/target, obj/item/bodypart/bodypart, target_zone)
-	. = ..()
-	if(!.)
-		return
-	return !bodypart.has_wound(/datum/wound/fracture)
 
 /datum/surgery_step/saw/preop(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I begin to saw through the bone in [target]'s [parse_zone(target_zone)]...</span>",
@@ -178,6 +170,7 @@
 	)
 	time = 3 SECONDS
 	surgery_flags = SURGERY_BLOODY | SURGERY_INCISED | SURGERY_RETRACTED
+	surgery_flags_blocked = SURGERY_BROKEN
 	skill_min = SKILL_LEVEL_JOURNEYMAN
 	skill_median = SKILL_LEVEL_EXPERT
 
