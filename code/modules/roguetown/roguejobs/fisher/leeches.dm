@@ -1,3 +1,5 @@
+#define MAX_LEECH_EVILNESS 10
+
 /obj/item/natural/worms/leech
 	name = "leech"
 	desc = "A disgusting, blood-sucking parasite."
@@ -135,10 +137,9 @@
 	)
 	var/list/adjectives = list()
 	var/list/descs = list()
-	var/maximal_evilness = 10
-	var/evilness_rating = rand(0, maximal_evilness)
+	var/evilness_rating = rand(0, MAX_LEECH_EVILNESS)
 	switch(evilness_rating)
-		if(maximal_evilness to INFINITY) //maximized evilness holy shit
+		if(MAX_LEECH_EVILNESS to INFINITY) //maximized evilness holy shit
 			color = "#ff0000"
 			adjectives += pick("evil", "malevolent", "misanthropic")
 			descs += "<span class='danger'>This one is bursting with hatred!</span>"
@@ -184,3 +185,4 @@
 		user.visible_message("<span class='notice'>[user] squeezes [src].</span>",\
 							"<span class='notice'>I squeeze [src]. It will now extract blood.</span>")
 
+#undef MAX_LEECH_EVILNESS
