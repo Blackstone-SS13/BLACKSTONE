@@ -35,18 +35,18 @@
 /obj/item/natural/worms/leech/examine(mob/user)
 	. = ..()
 	switch(blood_storage/blood_maximum)
-		if(0.9 to 1)
+		if(0.8 to 1)
 			. += "<span class='bloody'><B>[p_theyre(TRUE)] fat and engorged with blood.</B></span>"
-		if(0.5 to 0.9)
+		if(0.5 to 0.8)
 			. += "<span class='bloody'>[p_theyre(TRUE)] well fed.</span>"
 		if(0.1 to 0.5)
 			. += "<span class='warning'>[p_they(TRUE)] want[p_s()] a meal.</span>"
 		if(0 to 0.1)
 			. += "<span class='dead'>[p_theyre(TRUE)] starved.</span>"
 	if(!giving)
-		. += "<span class='warning'>[p_theyre(TRUE)] slurping.</span>"
+		. += "<span class='warning'>[p_theyre(TRUE)] [pick("slurping", "sucking", "inhaling")].</span>"
 	else
-		. += "<span class='notice'>[p_theyre(TRUE)] gorfing.</span>"
+		. += "<span class='notice'>[p_theyre(TRUE)] [pick("vomiting", "gorfing", "exhaling")].</span>"
 
 /obj/item/natural/worms/leech/attack(mob/living/M, mob/user)
 	if(ishuman(M))
@@ -120,6 +120,7 @@
 		"hideous" = 4,
 		"stupid" = 2,
 		"dumb" = 2,
+		"demonic" = 1,
 		"graggoid" = 1,
 		"zizoid" = 1,
 	)
@@ -137,6 +138,7 @@
 	var/evilness_rating = rand(0, 10)
 	switch(evilness_rating)
 		if(10 to INFINITY) //maximized evilness holy shit
+			color = "#ff0000"
 			adjectives += pick("evil", "malevolent", "misanthropic")
 			descs += "<span class='danger'>This one is bursting with hatred!</span>"
 		if(5) //this leech is painfully average, it gets no adjectives
@@ -154,8 +156,10 @@
 				adjective_amount = 2
 			for(var/i in 1 to adjective_amount)
 				adjectives += pickweight(possible_adjectives)
+				descs += pickweight(possible_descs)
 	blood_sucking = max(round(evilness_rating/3, 0.1), 1)
-	color = pickweight(possible_colors)
+	if(evilness_rating < 10)
+		color = pickweight(possible_colors)
 	if(length(adjectives))
 		name = "[english_list(adjectives)] [name]"
 	if(length(descs))
