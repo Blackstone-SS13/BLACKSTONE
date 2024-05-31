@@ -46,11 +46,11 @@
 	sewn_whp = 20
 	bleed_rate = 1
 	sewn_bleed_rate = 0.1
-	clotting_rate = 0.01
-	sewn_clotting_rate = 0.01
+	clotting_rate = null
 	clotting_threshold = null
-	sewn_clotting_threshold = 0.25
 	sew_threshold = 100
+	passive_healing = 0
+	sleep_healing = 0
 
 /datum/wound/puncture/drilling/sew_wound()
 	qdel(src)
