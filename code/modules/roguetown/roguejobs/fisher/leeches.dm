@@ -179,6 +179,7 @@
 
 /obj/item/natural/worms/leech/cheele/attack_self(mob/user)
 	. = ..()
+	giving = !giving
 	if(giving)
 		user.visible_message("<span class='notice'>[user] squeezes [src].</span>",\
 							"<span class='notice'>I squeeze [src]. It will now infuse blood.</span>")

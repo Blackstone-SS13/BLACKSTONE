@@ -397,7 +397,7 @@
 			msg += "<span class='warning'>[m1] barely conscious.</span>"
 		else
 			if(stat >= UNCONSCIOUS)
-				msg += "[m1] unconscious."
+				msg += "[m1] [IsSleeping() ? "sleeping" : "unconscious"]."
 			else if(eyesclosed)
 				msg += "[capitalize(m2)] eyes are closed."
 			else if(has_status_effect(/datum/status_effect/debuff/sleepytime))
