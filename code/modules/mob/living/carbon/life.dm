@@ -45,8 +45,6 @@
 				if(!bleed_rate)
 					blood_volume = min(blood_volume + (4 * sleepy_mod), BLOOD_VOLUME_NORMAL)
 				for(var/obj/item/bodypart/affecting as anything in bodyparts)
-					if(affecting.get_surgery_flags() & SURGERY_RETRACTED | SURGERY_CLAMPED)
-						continue
 					//for context, it takes 5 small cuts (0.2 x 5) or 3 normal cuts (0.4 x 3) for a bodypart to not be able to heal itself
 					if(affecting.get_bleed_rate() >= 1)
 						continue
