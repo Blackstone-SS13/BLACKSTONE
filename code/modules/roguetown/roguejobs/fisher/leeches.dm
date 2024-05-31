@@ -14,6 +14,8 @@
 		"embedded_fall_chance" = 0,
 		"embedded_bloodloss"= 0,
 	)
+	/// Consistent AKA no lore
+	var/consistent = FALSE
 	/// Are we giving or receiving blood?
 	var/giving = FALSE
 	/// How much blood we suck on on_embed_life()
@@ -98,7 +100,16 @@
 
 /// LEECH LORE... Collect em all!
 /obj/item/natural/worms/leech/proc/leech_lore()
-	var/static/list/adjectives = list(
+	if(consistent)
+		return FALSE
+	var/static/list/possible_colors = list(
+		"#472783" = 10,
+		"#276c83" = 2,
+		"#368327" = 2,
+		"#ff7878" = 1,
+		"#ff31e4" = 1,
+	)
+	var/static/list/possible_adjectives = list(
 		"blood-sucking" = 20,
 		"disgusting" = 10,
 		"vile" = 8,
@@ -106,26 +117,55 @@
 		"revolting" = 4,
 		"grotesque" = 4,
 		"hideous" = 4,
-		"sad" = 2,
-		"pathetic" = 2,
+		"stupid" = 2,
+		"dumb" = 2,
 		"graggoid" = 1,
 		"zizoid" = 1,
 	)
-	var/static/list/colors = list(
-		"#472783" = 10,
-		"#276c83" = 2,
-		"#368327" = 2,
-		"#ff7878" = 1,
-		"#ff31e4" = 1,
+	var/static/list/possible_descs = list(
+		"What a disgusting creature." = 10,
+		"Fucking gross." = 5,
+		"Slippery..." = 3,
+		"So yummy and full of blood." = 3,
+		"I love this leech!" = 2,
+		"It is so beautiful." = 2,
+		"I wish I was a leech." = 1,
 	)
-	color = pickweight(colors)
-	name = "[pickweight(adjectives)] [name]"
+	var/list/adjectives = list()
+	var/list/descs = list()
+	var/evilness_rating = rand(0, 10)
+	switch(evilness_rating)
+		if(10 to INFINITY) //maximized evilness holy shit
+			adjectives += pick("evil", "malevolent", "misanthropic")
+			descs += "<span class='warning'>This one is bursting with hatred!</span>"
+		if(5) //this leech is painfully average, it gets no adjectives
+			if(prob(3))
+				adjectives += pick("average", "ordinary", "boring")
+				descs += "This one is extremely boring to look at."
+		if(-INFINITY to 1) //this leech is pretty terrible at being a leech
+			adjectives += pick("pitiful", "pathetic", "depressing")
+			descs += "<span class='dead'>This one yearns for nothing but death.</span>"
+		else
+			var/adjective_amount = 1
+			if(prob(5))
+				adjective_amount = 3
+			else if(prob(30))
+				adjective_amount = 2
+			for(var/i in 1 to adjective_amount)
+				adjectives += pickweight(possible_adjectives)
+	blood_sucking = max(round(evilness_rating/3, 0.1), 1)
+	color = pickweight(possible_colors)
+	if(length(adjectives))
+		name = "[english_list(adjectives)] [name]"
+	if(length(descs))
+		desc = "[desc] [jointext(descs, " ")]"
 	return TRUE
 
 /obj/item/natural/worms/leech/cheele
 	name = "cheele"
 	desc = "A beautiful, blood-infusing altruistic organism made by Pestra herself."
 	icon_state = "cheele"
+	consistent = TRUE
 	blood_storage = BLOOD_VOLUME_SAFE
 	blood_maximum = BLOOD_VOLUME_BAD
 
@@ -139,6 +179,3 @@
 		user.visible_message("<span class='notice'>[user] squeezes [src].</span>",\
 							"<span class='notice'>I squeeze [src]. It will now extract blood.</span>")
 
-// Cheeles don't need lore they're already special
-/obj/item/natural/worms/leech/leech_lore()
-	return FALSE

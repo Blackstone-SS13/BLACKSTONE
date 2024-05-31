@@ -6,14 +6,14 @@ GLOBAL_LIST_INIT(stone_sharpness_names, list(
 	"Acute",
 	"Edged",
 	"Fierce",
-	"Stinging"
+	"Stinging",
 ))
 
 GLOBAL_LIST_INIT(stone_sharpness_descs, list(
 	"It has a vicious edge.",
 	"This stone is akin to a knife.",
 	"It has a pointed side.",
-	"It has a serrated edge."
+	"It has a serrated edge.",
 ))
 
 GLOBAL_LIST_INIT(stone_bluntness_names, list(
@@ -26,7 +26,7 @@ GLOBAL_LIST_INIT(stone_bluntness_names, list(
 	"Meaty",
 	"Dumpy",
 	"Stout",
-	"Plump"
+	"Plump",
 ))
 
 GLOBAL_LIST_INIT(stone_bluntness_descs, list(
@@ -34,7 +34,7 @@ GLOBAL_LIST_INIT(stone_bluntness_descs, list(
 	"It is kinda hefty.",
 	"It fills the hand.",
 	"It is quite a handfull",
-	"This stone feels like it was made for ME!"
+	"This stone feels like it was made for ME!",
 ))
 
 GLOBAL_LIST_INIT(stone_magic_names, list(
@@ -58,7 +58,7 @@ GLOBAL_LIST_INIT(stone_magic_names, list(
 	"Angelic",
 	"Demonic",
 	"Devilish",
-	"Mischievous"
+	"Mischievous",
 ))
 
 GLOBAL_LIST_INIT(stone_magic_descs, list(
@@ -67,7 +67,7 @@ GLOBAL_LIST_INIT(stone_magic_descs, list(
 	"It has an odd sigil on it.",
 	"It has a small red stone pressed into it.",
 	"It is covered in tiny cracks.",
-	"It looks unsafe."
+	"It looks unsafe.",
 ))
 
 GLOBAL_LIST_INIT(stone_personalities, list(
@@ -112,18 +112,19 @@ GLOBAL_LIST_INIT(stone_personalities, list(
 	"Horripilation",
 	"Terror",
 	"Earthquakes",
-	"Thunder"
+	"Thunder",
 ))
 
 GLOBAL_LIST_INIT(stone_personality_descs, list(
-	"This stone is full of personality",
+	"This stone is full of personality!",
 	"They say the intelligent races built their foundations with stones.",
 	"One must think, where did this stone come from?",
 	"If all stones were like this, then they would be some pretty great stones.",
-	"I wish my personality was like this stones",
-	"I could sure do a whole lot with this stone", 
-	"I love stones!"
+	"I wish my personality was like this stone's...",
+	"I could sure do a whole lot with this stone.", 
+	"I love stones!",
 ))
+
 /obj/item/natural/stone
 	name = "stone"
 	icon_state = "stone1"

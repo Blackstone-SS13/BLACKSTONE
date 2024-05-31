@@ -850,7 +850,7 @@
 			var/mob/living/L = hud.mymob
 			L.look_around()
 	
-/atom/movable/screen/eye_intent/update_icon(mob/user)
+/atom/movable/screen/eye_intent/update_icon_state()
 	. = ..()
 	var/mob/living/L = hud.mymob
 	if(!istype(L))
@@ -858,9 +858,9 @@
 		return
 	if(L.eyesclosed)
 		icon_state = "eye_closed"
-	else if(user.tempfixeye)
+	else if(L.tempfixeye)
 		icon_state = "eye_target"
-	else if(user.fixedeye)
+	else if(L.fixedeye)
 		icon_state = "eye_fixed"
 	else
 		icon_state = "eye"
@@ -880,7 +880,7 @@
 			iris.icon_state = "oeye_fixed"
 		else
 			iris.icon_state = "oeye"
-	iris.color = sanitize_hexcolor(human.eye_color, include_crunch = TRUE)
+	iris.color = "#" + human.eye_color
 	. += iris
 
 /atom/movable/screen/eye_intent/proc/toggle(mob/user)
