@@ -434,7 +434,7 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 		allantags -= werewolf
 		pre_werewolves += werewolf
 		werewolf.special_role = ROLE_WEREWOLF
-		werewolf.assigned_role = ROLE_WEREWOLF
+		//werewolf.assigned_role = ROLE_WEREWOLF
 		werewolf.restricted_roles = restricted_jobs.Copy()
 		testing("[key_name(werewolf)] has been selected as a WEREWOLF")
 		log_game("[key_name(werewolf)] has been selected as a [werewolf.special_role]")
@@ -456,7 +456,8 @@ var/global/list/roguegamemodes = list("Rebellion", "Vampires and Werewolves", "E
 ///////////////// WWOLF
 	for(var/datum/mind/werewolf in pre_werewolves)
 		var/datum/antagonist/new_antag = new /datum/antagonist/werewolf()
-		addtimer(CALLBACK(werewolf, TYPE_PROC_REF(/datum/mind, add_antag_datum), new_antag), rand(10,100))
+		//addtimer(CALLBACK(werewolf, TYPE_PROC_REF(/datum/mind, add_antag_datum), new_antag), rand(10,100))
+		werewolf.add_antag_datum(new_antag)
 		GLOB.pre_setup_antags -= werewolf
 		werewolves += werewolf
 
