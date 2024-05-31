@@ -94,7 +94,7 @@
 									if(!wound.sleep_healing)
 										continue
 									wound.heal_wound(wound.sleep_healing * 0.5)
-						adjustToxLoss(-0.1)
+						adjustToxLoss(-0.5)
 
 			else if(fallingas)
 				fallingas = 0
