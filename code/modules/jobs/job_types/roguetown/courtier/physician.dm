@@ -40,13 +40,13 @@
 	r_hand = /obj/item/rogueweapon/woodstaff
 	backl = /obj/item/storage/backpack/rogue/backpack
 	backpack_contents = list(
+		/obj/item/reagent_containers/glass/bottle/rogue/healthpot = 2,
 		/obj/item/needle/pestra = 1,
 		/obj/item/rogueweapon/surgery/scalpel = 1,
 		/obj/item/rogueweapon/surgery/hemostat = 1,
 		/obj/item/rogueweapon/surgery/retractor = 1,
 		/obj/item/rogueweapon/surgery/saw = 1,
 		/obj/item/rogueweapon/surgery/cautery = 1,
-		/obj/item/reagent_containers/glass/bottle/rogue/healthpot = 2,
 	)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
@@ -57,7 +57,6 @@
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 6, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/holy, 3, TRUE)
 		H.change_stat("strength", -1)
 		H.change_stat("intelligence", 2)
 		H.change_stat("constitution", -1)

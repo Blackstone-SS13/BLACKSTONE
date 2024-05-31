@@ -191,7 +191,7 @@
 				return FALSE
 	
 	//no surgeries in the same body zone
-	if(target.surgeries[target_zone])
+	if(target_zone && LAZYACCESS(target.surgeries, target_zone))
 		return FALSE
 
 	return TRUE
@@ -294,6 +294,7 @@
 	return english_list(chems, and_text = require_all_chems ? " and " : " or ")
 
 /datum/surgery_step/proc/try_op(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent, try_to_fail = FALSE)
+	testing("[user] doing surgery step [name] on [target] [target_zone || "body"] with tool [tool || "hands"] and [intent || "none"] intent")
 	if(!can_do_step(user, target, target_zone, tool, intent, try_to_fail))
 		return FALSE
 

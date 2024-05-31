@@ -261,15 +261,17 @@
 				continue
 			if(surgery_step.can_do_step(user, src, user.zone_selected, null, user.used_intent))
 				possible_steps[surgery_step.name] = surgery_step
-		var/datum/surgery_step/done_step
-		if(length(possible_steps) > 1)
-			var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
-			if(input)
-				done_step = possible_steps[input]
-		else
-			done_step = possible_steps[possible_steps[1]]
-		if(done_step?.try_op(user, src, user.zone_selected, null, user.used_intent, try_to_fail))
-			return TRUE
+		var/possible_len = length(possible_steps)
+		if(possible_len)
+			var/datum/surgery_step/done_step
+			if(possible_len > 1)
+				var/input = input(user, "Which surgery step do you want to perform?", "PESTRA", ) as null|anything in possible_steps
+				if(input)
+					done_step = possible_steps[input]
+			else
+				done_step = possible_steps[possible_steps[1]]
+			if(done_step?.try_op(user, src, user.zone_selected, null, user.used_intent, try_to_fail))
+				return TRUE
 
 	/*
 	for(var/datum/surgery/S in surgeries)
