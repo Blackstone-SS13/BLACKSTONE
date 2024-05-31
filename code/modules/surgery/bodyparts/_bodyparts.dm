@@ -202,12 +202,12 @@
 	update_HP()
 
 /obj/item/bodypart/proc/update_HP()
+	if(!is_organic_limb() || !owner)
+		return
 	var/old_max_damage = max_damage
-	if(is_organic_limb())
-		if(owner)
-			var/new_max_damage = initial(max_damage) * (owner.STACON / 10)
-			if(new_max_damage != old_max_damage)
-				max_damage = new_max_damage
+	var/new_max_damage = initial(max_damage) * (owner.STACON / 10)
+	if(new_max_damage != old_max_damage)
+		max_damage = new_max_damage
 
 //Applies brute and burn damage to the organ. Returns 1 if the damage-icon states changed at all.
 //Damage will not exceed max_damage using this proc
