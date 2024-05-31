@@ -234,49 +234,10 @@
 			limb = dismembered
 	return limb
 
-/obj/effect/proc_holder/spell/invoked/attach_bodypart/proc/get_organ(mob/living/target, mob/living/user)
-	var/list/missing_organs = list(
-		ORGAN_SLOT_EARS,
-		ORGAN_SLOT_EYES,
-		ORGAN_SLOT_TONGUE,
-	)
-	for(var/missing_organ_slot in missing_organs)
-		if(!target.getorganslot(missing_organ_slot))
-			continue
-		missing_organs -= missing_organ_slot
-	if(!length(missing_organs))
-		return
-	var/obj/item/organ/organ
-	//try to get from user's hands first
-	for(var/obj/item/organ/potential_organ in user?.held_items)
-		if(potential_organ.owner || !(potential_organ.slot in missing_organs))
-			continue
-		organ = potential_organ
-	//then target's hands
-	if(!organ)
-		for(var/obj/item/organ/dismembered in target.held_items)
-			if(dismembered.owner || !(dismembered.slot in missing_organs))
-				continue
-			organ = dismembered
-	//then finally, 1 tile range around target
-	if(!organ)
-		for(var/obj/item/organ/dismembered in range(1, target))
-			if(dismembered.owner || !(dismembered.slot in missing_organs))
-				continue
-			organ = dismembered
-	return organ
-
 /obj/effect/proc_holder/spell/invoked/attach_bodypart/cast(list/targets, mob/living/user)
 	if(ishuman(targets[1]))
 		var/mob/living/carbon/human/target = targets[1]
 		var/obj/item/bodypart/limb = get_limb(target, user)
-		if(!limb?.attach_limb(target))
-			var/obj/item/organ/organ = get_organ(target, user)
-			if(!organ?.Insert(target))
-				return FALSE
-			target.visible_message("<span class='info'>\The [organ] attaches itself to [target]!</span>", \
-							"<span class='notice'>\The [organ] attaches itself to me!</span>")
-			return TRUE
 		target.visible_message("<span class='info'>\The [limb] attaches itself to [target]!</span>", \
 							"<span class='notice'>\The [limb] attaches itself to me!</span>")
 		return TRUE
