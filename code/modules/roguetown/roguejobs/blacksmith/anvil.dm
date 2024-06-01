@@ -9,6 +9,7 @@
 	density = TRUE
 	damage_deflection = 25
 	climbable = TRUE
+	var/previous_material_quality = 0
 
 /obj/machinery/anvil/crafted
 	icon_state = "caveanvil"
@@ -101,6 +102,10 @@
 		if(istype(W, /obj/item/ingot))
 			var/obj/item/ingot/I = W
 			hingot.currecipe.material_quality += I.quality
+			previous_material_quality = I.quality
+		else
+			hingot.currecipe.material_quality += previous_material_quality
+		hingot.currecipe.num_of_materials += 1 
 		qdel(W)
 		return
 
@@ -145,6 +150,7 @@
 		if(!hingot.currecipe && chosen_recipe)
 			hingot.currecipe = new chosen_recipe.type(hingot)
 			hingot.currecipe.material_quality += hingot.quality
+			previous_material_quality = hingot.quality
 			return TRUE
 	
 	return FALSE

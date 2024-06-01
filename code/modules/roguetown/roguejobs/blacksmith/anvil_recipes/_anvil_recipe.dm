@@ -81,7 +81,7 @@
 
 /datum/anvil_recipe/proc/handle_creation(obj/item/I)
 	material_quality = floor(material_quality/num_of_materials)-2
-	skill_quality = floor(skill_quality/1500)+material_quality
+	skill_quality = floor((skill_quality/num_of_materials)/1500)+material_quality
 	var/modifier
 	switch(skill_quality)
 		if(BLACKSMITH_LEVEL_SPOIL)
