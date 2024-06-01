@@ -46,12 +46,10 @@
 
 	outfit = null
 
-	category_flags = RT_TYPE_DISABLED_CLASS
-
 /datum/advclass/pick_everything/extra_slop_proc_ending(mob/living/carbon/human/H)
 	var/list/possible_classes = list()
-	for(var/datum/advclass/CHECKS in SSrole_class_handler.all_classes)
-		if(CHECKS.category_flags & (RT_TYPE_DISABLED_CLASS)) // shits disabled for a reason potentially really bad reasons really.
+	for(var/datum/advclass/CHECKS in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
+		if(CTAG_DISABLED in CHECKS.category_tags)
 			continue
 		possible_classes += CHECKS
 

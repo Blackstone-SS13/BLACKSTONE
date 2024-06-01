@@ -1,9 +1,8 @@
 /datum/job/roguetown
 	display_order = JOB_DISPLAY_ORDER_CAPTAIN
 
-	// These dictate how many slots we are displaying of either category if a class select handler is brought up for us
-	var/free_slot_rolls_count = 0 
-	var/combat_slot_rolls_count = 0
+	// How this works, its CTAG_DEFINE = amount_to_attempt_to_role EX: CTAG_PILGRIM = 5, CTAG_ADVENTURER = 5
+	var/list/advclass_cat_rolls
 
 /datum/job/roguetown/New()
 	. = ..()

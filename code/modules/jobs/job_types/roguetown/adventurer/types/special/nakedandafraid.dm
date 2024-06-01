@@ -16,7 +16,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/nudist
 	traits_applied = list(TRAIT_NUDIST)
-	category_flags = RT_TYPE_CHALLENGE_CLASS
+	category_tags = list(CTAG_CHALLENGE)
 
 /datum/outfit/job/roguetown/adventurer/nudist
 	allowed_patrons = list(/datum/patron/divine/dendor)

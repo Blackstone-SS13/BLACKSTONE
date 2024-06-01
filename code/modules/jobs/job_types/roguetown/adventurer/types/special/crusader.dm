@@ -15,7 +15,7 @@
 	of one of the rival Orders dedicated to retaking the holy land. \
 	The 451st crusade is sure to be the last."
 
-	category_flags = RT_TYPE_COMBAT_CLASS
+	category_tags = list(CTAG_DISABLED)
 
 /datum/outfit/job/roguetown/adventurer/crusader
 	name = "Crusader"
@@ -57,7 +57,7 @@
 	H.change_stat("perception", 1)
 	H.change_stat("strength", 2)
 
-	for(var/I in SSrole_class_handler.all_classes)
+	for(var/I in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
 		var/datum/advclass/A = I
 		if(A.name == name)
 			if(A.total_slots_occupied > 1)

@@ -16,7 +16,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/torso
 	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_STEELHEARTED)
-	category_flags = RT_TYPE_CHALLENGE_CLASS
+	category_tags = list(CTAG_CHALLENGE)
 
 /datum/outfit/job/roguetown/adventurer/torso/pre_equip(mob/living/carbon/human/H)
 	..()

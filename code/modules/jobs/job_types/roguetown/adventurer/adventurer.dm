@@ -22,8 +22,8 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	min_pq = 0
 	max_pq = null
 	
-	combat_slot_rolls_count = 5
-	
+	advclass_cat_rolls = list(CTAG_ADVENTURER = 5)
+
 	wanderer_examine = TRUE
 	advjob_examine = TRUE
 

@@ -17,7 +17,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
 	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
 	cmode_music = 'sound/music/combat_gronn.ogg'
-	category_flags = RT_TYPE_COMBAT_CLASS
+	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/barbarian
 	allowed_patrons = list(/datum/patron/divine/ravox, /datum/patron/inhumen/graggar)

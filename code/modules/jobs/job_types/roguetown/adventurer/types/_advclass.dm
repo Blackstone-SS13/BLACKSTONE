@@ -23,8 +23,8 @@
 	var/list/traits_applied
 	var/cmode_music
 
-	//What categories we are going to sort it in, keep in mind this is a set of bitflags
-	var/category_flags = RT_TYPE_DISABLED_CLASS
+	//What categories we are going to sort it in
+	var/list/category_tags = list(CTAG_DISABLED)
 
 /datum/advclass/proc/equipme(mob/living/carbon/human/H)
 	if(!H)
@@ -51,7 +51,7 @@
 	for(var/trait in traits_applied)
 		ADD_TRAIT(H, trait, ADVENTURER_TRAIT)
 
-	if(category_flags & (RT_TYPE_VILLAGER_CLASS))
+	if(CTAG_TOWNER in category_tags)
 		for(var/mob/M in GLOB.billagerspawns)
 			to_chat(M, "<span class='info'>[H.real_name] is the [name].</span>")
 		GLOB.billagerspawns -= H

@@ -13,7 +13,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/necromancer
 	pickprob = 30
 	traits_applied = list(TRAIT_ZOMBIE_IMMUNE)
-	category_flags = RT_TYPE_COMBAT_CLASS
+	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/necromancer
 	allowed_patrons = list(/datum/patron/inhumen/zizo)

@@ -26,10 +26,7 @@
 
 	total_positions = 0
 	spawn_positions = 0
-
-	free_slot_rolls_count = 5
-	combat_slot_rolls_count = 3
-	var/current_migrants = 0
+	advclass_cat_rolls = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 5)
 
 /datum/job/roguetown/drifters/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -42,10 +39,4 @@
 		if(GLOB.adventurer_hugbox_duration)
 			///FOR SOME RETARDED FUCKING REASON THIS REFUSED TO WORK WITHOUT A FUCKING TIMER IT JUST FUCKED SHIT UP
 			addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, adv_hugboxing_start)), 1)
-
-	// ha ha ha heres the snowflake logic for the shit!
-	current_migrants++ // Add one
-	if(current_migrants == 50) // When we hit the number of approximately 50
-		combat_slot_rolls_count = 0 // Set the combat slots roll count to 0, no more hobo fighters are entering for free
-
 

@@ -16,7 +16,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/miner
 
-	category_flags = RT_TYPE_FREE_CLASS | RT_TYPE_VILLAGER_CLASS
+	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 
 /datum/outfit/job/roguetown/adventurer/miner/pre_equip(mob/living/carbon/human/H)
 	..()

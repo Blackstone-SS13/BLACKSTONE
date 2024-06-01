@@ -10,7 +10,7 @@
 	maximum_possible_slots = 2
 	pickprob = 11
 	traits_applied = list(TRAIT_MEDIUMARMOR)
-	category_flags = RT_TYPE_COMBAT_CLASS
+	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/puritan
 	allowed_patrons = list(/datum/patron/old_god)

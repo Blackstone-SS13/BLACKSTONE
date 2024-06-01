@@ -37,23 +37,13 @@ SUBSYSTEM_DEF(role_class_handler)
 	var/list/special_session_queue = list()
 
 //Time for sloppa vars
-	// List of all classes, assc list: Name - Datum
-	var/list/all_classes = list()
-
-	// List of all classes that don't fall in any good criteria to be combat oriented
-	var/list/free_classes = list()
-
-	// List of all classes that are favorable for combat
-	var/list/combat_classes = list()
-	
-	// List of all classes villagers can be (These are townies)
-	var/list/villager_classes = list()
-
-	// List of all antag classes avail, these naturally result in antags
-	var/list/antag_classes = list()
-
-	// List of all challenge classes avail, these are meant to not consume rng roll slots atm
-	var/list/challenge_classes = list()
+	/*
+		This is basically a big assc list of sorted classes, 
+		The structure is as so, "category_key" = list(/datum/advclass/balls1, /datum/advclass/balls2, etc)
+		we only have one snowflake list in there rn and it is the following:
+		"all_classes" = list(every class datum)
+	*/
+	var/list/sorted_class_categories = list()
 
 
 /*
@@ -69,28 +59,19 @@ SUBSYSTEM_DEF(role_class_handler)
 
 // This covers both class datums and drifter waves
 /datum/controller/subsystem/role_class_handler/proc/build_dumbass_category_lists()
-	init_subtypes(/datum/advclass, all_classes) // Init all the classes
+
 	init_subtypes(/datum/drifter_wave, drifter_wave_data_slabs) // Init all the drifter waves
+
+	var/list/all_classes = list()
+	init_subtypes(/datum/advclass, all_classes) // Init all the classes
+	sorted_class_categories[CTAG_ALLCLASS] = all_classes
 
 	//Time to sort these retards, and sort them we shall.
 	for(var/datum/advclass/retard_datum in all_classes)
-		if(retard_datum.category_flags & (RT_TYPE_DISABLED_CLASS)) // shits disabled
-			continue
-
-		if(retard_datum.category_flags & (RT_TYPE_FREE_CLASS))
-			free_classes += retard_datum
-		
-		if(retard_datum.category_flags & (RT_TYPE_COMBAT_CLASS))
-			combat_classes += retard_datum
-
-		if(retard_datum.category_flags & (RT_TYPE_VILLAGER_CLASS))
-			villager_classes += retard_datum
-
-		if(retard_datum.category_flags & (RT_TYPE_ANTAG_CLASS))
-			antag_classes += retard_datum
-
-		if(retard_datum.category_flags & (RT_TYPE_CHALLENGE_CLASS))
-			challenge_classes += retard_datum
+		for(var/ctag in retard_datum.category_tags)
+			if(!sorted_class_categories[ctag]) // New cat
+				sorted_class_categories[ctag] = list()
+			sorted_class_categories[ctag] += retard_datum
 
 	//Well that about covers it really.
 

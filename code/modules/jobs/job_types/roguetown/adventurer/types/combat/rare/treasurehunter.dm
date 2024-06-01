@@ -17,7 +17,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/gravedigger
 	pickprob = 11
 	traits_applied = list(TRAIT_NOSTINK)
-	category_flags = RT_TYPE_COMBAT_CLASS
+	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/gravedigger/pre_equip(mob/living/carbon/human/H)
 	..()

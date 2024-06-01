@@ -5,7 +5,7 @@
 	allowed_races = list("Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dbomb
 	traits_applied = list(TRAIT_HEAVYARMOR)
-	category_flags = RT_TYPE_COMBAT_CLASS
+	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/dbomb/pre_equip(mob/living/carbon/human/H)
 	..()

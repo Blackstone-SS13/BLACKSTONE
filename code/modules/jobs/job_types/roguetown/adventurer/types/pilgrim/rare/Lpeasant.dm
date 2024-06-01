@@ -13,7 +13,7 @@
 	maximum_possible_slots = 1
 	pickprob = 5
 
-	category_flags = RT_TYPE_FREE_CLASS
+	category_tags = list(CTAG_PILGRIM)
 
 /datum/outfit/job/roguetown/adventurer/farmermaster/pre_equip(mob/living/carbon/human/H)
 	..()

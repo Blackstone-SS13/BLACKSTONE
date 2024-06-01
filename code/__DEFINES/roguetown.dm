@@ -52,15 +52,16 @@ GLOBAL_LIST_EMPTY(head_bounties)
 GLOBAL_LIST_EMPTY(adventurer_cooldowns)
 
 /*
-	ha ha ha bitflags!
-	For the shitty subjob (class) categories
+	Formerly bitflags, now we are strings
 */
-#define RT_TYPE_DISABLED_CLASS 1 // Disabled, aka don't make it fuckin APPEAR
-#define RT_TYPE_FREE_CLASS 2 // Free class - Formerly pilgrims, no specific orientation
-#define RT_TYPE_COMBAT_CLASS 4 // Combat class - oriented towards combat
-#define RT_TYPE_VILLAGER_CLASS 8 // Villager class - Villagers can use it
-#define RT_TYPE_ANTAG_CLASS 16 // Antag class - results in an antag
-#define RT_TYPE_CHALLENGE_CLASS 32 // Challenge class - Meant to be free for everyone
+
+#define CTAG_ALLCLASS		"CAT_ALLCLASS"		// jus a define for allclass to not deal with actively typing strings
+#define CTAG_DISABLED 		"CAT_DISABLED" 		// Disabled, aka don't make it fuckin APPEAR
+#define CTAG_PILGRIM 		"CAT_PILGRIM"  		// Pilgrim classes
+#define CTAG_ADVENTURER 	"CAT_ADVENTURER"  	// Adventurer classes
+#define CTAG_TOWNER 		"CAT_TOWNER"  		// Villager class - Villagers can use it
+#define CTAG_ANTAG 			"CAT_ANTAG"  		// Antag class - results in an antag
+#define CTAG_CHALLENGE 		"CAT_CHALLENGE"  	// Challenge class - Meant to be free for everyone
 
 
 /*

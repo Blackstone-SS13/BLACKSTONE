@@ -10,7 +10,7 @@
 	maximum_possible_slots = 1
 
 	horse = /mob/living/simple_animal/hostile/retaliate/rogue/saigabuck/tame/saddled
-	category_flags = RT_TYPE_DISABLED_CLASS
+	category_tags = list(CTAG_DISABLED)
 
 /datum/outfit/job/roguetown/adventurer/whitecheese
 	name = "WHITE CHEESE"

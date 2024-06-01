@@ -18,9 +18,7 @@
 	max_pq = null
 	wanderer_examine = FALSE
 	advjob_examine = TRUE
-
-	free_slot_rolls_count = 20
-
+	advclass_cat_rolls = list(CTAG_TOWNER = 20)
 
 /datum/job/roguetown/villager/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
