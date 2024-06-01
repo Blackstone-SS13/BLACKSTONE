@@ -347,8 +347,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 			return "You have played [jobtitle] recently."
 		if(JOB_UNAVAILABLE_JOB_COOLDOWN)
 			if(usr.ckey in GLOB.job_respawn_delays)
-				var/next_respawn_time = GLOB.job_respawn_delays[usr.ckey]
-				var/remaining_time = round((next_respawn_time - world.time) / 10)
+				var/remaining_time = round((GLOB.job_respawn_delays[usr.ckey] - world.time) / 10)
 				return "You must wait [remaining_time] seconds before playing as an [jobtitle] again."
 	return "Error: Unknown job availability."
 
