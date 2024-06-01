@@ -34,7 +34,7 @@
 	id = /obj/item/clothing/ring/gold
 	belt = /obj/item/storage/belt/rogue/leather/plaquesilver
 	beltl = /obj/item/rogueweapon/huntingknife/idagger
-	beltr = /obj/item/keyring/servant
+	beltr = /obj/item/keyring/physician
 	neck = /obj/item/clothing/neck/roguetown/psicross/pestra
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	r_hand = /obj/item/rogueweapon/woodstaff
