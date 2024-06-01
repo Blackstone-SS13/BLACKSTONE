@@ -647,9 +647,6 @@
 		return
 	to_chat(user, "<span class='warning'>I can't grind this!</span>")
 
-/obj/item/reagent_containers/glass/mortar/attack_obj(obj/target, mob/living/user)
-	..()
-
 /obj/item/reagent_containers/glass/saline
 	name = "saline canister"
 	volume = 5000
