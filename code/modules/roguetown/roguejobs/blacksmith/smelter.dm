@@ -27,7 +27,7 @@
 			ore -= I
 			I.forceMove(T)
 			T.hingot = I
-			if(user.mind && isliving(user) && T.hingot?.smithed)
+			if(user.mind && isliving(user) && T.hingot?.smelted)
 				var/mob/living/L = user
 				var/boon = user.mind.get_learning_boon(/datum/skill/craft/smelting)
 				var/amt2raise = L.STAINT/2 // (L.STAINT+L.STASTR)/4 optional: add another stat that isn't int

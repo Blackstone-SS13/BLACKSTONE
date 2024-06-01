@@ -72,7 +72,7 @@
 	. = ..()
 	if(smelt_quality)
 		quality = smelt_quality
-		smithed = TRUE
+		smelted = TRUE
 		switch(quality)
 			if(SMELTERY_LEVEL_POOR)
 				name = "poor-quality [name]"
