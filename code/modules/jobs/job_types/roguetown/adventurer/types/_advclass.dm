@@ -21,6 +21,7 @@
 	var/horse = FALSE
 	var/vampcompat = TRUE
 	var/list/traits_applied
+	var/cmode_music
 
 	//What categories we are going to sort it in, keep in mind this is a set of bitflags
 	var/category_flags = RT_TYPE_DISABLED_CLASS
@@ -57,7 +58,8 @@
 
 /datum/advclass/proc/post_equip(mob/living/carbon/human/H)
 	addtimer(CALLBACK(H,TYPE_PROC_REF(/mob/living/carbon/human, add_credit)), 20)
-	return
+	if(cmode_music)
+		H.cmode_music = cmode_music
 
 /*
 	Whoa! we are checking requirements here!

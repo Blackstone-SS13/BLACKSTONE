@@ -6,6 +6,7 @@
 	anchored = TRUE
 	density = FALSE
 	max_integrity = 15
+	debris = list(/obj/item/natural/silk = 1)
 
 
 
@@ -15,7 +16,7 @@
 
 
 /obj/structure/spider/run_obj_armor(damage_amount, damage_type, damage_flag = 0, attack_dir)
-	if(damage_flag == "melee")
+	if(damage_flag == "blunt" || damage_flag == "slash" || damage_flag == "stab")
 		switch(damage_type)
 			if(BURN)
 				damage_amount *= 2
@@ -49,7 +50,7 @@
 	else if(isliving(mover))
 		if(istype(mover.pulledby, /mob/living/simple_animal/hostile/poison/giant_spider))
 			return TRUE
-		if(prob(50) && !HAS_TRAIT(mover, RTRAIT_WEBWALK))
+		if(prob(50) && !HAS_TRAIT(mover, TRAIT_WEBWALK))
 			to_chat(mover, "<span class='danger'>I get stuck in \the [src] for a moment.</span>")
 			return FALSE
 	else if(istype(mover, /obj/projectile))

@@ -11,7 +11,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/sentinal
 	maximum_possible_slots = 5
 	pickprob = 50
-	traits_applied = list(RTRAIT_MEDIUMARMOR)
+	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_DODGEEXPERT)
 	category_flags = RT_TYPE_COMBAT_CLASS
 
 

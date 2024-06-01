@@ -1,6 +1,6 @@
 /datum/job/roguetown/nightman
 	title = "Nightmaster"
-	flag = JESTER
+	flag = NIGHTMASTER
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = 0
@@ -23,7 +23,7 @@
 
 	allowed_ages = ADULT_AGES_LIST
 	outfit = /datum/outfit/job/roguetown/nightman
-	display_order = JDO_NIGHTMAN
+	display_order = JDO_NIGHTMASTER
 	give_bank_account = TRUE
 	min_pq = -10
 	max_pq = null
@@ -37,7 +37,6 @@
 	belt = /obj/item/storage/belt/rogue/leather
 	beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 	backpack_contents = list(/obj/item/rogueweapon/huntingknife/idagger = 1)
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 4, TRUE)

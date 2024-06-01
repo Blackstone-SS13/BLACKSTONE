@@ -15,7 +15,8 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/barbarian
-	traits_applied = list(RTRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
+	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
+	cmode_music = 'sound/music/combat_gronn.ogg'
 	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/barbarian
@@ -45,7 +46,8 @@
 			H.mind.adjust_skillrank(/datum/skill/labor/fishing, pick(0,1), TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 			beltr = /obj/item/rogueweapon/sword/iron
 			belt = /obj/item/storage/belt/rogue/leather
@@ -86,7 +88,8 @@
 			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 			beltr = /obj/item/rogueweapon/stoneaxe/woodcut
 			r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
@@ -126,7 +129,8 @@
 					H.mind.adjust_skillrank(/datum/skill/labor/fishing, pick(0,1), TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-					H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+					H.mind.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
+					H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 					beltr = /obj/item/rogueweapon/sword/iron
 					belt = /obj/item/storage/belt/rogue/leather
@@ -167,7 +171,8 @@
 					
 					H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/polearms, 1, TRUE)
-					H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+					H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
+					H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 					beltr = /obj/item/rogueweapon/stoneaxe/woodcut
 					r_hand = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
@@ -205,7 +210,8 @@
 					H.mind.adjust_skillrank(/datum/skill/labor/fishing, 1, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
 					H.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
-					H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE) 
+					H.mind.adjust_skillrank(/datum/skill/combat/axes, 4, TRUE) 
+					H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE) 
 					H.mind.adjust_skillrank(/datum/skill/combat/swords, 4, TRUE)
 					beltr = /obj/item/rogueweapon/stoneaxe/woodcut
 					belt = /obj/item/storage/belt/rogue/leather
@@ -224,22 +230,20 @@
 		H.update_body()
 	if(H.dna?.species)
 		H.dna.species.soundpack_m = new /datum/voicepack/male/warrior()
-	H.cmode_music = 'sound/music/combat_gronn.ogg'
 /* 
-
 	var/randy = rand(1,5)
 	switch(randy) // Pick wep. Choose skill.
 		if(1 to 2)
 			beltr = /obj/item/rogueweapon/stoneaxe/woodcut
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 		if(3 to 4)
 			
 		if(5)
 			beltr = /obj/item/rogueweapon/mace/steel
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 */
 	//70% chance to be raceswapped to Gronn because slop lore

@@ -1,7 +1,7 @@
 /datum/job/roguetown/skeleton
-	title = "skeleton"
-	flag = GRAVEDIGGER
-	department_flag = PEASANTS
+	title = "Skeleton"
+	flag = SKELETON
+	department_flag = SLOP
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0
@@ -13,6 +13,8 @@
 	outfit = /datum/outfit/job/roguetown/skeleton
 	show_in_credits = FALSE
 	give_bank_account = FALSE
+
+	cmode_music = 'sound/music/combat_weird.ogg'
 
 /datum/job/roguetown/skeleton/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
@@ -41,7 +43,6 @@
 		H.remove_all_languages()
 		H.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/simple/claw)
 		H.update_a_intents()
-		H.cmode_music = 'sound/music/combat_weird.ogg'
 
 		var/obj/item/organ/eyes/eyes = H.getorganslot(ORGAN_SLOT_EYES)
 		if(eyes)
@@ -56,10 +57,10 @@
 		H.update_body()
 		H.mob_biotypes = MOB_UNDEAD
 		H.faction = list("undead")
-		H.name = "skeleton"
-		H.real_name = "skeleton"
+		H.name = "skelelon"
+		H.real_name = "skelelon"
 		ADD_TRAIT(H, TRAIT_NOMOOD, TRAIT_GENERIC)
-		ADD_TRAIT(H, RTRAIT_NOFATSTAM, TRAIT_GENERIC)
+		ADD_TRAIT(H, TRAIT_NOROGSTAM, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOLIMBDISABLE, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOHUNGER, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_NOBREATH, TRAIT_GENERIC)

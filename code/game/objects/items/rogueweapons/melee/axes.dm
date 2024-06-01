@@ -13,7 +13,7 @@
 	//dropshrink = 0.75
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
 	swingsound = BLADEWOOSH_MED
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/skill/combat/axes
 	max_blade_int = 100
 	minstr = 8
 	wdefense = 1
@@ -86,6 +86,7 @@
 	animname = "cut"
 	penfactor = 10
 	chargetime = 0
+	item_d_type = "slash"
 
 /datum/intent/axe/chop
 	name = "chop"
@@ -96,6 +97,7 @@
 	hitsound = list('sound/combat/hits/bladed/genchop (1).ogg', 'sound/combat/hits/bladed/genchop (2).ogg', 'sound/combat/hits/bladed/genchop (3).ogg')
 	penfactor = 20
 	swingdelay = 10
+	item_d_type = "slash"
 
 /datum/intent/axe/chop/battle
 	penfactor = 70

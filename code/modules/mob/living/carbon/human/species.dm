@@ -1245,8 +1245,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!I.species_exception || !is_type_in_list(src, I.species_exception))
 			return FALSE
 
-	var/is_nudist = HAS_TRAIT(H, RTRAIT_NUDIST)
-	var/is_retarded = HAS_TRAIT(H, RTRAIT_RETARD_ANATOMY)
+	var/is_nudist = HAS_TRAIT(H, TRAIT_NUDIST)
+	var/is_retarded = HAS_TRAIT(H, TRAIT_RETARD_ANATOMY)
 	var/num_arms = H.get_num_arms(FALSE)
 	var/num_legs = H.get_num_legs(FALSE)
 
@@ -1857,7 +1857,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(!target.lying_attack_check(user))
 			return 0
 
-		var/armor_block = target.run_armor_check(selzone, "melee", blade_dulling = user.used_intent.blade_class)
+		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = user.used_intent.blade_class)
 
 		target.lastattacker = user.real_name
 		if(target.mind)
@@ -1873,7 +1873,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			nodmg = TRUE
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
-			affecting.bodypart_attacked_by(user.used_intent.blade_class, damage, user, selzone)
+			affecting.bodypart_attacked_by(user.used_intent.blade_class, damage, user, selzone, crit_message = TRUE)
 		log_combat(user, target, "punched")
 
 		if(!nodmg)
@@ -1882,10 +1882,8 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				var/probability = damage / (2 - easy_dismember)
 				if(HAS_TRAIT(target, TRAIT_HARDDISMEMBER) && !easy_dismember)
 					probability = min(probability, 5)
-				if(prob(probability))
-					if(affecting.brute_dam > 0)
-						if(affecting.dismember())
-							playsound(get_turf(target), "desceration", 80, TRUE)
+				if(prob(probability) && affecting.dismember())
+					playsound(get_turf(target), "desecration", 80, TRUE)
 
 /*		if(user == target)
 			target.visible_message("<span class='danger'>[user] [atk_verb]ed themself![target.next_attack_msg.Join()]</span>", COMBAT_MESSAGE_RANGE, user)
@@ -2067,7 +2065,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				target.mind.attackedme[user.real_name] = world.time
 			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/skill/combat/unarmed, user.used_intent)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
-			var/armor_block = target.run_armor_check(selzone, "melee", blade_dulling = BCLASS_BLUNT)
+			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
 			var/damage = user.get_punch_dmg() * 1.4
 			target.next_attack_msg.Cut()
 			var/nodmg = FALSE
@@ -2076,7 +2074,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 				target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 			else
 				if(affecting)
-					affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected)
+					affecting.bodypart_attacked_by(BCLASS_BLUNT, damage, user, user.zone_selected, crit_message = TRUE)
 			target.visible_message("<span class='danger'>[user] stomps [target]![target.next_attack_msg.Join()]</span>", \
 							"<span class='danger'>I'm stomped by [user]![target.next_attack_msg.Join()]</span>", "<span class='hear'>I hear a sickening kick!</span>", COMBAT_MESSAGE_RANGE, user)
 			to_chat(user, "<span class='danger'>I stomp on [target]![target.next_attack_msg.Join()]</span>")
@@ -2160,7 +2158,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 		if(!affecting)
 			affecting = target.get_bodypart(BODY_ZONE_CHEST)
-		var/armor_block = target.run_armor_check(selzone, "melee", blade_dulling = BCLASS_BLUNT)
+		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
 		var/damage = user.get_punch_dmg()
 		if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
@@ -2237,10 +2235,10 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	if(user.used_intent?.penfactor)
 		pen = I.armor_penetration + user.used_intent.penfactor
 
-//	var/armor_block = H.run_armor_check(affecting, "melee", "<span class='notice'>My armor has protected my [hit_area]!</span>", "<span class='warning'>My armor has softened a hit to my [hit_area]!</span>",pen)
+//	var/armor_block = H.run_armor_check(affecting, "I.d_type", "<span class='notice'>My armor has protected my [hit_area]!</span>", "<span class='warning'>My armor has softened a hit to my [hit_area]!</span>",pen)
 
 	var/Iforce = get_complex_damage(I, user) //to avoid runtimes on the forcesay checks at the bottom. Some items might delete themselves if you drop them. (stunning yourself, ninja swords)
-	var/armor_block = H.run_armor_check(selzone, "melee", "", "",pen, damage = Iforce, blade_dulling=user.used_intent.blade_class)
+	var/armor_block = H.run_armor_check(selzone, I.d_type, "", "",pen, damage = Iforce, blade_dulling=user.used_intent.blade_class)
 
 	var/nodmg = FALSE
 
@@ -2253,27 +2251,19 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 			nodmg = TRUE
 			H.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 			if(I)
-				I.take_damage(1, BRUTE, "melee")
+				I.take_damage(1, BRUTE, I.d_type)
 		if(!nodmg)
-			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone)
-			if(should_embed_weapon(crit_wound))
+			var/datum/wound/crit_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, (Iforce * weakness) * ((100-(armor_block+armor))/100), user, selzone, crit_message = TRUE)
+			if(should_embed_weapon(crit_wound, I))
 				var/can_impale = TRUE
 				if(!affecting)
 					can_impale = FALSE
-				else
-					if(I.wlength > WLENGTH_SHORT)
-						if(affecting.body_zone != BODY_ZONE_CHEST)
-							can_impale = FALSE
-				if(can_impale)
-					if(user.Adjacent(H))
-						//H.throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
-						affecting.embedded_objects |= I
-						I.add_mob_blood(H)
-						I.forceMove(H)
-						H.emote("embed", forced = TRUE)
-						playsound(H, 'sound/combat/newstuck.ogg', 100, TRUE)
-						H.next_attack_msg += " <span class='userdanger'>[I] is stuck in [H]!</span>"
-						H.grabbedby(user, 1, item_override = I)
+				else if(I.wlength > WLENGTH_SHORT && (affecting.body_zone != BODY_ZONE_CHEST))
+					can_impale = FALSE
+				if(can_impale && user.Adjacent(H))
+					affecting.add_embedded_object(I, silent = FALSE, crit_message = TRUE)
+					H.emote("embed")
+					H.grabbedby(user, 1, item_override = I)
 //		if(H.used_intent.blade_class == BCLASS_BLUNT && I.force >= 15 && affecting.body_zone == "chest")
 //			var/turf/target_shove_turf = get_step(H.loc, get_dir(user.loc,H.loc))
 //			H.throw_at(target_shove_turf, 1, 1, H, spin = FALSE)
@@ -2287,16 +2277,12 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 	//dismemberment
 	var/bloody = 0
-	var/easy_dismember = HAS_TRAIT(H, TRAIT_EASYDISMEMBER) || affecting.rotted
-	var/probability = I.get_dismemberment_chance(affecting)
-	if(HAS_TRAIT(H, TRAIT_HARDDISMEMBER) && !easy_dismember)
-		probability = min(probability, 5)
-	if(affecting.brute_dam && prob(probability))
-		if(affecting.dismember(I.damtype, user, selzone))
-			bloody = 1
-			I.add_mob_blood(H)
-			user.update_inv_hands()
-			playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
+	var/probability = I.get_dismemberment_chance(affecting, user)
+	if(affecting.brute_dam && prob(probability) && affecting.dismember(I.damtype, user.used_intent?.blade_class, user, selzone))
+		bloody = 1
+		I.add_mob_blood(H)
+		user.update_inv_hands()
+		playsound(get_turf(H), I.get_dismember_sound(), 80, TRUE)
 
 	if(((I.damtype == BRUTE) && I.force && prob(25 + (I.force * 2))))
 		if(affecting.status == BODYPART_ORGANIC)
@@ -2458,7 +2444,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(/obj/projectile/energy/florayield)
 			H.show_message("<span class='notice'>The radiation beam dissipates harmlessly through my body.</span>")
 
-/datum/species/proc/bullet_act(obj/projectile/P, mob/living/carbon/human/H, def_zone)
+/datum/species/proc/bullet_act(obj/projectile/P, mob/living/carbon/human/H, def_zone = BODY_ZONE_CHEST)
 	// called before a projectile hit
 	if(def_zone == "head")
 		if(H.head)

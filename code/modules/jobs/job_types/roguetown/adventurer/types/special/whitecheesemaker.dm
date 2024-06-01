@@ -4,7 +4,7 @@
 	allowed_races = list("Humen",
 							"Humen")
 	outfit = /datum/outfit/job/roguetown/adventurer/whitecheese
-	traits_applied = list(RTRAIT_HEAVYARMOR, RTRAIT_BREADY, TRAIT_STEELHEARTED)
+	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_BREADY, TRAIT_STEELHEARTED)
 	// oh god oh fuck this dont seem very safe to do
 	// this looks kinda op so imma just leave it at patreon level 1 until someone puts this behind a different lock
 	maximum_possible_slots = 1
@@ -18,7 +18,8 @@
 /datum/outfit/job/roguetown/adventurer/whitecheese/pre_equip(mob/living/carbon/human/H)
 	..()
 	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
@@ -31,6 +32,7 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/riding, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/weaving, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/magic/arcane, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 4, TRUE)

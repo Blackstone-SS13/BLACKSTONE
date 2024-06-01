@@ -6,7 +6,7 @@
 		"Tiefling",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/crusader
-	traits_applied = list(RTRAIT_HEAVYARMOR)
+	traits_applied = list(TRAIT_HEAVYARMOR)
 
 	maximum_possible_slots = 1
 

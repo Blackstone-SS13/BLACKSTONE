@@ -15,6 +15,7 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/monk
+	traits_applied = list(TRAIT_DODGEEXPERT)
 
 	vampcompat = FALSE
 
@@ -50,3 +51,4 @@
 		H.change_stat("constitution", 1)
 		H.change_stat("speed", 2)
 		H.change_stat("perception", -1)
+		ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)

@@ -15,7 +15,7 @@
 	wlength = WLENGTH_NORMAL
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP | ITEM_SLOT_BACK
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/skill/combat/maces
 	anvilrepair = /datum/skill/craft/weaponsmithing
 	smeltresult = /obj/item/ingot/iron
 	gripped_intents = list(/datum/intent/mace/strike,/datum/intent/mace/smash)
@@ -109,6 +109,7 @@
 	penfactor = 15
 	swingdelay = 0
 	icon_state = "instrike"
+	item_d_type = "blunt"
 
 /datum/intent/mace/smash
 	name = "smash"
@@ -119,6 +120,7 @@
 	damfactor = 1.1
 	swingdelay = 10
 	icon_state = "insmash"
+	item_d_type = "blunt"
 	
 /datum/intent/mace/rangedthrust
 	name = "thrust"
@@ -133,6 +135,7 @@
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	penfactor = 25
 	damfactor = 0.9
+	item_d_type = "stab"
 
 /obj/item/rogueweapon/mace/woodclub
 	force = 15
@@ -265,7 +268,7 @@
 	//dropshrink = 0.75
 	wlength = WLENGTH_LONG
 	w_class = WEIGHT_CLASS_BULKY
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/skill/combat/maces
 	smeltresult = /obj/item/ash
 	parrysound = "parrywood"
 	swingsound = BLUNTWOOSH_MED

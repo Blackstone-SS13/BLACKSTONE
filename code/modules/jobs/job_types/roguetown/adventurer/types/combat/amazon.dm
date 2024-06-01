@@ -19,7 +19,8 @@
 	maximum_possible_slots = 2
 	category_flags = RT_TYPE_COMBAT_CLASS
 
-	traits_applied = list(RTRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
+	traits_applied = list(TRAIT_CRITICAL_RESISTANCE, TRAIT_NOPAINSTUN, TRAIT_STEELHEARTED)
+	cmode_music = 'sound/music/combat_gronn.ogg'
 
 /datum/outfit/job/roguetown/adventurer/amazon/pre_equip(mob/living/carbon/human/H)
 	..()

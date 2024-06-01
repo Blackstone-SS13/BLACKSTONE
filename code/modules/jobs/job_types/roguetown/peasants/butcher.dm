@@ -1,6 +1,6 @@
 /datum/job/roguetown/butcher
 	title = "Butcher"
-	flag = BEASTMASTER
+	flag = BUTCHER
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = 1
@@ -37,7 +37,7 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/labor/taming, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/tanning, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/labor/butchering, 5, TRUE)
 	if(H.gender == MALE)

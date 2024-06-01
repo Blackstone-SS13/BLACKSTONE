@@ -15,11 +15,11 @@
 	)
 	/// Traits we apply to the owner
 	var/static/list/applied_traits = list(
-		RTRAIT_CRITICAL_RESISTANCE,
-		RTRAIT_DECEIVING_MEEKNESS,
-		RTRAIT_NOSTINK,
-		RTRAIT_EMPATH,
-		RTRAIT_NOFATSTAM,
+		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_DECEIVING_MEEKNESS,
+		TRAIT_NOSTINK,
+		TRAIT_EMPATH,
+		TRAIT_NOROGSTAM,
 		TRAIT_NOPAIN,
 		TRAIT_NOPAINSTUN,
 		TRAIT_STEELHEARTED,
@@ -35,7 +35,7 @@
 	)
 	/// Traits that only get applied in the final sequence
 	var/static/list/final_traits = list(
-		RTRAIT_MANIAC_AWOKEN,
+		TRAIT_MANIAC_AWOKEN,
 		TRAIT_SCREENSHAKE,
 	)
 	/// Cached old stats in case we get removed

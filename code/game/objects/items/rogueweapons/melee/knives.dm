@@ -44,6 +44,7 @@
 	chargetime = 0
 	swingdelay = 0
 	clickcd = 10
+	item_d_type = "slash"
 
 /datum/intent/dagger/thrust
 	name = "thrust"
@@ -55,6 +56,7 @@
 	penfactor = 40
 	chargetime = 0
 	clickcd = 8
+	item_d_type = "stab"
 
 /datum/intent/dagger/thrust/pick
 	name = "icepick stab"
@@ -87,6 +89,7 @@
 	damfactor = 1.5
 	swingdelay = 5
 	clickcd = 10
+	item_d_type = "slash"
 
 /obj/item/rogueweapon/huntingknife/cleaver
 	force = 15
@@ -156,7 +159,7 @@
 	possible_item_intents = list(/datum/intent/dagger/thrust,/datum/intent/dagger/cut, /datum/intent/dagger/thrust/pick)
 	force = 15
 	max_integrity = 100
-	name = "Iron dagger"
+	name = "iron dagger"
 	desc = "This is a common dagger of iron."
 	icon_state = "idagger"
 	smeltresult = /obj/item/ingot/iron

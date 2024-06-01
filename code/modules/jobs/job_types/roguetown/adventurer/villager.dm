@@ -1,6 +1,6 @@
 /datum/job/roguetown/villager
 	title = "Towner"
-	flag = ADVENTURER
+	flag = VILLAGER
 	department_flag = PEASANTS
 	faction = "Station"
 	total_positions = 50
@@ -36,7 +36,7 @@
 	for(var/X in GLOB.peasant_positions)
 		peopleiknow += X
 		peopleknowme += X
-	for(var/X in GLOB.serf_positions)
+	for(var/X in GLOB.yeoman_positions)
 		peopleiknow += X
 	for(var/X in GLOB.church_positions)
 		peopleiknow += X

@@ -20,7 +20,8 @@
 	gender = PLURAL
 	icon_state = "blackboots"
 	item_state = "blackboots"
-	armor = list("melee" = 15, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	sewrepair = TRUE
+	armor = list("blunt" = 30, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/shoes/roguetown/nobleboot
 	name = "noble boots"
@@ -30,7 +31,8 @@
 	gender = PLURAL
 	icon_state = "nobleboots"
 	item_state = "nobleboots"
-	armor = list("melee" = 15, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	sewrepair = TRUE
+	armor = list("blunt" = 35, "slash" = 15, "stab" = 25, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/shoes/roguetown/shortboots
 	name = "shortboots"
@@ -39,6 +41,7 @@
 	gender = PLURAL
 	icon_state = "shortboots"
 	item_state = "shortboots"
+	sewrepair = TRUE
 
 /obj/item/clothing/shoes/roguetown/ridingboots
 	name = "riding boots"
@@ -47,6 +50,7 @@
 	gender = PLURAL
 	icon_state = "ridingboots"
 	item_state = "ridingboots"
+	sewrepair = TRUE
 
 ///obj/item/clothing/shoes/roguetown/ridingboots/Initialize()
 //	. = ..()
@@ -58,6 +62,7 @@
 	gender = PLURAL
 	icon_state = "simpleshoe"
 	item_state = "simpleshoe"
+	sewrepair = TRUE
 	resistance_flags = null
 	color = "#473a30"
 
@@ -85,6 +90,7 @@
 	gender = PLURAL
 	icon_state = "gladiator"
 	item_state = "gladiator"
+	sewrepair = TRUE
 
 /obj/item/clothing/shoes/roguetown/sandals
 	name = "sandals"
@@ -92,6 +98,7 @@
 	gender = PLURAL
 	icon_state = "sandals"
 	item_state = "sandals"
+	sewrepair = TRUE
 
 /obj/item/clothing/shoes/roguetown/shalal
 	name = "babouche"
@@ -99,6 +106,7 @@
 	gender = PLURAL
 	icon_state = "shalal"
 	item_state = "shalal"
+	sewrepair = TRUE
 
 /obj/item/clothing/shoes/roguetown/boots/armor
 	name = "plated boots"
@@ -106,10 +114,10 @@
 	body_parts_covered = FEET
 	icon_state = "armorboots"
 	item_state = "armorboots"
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	color = null
 	blocksound = PLATEHIT
-	armor = list("melee" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
 
@@ -120,9 +128,11 @@
 	gender = PLURAL
 	icon_state = "leatherboots"
 	item_state = "leatherboots"
-	armor = list("melee" = 15, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	sewrepair = TRUE
+	armor = list("blunt" = 30, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 
 /obj/item/clothing/shoes/roguetown/jester
 	name = "funny shoes"
 	icon_state = "jestershoes"
 	resistance_flags = null
+	sewrepair = TRUE

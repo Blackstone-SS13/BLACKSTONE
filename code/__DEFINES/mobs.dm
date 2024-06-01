@@ -26,13 +26,13 @@
 #define SUBMIT_INTENT 1
 
 //Blood levels
-#define BLOOD_VOLUME_MAXIMUM		600
-#define BLOOD_VOLUME_SLIME_SPLIT	1120
-#define BLOOD_VOLUME_NORMAL			500
-#define BLOOD_VOLUME_SAFE			450
-#define BLOOD_VOLUME_OKAY			350
-#define BLOOD_VOLUME_BAD			250
-#define BLOOD_VOLUME_SURVIVE		100
+#define BLOOD_VOLUME_MAXIMUM 1120
+#define BLOOD_VOLUME_SLIME_SPLIT 1120
+#define BLOOD_VOLUME_NORMAL 560
+#define BLOOD_VOLUME_SAFE 475
+#define BLOOD_VOLUME_OKAY 336
+#define BLOOD_VOLUME_BAD 224
+#define BLOOD_VOLUME_SURVIVE 122
 
 //Sizes of mobs, used by mob/living/var/mob_size
 #define MOB_SIZE_TINY 0
@@ -194,6 +194,7 @@
 #define DISGUST_LEVEL_DISGUSTED 75
 #define DISGUST_LEVEL_VERYGROSS 50
 #define DISGUST_LEVEL_GROSS 25
+#define DISGUST_LEVEL_SLIGHTLYGROSS 10
 
 //Used as an upper limit for species that continuously gain nutriment
 #define NUTRITION_LEVEL_ALMOST_FULL 995

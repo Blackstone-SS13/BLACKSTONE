@@ -200,6 +200,8 @@
 		return 0
 	var/newforce = I.force
 	testing("startforce [newforce]")
+	if(!istype(user))
+		return newforce
 	var/cont = FALSE
 	var/used_str = user.STASTR
 	if(iscarbon(user))
@@ -309,9 +311,9 @@
 			newforce = 1
 	else
 		user.visible_message("<span class='warning'>[user] [verbu] [src] with [I]!</span>")
-	take_damage(newforce, I.damtype, "melee", 1)
+	take_damage(newforce, I.damtype, I.d_type, 1)
 	if(newforce > 1)
-		I.take_damage(1, BRUTE, "melee")
+		I.take_damage(1, BRUTE, I.d_type)
 	return TRUE
 
 /turf/proc/attacked_by(obj/item/I, mob/living/user)
@@ -337,9 +339,9 @@
 	else
 		user.visible_message("<span class='warning'>[user] [verbu] [src] with [I]!</span>")
 
-	take_damage(newforce, I.damtype, "melee", 1)
+	take_damage(newforce, I.damtype, I.d_type, 1)
 	if(newforce > 1)
-		I.take_damage(1, BRUTE, "melee")
+		I.take_damage(1, BRUTE, I.d_type)
 	return TRUE
 
 /mob/living/proc/simple_limb_hit(zone)
@@ -404,13 +406,10 @@
 			next_attack_msg.Cut()
 			if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 				var/datum/wound/crit_wound  = simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
-				if(should_embed_weapon(crit_wound))
+				if(should_embed_weapon(crit_wound, I))
 					// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
-					simple_embedded_objects |= I
-					I.add_mob_blood(src)
-					I.forceMove(src)
+					simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
 					src.grabbedby(user, 1, item_override = I)
-					next_attack_msg += " <span class='userdanger'>[I] is stuck in [src]!</span>"
 			var/haha = user.used_intent.blade_class
 			if(newforce > 5)
 				if(haha != BCLASS_BLUNT)

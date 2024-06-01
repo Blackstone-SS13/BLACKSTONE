@@ -24,7 +24,7 @@
 	default_color = "FFFFFF"
 	species_traits = list(EYECOLOR,HAIR,FACEHAIR,LIPS,YOUNGBEARD,STUBBLE,OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP,TRAIT_DRUNK_HEALING)
-	possible_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
+	possible_ages = list(AGE_YOUNG, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	default_features = list("mcolor" = "FFF", "wings" = "None")
 	use_skintones = 1
 	skinned_type = /obj/item/stack/sheet/animalhide/human
@@ -122,7 +122,9 @@
 /datum/species/dwarf/mountain/random_surname()
 	return " [pick(world.file2list("strings/rt/names/dwarf/dwarmlast.txt"))]"
 
-/* this accent is HORRIBLE right now, someone please fix this shit
-/datum/species/dwarf/mountain/get_accent(mob/living/carbon/human/H)
-	return strings("dwarf_replacement.json", "dwarf")
-*/
+//this accent is HORRIBLE right now, someone please fix this shit
+// oh yeah here we go again 85 to 23
+// changed my mind, if the accent were to return it should just be on a single subset of dwarves.
+///datum/species/dwarf/mountain/get_accent(mob/living/carbon/human/H)
+//	return strings("dwarf_replacement.json", "dwarf")
+

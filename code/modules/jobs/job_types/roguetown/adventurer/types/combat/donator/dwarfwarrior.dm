@@ -6,7 +6,7 @@
 	allowed_races = list("Dwarf","Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dwarfwarrior
 
-	traits_applied = list(RTRAIT_HEAVYARMOR)
+	traits_applied = list(TRAIT_HEAVYARMOR)
 	maximum_possible_slots = 2
 	category_flags = RT_TYPE_COMBAT_CLASS
 
@@ -30,7 +30,8 @@
 	else
 		beltl = /obj/item/rogueweapon/stoneaxe/battle
 
-	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)

@@ -15,7 +15,7 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/nudist
-	traits_applied = list(RTRAIT_NUDIST)
+	traits_applied = list(TRAIT_NUDIST)
 	category_flags = RT_TYPE_CHALLENGE_CLASS
 
 /datum/outfit/job/roguetown/adventurer/nudist

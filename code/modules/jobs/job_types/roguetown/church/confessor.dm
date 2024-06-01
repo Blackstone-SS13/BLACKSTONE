@@ -1,6 +1,6 @@
 /datum/job/roguetown/shepherd
 	title = "Confessor"
-	flag = MONK
+	flag = CONFESSOR
 	department_flag = CHURCHMEN
 	faction = "Station"
 	total_positions = 0
@@ -49,7 +49,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/stealing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)

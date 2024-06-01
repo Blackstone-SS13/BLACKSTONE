@@ -10,7 +10,7 @@
 		"Aasimar",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/paladin
-	traits_applied = list(RTRAIT_HEAVYARMOR)
+	traits_applied = list(TRAIT_HEAVYARMOR)
 	category_flags = RT_TYPE_COMBAT_CLASS
 
 /datum/outfit/job/roguetown/adventurer/paladin
@@ -43,7 +43,7 @@
 			to_chat(H, "<span class='warning'>You are a paladin.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
@@ -89,7 +89,7 @@
 			to_chat(H, "<span class='warning'>You are a battle-master.</span>")
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
@@ -116,6 +116,17 @@
 			beltr = /obj/item/rogueweapon/huntingknife
 			id = /obj/item/clothing/ring/silver
 			cloak = /obj/item/clothing/cloak/tabard/crusader
+			switch(H.patron.name)	
+				if("Astrata")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/astrata
+				if("Dendor")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/dendor
+				if("Necra")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/necra
+				if("Pestra")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/pestra
+				if("Noc")
+					cloak = /obj/item/clothing/cloak/tabard/crusader/noc
 			backr = /obj/item/rogueweapon/flail
 			if(prob(50))
 				l_hand = /obj/item/rogueweapon/shield/wood
@@ -123,8 +134,8 @@
 				l_hand = /obj/item/rogueweapon/shield/tower/metal
 			backl = /obj/item/storage/backpack/rogue/satchel
 		
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	if(H.dna?.species)
 		if(H.dna.species.id == "humen")
 			H.dna.species.soundpack_m = new /datum/voicepack/male/knight()

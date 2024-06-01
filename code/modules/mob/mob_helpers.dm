@@ -569,12 +569,8 @@
 		playsound_local(src, 'sound/misc/comboff.ogg', 100)
 		SSdroning.play_area_sound(get_area(src), client)
 		cmode = FALSE
-		if(HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE))
-			if(HAS_TRAIT(src, TRAIT_SCREENSHAKE))
-				animate(client, pixel_y = 1, time = 1, loop = -1, flags = ANIMATION_RELATIVE)
-				animate(pixel_y = -1, time = 1, flags = ANIMATION_RELATIVE)
-			else if(HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE))
-				animate(client, pixel_y)
+		if(client && HAS_TRAIT(src, TRAIT_SCREENSHAKE))
+			animate(client, pixel_y)
 	else
 		cmode = TRUE
 		playsound_local(src, 'sound/misc/combon.ogg', 100)

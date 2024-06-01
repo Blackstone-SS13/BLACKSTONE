@@ -19,6 +19,8 @@
 	min_pq = 4
 	max_pq = null
 
+	cmode_music = 'sound/music/combat_guard.ogg'
+
 /datum/job/roguetown/sheriff/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
 	if(ishuman(L))
@@ -59,7 +61,7 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 6, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
@@ -83,9 +85,9 @@
 		if(!(H.hairstyle in acceptable))
 			H.hairstyle = pick(acceptable)
 			H.update_hair()
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	H.verbs |= /mob/proc/haltyell
 
@@ -137,7 +139,7 @@
 		return FALSE
 	//only migrants and peasants
 	if(!(recruit.job in GLOB.peasant_positions) && \
-		!(recruit.job in GLOB.serf_positions) && \
+		!(recruit.job in GLOB.yeoman_positions) && \
 		!(recruit.job in GLOB.allmig_positions) && \
 		!(recruit.job in GLOB.mercenary_positions))
 		return FALSE

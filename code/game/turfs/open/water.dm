@@ -87,7 +87,7 @@
 					user.Immobilize(30)
 					addtimer(CALLBACK(user, TYPE_PROC_REF(/mob/living, Knockdown), 30), 10)
 
-/turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
+/turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, d_type = "blunt")
 	..()
 	playsound(src, pick('sound/foley/water_land1.ogg','sound/foley/water_land2.ogg','sound/foley/water_land3.ogg'), 100, FALSE)
 
@@ -113,7 +113,7 @@
 			return
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/L = AM
-		if(L.lying || water_level == 3)
+		if(!(L.mobility_flags & MOBILITY_STAND) || water_level == 3)
 			L.SoakMob(FULL_BODY)
 		else
 			if(water_level == 2)
@@ -204,7 +204,7 @@
 	if(water_top_overlay)
 		QDEL_NULL(water_top_overlay)
 
-/turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum)
+/turf/open/water/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, d_type = "blunt")
 	if(isobj(AM))
 		var/obj/O = AM
 		O.extinguish()
@@ -284,7 +284,7 @@
 				if(BP.skeletonized)
 					continue
 				var/obj/item/natural/worms/leeches/I = new(C)
-				BP.embedded_objects |= I
+				BP.add_embedded_object(I, silent = TRUE)
 				return .
 
 /turf/open/water/swamp/deep
@@ -313,7 +313,7 @@
 				if(BP.skeletonized)
 					continue
 				var/obj/item/natural/worms/leeches/I = new(C)
-				BP.embedded_objects |= I
+				BP.add_embedded_object(I, silent = TRUE)
 				return .
 
 /turf/open/water/cleanshallow

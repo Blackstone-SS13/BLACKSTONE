@@ -92,6 +92,7 @@
 			blood_volume -= 5*amount
 		else
 			blood_volume -= amount
+		blood_volume = max(blood_volume, 0)
 	if(HAS_TRAIT(src, TRAIT_TOXIMMUNE)) //Prevents toxin damage, but not healing
 		amount = min(amount, 0)
 	return ..()
@@ -191,7 +192,7 @@
 	if(!parts.len)
 		return
 	var/obj/item/bodypart/picked = pick(parts)
-	if(picked.receive_damage(brute, burn, stamina,check_armor ? run_armor_check(picked, (brute ? "melee" : burn ? "fire" : stamina ? "bullet" : null)) : FALSE))
+	if(picked.receive_damage(brute, burn, stamina,check_armor ? run_armor_check(picked, (brute ? "blunt" : burn ? "fire" : stamina ? "bullet" : null)) : FALSE))
 		update_damage_overlays()
 
 //Heal MANY bodyparts, in random order
