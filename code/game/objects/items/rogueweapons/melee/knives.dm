@@ -226,6 +226,6 @@
 	item_state = "elfdag"
 
 /obj/item/rogueweapon/huntingknife/elvish/drow
-	name = "drow dagger"
-	desc = "This ominous, dark handled dagger was crafted by the assassin race of drow."
+	name = "dark elf dagger"
+	desc = "This ominous, dark handled dagger was crafted by the assassin race of dark elves."
 	force = 25
