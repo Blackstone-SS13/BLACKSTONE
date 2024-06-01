@@ -6,7 +6,7 @@
 		"Tiefling",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/crusader
-	traits_applied = list(TRAIT_HEAVYARMOR)
+	traits_applied = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR)
 
 	maximum_possible_slots = 1
 
@@ -33,7 +33,8 @@
 	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 5, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/magic/holy, 2, TRUE)
 
 	belt = /obj/item/storage/belt/rogue/leather/plaquegold
@@ -55,8 +56,6 @@
 	H.change_stat("intelligence", 1)
 	H.change_stat("perception", 1)
 	H.change_stat("strength", 2)
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 	for(var/I in SSrole_class_handler.all_classes)
 		var/datum/advclass/A = I
