@@ -84,6 +84,9 @@
 	skill_quality = floor(skill_quality/1500)+material_quality
 	var/modifier
 	switch(skill_quality)
+		if(BLACKSMITH_LEVEL_SPOIL)
+			I.name = "spoilt [I.name]"
+			modifier = 0.3
 		if(BLACKSMITH_LEVEL_AWFUL)
 			I.name = "awful [I.name]"
 			modifier = 0.5
