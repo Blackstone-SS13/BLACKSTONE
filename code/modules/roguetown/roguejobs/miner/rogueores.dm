@@ -74,6 +74,8 @@
 		quality = smelt_quality
 		smelted = TRUE
 		switch(quality)
+			if(SMELTERY_LEVEL_SPOIL)
+				name = "spoilt-quality [name]"
 			if(SMELTERY_LEVEL_POOR)
 				name = "poor-quality [name]"
 			if(SMELTERY_LEVEL_GOOD)
