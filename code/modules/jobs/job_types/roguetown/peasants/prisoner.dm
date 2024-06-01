@@ -26,6 +26,11 @@
 
 /datum/outfit/job/roguetown/prisoner/pre_equip(mob/living/carbon/human/H)
 	..()
+	mask = /obj/item/clothing/mask/rogue/facemask/prisoner
+	if(H.wear_mask)
+		var/obj/I = H.wear_mask
+		H.dropItemToGround(H.wear_mask, TRUE)
+		qdel(I)
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	id = /obj/item/clothing/ring/gold
 	if(H.mind)
@@ -33,9 +38,9 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/music, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
 		H.change_stat("intelligence", 1)
 		H.change_stat("fortune", 2)
 		var/datum/antagonist/new_antag = new /datum/antagonist/prisoner()
