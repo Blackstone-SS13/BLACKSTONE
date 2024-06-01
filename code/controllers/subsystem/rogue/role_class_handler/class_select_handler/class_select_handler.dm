@@ -39,7 +39,7 @@
 	//preload_assets()
 
 /datum/class_select_handler/proc/second_step()
-	var/datum/asset/thicc_assets = get_asset_datum(/datum/asset/simple/blackedstone_browser_slop_layout)
+	var/datum/asset/thicc_assets = get_asset_datum(/datum/asset/simple/blackedstone_class_menu_slop_layout)
 	thicc_assets.send(linked_client)
 
 	browser_slop()

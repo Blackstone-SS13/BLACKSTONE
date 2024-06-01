@@ -8,8 +8,7 @@
 		"Dwarf",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/seamstress
-	isvillager = TRUE
-	ispilgrim = FALSE
+	category_flags = RT_TYPE_FREE_CLASS | RT_TYPE_VILLAGER_CLASS
 
 /datum/outfit/job/roguetown/adventurer/seamstress/pre_equip(mob/living/carbon/human/H)
 	..()

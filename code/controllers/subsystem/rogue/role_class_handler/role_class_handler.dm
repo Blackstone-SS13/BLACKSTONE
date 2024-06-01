@@ -17,10 +17,10 @@ SUBSYSTEM_DEF(role_class_handler)
 
 	/*
 		This one is important, its all the open class select handlers
-		Its an assc list too active_menus[ckey] = /datum/class_select_handler
+		Its an assc list too class_select_handlers[ckey] = /datum/class_select_handler
 		If someone makes one they shouldn't be getting a new one in the current session
 	*/
-	var/list/active_menus
+	var/list/class_select_handlers = list()
 
 
 	/*
@@ -28,58 +28,49 @@ SUBSYSTEM_DEF(role_class_handler)
 		"ckey" = num to track the rerolls per server session attached to a ckey.
 		You are only getting THREE (by default)
 	*/
-	var/list/session_rerolls
+	var/list/session_rerolls = list()
 
 	/*
 		This one is kinda retarded, its basically for datums certain ckeys will get in the session
 		"ckey" = list(the datums), which will be its own copy that the person its hooked to can drain numbers out of on their own.
 	*/
-	var/list/special_session_queue
+	var/list/special_session_queue = list()
 
 //Time for sloppa vars
 	// List of all classes, assc list: Name - Datum
-	var/list/all_classes
+	var/list/all_classes = list()
 
 	// List of all classes that don't fall in any good criteria to be combat oriented
-	var/list/free_classes
+	var/list/free_classes = list()
 
 	// List of all classes that are favorable for combat
-	var/list/combat_classes
+	var/list/combat_classes = list()
 	
 	// List of all classes villagers can be (These are townies)
-	var/list/villager_classes
+	var/list/villager_classes = list()
 
 	// List of all antag classes avail, these naturally result in antags
-	var/list/antag_classes
+	var/list/antag_classes = list()
 
 	// List of all challenge classes avail, these are meant to not consume rng roll slots atm
-	var/list/challenge_classes
+	var/list/challenge_classes = list()
 
 
-	var/drifter_q_worldtime_start
 /*
 	We init and build the retard azz listszz
 */
 /datum/controller/subsystem/role_class_handler/Initialize()
-	build_dumbass_class_lists()
+	build_dumbass_category_lists()
 
 	initialized = TRUE
 
 	return ..()
 
 
-/datum/controller/subsystem/role_class_handler/proc/build_dumbass_class_lists()
-	all_classes = list()
+// This covers both class datums and drifter waves
+/datum/controller/subsystem/role_class_handler/proc/build_dumbass_category_lists()
 	init_subtypes(/datum/advclass, all_classes) // Init all the classes
-
-	// Idk make some lists?
-	session_rerolls = list()
-	special_session_queue = list()
-	free_classes = list()
-	combat_classes = list()
-	villager_classes = list()
-	antag_classes = list()
-	challenge_classes = list()
+	init_subtypes(/datum/drifter_wave, drifter_wave_data_slabs) // Init all the drifter waves
 
 	//Time to sort these retards, and sort them we shall.
 	for(var/datum/advclass/retard_datum in all_classes)
@@ -101,23 +92,7 @@ SUBSYSTEM_DEF(role_class_handler)
 		if(retard_datum.category_flags & (RT_TYPE_CHALLENGE_CLASS))
 			challenge_classes += retard_datum
 
-	//init list to hold active class select handlers (aka menu data)
-	active_menus = list(
-	)
-
 	//Well that about covers it really.
-
-/*
-	Hey we got somethin to keep track of now, which is drifter queue
-	haha
-*/
-/datum/controller/subsystem/role_class_handler/fire(resumed = 0)
-	if(!drifter_q_worldtime_start)
-		drifter_q_worldtime_start = world.time
-
-
-/datum/controller/subsystem/role_class_handler/proc/drifter_queue_decor_time()
-	return max(0, drifter_q_worldtime_start - world.time)
 
 /*
 	We setup the class handler here, aka the menu
@@ -127,7 +102,7 @@ SUBSYSTEM_DEF(role_class_handler)
 	// Also insure we somehow don't call this without a ref in the params
 	if(H)
 		// insure they somehow aren't closing the datum they got and opening a new one w rolls
-		var/datum/class_select_handler/GOT_IT = active_menus[H.client.ckey]
+		var/datum/class_select_handler/GOT_IT = class_select_handlers[H.client.ckey]
 		if(GOT_IT)
 			if(!GOT_IT.linked_client) // this ref will disappear if they disconnect neways probably, as its a client
 				GOT_IT.linked_client = H.client // too bad the firing of slop just checks the mob for what it can even use anyways
@@ -143,7 +118,7 @@ SUBSYSTEM_DEF(role_class_handler)
 				XTRA_MEATY.total_free_class = RT_JOB.free_slot_rolls_count
 
 			XTRA_MEATY.initial_setup()
-			active_menus[H.client.ckey] = XTRA_MEATY
+			class_select_handlers[H.client.ckey] = XTRA_MEATY
 
 		if(!(H.client.ckey in session_rerolls)) // no key in sess rerolls
 			session_rerolls[H.client.ckey] = 3 // Set it and give them 3
@@ -173,7 +148,7 @@ SUBSYSTEM_DEF(role_class_handler)
 	related_handler.ForceCloseMenus() // force menus closed
 	
 	// Remove the key from the list and with it the value too
-	active_menus.Remove(related_handler.linked_client.ckey)
+	class_select_handlers.Remove(related_handler.linked_client.ckey)
 	// Call qdel on it
 	qdel(related_handler)
 
@@ -185,8 +160,8 @@ SUBSYSTEM_DEF(role_class_handler)
 	target_datum.total_slots_occupied += amount
 
 	if((target_datum.total_slots_occupied >= target_datum.maximum_possible_slots)) // We just hit a cap, iterate all the class handlers and inform them.
-		for(var/CUCKS in active_menus)
-			var/datum/class_select_handler/found_menu = active_menus[CUCKS]
+		for(var/CUCKS in class_select_handlers)
+			var/datum/class_select_handler/found_menu = class_select_handlers[CUCKS]
 			
 			if(target_datum in found_menu.rolled_classes) // We found the target datum in one of the classes they rolled aka in the list of options they got visible,
 				found_menu.rolled_class_is_full(target_datum) //  inform the datum of its error.
@@ -206,4 +181,5 @@ SUBSYSTEM_DEF(role_class_handler)
 
 	special_session_queue[ckey]["[key_id]"] = datum
 
-/datum/controller/subsystem/role_class_handler/proc/remove_from_special_session_queue(ckey, key_id)
+
+

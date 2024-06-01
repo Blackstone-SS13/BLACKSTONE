@@ -1526,13 +1526,8 @@ Slots: [job.spawn_positions]</span>
 	
 	else if(href_list["preference"] == "drifters")
 		switch(href_list["task"])
-			if("close")
-				user << browse(null, "drifter_queue")
-				ShowChoices(user)
-			if("drifter_queue_join")
-				to_chat(world, "ENTER DRIFTER QUEUE")
 			if("show_drifter_queue")
-				Drifter_queue_popup(user)
+				SSrole_class_handler.add_drifter_queue_viewer(user.client)
 
 	else if(href_list["preference"] == "playerquality")
 		check_pq_menu(user.ckey)
