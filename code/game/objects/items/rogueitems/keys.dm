@@ -45,6 +45,11 @@
 		if(D.masterkey)
 			lockhash = D.lockhash
 
+/obj/item/roguekey/royal
+	name = "Royal Key"
+	desc = "The Key to the royal chambers. It even feels pretentious."
+	icon_state = "ekey"
+	lockid = "royal"
 
 /obj/item/roguekey/manor
 	name = "manor key"
