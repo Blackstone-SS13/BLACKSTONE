@@ -61,7 +61,7 @@
 			return FALSE
 	else
 		if(user.mind && isliving(user))
-			skill_quality += rand(skill_level*8, skill_level*17)*skill_level*(breakthrough == 1 ? 1.5 : 1)
+			skill_quality += (rand(skill_level*8, skill_level*17)*moveup*(breakthrough == 1 ? 1.5 : 1))
 			var/mob/living/L = user
 			var/boon = user.mind.get_learning_boon(appro_skill)
 			var/amt2raise = L.STAINT/2 // (L.STAINT+L.STASTR)/4 optional: add another stat that isn't int
@@ -79,4 +79,47 @@
 	user.visible_message("<span class='info'>[user] adds [needed_item_text]</span>")
 	needed_item_text = null
 
-/datum/anvil_recipe/proc/handle_creation(/obj/item/I)
+/datum/anvil_recipe/proc/handle_creation(obj/item/I)
+	material_quality = floor(material_quality/num_of_materials)-2
+	skill_quality = floor(skill_quality/1500)+material_quality
+	var/modifier
+	switch(skill_quality)
+		if(BLACKSMITH_LEVEL_AWFUL)
+			I.name = "awful [I.name]"
+			modifier = 0.5
+		if(BLACKSMITH_LEVEL_CRUDE)
+			I.name = "crude [I.name]"
+			modifier = 0.8
+		if(BLACKSMITH_LEVEL_ROUGH)
+			I.name = "rough [I.name]"
+			modifier = 0.9
+		if(BLACKSMITH_LEVEL_COMPETENT)
+			I.desc = "[I.desc]\nIt is competently made."
+		if(BLACKSMITH_LEVEL_FINE)
+			I.name = "fine [I.name]"
+			modifier = 1.1
+		if(BLACKSMITH_LEVEL_FLAWLESS)
+			I.name = "flawless [I.name]"
+			modifier = 1.2
+		if(BLACKSMITH_LEVEL_LEGENDARY)
+			I.name = "legendary [I.name]"
+			modifier = 1.3
+	
+	if(!modifier)
+		return
+	I.obj_integrity *= modifier
+	I.max_integrity  *= modifier
+	I.sellprice *= modifier
+	if(istype(I, /obj/item/rogueweapon))
+		var/obj/item/rogueweapon/W = I
+		W.force *= modifier
+		W.throwforce *= modifier
+		W.block_chance *= modifier
+		W.armor_penetration *= modifier
+		W.wdefense *= modifier
+	if(istype(I, /obj/item/clothing))
+		var/obj/item/clothing/C = I
+		C.damage_deflection *= modifier
+		C.integrity_failure /= modifier
+		C.armor = C.armor.multiplymodifyAllRatings(modifier)
+		C.equip_delay_self *= modifier

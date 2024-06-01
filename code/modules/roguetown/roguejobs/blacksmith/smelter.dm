@@ -27,6 +27,13 @@
 			ore -= I
 			I.forceMove(T)
 			T.hingot = I
+			if(user.mind && isliving(user) && T.hingot?.smithed)
+				var/mob/living/L = user
+				var/boon = user.mind.get_learning_boon(/datum/skill/craft/smelting)
+				var/amt2raise = L.STAINT/2 // (L.STAINT+L.STASTR)/4 optional: add another stat that isn't int
+				//i feel like leveling up takes forever regardless, this would just make it faster
+				if(amt2raise > 0)
+					user.mind.adjust_experience(/datum/skill/craft/smelting, amt2raise * boon, FALSE)
 			user.visible_message("<span class='info'>[user] retrieves [I] from [src].</span>")
 			if(on)
 				var/tyme = world.time

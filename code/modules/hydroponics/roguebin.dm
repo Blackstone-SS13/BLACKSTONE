@@ -176,7 +176,7 @@
 					new IT(used_turf)
 					R.handle_creation(IT)
 			else
-				new R.created_item(used_turf)
+				var/IT = new R.created_item(used_turf)
 				R.handle_creation(IT)
 			playsound(src,pick('sound/items/quench_barrel1.ogg','sound/items/quench_barrel2.ogg'), 100, FALSE)
 			QDEL_NULL(T.hingot)
