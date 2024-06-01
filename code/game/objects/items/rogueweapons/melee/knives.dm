@@ -193,16 +193,16 @@
 	. = ..()
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		if(H.dna && H.dna.species)
-			if(istype(H.dna.species, /datum/species/werewolf))
-				target.Knockdown(30)
-				target.Stun(30)
-	if(target.mind && target.mind.has_antag_datum(/datum/antagonist/vampirelord))
-		var/datum/antagonist/vampirelord/VD = target.mind.has_antag_datum(/datum/antagonist/vampirelord)
-		if(!VD.disguised)
-			target.Knockdown(30)
-			target.Stun(30)
-
+		if(H.stat == DEAD)
+			continue
+		if(H.mind)
+			var/datum/antagonist/vampirelord/lesser/V = H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser)
+			if(V)
+				if(!V.disguised)
+					target.Knockdown(30)
+					target.Stun(30)
+					H.Knockdown(30)
+					H.Stun(30)
 
 /obj/item/rogueweapon/huntingknife/stoneknife
 	possible_item_intents = list(/datum/intent/dagger/cut,/datum/intent/dagger/chop)
