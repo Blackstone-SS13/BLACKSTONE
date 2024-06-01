@@ -84,7 +84,7 @@
 	skill_quality = floor((skill_quality/num_of_materials)/1500)+material_quality
 	var/modifier
 	switch(skill_quality)
-		if(BLACKSMITH_LEVEL_SPOIL)
+		if(BLACKSMITH_LEVEL_MIN to BLACKSMITH_LEVEL_SPOIL)
 			I.name = "spoilt [I.name]"
 			modifier = 0.3
 		if(BLACKSMITH_LEVEL_AWFUL)
@@ -104,7 +104,7 @@
 		if(BLACKSMITH_LEVEL_FLAWLESS)
 			I.name = "flawless [I.name]"
 			modifier = 1.2
-		if(BLACKSMITH_LEVEL_LEGENDARY)
+		if(BLACKSMITH_LEVEL_LEGENDARY to BLACKSMITH_LEVEL_MAX)
 			I.name = "legendary [I.name]"
 			modifier = 1.3
 	
