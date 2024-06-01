@@ -19,8 +19,8 @@
 #define GetSkillRef(A) (SSskills.all_skills[A])
 
 //Blacksmith resultant skills
-#define BLACKSMITH_LEVEL_SPOIL -2 // you can only get this by using spoilt bars
-#define BLACKSMITH_LEVEL_AWFUL -1
+#define BLACKSMITH_LEVEL_SPOIL -2 // you can only get this by using spoilt bars and crude skill
+#define BLACKSMITH_LEVEL_AWFUL -1 // you can only get this by using poor bars and crude skill (or spoilt bars and rough skill)
 #define BLACKSMITH_LEVEL_CRUDE 0
 #define BLACKSMITH_LEVEL_ROUGH 1
 #define BLACKSMITH_LEVEL_COMPETENT 2
