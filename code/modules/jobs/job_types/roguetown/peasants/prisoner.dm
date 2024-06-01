@@ -54,6 +54,7 @@
 	if(H.gender == MALE)
 		H.change_stat("strength", -1)
 		pants = /obj/item/clothing/under/roguetown/tights/purple
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/purple
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
+		armor = /obj/item/clothing/suit/roguetown/shirt/tunic/blue
 		head = /obj/item/clothing/head/roguetown/fancyhat
 		
