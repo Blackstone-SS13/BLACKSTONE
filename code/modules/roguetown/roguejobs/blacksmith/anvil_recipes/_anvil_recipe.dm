@@ -18,7 +18,6 @@
 
 /datum/anvil_recipe/New(datum/P, ...)
 	parent = P
-	num_of_materials += additional_items.len
 	. = ..()
 
 /datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE)
@@ -61,7 +60,8 @@
 			return FALSE
 	else
 		if(user.mind && isliving(user))
-			skill_quality += (rand(skill_level*8, skill_level*17)*moveup*(breakthrough == 1 ? 1.5 : 1))
+			skill_quality += (rand(skill_level*8, skill_level*17)*moveup)
+			message_admins("[skill_quality]")
 			var/mob/living/L = user
 			var/boon = user.mind.get_learning_boon(appro_skill)
 			var/amt2raise = L.STAINT/2 // (L.STAINT+L.STASTR)/4 optional: add another stat that isn't int
@@ -97,7 +97,7 @@
 			I.name = "rough [I.name]"
 			modifier = 0.9
 		if(BLACKSMITH_LEVEL_COMPETENT)
-			I.desc = "[I.desc]\nIt is competently made."
+			I.desc = "[I.desc] It is competently made."
 		if(BLACKSMITH_LEVEL_FINE)
 			I.name = "fine [I.name]"
 			modifier = 1.1
