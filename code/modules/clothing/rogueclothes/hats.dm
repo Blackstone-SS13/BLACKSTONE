@@ -383,7 +383,7 @@
 	item_state = "armingcap"
 	sleevetype = null
 	sleeved = null
-	body_parts_covered = HEAD|HAIR|EARS
+	body_parts_covered = HEAD|HAIR|EARS|NECK
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_NECK|ITEM_SLOT_HEAD|ITEM_SLOT_EYES
 	armor = list("blunt" = 35, "slash" = 30, "stab" = 25, "bullet" = 5, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS SMASH)
