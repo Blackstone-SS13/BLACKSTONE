@@ -387,7 +387,7 @@
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_NECK|ITEM_SLOT_HEAD
 	armor = list("blunt" = 35, "slash" = 30, "stab" = 25, "bullet" = 5, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_SMASH)
-	blocksound = SOFTHIT
+	blocksound = SOFTUNDERHIT
 	max_integrity = 100
 	color = "#463C2B"
 	sewrepair = TRUE
