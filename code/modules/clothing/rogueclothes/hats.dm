@@ -73,7 +73,7 @@
 	icon = 'icons/roguetown/clothing/head.dmi'
 	body_parts_covered = NECK
 	slot_flags = ITEM_SLOT_HEAD
-	dynamic_hair_suffix = ""
+	flags_inv = HIDEEARS
 	edelay_type = 1
 	adjustable = CAN_CADJUST
 	dynamic_hair_suffix = "+generic"
