@@ -1,5 +1,5 @@
 /datum/antagonist/werewolf
-	name = "Werewolf"
+	name = "Verewolf"
 	roundend_category = "Werewolves"
 	antagpanel_category = "Werewolf"
 	job_rank = ROLE_WEREWOLF
@@ -14,7 +14,7 @@
 	var/transformed
 	var/transforming
 	var/untransforming
-	var/wolfname = "Werevolf"
+	var/wolfname = "Verewolf"
 
 /datum/antagonist/werewolf/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/M = mob_override || owner.current
@@ -25,7 +25,7 @@
 	remove_antag_hud(antag_hud_type, M)
 
 /datum/antagonist/werewolf/lesser
-	name = "Lesser Werewolf"
+	name = "Lesser Verewolf"
 	increase_votepwr = FALSE
 
 /datum/antagonist/werewolf/lesser/roundend_report()
@@ -103,7 +103,7 @@
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/werewolf_skin
 	slot_flags = null
-	name = "werewolf's skin"
+	name = "verewolf's skin"
 	desc = ""
 	icon_state = null
 	body_parts_covered = FULL_BODY
@@ -135,7 +135,7 @@
 	item_d_type = "slash"
 
 /obj/item/rogueweapon/werewolf_claw
-	name = "Werevolf's Claw"
+	name = "Verevolf Claw"
 	desc = ""
 	item_state = null
 	lefthand_file = null

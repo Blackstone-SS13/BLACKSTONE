@@ -79,6 +79,7 @@
 
 	var/mob/living/carbon/human/species/werewolf/W = new (loc)
 
+	W.set_patron(src.patron)
 	W.gender = gender
 	W.regenerate_icons()
 	W.stored_mob = src

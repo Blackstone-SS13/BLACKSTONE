@@ -6,7 +6,7 @@
 	var/list/stored_experience
 
 /datum/species/werewolf
-	name = "werewolf"
+	name = "verewolf"
 	id = "werewolf"
 	species_traits = list(NO_UNDERWEAR,NOEYESPRITES)
 	inherent_traits = list(
@@ -91,4 +91,4 @@
 	return TRUE
 
 /datum/species/werewolf/random_name(gender,unique,lastname)
-	return "WEREVOLF"
+	return "VEREWOLF"
