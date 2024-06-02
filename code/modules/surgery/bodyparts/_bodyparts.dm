@@ -164,7 +164,7 @@
 	for(var/obj/item/I in src)
 		I.forceMove(T)
 
-/obj/item/bodypart/proc/skeletonize()
+/obj/item/bodypart/proc/skeletonize(lethal = TRUE)
 	if(bandage)
 		remove_bandage()
 	for(var/obj/item/I in embedded_objects)
@@ -173,14 +173,14 @@
 		qdel(I)
 	skeletonized = TRUE
 
-/obj/item/bodypart/chest/skeletonize()
+/obj/item/bodypart/chest/skeletonize(lethal = TRUE)
 	. = ..()
-	if(owner && !(NOBLOOD in owner.dna?.species?.species_traits))
+	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
 		owner.death()
 
-/obj/item/bodypart/head/skeletonize()
+/obj/item/bodypart/head/skeletonize(lethal = TRUE)
 	. = ..()
-	if(owner && !(NOBLOOD in owner.dna?.species?.species_traits))
+	if(lethal && owner && !(NOBLOOD in owner.dna?.species?.species_traits))
 		owner.death()
 
 /obj/item/bodypart/proc/consider_processing()
