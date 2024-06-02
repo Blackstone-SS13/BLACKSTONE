@@ -44,6 +44,7 @@
 		TRAIT_LIMPDICK,
 		TRAIT_ZOMBIE_SPEECH,
 		TRAIT_ZOMBIE_IMMUNE,
+		TRAIT_EMOTEMUTE,
 		TRAIT_ROTMAN,
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"

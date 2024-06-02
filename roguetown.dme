@@ -1814,6 +1814,7 @@
 #include "code\modules\clothing\rogueclothes\pants.dm"
 #include "code\modules\clothing\rogueclothes\quiver.dm"
 #include "code\modules\clothing\rogueclothes\rings.dm"
+#include "code\modules\clothing\rogueclothes\robes.dm"
 #include "code\modules\clothing\rogueclothes\shirts.dm"
 #include "code\modules\clothing\rogueclothes\storage.dm"
 #include "code\modules\clothing\rogueclothes\wrists.dm"

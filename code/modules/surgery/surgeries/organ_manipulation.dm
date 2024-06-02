@@ -146,7 +146,7 @@
 
 	var/obj/item/organ/organ_tool = tool
 	if(istype(organ_tool) && user.temporarilyRemoveItemFromInventory(organ_tool))
-		organ_tool.Insert(target, drop_if_replaced = TRUE)
+		organ_tool.Insert(target)
 		display_results(user, target, "<span class='notice'>I insert [tool] into [target]'s [parse_zone(target_zone)].</span>",
 			"<span class='notice'>[user] inserts [tool] into [target]'s [parse_zone(target_zone)]!</span>",
 			"<span class='notice'>[user] inserts something into [target]'s [parse_zone(target_zone)]!</span>")

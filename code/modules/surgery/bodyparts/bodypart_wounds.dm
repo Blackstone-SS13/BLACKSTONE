@@ -338,52 +338,32 @@
 		if(prob(used))
 			attempted_wounds += artery_type
 			if((bclass in GLOB.stab_bclasses) && !resistance)
-				if(zone_precise in eyestab_zones)
-					var/obj/item/organ/eyes/my_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
-					if(my_eyes)
-						playsound(owner, 'sound/combat/crit.ogg', 100, FALSE)
-						owner.Stun(5)
-						owner.blind_eyes(5)
-						if((zone_precise == BODY_ZONE_PRECISE_R_EYE) && !my_eyes.right_poked)
-							my_eyes.right_poked = TRUE
-							if(!my_eyes.left_poked)
-								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The right eye is poked out!</span>"
-						else if((zone_precise == BODY_ZONE_PRECISE_L_EYE) && !my_eyes.left_poked)
-							my_eyes.left_poked = TRUE
-							if(!my_eyes.right_poked)
-								owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The left eye is poked out!</span>"
-						if(my_eyes.right_poked && my_eyes.left_poked)
-							owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The eyes are gored!</span>"
-							my_eyes.forceMove(get_turf(owner))
-							my_eyes.Remove(owner)
-						owner.update_fov_angles()
-					else
+				if(zone_precise in earstab_zones)
+					var/obj/item/organ/ears/my_ears = owner.getorganslot(ORGAN_SLOT_EARS)
+					if(!my_ears || has_wound(/datum/wound/facial/ears))
+						attempted_wounds += /datum/wound/fracture/head/ears
+					else 
+						attempted_wounds += /datum/wound/facial/ears
+				else if(zone_precise in eyestab_zones)
+					var/obj/item/organ/my_eyes = owner.getorganslot(ORGAN_SLOT_EYES)
+					if(!my_eyes || (has_wound(/datum/wound/facial/eyes/left) && has_wound(/datum/wound/facial/eyes/right)))
 						attempted_wounds += /datum/wound/fracture/head/eyes
+					else if(my_eyes)
+						if(zone_precise == BODY_ZONE_PRECISE_R_EYE)
+							attempted_wounds += /datum/wound/facial/eyes/right
+						else if(zone_precise == BODY_ZONE_PRECISE_L_EYE)
+							attempted_wounds += /datum/wound/facial/eyes/left
 				else if(zone_precise in tonguestab_zones)
 					var/obj/item/organ/tongue/tongue_up_my_asshole = owner.getorganslot(ORGAN_SLOT_TONGUE)
-					if(tongue_up_my_asshole)
-						playsound(owner, 'sound/combat/crit.ogg', 100, FALSE)
-						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The tongue flies off in an arc!</span>"
-						owner.Stun(10)
-						tongue_up_my_asshole.forceMove(get_turf(owner))
-						tongue_up_my_asshole.Remove(owner)
-					else
+					if(!tongue_up_my_asshole || has_wound(/datum/wound/facial/tongue))
 						attempted_wounds += /datum/wound/fracture/mouth
+					else
+						attempted_wounds += /datum/wound/facial/tongue
 				else if(zone_precise in nosestab_zones)
-					if(!has_wound(/datum/wound/disfigurement/nose))
-						attempted_wounds += /datum/wound/disfigurement/nose
-					else if(!has_wound(/datum/wound/fracture/head/nose))
+					if(has_wound(/datum/wound/facial/disfigurement/nose))
 						attempted_wounds +=/datum/wound/fracture/head/nose
-				else if(zone_precise in earstab_zones)
-					var/obj/item/organ/ears/my_ears = owner.getorganslot(ORGAN_SLOT_EARS)
-					if(my_ears)
-						owner.next_attack_msg += " <span class='crit'><b>Critical hit!</b> The eardrums are ruptured!</span>"
-						playsound(owner, 'sound/combat/crit.ogg', 100, FALSE)
-						owner.Stun(10)
-						my_ears.forceMove(get_turf(owner))
-						my_ears.Remove(owner)
-					else 
-						attempted_wounds += /datum/wound/fracture/head/ears
+					else
+						attempted_wounds += /datum/wound/facial/disfigurement/nose
 				else if(zone_precise in knockout_zones)
 					attempted_wounds += /datum/wound/fracture/head/brain
 

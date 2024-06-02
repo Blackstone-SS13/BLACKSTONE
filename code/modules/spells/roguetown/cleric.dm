@@ -238,6 +238,8 @@
 	if(ishuman(targets[1]))
 		var/mob/living/carbon/human/target = targets[1]
 		var/obj/item/bodypart/limb = get_limb(target, user)
+		if(!limb.attach_limb(target))
+			return FALSE
 		target.visible_message("<span class='info'>\The [limb] attaches itself to [target]!</span>", \
 							"<span class='notice'>\The [limb] attaches itself to me!</span>")
 		return TRUE

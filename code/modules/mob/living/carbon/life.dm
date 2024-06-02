@@ -163,12 +163,11 @@
 			adjustOxyLoss(5)
 	if(isopenturf(loc))
 		var/turf/open/T = loc
-		if(T.pollutants)
+		if(reagents&& T.pollutants)
 			var/obj/effect/pollutant_effect/P = T.pollutants
-			if(reagents)
-				for(var/datum/pollutant/X in P.pollute_list)
-					for(var/A in X.reagents_on_breathe)
-						reagents.add_reagent(A, X.reagents_on_breathe[A])
+			for(var/datum/pollutant/X in P.pollute_list)
+				for(var/A in X.reagents_on_breathe)
+					reagents.add_reagent(A, X.reagents_on_breathe[A])
 
 /mob/living/proc/handle_inwater()
 	ExtinguishMob()

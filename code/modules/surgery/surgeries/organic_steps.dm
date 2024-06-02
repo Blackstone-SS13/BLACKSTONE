@@ -126,6 +126,21 @@
 		TOOL_SHOVEL = 50,
 		TOOL_SHARP = 25,
 	)
+	possible_locs = list(
+		BODY_ZONE_PRECISE_SKULL,
+		BODY_ZONE_HEAD,
+		BODY_ZONE_PRECISE_NECK,
+		BODY_ZONE_CHEST,
+		BODY_ZONE_PRECISE_GROIN,
+		BODY_ZONE_R_ARM,
+		BODY_ZONE_PRECISE_R_HAND,
+		BODY_ZONE_L_ARM,
+		BODY_ZONE_PRECISE_L_HAND,
+		BODY_ZONE_R_LEG,
+		BODY_ZONE_PRECISE_R_FOOT,
+		BODY_ZONE_L_LEG,
+		BODY_ZONE_PRECISE_L_FOOT,
+	)
 	time = 5 SECONDS
 	surgery_flags = SURGERY_INCISED | SURGERY_RETRACTED
 	surgery_flags_blocked = SURGERY_BROKEN
@@ -149,8 +164,12 @@
 		switch(bodypart.body_zone)
 			if(BODY_ZONE_HEAD)
 				fracture_type = /datum/wound/fracture/head
+			if(BODY_ZONE_PRECISE_NECK)
+				fracture_type = /datum/wound/fracture/neck
 			if(BODY_ZONE_CHEST)
 				fracture_type = /datum/wound/fracture/chest
+			if(BODY_ZONE_PRECISE_GROIN)
+				fracture_type = /datum/wound/fracture/groin
 		bodypart.add_wound(fracture_type)
 	target.emote("scream")
 	return TRUE

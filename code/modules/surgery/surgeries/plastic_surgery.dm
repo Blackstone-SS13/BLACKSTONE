@@ -31,11 +31,11 @@
 
 /datum/surgery_step/reshape_face/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
-	if(bodypart?.has_wound(/datum/wound/disfigurement))
+	if(bodypart?.has_wound(/datum/wound/facial/disfigurement))
 		display_results(user, target, "<span class='notice'>I successfully restore [target]'s appearance.</span>",
 			"<span class='notice'>[user] successfully restores [target]'s appearance!</span>",
 			"<span class='notice'>[user] finishes the operation on [target]'s face.</span>")
-		bodypart.remove_wound(/datum/wound/disfigurement)
+		bodypart.remove_wound(/datum/wound/facial/disfigurement)
 	else
 		var/list/names = list("Custom...")
 		if(ishuman(target))
@@ -69,6 +69,6 @@
 		"<span class='notice'>[user] screws up, disfiguring [target]'s appearance!</span>",
 		"<span class='notice'>[user] finishes the operation on [target]'s face.</span>")
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
-	bodypart?.add_wound(/datum/wound/disfigurement)
+	bodypart?.add_wound(/datum/wound/facial/disfigurement)
 	target.emote("scream")
 	return FALSE

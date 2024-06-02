@@ -203,7 +203,8 @@
 /obj/item/organ/brain/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
 	Remove(C) //Changeling brain concerns are now handled in Remove
 	forceMove(LB)
-	LB.brain = src
+	if(istype(LB))
+		LB.brain = src
 	if(brainmob)
 		LB.brainmob = brainmob
 		LB.brainmob.forceMove(LB)
@@ -212,15 +213,18 @@
 	return TRUE
 
 /obj/item/organ/eyes/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
-	LB.eyes = src
+	if(istype(LB))
+		LB.eyes = src
 	return ..()
 
 /obj/item/organ/ears/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
-	LB.ears = src
+	if(istype(LB))
+		LB.ears = src
 	return ..()
 
 /obj/item/organ/tongue/transfer_to_limb(obj/item/bodypart/head/LB, mob/living/carbon/human/C)
-	LB.tongue = src
+	if(istype(LB))
+		LB.tongue = src
 	return ..()
 
 /obj/item/bodypart/chest/drop_limb(special)

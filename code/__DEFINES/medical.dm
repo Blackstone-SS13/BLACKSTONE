@@ -56,3 +56,15 @@
 #define SURGERY_DISLOCATED (1<<4)
 #define SURGERY_BROKEN (1<<5)
 #define SURGERY_DRILLED (1<<6)
+
+//flags for the organ_flags var on /obj/item/organ
+/// Synthetic organs, or cybernetic organs. Reacts to EMPs and don't deteriorate or heal
+#define ORGAN_SYNTHETIC			(1<<0)
+/// Frozen organs, don't deteriorate
+#define ORGAN_FROZEN			(1<<1)
+/// Failing organs perform damaging effects until replaced or fixed
+#define ORGAN_FAILING			(1<<2)
+/// Was this organ implanted/inserted/etc, if true will not be removed during species change.
+#define ORGAN_EXTERNAL			(1<<3)
+/// Currently only the brain - Removal of this organ immediately kills you
+#define ORGAN_VITAL				(1<<4)

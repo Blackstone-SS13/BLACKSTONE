@@ -31,14 +31,12 @@
 	var/no_glasses
 	var/damaged	= FALSE	//damaged indicates that our eyes are undergoing some level of negative effect
 
-	var/left_poked = FALSE
-	var/right_poked = FALSE
 
 /obj/item/organ/eyes/update_overlays()
 	. = ..()
-	if(old_eye_color && (icon_state == "eyeball"))
+	if(eye_color && (icon_state == "eyeball"))
 		var/mutable_appearance/iris_overlay = mutable_appearance(src.icon, "eyeball-iris")
-		iris_overlay.color = old_eye_color
+		iris_overlay.color = "#" + eye_color
 		. += iris_overlay
 
 /obj/item/organ/eyes/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE, initialising)
@@ -53,6 +51,8 @@
 			eye_color = HMN.eye_color
 		if(HAS_TRAIT(HMN, TRAIT_NIGHT_VISION) && !lighting_alpha)
 			lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
+	for(var/datum/wound/facial/eyes/eye_wound as anything in M.get_wounds())
+		qdel(eye_wound)
 	M.update_tint()
 	owner.update_sight()
 	if(M.has_dna() && ishuman(M))
