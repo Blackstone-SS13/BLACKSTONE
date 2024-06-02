@@ -41,7 +41,7 @@
 		var/current_iteration = 0
 		// Amount of waves to display
 		var/max_to_display = 2
-		for(var/i = SSrole_class_handler.drifter_wave_schedule.len, i > 0, i--)
+		for(var/i = SSrole_class_handler.current_wave_number, SSrole_class_handler.drifter_wave_schedule.len >= i, i++)
 			var/datum/drifter_wave/cur_datum = SSrole_class_handler.drifter_wave_schedule[i]
 			current_iteration++
 

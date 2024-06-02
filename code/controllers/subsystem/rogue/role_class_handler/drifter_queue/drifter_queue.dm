@@ -21,7 +21,7 @@
 	// Next time we fire
 	var/next_drifter_mass_release_time = 0
 	// Delay before next wave rn
-	var/drifter_time_buffer = 10 MINUTES
+	var/drifter_time_buffer = 30 SECONDS
 	
 	// The current wave
 	var/datum/drifter_wave/current_wave
@@ -36,6 +36,8 @@
 	// Current drop location target
 	var/atom/drifter_dropzone_target
 
+	// Whether its time for a total refresh (sorry I don't feel like updating the damn table itself)
+	var/queue_total_browser_update = FALSE
 	// Whether its time to update the browser table
 	var/queue_table_browser_update = FALSE
 	// String vars for display menus
@@ -70,13 +72,19 @@
 		var/client/target_client = current_menu.linked_client
 		target_client << output(url_encode(time_left_until_next_wave_string), "drifter_queue.browser:update_timer")
 
+		if(queue_total_browser_update)
+			current_menu.show_drifter_queue_menu()
 		if(queue_table_browser_update)
 			// This function wants the lefthand current wave player number and then the current table html
 			target_client << output(list2params(list("[drifter_wave_joined_clients.len]", drifter_queue_player_tbl_string)), "drifter_queue.browser:update_playersegments")
-			queue_table_browser_update = FALSE
 
 		if(MC_TICK_CHECK)
 			return
+
+	if(queue_total_browser_update)
+		queue_total_browser_update = FALSE
+	if(queue_table_browser_update)
+		queue_table_browser_update = FALSE
 
 	rebuild_time_string()
 
@@ -85,8 +93,6 @@
 	// It is time
 	if(world.time >= next_drifter_mass_release_time)
 		to_chat(world, "Release Drifters")
-
-		current_wave = drifter_wave_schedule[current_wave_number]
 
 		if(!current_wave)
 			return
@@ -99,6 +105,8 @@
 				process_drifter_wave_client(target_client)
 
 			drifter_wave_joined_clients.Cut()
+
+		queue_total_browser_update = TRUE
 
 		handle_drifter_wave_scheduling()
 		current_wave_number++
