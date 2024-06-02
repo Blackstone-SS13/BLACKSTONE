@@ -14,10 +14,12 @@
 	blocksound = SOFTHIT
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	armor = list("blunt" = 35, "slash" = 30, "stab" = 25, "bullet" = 5, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	max_integrity = 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS SMASH)
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	sewrepair = TRUE
+	
 
 /obj/item/clothing/neck/roguetown/coif/AdjustClothes(mob/user)
 	if(loc == user)
