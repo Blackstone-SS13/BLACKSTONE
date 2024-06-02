@@ -751,16 +751,16 @@
 	name = "dragon chest"
 
 /obj/structure/closet/crate/necropolis/dragon/PopulateContents()
-	var/loot = rand(1,4)
+	var/loot = rand(1,3)
 	switch(loot)
 		if(1)
 			new /obj/item/melee/ghost_sword(src)
+		// if(2)
+		// 	new /obj/item/lava_staff(src)
 		if(2)
-			new /obj/item/lava_staff(src)
-		if(3)
 			new /obj/item/book/granter/spell/sacredflame(src)
 			new /obj/item/gun/magic/wand/fireball(src)
-		if(4)
+		if(3)
 			new /obj/item/dragons_blood(src)
 
 /obj/structure/closet/crate/necropolis/dragon/crusher
@@ -786,6 +786,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "rended")
 	var/summon_cooldown = 0
 	var/list/mob/dead/observer/spirits
+	possible_item_intents = list(/datum/intent/sword/cut, /datum/intent/sword/thrust)
 
 /obj/item/melee/ghost_sword/Initialize()
 	. = ..()

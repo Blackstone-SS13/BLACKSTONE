@@ -33,8 +33,8 @@ Difficulty: Medium
 /mob/living/simple_animal/hostile/megafauna/dragon
 	name = "ash drake"
 	desc = ""
-	health = 2500
-	maxHealth = 2500
+	health = 5000
+	maxHealth = 5000
 	attack_verb_continuous = "chomps"
 	attack_verb_simple = "chomp"
 	attack_sound = 'sound/blank.ogg'
@@ -54,8 +54,8 @@ Difficulty: Medium
 	pixel_x = -16
 	crusher_loot = list(/obj/structure/closet/crate/necropolis/dragon/crusher)
 	loot = list(/obj/structure/closet/crate/necropolis/dragon)
-	butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/bone = 30)
-	guaranteed_butcher_results = list(/obj/item/stack/sheet/animalhide/ashdrake = 10)
+	// butcher_results = list(/obj/item/stack/ore/diamond = 5, /obj/item/stack/sheet/sinew = 5, /obj/item/stack/sheet/bone = 30)
+	// guaranteed_butcher_results = list(/obj/item/stack/sheet/animalhide/ashdrake = 10)
 	var/swooping = NONE
 	var/player_cooldown = 0
 	gps_name = "Fiery Signal"
@@ -70,6 +70,11 @@ Difficulty: Medium
 							   /datum/action/innate/megafauna_attack/mass_fire,
 							   /datum/action/innate/megafauna_attack/lava_swoop)
 	small_sprite_type = /datum/action/small_sprite/megafauna/drake
+	true_spawn = FALSE
+	base_intents = list(/datum/intent/simple/bite/dragon)
+
+/datum/intent/simple/bite/dragon
+	penfactor = 30
 
 /datum/action/innate/megafauna_attack/fire_cone
 	name = "Fire Cone"
@@ -273,13 +278,14 @@ Difficulty: Medium
 	for(var/turf/T in turfs)
 		if(istype(T, /turf/closed))
 			break
-		new /obj/effect/hotspot(T)
-		T.hotspot_expose(700,50,1)
+		var/obj/effect/hotspot/hotspot = new /obj/effect/hotspot(T)
+		hotspot.life = 3
+		T.hotspot_expose(350,25,1)
 		for(var/mob/living/L in T.contents)
 			if(L in hit_list || L == source)
 				continue
 			hit_list += L
-			L.adjustFireLoss(20)
+			L.adjustFireLoss(10)
 			to_chat(L, "<span class='danger'>You're hit by [source]'s fire breath!</span>")
 
 		// deals damage to mechs
@@ -288,7 +294,7 @@ Difficulty: Medium
 				continue
 			hit_list += M
 			M.take_damage(45, BRUTE, "blunt", 1)
-		sleep(1.5)
+		sleep(2)
 
 /mob/living/simple_animal/hostile/megafauna/dragon/proc/swoop_attack(lava_arena = FALSE, atom/movable/manual_target, swoop_cooldown = 30)
 	if(stat || swooping)
@@ -360,7 +366,7 @@ Difficulty: Medium
 	for(var/mob/living/L in orange(1, src))
 		if(L.stat)
 			visible_message("<span class='warning'>[src] slams down on [L], crushing [L.p_them()]!</span>")
-			L.gib()
+			L.gib(no_brain = TRUE, no_organs = TRUE, no_bodyparts = TRUE)
 		else
 			L.adjustBruteLoss(75)
 			if(L && !QDELETED(L)) // Some mobs are deleted on death
@@ -423,7 +429,7 @@ Difficulty: Medium
 /obj/effect/temp_visual/lava_warning/ex_act()
 	return
 
-/obj/effect/temp_visual/lava_warning/Initialize(mapload, reset_time = 10)
+/obj/effect/temp_visual/lava_warning/Initialize(mapload, reset_time = 13)
 	. = ..()
 	INVOKE_ASYNC(src, PROC_REF(fall), reset_time)
 	src.alpha = 63.75
@@ -438,7 +444,7 @@ Difficulty: Medium
 	for(var/mob/living/L in T.contents)
 		if(istype(L, /mob/living/simple_animal/hostile/megafauna/dragon))
 			continue
-		L.adjustFireLoss(10)
+		L.adjustFireLoss(5)
 		to_chat(L, "<span class='danger'>I fall directly into the pool of lava!</span>")
 
 	// deals damage to mechs
@@ -525,7 +531,7 @@ obj/effect/temp_visual/fireball
 	desc = ""
 	layer = FLY_LAYER
 	randomdir = FALSE
-	duration = 9
+	duration = 18
 	pixel_z = 270
 
 /obj/effect/temp_visual/fireball/Initialize()
@@ -537,7 +543,7 @@ obj/effect/temp_visual/fireball
 	icon_state = "sniper_zoom"
 	layer = BELOW_MOB_LAYER
 	light_range = 2
-	duration = 9
+	duration = 18
 
 /obj/effect/temp_visual/target/ex_act()
 	return
@@ -555,17 +561,25 @@ obj/effect/temp_visual/fireball
 		var/turf/closed/mineral/M = T
 		M.gets_drilled()
 	playsound(T, "explosion", 80, TRUE)
-	new /obj/effect/hotspot(T)
-	T.hotspot_expose(700, 50, 1)
+	var/obj/effect/hotspot/hotspot = new /obj/effect/hotspot(T)
+	hotspot.life = 3
+	T.hotspot_expose(350, 25, 1)
 	for(var/mob/living/L in T.contents)
 		if(istype(L, /mob/living/simple_animal/hostile/megafauna/dragon))
 			continue
 		if(islist(flame_hit) && !flame_hit[L])
-			L.adjustFireLoss(40)
+			L.adjustFireLoss(20)
 			to_chat(L, "<span class='danger'>You're hit by the drake's fire breath!</span>")
 			flame_hit[L] = TRUE
 		else
-			L.adjustFireLoss(10) //if we've already hit them, do way less damage
+			L.adjustFireLoss(5) //if we've already hit them, do way less damage
+
+/obj/structure/spawner/dragon
+	max_mobs = 1
+	obj_flags = NONE
+	max_integrity = 999999
+	spawn_time = 1 HOURS
+	mob_types = list(/mob/living/simple_animal/hostile/megafauna/dragon)
 
 /mob/living/simple_animal/hostile/megafauna/dragon/lesser
 	name = "lesser ash drake"
