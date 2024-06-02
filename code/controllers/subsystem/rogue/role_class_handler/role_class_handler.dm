@@ -52,6 +52,7 @@ SUBSYSTEM_DEF(role_class_handler)
 	build_dumbass_category_lists()
 
 	if(drifter_queue_enabled)
+		next_drifter_mass_release_time = world.time + drifter_time_buffer
 		handle_drifter_wave_scheduling()
 
 	initialized = TRUE

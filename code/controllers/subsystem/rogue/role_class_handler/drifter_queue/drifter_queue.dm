@@ -21,7 +21,7 @@
 	// Next time we fire
 	var/next_drifter_mass_release_time = 0
 	// Delay before next wave rn
-	var/drifter_time_buffer = 30 SECONDS
+	var/drifter_time_buffer = 2 MINUTES
 	
 	// The current wave
 	var/datum/drifter_wave/current_wave
@@ -164,15 +164,17 @@
 /datum/controller/subsystem/role_class_handler/proc/find_dropoff_location()
 	// This will be full of turfs
 	var/list/potential_target_dropzones = list()
+
 	if(current_wave.droppoint_landmark_types.len)
 		for(var/obj/effect/landmark/cur_landmark in GLOB.landmarks_list)
 			if(cur_landmark.type in current_wave.droppoint_landmark_types)
 				potential_target_dropzones += cur_landmark      
 
-	else if(SSjob.latejoin_trackers.len)
-		potential_target_dropzones += pick(SSjob.latejoin_trackers)
+	if(!potential_target_dropzones.len)
+		if(SSjob.latejoin_trackers.len)
+			potential_target_dropzones += pick(SSjob.latejoin_trackers)
 
-	else
+	if(!potential_target_dropzones.len)
 		message_admins("DRIFTER QUEUE HAS NO DROPZONE TARGET POINTS. SHIIIET!")
 		return
 
