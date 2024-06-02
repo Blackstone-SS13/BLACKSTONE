@@ -138,7 +138,7 @@
 	result = list (/obj/item/clothing/head/roguetown/wizhat/gen/wise)
 	reqs = list(/obj/item/natural/cloth = 4,
 				/obj/item/natural/silk = 4,
-				/obj/item/natural/fabric = 4)
+				/obj/item/natural/fibers = 4)
 	craftdiff = 6
 
 /datum/crafting_recipe/roguetown/weaving/ladybelt
