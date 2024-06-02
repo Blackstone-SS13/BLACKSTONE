@@ -49,7 +49,6 @@
 	tools = /obj/item/rogueweapon/huntingknife
 	verbage_simple = "carve"
 	verbage = "carves"
-	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/bow
 	name = "wooden bow"
