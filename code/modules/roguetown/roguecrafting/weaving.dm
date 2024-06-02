@@ -119,3 +119,31 @@
 				/obj/item/natural/fur = 2)
 	craftdiff = 5
 	sellprice = 60
+
+/datum/crafting_recipe/roguetown/weaving/headdress
+	name = "foreign headdress"
+	result = list (/obj/item/clothing/head/roguetown/headdress)
+	reqs = list(/obj/item/natural/silk = 2)
+	craftdiff = 4
+
+/datum/crafting_recipe/roguetown/weaving/hennin
+	name = "hennin"
+	result = list (/obj/item/clothing/head/roguetown/hennin)
+	reqs = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/silk = 2)
+	craftdiff = 4
+
+/datum/crafting_recipe/roguetown/weaving/wise
+	name = "wise hat"
+	result = list (/obj/item/clothing/head/roguetown/wizhat/gen/wise)
+	reqs = list(/obj/item/natural/cloth = 4,
+				/obj/item/natural/silk = 4,
+				/obj/item/natural/fabric = 4)
+	craftdiff = 6
+
+/datum/crafting_recipe/roguetown/weaving/ladybelt
+	name = "fine belt"
+	result = list (/obj/item/storage/belt/rogue/leather/cloth/lady)
+	reqs = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/silk = 2)
+	craftdiff = 3
