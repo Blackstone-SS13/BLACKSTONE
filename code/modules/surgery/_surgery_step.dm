@@ -215,16 +215,6 @@
 		return FALSE
 	if((surgery_flags_blocked & bodypart_flags))
 		return FALSE
-	if((surgery_flags & SURGERY_INCISED) && !(bodypart_flags & SURGERY_INCISED))
-		return FALSE
-	if((surgery_flags & SURGERY_RETRACTED) && !(bodypart_flags & SURGERY_RETRACTED))
-		return FALSE
-	if((surgery_flags & SURGERY_CLAMPED) && !(bodypart_flags & SURGERY_CLAMPED))
-		return FALSE
-	if((surgery_flags & SURGERY_BROKEN) && !(bodypart_flags & SURGERY_BROKEN))
-		return FALSE
-	if((surgery_flags & SURGERY_DRILLED) && !(bodypart_flags & SURGERY_DRILLED))
-		return FALSE
 
 	/*
 	if(user == target)
