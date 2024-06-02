@@ -245,7 +245,7 @@
 				msg += "<B>[m1] severely wounded.</B>"
 			if(100 to INFINITY)
 				msg += "<span class='danger'>[m1] gravely wounded.</span>"
-		
+
 	// Blood volume
 	switch(blood_volume)
 		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
@@ -295,6 +295,7 @@
 			else
 				msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
 
+	// Missing limbs
 	var/missing_head = FALSE
 	var/list/missing_limbs = list()
 	for(var/missing_zone in get_missing_limbs())
@@ -306,6 +307,8 @@
 		var/missing_limb_message = "<B>[capitalize(m2)] [english_list(missing_limbs)] [missing_limbs.len > 1 ? "are" : "is"] gone.</B>"
 		if(missing_head)
 			missing_limb_message = "<span class='dead'>[missing_limb_message]</span>"
+		else
+			missing_limb_message = "<span class='danger'>[missing_limb_message]</span>"
 		msg += missing_limb_message
 
 	//Grabbing
