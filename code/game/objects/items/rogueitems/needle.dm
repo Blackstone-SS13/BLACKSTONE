@@ -146,4 +146,3 @@
 	name = "needle of pestra"
 	desc = "<span class='green'>This needle has been blessed by the goddess of medicine herself!</span>"
 	infinite = TRUE
-	can_repair = FALSE
