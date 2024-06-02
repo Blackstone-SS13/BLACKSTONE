@@ -53,7 +53,7 @@
 			if(!index)
 				index = H.real_name
 			S.name = "watchman tabard ([index])"
-			
+
 /datum/outfit/job/roguetown/guardsman
 	name = "Watchman"
 	/// Whether or not we are a bowman
@@ -93,7 +93,7 @@
 /datum/outfit/job/roguetown/guardsman/proc/assign_skills(mob/living/carbon/human/guard)
 	guard.mind.adjust_skillrank(/datum/skill/combat/maces, pick(3,4), TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE) 
+	guard.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/polearms, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
@@ -102,13 +102,13 @@
 	guard.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE) 
+	guard.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
 	guard.change_stat("strength", 1)
-	guard.change_stat("perception", 2) 
+	guard.change_stat("perception", 2)
 	guard.change_stat("constitution", 1)
 	guard.change_stat("endurance", 1)
 	guard.change_stat("speed", 1)
@@ -127,7 +127,7 @@
 	guard.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
-	guard.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE) 
+	guard.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)

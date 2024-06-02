@@ -91,3 +91,8 @@
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/steel
 
+/obj/item/clothing/gloves/roguetown/plate/iron
+	name = "iron mitts"
+	max_integrity = 200
+	smeltresult = /obj/item/ingot/iron
+	icon_state = "igauntlets"

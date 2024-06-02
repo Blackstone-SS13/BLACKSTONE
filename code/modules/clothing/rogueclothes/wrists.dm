@@ -6,7 +6,7 @@
 	sleevetype = "shirt"
 
 /obj/item/clothing/wrists/roguetown/bracers
-	name = "bracers"
+	name = "steel vambraces"
 	desc = ""
 	body_parts_covered = ARMS
 	icon_state = "bracers"
@@ -33,6 +33,12 @@
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	anvilrepair = null
 	sewrepair = TRUE
+
+/obj/item/clothing/wrists/roguetown/bracers/iron
+	name = "iron bracers"
+	icon_state = "ibracers"
+	max_integrity = 200
+	smeltresult = /obj/item/ingot/iron
 
 /obj/item/clothing/wrists/roguetown/wrappings
 	name = "solar wrappings"

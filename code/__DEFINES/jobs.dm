@@ -191,6 +191,14 @@
 #define DEATHKNIGHT (1<<1)
 #define SKELETON	(1<<2)
 
+#define DWARFFORT	(1<<10)
+
+#define DWARFLEADER (1<<0)
+#define PROVISIONER	(1<<1)
+#define EMISSARY	(1<<2)
+#define GUARDSDWARF	(1<<3)
+#define DWARFMINER	(1<<4)
+
 #define JCOLOR_NOBLE "#aa83b9"
 #define JCOLOR_COURTIER "#81adc8"
 #define JCOLOR_CHURCH "#c0ba8d"
@@ -198,6 +206,7 @@
 #define JCOLOR_YEOMAN "#819e82"
 #define JCOLOR_PEASANT "#b09262"
 #define JCOLOR_MERCENARY "#c86e3a"
+#define JCOLOR_DWARFFORT "#7a292e"
 
 
 // job display orders //
@@ -278,3 +287,9 @@
 #define JDO_GOBLINCOOK 37
 #define JDO_GOBLINGUARD 38
 #define JDO_GOBLINSMITH 39
+
+#define JDO_DWARFLEADER 40
+#define JDO_PROVISIONER 41
+#define JDO_EMISSARY 42
+#define JDO_GUARDSDWARF 43
+#define JDO_DWARFMINER 44
