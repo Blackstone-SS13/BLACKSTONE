@@ -56,8 +56,8 @@
 		H.change_stat("intelligence", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("speed", -1)
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
 
 /datum/job/roguetown/guardsdwarf
 	title = "Guardian"
@@ -114,8 +114,8 @@
 			H.hairstyle = pick(acceptable)
 			H.update_hair()
 	H.verbs |= /mob/proc/haltyell
-	ADD_TRAIT(H, RTRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/guardsdwarf/proc/assign_skills(mob/living/carbon/human/guard)
 	guard.mind.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
@@ -302,5 +302,5 @@
 		H.change_stat("intelligence", 2)
 		H.change_stat("perception", 2)
 		H.change_stat("speed", -1)
-	ADD_TRAIT(H, RTRAIT_NOBLE, TRAIT_GENERIC)
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
