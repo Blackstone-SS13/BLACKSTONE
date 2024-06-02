@@ -571,7 +571,13 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	assets = list(
 		"try5.png" = 'icons/roguetown/misc/try5.png',
 		"try5_border.png" = 'icons/roguetown/misc/try5_border.png',
-		"slop_menustyle2.css" = 'html/browser/slop_menustyle3.css'
+		"slop_menustyle3.css" = 'html/browser/slop_menustyle3.css'
+	)
+
+/datum/asset/simple/blackedstone_drifter_queue_menu_slop_layout
+	verify = FALSE
+	assets = list(
+		"slop_menustyle4.css" = 'html/browser/slop_menustyle4.css'
 	)
 
 /datum/asset/simple/roguefonts

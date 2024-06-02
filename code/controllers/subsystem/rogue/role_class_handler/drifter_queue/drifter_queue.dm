@@ -24,7 +24,7 @@
 	
 	// The current wave
 	var/datum/drifter_wave/current_wave
-	//Schedule of drifter waves
+	// Schedule of drifter waves
 	var/list/drifter_wave_schedule = list()
 	// List of clients who have joined for the wave
 	var/list/drifter_wave_joined_clients = list()

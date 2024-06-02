@@ -20,9 +20,9 @@
 	if(menu)
 		if(!menu.linked_client)
 			menu.linked_client = C
-		menu.show_drifter_queue_menu()
+		menu.first_show_drifter_queue_menu()
 	else
 		menu = new()
 		drifter_queue_menus[C.ckey] = menu
 		menu.linked_client = C
-		menu.show_drifter_queue_menu()
+		menu.first_show_drifter_queue_menu()

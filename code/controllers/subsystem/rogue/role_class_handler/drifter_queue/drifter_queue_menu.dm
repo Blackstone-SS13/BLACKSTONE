@@ -4,6 +4,11 @@
 /datum/drifter_queue_menu
 	var/client/linked_client
 
+/datum/drifter_queue_menu/proc/first_show_drifter_queue_menu()
+	var/datum/asset/thicc_assets = get_asset_datum(/datum/asset/simple/blackedstone_drifter_queue_menu_slop_layout)
+	thicc_assets.send(linked_client)
+	show_drifter_queue_menu()
+
 /datum/drifter_queue_menu/proc/show_drifter_queue_menu()
 	//Opening tags and empty head
 	var/data = {"

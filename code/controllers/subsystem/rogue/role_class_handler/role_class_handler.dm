@@ -1,9 +1,6 @@
 /*
 	Basically we got a subsystem for the shitty subjob handling and new menu as of 4/30/2024 that goes with it
 */
-/*
-TODO ANTAG QUEUE SYSTEM
-*/
 
 /*
 	REMINDER TO RETEST THE OVERFILL HELPER
@@ -15,34 +12,36 @@ SUBSYSTEM_DEF(role_class_handler)
 	priority = FIRE_PRIORITY_ROLE_CLASS_HANDLER
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME
 
-	/*
-		This one is important, its all the open class select handlers
-		Its an assc list too class_select_handlers[ckey] = /datum/class_select_handler
-		If someone makes one they shouldn't be getting a new one in the current session
-	*/
+/*
+	a list of datums dedicated to helping handle a class selection session
+	ex: class_select_handlers[ckey] = /datum/class_select_handler
+	contents: class_select_handlers = list("ckey" = /datum/class_select_handler, "ckey2" = /datum/class_select_handler,... etc)
+*/
 	var/list/class_select_handlers = list()
 
 
-	/*
-		This one is just an assc list, basically
-		"ckey" = num to track the rerolls per server session attached to a ckey.
-		You are only getting THREE (by default)
-	*/
+/*
+	dumbazz list meant to keep track of how many rerolls they've used per server session
+	ex: session_rerolls[ckey] += 1
+	contents: session_rerolls = list("ckey" = 2, "ckey2" = 69,... etc)
+*/
 	var/list/session_rerolls = list()
 
-	/*
-		This one is kinda retarded, its basically for datums certain ckeys will get in the session
-		"ckey" = list(the datums), which will be its own copy that the person its hooked to can drain numbers out of on their own.
-	*/
+/*
+	This ones basically a list for if you want to give a specific ckey a specific isolated datum
+	ex: special_session_queue[ckey] += /datum/advclass/BIGMAN
+	contents: special_session_queue = list("ckey" = list(/datum/advclass/class), "ckey2" = list(/datum/advclass/class)... etc)
+*/
 	var/list/special_session_queue = list()
 
-//Time for sloppa vars
-	/*
-		This is basically a big assc list of sorted classes, 
-		The structure is as so, "category_key" = list(/datum/advclass/balls1, /datum/advclass/balls2, etc)
-		we only have one snowflake list in there rn and it is the following:
-		"all_classes" = list(every class datum)
-	*/
+
+/*
+	This is basically a big assc list of lists attached to tags which contain /datum/advclass datums
+	ex: sorted_class_categories[CTAG_GAPEMASTERS] += /datum/advclass/GAPER
+	contents: sorted_class_categories = list("CTAG_GAPEMASTERS" = list(/datum/advclass/GAPER, /datum/advclass/GAPER2)... etc)
+	Snowflake lists:
+		CTAG_ALLCLASS = list(every single class datum that exists outside of the parent)
+*/
 	var/list/sorted_class_categories = list()
 
 
@@ -80,33 +79,38 @@ SUBSYSTEM_DEF(role_class_handler)
 	We will cache it per server session via an assc list with a ckey leading to the datum.
 */
 /datum/controller/subsystem/role_class_handler/proc/setup_class_handler(mob/living/carbon/human/H)
-	// Also insure we somehow don't call this without a ref in the params
-	if(H)
-		// insure they somehow aren't closing the datum they got and opening a new one w rolls
-		var/datum/class_select_handler/GOT_IT = class_select_handlers[H.client.ckey]
-		if(GOT_IT)
-			if(!GOT_IT.linked_client) // this ref will disappear if they disconnect neways probably, as its a client
-				GOT_IT.linked_client = H.client // too bad the firing of slop just checks the mob for what it can even use anyways
-			GOT_IT.second_step()
+	// insure they somehow aren't closing the datum they got and opening a new one w rolls
+	var/datum/class_select_handler/GOT_IT = class_select_handlers[H.client.ckey]
+	if(GOT_IT)
+		if(!GOT_IT.linked_client) // this ref will disappear if they disconnect neways probably, as its a client
+			GOT_IT.linked_client = H.client // Thus we just give it back to them
+		GOT_IT.second_step() // And give them a second dose of something they already dosed on
+		return
 
-		else
-			var/datum/class_select_handler/XTRA_MEATY = new()
-			XTRA_MEATY.linked_client = H.client
+	var/datum/class_select_handler/XTRA_MEATY = new()
+	XTRA_MEATY.linked_client = H.client
 
-			if(H.job) // Set the totals being rolled via whats currently on the job
-				var/datum/job/roguetown/RT_JOB = SSjob.name_occupations[H.job]
-				XTRA_MEATY.total_combat_class = RT_JOB.combat_slot_rolls_count
-				XTRA_MEATY.total_free_class = RT_JOB.free_slot_rolls_count
+	var/datum/job/roguetown/RT_JOB = SSjob.GetJob(H.job)
+	if(RT_JOB.advclass_cat_rolls.len)
+		XTRA_MEATY.class_cat_alloc_attempts = RT_JOB.advclass_cat_rolls
 
-			XTRA_MEATY.initial_setup()
-			class_select_handlers[H.client.ckey] = XTRA_MEATY
+	if(H.client.ckey in special_session_queue)
+		XTRA_MEATY.special_session_queue = list()
+		for(var/datum/advclass/XTRA_SPECIAL in special_session_queue[H.client.ckey])
+			if(XTRA_SPECIAL.maximum_possible_slots > XTRA_SPECIAL.total_slots_occupied)
+				XTRA_MEATY.special_session_queue += XTRA_SPECIAL
 
-		if(!(H.client.ckey in session_rerolls)) // no key in sess rerolls
-			session_rerolls[H.client.ckey] = 3 // Set it and give them 3
+	XTRA_MEATY.initial_setup()
+	class_select_handlers[H.client.ckey] = XTRA_MEATY
 
-//Attempt to finish the class handling ordeal, aka they picked something
-// Since this is class handler related, might as well also have the class handler send itself into the params
-/datum/controller/subsystem/role_class_handler/proc/finish_class_handler(mob/living/carbon/human/H, datum/advclass/picked_class, datum/class_select_handler/related_handler, plus_factor)
+	if(!H.client.ckey in session_rerolls) // no key in sess rerolls
+		session_rerolls[H.client.ckey] = 3 // Set it and give them 3
+
+/*
+	Attempt to finish the class handling ordeal, aka they picked something
+	Since this is class handler related, might as well also have the class handler send itself into the params
+*/
+/datum/controller/subsystem/role_class_handler/proc/finish_class_handler(mob/living/carbon/human/H, datum/advclass/picked_class, datum/class_select_handler/related_handler, plus_factor, special_session_queue)
 	if(!(picked_class.maximum_possible_slots == -1)) // Is the class not set to infinite?
 		if(picked_class.total_slots_occupied >= picked_class.maximum_possible_slots) // are the occupied slots greater than or equal to the current maximum possible slots on the datum?
 			related_handler.rolled_class_is_full(picked_class) //If so we inform the datum in the off-chance some desyncing is occurring so we don't have a deadslot in their options.
@@ -120,12 +124,13 @@ SUBSYSTEM_DEF(role_class_handler)
 	qdel(GET_IT_OUT)
 	H.cure_blind("advsetup")
 
-	if(plus_factor) // If we get any plus factor at all, we run the datums boost proc on the human also.
+	//If we get any plus factor at all, we run the datums boost proc on the human also.
+	if(plus_factor) 
 		picked_class.boost_by_plus_power(plus_factor, H)
 
 
 	// In retrospect, If I don't just delete these Ill have to actually attempt to keep track of when a byond browser window is actually open lol
-	// soooo..... this will be the place where we take the out, as it means they finished class selection, and we can safely delete the handler.
+	// soooo..... this will be the place where we take it out, as it means they finished class selection, and we can safely delete the handler.
 	related_handler.ForceCloseMenus() // force menus closed
 	
 	// Remove the key from the list and with it the value too
@@ -147,20 +152,15 @@ SUBSYSTEM_DEF(role_class_handler)
 			if(target_datum in found_menu.rolled_classes) // We found the target datum in one of the classes they rolled aka in the list of options they got visible,
 				found_menu.rolled_class_is_full(target_datum) //  inform the datum of its error.
 
-// If they aren't in the list, they get 3 by default.
+
+
+/*
+	Janky ass reroll handlers
+*/
 /datum/controller/subsystem/role_class_handler/proc/get_session_rerolls(ckey)
 	return session_rerolls[ckey]
 
 
 /datum/controller/subsystem/role_class_handler/proc/adjust_session_rerolls(ckey, number)
 	session_rerolls[ckey] += number
-
-
-/datum/controller/subsystem/role_class_handler/proc/add_to_special_session_queue(ckey, datum, key_id)
-	if(!special_session_queue[ckey])
-		special_session_queue[ckey] = list()
-
-	special_session_queue[ckey]["[key_id]"] = datum
-
-
 

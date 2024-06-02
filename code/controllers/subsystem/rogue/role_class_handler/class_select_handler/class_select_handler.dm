@@ -3,41 +3,64 @@
 */
 /datum/class_select_handler
 	var/client/linked_client //the ss will link it!
+	//Well, we basically need to fill out our options
 
-	/*
-		Well, we basically need to fill out our options
-	*/
-	// Free classes we can personally take with our current human rn
-	var/list/viable_free_classes = list()
+/* 
+	This list is organized like so
+	class_cat_alloc_attempts = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 3, etc)
+	Wherein you will have this datum attempt to roll you up 5 pilgrim category classes, and 3 adventurer class categories
+*/
+	var/list/class_cat_alloc_attempts
 
-	// Combat classes we can personally take with our current human rn
-	var/list/viable_combat_classes = list()
-	var/list/combat_classes // a filler list cause i mite need to reuse it
+	// Whether we bypass reqs on class cat alloc attempts
+	var/class_cat_alloc_bypass_reqs = FALSE
 
-	// Total amounts of each we get by default. Which is now ZERO HAHAHA!
-	// Now its tied to the job file thats summoning our stupid datum menu azz
-	var/total_free_class = 0
-	var/total_combat_class = 0
+/* 
+	This list is organized exactly like the class_cat_alloc_attempts the numbers dictate how many plusboosts we give to the category
+	class_cat_alloc_attempts = list(CTAG_PILGRIM = 3, CTAG_ADVENTURER = 2, etc)
+	If you put a number in, it will attempt to allocate it to the cat
+*/
+	var/list/class_cat_plusboost_attempts
 
-	//classes we rolled, basically you get a datum followed by a number in here on how many times you rerolled it.
-	var/list/rolled_classes = list()
+/*
+	This list is organized like so
+	forced_class_additions = list(datum/advclass/filled_class)
+	Wherein the class will just be forced onto the list to be displayed
+*/
+	var/list/forced_class_additions
+	// If this has a number above 0 we will plusboost this many guys
+	var/forced_class_plusboost = 0
 
-	//Current class we takin
+
+
+
+/*
+	Working Vars - aka we are using these to just do work
+*/
+	// Special session queue classes - aka a connector to the special_session_queue
+	var/list/special_session_queue
+
+	// Local cache of sorted shit
+	var/list/local_sorted_class_cache = list()
+
+	//Current class we lookin at and its boost power
 	var/datum/advclass/cur_picked_class
 	var/plus_power = 0
-
-	//Special forced entries , If your key is in here you autoget the contents of it on your options.
-	var/list/ckey_special_classes = list()
+	// If this is set to true we don't run some other menu updating shit in the off-chance we max out our stupid shit
+	var/special_selected = FALSE
 
 	// If this is set to true we display all the challenge classes
 	var/showing_challenge_classes = FALSE
 
+	//classes we rolled, basically you get a datum followed by a number in here on how many times you rerolled it.
+	var/list/rolled_classes = list()
+
 // The normal route for first use of this list.
 /datum/class_select_handler/proc/initial_setup()
 	assemble_the_CLASSES()
-	lower_quality_gacha_rolls()
-	//preload_assets()
+	second_step()
 
+// The second step, aka we just want to make sure the resources are there and that the menu is being displayed
 /datum/class_select_handler/proc/second_step()
 	var/datum/asset/thicc_assets = get_asset_datum(/datum/asset/simple/blackedstone_class_menu_slop_layout)
 	thicc_assets.send(linked_client)
@@ -49,107 +72,82 @@
 	// Cleanup anything holding references, aka these lists holding refs to class datums and the other two
 	linked_client = null 
 	cur_picked_class = null
-	viable_combat_classes = null
-	viable_free_classes = null
-	rolled_classes = null
-	ckey_special_classes = null
+	class_cat_alloc_attempts = null
+	forced_class_additions = null
 	. = ..()
 
 // I hope to god you have a client before you call this, cause the checks on the SS
 /datum/class_select_handler/proc/assemble_the_CLASSES()
 	var/mob/living/carbon/human/H = linked_client.mob
-	for(var/datum/advclass/FREES in SSrole_class_handler.free_classes)
-		if(FREES.check_requirements(H))
-			viable_free_classes += FREES
-		
-	for(var/datum/advclass/COMBATS in SSrole_class_handler.combat_classes)
-		if(COMBATS.check_requirements(H))
-			viable_combat_classes += COMBATS
 
-	if(SSrole_class_handler.special_session_queue[linked_client.ckey])
-		for(var/current_key in SSrole_class_handler.special_session_queue[linked_client.ckey])
-			var/datum/advclass/SNOWFLAKES = SSrole_class_handler.special_session_queue[linked_client.ckey][current_key]
-			if(SNOWFLAKES.check_requirements(H))
-				ckey_special_classes += SNOWFLAKES
-			
-	// If for some reason we don't have the amounts to even cover what we want, reduce it
-	if(total_free_class > viable_free_classes.len)
-		total_free_class = viable_free_classes.len
+	// Time to sort and find our viable classes depending on what conditions we gotta deal w
+	if(class_cat_alloc_attempts && class_cat_alloc_attempts.len)
+		for(var/SORT_CAT_KEY in class_cat_alloc_attempts)
+			var/list/subsystem_ctag_list = SSrole_class_handler.sorted_class_categories[SORT_CAT_KEY]
+			var/list/local_insert_sortlist = list()
 
-	if(total_combat_class > viable_combat_classes.len)
-		total_combat_class = viable_combat_classes.len
 
-//The actual mathematics solution also was kind of fucked up along with the code one
-// So we cope here as rolling some plusses on classes properly isn't worth it
-/datum/class_select_handler/proc/lower_quality_gacha_rolls()
-	// Begin rolling to our alotted amount
-	if(total_free_class && viable_free_classes.len)
-		var/list/free_classes = viable_free_classes.Copy()
-		for(var/i=1, i <= total_free_class, i++) // We just do the normal thing
-			if(!free_classes.len)
-				break
-			var/datum/advclass/pickme = pick(free_classes) // Pick one
-			free_classes -= pickme
-			rolled_classes[pickme] = 0
+			if(class_cat_alloc_bypass_reqs)
+				for(var/datum/advclass/CUR_AZZ in subsystem_ctag_list)
+					local_insert_sortlist += CUR_AZZ
 
-		for(var/i in 1 to total_free_class)
-			var/datum/advclass/pickme = pick(viable_free_classes)
-			if(pickme in rolled_classes)
-				rolled_classes[pickme] += 1
+			else // If we are not bypassing reqs, time to do a req check
+				for(var/datum/advclass/CUR_AZZ in subsystem_ctag_list)
+					if(CUR_AZZ.check_requirements(H))
+						local_insert_sortlist += CUR_AZZ
+
+			// Time to do some picking, make sure we got things in the list we dealin with
+			if(local_insert_sortlist.len)
+				// Make sure we aren't going to attempt to pick more than what we even have avail
+				if(class_cat_alloc_attempts[SORT_CAT_KEY] > local_insert_sortlist.len)
+					class_cat_alloc_attempts[SORT_CAT_KEY] = local_insert_sortlist.len
+
+				local_insert_sortlist = shuffle(local_insert_sortlist)
+				for(var/i in 1 to class_cat_alloc_attempts[SORT_CAT_KEY])
+					rolled_classes[local_insert_sortlist[i]] = 0
+
+				// We are plusboosting too
+				if(class_cat_plusboost_attempts && SORT_CAT_KEY in class_cat_plusboost_attempts)
+					if(class_cat_plusboost_attempts[SORT_CAT_KEY])
+						for(var/i in 1 to class_cat_plusboost_attempts[SORT_CAT_KEY])
+							var/datum/advclass/boostclass = pick(local_insert_sortlist)
+							if(boostclass in rolled_classes)
+								rolled_classes[boostclass] += 1
+
+				local_sorted_class_cache[SORT_CAT_KEY] = local_insert_sortlist
+
+	// If we got forced class additions
+	if(forced_class_additions && forced_class_additions.len)
+		for(var/datum/advclass/FORCE_IT_IN in forced_class_additions)
+			rolled_classes[FORCE_IT_IN] = 0
+
+		if(forced_class_plusboost)
+			for(var/i in 1 to forced_class_plusboost)
+				var/datum/advclass/boostclass = pick(rolled_classes)
+				if(boostclass in forced_class_additions)
+					rolled_classes[boostclass] += 1
+
 	
-	if(total_combat_class && viable_combat_classes.len)
-		combat_classes = viable_combat_classes.Copy()
-		for(var/i=1, i <= total_combat_class, i++) // We just do the normal thing
-			if(!combat_classes.len)
-				break
-			var/datum/advclass/pickme = pick(combat_classes) // Pick one
-			combat_classes -= pickme
-			rolled_classes[pickme] = 0
-
-		for(var/i in 1 to 2)
-			var/datum/advclass/pickme = pick(viable_combat_classes)
-			if(pickme in rolled_classes)
-				rolled_classes[pickme] += 1
-
 
 // Something is calling to tell this datum a class it rolled is currently maxed out.
 // More shitcode!
 /datum/class_select_handler/proc/rolled_class_is_full(datum/advclass/filled_class)
 
-	rolled_classes -= filled_class // Remove it from rolled classes
-
-	var/list/attempt_pick_list
-
-	if(filled_class.category_flags & (RT_TYPE_FREE_CLASS))
-		if(filled_class in viable_free_classes)
-			viable_free_classes -= filled_class // Remove it from free classes
-			attempt_pick_list = viable_free_classes
-
-	if(filled_class.category_flags & (RT_TYPE_COMBAT_CLASS))
-		if(filled_class in viable_combat_classes)
-			viable_combat_classes -= filled_class // Remove it from combat classes
-			attempt_pick_list = viable_combat_classes
-
-	// And also make an arbitrary three attempts for no reason to get a new class in
-	// As long as we have something in the list
-	if(attempt_pick_list.len)
-		var/total_attempts = 3
-		var/datum/advclass/attempted_pick
-		for(var/i=1, i <= total_attempts, i++)
-			attempted_pick = pick(attempt_pick_list)
-
-			if(attempted_pick in rolled_classes)
-				if(attempted_pick.category_flags & (RT_TYPE_COMBAT_CLASS))
-					if(prob(30))
-						rolled_classes[attempted_pick] += 1
-				else
-					rolled_classes[attempted_pick] += 1
+	var/list/possible_list = list()
+	for(var/CTAG_CAT in filled_class.category_tags)
+		for(var/datum/advclass/new_age_datum in local_sorted_class_cache[CTAG_CAT])
+			if(new_age_datum in rolled_classes)
 				continue
-			else
-				rolled_classes[attempted_pick] = 0
-				break
+			if(new_age_datum in possible_list) // In the offchance we got the datum in two cats, we don't want to cuck them by doubling up the chance to get it
+				continue
+			possible_list += new_age_datum
 
+	if(possible_list.len)
+		rolled_classes[pick(possible_list)] = 0
+	
 	if(cur_picked_class == filled_class)
+		if(special_session_queue && cur_picked_class in special_session_queue)
+			special_selected = FALSE
 		cur_picked_class = null
 
 		if(linked_client) // In the current state we will still auto-adjust cached datums with no linked client
@@ -157,12 +155,6 @@
 
 	if(linked_client) // So make sure we don't go further than this without one I guess
 		browser_slop()
-
-// ha ha ha
-/datum/class_select_handler/proc/add_one_more_combat_slot()
-	var/datum/advclass/pickme = pick(combat_classes) // Pick one
-	combat_classes -= pickme
-	rolled_classes[pickme] = 0
 
 /datum/class_select_handler/proc/browser_slop()
 
@@ -187,9 +179,6 @@
 	data += "<div id='top_handwriting'> The fates giveth... </div>"
 	data += "<div id='class_select_box_div'>"
 
-
-	//var/total_antag = 1
-	
 	for(var/datum/advclass/datums in rolled_classes)
 		var/plus_str = ""
 		if(rolled_classes[datums] > 0)
@@ -198,11 +187,11 @@
 			for(var/i in 1 to plus_factor)
 				plus_str += "+"
 		data += "<div class='class_bar_div'><a class='vagrant' href='?src=\ref[src];class_selected=1;selected_class=\ref[datums];'><img class='ninetysskull' src='haha_skull.gif' width=32 height=32>[datums.name]<span id='green_plussa'>[plus_str]</span><img class='ninetysskull' src='haha_skull.gif' width=32 height=32></a></div>"
-	if(ckey_special_classes.len)
-		for(var/datum/advclass/datums in ckey_special_classes)
+	if(special_session_queue && special_session_queue.len)
+		for(var/datum/advclass/datums in special_session_queue)
 			data += "<div class='class_bar_div'><a class='vagrant' href='?src=\ref[src];special_selected=1;selected_special=\ref[datums];'><img class='ninetysskull' src='haha_skull.gif' width=32 height=32>[datums.name]<img class='ninetysskull' src='haha_skull.gif' width=32 height=32></a></div>"
 	if(showing_challenge_classes)
-		for(var/datum/advclass/datums in SSrole_class_handler.challenge_classes)
+		for(var/datum/advclass/datums in SSrole_class_handler.sorted_class_categories[CTAG_CHALLENGE])
 			data += "<div class='class_bar_div'><a class='vagrant' href='?src=\ref[src];class_selected=1;selected_class=\ref[datums];'><img class='ninetysskull' src='haha_skull.gif' width=32 height=32>[datums.name]<img class='ninetysskull' src='haha_skull.gif' width=32 height=32></a></div>"
 	data += "</div>"
 
@@ -211,16 +200,10 @@
 	var/rerolls_left = SSrole_class_handler.get_session_rerolls(linked_client.ckey)
 	if(rerolls_left > 0)
 		data += "<a class='bottom_buttons' href='?src=\ref[src];reroll=1'>Reroll Classes <span class='bottom_button_cost'>COST: 0</span></a><br>"
-	// Incase someone wants them to be able to buy rerolls later lol
-	/*
-	else 
-		data += "<a class='bottom_buttons' href='?src=\ref[src];buy_reroll=1'>Reroll COST:1</a><br>"
-	*/
 
-	data += {"
-		<a class='mo_bottom_buttons' href='?src=\ref[src];add_combat_slot=1'>Extra Adventurer Class <span class='bottom_button_cost'>COST: 1</span></a><br>
-		<a class='mo_bottom_buttons' href='?src=\ref[src];show_challenge_class=1'>Show Challenge Classes <span class='bottom_button_cost'>COST: 0</span></a><br>
-	</div>
+		data += {"	
+			<a class='mo_bottom_buttons' href='?src=\ref[src];show_challenge_class=1'>Show Challenge Classes <span class='bottom_button_cost'>COST: 0</span></a><br>
+		</div>
 	"}
 
 	//Closing Tags
@@ -251,7 +234,7 @@
 				<span class="title_shit">Description:</span> <span class="post_title_shit">[cur_picked_class.tutorial]</span>
 			</div>
 				<div id='button_div'>
-					<a class='class_desc_YES_LINK' href='?src=\ref[src];yes_to_class_select=1;special_class=1;'>This is my background</a><br>
+					<a class='class_desc_YES_LINK' href='?src=\ref[src];yes_to_class_select=1;special_class=0;'>This is my background</a><br>
 					<a class='bottom_buttons' href='?src=\ref[src];no_to_class_select=1'>I reject this background</a>
 				</div>
 			</div>
@@ -274,7 +257,7 @@
 		return
 
 	if(href_list["yes_to_class_select"]) // Send the data over and wrap it up.
-		SSrole_class_handler.finish_class_handler(linked_client.mob, cur_picked_class, src, plus_power)
+		SSrole_class_handler.finish_class_handler(linked_client.mob, cur_picked_class, src, plus_power, special_selected)
 		return
 
 	if(href_list["no_to_class_select"]) // Close the selector window
@@ -289,52 +272,24 @@
 			linked_client << browse(null, "window=class_select_yea")
 			plus_power = 0
 			cur_picked_class = null
-			rolled_classes = list() // Make sure to empty this out
-			lower_quality_gacha_rolls()
+			rolled_classes = list() // Make sure to empty this mf out
 			SSrole_class_handler.adjust_session_rerolls(linked_client.ckey, -1)
 			browser_slop()
-		return
-
-	// Unused rn, but its in the off-chance you want people to buy rerolls
-	/*
-	if(href_list["buy_reroll"])
-		var/triumph_amount = SStriumphs.get_triumphs(linked_client.ckey) - 1
-		if(triumph_amount >= 0)
-			SStriumphs.triumph_adjust(-1, linked_client.ckey)
-		linked_client << browse(null, "window=class_select_yea")
-		plus_power = 0
-		cur_picked_class = null
-		rolled_classes = list() // Make sure to empty this out
-		lower_quality_gacha_rolls()
-		browser_slop()
-	*/
-
-	if(href_list["add_combat_slot"])
-		if(total_combat_class+1 > viable_combat_classes.len)
-			to_chat(linked_client, "<span class='warning'>You have every possible class your character could be! WOW!</span>")
-			return
-
-		var/triumph_amount = SStriumphs.get_triumphs(linked_client.ckey) - 1
-		if(triumph_amount >= 0)
-			SStriumphs.triumph_adjust(-1, linked_client.ckey)
-			add_one_more_combat_slot()
-			total_combat_class += 1 // Add one here in case they reroll all of them
-
-		browser_slop()
-		return
-
-	if(href_list["show_challenge_class"])
-		showing_challenge_classes = !showing_challenge_classes
-		browser_slop()
 		return
 
 	if(href_list["special_selected"])
 		var/special_class = href_list["selected_special"]
 		var/locvar_check = locate(special_class)
 
-		if(locvar_check in ckey_special_classes)
+		if(locvar_check in special_session_queue)
 			cur_picked_class = locvar_check
+			special_selected = TRUE
 			class_select_slop()
+		return
+
+	if(href_list["show_challenge_class"])
+		showing_challenge_classes = !showing_challenge_classes
+		browser_slop()
 		return
 
 /datum/class_select_handler/proc/ForceCloseMenus()
@@ -343,27 +298,3 @@
 
 
 
-//This was theoretically really bad as it could technically be a infinite loop despite being more fun
-/*
-/datum/class_select_handler/proc/old_gacha_rolls()
-	//Gacha time, maybe I get a SSR Hunter
-	for(var/i=1, i <= total_free_class, i++)
-		var/datum/advclass/pickme = pick(viable_free_classes)
-		if(pickme in rolled_classes)
-			rolled_classes[pickme] += 1
-			i--
-			continue
-		else
-			rolled_classes[pickme] = 0
-
-	
-	//Getting a + on this will be harder because you get less rolls and theres usually a lot, but If you do its pretty major honestly.
-	for(var/i=1, i <= total_combat_class, i++)
-		var/datum/advclass/combat_class = pick(viable_combat_classes)
-		if(combat_class in rolled_classes)
-			rolled_classes[combat_class] += 1
-			i--
-			continue 
-		else
-			rolled_classes[combat_class] = 0
-*/

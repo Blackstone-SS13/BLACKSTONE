@@ -38,7 +38,7 @@
 				@import url('https://fonts.googleapis.com/css2?family=Nosifer&display=swap');
 				@import url('https://fonts.googleapis.com/css2?family=Jersey+25&display=swap');
 			</style>
-			<link rel='stylesheet' type='text/css' href='slop_menustyle2.css'>
+			<link rel='stylesheet' type='text/css' href='slop_menustyle3.css'>
 		</head>
 	"}
 
