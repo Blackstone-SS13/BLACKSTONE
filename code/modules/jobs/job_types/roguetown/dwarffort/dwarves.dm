@@ -188,7 +188,7 @@
 	provisioner.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
 	provisioner.mind.adjust_skillrank(/datum/skill/misc/sneaking, 3, TRUE)
 	provisioner.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
-	provisioner.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
+	provisioner.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 	provisioner.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 	provisioner.change_stat("perception", 3)
 	provisioner.change_stat("intelligence", 1)
