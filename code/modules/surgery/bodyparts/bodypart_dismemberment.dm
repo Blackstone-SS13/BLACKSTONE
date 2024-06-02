@@ -103,7 +103,7 @@
 	var/mob/living/carbon/was_owner = owner
 	var/datum/mind/ihaveamind = owner?.mind
 	. = ..()
-	if(. && was_owner && !HAS_TRAIT(was_owner, TRAIT_IWASHAUNTED) && ihaveamind && hasomen(OMEN_NOPRIEST))
+	if(. && was_owner && ihaveamind && !HAS_TRAIT(was_owner, TRAIT_IWASHAUNTED) && hasomen(OMEN_NOPRIEST))
 		ADD_TRAIT(was_owner, TRAIT_IWASHAUNTED, OMEN_NOPRIEST)
 		var/mob/living/simple_animal/hostile/rogue/haunt/omen/haunt = new(was_owner.drop_location())
 		var/haunt_name = real_name ? "omen of [real_name]" : "omen"
