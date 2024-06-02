@@ -381,6 +381,48 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = "Goblin Smith"
 	icon_state = "arrow"
 
+//dwarf fort
+/obj/effect/landmark/start/dwarfleader
+	name = "Expedition Leader"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/guardsdwarf
+	name = "Guardian"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/emissary
+	name = "Emissary"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/provisioner
+	name = "Provisioner"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/tunneler
+	name = "Tunneler"
+	icon_state = "arrow"
+
+/obj/effect/landmark/start/dwarflate
+	name = "Fortress Dwarf Late"
+	icon_state = "arrow"
+	jobspawn_override = list("Guardian", "Provisioner", "Tunneler")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/dwarfleaderlate
+	name = "Expedition Leader Late"
+	icon_state = "arrow"
+	jobspawn_override = list("Expedition Leader")
+	delete_after_roundstart = FALSE
+
+/obj/effect/landmark/start/emissarylate
+	name = "EmissaryLate"
+	icon_state = "arrow"
+	jobspawn_override = list("Emissary")
+	delete_after_roundstart = FALSE
+
+
+
+
 // START LANDMARKS FOLLOW. Don't change the names unless
 // you are refactoring shitty landmark code.
 /obj/effect/landmark/start/assistant

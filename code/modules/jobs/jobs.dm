@@ -154,6 +154,14 @@ GLOBAL_LIST_INIT(roguewar_positions, list(
 	"Adventurer",
 ))
 
+GLOBAL_LIST_INIT(dwarffort_positions, list(
+	"Expedition Leader",
+	"Provisioner",
+	"Emissary",
+	"Guardian",
+	"Tunneler",
+))
+
 GLOBAL_LIST_INIT(roguefight_positions, list(
 	"Red Captain",
 	"Red Caster",
@@ -180,10 +188,11 @@ GLOBAL_LIST_INIT(job_assignment_order, get_job_assignment_order())
 	sorting_order += GLOB.yeoman_positions
 	sorting_order += GLOB.peasant_positions
 	sorting_order += GLOB.youngfolk_positions
+	sorting_order += GLOB.dwarffort_positions
 	return sorting_order
 
 GLOBAL_LIST_INIT(exp_jobsmap, list(
-	EXP_TYPE_CREW = list("titles" = peasant_positions | command_positions | engineering_positions | medical_positions | science_positions | supply_positions | security_positions | civilian_positions | list("AI","Cyborg")), // crew positions
+	EXP_TYPE_CREW = list("titles" = peasant_positions | dwarffort_positions | command_positions | engineering_positions | medical_positions | science_positions | supply_positions | security_positions | civilian_positions | list("AI","Cyborg")), // crew positions
 	EXP_TYPE_COMMAND = list("titles" = command_positions),
 	EXP_TYPE_ENGINEERING = list("titles" = engineering_positions),
 	EXP_TYPE_MEDICAL = list("titles" = medical_positions),

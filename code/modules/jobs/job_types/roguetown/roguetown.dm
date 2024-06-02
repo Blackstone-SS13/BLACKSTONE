@@ -28,6 +28,9 @@
 		for(var/X in GLOB.mercenary_positions)
 			peopleiknow += X
 			peopleknowme += X
+		for(var/X in GLOB.dwarffort_positions)
+			peopleiknow += X
+			peopleknowme += X
 
 /datum/outfit/job/roguetown
 	uniform = null
