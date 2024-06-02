@@ -223,7 +223,6 @@
 	
 	. = ..()
 	if(ishuman(target))
-		world.log << "Reached ishumantarget"
 		var/mob/living/carbon/human/s_user = user
 		var/mob/living/carbon/human/H = target
 		var/datum/antagonist/vampirelord/lesser/V = H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser)
