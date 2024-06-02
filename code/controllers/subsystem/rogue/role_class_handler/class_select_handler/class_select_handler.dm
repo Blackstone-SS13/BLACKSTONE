@@ -28,6 +28,10 @@
 	Wherein the class will just be forced onto the list to be displayed
 */
 	var/list/forced_class_additions
+
+	// Whether we bypass reqs on these forced classes
+	var/forced_class_bypass_reqs = TRUE
+
 	// If this has a number above 0 we will plusboost this many guys
 	var/forced_class_plusboost = 0
 
@@ -118,8 +122,13 @@
 
 	// If we got forced class additions
 	if(forced_class_additions && forced_class_additions.len)
-		for(var/datum/advclass/FORCE_IT_IN in forced_class_additions)
-			rolled_classes[FORCE_IT_IN] = 0
+		if(forced_class_bypass_reqs)
+			for(var/datum/advclass/FORCE_IT_IN in forced_class_additions)
+				rolled_classes[FORCE_IT_IN] = 0
+		else
+			for(var/datum/advclass/FORCE_IT_IN in forced_class_additions)
+				if(FORCE_IT_IN.check_requirements(H))
+					rolled_classes[FORCE_IT_IN] = 0
 
 		if(forced_class_plusboost)
 			for(var/i in 1 to forced_class_plusboost)

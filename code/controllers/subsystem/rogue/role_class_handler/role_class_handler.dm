@@ -94,8 +94,18 @@ SUBSYSTEM_DEF(role_class_handler)
 	XTRA_MEATY.linked_client = H.client
 
 	var/datum/job/roguetown/RT_JOB = SSjob.GetJob(H.job)
-	if(RT_JOB.advclass_cat_rolls.len)
-		XTRA_MEATY.class_cat_alloc_attempts = RT_JOB.advclass_cat_rolls
+	if(RT_JOB.drifter_wave_attachment) // We got a drifter wave attachment, time to setup a different set of information
+		var/datum/drifter_wave/dwave = RT_JOB.drifter_wave_attachment
+		XTRA_MEATY.class_cat_alloc_attempts = dwave.advclass_cat_rolls
+		XTRA_MEATY.class_cat_alloc_bypass_reqs = dwave.class_cat_alloc_bypass_reqs
+		XTRA_MEATY.class_cat_plusboost_attempts = dwave.class_cat_plusboost_attempts
+
+		XTRA_MEATY.forced_class_additions = dwave.forced_class_additions
+		XTRA_MEATY.forced_class_bypass_reqs = dwave.forced_class_bypass_reqs
+		XTRA_MEATY.forced_class_plusboost = dwave.forced_class_plusboost
+	else
+		if(RT_JOB.advclass_cat_rolls.len)
+			XTRA_MEATY.class_cat_alloc_attempts = RT_JOB.advclass_cat_rolls
 
 	if(H.client.ckey in special_session_queue)
 		XTRA_MEATY.special_session_queue = list()

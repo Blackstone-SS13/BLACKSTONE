@@ -13,7 +13,14 @@
 	for(var/i in 1 to target_wave_addition)
 		drifter_wave_schedule += pick(drifter_wave_data_slabs)
 
+	// Run post run for old wave
+	if(current_wave) 
+		current_wave.post_drifter_wave()
+	// Set a new wave
 	current_wave = drifter_wave_schedule[current_wave_number]
+	// Run setup for new wave
+	current_wave.pre_drifter_wave() 
+
 	next_drifter_mass_release_time = world.time + drifter_time_buffer
 	
 

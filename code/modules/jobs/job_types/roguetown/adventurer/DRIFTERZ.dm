@@ -1,6 +1,7 @@
 
 /*
 	Once again we are back here, ha hahaha....
+	Also this is basically just a shell for the drifter queue system to manipulate.
 */
 /datum/job/roguetown/drifters
 	title = "Drifter"
