@@ -107,17 +107,17 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/coatplates
-	name = "Coat Of Plates (+1 Cloth)"
+	name = "Coat Of Plates (+1 Gambeson)"
 	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/natural/cloth)
+	additional_items = list(/obj/item/clothing/suit/roguetown/armor/gambeson)
 	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine/coatplates
 	craftdiff = 2
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/brigandine
-	name = "Brigandine (+1 Steel +2 Cloth)"
+	name = "Brigandine (+1 Steel 1 Gambeson)"
 	req_bar = /obj/item/ingot/steel
-	additional_items = list(/obj/item/ingot/steel, /obj/item/natural/cloth, /obj/item/natural/cloth)
+	additional_items = list(/obj/item/ingot/steel, /obj/item/clothing/suit/roguetown/armor/gambeson)
 	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine
 	craftdiff = 3
 	i_type = "Armor"
