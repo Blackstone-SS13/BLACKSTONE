@@ -115,7 +115,7 @@
 	i_type = "Armor"
 
 /datum/anvil_recipe/armor/brigandine
-	name = "Brigandine (+1 Steel 1 Gambeson)"
+	name = "Brigandine (+1 Steel +1 Gambeson)"
 	req_bar = /obj/item/ingot/steel
 	additional_items = list(/obj/item/ingot/steel, /obj/item/clothing/suit/roguetown/armor/gambeson)
 	created_item = /obj/item/clothing/suit/roguetown/armor/brigandine
