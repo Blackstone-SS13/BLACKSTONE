@@ -1,5 +1,6 @@
 /datum/advclass/seamstress
 	name = "Seamstress"
+	tutorial = "You are a mistress of the loom, capable of weaving wonders that have brought many nobles to your workshop. You arrive in Rockhill with some coin and your talent in the hopes of expanding your client base. By the looks of things these people are crying out for your aid!"
 	allowed_sexes = list("female")
 	allowed_races = list(
 		"Humen",
@@ -10,6 +11,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/seamstress
 	isvillager = TRUE
 	ispilgrim = FALSE
+	cmode_music = 'sound/music/combat_seamstress.ogg'
 
 /datum/outfit/job/roguetown/adventurer/seamstress/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -35,7 +37,7 @@
 	beltr = /obj/item/rogueweapon/huntingknife/idagger
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	beltl = /obj/item/needle
-	backpack_contents = list(/obj/item/natural/cloth = 1, /obj/item/natural/cloth = 1, /obj/item/natural/bundle/fibers/full = 1)
+	backpack_contents = list(/obj/item/natural/cloth = 2, /obj/item/natural/bundle/fibers/full = 1)
 	H.change_stat("intelligence", 2)
 	H.change_stat("speed", 2)  
 	H.change_stat("perception", 1)
