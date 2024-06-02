@@ -17,7 +17,7 @@
 		TOOL_SCREWDRIVER = 50,
 	)
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
-	time = 6 SECONDS
+	time = 4 SECONDS
 	requires_tech = TRUE
 	replaced_by = /datum/surgery_step
 	repeating = TRUE
@@ -145,7 +145,6 @@
 	brutehealing = 6
 	burnhealing = 6
 	missinghpbonus = 7.5
-	time = 1 SECONDS
 	requires_tech = FALSE
 	replaced_by = /datum/surgery_step/heal/combo/upgraded
 
