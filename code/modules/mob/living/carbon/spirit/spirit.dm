@@ -201,7 +201,7 @@
 
 /// Proc that sends the client associated with a given corpse to the lobby, if possible
 /proc/pacify_corpse(mob/living/corpse, mob/user, coin_pq = 0.2)
-	if(corpse.stat != DEAD)
+	if((corpse.stat != DEAD) || !corpse.mind)
 		return FALSE
 	if(ishuman(corpse))
 		var/mob/living/carbon/human/human_corpse = corpse
@@ -221,7 +221,7 @@
 					qdel(human_corpse.mouth)
 					human_corpse.update_inv_mouth()
 					break
-	corpse.mind?.remove_antag_datum(/datum/antagonist/zombie)
+	corpse.mind.remove_antag_datum(/datum/antagonist/zombie)
 	var/mob/dead/observer/ghost
 	//Try to find a lost ghost if there is no client
 	if(!corpse.client)
