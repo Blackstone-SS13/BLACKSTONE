@@ -64,6 +64,22 @@
 	toggle_icon_state = TRUE
 	max_integrity = 100
 
+/obj/item/clothing/head/roguetown/roguehood/pestra
+	name = "snake hood"
+	desc = ""
+	color = null
+	icon_state = "pestrahood"
+	item_state = "pestrahood"
+	icon = 'icons/roguetown/clothing/head.dmi'
+	body_parts_covered = NECK
+	slot_flags = ITEM_SLOT_HEAD
+	dynamic_hair_suffix = ""
+	edelay_type = 1
+	adjustable = CAN_CADJUST
+	dynamic_hair_suffix = "+generic"
+	toggle_icon_state = TRUE
+	max_integrity = 100
+
 /obj/item/clothing/head/roguetown/roguehood/nochood
 	name = "moon hood"
 	desc = ""
