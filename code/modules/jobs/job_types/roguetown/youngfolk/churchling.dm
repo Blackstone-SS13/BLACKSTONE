@@ -5,7 +5,6 @@
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	spells = list(/obj/effect/proc_holder/spell/invoked/lesser_heal)
 
 	allowed_races = list(
 		"Humen",
@@ -65,7 +64,7 @@
 	H.change_stat("perception", 1)
 	H.change_stat("speed", 2)
 
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron)
+	var/datum/devotion/C = new /datum/devotion(H, H.patron)
 	//Max devotion limit - Churchlings can only call upon lesser miracles until their education is complete.
 	C.max_devotion = 100
 	C.max_progression = CLERIC_REQ_0

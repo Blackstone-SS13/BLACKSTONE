@@ -64,9 +64,10 @@
 	desc = "The Loving Daughter of Psydon, gifted man medicine."
 	worshippers = "The Sick, Phyicians, Apothecaries"
 	mob_traits = list(TRAIT_EMPATH, TRAIT_ROT_EATER)
-	t1 = /obj/effect/proc_holder/spell/invoked/attach_bodypart
+	t0 = /obj/effect/proc_holder/spell/invoked/diagnose
+	t1 = /obj/effect/proc_holder/spell/invoked/lesser_heal
 	t2 = /obj/effect/proc_holder/spell/invoked/heal
-	t3 = /obj/effect/proc_holder/spell/invoked/cure_rot
+	t3 = /obj/effect/proc_holder/spell/invoked/attach_bodypart
 
 /datum/patron/divine/malum
 	name = "Malum"

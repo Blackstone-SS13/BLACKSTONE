@@ -17,7 +17,7 @@
 	target_mobtypes = list(/mob/living/carbon/human, /mob/living/carbon/monkey)
 
 /datum/surgery_step/amputate
-	name = "Amputation"
+	name = "Amputate"
 	implements = list(
 		TOOL_SCALPEL = 75, 
 		TOOL_SAW = 60,

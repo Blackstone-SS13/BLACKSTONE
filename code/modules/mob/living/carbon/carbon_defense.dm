@@ -272,7 +272,6 @@
 				done_step = possible_steps[possible_steps[1]]
 			if(done_step?.try_op(user, src, user.zone_selected, null, user.used_intent, try_to_fail))
 				return TRUE
-
 	/*
 	for(var/datum/surgery/S in surgeries)
 		if(!(mobility_flags & MOBILITY_STAND) || !S.lying_required)

@@ -56,7 +56,7 @@
 		H.change_stat("constitution", -1)
 		H.change_stat("endurance", 1)
 		H.change_stat("speed", -1)
-	var/datum/devotion/cleric_holder/C = new /datum/devotion/cleric_holder(H, H.patron) // This creates the cleric holder used for devotion spells
+	var/datum/devotion/C = new /datum/devotion(H, H.patron) // This creates the cleric holder used for devotion spells
 	C.holder_mob = H
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 	C.grant_spells_priest(H)

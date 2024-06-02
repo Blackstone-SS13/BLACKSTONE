@@ -399,6 +399,8 @@
 				done_step = possible_steps[possible_steps[1]]
 			if(done_step?.try_op(user, src, user.zone_selected, W, user.used_intent))
 				return TRUE
+		if(W.item_flags & SURGICAL_TOOL)
+			return TRUE
 	if(istype(W, /obj/item/stack/sheet/mineral/plasma) && !stat) //Let's you feed slimes plasma.
 		if (user in Friends)
 			++Friends[user]
