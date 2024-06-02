@@ -21,7 +21,7 @@
 	icon_state = "blackboots"
 	item_state = "blackboots"
 	sewrepair = TRUE
-	armor = list("blunt" = 30, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("blunt" = 40, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/nobleboot
@@ -133,7 +133,7 @@
 	icon_state = "leatherboots"
 	item_state = "leatherboots"
 	sewrepair = TRUE
-	armor = list("blunt" = 30, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("blunt" = 40, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	prevent_crits = list(BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/jester
