@@ -1,7 +1,8 @@
 /datum/surgery/embedded_removal
 	name = "Removal of embedded objects"
 	steps = list(
-		/datum/surgery_step/incise, 
+		/datum/surgery_step/incise,
+		/datum/surgery_step/clamp,
 		/datum/surgery_step/remove_object,
 	)
 

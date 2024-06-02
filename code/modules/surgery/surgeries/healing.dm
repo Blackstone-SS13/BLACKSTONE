@@ -1,8 +1,8 @@
 /datum/surgery/healing
 	steps = list(
 		/datum/surgery_step/incise,
-		/datum/surgery_step/retract,
 		/datum/surgery_step/clamp,
+		/datum/surgery_step/retract,
 		/datum/surgery_step/heal,
 		/datum/surgery_step/cauterize,
 	)

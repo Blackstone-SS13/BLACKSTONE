@@ -18,6 +18,8 @@
 	critical = TRUE
 	passive_healing = 0.25
 	qdel_on_droplimb = TRUE
+	/// Whether or not we can be surgically relocated
+	var/can_relocate = TRUE
 
 /datum/wound/dislocation/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/dislocation) && (type == other.type))
@@ -51,6 +53,12 @@
 	affected.emote("paincrit", TRUE)
 	affected.Slowdown(20)
 	shake_camera(affected, 2, 2)
+
+/datum/wound/dislocation/proc/relocate_bone()
+	if(!can_relocate)
+		return FALSE
+	qdel(src)
+	return TRUE
 
 /datum/wound/dislocation/neck
 	name = "cervical dislocation"

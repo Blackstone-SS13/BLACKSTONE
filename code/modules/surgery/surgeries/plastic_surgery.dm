@@ -2,6 +2,7 @@
 	name = "Plastic surgery"
 	steps = list(
 		/datum/surgery_step/incise,
+		/datum/surgery_step/clamp,
 		/datum/surgery_step/retract,
 		/datum/surgery_step/reshape_face,
 		/datum/surgery_step/cauterize,

@@ -4,8 +4,8 @@
 	possible_locs = list(BODY_ZONE_PRECISE_SKULL, BODY_ZONE_CHEST)
 	steps = list(
 		/datum/surgery_step/incise,
-		/datum/surgery_step/retract,
 		/datum/surgery_step/clamp,
+		/datum/surgery_step/retract,
 		/datum/surgery_step/saw,
 		/datum/surgery_step/manipulate_organs,
 		/datum/surgery_step/cauterize,
@@ -26,19 +26,6 @@
 		/datum/surgery_step/retract,
 		/datum/surgery_step/clamp,
 		/datum/surgery_step/incise,
-		/datum/surgery_step/manipulate_organs,
-		/datum/surgery_step/cauterize
-	)
-
-/datum/surgery/organ_manipulation/alien
-	name = "Alien organ manipulation"
-	possible_locs = list(BODY_ZONE_CHEST, BODY_ZONE_HEAD, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
-	target_mobtypes = list(/mob/living/carbon/alien/humanoid)
-	steps = list(
-		/datum/surgery_step/saw,
-		/datum/surgery_step/incise,
-		/datum/surgery_step/retract,
-		/datum/surgery_step/saw,
 		/datum/surgery_step/manipulate_organs,
 		/datum/surgery_step/cauterize
 	)

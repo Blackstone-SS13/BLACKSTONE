@@ -15,8 +15,16 @@
 	can_cauterize = FALSE
 	disabling = TRUE
 	critical = TRUE
+	sleep_healing = 0 // no sleep healing that is retarded
+	/// Whether or not we can be surgically set
+	var/can_set = TRUE
 	/// Emote we use when applied
 	var/gain_emote = "paincrit"
+
+/datum/wound/fracture/get_visible_name(mob/user)
+	. = ..()
+	if(passive_healing)
+		. += " <span class='green'>(set)</span>"
 
 /datum/wound/fracture/can_stack_with(datum/wound/other)
 	if(istype(other, /datum/wound/fracture) && (type == other.type))
@@ -29,6 +37,13 @@
 		affected.emote(gain_emote, TRUE)
 	affected.Slowdown(20)
 	shake_camera(affected, 2, 2)
+
+/datum/wound/fracture/proc/set_bone()
+	if(!can_set)
+		return FALSE
+	sleep_healing = max(sleep_healing, 1)
+	passive_healing = max(passive_healing, 1)
+	return TRUE
 
 /datum/wound/fracture/head
 	name = "cranial fracture"

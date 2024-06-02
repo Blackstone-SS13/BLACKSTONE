@@ -32,8 +32,6 @@
 	var/requires_real_bodypart = TRUE
 	/// What type of bodypart we require, in case requires_bodypart
 	var/requires_bodypart_type = BODYPART_ORGANIC
-	/// This surgery ignores clothes on the targeted bodypart
-	var/ignore_clothes = FALSE
 	/// Some surgeries require specific organs to be present in the patient
 	var/list/required_organs
 	/**
@@ -43,6 +41,8 @@
 	var/list/chems_needed
 	/// Any chem on the list required, or all of them?
 	var/require_all_chems = TRUE
+	/// This surgery ignores clothes on the targeted bodypart
+	var/ignore_clothes = FALSE
 	/// Does the patient need to be lying down?
 	var/lying_required = FALSE
 	/// Does this step allow self surgery?
