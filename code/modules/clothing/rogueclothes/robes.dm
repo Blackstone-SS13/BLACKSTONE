@@ -146,7 +146,7 @@
 
 /obj/item/clothing/suit/roguetown/shirt/robe/physician
 	name = "plague coat"
-	desc = "A coat worn by esteemed practicioners of the medical arts."
+	desc = "Medicum morbo adhibere."
 	icon = 'icons/roguetown/clothing/armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
 	icon_state = "physcoat"
