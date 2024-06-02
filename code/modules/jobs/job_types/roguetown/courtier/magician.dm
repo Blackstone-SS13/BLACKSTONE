@@ -58,8 +58,8 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/riding, 1, TRUE)
 		H.change_stat("strength", -1)
+		H.change_stat("constitution", -1)
 		H.change_stat("intelligence", 4)
-		H.change_stat("constitution", -1) // Need to port more ss13 spells into RT.
 		if(H.age == AGE_OLD)
 			H.change_stat("speed", -1)
 			H.change_stat("intelligence", 1)
