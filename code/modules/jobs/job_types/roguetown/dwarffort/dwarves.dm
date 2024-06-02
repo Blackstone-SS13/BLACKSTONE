@@ -26,7 +26,6 @@
 	shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	armor = /obj/item/clothing/cloak/stabard
-	ADD_TRAIT(H, RTRAIT_SEEPRICES, type)
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	head = /obj/item/clothing/head/roguetown/bardhat
 	belt = /obj/item/storage/belt/rogue/leather/plaquesilver
