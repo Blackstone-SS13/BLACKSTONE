@@ -175,6 +175,7 @@
 	name = "silver dagger"
 	desc = "This silver dagger can be the banishment of vampires and werewolves."
 	icon_state = "sildagger"
+	smeltresult = null
 	sellprice = 50
 	smeltresult = /obj/item/ingot/silver
 	var/last_used = 0
