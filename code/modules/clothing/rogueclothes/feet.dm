@@ -22,7 +22,7 @@
 	item_state = "blackboots"
 	sewrepair = TRUE
 	armor = list("blunt" = 30, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = (BCLASS_TWIST)
+	prevent_crits = list(BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/nobleboot
 	name = "noble boots"
@@ -34,7 +34,7 @@
 	item_state = "nobleboots"
 	sewrepair = TRUE
 	armor = list("blunt" = 35, "slash" = 15, "stab" = 25, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = (BCLASS_TWIST)
+	prevent_crits = list(BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/shortboots
 	name = "shortboots"
@@ -44,7 +44,7 @@
 	icon_state = "shortboots"
 	item_state = "shortboots"
 	sewrepair = TRUE
-	prevent_crits = (BCLASS_TWIST)
+	prevent_crits = list(BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/ridingboots
 	name = "riding boots"
@@ -54,7 +54,7 @@
 	icon_state = "ridingboots"
 	item_state = "ridingboots"
 	sewrepair = TRUE
-	prevent_crits = (BCLASS_TWIST)
+	prevent_crits = list(BCLASS_TWIST)
 
 ///obj/item/clothing/shoes/roguetown/ridingboots/Initialize()
 //	. = ..()
@@ -134,7 +134,7 @@
 	item_state = "leatherboots"
 	sewrepair = TRUE
 	armor = list("blunt" = 30, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = (BCLASS_TWIST)
+	prevent_crits = list(BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/jester
 	name = "funny shoes"
