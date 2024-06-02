@@ -1,3 +1,4 @@
+#define CTYPE_XYBRIUM "x"
 #define CTYPE_GOLD "g"
 #define CTYPE_SILV "s"
 #define CTYPE_COPP "c"
@@ -170,6 +171,15 @@
 		G.merge(src, user)
 		return
 	return ..()
+
+//XYBRIUM
+/obj/item/roguecoin/xybrium
+	name = "xentara"
+	desc = "Xybrium, an exceptionally rare metal, was primarily used to craft small, high-value items like coins. Its extreme rarity made it perfect for minting precious currency such as Zentari, valued for their enduring worth and unique composition."
+	icon_state = "x1"
+	sellprice = 50
+	base_type = CTYPE_XYBRIUM
+	plural_name = "zentari"
 
 //GOLD
 /obj/item/roguecoin/gold

@@ -20,6 +20,8 @@
 			say("Your balance is NEGATIVE.")
 			return
 		var/list/choicez = list()
+		if(amt > 50)
+			choicez += "PLATINUM"
 		if(amt > 10)
 			choicez += "GOLD"
 		if(amt > 5)

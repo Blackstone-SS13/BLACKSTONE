@@ -90,7 +90,7 @@ GLOBAL_VAR(moneymaster)
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	var/inputt = alert(user,"Gold, Silver, or Bronze?",,"BRONZE","SILVER","GOLD")
+	var/inputt = alert(user,"Gold, Silver, or Bronze?",,"BRONZE","SILVER","GOLD","PLATINUM")
 	if(inputt && Adjacent(user))
 		to_chat(user, "<span class='info'>I pull on the [inputt] tongue.</span>")
 		if(inputt == "BRONZE" && budget >= 50)
@@ -105,6 +105,11 @@ GLOBAL_VAR(moneymaster)
 		else
 			budget2change(budget, user, inputt)
 			switch(inputt)
+				if("XYBRIUM")
+					var/zenars = budget/50
+					if(zenars >= 1)
+						for(var/i in 1 to zenars)
+							budget -= 50
 				if("GOLD")
 					var/zenars = budget/10
 					if(zenars >= 1)
@@ -134,6 +139,9 @@ GLOBAL_VAR(moneymaster)
 	var/zenars_to_put
 	if(specify)
 		switch(specify)
+			if("XYBRIUM")
+				zenars_to_put = budget/50
+				type_to_put = /obj/item/roguecoin/xybrium
 			if("GOLD")
 				zenars_to_put = budget/10
 				type_to_put = /obj/item/roguecoin/gold

@@ -132,6 +132,10 @@ GLOBAL_LIST_INIT(blacklisted_cargo_types, typecacheof(list(
 		var/spawnedcoins = round(budget / 10)
 		if(spawnedcoins >= 1)
 			for(var/i in 1 to spawnedcoins)
+				budget -= 50
+				new /obj/item/roguecoin/xybrium(moneybox)
+		if(spawnedcoins >= 1)
+			for(var/i in 1 to spawnedcoins)
 				budget -= 10
 				new /obj/item/roguecoin/gold(moneybox)
 		spawnedcoins = round(budget / 5)
