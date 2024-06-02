@@ -1,6 +1,7 @@
 /datum/wound/dislocation
 	name = "dislocation"
 	check_name = "<span class='bone'>DISLOCATION</span>"
+	severity = WOUND_SEVERITY_MODERATE
 	crit_message = list(
 		"The %BODYPART jolts painfully!",
 		"The %BODYPART is twisted out of place!",

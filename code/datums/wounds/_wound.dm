@@ -13,6 +13,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	/// Name that appears on check_for_injuries()
 	var/check_name
 
+	/// Wounds get sorted from highest severity to lowest severity
+	var/severity = WOUND_SEVERITY_LIGHT
+
 	/// Overlay to use when this wound is applied to a carbon mob
 	var/mob_overlay = "w1"
 	/// Overlay to use when this wound is sewn, and is on a carbon mob
@@ -145,6 +148,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	else if(owner)
 		remove_from_mob()
 	LAZYADD(affected.wounds, src)
+	sortList(affected.wounds, GLOBAL_PROC_REF(cmp_wound_severity_dsc))
 	bodypart_owner = affected
 	owner = bodypart_owner.owner
 	on_bodypart_gain(affected)
@@ -202,6 +206,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	else if(owner)
 		remove_from_mob()
 	LAZYADD(affected.simple_wounds, src)
+	sortList(affected.simple_wounds, PROC_REF(cmp_wound_severity_dsc))
 	owner = affected
 	on_mob_gain(affected)
 	if(crit_message)

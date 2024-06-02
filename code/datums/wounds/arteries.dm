@@ -1,6 +1,7 @@
 /datum/wound/artery
 	name = "severed artery"
 	check_name = "<span class='artery'><B>ARTERY</B></span>"
+	severity = WOUND_SEVERITY_CRITICAL
 	crit_message = "Blood sprays from %VICTIM's %BODYPART!"
 	sound_effect = 'sound/combat/crit.ogg'
 	whp = 50
@@ -37,6 +38,7 @@
 /datum/wound/artery/neck
 	name = "torn carotid"
 	check_name = "<span class='artery'><B>CAROTID</B></span>"
+	severity = WOUND_SEVERITY_FATAL
 	crit_message = "Blood sprays from %VICTIM's throat!"
 	whp = 100
 	sewn_whp = 25
@@ -57,6 +59,7 @@
 /datum/wound/artery/chest
 	name = "aortic dissection"
 	check_name = "<span class='artery'><B>AORTA</B></span>"
+	severity = WOUND_SEVERITY_FATAL
 	whp = 100
 	sewn_whp = 35
 	bleed_rate = 50
@@ -91,6 +94,7 @@
 /datum/wound/artery/reattachment
 	name = "replantation"
 	check_name = "<span class='artery'><B>UNSEWN</B></span>"
+	severity = WOUND_SEVERITY_FATAL
 	whp = 100
 	sewn_whp = 25
 	bleed_rate = 50

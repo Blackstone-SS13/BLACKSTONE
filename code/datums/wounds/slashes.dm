@@ -42,6 +42,7 @@
 /datum/wound/slash/disembowel
 	name = "disembowelment"
 	check_name = "<span class='userdanger'><B>GUTS</B></span>"
+	severity = WOUND_SEVERITY_FATAL
 	crit_message = "%VICTIM spills %P_THEIR organs!"
 	sound_effect = 'sound/combat/crit2.ogg'
 	whp = 100
@@ -97,6 +98,7 @@
 /datum/wound/slash/incision
 	name = "incision"
 	check_name = "<span class='bloody'><B>INCISION</B></span>"
+	severity = WOUND_SEVERITY_SUPERFICIAL
 	whp = 40
 	sewn_whp = 12
 	bleed_rate = 1

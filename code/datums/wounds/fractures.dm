@@ -1,6 +1,7 @@
 /datum/wound/fracture
 	name = "fracture"
 	check_name = "<span class='bone'><B>FRACTURE</B></span>"
+	severity = WOUND_SEVERITY_SEVERE
 	crit_message = list(
 		"The bone shatters!", 
 		"The bone is broken!", 

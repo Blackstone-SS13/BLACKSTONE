@@ -1,6 +1,7 @@
 /datum/wound/facial
 	name = "facial trauma"
 	sound_effect = 'sound/combat/crit.ogg'
+	severity = WOUND_SEVERITY_SEVERE
 	whp = null
 	woundpain = 0
 	can_sew = FALSE
@@ -154,6 +155,7 @@
 /datum/wound/facial/disfigurement
 	name = "disfigurement"
 	check_name = "<span class='warning'>FACE</span>"
+	severity = 0
 	crit_message = "The face is mangled beyond recognition!"
 	whp = null
 	woundpain = 20

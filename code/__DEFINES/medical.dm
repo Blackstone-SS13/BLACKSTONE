@@ -68,3 +68,17 @@
 #define ORGAN_EXTERNAL			(1<<3)
 /// Currently only the brain - Removal of this organ immediately kills you
 #define ORGAN_VITAL				(1<<4)
+
+//wound severities for /datum/wound
+/// Wounds that are either surgically induced or too minor to matter
+#define WOUND_SEVERITY_SUPERFICIAL 0
+/// Wounds that are minor, such as bruises and minor cuts
+#define WOUND_SEVERITY_LIGHT 1
+/// Wounds that are moderate, such as dislocations
+#define WOUND_SEVERITY_MODERATE 2
+/// Wounds that are severe, such as broken bones
+#define WOUND_SEVERITY_SEVERE 3
+/// Wounds that are critical and will kill rather quickly, such as torn arteries
+#define WOUND_SEVERITY_CRITICAL 4
+/// Wounds that are almost immediately fatal, such as a dissected aorta
+#define WOUND_SEVERITY_FATAL 5
