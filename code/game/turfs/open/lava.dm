@@ -253,6 +253,8 @@
 					if(!B.skeletonized && B.is_organic_limb())
 						B.skeletonize(lethality)
 						shouldupdate = TRUE
+				if(!lethality)
+					ADD_TRAIT(C, TRAIT_NOLIMBDISABLE, "[type]")
 				if(shouldupdate)
 					if(ishuman(C))
 						var/mob/living/carbon/human/H = C
