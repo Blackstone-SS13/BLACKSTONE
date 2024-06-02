@@ -1,11 +1,3 @@
-/mob/living/proc/handle_wounds()
-	if(stat >= DEAD)
-		for(var/datum/wound/wound as anything in get_wounds())
-			wound.on_death()
-		return
-	for(var/datum/wound/wound as anything in get_wounds())
-		wound.on_life()
-
 /mob/living/carbon/Life()
 	set invisibility = 0
 
@@ -25,9 +17,10 @@
 
 		if (QDELETED(src))
 			return
-
-		handle_blood()
+		
 		handle_wounds()
+		handle_embedded_objects()
+		handle_blood()
 		handle_roguebreath()
 		var/bprv = handle_bodyparts()
 		if(bprv & BODYPART_LIFE_UPDATE_HEALTH)
@@ -131,6 +124,8 @@
 		. = ..()
 		if (QDELETED(src))
 			return
+		handle_wounds()
+		handle_embedded_objects()
 		handle_blood()
 
 	check_cremation()
@@ -571,6 +566,20 @@
 	if(radiation > RAD_MOB_SAFE)
 		adjustToxLoss(log(radiation-RAD_MOB_SAFE)*RAD_TOX_COEFFICIENT)
 
+/mob/living/carbon/handle_embedded_objects()
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		for(var/obj/item/embedded as anything in bodypart.embedded_objects)
+			if(embedded.on_embed_life(src, bodypart))
+				continue
+
+			if(prob(embedded.embedding.embedded_pain_chance))
+				bodypart.receive_damage(embedded.w_class*embedded.embedding.embedded_pain_multiplier)
+				to_chat(src, "<span class='danger'>[embedded] in my [bodypart.name] hurts!</span>")
+
+			if(prob(embedded.embedding.embedded_fall_chance))
+				bodypart.receive_damage(embedded.w_class*embedded.embedding.embedded_fall_pain_multiplier)
+				bodypart.remove_embedded_object(embedded)
+				to_chat(src,"<span class='danger'>[embedded] falls out of my [bodypart.name]!</span>")
 
 /*
 Alcohol Poisoning Chart

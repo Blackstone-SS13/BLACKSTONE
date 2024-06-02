@@ -44,6 +44,7 @@
 	chargetime = 0
 	swingdelay = 0
 	clickcd = 10
+	item_d_type = "slash"
 
 /datum/intent/dagger/thrust
 	name = "thrust"
@@ -55,6 +56,7 @@
 	penfactor = 40
 	chargetime = 0
 	clickcd = 8
+	item_d_type = "stab"
 
 /datum/intent/dagger/thrust/pick
 	name = "icepick stab"
@@ -87,6 +89,7 @@
 	damfactor = 1.5
 	swingdelay = 5
 	clickcd = 10
+	item_d_type = "slash"
 
 /obj/item/rogueweapon/huntingknife/cleaver
 	force = 15
@@ -223,6 +226,6 @@
 	item_state = "elfdag"
 
 /obj/item/rogueweapon/huntingknife/elvish/drow
-	name = "drow dagger"
-	desc = "This ominous, dark handled dagger was crafted by the assassin race of drow."
+	name = "nite elf dagger"
+	desc = "This ominous, dark handled dagger was crafted by the assassin race of nite elves."
 	force = 25

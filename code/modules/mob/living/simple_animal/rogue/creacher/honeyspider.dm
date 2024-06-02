@@ -113,7 +113,7 @@
 				playsound(T, pick('sound/vo/mobs/spider/speak (1).ogg','sound/vo/mobs/spider/speak (2).ogg','sound/vo/mobs/spider/speak (3).ogg','sound/vo/mobs/spider/speak (4).ogg'), 100, TRUE, -1)
 				new /obj/item/reagent_containers/food/snacks/rogue/honey(T)
 	if(pulledby && !tame)
-		if(HAS_TRAIT(pulledby, RTRAIT_WEBWALK))
+		if(HAS_TRAIT(pulledby, TRAIT_WEBWALK))
 			return
 		Retaliate()
 		GiveTarget(pulledby)

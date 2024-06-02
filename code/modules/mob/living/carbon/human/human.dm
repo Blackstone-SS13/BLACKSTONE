@@ -43,7 +43,7 @@
 		if(4)
 			affecting = get_bodypart(BODY_ZONE_HEAD)
 			chat_message = "<span class='danger'>I fall on my head!</span>"
-	if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "melee", damage = dam)))
+	if(affecting && apply_damage(dam, BRUTE, affecting, run_armor_check(affecting, "blunt", damage = dam)))
 		update_damage_overlays()
 		if(levels >= 1)
 			//absurd damage to guarantee a crit
@@ -655,7 +655,7 @@
 	if(admin_revive)
 		regenerate_limbs()
 		regenerate_organs()
-	remove_all_embedded_objects()
+	spill_embedded_objects()
 	set_heartattack(FALSE)
 	drunkenness = 0
 	for(var/datum/mutation/human/HM in dna.mutations)

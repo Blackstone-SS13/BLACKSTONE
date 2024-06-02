@@ -34,7 +34,7 @@
 	var/list/datum/mind/pre_bandits = list()
 	var/list/datum/mind/pre_delfs = list()
 	var/list/datum/mind/pre_rebels = list()
-
+	
 	var/banditcontrib = 0
 	var/banditgoal = 1
 	var/delfcontrib = 0

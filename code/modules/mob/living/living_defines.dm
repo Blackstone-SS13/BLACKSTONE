@@ -153,8 +153,6 @@
 	var/obj/item/grabbing/r_grab = null
 	var/obj/item/grabbing/l_grab = null
 
-	var/list/simple_embedded_objects = list()
-
 	var/datum/sex_controller/sexcon
 
 	var/slowdown

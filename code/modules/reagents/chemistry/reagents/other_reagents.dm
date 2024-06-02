@@ -153,14 +153,15 @@
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
 			H.adjust_hydration(hydration)
 		M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_MAXIMUM)
-		M.adjustToxLoss(-1)
+		if(M.blood_volume < BLOOD_VOLUME_NORMAL)
+			M.blood_volume = min(M.blood_volume+10, BLOOD_VOLUME_NORMAL)
 	..()
 
 /datum/reagent/water/gross
 	taste_description = "lead"
 
 /datum/reagent/water/gross/on_mob_life(mob/living/carbon/M)
-	if(!HAS_TRAIT(M, RTRAIT_NASTY_EATER))
+	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER))
 		M.adjustToxLoss(1)
 		M.add_nausea(50)
 	return ..()

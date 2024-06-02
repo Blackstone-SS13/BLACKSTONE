@@ -73,13 +73,13 @@ SUBSYSTEM_DEF(librarian)
 	return list()
 
 /datum/controller/subsystem/librarian/proc/del_player_book(book_title)
+	testing("delplayerbook")
 	if(!book_title)
 		return FALSE
 	var/json_file = file("data/player_generated_books/[book_title].json")
 	if(!fexists(json_file))
 		return FALSE
 	if(fexists("data/player_generated_books/_book_titles.json"))
-		testing("delplayerbook")
 		fdel(json_file)
 		var/list/_book_titles_contents = json_decode(file2text("data/player_generated_books/_book_titles.json"))
 		_book_titles_contents -= "[book_title]"
@@ -99,3 +99,18 @@ SUBSYSTEM_DEF(librarian)
 		return json_list
 	else
 		message_admins("!!! _book_titles.json no longer exists, previous book title list has been lost. !!!")
+
+/datum/controller/subsystem/librarian/proc/amend_player_book(book_title, amend_type, amend_text)
+	testing("amendplayerbook")
+	if(!book_title || !amend_type || !amend_text)
+		return FALSE
+	if(fexists("data/player_generated_books/_book_titles.json"))
+		var/list/contents = file2playerbook(book_title)
+		del_player_book(book_title)
+		contents[amend_type] = amend_text
+		if(playerbook2file(contents["text"], book_title = contents["book_title"], author = contents["author"], author_ckey = contents["author_ckey"], icon = contents["icon"]) == "You have a feeling the newly written book will remain in the archive for a very long time...")
+			return TRUE
+		return FALSE
+	else
+		message_admins("!!! _book_titles.json no longer exists, previous book title list has been lost. !!!")
+		return FALSE

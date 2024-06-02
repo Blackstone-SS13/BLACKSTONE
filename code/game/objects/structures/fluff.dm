@@ -22,7 +22,7 @@
 			new/obj/item/stack/sheet/metal(drop_location())
 			qdel(src)
 		return
-	..()
+	. = ..()
 
 /obj/structure/fluff/empty_terrarium //Empty terrariums are created when a preserved terrarium in a lavaland seed vault is activated.
 	name = "empty terrarium"
@@ -193,7 +193,6 @@
 	var/passcrawl = TRUE
 	layer = ABOVE_MOB_LAYER
 
-
 /obj/structure/fluff/railing/Initialize()
 	..()
 	var/lay = getwlayer(dir)
@@ -275,7 +274,7 @@
 	return 1
 
 /obj/structure/fluff/railing/OnCrafted(dirin)
-	dir = dirin
+	. = ..()
 	var/lay = getwlayer(dir)
 	if(lay)
 		layer = lay
@@ -803,13 +802,13 @@
 	icon_state = "knightstatue_l"
 
 /obj/structure/fluff/statue/astrata
-	name = "Astrata Statue"
+	name = "astrata statue"
 	desc = "A stone statue of the sun Goddess Astrata. Bless."
 	icon_state = "astrata"
 	icon = 'icons/roguetown/misc/tallandwide.dmi'
 
 /obj/structure/fluff/statue/astrata/gold
-	name = "Ornamental Astrata Statue"
+	name = "ornamental astrata statue"
 	desc = "An ornamental stone statue of the sun Goddess Astrata, decorated with golden jewelry. Bless."
 	icon_state = "astrata_bling"
 

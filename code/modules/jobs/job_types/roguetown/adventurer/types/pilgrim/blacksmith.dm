@@ -44,7 +44,8 @@
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, pick(1,2), TRUE) // If you can make a sword you can swing one.
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE) 
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE) 
+		H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE) 
 		H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
@@ -57,6 +58,7 @@
 		H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/smelting, 2, TRUE)
 		H.change_stat("strength", 1)
 		H.change_stat("endurance", 2)
 		H.change_stat("constitution", 2)

@@ -180,7 +180,7 @@
 
 /obj/item/grabbing/proc/twistlimb(mob/living/user) //implies limb_grabbed and sublimb are things
 	var/mob/living/carbon/C = grabbed
-	var/armor_block = C.run_armor_check(limb_grabbed, "melee")
+	var/armor_block = C.run_armor_check(limb_grabbed, "slash")
 	var/damage = user.get_punch_dmg()
 	playsound(C.loc, "genblunt", 100, FALSE, -1)
 	C.next_attack_msg.Cut()
@@ -207,46 +207,37 @@
 	var/obj/item/bodypart/L = limb_grabbed
 	playsound(M.loc, "genblunt", 100, FALSE, -1)
 	log_combat(user, M, "itemremovedgrab [sublimb_grabbed] ")
-	if(iscarbon(M) && L)
+	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		var/obj/item/I = locate(sublimb_grabbed) in L.embedded_objects
-		if(!I || !L || I.loc != C)
-			user.stop_pulling()
-			return
-		L.embedded_objects -= I
-		C.emote("paincrit", TRUE)
-		L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class)//It hurts to rip it out, get surgery you dingus.
-		I.forceMove(get_turf(C))
+		if(QDELETED(I) || QDELETED(L) || !L.remove_embedded_object(I))
+			return FALSE
+		L.receive_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class) //It hurts to rip it out, get surgery you dingus.
 		user.dropItemToGround(src)
 		user.put_in_hands(I)
+		C.emote("paincrit", TRUE)
 		playsound(C, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
-		if(!C.has_embedded_objects())
-			C.clear_alert("embeddedobject")
 		if(usr == src)
 			user.visible_message("<span class='notice'>[user] rips [I] out of [user.p_their()] [L.name]!</span>", "<span class='notice'>I rip [I] from my [L.name].</span>")
 		else
 			user.visible_message("<span class='notice'>[user] rips [I] out of [C]'s [L.name]!</span>", "<span class='notice'>I rip [I] from [C]'s [L.name].</span>")
 		sublimb_grabbed = limb_grabbed.body_zone
-	else
+	else if(HAS_TRAIT(M, TRAIT_SIMPLE_WOUNDS))
 		var/obj/item/I = locate(sublimb_grabbed) in M.simple_embedded_objects
-		if(!I || I.loc != M)
-			user.stop_pulling()
-			return
-		M.simple_embedded_objects -= I
-		M.emote("pain", TRUE)
-		M.apply_damage(rand(5,10), BRUTE)
-		I.forceMove(get_turf(M))
+		if(QDELETED(I) || !M.simple_remove_embedded_object(I))
+			return FALSE
+		M.apply_damage(I.embedding.embedded_unsafe_removal_pain_multiplier*I.w_class, BRUTE) //It hurts to rip it out, get surgery you dingus.
 		user.dropItemToGround(src)
 		user.put_in_hands(I)
+		M.emote("paincrit", TRUE)
 		playsound(M, 'sound/foley/flesh_rem.ogg', 100, TRUE, -2)
-		if(!M.has_embedded_objects())
-			M.clear_alert("embeddedobject")
 		if(user == M)
 			user.visible_message("<span class='notice'>[user] rips [I] out of [user.p_them()]self!</span>", "<span class='notice'>I remove [I] from myself.</span>")
 		else
 			user.visible_message("<span class='notice'>[user] rips [I] out of [M]!</span>", "<span class='notice'>I rip [I] from [src].</span>")
 		sublimb_grabbed = M.simple_limb_hit(user.zone_selected)
 	user.update_grab_intents(grabbed)
+	return TRUE
 
 /obj/item/grabbing/attack_turf(turf/T, mob/living/user)
 	user.changeNext_move(CLICK_CD_MELEE)
@@ -296,7 +287,7 @@
 
 /obj/item/grabbing/proc/smashlimb(atom/A, mob/living/user) //implies limb_grabbed and sublimb are things
 	var/mob/living/carbon/C = grabbed
-	var/armor_block = C.run_armor_check(limb_grabbed, "melee")
+	var/armor_block = C.run_armor_check(limb_grabbed, d_type)
 	var/damage = user.get_punch_dmg()
 	C.next_attack_msg.Cut()
 	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))
@@ -397,9 +388,9 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	var/mob/living/carbon/C = grabbed
-	var/armor_block = C.run_armor_check(sublimb_grabbed, "melee")
+	var/armor_block = C.run_armor_check(sublimb_grabbed, d_type)
 	var/damage = user.get_punch_dmg()
-	if(HAS_TRAIT(user, RTRAIT_STRONGBITE))
+	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		damage = damage*2
 	C.next_attack_msg.Cut()
 	if(C.apply_damage(damage, BRUTE, limb_grabbed, armor_block))

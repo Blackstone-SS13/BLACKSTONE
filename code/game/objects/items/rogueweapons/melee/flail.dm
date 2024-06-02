@@ -1,5 +1,5 @@
 /obj/item/rogueweapon/flail
-	force = 12
+	force = 15
 	possible_item_intents = list(/datum/intent/flail/strike, /datum/intent/flail/strike/smash)
 	name = "flail"
 	desc = "This is a swift, iron flail. Strikes hard and far."
@@ -27,6 +27,7 @@
 	chargetime = 0
 	penfactor = 5
 	icon_state = "instrike"
+	item_d_type = "slash"
 
 /datum/intent/flail/strikerange
 	name = "ranged strike"
@@ -38,6 +39,7 @@
 	penfactor = 5
 	reach = 2
 	icon_state = "instrike"
+	item_d_type = "slash"
 
 /datum/intent/flail/strike/smash
 	name = "smash"
@@ -52,6 +54,7 @@
 	blade_class = BCLASS_SMASH
 	attack_verb = list("smashes")
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
+	item_d_type = "blunt"
 
 /datum/intent/flail/strike/smashrange
 	name = "ranged smash"
@@ -68,6 +71,7 @@
 	blade_class = BCLASS_SMASH
 	attack_verb = list("smashes")
 	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
+	item_d_type = "blunt"
 
 /obj/item/rogueweapon/flail/getonmobprop(tag)
 	. = ..()
@@ -80,7 +84,7 @@
 
 
 /obj/item/rogueweapon/flail/sflail
-	force = 40
+	force = 30
 	icon_state = "flail"
 	desc = "This is a swift, steel flail. Strikes hard and far."
 	smeltresult = /obj/item/ingot/steel
@@ -97,6 +101,7 @@
 	penfactor = 10
 	reach = 2
 	icon_state = "inlash"
+	item_d_type = "slash"
 
 /datum/intent/whip/crack
 	name = "crack"
@@ -108,6 +113,7 @@
 	penfactor = 40
 	reach = 3
 	icon_state = "incrack"
+	item_d_type = "slash"
 
 /obj/item/rogueweapon/whip
 	force = 21

@@ -1,30 +1,32 @@
-//ROGUETRAITS (description when rmb skills button)
-#define RTRAIT_WEBWALK 					"Webwalker"
-#define RTRAIT_NOSTINK 					"Dead Nose"
-#define RTRAIT_ZJUMP 					"High Jumping"
-#define RTRAIT_LEAPER 					"Leaper"
-#define RTRAIT_NOSEGRAB 				"Intimidating"
-#define RTRAIT_NUTCRACKER 				"Nutcracker"
-#define RTRAIT_SEEPRICES				"Giza Blooded"
-#define RTRAIT_SEEPRICES_SHITTY			"Giza-in-training"
-#define RTRAIT_STRONGBITE				"Strong Bite"
-#define RTRAIT_NOBLE					"Noble Blooded"
-#define RTRAIT_EMPATH					"Empath"
-#define RTRAIT_BREADY					"Battleready"
-#define RTRAIT_MEDIUMARMOR				"Maille Training"
-#define RTRAIT_HEAVYARMOR				"Plate Training"
-#define RTRAIT_DODGEEXPERT              "Fast Reflexes"
-#define RTRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
-#define RTRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
-#define RTRAIT_CRITICAL_WEAKNESS		"Critical Weakness"
-#define RTRAIT_MANIAC_AWOKEN			"Awoken"
-#define RTRAIT_NOROGSTAM				"Indefatigable" //for ai
-#define RTRAIT_NUDIST					"Nudist" //you can't wear most clothes
-#define RTRAIT_KNEESTINGER_IMMUNITY		"Blessing of Dendor"
-#define RTRAIT_RETARD_ANATOMY			"Inhumen Anatomy" //can't wear hats and shoes
-#define RTRAIT_NASTY_EATER 				"Inhumen Digestion" //can eat rotten food, organs, poison berries, and drink murky water
-#define RTRAIT_ROT_EATER				"Blessing of Pestra" //can eat rotten food
-#define RTRAIT_ORGAN_EATER				"Blessing of Graggar"
+// ROGUETRAITS (description when rmb skills button)
+#define TRAIT_WEBWALK 					"Webwalker"
+#define TRAIT_NOSTINK 					"Dead Nose"
+#define TRAIT_ZJUMP 					"High Jumping"
+#define TRAIT_LEAPER 					"Leaper"
+#define TRAIT_NOSEGRAB 					"Intimidating"
+#define TRAIT_NUTCRACKER 				"Nutcracker"
+#define TRAIT_SEEPRICES					"Giza Blooded"
+#define TRAIT_SEEPRICES_SHITTY			"Giza-in-training"
+#define TRAIT_STRONGBITE				"Strong Bite"
+#define TRAIT_NOBLE						"Noble Blooded"
+#define TRAIT_EMPATH					"Empath"
+#define TRAIT_BREADY					"Battleready"
+#define TRAIT_MEDIUMARMOR				"Maille Training"
+#define TRAIT_HEAVYARMOR				"Plate Training"
+#define TRAIT_DODGEEXPERT             	"Fast Reflexes"
+#define TRAIT_DECEIVING_MEEKNESS		"Deceiving Meekness"
+#define TRAIT_CRITICAL_RESISTANCE		"Critical Resistance"
+#define TRAIT_CRITICAL_WEAKNESS			"Critical Weakness"
+#define TRAIT_MANIAC_AWOKEN				"Awoken"
+#define TRAIT_NOROGSTAM					"Indefatigable" //for ai
+#define TRAIT_NUDIST					"Nudist" //you can't wear most clothes
+#define TRAIT_KNEESTINGER_IMMUNITY		"Blessing of Dendor"
+#define TRAIT_RETARD_ANATOMY			"Inhumen Anatomy" //can't wear hats and shoes
+#define TRAIT_NASTY_EATER 				"Inhumen Digestion" //can eat rotten food, organs, poison berries, and drink murky water
+#define TRAIT_ROT_EATER					"Blessing of Pestra" //can eat rotten food
+#define TRAIT_ORGAN_EATER				"Blessing of Graggar" //can eat organs
+#define TRAIT_SOUL_EXAMINE				"Blessing of Necra" //can check bodies to see if they have departed
+#define TRAIT_CRACKHEAD					"Blessing of Eora" //will never overdose
 
 #define TRAIT_MISSING_NOSE "Missing Nose" //halved stamina regeneration
 #define TRAIT_SPELLCOCKBLOCK "spellcockblock" //prevents spellcasting
@@ -43,32 +45,34 @@
 #define TRAIT_SCREENSHAKE "screenshake" //screen will always be shaking, you cannot stop it
 
 GLOBAL_LIST_INIT(roguetraits, list(
-	RTRAIT_WEBWALK = "I can move freely between webs.",
-	RTRAIT_NOSTINK = "<span class='deadsay'>My nose is numb to the smell of decay.</span>",
-	RTRAIT_ZJUMP = "Time to reach a new high.",
-	RTRAIT_LEAPER = "I can leap like a frog.",
-	RTRAIT_NOSEGRAB = "I love to grab idiots by their noses!",
-	RTRAIT_NUTCRACKER = "I love kicking idiots on the nuts!",
-	RTRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
-	RTRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... <i>Kind of</i>.",
-	RTRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
-	RTRAIT_NOBLE = "<span class='blue'>I'm of noble blood.</span>",
-	RTRAIT_EMPATH = "I can notice when people are in pain.",
-	RTRAIT_BREADY = "Defensive stance does not passively fatigue me.",
-	RTRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
-	RTRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
-	RTRAIT_DODGEEXPERT = "I can dodge easly while only wearing light armor.",
-	RTRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
-	RTRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
-	RTRAIT_CRITICAL_WEAKNESS = "<span class='danger'>I am weak to wounds that others could survive.</span>",
-	RTRAIT_MANIAC_AWOKEN = "<span class='danger'>I am <b>WAKING UP</b> and the sheeple know this. They will resist.</span>",
-	RTRAIT_NOROGSTAM = "I have boundless energy, I will never tire.",
-	RTRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
-	RTRAIT_KNEESTINGER_IMMUNITY = "I am immune to the shock of kneestingers.",
-	RTRAIT_RETARD_ANATOMY = "My anatomy is inhumen, preventing me from wearing hats and shoes.",
-	RTRAIT_NASTY_EATER = "<span class='dead'>I can eat bad food, and water that would be toxic to humen will not affect me.</span>",
-	RTRAIT_ROT_EATER = "<span class='necrosis'>I can eat rotten food.</span>",
-	RTRAIT_ORGAN_EATER = "<span class='bloody'>I can eat organs and raw flesh.</span>",
+	TRAIT_WEBWALK = "I can move freely between webs.",
+	TRAIT_NOSTINK = "<span class='dead'>My nose is numb to the smell of decay.</span>",
+	TRAIT_ZJUMP = "Time to reach a new high.",
+	TRAIT_LEAPER = "I can leap like a frog.",
+	TRAIT_NOSEGRAB = "I love to grab idiots by their noses!",
+	TRAIT_NUTCRACKER = "I love kicking idiots on the nuts!",
+	TRAIT_SEEPRICES = "I can tell the prices of things down to the zenny.",
+	TRAIT_SEEPRICES_SHITTY = "I can tell the prices of things... <i>Kind of</i>.",
+	TRAIT_STRONGBITE = "Stronger bites, critical bite attacks.",
+	TRAIT_NOBLE = "<span class='blue'>I'm of noble blood.</span>",
+	TRAIT_EMPATH = "I can notice when people are in pain.",
+	TRAIT_BREADY = "Defensive stance does not passively fatigue me.",
+	TRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
+	TRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
+	TRAIT_DODGEEXPERT = "I can dodge easly while only wearing light armor.",
+	TRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
+	TRAIT_CRITICAL_RESISTANCE = "I am resistant to wounds that would be life threatening to others.",
+	TRAIT_CRITICAL_WEAKNESS = "<span class='danger'>I am weak to wounds that others could survive.</span>",
+	TRAIT_MANIAC_AWOKEN = "<span class='danger'>I am <b>WAKING UP</b> and the sheeple know this. They will resist.</span>",
+	TRAIT_NOROGSTAM = "I have boundless energy, I will never tire.",
+	TRAIT_NUDIST = "I <b>refuse</b> to wear clothes. They are a hindrance to my freedom.",
+	TRAIT_KNEESTINGER_IMMUNITY = "I am immune to the shock of kneestingers.",
+	TRAIT_RETARD_ANATOMY = "My anatomy is inhumen, preventing me from wearing hats and shoes.",
+	TRAIT_NASTY_EATER = "<span class='dead'>I can eat bad food, and water that would be toxic to humen will not affect me.</span>",
+	TRAIT_ROT_EATER = "<span class='necrosis'>I can eat rotten food.</span>",
+	TRAIT_ORGAN_EATER = "<span class='bloody'>I can eat organs and raw flesh.</span>",
+	TRAIT_SOUL_EXAMINE = "<span class='deadsay'>I know when someone's soul has departed.</span>",
+	TRAIT_CRACKHEAD = "<span class='love'>I can use drugs as much as I want!</span>",
 	TRAIT_MISSING_NOSE = "<span class='warning'>I struggle to breathe.</span>",
 	TRAIT_ANTIMAGIC = "I am immune to most forms of magic.",
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
@@ -249,6 +253,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 //item traits
 #define TRAIT_NODROP            "nodrop"
+#define TRAIT_NOEMBED			"noembed"
 #define TRAIT_T_RAY_VISIBLE     "t-ray-visible" // Visible on t-ray scanners if the atom/var/level == 1
 #define TRAIT_NO_TELEPORT		"no-teleport" //you just can't
 
@@ -272,7 +277,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PHOTOGRAPHER		"photographer"
 #define TRAIT_MUSICIAN			"musician"
 #define TRAIT_LIGHT_DRINKER		"light_drinker"
-#define TRAIT_EMPATH			"empath"
 #define TRAIT_FRIENDLY			"friendly"
 #define TRAIT_GRABWEAKNESS		"grab_weakness"
 #define TRAIT_SNOB				"snob"

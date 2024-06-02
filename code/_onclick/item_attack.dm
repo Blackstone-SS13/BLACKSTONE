@@ -194,7 +194,8 @@
 /atom/movable/proc/attacked_by()
 	return FALSE
 
-/proc/get_complex_damage(obj/item/I, mob/living/user, blade_dulling)
+
+/proc/get_complex_damage(obj/item/I, mob/living/user, blade_dulling, turf/closed/mineral/T)
 	var/dullfactor = 1
 	if(!I.force)
 		return 0
@@ -229,16 +230,22 @@
 		if(DULLING_CUT) //wooden that can't be attacked by clubs (trees, bushes, grass)
 			switch(user.used_intent.blade_class)
 				if(BCLASS_CUT)
+					var/mob/living/lumberjacker = user
+					var/lumberskill = lumberjacker.mind.get_skill_level(/datum/skill/labor/lumberjacking)
 					if(!I.remove_bintegrity(1))
 						dullfactor = 0.2
 					else
-						dullfactor = 0.75
+						dullfactor = 0.45 + (lumberskill * 0.15)
+						lumberjacker.mind.adjust_experience(/datum/skill/labor/lumberjacking, (lumberjacker.STAINT*0.2))
 					cont = TRUE
 				if(BCLASS_CHOP)
+					var/mob/living/lumberjacker = user
+					var/lumberskill = lumberjacker.mind.get_skill_level(/datum/skill/labor/lumberjacking)
 					if(!I.remove_bintegrity(1))
 						dullfactor = 0.2
 					else
-						dullfactor = 1.5
+						dullfactor = 1.2 + (lumberskill * 0.15)
+						lumberjacker.mind.adjust_experience(/datum/skill/labor/lumberjacking, (lumberjacker.STAINT*0.2))
 					cont = TRUE
 			if(!cont)
 				return 0
@@ -272,15 +279,22 @@
 				if(BCLASS_BLUNT)
 					cont = TRUE
 				if(BCLASS_PICK)
-					dullfactor = 1.5
+					var/mob/living/miner = user
+					var/mineskill = miner.mind.get_skill_level(/datum/skill/labor/mining)
+					dullfactor = 1.5 (mineskill*0.1)
 					cont = TRUE
 			if(!cont)
 				return 0
 		if(DULLING_PICK) //cannot deal damage if not a pick item. aka rock walls
+				    
 			if(user.used_intent.blade_class != BCLASS_PICK)
 				return 0
-			newforce = newforce * 10
+			var/mob/living/miner = user
+			var/mineskill = miner.mind.get_skill_level(/datum/skill/labor/mining)
+			newforce = newforce * (8+(mineskill*1.5))
 			shake_camera(user, 1, 1)
+			miner.mind.adjust_experience(/datum/skill/labor/mining, (miner.STAINT*0.2))
+	
 	newforce = (newforce * user.used_intent.damfactor) * dullfactor
 	if(user.used_intent.get_chargetime() && user.client?.chargedprog < 100)
 		newforce = newforce * 0.5
@@ -311,9 +325,9 @@
 			newforce = 1
 	else
 		user.visible_message("<span class='warning'>[user] [verbu] [src] with [I]!</span>")
-	take_damage(newforce, I.damtype, "melee", 1)
+	take_damage(newforce, I.damtype, I.d_type, 1)
 	if(newforce > 1)
-		I.take_damage(1, BRUTE, "melee")
+		I.take_damage(1, BRUTE, I.d_type)
 	return TRUE
 
 /turf/proc/attacked_by(obj/item/I, mob/living/user)
@@ -339,9 +353,9 @@
 	else
 		user.visible_message("<span class='warning'>[user] [verbu] [src] with [I]!</span>")
 
-	take_damage(newforce, I.damtype, "melee", 1)
+	take_damage(newforce, I.damtype, I.d_type, 1)
 	if(newforce > 1)
-		I.take_damage(1, BRUTE, "melee")
+		I.take_damage(1, BRUTE, I.d_type)
 	return TRUE
 
 /mob/living/proc/simple_limb_hit(zone)
@@ -406,13 +420,10 @@
 			next_attack_msg.Cut()
 			if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 				var/datum/wound/crit_wound  = simple_woundcritroll(user.used_intent.blade_class, newforce, user, hitlim)
-				if(should_embed_weapon(crit_wound))
+				if(should_embed_weapon(crit_wound, I))
 					// throw_alert("embeddedobject", /atom/movable/screen/alert/embeddedobject)
-					simple_embedded_objects |= I
-					I.add_mob_blood(src)
-					I.forceMove(src)
+					simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
 					src.grabbedby(user, 1, item_override = I)
-					next_attack_msg += " <span class='userdanger'>[I] is stuck in [src]!</span>"
 			var/haha = user.used_intent.blade_class
 			if(newforce > 5)
 				if(haha != BCLASS_BLUNT)

@@ -11,7 +11,7 @@
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	w_class = WEIGHT_CLASS_NORMAL
-	associated_skill = /datum/skill/combat/axesmaces
+	associated_skill = /datum/skill/combat/maces
 	smeltresult = /obj/item/ingot/iron
 
 /obj/item/rogueweapon/hammer/attack_obj(obj/attacked_object, mob/living/user)
@@ -23,7 +23,7 @@
 	if(locate(/obj/machinery/anvil) in attacked_object.loc)
 		repair_percent *= 2 // Double the repair amount if we're using an anvil
 	var/exp_gained = 0
-	if(isitem(attacked_object))
+	if(isitem(attacked_object) && !user.cmode)
 		var/obj/item/attacked_item = attacked_object
 		if(!attacked_item.anvilrepair || (attacked_item.obj_integrity >= attacked_item.max_integrity) || !isturf(attacked_item.loc))
 			return
@@ -44,15 +44,18 @@
 			repair_percent *= attacked_item.max_integrity
 			exp_gained = min(attacked_item.obj_integrity + repair_percent, attacked_item.max_integrity) - attacked_item.obj_integrity
 			attacked_item.obj_integrity = min(attacked_item.obj_integrity + repair_percent, attacked_item.max_integrity)
-			user.visible_message("<span class='info'>[user] repairs [attacked_item]!</span>")
+			if(repair_percent == 0.01) // If an inexperienced repair attempt has been successful
+				to_chat(user, "<span class='warning'>You fumble your way into slightly repairing [attacked_item].</span>")
+			else	
+				user.visible_message("<span class='info'>[user] repairs [attacked_item]!</span>")
 			blacksmith_mind.adjust_experience(attacked_item.anvilrepair, exp_gained/2) //We gain as much exp as we fix divided by 2
 			return
 		else
 			user.visible_message("<span class='warning'>[user] damages [attacked_item]!</span>")
-			attacked_item.take_damage(5, BRUTE, "melee")
+			attacked_item.take_damage(5, BRUTE, "blunt")
 			return
 
-	if(isstructure(attacked_object))
+	if(isstructure(attacked_object) && !user.cmode)
 		var/obj/structure/attacked_structure = attacked_object
 		if(!attacked_structure.hammer_repair || !attacked_structure.max_integrity)
 			return
@@ -67,7 +70,7 @@
 		user.visible_message("<span class='info'>[user] repairs [attacked_structure]!</span>")
 		return
 
-	..()
+	. = ..()
 
 /obj/item/rogueweapon/hammer/claw
 	icon_state = "clawh"

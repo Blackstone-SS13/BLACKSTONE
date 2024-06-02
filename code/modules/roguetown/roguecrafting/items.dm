@@ -16,6 +16,7 @@
 	reqs = list(/obj/item/natural/fibers = 2)
 	tools = list(/obj/item/needle)
 	skillcraft = /datum/skill/misc/sewing
+	verbage_simple = "sew"
 	verbage = "sews"
 	craftdiff = 0
 
@@ -24,18 +25,21 @@
 	result = /obj/item/storage/belt/rogue/leather/cloth
 	reqs = list(/obj/item/natural/cloth = 1)
 	craftdiff = 0
+	verbage_simple = "tie"
 	verbage = "ties"
 
 /datum/crafting_recipe/roguetown/rope
 	name = "rope"
 	result = /obj/item/rope
 	reqs = list(/obj/item/natural/fibers = 3)
+	verbage_simple = "braid"
 	verbage = "braids"
 
 /datum/crafting_recipe/roguetown/bowstring
 	name = "fiber bowstring"
 	result = /obj/item/natural/bowstring
 	reqs = list(/obj/item/natural/fibers = 2)
+	verbage_simple = "twist"
 	verbage = "twists"
 
 /datum/crafting_recipe/roguetown/bowpartial
@@ -43,14 +47,15 @@
 	result = /obj/item/grown/log/tree/bowpartial
 	reqs = list(/obj/item/grown/log/tree/small = 1)
 	tools = /obj/item/rogueweapon/huntingknife
+	verbage_simple = "carve"
 	verbage = "carves"
-	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/bow
 	name = "wooden bow"
 	result = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
 	reqs = list(/obj/item/natural/bowstring = 1, /obj/item/grown/log/tree/bowpartial = 1)
 	skillcraft = /datum/skill/combat/bows
+	verbage_simple = "string together"
 	verbage = "strings together"
 	craftdiff = 2
 
@@ -60,6 +65,11 @@
 	reqs = list(/obj/item/grown/log/tree/stick = 1,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 0
+
+/datum/crafting_recipe/roguetown/candle
+	name = "candle"
+	result = /obj/item/candle/yellow
+	reqs = list(/obj/item/reagent_containers/food/snacks/fat = 2)
 
 /datum/crafting_recipe/roguetown/stoneaxe
 	name = "stone axe"
@@ -86,29 +96,28 @@
 	name = "wood club"
 	result = /obj/item/rogueweapon/mace/woodclub/crafted
 	reqs = list(/obj/item/grown/log/tree/small = 1)
-	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/billhook
-	name = "Improvised Billhook"
+	name = "improvised billhook"
 	result = /obj/item/rogueweapon/spear/improvisedbillhook
-	reqs = list(/obj/item/rogueweapon/sickle,
+	reqs = list(/obj/item/rogueweapon/sickle = 1,
 				/obj/item/grown/log/tree/small = 1)
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/goedendag
-	name = "Goedendag"
+	name = "goedendag"
 	result = /obj/item/rogueweapon/mace/goden
 	reqs = list(/obj/item/grown/log/tree/small = 1,
-				/obj/item/rogueweapon/hoe)
+				/obj/item/rogueweapon/hoe = 1)
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
 /datum/crafting_recipe/roguetown/peasantwarflail
-	name = "Peasant War Flail"
+	name = "peasant war flail"
 	result = /obj/item/rogueweapon/flail/peasantwarflail
 	reqs = list(/obj/item/grown/log/tree/small = 1,
-				/obj/item/rogueweapon/thresher)
+				/obj/item/rogueweapon/thresher = 1)
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
@@ -286,7 +295,7 @@
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/sbaita
-	name = "sweetbait (a)"
+	name = "sweetbait (apple)"
 	result = /obj/item/bait/sweet
 	reqs = list(/obj/item/storage/roguebag = 1,
 				/obj/item/reagent_containers/food/snacks/grown/apple = 2)
@@ -294,7 +303,7 @@
 	subtype_reqs = TRUE
 
 /datum/crafting_recipe/roguetown/sbait
-	name = "sweetbait (b)"
+	name = "sweetbait (berry)"
 	result = /obj/item/bait/sweet
 	reqs = list(/obj/item/storage/roguebag = 1,
 				/obj/item/reagent_containers/food/snacks/grown/berries/rogue = 2)
@@ -350,3 +359,15 @@
 	result = /obj/item/clothing/neck/roguetown/psicross/wood
 	reqs = list(/obj/item/natural/fibers = 2,
 				/obj/item/grown/log/tree/stick = 2)
+
+/datum/crafting_recipe/roguetown/mantrap
+	name = "mantrap"
+	result = list(/obj/item/restraints/legcuffs/beartrap,
+				/obj/item/restraints/legcuffs/beartrap)
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/natural/fibers = 2,
+				/obj/item/ingot/iron = 1)
+	req_table = TRUE
+	skillcraft = /datum/skill/craft/traps
+	craftdiff = 1
+	verbage = "put together"

@@ -25,8 +25,8 @@
 	var/last_bite
 	/// Traits applied to the owner mob when we turn into a zombie
 	var/static/list/traits_zombie = list(
-		RTRAIT_CRITICAL_WEAKNESS,
-		RTRAIT_NOROGSTAM,
+		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_NOROGSTAM,
 		TRAIT_NOMOOD,
 		TRAIT_NOHUNGER,
 		TRAIT_EASYDISMEMBER,
@@ -124,6 +124,8 @@
 			if(!was_i_undead)
 				zombie.mob_biotypes &= ~MOB_UNDEAD
 			zombie.faction -= "undead"
+			zombie.faction += "station"
+			zombie.faction += "neutral"
 			zombie.regenerate_organs()
 			if(has_turned)
 				to_chat(zombie, "<span class='green'>I no longer crave for flesh...</span>")
@@ -173,14 +175,16 @@
 		zombie.charflaw.ephemeral = TRUE
 	zombie.mob_biotypes |= MOB_UNDEAD
 	zombie.faction += "undead"
+	zombie.faction -= "station"
+	zombie.faction -= "neutral"
 	zombie.verbs |= /mob/living/carbon/human/proc/zombie_seek
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		if(!zombie_part.rotted && !zombie_part.skeletonized)
 			zombie_part.rotted = TRUE
 		zombie_part.update_disabled()
 	zombie.update_body()
+	zombie.cmode_music = 'sound/music/combat_weird.ogg'
 
-	// Now you get what you had in life + the debuff from rotting limbs aka -8
 	// Outside of one 2% chance remaining for zombie era strength
 	if(prob(2))
 		zombie.STASTR = 18

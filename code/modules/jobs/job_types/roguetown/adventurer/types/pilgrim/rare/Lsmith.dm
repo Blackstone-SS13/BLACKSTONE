@@ -36,7 +36,8 @@
 		shirt = /obj/item/clothing/suit/roguetown/shirt/shortshirt
 
 		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/masonry, 2, TRUE)
@@ -44,11 +45,13 @@
 			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, 6, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, 6, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, 6, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/smelting, 6, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 			if(H.age == AGE_OLD)
 				H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
+				H.mind.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
 			H.change_stat("strength", 2)
 			H.change_stat("speed", -1)
 
@@ -58,7 +61,8 @@
 		shoes = /obj/item/clothing/shoes/roguetown/shortboots
 		
 		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/masonry, 2, TRUE)
@@ -66,10 +70,12 @@
 			H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, 6, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, 6, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, 6, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/smelting, 6, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 			if(H.age == AGE_OLD)
 				H.mind.adjust_skillrank(/datum/skill/craft/blacksmithing, 1, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/craft/armorsmithing, 1, TRUE)
 				H.mind.adjust_skillrank(/datum/skill/craft/weaponsmithing, 1, TRUE)
+				H.mind.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
 			H.change_stat("strength", 2)
 			H.change_stat("speed", -1)
