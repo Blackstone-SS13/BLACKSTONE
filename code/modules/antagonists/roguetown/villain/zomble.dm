@@ -295,8 +295,6 @@
  * We instead just transform at the end
  */
 /mob/living/carbon/human/proc/zombie_infect_attempt()
-	if(!prob(3)) // Since zombies are biting a lot now, we drop this down to 3% chance of a conversion
-		return 
 	var/datum/antagonist/zombie/zombie_antag = zombie_check()
 	if(!zombie_antag)
 		return
