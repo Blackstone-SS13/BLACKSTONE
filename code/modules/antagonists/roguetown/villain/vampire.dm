@@ -359,6 +359,8 @@
 	if(VD.disguised)
 		to_chat(src, "<span class='warning'>My curse is hidden.</span>")
 		return
+	if(silver_curse_status)
+		to_chat(src, "<span class='warning'>My BANE is not letting me REGEN!.</span>")	
 	if(VD.vitae < 500)
 		to_chat(src, "<span class='warning'>Not enough vitae.</span>")
 		return
