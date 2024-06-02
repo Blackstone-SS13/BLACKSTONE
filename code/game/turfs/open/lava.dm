@@ -248,9 +248,10 @@
 //					return
 				//make this acid
 				var/shouldupdate = FALSE
+				var/lethality = prob(95)
 				for(var/obj/item/bodypart/B in C.bodyparts)
 					if(!B.skeletonized && B.is_organic_limb())
-						B.skeletonize()
+						B.skeletonize(lethality)
 						shouldupdate = TRUE
 				if(shouldupdate)
 					if(ishuman(C))
