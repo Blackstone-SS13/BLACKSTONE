@@ -22,6 +22,7 @@
 	item_state = "blackboots"
 	sewrepair = TRUE
 	armor = list("blunt" = 30, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = (BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/nobleboot
 	name = "noble boots"
@@ -33,6 +34,7 @@
 	item_state = "nobleboots"
 	sewrepair = TRUE
 	armor = list("blunt" = 35, "slash" = 15, "stab" = 25, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = (BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/shortboots
 	name = "shortboots"
@@ -42,6 +44,7 @@
 	icon_state = "shortboots"
 	item_state = "shortboots"
 	sewrepair = TRUE
+	prevent_crits = (BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/ridingboots
 	name = "riding boots"
@@ -51,6 +54,7 @@
 	icon_state = "ridingboots"
 	item_state = "ridingboots"
 	sewrepair = TRUE
+	prevent_crits = (BCLASS_TWIST)
 
 ///obj/item/clothing/shoes/roguetown/ridingboots/Initialize()
 //	. = ..()
@@ -114,12 +118,12 @@
 	body_parts_covered = FEET
 	icon_state = "armorboots"
 	item_state = "armorboots"
-	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = list(BCLASS_TWIST)
 	color = null
 	blocksound = PLATEHIT
-	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	armor = list("blunt" = 100, "slash" = 100, "stab" = 100, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	anvilrepair = /datum/skill/craft/armorsmithing
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = /obj/item/ingot/steel
 
 /obj/item/clothing/shoes/roguetown/boots/leather
 	name = "leather boots"
@@ -130,6 +134,7 @@
 	item_state = "leatherboots"
 	sewrepair = TRUE
 	armor = list("blunt" = 30, "slash" = 10, "stab" = 20, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = (BCLASS_TWIST)
 
 /obj/item/clothing/shoes/roguetown/jester
 	name = "funny shoes"
