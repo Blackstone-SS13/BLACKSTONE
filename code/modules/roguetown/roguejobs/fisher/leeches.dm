@@ -113,7 +113,7 @@
 /obj/item/natural/worms/leech/proc/leech_lore()
 	if(consistent)
 		return FALSE
-	var/static/list/possible_colors = list(
+	var/static/list/all_colors = list(
 		"#9860ff" = 8,
 		"#bcff49" = 4,
 		"#ffce49" = 2,
@@ -121,7 +121,7 @@
 		"#ff7878" = 1,
 		"#ff31e4" = 1,
 	)
-	var/static/list/possible_adjectives = list(
+	var/static/list/all_adjectives = list(
 		"blood-sucking" = 20,
 		"disgusting" = 10,
 		"vile" = 8,
@@ -135,7 +135,7 @@
 		"graggoid" = 1,
 		"zizoid" = 1,
 	)
-	var/static/list/possible_descs = list(
+	var/static/list/all_descs = list(
 		"What a disgusting creature." = 10,
 		"Fucking gross." = 5,
 		"Slippery..." = 3,
@@ -144,6 +144,8 @@
 		"It is so beautiful." = 2,
 		"I wish I was a leech." = 1,
 	)
+	var/list/possible_adjectives = all_adjectives.Copy()
+	var/list/possible_descs = all_descs.Copy()
 	var/list/adjectives = list()
 	var/list/descs = list()
 	var/evilness_rating = rand(0, MAX_LEECH_EVILNESS)
@@ -166,11 +168,15 @@
 			else if(prob(30))
 				adjective_amount = 2
 			for(var/i in 1 to adjective_amount)
+				var/picked_adjective = pickweight(possible_adjectives)
+				possible_adjectives -= picked_adjective
 				adjectives += pickweight(possible_adjectives)
+				var/picked_desc = pickweight(possible_descs)
+				possible_descs -= picked_desc
 				descs += pickweight(possible_descs)
 	blood_sucking = max(round(evilness_rating/MAX_LEECH_EVILNESS * 2 * initial(blood_sucking), 0.1), 1)
 	if(evilness_rating < 10)
-		color = pickweight(possible_colors)
+		color = pickweight(all_colors)
 	if(length(adjectives))
 		name = "[english_list(adjectives)] [name]"
 	if(length(descs))

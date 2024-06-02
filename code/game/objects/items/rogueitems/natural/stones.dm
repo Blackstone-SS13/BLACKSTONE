@@ -139,8 +139,8 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 	w_class = WEIGHT_CLASS_TINY
 
 /obj/item/natural/stone/Initialize()
+	. = ..()
 	stone_lore()
-	..()
 
 /*
 	This right here is stone lore,
