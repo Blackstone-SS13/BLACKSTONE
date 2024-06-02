@@ -11,7 +11,7 @@
 	item_state = "coif"
 	flags_inv = HIDEEARS|HIDEHAIR
 	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_NECK|ITEM_SLOT_HEAD
-	blocksound = SOFTHIT
+	blocksound = SOFTUNDERHIT
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	armor = list("blunt" = 35, "slash" = 30, "stab" = 25, "bullet" = 5, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	max_integrity = 100
