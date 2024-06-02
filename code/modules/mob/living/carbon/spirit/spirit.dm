@@ -203,11 +203,11 @@
 /proc/pacify_corpse(mob/living/corpse, mob/user, coin_pq = 0.2)
 	if(corpse.stat != DEAD)
 		return FALSE
-	corpse.buried = TRUE
-	corpse.funeral = TRUE
-	if(ishuman(corpse) && !HAS_TRAIT(corpse, TRAIT_BURIED_COIN_GIVEN))
+	if(ishuman(corpse))
 		var/mob/living/carbon/human/human_corpse = corpse
-		if(istype(human_corpse.mouth, /obj/item/roguecoin))
+		human_corpse.buried = TRUE
+		human_corpse.funeral = TRUE
+		if(istype(human_corpse.mouth, /obj/item/roguecoin) && !HAS_TRAIT(corpse, TRAIT_BURIED_COIN_GIVEN))
 			var/obj/item/roguecoin/coin = human_corpse.mouth
 			if(coin.quantity >= 1) // stuffing their mouth full of a fuck ton of coins wont do shit
 				ADD_TRAIT(human_corpse, TRAIT_BURIED_COIN_GIVEN, TRAIT_GENERIC)
