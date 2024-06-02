@@ -203,6 +203,8 @@
 /proc/pacify_corpse(mob/living/corpse, mob/user, coin_pq = 0.2)
 	if(corpse.stat != DEAD)
 		return FALSE
+	corpse.buried = TRUE
+	corpse.funeral = TRUE
 	if(ishuman(corpse) && !HAS_TRAIT(corpse, TRAIT_BURIED_COIN_GIVEN))
 		var/mob/living/carbon/human/human_corpse = corpse
 		if(istype(human_corpse.mouth, /obj/item/roguecoin))
