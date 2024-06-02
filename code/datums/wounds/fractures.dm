@@ -1,6 +1,6 @@
 /datum/wound/fracture
 	name = "fracture"
-	check_name = "<span class='bone'>FRACTURE</span>"
+	check_name = "<span class='bone'><B>FRACTURE</B></span>"
 	crit_message = list(
 		"The bone shatters!", 
 		"The bone is broken!", 
@@ -169,7 +169,7 @@
 
 /datum/wound/fracture/neck
 	name = "cervical fracture"
-	check_name = "<span class='bone'><B>CERVICAL FRACTURE</B></span>"
+	check_name = "<span class='bone'><B>NECK</B></span>"
 	crit_message = list(
 		"The spine shatters in a spectacular way!", 
 		"The spine snaps!",
@@ -197,7 +197,7 @@
 
 /datum/wound/fracture/chest
 	name = "rib fracture"
-	check_name = "<span class='bone'>RIBS</span>"
+	check_name = "<span class='bone'><B>RIBS</B></span>"
 	crit_message = list(
 		"The ribs shatter in a splendid way!",
 		"The ribs are smashed!",
@@ -220,7 +220,7 @@
 
 /datum/wound/fracture/groin
 	name = "pelvic fracture"
-	check_name = "<span class='bone'>PELVIS</span>"
+	check_name = "<span class='bone'><B>PELVIS</B></span>"
 	crit_message = list(
 		"The pelvis shatters in a magnificent way!", 
 		"The pelvis is smashed!", 

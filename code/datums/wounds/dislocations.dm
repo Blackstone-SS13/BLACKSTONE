@@ -62,7 +62,7 @@
 
 /datum/wound/dislocation/neck
 	name = "cervical dislocation"
-	check_name = "<span class='bone'><B>DISLOCATION</B></span>"
+	check_name = "<span class='bone'>NECK</span>"
 	crit_message = list(
 		"The spine slips!",
 		"The spine twists!",
