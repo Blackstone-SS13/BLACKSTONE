@@ -742,6 +742,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	src << browse(null, "window=latechoices") //closes late job selection
 
 	SStriumphs.remove_triumph_buy_menu(client)
+	SSrole_class_handler.cleanup_drifter_queue(client)
 
 	winshow(src, "preferencess_window", FALSE)
 	src << browse(null, "window=preferences_browser")

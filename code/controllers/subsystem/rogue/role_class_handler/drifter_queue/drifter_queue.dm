@@ -15,7 +15,7 @@
 
 
 	// Set this to true or false to stop the system/hide crap related to it hopefully lol
-	var/drifter_queue_enabled = FALSE
+	var/drifter_queue_enabled = TRUE
 
 	// Next time we fire
 	var/next_migrant_mass_release_time = 0
@@ -77,6 +77,7 @@
 	// It is time
 	if(world.time >= next_migrant_mass_release_time)
 		to_chat(world, "Release Drifters")
+		if(!drifter_wave_schedule[current_wave_number])
 		current_wave = drifter_wave_schedule[current_wave_number]
 
 		if(!current_wave)
@@ -159,26 +160,6 @@
 		return
 
 	drifter_dropzone_target = pick(potential_target_dropzones)
-
-// Attempt to add a client to play in the next drifter wave
-/datum/controller/subsystem/role_class_handler/proc/attempt_to_add_client_to_drifter_wave(client/target_client)
-	if(target_client in drifter_wave_joined_clients)
-		return FALSE
-	var/datum/drifter_wave/current_wave = drifter_wave_schedule[current_wave_number]
-	if(drifter_wave_joined_clients.len >= current_wave.maximum_playercount)
-		return FALSE
-
-	drifter_wave_joined_clients += target_client
-	return TRUE
-
-// Remove client from playing in next drifter wave
-/datum/controller/subsystem/role_class_handler/proc/remove_client_from_drifter_wave(client/target_client)
-	if(target_client in drifter_wave_joined_clients)
-		drifter_wave_joined_clients -= target_client
-		return TRUE
-	return FALSE
-
-
 
 // Set a next migrant mass release time
 /datum/controller/subsystem/role_class_handler/proc/start_a_drifter_wave_countdown()

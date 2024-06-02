@@ -1,7 +1,7 @@
 /datum/triumph_buy/pick_any_class
 	triumph_buy_id = "PickAny"
 	desc = "Get single run of a class that can pick any class BYPASSING CLASS RESTRICTIONS on any class selection! WARNING: MAY BE BUGGY"
-	triumph_cost = 6
+	triumph_cost = 5
 	category = TRIUMPH_CAT_CHARACTER
 	pre_round_only = FALSE
 	visible_on_active_menu = FALSE
@@ -14,11 +14,11 @@
 	var/datum/advclass/pick_everything/turbo_slop
 	if(!SSrole_class_handler.special_session_queue[ckey_of_buyer][triumph_buy_id])
 		turbo_slop = new()
-		turbo_slop.maximum_possible_slots = 6
+		turbo_slop.maximum_possible_slots = 1
 		SSrole_class_handler.special_session_queue[ckey_of_buyer][triumph_buy_id] = turbo_slop
 	else
 		turbo_slop = SSrole_class_handler.special_session_queue[ckey_of_buyer][triumph_buy_id]
-		turbo_slop.maximum_possible_slots += 6
+		turbo_slop.maximum_possible_slots += 1
 
 // It should be there you know? lol 
 // If not we are desyncing somehow

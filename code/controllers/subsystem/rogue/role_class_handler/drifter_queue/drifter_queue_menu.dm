@@ -108,6 +108,5 @@
 		show_drifter_queue_menu()
 
 	if(href_list["close"])
-		SSrole_class_handler.remove_client_from_drifter_wave(linked_client)
-		SSrole_class_handler.remove_drifter_queue_viewer(linked_client)
+		SSrole_class_handler.cleanup_drifter_queue(linked_client)
 		return

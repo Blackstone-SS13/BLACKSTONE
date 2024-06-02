@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(role_class_handler)
 /*
 	This ones basically a list for if you want to give a specific ckey a specific isolated datum
 	ex: special_session_queue[ckey] += /datum/advclass/BIGMAN
-	contents: special_session_queue = list("ckey" = list(/datum/advclass/class), "ckey2" = list(/datum/advclass/class)... etc)
+	contents: special_session_queue = list("ckey" = list("funID" = /datum/advclass/class), "ckey2" = list("funID" = /datum/advclass/class)... etc)
 */
 	var/list/special_session_queue = list()
 
@@ -96,7 +96,8 @@ SUBSYSTEM_DEF(role_class_handler)
 
 	if(H.client.ckey in special_session_queue)
 		XTRA_MEATY.special_session_queue = list()
-		for(var/datum/advclass/XTRA_SPECIAL in special_session_queue[H.client.ckey])
+		for(var/funny_key in special_session_queue[H.client.ckey])
+			var/datum/advclass/XTRA_SPECIAL = special_session_queue[H.client.ckey][funny_key]
 			if(XTRA_SPECIAL.maximum_possible_slots > XTRA_SPECIAL.total_slots_occupied)
 				XTRA_MEATY.special_session_queue += XTRA_SPECIAL
 
