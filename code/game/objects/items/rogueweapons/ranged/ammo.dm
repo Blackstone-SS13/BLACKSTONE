@@ -56,7 +56,7 @@
 
 /obj/projectile/bullet/reusable/arrow
 	name = "arrow"
-	damage = 35
+	damage = 0
 	damage_type = BRUTE
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "arrow_proj"
@@ -67,6 +67,30 @@
 	woundclass = BCLASS_STAB
 	flag = "bullet"
 	speed = 0.4
+
+/obj/item/ammo_casing/caseless/rogue/arrow/padded
+	name = "padded arrow"
+	desc = "A wooden shaft with a padded sack at the end."
+	projectile_type = /obj/projectile/bullet/reusable/arrow/padded
+	caliber = "arrow"
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "arrow_padded"
+	force = 0
+	dropshrink = 0.6
+	possible_item_intents = list(/datum/intent/mace/strike/wood, /datum/intent/mace/smash/wood)
+	max_integrity = 20
+
+/obj/projectile/bullet/reusable/arrow/padded
+	name = "padded arrpw"
+	damage = 0
+	knockdown = 100
+	stun = 50
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "arrow_pad_proj"
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow/padded
+	hitsound = 'sound/combat/hits/nodmg (2).ogg'
+	embedchance = 0
+	woundclass = BCLASS_BLUNT
 
 /obj/item/ammo_casing/caseless/rogue/arrow/stone
 	name = "stone arrow"
