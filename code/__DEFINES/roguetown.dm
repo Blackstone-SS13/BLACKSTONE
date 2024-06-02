@@ -13,7 +13,7 @@
 #define PLATEHIT "plate"
 #define CHAINHIT "chain"
 #define SOFTHIT "soft"
-#define SOFTUNDERHIT "softunder"
+#define SOFTUNDERHIT "softunder" // This is just for the soft underarmors like gambesons and arming jackets so they can be worn with light armors that use the same sound
 
 /proc/get_armor_sound(blocksound, blade_dulling)
 	switch(blocksound)
