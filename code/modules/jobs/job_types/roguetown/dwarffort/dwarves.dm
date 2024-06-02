@@ -45,7 +45,8 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/axes, 4, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
@@ -117,7 +118,7 @@
 	ADD_TRAIT(H, RTRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 
 /datum/outfit/job/roguetown/guardsdwarf/proc/assign_skills(mob/living/carbon/human/guard)
-	guard.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 4, TRUE)
+	guard.mind.adjust_skillrank(/datum/skill/combat/maces, 4, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/wrestling, 4, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/unarmed, 4, TRUE)
 	guard.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
@@ -182,7 +183,7 @@
 	provisioner.mind.adjust_skillrank(/datum/skill/combat/wrestling, 3, TRUE)
 	provisioner.mind.adjust_skillrank(/datum/skill/combat/unarmed, 3, TRUE)
 	provisioner.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
-	provisioner.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 2, TRUE)
+	provisioner.mind.adjust_skillrank(/datum/skill/combat/axes, 2, TRUE)
 	provisioner.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
 	provisioner.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 	provisioner.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
@@ -239,7 +240,7 @@
 	tunneler.mind.adjust_skillrank(/datum/skill/combat/wrestling, 5, TRUE) //Drown a bandit in the lake today!
 	tunneler.mind.adjust_skillrank(/datum/skill/combat/unarmed, 5, TRUE) //Punch a Dark Elf in the groin!
 	tunneler.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
-	tunneler.mind.adjust_skillrank(/datum/skill/combat/axesmaces, 3, TRUE)
+	tunneler.mind.adjust_skillrank(/datum/skill/combat/axes, 3, TRUE)
 	tunneler.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 	tunneler.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE)
 	tunneler.mind.adjust_skillrank(/datum/skill/misc/athletics, 6, TRUE)
