@@ -139,7 +139,7 @@
 					if(T.get_lumcount() > 0.15)
 						if(disguised)
 							vitae -= 8
-							to_chat(H, "<span class='warning'>My silver blood dwindles!</span>")
+							to_chat(H, "<span class='warning'>My vitae dwindles!</span>")
 						else
 							H.fire_act(1,5)
 
@@ -163,7 +163,7 @@
 				H.vampire_undisguise(src)
 		vitae -= 1
 	else
-		to_chat(H, "<span class='userdanger'>I RAN OUT OF SILVER BLOOD!</span>")
+		to_chat(H, "<span class='userdanger'>I RAN OUT OF VITAE!</span>")
 		var/obj/shapeshift_holder/SS = locate() in H
 		if(SS)
 			SS.shape.dust()
@@ -265,7 +265,7 @@
 		to_chat(src, "<span class='warning'>My curse is hidden.</span>")
 		return
 	if(VD.vitae < 500)
-		to_chat(src, "<span class='warning'>Not enough silver blood.</span>")
+		to_chat(src, "<span class='warning'>Not enough vitae.</span>")
 		return
 	if(has_status_effect(/datum/status_effect/buff/celerity))
 		to_chat(src, "<span class='warning'>Already active.</span>")
@@ -300,7 +300,7 @@
 		to_chat(src, "<span class='warning'>My curse is hidden.</span>")
 		return
 	if(VD.vitae < 200)
-		to_chat(src, "<span class='warning'>Not enough silver blood.</span>")
+		to_chat(src, "<span class='warning'>Not enough vitae blood.</span>")
 		return
 	if(has_status_effect(/datum/status_effect/buff/fortitude))
 		to_chat(src, "<span class='warning'>Already active.</span>")
