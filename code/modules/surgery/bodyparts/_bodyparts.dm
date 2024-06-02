@@ -172,6 +172,10 @@
 	for(var/obj/item/I in src) //dust organs
 		qdel(I)
 	skeletonized = TRUE
+	for(var/datum/wound/bloody_wound as anything in wounds)
+		if(isnull(bloody_wound.bleed_rate))
+			continue
+		qdel(bloody_wound)
 
 /obj/item/bodypart/chest/skeletonize(lethal = TRUE)
 	. = ..()
