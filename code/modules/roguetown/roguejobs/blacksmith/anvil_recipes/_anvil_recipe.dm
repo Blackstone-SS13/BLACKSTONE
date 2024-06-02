@@ -61,7 +61,6 @@
 	else
 		if(user.mind && isliving(user))
 			skill_quality += (rand(skill_level*8, skill_level*17)*moveup)
-			message_admins("[skill_quality]")
 			var/mob/living/L = user
 			var/boon = user.mind.get_learning_boon(appro_skill)
 			var/amt2raise = L.STAINT/2 // (L.STAINT+L.STASTR)/4 optional: add another stat that isn't int
