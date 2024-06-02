@@ -10,7 +10,7 @@
 	icon_state = "coif"
 	item_state = "coif"
 	flags_inv = HIDEEARS|HIDEHAIR
-	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_NECK|ITEM_SLOT_HEAD|ITEM_SLOT_MOUTH
+	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_NECK|ITEM_SLOT_HEAD
 	blocksound = SOFTHIT
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	armor = list("blunt" = 35, "slash" = 30, "stab" = 25, "bullet" = 5, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
@@ -52,7 +52,7 @@
 	armor = list("blunt" = 60, "slash" = 100, "stab" = 60, "bullet" = 10, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
 	max_integrity = 225
 	resistance_flags = FIRE_PROOF
-	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_NECK|ITEM_SLOT_HEAD|ITEM_SLOT_MOUTH
+	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_NECK|ITEM_SLOT_HEAD
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = list(BCLASS_CUT, BCLASS_TWIST)
 	adjustable = CAN_CADJUST
