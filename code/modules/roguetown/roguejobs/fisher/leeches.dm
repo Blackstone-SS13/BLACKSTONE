@@ -35,6 +35,8 @@
 	. = ..()
 	//leech lore
 	leech_lore()
+	if(drainage)
+		START_PROCESSING(SSobj, src)
 
 /obj/item/natural/worms/leech/process()
 	if(!drainage)
