@@ -1,5 +1,7 @@
 // Toggle the ss on and off along with all the things lookign for whether this is enabled
 /datum/controller/subsystem/role_class_handler/proc/toggle_drifter_queue()
+	if(!drifter_wave_schedule[current_wave_number])
+		handle_drifter_wave_scheduling()
 	drifter_queue_enabled = !drifter_queue_enabled
 	can_fire = !can_fire
 
@@ -36,12 +38,16 @@
 		return FALSE
 
 	drifter_wave_joined_clients += target_client
+	rebuild_player_html_table()
+	queue_table_browser_update = TRUE
 	return TRUE
 
 // Remove client from playing in next drifter wave
 /datum/controller/subsystem/role_class_handler/proc/remove_client_from_drifter_wave(client/target_client)
 	if(target_client in drifter_wave_joined_clients)
 		drifter_wave_joined_clients -= target_client
+		rebuild_player_html_table()
+		queue_table_browser_update = TRUE
 		return TRUE
 	return FALSE
 
@@ -49,3 +55,7 @@
 /datum/controller/subsystem/role_class_handler/proc/cleanup_drifter_queue(client/target_client)
 	remove_client_from_drifter_wave(target_client)
 	remove_drifter_queue_viewer(target_client)
+
+// Set a next migrant mass release time
+/datum/controller/subsystem/role_class_handler/proc/start_a_drifter_wave_countdown()
+	next_drifter_mass_release_time = world.time + drifter_time_buffer

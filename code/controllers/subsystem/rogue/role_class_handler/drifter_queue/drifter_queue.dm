@@ -17,10 +17,11 @@
 	// Set this to true or false to stop the system/hide crap related to it hopefully lol
 	var/drifter_queue_enabled = TRUE
 
+
 	// Next time we fire
-	var/next_migrant_mass_release_time = 0
+	var/next_drifter_mass_release_time = 0
 	// Delay before next wave rn
-	var/arbitrary_delay = 6 SECONDS
+	var/drifter_time_buffer = 10 MINUTES
 	
 	// The current wave
 	var/datum/drifter_wave/current_wave
@@ -35,9 +36,11 @@
 	// Current drop location target
 	var/atom/drifter_dropzone_target
 
+	// Whether its time to update the browser table
+	var/queue_table_browser_update = FALSE
 	// String vars for display menus
 	var/drifter_queue_player_tbl_string = "DISABLED"
-	var/time_left_until_next_wave_string = "DISABLED"
+	var/time_left_until_next_wave_string = "DELAYED"
 
 /*
 	Hey we got somethin to keep track of now, which is drifter queue
@@ -63,21 +66,26 @@
 			drifter_queue_menus.Remove(current_ckey)
 			qdel(current_menu)
 			continue
+		
+		var/client/target_client = current_menu.linked_client
+		target_client << output(url_encode(time_left_until_next_wave_string), "drifter_queue.browser:update_timer")
 
-		current_menu.show_drifter_queue_menu()
+		if(queue_table_browser_update)
+			// This function wants the lefthand current wave player number and then the current table html
+			target_client << output(list2params(list("[drifter_wave_joined_clients.len]", drifter_queue_player_tbl_string)), "drifter_queue.browser:update_playersegments")
+			queue_table_browser_update = FALSE
 
 		if(MC_TICK_CHECK)
 			return
 
-	rebuild_player_html_table()
 	rebuild_time_string()
 
 // BRO DON'T FORGET TO REFACTOR CATEGORIES INTO STRINGS OR INTS OR SOME SHIT IN LISTS AND AUTOBUILD A CACHE VIA USING THAT AS KEYS
 
 	// It is time
-	if(world.time >= next_migrant_mass_release_time)
+	if(world.time >= next_drifter_mass_release_time)
 		to_chat(world, "Release Drifters")
-		if(!drifter_wave_schedule[current_wave_number])
+
 		current_wave = drifter_wave_schedule[current_wave_number]
 
 		if(!current_wave)
@@ -92,10 +100,11 @@
 
 			drifter_wave_joined_clients.Cut()
 
-		start_a_drifter_wave_countdown()
-
 		handle_drifter_wave_scheduling()
 		current_wave_number++
+
+
+
 
 // It would be my hope that anything going through here starts off as a /mob/dead/new_player
 // Otherwise I will have to copypaste a ton of shit
@@ -161,38 +170,8 @@
 
 	drifter_dropzone_target = pick(potential_target_dropzones)
 
-// Set a next migrant mass release time
-/datum/controller/subsystem/role_class_handler/proc/start_a_drifter_wave_countdown()
-	next_migrant_mass_release_time = world.time + arbitrary_delay
 
-// Time string for the html menus
-/datum/controller/subsystem/role_class_handler/proc/rebuild_time_string()
-	if(!drifter_queue_enabled)
-		time_left_until_next_wave_string = "DISABLED"
-		return
 
-	var/time_left = max(0, next_migrant_mass_release_time - world.time)
-	time_left_until_next_wave_string = "[time2text(time_left, "mm:ss")]"
 
-// player table for the html menus
-/datum/controller/subsystem/role_class_handler/proc/rebuild_player_html_table()
-	var/data
-	// Wave entrants
-	data += "<table class='player_table'>"
-	var/on_playa_num = 1
-	var/total_rows = ceil(drifter_wave_joined_clients.len/2)
-	for(var/i in 1 to total_rows)
-		data += "<tr>"
-
-		for(var/ii in 1 to 2)
-			var/client/C = drifter_wave_joined_clients[on_playa_num]
-			data += "<td>[C.prefs.real_name]</td>"
-			on_playa_num++
-
-		data += "</tr>"
-	data += "</table>"
-
-	// One building of the motherfuckin table per iteration
-	drifter_queue_player_tbl_string = data
 
 

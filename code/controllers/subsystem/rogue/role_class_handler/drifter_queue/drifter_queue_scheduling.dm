@@ -12,6 +12,8 @@
 	// Filler code for any complex logic rn
 	for(var/i in 1 to target_wave_addition)
 		drifter_wave_schedule += pick(drifter_wave_data_slabs)
+
+	next_drifter_mass_release_time = world.time + drifter_time_buffer
 	
 
 

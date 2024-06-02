@@ -19,12 +19,13 @@
 			<style>
 			</style>
 			<link rel='stylesheet' type='text/css' href='slop_menustyle4.css'>
+			<script type='text/javascript' src='slop_scriptstyle4.js'></script>
 		</head>
 	"}
 
 	//Body tag start
 	data += "<body>"
-	data += "<table class='timer_table'><tr><td class='timer_fluff'>Time to next incursion:</td><td class='timer_time'>[SSrole_class_handler.time_left_until_next_wave_string]</td></tr></table>"
+	data += "<table class='timer_table'><tr><td class='timer_fluff'>Time to next incursion:</td><td class='timer_time' id='queue_timer'>[SSrole_class_handler.time_left_until_next_wave_string]</td></tr></table>"
 	data += "<br>"
 	data += "<div class='table_fluff_container'><span class='table_fluff_text'>Forecast:</span><span class='table_fluff_fadeout_line'></span></div><br>"
 	/*
@@ -68,7 +69,7 @@
 
 			data += "<td class='wave_type'><a class='wave_type_hlink' href='?src=\ref[src];'>[cur_datum.wave_type_name]<span class='wave_type_hlink_tooltext'>[cur_datum.wave_type_tooltip]</span></a></td>"
 			if(current_iteration == 1)
-				data += "<td>[SSrole_class_handler.drifter_wave_joined_clients.len]/[cur_datum.maximum_playercount]</td>"
+				data += "<td><span id='current_count'>0</span>/[cur_datum.maximum_playercount]</td>"
 			else
 				data += "<td>0/[cur_datum.maximum_playercount]</td>"
 			data += "</tr>"
@@ -79,7 +80,8 @@
 	data += "</table>"
 	data += "<hr class='fadeout_line'>"
 
-	data += SSrole_class_handler.drifter_queue_player_tbl_string
+	data += "<table class='player_table' id='player_table'>"
+	data += "</table>"
 
 	//Closing Tags
 	data += {"

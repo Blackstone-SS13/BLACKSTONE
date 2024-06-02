@@ -7,10 +7,10 @@
 */
 SUBSYSTEM_DEF(role_class_handler)
 	name = "Role Class Handler"
-	flags = SS_KEEP_TIMING
+	wait = 10
 	init_order = INIT_ORDER_ROLE_CLASS_HANDLER
 	priority = FIRE_PRIORITY_ROLE_CLASS_HANDLER
-	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME
+	runlevels = RUNLEVEL_GAME|RUNLEVEL_LOBBY|RUNLEVEL_SETUP
 
 /*
 	a list of datums dedicated to helping handle a class selection session
@@ -51,6 +51,9 @@ SUBSYSTEM_DEF(role_class_handler)
 /datum/controller/subsystem/role_class_handler/Initialize()
 	build_dumbass_category_lists()
 
+	if(drifter_queue_enabled)
+		handle_drifter_wave_scheduling()
+
 	initialized = TRUE
 
 	return ..()
@@ -58,7 +61,6 @@ SUBSYSTEM_DEF(role_class_handler)
 
 // This covers both class datums and drifter waves
 /datum/controller/subsystem/role_class_handler/proc/build_dumbass_category_lists()
-
 	init_subtypes(/datum/drifter_wave, drifter_wave_data_slabs) // Init all the drifter waves
 
 	var/list/all_classes = list()
