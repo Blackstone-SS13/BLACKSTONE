@@ -241,6 +241,14 @@
 	craftdiff = 3
 	sellprice = 12
 
+/datum/crafting_recipe/roguetown/sewing/cloak
+	name = "cloak"
+	result = list(/obj/item/clothing/cloak/raincloak)
+	reqs = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+	sellprice = 12
+
 /datum/crafting_recipe/roguetown/sewing/lordcloak
 	name = "lordly cloak"
 	result = list(/obj/item/clothing/cloak/lordcloak)
@@ -256,3 +264,17 @@
 				/obj/item/natural/fibers = 3)
 	craftdiff = 6
 	sellprice = 25
+
+/datum/crafting_recipe/roguetown/sewing/eyepatch
+	name = "right eyepatch"
+	result = list(/obj/item/clothing/mask/rogue/eyepatch)
+	reqs = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
+
+/datum/crafting_recipe/roguetown/sewing/lefteyepatch
+	name = "left eyepatch"
+	result = list(/obj/item/clothing/mask/rogue/eyepatch/left)
+	reqs = list(/obj/item/natural/cloth = 1,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
