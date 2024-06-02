@@ -55,6 +55,6 @@
 		"<span class='notice'>[user] successfully relocate the bone in [target]'s [parse_zone(target_zone)]!</span>")
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
 	if(bodypart)
-		for(var/datum/wound/dislocation/bone as anything in bodypart.wounds)
+		for(var/datum/wound/dislocation/bone in bodypart.wounds)
 			bone.relocate_bone()
 	return TRUE

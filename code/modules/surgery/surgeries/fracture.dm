@@ -50,10 +50,10 @@
 
 /datum/surgery_step/set_bone/success(mob/user, mob/living/target, target_zone, obj/item/tool, datum/intent/intent)
 	display_results(user, target, "<span class='notice'>I successfully set the bone in [target]'s [parse_zone(target_zone)].</span>",
-		"<span class='notice'>[user] successfully set the bone in [target]'s [parse_zone(target_zone)]!</span>",
-		"<span class='notice'>[user] successfully set the bone in [target]'s [parse_zone(target_zone)]!</span>")
+		"<span class='notice'>[user] successfully sets the bone in [target]'s [parse_zone(target_zone)]!</span>",
+		"<span class='notice'>[user] successfully sets the bone in [target]'s [parse_zone(target_zone)]!</span>")
 	var/obj/item/bodypart/bodypart = target.get_bodypart(check_zone(target_zone))
 	if(bodypart)
-		for(var/datum/wound/fracture/bone as anything in bodypart.wounds)
+		for(var/datum/wound/fracture/bone in bodypart.wounds)
 			bone.set_bone()
 	return TRUE

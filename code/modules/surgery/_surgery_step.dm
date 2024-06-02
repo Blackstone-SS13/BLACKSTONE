@@ -366,7 +366,7 @@
 	if(implements)
 		var/implement_type = tool_check(user, tool)
 		if(implement_type)
-			success_prob *= implements[implement_type] || 1
+			success_prob *= (implements[implement_type]/100) || 1
 	success_prob *= get_location_modifier(target)
 	success_prob *= get_skill_modifier(user, target, target_zone, tool, intent)
 	//even if lying is not required, not lying down does you no good

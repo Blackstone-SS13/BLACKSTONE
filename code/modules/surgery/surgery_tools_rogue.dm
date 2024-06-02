@@ -19,6 +19,10 @@
 	anvilrepair = /datum/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/iron
 
+/obj/item/rogueweapon/surgery/Initialize()
+	. = ..()
+	item_flags |= SURGICAL_TOOL //let's not stab patients for fun
+
 /obj/item/rogueweapon/surgery/scalpel
 	name = "scalpel"
 	desc = "A tool used to carve precisely into the flesh of the sickly."
