@@ -160,8 +160,10 @@ SUBSYSTEM_DEF(treasury)
 ///@param character: The character making the deposit.
 ///@return TRUE if the money was successfully deposited, FALSE otherwise.
 /datum/controller/subsystem/treasury/proc/generate_money_account(amt, mob/living/carbon/human/character)
-	if(!amt) return FALSE
-	if(!character) return FALSE
+	if(!amt)
+		return FALSE
+	if(!character)
+		return FALSE
 	var/taxed_amount = 0
 	var/original_amt = amt
 	if(character in bank_accounts)
