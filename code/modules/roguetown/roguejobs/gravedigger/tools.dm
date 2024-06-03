@@ -1,5 +1,5 @@
 /obj/item/rogueweapon/shovel
-	force = 21
+	force = 30
 	possible_item_intents = list(/datum/intent/mace/strike/shovel, /datum/intent/shovelscoop)
 	gripped_intents = list(/datum/intent/mace/strike/shovel, /datum/intent/shovelscoop, /datum/intent/axe/chop/battle)
 	name = "shovel"
@@ -21,13 +21,6 @@
 
 /obj/item/rogueweapon/shovel/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE)
 	. = ..()
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.dna && H.dna.species)
-			if(istype(H.dna.species, /datum/species/skeleton))
-				return FALSE
-	if(M.mind && M.mind.has_antag_datum(/datum/antagonist/vampire))
-		return FALSE
 	if(M.mind && M.mind.has_antag_datum(/datum/antagonist/zombie))
 		return FALSE
 	if(M.mind && M.mind.has_antag_datum(/datum/antagonist/skeleton))
