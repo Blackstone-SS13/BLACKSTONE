@@ -54,7 +54,7 @@
 				H.mind.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
 			H.change_stat("strength", 2)
 			H.change_stat("speed", -1)
-			H.change_stat("fortune", 3)
+			H.change_stat("fortune", 2)
 
 
 	else
