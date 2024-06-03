@@ -7,7 +7,7 @@
 	spawn_positions = 50
 	allowed_races = ALL_RACES_LIST_NAMES
 	tutorial = "You've lived in this shithole for effectively all your life. You are not an explorer, nor exactly a warrior in many cases. You're just some average poor bastard who thinks they'll be something someday."
-
+	advclass_cat_rolls = list(CTAG_TOWNER = 20)
 	outfit = null
 	outfit_female = null
 	bypass_lastclass = TRUE
@@ -21,9 +21,7 @@
 	always_show_on_latechoices = TRUE
 	same_job_respawn_delay = 0
 
-	ispilgrim = FALSE
-	isvillager = TRUE
-	advclass_cat_rolls = list(CTAG_TOWNER = 20)
+	
 
 /datum/job/roguetown/villager/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	..()
