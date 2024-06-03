@@ -10,6 +10,13 @@
 	can_fire = drifter_queue_enabled
 
 /*
+	Attempts to just toggle whether the drifter queue is delayed or not
+*/
+/datum/controller/subsystem/role_class_handler/proc/delay_drifter_queue()
+	drifter_queue_delayed = !drifter_queue_delayed
+	rebuild_drifter_time_string()
+
+/*
 	Attempts to remove and cleanup drifter queue viewer datum
 
 */
@@ -50,7 +57,7 @@
 		return FALSE
 
 	drifter_wave_joined_clients += target_client
-	rebuild_player_html_table()
+	rebuild_drifter_html_table()
 	queue_table_browser_update = TRUE
 	return TRUE
 
@@ -61,7 +68,7 @@
 /datum/controller/subsystem/role_class_handler/proc/remove_client_from_drifter_wave(client/target_client)
 	if(target_client in drifter_wave_joined_clients)
 		drifter_wave_joined_clients -= target_client
-		rebuild_player_html_table()
+		rebuild_drifter_html_table()
 		queue_table_browser_update = TRUE
 		return TRUE
 	return FALSE

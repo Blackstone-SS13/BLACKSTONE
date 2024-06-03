@@ -1,5 +1,5 @@
 // player table for the html menus
-/datum/controller/subsystem/role_class_handler/proc/rebuild_player_html_table()
+/datum/controller/subsystem/role_class_handler/proc/rebuild_drifter_html_table()
 	if(!drifter_wave_joined_clients.len)
 		drifter_queue_player_tbl_string = "<tr></tr>"
 		return
