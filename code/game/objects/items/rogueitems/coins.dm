@@ -221,6 +221,11 @@
 	. = ..()
 	set_quantity(rand(4,19))
 
+/obj/item/roguecoin/xybrium/pile/Initialize()
+	. = ..()
+	set_quantity(rand(4,19))
+
+#undef CTYPE_XYBRIUM
 #undef CTYPE_GOLD
 #undef CTYPE_SILV
 #undef CTYPE_COPP
