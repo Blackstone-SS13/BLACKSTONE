@@ -92,6 +92,7 @@
 	for(var/S in MOBSTATS)
 		H.change_stat(S, plus_factor)
 
+
 //Final proc in the set for really retarded shit
-/datum/advclass/proc/extra_slop_proc_ending(mob/living/carbon/human/H)
+///datum/advclass/proc/extra_slop_proc_ending(mob/living/carbon/human/H)
 

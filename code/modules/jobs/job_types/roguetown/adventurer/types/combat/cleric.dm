@@ -13,7 +13,6 @@
 		"Dark Elf",
 		"Aasimar"
 	)
-	allowed_patrons = list("Astrata", "Dendor", "Necra", "Pestra","Noc")
 	vampcompat = FALSE
 	outfit = /datum/outfit/job/roguetown/adventurer/cleric
 	traits_applied = list(TRAIT_HEAVYARMOR)

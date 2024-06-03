@@ -343,7 +343,7 @@ SUBSYSTEM_DEF(triumphs)
 	var/user_key = CLIENT_KEY_not_CKEY
 	var/triumph_total = triumph_amount_cache[ckey(CLIENT_KEY_not_CKEY)]
 
-	if(5 > triumph_total) // You aren't tracked at all unless you got 5, no iterating a bunch of losers repeatedly
+	if(5 > triumph_total) // You aren't tracked at all unless you got at least 5, no iterating a bunch of losers repeatedly
 		return
 
 	// You automatically get added in if we haven't filled in all the crap

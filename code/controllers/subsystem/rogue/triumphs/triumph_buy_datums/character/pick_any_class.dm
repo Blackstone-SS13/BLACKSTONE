@@ -46,7 +46,8 @@
 
 	outfit = null
 
-/datum/advclass/pick_everything/extra_slop_proc_ending(mob/living/carbon/human/H)
+/datum/advclass/pick_everything/post_equip(mob/living/carbon/human/H)
+	..()
 	var/list/possible_classes = list()
 	for(var/datum/advclass/CHECKS in SSrole_class_handler.sorted_class_categories[CTAG_ALLCLASS])
 		if(CTAG_DISABLED in CHECKS.category_tags)
@@ -55,3 +56,4 @@
 
 	var/datum/advclass/C = input(H.client, "What is my class?", "Adventure") as null|anything in possible_classes
 	C.equipme(H)
+
