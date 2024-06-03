@@ -388,7 +388,7 @@
 			C.electrocute_act(shock_damage*0.75, src, 1, flags)
 	//Stun
 	var/should_stun = (!(flags & SHOCK_TESLA) || siemens_coeff > 0.5) && !(flags & SHOCK_NOSTUN)
-	if(!HAS_TRAIT(src, TRAIT_NOPAIN))
+	if(!HAS_TRAIT(src, TRAIT_NOPAIN) || !HAS_TRAIT(src, TRAIT_TRAIT_NOPAINSTUN) )
 		if(should_stun)
 			Paralyze(30)
 		//Jitter and other fluff.
