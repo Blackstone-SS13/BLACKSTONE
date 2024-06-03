@@ -66,7 +66,7 @@
 			. = list("<span class='info'>ø ------------ ø\nThis is the <EM>[used_name]</EM>, the [race_name].")
 		
 		if(GLOB.lord_titles[name])
-			. += "<span class='notice'>[m3] granted the title of \"[GLOB.lord_titles[name]]\".</span>"
+			. += "<span class='notice'>[m3] been granted the title of \"[GLOB.lord_titles[name]]\".</span>"
 		
 		if(dna.species.use_skintones)
 			var/skin_tone_wording = dna.species.skin_tone_wording ? lowertext(dna.species.skin_tone_wording) : "skin tone"

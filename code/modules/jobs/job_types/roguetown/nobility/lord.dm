@@ -193,9 +193,9 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	if(QDELETED(recruit) || QDELETED(recruiter) || !granted_title)
 		return FALSE
 	if(GLOB.lord_titles[recruit.real_name])
-		recruiter.say("I HEREBY STRIP YOU, [recruit], OF THE TITLE OF [uppertext(GLOB.lord_titles[recruit.real_name])]!")
+		recruiter.say("I HEREBY STRIP YOU, [uppertext(recruit.name)], OF THE TITLE OF [uppertext(GLOB.lord_titles[recruit.real_name])]!")
 		GLOB.lord_titles -= recruit.real_name
 		return FALSE
-	recruiter.say("I HEREBY GRANT YOU, [recruit], THE TITLE OF [uppertext(granted_title)]!")
+	recruiter.say("I HEREBY GRANT YOU, [uppertext(recruit.name)], THE TITLE OF [uppertext(granted_title)]!")
 	GLOB.lord_titles[recruit.real_name] = granted_title
 	return TRUE
