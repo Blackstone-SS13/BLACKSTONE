@@ -2929,7 +2929,7 @@
 "vAB" = (/obj/structure/fluff/railing/border{dir = 10},/turf/open/floor/rogue/cobble,/area/rogue/outdoors/town)
 "vAF" = (/obj/structure/floordoor/gatehatch/inner{redstone_id = "gatelava"},/turf/open/transparent/openspace,/area/rogue/indoors/town/manor)
 "vAV" = (/obj/structure/mineral_door/wood/donjon{icon_state = "donjondir"; dir = 8},/turf/open/floor/rogue/blocks,/area/rogue/under/cavewet/bogcaves)
-"vBs" = (/obj/structure/fluff/railing/border{dir = 8},/obj/structure/winch{gid = s},/turf/open/floor/rogue/blocks,/area/rogue/outdoors/bog)
+"vBs" = (/obj/structure/fluff/railing/border{dir = 8},/obj/structure/winch{gid = "dwarffarmnorth"},/turf/open/floor/rogue/blocks,/area/rogue/outdoors/bog)
 "vBH" = (/obj/item/reagent_containers/food/snacks/crow{dir = 8},/turf/open/floor/rogue/rooftop,/area/rogue/outdoors/town)
 "vBV" = (/obj/structure/roguewindow/stained/yellow,/turf/open/floor/rogue/church,/area/rogue/under/town/basement)
 "vBZ" = (/obj/structure/fluff/railing/border{dir = 6},/turf/open/transparent/openspace,/area/rogue/outdoors/town)
