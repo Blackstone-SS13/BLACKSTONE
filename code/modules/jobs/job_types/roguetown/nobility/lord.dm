@@ -16,7 +16,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	spells = list(
 		/obj/effect/proc_holder/spell/self/grant_title,
 		/obj/effect/proc_holder/spell/self/convertrole/servant,
-		/obj/effect/proc_holder/spell/self/convertrole/guard, 
+		/obj/effect/proc_holder/spell/self/convertrole/guard,
 		/obj/effect/proc_holder/spell/self/convertrole/bog,
 	)
 	outfit = /datum/outfit/job/roguetown/lord
@@ -51,13 +51,12 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		else
 			GLOB.lordsurname = "of [L.real_name]"
 		SSticker.select_ruler()
-		if(SSticker.rulertype == "King")
+		if(L.gender != FEMALE)
 			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is King of Rockhill.</span></span></b>")
 			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
 		else
 			to_chat(world, "<b><span class='notice'><span class='big'>[L.real_name] is Queen of Rockhill.</span></span></b>")
 			addtimer(CALLBACK(L, TYPE_PROC_REF(/mob, lord_color_choice)), 50)
-
 
 /datum/outfit/job/roguetown/lord/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -94,9 +93,8 @@ GLOBAL_LIST_EMPTY(lord_titles)
 			H.change_stat("speed", 1)
 			H.change_stat("perception", 2)
 			H.change_stat("fortune", 5)
-		if(H.dna?.species)
-			if(H.dna.species.id == "humen")
-				H.dna.species.soundpack_m = new /datum/voicepack/male/evil()
+		if(ishumannorthern(H))
+			H.dna.species.soundpack_m = new /datum/voicepack/male/evil()
 
 		if(H.wear_mask)
 			if(istype(H.wear_mask, /obj/item/clothing/mask/rogue/eyepatch))
@@ -149,14 +147,19 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	desc = "Grant someone a title of honor... Or shame."
 	antimagic_allowed = TRUE
 	charge_max = 100
+	/// Maximum range for title granting
+	var/title_range = 3
+	/// Maximum length for the title
+	var/title_length = 42
 
 /obj/effect/proc_holder/spell/self/grant_title/cast(list/targets, mob/user = usr)
 	. = ..()
 	var/granted_title = input(user, "What title do you wish to grant?", "[name]") as null|text
+	granted_title = reject_bad_text(granted_title, title_length)
 	if(!granted_title)
 		return
 	var/list/recruitment = list()
-	for(var/mob/living/carbon/human/village_idiot in (get_hearers_in_view(recruitment_range, user) - user))
+	for(var/mob/living/carbon/human/village_idiot in (get_hearers_in_view(title_range, user) - user))
 		//not allowed
 		if(!can_title(village_idiot))
 			continue
@@ -167,7 +170,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	var/inputty = input(user, "Select an honorary!", "[name]") as anything in recruitment
 	if(inputty)
 		var/mob/living/carbon/human/recruit = recruitment[inputty]
-		if(!QDELETED(recruit) && (recruit in get_hearers_in_view(recruitment_range, user)))
+		if(!QDELETED(recruit) && (recruit in get_hearers_in_view(title_range, user)))
 			INVOKE_ASYNC(src, PROC_REF(village_idiotify), recruit, user, granted_title)
 		else
 			to_chat(user, "<span class='warning'>Honorific failed!</span>")
