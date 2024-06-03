@@ -90,7 +90,6 @@
 			var/list/subsystem_ctag_list = SSrole_class_handler.sorted_class_categories[SORT_CAT_KEY]
 			var/list/local_insert_sortlist = list()
 
-
 			if(class_cat_alloc_bypass_reqs)
 				for(var/datum/advclass/CUR_AZZ in subsystem_ctag_list)
 					local_insert_sortlist += CUR_AZZ
@@ -207,13 +206,9 @@
 
 	//Buttondiv Segment
 	data += "<div class='footer'>"
-	var/rerolls_left = SSrole_class_handler.get_session_rerolls(linked_client.ckey)
-	if(rerolls_left > 0)
-		data += "<a class='bottom_buttons' href='?src=\ref[src];reroll=1'>Reroll Classes <span class='bottom_button_cost'>COST: 0</span></a><br>"
-
-		data += {"	
-			<a class='mo_bottom_buttons' href='?src=\ref[src];show_challenge_class=1'>Show Challenge Classes <span class='bottom_button_cost'>COST: 0</span></a><br>
-		</div>
+	data += {"	
+		<a class='mo_bottom_buttons' href='?src=\ref[src];show_challenge_class=1'>[showing_challenge_classes ? "Hide Challenge Classes" : "Show Challenge Classes"]</a>
+	</div>
 	"}
 
 	//Closing Tags
@@ -259,8 +254,17 @@
 	if(href_list["class_selected"])
 		var/selected_class = href_list["selected_class"]
 		var/locvar_check = locate(selected_class)
-		
-		if(locvar_check in rolled_classes) // Safety check. Make sure the thing that got rammed into the href is actually in the rolled list
+
+		// shiiiiiiiiiiiiiiiiet
+		if(locvar_check in SSrole_class_handler.sorted_class_categories[CTAG_CHALLENGE])
+			plus_power = 0
+			cur_picked_class = locvar_check
+			class_select_slop()
+			return
+
+		// Safety check. Make sure the thing that got rammed into the href is actually in the rolled list
+		// Unless its a challenge class then everyone can jus see it via a click of the button anyways
+		if(locvar_check in rolled_classes) 
 			plus_power = rolled_classes[locvar_check]	// Get the plus power too
 			cur_picked_class = locvar_check
 			class_select_slop()
@@ -274,17 +278,6 @@
 		plus_power = 0
 		cur_picked_class = null
 		linked_client << browse(null, "window=class_select_yea")
-		return
-
-	if(href_list["reroll"])
-		var/rerolls_left = SSrole_class_handler.get_session_rerolls(linked_client.ckey)
-		if(rerolls_left > 0)
-			linked_client << browse(null, "window=class_select_yea")
-			plus_power = 0
-			cur_picked_class = null
-			rolled_classes = list() // Make sure to empty this mf out
-			SSrole_class_handler.adjust_session_rerolls(linked_client.ckey, -1)
-			browser_slop()
 		return
 
 	if(href_list["special_selected"])

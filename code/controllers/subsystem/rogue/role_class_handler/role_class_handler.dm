@@ -19,14 +19,6 @@ SUBSYSTEM_DEF(role_class_handler)
 */
 	var/list/class_select_handlers = list()
 
-
-/*
-	dumbazz list meant to keep track of how many rerolls they've used per server session
-	ex: session_rerolls[ckey] += 1
-	contents: session_rerolls = list("ckey" = 2, "ckey2" = 69,... etc)
-*/
-	var/list/session_rerolls = list()
-
 /*
 	This ones basically a list for if you want to give a specific ckey a specific isolated datum
 	ex: special_session_queue[ckey] += /datum/advclass/BIGMAN
@@ -117,8 +109,6 @@ SUBSYSTEM_DEF(role_class_handler)
 	XTRA_MEATY.initial_setup()
 	class_select_handlers[H.client.ckey] = XTRA_MEATY
 
-	if(!H.client.ckey in session_rerolls) // no key in sess rerolls
-		session_rerolls[H.client.ckey] = 3 // Set it and give them 3
 
 /*
 	Attempt to finish the class handling ordeal, aka they picked something
@@ -167,13 +157,4 @@ SUBSYSTEM_DEF(role_class_handler)
 
 
 
-/*
-	Janky ass reroll handlers
-*/
-/datum/controller/subsystem/role_class_handler/proc/get_session_rerolls(ckey)
-	return session_rerolls[ckey]
-
-
-/datum/controller/subsystem/role_class_handler/proc/adjust_session_rerolls(ckey, number)
-	session_rerolls[ckey] += number
 
