@@ -144,7 +144,7 @@
 			update_icon()
 			buckle_mob(L, TRUE, check_loc = FALSE)
 			START_PROCESSING(SSobj, src)
-			if(!HAS_TRAIT(L, TRAIT_NOPAIN))
+			if(!HAS_TRAIT(L, TRAIT_NOPAIN) || !HAS_TRAIT(L, TRAIT_NOPAINSTUN) )
 				L.emote("painscream", forced = TRUE)
 			src.visible_message("<span class='danger'>[src] snatches [L]!</span>")
 			playsound(src.loc, list('sound/vo/mobs/plant/attack (1).ogg','sound/vo/mobs/plant/attack (2).ogg','sound/vo/mobs/plant/attack (3).ogg','sound/vo/mobs/plant/attack (4).ogg'), 100, FALSE, -1)
