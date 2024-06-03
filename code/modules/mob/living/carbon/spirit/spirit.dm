@@ -218,7 +218,7 @@
 					fallen = locate(fallen.x + rand(-3, 3), fallen.y + rand(-3, 3), fallen.z)
 					new /obj/item/underworld/coin/notracking(fallen)
 					fallen.visible_message("<span class='warning'>A coin falls from above!</span>")
-					if(coin_pq && user?.ckey)
+					if(coin_pq && user?.ckey && (user.ckey != attacker_ckey))
 						adjust_playerquality(coin_pq, user.ckey)
 					qdel(human_corpse.mouth)
 					human_corpse.update_inv_mouth()
