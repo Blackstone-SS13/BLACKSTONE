@@ -1,9 +1,9 @@
 /obj/item/rogueweapon/shovel
 	force = 21
 	possible_item_intents = list(/datum/intent/mace/strike/shovel, /datum/intent/shovelscoop)
-	gripped_intents = list(/datum/intent/mace/strike/shovel, /datum/intent/shovelscoop, /datum/intent/axe/chop/stone)
+	gripped_intents = list(/datum/intent/mace/strike/shovel, /datum/intent/shovelscoop, /datum/intent/axe/chop/battle)
 	name = "shovel"
-	desc = ""
+	desc = "A shovel, blessed by Necra to help the dead rest. One way or another."
 	icon_state = "shovel"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	sharpness = IS_BLUNT
@@ -17,6 +17,32 @@
 	var/obj/item/natural/dirtclod/heldclod
 	smeltresult = /obj/item/ingot/iron
 	max_blade_int = 50
+	associated_skill = /datum/skill/combat/polearms
+
+/obj/item/rogueweapon/shovel/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE)
+	. = ..()
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.dna && H.dna.species)
+			if(istype(H.dna.species, /datum/species/skeleton))
+				return FALSE
+	if(M.mind && M.mind.has_antag_datum(/datum/antagonist/vampire))
+		return FALSE
+	if(M.mind && M.mind.has_antag_datum(/datum/antagonist/zombie))
+		return FALSE
+	if(M.mind && M.mind.has_antag_datum(/datum/antagonist/skeleton))
+		return FALSE
+
+/obj/item/rogueweapon/shovel/funny_attack_effects(mob/living/target, mob/living/user, nodmg)
+	. = ..()
+	if(target.mind && target.mind.has_antag_datum(/datum/antagonist/zombie))
+		force = 90
+		target.Knockdown(30)
+		target.Stun(30)
+	if(target.mind && target.mind.has_antag_datum(/datum/antagonist/skeleton))
+		force = 90
+		target.Knockdown(30)
+		target.Stun(30)
 
 /obj/item/rogueweapon/shovel/Destroy()
 	if(heldclod)
