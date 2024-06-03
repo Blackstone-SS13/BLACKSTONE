@@ -2,7 +2,7 @@
 /datum/advclass/gravedigger
 	name = "Treasure Hunter"
 	tutorial = "A treasure hunter trained in the art of the Giza, discern what is treasure or not \
-	,your fortune could be hidden anywhere \
+	,your fortune could be hidden anywhere."\
 	allowed_sexes = list("male", "female")
 	allowed_races = list(
 		"Humen",
