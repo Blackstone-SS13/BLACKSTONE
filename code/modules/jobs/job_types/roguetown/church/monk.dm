@@ -3,9 +3,9 @@
 	flag = MONK
 	department_flag = CHURCHMEN
 	faction = "Station"
-	total_positions = 4
-	spawn_positions = 4
-
+	total_positions = 3
+	spawn_positions = 3
+	allowed_patrons = ALL_ACOLYTE_PATRONS
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
