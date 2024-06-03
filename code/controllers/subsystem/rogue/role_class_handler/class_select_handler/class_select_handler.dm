@@ -304,8 +304,9 @@
 		return
 
 /datum/class_select_handler/proc/ForceCloseMenus()
-	linked_client << browse(null, "window=class_handler_main")
-	linked_client << browse(null, "window=class_select_yea")
+	if(linked_client)
+		linked_client << browse(null, "window=class_handler_main")
+		linked_client << browse(null, "window=class_select_yea")
 
 
 

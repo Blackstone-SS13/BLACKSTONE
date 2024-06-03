@@ -99,7 +99,8 @@
 			break
 
 /datum/drifter_queue_menu/proc/ForceCloseMenus()
-	linked_client << browse(null, "window=drifter_queue")
+	if(linked_client)
+		linked_client << browse(null, "window=drifter_queue")
 
 /datum/drifter_queue_menu/Topic(href, list/href_list)
 	. = ..()
