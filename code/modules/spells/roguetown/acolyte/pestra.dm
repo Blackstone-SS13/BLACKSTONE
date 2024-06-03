@@ -143,7 +143,7 @@
 	miracle = TRUE
 	devotion_cost = -100
 	/// Amount of PQ gained for curing zombos
-	var/unzombification_pq = 0.4
+	var/unzombification_pq = PQ_GAIN_UNZOMBIFY
 
 /obj/effect/proc_holder/spell/invoked/cure_rot/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
