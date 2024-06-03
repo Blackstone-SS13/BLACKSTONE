@@ -113,7 +113,7 @@
 	check_cremation()
 
 /mob/living/carbon/handle_random_events()//BP/WOUND BASED PAIN
-	if(HAS_TRAIT(src, TRAIT_NOPAIN) || HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+	if(HAS_TRAIT(src, TRAIT_NOPAIN))
 		return
 	if(!stat)
 		var/painpercent = get_complex_pain() / (STAEND * 10)
@@ -128,7 +128,7 @@
 					emote("painmoan")
 			else
 				if(painpercent >= 100)
-					if(prob(probby))
+					if(prob(probby) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))
 						Immobilize(10)
 						emote("painscream")
 						stuttering += 5
