@@ -32,6 +32,8 @@
 			return
 		amt = SStreasury.bank_accounts[H]
 		var/mod = 1
+		if(selection == "PLATINUM")
+			mod = 50
 		if(selection == "GOLD")
 			mod = 10
 		if(selection == "SILVER")

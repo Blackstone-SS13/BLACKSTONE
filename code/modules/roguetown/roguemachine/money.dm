@@ -85,46 +85,38 @@ GLOBAL_VAR(moneymaster)
 		playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
 	update_icon()
 
+proc/select_currency(mob/user)
+	return input(user, "Select a currency:", "Currency Selection") in list("BRONZE", "SILVER", "GOLD", "PLATINUM")
+
 /obj/structure/roguemachine/money/attack_right(mob/user)
 	. = ..()
 	if(.)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
-	var/inputt = alert(user,"Gold, Silver, or Bronze?",,"BRONZE","SILVER","GOLD","PLATINUM")
-	if(inputt && Adjacent(user))
-		to_chat(user, "<span class='info'>I pull on the [inputt] tongue.</span>")
-		if(inputt == "BRONZE" && budget >= 50)
-			budget2change(budget, user, inputt)
-			budget = 0
-			if(isliving(user))
-				var/mob/living/L = user
-				L.emote("scream")
-				L.Paralyze(50)
-				L.Stun(50)
-				L.visible_message("<span class='danger'>[user] is buried under a mountain of coins!</span>")
-		else
-			budget2change(budget, user, inputt)
-			switch(inputt)
-				if("XYBRIUM")
-					var/zenars = budget/50
-					if(zenars >= 1)
-						for(var/i in 1 to zenars)
-							budget -= 50
-				if("GOLD")
-					var/zenars = budget/10
-					if(zenars >= 1)
-						for(var/i in 1 to zenars)
-							budget -= 10
-				if("SILVER")
-					var/zenars = budget/5
-					if(zenars >= 1)
-						for(var/i in 1 to zenars)
-							budget -= 5
-				if("BRONZE")
-					if(budget >= 1)
-						for(var/i in 1 to budget)
-							budget -= 1
-		update_icon()
+	var/currency = select_currency(user)
+	if(currency && Adjacent(user))
+		to_chat(user, "<span class='info'>I pull on the [currency] tongue.</span>")
+		switch(currency)
+			if("PLATINUM")
+				var/zenars = budget/50
+				if(zenars >= 1)
+					for(var/i in 1 to zenars)
+						budget -= 50
+			if("GOLD")
+				var/zenars = budget/10
+				if(zenars >= 1)
+					for(var/i in 1 to zenars)
+						budget -= 10
+			if("SILVER")
+				var/zenars = budget/5
+				if(zenars >= 1)
+					for(var/i in 1 to zenars)
+						budget -= 5
+			if("BRONZE")
+				if(budget >= 1)
+					for(var/i in 1 to budget)
+						budget -= 1
+	update_icon()
 
 /obj/structure/roguemachine/proc/budget2change(budget, mob/user, specify)
 	var/turf/T
@@ -139,7 +131,7 @@ GLOBAL_VAR(moneymaster)
 	var/zenars_to_put
 	if(specify)
 		switch(specify)
-			if("XYBRIUM")
+			if("PLATINUM")
 				zenars_to_put = budget/50
 				type_to_put = /obj/item/roguecoin/xybrium
 			if("GOLD")
