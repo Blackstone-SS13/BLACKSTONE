@@ -92,10 +92,14 @@
 
 			if(class_cat_alloc_bypass_reqs)
 				for(var/datum/advclass/CUR_AZZ in subsystem_ctag_list)
+					if(rolled_classes[CUR_AZZ])
+						continue
 					local_insert_sortlist += CUR_AZZ
 
 			else // If we are not bypassing reqs, time to do a req check
 				for(var/datum/advclass/CUR_AZZ in subsystem_ctag_list)
+					if(rolled_classes[CUR_AZZ])
+						continue
 					if(CUR_AZZ.check_requirements(H))
 						local_insert_sortlist += CUR_AZZ
 
@@ -123,9 +127,13 @@
 	if(forced_class_additions && forced_class_additions.len)
 		if(forced_class_bypass_reqs)
 			for(var/datum/advclass/FORCE_IT_IN in forced_class_additions)
+				if(rolled_classes[FORCE_IT_IN])
+					continue
 				rolled_classes[FORCE_IT_IN] = 0
 		else
 			for(var/datum/advclass/FORCE_IT_IN in forced_class_additions)
+				if(rolled_classes[FORCE_IT_IN])
+					continue
 				if(FORCE_IT_IN.check_requirements(H))
 					rolled_classes[FORCE_IT_IN] = 0
 
