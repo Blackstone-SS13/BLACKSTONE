@@ -2373,7 +2373,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(BRUTE)
 			H.damageoverlaytemp = 20
 			var/damage_amount = forced ? damage : damage * hit_percent * brutemod * H.physiology.brute_mod
-			if(!HAS_TRAIT(H, TRAIT_NOPAIN))
+			if(!HAS_TRAIT(H, TRAIT_NOPAIN) || !HAS_TRAIT(H, TRAIT_NOPAINSTUN) || )
 				if(damage_amount > 5)
 					H.AdjustSleeping(-50)
 					if(prob(damage_amount * 3))
