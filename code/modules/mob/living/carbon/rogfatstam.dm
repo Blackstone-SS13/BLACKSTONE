@@ -16,7 +16,7 @@
 	update_health_hud()
 
 /mob/living/proc/update_rogstam()
-		var/athletics_skill = 0
+	var/athletics_skill = 0
 	if(mind)
 		athletics_skill = mind.get_skill_level(/datum/skill/misc/athletics)
 	maxrogstam = (STAEND + (athletics_skill/2 ) ) * 100
