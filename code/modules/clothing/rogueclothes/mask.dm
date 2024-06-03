@@ -52,6 +52,7 @@
 	max_integrity = 20
 	integrity_failure = 0.5
 	block2add = FOV_RIGHT
+	body_parts_covered = EYES
 	sewrepair = TRUE
 
 /obj/item/clothing/mask/rogue/eyepatch/left
@@ -134,3 +135,12 @@
 				if(ishuman(user))
 					var/mob/living/carbon/H = user
 					H.update_inv_wear_mask()
+
+/obj/item/clothing/mask/rogue/physician
+	name = "plague mask"
+	desc = "What better laboratory than the blood-soaked battlefield?"
+	icon_state = "physmask"
+	flags_inv = HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	body_parts_covered = FACE|EARS|EYES|MOUTH|NECK
+	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
+	sewrepair = TRUE
