@@ -128,7 +128,7 @@
 					emote("painmoan")
 			else
 				if(painpercent >= 100)
-					if(prob(probby) && !HAS_TRAIT(H, TRAIT_NOPAINSTUN))
+					if(prob(probby) && !HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 						Immobilize(10)
 						emote("painscream")
 						stuttering += 5
