@@ -65,7 +65,7 @@
 		return
 	var/inputty = input("Write a new law", "BAILIFF") as text|null
 	if(inputty)
-		if(hasomen("nolord"))
+		if(hasomen(OMEN_NOLORD))
 			make_law(inputty)
 		else
 			var/lord = find_lord()
@@ -82,7 +82,7 @@
 	var/inputty = input("Remove a law", "BAILIFF") as text|null
 	var/law_index = text2num(inputty) || 0
 	if(law_index && GLOB.laws_of_the_land[law_index])
-		if(hasomen("nolord"))
+		if(hasomen(OMEN_NOLORD))
 			remove_law(law_index)
 		else
 			var/lord = find_lord()
@@ -96,7 +96,7 @@
 	set category = "Bailiff"
 	if(stat)
 		return
-	if(hasomen("nolord"))
+	if(hasomen(OMEN_NOLORD))
 		purge_laws()
 	else
 		var/lord = find_lord()
@@ -112,7 +112,7 @@
 		return
 	var/inputty = input("Outlaw a person", "BAILIFF") as text|null
 	if(inputty)
-		if(hasomen("nolord"))
+		if(hasomen(OMEN_NOLORD))
 			make_outlaw(inputty)
 		else
 			var/lord = find_lord()

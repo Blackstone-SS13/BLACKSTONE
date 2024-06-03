@@ -113,6 +113,15 @@
 	/// This job uses adventurer classes on examine
 	var/advjob_examine = FALSE
 
+	/// This job always shows on latechoices
+	var/always_show_on_latechoices = FALSE
+
+	/// Cooldown for joining as this job again, if it was your last job
+	var/same_job_respawn_delay = FALSE
+
+	/// This job re-opens slots if someone dies as it
+	var/job_reopens_slots_on_death = FALSE
+
 /*
 	How this works, its CTAG_DEFINE = amount_to_attempt_to_role 
 	EX: advclass_cat_rolls = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 5)
