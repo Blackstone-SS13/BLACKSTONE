@@ -113,7 +113,7 @@
 	check_cremation()
 
 /mob/living/carbon/handle_random_events()//BP/WOUND BASED PAIN
-	if(HAS_TRAIT(src, TRAIT_NOPAIN))
+	if(HAS_TRAIT(src, TRAIT_NOPAIN) || HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 		return
 	if(!stat)
 		var/painpercent = get_complex_pain() / (STAEND * 10)
