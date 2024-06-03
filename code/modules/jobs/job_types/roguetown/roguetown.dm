@@ -1,19 +1,6 @@
 /datum/job/roguetown
 	display_order = JOB_DISPLAY_ORDER_CAPTAIN
 
-/*
-	How this works, its CTAG_DEFINE = amount_to_attempt_to_role 
-	EX: advclass_cat_rolls = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 5)
-	You will still need to contact the subsystem though
-*/
-	var/list/advclass_cat_rolls
-/*
-	Basically this is just a ref to a drifter wave if its attached to one
-	The role class handler will grab relevant data out of it it uses a class select
-	Just make sure to unattach afterward we are done.
-*/
-	var/datum/drifter_wave/drifter_wave_attachment
-
 /datum/job/roguetown/New()
 	. = ..()
 	if(give_bank_account)

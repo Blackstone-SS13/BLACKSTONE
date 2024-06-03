@@ -1,11 +1,18 @@
-// Toggle the ss on and off along with all the things lookign for whether this is enabled
+/*
+	Attempts to enable/disable drifter queue
+*/
 /datum/controller/subsystem/role_class_handler/proc/toggle_drifter_queue()
-	if(!drifter_wave_schedule[current_wave_number])
+	if(!(length(drifter_wave_schedule) == current_wave_number))
 		handle_drifter_wave_scheduling()
+	if(world.time > next_drifter_mass_release_time)
+		next_drifter_mass_release_time = world.time + 5 MINUTES
 	drifter_queue_enabled = !drifter_queue_enabled
-	can_fire = !can_fire
+	can_fire = drifter_queue_enabled
 
-// Time to go mister menu
+/*
+	Attempts to remove and cleanup drifter queue viewer datum
+
+*/
 /datum/controller/subsystem/role_class_handler/proc/remove_drifter_queue_viewer(client/C)
 	var/datum/drifter_queue_menu/menu = drifter_queue_menus[C.ckey]
 	if(menu)
@@ -15,8 +22,9 @@
 		drifter_queue_menus.Remove(C.ckey)
 		qdel(menu)
 
-
-//They click the button on prefs and we make a new menu datum and stick a ref to their client on it
+/*
+	Attempts to create a new drifter queue viewer datum and tie the client into it
+*/
 /datum/controller/subsystem/role_class_handler/proc/add_drifter_queue_viewer(client/C)
 	var/datum/drifter_queue_menu/menu = drifter_queue_menus[C.ckey]
 	if(menu)
@@ -29,12 +37,16 @@
 		menu.linked_client = C
 		menu.first_show_drifter_queue_menu()
 
-// Attempt to add a client to play in the next drifter wave
+/*
+	Attempts to add a client to be queued for processing in the next drifter release
+*/
 /datum/controller/subsystem/role_class_handler/proc/attempt_to_add_client_to_drifter_wave(client/target_client)
 	if(target_client in drifter_wave_joined_clients)
 		return FALSE
 	var/datum/drifter_wave/current_wave = drifter_wave_schedule[current_wave_number]
 	if(drifter_wave_joined_clients.len >= current_wave.maximum_playercount)
+		return FALSE
+	if(!check_drifterwave_restrictions(target_client))
 		return FALSE
 
 	drifter_wave_joined_clients += target_client
@@ -42,7 +54,10 @@
 	queue_table_browser_update = TRUE
 	return TRUE
 
-// Remove client from playing in next drifter wave
+
+/*
+	Attempts to remove a client from the processing list for the next drifter release
+*/
 /datum/controller/subsystem/role_class_handler/proc/remove_client_from_drifter_wave(client/target_client)
 	if(target_client in drifter_wave_joined_clients)
 		drifter_wave_joined_clients -= target_client
@@ -51,11 +66,49 @@
 		return TRUE
 	return FALSE
 
-//Shitty proc thats just for a general cleanup
+/*
+	A haphazard proc that just attempts to cleanup anything related to a client in both the queue and viewer areas
+*/
 /datum/controller/subsystem/role_class_handler/proc/cleanup_drifter_queue(client/target_client)
 	remove_client_from_drifter_wave(target_client)
 	remove_drifter_queue_viewer(target_client)
 
-// Set a next migrant mass release time
-/datum/controller/subsystem/role_class_handler/proc/start_a_drifter_wave_countdown()
-	next_drifter_mass_release_time = world.time + drifter_time_buffer
+/*
+	Just checks the restrictions on the drifter wave datum against the client and tells you if they ain't getting in
+	If I build a total string and do every check then... it may get a bit nasty you know?
+*/
+/datum/controller/subsystem/role_class_handler/proc/check_drifterwave_restrictions(client/target_client)
+	if(length(current_wave.allowed_races) && !(target_client.prefs.pref_species.name in current_wave.allowed_races))
+		to_chat(target_client, "WRONG RACE")
+		return FALSE
+	if(length(current_wave.allowed_patrons) && !(target_client.prefs.selected_patron.type in current_wave.allowed_patrons))
+		to_chat(target_client, "WRONG PATRON")
+		return FALSE
+	if(length(current_wave.allowed_sexes) && !(target_client.prefs.gender in current_wave.allowed_sexes))
+		to_chat(target_client, "WRONG GENDER")
+		return FALSE
+	if(length(current_wave.allowed_ages) && !(target_client.prefs.age in current_wave.allowed_ages))
+		to_chat(target_client, "WRONG AGEGROUP")
+		return FALSE
+	if(length(current_wave.allowed_skintones) && !(target_client.prefs.skin_tone in current_wave.allowed_skintones))
+		to_chat(target_client, "WRONG ANCESTRY")
+		return FALSE
+	return TRUE
+
+/*
+	Just a proc that occurs a smidge before the MC gets its runlevel set to RUNLEVEL_GAME
+*/
+/datum/controller/subsystem/role_class_handler/proc/RoundStart()
+	next_drifter_mass_release_time = world.time + 2 MINUTES
+	drifter_queue_delayed = FALSE
+	rebuild_drifter_time_string()
+
+	for(var/cur_ckey in drifter_queue_menus)
+		var/datum/drifter_queue_menu/cur_menu = drifter_queue_menus[cur_ckey]
+		if(!cur_menu.linked_client)
+			drifter_queue_menus.Remove(cur_ckey)
+			qdel(cur_menu)
+			continue
+
+		cur_menu.show_drifter_queue_menu()
+			

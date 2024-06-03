@@ -21,7 +21,6 @@
 	// Run setup for new wave
 	current_wave.pre_drifter_wave() 
 
-	next_drifter_mass_release_time = world.time + drifter_time_buffer
 	
 
 

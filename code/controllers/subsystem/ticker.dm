@@ -471,8 +471,8 @@ SUBSYSTEM_DEF(ticker)
 			C.mob.playsound_local(C.mob, 'sound/misc/roundstart.ogg', 100, FALSE)
 
 //	SEND_SOUND(world, sound('sound/misc/roundstart.ogg'))
-
 	current_state = GAME_STATE_PLAYING
+	SSrole_class_handler.RoundStart()
 	
 	Master.SetRunLevel(RUNLEVEL_GAME)
 /*

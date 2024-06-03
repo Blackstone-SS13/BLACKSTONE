@@ -10,6 +10,20 @@
 	var/wave_type_tooltip = "ERROR: If you see this one report it"
 	// Title of the job related to the job subsystem thats being made/equipped towards for the wave
 	var/job_rank = "Drifter"
+	// If you stick something in here, we will not use the job equip and instead force this specific outfit onto them
+	var/datum/outfit/bypass_job_and_force_this_outfit_on
+	// Delay before we fire when its our turn to be current wave
+	var/wave_delay_time = 2 MINUTES
+
+	//Restrictions on what is required in order to enter the wave
+	//Make sure to set this up if you need it otherwise you might cuck someone if theres a class selection w requirements.
+	var/list/allowed_sexes
+	var/list/allowed_races
+	var/list/allowed_patrons
+	var/list/allowed_ages = ADULT_AGES_LIST
+	var/list/allowed_skintones
+
+
 
 	// How many of each class category type we will attempt to roll
 	var/list/advclass_cat_rolls = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 5)
@@ -31,9 +45,9 @@
 	)
 
 /datum/drifter_wave/proc/pre_drifter_wave()
-	var/datum/job/roguetown/target_job = SSjob.GetJob(job_rank)
+	var/datum/job/target_job = SSjob.GetJob(job_rank)
 	target_job.drifter_wave_attachment = src
 
 /datum/drifter_wave/proc/post_drifter_wave()
-	var/datum/job/roguetown/target_job = SSjob.GetJob(job_rank)
+	var/datum/job/target_job = SSjob.GetJob(job_rank)
 	target_job.drifter_wave_attachment = null

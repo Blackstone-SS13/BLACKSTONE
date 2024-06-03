@@ -51,6 +51,8 @@
 					data += "<td class='wave_entry_href'>"
 					if(linked_client in SSrole_class_handler.drifter_wave_joined_clients)
 						data += "<a class='leave_drifter_queue'href='?src=\ref[src];leave_queue=1'>LEAVE</a>"
+					else if(SSrole_class_handler.drifter_queue_delayed)
+						data += "<span class='delay_span'>DELAYED</span>"
 					else
 						data += "<a class='join_drifter_queue'href='?src=\ref[src];join_queue=1'>JOIN</a>"
 					data += "</td>"
@@ -102,7 +104,8 @@
 /datum/drifter_queue_menu/Topic(href, list/href_list)
 	. = ..()
 	if(href_list["join_queue"])
-		SSrole_class_handler.attempt_to_add_client_to_drifter_wave(linked_client)
+		if(!SSrole_class_handler.drifter_queue_delayed)
+			SSrole_class_handler.attempt_to_add_client_to_drifter_wave(linked_client)
 		show_drifter_queue_menu()
 
 	if(href_list["leave_queue"])

@@ -10,7 +10,7 @@ SUBSYSTEM_DEF(role_class_handler)
 	wait = 10
 	init_order = INIT_ORDER_ROLE_CLASS_HANDLER
 	priority = FIRE_PRIORITY_ROLE_CLASS_HANDLER
-	runlevels = RUNLEVEL_GAME|RUNLEVEL_LOBBY|RUNLEVEL_SETUP
+	runlevels = RUNLEVEL_GAME
 
 /*
 	a list of datums dedicated to helping handle a class selection session
@@ -51,8 +51,8 @@ SUBSYSTEM_DEF(role_class_handler)
 /datum/controller/subsystem/role_class_handler/Initialize()
 	build_dumbass_category_lists()
 
+	rebuild_drifter_time_string()
 	if(drifter_queue_enabled)
-		next_drifter_mass_release_time = world.time + drifter_time_buffer
 		handle_drifter_wave_scheduling()
 
 	initialized = TRUE
@@ -94,7 +94,7 @@ SUBSYSTEM_DEF(role_class_handler)
 	XTRA_MEATY.linked_client = H.client
 
 	var/datum/job/roguetown/RT_JOB = SSjob.GetJob(H.job)
-	if(RT_JOB.drifter_wave_attachment) // We got a drifter wave attachment, time to setup a different set of information
+	if(RT_JOB.drifter_wave_attachment) // We got a drifter wave attachment, time to setup a different and specific set of information, yaaay two job systems
 		var/datum/drifter_wave/dwave = RT_JOB.drifter_wave_attachment
 		XTRA_MEATY.class_cat_alloc_attempts = dwave.advclass_cat_rolls
 		XTRA_MEATY.class_cat_alloc_bypass_reqs = dwave.class_cat_alloc_bypass_reqs

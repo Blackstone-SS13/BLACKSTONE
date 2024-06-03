@@ -136,8 +136,9 @@
 				if(boostclass in forced_class_additions)
 					rolled_classes[boostclass] += 1
 
-	
-
+	if(!rolled_classes.len)
+		linked_client.mob.returntolobby()
+		message_admins("CLASS_SELECT_HANDLER HAD PERSON WITH 0 CLASS SELECT OPTIONS. THIS IS REALLY BAD! RETURNED THEM TO LOBBY")
 // Something is calling to tell this datum a class it rolled is currently maxed out.
 // More shitcode!
 /datum/class_select_handler/proc/rolled_class_is_full(datum/advclass/filled_class)

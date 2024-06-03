@@ -17,12 +17,11 @@
 	// Set this to true or false to stop the system/hide crap related to it hopefully lol
 	var/drifter_queue_enabled = TRUE
 
-
 	// Next time we fire
 	var/next_drifter_mass_release_time = 0
-	// Delay before next wave rn
-	var/drifter_time_buffer = 2 MINUTES
-	
+	// Whether we are currently delayed, changes some text in menus etc
+	var/drifter_queue_delayed = TRUE
+
 	// The current wave
 	var/datum/drifter_wave/current_wave
 	// Schedule of drifter waves
@@ -42,7 +41,7 @@
 	var/queue_table_browser_update = FALSE
 	// String vars for display menus
 	var/drifter_queue_player_tbl_string = "DISABLED"
-	var/time_left_until_next_wave_string = "DELAYED"
+	var/time_left_until_next_wave_string = "DISABLED"
 
 /*
 	Hey we got somethin to keep track of now, which is drifter queue
@@ -53,12 +52,17 @@
 		can_fire = FALSE
 		return
 
+	if(drifter_queue_delayed)
+		return
+
 	if(!resumed)
 		src.currentrun = drifter_queue_menus.Copy()
 
+/*
+	LOOP SEGMENT
+*/
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
-
 	while(currentrun.len)
 		var/current_ckey = currentrun[currentrun.len]
 		var/datum/drifter_queue_menu/current_menu = currentrun[current_ckey]
@@ -86,22 +90,29 @@
 	if(queue_table_browser_update)
 		queue_table_browser_update = FALSE
 
-	rebuild_time_string()
-
+	rebuild_drifter_time_string()
 // BRO DON'T FORGET TO REFACTOR CATEGORIES INTO STRINGS OR INTS OR SOME SHIT IN LISTS AND AUTOBUILD A CACHE VIA USING THAT AS KEYS
 
 	// It is time
 	if(world.time >= next_drifter_mass_release_time)
-		to_chat(world, "Release Drifters")
+		//to_chat(world, "Release Drifters")
 
 		if(!current_wave)
 			return
-		
+
+		if(drifter_wave_schedule.len >= current_wave_number+1)
+			var/datum/drifter_wave/next_wave = drifter_wave_schedule[current_wave_number+1]
+			next_drifter_mass_release_time = world.time + next_wave.wave_delay_time
+		else
+			next_drifter_mass_release_time = world.time + current_wave.wave_delay_time
+
 		if(drifter_wave_joined_clients.len)
 			if(!drifter_dropzone_target) // If you set some random crap to it it'll all go there otherwise its business as usual
 				find_dropoff_location()
 
 			for(var/client/target_client in drifter_wave_joined_clients)
+				if(!check_drifterwave_restrictions(target_client)) // Alas, I be feelin lazy fuck you ppl
+					continue
 				process_drifter_wave_client(target_client)
 
 			drifter_wave_joined_clients.Cut()
@@ -123,16 +134,28 @@
 		message_admins("DRIFTER QUEUE HAS BROKEN AND WE GOT SOME GUY WHO AIN'T ON CHAR SETUP! SHIIIET")
 		return
 
-	var/rank = current_wave.job_rank // you could technically have a wave of any fuckin job if you wanted ironically
+	// you could technically have a wave of any fuckin job if you wanted ironically
+	var/rank = current_wave.job_rank 
 
-	SSjob.AssignRole(ourguy, rank, 1)
+	// The important segments of SSjob's AssignRole, the only thing we are missing is incrementing the jobcount which we will not do for immigrants
+	ourguy.mind.assigned_role = rank
+	SSjob.unassigned -= ourguy
 
+	// This one is fine
 	var/mob/living/character = ourguy.create_character(TRUE)	//creates the human and transfers vars and mind
 	character.islatejoin = TRUE
 
-	var/equip = SSjob.EquipRank(character, rank, TRUE)
-	if(isliving(equip))	//Borgs get borged in the equip, so we need to make sure we handle the new mob.
-		character = equip
+	// In the offchance you want a way to just force some specific clown azz outfits onto people and not deal in job datums.
+	if(current_wave.bypass_job_and_force_this_outfit_on)
+		var/mob/living/carbon/human/HEH = character
+		if(HEH)
+			HEH.equipOutfit(current_wave.bypass_job_and_force_this_outfit_on)
+	else
+		var/equip = SSjob.EquipRank(character, rank, TRUE)
+		//Theres many ways to go about it, but if you want to turn someone into some other shit, and decide to look at cyborg.dm
+		//You can just return a mob in the job's equip datum, and this will help it.
+		if(isliving(equip))	
+			character = equip
 
 	var/atom/movable/screen/splash/Spl = new(character.client, TRUE)
 	Spl.Fade(TRUE)
