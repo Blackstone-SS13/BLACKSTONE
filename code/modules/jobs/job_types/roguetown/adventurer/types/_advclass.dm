@@ -75,6 +75,9 @@
 	if(length(allowed_ages) && !(H.age in allowed_ages))
 		return FALSE
 
+	if(length(allowed_patrons) && !(H.patron in allowed_patrons))
+		return FALSE
+
 	if(maximum_possible_slots > -1)
 		if(total_slots_occupied >= maximum_possible_slots)
 			return FALSE
