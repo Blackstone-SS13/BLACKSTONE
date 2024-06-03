@@ -9,8 +9,9 @@
 		If the version number is below the current wipe season we put them back to 0
 		It is then cached into a global list attached to their ckey
 
-	When server reboots - 
-		We save all the things in the cache to the relevant directories
+	Was running into issues saving this all at server reboot
+	Thusly triumphs all jus save into individual files everytime its ran into 
+	triumph_adjust()
 
 	Simple enough
 */
