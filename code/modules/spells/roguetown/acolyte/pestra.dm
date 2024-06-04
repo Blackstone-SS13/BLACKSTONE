@@ -16,11 +16,9 @@
 	miracle = TRUE
 	devotion_cost = -5
 
-/obj/effect/proc_holder/spell/diagnose/cast(list/targets, mob/living/user)
+/obj/effect/proc_holder/spell/invoked/diagnose/cast(list/targets, mob/living/user)
 	if(ishuman(targets[1]))
 		var/mob/living/carbon/human/human_target = targets[1]
-		user.visible_message("<span class='info'>[user] diagnoses [human_target]!</span>", \
-							"<span class='notice'>I diagnose [human_target]!</span>")
 		human_target.check_for_injuries(user)
 		return TRUE
 	return FALSE
