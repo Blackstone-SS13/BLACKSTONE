@@ -56,7 +56,7 @@
 
 /obj/projectile/bullet/reusable/arrow
 	name = "arrow"
-	damage = 0
+	damage = 35
 	damage_type = BRUTE
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "arrow_proj"
