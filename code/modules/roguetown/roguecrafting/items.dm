@@ -288,3 +288,12 @@
 	skillcraft = /datum/skill/craft/traps
 	craftdiff = 1
 	verbage = "put together"
+
+/datum/crafting_recipe/roguetown/paddedarrow
+	name = "padded arrow"
+	result = /obj/item/ammo_casing/caseless/rogue/arrow/padded
+	reqs = list(/obj/item/storage/roguebag = 1,
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone = 1,
+				/obj/item/natural/fibers = 3)
+	verbage_simple = "stuff together"
+	verbage = "stuff together"
