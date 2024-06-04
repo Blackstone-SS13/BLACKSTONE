@@ -96,7 +96,7 @@
 	desc = "A wooden shaft with a jagged rock on the end."
 	icon_state = "stonearrow"
 	max_integrity = 5
-	projectile_type = /obj/projectile/bullet/reusable/arrow/stone
+	projectile_type = /obj/projectile/bullet/reusable/arrow
 
 /obj/item/ammo_casing/caseless/rogue/arrow/poison
 	name = "poisoned arrow"
