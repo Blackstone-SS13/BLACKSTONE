@@ -79,7 +79,7 @@
 /datum/anvil_recipe/weapons/scutlass
 	name = "Cutlass"
 	req_bar = /obj/item/ingot/steel
-	created_item = /cutlass
+	created_item = /obj/item/rogueweapon/sword/cutlass
 	i_type = "Weapons"
 
 /datum/anvil_recipe/weapons/hknife
