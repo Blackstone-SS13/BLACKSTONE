@@ -104,8 +104,11 @@
 	var/datum/mind/ihaveamind = owner?.mind
 	. = ..()
 	if(. && was_owner && ihaveamind && !HAS_TRAIT(was_owner, TRAIT_IWASHAUNTED) && hasomen(OMEN_NOPRIEST))
+		var/drop_location = was_owner.drop_location()
+		if(!drop_location) //how the fuck?
+			return
 		ADD_TRAIT(was_owner, TRAIT_IWASHAUNTED, OMEN_NOPRIEST)
-		var/mob/living/simple_animal/hostile/rogue/haunt/omen/haunt = new(was_owner.drop_location())
+		var/mob/living/simple_animal/hostile/rogue/haunt/omen/haunt = new(drop_location)
 		var/haunt_name = real_name ? "omen of [real_name]" : "omen"
 		haunt.name = haunt_name
 		haunt.real_name = haunt_name
