@@ -70,7 +70,7 @@
 
 /obj/projectile/bullet/reusable/arrow/stone
 	name = "stone arrow"
-	ammo_type = /object/item/ammo_casing/caseless/rouge/arrow/stone
+	ammo_type = /obj/item/ammo_casing/caseless/rouge/arrow/stone
 
 /obj/item/ammo_casing/caseless/rogue/arrow/padded
 	name = "padded arrow"
