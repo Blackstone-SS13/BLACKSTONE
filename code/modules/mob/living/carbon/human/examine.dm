@@ -19,7 +19,7 @@
 //	var/t_him = p_them()
 	var/t_has = p_have()
 	var/t_is = p_are()
-	var/obscure_name
+	var/obscure_name = FALSE
 	var/race_name = dna.species.name
 	var/datum/antagonist/maniac/maniac = user.mind?.has_antag_datum(/datum/antagonist/maniac)
 	if(maniac && (user != src))
@@ -38,7 +38,7 @@
 		if(HAS_TRAIT(L, TRAIT_PROSOPAGNOSIA))
 			obscure_name = TRUE
 
-	if(name == "Unknown" || name == "Unknown Man" || name == "Unknown Woman")
+	if(!get_face_name(null))
 		obscure_name = TRUE
 
 	if(observer_privilege)
@@ -65,11 +65,14 @@
 		else
 			. = list("<span class='info'>ø ------------ ø\nThis is the <EM>[used_name]</EM>, the [race_name].")
 		
+		if(GLOB.lord_titles[name])
+			. += "<span class='notice'>[m3] been granted the title of \"[GLOB.lord_titles[name]]\".</span>"
+		
 		if(dna.species.use_skintones)
 			var/skin_tone_wording = dna.species.skin_tone_wording ? lowertext(dna.species.skin_tone_wording) : "skin tone"
 			var/list/skin_tones = dna.species.get_skin_list()
 			var/skin_tone_seen = "incomprehensible"
-			if(skin_tone)
+			if(!HAS_TRAIT(src, TRAIT_ROTMAN) && skin_tone)
 				//AGGHHHHH this is stupid
 				for(var/tone in skin_tones)
 					if(src.skin_tone == skin_tones[tone])
@@ -91,14 +94,15 @@
 
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
-			if(H.marriedto == real_name)
+			if(H.marriedto == name)
 				. += "<span class='love'>It's my spouse.</span>"
 
-		if(real_name in GLOB.excommunicated_players)
+		if(name in GLOB.excommunicated_players)
 			. += "<span class='userdanger'>HERETIC! SHAME!</span>"
 
-		if(real_name in GLOB.outlawed_players)
+		if(name in GLOB.outlawed_players)
 			. += "<span class='userdanger'>OUTLAW!</span>"
+		
 		if(mind)
 			if(mind.special_role == "Bandit")
 				. += "<span class='userdanger'>BANDIT!</span>"
@@ -245,7 +249,7 @@
 				msg += "<B>[m1] severely wounded.</B>"
 			if(100 to INFINITY)
 				msg += "<span class='danger'>[m1] gravely wounded.</span>"
-		
+
 	// Blood volume
 	switch(blood_volume)
 		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
@@ -295,6 +299,7 @@
 			else
 				msg += "<span class='bloody'>[m1] [bleed_wording]!</span>"
 
+	// Missing limbs
 	var/missing_head = FALSE
 	var/list/missing_limbs = list()
 	for(var/missing_zone in get_missing_limbs())
@@ -306,6 +311,8 @@
 		var/missing_limb_message = "<B>[capitalize(m2)] [english_list(missing_limbs)] [missing_limbs.len > 1 ? "are" : "is"] gone.</B>"
 		if(missing_head)
 			missing_limb_message = "<span class='dead'>[missing_limb_message]</span>"
+		else
+			missing_limb_message = "<span class='danger'>[missing_limb_message]</span>"
 		msg += missing_limb_message
 
 	//Grabbing
@@ -397,7 +404,7 @@
 			msg += "<span class='warning'>[m1] barely conscious.</span>"
 		else
 			if(stat >= UNCONSCIOUS)
-				msg += "[m1] unconscious."
+				msg += "[m1] [IsSleeping() ? "sleeping" : "unconscious"]."
 			else if(eyesclosed)
 				msg += "[capitalize(m2)] eyes are closed."
 			else if(has_status_effect(/datum/status_effect/debuff/sleepytime))
