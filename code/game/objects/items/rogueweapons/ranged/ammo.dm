@@ -68,6 +68,10 @@
 	flag = "bullet"
 	speed = 0.4
 
+/obj/projectile/bullet/reusable/arrow/stone
+	name = "stone arrow"
+	ammo_type = /object/item/ammo_casing/caseless/rouge/arrow/stone
+
 /obj/item/ammo_casing/caseless/rogue/arrow/padded
 	name = "padded arrow"
 	desc = "A wooden shaft with a padded sack at the end."
@@ -96,7 +100,7 @@
 	desc = "A wooden shaft with a jagged rock on the end."
 	icon_state = "stonearrow"
 	max_integrity = 5
-	projectile_type = /obj/projectile/bullet/reusable/arrow
+	projectile_type = /obj/projectile/bullet/reusable/arrow/stone
 
 /obj/item/ammo_casing/caseless/rogue/arrow/poison
 	name = "poisoned arrow"
