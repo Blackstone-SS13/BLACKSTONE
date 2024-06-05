@@ -81,12 +81,7 @@
 
 
 	var/datum/devotion/C = new /datum/devotion(H, H.patron)
-	//Max devotion limit - Paladins are stronger but cannot pray to gain all abilities beyond t1
-	C.max_devotion = 250
-	C.max_progression = CLERIC_REQ_1
-	C.update_devotion(50, 50)
-	C.holder_mob = H
-	C.grant_spells_templar(H)
+	C.grant_spells(H)
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
 
 /obj/item/clothing/cloak/stabard/crusader
