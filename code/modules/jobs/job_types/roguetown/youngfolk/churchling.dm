@@ -49,15 +49,6 @@
 	belt = /obj/item/storage/belt/rogue/leather/rope
 	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
 	backl = /obj/item/storage/backpack/rogue/backpack
-	backpack_contents = list(
-		/obj/item/needle = 1,
-		/obj/item/rogueweapon/surgery/scalpel = 1,
-		/obj/item/rogueweapon/surgery/saw = 1,
-		/obj/item/rogueweapon/surgery/hemostat = 2, //2 forceps so you can clamp bleeders AND manipulate organs
-		/obj/item/rogueweapon/surgery/retractor = 1,
-		/obj/item/rogueweapon/surgery/bonesetter = 1,
-		/obj/item/rogueweapon/surgery/cautery = 1,
-	)
 
 	H.change_stat("perception", 1)
 	H.change_stat("speed", 2)
