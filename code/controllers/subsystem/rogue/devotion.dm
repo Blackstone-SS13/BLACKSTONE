@@ -37,7 +37,7 @@
 
 /datum/devotion/New(mob/living/carbon/human/holder, datum/patron/patron)
 	. = ..()
-	holder = holder
+	src.holder = holder
 	holder?.devotion = src
 	src.patron = patron
 
@@ -99,7 +99,7 @@
 			continue
 		var/newspell = new spell_type
 		H.mind.AddSpell(newspell)
-		granted_spells += newspell
+		LAZYADD(granted_spells, newspell)
 	level = CLERIC_T1
 	update_devotion(50, 50)
 
@@ -113,7 +113,7 @@
 			continue
 		var/newspell = new spell_type
 		H.mind.AddSpell(newspell)
-		granted_spells += newspell
+		LAZYADD(granted_spells, newspell)
 	level = CLERIC_T0
 	max_devotion = CLERIC_REQ_1 //Max devotion limit - Paladins are stronger but cannot pray to gain all abilities beyond t1
 	max_progression = CLERIC_REQ_1
@@ -128,7 +128,7 @@
 			continue
 		var/newspell = new spell_type
 		H.mind.AddSpell(newspell)
-		granted_spells += newspell
+		LAZYADD(granted_spells, newspell)
 	level = CLERIC_T0
 	max_devotion = CLERIC_REQ_1 //Max devotion limit - Churchlings only get the t0 spell
 	max_progression = CLERIC_REQ_0
@@ -144,7 +144,7 @@
 			continue
 		var/newspell = new spell_type
 		H.mind.AddSpell(newspell)
-		granted_spells += newspell
+		LAZYADD(granted_spells, newspell)
 	level = CLERIC_T3
 	passive_devotion_gain = 1
 	update_devotion(300, CLERIC_REQ_3)
@@ -189,8 +189,11 @@
 			break
 		if(!do_after(src, 30))
 			break
-		devotion.update_devotion(devotion.prayer_effectiveness, devotion.prayer_effectiveness)
-		prayersesh += devotion.prayer_effectiveness
+		var/devotion_multiplier = 1
+		if(mind)
+			devotion_multiplier += (mind.get_skill_level(/datum/skill/magic/holy) / 6)
+		devotion.update_devotion(floor(devotion.prayer_effectiveness * devotion_multiplier), floor(devotion.prayer_effectiveness * devotion_multiplier))
+		prayersesh += floor(devotion.prayer_effectiveness * devotion_multiplier)
 	visible_message("[src] concludes their prayer.", "I conclude my prayer.")
 	to_chat(src, "<font color='purple'>I gained [prayersesh] devotion!</font>")
 	return TRUE
