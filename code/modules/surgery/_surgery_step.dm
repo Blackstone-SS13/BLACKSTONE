@@ -317,7 +317,10 @@
 		return TRUE
 	else if(failure(user, target, target_zone, tool, intent, success_prob))
 		if(user.client?.prefs.showrolls)
-			to_chat(user, "<span class='warning'>Surgery fail! [success_prob]%</span>")
+			if(try_to_fail)
+				to_chat(user, "<span class='warning'>Intentional surgery fail... [success_prob]%</span>")
+			else
+				to_chat(user, "<span class='warning'>Surgery fail... [success_prob]%</span>")
 		return FALSE
 		
 	return FALSE
