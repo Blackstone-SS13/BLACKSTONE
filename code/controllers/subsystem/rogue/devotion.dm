@@ -25,21 +25,20 @@
 	holder.devotion = src
 	patron = god
 
-/datum/devotion/proc/check_devotion(req)
-	if(abs(req) <= devotion)
-		return TRUE
-	return FALSE
+/datum/devotion/proc/check_devotion(obj/effect/proc_holder/spell/spell)
+	if(devotion - spell.devotion_cost < 0)
+		return FALSE
+	return TRUE
 
 /datum/devotion/proc/update_devotion(dev_amt, prog_amt)
 	var/datum/patron/P = patron
-	devotion += dev_amt
+	devotion = clamp(devotion + dev_amt, 0, max_devotion)
 	//Max devotion limit
-	if(devotion > max_devotion)
-		devotion = max_devotion
+	if(devotion >= max_devotion)
 		to_chat(holder_mob, "<span class='warning'>I have reached the limit of my devotion...</span>")
 	if(!prog_amt) // no point in the rest if it's just an expenditure
 		return
-	progression = min(progression + prog_amt, max_progression)
+	progression = clamp(progression + prog_amt, 0, max_progression)
 	var/obj/effect/spell_unlocked
 	switch(level)
 		if(CLERIC_T0)

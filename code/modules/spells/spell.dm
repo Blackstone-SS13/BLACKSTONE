@@ -295,8 +295,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 				to_chat(H, "<span class='warning'>I don't feel strong enough without your helmet.</span>")
 				return FALSE
 		if(miracle)
-			var/datum/devotion/D = H.devotion
-			if(!D.check_devotion(devotion_cost))
+			if(!H.devotion.check_devotion(src))
 				to_chat(H, "<span class='warning'>I don't have enough devotion!</span>")
 				return FALSE
 	else
@@ -409,37 +408,46 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 			recharging = FALSE
 
 /obj/effect/proc_holder/spell/proc/perform(list/targets, recharge = TRUE, mob/user = usr) //if recharge is started is important for the trigger spells
-	before_cast(targets)
+	before_cast(targets, user = user)
 	invocation(user)
 	if(user && user.ckey)
 		user.log_message("<span class='danger'>cast the spell [name].</span>", LOG_ATTACK)
 	if(recharge)
 		recharging = TRUE
-	if(cast(targets,user=user))
+	if(cast(targets, user = user))
 		start_recharge()
 		if(sound)
 			playMagSound()
-		after_cast(targets)
+		after_cast(targets, user = user)
 		if(action)
 			action.UpdateButtonIcon()
 		return TRUE
+	return FALSE
 
-/obj/effect/proc_holder/spell/proc/before_cast(list/targets)
-	if(overlay)
-		for(var/atom/target in targets)
-			var/location
-			if(isliving(target))
-				location = target.loc
-			else if(isturf(target))
-				location = target
-			var/obj/effect/overlay/spell = new /obj/effect/overlay(location)
-			spell.icon = overlay_icon
-			spell.icon_state = overlay_icon_state
-			spell.anchored = TRUE
-			spell.density = FALSE
-			QDEL_IN(spell, overlay_lifespan)
+/obj/effect/proc_holder/spell/proc/before_cast(list/targets, mob/user = usr)
+	if(!overlay)
+		return
+	for(var/atom/target in targets)
+		var/location
+		if(isliving(target))
+			location = target.loc
+		else if(isturf(target))
+			location = target
+		var/obj/effect/overlay/spell = new /obj/effect/overlay(location)
+		spell.icon = overlay_icon
+		spell.icon_state = overlay_icon_state
+		spell.anchored = TRUE
+		spell.density = FALSE
+		QDEL_IN(spell, overlay_lifespan)
 
-/obj/effect/proc_holder/spell/proc/after_cast(list/targets)
+/obj/effect/proc_holder/spell/proc/cast(list/targets, mob/user = usr)
+	if(miracle)
+		var/mob/living/carbon/human/C = user
+		var/datum/devotion/D = C.devotion
+		D.update_devotion(devotion_cost)
+	return TRUE
+
+/obj/effect/proc_holder/spell/proc/after_cast(list/targets, mob/user = usr)
 	for(var/atom/target in targets)
 		var/location
 		if(isliving(target))
@@ -463,14 +471,9 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 				var/datum/effect_system/smoke_spread/sleeping/smoke = new
 				smoke.set_up(smoke_amt, location)
 				smoke.start()
-
-
-/obj/effect/proc_holder/spell/proc/cast(list/targets,mob/user = usr)
-	if(miracle)
-		var/mob/living/carbon/human/C = user
-		var/datum/devotion/D = C.devotion
-		D.update_devotion(devotion_cost)
-	return
+	if(devotion_cost && ishuman(user))
+		var/mob/living/carbon/human/devotee = user
+		devotee.devotion?.update_devotion(-devotion_cost)
 
 /obj/effect/proc_holder/spell/proc/view_or_range(distance = world.view, center=usr, type="view")
 	switch(type)
