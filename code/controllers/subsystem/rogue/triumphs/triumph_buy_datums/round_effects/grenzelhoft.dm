@@ -19,10 +19,11 @@
 			continue
 		if(cur_datum == src)
 			continue
-		if(istype(cur_datum, /datum/triumph_buy/grenzelhoft_maximum))
+		if(istype(cur_datum, src.type))
 			found_duplicate = TRUE
 
-	if(!found_duplicate) // If we found a duplicate that isn't us, leave the call in
+	// We found no same type effects in there outside of us
+	if(!found_duplicate) 
 		SStriumphs.post_equip_calls.Remove(triumph_buy_id)
 
 /datum/triumph_buy/grenzelhoft_maximum/on_activate(mob/living/carbon/human/H)

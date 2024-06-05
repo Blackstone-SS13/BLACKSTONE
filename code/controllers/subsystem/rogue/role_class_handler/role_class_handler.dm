@@ -10,7 +10,7 @@ SUBSYSTEM_DEF(role_class_handler)
 	wait = 10
 	init_order = INIT_ORDER_ROLE_CLASS_HANDLER
 	priority = FIRE_PRIORITY_ROLE_CLASS_HANDLER
-	runlevels = RUNLEVEL_GAME
+	runlevels = RUNLEVEL_LOBBY|RUNLEVEL_GAME|RUNLEVEL_SETUP
 
 /*
 	a list of datums dedicated to helping handle a class selection session

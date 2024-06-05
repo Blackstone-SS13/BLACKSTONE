@@ -40,7 +40,7 @@
 	// Whether its time to update the browser table
 	var/queue_table_browser_update = FALSE
 	// String vars for display menus
-	var/drifter_queue_player_tbl_string = "DISABLED"
+	var/drifter_queue_player_tbl_string = ""
 	var/time_left_until_next_wave_string = "DISABLED"
 
 /*
@@ -50,9 +50,6 @@
 /datum/controller/subsystem/role_class_handler/fire(resumed = 0)
 	if(!drifter_queue_enabled)
 		can_fire = FALSE
-		return
-
-	if(drifter_queue_delayed)
 		return
 
 	if(!resumed)
@@ -91,7 +88,9 @@
 		queue_table_browser_update = FALSE
 
 	rebuild_drifter_time_string()
-// BRO DON'T FORGET TO REFACTOR CATEGORIES INTO STRINGS OR INTS OR SOME SHIT IN LISTS AND AUTOBUILD A CACHE VIA USING THAT AS KEYS
+
+	if(drifter_queue_delayed)
+		return
 
 	// It is time
 	if(world.time >= next_drifter_mass_release_time)

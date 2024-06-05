@@ -106,16 +106,15 @@
 	Just a proc that occurs a smidge before the MC gets its runlevel set to RUNLEVEL_GAME
 */
 /datum/controller/subsystem/role_class_handler/proc/RoundStart()
-	next_drifter_mass_release_time = world.time + 2 MINUTES
 	drifter_queue_delayed = FALSE
-	rebuild_drifter_time_string()
+	//rebuild_drifter_time_string()
 
-	for(var/cur_ckey in drifter_queue_menus)
-		var/datum/drifter_queue_menu/cur_menu = drifter_queue_menus[cur_ckey]
-		if(!cur_menu.linked_client)
-			drifter_queue_menus.Remove(cur_ckey)
-			qdel(cur_menu)
-			continue
+	//for(var/cur_ckey in drifter_queue_menus)
+	//	var/datum/drifter_queue_menu/cur_menu = drifter_queue_menus[cur_ckey]
+	//	if(!cur_menu.linked_client)
+	//		drifter_queue_menus.Remove(cur_ckey)
+	//		qdel(cur_menu)
+	//		continue
 
-		cur_menu.show_drifter_queue_menu()
+	//	cur_menu.show_drifter_queue_menu()
 			
