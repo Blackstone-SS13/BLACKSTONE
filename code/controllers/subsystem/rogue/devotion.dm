@@ -15,7 +15,7 @@
 	var/holder_mob = null
 	var/patron = null
 	var/devotion = 0
-	var/max_devotion = 1000
+	var/max_devotion = CLERIC_REQ_3 * 2
 	var/progression = 0
 	var/max_progression = CLERIC_REQ_3
 	var/level = CLERIC_T0
