@@ -118,6 +118,21 @@
 	max_devotion = CLERIC_REQ_1 //Max devotion limit - Paladins are stronger but cannot pray to gain all abilities beyond t1
 	max_progression = CLERIC_REQ_1
 
+/datum/devotion/proc/grant_spells_churchling(mob/living/carbon/human/H)
+	if(!H || !H.mind || !patron)
+		return
+
+	var/list/spelllist = list(patron.t0)
+	for(var/spell_type in spelllist)
+		if(!spell_type || H.mind.has_spell(spell_type))
+			continue
+		var/newspell = new spell_type
+		H.mind.AddSpell(newspell)
+		granted_spells += newspell
+	level = CLERIC_T0
+	max_devotion = CLERIC_REQ_1 //Max devotion limit - Churchlings only get the t0 spell
+	max_progression = CLERIC_REQ_0
+
 /datum/devotion/proc/grant_spells_priest(mob/living/carbon/human/H)
 	if(!H || !H.mind || !patron)
 		return
@@ -132,7 +147,7 @@
 		granted_spells += newspell
 	level = CLERIC_T3
 	passive_devotion_gain = 1
-	update_devotion(300, 900)
+	update_devotion(300, CLERIC_REQ_3)
 	START_PROCESSING(SSobj, src)
 
 // Debug verb
