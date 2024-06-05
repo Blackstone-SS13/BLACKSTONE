@@ -19,6 +19,7 @@
 	var/progression = 0
 	var/max_progression = CLERIC_REQ_3
 	var/level = CLERIC_T0
+	var/prayer_effectiveness = 2 //how much devotion is gained per prayer cycle
 
 /datum/devotion/New(mob/living/carbon/human/holder, god)
 	holder_mob = holder
@@ -131,8 +132,8 @@
 			if(C.devotion >= C.max_devotion)
 				to_chat(src, "<font color='red'>I have reached the limit of my devotion...</font>")
 				break
-			C.update_devotion(2, 2)
-			prayersesh += 2
+			C.update_devotion(prayer_effectiveness, prayer_effectiveness)
+			prayersesh += prayer_effectiveness
 		else
 			visible_message("[src] concludes their prayer.", "I conclude my prayer.")
 			to_chat(src, "<font color='purple'>I gained [prayersesh] devotion!</font>")
