@@ -98,7 +98,7 @@
 	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
