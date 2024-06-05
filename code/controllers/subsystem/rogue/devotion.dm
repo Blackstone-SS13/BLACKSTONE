@@ -12,7 +12,7 @@
 // Cleric Holder Datums
 
 /datum/devotion
-	var/holder_mob = null
+	var/mob/holder_mob = null
 	var/patron = null
 	var/devotion = 0
 	var/max_devotion = CLERIC_REQ_3 * 2
