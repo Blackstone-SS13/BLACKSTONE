@@ -63,9 +63,5 @@
 	H.change_stat("speed", 2)
 
 	var/datum/devotion/C = new /datum/devotion(H, H.patron)
-	//Max devotion limit - Churchlings can only call upon lesser miracles until their education is complete.
-	C.max_devotion = 100
-	C.max_progression = CLERIC_REQ_0
-	C.update_devotion(50, 50)
-	C.holder_mob = H
+	C.grant_spells_churchling(H)
 	H.verbs += list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray)
