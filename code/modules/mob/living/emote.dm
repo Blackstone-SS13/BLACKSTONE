@@ -46,7 +46,7 @@
 /mob/living/proc/check_prayer(mob/living/L,message)
 	if(!L || !message)
 		return FALSE
-	var/list/bannedwords = list("cock","dick","fuck","pussy","cuck","fucker","fucked","cunt")
+	var/list/bannedwords = list("cock","dick","fuck","pussy","cuck","fucker","fucked","cunt","bitch")
 	var/message2recognize = sanitize_hear_message(message)
 	var/mob/living/carbon/human/M = L
 	for(var/T in bannedwords)
