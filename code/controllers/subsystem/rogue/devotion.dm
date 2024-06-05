@@ -22,7 +22,7 @@
 
 /datum/devotion/New(mob/living/carbon/human/holder, god)
 	holder_mob = holder
-	holder.cleric = src
+	holder.devotion = src
 	patron = god
 
 /datum/devotion/proc/check_devotion(req)
@@ -101,7 +101,7 @@
 	set name = "Check Devotion"
 	set category = "Cleric"
 
-	var/datum/devotion/C = src.cleric
+	var/datum/devotion/C = src.devotion
 	to_chat(src,"My devotion is [C.devotion].")
 
 // Debug verb
@@ -109,7 +109,7 @@
 	set name = "(DEBUG)Change Devotion"
 	set category = "Special Verbs"
 
-	var/datum/devotion/C = src.cleric
+	var/datum/devotion/C = src.devotion
 	var/changeamt = input(src, "My devotion is [C.devotion]. How much to change?", "How much to change?") as null|num
 	if(!changeamt)
 		return
@@ -121,7 +121,7 @@
 	set name = "Give Prayer"
 	set category = "Cleric"
 	
-	var/datum/devotion/C = src.cleric
+	var/datum/devotion/C = src.devotion
 	var/prayersesh = 0
 
 	visible_message("[src] kneels their head in prayer to the Gods.", "I kneel my head in prayer to [patron.name]")
