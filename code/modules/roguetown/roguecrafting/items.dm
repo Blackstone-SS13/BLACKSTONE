@@ -380,3 +380,4 @@
 				/obj/item/natural/fibers = 3)
 	verbage_simple = "stuff together"
 	verbage = "stuff together"
+	craftdiff = 1
