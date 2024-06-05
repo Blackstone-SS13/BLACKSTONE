@@ -14,7 +14,7 @@
 	antimagic_allowed = TRUE
 	charge_max = 5 SECONDS //very stupidly simple spell
 	miracle = TRUE
-	devotion_cost = 5
+	devotion_cost = 5 //come on, this is very basic
 
 /obj/effect/proc_holder/spell/invoked/diagnose/cast(list/targets, mob/living/user)
 	if(ishuman(targets[1]))

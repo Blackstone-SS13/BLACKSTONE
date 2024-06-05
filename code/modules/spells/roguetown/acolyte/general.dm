@@ -13,9 +13,11 @@
 	associated_skill = /datum/skill/magic/holy
 	antimagic_allowed = TRUE
 	charge_max = 10 SECONDS
-	devotion_cost = 20
+	miracle = TRUE
+	devotion_cost = 25
 
 /obj/effect/proc_holder/spell/invoked/lesser_heal/cast(list/targets, mob/living/user)
+	. = ..()
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
 		if(user.patron?.undead_hater && (target.mob_biotypes & MOB_UNDEAD)) //positive energy harms the undead
@@ -94,9 +96,10 @@
 	antimagic_allowed = TRUE
 	charge_max = 20 SECONDS
 	miracle = TRUE
-	devotion_cost = 40
+	devotion_cost = 50
 
 /obj/effect/proc_holder/spell/invoked/heal/cast(list/targets, mob/living/user)
+	. = ..()
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
 		if(user.patron?.undead_hater && (target.mob_biotypes & MOB_UNDEAD)) //positive energy harms the undead

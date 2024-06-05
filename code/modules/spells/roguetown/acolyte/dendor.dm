@@ -50,7 +50,7 @@
 		if(B.aggressive)
 			tamed = TRUE
 		B.aggressive = 0
-	return TRUE
+	return tamed
 
 /obj/effect/proc_holder/spell/targeted/conjure_glowshroom
 	name = "Fungal Illumination"

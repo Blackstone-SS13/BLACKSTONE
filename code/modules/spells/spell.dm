@@ -228,7 +228,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 /obj/effect/proc_holder/spell/proc/cast_check(skipcharge = 0, mob/user = usr) //checks if the spell can be cast based on its settings; skipcharge is used when an additional cast_check is called inside the spell
 	if(player_lock)
 		if(!user.mind || !(src in user.mind.spell_list) && !(src in user.mob_spell_list))
-			to_chat(user, "<span class='warning'>I shouldn't have this spell! Something's wrong.</span>")
+			to_chat(user, "<span class='warning'>I shouldn't have this spell! Something's wrong...</span>")
 			return FALSE
 	else
 		if(!(src in user.mob_spell_list))
@@ -246,29 +246,28 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 			return FALSE
 
 	if(user.stat && !stat_allowed)
-		to_chat(user, "<span class='warning'>Not when you're incapacitated!</span>")
+		to_chat(user, "<span class='warning'>Not when I am incapacitated!</span>")
 		return FALSE
 
 	if(!ignore_cockblock && HAS_TRAIT(user, TRAIT_SPELLCOCKBLOCK))
+		to_chat(user, "<span class='warning'>I can't cast spells!</span>")
 		return FALSE
 	
 	if(!antimagic_allowed)
 		var/antimagic = user.anti_magic_check(TRUE, FALSE, FALSE, 0, TRUE)
 		if(antimagic)
-			if(isitem(antimagic))
-				to_chat(user, "<span class='notice'>[antimagic] is interfering with your magic.</span>")
+			if(isatom(antimagic))
+				to_chat(user, "<span class='notice'>[antimagic] is interfering with my magic.</span>")
 			else
 				to_chat(user, "<span class='warning'>Magic seems to flee from you, you can't gather enough power to cast this spell.</span>")
 			return FALSE
 
 	if(!phase_allowed && istype(user.loc, /obj/effect/dummy))
-		to_chat(user, "<span class='warning'>[name] cannot be cast unless you are completely manifested in the material plane!</span>")
+		to_chat(user, "<span class='warning'>[name] cannot be cast unless I am completely manifested in the material plane!</span>")
 		return FALSE
 
 	if(ishuman(user))
-
 		var/mob/living/carbon/human/H = user
-
 		if((invocation_type == "whisper" || invocation_type == "shout") && !H.can_speak_vocal())
 			to_chat(user, "<span class='warning'>I can't get the words out!</span>")
 			return FALSE
@@ -294,10 +293,9 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 			if(!istype(H.head, /obj/item/clothing/head/magus) && !istype(H.head, /obj/item/clothing/head/helmet/space/hardsuit/cult))
 				to_chat(H, "<span class='warning'>I don't feel strong enough without your helmet.</span>")
 				return FALSE
-		if(miracle)
-			if(!H.devotion.check_devotion(src))
-				to_chat(H, "<span class='warning'>I don't have enough devotion!</span>")
-				return FALSE
+		if(miracle && !H.devotion?.check_devotion(src))
+			to_chat(H, "<span class='warning'>I don't have enough devotion!</span>")
+			return FALSE
 	else
 		if(clothes_req || human_req)
 			to_chat(user, "<span class='warning'>This spell can only be cast by humans!</span>")
@@ -441,10 +439,6 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 		QDEL_IN(spell, overlay_lifespan)
 
 /obj/effect/proc_holder/spell/proc/cast(list/targets, mob/user = usr)
-	if(miracle)
-		var/mob/living/carbon/human/C = user
-		var/datum/devotion/D = C.devotion
-		D.update_devotion(devotion_cost)
 	return TRUE
 
 /obj/effect/proc_holder/spell/proc/after_cast(list/targets, mob/user = usr)
@@ -474,6 +468,7 @@ GLOBAL_LIST_INIT(spells, typesof(/obj/effect/proc_holder/spell)) //needed for th
 	if(devotion_cost && ishuman(user))
 		var/mob/living/carbon/human/devotee = user
 		devotee.devotion?.update_devotion(-devotion_cost)
+		to_chat(devotee, "<font color='purple'>I [devotion_cost > 0 ? "lost" : "gained"] [abs(devotion_cost)] devotion.</font>")
 
 /obj/effect/proc_holder/spell/proc/view_or_range(distance = world.view, center=usr, type="view")
 	switch(type)

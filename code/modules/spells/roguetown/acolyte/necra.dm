@@ -13,7 +13,7 @@
 	invocation = "Undermaiden grant thee passage forth and spare the trials of the forgotten."
 	invocation_type = "whisper" //can be none, whisper, emote and shout
 	miracle = TRUE
-	devotion_cost = 10
+	devotion_cost = 10 //very weak spell, you can just make a grave marker with a literal stick
 
 /obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets, mob/user = usr)
 	. = ..()
