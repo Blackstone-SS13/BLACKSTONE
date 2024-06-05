@@ -23,7 +23,7 @@
 	/// How much blood we waste away on process()
 	var/drainage = 1
 	/// How much blood we suck on on_embed_life()
-	var/blood_sucking = 2
+	var/blood_sucking = 1
 	/// How much toxin damage we heal on on_embed_life()
 	var/toxin_healing = -2
 	/// Amount of blood we have stored
