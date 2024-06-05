@@ -369,9 +369,6 @@
 			success_prob *= (implements[implement_type]/100) || 1
 	success_prob *= get_location_modifier(target)
 	success_prob *= get_skill_modifier(user, target, target_zone, tool, intent)
-	//even if lying is not required, not lying down does you no good
-	if(target.mobility_flags & MOBILITY_STAND)
-		success_prob *= 0.8
 
 	return success_prob
 
@@ -391,6 +388,15 @@
 
 /datum/surgery_step/proc/get_location_modifier(mob/living/target)
 	var/turf/patient_turf = get_turf(target)
+	var/is_lying = !(target.mobility_flags & MOBILITY_STAND)
+	if(!is_lying)
+		return 0.6
+	if(locate(/obj/structure/bed) in patient_turf)
+		return 1
+	else if(locate(/obj/structure/table) in patient_turf)
+		return 0.8
+	return 0.7
+	/*
 	if(locate(/obj/structure/table/optable) in patient_turf)
 		return 1
 	else if(locate(/obj/machinery/stasis) in patient_turf)
@@ -400,3 +406,4 @@
 	else if(locate(/obj/structure/bed) in patient_turf)
 		return 0.7
 	return 0.5
+	*/
