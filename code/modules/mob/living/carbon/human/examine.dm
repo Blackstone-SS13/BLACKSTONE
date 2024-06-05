@@ -38,7 +38,7 @@
 		if(HAS_TRAIT(L, TRAIT_PROSOPAGNOSIA))
 			obscure_name = TRUE
 
-	if(!get_face_name(null))
+	if(!get_face_name(if_no_face = null))
 		obscure_name = TRUE
 
 	if(observer_privilege)
