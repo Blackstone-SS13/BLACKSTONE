@@ -37,19 +37,17 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, round(rand(3,5)), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, round(rand(3,5)), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
+	neck = /obj/item/clothing/neck/roguetown/psicross
 	if(H.gender == MALE)
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		pants = /obj/item/clothing/under/roguetown/tights
-		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
 		armor = /obj/item/clothing/suit/roguetown/shirt/robe
-	else
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
-		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
-		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
-		belt = /obj/item/storage/belt/rogue/leather/rope
-		pants = /obj/item/clothing/under/roguetown/tights
+	else
 		head = /obj/item/clothing/head/roguetown/armingcap
+		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
+		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
+	pants = /obj/item/clothing/under/roguetown/tights
+	belt = /obj/item/storage/belt/rogue/leather/rope
+	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
 	backl = /obj/item/storage/backpack/rogue/backpack
 	backpack_contents = list(
 		/obj/item/needle = 1,
