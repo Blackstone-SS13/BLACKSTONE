@@ -407,7 +407,7 @@
 					if(H.mind)
 						prob2defend = prob2defend + (H.mind.get_skill_level(/datum/skill/combat/unarmed) * 10)
 		// dodging while knocked down sucks ass
-		if(!(mobility_flags & MOBILITY_STAND))
+		if(!(L.mobility_flags & MOBILITY_STAND))
 			prob2defend *= 0.25
 		prob2defend = clamp(prob2defend, 5, 90)
 		if(client?.prefs.showrolls)
