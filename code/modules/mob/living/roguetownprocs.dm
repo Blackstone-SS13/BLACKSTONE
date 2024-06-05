@@ -185,6 +185,9 @@
 					attacker_skill = U.mind.get_skill_level(/datum/skill/combat/unarmed)
 					prob2defend -= (attacker_skill * 20)
 
+			// parrying while knocked down sucks ass
+			if(!(mobility_flags & MOBILITY_STAND))
+				prob2defend *= 0.65
 			prob2defend = clamp(prob2defend, 5, 90)
 			if(src.client?.prefs.showrolls)
 				to_chat(src, "<span class='info'>Roll to parry... [prob2defend]%</span>")
@@ -343,7 +346,7 @@
 
 
 /mob/proc/do_dodge(mob/user, turf/turfy)
-	if(!dodgecd)
+	if(dodgecd)
 		return FALSE
 	var/mob/living/L = src
 	var/mob/living/U = user
@@ -403,6 +406,9 @@
 						prob2defend = prob2defend - (UH.mind.get_skill_level(/datum/skill/combat/unarmed) * 10)
 					if(H.mind)
 						prob2defend = prob2defend + (H.mind.get_skill_level(/datum/skill/combat/unarmed) * 10)
+		// dodging while knocked down sucks ass
+		if(!(mobility_flags & MOBILITY_STAND))
+			prob2defend *= 0.25
 		prob2defend = clamp(prob2defend, 5, 90)
 		if(client?.prefs.showrolls)
 			to_chat(src, "<span class='info'>Roll to dodge... [prob2defend]%</span>")
@@ -424,7 +430,7 @@
 		src.visible_message("<span class='warning'><b>[src]</b> dodges [user]'s attack!</span>")
 	else
 		src.visible_message("<span class='warning'><b>[src]</b> easily dodges [user]'s attack!</span>")
-	dodgecd = null
+	dodgecd = FALSE
 //		if(H)
 //			if(H.IsOffBalanced())
 //				H.Knockdown(1)
