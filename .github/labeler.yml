@@ -1,14 +1,4 @@
-Spriting:
-- icons/**
-
-Mapping:
-  - _maps/**
-
 documentation:
-  - .github/**
-  - README.md
-
-Balance:
-  - code/modules/jobs/job_types/roguetown/**
-  - code/modules/clothing/rogueclothes/**
-  - code/game/objects/items/rogueweapons/**
+- changed-files:
+  - any-glob-to-any-file:
+    - .github/**
