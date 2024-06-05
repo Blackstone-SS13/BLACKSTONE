@@ -1,7 +1,8 @@
 
 /obj/machinery/light/rogue/forge
 	icon = 'icons/roguetown/misc/forge.dmi'
-	name = "forge"
+	name = "stone forge"
+	desc = "This forge sings of war and creation."
 	icon_state = "forge0"
 	base_state = "forge"
 	density = TRUE
@@ -20,4 +21,4 @@
 			T.update_icon()
 			user.visible_message("<span class='info'>[user] heats the bar.</span>")
 			return
-	..()
+	return ..()

@@ -3,7 +3,7 @@
 	force = 21
 	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
 	name = "hammer"
-	desc = ""
+	desc = "Each strikes reverberate loudly chanting war!"
 	icon_state = "hammer"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	sharpness = IS_BLUNT
@@ -128,7 +128,7 @@
 	force = 10
 	possible_item_intents = list(/datum/intent/mace/strike)
 	name = "tongs"
-	desc = ""
+	desc = "A pair of iron jaws used to carry hot ingots."
 	icon_state = "tongs"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	sharpness = IS_BLUNT
@@ -140,7 +140,24 @@
 	var/hott = FALSE
 	smeltresult = /obj/item/ingot/iron
 
+/obj/item/rogueweapon/tongs/examine(mob/user)
+	. = ..()
+	if(hott)
+		. += "<span class='warning'>The tip is hot to the touch.</span>"
+
+/obj/item/rogueweapon/tongs/get_temperature()
+	if(hott)
+		return FIRE_MINIMUM_TEMPERATURE_TO_SPREAD
+	return ..()
+
+/obj/item/rogueweapon/tongs/fire_act(added, maxstacks)
+	. = ..()
+	hott = world.time
+	update_icon()
+	addtimer(CALLBACK(src, PROC_REF(make_unhot), world.time), 10 SECONDS)
+
 /obj/item/rogueweapon/tongs/update_icon()
+	. = ..()
 	if(!hingot)
 		icon_state = "tongs"
 	else
@@ -162,7 +179,7 @@
 			update_icon()
 
 /obj/item/rogueweapon/tongs/dropped()
-	..()
+	. = ..()
 	if(hingot)
 		hingot.forceMove(get_turf(src))
 		hingot = null

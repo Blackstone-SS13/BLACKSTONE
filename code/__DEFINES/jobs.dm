@@ -53,7 +53,7 @@
 #define JOB_UNAVAILABLE_WTEAM 8
 #define JOB_UNAVAILABLE_LASTCLASS 9
 #define JOB_UNAVAILABLE_PATRON 10
-#define JOB_UNAVAILABLE_ADVENTURER_COOLDOWN 11
+#define JOB_UNAVAILABLE_JOB_COOLDOWN 11
 
 #define DEFAULT_RELIGION "Christianity"
 #define DEFAULT_DEITY "Space Jesus"
@@ -121,6 +121,7 @@
 #define MONK		(1<<3)
 #define GRAVEDIGGER	(1<<4)
 #define CONFESSOR	(1<<5)
+#define DRUID		(1<<6)
 
 #define COURTIERS	(1<<3)
 
@@ -236,6 +237,7 @@
 #define JDO_PURITAN 11
 #define JDO_TEMPLAR 12
 #define JDO_MONK 13
+#define JDO_DRUID 13.1
 #define JDO_CHURCHLING 14
 #define JDO_GRAVEMAN 15
 #define JDO_SHEPHERD 16

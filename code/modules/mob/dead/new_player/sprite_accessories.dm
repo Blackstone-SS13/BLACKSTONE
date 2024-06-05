@@ -316,6 +316,12 @@
 	gender = FEMALE
 	specuse = list("humen", "dwarfm", "tiefling", "halforkf")
 
+/datum/sprite_accessory/hair/fsinglebraid
+	name = "Single Braid"
+	icon_state = "fhair_singlebraid"
+	gender = FEMALE
+	specuse = list("humen", "dwarfm", "aasimar", "helf")
+
 /datum/sprite_accessory/hair/fbuns
 	name = "Loose Braid"
 	icon_state = "fhair_tressshoulder"
@@ -339,6 +345,13 @@
 	icon_state = "fhair_bob2"
 	gender = FEMALE
 	specuse = list("humen", "dwarfm", "tiefling", "aasimar")
+
+/datum/sprite_accessory/hair/fpolite
+	name = "Polite"
+	icon_state = "fhair_kepthair"
+	gender = FEMALE
+	specuse = list("humen", "dwarfm", "aasimar", "held")
+
 /datum/sprite_accessory/hair/fpix
 	name = "Pixie"
 	icon_state = "fhair_pixie"

@@ -1,11 +1,12 @@
 
 /obj/machinery/anvil
 	icon = 'icons/roguetown/misc/forge.dmi'
-	name = "anvil"
+	name = "iron anvil"
+	desc = "It's surface is marred by countless hammer strikes."
 	icon_state = "anvil"
 	var/hott = null
 	var/obj/item/ingot/hingot
-	max_integrity = 2000
+	max_integrity = 500
 	density = TRUE
 	damage_deflection = 25
 	climbable = TRUE
@@ -13,6 +14,11 @@
 
 /obj/machinery/anvil/crafted
 	icon_state = "caveanvil"
+
+/obj/machinery/anvil/examine(mob/user)
+	. = ..()
+	if(hingot && hott)
+		. += "<span class='warning'>[hingot] is too hot to touch.</span>"
 
 /obj/machinery/anvil/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/rogueweapon/tongs))

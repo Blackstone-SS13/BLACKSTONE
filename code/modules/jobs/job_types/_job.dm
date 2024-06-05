@@ -113,6 +113,15 @@
 	/// This job uses adventurer classes on examine
 	var/advjob_examine = FALSE
 
+	/// This job always shows on latechoices
+	var/always_show_on_latechoices = FALSE
+
+	/// Cooldown for joining as this job again, if it was your last job
+	var/same_job_respawn_delay = FALSE
+
+	/// This job re-opens slots if someone dies as it
+	var/job_reopens_slots_on_death = FALSE
+
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
 
@@ -135,10 +144,9 @@
 		for(var/i in roundstart_experience)
 			experiencer.mind.adjust_experience(i, roundstart_experience[i], TRUE)
 
-	if(spells)		
+	if(spells && H.mind)	
 		for(var/S in spells)
-			if(H.mind)
-				H.mind.AddSpell(new S)
+			H.mind.AddSpell(new S)
 
 	if(H.gender == FEMALE)
 		if(jobstats_f)

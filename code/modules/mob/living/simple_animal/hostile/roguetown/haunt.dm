@@ -80,9 +80,9 @@
 			return "body"
 		if(BODY_ZONE_PRECISE_GROIN)
 			return "body"
-		if(BODY_ZONE_R_INHAND)
+		if(BODY_ZONE_PRECISE_R_INHAND)
 			return "body"
-		if(BODY_ZONE_L_INHAND)
+		if(BODY_ZONE_PRECISE_L_INHAND)
 			return "body"
 		if(BODY_ZONE_HEAD)
 			return "head"
@@ -98,6 +98,12 @@
 			return "chest"
 
 	return ..()
+
+/mob/living/simple_animal/hostile/rogue/haunt/omen
+	name = "omen"
+	desc = "A vengeful spirit!"
+	maxHealth = 100
+	health = 100
 
 /obj/structure/bonepile
 	icon = 'icons/roguetown/mob/monster/wraith.dmi'

@@ -1139,6 +1139,12 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			brazil.random_character(ligga)
 			ligga.fully_replace_character_name(ligga.real_name, old_name)
 			ligga.regenerate_icons()
+			var/static/list/bad_slots = list(
+				SLOT_HEAD,
+				SLOT_SHOES,
+			)
+			for(var/slot in bad_slots)
+				ligga.dropItemToGround(ligga.get_item_by_slot(slot))
 			to_chat(ligga, "<span class='userdanger'>I have been sent to <span class='green'>Brazil</span>!</span>")
 		if(ADMIN_PUNISHMENT_CBT)
 			if(!ishuman(target))
@@ -1149,7 +1155,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			if(!affecting)
 				to_chat(usr,"<span class='warning'>Target must have a chest!</span>")
 				return
-			affecting.add_wound(/datum/wound/cbt/smite)
+			affecting.add_wound(/datum/wound/cbt/permanent)
 		if(ADMIN_PUNISHMENT_NECKSNAP)
 			if(!ishuman(target))
 				to_chat(usr,"<span class='warning'>Target must be human!</span>")

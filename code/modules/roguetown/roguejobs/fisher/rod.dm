@@ -2,7 +2,7 @@
 	force = 12
 	possible_item_intents = list(SPEAR_BASH,ROD_CAST)
 	name = "fishing rod"
-	desc = ""
+	desc = "Made from weathered wood and coarse twine. The tool of the battle against the dark waters below."
 	icon_state = "rod"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	sharpness = IS_BLUNT
@@ -32,18 +32,8 @@
 		user.visible_message("<span class='notice'>[user] hooks something to the line.</span>", \
 							"<span class='notice'>I hook [I] to my line.</span>")
 		playsound(src.loc, 'sound/foley/pierce.ogg', 50, FALSE)
-		if(istype(I,/obj/item/natural/worms))
-			var/obj/item/natural/worms/W = I
-			if(W.amt > 1)
-				W.amt--
-				var/obj/item/natural/worms/N = new W.type(src)
-				baited = N
-			else
-				W.forceMove(src)
-				baited = W
-		else
-			I.forceMove(src)
-			baited = I
+		I.forceMove(src)
+		baited = I
 		update_icon()
 		return
 	. = ..()
