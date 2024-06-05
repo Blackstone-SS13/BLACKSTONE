@@ -67,14 +67,7 @@
 			H.change_stat("perception", 1) // More intelligence and no speed penalty for Life Clerics.
 			H.change_stat("strength", 1)
 			H.change_stat("constitution", 2)
-			H.change_stat("endurance", 2) 
-			if(prob(50))
-				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/churn)
-			else if(prob(50))
-				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/beasttame)
-			else
-				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/soulspeak)
-				H.mind.AddSpell(new /obj/effect/proc_holder/spell/targeted/churn)
+			H.change_stat("endurance", 2)
 		if("War Cleric")
 			H.set_blindness(0)
 			to_chat(H, "<span class='warning'>You are a cleric of the war domain. Experienced in both the granting of life and the taking of it. Unfortunately your study of warcraft has weakened your divine abilities...</span>")

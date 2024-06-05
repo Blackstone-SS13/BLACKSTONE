@@ -12,7 +12,7 @@
 // Cleric Holder Datums
 
 /datum/devotion
-	var/holder_mob = null
+	var/mob/holder_mob = null
 	var/patron = null
 	var/devotion = 0
 	var/max_devotion = CLERIC_REQ_3 * 2
@@ -25,39 +25,40 @@
 	holder.devotion = src
 	patron = god
 
-/datum/devotion/proc/check_devotion(req)
-	if(abs(req) <= devotion)
-		return TRUE
-	return FALSE
+/datum/devotion/proc/check_devotion(obj/effect/proc_holder/spell/spell)
+	if(devotion - spell.devotion_cost < 0)
+		return FALSE
+	return TRUE
 
 /datum/devotion/proc/update_devotion(dev_amt, prog_amt)
 	var/datum/patron/P = patron
-	devotion += dev_amt
+	devotion = clamp(devotion + dev_amt, 0, max_devotion)
 	//Max devotion limit
-	if(devotion > max_devotion)
-		devotion = max_devotion
+	if(devotion >= max_devotion)
 		to_chat(holder_mob, "<span class='warning'>I have reached the limit of my devotion...</span>")
 	if(!prog_amt) // no point in the rest if it's just an expenditure
-		return
-	progression = min(progression + prog_amt, max_progression)
+		return TRUE
+	progression = clamp(progression + prog_amt, 0, max_progression)
 	var/obj/effect/spell_unlocked
 	switch(level)
 		if(CLERIC_T0)
 			if(progression >= CLERIC_REQ_1)
-				level = CLERIC_T1
 				spell_unlocked = P.t1
+				level = CLERIC_T1
 		if(CLERIC_T1)
 			if(progression >= CLERIC_REQ_2)
-				level = CLERIC_T2
 				spell_unlocked = P.t2
+				level = CLERIC_T2
 		if(CLERIC_T2)
 			if(progression >= CLERIC_REQ_3)
-				level = CLERIC_T3
 				spell_unlocked = P.t3
-	if(spell_unlocked && !usr.mind.has_spell(spell_unlocked))
-		spell_unlocked = new spell_unlocked
-		to_chat(holder_mob, "<span class='boldnotice'>I have unlocked a new spell: [spell_unlocked]</font>")
-		usr.mind.AddSpell(spell_unlocked)
+				level = CLERIC_T3
+	if(!spell_unlocked || !holder_mob?.mind || holder_mob.mind.has_spell(spell_unlocked, specific = FALSE))
+		return TRUE
+	spell_unlocked = new spell_unlocked
+	to_chat(holder_mob, "<span class='boldnotice'>I have unlocked a new spell: [spell_unlocked]</span>")
+	usr.mind.AddSpell(spell_unlocked)
+	return TRUE
 
 // Cleric Spell Spawner
 /datum/devotion/proc/grant_spells_priest(mob/living/carbon/human/H)
@@ -124,7 +125,7 @@
 	var/datum/devotion/C = src.devotion
 	var/prayersesh = 0
 
-	visible_message("[src] kneels their head in prayer to the Gods.", "I kneel my head in prayer to [patron.name]")
+	visible_message("[src] kneels their head in prayer to the Gods.", "I kneel my head in prayer to [patron.name].")
 	for(var/i in 1 to 20)
 		if(do_after(src, 30))
 			if(C.devotion >= C.max_devotion)
