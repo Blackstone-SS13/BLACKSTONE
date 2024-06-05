@@ -2057,7 +2057,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/stander = TRUE
 	if(!(target.mobility_flags & MOBILITY_STAND))
 		stander = FALSE
-	if(user.loc == target.loc)
+	if(!get_dist(user, target))
 		if(!stander && (user.mobility_flags & MOBILITY_STAND))
 			target.lastattacker = user.real_name
 			target.lastattackerckey = user.ckey
