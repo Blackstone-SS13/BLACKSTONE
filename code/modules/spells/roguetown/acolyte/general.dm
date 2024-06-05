@@ -18,7 +18,7 @@
 /obj/effect/proc_holder/spell/invoked/lesser_heal/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
-		if(user.patron.undead_hater && (target.mob_biotypes & MOB_UNDEAD)) //positive energy harms the undead
+		if(user.patron?.undead_hater && (target.mob_biotypes & MOB_UNDEAD)) //positive energy harms the undead
 			target.visible_message("<span class='danger'>[target] is burned by holy light!</span>", "<span class='userdanger'>I'm burned by holy light!</span>")
 			target.adjustFireLoss(50)
 			target.Paralyze(30)
@@ -99,7 +99,7 @@
 /obj/effect/proc_holder/spell/invoked/heal/cast(list/targets, mob/living/user)
 	if(isliving(targets[1]))
 		var/mob/living/target = targets[1]
-		if(target.mob_biotypes & MOB_UNDEAD) //positive energy harms the undead
+		if(user.patron?.undead_hater && (target.mob_biotypes & MOB_UNDEAD)) //positive energy harms the undead
 			target.visible_message("<span class='danger'>[target] is burned by holy light!</span>", "<span class='userdanger'>I'm burned by holy light!</span>")
 			target.adjustFireLoss(100)
 			target.Paralyze(50)
