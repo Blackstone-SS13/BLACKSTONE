@@ -578,7 +578,7 @@ GLOBAL_LIST_EMPTY(asset_datums)
 	verify = FALSE
 	assets = list(
 		"slop_menustyle4.css" = 'html/browser/slop_menustyle4.css',
-		"slop_scriptstyle4.js" = 'html/browser/slop_scriptstyle4.js'
+		//"slop_scriptstyle4.js" = 'html/browser/slop_scriptstyle4.js'
 	)
 
 /datum/asset/simple/roguefonts

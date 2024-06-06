@@ -32,8 +32,8 @@
 	var/drifter_wave_schedule_buffer = 2
 	// Current wave number we are on
 	var/current_wave_number = 1
-	// Current drop location target
-	var/atom/drifter_dropzone_target
+	// Current drop location targets, attempts to get a block of turfs around the landmark
+	var/list/drifter_dropzone_targets = list()
 
 	// Whether its time for a total refresh (sorry I don't feel like updating the damn table itself)
 	var/queue_total_browser_update = FALSE
@@ -55,8 +55,11 @@
 	if(!resumed)
 		src.currentrun = drifter_queue_menus.Copy()
 
+	// Rebuild the timer string
+	rebuild_drifter_time_string()
 /*
 	LOOP SEGMENT
+	Here is where we handle a majority of the normal menu updates
 */
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
@@ -65,16 +68,21 @@
 		var/datum/drifter_queue_menu/current_menu = currentrun[current_ckey]
 		currentrun.len--
 		
+		// If the datum has no linked client just remove it
 		if(!current_menu.linked_client)
 			drifter_queue_menus.Remove(current_ckey)
 			qdel(current_menu)
 			continue
-		
-		var/client/target_client = current_menu.linked_client
-		target_client << output(url_encode(time_left_until_next_wave_string), "drifter_queue.browser:update_timer")
 
+		var/client/target_client = current_menu.linked_client
+		// Refresh timer
+		target_client << output(url_encode(time_left_until_next_wave_string), "drifter_queue.browser:update_timer")
+		
+		// Whether its time to refresh the webpage for someone
 		if(queue_total_browser_update)
 			current_menu.show_drifter_queue_menu()
+
+		// Whether its time to update the player table and playercount for the waves
 		if(queue_table_browser_update)
 			// This function wants the lefthand current wave player number and then the current table html
 			target_client << output(list2params(list("[drifter_wave_joined_clients.len]", drifter_queue_player_tbl_string)), "drifter_queue.browser:update_playersegments")
@@ -82,17 +90,39 @@
 		if(MC_TICK_CHECK)
 			return
 
+	// Make sure to set the table/browser refresh to off after we are done
 	if(queue_total_browser_update)
 		queue_total_browser_update = FALSE
 	if(queue_table_browser_update)
 		queue_table_browser_update = FALSE
 
-	rebuild_drifter_time_string()
+/*
+	PREGAME CUCKSTOPPER
+	Aka we don't want people to join queue and then click ready and stay in queue
+*/
+	// You will not be in drifter queue and adversely also join regular queue dickhead
+	if(Master.current_runlevel == RUNLEVEL_LOBBY)
+		for(var/client/target_client in drifter_wave_joined_clients)
+			var/mob/dead/new_player/pregame_retard = target_client.mob
+			if(pregame_retard.ready == PLAYER_READY_TO_PLAY)
+				drifter_wave_joined_clients -= target_client
 
+				rebuild_drifter_html_table()
+
+				for(var/itr_ckeys in drifter_queue_menus)
+					if(itr_ckeys != target_client.ckey)
+						continue
+					var/datum/drifter_queue_menu/fuckyou = drifter_queue_menus[itr_ckeys]
+					fuckyou.show_drifter_queue_menu()
+
+	// If we are delayed just stop here
 	if(drifter_queue_delayed)
 		return
 
-	// It is time
+/*
+	WAVE DEPLOYMENT SEGMENT
+	Aka we are trying to deploy all the sick cunts in the wave
+*/
 	if(world.time >= next_drifter_mass_release_time)
 		//to_chat(world, "Release Drifters")
 
@@ -106,15 +136,27 @@
 			next_drifter_mass_release_time = world.time + current_wave.wave_delay_time
 
 		if(drifter_wave_joined_clients.len)
-			if(!drifter_dropzone_target) // If you set some random crap to it it'll all go there otherwise its business as usual
+			if(!drifter_dropzone_targets.len) // If you set some random crap to it it'll all go there otherwise its business as usual
 				find_dropoff_location()
 
+			var/list/temp_dropoff_refs = drifter_dropzone_targets.Copy()
 			for(var/client/target_client in drifter_wave_joined_clients)
 				if(!check_drifterwave_restrictions(target_client)) // Alas, I be feelin lazy fuck you ppl
 					continue
-				process_drifter_wave_client(target_client)
+				var/mob/living/character = process_drifter_wave_client(target_client)
+				if(character) // plz do not runtime here ok
+					var/turf/picked_turf
+					// Do our best to make sure our guys don't spawn ontop of each other
+					if(temp_dropoff_refs)
+						picked_turf = pick(temp_dropoff_refs)
+						temp_dropoff_refs -= picked_turf
+					else // And if we can't we will just do it neways ok
+						picked_turf = drifter_dropzone_targets
+
+					character.forceMove(picked_turf)
 
 			drifter_wave_joined_clients.Cut()
+			drifter_dropzone_targets.Cut()
 
 		queue_total_browser_update = TRUE
 
@@ -178,8 +220,7 @@
 	else
 		GLOB.respawncounts[character.ckey] = 1
 
-	character.forceMove(get_turf(drifter_dropzone_target))
-
+	return character
 	log_manifest(character.mind.key, character.mind, character,latejoin = TRUE)
 
 // Attempt to find a place to put all these motherfuckers
@@ -200,10 +241,10 @@
 		message_admins("DRIFTER QUEUE HAS NO DROPZONE TARGET POINTS. SHIIIET!")
 		return
 
-	drifter_dropzone_target = pick(potential_target_dropzones)
+	var/atom/TITS = pick(potential_target_dropzones) // Well we got our thing
 
-
-
-
-
-
+	// we try our best to deploy each guy into his own turf ok this def needs to be less retarded but the map landmarks are fucky
+	var/rows_2_make = ceil(current_wave.maximum_playercount/2)
+	for(var/turf/T in block(TITS.x-1, TITS.y-2, TITS.z, TITS.x+rows_2_make, TITS.y+1, TITS.z))
+		if(isopenturf(T))
+			drifter_dropzone_targets += T

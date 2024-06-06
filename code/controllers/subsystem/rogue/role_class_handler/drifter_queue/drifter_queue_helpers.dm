@@ -55,6 +55,12 @@
 		return FALSE
 	if(!check_drifterwave_restrictions(target_client))
 		return FALSE
+	if(Master.current_runlevel < RUNLEVEL_LOBBY) // No entering during init
+		return FALSE
+	if(Master.current_runlevel == RUNLEVEL_LOBBY)
+		var/mob/dead/new_player/pregame_tard = target_client.mob
+		if(pregame_tard.ready == PLAYER_READY_TO_PLAY) // No entering if you are already ready
+			return FALSE
 
 	drifter_wave_joined_clients += target_client
 	rebuild_drifter_html_table()

@@ -19,10 +19,10 @@
 			<style>
 			</style>
 			<link rel='stylesheet' type='text/css' href='slop_menustyle4.css'>
-			<script type='text/javascript' src='slop_scriptstyle4.js'></script>
+			
 		</head>
 	"}
-
+	//<script type='text/javascript' src='slop_scriptstyle4.js'></script>
 	//Body tag start
 	data += "<body>"
 	data += "<table class='timer_table'><tr><td class='timer_fluff'>Time to next incursion:</td><td class='timer_time' id='queue_timer'>[SSrole_class_handler.time_left_until_next_wave_string]</td></tr></table>"
@@ -86,6 +86,19 @@
 	data += "[SSrole_class_handler.drifter_queue_player_tbl_string]"
 	data += "</table>"
 
+	// Script chunk as this will insure something doesn't happen due to the fact we are reloading the menu repeatedly
+	data += {"
+		<script>
+			function update_timer(new_time) {
+				document.getElementById('queue_timer').innerHTML = new_time; 
+			}
+
+			function update_playersegments(new_count, list) {
+				document.getElementById('current_count').innerHTML = new_count;
+				document.getElementById('player_table').innerHTML = list;
+			}
+		</script>
+	"}
 	//Closing Tags
 	data += {"
 		</body>
