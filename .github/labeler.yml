@@ -16,5 +16,3 @@ Balance:
 - changed-files:
   - any-glob-to-any-file:
     - code/modules/jobs/job_types/roguetown/**
-    - code/modules/clothing/rogueclothes/**
-    - code/game/objects/items/rogueweapons/**
