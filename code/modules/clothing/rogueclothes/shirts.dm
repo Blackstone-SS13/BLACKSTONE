@@ -14,6 +14,30 @@
 	boobed = TRUE
 	sewrepair = TRUE
 
+	var/list/body_parts_covered_list = list()
+
+	// Proc to generate description
+	proc/generate_desc()
+		body_parts_covered_list = list() // Clear the list
+		if (body_parts_covered & CHEST)
+			body_parts_covered_list += "CHEST"
+		if (body_parts_covered & ARMS)
+			body_parts_covered_list += "ARMS"
+		if (body_parts_covered & VITALS)
+			body_parts_covered_list += "VITALS"
+		
+		var/body_parts_string = ""
+		for (var/part in body_parts_covered_list)
+			body_parts_string += "[part], "
+		body_parts_string = copytext(body_parts_string, 1, length(body_parts_string) - 1) // Remove the trailing comma and space
+		
+		desc = "[desc]\nCovered body parts: [body_parts_string]"
+
+	// Initialize to call the proc
+	Initialize()
+		..()
+		generate_desc()
+
 /obj/item/clothing/suit/roguetown/shirt/undershirt
 	name = "shirt"
 	desc = ""

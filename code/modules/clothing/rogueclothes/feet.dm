@@ -12,6 +12,26 @@
 	equip_delay_self = 30
 	resistance_flags = FIRE_PROOF
 
+	var/list/body_parts_covered_list = list()
+
+	// Proc to generate description
+	proc/generate_desc()
+		body_parts_covered_list = list() // Clear the list
+		if (body_parts_covered & FEET)
+			body_parts_covered_list += "FEET"
+		
+		var/body_parts_string = ""
+		for (var/part in body_parts_covered_list)
+			body_parts_string += "[part], "
+		body_parts_string = copytext(body_parts_string, 1, length(body_parts_string) - 1) // Remove the trailing comma and space
+		
+		desc = "[desc]\nCovered body parts: [body_parts_string]"
+
+	// Initialize to call the proc
+	Initialize()
+		..()
+		generate_desc()
+
 /obj/item/clothing/shoes/roguetown/boots
 	name = "dark boots"
 	//dropshrink = 0.75
