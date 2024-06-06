@@ -14,20 +14,20 @@
 
 /datum/outfit/job/roguetown/adventurer/minstrel/pre_equip(mob/living/carbon/human/H)
 	..()
-  H.mind.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/music, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
-  H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/stealing, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-  H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 1, TRUE)
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
 	cloak = /obj/item/clothing/cloak/half/red
 	if(prob(33))
 		cloak = /obj/item/clothing/cloak/half
 	if(prob(33))
-		cloak = /obj/item/clothing/cloak/half/orange
+	cloak = /obj/item/clothing/cloak/half/orange
 	shirt = /obj/item/clothing/suit/roguetown/shirt/tunic/white
 	lhand = /obj/item/rogue/instrument/accord
 	pants = /obj/item/clothing/under/roguetown/tights/random
