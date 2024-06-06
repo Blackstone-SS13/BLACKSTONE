@@ -43,7 +43,8 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/lockpicking, 1, TRUE) //Breaking into the houses of anyone who ever loved them.
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE) //Climbing into windows to steal drugs or booze.
 		H.change_stat("intelligence", -2)
-		H.change_stat("constitution", 2)
-		H.change_stat("strength", 2)
+		H.change_stat("constitution", 1)
+		H.change_stat("strength", 1)
+		H.change_stat("fortune", 2)
 		ADD_TRAIT(H, TRAIT_NOSTINK, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_LIMPDICK, TRAIT_GENERIC)
