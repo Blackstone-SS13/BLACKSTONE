@@ -2,7 +2,6 @@
 	name = "Drunkard"
 	tutorial = "You are a scumbag. Everyone in your life has given up on you, and your remaining liver has tried to jump ship a few times. All you have left to your name are some cards, dice and whatever is in this bottle."
 	allowed_sexes = list("male", "female")
-	f_title = "Bottle Wench"
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -21,7 +20,7 @@
 /datum/outfit/job/roguetown/drunkard
 	allowed_patrons = list(/datum/patron/inhumen/eora)
 
-/datum/outfit/job/roguetown/adventurer/fisher/pre_equip(mob/living/carbon/human/H)
+/datum/outfit/job/roguetown/adventurer/drunkard/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
 		pants = /obj/item/clothing/under/roguetown/tights/vagrant
