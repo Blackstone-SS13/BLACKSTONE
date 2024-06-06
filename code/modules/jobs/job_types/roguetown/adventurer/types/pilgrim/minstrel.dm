@@ -29,7 +29,7 @@
 	if(prob(33))
 	cloak = /obj/item/clothing/cloak/half/orange
 	shirt = /obj/item/clothing/suit/roguetown/shirt/tunic/white
-	lhand = /obj/item/rogue/instrument/accord
+	r_hand = /obj/item/rogue/instrument/accord
 	pants = /obj/item/clothing/under/roguetown/tights/random
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	belt = /obj/item/storage/belt/rogue/leather/cloth
