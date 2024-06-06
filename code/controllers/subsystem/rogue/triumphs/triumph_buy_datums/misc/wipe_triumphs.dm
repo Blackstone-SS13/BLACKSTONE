@@ -1,7 +1,7 @@
 /datum/triumph_buy/wipe_triumphs
 	triumph_buy_id = "WipeTriumphs"
 	desc = "Burn down the hall of triumphs! Bring everyone back to ZERO!"
-	triumph_cost = 250
+	triumph_cost = 180
 	category = TRIUMPH_CAT_MISC
 	pre_round_only = FALSE
 	visible_on_active_menu = FALSE
