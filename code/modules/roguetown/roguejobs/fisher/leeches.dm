@@ -6,6 +6,7 @@
 	icon = 'icons/roguetown/items/surgery.dmi'
 	icon_state = "leech"
 	baitchance = 100
+	bundletype = null
 	fishloot = list(/obj/item/reagent_containers/food/snacks/fish/carp = 5,
 					/obj/item/reagent_containers/food/snacks/fish/eel = 5,
 					/obj/item/reagent_containers/food/snacks/fish/angler = 1)

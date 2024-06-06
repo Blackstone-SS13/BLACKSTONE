@@ -1,4 +1,4 @@
-/obj/item
+/obj/item/reagent_containers/food/snacks
 	var/baitchance = 0
 	var/list/fishloot = null
 
@@ -14,11 +14,13 @@
 					/obj/item/reagent_containers/food/snacks/fish/eel = 5,
 					/obj/item/reagent_containers/food/snacks/fish/angler = 1)
 	drop_sound = 'sound/foley/dropsound/food_drop.ogg'
+	bundletype = /obj/item/natural/bundle/worms
 
 /obj/item/natural/worms/grubs
 	name = "grub"
 	baitchance = 100
 	color = null
+	bundletype = null
 	fishloot = list(
 		/obj/item/reagent_containers/food/snacks/fish/carp = 5,
 		/obj/item/reagent_containers/food/snacks/fish/angler = 1,
