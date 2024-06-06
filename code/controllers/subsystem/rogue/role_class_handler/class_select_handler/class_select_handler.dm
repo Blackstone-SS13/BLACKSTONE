@@ -126,12 +126,14 @@
 	// If we got forced class additions
 	if(forced_class_additions && forced_class_additions.len)
 		if(forced_class_bypass_reqs)
-			for(var/datum/advclass/FORCE_IT_IN in forced_class_additions)
+			for(var/uninstanced_azz_types in forced_class_additions)
+				var/datum/advclass/FORCE_IT_IN = new uninstanced_azz_types
 				if(rolled_classes[FORCE_IT_IN])
 					continue
 				rolled_classes[FORCE_IT_IN] = 0
 		else
-			for(var/datum/advclass/FORCE_IT_IN in forced_class_additions)
+			for(var/uninstanced_azz_types in forced_class_additions)
+				var/datum/advclass/FORCE_IT_IN = new uninstanced_azz_types
 				if(rolled_classes[FORCE_IT_IN])
 					continue
 				if(FORCE_IT_IN.check_requirements(H))
@@ -140,7 +142,7 @@
 		if(forced_class_plusboost)
 			for(var/i in 1 to forced_class_plusboost)
 				var/datum/advclass/boostclass = pick(rolled_classes)
-				if(boostclass in forced_class_additions)
+				if(boostclass.type in forced_class_additions)
 					rolled_classes[boostclass] += 1
 
 	if(!rolled_classes.len)

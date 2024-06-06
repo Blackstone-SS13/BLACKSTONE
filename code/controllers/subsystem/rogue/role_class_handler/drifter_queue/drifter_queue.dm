@@ -2,27 +2,28 @@
 	Drifter Queue Shit, role_class_handler subsystem except hopefully most to all of the drifter queue shit is in here
 */
 /datum/controller/subsystem/role_class_handler
-	// List of drifter wave datums, created and crammed up this lists ass in the initialize for this subsystem
+/*
+	List of drifter wave datums, created and crammed up this lists ass in the initialize for this subsystem
+	contents: drifter_wave_data_slabs = list(/datum/drifter_wave, /datum/drifter_wave1, /datum/drifter_wave2)
+*/
 	var/list/drifter_wave_data_slabs = list()
 
-
-	// assc list of ckeys linked to drifter queue menus if they got one which have client refs on them
+/*
+	assc list of ckeys linked to drifter queue menus if they got one which have client refs on them
+	ex: drifter_queue_menuss[ckey] = /datum/drifter_queue_menu
+	contents: drifter_queue_menus = list("ckey" = /datum/drifter_queue_menu, "ckey2" = /datum/drifter_queue_menu,... etc)
+*/
 	var/list/drifter_queue_menus = list()
 	
-
-	// List of things to handle in the fire()
-	var/list/currentrun = list() 
-
-
-	// Set this to true or false to stop the system/hide crap related to it hopefully lol
+	// Set this to false manually to stop the system, if you want to start the system call toggle_drifter_queue()
 	var/drifter_queue_enabled = TRUE
-
-	// Next time we fire
-	var/next_drifter_mass_release_time = 0
-	// Whether we are currently delayed, changes some text in menus etc
+	// Whether we are currently delayed, which stops the actual wave handling segment from firing
 	var/drifter_queue_delayed = TRUE
 
-	// The current wave
+/*
+	WORKING VARS
+*/
+	// ref to the current wave
 	var/datum/drifter_wave/current_wave
 	// Schedule of drifter waves
 	var/list/drifter_wave_schedule = list()
@@ -30,9 +31,11 @@
 	var/list/drifter_wave_joined_clients = list()
 	// Number of waves we keep scheduled past the current one
 	var/drifter_wave_schedule_buffer = 2
+	// Next time we attempt to process a wave/joined clients
+	var/next_drifter_mass_release_time = 0
 	// Current wave number we are on
 	var/current_wave_number = 1
-	// Current drop location targets, attempts to get a block of turfs around the landmark
+	// Current drop location targets, attempts to get a block of turfs around the atom
 	var/list/drifter_dropzone_targets = list()
 
 	// Whether its time for a total refresh (sorry I don't feel like updating the damn table itself)
@@ -42,6 +45,8 @@
 	// String vars for display menus
 	var/drifter_queue_player_tbl_string = ""
 	var/time_left_until_next_wave_string = "DISABLED"
+	// List of menu datums that we are currently processing in the fire() var on this subsystem
+	var/list/currentrun = list() 
 
 /*
 	Hey we got somethin to keep track of now, which is drifter queue
