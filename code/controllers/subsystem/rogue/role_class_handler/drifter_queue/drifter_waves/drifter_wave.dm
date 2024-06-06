@@ -11,7 +11,7 @@
 	advclass_cat_rolls = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 5)
 	class_cat_plusboost_attempts = list(CTAG_PILGRIM = 3) // Here you go buddy, have a 3 on pilgrims
 
-	wave_delay_time = 6 SECONDS
+	wave_delay_time = 2 MINUTES
 
 	// List of landmark types we can place the drifters at/around
 	droppoint_landmark_types = list(
