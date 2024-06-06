@@ -205,8 +205,11 @@
 				if(user.mind.has_antag_datum(/datum/antagonist/werewolf))
 					if(!src.mind.has_antag_datum(/datum/antagonist/werewolf))
 						if(prob(10))
-							H.werewolf_infect()
-							//addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, werewolf_infect)), 3 MINUTES)
+							//H.werewolf_infect()
+							addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human/, werewolf_infect)), 45 SECONDS)
+						if(prob(30))
+							user.werewolf_feed(H)
+						//addtimer(CALLBACK(src, TYPE_PROC_REF(/mob/living/carbon/human, werewolf_infect)), 3 MINUTES)
 				if(user.mind.has_antag_datum(/datum/antagonist/zombie) && !src.mind.has_antag_datum(/datum/antagonist/zombie))
 					if(!prob(3))
 						return

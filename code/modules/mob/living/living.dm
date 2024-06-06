@@ -51,6 +51,9 @@
 	med_hud_set_status()
 
 /mob/living/onZImpact(turf/T, levels)
+	if(HAS_TRAIT(src, TRAIT_NOFALLDAMAGE1))
+		if(levels <= 2)	
+			return 
 	var/points
 	for(var/i in 2 to levels)
 		i++
