@@ -263,7 +263,6 @@ GLOBAL_VAR(restart_counter)
 		if(!thing)
 			continue
 		thing << sound(round_end_sound)
-		sleep(50)
 
 	to_chat(world, "Please be patient as the server restarts. You will be automatically reconnected in about 60 seconds.")
 	Master.Shutdown()	//run SS shutdowns? rtchange
