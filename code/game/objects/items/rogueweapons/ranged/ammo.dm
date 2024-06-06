@@ -87,7 +87,7 @@
 	name = "padded arrow"
 	damage = 0
 	knockdown = 100
-	stun = 50
+	stun = 20
 	icon = 'icons/roguetown/weapons/ammo.dmi'
 	icon_state = "arrow_pad_proj"
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow/padded
