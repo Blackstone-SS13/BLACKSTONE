@@ -2734,7 +2734,7 @@
 "uFE" = (/turf/closed/wall/mineral/rogue/stonebrick,/area/rogue/indoors/shelter/mountains)
 "uGf" = (/obj/machinery/light/rogue/firebowl/stump,/turf/open/floor/rogue/dirt/road,/area/rogue/outdoors/town/roofs)
 "uGo" = (/obj/structure/mineral_door/wood{name = "Kitchen"; icon_state = "wcv"; locked = 1; lockid = "manor"},/turf/open/floor/rogue/wood,/area/rogue/indoors/town/manor)
-"uGP" = (/obj/structure/fluff/statue/gargoyle/moss,/obj/machinery/light/rogue/torchholder,/turf/open/floor/rogue/grass,/area/rogue/outdoors/town)
+"uGP" = (/obj/structure/fluff/statue/gargoyle/moss,/turf/open/floor/rogue/grass,/area/rogue/outdoors/town)
 "uHh" = (/obj/structure/fermenting_barrel/random/water,/turf/open/floor/rogue/wood,/area/rogue/indoors/town/shop)
 "uHj" = (/obj/structure/bars/cemetery,/turf/open/floor/rogue/dirt/road,/area/rogue/outdoors/town/roofs)
 "uHW" = (/obj/structure/closet/crate/roguecloset,/obj/item/reagent_containers/food/snacks/smallrat,/turf/open/floor/rogue/hexstone,/area/rogue/indoors/town/manor)
