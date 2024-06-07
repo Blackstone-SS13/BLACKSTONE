@@ -1,6 +1,6 @@
 /datum/crafting_recipe/roguetown
 	req_table = FALSE
-	structurecraft = /obj/structure/fluff/millstone
+	tools = list(/obj/item/reagent_containers/glass/mortar, /obj/item/pestle)
 	verbage_simple = "mixes"
 	skillcraft = /datum/skill/misc/alchemy
 
@@ -16,7 +16,7 @@
 	reqs = list(/obj/item/reagent_containers/glass/bowl = 1, /obj/item/ash = 1, /obj/item/reagent_containers/food/snacks/fish/eel = 1)
 	craftdiff = 3
 
-  /datum/crafting_recipe/roguetown/alchemy/manna_pot
+  /datum/crafting_recipe/roguetown/alchemy/manna_pot_3x
 	name = "3x Manna Potion"
 	result = list(/datum/supply_pack/rogue/food/manapot)
 	reqs = list(/obj/item/reagent_containers/glass/bowl = 3, /obj/item/ash = 3, /obj/item/reagent_containers/food/snacks/fish/eel = 2)
@@ -25,11 +25,11 @@
    /datum/crafting_recipe/roguetown/alchemy/health_pot
 	name = "Health Potion"
 	result = list(/obj/item/reagent_containers/glass/bottle/rogue/healthpot)
-	reqs = list(/obj/item/reagent_containers/glass/bowl = 1, /obj/item/ash = 1, /obj/item/reagent_containers/food/snacks/grown/berries/rogue = 3)
+	reqs = list(/obj/item/reagent_containers/glass/bowl = 1, /obj/item/ash = 1, /obj/item/reagent_containers/food/snacks/grown/berries/rogue = 2)
 	craftdiff = 4
 
-     /datum/crafting_recipe/roguetown/alchemy/health_pot
+     /datum/crafting_recipe/roguetown/alchemy/health_pot_3x
 	name = "3x Health Potion"
 	result = list(/datum/supply_pack/rogue/food/healthpot)
-	reqs = list(/obj/item/reagent_containers/glass/bowl = 3, /obj/item/ash = 3, /obj/item/reagent_containers/food/snacks/grown/berries/rogue = 6)
+	reqs = list(/obj/item/reagent_containers/glass/bowl = 3, /obj/item/ash = 3, /obj/item/reagent_containers/food/snacks/grown/berries/rogue = 5)
 	craftdiff = 4
