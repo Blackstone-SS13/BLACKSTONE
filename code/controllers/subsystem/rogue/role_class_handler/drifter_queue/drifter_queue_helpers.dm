@@ -2,10 +2,12 @@
 	Attempts to enable/disable drifter queue
 */
 /datum/controller/subsystem/role_class_handler/proc/toggle_drifter_queue()
-	if(!(length(drifter_wave_schedule) == current_wave_number))
-		handle_drifter_wave_scheduling()
-	if(world.time > next_drifter_mass_release_time)
-		next_drifter_mass_release_time = world.time + 5 MINUTES
+	if(drifter_queue_enabled == FALSE) // Keep in mind, if we are set to false this will soon be true, so it'd be safer to have the instructions here
+		if(!(length(drifter_wave_schedule) == current_wave_number))
+			handle_drifter_wave_scheduling()
+		if(world.time > next_drifter_mass_release_time)
+			next_drifter_mass_release_time = world.time + 5 MINUTES
+
 	drifter_queue_enabled = !drifter_queue_enabled
 	can_fire = drifter_queue_enabled
 
