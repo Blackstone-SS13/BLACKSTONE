@@ -74,10 +74,13 @@
 		return FALSE
 	if(!ishuman(owner))
 		return FALSE
+	var/mob/living/carbon/human/human_owner = owner
+	var/datum/antagonist/werewolf/wolfy = human_owner.werewolf_check()
+	if(!wolfy)
+		return FALSE
 	werewolf_infection_timer = null
 	owner.flash_fullscreen("redflash3")
 	to_chat(owner, "<span class='danger'>It hurts... Is this really the end for me?</span>")
 	owner.emote("scream") // heres your warning to others bro
 	owner.Knockdown(1)
-	var/mob/living/carbon/human/human_owner = owner
-	return human_owner.werewolf_check()
+	return wolfy

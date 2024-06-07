@@ -99,16 +99,16 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		visible_name += " <span class='green'>(sewn)</span>"
 	if(is_clotted())
 		visible_name += " <span class='danger'>(clotted)</span>"
-	if(zombie_infection_timer || werewolf_infection_timer)
-		visible_name += " <span class='necrosis'>(INFECTED)</span>"
+	if(has_special_infection())
+		visible_name += " <span class='infection'>(INFECTED)</span>"
 	return visible_name
 
 /// Description of this wound returned to the player when the bodypart is checked with check_for_injuries()
 /datum/wound/proc/get_check_name(mob/user)
 	var/visible_name = check_name
 	if(visible_name)
-		if(zombie_infection_timer || werewolf_infection_timer)
-			visible_name += " <span class='necrosis'>\[INFECTION\]</span>"
+		if(has_special_infection())
+			visible_name += " <span class='infection'>\[INFECTION\]</span>"
 	return visible_name
 
 /// Crit message that should be appended when this wound is applied in combat
@@ -237,9 +237,11 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		affected.update_damage_overlays()
 	if(zombie_infection_timer)
 		deltimer(zombie_infection_timer)
+		zombie_infection_timer = null
 		zombie_infect_attempt()
 	if(werewolf_infection_timer)
 		deltimer(werewolf_infection_timer)
+		werewolf_infection_timer = null
 		werewolf_infect_attempt()
 
 /// Removes this wound from a given, simpler than adding to a bodypart - No extra effects
@@ -261,6 +263,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /// Called on handle_wounds(), on the life() proc
 /datum/wound/proc/on_life()
+	if(whp <= 0)
+		return FALSE
 	if(!isnull(clotting_threshold) && clotting_rate && (bleed_rate > clotting_threshold))
 		bleed_rate = max(clotting_threshold, bleed_rate - clotting_rate)
 	if(passive_healing)
@@ -331,9 +335,13 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /datum/wound/proc/is_clotted()
 	return !isnull(clotting_threshold) && (bleed_rate <= clotting_threshold)
 
+/// Checks if this wound has a special infection (zombie or werewolf)
+/datum/wound/proc/has_special_infection()
+	return (zombie_infection_timer || werewolf_infection_timer)
+
 /// Some wounds cannot go away naturally
 /datum/wound/proc/should_persist()
-	if(zombie_infection_timer || werewolf_infection_timer)
+	if(has_special_infection())
 		return TRUE
 	return FALSE
 
