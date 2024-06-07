@@ -1,6 +1,7 @@
 /datum/advclass/dbomb
 	name = "Vagrant"
-	tutorial = "Dwarves like to blow things up."
+	tutorial = "Dwarves like to blow things up, and after looking at the colorful pictures you found in an ancient potion book you found on some old wizards skeleton, you know how to make yourself bombs! \
+	Just 2 dips of ash, a piece of coal, a strip of cloth to ignite, and a bottle to throw it into."
 	allowed_sexes = list("male", "female")
 	allowed_races = list("Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/dbomb
@@ -19,7 +20,7 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	backl = /obj/item/storage/backpack/rogue/backpack
-	backpack_contents = list(/obj/item/bomb = 1, /obj/item/flint = 1)
+	backpack_contents = list(/obj/item/bomb = 1, /obj/item/flint = 1, /obj/item/reagent_containers/glass/mortar, /obj/item/pestle, /obj/item/natural/rock/coal = 3,)
 	if(prob(50))
 		beltr = /obj/item/rogueweapon/pick
 	else
@@ -30,6 +31,7 @@
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/alchemy, 1, TRUE) //just for more bbombs
 	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
