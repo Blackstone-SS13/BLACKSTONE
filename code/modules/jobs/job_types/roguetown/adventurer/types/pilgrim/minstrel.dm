@@ -33,5 +33,5 @@
 	backl = /obj/item/storage/backpack/rogue/satchel
 	backpack_contents = list(/obj/item/rogue/instrument/lute = 1, /obj/item/rogue/instrument/flute = 1, /obj/item/rogue/instrument/drum = 1)
 	H.change_stat("speed", 1)  
-  H.change_stat("fortune", 1)
-  ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)
+	H.change_stat("fortune", 1)
+	ADD_TRAIT(H, RTRAIT_EMPATH, TRAIT_GENERIC)
