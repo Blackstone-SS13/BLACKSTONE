@@ -7,29 +7,29 @@
   /datum/crafting_recipe/roguetown/alchemy/bbomb
 	name = "Bottle bomb"
 	result = list(/obj/item/bomb)
-	reqs = list(/obj/item/reagent_containers/glass/bowl = 1, /obj/item/ash = 2, /obj/item/natural/rock/coal = 1, /obj/item/natural/cloth = 1)
+	reqs = list(/obj/item/reagent_containers/glass/bottle = 1, /obj/item/ash = 2, /obj/item/natural/rock/coal = 1, /obj/item/natural/cloth = 1)
 	craftdiff = 2
 
   /datum/crafting_recipe/roguetown/alchemy/manna_pot
 	name = "Manna Potion"
 	result = list(/obj/item/reagent_containers/glass/bottle/rogue/manapot)
-	reqs = list(/obj/item/reagent_containers/glass/bowl = 1, /obj/item/ash = 1, /obj/item/reagent_containers/food/snacks/fish/eel = 1)
+	reqs = list(/obj/item/reagent_containers/glass/bottle = 1, /obj/item/ash = 1, /obj/item/reagent_containers/food/snacks/fish/eel = 1)
 	craftdiff = 3
 
   /datum/crafting_recipe/roguetown/alchemy/manna_pot_3x
 	name = "3x Manna Potion"
 	result = list(/datum/supply_pack/rogue/food/manapot)
-	reqs = list(/obj/item/reagent_containers/glass/bowl = 3, /obj/item/ash = 3, /obj/item/reagent_containers/food/snacks/fish/eel = 2)
+	reqs = list(/obj/item/reagent_containers/glass/bottle = 3, /obj/item/ash = 3, /obj/item/reagent_containers/food/snacks/fish/eel = 2)
 	craftdiff = 3
 
    /datum/crafting_recipe/roguetown/alchemy/health_pot
 	name = "Health Potion"
 	result = list(/obj/item/reagent_containers/glass/bottle/rogue/healthpot)
-	reqs = list(/obj/item/reagent_containers/glass/bowl = 1, /obj/item/ash = 1, /obj/item/reagent_containers/food/snacks/grown/berries/rogue = 2)
+	reqs = list(/obj/item/reagent_containers/glass/bottle = 1, /obj/item/ash = 1, /obj/item/reagent_containers/food/snacks/grown/berries/rogue = 2)
 	craftdiff = 4
 
      /datum/crafting_recipe/roguetown/alchemy/health_pot_3x
 	name = "3x Health Potion"
 	result = list(/datum/supply_pack/rogue/food/healthpot)
-	reqs = list(/obj/item/reagent_containers/glass/bowl = 3, /obj/item/ash = 3, /obj/item/reagent_containers/food/snacks/grown/berries/rogue = 5)
+	reqs = list(/obj/item/reagent_containers/glass/bottle = 3, /obj/item/ash = 3, /obj/item/reagent_containers/food/snacks/grown/berries/rogue = 5)
 	craftdiff = 4
