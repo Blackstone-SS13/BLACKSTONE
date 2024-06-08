@@ -68,7 +68,7 @@
 	reagent_state = LIQUID
 	color = "#56e300"
 	taste_description = "fur and dirt"
-	metabolization_rate = 1.25 * REAGENTS_METABOLISM
+	metabolization_rate = 0.6 * REAGENTS_METABOLISM
 	alpha = 173
 
 /datum/status_effect/buff/speedy
