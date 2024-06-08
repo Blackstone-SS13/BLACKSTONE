@@ -10,6 +10,8 @@
 	show_drifter_queue_menu()
 
 /datum/drifter_queue_menu/proc/show_drifter_queue_menu()
+	if(!linked_client)
+		return
 	//Opening tags and empty head
 	var/data = {"
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>

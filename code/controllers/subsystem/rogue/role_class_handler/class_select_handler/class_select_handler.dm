@@ -176,7 +176,8 @@
 		browser_slop()
 
 /datum/class_select_handler/proc/browser_slop()
-
+	if(!linked_client)
+		return
 	//Opening tags and empty head
 	var/data = {"
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>

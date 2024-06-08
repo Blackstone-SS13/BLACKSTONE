@@ -27,6 +27,10 @@
 		SStriumphs.post_equip_calls.Remove(triumph_buy_id)
 
 /datum/triumph_buy/grenzelhoft_maximum/on_activate(mob/living/carbon/human/H)
+//	if(is_species(A, /datum/species/goblin)) idk this is funny lets have it happen one more time...
+//		return
 	H.set_species(/datum/species/human/northern)
 	H.skin_tone = "fff0e9"
 	H.update_body()
+	 // Yeah, you gotta do this after setting species haha! theres an after_creation() proc that goes with set_species and this handles the stats in it.
+	H.roll_stats()

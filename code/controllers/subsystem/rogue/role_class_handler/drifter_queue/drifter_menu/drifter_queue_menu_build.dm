@@ -18,6 +18,8 @@
 			var/client/C = drifter_wave_joined_clients[on_playa_num]
 			data += "<td>[C.prefs.real_name]</td>"
 			on_playa_num++
+			if(on_playa_num > drifter_wave_joined_clients.len)
+				break
 
 		data += "</tr>"
 

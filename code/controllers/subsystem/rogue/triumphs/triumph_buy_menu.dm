@@ -27,6 +27,8 @@
 
 // TRIUMPH BUY MENU SIDED PROC
 /datum/triumph_buy_menu/proc/show_menu()
+	if(!linked_client)
+		return
 	var/data = {"
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>

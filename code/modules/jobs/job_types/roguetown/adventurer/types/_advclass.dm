@@ -27,6 +27,8 @@
 	var/list/category_tags = list(CTAG_DISABLED)
 
 /datum/advclass/proc/equipme(mob/living/carbon/human/H)
+	// input sleeps....
+	set waitfor = FALSE
 	if(!H)
 		return FALSE
 
