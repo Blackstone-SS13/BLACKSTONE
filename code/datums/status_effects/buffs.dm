@@ -35,7 +35,10 @@
     name = "Strong"
     desc = "I could lift anything!"
     icon_state = "potioneffect"
+	to_chat(M, "<span class='warning'>I feel a surge of strength as the potion takes effect!</span>")
 
+/datum/reagent/strong/on_mob_end_metabolize(mob/living/M)
+	to_chat(M, "<span class='warning'>The strength leaves me...</span>")
 
 /datum/status_effect/buff/speedy
     id = "zoomies"
@@ -45,17 +48,19 @@
 
 /atom/movable/screen/alert/status_effect/buff/speedy
     name = "Zoomies"
-    desc = "I got the zoomies!"
+    desc = "I feel much faster!"
     icon_state = "potioneffect"
+	to_chat(M, "<span class='warning'>I feel a rush of speed as the potion takes effect!</span>")
 
 /datum/reagent/swiftpot/on_mob_life(mob/living/carbon/M)
-    M.apply_status_effect(/datum/status_effect/buff/speedy)
+	M.apply_status_effect(/datum/status_effect/buff/speedy)
     ADD_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
     ..()
 
 /datum/reagent/swiftpot/on_mob_end_metabolize(mob/living/M)
     . = ..()
     REMOVE_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
+	to_chat(M, "<span class='warning'>The speed leaves me...</span>")
 
 
 /datum/status_effect/void_price
