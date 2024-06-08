@@ -14,7 +14,7 @@
 	and tend to shun the modernization of the world around them. \
 	Instead, a Dwarf looks to his ancestorial heritage for guidance on \
 	the various challenges they face. Even if, in some irony: this behaviour \
-	leads the race towards technological advacement as they continue \
+	leads the race towards technological advancement as they continue \
 	to improve their craft through powerful mechanization and forging \
 	Dwarves are hearty, but are not known for their speed or eyesight... \
 	Each dwarf hails from a ancient fortress named after the most plentiful mineral."
