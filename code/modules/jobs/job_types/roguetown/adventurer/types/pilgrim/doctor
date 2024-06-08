@@ -29,7 +29,7 @@
 	H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 2, TRUE) //changed to level 2 so you can build a murder hut i mean doctor office
 	H.mind.adjust_skillrank(/datum/skill/labor/lumberjacking, 1, TRUE) //added level 1 to go alongside carpentry, so they can get some mammons to work with and to construct said murder sha- clinic
  	H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE) //novice alchemy for later when somebody codes it
+	H.mind.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE) //for making the funny red drink of literal immortality, and the blue one i guess
 	neck = /obj/item/storage/belt/rogue/pouch/coins/poor
   	armor = /obj/item/clothing/suit/roguetown/armor/leather/vest
   	head = /obj/item/clothing/head/roguetown/flathat //better hat, more unique to them, ive never seen this hat on anybody else
