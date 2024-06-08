@@ -88,7 +88,7 @@
 	..()
 
 if(M)
-	REMOVE_TRAIT(M, TRAIT_NOROGSTAM)
+	REMOVE_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
 
 /datum/reagent/berrypoison
 	name = "Berry Poison"
