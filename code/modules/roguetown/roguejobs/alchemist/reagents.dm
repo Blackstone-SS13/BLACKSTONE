@@ -87,9 +87,6 @@
 	ADD_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
 	..()
 
-if(M)
-	REMOVE_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
-
 /datum/reagent/berrypoison
 	name = "Berry Poison"
 	description = "Contains a poisonous thick, dark purple liquid."
