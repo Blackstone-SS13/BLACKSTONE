@@ -52,7 +52,7 @@
 
 /datum/reagent/medicine/swiftpot
 	name = "Swiftness Potion"
-	description = "A bubbling, bright green liquid, it seems to be swirling by itself. Greatly increases speed for a short period of time, and gives you stamina, at the cost of making you more prone to devestating, lethal injuries and making your bones soft and plyable.
+	description = "A bubbling, bright green liquid, it seems to be swirling by itself. Greatly increases speed for a short period of time, and gives you stamina, at the cost of making you more prone to devestating, lethal injuries and making your bones soft and plyable."
 	reagent_state = LIQUID
 	color = "#56e300"
 	taste_description = "fur and dirt"
