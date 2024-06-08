@@ -197,11 +197,15 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 				/mob/living/carbon/human/species/goblin/npc/ambush/cave = 30)
 	first_time_text = "THE TERRORBOG"
 	converted_type = /area/rogue/indoors/shelter/bog
+
 /area/rogue/indoors/shelter/bog
 	icon_state = "bog"
 	droning_sound = 'sound/music/area/bog.ogg'
 	droning_sound_dusk = null
 	droning_sound_night = null
+
+/area/rogue/outdoors/bog/dense
+	name = "dense bog"
 
 /area/rogue/outdoors/beach
 	name = "sophia's cry"
