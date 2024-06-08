@@ -87,8 +87,8 @@
 	ADD_TRAIT(M, Indefatigable, INNATE_TRAIT)
 	..()
 
-/datum/reagent/swiftpot/on_mob_end_metabolize(mob/living/M)
-    REMOVE_TRAIT(M, Indefatigable, source)
+if(M)
+	REMOVE_TRAIT(M, TRAIT_NOROGSTAM, "Indefatigable")
 
 /datum/reagent/berrypoison
 	name = "Berry Poison"
