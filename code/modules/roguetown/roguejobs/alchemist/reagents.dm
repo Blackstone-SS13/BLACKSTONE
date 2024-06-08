@@ -51,7 +51,7 @@
     id = "strong"
     alert_type = null
     effectedstats = list("strength" = 6, "constitution" = 3, "endurance" = 3, "speed" = -9, "intelligence" = -5, "fortune" = -1)
-    duration = 45 seconds
+    duration = 45 SECONDS
 
 /atom/movable/screen/alert/status_effect/buff/strong
     name = "Strong"
@@ -75,7 +75,7 @@
     id = "zoomies"
     alert_type = null
     effectedstats = list("speed" = 12, "endurance" = -8, "fortune" = -15)
-    duration = 12 seconds
+    duration = 12 SECONDS
 
 /atom/movable/screen/alert/status_effect/buff/speedy
     name = "Zoomies"
