@@ -39,7 +39,7 @@
 
 /datum/reagent/medicine/strengthpot
 	name = "Strength Potion"
-	description = "A viscous, thick black-blood like liquid. Expands muscles in the upper body for some time, and makes your skin harder to pierce, at the exepnse of slowing you down."
+	description = "A viscous, thick, black-blood like liquid. Expands muscles in the upper body for some time, and makes your skin harder to pierce."
 	reagent_state = LIQUID
 	color = "#3f0000"
 	taste_description = "bitter and meaty"
@@ -47,8 +47,20 @@
 	metabolization_rate = 0.35 * REAGENTS_METABOLISM
 	alpha = 173
 
-/datum/reagent/medicine/strengthpot/on_mob_life(mob/living/carbon/M)
-	effectedstats = list("strength" = 6, "constitution" = 3, "endurance" = 5, "speed" = -9, "intelligence" = -5, "fortune" = -1)
+/datum/status_effect/buff/strong
+    id = "strong"
+    alert_type = null
+    effectedstats = list("strength" = 6, "constitution" = 3, "endurance" = 3, "speed" = -9, "intelligence" = -5, "fortune" = -1)
+    duration = 45 seconds
+
+/atom/movable/screen/alert/status_effect/buff/speedy
+    name = "Strong"
+    desc = "I could lift anything!"
+    icon_state = ""
+
+/datum/reagent/strengthpot/on_mob_life(mob/living/carbon/M)
+    M.apply_status_effect(/datum/status_effect/buff/strong)
+    ..()
 
 /datum/reagent/medicine/swiftpot
 	name = "Swiftness Potion"
@@ -59,8 +71,22 @@
 	metabolization_rate = 1.25 * REAGENTS_METABOLISM
 	alpha = 173
 
+/datum/status_effect/buff/speedy
+    id = "zoomies"
+    alert_type = null
+    effectedstats = list("speed" = 12, "endurance" = -8, "fortune" = -15)
+    duration = 12 seconds
+
+/atom/movable/screen/alert/status_effect/buff/speedy
+    name = "Zoomies"
+    desc = "I got the zoomies!"
+    icon_state = ""
+
+/datum/reagent/swiftpot/on_mob_life(mob/living/carbon/M)
+    M.apply_status_effect(/datum/status_effect/buff/zoomies)
+    ..()
+
 /datum/reagent/medicine/swiftpot/on_mob_life(mob/living/carbon/M)
-	effectedstats = list("speed" = 12, "endurance" = -8, "fortune" = -15)
 	ADD_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
 
 /datum/reagent/medicine/swiftpot/on_remove()
