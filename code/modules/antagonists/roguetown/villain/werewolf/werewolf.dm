@@ -72,34 +72,58 @@
 		return
 
 /datum/antagonist/werewolf/greet()
-	to_chat(owner.current, "<span class='userdanger'>Ever since that bite, I have been a [owner.special_role].</span>")
+	to_chat(owner.current, "<span class='userdanger'>Ever since that bite, I have been a [name].</span>")
 	owner.announce_objectives()
-	..()
+	return ..()
 
-/mob/living/carbon/human/proc/werewolf_infect()
-	if(!mind) return
-	if(mind.has_antag_datum(/datum/antagonist/vampirelord)) return
-	if(mind.has_antag_datum(/datum/antagonist/zombie)) return
-	if(mind.has_antag_datum(/datum/antagonist/werewolf)) return
+/mob/living/carbon/human/proc/can_werewolf()
+	if(!mind)
+		return FALSE
+	if(mind.has_antag_datum(/datum/antagonist/vampirelord))
+		return FALSE
+	if(mind.has_antag_datum(/datum/antagonist/werewolf))
+		return FALSE
+	if(mind.has_antag_datum(/datum/antagonist/skeleton))
+		return FALSE
+	return FALSE
 
-	var/datum/antagonist/werewolf/new_antag = new /datum/antagonist/werewolf/lesser()
-	mind.add_antag_datum(new_antag)
+/mob/living/carbon/human/proc/werewolf_check(werewolf_type = /datum/antagonist/werewolf/lesser)
+	if(!mind)
+		return
+	var/already_wolfy = mind.has_antag_datum(/datum/antagonist/werewolf)
+	if(already_wolfy)
+		return already_wolfy
+	if(!can_werewolf())
+		return
+	return mind.add_antag_datum(werewolf_type)
 
-/mob/living/carbon/human/proc/werewolf_feed(target)
-	var/mob/living/carbon/human/W = target
-	if(!W) return
-	if(W.mind.has_antag_datum(/datum/antagonist/zombie))
-		to_chat(src, "<span class='warning'>I should not feed on rotten flesh.</span>")
+/mob/living/carbon/human/proc/werewolf_infect_attempt()
+	var/datum/antagonist/werewolf/wolfy = werewolf_check()
+	if(!wolfy)
 		return
-	if(W.mind.has_antag_datum(/datum/antagonist/vampirelord))
-		to_chat(src, "<span class='warning'>I should not feed on corrupted flesh.</span>")
+	if(stat >= DEAD) //do shit the natural way i guess
 		return
-	if(W.mind.has_antag_datum(/datum/antagonist/werewolf))
-		to_chat(src, "<span class='warning'>I should not feed on my kin's flesh.</span>")
+	to_chat(src, "<span class='danger'>I feel horrible... REALLY horrible...</span>")
+	mob_timers["puke"] = world.time
+	vomit(1, blood = TRUE, stun = FALSE)
+	return wolfy
+
+/mob/living/carbon/human/proc/werewolf_feed(mob/living/carbon/human/target)
+	if(!istype(target)) 
 		return
+	if(target.mind)
+		if(target.mind.has_antag_datum(/datum/antagonist/zombie))
+			to_chat(src, "<span class='warning'>I should not feed on rotten flesh.</span>")
+			return
+		if(target.mind.has_antag_datum(/datum/antagonist/vampirelord))
+			to_chat(src, "<span class='warning'>I should not feed on corrupted flesh.</span>")
+			return
+		if(target.mind.has_antag_datum(/datum/antagonist/werewolf))
+			to_chat(src, "<span class='warning'>I should not feed on my kin's flesh.</span>")
+			return
 
 	to_chat(src, "<span class='warning'>I feed on succulent flesh. I feel reinvigorated.</span>")
-	src.reagents.add_reagent(/datum/reagent/medicine/healthpot, 3)
+	return src.reagents.add_reagent(/datum/reagent/medicine/healthpot, 3)
 
 /obj/item/clothing/suit/roguetown/armor/skin_armor/werewolf_skin
 	slot_flags = null
