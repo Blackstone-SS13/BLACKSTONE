@@ -37,6 +37,36 @@
 	..()
 	. = 1
 
+/datum/reagent/medicine/strengthpot
+	name = "Strength Potion"
+	description = "A viscous, thick black-blood like liquid. Expands muscles in the upper body for some time, and makes your skin harder to pierce, at the exepnse of slowing you down."
+	reagent_state = LIQUID
+	color = "#3f0000"
+	taste_description = "bitter and meaty"
+	overdose_threshold = 0
+	metabolization_rate = 0.35 * REAGENTS_METABOLISM
+	alpha = 173
+
+/datum/reagent/medicine/strengthpot/on_mob_life(mob/living/carbon/M)
+	effectedstats = list("strength" = 6, "constitution" = 3, "endurance" = 5, "speed" = -9, "intelligence" = -5, "fortune" = -1)
+
+/datum/reagent/medicine/swiftpot
+	name = "Swiftness Potion"
+	description = "A bubbling, bright green liquid, it seems to be swirling by itself. Greatly increases speed for a short period of time, and gives you stamina, at the cost of making you more prone to devestating, lethal injuries and making your bones soft and plyable.
+	reagent_state = LIQUID
+	color = "#56e300"
+	taste_description = "fur and dirt"
+	metabolization_rate = 1.25 * REAGENTS_METABOLISM
+	alpha = 173
+
+/datum/reagent/medicine/swiftpot/on_mob_life(mob/living/carbon/M)
+	effectedstats = list("speed" = 12, "endurance" = -8, "fortune" = -15)
+	ADD_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
+
+/datum/reagent/medicine/swiftpot/on_remove()
+    REMOVE_TRAIT(M, TRAIT_NOROGSTAM, source)
+    . = ..()
+
 /datum/reagent/berrypoison
 	name = "Berry Poison"
 	description = "Contains a poisonous thick, dark purple liquid."
