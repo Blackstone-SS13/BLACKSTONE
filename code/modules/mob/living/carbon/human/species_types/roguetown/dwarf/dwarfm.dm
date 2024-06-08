@@ -16,7 +16,8 @@
 	the various challenges they face. Even if, in some irony: this behaviour \
 	leads the race towards technological advancement as they continue \
 	to improve their craft through powerful mechanization and forging \
-	Dwarves are hearty, but are not known for their speed or eyesight... \
+	Dwarves are hearty, but are not known for their speed... \
+	Life in darkness has acclimated their vision to see within it. \
 	Each dwarf hails from a ancient fortress named after the most plentiful mineral."
 
 	skin_tone_wording = "Dwarf Fortress"
