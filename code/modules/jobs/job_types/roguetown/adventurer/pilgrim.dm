@@ -3,8 +3,8 @@
 	flag = PILGRIM
 	department_flag = PEASANTS
 	faction = "Station"
-	total_positions = -1
-	spawn_positions = -1
+	total_positions = 0
+	spawn_positions = 0
 	allowed_races = ALL_RACES_LIST_NAMES
 	tutorial = "Pilgrims begin far outside of the town and must reach it in order to ply their various trades. Sometimes, they build their own settlements and enjoy the terrible nature."
 
@@ -19,7 +19,7 @@
 	max_pq = null
 	wanderer_examine = TRUE
 	advjob_examine = TRUE
-	always_show_on_latechoices = TRUE
+	always_show_on_latechoices = FALSE
 	same_job_respawn_delay = 0
 
 /datum/job/roguetown/pilgrim/after_spawn(mob/living/L, mob/M, latejoin = TRUE)

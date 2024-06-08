@@ -4,7 +4,7 @@
 	// Maximum playercount of wave
 	maximum_playercount = 6
 	// Tooltip when moused over on wave
-	wave_type_tooltip = "A band of immigrants searching for fortune and fame."
+	wave_type_tooltip = "A band of immigrants searching for fame and fortune."
 	// Title of the job related to the job subsystem thats being made/equipped towards for the wave
 	job_rank = "Drifter"
 
