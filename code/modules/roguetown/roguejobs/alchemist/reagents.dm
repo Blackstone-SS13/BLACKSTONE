@@ -84,8 +84,8 @@
 
 /datum/reagent/swiftpot/on_mob_life(mob/living/carbon/M)
 	M.apply_status_effect(/datum/status_effect/buff/speedy)
-    ADD_TRAIT(M, Indefatigable, INNATE_TRAIT)
-    ..()
+	ADD_TRAIT(M, Indefatigable, INNATE_TRAIT)
+	..()
 
 /datum/reagent/swiftpot/on_mob_end_metabolize(mob/living/M)
     REMOVE_TRAIT(M, Indefatigable, source)
