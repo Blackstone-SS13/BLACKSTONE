@@ -87,7 +87,7 @@
 	ADD_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
 	..()
 
-/datum/reagent/medicine/swiftpot/on_remove(speedy)
+/datum/reagent/medicine/swiftpot/on_remove()
     REMOVE_TRAIT(M, TRAIT_NOROGSTAM, source)
     . = ..()
 
