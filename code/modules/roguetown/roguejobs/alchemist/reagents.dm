@@ -37,32 +37,32 @@
 	..()
 	. = 1
 
-/datum/reagent/medicine/strengthpot
-	name = "Strength Potion"
-	description = "A smooth yet viscous, thick, liquid. Expands muscles in the upper body for some time, and makes your skin harder to pierce."
-	reagent_state = LIQUID
-	color = "#d33f04"
-	taste_description = "bitter oily blood"
-	overdose_threshold = 0
-	metabolization_rate = 0.3 * REAGENTS_METABOLISM
-	alpha = 173
-
-/datum/reagent/medicine/strengthpot/on_mob_life(mob/living/carbon/M)
-    M.apply_status_effect(/datum/status_effect/buff/strong)
-    ..()
-
-/datum/reagent/medicine/swiftpot
-	name = "Swiftness Potion"
-	description = "A swirling, bright green liquid, it seems to be bubbling. Greatly increases speed for a short period of time, and gives you stamina, at the cost of making you more prone to devestating, lethal injuries and making your bones soft and plyable."
-	reagent_state = LIQUID
-	color = "#56e300"
-	taste_description = "earth, and a sharp, tingly aftertaste"
-	metabolization_rate = 0.4 * REAGENTS_METABOLISM
-	alpha = 173
-
-/datum/reagent/medicine/swiftpot/on_mob_life(mob/living/carbon/M)
-    M.apply_status_effect(/datum/status_effect/buff/speedy)
-    ..()
+// /datum/reagent/medicine/strengthpot
+//	name = "Strength Potion"
+//	description = "A smooth yet viscous, thick, liquid. Expands muscles in the upper body for some time, and makes your skin harder to pierce."
+//	reagent_state = LIQUID
+//	color = "#d33f04"
+//	taste_description = "bitter oily blood"
+//	overdose_threshold = 0
+//	metabolization_rate = 0.3 * REAGENTS_METABOLISM
+//	alpha = 173
+//
+// /datum/reagent/medicine/strengthpot/on_mob_life(mob/living/carbon/M)
+//    M.apply_status_effect(/datum/status_effect/buff/strong)
+//    ..()
+//
+// /datum/reagent/medicine/swiftpot
+//	name = "Swiftness Potion"
+//	description = "A swirling, bright green liquid, it seems to be bubbling. Greatly increases speed for a short period of time, and gives you stamina, at the cost of making you more prone to devestating, lethal injuries and making your bones soft and plyable."
+//	reagent_state = LIQUID
+//	color = "#56e300"
+//	taste_description = "earth, and a sharp, tingly aftertaste"
+//	metabolization_rate = 0.4 * REAGENTS_METABOLISM
+//	alpha = 173
+//
+// /datum/reagent/medicine/swiftpot/on_mob_life(mob/living/carbon/M)
+//    M.apply_status_effect(/datum/status_effect/buff/speedy)
+//    ..()
 
 /datum/reagent/berrypoison
 	name = "Berry Poison"
