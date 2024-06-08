@@ -34,7 +34,7 @@
 /atom/movable/screen/alert/status_effect/buff/strong
     name = "Strong"
     desc = "I could lift anything!"
-    icon_state = "potioneffect"
+    icon_state = ""
 
 /datum/reagent/strong/on_mob_end_metabolize(mob/living/M)
 
@@ -47,7 +47,7 @@
 /atom/movable/screen/alert/status_effect/buff/speedy
     name = "Zoomies"
     desc = "I feel much faster!"
-    icon_state = "potioneffect"
+    icon_state = ""
 
 /datum/reagent/swiftpot/on_mob_life(mob/living/carbon/M)
 	M.apply_status_effect(/datum/status_effect/buff/speedy)
