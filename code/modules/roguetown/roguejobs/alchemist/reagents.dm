@@ -53,7 +53,7 @@
     effectedstats = list("strength" = 6, "constitution" = 3, "endurance" = 3, "speed" = -9, "intelligence" = -5, "fortune" = -1)
     duration = 45 seconds
 
-/atom/movable/screen/alert/status_effect/buff/speedy
+/atom/movable/screen/alert/status_effect/buff/strong
     name = "Strong"
     desc = "I could lift anything!"
     icon_state = ""
