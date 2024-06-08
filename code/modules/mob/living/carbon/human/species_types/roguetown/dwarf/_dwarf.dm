@@ -5,6 +5,7 @@
 	name = "Dwarfb"
 	id = "dwarf"
 	max_age = 200
+	mutanteyes = /obj/item/organ/eyes/dwarf
 
 /datum/species/dwarf/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()

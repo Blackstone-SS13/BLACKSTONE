@@ -142,6 +142,12 @@
 	name = "fung-eye"
 	desc = ""
 
+/obj/item/organ/eyes/dwarf
+	name = "dwarf eyes"
+	desc = ""
+	see_in_dark = 4
+	lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
+
 /obj/item/organ/eyes/elf
 	name = "elf eyes"
 	desc = ""
