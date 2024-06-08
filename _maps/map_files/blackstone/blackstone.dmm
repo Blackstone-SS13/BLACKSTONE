@@ -693,7 +693,7 @@
 "fgl" = (/obj/structure/closet/crate/roguecloset,/obj/item/flint,/turf/open/floor/carpet/royalblack,/area/rogue/indoors/town/manor)
 "fgs" = (/obj/structure/fluff/wallclock,/obj/effect/landmark/latejoin,/turf/open/floor/rogue/ruinedwood{icon_state = "wooden_floort"},/area/rogue/outdoors/beach)
 "fhw" = (/obj/structure/closet/crate/chest,/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree,/turf/open/floor/rogue/blocks/stonered/tiny,/area/rogue/indoors/town/dwarfin)
-"fhx" = (/turf/open/floor/rogue/blocks/newstone/alt,/area/rogue/indoors/town/shop)
+"fhx" = (/turf/open/floor/rogue/blocks/newstone/alt,/area/rogue/indoors/town/warehouse)
 "fhH" = (/obj/structure/roguewindow/openclose{dir = 8},/turf/open/floor/rogue/wood,/area/rogue/indoors/town/garrison)
 "fhN" = (/obj/machinery/light/rogue/firebowl/standing/blue,/turf/open/floor/rogue/grass,/area/rogue/outdoors/bog)
 "fiL" = (/obj/structure/mineral_door/wood/donjon/stone{lockid = "physician"; locked = 1},/turf/open/floor/rogue/church,/area/rogue/indoors/town/manor)
