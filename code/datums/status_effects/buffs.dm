@@ -25,6 +25,39 @@
 	owner.apply_status_effect(STATUS_EFFECT_VOID_PRICE)
 
 
+/datum/status_effect/buff/strong
+    id = "strong"
+    alert_type = null
+    effectedstats = list("strength" = 6, "constitution" = 3, "endurance" = 3, "speed" = -9, "intelligence" = -5, "fortune" = -1)
+    duration = 45 SECONDS
+
+/atom/movable/screen/alert/status_effect/buff/strong
+    name = "Strong"
+    desc = "I could lift anything!"
+    icon_state = ""
+
+
+/datum/status_effect/buff/speedy
+    id = "zoomies"
+    alert_type = null
+    effectedstats = list("speed" = 12, "endurance" = -8, "fortune" = -15)
+    duration = 12 SECONDS
+
+/atom/movable/screen/alert/status_effect/buff/speedy
+    name = "Zoomies"
+    desc = "I got the zoomies!"
+    icon_state = ""
+
+/datum/reagent/swiftpot/on_mob_life(mob/living/carbon/M)
+    M.apply_status_effect(/datum/status_effect/buff/speedy)
+    ADD_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
+    ..()
+
+/datum/reagent/swiftpot/on_mob_end_metabolize(mob/living/M)
+    . = ..()
+    REMOVE_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
+
+
 /datum/status_effect/void_price
 	id = "void_price"
 	duration = 300
