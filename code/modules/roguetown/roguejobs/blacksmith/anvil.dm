@@ -97,8 +97,14 @@
 
 		return
 
-	if(hingot && hingot.currecipe && hingot.currecipe.needed_item && istype(W, hingot.currecipe.needed_item))
-		hingot.currecipe.item_added(user)
+	if(hingot?.currecipe?.additional_items_text)
+		var/found_in_list = FALSE
+		for(var/I_list in hingot.currecipe.additional_items)
+			if(istype(W, I_list))
+				found_in_list = TRUE
+		if(!found_in_list)
+			return
+		hingot.currecipe.item_added(user, W)
 		if(istype(W, /obj/item/ingot))
 			var/obj/item/ingot/I = W
 			hingot.currecipe.material_quality += I.quality
