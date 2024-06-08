@@ -84,11 +84,11 @@
 
 /datum/reagent/swiftpot/on_mob_life(mob/living/carbon/M)
 	M.apply_status_effect(/datum/status_effect/buff/speedy)
-	ADD_TRAIT(M, Indefatigable, INNATE_TRAIT)
+	ADD_TRAIT(M, TRAIT_NOROGSTAM, INNATE_TRAIT)
 	..()
 
 if(M)
-	REMOVE_TRAIT(M, TRAIT_NOROGSTAM, "Indefatigable")
+	REMOVE_TRAIT(M, TRAIT_NOROGSTAM)
 
 /datum/reagent/berrypoison
 	name = "Berry Poison"
