@@ -88,7 +88,7 @@
 	..()
 
 /datum/reagent/swiftpot/on_mob_end_metabolize(mob/living/M)
-	REMOVE_TRAIT(m, TRAIT_NOROGSTAM, TRAIT_INNATE, source)
+	REMOVE_TRAIT(M, TRAIT_NOROGSTAM, source)
 
 /datum/reagent/berrypoison
 	name = "Berry Poison"
