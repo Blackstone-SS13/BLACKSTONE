@@ -17,7 +17,7 @@
 	isvillager = TRUE
 	ispilgrim = TRUE
 
-/datum/outfit/job/roguetown/drunkard
+/datum/outfit/job/roguetown/adventurer/drunkard
 	allowed_patrons = list(/datum/patron/inhumen/eora)
 
 /datum/outfit/job/roguetown/adventurer/drunkard/pre_equip(mob/living/carbon/human/H)
