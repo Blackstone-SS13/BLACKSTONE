@@ -1,6 +1,6 @@
 /datum/advclass/drunkard
 	name = "Drunkard"
-	tutorial = "You are a scumbag. Everyone in your life has given up on you, and your remaining liver has tried to jump ship a few times. All you have left to your name are some cards, dice and whatever is in this bottle."
+	tutorial = "You are a scumbag. Everyone in your life has given up on you, and your remaining liver has tried to jump ship a few times. All you have left to your name are some cards, dice and whatever is in this bottle. At least you're still in Eora's good graces, whether you reciprocate such feelings or not..."
 	allowed_sexes = list("male", "female")
 	allowed_races = list(
 		"Humen",
@@ -18,7 +18,7 @@
 	ispilgrim = TRUE
 
 /datum/outfit/job/roguetown/adventurer/drunkard
-	allowed_patrons = list(/datum/patron/inhumen/eora)
+	allowed_patrons = list(/datum/patron/inhumen/eora, /datum/patron/divine/xylix)
 
 /datum/outfit/job/roguetown/adventurer/drunkard/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -48,3 +48,4 @@
 		H.change_stat("fortune", 2)
 		ADD_TRAIT(H, TRAIT_NOSTINK, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_LIMPDICK, TRAIT_GENERIC)
+		ADD_TRAIT(H, TRAIT_CRACKHEAD, TRAIT_GENERIC)
