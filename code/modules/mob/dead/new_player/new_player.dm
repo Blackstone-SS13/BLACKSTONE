@@ -341,10 +341,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 			return "[jobtitle] is already filled to capacity."
 		if(JOB_UNAVAILABLE_RACE)
 			return "[jobtitle] is not meant for your kind."
-		if(JOB_UNAVAILABLE_SEX)
-			return "[jobtitle] is not meant for your lesser sex."
-		if(JOB_UNAVAILABLE_AGE)
-			return "[jobtitle] is not meant for your age."
 		if(JOB_UNAVAILABLE_PATRON)
 			return "[jobtitle] requires more faith."
 		if(JOB_UNAVAILABLE_LASTCLASS)
@@ -412,22 +408,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		return JOB_UNAVAILABLE_PLAYTIME
 	if(latejoin && !job.special_check_latejoin(client))
 		return JOB_UNAVAILABLE_GENERIC
-	var/datum/species/pref_species = client.prefs.pref_species
-	if(length(job.allowed_races) && !(pref_species in job.allowed_races))
+	if(length(job.allowed_races) && !(client.prefs.pref_species.name in job.allowed_races))
 		return JOB_UNAVAILABLE_RACE
-	var/list/allowed_sexes = list()
-	allowed_sexes |= job.allowed_sexes
-	if(!job.immune_to_genderswap && pref_species?.gender_swapping)
-		if(MALE in allowed_sexes)
-			allowed_sexes -= MALE
-			allowed_sexes += FEMALE
-		if(FEMALE in allowed_sexes)
-			allowed_sexes -= FEMALE
-			allowed_sexes += MALE
-	if(length(allowed_sexes) && !(client.prefs.gender in allowed_sexes))
-		return JOB_UNAVAILABLE_SEX
-	if(length(job.allowed_ages) && !(client.prefs.age in job.allowed_ages))
-		return JOB_UNAVAILABLE_AGE
 	if(length(job.allowed_patrons) && !(client.prefs.selected_patron.type in job.allowed_patrons))
 		return JOB_UNAVAILABLE_PATRON
 	if(job.plevel_req > client.patreonlevel())
@@ -437,6 +419,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 		return JOB_UNAVAILABLE_GENERIC
 	if(!isnull(job.max_pq) && (get_playerquality(ckey) > job.max_pq))
 		return JOB_UNAVAILABLE_GENERIC
+	if(length(job.allowed_sexes) && !(client.prefs.gender in job.allowed_sexes))
+		return JOB_UNAVAILABLE_RACE
+	if(length(job.allowed_ages) && !(client.prefs.age in job.allowed_ages))
+		return JOB_UNAVAILABLE_RACE
 	if((client.prefs.lastclass == job.title) && !job.bypass_lastclass)
 		return JOB_UNAVAILABLE_GENERIC
 	if(istype(SSticker.mode, /datum/game_mode/roguewar))
