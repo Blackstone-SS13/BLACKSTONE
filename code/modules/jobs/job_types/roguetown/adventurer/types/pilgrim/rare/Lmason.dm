@@ -12,9 +12,8 @@
 	"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/grandmastermason
-	isvillager = FALSE
-	ispilgrim = TRUE
-	maxchosen = 1
+	category_tags = list(CTAG_PILGRIM)
+	maximum_possible_slots = 1
 	pickprob = 5
 	
 /datum/outfit/job/roguetown/adventurer/grandmastermason/pre_equip(mob/living/carbon/human/H)
