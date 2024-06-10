@@ -1,6 +1,6 @@
 /datum/advclass/doctor
 	name = "Doctor"
-	tutorial = "Blurring the line between healer and harbinger of death, you are the closest thing to a doctor that the townsfolk here can afford."
+	tutorial = "You are the closest thing to a doctor that the townsfolk here will ever meet. Wielding crude tools and accumulated knowledge, you have probably cut into as many people as the average Knight."
 	allowed_sexes = list("male")
 	allowed_races = list(
 		"Humen",
@@ -16,7 +16,7 @@
 	cmode_music = 'sound/music/combat_physician.ogg'
 
 /datum/outfit/job/roguetown/adventurer/doctor
-	allowed_patrons = list(/datum/patron/divine/pestra)
+	allowed_patrons = list(/datum/patron/divine/pestra, /datum/patron/inhumen/graggar)
 
 /datum/outfit/job/roguetown/adventurer/doctor/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -27,7 +27,7 @@
   		armor = /obj/item/clothing/suit/roguetown/armor/leather/vest
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/puritan
 		belt = /obj/item/storage/belt/rogue/leather
-		beltl = /obj/item/storage/belt/rogue/pouch/coins/mid
+		beltl = /obj/item/storage/belt/rogue/pouch/coins/poor
 		beltr = /obj/item/rogueweapon/huntingknife/idagger
 		pants = /obj/item/clothing/under/roguetown/trou
 		shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
@@ -43,13 +43,7 @@
 		/obj/item/needle = 1,
 		/obj/item/natural/cloth = 2,
 		)
-		H.change_stat("intelligence", 3)
 		H.change_stat("perception", 2)
-		H.change_stat("speed", pick(1,2))
-		H.change_stat("strength", pick(-2,-1))
-		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
   		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
@@ -57,6 +51,28 @@
 		H.mind.adjust_skillrank(/datum/skill/labor/lumberjacking, 1, TRUE)
  		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
 		ADD_TRAIT(H, TRAIT_EMPATH, "[type]")
 		ADD_TRAIT(H, TRAIT_NOSTINK, "[type]")
-
+		if(H.age == AGE_OLD)
+			H.change_stat("intelligence", 5)
+			H.change_stat("speed", 3)
+			H.change_stat("strength", -2)
+			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 5, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 4, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/alchemy, 3, TRUE)
+		if(H.age == AGE_MIDDLEAGED)
+			H.change_stat("intelligence", 4)
+			H.change_stat("speed", 2)
+			H.change_stat("strength", -1)
+			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
+		else
+			H.change_stat("intelligence", 3)
+			H.change_stat("speed", 1)
+			H.change_stat("fortune", 1)
+			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
