@@ -780,13 +780,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		if(!unlocked)
 			to_chat(user, "I have yet to regain this aspect of my power!")
 			return
-		if(C.deathknights.len >= 3)
-			to_chat(user, "You cannot summon any more death knights.")
-			return
 		var/choice = input(user,"What to do?", "ROGUETOWN") as anything in useoptions|null
 		switch(choice)
 			if("Create Death Knight")
 				if(alert(user, "Create a Death Knight? Cost:5000","","Yes","No") == "Yes")
+					if(C.deathknights.len >= 3)
+						to_chat(user, "You cannot summon any more death knights.")
+						return
 					if(!lord.mypool.check_withdraw(-5000))
 						to_chat(user, "I don't have enough vitae!")
 						return
@@ -1327,12 +1327,12 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 				to_chat(user, "I fail to ensnare their mind.")
 			if(willroll - bloodroll >= 3)
 				if(found_psycross == TRUE)
-					to_chat(L, "<font color='white'> The silver psycross shines and protect me from the blood magic, the one who used bllod magic was [user]!</font>")
+					to_chat(L, "<font color='white'> The silver psycross shines and protect me from the blood magic, the one who used blood magic was [user]!</font>")
 				else
 					to_chat(user, "I fail to ensnare their mind.")
 					to_chat(L, "I feel like someone or something unholy is messing with my head. I should get out of here!")
-					var/holyskill = user.mind.get_skill_level(/datum/skill/magic/holy)
-					var/arcaneskill = user.mind.get_skill_level(/datum/skill/magic/arcane)
+					var/holyskill = L.mind.get_skill_level(/datum/skill/magic/holy)
+					var/arcaneskill = L.mind.get_skill_level(/datum/skill/magic/arcane)
 					if(holyskill + arcaneskill >= 1)
 						to_chat(L, "I feel like the unholy magic came from [user]. I should use my magic or miracles on them.")
 
