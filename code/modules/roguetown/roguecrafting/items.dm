@@ -121,7 +121,7 @@
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
-/datum/crafting_recipe/roguetown/rproesthetic
+/datum/crafting_recipe/roguetown/lproesthetic
 	name = "wood arm (L)"
 	result = list(/obj/item/bodypart/l_arm/rproesthetic)
 	reqs = list(/obj/item/grown/log/tree/small = 1,
