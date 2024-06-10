@@ -16,6 +16,8 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/masterwoodcutter
 	maxchosen = 1
 	pickprob = 5
+	isvillager = FALSE
+	ispilgrim = TRUE
 	
 	
 /datum/outfit/job/roguetown/adventurer/masterwoodcutter/pre_equip(mob/living/carbon/human/H)
