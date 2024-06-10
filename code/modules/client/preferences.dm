@@ -989,7 +989,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 				JOB_AVAILABLE,
 				JOB_UNAVAILABLE_SLOTFULL,
 			)
-			if(job_unavailable in acceptable_unavailables)
+			if(!(job_unavailable in acceptable_unavailables))
 				HTML += "<font color=#a36c63>[used_name]</font></td> <td> </td></tr>"
 				continue
 //			if((job_preferences[SSjob.overflow_role] == JP_LOW) && (rank != SSjob.overflow_role) && !is_banned_from(user.ckey, SSjob.overflow_role))
