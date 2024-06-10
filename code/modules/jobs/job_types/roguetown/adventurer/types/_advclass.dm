@@ -3,7 +3,14 @@
 	var/outfit
 	var/tutorial = "Choose me!"
 	var/list/allowed_sexes
-	var/list/allowed_races
+	var/list/allowed_races = list(
+		"Humen",
+		"Elf",
+		"Elf",
+		"Dark Elf",
+		"Dwarf",
+		"Dwarf"
+	)
 	var/list/allowed_patrons
 	var/list/allowed_ages
 	var/pickprob = 100
@@ -18,9 +25,6 @@
 	var/vampcompat = TRUE
 	var/list/traits_applied
 	var/cmode_music
-
-	/// This class is immune to species-based swapped gender locks
-	var/immune_to_genderswap = FALSE
 
 /datum/advclass/proc/equipme(mob/living/carbon/human/H)
 	if(!H)

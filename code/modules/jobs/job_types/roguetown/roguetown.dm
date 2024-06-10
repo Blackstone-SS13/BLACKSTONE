@@ -57,14 +57,9 @@
 		H.set_patron(default_patron || pick(possiblegods))
 		to_chat(H, "<span class='warning'>[old_patron] had not endorsed my practices in my younger years. I've since grown acustomed to [H.patron].")
 	if(H.mind)
-		var/datum/species/pref_species = H.dna?.species
-		var/weak_gender = FEMALE
-		if(pref_species.gender_swapping)
-			weak_gender = MALE
-		if(H.gender == weak_gender)
+		if(H.gender == FEMALE)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/weaving, 1, TRUE)
 		if(H.dna)
 			H.dna.species.random_underwear(H.gender)
 			if(iself(H) || ishalfelf(H))
