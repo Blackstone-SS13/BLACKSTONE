@@ -6,6 +6,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
+		"Dark Elf",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/seamstress
 	isvillager = TRUE
