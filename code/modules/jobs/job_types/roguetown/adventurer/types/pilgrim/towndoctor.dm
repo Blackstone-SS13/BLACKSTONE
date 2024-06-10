@@ -22,7 +22,7 @@
 	..()
 	if(H.mind)
 		mask = /obj/item/clothing/mask/rogue/spectacles
-		head = /obj/item/clothing/head/roguetown/flathat
+		head = /obj/item/clothing/head/roguetown/nightman
 		neck = /obj/item/clothing/neck/roguetown/psicross/wood
 		armor = /obj/item/clothing/suit/roguetown/armor/leather/vest
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/puritan
@@ -59,17 +59,17 @@
 			H.change_stat("perception", 1)
 			H.change_stat("speed", -1)
 			H.change_stat("strength", -2)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 5, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/alchemy, 2, TRUE)
 		if(H.age == AGE_MIDDLEAGED)
 			H.change_stat("intelligence", 2)
 			H.change_stat("strength", -1)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 4, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/craft/alchemy, 1, TRUE)
 		else
 			H.change_stat("intelligence", 1)
 			H.change_stat("fortune", 1)
-			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
