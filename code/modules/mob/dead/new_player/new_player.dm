@@ -418,10 +418,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	var/list/allowed_sexes = list()
 	allowed_sexes |= job.allowed_sexes
 	if(!job.immune_to_genderswap && pref_species?.gender_swapping)
-		if(MALE in allowed_sexes)
+		if(MALE in job.allowed_sexes)
 			allowed_sexes -= MALE
 			allowed_sexes += FEMALE
-		if(FEMALE in allowed_sexes)
+		if(FEMALE in job.allowed_sexes)
 			allowed_sexes -= FEMALE
 			allowed_sexes += MALE
 	if(length(allowed_sexes) && !(client.prefs.gender in allowed_sexes))
