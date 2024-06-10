@@ -1,7 +1,7 @@
 /datum/advclass/drunkard
 	name = "Drunkard"
 	tutorial = "You are a scumbag. Everyone in your life has given up on you, and your remaining liver has tried to jump ship a few times. All you have left to your name are some cards, dice and whatever is in this bottle. At least you're still in Eora's good graces, whether you reciprocate such feelings or not..."
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",

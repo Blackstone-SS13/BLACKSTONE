@@ -1,6 +1,6 @@
 /datum/advclass/crusader
 	name = "Crusader"
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Tiefling",
