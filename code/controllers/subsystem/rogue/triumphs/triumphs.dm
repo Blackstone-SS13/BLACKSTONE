@@ -51,6 +51,8 @@ SUBSYSTEM_DEF(triumphs)
 /*
 	TRIUMPH BUY MENU THINGS
 */
+	// Whether triumph buys are enabled
+	var/triumph_buys_enabled = FALSE
 	//init list to hold triumph buy menus for the session (aka menu data)
 	// Assc list "ckey" = datum
 	var/list/active_triumph_menus = list()
@@ -171,6 +173,8 @@ SUBSYSTEM_DEF(triumphs)
 // Same deal as the role class stuff, we are only really just caching this to update displays as people buy stuff.
 // So we have to be careful to not leave it in when unneeded otherwise we will have to keep track of which menus are actually open.
 /datum/controller/subsystem/triumphs/proc/startup_triumphs_menu(client/C)
+	if(!triumph_buys_enabled)
+		return
 	if(C)
 		var/datum/triumph_buy_menu/check_this = active_triumph_menus[C.ckey]
 		if(check_this)
@@ -211,26 +215,6 @@ SUBSYSTEM_DEF(triumphs)
 // Called from the place its slopped in in SSticker, this will occur right after the gamemode starts ideally, aka roundstart.
 /datum/controller/subsystem/triumphs/proc/fire_on_PostSetup()
 	call_menu_refresh()
-
-/datum/controller/subsystem/triumphs/proc/handle_client_login(client/C)
-	var/target_ckey = C.ckey
-	if(!(target_ckey in triumph_amount_cache)) // If they are already cached who care they jus comin back for the same sess
-		var/target_file = file("data/player_saves/[target_ckey[1]]/[target_ckey]/triumphs.json") 
-		if(!fexists(target_file)) // no file or new player, write them in something
-			var/list/new_guy = list("triumph_count" = 0, "triumph_wipe_season" = GLOB.triumph_wipe_season)
-			WRITE_FILE(new_guy, json_encode(new_guy))
-			triumph_amount_cache[target_ckey] = 0
-			return
-
-		// This is not a new guy
-		var/list/not_new_guy = json_decode(file2text(target_file))
-		if(GLOB.triumph_wipe_season > not_new_guy["triumph_wipe_season"]) // Their file is behind in wipe seasons, time to be set to 0
-			triumph_amount_cache[target_ckey] = 0
-			return
-
-		var/cur_client_triumph_count = not_new_guy["triumph_count"]
-		triumph_amount_cache[target_ckey] = cur_client_triumph_count
-
 
 /*
 	We save everything when its time for reboot
@@ -301,7 +285,22 @@ SUBSYSTEM_DEF(triumphs)
 // Return a value of the triumphs they got
 /datum/controller/subsystem/triumphs/proc/get_triumphs(target_ckey)
 	if(!(target_ckey in triumph_amount_cache))
-		triumph_amount_cache[target_ckey] = 0
+		var/target_file = file("data/player_saves/[target_ckey[1]]/[target_ckey]/triumphs.json") 
+		if(!fexists(target_file)) // no file or new player, write them in something
+			var/list/new_guy = list("triumph_count" = 0, "triumph_wipe_season" = GLOB.triumph_wipe_season)
+			WRITE_FILE(new_guy, json_encode(new_guy))
+			triumph_amount_cache[target_ckey] = 0
+			return 0
+
+		// This is not a new guy
+		var/list/not_new_guy = json_decode(file2text(target_file))
+		if(GLOB.triumph_wipe_season > not_new_guy["triumph_wipe_season"]) // Their file is behind in wipe seasons, time to be set to 0
+			triumph_amount_cache[target_ckey] = 0
+			return 0
+
+		var/cur_client_triumph_count = not_new_guy["triumph_count"]
+		triumph_amount_cache[target_ckey] = cur_client_triumph_count		
+		return cur_client_triumph_count
 
 	return triumph_amount_cache[target_ckey]
 

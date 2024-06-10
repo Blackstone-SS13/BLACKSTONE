@@ -27,6 +27,11 @@ body {
 	color: #fa2222;
 }
 
+.queue_buttan {
+	width: 100%;
+	text-align: center;
+}
+
 a.join_drifter_queue, a.join_drifter_queue:link, a.join_drifter_queue:visited, a.join_drifter_queue:active {
 	text-decoration: none;
 	font-size: 18px;

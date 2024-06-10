@@ -27,7 +27,13 @@
 	//<script type='text/javascript' src='slop_scriptstyle4.js'></script>
 	//Body tag start
 	data += "<body>"
-	data += "<table class='timer_table'><tr><td class='timer_fluff'>Time to next incursion:</td><td class='timer_time' id='queue_timer'>[SSrole_class_handler.time_left_until_next_wave_string]</td></tr></table>"
+	data += "<table class='timer_table'><tr><td class='timer_fluff'>Time to next excursion:</td><td class='timer_time' id='queue_timer'>[SSrole_class_handler.time_left_until_next_wave_string]</td></tr></table>"
+	data += "<div class='queue_buttan'>"
+	if(linked_client in SSrole_class_handler.drifter_queue_joined_clients)
+		data += "<a class='leave_drifter_queue'href='?src=\ref[src];leave_queue=1'>LEAVE QUEUE</a>"
+	else
+		data += "<a class='join_drifter_queue'href='?src=\ref[src];join_queue=1'>ENTER QUEUE</a>"
+	data += "</div>"
 	data += "<br>"
 	data += "<div class='table_fluff_container'><span class='table_fluff_text'>Forecast:</span><span class='table_fluff_fadeout_line'></span></div><br>"
 	/*
@@ -50,30 +56,17 @@
 			data += "<tr class='wave_row'>"
 			switch(current_iteration)
 				if(1)
-					data += "<td class='wave_entry_href'>"
-					if(linked_client in SSrole_class_handler.drifter_wave_joined_clients)
-						data += "<a class='leave_drifter_queue'href='?src=\ref[src];leave_queue=1'>LEAVE</a>"
-					//else if(SSrole_class_handler.drifter_queue_delayed)
-					//	data += "<span class='delay_span'>DELAYED</span>"
-					else
-						data += "<a class='join_drifter_queue'href='?src=\ref[src];join_queue=1'>JOIN</a>"
-					data += "</td>"
+					//data += "<td class='wave_entry_href'>"
+					//data += "</td>"
 					data += "<td class='wave_number'>NOW: </td>"
 				if(2)
-					data += {"
-						<td class='wave_entry_href'></td>
-						<td class='wave_number'>NEXT: </td>
-					"}
-
+					data += "<td class='wave_number'>NEXT: </td>"
 				else
-					data += {"
-						<td class='wave_entry_href'></td>
-						<td class='wave_number'>[i]: </td>
-					"}
+					data += "<td class='wave_number'>[i]: </td>"
 
 			data += "<td class='wave_type'><a class='wave_type_hlink' href='?src=\ref[src];'>[cur_datum.wave_type_name]<span class='wave_type_hlink_tooltext'>[cur_datum.wave_type_tooltip]</span></a></td>"
 			if(current_iteration == 1)
-				data += "<td><span id='current_count'>0</span>/[cur_datum.maximum_playercount]</td>"
+				data += "<td><span id='current_count'>[SSrole_class_handler.drifter_wave_FULLY_entered_clients.len]</span>/[cur_datum.maximum_playercount]</td>"
 			else
 				data += "<td>0/[cur_datum.maximum_playercount]</td>"
 			data += "</tr>"
@@ -122,11 +115,11 @@
 	. = ..()
 	if(href_list["join_queue"])
 		//if(!SSrole_class_handler.drifter_queue_delayed)
-		SSrole_class_handler.attempt_to_add_client_to_drifter_wave(linked_client)
+		SSrole_class_handler.attempt_to_add_client_to_drifter_queue(linked_client)
 		show_drifter_queue_menu()
 
 	if(href_list["leave_queue"])
-		SSrole_class_handler.remove_client_from_drifter_wave(linked_client)
+		SSrole_class_handler.remove_client_from_drifter_queue(linked_client)
 		show_drifter_queue_menu()
 
 	if(href_list["close"])

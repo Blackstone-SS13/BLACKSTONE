@@ -386,13 +386,17 @@
 		if(player.ready == PLAYER_READY_TO_PLAY && player.check_preferences())
 //			if(player.client && player.client.whitelisted() && !player.client.blacklisted())
 			players += player
+			continue
+		if(player.client in SSrole_class_handler.drifter_wave_FULLY_entered_clients)
+			players += player
+			continue
 
 	// Shuffling, the players list is now ping-independent!!!
 	// Goodbye antag dante
 	players = shuffle(players)
 
 	for(var/mob/dead/new_player/player in players)
-		if(player.client && player.ready == PLAYER_READY_TO_PLAY)
+		if(player.client && player.ready == PLAYER_READY_TO_PLAY || player.client in SSrole_class_handler.drifter_wave_FULLY_entered_clients)
 			if(check_pq)
 				if(get_playerquality(player.ckey) <= -10)
 					continue

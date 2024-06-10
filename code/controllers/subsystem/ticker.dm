@@ -436,7 +436,7 @@ SUBSYSTEM_DEF(ticker)
 	
 	log_game("GAME SETUP: round start events success")
 	LAZYCLEARLIST(round_start_events)
-
+	SSrole_class_handler.RoundStart()
 	CHECK_TICK
 	if(isrogueworld)
 		for(var/obj/structure/fluff/traveltile/TT in GLOB.traveltiles)
@@ -472,7 +472,7 @@ SUBSYSTEM_DEF(ticker)
 
 //	SEND_SOUND(world, sound('sound/misc/roundstart.ogg'))
 	current_state = GAME_STATE_PLAYING
-	SSrole_class_handler.RoundStart()
+	
 	
 	Master.SetRunLevel(RUNLEVEL_GAME)
 /*

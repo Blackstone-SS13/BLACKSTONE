@@ -1,24 +1,24 @@
 // player table for the html menus
 /datum/controller/subsystem/role_class_handler/proc/rebuild_drifter_html_table()
-	if(!drifter_wave_joined_clients.len)
+	if(!drifter_wave_FULLY_entered_clients.len)
 		drifter_queue_player_tbl_string = "<tr></tr>"
 		return
 
 	var/data
 	// Wave entrants
 	var/on_playa_num = 1
-	var/total_rows = ceil(drifter_wave_joined_clients.len/2)
+	var/total_rows = ceil(drifter_wave_FULLY_entered_clients.len/2)
 	var/row_cellcount = 2
-	if(drifter_wave_joined_clients.len < 2)
+	if(drifter_wave_FULLY_entered_clients.len < 2)
 		row_cellcount = 1
 	for(var/i in 1 to total_rows)
 		data += "<tr>"
 
 		for(var/ii in 1 to row_cellcount)
-			var/client/C = drifter_wave_joined_clients[on_playa_num]
+			var/client/C = drifter_wave_FULLY_entered_clients[on_playa_num]
 			data += "<td>[C.prefs.real_name]</td>"
 			on_playa_num++
-			if(on_playa_num > drifter_wave_joined_clients.len)
+			if(on_playa_num > drifter_wave_FULLY_entered_clients.len)
 				break
 
 		data += "</tr>"

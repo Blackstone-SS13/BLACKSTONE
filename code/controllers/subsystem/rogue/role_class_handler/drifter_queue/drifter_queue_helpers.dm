@@ -35,6 +35,9 @@
 	Attempts to create a new drifter queue viewer datum and tie the client into it
 */
 /datum/controller/subsystem/role_class_handler/proc/add_drifter_queue_viewer(client/C)
+	if(!drifter_queue_enabled)
+		return
+
 	var/datum/drifter_queue_menu/menu = drifter_queue_menus[C.ckey]
 	if(menu)
 		if(!menu.linked_client)
@@ -49,12 +52,12 @@
 /*
 	Attempts to add a client to be queued for processing in the next drifter release
 */
-/datum/controller/subsystem/role_class_handler/proc/attempt_to_add_client_to_drifter_wave(client/target_client)
-	if(target_client in drifter_wave_joined_clients)
+/datum/controller/subsystem/role_class_handler/proc/attempt_to_add_client_to_drifter_queue(client/target_client)
+	if(target_client in drifter_queue_joined_clients)
 		return FALSE
-	var/datum/drifter_wave/current_wave = drifter_wave_schedule[current_wave_number]
-	if(drifter_wave_joined_clients.len >= current_wave.maximum_playercount)
-		return FALSE
+//	var/datum/drifter_wave/current_wave = drifter_wave_schedule[current_wave_number]
+	//if(drifter_wave_joined_clients.len >= current_wave.maximum_playercount)
+	//	return FALSE
 	if(!check_drifterwave_restrictions(target_client))
 		return FALSE
 	if(Master.current_runlevel < RUNLEVEL_LOBBY) // No entering during init
@@ -64,20 +67,25 @@
 		if(pregame_tard.ready == PLAYER_READY_TO_PLAY) // No entering if you are already ready
 			return FALSE
 
-	drifter_wave_joined_clients += target_client
-	rebuild_drifter_html_table()
-	queue_table_browser_update = TRUE
+	drifter_queue_joined_clients += target_client
+	// If the current wave isn't full jus enter us in brother
+	if(current_wave.maximum_playercount > drifter_wave_FULLY_entered_clients.len)
+		drifter_wave_FULLY_entered_clients += target_client
+		rebuild_drifter_html_table()
+		queue_table_browser_update = TRUE
 	return TRUE
 
 
 /*
 	Attempts to remove a client from the processing list for the next drifter release
 */
-/datum/controller/subsystem/role_class_handler/proc/remove_client_from_drifter_wave(client/target_client)
-	if(target_client in drifter_wave_joined_clients)
-		drifter_wave_joined_clients -= target_client
-		rebuild_drifter_html_table()
-		queue_table_browser_update = TRUE
+/datum/controller/subsystem/role_class_handler/proc/remove_client_from_drifter_queue(client/target_client)
+	if(target_client in drifter_queue_joined_clients)
+		drifter_queue_joined_clients -= target_client
+		if(target_client in drifter_wave_FULLY_entered_clients)
+			drifter_wave_FULLY_entered_clients -= target_client
+			rebuild_drifter_html_table()
+			queue_table_browser_update = TRUE
 		return TRUE
 	return FALSE
 
@@ -85,7 +93,7 @@
 	A haphazard proc that just attempts to cleanup anything related to a client in both the queue and viewer areas
 */
 /datum/controller/subsystem/role_class_handler/proc/cleanup_drifter_queue(client/target_client)
-	remove_client_from_drifter_wave(target_client)
+	remove_client_from_drifter_queue(target_client)
 	remove_drifter_queue_viewer(target_client)
 
 /*

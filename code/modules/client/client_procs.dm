@@ -503,8 +503,6 @@ GLOBAL_LIST_EMPTY(external_rsc_urls)
 		if (menuitem)
 			menuitem.Load_checked(src)
 
-	SStriumphs.handle_client_login(src)
-
 	Master.UpdateTickRate()
 
 //////////////

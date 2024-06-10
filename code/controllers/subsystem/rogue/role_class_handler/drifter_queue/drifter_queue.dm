@@ -29,8 +29,10 @@
 	var/datum/drifter_wave/current_wave
 	// Schedule of drifter waves
 	var/list/drifter_wave_schedule = list()
-	// List of clients who have joined for the wave
-	var/list/drifter_wave_joined_clients = list()
+	// List of clients who are currently queued
+	var/list/drifter_queue_joined_clients = list()
+	// List of clients who are set to be sent out with the wave
+	var/list/drifter_wave_FULLY_entered_clients = list()
 	// Number of waves we keep scheduled past the current one
 	var/drifter_wave_schedule_buffer = 2
 	// Next time we attempt to process a wave/joined clients
@@ -93,7 +95,7 @@
 		// Whether its time to update the player table and playercount for the waves
 		if(queue_table_browser_update)
 			// This function wants the lefthand current wave player number and then the current table html
-			target_client << output(list2params(list("[drifter_wave_joined_clients.len]", drifter_queue_player_tbl_string)), "drifter_queue.browser:update_playersegments")
+			target_client << output(list2params(list("[drifter_wave_FULLY_entered_clients.len]", drifter_queue_player_tbl_string)), "drifter_queue.browser:update_playersegments")
 
 		if(MC_TICK_CHECK)
 			return
@@ -110,10 +112,10 @@
 */
 	// You will not be in drifter queue and adversely also join regular queue dickhead
 	if(Master.current_runlevel == RUNLEVEL_LOBBY)
-		for(var/client/target_client in drifter_wave_joined_clients)
+		for(var/client/target_client in drifter_queue_joined_clients)
 			var/mob/dead/new_player/pregame_retard = target_client.mob
 			if(pregame_retard.ready == PLAYER_READY_TO_PLAY)
-				drifter_wave_joined_clients -= target_client
+				drifter_queue_joined_clients -= target_client
 
 				rebuild_drifter_html_table()
 
@@ -143,12 +145,12 @@
 		else
 			next_drifter_mass_release_time = world.time + current_wave.wave_delay_time
 
-		if(drifter_wave_joined_clients.len)
+		if(drifter_wave_FULLY_entered_clients.len)
 			if(!drifter_dropzone_targets.len) // If you set some random crap to it it'll all go there otherwise its business as usual
 				find_dropoff_location()
 
 			var/list/temp_dropoff_refs = drifter_dropzone_targets.Copy()
-			for(var/client/target_client in drifter_wave_joined_clients)
+			for(var/client/target_client in drifter_wave_FULLY_entered_clients)
 				if(!check_drifterwave_restrictions(target_client)) // Alas, I be feelin lazy fuck you ppl
 					continue
 				var/mob/living/character = process_drifter_wave_client(target_client)
@@ -165,7 +167,7 @@
 				// We do some tracking for funsies
 				total_amount_of_drifters_entered_into_round++
 
-			drifter_wave_joined_clients.Cut()
+			drifter_wave_FULLY_entered_clients.Cut()
 			drifter_dropzone_targets.Cut()
 
 		queue_total_browser_update = TRUE
