@@ -3,7 +3,7 @@
 	name = "Warrior"
 	tutorial = "Warriors are well balanced fighters, skilled in blades and capable of most other weapons. \
 	they are an important member to most parties for their combat prowess, but not for much more"
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",

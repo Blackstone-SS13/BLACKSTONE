@@ -2,7 +2,7 @@
 /datum/advclass/barbarian
 	name = "Barbarian"
 	tutorial = "A jack-of-all-trades warrior sort. Is skilled in all weapons, but master of none"
-	allowed_sexes = list("male")
+	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",

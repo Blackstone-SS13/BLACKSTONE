@@ -2,7 +2,7 @@
 	name = "Woodcutter"
 	tutorial = "You are a strong Lumberjack, armed with an axe, you can gather wood \
 	either for yourself, or for others. You are a novice carpenter too, so you can bend wood into some items you need, and chop it efficiently"
-	allowed_sexes = list("male")
+	allowed_sexes = list(MALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
