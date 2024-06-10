@@ -413,7 +413,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	if(latejoin && !job.special_check_latejoin(client))
 		return JOB_UNAVAILABLE_GENERIC
 	var/datum/species/pref_species = client.prefs.pref_species
-	if(length(job.allowed_races) && !(pref_species in job.allowed_races))
+	if(length(job.allowed_races) && !(pref_species.name in job.allowed_races))
 		return JOB_UNAVAILABLE_RACE
 	var/list/allowed_sexes = list()
 	allowed_sexes |= job.allowed_sexes
