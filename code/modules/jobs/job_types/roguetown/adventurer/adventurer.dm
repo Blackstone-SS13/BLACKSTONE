@@ -67,7 +67,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 			var/datum/species/pref_species = H.dna.species
 			var/list/allowed_sexes = list()
 			allowed_sexes |= A.allowed_sexes
-			if(pref_species?.gender_swapping)
+			if(!A.immune_to_genderswap && pref_species?.gender_swapping)
 				if(MALE in allowed_sexes)
 					allowed_sexes -= MALE
 					allowed_sexes += FEMALE
