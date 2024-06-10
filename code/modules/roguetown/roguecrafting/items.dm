@@ -28,7 +28,7 @@
 	verbage_simple = "tie"
 	verbage = "ties"
 
-	/datum/crafting_recipe/roguetown/unclothbelt
+/datum/crafting_recipe/roguetown/unclothbelt
 	name = "untie cloth belt"
 	result = /obj/item/natural/cloth
 	reqs = list(/obj/item/storage/belt/rogue/leather/cloth = 1)
@@ -36,7 +36,7 @@
 	verbage_simple = "untie"
 	verbage = "unties"
 
-	/datum/crafting_recipe/roguetown/ropebelt
+/datum/crafting_recipe/roguetown/ropebelt
 	name = "rope belt"
 	result = /obj/item/storage/belt/rogue/leather/rope
 	reqs = list(/obj/item/rope = 1)
@@ -44,7 +44,7 @@
 	verbage_simple = "tie"
 	verbage = "ties"
 
-	/datum/crafting_recipe/roguetown/unropebelt
+/datum/crafting_recipe/roguetown/unropebelt
 	name = "untie rope belt"
 	result = /obj/item/rope
 	reqs = list(/obj/item/storage/belt/rogue/leather/rope = 1)
