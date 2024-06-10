@@ -64,6 +64,7 @@
 		if(H.gender == weak_gender)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/weaving, 1, TRUE)
 		if(H.dna)
 			H.dna.species.random_underwear(H.gender)
 			if(iself(H) || ishalfelf(H))
