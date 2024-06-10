@@ -157,7 +157,7 @@
 	// We setup the href_list "close" call if they hit the x on the top right
 	for(var/i in 1 to 10)
 		if(linked_client && winexists(linked_client, "triumph_buy_window"))
-			onclose(linked_client.mob, "triumph_buy_window", src)
+			winset(linked_client, "triumph_buy_window", "on-close=\".windowclose [REF(src)]\"")
 			break
 
 // TRIUMPH BUY MENU SIDED PROC

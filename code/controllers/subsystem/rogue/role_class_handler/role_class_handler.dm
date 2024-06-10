@@ -115,6 +115,8 @@ SUBSYSTEM_DEF(role_class_handler)
 	Since this is class handler related, might as well also have the class handler send itself into the params
 */
 /datum/controller/subsystem/role_class_handler/proc/finish_class_handler(mob/living/carbon/human/H, datum/advclass/picked_class, datum/class_select_handler/related_handler, plus_factor, special_session_queue)
+	if(!picked_class || !related_handler || !H) // ????????? This is realistically only going to happen when someones doubling up or trying to href exploit
+		return FALSE
 	if(!(picked_class.maximum_possible_slots == -1)) // Is the class not set to infinite?
 		if(picked_class.total_slots_occupied >= picked_class.maximum_possible_slots) // are the occupied slots greater than or equal to the current maximum possible slots on the datum?
 			related_handler.rolled_class_is_full(picked_class) //If so we inform the datum in the off-chance some desyncing is occurring so we don't have a deadslot in their options.

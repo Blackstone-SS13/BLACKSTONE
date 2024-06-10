@@ -111,7 +111,7 @@
 	// We setup the href_list "close" call if they hit the x on the top right
 	for(var/i in 1 to 10)
 		if(linked_client && winexists(linked_client, "drifter_queue"))
-			onclose(linked_client.mob, "drifter_queue", src)
+			winset(linked_client, "drifter_queue", "on-close=\".windowclose [REF(src)]\"")
 			break
 
 /datum/drifter_queue_menu/proc/ForceCloseMenus()

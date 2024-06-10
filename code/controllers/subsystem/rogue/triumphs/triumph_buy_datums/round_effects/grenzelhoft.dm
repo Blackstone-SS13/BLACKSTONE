@@ -1,7 +1,7 @@
 /datum/triumph_buy/grenzelhoft_maximum
 	triumph_buy_id = "Grenzelhoftmaxx"
 	desc = "Everyone is a human from Grenzelhoft!"
-	triumph_cost = 30
+	triumph_cost = 60
 	category = TRIUMPH_CAT_ROUND_EFX
 	pre_round_only = TRUE
 	visible_on_active_menu = TRUE

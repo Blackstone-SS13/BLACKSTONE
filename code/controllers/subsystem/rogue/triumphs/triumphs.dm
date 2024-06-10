@@ -48,9 +48,9 @@ SUBSYSTEM_DEF(triumphs)
 	// When the server session is about to end we will write it all in.
 	var/list/triumph_amount_cache = list()
 
-	/*
-		TRIUMPH BUY MENU THINGS
-								*/
+/*
+	TRIUMPH BUY MENU THINGS
+*/
 	//init list to hold triumph buy menus for the session (aka menu data)
 	// Assc list "ckey" = datum
 	var/list/active_triumph_menus = list()
@@ -69,9 +69,9 @@ SUBSYSTEM_DEF(triumphs)
 	)
 
 
-	/*
-		TRIUMPH BUY DATUM THINGS
-										*/
+/*
+	TRIUMPH BUY DATUM THINGS
+*/
 
 	var/current_refund_percentage = 0.50 // Current refund percentage is 50%
 	//this is basically the total list of triumph buy datums on init

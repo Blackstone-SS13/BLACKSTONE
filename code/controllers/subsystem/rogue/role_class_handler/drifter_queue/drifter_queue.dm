@@ -23,6 +23,8 @@
 /*
 	WORKING VARS
 */
+	// How many drifters have entered into the round over the entire course of it
+	var/total_amount_of_drifters_entered_into_round = 0
 	// ref to the current wave
 	var/datum/drifter_wave/current_wave
 	// Schedule of drifter waves
@@ -41,6 +43,7 @@
 	// Whether its time for a total refresh (sorry I don't feel like updating the damn table itself)
 	var/queue_total_browser_update = FALSE
 	// Whether its time to update the browser table
+	var/next_queue_table_browser_update_time
 	var/queue_table_browser_update = FALSE
 	// String vars for display menus
 	var/drifter_queue_player_tbl_string = ""
@@ -159,6 +162,8 @@
 						picked_turf = drifter_dropzone_targets
 
 					character.forceMove(picked_turf)
+				// We do some tracking for funsies
+				total_amount_of_drifters_entered_into_round++
 
 			drifter_wave_joined_clients.Cut()
 			drifter_dropzone_targets.Cut()
