@@ -677,7 +677,7 @@
 		to_chat(user, span_warning("The door doesn't lock from this side."))
 
 /obj/structure/mineral_door/wood/donjon
-	desc = ""
+	desc = "dungeon door"
 	icon_state = "donjondir"
 	base_state = "donjon"
 	keylock = TRUE
@@ -691,11 +691,11 @@
 	attacked_sound = list("sound/combat/hits/onmetal/metalimpact (1).ogg", "sound/combat/hits/onmetal/metalimpact (2).ogg")
 
 /obj/structure/mineral_door/wood/donjon/stone
-	desc = ""
+	desc = "stone door"
 	icon_state = "stone"
 	base_state = "stone"
 	keylock = TRUE
-	max_integrity = 1000
+	max_integrity = 1500
 	over_state = "stoneopen"
 	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
 
@@ -742,7 +742,7 @@
 	openSound = 'sound/foley/doors/ironopen.ogg'
 	closeSound = 'sound/foley/doors/ironclose.ogg'
 	resistance_flags = null
-	max_integrity = 1000
+	max_integrity = 2000
 	damage_deflection = 15
 	layer = ABOVE_MOB_LAYER
 	keylock = TRUE

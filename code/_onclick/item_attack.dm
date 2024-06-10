@@ -51,9 +51,6 @@
 /obj/attackby(obj/item/I, mob/living/user, params)
 	return ..() || ((obj_flags & CAN_BE_HIT) && I.attack_obj(src, user))
 
-/turf/attackby(obj/item/I, mob/living/user, params)
-	return ..() || (max_integrity && I.attack_turf(src, user))
-
 /mob/living/attackby(obj/item/I, mob/living/user, params)
 	if(..())
 		return TRUE

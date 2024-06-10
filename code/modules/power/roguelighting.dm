@@ -453,6 +453,20 @@
 	pixel_y = 32
 	soundloop = null
 
+/obj/machinery/light/rogue/wallfire/candle/OnCrafted(dirin, user)
+	pixel_x = 0
+	pixel_y = 0
+	switch(dirin)
+		if(NORTH)
+			pixel_y = 32
+		if(SOUTH)
+			pixel_y = -32
+		if(EAST)
+			pixel_x = 32
+		if(WEST)
+			pixel_x = -32
+	. = ..()
+	
 /obj/machinery/light/rogue/wallfire/candle/attack_hand(mob/user)
 	if(isliving(user) && on)
 		user.visible_message(span_warning("[user] snuffs [src]."))
@@ -523,7 +537,7 @@
 /obj/machinery/light/rogue/torchholder/OnCrafted(dirin, user)
 	if(dirin == NORTH)
 		pixel_y = 32
-	dirin = angle2dir(dir2angle(dirin) + 180)
+	dirin = turn(dirin, 180)
 	QDEL_NULL(torchy)
 	on = FALSE
 	set_light(0)

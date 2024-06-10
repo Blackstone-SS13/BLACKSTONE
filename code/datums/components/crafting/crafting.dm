@@ -183,9 +183,6 @@
 	if(!R.TurfCheck(user, T))
 		to_chat(user, span_warning("I can't craft here."))
 		return
-	if(istype(T, /turf/open/water))
-		to_chat(user, span_warning("I can't craft here."))
-		return
 	if(isturf(R.result))
 		for(var/obj/structure/fluff/traveltile/TT in range(7, user))
 			to_chat(user, span_warning("I can't craft here."))

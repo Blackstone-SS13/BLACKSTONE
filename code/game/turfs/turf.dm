@@ -297,6 +297,7 @@
 /turf/attackby(obj/item/C, mob/user, params)
 	if(..())
 		return TRUE
+	//Cables and RCD
 	if(can_lay_cable() && istype(C, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/coil = C
 		coil.place_turf(src, user)
@@ -313,7 +314,7 @@
 	else if(istype(C, /obj/item/twohanded/rcl))
 		handleRCL(C, user)
 
-	return FALSE
+	return max_integrity && C.attack_turf(src, user)
 
 /turf/CanPass(atom/movable/mover, turf/target)
 	if(!target)
