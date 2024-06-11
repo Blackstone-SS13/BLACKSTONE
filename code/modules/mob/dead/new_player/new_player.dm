@@ -416,7 +416,8 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	if(length(job.allowed_races) && !(pref_species.name in job.allowed_races))
 		return JOB_UNAVAILABLE_RACE
 	var/list/allowed_sexes = list()
-	allowed_sexes |= job.allowed_sexes
+	if(length(job.allowed_sexes))
+		allowed_sexes |= job.allowed_sexes
 	if(!job.immune_to_genderswap && pref_species?.gender_swapping)
 		if(MALE in job.allowed_sexes)
 			allowed_sexes -= MALE
