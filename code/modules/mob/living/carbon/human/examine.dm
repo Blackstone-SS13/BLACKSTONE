@@ -38,7 +38,12 @@
 		if(HAS_TRAIT(L, TRAIT_PROSOPAGNOSIA))
 			obscure_name = TRUE
 
-	if(!get_face_name(if_no_face = null))
+	var/static/list/unknown_names = list(
+		"Unknown",
+		"Unknown Man",
+		"Unknown Woman",
+	)
+	if(get_visible_name() in unknown_names)
 		obscure_name = TRUE
 
 	if(observer_privilege)
