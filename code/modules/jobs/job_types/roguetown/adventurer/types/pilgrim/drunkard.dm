@@ -15,7 +15,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/drunkard
 	isvillager = TRUE
-	ispilgrim = TRUE
+	ispilgrim = FALSE
 
 /datum/outfit/job/roguetown/adventurer/drunkard
 	allowed_patrons = list(/datum/patron/inhumen/eora, /datum/patron/divine/xylix)
