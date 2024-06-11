@@ -3,12 +3,6 @@
 */
 /datum/controller/subsystem/role_class_handler
 /*
-	List of drifter wave datums, created and crammed up this lists ass in the initialize for this subsystem
-	contents: drifter_wave_data_slabs = list(/datum/drifter_wave, /datum/drifter_wave1, /datum/drifter_wave2)
-*/
-	var/list/drifter_wave_data_slabs = list()
-
-/*
 	assc list of ckeys linked to drifter queue menus if they got one which have client refs on them
 	ex: drifter_queue_menuss[ckey] = /datum/drifter_queue_menu
 	contents: drifter_queue_menus = list("ckey" = /datum/drifter_queue_menu, "ckey2" = /datum/drifter_queue_menu,... etc)
@@ -39,8 +33,6 @@
 	var/next_drifter_mass_release_time = 0
 	// Current wave number we are on
 	var/current_wave_number = 1
-	// Current drop location targets, attempts to get a block of turfs around the atom
-	var/list/drifter_dropzone_targets = list()
 
 	// Whether its time for a total refresh (sorry I don't feel like updating the damn table itself)
 	var/queue_total_browser_update = FALSE
@@ -146,10 +138,12 @@
 			next_drifter_mass_release_time = world.time + current_wave.wave_delay_time
 
 		if(drifter_wave_FULLY_entered_clients.len)
-			if(!drifter_dropzone_targets.len) // If you set some random crap to it it'll all go there otherwise its business as usual
-				find_dropoff_location()
+			current_wave.build_dropzone()
+			if(!current_wave.drifter_dropzone_targets)
+				message_admins("DRIFTER QUEUE TRIED TO FIRE WAVE WITH NO DROPZONE")
+				return
 
-			var/list/temp_dropoff_refs = drifter_dropzone_targets.Copy()
+			var/list/temp_dropoff_refs = current_wave.drifter_dropzone_targets.Copy()
 			for(var/client/target_client in drifter_wave_FULLY_entered_clients)
 				if(!check_drifterwave_restrictions(target_client)) // Alas, I be feelin lazy fuck you ppl
 					continue
@@ -161,14 +155,14 @@
 						picked_turf = pick(temp_dropoff_refs)
 						temp_dropoff_refs -= picked_turf
 					else // And if we can't we will just do it neways ok
-						picked_turf = drifter_dropzone_targets
+						picked_turf = current_wave.drifter_dropzone_targets
 
 					character.forceMove(picked_turf)
+					current_wave.post_character_handling(character)
 				// We do some tracking for funsies
 				total_amount_of_drifters_entered_into_round++
 
 			drifter_wave_FULLY_entered_clients.Cut()
-			drifter_dropzone_targets.Cut()
 
 		queue_total_browser_update = TRUE
 
@@ -233,30 +227,6 @@
 		GLOB.respawncounts[character.ckey] = 1
 
 	return character
-	log_manifest(character.mind.key, character.mind, character,latejoin = TRUE)
+	log_manifest(character.mind.key, character.mind, character, latejoin = TRUE)
 
-// Attempt to find a place to put all these motherfuckers
-/datum/controller/subsystem/role_class_handler/proc/find_dropoff_location()
-	// This will be full of turfs
-	var/list/potential_target_dropzones = list()
 
-	if(current_wave.droppoint_landmark_types.len)
-		for(var/obj/effect/landmark/cur_landmark in GLOB.landmarks_list)
-			if(cur_landmark.type in current_wave.droppoint_landmark_types)
-				potential_target_dropzones += cur_landmark      
-
-	if(!potential_target_dropzones.len)
-		if(SSjob.latejoin_trackers.len)
-			potential_target_dropzones += pick(SSjob.latejoin_trackers)
-
-	if(!potential_target_dropzones.len)
-		message_admins("DRIFTER QUEUE HAS NO DROPZONE TARGET POINTS. SHIIIET!")
-		return
-
-	var/atom/TITS = pick(potential_target_dropzones) // Well we got our thing
-
-	// we try our best to deploy each guy into his own turf ok this def needs to be less retarded but the map landmarks are fucky
-	var/rows_2_make = ceil(current_wave.maximum_playercount/2)
-	for(var/turf/T in block(TITS.x-1, TITS.y-2, TITS.z, TITS.x+rows_2_make, TITS.y+1, TITS.z))
-		if(isopenturf(T))
-			drifter_dropzone_targets += T

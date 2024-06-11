@@ -54,7 +54,16 @@ SUBSYSTEM_DEF(role_class_handler)
 
 // This covers both class datums and drifter waves
 /datum/controller/subsystem/role_class_handler/proc/build_dumbass_category_lists()
-	init_subtypes(/datum/drifter_wave, drifter_wave_data_slabs) // Init all the drifter waves
+	var/list/all_drifter_waves = list()
+	init_subtypes(/datum/drifter_wave, all_drifter_waves) // Init all the drifter waves
+	sorted_drifter_wave_categories[DTAG_ALLWAVES] = all_drifter_waves
+
+	for(var/datum/drifter_wave/stupidass_datum in all_drifter_waves)
+		for(var/dtag in stupidass_datum.drifter_wave_categories)
+			if(!sorted_drifter_wave_categories[dtag])
+				sorted_drifter_wave_categories[dtag] = list()
+			sorted_drifter_wave_categories[dtag] += stupidass_datum
+
 
 	var/list/all_classes = list()
 	init_subtypes(/datum/advclass, all_classes) // Init all the classes
