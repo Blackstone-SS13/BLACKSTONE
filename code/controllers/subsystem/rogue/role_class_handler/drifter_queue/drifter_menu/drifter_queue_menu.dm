@@ -103,7 +103,9 @@
 	linked_client << browse(data, "window=drifter_queue;size=400x430;can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=1")
 	// We setup the href_list "close" call if they hit the x on the top right
 	for(var/i in 1 to 10)
-		if(linked_client && winexists(linked_client, "drifter_queue"))
+		if(!linked_client)
+			break
+		if(winexists(linked_client, "drifter_queue"))
 			winset(linked_client, "drifter_queue", "on-close=\".windowclose [REF(src)]\"")
 			break
 
