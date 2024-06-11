@@ -64,7 +64,19 @@
 	On the datum! Wow!
 */
 /datum/advclass/proc/check_requirements(mob/living/carbon/human/H)
-	if(length(allowed_sexes) && !(H.gender in allowed_sexes))
+
+	var/datum/species/pref_species = H.dna.species
+	var/list/local_allowed_sexes = list()
+	if(length(allowed_sexes))
+		local_allowed_sexes |= allowed_sexes
+	if(!immune_to_genderswap && pref_species?.gender_swapping)
+		if(MALE in allowed_sexes)
+			local_allowed_sexes -= MALE
+			local_allowed_sexes += FEMALE
+		if(FEMALE in allowed_sexes)
+			local_allowed_sexes -= FEMALE
+			local_allowed_sexes += MALE
+	if(length(local_allowed_sexes) && !(H.gender in local_allowed_sexes))
 		return FALSE
 
 	if(length(allowed_races) && !(H.dna.species.name in allowed_races))

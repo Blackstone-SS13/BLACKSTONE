@@ -18,6 +18,9 @@
 	//Restrictions on what is required in order to enter the wave
 	//Make sure to set this up if you need it otherwise you might cuck someone if theres a class selection w requirements.
 	var/list/allowed_sexes
+	// This wave does not allow a swap of gender based on species variables
+	var/immune_to_genderswap = FALSE
+
 	var/list/allowed_races
 	var/list/allowed_patrons
 	var/list/allowed_ages = ADULT_AGES_LIST
