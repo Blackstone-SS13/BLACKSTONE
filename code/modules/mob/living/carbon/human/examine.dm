@@ -60,7 +60,7 @@
 			var/datum/job/J = SSjob.GetJob(job)
 			var/used_title = J.title
 			var/weaker_pronoun = p_they(TRUE, temp_gender = FEMALE)
-			if(!J. && dna.species.gender_swapping)
+			if(!J.immune_to_genderswap && dna.species.gender_swapping)
 				weaker_pronoun = p_they(TRUE,temp_gender = MALE)
 			if(J.f_title && (t_He == weaker_pronoun))
 				used_title = J.f_title
