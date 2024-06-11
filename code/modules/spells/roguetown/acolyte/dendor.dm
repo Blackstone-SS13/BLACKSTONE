@@ -63,9 +63,9 @@
 	cast_without_targets = TRUE
 	sound = 'sound/items/dig_shovel.ogg'
 	associated_skill = /datum/skill/magic/holy
-	req_items = list(/obj/item/clothing/neck/roguetown/psicross)
 	invocation = "Treefather light the way."
 	invocation_type = "whisper" //can be none, whisper, emote and shout
+	devotion_cost = 75
 
 /obj/effect/proc_holder/spell/targeted/conjure_glowshroom/cast(list/targets, mob/user = usr)
 	. = ..()
