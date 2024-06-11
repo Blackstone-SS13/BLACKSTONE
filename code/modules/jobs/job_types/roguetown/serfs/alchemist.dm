@@ -31,7 +31,7 @@
 	..()
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/alchemy, pick(3,4,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/alchemy, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		if(H.age == AGE_OLD)
 			H.mind.adjust_skillrank(/datum/skill/misc/alchemy, pick(5,6), TRUE)
