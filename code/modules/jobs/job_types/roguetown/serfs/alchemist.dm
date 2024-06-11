@@ -1,4 +1,3 @@
-//SINCE WHEN IS THIS A THING, this is sick, my alchemy pr is compatable with this already and everything, just gonna give it a touch up so someone else can sprite this up and boom
 /datum/job/roguetown/alchemist 
 	title = "Alchemist"
 	flag = ALCHEMIST
@@ -33,7 +32,7 @@
 	..()
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/alchemy, pick(3,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/alchemy, pick(3,4,5), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		if(H.age == AGE_OLD)
 			H.mind.adjust_skillrank(/datum/skill/misc/alchemy, pick(5,6), TRUE)
