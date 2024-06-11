@@ -185,7 +185,7 @@
 	var/mob/living/carbon/human/H
 	if(ishuman(M))
 		H = M
-		if(!immune_to_gender_swap && H.dna?.species?.gender_swapping)
+		if(!immune_to_genderswap && H.dna?.species?.gender_swapping)
 			if(MALE in allowed_sex)
 				allowed_sexes -= MALE
 				allowed_sexes += FEMALE
