@@ -59,7 +59,7 @@
 	if(H.mind)
 		var/datum/species/pref_species = H.dna?.species
 		var/weak_gender = FEMALE
-		if(pref_species.gender_swapping)
+		if(pref_species?.gender_swapping)
 			weak_gender = MALE
 		if(H.gender == weak_gender)
 			H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
