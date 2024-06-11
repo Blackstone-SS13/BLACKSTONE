@@ -273,9 +273,10 @@
 				to_chat(s_user, "<font color='red'> The silver weapon fails!</font>")
 				H.visible_message(H, "<span class='userdanger'>This feeble metal can't hurt me, I AM THE ANCIENT!</span>")
 		if(W && W.transformed == TRUE)
-			H.Stun(20)
-			H.Paralyze(20)
+			H.Stun(40)
+			H.Paralyze(40)
 			to_chat(H, "<span class='userdanger'>I'm hit by my BANE!</span>")
+			src.last_used = world.time
 
 
 /obj/item/rogueweapon/huntingknife/stoneknife
