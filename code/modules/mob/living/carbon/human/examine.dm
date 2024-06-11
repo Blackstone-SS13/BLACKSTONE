@@ -59,10 +59,7 @@
 		if(job)
 			var/datum/job/J = SSjob.GetJob(job)
 			var/used_title = J.title
-			var/weaker_pronoun = p_they(TRUE, temp_gender = FEMALE)
-			if(!J.immune_to_genderswap && dna.species.gender_swapping)
-				weaker_pronoun = p_they(TRUE,temp_gender = MALE)
-			if(J.f_title && (t_He == weaker_pronoun))
+			if(J.f_title && (t_He == "She"))
 				used_title = J.f_title
 			if(J.wanderer_examine)
 				. = list("<span class='info'>ø ------------ ø\nThis is <EM>[used_name]</EM>, the wandering [race_name].")
