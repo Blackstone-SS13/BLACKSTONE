@@ -11,7 +11,7 @@
 "bd" = (/obj/item/rogue/painting,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "bi" = (/obj/effect/decal/cleanable/blood/old,/obj/effect/decal/cobbleedge,/turf/open/floor/rogue/cobble,/area/rogue/under/cave/dungeon1)
 "bj" = (/obj/structure/rack/rogue,/obj/effect/spawner/lootdrop/roguetown/dungeon/tools,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
-"bk" = (/obj/effect/decal/cleanable/blood/gibs/old,/mob/living/simple_animal/hostile/rogue/demon,/obj/structure/bookcase,/obj/effect/spawner/lootdrop/roguetown/dungeon/spells,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
+"bk" = (/obj/effect/decal/cleanable/blood/gibs/old,/obj/structure/bookcase,/obj/effect/spawner/lootdrop/roguetown/dungeon/spells,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
 "bl" = (/obj/structure/table/vtable/v2,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "bn" = (/obj/machinery/light/rogue/wallfire/candle/blue,/obj/machinery/light/rogue/wallfire/candle/blue,/mob/living/carbon/human/species/skeleton/npc/ambush,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "bq" = (/obj/item/natural/rock/salt,/mob/living/carbon/human/species/goblin/npc/ambush/cave{icon_state = "goblin"},/turf/open/floor/rogue/naturalstone,/area/rogue/under/cave/dungeon1)
@@ -19,7 +19,7 @@
 "bt" = (/obj/effect/decal/cobbleedge,/turf/open/floor/rogue/naturalstone,/area/rogue/under/cave/dungeon1)
 "bv" = (/obj/machinery/light/rogue/wallfire/candle/blue,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "bC" = (/obj/item/natural/rock/iron,/turf/open/floor/rogue/dirt/road,/area/rogue/under/cave/dungeon1)
-"bH" = (/mob/living/simple_animal/hostile/rogue/demon,/obj/effect/spawner/lootdrop/roguetown/dungeon,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
+"bH" = (/obj/effect/decal/cleanable/blood/splatter,/mob/living/simple_animal/hostile/rogue/dragger,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
 "bV" = (/obj/structure/closet/crate/roguecloset/inn/chest,/obj/structure/chair/wood/rogue,/obj/item/natural/fibers,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "bX" = (/obj/structure/table/wood{dir = 10; icon_state = "tablewood2"},/obj/effect/decal/cleanable/cobweb/cobweb2,/obj/item/grown/log/tree/stick,/obj/item/natural/bundle/fibers,/obj/effect/spawner/lootdrop/roguetown/dungeon/materials,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "ci" = (/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
@@ -49,7 +49,7 @@
 "fg" = (/obj/effect/decal/cleanable/blood/bubblegum,/mob/living/carbon/human/species/skeleton/npc/ambush,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "fl" = (/obj/effect/spawner/lootdrop/roguetown/dungeon/materials,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "fo" = (/obj/structure/table/vtable,/obj/effect/spawner/lootdrop/roguetown/dungeon/spells,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
-"fS" = (/mob/living/simple_animal/hostile/rogue/demon,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
+"fS" = (/mob/living/simple_animal/hostile/rogue/dragger,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
 "fV" = (/obj/structure/chair/wood/rogue/fancy{dir = 8},/obj/effect/decal/cobbleedge,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "gn" = (/obj/effect/decal/cleanable/blood/gibs/limb,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "gt" = (/obj/effect/decal/cleanable/blood/gibs/limb,/obj/structure/fluff/walldeco/chains,/obj/machinery/light/rogue/firebowl/standing/blue,/obj/machinery/light/rogue/firebowl/standing/blue,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
@@ -63,7 +63,6 @@
 "ic" = (/obj/structure/rack/rogue/shelf/big,/obj/effect/spawner/lootdrop/roguetown/dungeon/clothing,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "ig" = (/turf/open/floor/rogue/ruinedwood/turned,/area/rogue/under/cave/dungeon1)
 "ih" = (/obj/effect/spawner/lootdrop/roguetown/dungeon,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
-"im" = (/obj/effect/decal/cleanable/blood/old,/mob/living/simple_animal/hostile/rogue/demon,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
 "it" = (/mob/living/simple_animal/hostile/retaliate/rogue/wolf{faction = list("wolves")},/obj/effect/spawner/lootdrop/roguetown/dungeon,/turf/open/floor/rogue/naturalstone,/area/rogue/under/cave/dungeon1)
 "iy" = (/obj/structure/closet/crate/roguecloset/dark,/obj/effect/spawner/lootdrop/roguetown/dungeon/misc,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "iz" = (/obj/effect/decal/cleanable/blood/old,/mob/living/carbon/human/species/skeleton/npc/ambush,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
@@ -120,7 +119,7 @@
 "oW" = (/obj/item/chair/stool/bar/rogue/crafted,/obj/effect/decal/cobbleedge,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "pa" = (/obj/structure/closet/crate/chest/crafted,/obj/effect/spawner/lootdrop/roguetown/dungeon,/obj/effect/spawner/lootdrop/roguetown/dungeon,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "pg" = (/obj/effect/decal/cobbleedge,/obj/effect/spawner/lootdrop/roguetown/dungeon,/turf/open/floor/rogue/cobble,/area/rogue/under/cave/dungeon1)
-"pj" = (/mob/living/simple_animal/hostile/rogue/werewolf,/turf/open/floor/rogue/naturalstone,/area/rogue/under/cave/dungeon1)
+"pj" = (/obj/effect/spawner/lootdrop/roguetown/dungeon,/mob/living/simple_animal/hostile/rogue/dragger,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
 "pu" = (/obj/item/grown/log/tree,/obj/item/grown/log/tree,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "px" = (/obj/structure/closet/crate/chest/gold,/obj/effect/spawner/lootdrop/roguetown/dungeon/money,/obj/effect/spawner/lootdrop/roguetown/dungeon/money,/obj/effect/spawner/lootdrop/roguetown/dungeon/money,/obj/effect/spawner/lootdrop/roguetown/dungeon/money,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "py" = (/turf/open/floor/rogue/dirt/road,/area/rogue/under/cave/dungeon1)
@@ -131,7 +130,6 @@
 "pN" = (/obj/effect/spawner/lootdrop/roguetown/dungeon,/turf/open/floor/rogue/naturalstone,/area/rogue/under/cave/dungeon1)
 "pX" = (/obj/effect/spawner/lootdrop/roguetown/dungeon/money,/turf/open/water/swamp,/area/rogue/under/cave/dungeon1)
 "pY" = (/obj/effect/decal/cleanable/blood,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
-"qe" = (/obj/effect/decal/cleanable/blood/splatter,/mob/living/simple_animal/hostile/rogue/demon,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
 "qg" = (/obj/effect/spawner/lootdrop/roguetown/dungeon/clothing,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "qj" = (/obj/structure/closet/crate/roguecloset/dark,/obj/effect/spawner/lootdrop/roguetown/dungeon/weapons,/obj/effect/spawner/lootdrop/roguetown/dungeon/weapons,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "qn" = (/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
@@ -190,7 +188,7 @@
 "wv" = (/obj/item/natural/rock/salt,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "wG" = (/obj/item/grown/log/tree/stick,/obj/structure/closet/crate/chest/crafted,/obj/effect/spawner/lootdrop/roguetown/dungeon/materials,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "wK" = (/obj/structure/bars/cemetery,/turf/open/floor/rogue/naturalstone,/area/rogue/under/cave/dungeon1)
-"wT" = (/obj/structure/fluff/walldeco/chains,/obj/structure/fluff/walldeco/chains,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
+"wT" = (/obj/structure/fluff/walldeco/chains,/obj/structure/fluff/walldeco/chains,/mob/living/simple_animal/hostile/rogue/dragger,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
 "wW" = (/obj/machinery/light/rogue/firebowl/church,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "xa" = (/obj/effect/decal/cleanable/blood/splatter,/obj/effect/decal/remains/human,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
 "xc" = (/obj/effect/decal/cleanable/blood/old,/obj/effect/decal/cobbleedge,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
@@ -318,7 +316,6 @@
 "KH" = (/obj/structure/table/wood/crafted,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "KI" = (/obj/structure/rack/rogue/shelf/big,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "KJ" = (/obj/item/chair/stool/bar/rogue/crafted,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
-"KM" = (/obj/structure/fluff/big_chain,/mob/living/simple_animal/hostile/rogue/demon,/turf/open/floor/rogue/herringbone,/area/rogue/under/cave/dungeon1)
 "KY" = (/obj/structure/table/wood/crafted,/obj/effect/spawner/lootdrop/roguetown/dungeon/money,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "Lh" = (/obj/structure/rack/rogue/shelf/big,/obj/structure/fluff/walldeco/bigpainting,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
 "Li" = (/obj/structure/chair/bench,/turf/open/floor/rogue/blocks,/area/rogue/under/cave/dungeon1)
@@ -461,16 +458,16 @@ RKEfjgEfwswswszhwswsaeaejXpywswsuIwswswsuIwswswswswsRKlxuYalWNWNJVWNluWNWNWNofmU
 RKpyuIpypywspyuIuIwsaeDspywswswsuIwswswsuIwswswswswsRKofmUWNWNWNsYWNWNWNWNmUYIRKRKwswswswsuIuIuIuIuIpNwswswswswsxZUseneneneTwswswswswswsuIpyWNpyuvRKRKRKuIRKRKRK
 wsuIpyuIpypyuIpyuIwswspywswswswsuIwswsuIHswswswswswsRKluWNRKRKRKRKRKRKRKRKRKRKRKwswswswswsuIZlpNuIuIuIwswswswswsRKUsenenennERKwswswswspyjXWNpyWNsYRKwswsHsuIwsRK
 wsWNuIuIuIwswspyuIuIuIpywswswswsuIwsuIuIwswswswswswsRKWNWNRKwswswswswswswswswswswswswspNuIuIuIuIuIuIuIwswswswswsxZnEenenenUsxZwswswswsuIpyRKmUWNWNRKwswswsHswsRK
-wsuIuIpywswswswsuIpyuIwswswswsuIuIuIZUwswswswswswswsRKmUsYRKwswswswswswswswswswswswsZluIuIuIwswspNpjuIitwswswswsRKUsenenenUsRKwswswspyHswsRKWNWNsYRKwswsUpuIwsRK
+wsuIuIpywswswswsuIpyuIwswswswsuIuIuIZUwswswswswswswsRKmUsYRKwswswswswswswswswswswswsZluIuIuIwswspNuIuIitwswswswsRKUsenenenUsRKwswswspyHswsRKWNWNsYRKwswsUpuIwsRK
 RKpyWNWNwswswswswsuIuIuIZUuIuIuIwsHsuIRKRKIlwsRKRKRKRKWNmURKRKRKRKwswswswswswswswsuIuIuIpNwswswswsuIuIuIuIwswswsRKUsenenenUsFywswspyuIwswsRKDAWNWNRKwswsuIwswsRK
 wsuIpyuIRKwswswswsuIpywswswswswswsuIuIWNuIWNSyYaWNuYWNofWNWNWNuYRKwswswswswswswswsuIFyuIuIwswswswswsuIpNuIuIwswsRKUsenenenUsHsuIpyUHpyFywsRKsYWNmURKwswsHswswsRK
-wsWNpyuIpywswswspyuIwswswswswswswswsZUuImUuIofuIWNWNWNWNWNmUWNmURKwswswswswswswswspjuIuIuIZlwswswswswsZluIpNwswsxZUsenenenUsuIpyuIuIpyjXwsRKWNmUsYRKwsnjuIFywsRK
+wsWNpyuIpywswswspyuIwswswswswswswswsZUuImUuIofuIWNWNWNWNWNmUWNmURKwswswswswswswswsuIuIuIuIZlwswswswswsZluIpNwswsxZUsenenenUsuIpyuIuIpyjXwsRKWNmUsYRKwsnjuIFywsRK
 RKpyuIpypywswswspywswswswswswswswswsRKRKRKRKRKRKRKRKRKRKRKRKWNWNRKwswswswswswswswswsuIuIpNuIFywswswswswsuIuIUpwsRKUsenenenUsuIWhjXpypyuInjRKWNWNWNRKwsuIuIHuwsRK
 RKZUpypyRKwswsuIpywswswswswswswswswsRKWNofuYWNsYluRKaYbjffRKWNuYRKwswswswswswswswswspNuIuIuIuIuIwswswswsuIuIuIwsxZUsenenenUsUpHspypyjXuIwsRKDAWNWNRKwsnjuInjwsRK
 RKjtpyWNRKwspyuIuIwswswswswswswswswsRKZRCHWNCHZRpIRKWNWNWNRKWNWNRKwswswswswswswswswswsFyuIuIuIFyuIuIwswsuIuIZlwsxZnEenenenUsRKuIHspyuIFywsRKWNWNWNRKwswsnjwswsRK
 RKpyWNjtwswsuIuIwswswswswswswswswswsRKWNpIWNKHofqgRKRKjgRKRKWNofRKwswswswswswswswswswswswspNuIuIuIFyuIuIuIFyuIwsRKUsenenennExZwsFyuIHswswsRKWNmUsYRKwswswswswsRK
 RKuIpypypypyuIwswswswswswswswswswswsRKWNsYluCHWNuYRKzAWNWNRKWNWNRKwswswswswswswswswswswswswswsZluIuIuIFyuIuIuIwsRKUsenenenUsxZwswsUpwswswsRKuvWNWNRKwswswswswsRK
-RKuIWNpypyuIpywswswswswswswsRKRKRKRKRKWNKHuYDRWNWNRKoOblofRKWNWNRKRKRKRKRKRKRKRKRKRKRKRKRKRKwswsUpuIuIuIuIpjFywsxZUsenenenUsxZwswswswswswsRKuYmUmURKwswswswswsRK
+RKuIWNpypyuIpywswswswswswswsRKRKRKRKRKWNKHuYDRWNWNRKoOblofRKWNWNRKRKRKRKRKRKRKRKRKRKRKRKRKRKwswsUpuIuIuIuIuIFywsxZUsenenenUsxZwswswswswswsRKuYmUmURKwswswswswsRK
 RKpyWNWNuIZUwswswswswswsRKRKRKZHWjxYRKWNCHofZRMYWNjgWNuYWNRKuYuYNBihWNWNRKuTnGAmWNWNWNnGluRKRKwswswsFyZluImEwswsRKUsenenenUsxZwswswswswswsRKsYWNWNRKwswswswswsRK
 RKWNpyWNRKwswswswswswswsRKWNNBMYuYsYRKWNWNWNWjWNWNRKWNWNuYWNWNWNNBJzKhWNWNWNWNqVRmvaWNWNWNAXRKwswswswswswswswswsxZUsenenenUsRKwswswswswswsRKuYWNWNRKwswswswswsRK
 RKWNWNzeRKwswswswswswswsRKWNRKsYluofNBWNxYmiWNRpluRKKHWNsgRKWNWNRKRKRKWNWNofWNwuzJTzWNWNWNWNRKRKwswswswswswsRKxZxZQdsAsAsAQdRKRKxZxZRKRKwsRKuYWNWNRKwswswswswsRK
@@ -508,13 +505,13 @@ RKWNuYihRKflWjWNflRKWNWNRKRKRKRKRKRKRKDrpCuYeJWNWNoiDrRKRKRKRKbqEZuIuIHsKpwswsHu
 sWofihWNRKeWWNWjWNysWNWNRKRKRKRKRKRKcLofWNWNWNWNWNWNWNGhRKRKRKRKwswsFyKpwswswswswswswswswswswsgHHsuIenenenenUsUsxZxZRDWNNBWNOfWNihmoWNNBWNWNjtNBWNjtWNWNWNWNsYRK
 RKWNluWNRKBPWNWNWcRKsYWNRKRKRKRKUFWNWNWNWNWNnZWNWNpguYeJWNLiRKRKRKwswswswswswswswswswswswswswswsUsnBuIUsUsUsnExZxZRKWNWNRKueihjtWNWNihRKjtWNWNRKRKRKRKnsWNWNRKRK
 RKpCWNWNRKRKluRKRKBkNBNBBkRKRKOvWNuYWNWNWNuYWNWNWNWNWNWNWNWNjtRKRKRKRKRKRKRKRKRKRKRKRKRKwswsxZxZuIwsKpuIRKwsRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRDWNuYuYCoRK
-RKueWNihWNueluWNihWNWNofWNWNWNWNWNWNluWNihWNoOblWNWNWNWNofWNWNgFDRKJalObjtWNWNWNKIWNWNRKwsHuKpKpuIuIHsuIuIuIwsRKCDUXnWksCnnWksCDnWqeCDksVtCnRKWNWNWNMTCoWNuYWNRK
-RKWNzJuYWNWNWNzJuYWNWNWNihWNWNWNWNWNWNWNueRKRKRKRKeJWNWNWNKzWNWNWNWNWNjtWNWNWNWNWNWNWNRKwswswsHsuInBuIKpuIwswsRKCnfSksvdweksUXksksksYoimksksRKgCZRgCWNWNWNuYddRK
-RKihWNWNWNWNuYWNWNWNWNWNWNzJuYDyWNWNihRKRKRKRKRKRKRKRKWNWNsuWNRKRKRKRKRKRKRKRKRKRKWNWNRKwswswswswsuIHuwswswswsRKXZSTSTBVamSbkstxksksdPVeWJksRKWNwWWNwWWNuYuYWNRK
-RKWNWNWNWNihWNWNueRKBkNBBkRKxYYORbIyRKRKvTWNeIuYicMzzLRKaMgFWNRKbvuWbnWNyubvURvNRKWNmURKwswswswswsuIwswswswswsRKWOksCnksfSAiAiksbHSTksksksksJNXCddWNWNWNWNZRWNRK
-RKpCWNuYueRKRKNBRKRKWNRZjtRKRKsWRKVsRKjtWNWNzzRZzzRZpaRKRKRKNBRKEkRSydRSydRSEkRSRKWNWNRKwswswswsuIHswswswswswsRKzRksYoYoYoCnfSksksksksCnfSksJNeqWNWNWNCoWNWNWNRK
-RKznihWNWNRKnmWNYKRKWNRZWNWNBkHpeJWNWNRZZqRZRZZqRZiJpxRKWNWNWNRKRSydMGydRSydRSydRKWNWNRKRKwswsxZuIxZxZxZRKRKRKRKXZksbHksSTksksksJGksfSksksksRKWNwWWNwWuYuYWNWNRK
-RKRKueWNzrRKKIWNWNNBjtRZRZRZNBWNWNuYWNjtWNWNzzRZzzRZWNRKWNjtWNNBydRSydRSydMGydRSRKmUWNWNWNWNmUWNWNWNWNWNRKRKRKRKUXAiksBVCnBVksKMksksdPxawTksRKgCWNgCWNWNWNddWNRK
-RKRKRKrvDPRKKIWNjtRKKHWNWNjtBkjtWNjtReTiWNfoTijtuYdqjtRKWNWNWNRKWNWNjtWNWNWNWNyuRKWNWNmUuYuYWNuYmUWNWNmURKRKRKRKbkCnVYfSksnWksCnnWCDCnYofSCnRKWNWNWNWNWNZRWNWNRK
+RKueWNihWNueluWNihWNWNofWNWNWNWNWNWNluWNihWNoOblWNWNWNWNofWNWNgFDRKJalObjtWNWNWNKIWNWNRKwsHuKpKpuIuIHsuIuIuIwsRKCDUXnWksCnnWksCDnWAiCDksVtCnRKWNWNWNMTCoWNuYWNRK
+RKWNzJuYWNWNWNzJuYWNWNWNihWNWNWNWNWNWNWNueRKRKRKRKeJWNWNWNKzWNWNWNWNWNjtWNWNWNWNWNWNWNRKwswswsHsuInBuIKpuIwswsRKCnfSksvdweksUXksksksYoYoksfSRKgCZRgCWNWNWNuYddRK
+RKihWNWNWNWNuYWNWNWNWNWNWNzJuYDyWNWNihRKRKRKRKRKRKRKRKWNWNsuWNRKRKRKRKRKRKRKRKRKRKWNWNRKwswswswswsuIHuwswswswsRKXZSTSTBVamSbkstxfSksdPVeWJksRKWNwWWNwWWNuYuYWNRK
+RKWNWNWNWNihWNWNueRKBkNBBkRKxYYORbIyRKRKvTWNeIuYicMzzLRKaMgFWNRKbvuWbnWNyubvURvNRKWNmURKwswswswswsuIwswswswswsRKWOksCnfSksAiAiksCnSTfSksksksJNXCddWNWNWNWNZRWNRK
+RKpCWNuYueRKRKNBRKRKWNRZjtRKRKsWRKVsRKjtWNWNzzRZzzRZpaRKRKRKNBRKEkRSydRSydRSEkRSRKWNWNRKwswswswsuIHswswswswswsRKzRfSYoYoYoCnksksksfSksCnfSksJNeqWNWNWNCoWNWNWNRK
+RKznihWNWNRKnmWNYKRKWNRZWNWNBkHpeJWNWNRZZqRZRZZqRZiJpxRKWNWNWNRKRSydMGydRSydRSydRKWNWNRKRKwswsxZuIxZxZxZRKRKRKRKXZksCnksSTksfSksJGksksksksksRKWNwWWNwWuYuYWNWNRK
+RKRKueWNzrRKKIWNWNNBjtRZRZRZNBWNWNuYWNjtWNWNzzRZzzRZWNRKWNjtWNNBydRSydRSydMGydRSRKmUWNWNWNWNmUWNWNWNWNWNRKRKRKRKUXbHksBVCnBVksBVksksdPxawTksRKgCWNgCWNWNWNddWNRK
+RKRKRKrvDPRKKIWNjtRKKHWNWNjtBkjtWNjtReTiWNfoTijtuYdqjtRKWNWNWNRKWNWNjtWNWNWNWNyuRKWNWNmUuYuYWNuYmUWNWNmURKRKRKRKbkCnVYksksnWfSCnnWCDpjYoksCnRKWNWNWNWNWNZRWNWNRK
 RKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKxZxZxZRKxZRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRKRK
 "}
