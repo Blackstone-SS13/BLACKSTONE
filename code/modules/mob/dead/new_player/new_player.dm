@@ -379,24 +379,6 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	var/datum/job/job = SSjob.GetJob(rank)
 	if(!job)
 		return JOB_UNAVAILABLE_GENERIC
-	// Check if the player is on cooldown for the hiv+ role
-	if((job.same_job_respawn_delay) && (ckey in GLOB.job_respawn_delays))
-		if(world.time < GLOB.job_respawn_delays[ckey])
-			return JOB_UNAVAILABLE_JOB_COOLDOWN
-
-	if((job.current_positions >= job.total_positions) && job.total_positions != -1)
-		if(job.title == "Assistant")
-			if(isnum(client.player_age) && client.player_age <= 14) //Newbies can always be assistants
-				return JOB_AVAILABLE
-			for(var/datum/job/J in SSjob.occupations)
-				if(J && J.current_positions < J.total_positions && J.title != job.title)
-					return JOB_UNAVAILABLE_SLOTFULL
-		else
-			return JOB_UNAVAILABLE_SLOTFULL
-//	if(job.title == "Adventurer" && latejoin)
-//		for(var/datum/job/J in SSjob.occupations)
-//			if(J && J.total_positions && J.current_positions < 1 && J.title != job.title && (IsJobUnavailable(J.title))
-//				return JOB_UNAVAILABLE_GENERIC //we can't play adventurer if there isn't 1 of every other job that we can play
 	if(is_banned_from(ckey, rank))
 		return JOB_UNAVAILABLE_BANNED
 	if((!job.bypass_jobban) && (client.blacklisted()))
@@ -439,12 +421,29 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	if(!isnull(job.max_pq) && (get_playerquality(ckey) > job.max_pq))
 		return JOB_UNAVAILABLE_GENERIC
 	if((client.prefs.lastclass == job.title) && !job.bypass_lastclass)
-		return JOB_UNAVAILABLE_GENERIC
+		return JOB_UNAVAILABLE_LASTCLASS
 	if(istype(SSticker.mode, /datum/game_mode/roguewar))
 		var/datum/game_mode/roguewar/W = SSticker.mode
 		if(W.get_team(ckey))
 			if(W.get_team(ckey) != job.faction)
-				return JOB_UNAVAILABLE_GENERIC
+				return JOB_UNAVAILABLE_WTEAM
+	// Check if the player is on cooldown for the hiv+ role
+	if((job.same_job_respawn_delay) && (ckey in GLOB.job_respawn_delays))
+		if(world.time < GLOB.job_respawn_delays[ckey])
+			return JOB_UNAVAILABLE_JOB_COOLDOWN
+	if((job.current_positions >= job.total_positions) && job.total_positions != -1)
+		if(job.title == "Assistant")
+			if(isnum(client.player_age) && client.player_age <= 14) //Newbies can always be assistants
+				return JOB_AVAILABLE
+			for(var/datum/job/J in SSjob.occupations)
+				if(J && J.current_positions < J.total_positions && J.title != job.title)
+					return JOB_UNAVAILABLE_SLOTFULL
+		else
+			return JOB_UNAVAILABLE_SLOTFULL
+//	if(job.title == "Adventurer" && latejoin)
+//		for(var/datum/job/J in SSjob.occupations)
+//			if(J && J.total_positions && J.current_positions < 1 && J.title != job.title && (IsJobUnavailable(J.title))
+//				return JOB_UNAVAILABLE_GENERIC //we can't play adventurer if there isn't 1 of every other job that we can play
 	return JOB_AVAILABLE
 
 /mob/dead/new_player/proc/AttemptLateSpawn(rank)
