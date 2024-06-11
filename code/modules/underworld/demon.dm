@@ -15,8 +15,8 @@
 	turns_per_move = 5
 	response_help_continuous = "passes through"
 	response_help_simple = "pass through"
-	maxHealth = 225
-	health = 225
+	maxHealth = 50
+	health = 50
 	layer = 16
 	plane = 16
 	spacewalk = TRUE
@@ -26,8 +26,8 @@
 	move_to_delay = 5 //delay for the automated movement.
 	harm_intent_damage = 1
 	obj_damage = 1
-	melee_damage_lower = 20
-	melee_damage_upper = 35
+	melee_damage_lower = 15
+	melee_damage_upper = 25
 	attack_same = FALSE
 	attack_sound = 'sound/combat/wooshes/bladed/wooshmed (1).ogg'
 	dodge_sound = 'sound/combat/dodge.ogg'
