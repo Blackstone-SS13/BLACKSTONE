@@ -122,7 +122,7 @@
 		/obj/item/reagent_containers/food/snacks/egg = 3,
 
 	)
-	lootcount = 5
+	lootcount = 1
 
 /obj/effect/spawner/lootdrop/roguetown/dungeon/materials
 	loot = list(
@@ -136,7 +136,7 @@
 		/obj/item/rogueore/iron = 3,
 		/obj/item/natural/bundle/fibers = 2
 		)
-	lootcount = 3
+	lootcount = 2
 
 /obj/effect/spawner/lootdrop/roguetown/dungeon/clothing
 	loot = list(
@@ -155,7 +155,7 @@
 		/obj/item/clothing/shoes/roguetown/boots = 4,
 		/obj/item/clothing/shoes/roguetown/boots/leather = 4
 	)
-	lootcount = 2
+	lootcount = 1
 
 /obj/effect/spawner/lootdrop/roguetown/dungeon/money
 	loot = list(
@@ -203,7 +203,7 @@
 		/obj/item/natural/cloth = 5,
 		/obj/item/natural/bundle/cloth = 3
 	)
-	lootcount = 3
+	lootcount = 2
 
 /obj/effect/spawner/lootdrop/roguetown/dungeon/weapons
 	loot = list(
@@ -229,7 +229,6 @@
 	loot = list(
 		// tools
 		/obj/item/rogueweapon/shovel = 3,
-		/obj/machinery/light/rogue/hearth = 4,
 		/obj/item/rogueweapon/thresher = 3,
 		/obj/item/flint = 4,
 		/obj/item/rogueweapon/stoneaxe/woodcut = 3,
@@ -238,7 +237,7 @@
 		/obj/item/rogueweapon/tongs = 3,
 		/obj/item/rogueweapon/pick = 3
 	)
-	lootcount = 2
+	lootcount = 1
 
 /obj/effect/spawner/lootdrop/roguetown/dungeon/armor
 	loot = list(
@@ -257,7 +256,7 @@
 		/obj/item/clothing/head/roguetown/helmet/skullcap = 1,
 		/obj/item/clothing/head/roguetown/helmet/winged = 1
 	)
-	lootcount = 2
+	lootcount = 1
 
 /obj/effect/spawner/lootdrop/roguetown/dungeon/food
 	loot = list(
@@ -267,7 +266,7 @@
 		/obj/item/reagent_containers/powder/flour/salt = 3,
 		/obj/item/reagent_containers/food/snacks/egg = 3
 	)
-	lootcount = 3
+	lootcount = 2
 
 /obj/effect/spawner/lootdrop/roguetown/dungeon/spells
 	loot = list(
