@@ -346,6 +346,19 @@ GLOBAL_LIST_INIT(roguetown_areas_typecache, typecacheof(/area/rogue/indoors/town
 	spookysounds = SPOOKY_CAVE
 	spookynight = SPOOKY_GEN
 
+/area/rogue/under/cave/dungeon1
+	icon_state = "spider"
+	first_time_text = "THE ABANDONED FORTRESS"
+	droning_sound = 'sound/music/area/dungeon.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+	converted_type = /area/rogue/outdoors/dungeon1
+/area/rogue/outdoors/dungeon1
+	icon_state = "spidercave"
+	droning_sound = 'sound/music/area/dungeon.ogg'
+	droning_sound_dusk = null
+	droning_sound_night = null
+
 //////
 /////
 ////     TOWN AREAS
