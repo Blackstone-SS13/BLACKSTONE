@@ -51,6 +51,7 @@
 #define TRAIT_IWASHAUNTED "iwashaunted" //prevents spawning a haunt from a decapitated body twice
 #define TRAIT_SCHIZO_AMBIENCE "schizo_ambience" //replaces all ambience with creepy shit
 #define TRAIT_SCREENSHAKE "screenshake" //screen will always be shaking, you cannot stop it
+#define TRAIT_RAISEDEAD "Necromancer's Binding"
 
 GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_WEBWALK = "I can move freely between webs.",
@@ -90,6 +91,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "<span class='warning'>I can't sleep.</span>",
 	TRAIT_NOFALLDAMAGE1 = "<span class='warning'>I can easily handle minor falls.</span>",
+	TRAIT_RAISEDEAD = "I serve a Necromancer, whose power strengthens me and protects me from misfortune."
 ))
 
 // trait accessor defines

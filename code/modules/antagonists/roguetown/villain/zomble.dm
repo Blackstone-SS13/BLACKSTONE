@@ -194,6 +194,13 @@
 	zombie.STASPD = rand(5,7)
 
 	zombie.STAINT = 1
+	if(istype(zombie.patron, /datum/patron/inhumen/zizo))//Becoming a zombie comes with a punishment, lessened for worshippers of Zizo; Xylix hates the undead every bit as much as the rest of the Nine, and withholds his gifts from them.
+		zombie.STALUC = 5
+	if(HAS_TRAIT(zombie, TRAIT_RAISEDEAD))//Only the power of Zizo's faithful necromancers counteracts the curses of Xylix.
+		zombie.STALUC = 10
+		zombie.STASTR = 18
+	else
+		zombie.STALUC = -1
 	last_bite = world.time
 	has_turned = TRUE
 	// Drop your helm and gorgies boy you won't need it anymore!!!
@@ -328,7 +335,7 @@
 	if(!zombie_antag)
 		return
 	if(stat >= DEAD) //do shit the natural way i guess
-		return 
+		return
 	to_chat(src, "<span class='danger'>I feel horrible... REALLY horrible...</span>")
 	mob_timers["puke"] = world.time
 	vomit(1, blood = TRUE, stun = FALSE)
