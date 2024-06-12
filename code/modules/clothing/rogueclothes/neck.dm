@@ -241,3 +241,10 @@
 	resistance_flags = FIRE_PROOF
 	sellprice = 15
 	anvilrepair = /datum/skill/craft/armorsmithing
+
+/obj/item/clothing/neck/roguetown/dherbs
+	name = "druid herbs"
+	desc = "Crafted from natural materials"
+	icon_state = "herbs"
+	sellprice = 5
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
