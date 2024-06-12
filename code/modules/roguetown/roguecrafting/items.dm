@@ -413,6 +413,7 @@
 	name = "novice's guide to literature"
 	result = list(/obj/item/literary)
 	reqs = list(/obj/item/paper/scroll = 5)
+	tools = list(/obj/item/natural/feather)
 	req_table = TRUE
 	skillcraft = /datum/skill/misc/reading
 	craftdiff = 2
