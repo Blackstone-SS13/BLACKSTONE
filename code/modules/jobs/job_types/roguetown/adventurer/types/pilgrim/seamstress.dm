@@ -9,8 +9,7 @@
 		"Dark Elf",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/seamstress
-	isvillager = TRUE
-	ispilgrim = FALSE
+	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 
 /datum/outfit/job/roguetown/adventurer/seamstress/pre_equip(mob/living/carbon/human/H)
 	..()
