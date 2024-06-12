@@ -141,7 +141,7 @@ SUBSYSTEM_DEF(triumphs)
 						triumph_adjust(refund_amount, ckey_cur_owna)
 
 						if(GLOB.directory[ckey_cur_owna]) // If they are still logged into the game, inform them they got refunded
-							to_chat(GLOB.directory[ckey_cur_owna], "<span class='redtext'>You were refunded [refund_amount] triumphs due to CONFLICTS.</span>")
+							to_chat(GLOB.directory[ckey_cur_owna], span_redtext("You were refunded [refund_amount] triumphs due to CONFLICTS."))
 
 						// Cleanup Time
 						active_datum.on_removal()
@@ -164,7 +164,7 @@ SUBSYSTEM_DEF(triumphs)
 		triumph_adjust(refund_amount, ckey_prev_owna)
 
 		if(GLOB.directory[ckey_prev_owna]) // If they are still logged into the game, inform them they got refunded
-			to_chat(GLOB.directory[ckey_prev_owna], "<span class='redtext'>You were refunded [refund_amount] triumphs due to a UNBUY.</span>")
+			to_chat(GLOB.directory[ckey_prev_owna], span_redtext("You were refunded [refund_amount] triumphs due to a UNBUY."))
 
 		pull_it_out.on_removal()
 
@@ -220,7 +220,7 @@ SUBSYSTEM_DEF(triumphs)
 	We save everything when its time for reboot
 */
 /datum/controller/subsystem/triumphs/proc/end_triumph_saving_time()
-	to_chat(world, "<span class='boldannounce'> Recording VICTORIES to the WORLD END MACHINE. </span>")
+	to_chat(world, span_boldannounce(" Recording VICTORIES to the WORLD END MACHINE. "))
 	//for(var/target_ckey in triumph_amount_cache) 
 	//	var/list/saving_data = list()
 	//	// this will be for example "data/player_saves/a/ass/triumphs.json" if their ckey was ass

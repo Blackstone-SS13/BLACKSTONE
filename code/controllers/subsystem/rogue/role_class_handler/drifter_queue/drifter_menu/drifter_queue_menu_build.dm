@@ -30,11 +30,11 @@
 // Time string for the html menus
 /datum/controller/subsystem/role_class_handler/proc/rebuild_drifter_time_string()
 	if(!drifter_queue_enabled)
-		time_left_until_next_wave_string = "<span class='delay_span'>DISABLED</span>"
+		time_left_until_next_wave_string = "DISABLED"
 		return
 
 	if(drifter_queue_delayed)
-		time_left_until_next_wave_string = "<span class='delay_span'>DELAYED</span>"
+		time_left_until_next_wave_string = "DELAYED"
 		return
 
 	var/time_left = max(0, next_drifter_mass_release_time - world.time)
