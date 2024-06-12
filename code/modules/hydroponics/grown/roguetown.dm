@@ -76,3 +76,10 @@ GLOBAL_LIST_EMPTY(berrycolors)
 
 /obj/item/seeds/berryrogue/poison
 	product = /obj/item/reagent_containers/food/snacks/grown/berries/rogue/poison
+
+/obj/item/reagent_containers/food/snacks/grown/berries/rogue/blood
+	seed = null
+	icon_state = "berries"
+	tastes = list("berry" = 1, "red" = 1)
+	list_reagents = list(/datum/reagent/medicine/healthpot = 1.5, /datum/reagent/consumable/nutriment = 2)
+	color = "#ff0000"
