@@ -40,9 +40,6 @@
 	var/swim_skill = FALSE
 	nomouseover = FALSE
 	var/swimdir = FALSE
-	var/const/canfish = TRUE
-	var/const/fishinglist = list(/obj/item/reagent_containers/food/snacks/fish/carp = 5
-							/obj/item/reagent_containers/food/snacks/fish/eel = 3)
 
 /turf/open/water/Initialize()
 	.  = ..()
@@ -232,8 +229,6 @@
 	water_color = "#FFFFFF"
 	slowdown = 3
 	water_reagent = /datum/reagent/water/gross
-	const/canfish = FALSE
-	const/fishinglist = null
 
 /turf/open/water/bath/Initialize()
 	.  = ..()
@@ -249,8 +244,6 @@
 	slowdown = 1
 	wash_in = FALSE
 	water_reagent = /datum/reagent/water/gross
-	const/canfish = FALSE
-	const/fishinglist = null
 
 /turf/open/water/sewer/Initialize()
 	icon_state = "paving"
@@ -267,8 +260,6 @@
 	slowdown = 3
 	wash_in = TRUE
 	water_reagent = /datum/reagent/water/gross
-	const/fishinglist = list(/obj/item/reagent_containers/food/snacks/fish/carp = 2
-							/obj/item/reagent_containers/food/snacks/fish/eel = 5)
 
 /turf/open/water/swamp/Initialize()
 	icon_state = "dirt"
@@ -304,9 +295,6 @@
 	water_color = "#705a43"
 	slowdown = 5
 	swim_skill = TRUE
-	const/fishinglist = list(/obj/item/reagent_containers/food/snacks/fish/carp = 2
-							/obj/item/reagent_containers/food/snacks/fish/eel = 4
-							/obj/item/reagent_containers/food/snacks/fish/angler = 1)
 
 /turf/open/water/swamp/deep/Entered(atom/movable/AM, atom/oldLoc)
 	. = ..()
@@ -337,8 +325,6 @@
 	slowdown = 3
 	wash_in = TRUE
 	water_reagent = /datum/reagent/water
-	const/fishinglist = list(/obj/item/reagent_containers/food/snacks/fish/carp = 5
-							/obj/item/reagent_containers/food/snacks/fish/eel = 2)
 
 /turf/open/water/cleanshallow/Initialize()
 	icon_state = "rock"
@@ -357,8 +343,6 @@
 	swim_skill = TRUE
 	var/river_processing
 	swimdir = TRUE
-	const/fishinglist = list(/obj/item/reagent_containers/food/snacks/fish/carp = 5
-							/obj/item/reagent_containers/food/snacks/fish/eel = 1)
 
 /turf/open/water/river/update_icon()
 	if(water_overlay)
