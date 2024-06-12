@@ -16,5 +16,5 @@
 		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/sfighter
-	maxchosen = 1
+	maximum_possible_slots = 1
 	pickprob = 11

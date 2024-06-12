@@ -14,6 +14,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/sorceress
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
+	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/sorceress
 	allowed_patrons = list(/datum/patron/divine/noc)

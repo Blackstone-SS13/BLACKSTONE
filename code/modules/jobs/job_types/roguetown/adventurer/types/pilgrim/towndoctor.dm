@@ -10,8 +10,7 @@
 		"Dark Elf",
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/doctor
-	isvillager = TRUE
-	ispilgrim = TRUE
+	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 	traits_applied = list(TRAIT_EMPATH, TRAIT_NOSTINK)
 	cmode_music = 'sound/music/combat_physician.ogg'
 

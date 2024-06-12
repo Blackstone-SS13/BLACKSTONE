@@ -252,7 +252,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 
 		AttemptLateSpawn(href_list["SelectedJob"])
 		return
-
+ 
 	if(!ready && href_list["preference"])
 		if(client)
 			client.prefs.process_link(src, href_list)
@@ -473,6 +473,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	//Remove the player from the join queue if he was in one and reset the timer
 	SSticker.queued_players -= src
 	SSticker.queue_delay = 4
+
+	// Jus remove them from drifter queue if they were in it. 
+	// This shit shouldn't be firing before the round starts anyways sooo this is one of the only ways in
+	SSrole_class_handler.cleanup_drifter_queue(client)
 
 	testing("basedtest 1")
 
@@ -751,6 +755,10 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	src << browse(null, "window=preferences") //closes job selection
 	src << browse(null, "window=mob_occupation")
 	src << browse(null, "window=latechoices") //closes late job selection
+
+	SStriumphs.remove_triumph_buy_menu(client)
+	SSrole_class_handler.cleanup_drifter_queue(client)
+
 	winshow(src, "preferencess_window", FALSE)
 	src << browse(null, "window=preferences_browser")
 	src << browse(null, "window=lobby_window")

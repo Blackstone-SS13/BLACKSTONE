@@ -16,9 +16,10 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/monk
 	traits_applied = list(TRAIT_DODGEEXPERT)
-	isvillager = FALSE
-	ispilgrim = FALSE
+
 	vampcompat = FALSE
+
+	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/monk/pre_equip(mob/living/carbon/human/H)
 	..()

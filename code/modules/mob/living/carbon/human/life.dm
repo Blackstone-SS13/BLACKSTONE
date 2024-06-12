@@ -36,7 +36,7 @@
 		handle_ai()
 
 	if(advsetup)
-		Stun(100)
+		Stun(50)
 
 	if(mind)
 		for(var/datum/antagonist/A in mind.antag_datums)
