@@ -298,9 +298,9 @@
 	//TODO add some bar hud or something, i think i seen a request like that somewhere
 	if(known_skills[S] >= old_level)
 		if(known_skills[S] > old_level)
-			to_chat(current, "<span class='nicegreen'>My [S.name] grows!</span>")
+			to_chat(current, "<span class='nicegreen'>My [S.name] grows to [SSskills.level_names[known_skills[S]]]!</span>")
 	else
-		to_chat(current, "<span class='warning'>My [S.name] has weakened!</span>")
+		to_chat(current, "<span class='warning'>My [S.name] has weakened to [SSskills.level_names[known_skills[S]]]!</span>")
 
 /datum/mind/proc/adjust_skillrank(skill, amt, silent = FALSE)
 	var/datum/skill/S = GetSkillRef(skill)
