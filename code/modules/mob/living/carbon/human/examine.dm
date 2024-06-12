@@ -108,15 +108,26 @@
 		if(name in GLOB.outlawed_players)
 			. += "<span class='userdanger'>OUTLAW!</span>"
 		
+		
+		var/commie_text
 		if(mind)
 			if(mind.special_role == "Bandit")
-				. += "<span class='userdanger'>BANDIT!</span>"
+				if(HAS_TRAIT(user, TRAIT_COMMIE))
+					commie_text = "<span class='notice'>Free man!</span>"
+				else
+					commie_text = "<span class='userdanger'>BANDIT!</span>"
 			if(mind.special_role == "Vampire Lord")
 				. += "<span class='userdanger'>A MONSTER!</span>"
 			if(mind.assigned_role == "Lunatic")
 				. += "<span class='userdanger'>LUNATIC!</span>"
+		
 		if(HAS_TRAIT(src, TRAIT_MANIAC_AWOKEN))
 			. += "<span class='userdanger'>MANIAC!</span>"
+
+		if(commie_text)
+			. += commie_text
+		else if(HAS_TRAIT(src, TRAIT_COMMIE) && HAS_TRAIT(user, TRAIT_COMMIE))
+			. += "<span class='notice'>Comrade!</span>"
 
 	if(leprosy == 1)
 		. += "<span class='necrosis'>A LEPER...</span>"
