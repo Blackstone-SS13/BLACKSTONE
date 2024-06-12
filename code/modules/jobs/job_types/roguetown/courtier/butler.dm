@@ -14,7 +14,7 @@
 		"Dwarf",
 		"Aasimar",
 	)
-	allowed_ages = ADULT_AGES_LIST
+	allowed_ages = ALL_AGES_LIST
 
 	tutorial = "Servitude unto death; your blade a charcuterie of artisanal cheeses and meat, your armor wit and classical training. \
 			You don't consider yourself a servant anymore, if anything, you're a part of the family now. \

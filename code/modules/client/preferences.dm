@@ -1648,8 +1648,6 @@ Slots: [job.spawn_positions]</span>
 					random_species()
 					accessory = "Nothing"
 					detail = "Nothing"
-					if(age == AGE_YOUNG)
-						age = AGE_ADULT
 				if("bag")
 					backpack = pick(GLOB.backpacklist)
 				if("suit")
@@ -1658,8 +1656,6 @@ Slots: [job.spawn_positions]</span>
 					random_character(gender)
 					accessory = "Nothing"
 					detail = "Nothing"
-					if(age == AGE_YOUNG)
-						age = AGE_ADULT
 
 		if("input")
 
@@ -1923,8 +1919,6 @@ Slots: [job.spawn_positions]</span>
 						to_chat(user, "<font color='red'>Classes reset.</font>")
 						random_character(gender)
 						accessory = "Nothing"
-						if(age == AGE_YOUNG)
-							age = AGE_ADULT
 
 				if("mutant_color")
 					var/new_mutantcolor = input(user, "Choose your character's alien/mutant color:", "Character Preference","#"+features["mcolor"]) as color|null

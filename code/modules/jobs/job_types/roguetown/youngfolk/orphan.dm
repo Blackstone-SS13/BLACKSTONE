@@ -3,8 +3,8 @@
 	flag = ORPHAN
 	department_flag = YOUNGFOLK
 	faction = "Station"
-	total_positions = 8
-	spawn_positions = 8
+	total_positions = 0
+	spawn_positions = 0
 
 	allowed_races = list(
 		"Humen",
@@ -17,7 +17,7 @@
 		"Aasimar",
 		"Half Orc",
 	)
-	allowed_ages = YOUNG_AGES_LIST
+	allowed_ages = list(AGE_ADULT)
 
 	tutorial = "Dozens of unwanted children are born in the kingdom of Psydonia every day. They sometimes make something of themselves but much more often die early in the streets."
 
