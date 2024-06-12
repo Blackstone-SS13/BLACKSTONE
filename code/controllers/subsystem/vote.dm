@@ -224,6 +224,11 @@ SUBSYSTEM_DEF(vote)
 					var/datum/map_config/VM = config.maplist[map]
 					if(!VM.votable)
 						continue
+					var/player_count = GLOB.clients.len
+					if(VM.config_max_users > 0 && player_count >= VM.config_max_users)
+						continue
+					if(VM.config_min_users > 0 && player_count <= VM.config_min_users)
+						continue
 					choices.Add(VM.map_name)
 			if("custom")
 				question = stripped_input(usr,"What is the vote for?")
