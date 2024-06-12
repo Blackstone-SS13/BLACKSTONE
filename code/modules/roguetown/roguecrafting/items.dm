@@ -436,3 +436,4 @@
 	name = "master's guide to literature"
 	result = list(/obj/item/literary/master)
 	craftdiff = 6
+	verbage = "writes"
