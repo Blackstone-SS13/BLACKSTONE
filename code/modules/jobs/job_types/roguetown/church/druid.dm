@@ -57,6 +57,9 @@
 		H.change_stat("intelligence", 1)
 		H.change_stat("endurance", 1)
 		H.change_stat("perception", -1)
+		H.mind.AddSpell(new/obj/effect/proc_holder/spell/invoked/bloodberry)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/growvines)
+		H.mind.AddSpell(new/obj/effect/proc_holder/spell/invoked/budlet)
 
 	var/datum/devotion/C = new /datum/devotion(H, H.patron)
 	C.grant_spells(H)
