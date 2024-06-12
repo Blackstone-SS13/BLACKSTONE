@@ -18,6 +18,7 @@
 	var/STASPD
 	var/STAINT
 	var/cmode_music
+	var/datum/patron/patron
 	var/list/base_intents
 	/// Whether or not we have been turned
 	var/has_turned = FALSE
@@ -38,7 +39,6 @@
 		TRAIT_CHUNKYFINGERS,
 		TRAIT_NOSLEEP,
 		TRAIT_BASHDOORS,
-		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLCOCKBLOCK,
 		TRAIT_BLOODLOSS_IMMUNE,
 		TRAIT_LIMPDICK,
@@ -89,6 +89,7 @@
 	STASPD = zombie.STASPD
 	STAINT = zombie.STAINT
 	cmode_music = zombie.cmode_music
+	patron = zombie.patron
 	return ..()
 
 /datum/antagonist/zombie/on_removal()
@@ -111,6 +112,7 @@
 		zombie.STASPD = STASPD
 		zombie.STAINT = STAINT
 		zombie.cmode_music = cmode_music
+		zombie.set_patron(patron)
 		for(var/trait in traits_zombie)
 			REMOVE_TRAIT(zombie, trait, "[type]")
 		zombie.remove_client_colour(/datum/client_colour/monochrome)
@@ -185,6 +187,7 @@
 		zombie_part.update_disabled()
 	zombie.update_body()
 	zombie.cmode_music = 'sound/music/combat_weird.ogg'
+	zombie.set_patron(/datum/patron/inhumen/zizo)
 
 	// Outside of one 2% chance remaining for zombie era strength
 	if(prob(2))
