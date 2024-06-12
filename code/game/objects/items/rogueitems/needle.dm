@@ -90,7 +90,7 @@
 			return
 		else
 			to_chat(user, "I begin threading the needle with additional fibers...")
-			if(do_after(user, 10 / (user.mind.get_skill_level(/datum/skill/misc/sewing)), target = O))
+			if(do_after(user, 10 SECONDS / (user.mind.get_skill_level(/datum/skill/misc/sewing)), target = O))
 				stringamt += 5
 				to_chat(user, "I replenish the needle's thread!")
 			return
