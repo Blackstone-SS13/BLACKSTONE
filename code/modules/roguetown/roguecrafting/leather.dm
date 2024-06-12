@@ -148,3 +148,10 @@
 	name = "Drum"
 	result = /obj/item/rogue/instrument/drum
 	reqs = list(/obj/item/natural/hide = 1,/obj/item/grown/log/tree/small = 1)
+
+/datum/crafting_recipe/roguetown/leather/dherbs
+	name = "druid herbs"
+	result = /obj/item/clothing/neck/roguetown/dherbs
+	reqs = list(/obj/item/natural/hide = 1,/obj/item/seeds/wheat = 1, /obj/item/seeds/apple = 1,
+	/obj/item/seeds/pipeweed = 1, /obj/item/seeds/sweetleaf = 1 ,/obj/item/seeds/berryrogue = 1,
+	/obj/item/natural/fibers = 1, /obj/item/reagent_containers/powder = 1, /obj/item/natural/thorn = 1)
