@@ -51,7 +51,7 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 	var/static/list/safe_areas = typecacheof(list(\
 		/area/rogue/outdoors/town,\
 		/area/rogue/indoors/town,\
-		/area/rogue/under/town,\  //to prevent zombies in the sewer area
+		/area/rogue/under/town,\
 		/area/rogue/under/town/basement,\
 		/area/rogue/under/town/caverogue,\
 	))
