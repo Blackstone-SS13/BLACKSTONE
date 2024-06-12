@@ -148,9 +148,13 @@
 	if(!rolled_classes.len)
 		linked_client.mob.returntolobby()
 		message_admins("CLASS_SELECT_HANDLER HAD PERSON WITH 0 CLASS SELECT OPTIONS. THIS IS REALLY BAD! RETURNED THEM TO LOBBY")
+
 // Something is calling to tell this datum a class it rolled is currently maxed out.
 // More shitcode!
 /datum/class_select_handler/proc/rolled_class_is_full(datum/advclass/filled_class)
+	// Fun fact, if you don't remove the class that is maxed they just get new choices infinitely
+	// Also all the checks are done causing this to be called anyways
+	rolled_classes.Remove(filled_class)
 
 	var/list/possible_list = list()
 	for(var/CTAG_CAT in filled_class.category_tags)
