@@ -241,15 +241,12 @@
 	var/turf/targeted
 	if(istype(target, /turf/open/transparent/openspace))
 		var/turf/downcheck = get_step_multiz(target, DOWN)
-		to_chat(user, "Check 1 Passed.")
 		if(istype(downcheck, /turf/open/water))
 			targeted = downcheck
 		else
-			to_chat(user, "Check 2 Failed.[downcheck]")
 			to_chat(user, "<span class='warning'>I can't fish here...</span>")
 			return
 	else if(ispath(target, /turf/open/water))
-		to_chat(user, "Check 1 Failed.")
 		targeted = target
 	else
 		to_chat(user, "<span class='warning'>I can't fish here...</span>")
