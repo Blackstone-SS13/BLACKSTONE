@@ -63,6 +63,7 @@
 	ADD_TRAIT(H, TRAIT_EMPATH, "[type]")
 	ADD_TRAIT(H, TRAIT_NOSTINK, "[type]")
 	ADD_TRAIT(H, TRAIT_ROT_EATER, "[type]")
+	ADD_TRAIT(H, TRAIT_IAMASURGEON, "[type]")//If you happen to lose your special needle, any other needle will still suffice.
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)

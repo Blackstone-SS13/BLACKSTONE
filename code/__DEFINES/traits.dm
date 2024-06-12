@@ -30,6 +30,7 @@
 #define TRAIT_SOUL_EXAMINE				"Blessing of Necra" //can check bodies to see if they have departed
 #define TRAIT_CRACKHEAD					"Blessing of Eora" //will never overdose
 #define TRAIT_NOFALLDAMAGE1				"Minor fall damage immunity"
+#define TRAIT_IAMASURGEON				"Accomplished Physician"
 
 #define TRAIT_MISSING_NOSE "Missing Nose" //halved stamina regeneration
 #define TRAIT_DISFIGURED "Disfigured"
@@ -90,6 +91,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_SHOCKIMMUNE = "I am immune to electrical shocks.",
 	TRAIT_NOSLEEP = "<span class='warning'>I can't sleep.</span>",
 	TRAIT_NOFALLDAMAGE1 = "<span class='warning'>I can easily handle minor falls.</span>",
+	TRAIT_IAMASURGEON = "My skills as a surgeon go beyond all these other hacks playing doctor. The more medical experience I have, the less likely I am to waste thread when stitching people up.",
 ))
 
 // trait accessor defines
