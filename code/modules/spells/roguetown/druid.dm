@@ -10,7 +10,7 @@
 	movement_interrupt = FALSE
 	chargedloop = null
 	req_items = list(/obj/item/clothing/neck/roguetown/dherbs)
-	sound = 'sound/magic/grow_vine.ogg'
+	sound = 'sound/magic/webspin.ogg'
 	associated_skill = /datum/skill/magic/druidic
 	antimagic_allowed = TRUE
 	charge_max = 60 SECONDS
@@ -31,7 +31,7 @@
 	charge_max = 120 SECONDS
 	req_items = list(/obj/item/clothing/neck/roguetown/dherbs)
 	cast_without_targets = TRUE
-	sound = 'sound/magic/grow_vine.ogg'
+	sound = 'sound/magic/webspin.ogg'
 	associated_skill = /datum/skill/magic/druidic
 	antimagic_allowed = TRUE
 	invocation = "By the power of Dendor, come forth!"
