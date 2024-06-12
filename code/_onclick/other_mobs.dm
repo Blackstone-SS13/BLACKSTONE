@@ -383,6 +383,7 @@
 					var/targetperception = (V.STAPER)
 					var/list/stealablezones = list("chest", "neck", "groin", "r_hand", "l_hand")
 					var/list/stealpos = list()
+					var/list/mobsbehind = list()
 					var/exp_to_gain = STAINT
 					if(stealroll > targetperception)
 					//TODO add exp here
@@ -392,7 +393,8 @@
 						if(!(zone_selected in stealablezones))
 							to_chat(src, "<span class='warning'>What am I going to steal from there?</span>")
 							return
-						if(do_after(U, 2 SECONDS, target = V, progress = 0))
+						mobsbehind |= cone(V, list(turn(V.dir, 180)), list(src))
+						if(mobsbehind.Find(src))
 							switch(U.zone_selected)
 								if("chest")
 									if (V.get_item_by_slot(SLOT_BACK_L))
@@ -422,7 +424,7 @@
 								exp_to_gain /= 2 // these can be removed or changed on reviewer's discretion
 								to_chat(src, "<span class='warning'>I didn't find anything there. Perhaps I should look elsewhere.</span>")
 						else
-							to_chat(src, "<span class='warning'>I fumbled it!")
+							to_chat(src, "<span class='warning'>They can see me!")
 					if(stealroll <= 4)
 						V.log_message("has had an attempted pickpocket by [key_name(U)]", LOG_ATTACK, color="black")
 						U.log_message("has attempted to pickpocket [key_name(V)]", LOG_ATTACK, color="black")
