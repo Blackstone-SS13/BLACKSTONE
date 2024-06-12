@@ -102,10 +102,10 @@
 */
 /datum/controller/subsystem/role_class_handler/proc/check_drifterwave_restrictions(client/target_client)
 	if(length(current_wave.allowed_races) && !(target_client.prefs.pref_species.name in current_wave.allowed_races))
-		to_chat(target_client, "<span class='warning'> WRONG RACE </span>")
+		to_chat(target_client, span_warning(" WRONG RACE "))
 		return FALSE
 	if(length(current_wave.allowed_patrons) && !(target_client.prefs.selected_patron.type in current_wave.allowed_patrons))
-		to_chat(target_client, "<span class='warning'> WRONG PATRON </span>")
+		to_chat(target_client, span_warning(" WRONG PATRON "))
 		return FALSE
 
 	var/list/local_allowed_sexes = list()
@@ -121,13 +121,13 @@
 	if(length(local_allowed_sexes) && !(target_client.prefs.gender in local_allowed_sexes))
 		return JOB_UNAVAILABLE_SEX
 	if(length(current_wave.allowed_sexes) && !(target_client.prefs.gender in current_wave.allowed_sexes))
-		to_chat(target_client, "<span class='warning'> WRONG GENDER </span>")
+		to_chat(target_client, span_warning(" WRONG GENDER "))
 		return FALSE
 	if(length(current_wave.allowed_ages) && !(target_client.prefs.age in current_wave.allowed_ages))
-		to_chat(target_client, "<span class='warning'> WRONG AGEGROUP </span>")
+		to_chat(target_client, span_warning(" WRONG AGEGROUP "))
 		return FALSE
 	if(length(current_wave.allowed_skintones) && !(target_client.prefs.skin_tone in current_wave.allowed_skintones))
-		to_chat(target_client, "<span class='warning'> WRONG ANCESTRY </span>")
+		to_chat(target_client, span_warning(" WRONG ANCESTRY "))
 		return FALSE
 	return TRUE
 
