@@ -2,15 +2,17 @@
 	var/name
 	var/list/additional_items = list()
 	var/material_quality = 0 // accumulated per added ingot (decided by quality of smelting per ingot)
-	var/num_of_materials = 1 // why are additional_items and req_bar 2 different things?! THE SLOP!
-	var/quality = 0 // accumulated per hit, variant on the skill of the smith.
+	var/num_of_materials = 1
+	var/median_calculated = FALSE
+	var/quality = 0
 	var/appro_skill = /datum/skill/craft/blacksmithing
 	var/req_bar
 	var/created_item
 	var/craftdiff = 0
 	var/additional_items_text
 	var/quality_mod = 0
-	var/mistakes
+	var/mistakes = 0
+	var/max_mistakes = 0
 	var/i_type
 
 	var/datum/parent
@@ -20,17 +22,12 @@
 	. = ..()
 
 /datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE)
-	if(!additional_items_text && additional_items.len)
-		for(var/I in additional_items)
-			var/obj/item/NI = new I
-			additional_items_text = "[additional_items_text], [NI.name]"
-			qdel(NI)
-	if(additional_items_text)
-		to_chat(user, "<span class='info'>Before you can smith, you will need to add [additional_items_text].</span>")
+	if(handle_additional_items(user, FALSE))
 		return FALSE
-	if(num_of_materials) // has the median material quality been calculated?
+	max_mistakes = 3*num_of_materials
+	if(!median_calculated) // has the median material quality been calculated?
 		material_quality = floor(material_quality/num_of_materials)
-		num_of_materials = 0
+		median_calculated = TRUE
 	var/current_mistake = FALSE
 	var/proab = 14
 	var/skill_level
@@ -43,17 +40,17 @@
 		current_mistake = TRUE
 	if(current_mistake)
 		mistakes += 1
-		if(mistakes >= 3)
-			user.visible_message("<span class='warning'>[user] spoils the bar!</span>")
+		if(mistakes >= max_mistakes)
+			user.visible_message("<span class='warning'>[user]'s bar falls apart!</span>")
 			if(parent)
 				var/obj/item/P = parent
 				qdel(P)
 			return FALSE
 		else
-			user.visible_message("<span class='warning'>[user] fumbles with the bar!</span>")
+			user.visible_message("<span class='warning'>[user] works a mistake into the bar!</span>")
 			return FALSE
 	else
-		quality += (breakthrough ? 15 : 10)+(material_quality*2)
+		quality += ((breakthrough ? 15 : 10)+(material_quality*2))/num_of_materials
 		if(user.mind && isliving(user))
 			var/mob/living/L = user
 			var/boon = user.mind.get_learning_boon(appro_skill)
@@ -67,22 +64,32 @@
 			user.visible_message("<span class='info'>[user] strikes the bar!</span>")
 		return TRUE
 
-/datum/anvil_recipe/proc/item_added(mob/user, obj/item/I)
-	additional_items -= I
-	user.visible_message("<span class='info'>[user] adds [I]</span>")
-	additional_items_text = null
+/datum/anvil_recipe/proc/handle_additional_items(mob/user, obj/item/W)
+	if(additional_items.len)
+		if(!additional_items_text)
+			for(var/I in additional_items)
+				var/obj/item/NI = new I
+				if(additional_items_text)
+					additional_items_text = "[additional_items_text], [NI.name]"
+				else
+					additional_items_text = "[NI.name]"
+				qdel(NI)
+		if(W)
+			user.visible_message("<span class='info'>[user] adds [W]</span>")
+		else
+			to_chat(user, "<span class='info'>Before you can smith, you will need to add [additional_items_text].</span>")
+		return TRUE
+	else
+		additional_items_text = null
+		return FALSE
 
 /datum/anvil_recipe/proc/handle_creation(obj/item/I)
-	material_quality = floor(material_quality/num_of_materials)-2
-	quality = floor((quality/num_of_materials)/1500)
+	quality = floor(quality/70)
 	var/modifier
 	switch(quality)
-		if(BLACKSMITH_LEVEL_MIN to BLACKSMITH_LEVEL_SPOIL)
-			I.name = "spoilt [I.name]"
-			modifier = 0.3
-		if(BLACKSMITH_LEVEL_AWFUL)
+		if(BLACKSMITH_LEVEL_MIN)
 			I.name = "awful [I.name]"
-			modifier = 0.5
+			modifier = 0.3
 		if(BLACKSMITH_LEVEL_CRUDE)
 			I.name = "crude [I.name]"
 			modifier = 0.8

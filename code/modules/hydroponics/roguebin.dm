@@ -160,8 +160,8 @@
 			if(!T.hingot.currecipe)
 				to_chat(user, "<span class='warning'>Huh?</span>")
 				return
-			if(T.hingot.currecipe.progress != 100)
-				to_chat(user, "<span class='warning'>It's not finished yet.</span>")
+			if(T.hingot.currecipe.quality <= 70)
+				to_chat(user, "<span class='warning'>It's not even crudely finished yet.</span>")
 				return
 			if(!T.hott)
 				to_chat(user, "<span class='warning'>I need to heat it to temper the metal.</span>")

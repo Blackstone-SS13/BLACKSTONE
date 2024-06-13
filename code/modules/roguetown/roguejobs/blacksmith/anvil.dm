@@ -98,20 +98,23 @@
 		return
 
 	if(hingot?.currecipe?.additional_items_text)
+		var/datum/anvil_recipe/currentrecipe = hingot.currecipe
 		var/found_in_list = FALSE
-		for(var/I_list in hingot.currecipe.additional_items)
+		for(var/I_list in currentrecipe.additional_items)
 			if(istype(W, I_list))
 				found_in_list = TRUE
+				currentrecipe.additional_items -= I_list
+				break
 		if(!found_in_list)
 			return
-		hingot.currecipe.item_added(user, W)
+		currentrecipe.handle_additional_items(user, W)
 		if(istype(W, /obj/item/ingot))
 			var/obj/item/ingot/I = W
-			hingot.currecipe.material_quality += I.quality
+			currentrecipe.material_quality += I.quality
 			previous_material_quality = I.quality
 		else
-			hingot.currecipe.material_quality += previous_material_quality
-		hingot.currecipe.num_of_materials += 1 
+			currentrecipe.material_quality += previous_material_quality
+		currentrecipe.num_of_materials += 1
 		qdel(W)
 		return
 
