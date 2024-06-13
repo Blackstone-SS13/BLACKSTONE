@@ -96,7 +96,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_CRACKHEAD = span_love("I can use drugs as much as I want!"),
 	TRAIT_COMMIE = span_bloody("I can recognize other free men, and they can recognize me too."),
 	TRAIT_IAMASURGEON = "My skills as a surgeon go beyond all these other hacks playing doctor. The more medical experience I have, the less likely I am to waste thread when stitching people up.",
-	TRAIT_ZOMBIFIED = span_warning("My body has atrophied in my state of decay; my leg joints just don't have the strength or durability for running anymore"),
+	TRAIT_NORUN = span_warning("My body has atrophied in my state of decay; my leg joints just don't have the strength or durability for running anymore"),
 ))
 
 // trait accessor defines
