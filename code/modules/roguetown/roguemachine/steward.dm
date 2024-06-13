@@ -16,13 +16,14 @@
 	anchored = TRUE
 	layer = BELOW_OBJ_LAYER
 	var/locked = FALSE
+	var/keycontrol = "steward"
 	var/current_tab = TAB_MAIN
 
 
 /obj/structure/roguemachine/steward/attackby(obj/item/P, mob/user, params)
 	if(istype(P, /obj/item/roguekey))
 		var/obj/item/roguekey/K = P
-		if(K.lockid == "steward" || K.lockid == "lord")
+		if(K.lockid == keycontrol)
 			locked = !locked
 			playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
 			update_icon()
@@ -33,7 +34,7 @@
 	if(istype(P, /obj/item/keyring))
 		var/obj/item/keyring/K = P
 		for(var/obj/item/roguekey/KE in K.keys)
-			if(KE.lockid == "steward" || KE.lockid == "lord")
+			if(KE.lockid == keycontrol)
 				locked = !locked
 				playsound(loc, 'sound/misc/beep.ogg', 100, FALSE, -1)
 				update_icon()
