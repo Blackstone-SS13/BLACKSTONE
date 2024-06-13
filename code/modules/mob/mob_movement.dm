@@ -577,7 +577,8 @@
 	if(m_intent == MOVE_INTENT_RUN)
 		m_intent = MOVE_INTENT_WALK
 	else
-		m_intent = MOVE_INTENT_RUN
+		if(!HAS_TRAIT(user, TRAIT_ZOMBIFIED))
+			m_intent = MOVE_INTENT_RUN
 	if(hud_used && hud_used.static_inventory)
 		for(var/atom/movable/screen/mov_intent/selector in hud_used.static_inventory)
 			selector.update_icon()
