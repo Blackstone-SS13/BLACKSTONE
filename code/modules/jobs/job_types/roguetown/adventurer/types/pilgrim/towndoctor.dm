@@ -51,6 +51,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 1, TRUE)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular)
 		if(H.age == AGE_OLD)
 			H.change_stat("intelligence", 3)
 			H.change_stat("perception", 1)

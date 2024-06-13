@@ -1,4 +1,4 @@
-// Diagnose 
+// Diagnose
 /obj/effect/proc_holder/spell/invoked/diagnose
 	name = "Diagnose"
 	overlay_state = "diagnose"
@@ -22,6 +22,14 @@
 		human_target.check_for_injuries(user)
 		return TRUE
 	return FALSE
+
+/obj/effect/proc_holder/spell/invoked/diagnose/secular
+	name = "Secular Diagnosis"
+	overlay_state = "diagnose"
+	range = 1
+	associated_skill = /datum/skill/misc/medicine
+	miracle = FALSE
+	devotion_cost = 0 //Doctors are not clerics
 
 // Limb or organ attachment
 /obj/effect/proc_holder/spell/invoked/attach_bodypart
