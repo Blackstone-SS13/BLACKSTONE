@@ -209,10 +209,8 @@
 	for(var/slot in removed_slots)
 		zombie.dropItemToGround(zombie.get_item_by_slot(slot), TRUE)
 
-	/* Exercises in futility
 	// Ghosts you because this shit was just not working whatsoever, let the AI handle the rest
 	zombie.ghostize(FALSE)
-	*/
 
 /datum/antagonist/zombie/greet()
 	to_chat(owner.current, span_userdanger("Death is not the end..."))
