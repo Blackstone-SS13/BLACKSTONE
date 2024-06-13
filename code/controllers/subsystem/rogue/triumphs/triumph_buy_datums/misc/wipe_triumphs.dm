@@ -9,4 +9,4 @@
 // We fire this on activate
 /datum/triumph_buy/wipe_triumphs/on_activate()
 	SStriumphs.wipe_all_triumphs(ckey_of_buyer) // ha haha .... woops guys
-	to_chat(world, "<span class='redtext'>[key_of_buyer] burns the hall of triumphs to the ground!</span>")
+	to_chat(world, span_redtext("[key_of_buyer] burns the hall of triumphs to the ground!"))

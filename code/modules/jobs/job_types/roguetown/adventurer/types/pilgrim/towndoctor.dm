@@ -11,7 +11,7 @@
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/doctor
 	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
-	traits_applied = list(TRAIT_EMPATH, TRAIT_NOSTINK)
+	traits_applied = list(TRAIT_EMPATH, TRAIT_NOSTINK, TRAIT_IAMASURGEON)
 	cmode_music = 'sound/music/combat_physician.ogg'
 
 /datum/outfit/job/roguetown/adventurer/doctor
@@ -31,7 +31,7 @@
 	shoes = /obj/item/clothing/shoes/roguetown/simpleshoes
 	backl = /obj/item/storage/backpack/rogue/backpack
 	backpack_contents = list(
-		/obj/item/rogueweapon/surgery/scalpel = 1, 
+		/obj/item/rogueweapon/surgery/scalpel = 1,
 		/obj/item/rogueweapon/surgery/saw = 1,
 		/obj/item/rogueweapon/surgery/hemostat = 2,
 		/obj/item/rogueweapon/surgery/retractor = 1,

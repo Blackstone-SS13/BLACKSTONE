@@ -2588,7 +2588,7 @@
 "tkE" = (/obj/structure/roguewindow/openclose{dir = 8},/turf/open/floor/rogue/ruinedwood{icon_state = "horzw"},/area/rogue/indoors/town/bath)
 "tkQ" = (/obj/structure/table/wood,/turf/open/floor/rogue/wood,/area/rogue/indoors/town/dwarfin)
 "tkS" = (/obj/structure/closet/crate/roguecloset/dark,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/obj/item/paper/scroll,/turf/open/floor/rogue/tile/masonic/single,/area/rogue/indoors/town/manor)
-"tkZ" = (/obj/structure/rack/rogue,/turf/open/floor/rogue/ruinedwood{icon_state = "horzw"},/area/rogue/indoors/town/church)
+"tkZ" = (/obj/structure/rack/rogue,/obj/item/storage/backpack/rogue/backpack/surgery,/turf/open/floor/rogue/ruinedwood{icon_state = "horzw"},/area/rogue/indoors/town/church)
 "tlQ" = (/obj/structure/roguewindow,/turf/open/floor/rogue/herringbone,/area/rogue/indoors/town/church)
 "tmE" = (/obj/structure/roguewindow/openclose{dir = 1},/turf/open/floor/rogue/woodturned,/area/rogue/indoors/town/manor)
 "tmH" = (/turf/closed/mineral/random/rogue,/area/rogue/indoors/shelter/mountains)

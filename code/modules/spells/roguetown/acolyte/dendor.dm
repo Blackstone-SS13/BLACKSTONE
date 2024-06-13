@@ -17,7 +17,7 @@
 
 /obj/effect/proc_holder/spell/targeted/blesscrop/cast(list/targets,mob/user = usr)
 	. = ..()
-	visible_message("<span class='green'>[usr] blesses the crop with Dendor's Favour!</span>")
+	visible_message(span_green("[usr] blesses the crop with Dendor's Favour!"))
 	var/growed = FALSE
 	for(var/obj/machinery/crop/C in view(5))
 		growed = TRUE
@@ -44,7 +44,7 @@
 
 /obj/effect/proc_holder/spell/targeted/beasttame/cast(list/targets,mob/user = usr)
 	. = ..()
-	visible_message("<span class='green'>[usr] soothes the beastblood with Dendor's whisper.</span>")
+	visible_message(span_green("[usr] soothes the beastblood with Dendor's whisper."))
 	var/tamed = FALSE
 	for(var/mob/living/simple_animal/hostile/retaliate/B in oview(2))
 		if(B.aggressive)
