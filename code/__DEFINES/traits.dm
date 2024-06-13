@@ -54,7 +54,7 @@
 #define TRAIT_IWASHAUNTED "iwashaunted" //prevents spawning a haunt from a decapitated body twice
 #define TRAIT_SCHIZO_AMBIENCE "schizo_ambience" //replaces all ambience with creepy shit
 #define TRAIT_SCREENSHAKE "screenshake" //screen will always be shaking, you cannot stop it
-#define TRAIT_ZOMBIFIED "Decayed Flesh"
+#define TRAIT_NORUN "Decayed Flesh"
 
 GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_WEBWALK = "I can move freely between webs.",
