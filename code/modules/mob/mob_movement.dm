@@ -577,7 +577,7 @@
 	if(m_intent == MOVE_INTENT_RUN)
 		m_intent = MOVE_INTENT_WALK
 	else
-		if(!HAS_TRAIT(user, TRAIT_ZOMBIFIED))
+		if(!HAS_TRAIT(user, TRAIT_NORUN))
 			m_intent = MOVE_INTENT_RUN
 		else
 			to_chat(user, span_warning("My joints have decayed too much for running!"))
