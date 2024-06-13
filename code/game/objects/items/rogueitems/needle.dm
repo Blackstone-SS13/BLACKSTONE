@@ -14,7 +14,8 @@
 	anvilrepair = /datum/skill/craft/blacksmithing
 	tool_behaviour = TOOL_SUTURE
 	/// Amount of uses left
-	var/stringamt = 10
+	var/stringamt = 20
+	var/maxstring = 20
 	/// If this needle is infinite
 	var/infinite = FALSE
 	/// If this needle can be used to repair items
@@ -23,7 +24,10 @@
 /obj/item/needle/examine()
 	. = ..()
 	if(!infinite)
-		. += span_bold("It has [stringamt] uses left.")
+		if(stringamt > 0)
+			. += span_bold("It has [stringamt] uses left.")
+		else
+			. += span_bold("It has no uses left.")
 	else
 		. += "Can be used indefinitely."
 
@@ -41,8 +45,8 @@
 	if(infinite)
 		return TRUE
 	stringamt = stringamt - used
-	if(stringamt <= 0)
-		qdel(src)
+//	if(stringamt <= 0)
+//		qdel(src)
 
 /obj/item/needle/attack(mob/living/M, mob/user)
 	sew(M, user)
@@ -50,6 +54,9 @@
 /obj/item/needle/attack_obj(obj/O, mob/living/user)
 	if(can_repair && isitem(O))
 		var/obj/item/I = O
+		if(stringamt < 1)
+			to_chat(user, span_warning("The needle has no thread left!"))
+			return
 		if(I.sewrepair && I.max_integrity && !I.obj_broken)
 			if(I.obj_integrity == I.max_integrity)
 				to_chat(user, span_warning("This is not broken."))
@@ -73,10 +80,20 @@
 				if(target_storage)
 					target_storage.being_repaired = FALSE
 				return
-			else 
+			else
 				//Vrell - Part of storage item repair fix
 				if(target_storage)
 					target_storage.being_repaired = FALSE
+		if(istype(O, /obj/item/natural/fibers))
+			if(maxstring - stringamt < 5)
+				to_chat(user, span_warning("Not enough room for more thread!"))
+				return
+			else
+				to_chat(user, "I begin threading the needle with additional fibers...")
+				if(do_after(user, 10 SECONDS / (user.mind.get_skill_level(/datum/skill/misc/sewing)), target = O))
+					stringamt += 5
+					to_chat(user, "I replenish the needle's thread!")
+				return
 		return
 	return ..()
 
@@ -85,6 +102,9 @@
 		return FALSE
 	var/mob/living/doctor = user
 	var/mob/living/carbon/human/patient = target
+	if(stringamt < 1)
+		to_chat(user, span_warning("The needle has no thread left!"))
+		return
 	if(!get_location_accessible(patient, check_zone(doctor.zone_selected)))
 		to_chat(doctor, span_warning("Something in the way."))
 		return FALSE
@@ -122,7 +142,14 @@
 			continue
 		if(doctor.mind)
 			doctor.mind.adjust_experience(/datum/skill/misc/medicine, doctor.STAINT * 5)
-		use(1)
+		if(!HAS_TRAIT(doctor, TRAIT_IAMASURGEON))
+			use(1)
+		else
+			if(prob(20 * (user.mind.get_skill_level(/datum/skill/misc/medicine) - 1)))//Physicians and surgeons with Legendary Medicine can use any needle like a Needle of Pestra.
+				to_chat(user, span_green("Eureka! I hardly spent any thread this time!"))
+				continue
+			else
+				use(1)
 		target_wound.sew_wound()
 		if(patient == doctor)
 			doctor.visible_message(span_notice("[doctor] sews \a [target_wound.name] on [doctor.p_them()]self."), span_notice("I stitch \a [target_wound.name] on my [affecting]."))
