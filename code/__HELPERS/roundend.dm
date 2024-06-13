@@ -201,7 +201,6 @@
 
 	to_chat(world, "<BR><BR><BR><span class='reallybig'>So ends this tale of Blackstone.</span>")
 	get_end_reason()
-	SSvote.initiate_vote("map", "Blackstone players")
 
 	var/list/key_list = list()
 	for(var/client/C in GLOB.clients)
