@@ -3,11 +3,11 @@
 
 #define ALL_RACES_LIST_NAMES list("Humen", "Elf", "Dark Elf", "Half-Elf", "Dwarf", "Tiefling", "Argonian", "Aasimar", "Half Orc")
 
-#define ALL_CLERIC_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/necra, /datum/patron/divine/pestra)
+#define ALL_CLERIC_PATRONS list(/datum/patron/veneration/cephas, /datum/patron/veneration/mikros, /datum/patron/veneration/yaakov, /datum/patron/veneration/labbeus, /datum/patron/veneration/julias)
 
-#define ALL_ACOLYTE_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/pestra)
+#define ALL_ACOLYTE_PATRONS list(/datum/patron/veneration/cephas, /datum/patron/veneration/mikros)
 
-#define ALL_DIVINE_PATRONS list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/ravox, /datum/patron/divine/necra, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum)
+#define ALL_DIVINE_PATRONS list(/datum/patron/veneration/cephas, /datum/patron/veneration/eosten, /datum/patron/veneration/patras, /datum/patron/veneration/mikros, /datum/patron/veneration/nazar, /datum/patron/veneration/mikros, /datum/patron/veneration/yaakov, /datum/patron/veneration/julias, /datum/patron/veneration/cana, /datum/patron/veneration/mathuin, /datum/patron/veneration/toma, /datum/patron/veneration/labbeus)
 
 
 #define PLATEHIT "plate"
