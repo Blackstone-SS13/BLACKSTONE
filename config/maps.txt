@@ -23,3 +23,8 @@ endmap
 map blackstonedense
 	votable
 endmap
+
+map oldtown
+	votable
+	maxplayers 70
+endmap
