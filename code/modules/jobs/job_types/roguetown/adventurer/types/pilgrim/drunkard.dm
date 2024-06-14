@@ -17,7 +17,7 @@
 	category_tags = list(CTAG_PILGRIM)
 
 /datum/outfit/job/roguetown/adventurer/drunkard
-	allowed_patrons = list(/datum/patron/inhumen/eora, /datum/patron/divine/xylix)
+	allowed_patrons = list(/datum/patron/apostate/eora, /datum/patron/pagan/xylix, /datum/patron/pagan/julias)
 
 /datum/outfit/job/roguetown/adventurer/drunkard/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -47,5 +47,5 @@
 		H.change_stat("fortune", 2)
 		ADD_TRAIT(H, TRAIT_NOSTINK, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_LIMPDICK, TRAIT_GENERIC)
-		if(H.patron.type == /datum/patron/divine/xylix)
+		if(H.patron.type == /datum/patron/pagan/xylix, /datum/patron/veneration/julias)
 			ADD_TRAIT(H, TRAIT_CRACKHEAD, TRAIT_GENERIC)
