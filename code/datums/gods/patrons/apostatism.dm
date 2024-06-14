@@ -1,6 +1,6 @@
 /datum/patron/apostate
 	name = null
-	associated_faith = /datum/faith/apostatism
+	associated_faith = /datum/faith/apostates
 	undead_hater = FALSE
 	confess_lines = list(
 		"PSYDON IS THE DEMIURGE!",
