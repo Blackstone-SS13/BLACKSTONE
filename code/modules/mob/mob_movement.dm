@@ -577,7 +577,10 @@
 	if(m_intent == MOVE_INTENT_RUN)
 		m_intent = MOVE_INTENT_WALK
 	else
-		m_intent = MOVE_INTENT_RUN
+		if(!HAS_TRAIT(user, TRAIT_NORUN))
+			m_intent = MOVE_INTENT_RUN
+		else
+			to_chat(user, span_warning("My joints have decayed too much for running!"))
 	if(hud_used && hud_used.static_inventory)
 		for(var/atom/movable/screen/mov_intent/selector in hud_used.static_inventory)
 			selector.update_icon()
