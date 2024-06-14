@@ -17,7 +17,7 @@
 	category_tags = list(CTAG_PILGRIM)
 
 /datum/outfit/job/roguetown/adventurer/drunkard
-	allowed_patrons = list(/datum/patron/apostate/eora, /datum/patron/pagan/xylix, /datum/patron/pagan/julias)
+	allowed_patrons = list(/datum/patron/apostate/eora, /datum/patron/pagan/xylix, /datum/patron/veneration/julias)
 
 /datum/outfit/job/roguetown/adventurer/drunkard/pre_equip(mob/living/carbon/human/H)
 	..()
