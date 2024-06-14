@@ -10,18 +10,7 @@
 		"Humen",
 		"Aasimar",
 	)
-	allowed_patrons = list(
-		/datum/patron/old_god,
-		/datum/patron/divine/astrata, 
-		/datum/patron/divine/noc, 
-		/datum/patron/divine/dendor, 
-		/datum/patron/divine/abyssor, 
-		/datum/patron/divine/ravox, 
-		/datum/patron/divine/necra, 
-		/datum/patron/divine/xylix, 
-		/datum/patron/divine/pestra, 
-		/datum/patron/divine/malum,
-	) //gets set to old god anyways
+	allowed_patrons = ALL_DIVINE_PATRONS //gets set to Gnosticism anyways
 	tutorial = "As an Inquisitor, the Queen has emboldened your radical sect to root out cultists and the cursed night beasts, using your practice of extracting involuntary 'sin confessions' as a guise to spy on the local populace. Witch Hunters are hired for their extreme paranoia and religious fervor."
 	whitelist_req = TRUE
 
@@ -43,7 +32,7 @@
 /datum/outfit/job/roguetown/puritan
 	name = "Inquisitor"
 	jobtype = /datum/job/roguetown/puritan
-	allowed_patrons = list(/datum/patron/old_god)
+	allowed_patrons = list(/datum/patron/gnostic/the_one)
 
 /datum/outfit/job/roguetown/puritan/pre_equip(mob/living/carbon/human/H)
 	..()
