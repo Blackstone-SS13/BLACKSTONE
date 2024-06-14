@@ -26,7 +26,7 @@
 	max_pq = null
 
 /datum/outfit/job/roguetown/magician
-	allowed_patrons = list(/datum/patron/divine/noc)
+	allowed_patrons = list(/datum/patron/veneration/eosten)
 
 /datum/outfit/job/roguetown/magician/pre_equip(mob/living/carbon/human/H)
 	..()
