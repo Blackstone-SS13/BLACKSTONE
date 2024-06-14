@@ -590,6 +590,7 @@
 #include "code\datums\gods\patrons\pagan.dm"
 #include "code\datums\gods\patrons\apostatism.dm"
 #include "code\datums\gods\patrons\veneration.dm"
+#include "code\datums\gods\patrons\gnostic.dm"
 #include "code\datums\helper_datums\events.dm"
 #include "code\datums\helper_datums\getrev.dm"
 #include "code\datums\helper_datums\icon_snapshot.dm"
