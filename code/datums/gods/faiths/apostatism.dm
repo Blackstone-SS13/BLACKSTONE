@@ -5,4 +5,4 @@
 		Humanity cannot be free until we cast down these false evangalists and their sheep.\n\
 		By the Black Sun, we shall corrupt and bring about the ruin of what they falsely believe to be sacred..."
 	worshippers = "Cultists, the Forsaken and the Cursed."
-	godhead = /datum/patron/apostatism/graggar
+	godhead = /datum/patron/apostate/graggar
