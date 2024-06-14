@@ -28,12 +28,12 @@
 	max_pq = null
 
 /datum/outfit/job/roguetown/undertaker
-	allowed_patrons = list(/datum/patron/divine/necra)
+	allowed_patrons = list(/datum/patron/veneration/labbeus)
 
 /datum/outfit/job/roguetown/undertaker/pre_equip(mob/living/carbon/human/H)
 	..()
 	head = /obj/item/clothing/head/roguetown/necrahood
-	neck = /obj/item/clothing/neck/roguetown/psicross/necra
+	neck = /obj/item/clothing/neck/roguetown/psicross/wood
 	cloak = /obj/item/clothing/cloak/raincloak/mortus
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/necra
 	shirt = /obj/item/clothing/suit/roguetown/armor/leather/vest/black
