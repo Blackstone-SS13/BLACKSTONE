@@ -147,7 +147,6 @@
 		else
 			if(prob(20 * (user.mind.get_skill_level(/datum/skill/misc/medicine) - 1)))//Physicians and surgeons with Legendary Medicine can use any needle like a Needle of Pestra.
 				to_chat(user, span_green("Eureka! I hardly spent any thread this time!"))
-				continue
 			else
 				use(1)
 		target_wound.sew_wound()
