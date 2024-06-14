@@ -1132,7 +1132,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 				return
 			var/mob/living/carbon/human/ligga = target
 			ligga.emote("painscream")
-			ligga.set_patron(GLOB.patronlist[/datum/patron/veneration/yaavok] || GLOB.patronlist[/datum/patron/godless])
+			ligga.set_patron(GLOB.patronlist[/datum/patron/veneration/yaakov] || GLOB.patronlist[/datum/patron/godless])
 			var/old_name = ligga.real_name
 			var/datum/species/lizard/brazil/brazil = new /datum/species/lizard/brazil
 			ligga.set_species(brazil)
