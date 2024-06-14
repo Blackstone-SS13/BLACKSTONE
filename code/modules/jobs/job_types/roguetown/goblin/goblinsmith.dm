@@ -7,7 +7,7 @@
 	spawn_positions = 0
 	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
-	allowed_patrons = list(/datum/patron/inhumen/graggar)
+	allowed_patrons = list(/datum/patron/apostate/graggar)
 	tutorial = "Goblin rensposible for fresh iron and steel"
 	display_order = JDO_GOBLINSMITH
 	outfit = /datum/outfit/job/roguetown/goblinsmith
