@@ -27,7 +27,7 @@
 /datum/outfit/job/roguetown/druid
 	name = "Druid"
 	jobtype = /datum/job/roguetown/druid
-	allowed_patrons = list(/datum/patron/divine/dendor)
+	allowed_patrons = list(/datum/patron/veneration/yaakov)
 
 /datum/outfit/job/roguetown/druid/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -36,7 +36,7 @@
 	beltr = /obj/item/flashlight/flare/torch/lantern
 	backl = /obj/item/storage/backpack/rogue/satchel
 	head = /obj/item/clothing/head/roguetown/dendormask
-	neck = /obj/item/clothing/neck/roguetown/psicross/dendor
+	neck = /obj/item/clothing/neck/roguetown/psicross/wood
 	armor = /obj/item/clothing/suit/roguetown/shirt/robe/dendor
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
