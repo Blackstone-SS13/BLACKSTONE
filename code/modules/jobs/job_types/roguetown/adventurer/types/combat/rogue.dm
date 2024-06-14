@@ -19,7 +19,7 @@
 	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/rogue
-	allowed_patrons = list(/datum/patron/divine/xylix, /datum/patron/inhumen/matthios)
+	allowed_patrons = list(/datum/patron/pagan/xylix, /datum/patron/apostate/matthios, /datum/patron/veneration/julias)
 
 /datum/outfit/job/roguetown/adventurer/rogue/pre_equip(mob/living/carbon/human/H)
 	..()
