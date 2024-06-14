@@ -47,5 +47,5 @@
 		H.change_stat("fortune", 2)
 		ADD_TRAIT(H, TRAIT_NOSTINK, TRAIT_GENERIC)
 		ADD_TRAIT(H, TRAIT_LIMPDICK, TRAIT_GENERIC)
-		if(H.patron.type == /datum/patron/pagan/xylix, /datum/patron/veneration/julias)
+		if(H.patron.type == /datum/patron/pagan/xylix)
 			ADD_TRAIT(H, TRAIT_CRACKHEAD, TRAIT_GENERIC)
