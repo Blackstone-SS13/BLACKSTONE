@@ -7,7 +7,7 @@
 	spawn_positions = 0
 	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
-	allowed_patrons = list(/datum/patron/inhumen/graggar)
+	allowed_patrons = list(/datum/patron/apostate/graggar)
 	tutorial = "Cook, farm, butcher. Make king happy with apple pies! Don't forget about your brothers."
 
 
