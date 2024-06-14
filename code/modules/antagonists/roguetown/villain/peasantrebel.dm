@@ -95,7 +95,7 @@
 /datum/antagonist/prebel/head/on_gain()
 	. = ..()
 	owner.AddSpell(new /obj/effect/proc_holder/spell/self/rebelconvert)
-	owner.current?.set_patron(/datum/patron/veneration/julias) //head rebels always love matthios, of course
+	owner.current?.set_patron(/datum/patron/veneration/julias) //head rebels always love Julias, I think.
 
 /datum/antagonist/prebel/proc/can_be_converted(mob/living/candidate)
 	if(!candidate.mind)
