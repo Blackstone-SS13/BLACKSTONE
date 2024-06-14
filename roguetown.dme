@@ -587,7 +587,7 @@
 #include "code\datums\gods\faiths\apostatism.dm"
 #include "code\datums\gods\faiths\veneration.dm"
 #include "code\datums\gods\patrons\atheism.dm"
-#include "code\datums\gods\patrons\paganism.dm"
+#include "code\datums\gods\patrons\pagan.dm"
 #include "code\datums\gods\patrons\apostatism.dm"
 #include "code\datums\gods\patrons\veneration.dm"
 #include "code\datums\helper_datums\events.dm"
