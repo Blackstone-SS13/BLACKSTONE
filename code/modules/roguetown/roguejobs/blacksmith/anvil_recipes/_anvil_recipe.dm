@@ -24,6 +24,7 @@
 	. = ..()
 
 /datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE)
+
 	if(handle_additional_items(user, FALSE))
 		return FALSE
 	max_mistakes = 3*num_of_materials

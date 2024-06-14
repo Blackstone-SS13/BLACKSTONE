@@ -302,7 +302,7 @@
 
 /datum/intent/shoot/prewarning()
 	if(masteritem && mastermob)
-		mastermob.visible_message("<span class='warning'>[mastermob] aims [masteritem]!</span>")
+		mastermob.visible_message(span_warning("[mastermob] aims [masteritem]!"))
 
 /datum/intent/arc
 	name = "arc"
@@ -324,7 +324,7 @@
 
 /datum/intent/arc/prewarning()
 	if(masteritem && mastermob)
-		mastermob.visible_message("<span class='warning'>[mastermob] aims [masteritem]!</span>")
+		mastermob.visible_message(span_warning("[mastermob] aims [masteritem]!"))
 
 
 /datum/intent/unarmed
@@ -352,11 +352,11 @@
 	if(ismob(target))
 		var/mob/M = target
 		var/list/targetl = list(target)
-		user.visible_message("<span class='warning'>[user] taunts [M]!</span>", "<span class='warning'>I taunt [M]!</span>", ignored_mobs = targetl)
+		user.visible_message(span_warning("[user] taunts [M]!"), span_warning("I taunt [M]!"), ignored_mobs = targetl)
 		user.emote("taunt")
 		if(M.client)
 			if(M.can_see_cone(user))
-				to_chat(M, "<span class='danger'>[user] taunts me!</span>")
+				to_chat(M, span_danger("[user] taunts me!"))
 		else
 			M.taunted(user)
 	return
@@ -379,10 +379,10 @@
 	if(ismob(target))
 		var/mob/M = target
 		var/list/targetl = list(target)
-		user.visible_message("<span class='blue'>[user] shoos [M] away.</span>", "<span class='blue'>I shoo [M] away.</span>", ignored_mobs = targetl)
+		user.visible_message(span_blue("[user] shoos [M] away."), span_blue("I shoo [M] away."), ignored_mobs = targetl)
 		if(M.client)
 			if(M.can_see_cone(user))
-				to_chat(M, "<span class='blue'>[user] shoos me away.</span>")
+				to_chat(M, span_blue("[user] shoos me away."))
 		else
 			M.shood(user)
 	return
@@ -404,10 +404,10 @@
 	if(ismob(target))
 		var/mob/M = target
 		var/list/targetl = list(target)
-		user.visible_message("<span class='green'>[user] beckons [M] to come closer.</span>", "<span class='green'>I beckon [M] to come closer.</span>", ignored_mobs = targetl)
+		user.visible_message(span_green("[user] beckons [M] to come closer."), span_green("I beckon [M] to come closer."), ignored_mobs = targetl)
 		if(M.client)
 			if(M.can_see_cone(user))
-				to_chat(M, "<span class='green'>[user] beckons me to come closer.</span>")
+				to_chat(M, span_green("[user] beckons me to come closer."))
 		else
 			M.beckoned(user)
 	return
@@ -426,10 +426,10 @@
 	if(ismob(target))
 		var/mob/M = target
 		var/list/targetl = list(target)
-		user.visible_message("<span class='green'>[user] waves friendly at [M].</span>", "<span class='green'>I wave friendly at [M].</span>", ignored_mobs = targetl)
+		user.visible_message(span_green("[user] waves friendly at [M]."), span_green("I wave friendly at [M]."), ignored_mobs = targetl)
 		if(M.client)
 			if(M.can_see_cone(user))
-				to_chat(M, "<span class='green'>[user] gives me a friendly wave.</span>")
+				to_chat(M, span_green("[user] gives me a friendly wave."))
 	return
 
 /datum/intent/simple/headbutt
@@ -474,31 +474,3 @@
 	candodge = TRUE
 	canparry = TRUE
 	item_d_type = "stab"
-
-/datum/intent/unarmed/claw
-	name = "claw"
-	icon_state = "instrike"
-	attack_verb = list("claws", "tears", "rips")
-	animname = "cut"
-	blade_class = BCLASS_CUT
-	hitsound = "smallslash"
-	penfactor = 0
-	candodge = TRUE
-	canparry = TRUE
-	miss_text = "claws the air!"
-	miss_sound = "bluntwooshmed"
-	item_d_type = "slash"
-
-/datum/intent/unarmed/wwolf
-	name = "claw"
-	icon_state = "inchop"
-	attack_verb = list("claws", "mauls", "eviscerates")
-	animname = "cut"
-	blade_class = BCLASS_CHOP
-	hitsound = "genslash"
-	penfactor = 30
-	candodge = TRUE
-	canparry = TRUE
-	miss_text = "slashes the air!"
-	miss_sound = "bluntwooshlarge"
-	item_d_type = "slash"

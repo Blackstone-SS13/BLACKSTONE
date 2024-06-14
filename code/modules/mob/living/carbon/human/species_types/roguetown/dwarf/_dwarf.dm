@@ -36,7 +36,7 @@
 	..()
 //	if(!C.has_language(/datum/language/dwarvish))
 	C.grant_language(/datum/language/dwarvish)
-	to_chat(C, "<span class='info'>I can speak Dwarfish with ,d before my speech.</span>")
+	to_chat(C, span_info("I can speak Dwarfish with ,d before my speech."))
 
 /datum/species/dwarf/on_species_loss(mob/living/carbon/C)
 	. = ..()

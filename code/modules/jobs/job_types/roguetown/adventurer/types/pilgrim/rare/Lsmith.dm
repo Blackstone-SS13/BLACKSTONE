@@ -4,15 +4,16 @@
 	name = "Master Blacksmith"
 	tutorial = "A master blacksmith, able to forge steel like dough, and gold like clay. \
 	create masterful weapons and armor, be a legend among those who interest in your mighty forge"
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list("Humen",
 	"Dwarf"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/masterblacksmith
-	isvillager = FALSE
-	ispilgrim = TRUE
-	maxchosen = 1
+
+	maximum_possible_slots = 1
 	pickprob = 5
+
+	category_tags = list(CTAG_PILGRIM)
 
 /datum/outfit/job/roguetown/adventurer/masterblacksmith/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -54,6 +55,8 @@
 				H.mind.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
 			H.change_stat("strength", 2)
 			H.change_stat("speed", -1)
+			H.change_stat("fortune", 2)
+
 
 	else
 		armor = /obj/item/clothing/suit/roguetown/shirt/dress/gen/random
@@ -79,3 +82,4 @@
 				H.mind.adjust_skillrank(/datum/skill/craft/smelting, 1, TRUE)
 			H.change_stat("strength", 2)
 			H.change_stat("speed", -1)
+			H.change_stat("fortune", 3)
