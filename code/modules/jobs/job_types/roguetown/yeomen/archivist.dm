@@ -21,7 +21,7 @@
 	max_pq = null
 
 /datum/outfit/job/roguetown/archivist
-	allowed_patrons = list(/datum/patron/divine/noc)
+	allowed_patrons = list(/datum/patron/veneration/eosten)
 
 /datum/outfit/job/roguetown/archivist/pre_equip(mob/living/carbon/human/H)
 	..()
