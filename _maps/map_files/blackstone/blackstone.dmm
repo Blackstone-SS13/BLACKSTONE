@@ -1592,7 +1592,7 @@
 "lOl" = (/obj/structure/mineral_door/wood,/turf/open/floor/rogue/ruinedwood/spiral,/area/rogue/indoors)
 "lOz" = (/obj/structure/mineral_door/bars{lockid = "graveyard"},/turf/open/floor/rogue/cobblerock,/area/rogue/outdoors/town)
 "lOV" = (/turf/open/floor/rogue/cobblerock,/area/rogue/outdoors/bog)
-"lPc" = (/obj/structure/mineral_door/wood/donjon,/turf/open/floor/rogue/cobble,/area/rogue/indoors/shelter/town)
+"lPc" = (/obj/structure/mineral_door/wood/donjon{lockid = "manor"},/turf/open/floor/rogue/cobble,/area/rogue/indoors/shelter/town)
 "lQi" = (/obj/machinery/light/rogue/smelter/great,/turf/open/floor/rogue/metal,/area/rogue/indoors/town/dwarfin)
 "lQq" = (/obj/structure/table/wood{icon_state = "largetable"; dir = 5},/obj/item/reagent_containers/glass/cup/steel,/turf/open/floor/carpet/royalblack,/area/rogue/indoors/town/bath)
 "lQy" = (/obj/structure/fluff/walldeco/customflag{pixel_y = 32},/turf/open/floor/rogue/concrete,/area/rogue/indoors/town/garrison)
