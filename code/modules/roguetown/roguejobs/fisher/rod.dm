@@ -246,7 +246,7 @@
 		else
 			to_chat(user, "<span class='warning'>I can't fish here...</span>")
 			return
-	else if(ispath(target, /turf/open/water))
+	else if(istype(target, /turf/open/water))
 		targeted = target
 	else
 		to_chat(user, "<span class='warning'>I can't fish here...</span>")
@@ -390,8 +390,8 @@
 		fishtype = pickweightAllowZero(fishpicker)
 		difficulty += sizepicker.Find(fishsize) + raritypicker.Find(fishrarity)
 		hookwindow -= raritypicker.Find(fishrarity) - 1
-		acceleration += sizepicker.Find(fishsize) + raritypicker.Find(fishrarity) - 1
-		maxvelocity = 3 + raritypicker.Find(fishrarity)
+		acceleration += clamp(sizepicker.Find(fishsize) - 3, -1, 2) + clamp(raritypicker.Find(fishrarity) - 1, 0, 3)
+		maxvelocity = 3 + clamp(raritypicker.Find(fishrarity) - 1, 0, 3) + clamp(sizepicker.Find(fishsize) - 3, -1, 2)
 		fishhealth =  3 + sizepicker.Find(fishsize)*2 + raritypicker.Find(fishrarity)*2
 		switch(fishsize)
 			if("tiny")
@@ -445,18 +445,14 @@
 
 		switch(currentstate)
 			if("wait")
-				//to_chat(fisher, "<span class = 'notice'>[waittime]</span>")
 				if(waittime <= 0)
 					if(line.bobber)
 						to_chat(fisher, "<span class = 'notice'>The [line.name] dips in the water!</span>")
-					else
-						to_chat(fisher, "<span class = 'notice'>Can't find bobber.</span>")
 					if(abs(currentmouse - lastmouse) > 1 && waittime / initialwait < 0.5)
 						currentlyfishing = FALSE
 					currentstate = "biting"
 				waittime--
 			if("biting")
-				//to_chat(fisher, "<span class = 'notice'>[hookwindow]</span>")
 				if(hookwindow <= 0)
 					currentlyfishing = FALSE
 				if(targetdif == 0)
@@ -491,7 +487,6 @@
 				targetdif = clamp((-currentmouse + fishtarget + 90) * difficulty, -90, 90)
 				if(targetdif >= 90 || targetdif <= -90)
 					linehealth--
-					//to_chat(fisher, "<span class = 'notice'>[linehealth]</span>")
 				velocity = clamp(velocity + ((acceleration*directionstate)/5), -maxvelocity, maxvelocity)
 				fishtarget = clamp(fishtarget + velocity, 0, 180)
 		lastmouse = currentmouse
