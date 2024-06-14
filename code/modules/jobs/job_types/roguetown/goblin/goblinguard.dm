@@ -7,7 +7,7 @@
 	spawn_positions = 0
 	allowed_sexes = list(MALE)
 	allowed_races = list("Goblin")
-	allowed_patrons = list(/datum/patron/inhumen/graggar)
+	allowed_patrons = list(/datum/patron/apostate/graggar)
 	tutorial = "Goblin Guards rensposible for their kingdom and his majesty King."
 	display_order = JDO_GOBLINGUARD
 	outfit = /datum/outfit/job/roguetown/goblinguard
