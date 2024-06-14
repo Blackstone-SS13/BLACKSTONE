@@ -4,6 +4,8 @@
 	var/material_quality = 0 // accumulated per added ingot (decided by quality of smelting per ingot)
 	var/num_of_materials = 1
 	var/median_calculated = FALSE
+	var/quality_level_text = "awful"
+	var/quality_level = BLACKSMITH_LEVEL_MIN
 	var/quality = 0
 	var/appro_skill = /datum/skill/craft/blacksmithing
 	var/req_bar
@@ -47,10 +49,11 @@
 				qdel(P)
 			return FALSE
 		else
-			user.visible_message("<span class='warning'>[user] works a mistake into the bar!</span>")
+			user.visible_message("<span class='warning'>[user] works a mistake into the bar!</span>", "<span class='warning'>You work a mistake into the bar! ([max_mistakes-mistakes] more mistakes until it falls apart!)</span>")
 			return FALSE
 	else
-		quality += ((breakthrough ? 15 : 10)+(material_quality*2))/num_of_materials
+		var/quality_change = ((breakthrough ? 15 : 10)+(material_quality*2))/num_of_materials
+		quality += quality_change
 		if(user.mind && isliving(user))
 			var/mob/living/L = user
 			var/boon = user.mind.get_learning_boon(appro_skill)
@@ -58,10 +61,27 @@
 			//i feel like leveling up takes forever regardless, this would just make it faster
 			if(amt2raise > 0)
 				user.mind.adjust_experience(appro_skill, amt2raise * boon, FALSE)
+		if(quality >= 70 && quality_level <= 6)
+			quality_level += 1
+			quality -= 70
+			switch(quality_level)
+				if(BLACKSMITH_LEVEL_CRUDE)
+					quality_level_text = "crude"
+				if(BLACKSMITH_LEVEL_ROUGH)
+					quality_level_text = "rough"
+				if(BLACKSMITH_LEVEL_COMPETENT)
+					quality_level_text = "normal"
+				if(BLACKSMITH_LEVEL_FINE)
+					quality_level_text = "fine"
+				if(BLACKSMITH_LEVEL_FLAWLESS)
+					quality_level_text = "flawless"
+				if(BLACKSMITH_LEVEL_LEGENDARY to BLACKSMITH_LEVEL_MAX)
+					quality_level_text = "legendary"
+			to_chat(user, "<span class='info'>You advance the smith item to [quality_level_text] quality level!</span>")
 		if(breakthrough)
-			user.visible_message("<span class='warning'>[user] strikes the bar!</span>")
+			user.visible_message("<span class='warning'>[user] strikes the bar!</span>", "<span class='warning'>You strike the bar! (you're roughly [70-quality] work from the next level)</span>")
 		else
-			user.visible_message("<span class='info'>[user] strikes the bar!</span>")
+			user.visible_message("<span class='info'>[user] strikes the bar!</span>", "<span class='info'>You strike the bar! (you're roughly [70-quality] work from the next level)</span>")
 		return TRUE
 
 /datum/anvil_recipe/proc/handle_additional_items(mob/user, obj/item/W)
@@ -84,32 +104,8 @@
 		return FALSE
 
 /datum/anvil_recipe/proc/handle_creation(obj/item/I)
-	quality = floor(quality/70)
-	var/modifier
-	switch(quality)
-		if(BLACKSMITH_LEVEL_MIN)
-			I.name = "awful [I.name]"
-			modifier = 0.3
-		if(BLACKSMITH_LEVEL_CRUDE)
-			I.name = "crude [I.name]"
-			modifier = 0.8
-		if(BLACKSMITH_LEVEL_ROUGH)
-			I.name = "rough [I.name]"
-			modifier = 0.9
-		if(BLACKSMITH_LEVEL_COMPETENT)
-			I.desc = "[I.desc] It is competently made."
-		if(BLACKSMITH_LEVEL_FINE)
-			I.name = "fine [I.name]"
-			modifier = 1.1
-		if(BLACKSMITH_LEVEL_FLAWLESS)
-			I.name = "flawless [I.name]"
-			modifier = 1.2
-		if(BLACKSMITH_LEVEL_LEGENDARY to BLACKSMITH_LEVEL_MAX)
-			I.name = "legendary [I.name]"
-			modifier = 1.3
-	
-	if(!modifier)
-		return
+	var/modifier = 0.7+(0.1*quality_level)
+	I.name = "[quality_level_text] [I.name]"
 	I.obj_integrity *= modifier
 	I.max_integrity  *= modifier
 	I.sellprice *= modifier

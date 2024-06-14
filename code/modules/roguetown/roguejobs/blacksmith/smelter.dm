@@ -54,7 +54,7 @@
 			else
 				var/datum/mind/smelter_mind = user.mind
 				var/smelter_exp = smelter_mind.get_skill_level(/datum/skill/craft/smelting)
-				ore[W] = floor(rand(smelter_exp*15, max(63, smelter_exp*25))/25) // (0-25 spoil, 25-50 poor, 50-75, normal, 75-onwards good) no skill = 0, 63, novice = 15, 63, apprentice = 30, 63, skilled = 45, 75, expert = 60, 100, master = 75, 125, legendary = 100, 150, (may want to add a tier above good)
+				ore[W] = min(floor(rand(smelter_exp*15, max(63, smelter_exp*25))/25),3) // (0-25 spoil, 25-50 poor, 50-75, normal, 75-onwards good) no skill = 0, 63, novice = 15, 63, apprentice = 30, 63, skilled = 45, 75, expert = 60, 100, master = 75, 125, legendary = 100, 150, (may want to add a tier above good)
 			user.visible_message("<span class='warning'>[user] puts something in the smelter.</span>")
 			cooking = 0
 			return
@@ -142,7 +142,7 @@
 							ore_deleted += 1
 							ore -= I
 							qdel(I)
-						floor_mean_quality = floor(floor_mean_quality/ore_deleted)
+						floor_mean_quality = min(floor(floor_mean_quality/ore_deleted),3)
 						for(var/i in 1 to maxore)
 							var/obj/item/R = new alloy(src, floor_mean_quality)
 							ore += R
