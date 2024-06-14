@@ -15,7 +15,7 @@
 	cmode_music = 'sound/music/combat_physician.ogg'
 
 /datum/outfit/job/roguetown/adventurer/doctor
-	allowed_patrons = list(/datum/patron/divine/pestra, /datum/patron/inhumen/graggar)
+	allowed_patrons = list(/datum/patron/pagan/pestra, /datum/patron/apostate/graggar, /datum/patron/veneration/mikros)
 
 /datum/outfit/job/roguetown/adventurer/doctor/pre_equip(mob/living/carbon/human/H)
 	..()
