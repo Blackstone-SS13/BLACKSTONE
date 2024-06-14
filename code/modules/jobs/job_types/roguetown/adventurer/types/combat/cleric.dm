@@ -23,7 +23,7 @@
 
 /datum/outfit/job/roguetown/adventurer/cleric/pre_equip(mob/living/carbon/human/H)
 	..()
-	neck = /obj/item/clothing/neck/roguetown/psicross/wooden
+	neck = /obj/item/clothing/neck/roguetown/psicross/wood
 
 	// CLASS ARCHETYPES
 	H.adjust_blindness(-3)
