@@ -26,7 +26,7 @@
 	wbalance = 1
 	thrown_bclass = BCLASS_CUT
 	anvilrepair = /datum/skill/craft/weaponsmithing
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/iron
 
 
 
