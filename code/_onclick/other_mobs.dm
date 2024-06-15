@@ -381,7 +381,7 @@
 					var/thiefskill = src.mind.get_skill_level(/datum/skill/misc/stealing)
 					var/stealroll = roll("[thiefskill]d6")
 					var/targetperception = (V.STAPER)
-					var/list/stealablezones = list("chest", "neck", "groin", "r_hand", "l_hand")
+					var/list/stealablezones = list("neck", "groin", "r_hand", "l_hand")
 					var/list/stealpos = list()
 					var/list/mobsbehind = list()
 					var/exp_to_gain = STAINT
@@ -396,11 +396,6 @@
 						mobsbehind |= cone(V, list(turn(V.dir, 180)), list(src))
 						if(mobsbehind.Find(src))
 							switch(U.zone_selected)
-//								if("chest")
-//									if (V.get_item_by_slot(SLOT_BACK_L))//There is no way on Psydon's green continent that you can instantly swipe something strapped around someone's torso.
-//										stealpos.Add(V.get_item_by_slot(SLOT_BACK_L))
-//									if (V.get_item_by_slot(SLOT_BACK_R))
-//										stealpos.Add(V.get_item_by_slot(SLOT_BACK_R))
 								if("neck")
 									if (V.get_item_by_slot(SLOT_NECK))
 										stealpos.Add(V.get_item_by_slot(SLOT_NECK))
