@@ -142,13 +142,7 @@
 			continue
 		if(doctor.mind)
 			doctor.mind.adjust_experience(/datum/skill/misc/medicine, doctor.STAINT * 5)
-		if(!HAS_TRAIT(doctor, TRAIT_IAMASURGEON))
-			use(1)
-		else
-			if(prob(20 * (user.mind.get_skill_level(/datum/skill/misc/medicine) - 1)))//Physicians and surgeons with Legendary Medicine can use any needle like a Needle of Pestra.
-				to_chat(user, span_green("Eureka! I hardly spent any thread this time!"))
-			else
-				use(1)
+		use(1)
 		target_wound.sew_wound()
 		if(patient == doctor)
 			doctor.visible_message(span_notice("[doctor] sews \a [target_wound.name] on [doctor.p_them()]self."), span_notice("I stitch \a [target_wound.name] on my [affecting]."))
