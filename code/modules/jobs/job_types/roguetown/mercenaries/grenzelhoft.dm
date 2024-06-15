@@ -28,7 +28,7 @@
 	pants = /obj/item/clothing/under/roguetown/chainlegs/iron
 	neck = /obj/item/clothing/neck/roguetown/gorget
 	head = /obj/item/clothing/head/roguetown/chaperon
-	r_hand = /obj/item/rogueweapon/eaglebeak
+	r_hand = /obj/item/rogueweapon/eaglebeak/lucerne
 
 	if(H.gender == FEMALE)
 		var/acceptable = list("Tomboy", "Bob", "Curly Short")
