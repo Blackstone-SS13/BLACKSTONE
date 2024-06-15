@@ -1,7 +1,7 @@
 /datum/job/roguetown/orphan
 	title = "Orphan"
 	flag = ORPHAN
-	department_flag = YOUNGFOLK
+	department_flag = FRESHFOLK
 	faction = "Station"
 	total_positions = 0
 	spawn_positions = 0

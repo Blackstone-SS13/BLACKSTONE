@@ -2,7 +2,7 @@
 	title = "Prince"
 	f_title = "Princess"
 	flag = PRINCE
-	department_flag = YOUNGFOLK
+	department_flag = FRESHFOLK
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
