@@ -238,7 +238,7 @@ GLOBAL_LIST_EMPTY(chosen_names)
 			dat += "<td style='width:33%;text-align:right'>"
 			if(SSrole_class_handler.drifter_queue_enabled)
 				dat += "<style>#drifter_queue {color:aliceblue;font-weight: bold;} #drifter_queue:hover{color: #eac0b9;}</style>"
-				dat += "<a id='drifter_queue' href='?_src_=prefs;preference=drifters;task=show_drifter_queue'>Drifter Queue</a>"
+				dat += "<a id='drifter_queue' href='?_src_=prefs;preference=drifters;task=show_drifter_queue'>Special Latejoin Queue</a>"
 			dat += "</td>"
 			dat += "</tr>"
 
