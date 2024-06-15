@@ -794,7 +794,7 @@
 		return
 	var/mob/living/carbon/human/H = hud.mymob
 	// Eh this will work for now mayb? Just don't startup class select if its the first set of guys and we got these antags
-	if(SSrole_class_handler.current_wave_number == 1)
+	if(SSrole_class_handler.current_wave_number == 1 && H.job == "Drifter")
 		if(H.mind && H.mind.antag_datums)
 			for(var/datum/antagonist/D in H.mind.antag_datums)
 				if(istype(D, /datum/antagonist/vampirelord) || istype(D, /datum/antagonist/vampire) || istype(D, /datum/antagonist/bandit))
