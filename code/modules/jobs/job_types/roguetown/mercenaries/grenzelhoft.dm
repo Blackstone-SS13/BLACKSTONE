@@ -60,4 +60,4 @@
 		H.change_stat("constitution", 3)
 		H.change_stat("perception", 1)
 		H.change_stat("speed", 1)
-	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
+		traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_HEAVYARMOR)
