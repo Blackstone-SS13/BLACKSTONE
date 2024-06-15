@@ -6,7 +6,6 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list("Humen", "Half-Elf")
 	outfit = /datum/outfit/job/roguetown/mercenary/grenzelhoft
-	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_HEAVYARMOR)
 	display_order = JDO_GRENZELHOFT
 	selection_color = JCOLOR_MERCENARY
 	faction = "Station"
@@ -61,3 +60,5 @@
 		H.change_stat("constitution", 3)
 		H.change_stat("perception", 1)
 		H.change_stat("speed", 1)
+	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
