@@ -20,7 +20,7 @@
 	armor = /obj/item/clothing/suit/roguetown/armor/chainmail/iron
 	wrists = /obj/item/clothing/wrists/roguetown/bracers/leather
 	backl = /obj/item/storage/backpack/rogue/backpack
-	backpack_contents = list(/obj/item/bomb = 1, /obj/item/flint = 1)
+	backpack_contents = list(/obj/item/bomb = 1, /obj/item/flint = 1, /obj/item/reagent_containers/glass/mortar = 1, /obj/item/pestle = 1, /obj/item/natural/rock/coal = 3)
 	if(prob(50))
 		beltr = /obj/item/rogueweapon/pick
 	else
@@ -31,6 +31,7 @@
 	H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 4, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/misc/alchemy, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/sewing, 1, TRUE)
