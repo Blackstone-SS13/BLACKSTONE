@@ -61,4 +61,3 @@
 		H.change_stat("constitution", 3)
 		H.change_stat("perception", 1)
 		H.change_stat("speed", 1)
-		
