@@ -1,7 +1,8 @@
+name: 'Merge Conflict Detection'
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
   triage:
     runs-on: ubuntu-latest
