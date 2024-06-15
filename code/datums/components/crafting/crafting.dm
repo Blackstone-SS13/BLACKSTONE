@@ -183,9 +183,6 @@
 	if(!R.TurfCheck(user, T))
 		to_chat(user, span_warning("I can't craft here."))
 		return
-	if(istype(T, /turf/open/water))
-		to_chat(user, span_warning("I can't craft here."))
-		return
 	if(isturf(R.result))
 		for(var/obj/structure/fluff/traveltile/TT in range(7, user))
 			to_chat(user, span_warning("I can't craft here."))
@@ -197,18 +194,18 @@
 		for(var/obj/structure/S in T)
 			if(R.buildsame && istype(S, R.result))
 				if(user.dir == S.dir)
-					to_chat(user, span_warning("Something in the way."))
+					to_chat(user, span_warning("Something is in the way."))
 					return
 				continue
 			if(R.structurecraft && istype(S, R.structurecraft))
 				testing("isstructurecraft")
 				continue
 			if(S.density)
-				to_chat(user, span_warning("Something in the way."))
+				to_chat(user, span_warning("Something is in the way."))
 				return
 		for(var/obj/machinery/M in T)
 			if(M.density)
-				to_chat(user, span_warning("Something in the way."))
+				to_chat(user, span_warning("Something is in the way."))
 				return
 	if(R.req_table)
 		if(!(locate(/obj/structure/table) in T))

@@ -15,7 +15,7 @@
 		return FALSE
 	for(var/obj/structure/closet/dirthole/D in T)
 		if(D.stage != 4)
-			to_chat(user, span_warning("I can't."))
+			to_chat(user, span_warning("The grave isn't covered."))
 			return FALSE
 	if(locate(/obj/structure/gravemarker) in T)
 		to_chat(user, span_warning("This grave is already hallowed."))

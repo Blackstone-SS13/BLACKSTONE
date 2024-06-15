@@ -762,6 +762,10 @@
 	max_integrity = 300
 	dir = SOUTH
 
+/obj/structure/fluff/statue/OnCrafted(dirin, user)
+	dirin = turn(dirin, 180)
+	. = ..()
+
 /obj/structure/fluff/statue/attack_right(mob/user)
 	if(user.mind && isliving(user))
 		if(user.mind.special_items && user.mind.special_items.len)
@@ -1033,6 +1037,7 @@
 /obj/structure/fluff/psycross/crafted
 	name = "wooden pantheon cross"
 	icon_state = "psycrosscrafted"
+	max_integrity = 80
 	chance2hear = 10
 
 /obj/structure/fluff/psycross/attackby(obj/item/W, mob/user, params)

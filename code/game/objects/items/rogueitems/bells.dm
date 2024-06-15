@@ -23,7 +23,7 @@
 
 	for(var/mob/M in view(10, src.loc))
 		if(M.client)
-			to_chat(M, span_notice("BELL RINGS"))
+			to_chat(M, span_notice("The handheld bell rings sharply through the area."))
 
 	user.visible_message(span_notice("[user] rings [src]."))
 	ringing = TRUE

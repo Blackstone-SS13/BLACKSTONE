@@ -19,7 +19,7 @@ GLOBAL_DATUM_INIT(openspace_backdrop_one_for_all, /atom/movable/openspace_backdr
 
 /turf/open/transparent/openspace
 	name = "open space"
-	desc = "My eyes can see far down below.."
+	desc = "My eyes can see far down below."
 	icon_state = "openspace"
 	baseturfs = /turf/open/transparent/openspace
 	CanAtmosPassVertical = ATMOS_PASS_YES
