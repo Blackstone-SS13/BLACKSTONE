@@ -70,7 +70,7 @@
 	var/list/allowed_sexes
 	var/list/allowed_races
 	var/list/allowed_patrons
-	var/list/allowed_ages = ADULT_AGES_LIST
+	var/list/allowed_ages = ALL_AGES_LIST
 
 	/// Innate skill levels unlocked at roundstart. Format is list(/datum/skill/foo = SKILL_EXP_NOVICE) with exp as an integer or as per code/_DEFINES/skills.dm
 	var/list/skills
