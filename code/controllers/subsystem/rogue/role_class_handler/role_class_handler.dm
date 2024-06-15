@@ -108,6 +108,9 @@ SUBSYSTEM_DEF(role_class_handler)
 		if(RT_JOB.advclass_cat_rolls.len)
 			XTRA_MEATY.class_cat_alloc_attempts = RT_JOB.advclass_cat_rolls
 
+	if(RT_JOB.PQ_boost_divider)
+		XTRA_MEATY.PQ_boost_divider = RT_JOB.PQ_boost_divider
+
 	if(H.client.ckey in special_session_queue)
 		XTRA_MEATY.special_session_queue = list()
 		for(var/funny_key in special_session_queue[H.client.ckey])

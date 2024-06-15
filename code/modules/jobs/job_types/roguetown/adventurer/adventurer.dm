@@ -23,11 +23,12 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	max_pq = null
 	
 	advclass_cat_rolls = list(CTAG_ADVENTURER = 5)
+	PQ_boost_divider = 10
 
 	wanderer_examine = TRUE
 	advjob_examine = TRUE
-	always_show_on_latechoices = FALSE
-	job_reopens_slots_on_death = FALSE
+	always_show_on_latechoices = TRUE
+	job_reopens_slots_on_death = TRUE
 	same_job_respawn_delay = 15 MINUTES
 
 

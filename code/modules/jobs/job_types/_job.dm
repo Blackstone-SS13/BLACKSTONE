@@ -137,6 +137,11 @@
 */
 	var/datum/drifter_wave/drifter_wave_attachment
 
+/*
+	How this works, they get one extra roll on every category per PQ amount
+*/
+	var/PQ_boost_divider = 0
+
 
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
