@@ -101,9 +101,11 @@
 
 /mob/living/simple_animal/hostile/rogue/haunt/omen
 	name = "omen"
-	desc = "A vengeful spirit!"
-	maxHealth = 100
-	health = 100
+	desc = "A vengeful spirit comes to haunt the living!"
+	maxHealth = 200
+	health = 200
+	melee_damage_lower = 30
+	melee_damage_upper = 40
 
 /obj/structure/bonepile
 	icon = 'icons/roguetown/mob/monster/wraith.dmi'

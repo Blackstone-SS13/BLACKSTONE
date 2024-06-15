@@ -112,7 +112,7 @@
 		var/haunt_name = real_name ? "omen of [real_name]" : "omen"
 		haunt.name = haunt_name
 		haunt.real_name = haunt_name
-		ihaveamind.transfer_to(haunt)
+		ihaveamind.transfer_to(haunt, force_key_move = TRUE)
 	
 //limb removal. The "special" argument is used for swapping a limb with a new one without the effects of losing a limb kicking in.
 /obj/item/bodypart/proc/drop_limb(special)
