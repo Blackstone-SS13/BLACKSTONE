@@ -152,6 +152,8 @@
 	if(H.stat)
 		if(istype(H.loc, /obj/structure/closet/crate/coffin))
 			H.fully_heal()
+			H.rogstam_add(100)
+			H.rogfat_add(-10)
 
 	vitae = CLAMP(vitae, 0, 1666)
 
