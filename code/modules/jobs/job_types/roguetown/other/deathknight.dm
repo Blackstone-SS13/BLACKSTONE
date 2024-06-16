@@ -119,7 +119,8 @@
 /obj/item/clothing/under/roguetown/platelegs/blk/death
 	color = CLOTHING_BLACK
 
-datum/job/roguetown/deathknight/on_life(mob/user)
+datum/job/roguetown/deathknight/proc/on_life(mob/user)
+	var/mob/living/carbon/human/H = user
 	if(H.stat)
 		if(istype(H.loc, /obj/structure/closet/crate/coffin))
 			H.fully_heal()
