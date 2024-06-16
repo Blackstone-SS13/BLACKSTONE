@@ -307,7 +307,7 @@
 		skillmod = fisher.mind.get_skill_level(/datum/skill/labor/fishing)
 	difficulty = -skillmod
 	linehealth = skillmod
-	hookwindow = skillmod*3
+	hookwindow = skillmod*3 + 4
 
 	for(var/obj/item/fishing/A in attacheditems)
 		deepmod += A.deepfishingweight
@@ -468,6 +468,7 @@
 				if(waittime <= 0)
 					if(line.bobber)
 						to_chat(fisher, "<span class = 'notice'>The [line.name] dips in the water!</span>")
+						playsound(loc, 'sound/items/fishing_plouf.ogg', 100, TRUE)
 					if(abs(currentmouse - lastmouse) > 1 && waittime / initialwait < 0.5)
 						currentlyfishing = FALSE
 					currentstate = "biting"
@@ -483,6 +484,7 @@
 					currentstate = "hooked"
 					fishtarget = currentmouse
 					targetdif = 0
+					target = (-currentmouse + 270)
 					to_chat(fisher, "<span class='notice'>Something tugs the line!</span>")
 					playsound(loc, 'sound/items/fishing_plouf.ogg', 100, TRUE)
 					directionstate = 1
