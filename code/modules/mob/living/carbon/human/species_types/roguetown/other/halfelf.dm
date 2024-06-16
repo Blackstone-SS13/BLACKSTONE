@@ -23,7 +23,7 @@
 	mutant_bodyparts = list("ears")
 	mutanteyes = /obj/item/organ/eyes/halfelf
 	use_skintones = 1
-	possible_ages = list(AGE_YOUNG, AGE_ADULT, AGE_MIDDLEAGED)
+	possible_ages = list(AGE_ADULT, AGE_MIDDLEAGED)
 	skinned_type = /obj/item/stack/sheet/animalhide/human
 	disliked_food = NONE
 	liked_food = NONE

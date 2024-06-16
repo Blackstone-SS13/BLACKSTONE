@@ -1,6 +1,6 @@
 /obj/item/reagent_containers/food/snacks/fish
 	name = "fish"
-	desc = ""
+	desc = "Fresh blood stains its silvery skin. Silver-coloured scales shimmering softly.."
 	icon_state = "carp"
 	icon = 'icons/roguetown/misc/fish.dmi'
 	verb_say = "glubs"
@@ -36,7 +36,7 @@
 	else
 		if(isturf(user.loc))
 			src.forceMove(user.loc)
-		to_chat(user, "<span class='warning'>Too slippery!</span>")
+		to_chat(user, span_warning("Too slippery!"))
 		return
 
 /obj/item/reagent_containers/food/snacks/fish/process()
@@ -61,12 +61,14 @@
 
 /obj/item/reagent_containers/food/snacks/fish/carp
 	name = "carp"
+	desc = "A majestic scaled fish bearing untold tales."
 	icon_state = "carp"
 	fried_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/carp
 	cooked_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/carp
 
 /obj/item/reagent_containers/food/snacks/fish/clownfish
 	name = "clownfish"
+	desc = "This fish brings vibrant hues to the dark world of Rockhill."
 	icon_state = "clownfish"
 	sellprice = 40
 	fried_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/clownfish
@@ -74,6 +76,7 @@
 
 /obj/item/reagent_containers/food/snacks/fish/angler
 	name = "anglerfish"
+	desc = "A menacing abyssal predator."
 	icon_state = "angler"
 	sellprice = 15
 	fried_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/angler
@@ -81,6 +84,7 @@
 
 /obj/item/reagent_containers/food/snacks/fish/eel
 	name = "eel"
+	desc = "A sinuous eel that slithers through the dark waters."
 	icon_state = "eel"
 	sellprice = 5
 	fried_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/eel
@@ -92,7 +96,7 @@
 	list_reagents = list(/datum/reagent/consumable/nutriment = 10)
 	tastes = list("fish" = 1)
 	name = "cooked fish"
-	desc = ""
+	desc = "A charred fish, crisped to perfection."
 	icon_state = "carpcooked"
 	foodtype = MEAT
 	warming = 5 MINUTES

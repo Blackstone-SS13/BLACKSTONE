@@ -23,7 +23,7 @@
 		Your cheap tricks and illusions of intelligence will only work for so long, \
 		and someday you'll find yourself at the end of something sharper than you."
 
-	allowed_ages = ADULT_AGES_LIST
+	allowed_ages = ALL_AGES_LIST
 	spells = list(/obj/effect/proc_holder/spell/self/telljoke,/obj/effect/proc_holder/spell/self/telltragedy)
 	outfit = /datum/outfit/job/roguetown/jester
 	display_order = JDO_JESTER
@@ -69,7 +69,11 @@
 		H.facial_hair_color = "cd65cb"
 		H.update_body_parts_head_only()
 */
-	ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_ZJUMP, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_LEAPER, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC)
+	if(prob(50))	
+		ADD_TRAIT(H, TRAIT_EMPATH, TRAIT_GENERIC) // Jester :3
+	else	
+		ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC) // Joker >:(
+

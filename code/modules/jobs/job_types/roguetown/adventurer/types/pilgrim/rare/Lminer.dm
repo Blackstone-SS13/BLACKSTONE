@@ -3,13 +3,14 @@
 /datum/advclass/minermaster
 	name = "Master Miner"
 	tutorial = "A master miner, you are capable of cutting stone like butter, and forging rocks into anything you can think of"
-	allowed_sexes = list("male")
+	allowed_sexes = list(MALE)
 	allowed_races = list("Dwarf")
 	outfit = /datum/outfit/job/roguetown/adventurer/minermaster
-	isvillager = FALSE
-	ispilgrim = TRUE
-	maxchosen = 1
+
+	maximum_possible_slots = 1
 	pickprob = 5
+
+	category_tags = list(CTAG_PILGRIM)
 
 /datum/outfit/job/roguetown/adventurer/minermaster/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -36,3 +37,5 @@
 		H.change_stat("endurance", 2)
 		H.change_stat("constitution", 1)
 		H.change_stat("perception", 1)
+		H.change_stat("fortune", 4)
+

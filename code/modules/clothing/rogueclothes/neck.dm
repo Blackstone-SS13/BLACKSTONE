@@ -14,6 +14,7 @@
 	blocksound = SOFTHIT
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	armor = list("blunt" = 33, "slash" = 12, "stab" = 22, "bullet" = 0, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	sewrepair = TRUE
@@ -52,7 +53,7 @@
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HEAD
 	body_parts_covered = NECK|HAIR|EARS|HEAD
-	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT)
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
@@ -83,9 +84,9 @@
 
 /obj/item/clothing/neck/roguetown/chaincoif/iron
 	icon_state = "ichaincoif"
-
 	anvilrepair = /datum/skill/craft/armorsmithing
 	smeltresult = /obj/item/ingot/iron
+	max_integrity = 150
 
 /obj/item/clothing/neck/roguetown/bervor
 	name = "bervor"
@@ -165,36 +166,45 @@
 	. = ..()
 	var/mob/living/carbon/human/H = user
 	var/datum/antagonist/vampirelord/V_lord = H.mind.has_antag_datum(/datum/antagonist/vampirelord/)
+	var/datum/antagonist/werewolf/W = H.mind.has_antag_datum(/datum/antagonist/werewolf/)
 	if(ishuman(H))
 		if(H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser))
-			to_chat(H, "<span class='userdanger'>I can't pick up the silver, it is my BANE!</span>")
+			to_chat(H, span_userdanger("I can't pick up the silver, it is my BANE!"))
 			H.Knockdown(20)
 			H.adjustFireLoss(60)
 			H.Paralyze(20)
 			H.fire_act(1,5)
 		if(V_lord)
 			if(V_lord.vamplevel < 4 && !H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser))
-				to_chat(H, "<span class='userdanger'>I can't pick up the silver, it is my BANE!</span>")
+				to_chat(H, span_userdanger("I can't pick up the silver, it is my BANE!"))
 				H.Knockdown(10)
 				H.Paralyze(10)
-			
+		if(W && W.transformed == TRUE)
+			to_chat(H, span_userdanger("I can't equip the silver, it is my BANE!"))
+			H.Knockdown(20)
+			H.Paralyze(20)	
 
 /obj/item/clothing/neck/roguetown/psicross/silver/mob_can_equip(mob/living/M, mob/living/equipper, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE)
 	. = ..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/datum/antagonist/vampirelord/V_lord = H.mind.has_antag_datum(/datum/antagonist/vampirelord/)
+		var/datum/antagonist/werewolf/W = H.mind.has_antag_datum(/datum/antagonist/werewolf/)
 		if(H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser))
-			to_chat(H, "<span class='userdanger'>I can't pick up the silver, it is my BANE!</span>")
+			to_chat(H, span_userdanger("I can't equip the silver, it is my BANE!"))
 			H.Knockdown(20)
 			H.adjustFireLoss(60)
 			H.Paralyze(20)
 			H.fire_act(1,5)
 		if(V_lord)
 			if(V_lord.vamplevel < 4 && !H.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser))
-				to_chat(H, "<span class='userdanger'>I can't pick up the silver, it is my BANE!</span>")
+				to_chat(H, span_userdanger("I can't equip the silver, it is my BANE!"))
 				H.Knockdown(10)
 				H.Paralyze(10)
+		if(W && W.transformed == TRUE)
+			to_chat(H, span_userdanger("I can't equip the silver, it is my BANE!"))
+			H.Knockdown(20)
+			H.Paralyze(20)
 
 /obj/item/clothing/neck/roguetown/psicross/g
 	name = "golden psycross"
@@ -211,7 +221,6 @@
 	item_state = "talkstone"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
-	allowed_race = list("human", "dwarf", "elf", "tiefling", "aasimar", "goblinp", "halforc")
 	sellprice = 98
 	anvilrepair = /datum/skill/craft/armorsmithing
 

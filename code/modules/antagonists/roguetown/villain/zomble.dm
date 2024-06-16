@@ -18,6 +18,7 @@
 	var/STASPD
 	var/STAINT
 	var/cmode_music
+	var/datum/patron/patron
 	var/list/base_intents
 	/// Whether or not we have been turned
 	var/has_turned = FALSE
@@ -38,7 +39,6 @@
 		TRAIT_CHUNKYFINGERS,
 		TRAIT_NOSLEEP,
 		TRAIT_BASHDOORS,
-		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLCOCKBLOCK,
 		TRAIT_BLOODLOSS_IMMUNE,
 		TRAIT_LIMPDICK,
@@ -46,6 +46,7 @@
 		TRAIT_ZOMBIE_IMMUNE,
 		TRAIT_EMOTEMUTE,
 		TRAIT_ROTMAN,
+		TRAIT_NORUN
 	)
 	/// Traits applied to the owner when we are cured and turn into just "rotmen"
 	var/static/list/traits_rotman = list(
@@ -63,12 +64,12 @@
 	if(istype(examined_datum, /datum/antagonist/vampirelord))
 		var/datum/antagonist/vampirelord/V = examined_datum
 		if(!V.disguised)
-			return "<span class='boldnotice'>Another deadite.</span>"
+			return span_boldnotice("Another deadite.")
 	if(istype(examined_datum, /datum/antagonist/zombie))
 		var/datum/antagonist/zombie/fellow_zombie = examined_datum
-		return "<span class='boldnotice'>Another deadite. [fellow_zombie.has_turned ? "My ally." : "<span class='warning'>Hasn't turned yet.</span>"]</span>"
+		return span_boldnotice("Another deadite. [fellow_zombie.has_turned ? "My ally." : span_warning("Hasn't turned yet.")]")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
-		return "<span class='boldnotice'>Another deadite.</span>"
+		return span_boldnotice("Another deadite.")
 
 /datum/antagonist/zombie/on_gain()
 	var/mob/living/carbon/human/zombie = owner?.current
@@ -89,6 +90,7 @@
 	STASPD = zombie.STASPD
 	STAINT = zombie.STAINT
 	cmode_music = zombie.cmode_music
+	patron = zombie.patron
 	return ..()
 
 /datum/antagonist/zombie/on_removal()
@@ -111,6 +113,7 @@
 		zombie.STASPD = STASPD
 		zombie.STAINT = STAINT
 		zombie.cmode_music = cmode_music
+		zombie.set_patron(patron)
 		for(var/trait in traits_zombie)
 			REMOVE_TRAIT(zombie, trait, "[type]")
 		zombie.remove_client_colour(/datum/client_colour/monochrome)
@@ -120,7 +123,7 @@
 			zombie.STAINT = max(zombie.STAINT - 3, 1)
 			for(var/trait in traits_rotman)
 				ADD_TRAIT(zombie, trait, "[type]")
-			to_chat(zombie, "<span class='green'>I no longer crave for flesh... <i>But I still feel ill.</i></span>")
+			to_chat(zombie, span_green("I no longer crave for flesh... <i>But I still feel ill.</i>"))
 		else
 			if(!was_i_undead)
 				zombie.mob_biotypes &= ~MOB_UNDEAD
@@ -129,7 +132,7 @@
 			zombie.faction += "neutral"
 			zombie.regenerate_organs()
 			if(has_turned)
-				to_chat(zombie, "<span class='green'>I no longer crave for flesh...</span>")
+				to_chat(zombie, span_green("I no longer crave for flesh..."))
 		for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 			zombie_part.rotted = FALSE
 			zombie_part.update_disabled()
@@ -185,6 +188,7 @@
 		zombie_part.update_disabled()
 	zombie.update_body()
 	zombie.cmode_music = 'sound/music/combat_weird.ogg'
+	zombie.set_patron(/datum/patron/inhumen/zizo)
 
 	// Outside of one 2% chance remaining for zombie era strength
 	if(prob(2))
@@ -205,11 +209,12 @@
 	)
 	for(var/slot in removed_slots)
 		zombie.dropItemToGround(zombie.get_item_by_slot(slot), TRUE)
+
 	// Ghosts you because this shit was just not working whatsoever, let the AI handle the rest
 	zombie.ghostize(FALSE)
 
 /datum/antagonist/zombie/greet()
-	to_chat(owner.current, "<span class='userdanger'>Death is not the end...</span>")
+	to_chat(owner.current, span_userdanger("Death is not the end..."))
 	return ..()
 
 /datum/antagonist/zombie/on_life(mob/user)
@@ -220,16 +225,16 @@
 		zombie.emote("idle")
 		next_idle_sound = world.time + rand(5 SECONDS, 10 SECONDS)
 	//fuck friendly zombies - tries to bite humans in range
-	if(world.time - last_bite < 10 SECONDS)
+/*	if(world.time - last_bite < 10 SECONDS)
 		return
 	var/obj/item/grabbing/bite/bite = zombie.get_item_by_slot(SLOT_MOUTH)
 	if(!bite || !get_location_accessible(src, BODY_ZONE_PRECISE_MOUTH, grabs = TRUE))
 		for(var/mob/living/carbon/human in view(1, zombie))
-			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction) || HAS_TRAIT(human, TRAIT_ZOMBIE_IMMUNE))
+			if((human.mob_biotypes & MOB_UNDEAD) || ("undead" in human.faction) || HAS_TRAIT(human, TRAIT_ZOMBIE_IMMUNE)) //Uncomment auto-bite when playable zombies are re-implemented.
 				continue
 			human.onbite(zombie)
 	else if(istype(bite))
-		bite.bitelimb(zombie)
+		bite.bitelimb(zombie)*/
 
 //Infected wake param is just a transition from living to zombie, via zombie_infect()
 //Previously you just died without warning in 3 minutes, now you just become an antag
@@ -294,10 +299,27 @@
 				closest_dist = total_distance
 				the_dir = get_dir(src, humie)
 	if(!closest_dist)
-		to_chat(src, "<span class='warning'>I failed to smell anything...</span>")
+		to_chat(src, span_warning("I failed to smell anything..."))
 		return FALSE
-	to_chat(src, "<span class='warning'>[closest_dist] meters away, [dir2text(the_dir)]...</span>")
+	to_chat(src, span_warning("[closest_dist] meters away, [dir2text(the_dir)]..."))
 	return TRUE
+
+/// Use this to attempt to add the zombie antag datum to a human
+/mob/living/carbon/human/proc/zombie_check()
+	if(!mind)
+		return
+	var/already_zombie = mind.has_antag_datum(/datum/antagonist/zombie)
+	if(already_zombie)
+		return already_zombie
+	if(mind.has_antag_datum(/datum/antagonist/vampirelord))
+		return
+	if(mind.has_antag_datum(/datum/antagonist/werewolf))
+		return
+	if(mind.has_antag_datum(/datum/antagonist/skeleton))
+		return
+	if(HAS_TRAIT(src, TRAIT_ZOMBIE_IMMUNE))
+		return
+	return mind.add_antag_datum(/datum/antagonist/zombie)
 
 /**
  * This occurs when one zombie infects a living human, going into instadeath from here is kind of shit and confusing
@@ -308,20 +330,19 @@
 	if(!zombie_antag)
 		return
 	if(stat >= DEAD) //do shit the natural way i guess
-		return 
-	to_chat(src, "<span class='danger'>I feel horrible... REALLY horrible after that...</span>")
-	if(blood_volume)
-		mob_timers["puke"] = world.time
-		vomit(1, blood = TRUE, stun = FALSE)
+		return
+	to_chat(src, span_danger("I feel horrible... REALLY horrible..."))
+	mob_timers["puke"] = world.time
+	vomit(1, blood = TRUE, stun = FALSE)
 	addtimer(CALLBACK(src, PROC_REF(wake_zombie)), 1 MINUTES)
 	return zombie_antag
 
 /mob/living/carbon/human/proc/wake_zombie()
 	var/datum/antagonist/zombie/zombie_antag = mind?.has_antag_datum(/datum/antagonist/zombie)
-	if(!zombie_antag)
+	if(!zombie_antag || zombie_antag.has_turned)
 		return FALSE
 	flash_fullscreen("redflash3")
-	to_chat(src, "<span class='danger'>It hurts... Is this really the end for me?</span>")
+	to_chat(src, span_danger("It hurts... Is this really the end for me?"))
 	emote("scream") // heres your warning to others bro
 	Knockdown(1)
 	zombie_antag.wake_zombie(TRUE)

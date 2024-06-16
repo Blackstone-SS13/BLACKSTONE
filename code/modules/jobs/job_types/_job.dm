@@ -1,6 +1,7 @@
 /datum/job
 	//The name of the job , used for preferences, bans and more. Make sure you know what you're doing before changing this.
 	var/title = "NOPE"
+	var/f_title
 
 	//Job access. The use of minimal_access or access is determined by a config setting: config.jobs_have_minimal_access
 	var/list/minimal_access = list()		//Useful for servers which prefer to only have access given to the places a job absolutely needs (Larger server population)
@@ -69,7 +70,7 @@
 	var/list/allowed_sexes
 	var/list/allowed_races
 	var/list/allowed_patrons
-	var/list/allowed_ages = ADULT_AGES_LIST
+	var/list/allowed_ages = ALL_AGES_LIST
 
 	/// Innate skill levels unlocked at roundstart. Format is list(/datum/skill/foo = SKILL_EXP_NOVICE) with exp as an integer or as per code/_DEFINES/skills.dm
 	var/list/skills
@@ -79,14 +80,12 @@
 	var/list/jobstats
 	var/list/jobstats_f
 
-	var/f_title = null
-
 	var/tutorial = null
 
 	var/whitelist_req = FALSE
 
 	var/bypass_jobban = FALSE
-	var/bypass_lastclass = FALSE
+	var/bypass_lastclass = TRUE
 
 	var/list/peopleiknow = list()
 	var/list/peopleknowme = list()
@@ -121,6 +120,28 @@
 
 	/// This job re-opens slots if someone dies as it
 	var/job_reopens_slots_on_death = FALSE
+
+	/// This job is immune to species-based swapped gender locks
+	var/immune_to_genderswap = FALSE
+
+/*
+	How this works, its CTAG_DEFINE = amount_to_attempt_to_role 
+	EX: advclass_cat_rolls = list(CTAG_PILGRIM = 5, CTAG_ADVENTURER = 5)
+	You will still need to contact the subsystem though
+*/
+	var/list/advclass_cat_rolls
+/*
+	Basically this is just a ref to a drifter wave if its attached to one
+	The role class handler will grab relevant data out of it it uses a class select
+	Just make sure to unattach afterward we are done.
+*/
+	var/datum/drifter_wave/drifter_wave_attachment
+
+/*
+	How this works, they get one extra roll on every category per PQ amount
+*/
+	var/PQ_boost_divider = 0
+
 
 /datum/job/proc/special_job_check(mob/dead/new_player/player)
 	return TRUE
@@ -189,9 +210,11 @@
 		return
 	var/thename = "[real_name]"
 	var/datum/job/J = SSjob.GetJob(mind.assigned_role)
-	var/used_title = J.title
-	if(gender == FEMALE && J.f_title)
-		used_title = J.f_title
+	var/used_title
+	if(J)
+		used_title = J.title
+		if(gender == FEMALE && J.f_title)
+			used_title = J.f_title
 	if(used_title)
 		thename = "[real_name] the [used_title]"
 	GLOB.credits_icons[thename] = list()

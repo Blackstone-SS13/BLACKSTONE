@@ -4,7 +4,7 @@
 /datum/advclass/rare
 	name = "Rarec"
 	tutorial = "rarec"
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -16,5 +16,5 @@
 		"Aasimar"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/sfighter
-	maxchosen = 1
+	maximum_possible_slots = 1
 	pickprob = 11

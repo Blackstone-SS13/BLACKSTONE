@@ -2,7 +2,7 @@
 /datum/advclass/gravedigger
 	name = "Treasure Hunter"
 	tutorial = "A treasure hunter trained in the art of the Giza, discern what is treasure or not, your fortune could be hidden anywhere."
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -16,6 +16,7 @@
 	outfit = /datum/outfit/job/roguetown/adventurer/gravedigger
 	pickprob = 11
 	traits_applied = list(TRAIT_MEDIUMARMOR, TRAIT_SEEPRICES)
+	category_tags = list(CTAG_ADVENTURER)
 
 /datum/outfit/job/roguetown/adventurer/gravedigger/pre_equip(mob/living/carbon/human/H)
 	..()

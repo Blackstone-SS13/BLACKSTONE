@@ -66,7 +66,7 @@
 		..()
 
 
-/obj/item/fishingrod/attackby(obj/item/I, mob/user, params)
+/obj/item/fishingrod/attackby(obj/item/I, mob/user, params
 	if(baited && reel && hook && line)
 		return  ..()
 
@@ -130,6 +130,7 @@
 
 	if(!attacheditems)
 		to_chat(user, "<span class='notice'>There's nothing on this fishing rod!</span>")
+
 		return
 	else
 		var/obj/totake = input(user, "What will you take off?", "Fishing rod") as obj in attacheditems
@@ -244,6 +245,7 @@
 	|| !isliving(user) \
 	|| !user.loc
 	)
+
 		return
 
 	if(get_dist(user, target) > 5)
@@ -274,6 +276,7 @@
 
 	if(istype(targeted, /turf/open/water/bath) || istype(targeted, /turf/open/water/sewer))
 		to_chat(user, "<span class='warning'>I can't fish here...</span>")
+
 		return
 	
 	if(!baited || !hook || !line)

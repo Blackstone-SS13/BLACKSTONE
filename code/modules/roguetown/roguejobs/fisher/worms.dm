@@ -17,6 +17,7 @@
 
 /obj/item/natural/worms/grubs
 	name = "grub"
+	desc = "Bait for the desperate, or the daring."
 	color = null
 	bundletype = null
 	fishloot = list(

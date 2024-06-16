@@ -13,7 +13,7 @@
 	invocation = "Undermaiden grant thee passage forth and spare the trials of the forgotten."
 	invocation_type = "whisper" //can be none, whisper, emote and shout
 	miracle = TRUE
-	devotion_cost = -15
+	devotion_cost = 10 //very weak spell, you can just make a grave marker with a literal stick
 
 /obj/effect/proc_holder/spell/targeted/burialrite/cast(list/targets, mob/user = usr)
 	. = ..()
@@ -28,7 +28,7 @@
 		if(success)
 			user.visible_message("My funeral rites have been performed on [hole]!", "[user] consecrates [hole]!")
 			return
-	to_chat(user, "<span class='red'>I failed to perform the rites.</span>")
+	to_chat(user, span_red("I failed to perform the rites."))
 
 /obj/effect/proc_holder/spell/targeted/churn
 	name = "Churn Undead"
@@ -44,7 +44,7 @@
 	invocation = "The Undermaiden rebukes!"
 	invocation_type = "shout" //can be none, whisper, emote and shout
 	miracle = TRUE
-	devotion_cost = -60
+	devotion_cost = 60
 
 /obj/effect/proc_holder/spell/targeted/churn/cast(list/targets,mob/living/user = usr)
 	var/prob2explode = 100
@@ -65,12 +65,12 @@
 			if(L.mind.has_antag_datum(/datum/antagonist/zombie))
 				iszombie = TRUE
 			if(L.mind.special_role == "Vampire Lord")
-				user.visible_message("<span class='warning'>[L] overpowers being churned!</span>", "<span class='userdanger'>[L] is too strong, I am churned!</span>")
+				user.visible_message(span_warning("[L] overpowers being churned!"), span_userdanger("[L] is too strong, I am churned!"))
 				user.Stun(50)
 				user.throw_at(get_ranged_target_turf(user, get_dir(user,L), 7), 7, 1, L, spin = FALSE)
 				return
 		if((L.mob_biotypes & MOB_UNDEAD) || isvampire || iszombie)
-//			L.visible_message("<span class='warning'>[L] is unmade by PSYDON!</span>", "<span class='danger'>I'm unmade by PSYDON!</span>")
+//			L.visible_message(span_warning("[L] is unmade by PSYDON!"), span_danger("I'm unmade by PSYDON!"))
 			var/vamp_prob = prob2explode
 			if(isvampire)
 				vamp_prob -= 59
@@ -79,7 +79,7 @@
 				L.Stun(50)
 //				L.throw_at(get_ranged_target_turf(L, get_dir(user,L), 7), 7, 1, L, spin = FALSE)
 			else
-				L.visible_message("<span class='warning'>[L] resists being churned!</span>", "<span class='userdanger'>I resist being churned!</span>")
+				L.visible_message(span_warning("[L] resists being churned!"), span_userdanger("I resist being churned!"))
 	..()
 	return TRUE
 
@@ -97,7 +97,7 @@
 	invocation = "She-Below brooks thee respite, be heard, wanderer."
 	invocation_type = "whisper" //can be none, whisper, emote and shout
 	miracle = TRUE
-	devotion_cost = -100
+	devotion_cost = 80
 
 /obj/effect/proc_holder/spell/targeted/soulspeak/cast(list/targets,mob/user = usr)
 	var/mob/living/carbon/spirit/capturedsoul = null

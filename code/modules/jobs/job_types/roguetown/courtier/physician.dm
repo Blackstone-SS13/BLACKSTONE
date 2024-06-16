@@ -21,9 +21,12 @@
 		Now you serve in the King's court ensuring the good health of those inhabiting the keep."
 	outfit = /datum/outfit/job/roguetown/physician
 	whitelist_req = TRUE
+
 	give_bank_account = 25
 	min_pq = 2
 	max_pq = null
+
+	cmode_music = 'sound/music/combat_physician.ogg'
 
 /datum/outfit/job/roguetown/physician
 	name = "Physician"
@@ -42,7 +45,7 @@
 	shoes = /obj/item/clothing/shoes/roguetown/boots/leather
 	belt = /obj/item/storage/belt/rogue/leather/black
 	beltl = /obj/item/reagent_containers/glass/bottle/waterskin
-	beltr = /obj/item/keyring/servant
+	beltr = /obj/item/keyring/physician
 	id = /obj/item/clothing/ring/quartzs
 	r_hand = /obj/item/rogueweapon/woodstaff
 	backl = /obj/item/storage/backpack/rogue/backpack
@@ -62,6 +65,7 @@
 	ADD_TRAIT(H, TRAIT_ROT_EATER, "[type]")
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 5, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/alchemy, 5, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/polearms, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 3, TRUE)
@@ -69,6 +73,7 @@
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 6, TRUE)
+		H.mind.AddSpell(new /obj/effect/proc_holder/spell/invoked/diagnose/secular)
 		H.change_stat("strength", -1)
 		H.change_stat("constitution", -1)
 		H.change_stat("intelligence", 3)

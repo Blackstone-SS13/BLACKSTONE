@@ -24,7 +24,7 @@
 	/// How much blood we suck on on_embed_life()
 	var/blood_sucking = 2
 	/// How much toxin damage we heal on on_embed_life()
-	var/toxin_healing = -2
+	var/toxin_healing = 2
 	/// Amount of blood we have stored
 	var/blood_storage = 0
 	/// Maximum amount of blood we can store
@@ -46,17 +46,17 @@
 	. = ..()
 	switch(blood_storage/blood_maximum)
 		if(0.8 to INFINITY)
-			. += "<span class='bloody'><B>[p_theyre(TRUE)] fat and engorged with blood.</B></span>"
+			. += span_bloody("<B>[p_theyre(TRUE)] fat and engorged with blood.</B>")
 		if(0.5 to 0.8)
-			. += "<span class='bloody'>[p_theyre(TRUE)] well fed.</span>"
+			. += span_bloody("[p_theyre(TRUE)] well fed.")
 		if(0.1 to 0.5)
-			. += "<span class='warning'>[p_they(TRUE)] want[p_s()] a meal.</span>"
+			. += span_warning("[p_they(TRUE)] want[p_s()] a meal.")
 		if(-INFINITY to 0.1)
-			. += "<span class='dead'>[p_theyre(TRUE)] starved.</span>"
+			. += span_dead("[p_theyre(TRUE)] starved.")
 	if(!giving)
-		. += "<span class='warning'>[p_theyre(TRUE)] [pick("slurping", "sucking", "inhaling")].</span>"
+		. += span_warning("[p_theyre(TRUE)] [pick("slurping", "sucking", "inhaling")].")
 	else
-		. += "<span class='notice'>[p_theyre(TRUE)] [pick("vomiting", "gorfing", "exhaling")].</span>"
+		. += span_notice("[p_theyre(TRUE)] [pick("vomiting", "gorfing", "exhaling")].")
 	if(drainage)
 		START_PROCESSING(SSobj, src)
 
@@ -67,7 +67,7 @@
 		if(!affecting)
 			return
 		if(!get_location_accessible(H, check_zone(user.zone_selected)))
-			to_chat(user, "<span class='warning'>Something in the way.</span>")
+			to_chat(user, span_warning("Something in the way."))
 			return
 		var/used_time = (70 - (H.mind.get_skill_level(/datum/skill/misc/medicine) * 10))/2
 		if(!do_mob(user, H, used_time))
@@ -78,16 +78,16 @@
 		src.forceMove(H)
 		affecting.add_embedded_object(src, silent = TRUE, crit_message = FALSE)
 		if(M == user)
-			user.visible_message("<span class='notice'>[user] places [src] on [user.p_their()] [affecting].</span>", "<span class='notice'>I place a leech on my [affecting].</span>")
+			user.visible_message(span_notice("[user] places [src] on [user.p_their()] [affecting]."), span_notice("I place a leech on my [affecting]."))
 		else
-			user.visible_message("<span class='notice'>[user] places [src] on [M]'s [affecting].</span>", "<span class='notice'>I place a leech on [M]'s [affecting].</span>")
+			user.visible_message(span_notice("[user] places [src] on [M]'s [affecting]."), span_notice("I place a leech on [M]'s [affecting]."))
 		return
 	return ..()
 
 /obj/item/natural/worms/leech/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
 	if(!user)
 		return
-	user.adjustToxLoss(toxin_healing)
+	user.adjustToxLoss(-toxin_healing)
 	if(giving)
 		var/blood_given = min(BLOOD_VOLUME_MAXIMUM - user.blood_volume, blood_storage, blood_sucking)
 		user.blood_volume += blood_given
@@ -154,14 +154,14 @@
 		if(MAX_LEECH_EVILNESS to INFINITY) //maximized evilness holy shit
 			color = "#ff0000"
 			adjectives += pick("evil", "malevolent", "misanthropic")
-			descs += "<span class='danger'>This one is bursting with hatred!</span>"
+			descs += span_danger("This one is bursting with hatred!")
 		if(5) //this leech is painfully average, it gets no adjectives
 			if(prob(3))
 				adjectives += pick("average", "ordinary", "boring")
 				descs += "This one is extremely boring to look at."
 		if(-INFINITY to 1) //this leech is pretty terrible at being a leech
 			adjectives += pick("pitiful", "pathetic", "depressing")
-			descs += "<span class='dead'>This one yearns for nothing but death.</span>"
+			descs += span_dead("This one yearns for nothing but death.")
 		else
 			var/adjective_amount = 1
 			if(prob(5))
@@ -192,7 +192,7 @@
 	color = null
 	consistent = TRUE
 	drainage = 0
-	toxin_healing = -3
+	toxin_healing = 2
 	blood_storage = BLOOD_VOLUME_SURVIVE
 	blood_maximum = BLOOD_VOLUME_BAD
 
@@ -200,10 +200,10 @@
 	. = ..()
 	giving = !giving
 	if(giving)
-		user.visible_message("<span class='notice'>[user] squeezes [src].</span>",\
-							"<span class='notice'>I squeeze [src]. It will now infuse blood.</span>")
+		user.visible_message(span_notice("[user] squeezes [src]."),\
+							span_notice("I squeeze [src]. It will now infuse blood."))
 	else
-		user.visible_message("<span class='notice'>[user] squeezes [src].</span>",\
-							"<span class='notice'>I squeeze [src]. It will now extract blood.</span>")
+		user.visible_message(span_notice("[user] squeezes [src]."),\
+							span_notice("I squeeze [src]. It will now extract blood."))
 
 #undef MAX_LEECH_EVILNESS

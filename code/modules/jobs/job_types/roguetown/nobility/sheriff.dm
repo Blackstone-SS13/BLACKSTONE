@@ -22,7 +22,7 @@
 	min_pq = 4
 	max_pq = null
 
-	cmode_music = 'sound/music/combat_guard.ogg'
+	cmode_music = 'sound/music/combat_guard2.ogg'
 
 /datum/job/roguetown/sheriff/after_spawn(mob/living/L, mob/M, latejoin = TRUE)
 	. = ..()
@@ -120,7 +120,7 @@
 			continue
 		recruitment[recruit.name] = recruit
 	if(!length(recruitment))
-		to_chat(user, "<span class='warning'>There are no potential recruits in range.</span>")
+		to_chat(user, span_warning("There are no potential recruits in range."))
 		return
 	var/inputty = input(user, "Select a potential recruit!", "[name]") as anything in recruitment
 	if(inputty)
@@ -128,9 +128,9 @@
 		if(!QDELETED(recruit) && (recruit in get_hearers_in_view(recruitment_range, user)))
 			INVOKE_ASYNC(src, PROC_REF(convert), recruit, user)
 		else
-			to_chat(user, "<span class='warning'>Recruitment failed!</span>")
+			to_chat(user, span_warning("Recruitment failed!"))
 	else
-		to_chat(user, "<span class='warning'>Recruitment cancelled.</span>")
+		to_chat(user, span_warning("Recruitment cancelled."))
 
 /obj/effect/proc_holder/spell/self/convertrole/proc/can_convert(mob/living/carbon/human/recruit)
 	//wtf

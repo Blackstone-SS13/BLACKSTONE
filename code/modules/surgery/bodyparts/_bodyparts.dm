@@ -109,8 +109,8 @@
 /obj/item/bodypart/onbite(mob/living/carbon/human/user)
 	if((user.mind && user.mind.has_antag_datum(/datum/antagonist/zombie)) || istype(user.dna.species, /datum/species/werewolf))
 		if(do_after(user, 50, target = src))
-			user.visible_message("<span class='warning'>[user] consumes [src]!</span>",\
-							"<span class='notice'>I consume [src]!</span>")
+			user.visible_message(span_warning("[user] consumes [src]!"),\
+							span_notice("I consume [src]!"))
 			playsound(get_turf(user), pick(dismemsound), 100, FALSE, -1)
 			new /obj/effect/gibspawner/generic(get_turf(src), user)
 			user.fully_heal()
@@ -124,11 +124,11 @@
 		if(HAS_TRAIT(C, TRAIT_LIMBATTACHMENT))
 			if(!H.get_bodypart(body_zone) && !animal_origin)
 				if(H == user)
-					H.visible_message("<span class='warning'>[H] jams [src] into [H.p_their()] empty socket!</span>",\
-					"<span class='notice'>I force [src] into my empty socket, and it locks into place!</span>")
+					H.visible_message(span_warning("[H] jams [src] into [H.p_their()] empty socket!"),\
+					span_notice("I force [src] into my empty socket, and it locks into place!"))
 				else
-					H.visible_message("<span class='warning'>[user] jams [src] into [H]'s empty socket!</span>",\
-					"<span class='notice'>[user] forces [src] into my empty socket, and it locks into place!</span>")
+					H.visible_message(span_warning("[user] jams [src] into [H]'s empty socket!"),\
+					span_notice("[user] forces [src] into my empty socket, and it locks into place!"))
 				user.temporarilyRemoveItemFromInventory(src, TRUE)
 				attach_limb(C)
 				return
@@ -138,12 +138,12 @@
 	if(length(contents) && I.get_sharpness() && !user.cmode)
 		add_fingerprint(user)
 		playsound(loc, 'sound/combat/hits/bladed/genstab (1).ogg', 60, vary = FALSE)
-		user.visible_message("<span class='warning'>[user] begins to cut open [src].</span>",\
-			"<span class='notice'>You begin to cut open [src]...</span>")
+		user.visible_message(span_warning("[user] begins to cut open [src]."),\
+			span_notice("You begin to cut open [src]..."))
 		if(do_after(user, 5 SECONDS, target = src))
 			drop_organs(user)
-			user.visible_message("<span class='danger'>[user] cuts [src] open!</span>",\
-				"<span class='notice'>You finish cutting [src] open.</span>")
+			user.visible_message(span_danger("[user] cuts [src] open!"),\
+				span_notice("You finish cutting [src] open."))
 		return
 	return ..()
 
@@ -304,7 +304,7 @@
 	set_disabled(is_disabled())
 
 /obj/item/bodypart/proc/is_disabled()
-	if(!can_disable() || !owner || HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
+	if(!owner || !can_disable() || HAS_TRAIT(owner, TRAIT_NOLIMBDISABLE))
 		return BODYPART_NOT_DISABLED
 	//yes this does mean vampires can use rotten limbs
 	if((rotted || skeletonized) && !(owner.mob_biotypes & MOB_UNDEAD))
@@ -558,11 +558,11 @@
 
 /obj/item/bodypart/chest/set_disabled(new_disabled)
 	. = ..()
-	if(!.)
+	if(!. || !owner)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='warning'>I feel a sharp pain in my back!</span>")
+			to_chat(owner, span_warning("I feel a sharp pain in my back!"))
 
 /obj/item/bodypart/chest/Destroy()
 	QDEL_NULL(cavity_item)
@@ -626,16 +626,16 @@
 
 /obj/item/bodypart/l_arm/set_disabled(new_disabled)
 	. = ..()
-	if(!.)
+	if(!. || !owner)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='boldwarning'>I can no longer move my [name]!</span>")
+			to_chat(owner, span_boldwarning("I can no longer move my [name]!"))
 		if(held_index)
 			owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
+			to_chat(owner, span_danger("I can no longer feel my [name]."))
 			if(held_index)
 				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	if(owner.hud_used)
@@ -692,16 +692,16 @@
 
 /obj/item/bodypart/r_arm/set_disabled(new_disabled)
 	. = ..()
-	if(!.)
+	if(!. || !owner)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
+			to_chat(owner, span_danger("I can no longer move my [name]!"))
 		if(held_index)
 			owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
+			to_chat(owner, span_danger("I can no longer feel my [name]."))
 			if(held_index)
 				owner.dropItemToGround(owner.get_item_for_held_index(held_index))
 	if(owner.hud_used)
@@ -755,14 +755,14 @@
 
 /obj/item/bodypart/l_leg/set_disabled(new_disabled)
 	. = ..()
-	if(!.)
+	if(!. || !owner)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
+			to_chat(owner, span_danger("I can no longer move my [name]!"))
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
+			to_chat(owner, span_danger("I can no longer feel my [name]."))
 
 /obj/item/bodypart/l_leg/digitigrade
 	name = "left digitigrade leg"
@@ -814,14 +814,14 @@
 
 /obj/item/bodypart/r_leg/set_disabled(new_disabled)
 	. = ..()
-	if(!.)
+	if(!. || !owner)
 		return
 	if(disabled == BODYPART_DISABLED_DAMAGE || disabled == BODYPART_DISABLED_WOUND)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='danger'>I can no longer move my [name]!</span>")
+			to_chat(owner, span_danger("I can no longer move my [name]!"))
 	else if(disabled == BODYPART_DISABLED_PARALYSIS)
 		if(owner.stat < DEAD)
-			to_chat(owner, "<span class='danger'>I can no longer feel my [name].</span>")
+			to_chat(owner, span_danger("I can no longer feel my [name]."))
 
 /obj/item/bodypart/r_leg/digitigrade
 	name = "right digitigrade leg"

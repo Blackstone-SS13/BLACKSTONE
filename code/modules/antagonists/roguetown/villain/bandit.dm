@@ -16,7 +16,7 @@
 
 /datum/antagonist/bandit/examine_friendorfoe(datum/antagonist/examined_datum,mob/examiner,mob/examined)
 	if(istype(examined_datum, /datum/antagonist/bandit))
-		return "<span class='boldnotice'>Another free man. My ally.</span>"
+		return span_boldnotice("Another free man. My ally.")
 
 /datum/antagonist/bandit/on_gain()
 	owner.special_role = "Bandit"
@@ -35,13 +35,14 @@
 	ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_COMMIE, TRAIT_GENERIC)
 	H.set_patron(/datum/patron/inhumen/matthios)
-	to_chat(H, "<span class='alertsyndie'>I am a BANDIT!</span>")
-	to_chat(H, "<span class='warning'>Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn. I must feed the idol money and valuable metals to satisfy my greed!</span>")
+	to_chat(H, span_alertsyndie("I am a BANDIT!"))
+	to_chat(H, span_warning("Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn. I must feed the idol money and valuable metals to satisfy my greed!"))
 
 /* /datum/antagonist/bandit/greet()
-	to_chat(owner.current, "<span class='alertsyndie'>I am a BANDIT!</span>")
-	to_chat(owner.current, "<span class='info'>Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn. I must feed the idol money and valuable metals to satisfy my greed!</span>")
+	to_chat(owner.current, span_alertsyndie("I am a BANDIT!"))
+	to_chat(owner.current, span_info("Long ago I did a crime worthy of my bounty being hung on the wall outside of the local inn. I must feed the idol money and valuable metals to satisfy my greed!"))
 	owner.announce_objectives()
 	..() */ //commenting out until they get a proper objective implementation or whatever.
 
@@ -98,7 +99,7 @@
 	H.mind.adjust_skillrank(/datum/skill/combat/whipsflails, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/combat/bows, 3, TRUE)
-	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
+	H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/crafting, 2, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 1, TRUE)
 	H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
@@ -140,9 +141,9 @@
 			else
 				r_hand = /obj/item/rogueweapon/flail/peasantwarflail
 			H.change_stat("strength", 1)
-		if(10 to 12) // crossbow bandit
-			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/crossbow
-			beltl = /obj/item/quiver/bolts
+		if(10 to 12) // ranged bandit
+			backl = /obj/item/gun/ballistic/revolver/grenadelauncher/bow
+			beltl = /obj/item/quiver/arrows
 			beltr = /obj/item/rogueweapon/stoneaxe/woodcut/steel
 			H.change_stat("perception", 3)
 		if(13 to 15) // spear bandit
@@ -202,11 +203,11 @@
 
 	if(traitorwin)
 		owner.adjust_triumphs(count)
-		to_chat(owner.current, "<span class='greentext'>I've TRIUMPHED!</span>")
+		to_chat(owner.current, span_greentext("I've TRIUMPHED!"))
 		if(owner.current)
 			owner.current.playsound_local(get_turf(owner.current), 'sound/misc/triumph.ogg', 100, FALSE, pressure_affected = FALSE)
 	else
-		to_chat(owner.current, "<span class='redtext'>I've failed to satisfy my greed.</span>")
+		to_chat(owner.current, span_redtext("I've failed to satisfy my greed."))
 		if(owner.current)
 			owner.current.playsound_local(get_turf(owner.current), 'sound/misc/fail.ogg', 100, FALSE, pressure_affected = FALSE)
 

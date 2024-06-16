@@ -2,7 +2,7 @@
 	name = "Carpenter"
 	tutorial = "A skilled carpenter, able to manipulate wood to suit their needs \
 	building forts and stores, carpenting floors, putting up crosses. You can do it all with enough logs"
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -15,8 +15,8 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/carpenter
-	isvillager = TRUE
-	ispilgrim = TRUE
+
+	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 
 /datum/outfit/job/roguetown/adventurer/carpenter/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -33,7 +33,7 @@
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 3, TRUE) // They work at great heights.
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 3, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 5, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/craft/carpentry, 4, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/masonry, pick(0,1), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/engineering, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)

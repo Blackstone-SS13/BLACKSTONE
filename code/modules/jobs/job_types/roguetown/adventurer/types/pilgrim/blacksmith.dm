@@ -2,7 +2,7 @@
 	name = "Blacksmith"
 	tutorial = "A skilled blacksmith, able to forge capable weapons for warriors in the bog, \
 	only after building a forge for themselves ofourse"
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -15,8 +15,8 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/blacksmith
-	isvillager = TRUE
-	ispilgrim = TRUE
+
+	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 
 /datum/outfit/job/roguetown/adventurer/blacksmith/pre_equip(mob/living/carbon/human/H)
 	..()
@@ -63,3 +63,4 @@
 		H.change_stat("endurance", 2)
 		H.change_stat("constitution", 2)
 		H.change_stat("speed", -1)
+		H.change_stat("fortune", 1)

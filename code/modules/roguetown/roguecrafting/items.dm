@@ -28,6 +28,30 @@
 	verbage_simple = "tie"
 	verbage = "ties"
 
+/datum/crafting_recipe/roguetown/unclothbelt
+	name = "untie cloth belt"
+	result = /obj/item/natural/cloth
+	reqs = list(/obj/item/storage/belt/rogue/leather/cloth = 1)
+	craftdiff = 0
+	verbage_simple = "untie"
+	verbage = "unties"
+
+/datum/crafting_recipe/roguetown/ropebelt
+	name = "rope belt"
+	result = /obj/item/storage/belt/rogue/leather/rope
+	reqs = list(/obj/item/rope = 1)
+	craftdiff = 0
+	verbage_simple = "tie"
+	verbage = "ties"
+
+/datum/crafting_recipe/roguetown/unropebelt
+	name = "untie rope belt"
+	result = /obj/item/rope
+	reqs = list(/obj/item/storage/belt/rogue/leather/rope = 1)
+	craftdiff = 0
+	verbage_simple = "untie"
+	verbage = "unties"
+
 /datum/crafting_recipe/roguetown/rope
 	name = "rope"
 	result = /obj/item/rope
@@ -67,8 +91,10 @@
 	craftdiff = 0
 
 /datum/crafting_recipe/roguetown/candle
-	name = "candle"
-	result = /obj/item/candle/yellow
+	name = "candle (x3)"
+	result = list(/obj/item/candle/yellow,
+				/obj/item/candle/yellow,
+				/obj/item/candle/yellow)
 	reqs = list(/obj/item/reagent_containers/food/snacks/fat = 2)
 
 /datum/crafting_recipe/roguetown/stoneaxe
@@ -101,6 +127,7 @@
 	name = "improvised billhook"
 	result = /obj/item/rogueweapon/spear/improvisedbillhook
 	reqs = list(/obj/item/rogueweapon/sickle = 1,
+				/obj/item/rope = 1,
 				/obj/item/grown/log/tree/small = 1)
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
@@ -109,6 +136,7 @@
 	name = "goedendag"
 	result = /obj/item/rogueweapon/mace/goden
 	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/rope = 1,
 				/obj/item/rogueweapon/hoe = 1)
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
@@ -117,11 +145,12 @@
 	name = "peasant war flail"
 	result = /obj/item/rogueweapon/flail/peasantwarflail
 	reqs = list(/obj/item/grown/log/tree/small = 1,
+				/obj/item/rope = 1,
 				/obj/item/rogueweapon/thresher = 1)
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
-/datum/crafting_recipe/roguetown/rproesthetic
+/datum/crafting_recipe/roguetown/lproesthetic
 	name = "wood arm (L)"
 	result = list(/obj/item/bodypart/l_arm/rproesthetic)
 	reqs = list(/obj/item/grown/log/tree/small = 1,

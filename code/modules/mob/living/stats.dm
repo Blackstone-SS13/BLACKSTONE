@@ -24,15 +24,16 @@
 
 /mob/living/proc/set_patron(datum/patron/new_patron)
 	if(!new_patron)
-		return
+		return TRUE
 	if(ispath(new_patron))
 		new_patron = GLOB.patronlist[new_patron]
 	if(!istype(new_patron))
-		return
+		return TRUE
 	if(istype(patron))
 		patron.on_loss(src)
 	patron = new_patron
 	new_patron.on_gain(src)
+	return TRUE
 
 /datum/species
 	var/list/specstats = list("strength" = 0, "perception" = 0, "intelligence" = 0, "constitution" = 0, "endurance" = 0, "speed" = 0, "fortune" = 0)
@@ -65,11 +66,6 @@
 				for(var/S in H.dna.species.specstats)
 					change_stat(S, H.dna.species.specstats[S])
 		switch(H.age)
-			if(AGE_YOUNG)
-				change_stat("strength", -2)
-				change_stat("constitution", -2)
-				change_stat("perception", 1)
-				change_stat("speed", round(rand(-1,2)))
 			if(AGE_MIDDLEAGED)
 				change_stat("speed", -1)
 				change_stat("endurance", 1)
