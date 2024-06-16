@@ -51,6 +51,7 @@
 			return
 
 	if(istype(W, /obj/item/rogueweapon/hammer))
+		var/obj/item/rogueweapon/hammer/H = W
 		user.changeNext_move(CLICK_CD_MELEE)
 		if(!hingot)
 			return
@@ -69,9 +70,9 @@
 			if(carbon_user.domhand)
 				used_str = carbon_user.get_str_arms(carbon_user.used_hand)
 			carbon_user.rogfat_add(max(30 - (used_str * 3), 0))
-		var/total_chance = 7 * user.mind.get_skill_level(hingot.currecipe.appro_skill)
+		var/total_chance = 7 * (user.mind.get_skill_level(hingot.currecipe.appro_skill)+H.smith_quality)
 		var/breakthrough = 0
-		if(prob(1 + total_chance)) //Small chance to flash
+		if(prob(max(total_chance, 1))) //Small chance to flash
 			user.flash_fullscreen("whiteflash")
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_turf(src)
@@ -79,7 +80,7 @@
 			S.start()
 			breakthrough = 1
 
-		if(!hingot.currecipe.advance(user, breakthrough))
+		if(!hingot.currecipe.advance(user, breakthrough, H))
 			shake_camera(user, 1, 1)
 			playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
 		playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)

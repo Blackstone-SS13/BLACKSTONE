@@ -1,6 +1,7 @@
 
 /obj/item/rogueweapon/hammer
 	force = 21
+	var/smith_quality = 0
 	possible_item_intents = list(/datum/intent/mace/strike, /datum/intent/mace/smash)
 	name = "hammer"
 	desc = ""
