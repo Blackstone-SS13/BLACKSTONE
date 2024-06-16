@@ -482,9 +482,8 @@
 					targetdif = 0
 				if(currentmouse > lastmouse)
 					currentstate = "hooked"
-					fishtarget = currentmouse
 					targetdif = 0
-					target = (-currentmouse + 270)
+					fishtarget = (-currentmouse + 270)
 					to_chat(fisher, "<span class='notice'>Something tugs the line!</span>")
 					playsound(loc, 'sound/items/fishing_plouf.ogg', 100, TRUE)
 					directionstate = 1
