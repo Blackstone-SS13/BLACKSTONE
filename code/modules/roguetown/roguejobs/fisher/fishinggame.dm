@@ -25,3 +25,13 @@
 
 /atom/movable/fishingoverlay/pointer2
 	icon_state = "fishstate"
+
+/atom/movable/fishingoverlay/face
+	icon = 'icons/mob/roguehud.dmi'
+	icon_state = "stress1"
+	screen_loc = "CENTER,CENTER:-64"
+
+/atom/movable/fishingoverlay/face/frame
+	icon = 'icons/roguetown/items/fishing.dmi'
+	icon_state = "faceframe"
+

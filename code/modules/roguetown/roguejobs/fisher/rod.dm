@@ -48,6 +48,8 @@
 	var/atom/movable/fishingoverlay/base/backdrop
 	var/atom/movable/fishingoverlay/reelstate
 	var/atom/movable/fishingoverlay/fishstate
+	var/atom/movable/fishingoverlay/face
+	var/atom/movable/fishingoverlay/faceframe
 
 /datum/intent/cast
 	name = "cast"
@@ -192,21 +194,31 @@
 	backdrop = new /atom/movable/fishingoverlay/base
 	reelstate = new /atom/movable/fishingoverlay/pointer1
 	fishstate = new /atom/movable/fishingoverlay/pointer2
+	face = new /atom/movable/fishingoverlay/face
+	faceframe = new /atom/movable/fishingoverlay/face/frame
 	backdrop.owner = user.client
 	user.client.screen += backdrop
 	user.client.screen += reelstate
 	user.client.screen += fishstate
+	user.client.screen += face
+	user.client.screen += faceframe
 
 /obj/item/fishingrod/proc/deleteui(mob/living/user)
 	user.client.screen -= backdrop
 	user.client.screen -= reelstate
 	user.client.screen -= fishstate
+	user.client.screen -= face
+	user.client.screen -= faceframe
 	qdel(backdrop)
 	qdel(reelstate)
 	qdel(fishstate)
+	qdel(face)
+	qdel(faceframe)
 	backdrop = null
 	reelstate = null
 	fishstate = null
+	face = null
+	faceframe = null
 
 /obj/item/fishingrod/proc/stopgame(mob/living/user)
 	src.deleteui(user)
@@ -423,6 +435,9 @@
 	var/targetdif = 0
 	var/velocity
 	var/initialwait = waittime
+	var/initialline = linehealth //these last two are for the face
+	var/initialfish = fishhealth
+	var/facestate = 1
 	createui(fisher)
 	fisher.doing = TRUE
 	fishtarget = 90
@@ -442,6 +457,8 @@
 		var/matrix/F = matrix()
 		F.Turn(targetdif)
 		fishstate.transform = F
+
+		face.icon_state = "stress[facestate]"
 
 		switch(currentstate)
 			if("wait")
@@ -489,6 +506,31 @@
 					linehealth--
 				velocity = clamp(velocity + ((acceleration*directionstate)/5), -maxvelocity, maxvelocity)
 				fishtarget = clamp(fishtarget + velocity, 0, 180)
+
+				switch(linehealth / initialline)
+					if(0.81 to 1)
+						facestate = 1
+					if(0.61 to 0.8)
+						facestate = 2
+					if(0.41 to 0.6)
+						facestate = 3
+					if(0.21 to 0.4)
+						facestate = 4
+					else
+						facestate = 5
+				
+				switch(fishhealth / initialfish)
+					if(0.61 to 0.8)
+						facestate -= 1
+					if(0.41 to 0.6)
+						facestate -= 2
+					if(0.21 to 0.4)
+						facestate -= 3
+					if(0 to 0.2)
+						facestate -= 4
+				
+				facestate = clamp(facestate, 1, 5)
+
 		lastmouse = currentmouse
 		sleep(1)
 	
@@ -498,7 +540,7 @@
 		to_chat(user, "<span class = 'notice'>I pull something out of the water!</span>")
 		playsound(loc, 'sound/items/Fish_out.ogg', 100, TRUE)
 		fisher.mind.adjust_experience(/datum/skill/labor/fishing, difficulty * fisher.STAINT) 
-		if(ispath(fishtype, /obj/item/reagent_containers/food/snacks/fish))
+		if(istype(fishtype, /obj/item/reagent_containers/food/snacks/fish))
 			var/obj/item/reagent_containers/food/snacks/caughtfish = new fishtype(get_turf(fisher))
 			var/raritydesc
 			var/sizedesc
