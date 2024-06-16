@@ -543,7 +543,7 @@
 		to_chat(user, "<span class = 'notice'>I pull something out of the water!</span>")
 		playsound(loc, 'sound/items/Fish_out.ogg', 100, TRUE)
 		fisher.mind.adjust_experience(/datum/skill/labor/fishing, difficulty * fisher.STAINT) 
-		if(istype(fishtype, /obj/item/reagent_containers/food/snacks/fish))
+		if(ispath(fishtype, /obj/item/reagent_containers/food/snacks/fish))
 			var/obj/item/reagent_containers/food/snacks/caughtfish = new fishtype(get_turf(fisher))
 			var/raritydesc
 			var/sizedesc
