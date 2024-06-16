@@ -70,3 +70,7 @@
 	name = "Riddle of Steel"
 	cost = 400
 	contains = list(/obj/item/riddleofsteel)
+
+	name = "Riddle of Steel"
+	cost = 400
+	contains = list(/obj/item/riddleofsteel)
