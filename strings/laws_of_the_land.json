@@ -16,6 +16,15 @@
 			],
 			"weight": 3
 		},
+		"igga_Laws": {
+			"name": "Kigga's Laws",
+			"laws": [
+				"Your Chosen Name is now Obsolete",
+				"You new name is your first initial of your previous title followed by 'igga' and the first initial of your previous first name followed by igga, e.g. Priest John is now Pigga Jigga",
+				"Noc and Necra worshippers are forbidden from saying their own name outloud",
+			],
+			"weight": 1
+		},
 		"code of hammurabi": {
 			"name": "Code of Hamurabi",
 			"laws": [
