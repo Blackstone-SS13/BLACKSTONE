@@ -338,7 +338,7 @@
 	else if(istype(targeted, /turf/open/water/river))
 		fishpicker = list(/obj/item/reagent_containers/food/snacks/fish/eel = 2, 
 							/obj/item/reagent_containers/food/snacks/fish/carp = 6)
-			deepmod += 1
+		deepmod += 1
 	
 	if(istype(baited, /obj/item/fishing/bait))
 		B = baited
