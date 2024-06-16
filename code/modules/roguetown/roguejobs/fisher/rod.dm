@@ -227,7 +227,7 @@
 	fishrarity = null
 	fishtype = null
 	fishsize = null
-	acceleration = 0
+	acceleration = 1
 	maxvelocity = 0
 	directionstate = null
 	difficulty = 0
@@ -405,7 +405,7 @@
 		fishtype = pickweightAllowZero(fishpicker)
 		difficulty += sizepicker.Find(fishsize) + raritypicker.Find(fishrarity)
 		hookwindow -= raritypicker.Find(fishrarity) - 1
-		acceleration += clamp(sizepicker.Find(fishsize) - 3, -1, 2) + clamp(raritypicker.Find(fishrarity) - 1, 0, 3)
+		acceleration += clamp(sizepicker.Find(fishsize) - 3, 0, 2) + clamp(raritypicker.Find(fishrarity) - 1, 0, 3)
 		maxvelocity = 3 + clamp(raritypicker.Find(fishrarity) - 1, 0, 3) + clamp(sizepicker.Find(fishsize) - 3, -1, 2)
 		fishhealth =  3 + sizepicker.Find(fishsize)*2 + raritypicker.Find(fishrarity)*2
 		switch(fishsize)
