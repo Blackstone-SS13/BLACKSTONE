@@ -47,37 +47,38 @@
 	devotion_cost = 60
 
 /obj/effect/proc_holder/spell/targeted/churn/cast(list/targets,mob/living/user = usr)
-	var/prob2explode = 100
+	var/prob2explode = 0
 	if(user && user.mind)
-		prob2explode = 0
 		for(var/i in 1 to user.mind.get_skill_level(/datum/skill/magic/holy))
 			prob2explode += 30
 	for(var/mob/living/L in targets)
 		var/isvampire = FALSE
 		var/iszombie = FALSE
+		var/isvampspawn = FALSE
 		if(L.stat == DEAD)
 			continue
 		if(L.mind)
-			var/datum/antagonist/vampirelord/lesser/V = L.mind.has_antag_datum(/datum/antagonist/vampirelord/lesser)
+			var/datum/antagonist/vampire/V = L.mind.has_antag_datum(/datum/antagonist/vampire)
+			var/datum/antagonist/vampirelord/VL = L.mind.has_antag_datum(/datum/antagonist/vampirelord)
+			if(VL)
+				if(!VL.disguised)
+					isvampspawn = TRUE
+				if(L.mind.special_role == "Vampire Lord")
+					if(VL.vamplevel > 2)
+						user.visible_message(span_warning("[L] cannot be churned!"), span_userdanger("[L] is too strong to be churned!"))
 			if(V)
-				if(!V.disguised)
-					isvampire = TRUE
+				isvampire = TRUE
 			if(L.mind.has_antag_datum(/datum/antagonist/zombie))
 				iszombie = TRUE
-			if(L.mind.special_role == "Vampire Lord")
-				user.visible_message(span_warning("[L] overpowers being churned!"), span_userdanger("[L] is too strong, I am churned!"))
-				user.Stun(50)
-				user.throw_at(get_ranged_target_turf(user, get_dir(user,L), 7), 7, 1, L, spin = FALSE)
-				return
-		if((L.mob_biotypes & MOB_UNDEAD) || isvampire || iszombie)
-//			L.visible_message(span_warning("[L] is unmade by PSYDON!"), span_danger("I'm unmade by PSYDON!"))
+		if((L.mob_biotypes & MOB_UNDEAD) || isvampire || iszombie || isvampspawn)
+			L.visible_message(span_warning("[L] is rebuked by Necra!"))
 			var/vamp_prob = prob2explode
 			if(isvampire)
-				vamp_prob -= 59
+				vamp_prob -= 25
 			if(prob(vamp_prob))
 				explosion(get_turf(L), light_impact_range = 1, flame_range = 1, smoke = FALSE)
 				L.Stun(50)
-//				L.throw_at(get_ranged_target_turf(L, get_dir(user,L), 7), 7, 1, L, spin = FALSE)
+				L.throw_at(get_ranged_target_turf(L, get_dir(user,L), 7), 7, 1, L, spin = FALSE)
 			else
 				L.visible_message(span_warning("[L] resists being churned!"), span_userdanger("I resist being churned!"))
 	..()
