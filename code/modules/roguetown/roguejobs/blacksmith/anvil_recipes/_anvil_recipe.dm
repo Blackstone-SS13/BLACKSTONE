@@ -26,7 +26,7 @@
 /datum/anvil_recipe/proc/advance(mob/user, breakthrough = FALSE, var/obj/item/rogueweapon/hammer/H)
 	if(handle_additional_items(user, FALSE))
 		return FALSE
-	max_mistakes = 3+num_of_materials
+	max_mistakes = 2+num_of_materials
 	if(!median_calculated) // has the median material quality been calculated?
 		material_quality = floor(material_quality/num_of_materials)
 		median_calculated = TRUE
@@ -35,7 +35,7 @@
 	var/skill_level
 	if(user.mind)
 		skill_level = user.mind.get_skill_level(appro_skill)
-		proab = (3*(7-skill_level)-smith_quality)+1
+		proab = ((3*(7-skill_level))-H.smith_quality)+1
 		if(!user.mind.get_skill_level(appro_skill))
 			proab = 14
 	if(prob(proab))
@@ -52,7 +52,7 @@
 			user.visible_message("<span class='warning'>[user] works a mistake into the bar!</span>", "<span class='warning'>You work a mistake into the bar! ([max_mistakes-mistakes] more mistakes until it falls apart!)</span>")
 			return FALSE
 	else
-		var/quality_change = ((breakthrough ? 15 : 10)+(material_quality-num_of_materials)*2)
+		var/quality_change = ((breakthrough ? 15 : 10)+(material_quality-2-num_of_materials)*2)
 		quality += quality_change
 		if(user.mind && isliving(user))
 			var/mob/living/L = user
@@ -123,5 +123,5 @@
 		C.armor = C.armor.multiplymodifyAllRatings(modifier)
 		C.equip_delay_self *= modifier
 	if(istype(I, /obj/item/rogueweapon/hammer))
-		var/obj/item/rogueweapon/hammer/H
+		var/obj/item/rogueweapon/hammer/H = I
 		H.smith_quality = quality_level-3
