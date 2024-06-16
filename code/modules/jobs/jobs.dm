@@ -136,7 +136,7 @@ GLOBAL_LIST_INIT(mercenary_positions, list(
 	"Desert Rider Mercenary",
 ))
 
-GLOBAL_LIST_INIT(freshfolk_positions, list(
+GLOBAL_LIST_INIT(youngfolk_positions, list(
 	"Squire",
 	"Clerk",
 	"Smithy Apprentice",
@@ -181,7 +181,7 @@ GLOBAL_LIST_INIT(job_assignment_order, get_job_assignment_order())
 	sorting_order += GLOB.church_positions
 	sorting_order += GLOB.yeoman_positions
 	sorting_order += GLOB.peasant_positions
-	sorting_order += GLOB.freshfolk_positions
+	sorting_order += GLOB.youngfolk_positions
 	return sorting_order
 
 GLOBAL_LIST_INIT(exp_jobsmap, list(

@@ -48,6 +48,7 @@
 	domain = "Goddess of Degeneracy, Debauchery and Addiction"
 	desc = "The Fallen Daughter of Psydon, once used to be a goddess of love and family but has now fallen from grace as she leads mortals to hedonism."
 	worshippers = "Drunkards, Junkies, Gamblers and Bards"
+	mob_traits = list(TRAIT_CRACKHEAD)
 	confess_lines = list(
 		"EORA BRINGS ME PLEASURE!",
 		"EORA BRINGS ME LUCK!",

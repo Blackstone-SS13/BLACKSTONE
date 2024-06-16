@@ -25,7 +25,7 @@
 
 	var/list/allowed_races
 	var/list/allowed_patrons
-	var/list/allowed_ages = ALL_AGES_LIST
+	var/list/allowed_ages = ADULT_AGES_LIST
 	var/list/allowed_skintones
 
 

@@ -586,7 +586,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 	omegalist += list(GLOB.yeoman_positions)
 	omegalist += list(GLOB.peasant_positions)
 	omegalist += list(GLOB.mercenary_positions)
-	omegalist += list(GLOB.freshfolk_positions)
+	omegalist += list(GLOB.youngfolk_positions)
 
 	if(istype(SSticker.mode, /datum/game_mode/chaosmode))
 		var/datum/game_mode/chaosmode/C = SSticker.mode
@@ -628,7 +628,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 					cat_name = "Yeomen"
 				if (PEASANTS)
 					cat_name = "Peasants"
-				if (FRESHFOLK)
+				if (YOUNGFOLK)
 					cat_name = "Youngfolk"
 				if (MERCENARIES)
 					cat_name = "Mercenaries"

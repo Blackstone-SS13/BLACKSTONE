@@ -110,6 +110,12 @@
 
 			// Time to do some picking, make sure we got things in the list we dealin with
 			if(local_insert_sortlist.len)
+
+				// Get the maximum amount right here before we do the limit check
+				if(PQ_boost_divider)
+					var/slot_addition = ceil(get_playerquality(linked_client.ckey)/PQ_boost_divider)
+					class_cat_alloc_attempts[SORT_CAT_KEY] += slot_addition
+
 				// Make sure we aren't going to attempt to pick more than what we even have avail
 				if(class_cat_alloc_attempts[SORT_CAT_KEY] > local_insert_sortlist.len)
 					class_cat_alloc_attempts[SORT_CAT_KEY] = local_insert_sortlist.len
@@ -121,11 +127,6 @@
 				// We are plusboosting too
 				if(class_cat_plusboost_attempts && SORT_CAT_KEY in class_cat_plusboost_attempts)
 					if(class_cat_plusboost_attempts[SORT_CAT_KEY])
-
-						if(PQ_boost_divider)
-							var/slot_addition = ceil(get_playerquality(linked_client.ckey)/PQ_boost_divider)
-							class_cat_plusboost_attempts[SORT_CAT_KEY] += slot_addition
-
 						for(var/i in 1 to class_cat_plusboost_attempts[SORT_CAT_KEY])
 							var/datum/advclass/boostclass = pick(local_insert_sortlist)
 							if(boostclass in rolled_classes)
