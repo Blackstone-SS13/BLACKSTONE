@@ -35,7 +35,7 @@
 		if(!(H.hairstyle in acceptable))
 			H.hairstyle = pick(acceptable)
 			H.update_hair()
-backpack_contents = list(/obj/item/roguekey/mercenary)
+	backpack_contents = list(/obj/item/roguekey/mercenary)
 	//Humie grenzelhofts are always set to be, well, grenzelhoft
 	if(ishumannorthern(H))
 		var/list/skin_slop = H.dna.species.get_skin_list()
