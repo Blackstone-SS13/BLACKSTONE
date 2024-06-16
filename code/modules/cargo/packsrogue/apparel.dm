@@ -33,11 +33,15 @@
 					/obj/item/storage/belt/rogue/leather,
 					/obj/item/storage/belt/rogue/leather)
 
-/datum/supply_pack/rogue/apparel/crosses
+/datum/supply_pack/rogue/apparel/crosses/silver
 	name = "Silver Cross"
 	cost = 150
 	contains = list(/obj/item/clothing/neck/roguetown/psicross/silver)
-
+	
+/datum/supply_pack/rogue/apparel/crosses
+	name = "Psicross"
+	cost = 15
+	contains = list(/obj/item/clothing/neck/roguetown/psicross)
 
 /datum/supply_pack/rogue/apparel/gloves
 	name = "Leather Gloves"
