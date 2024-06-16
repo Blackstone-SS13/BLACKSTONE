@@ -36,7 +36,7 @@
 /datum/supply_pack/rogue/apparel/crosses
 	name = "Silver Cross"
 	cost = 150
-	contains = list(/obj/item/clothing/neck/roguetown/psicross)
+	contains = list(/obj/item/clothing/neck/roguetown/psicross/silver)
 
 
 /datum/supply_pack/rogue/apparel/gloves
