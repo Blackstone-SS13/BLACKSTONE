@@ -165,7 +165,7 @@
 #define LUNATIC		(1<<15)
 #define WAVE_DRIFTER (1<<16)
 
-#define FRESHFOLK	(1<<6)
+#define YOUNGFOLK	(1<<6)
 
 #define APPRENTICE	(1<<0)
 #define CHURCHLING	(1<<1)

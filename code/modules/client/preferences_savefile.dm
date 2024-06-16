@@ -470,7 +470,7 @@ SAVEFILE UPDATING/VERSIONING - 'Simplified', or rather, more coder-friendly ~Car
 		undershirt = sanitize_inlist(undershirt, GLOB.undershirt_list)
 
 	socks = sanitize_inlist(socks, GLOB.socks_list)
-	age = sanitize_inlist(age, pref_species.possible_ages)
+//	age = sanitize_integer(age, AGE_MIN, AGE_MAX, initial(age))
 	hair_color = sanitize_hexcolor(hair_color, 3, 0)
 	facial_hair_color = sanitize_hexcolor(facial_hair_color, 3, 0)
 	underwear_color = sanitize_hexcolor(underwear_color, 3, 0)

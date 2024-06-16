@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 	var/icon_override
 	var/icon_override_m
 	var/icon_override_f
-	var/list/possible_ages = ALL_AGES_LIST
+	var/list/possible_ages = list(AGE_YOUNG, AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD)
 	var/sexes = 1		// whether or not the race has sexual characteristics. at the moment this is only 0 for skeletons and shadows
 	var/patreon_req = 0
 	var/max_age = 75
@@ -671,7 +671,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 		if(I.flags_inv & HIDEFACIALHAIR)
 			facialhair_hidden = TRUE
 
-	if(H.facial_hairstyle && (FACEHAIR in species_traits) && (!facialhair_hidden || dynamic_fhair_suffix))
+	if(H.facial_hairstyle && (FACEHAIR in species_traits) && (!facialhair_hidden || dynamic_fhair_suffix) && (H.age != AGE_YOUNG) )
 		S = GLOB.facial_hairstyles_list[H.facial_hairstyle]
 		if(S)
 
@@ -693,7 +693,7 @@ GLOBAL_LIST_EMPTY(roundstart_races)
 
 			var/mutable_appearance/facial_overlay = mutable_appearance(fhair_file, fhair_state, -HAIR_LAYER)
 
-			if((H.gender == MALE) && H.has_stubble && (STUBBLE in species_traits))
+			if((H.gender == MALE) && H.has_stubble && (STUBBLE in species_traits) && (H.age != AGE_YOUNG))
 				var/mutable_appearance/stubble_underlay = mutable_appearance('icons/roguetown/mob/facial.dmi', "facial_stubble")
 				facial_overlay.underlays += stubble_underlay
 
