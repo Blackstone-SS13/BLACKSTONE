@@ -44,7 +44,7 @@
 	cost = 10
 	contains = list(/obj/item/clothing/shoes/roguetown/boots/leather)
 
-/datum/supply_pack/rogue/apparel/trousers/leather
+/datum/supply_pack/rogue/apparel/boots/leather
 	name = "Leather Trousers"
 	cost = 10
 	contains = list(/obj/item/clothing/under/roguetown/trou/leather)
@@ -53,3 +53,8 @@
 	name = "Rain Cloak"
 	cost = 15
 	contains = list(/obj/item/clothing/cloak/raincloak/brown)
+	
+/datum/supply_pack/rogue/apparel/shirts/tunic
+	name = "Shirt"
+	cost = 10
+	contains = list(/obj/item/clothing/suit/roguetown/shirt/tunic
