@@ -2,7 +2,7 @@
 	name = "Hunter"
 	tutorial = "You are a hunter, with your bow you hunt the fauna in the bog, skinning what you kill to use in skincrafting \
 	cooking any meat left over, your role is one that is not done by many, but important in the circulation of clothing and light armor"
-	allowed_sexes = list("male", "female")
+	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = list(
 		"Humen",
 		"Elf",
@@ -15,8 +15,8 @@
 		"Half Orc"
 	)
 	outfit = /datum/outfit/job/roguetown/adventurer/hunter
-	isvillager = TRUE
-	ispilgrim = TRUE
+
+	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
 
 /datum/outfit/job/roguetown/adventurer/hunter/pre_equip(mob/living/carbon/human/H)
 	..()

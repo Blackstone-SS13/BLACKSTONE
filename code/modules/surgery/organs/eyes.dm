@@ -1,6 +1,6 @@
 /obj/item/organ/eyes
-	name = "eye"
-	icon_state = "eye1"
+	name = "eyes"
+	icon_state = "eyeball"
 	desc = ""
 	zone = BODY_ZONE_PRECISE_R_EYE
 	slot = ORGAN_SLOT_EYES
@@ -12,12 +12,12 @@
 	high_threshold = 0.3 * STANDARD_ORGAN_THRESHOLD	//threshold at 30
 	low_threshold = 0.2 * STANDARD_ORGAN_THRESHOLD	//threshold at 20
 
-	low_threshold_passed = "<span class='info'>Distant objects become somewhat less tangible.</span>"
-	high_threshold_passed = "<span class='info'>Everything starts to look a lot less clear.</span>"
-	now_failing = "<span class='warning'>Darkness envelopes you, as my eyes go blind!</span>"
-	now_fixed = "<span class='info'>Color and shapes are once again perceivable.</span>"
-	high_threshold_cleared = "<span class='info'>My vision functions passably once more.</span>"
-	low_threshold_cleared = "<span class='info'>My vision is cleared of any ailment.</span>"
+	low_threshold_passed = span_info("Distant objects become somewhat less tangible.")
+	high_threshold_passed = span_info("Everything starts to look a lot less clear.")
+	now_failing = span_warning("Darkness envelopes you, as my eyes go blind!")
+	now_fixed = span_info("Color and shapes are once again perceivable.")
+	high_threshold_cleared = span_info("My vision functions passably once more.")
+	low_threshold_cleared = span_info("My vision is cleared of any ailment.")
 
 	var/sight_flags = 0
 	var/see_in_dark = 8
@@ -31,8 +31,13 @@
 	var/no_glasses
 	var/damaged	= FALSE	//damaged indicates that our eyes are undergoing some level of negative effect
 
-	var/left_poked = FALSE
-	var/right_poked = FALSE
+
+/obj/item/organ/eyes/update_overlays()
+	. = ..()
+	if(eye_color && (icon_state == "eyeball"))
+		var/mutable_appearance/iris_overlay = mutable_appearance(src.icon, "eyeball-iris")
+		iris_overlay.color = "#" + eye_color
+		. += iris_overlay
 
 /obj/item/organ/eyes/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE, initialising)
 	. = ..()
@@ -46,13 +51,15 @@
 			eye_color = HMN.eye_color
 		if(HAS_TRAIT(HMN, TRAIT_NIGHT_VISION) && !lighting_alpha)
 			lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
+	for(var/datum/wound/facial/eyes/eye_wound as anything in M.get_wounds())
+		qdel(eye_wound)
 	M.update_tint()
 	owner.update_sight()
 	if(M.has_dna() && ishuman(M))
 		M.dna.species.handle_body(M) //updates eye icon
 
 /obj/item/organ/eyes/Remove(mob/living/carbon/M, special = 0)
-	..()
+	. = ..()
 	if(ishuman(M) && eye_color)
 		var/mob/living/carbon/human/HMN = M
 		HMN.eye_color = old_eye_color
@@ -62,7 +69,6 @@
 	M.set_blindness(0)
 	M.set_blurriness(0)
 	M.update_sight()
-
 
 /obj/item/organ/eyes/on_life()
 	..()
@@ -169,7 +175,7 @@
 		return
 	if(prob(10 * severity))
 		return
-	to_chat(owner, "<span class='warning'>Static obfuscates my vision!</span>")
+	to_chat(owner, span_warning("Static obfuscates my vision!"))
 	owner.flash_act(visual = 1)
 
 /obj/item/organ/eyes/robotic/xray
@@ -327,14 +333,14 @@
 /obj/item/organ/eyes/robotic/glow/proc/activate(silent = FALSE)
 	start_visuals()
 	if(!silent)
-		to_chat(owner, "<span class='warning'>My [src] clicks and makes a whining noise, before shooting out a beam of light!</span>")
+		to_chat(owner, span_warning("My [src] clicks and makes a whining noise, before shooting out a beam of light!"))
 	active = TRUE
 	cycle_mob_overlay()
 
 /obj/item/organ/eyes/robotic/glow/proc/deactivate(silent = FALSE)
 	clear_visuals()
 	if(!silent)
-		to_chat(owner, "<span class='warning'>My [src] shuts off!</span>")
+		to_chat(owner, span_warning("My [src] shuts off!"))
 	active = FALSE
 	remove_mob_overlay()
 

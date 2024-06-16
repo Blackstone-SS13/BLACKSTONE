@@ -14,7 +14,7 @@
 		"Dark Elf",
 		"Half Orc"
 	) //"evil" races only
-	allowed_sexes = list(MALE, FEMALE) //only allows females because muh dark elves
+	allowed_sexes = list(MALE) //dark elf females can still be dungeoneer!
 
 	display_order = JDO_DUNGEONEER
 

@@ -403,7 +403,7 @@
 	sleevetype = null
 	sleeved = null
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
 	dynamic_hair_suffix = "+generic"
 	bloody_icon_state = "helmetblood"
 	anvilrepair = /datum/skill/craft/armorsmithing
@@ -489,9 +489,10 @@
 	flags_inv = HIDEEARS|HIDEFACE
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	armor = list("blunt" = 90, "slash" = 100, "stab" = 80, "bullet" = 100, "laser" = 0,"energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST)
 	block2add = FOV_RIGHT|FOV_LEFT
 	smeltresult = /obj/item/ingot/steel
+	max_integrity = 400
 
 /obj/item/clothing/head/roguetown/helmet/heavy/guard
 	name = "savoyard"
@@ -685,8 +686,8 @@
 		return
 	var/mob/living/carbon/wise = user
 	if(slot == SLOT_HEAD)
-		wise.change_stat("intelligence", 2)
-		to_chat(wise, "<span class='green'>I gain wisdom.</span>")
+		wise.change_stat("intelligence", 2, "wisehat")
+		to_chat(wise, span_green("I gain wisdom."))
 
 /obj/item/clothing/head/roguetown/wizhat/gen/wise/dropped(mob/user)
 	. = ..()
@@ -694,8 +695,13 @@
 		return
 	var/mob/living/carbon/human/wise = user
 	if(wise.get_item_by_slot(SLOT_HEAD) == src)
-		wise.change_stat("intelligence", -2)
-		to_chat(wise, "<span class='red'>I lose wisdom.</span>")
+		wise.change_stat("intelligence", -2, "wisehat")
+		to_chat(wise, span_red("I lose wisdom."))
+
+/obj/item/clothing/head/roguetown/physician
+	name = "doctor's hat"
+	desc = "My cure is most effective."
+	icon_state = "physhat"
 
 /obj/item/clothing/head/roguetown/nyle
 	name = "jewel of nyle"

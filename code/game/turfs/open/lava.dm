@@ -82,7 +82,7 @@
 /turf/open/lava/rcd_act(mob/user, obj/item/construction/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_FLOORWALL)
-			to_chat(user, "<span class='notice'>I build a floor.</span>")
+			to_chat(user, span_notice("I build a floor."))
 			PlaceOnTop(/turf/open/floor/plating, flags = CHANGETURF_INHERIT_AIR)
 			return TRUE
 	return FALSE
@@ -248,10 +248,13 @@
 //					return
 				//make this acid
 				var/shouldupdate = FALSE
+				var/lethality = prob(95)
 				for(var/obj/item/bodypart/B in C.bodyparts)
 					if(!B.skeletonized && B.is_organic_limb())
-						B.skeletonize()
+						B.skeletonize(lethality)
 						shouldupdate = TRUE
+				if(!lethality)
+					ADD_TRAIT(C, TRAIT_NOLIMBDISABLE, "[type]")
 				if(shouldupdate)
 					if(ishuman(C))
 						var/mob/living/carbon/human/H = C

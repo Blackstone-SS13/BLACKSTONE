@@ -28,6 +28,30 @@
 	verbage_simple = "tie"
 	verbage = "ties"
 
+/datum/crafting_recipe/roguetown/unclothbelt
+	name = "untie cloth belt"
+	result = /obj/item/natural/cloth
+	reqs = list(/obj/item/storage/belt/rogue/leather/cloth = 1)
+	craftdiff = 0
+	verbage_simple = "untie"
+	verbage = "unties"
+
+/datum/crafting_recipe/roguetown/ropebelt
+	name = "rope belt"
+	result = /obj/item/storage/belt/rogue/leather/rope
+	reqs = list(/obj/item/rope = 1)
+	craftdiff = 0
+	verbage_simple = "tie"
+	verbage = "ties"
+
+/datum/crafting_recipe/roguetown/unropebelt
+	name = "untie rope belt"
+	result = /obj/item/rope
+	reqs = list(/obj/item/storage/belt/rogue/leather/rope = 1)
+	craftdiff = 0
+	verbage_simple = "untie"
+	verbage = "unties"
+
 /datum/crafting_recipe/roguetown/rope
 	name = "rope"
 	result = /obj/item/rope
@@ -49,7 +73,6 @@
 	tools = /obj/item/rogueweapon/huntingknife
 	verbage_simple = "carve"
 	verbage = "carves"
-	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/bow
 	name = "wooden bow"
@@ -122,7 +145,7 @@
 	tools = list(/obj/item/rogueweapon/hammer)
 	craftdiff = 3
 
-/datum/crafting_recipe/roguetown/rproesthetic
+/datum/crafting_recipe/roguetown/lproesthetic
 	name = "wood arm (L)"
 	result = list(/obj/item/bodypart/l_arm/rproesthetic)
 	reqs = list(/obj/item/grown/log/tree/small = 1,
@@ -189,6 +212,90 @@
 				/obj/item/natural/stone = 1)
 
 	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/poisonarrow
+	name = "poisoned arrow"
+	result = /obj/item/ammo_casing/caseless/rogue/arrow/poison
+	reqs = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow = 1,
+				/datum/reagent/berrypoison = 5
+				)
+
+	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/poisonarrow_stone
+	name = "poisoned stone arrow"
+	result = /obj/item/ammo_casing/caseless/rogue/arrow/stone/poison
+	reqs = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone = 1,
+				/datum/reagent/berrypoison = 5
+				)
+
+	req_table = TRUE
+/*
+/datum/crafting_recipe/roguetown/poisonbolt //Coded, but commented out pending balance discussion.
+	name = "poisoned bolt"
+	result = /obj/item/ammo_casing/caseless/rogue/bolt/poison
+	reqs = list(/obj/item/ammo_casing/caseless/rogue/bolt = 1,
+				/datum/reagent/berrypoison = 5)
+
+	req_table = TRUE
+*/
+/datum/crafting_recipe/roguetown/poisonarrow_five //Arrows and bolts can be smithed in batches of five. Makes sense for them to be dipped in batches of five, too
+	name = "poisoned arrow (x5)"
+	result = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/poison
+				)
+	reqs = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow = 5,
+				/datum/reagent/berrypoison = 25
+				)
+
+	req_table = TRUE
+/*
+/datum/crafting_recipe/roguetown/poisonbolt_five //Coded, but commented out pending balance discussion.
+	name = "poisoned bolts (x5)"
+	result = list(/obj/item/ammo_casing/caseless/rogue/bolt/poison = 5)
+	reqs = list(/obj/item/ammo_casing/caseless/rogue/bolt = 5,
+				/datum/reagent/berrypoison = 25)
+
+	req_table = TRUE
+*/
+/datum/crafting_recipe/roguetown/poisonarrow_five_stone
+	name = "poisoned stone arrow (x5)"
+	result = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison,
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone/poison
+				)
+	reqs = list(
+				/obj/item/ammo_casing/caseless/rogue/arrow/stone = 5,
+				/datum/reagent/berrypoison = 25
+				)
+
+	req_table = TRUE
+
+/datum/crafting_recipe/roguetown/mortar
+	name = "stone mortar"
+	result = /obj/item/reagent_containers/glass/mortar
+	reqs = list(/obj/item/natural/stone = 1)
+	tools = list(/obj/item/rogueweapon/huntingknife) // Intended to be either stone knife or steel hunting knife
+	craftdiff = 3
+	subtype_reqs = TRUE //Unsure if needed for stone knife to work, feel free to remove this if not.
+
+/datum/crafting_recipe/roguetown/pestle
+	name = "stone pestle"
+	result = /obj/item/pestle
+	reqs = list(/obj/item/natural/stone = 1)
+	tools = list(/obj/item/rogueweapon/huntingknife) // Intended to be either stone knife or steel hunting knife
+	craftdiff = 3
+	subtype_reqs = TRUE //Unsure if needed for stone knife to work, feel free to remove this if not.
 
 /datum/crafting_recipe/roguetown/bag
 	name = "bag"

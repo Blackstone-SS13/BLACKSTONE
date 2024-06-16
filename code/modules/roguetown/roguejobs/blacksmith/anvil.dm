@@ -1,11 +1,12 @@
 
 /obj/machinery/anvil
 	icon = 'icons/roguetown/misc/forge.dmi'
-	name = "anvil"
+	name = "iron anvil"
+	desc = "It's surface is marred by countless hammer strikes."
 	icon_state = "anvil"
 	var/hott = null
 	var/obj/item/ingot/hingot
-	max_integrity = 2000
+	max_integrity = 500
 	density = TRUE
 	damage_deflection = 25
 	climbable = TRUE
@@ -13,6 +14,11 @@
 
 /obj/machinery/anvil/crafted
 	icon_state = "caveanvil"
+
+/obj/machinery/anvil/examine(mob/user)
+	. = ..()
+	if(hingot && hott)
+		. += span_warning("[hingot] is too hot to touch.")
 
 /obj/machinery/anvil/attackby(obj/item/W, mob/living/user, params)
 	if(istype(W, /obj/item/rogueweapon/tongs))
@@ -56,7 +62,7 @@
 		if(!hingot)
 			return
 		if(!hott)
-			to_chat(user, "<span class='warning'>It's too cold.</span>")
+			to_chat(user, span_warning("It's too cold."))
 			return
 		if(!hingot.currecipe)
 			if(!choose_recipe(user))
@@ -120,7 +126,7 @@
 		return
 
 	if(W.anvilrepair)
-		user.visible_message("<span class='info'>[user] places [W] on the anvil.</span>")
+		user.visible_message(span_info("[user] places [W] on the anvil."))
 		W.forceMove(src.loc)
 		return
 	..()
@@ -168,7 +174,7 @@
 /obj/machinery/anvil/attack_hand(mob/user, params)
 	if(hingot)
 		if(hott)
-			to_chat(user, "<span class='warning'>It's too hot.</span>")
+			to_chat(user, span_warning("It's too hot."))
 			return
 		else
 			var/obj/item/I = hingot
