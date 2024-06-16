@@ -1,7 +1,7 @@
 /datum/job/roguetown/shophand
 	title = "Shophand"
 	flag = SHOPHAND
-	department_flag = FRESHFOLK
+	department_flag = YOUNGFOLK
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
@@ -18,7 +18,7 @@
 		"Half Orc",
 	)
 	allowed_sexes = list(MALE, FEMALE)
-	allowed_ages = list(AGE_ADULT)
+	allowed_ages = YOUNG_AGES_LIST
 
 	tutorial = "The Merchant has taken you under his wing to learn the arcane arts of mercantilism, numeracy, literacy, and the joy of organizing the shelves. It is mind numbing and repetitive, but at least you have a roof over your head and comfortable surroundings. Given time, perhaps you will run the town's barter."
 

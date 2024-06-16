@@ -1,10 +1,10 @@
 /datum/job/roguetown/orphan
 	title = "Orphan"
 	flag = ORPHAN
-	department_flag = FRESHFOLK
+	department_flag = YOUNGFOLK
 	faction = "Station"
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 8
+	spawn_positions = 8
 
 	allowed_races = list(
 		"Humen",
@@ -17,7 +17,7 @@
 		"Aasimar",
 		"Half Orc",
 	)
-	allowed_ages = list(AGE_ADULT)
+	allowed_ages = YOUNG_AGES_LIST
 
 	tutorial = "Dozens of unwanted children are born in the kingdom of Psydonia every day. They sometimes make something of themselves but much more often die early in the streets."
 
