@@ -57,4 +57,4 @@
 /datum/supply_pack/rogue/apparel/shirts/tunic
 	name = "Shirt"
 	cost = 10
-	contains = list(/obj/item/clothing/suit/roguetown/shirt/tunic
+	contains = list(/obj/item/clothing/suit/roguetown/shirt/tunic)
