@@ -52,6 +52,7 @@
 		beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 		belt = /obj/item/storage/belt/rogue/leather/rope
 		beltl = /obj/item/keyring/merchant
+		beltr = /obj/item/rogueweapon/sword/rapier
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 		pants = /obj/item/clothing/under/roguetown/tights/sailor
 		neck = /obj/item/clothing/neck/roguetown/horus
@@ -69,6 +70,7 @@
 		beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 		belt = /obj/item/storage/belt/rogue/leather/rope
 		beltl = /obj/item/roguekey/merchant
+		beltr = /obj/item/rogueweapon/sword/rapier
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 		neck = /obj/item/clothing/neck/roguetown/horus
 		armor = /obj/item/clothing/suit/roguetown/shirt/robe/merchant
