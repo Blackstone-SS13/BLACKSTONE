@@ -44,8 +44,8 @@
 	cost = 10
 	contains = list(/obj/item/clothing/shoes/roguetown/boots/leather)
 
-/datum/supply_pack/rogue/apparel/boots/leather
-	name = "Leather Boots"
+/datum/supply_pack/rogue/apparel/trousers/leather
+	name = "Leather Trousers"
 	cost = 10
 	contains = list(/obj/item/clothing/under/roguetown/trou/leather)
 
