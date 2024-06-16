@@ -66,7 +66,7 @@
 		..()
 
 
-/obj/item/fishingrod/attackby(obj/item/I, mob/user, params
+/obj/item/fishingrod/attackby(obj/item/I, mob/user, params)
 	if(baited && reel && hook && line)
 		return  ..()
 
