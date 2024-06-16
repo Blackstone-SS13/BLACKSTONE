@@ -152,8 +152,8 @@
 	if(H.stat)
 		if(istype(H.loc, /obj/structure/closet/crate/coffin))
 			H.fully_heal()
-			H.rogstam_add(100)
-			H.rogfat_add(-10)
+			H.rogstam_add(H.maxrogstam / 10)
+			H.rogfat_add(-H.maxrogfat / 10)
 
 	vitae = CLAMP(vitae, 0, 1666)
 
@@ -372,8 +372,8 @@
 	src.playsound_local(get_turf(src), 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
 	VD.handle_vitae(-500)
 	fully_heal()
-	rogstam_add(1000)//Since vampires cannot sleep and are now subject to stamina and fatigue, they may fully restore it using Regenerate if they are not cursed by silver.
-	rogfat_add(-100)
+	rogstam_add(maxrogstam)//Since vampires cannot sleep and are now subject to stamina and fatigue, they may fully restore it using Regenerate if they are not cursed by silver.
+	rogfat_add(-maxrogfat)
 
 /mob/living/carbon/human/proc/vampire_infect()
 	if(!mind)
