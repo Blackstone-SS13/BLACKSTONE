@@ -51,20 +51,25 @@
 /obj/item/needle/attack(mob/living/M, mob/user)
 	sew(M, user)
 
-/obj/item/needle/attack_obj(obj/O, mob/living/user)
-	if(istype(O, /obj/item/natural/fibers))
+/obj/item/needle/attackby(obj/item/I, mob/user, params)
+	if(istype(I, /obj/item/natural/fibers))
 		if(maxstring - stringamt < 5)
 			to_chat(user, span_warning("Not enough room for more thread!"))
 			return
 		else
 			to_chat(user, "I begin threading the needle with additional fibers...")
-			if(do_after(user, 10 SECONDS / (user.mind.get_skill_level(/datum/skill/misc/sewing)), target = O))
+			if(do_after(user, 6 SECONDS - user.mind.get_skill_level(/datum/skill/misc/sewing), target = I))
 				stringamt += 5
 				to_chat(user, "I replenish the needle's thread!")
-				qdel(O)
+				qdel(I)
 			return
-	if(can_repair && isitem(O))
-		var/obj/item/I = O
+	..()
+
+
+
+/obj/item/needle/attack_obj(obj/O, mob/living/user)
+	var/obj/item/I = O
+	if(can_repair)
 		if(stringamt < 1)
 			to_chat(user, span_warning("The needle has no thread left!"))
 			return
