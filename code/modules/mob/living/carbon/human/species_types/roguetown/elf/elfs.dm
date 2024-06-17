@@ -2,20 +2,12 @@
 	race = /datum/species/elf/wood
 
 /datum/species/elf/wood
-	name = "Elf"
+	name = "Dae-Elf"
 	id = "elfw"
-	desc = "<b>Elf</b><br>\
-	Elves, or Wood-Elf by the Elder races, are a generic term for tall, pointy-eared \
-	humanoids that trace their original heritage to the ancient mysterious Snow Elves. \
-	Considering their diverse history, it is extremely difficult for other mortals \
-	to even concept the various intricacies found in elven society, and the hundreds \
-	if not thousands of tribes that exist within their culture! \
-	Elves tend to be looked poorly upon by humans, as historically the two races have \
-	been rivals in various conflicts and territorial disputes. This however does not stop \
-	many humans and elves from forming relationships, which are capable of producing child.\
-	Elves are known for their intelligence and sharp eyes, but their graceful nature does \
-	not lend itself to the concepts of strength or durability... \
-	There are elves from a small smattering of tribes in these parts."
+	desc = "<b>Dae-Elf</b><br>\
+	Dae-Elves are a race descended from the Ancient Elves, who once lived in the grand forests of Dendor.\
+    They are deemed this because of their light complexion, that originates mostly from them being shielded from the Harsh Sun living in thick forests.\
+    Their culture varies from Forest to Forest; The darkest tones of the Dae-Elves typically originate from the more less-dense forests.\"
 
 	skin_tone_wording = "Tribal Identity"
 
