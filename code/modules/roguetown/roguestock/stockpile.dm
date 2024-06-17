@@ -128,7 +128,7 @@
 	withdraw_price = 5
 	transport_fee = 1
 	export_price = 5
-	importexport_amt = 5
+	importexport_amt = 10
 
 /datum/roguestock/stockpile/meat
 	name = "Meat"
