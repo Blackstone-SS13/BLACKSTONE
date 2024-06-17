@@ -1,13 +1,13 @@
 /datum/crafting_recipe/roguetown
 	req_table = FALSE
 	tools = list(/obj/item/reagent_containers/glass/mortar, /obj/item/pestle)
-	verbage_simple = "mixes"
+	verbage_simple = "mix"
 	skillcraft = /datum/skill/misc/alchemy
 
 /datum/crafting_recipe/roguetown/alchemy/bbomb
 	name = "Bottle bomb"
 	result = list(/obj/item/bomb)
-	reqs = list(/obj/item/reagent_containers/glass/bottle = 1, /obj/item/ash = 2, /obj/item/natural/rock/coal = 1, /obj/item/natural/cloth = 1)
+	reqs = list(/obj/item/reagent_containers/glass/bottle = 1, /obj/item/ash = 2, /obj/item/rogueore/coal = 1, /obj/item/natural/cloth = 1)
 	craftdiff = 2
 
 /datum/crafting_recipe/roguetown/alchemy/manna_pot
