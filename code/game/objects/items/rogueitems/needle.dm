@@ -63,7 +63,7 @@
 				to_chat(user, "I replenish the needle's thread!")
 				qdel(I)
 			return
-	..()
+	return ..()
 
 
 
