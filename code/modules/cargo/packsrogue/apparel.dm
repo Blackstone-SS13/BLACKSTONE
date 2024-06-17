@@ -14,6 +14,11 @@
 	cost = 10
 	contains = list(/obj/item/storage/backpack/rogue/satchel)
 
+/datum/supply_pack/rogue/apparel/bags/backpack
+	name = "Backpack"
+	cost = 10
+	contains = list(/obj/item/storage/backpack/rogue/backpack)
+
 /datum/supply_pack/rogue/apparel/bags/pouch
 	name = "Pouches"
 	cost = 10
@@ -31,7 +36,7 @@
 
 /datum/supply_pack/rogue/apparel/crosses/psicross
 	name = "Psicross"
-	cost = 30
+	cost = 20
 	contains = list(/obj/item/clothing/neck/roguetown/psicross)
 
 /datum/supply_pack/rogue/apparel/gloves/leather
@@ -51,7 +56,7 @@
 
 /datum/supply_pack/rogue/apparel/cloaks/leather
 	name = "Rain Cloak"
-	cost = 15
+	cost = 10
 	contains = list(/obj/item/clothing/cloak/raincloak/brown)
 	
 /datum/supply_pack/rogue/apparel/shirts/tunic
