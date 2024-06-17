@@ -7,10 +7,12 @@
 	name = "Healing Potion"
 	cost = 18
 	contains = list(/obj/item/reagent_containers/glass/bottle/rogue/healthpot)
+
 /datum/supply_pack/rogue/food/manapot
 	name = "Manna Potion"
 	cost = 24
 	contains = list(/obj/item/reagent_containers/glass/bottle/rogue/manapot)
+
 /datum/supply_pack/rogue/food/wineb
 	name = "Wine"
 	cost = 25
