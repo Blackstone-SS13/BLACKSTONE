@@ -1,7 +1,7 @@
 
 /obj/item/literary
 	name = "novice's guide to literature"
-	desc = "A book featuring an alphabet, sentences of varying complexity, and common symbols that, altogether, allow the user to train their reading skills up to a point. The more advanced the guide, the higher the limit and the more literate you must be to study it.."
+	desc = "A book that teaches the alphabet, sentences of varying complexity, and common symbols, allowing readers to train their reading skills. The more advanced the guide, the higher the limit and the more literate you must be to study it."
 	icon = 'icons/roguetown/items/books.dmi'
 	icon_state = "book_1"
 	var/exppercycle = 5
