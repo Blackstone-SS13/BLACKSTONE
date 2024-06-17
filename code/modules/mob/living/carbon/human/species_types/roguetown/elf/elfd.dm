@@ -2,16 +2,14 @@
 	race = /datum/species/elf/dark
 
 /datum/species/elf/dark
-	name = "Dark Elf"
+	name = "Nite-Elf"
 	id = "elfd"
-	desc = "<b>Dark Elf</b><br>\
-	Elves, are a generic term for tall, pointy-eared humanoids\
-    Of whom trace their original heritage to the ancient mysterious Snow Elves. \
-	These ones are of a dark complexion and originate mostly from the underdark. \
-    Their culture and entire lives normally involve serving the evil gods of the inhumen pantheon. \
-    Previously rare but in recent times, more and more dark elfs can be seen on the surface. \
-    The ones who aren't overtly cruel and bloodthirsty, tend to flee to the surface lest they get culled by their own society, \
-    while some more sinister ones abandon their cities in search of new and greater power."
+	desc = "<b>Nite-Elf</b><br>\
+	Nite-Elves are a race descended from the Ancient Elves, who once lived in the grand forests of Dendor.\
+    They are deemed this because of their dark complexion, that originates mostly from the Grand Deserts of Ebon.\
+    Their culture varies from city-state to city-state; The lightest tones of the Nite-Elves typically originate from the rare under-cities of Ebon and commonly are Apostate.\
+    Previously rare but in recent times, more and more Nite-Elves can be seen around the globe from their bustling trade economy and some of their more nefarious guilds in search for relics. \
+    Some Nite-Elves try to forget this past to move on; especially with their ties with the Trickster God Xylix."+ 
 
 /*
 	Former RT Desc: These guys were undead which doesn't really fit considering now you have a ton of them walking around.
@@ -110,7 +108,7 @@
 	return list(
 		"Commorah" = SKIN_COLOR_COMMORAH,
 		"Gloomhaven" = SKIN_COLOR_GLOOMHAVEN,
-		"Darkpila" = SKIN_COLOR_DARKPILA,
+		"Shodom" = SKIN_COLOR_DARKPILA,
 		"Sshanntynlan" = SKIN_COLOR_SSHANNTYNLAN,
 		"Llurth Dreir" = SKIN_COLOR_LLURTH_DREIR,
 		"Tafravma" = SKIN_COLOR_TAFRAVMA,
