@@ -251,7 +251,7 @@
 					return
 				if(isliving(A))
 					var/mob/living/L = A
-					if(!(L.mobility_flags & MOBILITY_STAND) && L.pulling != src)
+					if(!(mobility_flags & MOBILITY_STAND) && L.pulling == src)
 						return
 				if(IsOffBalanced())
 					to_chat(src, span_warning("I haven't regained my balance yet."))
