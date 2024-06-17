@@ -1,6 +1,6 @@
 /datum/crafting_recipe/roguetown
-	req_table = FALSE
-	tools = list(/obj/item/reagent_containers/glass/mortar, /obj/item/pestle)
+	req_table = TRUE
+	tools = /obj/item/pestle
 	verbage_simple = "mix"
 	skillcraft = /datum/skill/misc/alchemy
 
