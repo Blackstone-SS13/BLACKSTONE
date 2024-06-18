@@ -24,20 +24,20 @@
 	outfit = /datum/outfit/job/roguetown/churchling
 	display_order = JDO_CHURCHLING
 	give_bank_account = TRUE
-	min_pq = -10
+	min_pq = -2
 	max_pq = null
 
 /datum/outfit/job/roguetown/churchling/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.mind)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(3,5), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(3,5), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/sewing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/weaving, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/crafting, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/magic/holy, rand(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/magic/holy, 1, TRUE)
 	neck = /obj/item/clothing/neck/roguetown/psicross
 	if(H.gender == MALE)
 		armor = /obj/item/clothing/suit/roguetown/shirt/robe
