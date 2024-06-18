@@ -19,7 +19,7 @@
 	)
 	allowed_ages = YOUNG_AGES_LIST
 
-	tutorial = "Dozens of unwanted children are born in the kingdom of Psydonia every day. They sometimes make something of themselves but much more often die early in the streets."
+	tutorial = "Dozens of lost teenagers litter the streets in the kingdom of Psydonia. They sometimes make something of themselves but much more often are found dead in the streets."
 
 	outfit = /datum/outfit/job/roguetown/orphan
 	display_order = JDO_ORPHAN
@@ -49,11 +49,12 @@
 		gloves = /obj/item/clothing/gloves/roguetown/fingerless
 	if(H.mind)
 		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, pick(1,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, round(rand(2,5)), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, round(rand(1,3)), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/stealing, round(rand(2,4)), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, round(rand(2,3)), TRUE)
 		H.STALUC = rand(1, 20)
 	if(prob(10))
 		r_hand = /obj/item/rogue/instrument/flute
-	H.change_stat("intelligence", round(rand(-4,4)))
+	H.change_stat("intelligence", 2)
 	H.change_stat("constitution", -1)
 	H.change_stat("endurance", -1)
+	H.change_stat("strength", -1)
