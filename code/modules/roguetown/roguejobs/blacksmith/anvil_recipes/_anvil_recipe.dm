@@ -52,7 +52,7 @@
 			user.visible_message("<span class='warning'>[user] works a mistake into the bar!</span>", "<span class='warning'>You work a mistake into the bar! ([max_mistakes-mistakes] more mistakes until it falls apart!)</span>")
 			return FALSE
 	else
-		var/quality_change = ((breakthrough ? 20 : 15)+(material_quality-2-num_of_materials)*2)
+		var/quality_change = ((breakthrough ? 20 : 15)+(material_quality-2-num_of_materials+1)*2)
 		quality += quality_change
 		if(user.mind && isliving(user))
 			var/mob/living/L = user
