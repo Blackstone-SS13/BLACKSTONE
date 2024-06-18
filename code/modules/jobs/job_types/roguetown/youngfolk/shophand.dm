@@ -32,7 +32,7 @@
 
 /datum/outfit/job/roguetown/shophand/pre_equip(mob/living/carbon/human/H)
 	..()
-	ADD_TRAIT(H, TRAIT_SEEPRICES_SHITTY, "[type]")
+	ADD_TRAIT(H, TRAIT_SEEPRICES_SHITTY, TRAIT_GENERIC)
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt
@@ -50,15 +50,15 @@
 		beltl = /obj/item/keyring/merchant
 		backr = /obj/item/storage/backpack/rogue/satchel
 	if(H.mind)
-		//basically orphan+ skills
-		H.mind.adjust_skillrank(/datum/skill/misc/stealing, rand(3,6), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(2,3), TRUE)
+		//basically orphan+ skills wow holy shit power creep fix
+		H.mind.adjust_skillrank(/datum/skill/misc/stealing, rand(2,3), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(1,32), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(1,2), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/reading, rand(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/labor/mathematics, rand(2,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/combat/knives, rand(1,2), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
 		H.change_stat("strength", -2)
 		H.change_stat("intelligence", 1)
 		H.change_stat("perception", 1)
-		H.change_stat("fortune", 2)
+		H.change_stat("fortune", 1)
