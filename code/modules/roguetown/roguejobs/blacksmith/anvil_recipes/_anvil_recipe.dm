@@ -31,19 +31,19 @@
 		material_quality = floor(material_quality/num_of_materials)
 		median_calculated = TRUE
 	var/current_mistake = FALSE
-	var/proab = 14
+	var/proab = 26
 	var/skill_level
 	if(user.mind)
 		skill_level = user.mind.get_skill_level(appro_skill)
-		proab = ((3*(7-skill_level))-H.smith_quality)+1
+		proab = min(((2*(13-skill_level))-H.smith_quality), 1)
 		if(!user.mind.get_skill_level(appro_skill))
-			proab = 14
+			proab = 26
 	if(prob(proab))
 		current_mistake = TRUE
 	if(current_mistake)
 		mistakes += 1
 		if(mistakes >= max_mistakes)
-			user.visible_message("<span class='warning'>[user]'s bar falls apart!</span>")
+			user.visible_message("<span class='warning'>Has made too many mistakes! [user]'s bar falls apart!</span>")
 			if(parent)
 				var/obj/item/P = parent
 				qdel(P)
@@ -52,7 +52,7 @@
 			user.visible_message("<span class='warning'>[user] works a mistake into the bar!</span>", "<span class='warning'>You work a mistake into the bar! ([max_mistakes-mistakes] more mistakes until it falls apart!)</span>")
 			return FALSE
 	else
-		var/quality_change = ((breakthrough ? 15 : 10)+(material_quality-2-num_of_materials)*2)
+		var/quality_change = ((breakthrough ? 20 : 15)+(material_quality-2-num_of_materials)*2)
 		quality += quality_change
 		if(user.mind && isliving(user))
 			var/mob/living/L = user
