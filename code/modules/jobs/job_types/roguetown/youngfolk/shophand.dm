@@ -3,8 +3,8 @@
 	flag = SHOPHAND
 	department_flag = YOUNGFOLK
 	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 
 	allowed_races = list(
 		"Humen",
