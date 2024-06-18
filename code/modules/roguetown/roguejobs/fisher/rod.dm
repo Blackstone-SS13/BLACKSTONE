@@ -103,17 +103,17 @@
 				if(!line)
 					I.forceMove(src)
 					line = I
-					to_chat(user, "<span class='notice'>I add the [I] to [src]...</span>")
+					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
 			if("hook")
 				if(!hook)
 					I.forceMove(src)
 					hook = I
-					to_chat(user, "<span class='notice'>I add the [I] to [src]...</span>")
+					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
 			if("reel")
 				if(!reel)
 					I.forceMove(src)
 					reel = I
-					to_chat(user, "<span class='notice'>I add the [I] to [src]...</span>")
+					to_chat(user, "<span class='notice'>I add [I] to [src]...</span>")
 	update_icon()
 	return
 
@@ -306,7 +306,7 @@
 	if(fisher.mind)
 		skillmod = fisher.mind.get_skill_level(/datum/skill/labor/fishing)
 	difficulty = -skillmod
-	linehealth = skillmod
+	linehealth = skillmod + 6
 	hookwindow = skillmod*3 + 4
 
 	for(var/obj/item/fishing/A in attacheditems)
@@ -363,13 +363,12 @@
 		deepmod--
 	
 	//initialize fish modifiers
-	raritypicker = removenegativeweights(raritypicker)
-	sizepicker = removenegativeweights(sizepicker)
 	var/specialcatching = FALSE
 	var/specialfish = FALSE
 	var/specialrarity = FALSE
 	var/specialsize = FALSE
 	var/turfcatch = FALSE
+	var/trashfishing = FALSE
 	if(prob(specialcatchprob))
 		specialcatching = TRUE
 		if(B.specialsize)
@@ -399,33 +398,54 @@
 		if(B.specialturfcatch)
 			turfcatch = TRUE
 	else
-		fishsize = pickweightAllowZero(sizepicker)
-		fishrarity = pickweightAllowZero(raritypicker)
-		fishtype = pickweightAllowZero(fishpicker)
-		difficulty += sizepicker.Find(fishsize) + raritypicker.Find(fishrarity)
-		hookwindow -= raritypicker.Find(fishrarity) - 1
-		acceleration += clamp(sizepicker.Find(fishsize) - 3, 0, 2) + clamp(raritypicker.Find(fishrarity) - 1, 0, 3)
-		maxvelocity = 3 + clamp(raritypicker.Find(fishrarity) - 1, 0, 3) + clamp(sizepicker.Find(fishsize) - 3, -1, 2)
-		fishhealth =  3 + sizepicker.Find(fishsize)*2 + raritypicker.Find(fishrarity)*2
-		switch(fishsize)
-			if("tiny")
-				costmod *= 0.5
-			if("small")
-				costmod *= 0.75
-			if("large")
-				costmod *= 1.5
-			if("prize")
-				costmod *= 3
-		switch(fishrarity)
-			if("rare")
-				costmod *= 2
-			if("ultra")
-				costmod *= 4
-			if("gold")
-				costmod *= 10
-		
-	difficulty = clamp(difficulty, 1, 10)
+		if(fisher.STALUC > 10)
+			var/luckboost = fisher.STALUC - 10
+			var/luckrarity = list("com" = -1, "rare" = 1)
+			while(luckboost > 0)
+				raritypicker = pickweightmerge(raritypicker, luckrarity)
+				luckboost--
+		else if (fisher.STALUC < 10 || skillmod == 0)
+			if(prob(16 - skillmod - fisher.STALUC))
+				fishtype = pickweight(/obj/item/natural/fibers = 1, /obj/item/storage/belt/rogue/pouch/coins/poor = 1, /obj/item/clothing/shoes/roguetown/boots/leather = 1, /obj/structure/fermenting_barrel = 1, /obj/item/clothing/head/roguetown/fisherhat = 1)
+				difficulty = 1
+				acceleration = 1
+				hookwindow = 30
+				maxvelocity = 1
+				fishhealth = 15
+				trashfishing = TRUE
+		if(!trashfishing)
+			raritypicker = removenegativeweights(raritypicker)
+			sizepicker = removenegativeweights(sizepicker)
+
+			fishsize = pickweightAllowZero(sizepicker)
+			fishrarity = pickweightAllowZero(raritypicker)
+			fishtype = pickweightAllowZero(fishpicker)
+
+			difficulty += sizepicker.Find(fishsize) + raritypicker.Find(fishrarity) - 1
+			hookwindow -= raritypicker.Find(fishrarity) - 1
+			acceleration += clamp(sizepicker.Find(fishsize) - 3, 0, 2) + clamp(raritypicker.Find(fishrarity) - 1, 0, 3)
+			maxvelocity = 3 + clamp(raritypicker.Find(fishrarity) - 1, 0, 3) + clamp(sizepicker.Find(fishsize) - 3, -1, 2)
+			fishhealth =  9 + sizepicker.Find(fishsize)*6 + raritypicker.Find(fishrarity)*6
+			switch(fishsize)
+				if("tiny")
+					costmod *= 0.5
+				if("small")
+					costmod *= 0.75
+				if("large")
+					costmod *= 1.5
+				if("prize")
+					costmod *= 3
+			switch(fishrarity)
+				if("rare")
+					costmod *= 2
+				if("ultra")
+					costmod *= 4
+				if("gold")
+					costmod *= 10
+	
+	difficulty = clamp(difficulty, 1, 6)
 	hookwindow = clamp(hookwindow, 6, 30)
+	acceleration = max(acceleration, 1)
 
 	//the actual game
 	currentlyfishing = TRUE
@@ -542,7 +562,7 @@
 	else
 		to_chat(user, "<span class = 'notice'>I pull something out of the water!</span>")
 		playsound(loc, 'sound/items/Fish_out.ogg', 100, TRUE)
-		fisher.mind.adjust_experience(/datum/skill/labor/fishing, difficulty * fisher.STAINT) 
+		fisher.mind.adjust_experience(/datum/skill/labor/fishing, clamp(difficulty, 1, 3) * fisher.STAINT) 
 		if(ispath(fishtype, /obj/item/reagent_containers/food/snacks/fish))
 			var/obj/item/reagent_containers/food/snacks/caughtfish = new fishtype(get_turf(fisher))
 			var/raritydesc
@@ -563,6 +583,20 @@
 						else
 							raritydesc = "common"
 					caughtfish.icon_state = "[caughtfish.icon_state][fishrarity]"
+					if(fishrarity != "com")
+						switch(fishtype)
+							if(/obj/item/reagent_containers/food/snacks/fish/carp)
+								caughtfish.fried_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/carp/rare
+								caughtfish.cooked_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/carp/rare
+							if(/obj/item/reagent_containers/food/snacks/fish/eel)
+								caughtfish.fried_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/eel/rare
+								caughtfish.cooked_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/eel/rare
+							if(/obj/item/reagent_containers/food/snacks/fish/angler)
+								caughtfish.fried_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/angler/rare
+								caughtfish.cooked_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/angler/rare
+							if(/obj/item/reagent_containers/food/snacks/fish/clownfish)
+								caughtfish.fried_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/clownfish/rare
+								caughtfish.cooked_type = /obj/item/reagent_containers/food/snacks/rogue/fryfish/clownfish/rare
 				else
 					raritydesc = fishrarity
 
@@ -590,12 +624,14 @@
 		else//only occurs on special catch that most likely won't have special modifiers
 			if(turfcatch)
 				var/atom/caughtthing = new fishtype(targeted)
-				var/obj/item/fishing/bait/specialmaker = baited
-				specialmaker.makespecial(caughtthing)
+				if(specialcatching)
+					var/obj/item/fishing/bait/specialmaker = baited
+					specialmaker.makespecial(caughtthing)
 			else
 				var/atom/caughtthing2 = new fishtype(fisher.loc)
-				var/obj/item/fishing/bait/specialmaker = baited
-				specialmaker.makespecial(caughtthing2)
+				if(specialcatching)
+					var/obj/item/fishing/bait/specialmaker = baited
+					specialmaker.makespecial(caughtthing2)
 	
 	fisher.doing = FALSE
 	stopgame(fisher)
