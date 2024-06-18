@@ -14,7 +14,7 @@
 	outfit = /datum/outfit/job/roguetown/squire
 	display_order = JDO_SQUIRE
 	give_bank_account = TRUE
-	min_pq = 0 //knights should expect this player to actually want to learn and try, and that's probably more likely if he isn't a PQ nuked shitter
+	min_pq = -2 //knights should expect this player to actually want to learn and try, and that's probably more likely if he isn't a PQ nuked shitter
 	max_pq = null
 
 /datum/outfit/job/roguetown/squire/pre_equip(mob/living/carbon/human/H)
