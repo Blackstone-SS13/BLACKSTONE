@@ -99,7 +99,7 @@
 
 /datum/supply_pack/rogue/weapons/bolt
 	name = "Bolts"
-	cost = 2
+	cost = 1
 	contains = list(/obj/item/ammo_casing/caseless/rogue/bolt)
 /*
 /datum/supply_pack/rogue/weapons/Pbolts
