@@ -30,7 +30,6 @@
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/sailor
 		pants = /obj/item/clothing/under/roguetown/tights/random
 		armor = /obj/item/clothing/cloak/tabard/knight
-	ADD_TRAIT(H, TRAIT_SEEPRICES, type)
 	shoes = /obj/item/clothing/shoes/roguetown/shortboots
 	head = /obj/item/clothing/head/roguetown/chaperon/greyscale
 	belt = /obj/item/storage/belt/rogue/leather/plaquesilver
@@ -43,15 +42,14 @@
 		H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/swimming, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 1, TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/swords, 1, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/combat/knives, 3, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/craft/cooking, 1, TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/riding, 2, TRUE)
 		H.change_stat("intelligence", 2)
-		H.change_stat("perception", 2)
+		H.change_stat("perception", 4) //is set to -20 when his glasses break
 		H.change_stat("speed", -1)
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_SEEPRICES, TRAIT_GENERIC)
