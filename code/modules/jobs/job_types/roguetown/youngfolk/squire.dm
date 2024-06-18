@@ -43,7 +43,6 @@
 			H.change_stat("perception", 1)
 			H.change_stat("constitution", 1)
 			H.change_stat("speed", 1)
-			H.change_stat("fortune", 1)
 	if(H.gender == FEMALE) //disabled, only humen males can be knight
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guard
