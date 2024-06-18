@@ -16,7 +16,7 @@
 
 /datum/supply_pack/rogue/apparel/bags/backpack
 	name = "Backpack"
-	cost = 10
+	cost = 15
 	contains = list(/obj/item/storage/backpack/rogue/backpack)
 
 /datum/supply_pack/rogue/apparel/bags/pouch
