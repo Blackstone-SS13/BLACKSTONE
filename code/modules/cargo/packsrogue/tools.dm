@@ -6,7 +6,7 @@
 
 /datum/supply_pack/rogue/tools/ropes
 	name = "Ropes"
-	cost = 10
+	cost = 5
 	contains = list(/obj/item/rope)
 
 /*
@@ -26,32 +26,32 @@
 
 /datum/supply_pack/rogue/tools/paper
 	name = "Paper"
-	cost = 3
+	cost = 1
 	contains = list(/obj/item/paper/scroll)
 
 /datum/supply_pack/rogue/tools/flint
 	name = "Flint"
-	cost = 35
+	cost = 10
 	contains = list(/obj/item/flint)
 
 /datum/supply_pack/rogue/tools/bottl
 	name = "Glass Bottles"
-	cost = 10
+	cost = 5
 	contains = list(/obj/item/reagent_containers/glass/bottle/rogue)
 
 /datum/supply_pack/rogue/tools/matches
 	name = "Box of Matches"
-	cost = 10
+	cost = 5
 	contains = list(/obj/item/storage/box/matches)
 
 /datum/supply_pack/rogue/tools/pipes
 	name = "Pipes"
-	cost = 5
+	cost = 3
 	contains = list(/obj/item/clothing/mask/cigarette/pipe)
 
 /datum/supply_pack/rogue/tools/bait
 	name = "Premium Fishing Bait"
-	cost = 10
+	cost = 5
 	contains = list(/obj/item/natural/worms/grubs)
 
 /datum/supply_pack/rogue/tools/prarml
