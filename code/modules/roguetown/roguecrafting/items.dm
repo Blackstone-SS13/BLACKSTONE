@@ -399,3 +399,48 @@
 	skillcraft = /datum/skill/craft/traps
 	craftdiff = 1
 	verbage = "put together"
+
+/datum/crafting_recipe/roguetown/paperscroll
+	name = "scroll of parchment (x5)"
+	result = list(/obj/item/paper/scroll,
+				  /obj/item/paper/scroll,
+				  /obj/item/paper/scroll,
+				  /obj/item/paper/scroll,
+				  /obj/item/paper/scroll)
+	reqs = list(/obj/item/grown/log/tree/small = 1,
+	/datum/reagent/water = 50)
+	tools = list(/obj/item/rogueweapon/huntingknife = 1)
+	structurecraft = /obj/structure/fluff/dryingrack
+	craftdiff = 1
+
+/datum/crafting_recipe/roguetown/readingscroll
+	name = "novice's guide to literature"
+	result = list(/obj/item/literary)
+	reqs = list(/obj/item/paper/scroll = 5)
+	tools = list(/obj/item/natural/feather)
+	req_table = TRUE
+	skillcraft = /datum/skill/misc/reading
+	craftdiff = 2
+	verbage_simple = "write"
+	verbage = "writes"
+
+/datum/crafting_recipe/roguetown/readingscroll/apprentice
+	name = "apprentice's guide to literature"
+	result = list(/obj/item/literary/apprentice)
+	craftdiff = 3
+
+/datum/crafting_recipe/roguetown/readingscroll/journeyman
+	name = "journeyman's guide to literature"
+	result = list(/obj/item/literary/journeyman)
+	craftdiff = 4
+
+/datum/crafting_recipe/roguetown/readingscroll/expert
+	name = "expert's guide to literature"
+	result = list(/obj/item/literary/expert)
+	craftdiff = 5
+
+/datum/crafting_recipe/roguetown/readingscroll/master
+	name = "master's guide to literature"
+	result = list(/obj/item/literary/master)
+	craftdiff = 6
+

@@ -10,7 +10,7 @@
 	var/list/drifter_queue_menus = list()
 	
 	// Set this to false manually to stop the system, if you want to start the system call toggle_drifter_queue()
-	var/drifter_queue_enabled = TRUE
+	var/drifter_queue_enabled = FALSE
 	// Whether we are currently delayed, which stops the actual wave handling segment from firing
 	var/drifter_queue_delayed = TRUE
 
