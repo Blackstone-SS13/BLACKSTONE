@@ -417,8 +417,8 @@
 	req_table = TRUE
 	skillcraft = /datum/skill/misc/reading
 	craftdiff = 2
-verbage_simple = "write"
-verbage = "writes"
+	verbage_simple = "write"
+	verbage = "writes"
 
 /datum/crafting_recipe/roguetown/readingscroll/apprentice
 	name = "apprentice's guide to literature"
@@ -439,3 +439,4 @@ verbage = "writes"
 	name = "master's guide to literature"
 	result = list(/obj/item/literary/master)
 	craftdiff = 6
+
