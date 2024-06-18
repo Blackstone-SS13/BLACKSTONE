@@ -50,9 +50,8 @@
 		beltl = /obj/item/keyring/merchant
 		backr = /obj/item/storage/backpack/rogue/satchel
 	if(H.mind)
-		//basically orphan+ skills wow holy shit power creep fix
 		H.mind.adjust_skillrank(/datum/skill/misc/stealing, rand(2,3), TRUE)
-		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(1,32), TRUE)
+		H.mind.adjust_skillrank(/datum/skill/misc/sneaking, rand(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/climbing, rand(1,2), TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/reading, 2, TRUE)
 		H.mind.adjust_skillrank(/datum/skill/misc/medicine, 1, TRUE)
