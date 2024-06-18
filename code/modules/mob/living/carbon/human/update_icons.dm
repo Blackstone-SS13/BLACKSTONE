@@ -1871,6 +1871,9 @@ generate/load female uniform sprites matching all previously decided variables
 /mob/proc/update_body_parts_head_only()
 	return
 
+/mob/proc/update_body_parts_eyes_only()
+	return
+
 // Only renders the head of the human
 /mob/living/carbon/human/update_body_parts_head_only()
 	if (!dna)
@@ -1879,7 +1882,7 @@ generate/load female uniform sprites matching all previously decided variables
 	if (!dna.species)
 		return
 
-	var/obj/item/bodypart/HD = get_bodypart("head")
+	var/obj/item/bodypart/HD = get_bodypart(BODY_ZONE_HEAD)
 
 	if (!istype(HD))
 		return
@@ -1891,7 +1894,6 @@ generate/load female uniform sprites matching all previously decided variables
 	update_damage_overlays()
 
 	if(HD && !(HAS_TRAIT(src, TRAIT_HUSK)))
-
 		// lipstick
 		if(lip_style && (LIPS in dna.species.species_traits))
 			var/mutable_appearance/lip_overlay = mutable_appearance('icons/mob/human_face.dmi', "lips_[lip_style]", -BODY_LAYER)
@@ -1907,6 +1909,25 @@ generate/load female uniform sprites matching all previously decided variables
 			add_overlay(lip_overlay)
 
 		// eyes
+		update_body_parts_eyes_only()
+
+	dna.species.handle_hair(src)
+
+	update_inv_head()
+	update_inv_wear_mask()
+	update_inv_mouth()
+
+/mob/living/carbon/human/update_body_parts_eyes_only()
+	if (!dna)
+		return
+
+	if (!dna.species)
+		return
+
+	if(!get_bodypart(BODY_ZONE_HEAD)) //Decapitated
+		return
+
+	if(!(HAS_TRAIT(src, TRAIT_HUSK)))
 		if(!(NOEYESPRITES in dna.species.species_traits))
 			var/obj/item/organ/eyes/E = getorganslot(ORGAN_SLOT_EYES)
 			var/mutable_appearance/eye_overlay
@@ -1928,9 +1949,3 @@ generate/load female uniform sprites matching all previously decided variables
 					eye_overlay.pixel_x += dna.species.offset_features[OFFSET_FACE][1]
 					eye_overlay.pixel_y += dna.species.offset_features[OFFSET_FACE][2]
 			add_overlay(eye_overlay)
-
-	dna.species.handle_hair(src)
-
-	update_inv_head()
-	update_inv_wear_mask()
-	update_inv_mouth()
