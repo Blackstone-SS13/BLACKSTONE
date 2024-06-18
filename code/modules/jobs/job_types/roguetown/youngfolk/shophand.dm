@@ -25,7 +25,7 @@
 	outfit = /datum/outfit/job/roguetown/shophand
 	display_order = JDO_SHOPHAND
 	give_bank_account = TRUE
-	min_pq = -10
+	min_pq = -2
 	max_pq = null
 
 	cmode_music = 'sound/music/combat_giza.ogg'
