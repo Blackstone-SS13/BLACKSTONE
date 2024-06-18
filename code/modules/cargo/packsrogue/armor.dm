@@ -31,7 +31,7 @@
 
 /datum/supply_pack/rogue/armor/chaingauntlets
 	name = "Steel Chain Gauntlets"
-	cost = 20
+	cost = 30
 	contains = list(/obj/item/clothing/gloves/roguetown/chain)
 	
 /datum/supply_pack/rogue/armor/boots
