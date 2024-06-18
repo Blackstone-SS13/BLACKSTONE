@@ -5,12 +5,12 @@
 	crate_type = /obj/structure/closet/crate/chest/merchant
 
 /datum/supply_pack/rogue/weapons/sword
-	name = "Sword"
+	name = "Iron Sword"
 	cost = 30
 	contains = list(/obj/item/rogueweapon/sword/iron)
 
 /datum/supply_pack/rogue/weapons/mace
-	name = "Mace"
+	name = "Iron Mace"
 	cost = 30
 	contains = list(/obj/item/rogueweapon/mace)
 	
