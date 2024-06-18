@@ -19,7 +19,7 @@
 	)
 	allowed_ages = YOUNG_AGES_LIST
 
-	tutorial = "Dozens of lost teenagers litter the streets in the kingdom of Psydonia. They sometimes make something of themselves but much more often are found dead in the streets."
+	tutorial = "Numerous homeless youth litter the streets of the kingdom of Psydonia. They sometimes make something of themselves but much more often are found dead."
 
 	outfit = /datum/outfit/job/roguetown/orphan
 	display_order = JDO_ORPHAN
