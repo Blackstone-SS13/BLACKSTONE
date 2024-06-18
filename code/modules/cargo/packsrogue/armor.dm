@@ -51,7 +51,7 @@
 
 /datum/supply_pack/rogue/armor/leather/studded
 	name = "Studded Leather Armor"
-	cost = 50
+	cost = 30
 	contains = list(/obj/item/clothing/suit/roguetown/armor/leather/studded)
 	
 /datum/supply_pack/rogue/armor/chainmaille
@@ -66,15 +66,15 @@
 	
 /datum/supply_pack/rogue/armor/hauberk
 	name = "Hauberk"
-	cost = 80
+	cost = 60
 	contains = list(/obj/item/clothing/suit/roguetown/armor/chainmail/hauberk)
 
 /datum/supply_pack/rogue/armor/halfplate
 	name = "Half-Plate Armor"
-	cost = 125
+	cost = 100
 	contains = list(/obj/item/clothing/suit/roguetown/armor/plate/half)
 
 /datum/supply_pack/rogue/armor/plate/full
 	name = "Full Plate"
-	cost = 175
+	cost = 150
 	contains = list(/obj/item/clothing/suit/roguetown/armor/plate/full)
