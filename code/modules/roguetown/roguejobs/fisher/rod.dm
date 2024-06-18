@@ -406,7 +406,7 @@
 				luckboost--
 		else if (fisher.STALUC < 10 || skillmod == 0)
 			if(prob(16 - skillmod - fisher.STALUC))
-				fishtype = pickweight(/obj/item/natural/fibers = 1, /obj/item/storage/belt/rogue/pouch/coins/poor = 1, /obj/item/clothing/shoes/roguetown/boots/leather = 1, /obj/structure/fermenting_barrel = 1, /obj/item/clothing/head/roguetown/fisherhat = 1)
+				fishtype = pickweight(list(/obj/item/natural/fibers = 1, /obj/item/storage/belt/rogue/pouch/coins/poor = 1, /obj/item/clothing/shoes/roguetown/boots/leather = 1, /obj/structure/fermenting_barrel = 1, /obj/item/clothing/head/roguetown/fisherhat = 1))
 				difficulty = 1
 				acceleration = 1
 				hookwindow = 30
