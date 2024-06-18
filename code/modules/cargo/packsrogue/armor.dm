@@ -6,7 +6,7 @@
 
 /datum/supply_pack/rogue/armor/helmet
 	name = "Steel Helmet"
-	cost = 30
+	cost = 25
 	contains = list(/obj/item/clothing/head/roguetown/helmet)
 	
 /datum/supply_pack/rogue/armor/coif
@@ -16,32 +16,32 @@
 	
 /datum/supply_pack/rogue/armor/coif/steel
 	name = "Steel Coif"
-	cost = 30
+	cost = 25
 	contains = list(/obj/item/clothing/neck/roguetown/chaincoif)
 	
 /datum/supply_pack/rogue/armor/mask/steel
 	name = "Steel Mask"
-	cost = 30
+	cost = 25
 	contains = list(/obj/item/clothing/mask/rogue/facemask/steel)
 
 /datum/supply_pack/rogue/armor/bracers
 	name = "Steel Bracers"
-	cost = 30
+	cost = 25
 	contains = list(/obj/item/clothing/wrists/roguetown/bracers)
 
 /datum/supply_pack/rogue/armor/chaingauntlets
 	name = "Steel Chain Gauntlets"
-	cost = 30
+	cost = 25
 	contains = list(/obj/item/clothing/gloves/roguetown/chain)
 	
 /datum/supply_pack/rogue/armor/boots
 	name = "Steel Boots"
-	cost = 30
+	cost = 25
 	contains = list(/obj/item/clothing/shoes/roguetown/boots)
 
 /datum/supply_pack/rogue/armor/gambeson
 	name = "Gambesons"
-	cost = 30
+	cost = 25
 	contains = list(/obj/item/clothing/suit/roguetown/armor/gambeson)
 
 /datum/supply_pack/rogue/armor/leather
@@ -51,7 +51,7 @@
 
 /datum/supply_pack/rogue/armor/leather/studded
 	name = "Studded Leather Armor"
-	cost = 30
+	cost = 25
 	contains = list(/obj/item/clothing/suit/roguetown/armor/leather/studded)
 	
 /datum/supply_pack/rogue/armor/chainmaille
