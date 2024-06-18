@@ -33,17 +33,18 @@
 			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/knives, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/swords, 3, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/knives, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/swimming, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/climbing, 2, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 1, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/misc/athletics, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/misc/reading, 1, TRUE)
 			H.change_stat("strength", 1)
 			H.change_stat("perception", 1)
 			H.change_stat("constitution", 1)
 			H.change_stat("speed", 1)
-	if(H.gender == FEMALE) //disabled
+			H.change_stat("fortune", 1)
+	if(H.gender == FEMALE) //disabled, only humen males can be knight
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guard
 		armor = /obj/item/clothing/suit/roguetown/armor/chainmail
