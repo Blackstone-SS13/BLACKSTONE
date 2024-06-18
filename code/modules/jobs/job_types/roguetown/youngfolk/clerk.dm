@@ -26,7 +26,7 @@
 
 /datum/outfit/job/roguetown/clerk/pre_equip(mob/living/carbon/human/H)
 	..()
-	ADD_TRAIT(H, TRAIT_SEEPRICESSHITTY, TRAIT_GENERIC)
+	ADD_TRAIT(H, TRAIT_SEEPRICES_SHITTY, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 
 	if(H.mind)
