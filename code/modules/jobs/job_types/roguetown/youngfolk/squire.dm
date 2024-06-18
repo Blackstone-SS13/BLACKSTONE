@@ -5,10 +5,7 @@
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	allowed_races = list(
-		"Humen",
-		"Half-Elf",
-	) //should be humen only just like knight, but we give leeway to half elves because maybe a knight banged an elf
+	allowed_races = list("Humen",) //should be humen only just like knight, if you can't be a female squire helfs can fuck off too lol
 	allowed_sexes = list(MALE) //same as knight
 	allowed_ages = YOUNG_AGES_LIST
 
@@ -17,7 +14,7 @@
 	outfit = /datum/outfit/job/roguetown/squire
 	display_order = JDO_SQUIRE
 	give_bank_account = TRUE
-	min_pq = -5 //squires aren't great but they can do some damage
+	min_pq = 0 //knights should expect this player to actually want to learn and try, and that's probably more likely if he isn't a PQ nuked shitter
 	max_pq = null
 
 /datum/outfit/job/roguetown/squire/pre_equip(mob/living/carbon/human/H)
@@ -31,9 +28,9 @@
 		beltr = /obj/item/storage/belt/rogue/pouch
 		backr = /obj/item/storage/backpack/rogue/satchel
 		if(H.mind)
-			H.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/bows, 1, TRUE)
-			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/maces, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
+			H.mind.adjust_skillrank(/datum/skill/combat/crossbows, 3, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/wrestling, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/unarmed, 2, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/swords, 2, TRUE)
@@ -46,7 +43,7 @@
 			H.change_stat("perception", 1)
 			H.change_stat("constitution", 1)
 			H.change_stat("speed", 1)
-	if(H.gender == FEMALE)
+	if(H.gender == FEMALE) //disabled
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guard
 		armor = /obj/item/clothing/suit/roguetown/armor/chainmail
