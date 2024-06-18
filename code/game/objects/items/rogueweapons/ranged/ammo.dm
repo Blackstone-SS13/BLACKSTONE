@@ -74,6 +74,29 @@
 	name = "stone arrow"
 	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow/stone
 
+/obj/item/ammo_casing/caseless/rogue/arrow/padded
+	name = "padded arrow"
+	desc = "A wooden shaft with a padded sack at the end."
+	projectile_type = /obj/projectile/bullet/reusable/arrow/padded
+	caliber = "arrow"
+	icon_state = "arrow_padded"
+	force = 0
+	dropshrink = 0.6
+	possible_item_intents = list(/datum/intent/mace/strike/wood, /datum/intent/mace/smash/wood)
+	max_integrity = 20
+
+/obj/projectile/bullet/reusable/arrow/padded
+	name = "padded arrow"
+	damage = 0
+	knockdown = 100
+	stun = 20
+	icon = 'icons/roguetown/weapons/ammo.dmi'
+	icon_state = "arrow_pad_proj"
+	ammo_type = /obj/item/ammo_casing/caseless/rogue/arrow/padded
+	hitsound = 'sound/combat/hits/punch/punch_heavy.ogg'
+	embedchance = 0
+	woundclass = BCLASS_BLUNT
+
 /obj/item/ammo_casing/caseless/rogue/arrow/stone
 	name = "stone arrow"
 	desc = "A wooden shaft with a jagged rock on the end."
