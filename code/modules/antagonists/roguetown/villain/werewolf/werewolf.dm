@@ -137,12 +137,7 @@
 	blade_dulling = DULLING_BASHCHOP
 	sewrepair = FALSE
 	max_integrity = 250
-
-/obj/item/clothing/suit/roguetown/armor/skin_armor/dropped(mob/living/user, show_message = TRUE)
-	. = ..()
-	if(QDELETED(src))
-		return
-	qdel(src)
+	item_flags = DROPDEL
 
 /datum/intent/simple/werewolf
 	name = "claw"
@@ -181,6 +176,7 @@
 	possible_item_intents = list(/datum/intent/simple/werewolf)
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	embedding = list("embedded_pain_multiplier" = 0, "embed_chance" = 0, "embedded_fall_chance" = 0)
+	item_flags = DROPDEL
 
 /obj/item/rogueweapon/werewolf_claw/right
 	icon_state = "claw_r"
