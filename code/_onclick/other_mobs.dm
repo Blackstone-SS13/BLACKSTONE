@@ -394,7 +394,7 @@
 							to_chat(src, span_warning("What am I going to steal from there?"))
 							return
 						mobsbehind |= cone(V, list(turn(V.dir, 180)), list(src))
-						if(mobsbehind.Find(src))
+						if(mobsbehind.Find(src) || V.eyesclosed || V.stat >= UNCONSCIOUS)
 							switch(U.zone_selected)
 								if("chest")
 									if (V.get_item_by_slot(SLOT_BACK_L))
@@ -414,17 +414,30 @@
 										stealpos.Add(V.get_item_by_slot(SLOT_RING))
 							if (length(stealpos) > 0)
 								var/obj/item/picked = pick(stealpos)
-								if(stealroll > (targetperception + (picked.w_class * 3)))//Makes it exponentially harder to steal larger items, as every skill rank in thief adds 1d6 to the roll
-									V.dropItemToGround(picked)
-									put_in_active_hand(picked)
-									to_chat(src, span_green("I stole [picked]!"))
-									V.log_message("has had \the [picked] stolen by [key_name(U)]", LOG_ATTACK, color="black")
-									U.log_message("has stolen \the [picked] from [key_name(V)]", LOG_ATTACK, color="black")
-									exp_to_gain *= src.mind.get_learning_boon(thiefskill)
+								if(picked.w_class >= 3)
+									if(stealroll > (targetperception + (picked.w_class * 2)))//Law of averages puts 6d6 at between 17 and 25. Assuming a Perception of 10, the DC to steal bulky items is now 18.
+										V.dropItemToGround(picked)
+										put_in_active_hand(picked)
+										to_chat(src, span_green("I stole [picked]!"))
+										V.log_message("has had \the [picked] stolen by [key_name(U)]", LOG_ATTACK, color="black")
+										U.log_message("has stolen \the [picked] from [key_name(V)]", LOG_ATTACK, color="black")
+										exp_to_gain *= src.mind.get_learning_boon(thiefskill)
+									else
+										V.log_message("[key_name(U)] tried to steal my [picked.name]!", LOG_ATTACK, color="red")
+										U.log_message("has attempted to pickpocket [key_name(V)]!", LOG_ATTACK, color="red")
+										to_chat(src, span_danger("[picked.name] was too large to remove unnoticed!"))
 								else
-									V.log_message("[key_name(U)] tried to steal my [picked.name]!", LOG_ATTACK, color="red")
-									U.log_message("has attempted to pickpocket [key_name(V)]!", LOG_ATTACK, color="red")
-									to_chat(src, span_danger("[picked.name] was too large to remove unnoticed!"))
+									if(stealroll > targetperception)//Small and Tiny items do not have a weight penalty
+										V.dropItemToGround(picked)
+										put_in_active_hand(picked)
+										to_chat(src, span_green("I stole [picked]!"))
+										V.log_message("has had \the [picked] stolen by [key_name(U)]", LOG_ATTACK, color="black")
+										U.log_message("has stolen \the [picked] from [key_name(V)]", LOG_ATTACK, color="black")
+										exp_to_gain *= src.mind.get_learning_boon(thiefskill)
+									else
+										V.log_message("[key_name(U)] tried to steal my [picked.name]!", LOG_ATTACK, color="red")
+										U.log_message("has attempted to pickpocket [key_name(V)]!", LOG_ATTACK, color="red")
+										to_chat(src, span_danger("[picked.name] was too large to remove unnoticed!"))
 							else
 								exp_to_gain /= 2 // these can be removed or changed on reviewer's discretion
 								to_chat(src, span_warning("I didn't find anything there. Perhaps I should look elsewhere."))
