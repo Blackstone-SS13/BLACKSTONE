@@ -385,6 +385,7 @@
 					var/list/stealpos = list()
 					var/list/mobsbehind = list()
 					var/exp_to_gain = STAINT
+					var/shuteye = 0
 					if(stealroll > targetperception)
 					//TODO add exp here
 						if(U.get_active_held_item())
@@ -414,6 +415,14 @@
 										stealpos.Add(V.get_item_by_slot(SLOT_RING))
 							if (length(stealpos) > 0)
 								var/obj/item/picked = pick(stealpos)
+								if(V.stat >= UNCONSCIOUS)//If your victim is unconscious, you automatically succeed
+									V.dropItemToGround(picked)
+									put_in_active_hand(picked)
+									to_chat(src, span_green("I stole [picked]!"))
+									V.log_message("has had \the [picked] stolen by [key_name(U)]", LOG_ATTACK, color="black")
+									U.log_message("has stolen \the [picked] from [key_name(V)]", LOG_ATTACK, color="black")
+									exp_to_gain *= src.mind.get_learning_boon(thiefskill)
+									return
 								if(picked.w_class >= 3)
 									if(stealroll > (targetperception + (picked.w_class * 2)))//Law of averages puts 6d6 at between 17 and 25. Assuming a Perception of 10, the DC to steal bulky items is now 18.
 										V.dropItemToGround(picked)
@@ -422,6 +431,7 @@
 										V.log_message("has had \the [picked] stolen by [key_name(U)]", LOG_ATTACK, color="black")
 										U.log_message("has stolen \the [picked] from [key_name(V)]", LOG_ATTACK, color="black")
 										exp_to_gain *= src.mind.get_learning_boon(thiefskill)
+										return
 									else
 										V.log_message("[key_name(U)] tried to steal my [picked.name]!", LOG_ATTACK, color="red")
 										U.log_message("has attempted to pickpocket [key_name(V)]!", LOG_ATTACK, color="red")
@@ -434,6 +444,7 @@
 										V.log_message("has had \the [picked] stolen by [key_name(U)]", LOG_ATTACK, color="black")
 										U.log_message("has stolen \the [picked] from [key_name(V)]", LOG_ATTACK, color="black")
 										exp_to_gain *= src.mind.get_learning_boon(thiefskill)
+										return
 									else
 										V.log_message("[key_name(U)] tried to steal my [picked.name]!", LOG_ATTACK, color="red")
 										U.log_message("has attempted to pickpocket [key_name(V)]!", LOG_ATTACK, color="red")
