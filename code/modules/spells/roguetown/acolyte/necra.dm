@@ -61,11 +61,14 @@
 			var/datum/antagonist/vampire/V = L.mind.has_antag_datum(/datum/antagonist/vampire)
 			var/datum/antagonist/vampirelord/VL = L.mind.has_antag_datum(/datum/antagonist/vampirelord)
 			if(VL)
-				if(!VL.disguised)
+				if(VL.disguised)
+					return
+				else
 					isvampspawn = TRUE
 				if(L.mind.special_role == "Vampire Lord")
 					if(VL.vamplevel > 2)
 						user.visible_message(span_warning("[L] cannot be churned!"), span_userdanger("[L] is too strong to be churned!"))
+						return
 			if(V)
 				isvampire = TRUE
 			if(L.mind.has_antag_datum(/datum/antagonist/zombie))
