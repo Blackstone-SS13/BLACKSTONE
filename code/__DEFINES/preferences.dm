@@ -110,7 +110,7 @@
 #define RANDOM_EYE_COLOR "random_eye_color"
 
 //Age ranges
-#define AGE_YOUNG			"Young Adult" //literally the same exact thing, but always 18+, no more stupid arguments about this
+#define AGE_YOUNG			"Young Adult" //literally the same exact thing as before no actual code changes
 #define AGE_ADULT			"Adult"
 #define AGE_MIDDLEAGED		"Middle-Aged"
 #define AGE_OLD				"Old"
