@@ -218,15 +218,15 @@ GLOBAL_LIST_EMPTY(species_list)
 /proc/age2agedescription(age)
 	switch(age)
 		if(0 to 1)
-			return "infant"
+			return "i"
 		if(1 to 3)
-			return "toddler"
+			return "t"
 		if(3 to 13)
-			return "child"
+			return "c"
 		if(13 to 19)
-			return "teenager"
+			return "te
 		if(19 to 30)
-			return "young adult"
+			return "yo"
 		if(30 to 45)
 			return "adult"
 		if(45 to 60)
