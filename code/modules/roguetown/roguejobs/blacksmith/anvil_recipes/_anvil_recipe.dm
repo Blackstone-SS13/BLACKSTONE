@@ -31,7 +31,7 @@
 		material_quality = floor(material_quality/num_of_materials)
 		median_calculated = TRUE
 	var/current_mistake = FALSE
-	var/proab = 26
+	var/proab = 72
 	var/skill_level
 	if(user.mind)
 		skill_level = user.mind.get_skill_level(appro_skill)
