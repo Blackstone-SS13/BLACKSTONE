@@ -235,7 +235,7 @@
 			var/mob/living/carbon/human/B = A
 			B.buried = FALSE
 	..()
-	
+
 /obj/structure/closet/dirthole/open(mob/living/user)
 	if(opened)
 		return
@@ -284,9 +284,13 @@
 					else
 						new /obj/item/natural/worms(T)
 		else
-			if(!(locate(/obj/item/natural/stone) in T))
-				if(prob(23))
-					new /obj/item/natural/stone(T)
+			if((locate(/obj/structure/flora/newtree) in view(1)) && !(locate(/obj/item/grown/log/tree/stick) in T))
+				if(prob(33))
+					new /obj/item/grown/log/tree/stick(T)
+			else
+				if(!(locate(/obj/item/natural/stone) in T))
+					if(prob(33))
+						new /obj/item/natural/stone(T)
 	return ..()
 
 /obj/structure/closet/dirthole/Destroy()
