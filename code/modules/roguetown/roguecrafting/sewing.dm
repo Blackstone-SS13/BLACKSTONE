@@ -20,7 +20,7 @@
 	name = "winding sheet"
 	result = list(/obj/item/burial_shroud)
 	reqs = list(/obj/item/natural/cloth = 3)
-	craftdiff = 2
+	craftdiff = 1
 
 /datum/crafting_recipe/roguetown/sewing/loincloth
 	name = "loincloth"
