@@ -224,7 +224,7 @@ GLOBAL_LIST_EMPTY(species_list)
 		if(3 to 13)
 			return "c"
 		if(13 to 19)
-			return "te
+			return "te"
 		if(19 to 30)
 			return "yo"
 		if(30 to 45)
