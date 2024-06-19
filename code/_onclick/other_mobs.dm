@@ -385,7 +385,6 @@
 					var/list/stealpos = list()
 					var/list/mobsbehind = list()
 					var/exp_to_gain = STAINT
-					var/shuteye = 0
 					if(stealroll > targetperception)
 					//TODO add exp here
 						if(U.get_active_held_item())
