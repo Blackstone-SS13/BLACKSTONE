@@ -629,7 +629,7 @@ GLOBAL_LIST_INIT(roleplay_readme, world.file2list("strings/rt/rp_prompt.txt"))
 				if (PEASANTS)
 					cat_name = "Peasants"
 				if (YOUNGFOLK)
-					cat_name = "Youngfolk"
+					cat_name = "Apprentices" //NOTE: THIS ONLY CHANGES THE LATE JOIN MENU TO SAY THIS, DO NOT CHANGE ANYTHING ELSE, THIS IS ALL THAT NEEDS TO CHANGE. There is no need to rewrite all the code.
 				if (MERCENARIES)
 					cat_name = "Mercenaries"
 				if (GOBLIN)
