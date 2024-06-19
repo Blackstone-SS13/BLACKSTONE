@@ -11,7 +11,7 @@
 		"Elf",
 		"Half-Elf",
 		"Dwarf",
-	) //Maybe a system to force-pick lineage based on king and queen should be implemented. ADDED DWARF FOR MAXIMUM ADOPTED CHILD SHITTERY, I AM NOT SORRY
+	) //dwarf and elf are going to be totally victim to whatever the King demands, if that king does not actually want an adopted kid, they are ROYALLY FREE to treat you shitty. consider them super hard and lucky mode.
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_ages = YOUNG_AGES_LIST
 
@@ -30,15 +30,20 @@
 
 /datum/outfit/job/roguetown/prince/pre_equip(mob/living/carbon/human/H)
 	..()
+	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
 	if(H.gender == MALE)
 		pants = /obj/item/clothing/under/roguetown/tights
 		shirt = /obj/item/clothing/suit/roguetown/shirt/undershirt/guard
 		armor = /obj/item/clothing/suit/roguetown/armor/chainmail
-		shoes = /obj/item/clothing/shoes/roguetown/nobleboot
 		belt = /obj/item/storage/belt/rogue/leather
 		beltl = /obj/item/roguekey/manor
 		beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 		backr = /obj/item/storage/backpack/rogue/satchel
+		if(H.dna?.species) //this is so the elf prince can have shoes that fit at roundstart, remove if it breaks anything because they can just get a pair of shoes lol
+		if(iself(H)
+			shoes = /obj/item/clothing/shoes/roguetown/boots
+		else //is this even right lol?
+			shoes = /obj/item/clothing/shoes/roguetown/nobleboot
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
@@ -57,6 +62,7 @@
 			H.change_stat("endurance", -1)
 			H.change_stat("constitution", 1)
 			H.change_stat("speed", 1)
+			ADD_TRAIT(H, TRAIT_NOSEGRAB, TRAIT_GENERIC) //king has this
 	else
 		beltl = /obj/item/roguekey/manor
 		head = /obj/item/clothing/head/roguetown/hennin
@@ -82,4 +88,4 @@
 			H.change_stat("strength", -2)
 			H.change_stat("constitution", 1)
 			H.change_stat("speed", 2)
-	ADD_TRAIT(H, TRAIT_NOBLE, TRAIT_GENERIC)
+			ADD_TRAIT(H, TRAIT_NUTCRACKER, TRAIT_GENERIC) //queen has this
