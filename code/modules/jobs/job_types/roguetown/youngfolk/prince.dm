@@ -39,11 +39,7 @@
 		beltl = /obj/item/roguekey/manor
 		beltr = /obj/item/storage/belt/rogue/pouch/coins/rich
 		backr = /obj/item/storage/backpack/rogue/satchel
-		if(H.dna?.species) //this is so the elf prince can have shoes that fit at roundstart, remove if it breaks anything because they can just get a pair of shoes lol
-		if(iself(H)
-			shoes = /obj/item/clothing/shoes/roguetown/boots
-		else //is this even right lol?
-			shoes = /obj/item/clothing/shoes/roguetown/nobleboot
+		shoes = /obj/item/clothing/shoes/roguetown/nobleboot
 		if(H.mind)
 			H.mind.adjust_skillrank(/datum/skill/combat/maces, 1, TRUE)
 			H.mind.adjust_skillrank(/datum/skill/combat/bows, 2, TRUE)
