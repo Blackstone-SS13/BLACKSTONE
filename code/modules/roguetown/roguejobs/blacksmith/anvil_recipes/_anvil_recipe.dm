@@ -35,7 +35,7 @@
 	var/skill_level
 	if(user.mind)
 		skill_level = user.mind.get_skill_level(appro_skill)
-		proab = 72*skill_quality
+		proab = 72*skill_level
 		if(!user.mind.get_skill_level(appro_skill))
 			proab = 26
 	if(prob(proab))
