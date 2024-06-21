@@ -17,7 +17,7 @@
 	thrown_bclass = BCLASS_CUT
 	associated_skill = /datum/skill/combat/knives
 	anvilrepair = /datum/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/steel
+	smeltresult = /obj/item/ingot/iron
 
 /obj/item/rogueweapon/surgery/Initialize()
 	. = ..()
