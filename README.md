@@ -1,6 +1,6 @@
 # DEVELOPMENT FREEZE
 
-## This codebase is currently under a development freeze, pending changes that are being committed to a private repo which is not actively being hosted. The only PRs that will be considered at this time are small bug fixes.
+## This codebase is currently under a development freeze, until changes are implemented that are being implemented in a private repo can be brought over. The private repo is not being actively hosted anywhere. The only PRs that will be considered at this time are small bug fixes.
 
 "Ne participes, nec mors sequetur"
 # Blackstone
