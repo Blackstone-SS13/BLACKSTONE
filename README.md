@@ -1,3 +1,7 @@
+# DEVELOPMENT FREEZE
+
+## This codebase is currently under a development freeze, pending changes that are being committed to a private repo which is not actively being hosted. The only PRs that will be considered at this time are small bug fixes.
+
 "Ne participes, nec mors sequetur"
 # Blackstone
 Blackstone is a fantasy roleplaying game based on the source code for Roguetown, and is inspired by Table Top Roleplaying Games. The goal of Blackstone is to provide a freeform fantasy roleplay environment with minimal admin intervention, where players are empowered to collectively decide what is and is not acceptable through in-game action.
