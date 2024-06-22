@@ -112,29 +112,41 @@
 		var/mob/living/carbon/human/human_target = targets[1]
 		var/list/limbs_to_regenerate = human_target.get_missing_limbs()
 		var/list/detached_limbs = get_limbs(human_target, user)
-		
-		for(var/obj/item/bodypart/limb as anything in detached_limbs)
-			limbs_to_regenerate -= limb.body_zone
-			qdel(limb)
-		
-		if(length(detached_limbs))
-			human_target.regenerate_limbs(0, limbs_to_regenerate)
+		var/list/regenerated_limbs = list()
+
+		for(var/body_zone in limbs_to_regenerate)
+			var/obj/item/bodypart/limb_to_delete = find_detached_limb(detached_limbs, body_zone)
+			if(limb_to_delete)
+				regenerated_limbs += body_zone
+				qdel(limb_to_delete)
+
+		if(length(regenerated_limbs))
+			human_target.regenerate_limbs(0, limbs_to_regenerate - regenerated_limbs)
 			human_target.visible_message(span_info("[human_target]'s missing limbs regenerate!"), \
 								span_notice("My missing limbs regenerate!"))
 		else
 			to_chat(user, span_warning("No detached limbs found nearby to regenerate."))
+
 		for(var/obj/item/organ/organ as anything in get_organs(human_target, user))
 			if(human_target.getorganslot(organ.slot) || !organ.Insert(human_target))
 				continue
 			human_target.visible_message(span_info("\The [organ] attaches itself to [human_target]!"), \
 								span_notice("\The [organ] attaches itself to me!"))
+
 		if(!(human_target.mob_biotypes & MOB_UNDEAD))
 			for(var/obj/item/bodypart/limb as anything in human_target.bodyparts)
 				limb.rotted = FALSE
-				limb.skeletonized = FALSE  
+				limb.skeletonized = FALSE
+
 		human_target.update_body()
 		return TRUE
 	return FALSE
+
+/proc/find_detached_limb(list/detached_limbs, body_zone)
+	for(var/obj/item/bodypart/limb in detached_limbs)
+		if(limb.body_zone == body_zone)
+			return limb
+	return null
 
 // Cure rot
 /obj/effect/proc_holder/spell/invoked/cure_rot
