@@ -15,8 +15,8 @@
 	antag_hud_type = ANTAG_HUD_TRAITOR
 	antag_hud_name = "vampire"
 	confess_lines = list(
-		"I WANT YOUR BLOOD!", 
-		"DRINK THE BLOOD!", 
+		"I WANT YOUR BLOOD!",
+		"DRINK THE BLOOD!",
 		"CHILD OF KAIN!",
 	)
 	var/disguised = TRUE
@@ -119,7 +119,7 @@
 
 /datum/antagonist/vampire/proc/finalize_vampire()
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
-	
+
 
 
 /datum/antagonist/vampire/on_life(mob/user)
@@ -152,6 +152,8 @@
 	if(H.stat)
 		if(istype(H.loc, /obj/structure/closet/crate/coffin))
 			H.fully_heal()
+			H.rogstam_add(H.maxrogstam / 10)
+			H.rogfat_add(-H.maxrogfat / 10)
 
 	vitae = CLAMP(vitae, 0, 1666)
 
@@ -361,7 +363,7 @@
 		to_chat(src, span_warning("My curse is hidden."))
 		return
 	if(silver_curse_status)
-		to_chat(src, span_warning("My BANE is not letting me REGEN!."))	
+		to_chat(src, span_warning("My BANE is not letting me REGEN!."))
 		return
 	if(VD.vitae < 500)
 		to_chat(src, span_warning("Not enough vitae."))
@@ -370,6 +372,8 @@
 	src.playsound_local(get_turf(src), 'sound/misc/vampirespell.ogg', 100, FALSE, pressure_affected = FALSE)
 	VD.handle_vitae(-500)
 	fully_heal()
+	rogstam_add(maxrogstam)//Since vampires cannot sleep and are now subject to stamina and fatigue, they may fully restore it using Regenerate if they are not cursed by silver.
+	rogfat_add(-maxrogfat)
 
 /mob/living/carbon/human/proc/vampire_infect()
 	if(!mind)

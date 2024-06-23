@@ -14,8 +14,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	antag_hud_type = ANTAG_HUD_VAMPIRE
 	antag_hud_name = "Vlord"
 	confess_lines = list(
-		"I AM ANCIENT", 
-		"I AM THE LAND", 
+		"I AM ANCIENT",
+		"I AM THE LAND",
 		"CHILD OF KAIN!",
 	)
 	var/isspawn = FALSE
@@ -58,8 +58,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	. = ..()
 	owner.special_role = name
 	ADD_TRAIT(owner.current, TRAIT_CRITICAL_WEAKNESS, "[type]") //half assed but necessary otherwise these guys be invincible
+	ADD_TRAIT(owner.current, TRAIT_BREADY, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_STRONGBITE, "[type]")
-	ADD_TRAIT(owner.current, TRAIT_NOROGSTAM, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_NOHUNGER, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_NOBREATH, "[type]")
 	ADD_TRAIT(owner.current, TRAIT_NOPAIN, "[type]")
@@ -325,13 +325,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /datum/antagonist/vampirelord/proc/finalize_vampire()
 	owner.current.forceMove(pick(GLOB.vlord_starts))
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
-	
+
 
 /datum/antagonist/vampirelord/proc/finalize_vampire_lesser()
 	if(!sired)
 		owner.current.forceMove(pick(GLOB.vspawn_starts))
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/vampintro.ogg', 80, FALSE, pressure_affected = FALSE)
-	
+
 
 /datum/antagonist/vampirelord/proc/vamp_look()
 	var/mob/living/carbon/human/V = owner.current
@@ -487,8 +487,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	name = "Vampire Spawn"
 	antag_hud_name = "Vspawn"
 	confess_lines = list(
-		"THE CRIMSON CALLS!", 
-		"MY MASTER COMMANDS", 
+		"THE CRIMSON CALLS!",
+		"MY MASTER COMMANDS",
 		"THE SUN IS ENEMY!",
 	)
 	isspawn = TRUE
@@ -1027,7 +1027,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /obj/item/clothing/neck/roguetown/portalamulet/Initialize()
 	GLOB.vampire_objects |= src
 	. = ..()
-	
+
 /obj/item/clothing/neck/roguetown/portalamulet/Destroy()
 	GLOB.vampire_objects -= src
 	return ..()
@@ -1040,7 +1040,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 /obj/structure/vampire/Initialize()
 	GLOB.vampire_objects |= src
 	. = ..()
-	
+
 /obj/structure/vampire/Destroy()
 	GLOB.vampire_objects -= src
 	return ..()
@@ -1308,7 +1308,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		for(var/obj/item/clothing/neck/roguetown/psicross/silver in L.contents)
 			found_psycross = TRUE
 			break
-			
+
 		if(bloodroll >= willroll)
 			if(found_psycross == TRUE)
 				to_chat(L, "<font color='white'>The silver psycross shines and protect me from the unholy magic.</font>")
@@ -1318,7 +1318,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 				to_chat(user, "Their mind gives way, they will soon be asleep.")
 				sleep(50)
 				L.Sleeping(300)
-				
+
 		if(willroll >= bloodroll)
 			if(found_psycross == TRUE)
 				to_chat(L, "<font color='white'>The silver psycross shines and protect me from the unholy magic.</font>")
