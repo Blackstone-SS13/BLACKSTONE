@@ -177,26 +177,25 @@ SUBSYSTEM_DEF(treasury)
 	else
 		return FALSE
 
-	log_to_steward("+[original_amt] deposited by [character] of which taxed [taxed_amount]")
+	log_to_steward("+[original_amt] deposited by [character.real_name] of which taxed [taxed_amount]")
 
 	return TRUE
 
 
-/datum/controller/subsystem/treasury/proc/withdraw_money_account(amt, name)
-    if(!amt)
-        return
+/datum/controller/subsystem/treasury/proc/withdraw_money_account(amt, mob/living/carbon/human/character)
+    if(!amt) return FALSE
     var/found_account
     for(var/X in bank_accounts)
-        if(X == name)
+        if(X == character)
             if(bank_accounts[X] < amt)  // Check if the withdrawal amount exceeds the player's account balance
-                send_ooc_note("<b>The Bank:</b> Error: Insufficient funds in the player's account to complete the withdrawal.", name = name)
+                send_ooc_note("<b>The Bank:</b> Error: Insufficient funds in the player's account to complete the withdrawal.", character = character)
                 return  // Return without processing the transaction
             bank_accounts[X] -= amt
             found_account = TRUE
             break
     if(!found_account)
         return
-    log_to_steward("-[amt] withdrawn by [name]")
+    log_to_steward("-[amt] withdrawn by [character.real_name]")
     return TRUE
 
 
