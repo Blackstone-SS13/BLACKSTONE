@@ -57,6 +57,7 @@
 			return
 
 	if(istype(W, /obj/item/rogueweapon/hammer))
+		var/obj/item/rogueweapon/hammer/H = W
 		user.changeNext_move(CLICK_CD_MELEE)
 		if(!hingot)
 			return
@@ -75,9 +76,9 @@
 			if(carbon_user.domhand)
 				used_str = carbon_user.get_str_arms(carbon_user.used_hand)
 			carbon_user.rogfat_add(max(30 - (used_str * 3), 0))
-		var/total_chance = 7 * user.mind.get_skill_level(hingot.currecipe.appro_skill)
+		var/total_chance = 7 * (user.mind.get_skill_level(hingot.currecipe.appro_skill)+H.smith_quality)
 		var/breakthrough = 0
-		if(prob(1 + total_chance)) //Small chance to flash
+		if(prob(max(total_chance, 1))) //Small chance to flash
 			user.flash_fullscreen("whiteflash")
 			var/datum/effect_system/spark_spread/S = new()
 			var/turf/front = get_turf(src)
@@ -85,7 +86,7 @@
 			S.start()
 			breakthrough = 1
 
-		if(!hingot.currecipe.advance(user, breakthrough))
+		if(!hingot.currecipe.advance(user, breakthrough, H))
 			shake_camera(user, 1, 1)
 			playsound(src,'sound/items/bsmithfail.ogg', 100, FALSE)
 		playsound(src,pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
@@ -103,15 +104,24 @@
 
 		return
 
-	if(hingot && hingot.currecipe && hingot.currecipe.needed_item && istype(W, hingot.currecipe.needed_item))
-		hingot.currecipe.item_added(user)
+	if(hingot?.currecipe?.additional_items_text)
+		var/datum/anvil_recipe/currentrecipe = hingot.currecipe
+		var/found_in_list = FALSE
+		for(var/I_list in currentrecipe.additional_items)
+			if(istype(W, I_list))
+				found_in_list = TRUE
+				currentrecipe.additional_items -= I_list
+				break
+		if(!found_in_list)
+			return
+		currentrecipe.handle_additional_items(user, W)
 		if(istype(W, /obj/item/ingot))
 			var/obj/item/ingot/I = W
-			hingot.currecipe.material_quality += I.quality
+			currentrecipe.material_quality += I.quality
 			previous_material_quality = I.quality
 		else
-			hingot.currecipe.material_quality += previous_material_quality
-		hingot.currecipe.num_of_materials += 1 
+			currentrecipe.material_quality += previous_material_quality
+		currentrecipe.num_of_materials += 1
 		qdel(W)
 		return
 
