@@ -142,12 +142,6 @@
 		return TRUE
 	return FALSE
 
-/proc/find_detached_limb(list/detached_limbs, body_zone)
-	for(var/obj/item/bodypart/limb in detached_limbs)
-		if(limb.body_zone == body_zone)
-			return limb
-	return null
-
 // Cure rot
 /obj/effect/proc_holder/spell/invoked/cure_rot
 	name = "Cure Rot"
