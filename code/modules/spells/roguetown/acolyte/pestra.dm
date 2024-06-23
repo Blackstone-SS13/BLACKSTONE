@@ -107,24 +107,37 @@
 		limbs += dismembered
 	return limbs
 
-// consider adding functionality to regrow one entire organ or limb per casting?
 /obj/effect/proc_holder/spell/invoked/attach_bodypart/cast(list/targets, mob/living/user)
 	if(ishuman(targets[1]))
 		var/mob/living/carbon/human/human_target = targets[1]
-		for(var/obj/item/bodypart/limb as anything in get_limbs(human_target, user))
-			if(human_target.get_bodypart(limb.body_zone) || !limb.attach_limb(human_target))
-				continue
-			human_target.visible_message(span_info("\The [limb] attaches itself to [human_target]!"), \
-								span_notice("\The [limb] attaches itself to me!"))
+		var/list/limbs_to_regenerate = human_target.get_missing_limbs()
+		var/list/detached_limbs = get_limbs(human_target, user)
+		var/list/regenerated_limbs = list()
+		for(var/body_zone in limbs_to_regenerate)
+			for(var/obj/item/bodypart/limb in detached_limbs)
+				if(limb.body_zone == body_zone)
+					regenerated_limbs += body_zone
+					qdel(limb)
+					break
+		if(length(regenerated_limbs))
+			human_target.regenerate_limbs(0, limbs_to_regenerate - regenerated_limbs)
+			human_target.visible_message(span_info("[human_target]'s missing limbs attach to their body!"), \
+								span_notice("My missing limbs attach to my body!"))
+		else
+			to_chat(user, span_warning("No detached limbs found nearby to attach."))
+
+
 		for(var/obj/item/organ/organ as anything in get_organs(human_target, user))
 			if(human_target.getorganslot(organ.slot) || !organ.Insert(human_target))
 				continue
 			human_target.visible_message(span_info("\The [organ] attaches itself to [human_target]!"), \
 								span_notice("\The [organ] attaches itself to me!"))
+
 		if(!(human_target.mob_biotypes & MOB_UNDEAD))
 			for(var/obj/item/bodypart/limb as anything in human_target.bodyparts)
 				limb.rotted = FALSE
 				limb.skeletonized = FALSE
+
 		human_target.update_body()
 		return TRUE
 	return FALSE
